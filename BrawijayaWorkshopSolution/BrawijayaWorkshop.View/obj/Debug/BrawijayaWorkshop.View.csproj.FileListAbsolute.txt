@@ -1,0 +1,4 @@
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.View\bin\Debug\BrawijayaWorkshop.View.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.View\bin\Debug\BrawijayaWorkshop.View.pdb
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.View\obj\Debug\BrawijayaWorkshop.View.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.View\obj\Debug\BrawijayaWorkshop.View.pdb

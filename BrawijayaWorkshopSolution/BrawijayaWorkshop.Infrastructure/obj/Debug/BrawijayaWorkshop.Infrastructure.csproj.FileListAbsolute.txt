@@ -1,0 +1,11 @@
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\BrawijayaWorkshop.Infrastructure.dll.config
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\BrawijayaWorkshop.Infrastructure.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\BrawijayaWorkshop.Infrastructure.pdb
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\EntityFramework.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\MySql.Data.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\EntityFramework.xml
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\obj\Debug\BrawijayaWorkshop.Infrastructure.dll
+D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Infrastructure\obj\Debug\BrawijayaWorkshop.Infrastructure.pdb
