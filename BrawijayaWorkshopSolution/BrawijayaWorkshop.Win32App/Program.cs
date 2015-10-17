@@ -9,11 +9,12 @@ using System.Reflection;
 using System.Windows.Forms;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
-
 namespace BrawijayaWorkshop.Win32App
 {
     static class Program
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
+    (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
