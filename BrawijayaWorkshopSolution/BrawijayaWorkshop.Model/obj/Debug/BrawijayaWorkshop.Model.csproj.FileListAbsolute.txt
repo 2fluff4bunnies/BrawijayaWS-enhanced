@@ -1,4 +1,0 @@
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Model\bin\Debug\BrawijayaWorkshop.Model.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Model\bin\Debug\BrawijayaWorkshop.Model.pdb
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Model\obj\Debug\BrawijayaWorkshop.Model.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Model\obj\Debug\BrawijayaWorkshop.Model.pdb

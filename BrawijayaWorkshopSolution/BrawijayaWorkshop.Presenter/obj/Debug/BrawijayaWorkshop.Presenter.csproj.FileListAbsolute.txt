@@ -1,4 +1,0 @@
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Presenter\bin\Debug\BrawijayaWorkshop.Presenter.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Presenter\bin\Debug\BrawijayaWorkshop.Presenter.pdb
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Presenter\obj\Debug\BrawijayaWorkshop.Presenter.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Presenter\obj\Debug\BrawijayaWorkshop.Presenter.pdb

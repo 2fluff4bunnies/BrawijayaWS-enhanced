@@ -1,4 +1,0 @@
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Constant\bin\Debug\BrawijayaWorkshop.Constant.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Constant\bin\Debug\BrawijayaWorkshop.Constant.pdb
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Constant\obj\Debug\BrawijayaWorkshop.Constant.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Constant\obj\Debug\BrawijayaWorkshop.Constant.pdb

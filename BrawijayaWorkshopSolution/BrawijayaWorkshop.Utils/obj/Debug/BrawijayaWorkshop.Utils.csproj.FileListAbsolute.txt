@@ -1,6 +1,0 @@
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\bin\Debug\BrawijayaWorkshop.Utils.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\bin\Debug\BrawijayaWorkshop.Utils.pdb
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\bin\Debug\log4net.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\bin\Debug\log4net.xml
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\obj\Debug\BrawijayaWorkshop.Utils.dll
-D:\Labs\Development\Visual Studio 2013\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\obj\Debug\BrawijayaWorkshop.Utils.pdb
