@@ -48,8 +48,7 @@ namespace BrawijayaWorkshop.Win32App
             {
                 // ******* Contoh cara menampilkan user control pada main form
                 //TestUserControl control = new TestUserControl();
-                //control.Dock = DockStyle.Fill;
-                //splitContainerControl.Panel2.Controls.Add(control);
+                //ShowUserControl(control);
 
                 LoginForm login = Boostrapper.Resolve<LoginForm>();
                 login.ShowDialog(this);
@@ -80,6 +79,21 @@ namespace BrawijayaWorkshop.Win32App
             }
         }
 
+        #region Helper
+        private void ShowUserControl(XtraUserControl userControl)
+        {
+            ClearUserControl();
+            userControl.Dock = DockStyle.Fill;
+            splitContainerControl.Panel2.Controls.Add(userControl);
+        }
+
+        private void ClearUserControl()
+        {
+            splitContainerControl.Panel2.Controls.Clear();
+        }
+        #endregion
+
+        #region Menu Items Event Handler
         private void iAbout_ItemClick(object sender, ItemClickEventArgs e)
         {
             AboutAppForm aboutForm = new AboutAppForm();
@@ -90,6 +104,7 @@ namespace BrawijayaWorkshop.Win32App
         {
             this.Close();
         }
+        #endregion
 
         #region Startup Function
         private bool InitStartUp()
