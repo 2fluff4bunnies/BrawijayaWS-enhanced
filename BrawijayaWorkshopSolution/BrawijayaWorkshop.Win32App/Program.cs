@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Win32App
             {
                 MethodBase.GetCurrentMethod().Info("Initialize database");
                 // Initialize Database
-                new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
+                //new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
                 MethodBase.GetCurrentMethod().Info("Database initialized successfully");
 
                 Application.EnableVisualStyles();
