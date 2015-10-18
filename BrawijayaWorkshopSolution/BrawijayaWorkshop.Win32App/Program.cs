@@ -1,10 +1,9 @@
-﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database;
-using BrawijayaWorkshop.Utils;
+﻿using BrawijayaWorkshop.Utils;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using System;
+using System.Configuration;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -13,14 +12,19 @@ namespace BrawijayaWorkshop.Win32App
 {
     static class Program
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
-    (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            string applicationName = ConfigurationManager.AppSettings["LoggerAppName"];
+            LoggerExtensionUtils.InitLogger(applicationName);
+            MethodBase.GetCurrentMethod().Info("* " + applicationName + " - START");
+
             // Registering all dependency injection objects
             //Boostrapper.Wire(new ApplicationModule());
 
@@ -36,6 +40,7 @@ namespace BrawijayaWorkshop.Win32App
                 if (XtraMessageBox.Show("An error occured at startup. Please contact developer!", "Startup Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, DevExpress.Utils.DefaultBoolean.False) == DialogResult.OK)
                 {
                     Application.Exit();
+                    MethodBase.GetCurrentMethod().Info("* " + applicationName + " - END");
                 }
             }
 
@@ -50,6 +55,7 @@ namespace BrawijayaWorkshop.Win32App
             SplashScreenManager.ShowForm(typeof(StartupScreen), true, true);
 
             Application.Run(new MainForm());
+            MethodBase.GetCurrentMethod().Info("* " + applicationName + " - END");
         }
     }
 }

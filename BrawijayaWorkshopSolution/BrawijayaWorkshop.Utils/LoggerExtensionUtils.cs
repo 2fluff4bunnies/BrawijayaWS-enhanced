@@ -1,6 +1,5 @@
 ﻿using log4net;
 using System;
-using System.Configuration;
 using System.Reflection;
 
 namespace BrawijayaWorkshop.Utils
@@ -13,9 +12,9 @@ namespace BrawijayaWorkshop.Utils
         private const string LOGFORMAT = "{0}: {1}";
         private static ILog _log;
 
-        static LoggerExtensionUtils()
+        public static void InitLogger(string appName)
         {
-            _log = LogManager.GetLogger(ConfigurationManager.AppSettings["LoggerAppName"]);
+            _log = LogManager.GetLogger(appName);
         }
 
         public static void Error(this MethodBase method, string message)
