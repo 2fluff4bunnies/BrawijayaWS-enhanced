@@ -17,6 +17,7 @@ using System.Threading;
 using DevExpress.XtraEditors;
 using System.Reflection;
 using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.Database;
 
 namespace BrawijayaWorkshop.Win32App
 {
@@ -132,7 +133,10 @@ namespace BrawijayaWorkshop.Win32App
             try
             {
                 SplashScreenManager.Default.SendCommand(StartupScreen.SplashScreenCommand.CheckDatabaseConnection, null);
-                Thread.Sleep(3000); // TODO: do something
+                MethodBase.GetCurrentMethod().Info("Initialize database");
+                // Initialize Database
+                //new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
+                MethodBase.GetCurrentMethod().Info("Database initialized successfully");
                 return true;
             }
             catch (Exception ex)

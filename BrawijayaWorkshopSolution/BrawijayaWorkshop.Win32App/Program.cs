@@ -1,5 +1,4 @@
-﻿using BrawijayaWorkshop.Database;
-using BrawijayaWorkshop.Utils;
+﻿using BrawijayaWorkshop.Utils;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
@@ -31,11 +30,6 @@ namespace BrawijayaWorkshop.Win32App
 
             try
             {
-                MethodBase.GetCurrentMethod().Info("Initialize database");
-                // Initialize Database
-                //new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
-                MethodBase.GetCurrentMethod().Info("Database initialized successfully");
-
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
