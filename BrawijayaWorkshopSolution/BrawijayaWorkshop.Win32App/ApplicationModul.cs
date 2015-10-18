@@ -14,6 +14,8 @@ namespace BrawijayaWorkshop.Win32App
 
             Bind<ISettingRepository>().To<SettingRepository>();
             Bind<IRoleRepository>().To<RoleRepository>();
+            Bind<IUserRepository>().To<UserRepository>();
+            Bind<IUserRoleRepository>().To<UserRoleRepository>();
         }
     }
 }

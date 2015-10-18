@@ -2,7 +2,7 @@
 namespace BrawijayaWorkshop.Infrastructure.MVP
 {
     public abstract class BasePresenter<T, U>
-        where T : IView<BasePresenter<T, U>>
+        where T : IView
         where U : BaseModel
     {
         protected T View { get; set; }

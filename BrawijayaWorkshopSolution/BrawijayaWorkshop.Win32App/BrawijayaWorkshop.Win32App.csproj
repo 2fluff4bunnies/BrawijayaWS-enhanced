@@ -105,12 +105,42 @@
       <DependentUpon>AboutAppForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationModul.cs" />
+    <Compile Include="BaseAppUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseAppUserControl.Designer.cs">
+      <DependentUpon>BaseAppUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseDefaultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseDefaultForm.Designer.cs">
+      <DependentUpon>BaseDefaultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseEditorForm.Designer.cs">
+      <DependentUpon>BaseEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Boostrapper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\TestUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\TestUserControl.Designer.cs">
+      <DependentUpon>TestUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,11 +150,21 @@
     <Compile Include="StartupScreen.Designer.cs">
       <DependentUpon>StartupScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="XtraMessageBoxHelper.cs" />
     <EmbeddedResource Include="AboutAppForm.resx">
       <DependentUpon>AboutAppForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BaseEditorForm.resx">
+      <DependentUpon>BaseEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\TestUserControl.resx">
+      <DependentUpon>TestUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -155,10 +195,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModulControls\" />
-    <Folder Include="ModulForms\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
@@ -205,6 +242,15 @@
       <Project>{e3d4ad5b-203c-4f6d-b4f3-8d60e5c8b338}</Project>
       <Name>BrawijayaWorkshop.View</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apply_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\app_login.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

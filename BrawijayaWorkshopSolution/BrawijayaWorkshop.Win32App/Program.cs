@@ -26,7 +26,7 @@ namespace BrawijayaWorkshop.Win32App
             MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
 
             // Registering all dependency injection objects
-            //Boostrapper.Wire(new ApplicationModule());
+            Boostrapper.Wire(new ApplicationModule());
 
             try
             {
@@ -46,7 +46,8 @@ namespace BrawijayaWorkshop.Win32App
             catch (Exception ex)
             {
                 MethodBase.GetCurrentMethod().Error("Unable to initialize database!", ex);
-                XtraMessageBox.Show("An error occured at startup. Please contact developer!", "Startup Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, DevExpress.Utils.DefaultBoolean.False);
+                XtraMessageBoxHelper.ShowError(null, "Aplikasi error! Mohon hubungi developer.");
+                //XtraMessageBox.Show(, "Startup Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, DevExpress.Utils.DefaultBoolean.False);
                 MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
             }
         }

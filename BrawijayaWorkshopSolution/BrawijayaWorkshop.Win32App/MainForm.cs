@@ -18,6 +18,8 @@ using DevExpress.XtraEditors;
 using System.Reflection;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.Database;
+using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.ModulControls;
 
 namespace BrawijayaWorkshop.Win32App
 {
@@ -39,13 +41,23 @@ namespace BrawijayaWorkshop.Win32App
         {
             if (!initStartUpResult)
             {
-                XtraMessageBox.Show("Ada kesalahan pada sistem. Mohon hubungi developer.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                this.ShowError("Ada kesalahan pada sistem. Mohon hubungi developer.");
                 Application.Exit();
             }
             else
             {
-                // TODO
+                // ******* Contoh cara menampilkan user control pada main form
+                //TestUserControl control = new TestUserControl();
+                //control.Dock = DockStyle.Fill;
+                //splitContainerControl.Panel2.Controls.Add(control);
+
+                LoginForm login = Boostrapper.Resolve<LoginForm>();
+                login.ShowDialog(this);
+                if(login.DialogResult == System.Windows.Forms.DialogResult.Abort)
+                {
+                    this.FormClosing -= MainForm_FormClosing;
+                    this.Close();
+                }
             }
         }
 
@@ -54,8 +66,8 @@ namespace BrawijayaWorkshop.Win32App
             if (initStartUpResult)
             {
                 this.FormClosing -= MainForm_FormClosing;
-                if (XtraMessageBox.Show("Apakah anda yakin ingin menutup aplikasi?", "Konfirmasi",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) ==
+
+                if (this.ShowConfirmation("Apakah anda yakin ingin menutup aplikasi?") ==
                     System.Windows.Forms.DialogResult.Yes)
                 {
                     Application.Exit();

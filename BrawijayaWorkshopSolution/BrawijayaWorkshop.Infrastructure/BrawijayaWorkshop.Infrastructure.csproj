@@ -59,6 +59,7 @@
     <Compile Include="Disposable.cs" />
     <Compile Include="MVP\BaseModel.cs" />
     <Compile Include="MVP\BasePresenter.cs" />
+    <Compile Include="MVP\EnumViewMessage.cs" />
     <Compile Include="MVP\IView.cs" />
     <Compile Include="MySqlEntityFramework\MySqlDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

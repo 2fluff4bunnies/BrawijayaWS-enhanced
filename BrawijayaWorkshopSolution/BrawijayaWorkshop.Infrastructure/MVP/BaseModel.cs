@@ -1,8 +1,12 @@
-﻿
+﻿using System;
+
 namespace BrawijayaWorkshop.Infrastructure.MVP
 {
     public abstract class BaseModel
     {
-        public abstract bool Validate();
+        public virtual bool Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
