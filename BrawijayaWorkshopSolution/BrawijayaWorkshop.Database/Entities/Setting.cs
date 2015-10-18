@@ -6,6 +6,7 @@ namespace BrawijayaWorkshop.Database.Entities
     {
         [MaxLength(100)]
         [Required]
+        [Key]
         public string Key { get; set; }
 
         [MaxLength(100)]

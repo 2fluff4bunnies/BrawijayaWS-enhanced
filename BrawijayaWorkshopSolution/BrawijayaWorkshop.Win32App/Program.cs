@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Utils;
+﻿using BrawijayaWorkshop.Database;
+using BrawijayaWorkshop.Utils;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
@@ -23,39 +24,37 @@ namespace BrawijayaWorkshop.Win32App
         {
             string applicationName = ConfigurationManager.AppSettings["LoggerAppName"];
             LoggerExtensionUtils.InitLogger(applicationName);
-            MethodBase.GetCurrentMethod().Info("* " + applicationName + " - START");
+            MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
 
             // Registering all dependency injection objects
             //Boostrapper.Wire(new ApplicationModule());
 
             try
             {
-                // Initialize Database
-                //new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
                 MethodBase.GetCurrentMethod().Info("Initialize database");
+                // Initialize Database
+                new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
+                MethodBase.GetCurrentMethod().Info("Database initialized successfully");
+
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                DevExpress.Skins.SkinManager.EnableFormSkins();
+                DevExpress.UserSkins.BonusSkins.Register();
+                XtraMessageBox.AllowCustomLookAndFeel = true;
+                UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+
+                SplashScreenManager.ShowForm(typeof(StartupScreen), true, true);
+
+                Application.Run(new MainForm());
+                MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
             }
             catch (Exception ex)
             {
                 MethodBase.GetCurrentMethod().Error("Unable to initialize database!", ex);
-                if (XtraMessageBox.Show("An error occured at startup. Please contact developer!", "Startup Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, DevExpress.Utils.DefaultBoolean.False) == DialogResult.OK)
-                {
-                    Application.Exit();
-                    MethodBase.GetCurrentMethod().Info("* " + applicationName + " - END");
-                }
+                XtraMessageBox.Show("An error occured at startup. Please contact developer!", "Startup Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, DevExpress.Utils.DefaultBoolean.False);
+                MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
             }
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            DevExpress.Skins.SkinManager.EnableFormSkins();
-            DevExpress.UserSkins.BonusSkins.Register();
-            XtraMessageBox.AllowCustomLookAndFeel = true;
-            UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-
-            SplashScreenManager.ShowForm(typeof(StartupScreen), true, true);
-
-            Application.Run(new MainForm());
-            MethodBase.GetCurrentMethod().Info("* " + applicationName + " - END");
         }
     }
 }

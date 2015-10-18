@@ -113,12 +113,12 @@ namespace BrawijayaWorkshop.Utils
             }
         }
 
-        public static string Decrypt(this string sourceData)
+        public static string Decrypt(this string sender)
         {
             try
             {
                 // convert data to byte array
-                byte[] encryptedDataBytes = Convert.FromBase64String(sourceData);
+                byte[] encryptedDataBytes = Convert.FromBase64String(sender);
 
                 // get source memory stream and fill it 
                 MemoryStream tempStream = new MemoryStream(encryptedDataBytes, 0, encryptedDataBytes.Length);

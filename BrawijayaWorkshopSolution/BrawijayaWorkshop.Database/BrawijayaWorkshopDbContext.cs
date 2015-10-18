@@ -1,14 +1,8 @@
-﻿using BrawijayaWorkshop.Constant;
+﻿using BrawijayaWorkshop.Database.Configurations;
 using BrawijayaWorkshop.Database.Entities;
 using MySql.Data.Entity;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Database
 {
@@ -17,6 +11,8 @@ namespace BrawijayaWorkshop.Database
     {
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
@@ -27,6 +23,7 @@ namespace BrawijayaWorkshop.Database
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // add entity configuration here
+            modelBuilder.Configurations.Add(new UserRoleConfiguration());
         }
     }
 }

@@ -24,17 +24,17 @@ namespace BrawijayaWorkshop.Utils
 
         public static void Error(this MethodBase method, string message, Exception exception)
         {
-            _log.Error(string.Format(LOGFORMAT, method.Name, message), exception);
+            _log.Error(string.Format(LOGFORMAT, method.GetMethodFullName(), message), exception);
         }
 
         public static void Debug(this MethodBase method, string message)
         {
-            _log.Debug(string.Format(LOGFORMAT, method.Name, message));
+            _log.Debug(string.Format(LOGFORMAT, method.GetMethodFullName(), message));
         }
 
         public static void Info(this MethodBase method, string message)
         {
-            _log.Info(string.Format(LOGFORMAT, method.Name, message));
+            _log.Info(string.Format(LOGFORMAT, method.GetMethodFullName(), message));
         }
 
         public static void Fatal(this MethodBase method, string message)
@@ -44,7 +44,15 @@ namespace BrawijayaWorkshop.Utils
 
         public static void Fatal(this MethodBase method, string message, Exception exception)
         {
-            _log.Fatal(string.Format(LOGFORMAT, method.Name, message), exception);
+            _log.Fatal(string.Format(LOGFORMAT, method.GetMethodFullName(), message), exception);
+        }
+
+        private static string GetMethodFullName(this MethodBase method)
+        {
+            string methodName = method.Name;
+            string className = method.ReflectedType.Name;
+
+            return className + "." + methodName;
         }
     }
 }
