@@ -26,7 +26,7 @@ namespace BrawijayaWorkshop.Win32App
             MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
 
             // Registering all dependency injection objects
-            Boostrapper.Wire(new ApplicationModule());
+            Boostrapper.Wire(new DependencyInjectionModul());
 
             try
             {

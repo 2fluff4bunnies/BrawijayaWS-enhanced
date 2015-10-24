@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationConstant.cs" />
+    <Compile Include="DbConstant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuntimeConstant.cs" />
   </ItemGroup>

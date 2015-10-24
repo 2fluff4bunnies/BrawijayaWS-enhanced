@@ -5,7 +5,7 @@ using Ninject.Modules;
 
 namespace BrawijayaWorkshop.Win32App
 {
-    public class ApplicationModule : NinjectModule
+    public class DependencyInjectionModul : NinjectModule
     {
         public override void Load()
         {
@@ -16,6 +16,8 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IRoleRepository>().To<RoleRepository>();
             Bind<IUserRepository>().To<UserRepository>();
             Bind<IUserRoleRepository>().To<UserRoleRepository>();
+            Bind<IApplicationModulRepository>().To<ApplicationModulRepository>();
+            Bind<IRoleAccessRepository>().To<RoleAccessRepository>();
         }
     }
 }

@@ -104,7 +104,7 @@
     <Compile Include="AboutAppForm.Designer.cs">
       <DependentUpon>AboutAppForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationModul.cs" />
+    <Compile Include="DependencyInjectionModul.cs" />
     <Compile Include="BaseAppUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -24,6 +24,7 @@ namespace BrawijayaWorkshop.Database
         {
             // add entity configuration here
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
+            modelBuilder.Configurations.Add(new RoleAccessConfiguration());
         }
     }
 }
