@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BrawijayaWorkshop.CryptoWin32App")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Encryption Tool")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Brawijaya Workshop")]
 [assembly: AssemblyProduct("BrawijayaWorkshop.CryptoWin32App")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © THE 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

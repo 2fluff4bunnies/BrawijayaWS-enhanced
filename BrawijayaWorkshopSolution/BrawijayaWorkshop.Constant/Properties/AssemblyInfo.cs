@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Brawijaya Workshop")]
 [assembly: AssemblyProduct("BrawijayaWorkshop.Constant")]
-[assembly: AssemblyCopyright("Copyright © EHT 2015")]
+[assembly: AssemblyCopyright("Copyright © THE 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
