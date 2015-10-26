@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrawijayaWorkshop.Constant;
+using System;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Runtime
@@ -55,6 +56,18 @@ namespace BrawijayaWorkshop.Runtime
 
             AllowedModules.Clear();
             AllowedModules = new List<ModulInfo>();
+        }
+
+        public static bool IsAccessible(int accessCode, DbConstant.AccessTypeEnum accessType)
+        {
+            int defaultAction = (int)DbConstant.AccessTypeEnum.Read;
+            defaultAction = defaultAction | accessCode;
+            return defaultAction.Has(accessType);
+        }
+
+        public static bool Has(this int accessCode, DbConstant.AccessTypeEnum flags)
+        {
+            return ((int)accessCode == ((int)flags | (int)accessCode));
         }
     }
 

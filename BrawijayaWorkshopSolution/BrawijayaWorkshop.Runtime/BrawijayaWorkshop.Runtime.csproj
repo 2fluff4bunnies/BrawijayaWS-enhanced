@@ -42,6 +42,12 @@
     <Compile Include="LoginInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">
+      <Project>{26119b53-0e9a-4c13-8c2e-bc032fcb1686}</Project>
+      <Name>BrawijayaWorkshop.Constant</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
