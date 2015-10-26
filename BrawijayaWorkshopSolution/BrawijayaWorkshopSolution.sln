@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.Constant"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.CryptoWin32App", "BrawijayaWorkshop.CryptoWin32App\BrawijayaWorkshop.CryptoWin32App.csproj", "{F693D1DE-664E-4371-BB2C-C9EEB90AD7CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.Runtime", "BrawijayaWorkshop.Runtime\BrawijayaWorkshop.Runtime.csproj", "{7EA16C88-7273-4683-A59C-E8DED545662E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{F693D1DE-664E-4371-BB2C-C9EEB90AD7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F693D1DE-664E-4371-BB2C-C9EEB90AD7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F693D1DE-664E-4371-BB2C-C9EEB90AD7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA16C88-7273-4683-A59C-E8DED545662E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA16C88-7273-4683-A59C-E8DED545662E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA16C88-7273-4683-A59C-E8DED545662E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA16C88-7273-4683-A59C-E8DED545662E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +86,6 @@ Global
 		{49F696DC-CD3F-491E-A729-1B78CB550DDA} = {949A10B9-2D5C-46E4-BB3F-3E652526128E}
 		{26119B53-0E9A-4C13-8C2E-BC032FCB1686} = {16BF9EDF-9770-4BD4-9878-A6DB5E945B73}
 		{F693D1DE-664E-4371-BB2C-C9EEB90AD7CF} = {949A10B9-2D5C-46E4-BB3F-3E652526128E}
+		{7EA16C88-7273-4683-A59C-E8DED545662E} = {16BF9EDF-9770-4BD4-9878-A6DB5E945B73}
 	EndGlobalSection
 EndGlobal

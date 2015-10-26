@@ -20,6 +20,7 @@ using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.Database;
 using BrawijayaWorkshop.Win32App.ModulForms;
 using BrawijayaWorkshop.Win32App.ModulControls;
+using BrawijayaWorkshop.Runtime;
 
 namespace BrawijayaWorkshop.Win32App
 {
@@ -47,8 +48,9 @@ namespace BrawijayaWorkshop.Win32App
             else
             {
                 // ******* Contoh cara menampilkan user control pada main form
-                //TestUserControl control = new TestUserControl();
-                //ShowUserControl(control);
+                // TestUserControl control = new TestUserControl();
+                // ShowUserControl(control);
+                // *******
 
                 LoginForm login = Boostrapper.Resolve<LoginForm>();
                 login.ShowDialog(this);
@@ -57,6 +59,10 @@ namespace BrawijayaWorkshop.Win32App
                     this.FormClosing -= MainForm_FormClosing;
                     this.Close();
                 }
+
+                siInfo.Caption = string.Format("{0}: {1} - ", LoginInformation.UserName, LoginInformation.RoleName);
+
+                // todo: get login information and generate menus and navigations based on allowed modules
             }
         }
 

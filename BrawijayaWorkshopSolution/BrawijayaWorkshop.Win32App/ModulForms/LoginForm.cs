@@ -42,8 +42,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public void SetLoginResult(User user)
         {
-            // todo
-            this.ShowInformation("Login Called!");
+            if (user == null)
+            {
+                this.ShowWarning("Username atau Password salah!");
+                return;
+            }
+
+            _presenter.CompileLoginInformation(user);
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.Close();
         }
 
         private void btnAccept_Click(object sender, EventArgs e)

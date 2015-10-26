@@ -246,7 +246,7 @@
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homeRibbonPage,
             this.helpRibbonPage});
-            this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
+            this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.Size = new System.Drawing.Size(1100, 143);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.Toolbar.ItemLinks.Add(this.iNew);
@@ -599,8 +599,8 @@
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
             this.ribbonStatusBar.ItemLinks.Add(this.siInfo);
+            this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 669);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;

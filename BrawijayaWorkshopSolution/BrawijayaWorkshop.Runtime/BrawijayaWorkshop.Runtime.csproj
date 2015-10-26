@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1B1B852C-6000-49CB-9874-523F7429124C}</ProjectGuid>
+    <ProjectGuid>{7EA16C88-7273-4683-A59C-E8DED545662E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BrawijayaWorkshop.Presenter</RootNamespace>
-    <AssemblyName>BrawijayaWorkshop.Presenter</AssemblyName>
+    <RootNamespace>BrawijayaWorkshop.Runtime</RootNamespace>
+    <AssemblyName>BrawijayaWorkshop.Runtime</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,34 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginPresenter.cs" />
+    <Compile Include="LoginInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BrawijayaWorkshop.Database\BrawijayaWorkshop.Database.csproj">
-      <Project>{45d59c1f-c0d4-4420-9804-5fd8f223a8c6}</Project>
-      <Name>BrawijayaWorkshop.Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BrawijayaWorkshop.Infrastructure\BrawijayaWorkshop.Infrastructure.csproj">
-      <Project>{e93349f1-53b0-453f-907a-4700ecfb6ba5}</Project>
-      <Name>BrawijayaWorkshop.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BrawijayaWorkshop.Model\BrawijayaWorkshop.Model.csproj">
-      <Project>{83ea8859-1a67-46c3-91c2-27d5346dcf11}</Project>
-      <Name>BrawijayaWorkshop.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BrawijayaWorkshop.Runtime\BrawijayaWorkshop.Runtime.csproj">
-      <Project>{7ea16c88-7273-4683-a59c-e8ded545662e}</Project>
-      <Name>BrawijayaWorkshop.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BrawijayaWorkshop.Utils\BrawijayaWorkshop.Utils.csproj">
-      <Project>{49f696dc-cd3f-491e-a729-1b78cb550dda}</Project>
-      <Name>BrawijayaWorkshop.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BrawijayaWorkshop.View\BrawijayaWorkshop.View.csproj">
-      <Project>{e3d4ad5b-203c-4f6d-b4f3-8d60e5c8b338}</Project>
-      <Name>BrawijayaWorkshop.View</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

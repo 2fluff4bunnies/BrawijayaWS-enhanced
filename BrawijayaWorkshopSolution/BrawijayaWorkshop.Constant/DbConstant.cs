@@ -6,6 +6,8 @@ namespace BrawijayaWorkshop.Constant
         public const string ROLE_ADMIN = "R_ADMIN";
         public const string ROLE_MANAGER = "R_MANAGER";
 
+        public const string MODUL_USERCONTROL = "M_USERCONTROL";
+
         public enum AccessTypeEnum
         {
             Read = 1,

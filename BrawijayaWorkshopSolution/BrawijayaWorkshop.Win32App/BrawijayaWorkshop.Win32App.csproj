@@ -234,6 +234,10 @@
       <Project>{1b1b852c-6000-49cb-9874-523f7429124c}</Project>
       <Name>BrawijayaWorkshop.Presenter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BrawijayaWorkshop.Runtime\BrawijayaWorkshop.Runtime.csproj">
+      <Project>{7ea16c88-7273-4683-a59c-e8ded545662e}</Project>
+      <Name>BrawijayaWorkshop.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BrawijayaWorkshop.Utils\BrawijayaWorkshop.Utils.csproj">
       <Project>{49f696dc-cd3f-491e-a729-1b78cb550dda}</Project>
       <Name>BrawijayaWorkshop.Utils</Name>
