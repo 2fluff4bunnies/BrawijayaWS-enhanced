@@ -25,6 +25,9 @@ namespace BrawijayaWorkshop.Win32App
                 case EnumViewMessage.Error:
                     this.ShowError(message);
                     break;
+                case EnumViewMessage.Warning:
+                    this.ShowWarning(message);
+                    break;
                 default:
                     break;
             }
