@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Runtime
 {
@@ -56,6 +57,26 @@ namespace BrawijayaWorkshop.Runtime
 
             AllowedModules.Clear();
             AllowedModules = new List<ModulInfo>();
+        }
+
+        public static ModulInfo GetModul(string modulName)
+        {
+            if(IsLoggedIn)
+            {
+                return AllowedModules.Where(modul => string.Compare(modul.ModulName, modulName, true) == 0).FirstOrDefault();
+            }
+
+            return null;
+        }
+
+        public static bool Validate(this ModulInfo sender, DbConstant.AccessTypeEnum accessType)
+        {
+            if(sender != null)
+            {
+                return IsAccessible(sender.AccessCode, accessType);
+            }
+
+            return false;
         }
 
         public static bool IsAccessible(int accessCode, DbConstant.AccessTypeEnum accessType)

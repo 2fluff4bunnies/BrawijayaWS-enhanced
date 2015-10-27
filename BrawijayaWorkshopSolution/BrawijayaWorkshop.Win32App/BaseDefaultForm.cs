@@ -1,10 +1,73 @@
-﻿using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.Runtime;
 using System;
 
 namespace BrawijayaWorkshop.Win32App
 {
     public partial class BaseDefaultForm : DevExpress.XtraEditors.XtraForm, IView
     {
+        #region Credential Members
+        protected virtual string ModulName
+        {
+            get
+            {
+                return "-";
+            }
+        }
+
+        protected bool AllowInsert
+        {
+            get
+            {
+                if (LoginInformation.IsLoggedIn)
+                {
+                    ModulInfo currentModul = LoginInformation.GetModul(this.ModulName);
+                    if (currentModul != null)
+                    {
+                        return currentModul.Validate(DbConstant.AccessTypeEnum.Create);
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        protected bool AllowEdit
+        {
+            get
+            {
+                if (LoginInformation.IsLoggedIn)
+                {
+                    ModulInfo currentModul = LoginInformation.GetModul(this.ModulName);
+                    if (currentModul != null)
+                    {
+                        return currentModul.Validate(DbConstant.AccessTypeEnum.Update);
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        protected bool AllowDelete
+        {
+            get
+            {
+                if (LoginInformation.IsLoggedIn)
+                {
+                    ModulInfo currentModul = LoginInformation.GetModul(this.ModulName);
+                    if (currentModul != null)
+                    {
+                        return currentModul.Validate(DbConstant.AccessTypeEnum.Delete);
+                    }
+                }
+
+                return false;
+            }
+        }
+        #endregion
+
         public BaseDefaultForm()
         {
             InitializeComponent();
