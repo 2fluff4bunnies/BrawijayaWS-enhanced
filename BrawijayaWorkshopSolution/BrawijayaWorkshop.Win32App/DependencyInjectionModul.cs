@@ -18,6 +18,8 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IUserRoleRepository>().To<UserRoleRepository>();
             Bind<IApplicationModulRepository>().To<ApplicationModulRepository>();
             Bind<IRoleAccessRepository>().To<RoleAccessRepository>();
+            Bind<ICityRepository>().To<CityRepository>();
+            Bind<ICustomerRepository>().To<CustomerRepository>();
         }
     }
 }
