@@ -25,6 +25,12 @@ namespace BrawijayaWorkshop.Database
             // add entity configuration here
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new RoleAccessConfiguration());
+            modelBuilder.Configurations.Add(new CustomerConfiguration());
+            modelBuilder.Configurations.Add(new VehicleConfiguration());
+            modelBuilder.Configurations.Add(new PurchasingConfiguration());
+            modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
+            modelBuilder.Configurations.Add(new ReferenceDetailConfiguration());
+            modelBuilder.Configurations.Add(new SparepartConfiguration());
         }
     }
 }

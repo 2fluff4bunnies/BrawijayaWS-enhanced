@@ -7,7 +7,7 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public PurchasingConfiguration()
         {
-            HasRequired(c => c.Supplier).WithMany().HasForeignKey(c => c.SupplierId).WillCascadeOnDelete(true);
+            HasRequired(p => p.Supplier).WithMany().HasForeignKey(p => p.SupplierId).WillCascadeOnDelete(true);
         }
     }
 }

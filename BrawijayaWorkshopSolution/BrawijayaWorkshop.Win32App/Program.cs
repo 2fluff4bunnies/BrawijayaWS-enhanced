@@ -40,7 +40,7 @@ namespace BrawijayaWorkshop.Win32App
 
                 SplashScreenManager.ShowForm(typeof(StartupScreen), true, true);
 
-                Application.Run(new MainForm());
+                Application.Run(FormHelpers.CurrentMainForm);
                 MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
             }
             catch (Exception ex)

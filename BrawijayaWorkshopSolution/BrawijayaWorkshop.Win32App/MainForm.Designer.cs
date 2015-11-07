@@ -79,6 +79,9 @@
             this.helpRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.repositoryItemMarqueeProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
+            this.biStatusProgress = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemMarqueeProgressBar2 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).BeginInit();
@@ -93,6 +96,8 @@
             this.popupControlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl
@@ -237,15 +242,19 @@
             this.iLeftTextAlign,
             this.iCenterTextAlign,
             this.iRightTextAlign,
-            this.rgbiSkins});
+            this.rgbiSkins,
+            this.biStatusProgress});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 62;
+            this.ribbonControl.MaxItemId = 64;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homeRibbonPage,
             this.helpRibbonPage});
+            this.ribbonControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemMarqueeProgressBar1,
+            this.repositoryItemMarqueeProgressBar2});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.Size = new System.Drawing.Size(1100, 143);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
@@ -601,10 +610,25 @@
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.siInfo);
             this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
+            this.ribbonStatusBar.ItemLinks.Add(this.biStatusProgress);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 669);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1100, 31);
+            // 
+            // repositoryItemMarqueeProgressBar1
+            // 
+            this.repositoryItemMarqueeProgressBar1.Name = "repositoryItemMarqueeProgressBar1";
+            // 
+            // biStatusProgress
+            // 
+            this.biStatusProgress.Edit = this.repositoryItemMarqueeProgressBar2;
+            this.biStatusProgress.Id = 63;
+            this.biStatusProgress.Name = "biStatusProgress";
+            // 
+            // repositoryItemMarqueeProgressBar2
+            // 
+            this.repositoryItemMarqueeProgressBar2.Name = "repositoryItemMarqueeProgressBar2";
             // 
             // MainForm
             // 
@@ -637,6 +661,8 @@
             this.popupControlContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,6 +719,9 @@
         private DevExpress.XtraNavBar.NavBarItem tasksItem;
         private DevExpress.Utils.ImageCollection navbarImageCollection;
         private DevExpress.Utils.ImageCollection navbarImageCollectionLarge;
+        private DevExpress.XtraBars.BarEditItem biStatusProgress;
+        private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar1;
 
     }
 }

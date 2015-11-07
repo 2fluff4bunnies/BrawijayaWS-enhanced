@@ -201,5 +201,15 @@ namespace BrawijayaWorkshop.Win32App
             SkinHelper.InitSkinGallery(rgbiSkins, true);
         }
         #endregion
+
+        public void UpdateStatusInformation(string status, bool isComplete)
+        {
+            this.siStatus.Caption = status;
+            biStatusProgress.Visibility = BarItemVisibility.Never;
+            if (!isComplete)
+            {
+                biStatusProgress.Visibility = BarItemVisibility.Always;
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public VehicleConfiguration()
         {
-            HasRequired(c => c.Customer).WithMany().HasForeignKey(c => c.CustomerId).WillCascadeOnDelete(true);
+            HasRequired(v => v.Customer).WithMany().HasForeignKey(v => v.CustomerId).WillCascadeOnDelete(true);
         }
     }
 }

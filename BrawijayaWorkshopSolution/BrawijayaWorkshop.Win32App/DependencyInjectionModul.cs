@@ -20,6 +20,16 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IRoleAccessRepository>().To<RoleAccessRepository>();
             Bind<ICityRepository>().To<CityRepository>();
             Bind<ICustomerRepository>().To<CustomerRepository>();
+            Bind<IPurchasingRepository>().To<PurchasingRepository>();
+            Bind<IPurchasingDetailRepository>().To<PurchasingDetailRepository>();
+            Bind<IReferenceRepository>().To<ReferenceRepository>();
+            Bind<IReferenceDetailRepository>().To<ReferenceDetailRepository>();
+            Bind<ISparepartRepository>().To<SparepartRepository>();
+            Bind<ISparepartDetailRepository>().To<SparepartDetailRepository>();
+            Bind<ISupplierRepository>().To<SupplierRepository>();
+            Bind<IVehicleRepository>().To<VehicleRepository>();
+
+            // todo: add binding
         }
     }
 }
