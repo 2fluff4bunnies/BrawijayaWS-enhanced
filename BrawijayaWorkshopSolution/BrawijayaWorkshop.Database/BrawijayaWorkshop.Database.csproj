@@ -66,9 +66,16 @@
     <Compile Include="Entities\ApplicationModul.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Purchasing.cs" />
+    <Compile Include="Entities\PurchasingDetail.cs" />
+    <Compile Include="Entities\Reference.cs" />
+    <Compile Include="Entities\ReferenceDetail.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\RoleAccess.cs" />
     <Compile Include="Entities\Setting.cs" />
+    <Compile Include="Entities\Sparepart.cs" />
+    <Compile Include="Entities\SparepartDetail.cs" />
+    <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,9 +85,16 @@
     <Compile Include="Repositories\AppUnitOfWork.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\PurchasingDetailRepository.cs" />
+    <Compile Include="Repositories\PurchasingRepository.cs" />
+    <Compile Include="Repositories\ReferenceDetailRepository.cs" />
+    <Compile Include="Repositories\ReferenceRepository.cs" />
     <Compile Include="Repositories\RoleAccessRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
+    <Compile Include="Repositories\SparepartDetailRepository.cs" />
+    <Compile Include="Repositories\SparepartRepository.cs" />
+    <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
   </ItemGroup>
