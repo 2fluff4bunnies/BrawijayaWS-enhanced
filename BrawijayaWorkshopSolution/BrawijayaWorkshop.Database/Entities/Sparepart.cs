@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class Sparepart
+    public class Sparepart : BaseModifierWithStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

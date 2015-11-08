@@ -70,6 +70,9 @@
     <Compile Include="Configurations\VehicleConfiguration.cs" />
     <Compile Include="DatabaseConfigurationHelper.cs" />
     <Compile Include="Entities\ApplicationModul.cs" />
+    <Compile Include="Entities\BaseModifierEntity.cs" />
+    <Compile Include="Entities\BaseModifierWithStatus.cs" />
+    <Compile Include="Entities\BaseStatusEntity.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Purchasing.cs" />
