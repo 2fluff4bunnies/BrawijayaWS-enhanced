@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.Infrastructure.Repository;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,10 +10,12 @@ namespace BrawijayaWorkshop.Model
     public class CustomerListModel : BaseModel
     {
         private ICustomerRepository _customerRepository;
+        private IUnitOfWork _unitOfWork;
 
-        public CustomerListModel(ICustomerRepository customerRepository)
+        public CustomerListModel(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public List<Customer> SearchCustomer(string companyName)
@@ -23,6 +26,7 @@ namespace BrawijayaWorkshop.Model
         public void DeleteCustomer(Customer customer)
         {
             _customerRepository.Delete(customer);
+            _unitOfWork.SaveChanges();
         }
     }
 }

@@ -62,7 +62,7 @@
     <Compile Include="Configurations\CustomerConfiguration.cs" />
     <Compile Include="Configurations\PurchasingConfiguration.cs" />
     <Compile Include="Configurations\PurchasingDetailConfiguration.cs" />
-    <Compile Include="Configurations\ReferenceDetailConfiguration.cs" />
+    <Compile Include="Configurations\ReferenceConfiguration.cs" />
     <Compile Include="Configurations\RoleAccessConfiguration.cs" />
     <Compile Include="Configurations\SparepartConfiguration.cs" />
     <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
@@ -78,7 +78,6 @@
     <Compile Include="Entities\Purchasing.cs" />
     <Compile Include="Entities\PurchasingDetail.cs" />
     <Compile Include="Entities\Reference.cs" />
-    <Compile Include="Entities\ReferenceDetail.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\RoleAccess.cs" />
     <Compile Include="Entities\Setting.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\PurchasingDetailRepository.cs" />
     <Compile Include="Repositories\PurchasingRepository.cs" />
-    <Compile Include="Repositories\ReferenceDetailRepository.cs" />
     <Compile Include="Repositories\ReferenceRepository.cs" />
     <Compile Include="Repositories\RoleAccessRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />

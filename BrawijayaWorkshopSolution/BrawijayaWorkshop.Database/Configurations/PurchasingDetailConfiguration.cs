@@ -9,6 +9,8 @@ namespace BrawijayaWorkshop.Database.Configurations
         {
             HasRequired(pd => pd.Purchasing).WithMany().HasForeignKey(pd => pd.PurchasingId).WillCascadeOnDelete(true);
             HasRequired(pd => pd.Sparepart).WithMany().HasForeignKey(pd => pd.SparepartId).WillCascadeOnDelete(true);
+            HasRequired(pd => pd.CreateUser).WithMany().HasForeignKey(pd => pd.CreateUserId).WillCascadeOnDelete(true);
+            HasRequired(pd => pd.ModifyUser).WithMany().HasForeignKey(pd => pd.ModifyUserId).WillCascadeOnDelete(true);
         }
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="ICustomerEditorView.cs" />
     <Compile Include="ICustomerListView.cs" />
     <Compile Include="ILoginView.cs" />
+    <Compile Include="ISparepartListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

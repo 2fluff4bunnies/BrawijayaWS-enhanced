@@ -7,8 +7,10 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public SparepartDetailConfiguration()
         {
-            HasRequired(spd => spd.Reference).WithMany().HasForeignKey(spd => spd.ReferenceId).WillCascadeOnDelete(true);
+            HasRequired(spd => spd.Sparepart).WithMany().HasForeignKey(spd => spd.SparepartId).WillCascadeOnDelete(true);
             HasRequired(spd => spd.PurchasingDetail).WithMany().HasForeignKey(spd => spd.PurchasingDetailId).WillCascadeOnDelete(true);
+            HasRequired(spd => spd.CreateUser).WithMany().HasForeignKey(spd => spd.CreateUserId).WillCascadeOnDelete(true);
+            HasRequired(spd => spd.ModifyUser).WithMany().HasForeignKey(spd => spd.ModifyUserId).WillCascadeOnDelete(true);
         }
     }
 }

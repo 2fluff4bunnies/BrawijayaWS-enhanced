@@ -22,7 +22,6 @@ namespace BrawijayaWorkshop.Database
         public DbSet<Purchasing> Purchasings { get; set; }
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
         public DbSet<Reference> References { get; set; }
-        public DbSet<ReferenceDetail> ReferenceDetails { get; set; }
 
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
@@ -39,8 +38,9 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new VehicleConfiguration());
             modelBuilder.Configurations.Add(new PurchasingConfiguration());
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
-            modelBuilder.Configurations.Add(new ReferenceDetailConfiguration());
+            modelBuilder.Configurations.Add(new ReferenceConfiguration());
             modelBuilder.Configurations.Add(new SparepartConfiguration());
+            modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
         }
     }
 }
