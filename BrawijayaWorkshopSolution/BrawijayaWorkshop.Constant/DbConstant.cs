@@ -17,6 +17,7 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_PURCHASING = "M_PURCHASING";
 
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
+        public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
 
         public enum AccessTypeEnum
         {
