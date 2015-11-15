@@ -135,7 +135,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (SelectedCustomer == null) return;
 
-            if (this.ShowConfirmation("Apakah anda yakin ingin customer: '" + SelectedCustomer.CompanyName + "'?") == DialogResult.Yes)
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus customer: '" + SelectedCustomer.CompanyName + "'?") == DialogResult.Yes)
             {
                 try
                 {
@@ -161,7 +161,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             catch (Exception ex)
             {
-                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadData()", ex);
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadCustomer()", ex);
                 e.Result = ex;
             }
         }

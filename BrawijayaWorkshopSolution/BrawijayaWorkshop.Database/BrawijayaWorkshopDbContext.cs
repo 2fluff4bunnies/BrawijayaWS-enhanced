@@ -14,6 +14,15 @@ namespace BrawijayaWorkshop.Database
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<ApplicationModul> ApplicationModuls { get; set; }
+        public DbSet<RoleAccess> RoleAccesses { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Purchasing> Purchasings { get; set; }
+        public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
+        public DbSet<Reference> References { get; set; }
+
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
 
@@ -29,8 +38,9 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new VehicleConfiguration());
             modelBuilder.Configurations.Add(new PurchasingConfiguration());
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
-            modelBuilder.Configurations.Add(new ReferenceDetailConfiguration());
+            modelBuilder.Configurations.Add(new ReferenceConfiguration());
             modelBuilder.Configurations.Add(new SparepartConfiguration());
+            modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
         }
     }
 }

@@ -23,7 +23,6 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IPurchasingRepository>().To<PurchasingRepository>();
             Bind<IPurchasingDetailRepository>().To<PurchasingDetailRepository>();
             Bind<IReferenceRepository>().To<ReferenceRepository>();
-            Bind<IReferenceDetailRepository>().To<ReferenceDetailRepository>();
             Bind<ISparepartRepository>().To<SparepartRepository>();
             Bind<ISparepartDetailRepository>().To<SparepartDetailRepository>();
             Bind<ISupplierRepository>().To<SupplierRepository>();

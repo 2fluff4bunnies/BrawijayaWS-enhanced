@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class Sparepart
+    public class Sparepart : BaseModifierWithStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -19,7 +19,10 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public int StockQty { get; set; }
 
-        public int ReferenceId { get; set; }
-        public virtual Reference Reference { get; set; }
+        public int UnitReferenceId { get; set; }
+        public virtual Reference UnitReference { get; set; }
+
+        public int CategoryReferenceId { get; set; }
+        public virtual Reference CategoryReference { get; set; }
     }
 }

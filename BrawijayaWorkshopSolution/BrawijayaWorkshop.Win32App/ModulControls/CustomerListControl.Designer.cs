@@ -132,6 +132,7 @@
             this.gvCustomer.OptionsCustomization.AllowFilter = false;
             this.gvCustomer.OptionsCustomization.AllowGroup = false;
             this.gvCustomer.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvCustomer.OptionsView.EnableAppearanceEvenRow = true;
             this.gvCustomer.OptionsView.ShowGroupPanel = false;
             this.gvCustomer.OptionsView.ShowViewCaption = true;
             this.gvCustomer.ViewCaption = "Daftar Customer";

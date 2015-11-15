@@ -140,6 +140,12 @@
     <Compile Include="ModulControls\CustomerListControl.Designer.cs">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\SparepartListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SparepartListControl.Designer.cs">
+      <DependentUpon>SparepartListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\TestUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,6 +176,12 @@
     <Compile Include="ModulForms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SparepartEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SparepartEditorForm.Designer.cs">
+      <DependentUpon>SparepartEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupScreen.cs">
@@ -191,6 +203,9 @@
     <EmbeddedResource Include="ModulControls\CustomerListControl.resx">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SparepartListControl.resx">
+      <DependentUpon>SparepartListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\TestUserControl.resx">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SparepartEditorForm.resx">
+      <DependentUpon>SparepartEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

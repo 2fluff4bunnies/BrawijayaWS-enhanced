@@ -45,6 +45,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VehicleEditorPresenter.cs" />
     <Compile Include="VehicleListPresenter.cs" />
+    <Compile Include="SparepartEditorPresenter.cs" />
+    <Compile Include="SparepartListPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Database\BrawijayaWorkshop.Database.csproj">
