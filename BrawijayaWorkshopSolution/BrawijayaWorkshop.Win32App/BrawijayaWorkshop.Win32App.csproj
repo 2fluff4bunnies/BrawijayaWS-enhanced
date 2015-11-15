@@ -146,6 +146,18 @@
     <Compile Include="ModulControls\TestUserControl.Designer.cs">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\VehicleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\VehicleListControl.Designer.cs">
+      <DependentUpon>VehicleListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\VehicleEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\VehicleEditorForm.Designer.cs">
+      <DependentUpon>VehicleEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\CustomerEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +193,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\TestUserControl.resx">
       <DependentUpon>TestUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
+      <DependentUpon>VehicleListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\VehicleEditorForm.resx">
+      <DependentUpon>VehicleEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\CustomerEditorForm.resx">
       <DependentUpon>CustomerEditorForm.cs</DependentUpon>

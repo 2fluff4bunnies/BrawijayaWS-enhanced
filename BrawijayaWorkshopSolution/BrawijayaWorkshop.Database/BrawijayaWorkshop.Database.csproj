@@ -81,6 +81,7 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Sparepart.cs" />
     <Compile Include="Entities\SparepartDetail.cs" />
+    <Compile Include="Entities\SPK.cs" />
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
