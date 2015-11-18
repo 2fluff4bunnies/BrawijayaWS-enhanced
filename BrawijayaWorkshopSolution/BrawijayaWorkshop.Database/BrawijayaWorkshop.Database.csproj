@@ -60,6 +60,7 @@
     <Compile Include="BrawijayaWorkshopDbContext.cs" />
     <Compile Include="BrawijayaWorkshopDbInitializer.cs" />
     <Compile Include="Configurations\CustomerConfiguration.cs" />
+    <Compile Include="Configurations\JournalMasterConfiguration.cs" />
     <Compile Include="Configurations\PurchasingConfiguration.cs" />
     <Compile Include="Configurations\PurchasingDetailConfiguration.cs" />
     <Compile Include="Configurations\ReferenceConfiguration.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Entities\BaseStatusEntity.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\JournalMaster.cs" />
     <Compile Include="Entities\Purchasing.cs" />
     <Compile Include="Entities\PurchasingDetail.cs" />
     <Compile Include="Entities\Reference.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Repositories\AppUnitOfWork.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\JournalMasterRepository.cs" />
     <Compile Include="Repositories\PurchasingDetailRepository.cs" />
     <Compile Include="Repositories\PurchasingRepository.cs" />
     <Compile Include="Repositories\ReferenceRepository.cs" />

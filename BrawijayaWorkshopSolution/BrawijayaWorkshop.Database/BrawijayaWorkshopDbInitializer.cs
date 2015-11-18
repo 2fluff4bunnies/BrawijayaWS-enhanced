@@ -12,11 +12,11 @@ namespace BrawijayaWorkshop.Database
             {
                 Name = DbConstant.ROLE_SUPERADMIN
             });
-            context.Roles.Add(new Role
+            Role adminRole = context.Roles.Add(new Role
             {
                 Name = DbConstant.ROLE_ADMIN
             });
-            context.Roles.Add(new Role
+            Role managerRole = context.Roles.Add(new Role
             {
                 Name = DbConstant.ROLE_MANAGER
             });
@@ -27,7 +27,25 @@ namespace BrawijayaWorkshop.Database
                 LastName = "Admin",
                 IsActive = true,
                 UserName = "superadmin",
+                Password = "!0superadmin123"
+            });
+
+            User adminUser = context.Users.Add(new User
+            {
+                FirstName = "Admin",
+                LastName = "-",
+                IsActive = true,
+                UserName = "admin",
                 Password = "!0admin123"
+            });
+
+            User managerUser = context.Users.Add(new User
+            {
+                FirstName = "Manager",
+                LastName = "-",
+                IsActive = true,
+                UserName = "manager",
+                Password = "!0manager123"
             });
             context.SaveChanges();
 
@@ -36,8 +54,19 @@ namespace BrawijayaWorkshop.Database
                 RoleId = superAdminRole.Id,
                 UserId = superAdminUser.Id
             });
-            context.SaveChanges();
 
+            context.UserRoles.Add(new UserRole
+            {
+                RoleId = adminRole.Id,
+                UserId = adminUser.Id
+            });
+
+            context.UserRoles.Add(new UserRole
+            {
+                RoleId = managerRole.Id,
+                UserId = managerUser.Id
+            });
+            context.SaveChanges();
             
             // todo: insert initial data here
         }

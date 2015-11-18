@@ -38,11 +38,12 @@ namespace BrawijayaWorkshop.Model
 
             if (categoryReferenceId > 0)
             {
-                result = _sparepartRepository.GetMany(sp => sp.CategoryReferenceId == categoryReferenceId && sp.Name.Contains(name)).ToList();
+                result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.SparepartDataStatus.Active &&
+                    sp.CategoryReferenceId == categoryReferenceId && sp.Name.Contains(name)).ToList();
             }
             else
             {
-                result = _sparepartRepository.GetMany(sp => sp.Name.Contains(name)).ToList();
+                result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.SparepartDataStatus.Active && sp.Name.Contains(name)).ToList();
             }
 
             return result;

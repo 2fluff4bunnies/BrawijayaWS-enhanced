@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ICustomerEditorView.cs" />
     <Compile Include="ICustomerListView.cs" />
+    <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />
     <Compile Include="IVehicleEditorView.cs" />
     <Compile Include="IVehicleListView.cs" />

@@ -33,6 +33,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             gvSparepart.FocusedRowChanged += gvSparepart_FocusedRowChanged;
             gvSparepart.PopupMenuShowing += gvSparepart_PopupMenuShowing;
+
+            // init editor control accessibility
+            btnNewSparepart.Enabled = AllowInsert;
+            cmsEditData.Enabled = AllowEdit;
+            cmsDeleteData.Enabled = AllowDelete;
         }
 
         private void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
