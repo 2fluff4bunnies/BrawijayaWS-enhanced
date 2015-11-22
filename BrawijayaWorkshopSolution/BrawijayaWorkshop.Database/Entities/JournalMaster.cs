@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class ReferenceDetail
+    public class JournalMaster
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -14,9 +14,9 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         [MaxLength(100)]
-        public string Value { get; set; }
+        public string Name { get; set; }
 
-        public int ReferenceId { get; set; }
-        public virtual Reference Reference { get; set; }
+        public int ParentId { get; set; }
+        public virtual JournalMaster Parent { get; set; }
     }
 }

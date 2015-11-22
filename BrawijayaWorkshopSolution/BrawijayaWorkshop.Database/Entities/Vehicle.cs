@@ -11,7 +11,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         [MaxLength(10)]
-        public string CarLicenseId { get; set; }
+        public string Brand { get; set; }
 
         [Required]
         [MaxLength(100)]

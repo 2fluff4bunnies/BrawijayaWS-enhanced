@@ -41,9 +41,14 @@
   <ItemGroup>
     <Compile Include="ICustomerEditorView.cs" />
     <Compile Include="ICustomerListView.cs" />
+    <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />
     <Compile Include="ISupplierEditorView.cs" />
     <Compile Include="ISupplierListView.cs" />
+    <Compile Include="IVehicleEditorView.cs" />
+    <Compile Include="IVehicleListView.cs" />
+    <Compile Include="ISparepartEditorView.cs" />
+    <Compile Include="ISparepartListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

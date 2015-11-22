@@ -41,12 +41,21 @@
   <ItemGroup>
     <Compile Include="CustomerEditorModel.cs" />
     <Compile Include="CustomerListModel.cs" />
+    <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />
+    <Compile Include="VehicleEditorModel.cs" />
+    <Compile Include="VehicleListModel.cs" />
+    <Compile Include="SparepartEditorModel.cs" />
+    <Compile Include="SparepartListModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">
+      <Project>{26119b53-0e9a-4c13-8c2e-bc032fcb1686}</Project>
+      <Name>BrawijayaWorkshop.Constant</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BrawijayaWorkshop.CryptoWin32App\BrawijayaWorkshop.CryptoWin32App.csproj">
       <Project>{f693d1de-664e-4371-bb2c-c9eeb90ad7cf}</Project>
       <Name>BrawijayaWorkshop.CryptoWin32App</Name>

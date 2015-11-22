@@ -19,7 +19,10 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public int StockQty { get; set; }
 
-        public int ReferenceId { get; set; }
-        public virtual Reference Reference { get; set; }
+        public int UnitReferenceId { get; set; }
+        public virtual Reference UnitReference { get; set; }
+
+        public int CategoryReferenceId { get; set; }
+        public virtual Reference CategoryReference { get; set; }
     }
 }

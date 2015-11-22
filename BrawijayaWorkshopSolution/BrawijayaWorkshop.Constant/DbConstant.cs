@@ -16,6 +16,9 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_SUPPLIER = "M_SUPPLIER";
         public const string MODUL_PURCHASING = "M_PURCHASING";
 
+        public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
+        public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
+
         public enum AccessTypeEnum
         {
             Read = 1,
@@ -24,6 +27,28 @@ namespace BrawijayaWorkshop.Constant
             Delete = 8,
 
             All = Read | Create | Update | Delete
+        }
+
+        public enum DefaultDataStatus
+        {
+            Active = 1,
+            Deleted = -1
+        }
+
+        public enum SparepartDataStatus
+        {
+            Active = 1,
+            Deleted = -1,
+            OutPurchase = 2,
+            OutService = 3,
+            Broken = 4
+        }
+
+        public enum ApprovalStatus
+        {
+            Pending = 0,
+            Approved = 1,
+            Rejected = -1
         }
     }
 }

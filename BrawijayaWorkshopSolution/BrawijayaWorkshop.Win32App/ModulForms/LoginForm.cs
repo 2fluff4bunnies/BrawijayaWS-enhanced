@@ -1,8 +1,10 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
+using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -62,7 +64,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 return;
             }
 
-            _presenter.ExecuteLogin();
+            try
+            {
+                _presenter.ExecuteLogin();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to login", ex);
+                this.ShowError("Proses login gagal!");
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
