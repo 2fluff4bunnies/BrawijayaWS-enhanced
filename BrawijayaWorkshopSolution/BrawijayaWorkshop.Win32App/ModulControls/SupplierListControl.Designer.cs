@@ -36,7 +36,7 @@
             this.lblFilterSupplierName = new DevExpress.XtraEditors.LabelControl();
             this.gridSupplier = new DevExpress.XtraGrid.GridControl();
             this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colNameSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSupplierSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colAddressSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPhoneSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewSupplier = new DevExpress.XtraEditors.SimpleButton();
@@ -54,7 +54,7 @@
             // 
             // gcFilter
             // 
-            this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtFilterSupplierName);
@@ -80,7 +80,7 @@
             // 
             // txtFilterSupplierName
             // 
-            this.txtFilterSupplierName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtFilterSupplierName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterSupplierName.Location = new System.Drawing.Point(128, 30);
             this.txtFilterSupplierName.Name = "txtFilterSupplierName";
@@ -92,14 +92,14 @@
             // 
             this.lblFilterSupplierName.Location = new System.Drawing.Point(12, 33);
             this.lblFilterSupplierName.Name = "lblFilterSupplierName";
-            this.lblFilterSupplierName.Size = new System.Drawing.Size(87, 13);
+            this.lblFilterSupplierName.Size = new System.Drawing.Size(68, 13);
             this.lblFilterSupplierName.TabIndex = 0;
             this.lblFilterSupplierName.Text = "Nama Supplier";
             // 
             // gridSupplier
             // 
-            this.gridSupplier.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.gridSupplier.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridSupplier.Location = new System.Drawing.Point(3, 100);
             this.gridSupplier.MainView = this.gvSupplier;
@@ -112,7 +112,7 @@
             // gvSupplier
             // 
             this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colNameSupplier,
+            this.colSupplierSupplier,
             this.colAddressSupplier,
             this.colPhoneSupplier});
             this.gvSupplier.GridControl = this.gridSupplier;
@@ -130,13 +130,13 @@
             this.gvSupplier.OptionsView.ShowViewCaption = true;
             this.gvSupplier.ViewCaption = "Daftar Supplier";
             // 
-            // colNameSupplier
+            // colSupplierSupplier
             // 
-            this.colNameSupplier.Caption = "Nama Supplier";
-            this.colNameSupplier.FieldName = "SupplierName";
-            this.colNameSupplier.Name = "colSupplierSupplier";
-            this.colNameSupplier.Visible = true;
-            this.colNameSupplier.VisibleIndex = 1;
+            this.colSupplierSupplier.Caption = "Nama Supplier";
+            this.colSupplierSupplier.FieldName = "SupplierName";
+            this.colSupplierSupplier.Name = "colSupplierSupplier";
+            this.colSupplierSupplier.Visible = true;
+            this.colSupplierSupplier.VisibleIndex = 0;
             // 
             // colAddressSupplier
             // 
@@ -144,7 +144,7 @@
             this.colAddressSupplier.FieldName = "Address";
             this.colAddressSupplier.Name = "colAddressSupplier";
             this.colAddressSupplier.Visible = true;
-            this.colAddressSupplier.VisibleIndex = 2;
+            this.colAddressSupplier.VisibleIndex = 1;
             // 
             // colPhoneSupplier
             // 
@@ -152,7 +152,7 @@
             this.colPhoneSupplier.FieldName = "PhoneNumber";
             this.colPhoneSupplier.Name = "colPhoneSupplier";
             this.colPhoneSupplier.Visible = true;
-            this.colPhoneSupplier.VisibleIndex = 3;
+            this.colPhoneSupplier.VisibleIndex = 2;
             // 
             // btnNewSupplier
             // 
@@ -231,5 +231,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraGrid.Columns.GridColumn colSupplierSupplier;
     }
 }
