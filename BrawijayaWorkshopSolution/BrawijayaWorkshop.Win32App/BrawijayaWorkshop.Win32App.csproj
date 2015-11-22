@@ -145,6 +145,7 @@
     </Compile>
     <Compile Include="ModulControls\SupplierListControl.Designer.cs">
       <DependentUpon>SupplierListControl.cs</DependentUpon>
+	  </Compile>
     <Compile Include="ModulControls\SparepartListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,6 +187,7 @@
     </Compile>
     <Compile Include="ModulForms\SupplierEditorForm.Designer.cs">
       <DependentUpon>SupplierEditorForm.cs</DependentUpon>
+	</Compile>
     <Compile Include="ModulForms\SparepartEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +235,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SupplierEditorForm.resx">
       <DependentUpon>SupplierEditorForm.cs</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartEditorForm.resx">
       <DependentUpon>SparepartEditorForm.cs</DependentUpon>
     </EmbeddedResource>
