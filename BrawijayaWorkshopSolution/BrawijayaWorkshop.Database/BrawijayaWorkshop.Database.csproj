@@ -69,6 +69,7 @@
     <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
+    <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
     <Compile Include="DatabaseConfigurationHelper.cs" />
     <Compile Include="Entities\ApplicationModul.cs" />
     <Compile Include="Entities\BaseModifierEntity.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\Vehicle.cs" />
+    <Compile Include="Entities\VehicleDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AppBaseRepository.cs" />
     <Compile Include="Repositories\AppDatabaseFactory.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
+    <Compile Include="Repositories\VehicleDetailRepository.cs" />
     <Compile Include="Repositories\VehicleRepository.cs" />
   </ItemGroup>
   <ItemGroup />
