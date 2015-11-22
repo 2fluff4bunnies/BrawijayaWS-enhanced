@@ -44,6 +44,8 @@
     <Compile Include="IJournalMasterEditorView.cs" />
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />
+    <Compile Include="ISupplierEditorView.cs" />
+    <Compile Include="ISupplierListView.cs" />
     <Compile Include="IVehicleEditorView.cs" />
     <Compile Include="IVehicleListView.cs" />
     <Compile Include="ISparepartEditorView.cs" />

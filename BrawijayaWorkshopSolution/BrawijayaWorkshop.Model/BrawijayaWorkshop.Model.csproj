@@ -45,6 +45,8 @@
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplierEditorModel.cs" />
+    <Compile Include="SupplierListModel.cs" />
     <Compile Include="VehicleEditorModel.cs" />
     <Compile Include="VehicleListModel.cs" />
     <Compile Include="SparepartEditorModel.cs" />
