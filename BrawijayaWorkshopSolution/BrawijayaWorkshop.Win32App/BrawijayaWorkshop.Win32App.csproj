@@ -329,7 +329,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\delete_icon.png" />
+    <None Include="ModulForms\Resources\delete_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -383,16 +383,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\apply_32x32.png" />
+    <None Include="ModulForms\Resources\apply_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cancel_32x32.png" />
+    <None Include="ModulForms\Resources\cancel_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\app_login.png" />
+    <None Include="ModulForms\Resources\app_login.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\edit_icon.png" />
+    <None Include="ModulForms\Resources\edit_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
