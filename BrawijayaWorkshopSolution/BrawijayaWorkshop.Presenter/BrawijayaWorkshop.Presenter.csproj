@@ -43,15 +43,12 @@
     <Compile Include="CustomerListPresenter.cs" />
     <Compile Include="LoginPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="SupplierEditorPresenter.cs" />
     <Compile Include="SupplierListPresenter.cs" />
-=======
     <Compile Include="VehicleEditorPresenter.cs" />
     <Compile Include="VehicleListPresenter.cs" />
     <Compile Include="SparepartEditorPresenter.cs" />
     <Compile Include="SparepartListPresenter.cs" />
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Database\BrawijayaWorkshop.Database.csproj">
