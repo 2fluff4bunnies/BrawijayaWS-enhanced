@@ -13,12 +13,11 @@ namespace BrawijayaWorkshop.Model
         private ICityRepository _cityRepository;
         private IUnitOfWork _unitOfWork;
 
-        public CustomerEditorModel(ICustomerRepository customerRepository, ICityRepository cityRepository,
-            IUnitOfWork unitOfWork)
+        public CustomerEditorModel(ICustomerRepository customerRepository, ICityRepository cityRepository)
         {
             _customerRepository = customerRepository;
             _cityRepository = cityRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new AppUnitOfWork(_customerRepository.DatabaseFactory);
         }
 
         public List<City> RetrieveCity()

@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             _dbset = DataContext.Set<T>();
         }
 
-        protected IDatabaseFactory<U> DatabaseFactory { get; private set; }
+        public IDatabaseFactory<U> DatabaseFactory { get; private set; }
 
         protected U DataContext
         {

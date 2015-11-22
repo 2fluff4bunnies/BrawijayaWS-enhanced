@@ -28,35 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
-            this.navBarControl = new DevExpress.XtraNavBar.NavBarControl();
-            this.mailGroup = new DevExpress.XtraNavBar.NavBarGroup();
-            this.inboxItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.outboxItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.draftsItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.trashItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.organizerGroup = new DevExpress.XtraNavBar.NavBarGroup();
-            this.calendarItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.tasksItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.navbarImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
-            this.navbarImageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.navbarImageCollectionLarge = new DevExpress.Utils.ImageCollection();
+            this.navbarImageCollection = new DevExpress.Utils.ImageCollection();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
-            this.popupControlContainer2 = new DevExpress.XtraBars.PopupControlContainer(this.components);
+            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu();
+            this.popupControlContainer2 = new DevExpress.XtraBars.PopupControlContainer();
             this.buttonEdit = new DevExpress.XtraEditors.ButtonEdit();
-            this.iNew = new DevExpress.XtraBars.BarButtonItem();
-            this.iOpen = new DevExpress.XtraBars.BarButtonItem();
-            this.iSave = new DevExpress.XtraBars.BarButtonItem();
-            this.iSaveAs = new DevExpress.XtraBars.BarButtonItem();
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
-            this.popupControlContainer1 = new DevExpress.XtraBars.PopupControlContainer(this.components);
+            this.popupControlContainer1 = new DevExpress.XtraBars.PopupControlContainer();
             this.someLabelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.someLabelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.ribbonImageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.ribbonImageCollection = new DevExpress.Utils.ImageCollection();
+            this.iNew = new DevExpress.XtraBars.BarButtonItem();
+            this.iOpen = new DevExpress.XtraBars.BarButtonItem();
             this.iClose = new DevExpress.XtraBars.BarButtonItem();
             this.iFind = new DevExpress.XtraBars.BarButtonItem();
+            this.iSave = new DevExpress.XtraBars.BarButtonItem();
+            this.iSaveAs = new DevExpress.XtraBars.BarButtonItem();
             this.iHelp = new DevExpress.XtraBars.BarButtonItem();
             this.iAbout = new DevExpress.XtraBars.BarButtonItem();
             this.siStatus = new DevExpress.XtraBars.BarStaticItem();
@@ -70,21 +60,21 @@
             this.iCenterTextAlign = new DevExpress.XtraBars.BarButtonItem();
             this.iRightTextAlign = new DevExpress.XtraBars.BarButtonItem();
             this.rgbiSkins = new DevExpress.XtraBars.RibbonGalleryBarItem();
-            this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
+            this.biStatusProgress = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemMarqueeProgressBar2 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
+            this.iNotification = new DevExpress.XtraBars.BarButtonItem();
+            this.iMaster = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection();
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.formatRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.skinsRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.exitRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.helpRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.repositoryItemMarqueeProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
-            this.biStatusProgress = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemMarqueeProgressBar2 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
+            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -95,9 +85,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer1)).BeginInit();
             this.popupControlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl
@@ -106,96 +96,12 @@
             this.splitContainerControl.Location = new System.Drawing.Point(0, 143);
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Padding = new System.Windows.Forms.Padding(6);
-            this.splitContainerControl.Panel1.Controls.Add(this.navBarControl);
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Text = "Panel2";
-            this.splitContainerControl.Size = new System.Drawing.Size(1100, 526);
+            this.splitContainerControl.Size = new System.Drawing.Size(826, 271);
             this.splitContainerControl.SplitterPosition = 165;
             this.splitContainerControl.TabIndex = 0;
             this.splitContainerControl.Text = "splitContainerControl1";
-            // 
-            // navBarControl
-            // 
-            this.navBarControl.ActiveGroup = this.mailGroup;
-            this.navBarControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navBarControl.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
-            this.mailGroup,
-            this.organizerGroup});
-            this.navBarControl.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
-            this.inboxItem,
-            this.outboxItem,
-            this.draftsItem,
-            this.trashItem,
-            this.calendarItem,
-            this.tasksItem});
-            this.navBarControl.LargeImages = this.navbarImageCollectionLarge;
-            this.navBarControl.Location = new System.Drawing.Point(0, 0);
-            this.navBarControl.Name = "navBarControl";
-            this.navBarControl.OptionsNavPane.ExpandedWidth = 165;
-            this.navBarControl.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.ExplorerBar;
-            this.navBarControl.Size = new System.Drawing.Size(165, 514);
-            this.navBarControl.SmallImages = this.navbarImageCollection;
-            this.navBarControl.StoreDefaultPaintStyleName = true;
-            this.navBarControl.TabIndex = 0;
-            this.navBarControl.Text = "navBarControl1";
-            // 
-            // mailGroup
-            // 
-            this.mailGroup.Caption = "Mail";
-            this.mailGroup.Expanded = true;
-            this.mailGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.inboxItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.outboxItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.draftsItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.trashItem)});
-            this.mailGroup.LargeImageIndex = 0;
-            this.mailGroup.Name = "mailGroup";
-            // 
-            // inboxItem
-            // 
-            this.inboxItem.Caption = "Inbox";
-            this.inboxItem.Name = "inboxItem";
-            this.inboxItem.SmallImageIndex = 0;
-            // 
-            // outboxItem
-            // 
-            this.outboxItem.Caption = "Outbox";
-            this.outboxItem.Name = "outboxItem";
-            this.outboxItem.SmallImageIndex = 1;
-            // 
-            // draftsItem
-            // 
-            this.draftsItem.Caption = "Drafts";
-            this.draftsItem.Name = "draftsItem";
-            this.draftsItem.SmallImageIndex = 2;
-            // 
-            // trashItem
-            // 
-            this.trashItem.Caption = "Trash";
-            this.trashItem.Name = "trashItem";
-            this.trashItem.SmallImageIndex = 3;
-            // 
-            // organizerGroup
-            // 
-            this.organizerGroup.Caption = "Organizer";
-            this.organizerGroup.Expanded = true;
-            this.organizerGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.calendarItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.tasksItem)});
-            this.organizerGroup.LargeImageIndex = 1;
-            this.organizerGroup.Name = "organizerGroup";
-            // 
-            // calendarItem
-            // 
-            this.calendarItem.Caption = "Calendar";
-            this.calendarItem.Name = "calendarItem";
-            this.calendarItem.SmallImageIndex = 4;
-            // 
-            // tasksItem
-            // 
-            this.tasksItem.Caption = "Tasks";
-            this.tasksItem.Name = "tasksItem";
-            this.tasksItem.SmallImageIndex = 5;
             // 
             // navbarImageCollectionLarge
             // 
@@ -243,10 +149,12 @@
             this.iCenterTextAlign,
             this.iRightTextAlign,
             this.rgbiSkins,
-            this.biStatusProgress});
+            this.biStatusProgress,
+            this.iNotification,
+            this.iMaster});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 64;
+            this.ribbonControl.MaxItemId = 70;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -256,7 +164,7 @@
             this.repositoryItemMarqueeProgressBar1,
             this.repositoryItemMarqueeProgressBar2});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbonControl.Size = new System.Drawing.Size(1100, 143);
+            this.ribbonControl.Size = new System.Drawing.Size(826, 143);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.Toolbar.ItemLinks.Add(this.iNew);
             this.ribbonControl.Toolbar.ItemLinks.Add(this.iOpen);
@@ -267,10 +175,6 @@
             // appMenu
             // 
             this.appMenu.BottomPaneControlContainer = this.popupControlContainer2;
-            this.appMenu.ItemLinks.Add(this.iNew);
-            this.appMenu.ItemLinks.Add(this.iOpen);
-            this.appMenu.ItemLinks.Add(this.iSave);
-            this.appMenu.ItemLinks.Add(this.iSaveAs);
             this.appMenu.ItemLinks.Add(this.iExit);
             this.appMenu.Name = "appMenu";
             this.appMenu.Ribbon = this.ribbonControl;
@@ -300,47 +204,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.buttonEdit.Size = new System.Drawing.Size(100, 20);
             this.buttonEdit.TabIndex = 0;
-            // 
-            // iNew
-            // 
-            this.iNew.Caption = "New";
-            this.iNew.Description = "Creates a new, blank file.";
-            this.iNew.Hint = "Creates a new, blank file";
-            this.iNew.Id = 1;
-            this.iNew.ImageIndex = 0;
-            this.iNew.LargeImageIndex = 0;
-            this.iNew.Name = "iNew";
-            // 
-            // iOpen
-            // 
-            this.iOpen.Caption = "&Open";
-            this.iOpen.Description = "Opens a file.";
-            this.iOpen.Hint = "Opens a file";
-            this.iOpen.Id = 2;
-            this.iOpen.ImageIndex = 1;
-            this.iOpen.LargeImageIndex = 1;
-            this.iOpen.Name = "iOpen";
-            this.iOpen.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            // 
-            // iSave
-            // 
-            this.iSave.Caption = "&Save";
-            this.iSave.Description = "Saves the active document.";
-            this.iSave.Hint = "Saves the active document";
-            this.iSave.Id = 16;
-            this.iSave.ImageIndex = 4;
-            this.iSave.LargeImageIndex = 4;
-            this.iSave.Name = "iSave";
-            // 
-            // iSaveAs
-            // 
-            this.iSaveAs.Caption = "Save As";
-            this.iSaveAs.Description = "Saves the active document in a different location.";
-            this.iSaveAs.Hint = "Saves the active document in a different location";
-            this.iSaveAs.Id = 17;
-            this.iSaveAs.ImageIndex = 5;
-            this.iSaveAs.LargeImageIndex = 5;
-            this.iSaveAs.Name = "iSaveAs";
             // 
             // iExit
             // 
@@ -401,6 +264,30 @@
             this.ribbonImageCollection.Images.SetKeyName(12, "Ribbon_AlignLeft_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(13, "Ribbon_AlignCenter_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(14, "Ribbon_AlignRight_16x16.png");
+            this.ribbonImageCollection.Images.SetKeyName(15, "notification_icon_16x16.png");
+            this.ribbonImageCollection.Images.SetKeyName(16, "supplier_16x16.png");
+            this.ribbonImageCollection.Images.SetKeyName(17, "master_16x16.png");
+            // 
+            // iNew
+            // 
+            this.iNew.Caption = "New";
+            this.iNew.Description = "Creates a new, blank file.";
+            this.iNew.Hint = "Creates a new, blank file";
+            this.iNew.Id = 1;
+            this.iNew.ImageIndex = 0;
+            this.iNew.LargeImageIndex = 0;
+            this.iNew.Name = "iNew";
+            // 
+            // iOpen
+            // 
+            this.iOpen.Caption = "&Open";
+            this.iOpen.Description = "Opens a file.";
+            this.iOpen.Hint = "Opens a file";
+            this.iOpen.Id = 2;
+            this.iOpen.ImageIndex = 1;
+            this.iOpen.LargeImageIndex = 1;
+            this.iOpen.Name = "iOpen";
+            this.iOpen.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             // 
             // iClose
             // 
@@ -423,6 +310,26 @@
             this.iFind.LargeImageIndex = 3;
             this.iFind.Name = "iFind";
             this.iFind.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            // 
+            // iSave
+            // 
+            this.iSave.Caption = "&Save";
+            this.iSave.Description = "Saves the active document.";
+            this.iSave.Hint = "Saves the active document";
+            this.iSave.Id = 16;
+            this.iSave.ImageIndex = 4;
+            this.iSave.LargeImageIndex = 4;
+            this.iSave.Name = "iSave";
+            // 
+            // iSaveAs
+            // 
+            this.iSaveAs.Caption = "Save As";
+            this.iSaveAs.Description = "Saves the active document in a different location.";
+            this.iSaveAs.Hint = "Saves the active document in a different location";
+            this.iSaveAs.Id = 17;
+            this.iSaveAs.ImageIndex = 5;
+            this.iSaveAs.LargeImageIndex = 5;
+            this.iSaveAs.Name = "iSaveAs";
             // 
             // iHelp
             // 
@@ -447,14 +354,14 @@
             // 
             // siStatus
             // 
-            this.siStatus.Caption = "Some Status Info";
+            this.siStatus.Caption = "-";
             this.siStatus.Id = 31;
             this.siStatus.Name = "siStatus";
             this.siStatus.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // siInfo
             // 
-            this.siInfo.Caption = "Some Info";
+            this.siInfo.Caption = "-";
             this.siInfo.Id = 32;
             this.siInfo.Name = "siInfo";
             this.siInfo.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -537,6 +444,36 @@
             this.rgbiSkins.Id = 60;
             this.rgbiSkins.Name = "rgbiSkins";
             // 
+            // biStatusProgress
+            // 
+            this.biStatusProgress.Edit = this.repositoryItemMarqueeProgressBar2;
+            this.biStatusProgress.Id = 63;
+            this.biStatusProgress.Name = "biStatusProgress";
+            this.biStatusProgress.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            // 
+            // repositoryItemMarqueeProgressBar2
+            // 
+            this.repositoryItemMarqueeProgressBar2.Name = "repositoryItemMarqueeProgressBar2";
+            // 
+            // iNotification
+            // 
+            this.iNotification.Caption = "Notifikasi";
+            this.iNotification.Id = 64;
+            this.iNotification.ImageIndex = 15;
+            this.iNotification.LargeImageIndex = 9;
+            this.iNotification.Name = "iNotification";
+            this.iNotification.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.iNotification.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iNotification_ItemClick);
+            // 
+            // iMaster
+            // 
+            this.iMaster.Caption = "Master Data";
+            this.iMaster.Id = 69;
+            this.iMaster.ImageIndex = 17;
+            this.iMaster.LargeImageIndex = 11;
+            this.iMaster.Name = "iMaster";
+            this.iMaster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iMaster_ItemClick);
+            // 
             // ribbonImageCollectionLarge
             // 
             this.ribbonImageCollectionLarge.ImageSize = new System.Drawing.Size(32, 32);
@@ -550,12 +487,14 @@
             this.ribbonImageCollectionLarge.Images.SetKeyName(6, "Ribbon_Exit_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(7, "Ribbon_Content_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(8, "Ribbon_Info_32x32.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(9, "notification_icon_32x32.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(10, "supplier_32x32.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(11, "master_32x32.png");
             // 
             // homeRibbonPage
             // 
             this.homeRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.fileRibbonPageGroup,
-            this.formatRibbonPageGroup,
             this.skinsRibbonPageGroup,
             this.exitRibbonPageGroup});
             this.homeRibbonPage.Name = "homeRibbonPage";
@@ -563,21 +502,10 @@
             // 
             // fileRibbonPageGroup
             // 
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iNew);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iOpen);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iClose);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iFind);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iSave);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iSaveAs);
+            this.fileRibbonPageGroup.ItemLinks.Add(this.iNotification);
+            this.fileRibbonPageGroup.ItemLinks.Add(this.iMaster);
             this.fileRibbonPageGroup.Name = "fileRibbonPageGroup";
-            this.fileRibbonPageGroup.Text = "File";
-            // 
-            // formatRibbonPageGroup
-            // 
-            this.formatRibbonPageGroup.ItemLinks.Add(this.alignButtonGroup);
-            this.formatRibbonPageGroup.ItemLinks.Add(this.fontStyleButtonGroup);
-            this.formatRibbonPageGroup.Name = "formatRibbonPageGroup";
-            this.formatRibbonPageGroup.Text = "Format";
+            this.fileRibbonPageGroup.Text = "Beranda";
             // 
             // skinsRibbonPageGroup
             // 
@@ -606,36 +534,26 @@
             this.helpRibbonPageGroup.Name = "helpRibbonPageGroup";
             this.helpRibbonPageGroup.Text = "Help";
             // 
+            // repositoryItemMarqueeProgressBar1
+            // 
+            this.repositoryItemMarqueeProgressBar1.Name = "repositoryItemMarqueeProgressBar1";
+            // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.siInfo);
             this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
             this.ribbonStatusBar.ItemLinks.Add(this.biStatusProgress);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 669);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 414);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1100, 31);
-            // 
-            // repositoryItemMarqueeProgressBar1
-            // 
-            this.repositoryItemMarqueeProgressBar1.Name = "repositoryItemMarqueeProgressBar1";
-            // 
-            // biStatusProgress
-            // 
-            this.biStatusProgress.Edit = this.repositoryItemMarqueeProgressBar2;
-            this.biStatusProgress.Id = 63;
-            this.biStatusProgress.Name = "biStatusProgress";
-            // 
-            // repositoryItemMarqueeProgressBar2
-            // 
-            this.repositoryItemMarqueeProgressBar2.Name = "repositoryItemMarqueeProgressBar2";
+            this.ribbonStatusBar.Size = new System.Drawing.Size(826, 31);
             // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1100, 700);
+            this.ClientSize = new System.Drawing.Size(826, 445);
             this.Controls.Add(this.splitContainerControl);
             this.Controls.Add(this.popupControlContainer1);
             this.Controls.Add(this.popupControlContainer2);
@@ -648,7 +566,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
@@ -660,9 +577,9 @@
             this.popupControlContainer1.ResumeLayout(false);
             this.popupControlContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -694,7 +611,6 @@
         private DevExpress.XtraBars.RibbonGalleryBarItem rgbiSkins;
         private DevExpress.XtraBars.Ribbon.RibbonPage homeRibbonPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup fileRibbonPageGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup formatRibbonPageGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup skinsRibbonPageGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup exitRibbonPageGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPage helpRibbonPage;
@@ -708,20 +624,13 @@
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.Utils.ImageCollection ribbonImageCollection;
         private DevExpress.Utils.ImageCollection ribbonImageCollectionLarge;
-        private DevExpress.XtraNavBar.NavBarControl navBarControl;
-        private DevExpress.XtraNavBar.NavBarGroup mailGroup;
-        private DevExpress.XtraNavBar.NavBarGroup organizerGroup;
-        private DevExpress.XtraNavBar.NavBarItem inboxItem;
-        private DevExpress.XtraNavBar.NavBarItem outboxItem;
-        private DevExpress.XtraNavBar.NavBarItem draftsItem;
-        private DevExpress.XtraNavBar.NavBarItem trashItem;
-        private DevExpress.XtraNavBar.NavBarItem calendarItem;
-        private DevExpress.XtraNavBar.NavBarItem tasksItem;
         private DevExpress.Utils.ImageCollection navbarImageCollection;
         private DevExpress.Utils.ImageCollection navbarImageCollectionLarge;
         private DevExpress.XtraBars.BarEditItem biStatusProgress;
         private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar2;
         private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar1;
+        private DevExpress.XtraBars.BarButtonItem iNotification;
+        private DevExpress.XtraBars.BarButtonItem iMaster;
 
     }
 }

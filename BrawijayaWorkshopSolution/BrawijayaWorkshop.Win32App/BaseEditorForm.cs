@@ -12,6 +12,7 @@ namespace BrawijayaWorkshop.Win32App
         private void btnSave_Click(object sender, EventArgs e)
         {
             ExecuteSave();
+            this.Close();
         }
 
         protected virtual void ExecuteSave()

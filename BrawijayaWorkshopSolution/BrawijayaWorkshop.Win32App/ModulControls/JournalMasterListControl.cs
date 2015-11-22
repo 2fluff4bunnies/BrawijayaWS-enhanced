@@ -25,6 +25,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             gvJournalMaster.FocusedRowChanged += gvJournalMaster_FocusedRowChanged;
             gvJournalMaster.PopupMenuShowing += gvJournalMaster_PopupMenuShowing;
+
+            // init editor control accessibility
+            btnNewJournal.Enabled = AllowInsert;
+            cmsEditData.Enabled = AllowEdit;
+            cmsDeleteData.Enabled = AllowDelete;
         }
 
         private void gvJournalMaster_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)

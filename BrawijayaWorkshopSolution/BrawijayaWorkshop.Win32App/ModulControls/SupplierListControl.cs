@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -19,6 +20,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private SupplierListPresenter _presenter;
         private Supplier _selectedSupplier;
 
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_SUPPLIER;
+            }
+        }
+
         public SupplierListControl(SupplierListModel model)
         {
             InitializeComponent();
@@ -31,6 +40,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewSupplier.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
+
+            _presenter.LoadSupplier();
         }
 
         private void gvSupplier_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -172,7 +183,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 this.ShowError("Proses memuat data gagal!");
             }
-
+            if(SupplierListData.Count > 0)
+            {
+                gvSupplier.FocusedRowHandle = 0;
+                _selectedSupplier = gvSupplier.GetRow(0) as Supplier;
+            }
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Supplier selesai", true);
         }
     }

@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -18,6 +19,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     {
         private CustomerListPresenter _presenter;
         private Customer _selectedCustomer;
+
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_CUSTOMER;
+            }
+        }
 
         public CustomerListControl(CustomerListModel model)
         {

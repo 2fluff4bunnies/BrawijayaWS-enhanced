@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Repositories
             : base(databaseFactory) { }
     }
 
-    public interface ISparepartRepository : IRepository<Sparepart>
+    public interface ISparepartRepository : IRepository<Sparepart, BrawijayaWorkshopDbContext>
     {
     }
 }

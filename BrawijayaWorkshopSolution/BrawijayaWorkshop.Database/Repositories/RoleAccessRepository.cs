@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Repositories
             : base(databaseFactory) { }
     }
 
-    public interface IRoleAccessRepository : IRepository<RoleAccess>
+    public interface IRoleAccessRepository : IRepository<RoleAccess, BrawijayaWorkshopDbContext>
     {
     }
 }

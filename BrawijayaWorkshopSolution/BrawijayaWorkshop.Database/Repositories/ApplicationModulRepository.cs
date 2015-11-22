@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Repositories
             : base(databaseFactory) { }
     }
 
-    public interface IApplicationModulRepository : IRepository<ApplicationModul>
+    public interface IApplicationModulRepository : IRepository<ApplicationModul, BrawijayaWorkshopDbContext>
     {
     }
 }

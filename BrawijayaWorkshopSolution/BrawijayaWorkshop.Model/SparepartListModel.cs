@@ -15,15 +15,17 @@ namespace BrawijayaWorkshop.Model
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
+        private IUnitOfWork _detailUnitOfWork;
 
         public SparepartListModel(ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
-            IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
+            IReferenceRepository referenceRepository)
         {
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new AppUnitOfWork(_sparepartRepository.DatabaseFactory);
+            _detailUnitOfWork = new AppUnitOfWork(_sparepartDetailRepository.DatabaseFactory);
         }
 
         public List<Reference> GetSparepartCategoryList()
@@ -60,6 +62,7 @@ namespace BrawijayaWorkshop.Model
                 iDetails.ModifyUserId = userId;
                 _sparepartDetailRepository.Update(iDetails);
             }
+            _detailUnitOfWork.SaveChanges();
 
             sparepart.Status = (int)DbConstant.SparepartDataStatus.Deleted;
             sparepart.ModifyDate = serverTime;

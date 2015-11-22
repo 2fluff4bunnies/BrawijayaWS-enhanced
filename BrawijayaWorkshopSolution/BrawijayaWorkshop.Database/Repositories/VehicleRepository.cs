@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Repositories
             : base(databaseFactory) { }
     }
 
-    public interface IVehicleRepository : IRepository<Vehicle>
+    public interface IVehicleRepository : IRepository<Vehicle, BrawijayaWorkshopDbContext>
     {
     }
 }

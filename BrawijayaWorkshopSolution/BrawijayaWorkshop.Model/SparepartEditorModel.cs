@@ -15,12 +15,11 @@ namespace BrawijayaWorkshop.Model
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SparepartEditorModel(ISparepartRepository sparepartRepository, IReferenceRepository referenceRepository,
-            IUnitOfWork unitOfWork)
+        public SparepartEditorModel(ISparepartRepository sparepartRepository, IReferenceRepository referenceRepository)
         {
             _sparepartRepository = sparepartRepository;
             _referenceRepository = referenceRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new AppUnitOfWork(_sparepartRepository.DatabaseFactory);
         }
 
         public List<Reference> GetSparepartCategoryList()

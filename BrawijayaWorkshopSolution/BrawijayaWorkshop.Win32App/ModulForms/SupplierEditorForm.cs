@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #region Field Editor
 
-        public new string SupplierName
+        public string SupplierName
         {
             get
             {
@@ -70,7 +70,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #endregion
-
 
         protected override void ExecuteSave()
         {

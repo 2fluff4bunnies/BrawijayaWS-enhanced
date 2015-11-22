@@ -12,10 +12,10 @@ namespace BrawijayaWorkshop.Model
         private ICustomerRepository _customerRepository;
         private IUnitOfWork _unitOfWork;
 
-        public CustomerListModel(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+        public CustomerListModel(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new AppUnitOfWork(_customerRepository.DatabaseFactory);
         }
 
         public List<Customer> SearchCustomer(string companyName)

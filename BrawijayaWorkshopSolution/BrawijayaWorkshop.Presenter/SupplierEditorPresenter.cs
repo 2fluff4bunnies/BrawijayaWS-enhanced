@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedSupplier != null)
             {
-                View.Name = View.SelectedSupplier.Name;
+                View.SupplierName = View.SelectedSupplier.Name;
                 View.Address = View.SelectedSupplier.Address;
                 View.PhoneNumber = View.SelectedSupplier.PhoneNumber;
             }
@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedSupplier = new Supplier();
             }
 
-            View.SelectedSupplier.Name = View.Name;
+            View.SelectedSupplier.Name = View.SupplierName;
             View.SelectedSupplier.Address = View.Address;
             View.SelectedSupplier.PhoneNumber = View.PhoneNumber;
 

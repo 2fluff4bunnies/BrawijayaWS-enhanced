@@ -21,6 +21,7 @@ using BrawijayaWorkshop.Database;
 using BrawijayaWorkshop.Win32App.ModulForms;
 using BrawijayaWorkshop.Win32App.ModulControls;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.Win32App.NavigationControls;
 
 namespace BrawijayaWorkshop.Win32App
 {
@@ -93,9 +94,21 @@ namespace BrawijayaWorkshop.Win32App
             splitContainerControl.Panel2.Controls.Add(userControl);
         }
 
+        private void ShowNavigationControl(XtraUserControl userControl)
+        {
+            ClearNavigation();
+            userControl.Dock = DockStyle.Fill;
+            splitContainerControl.Panel1.Controls.Add(userControl);
+        }
+
         private void ClearUserControl()
         {
             splitContainerControl.Panel2.Controls.Clear();
+        }
+
+        private void ClearNavigation()
+        {
+            splitContainerControl.Panel1.Controls.Clear();
         }
         #endregion
 
@@ -168,7 +181,7 @@ namespace BrawijayaWorkshop.Win32App
                 SplashScreenManager.Default.SendCommand(StartupScreen.SplashScreenCommand.CheckDatabaseConnection, null);
                 MethodBase.GetCurrentMethod().Info("Initialize database");
                 // Initialize Database
-                //new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
+                new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
                 MethodBase.GetCurrentMethod().Info("Database initialized successfully");
                 return true;
             }
@@ -210,6 +223,36 @@ namespace BrawijayaWorkshop.Win32App
             {
                 biStatusProgress.Visibility = BarItemVisibility.Always;
             }
+        }
+
+        private void iNotification_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
+            
+            ClearNavigation();
+            ClearUserControl();
+
+            // show layout notification
+        }
+
+        private void iMaster_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
+
+            ClearNavigation();
+            ClearUserControl();
+
+            // show navigation list
+            MasterDataNavigationControl navMasterData = new MasterDataNavigationControl();
+            ShowNavigationControl(navMasterData);
+            // init event navigation
+            navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
+        }
+
+        private void iSupplier_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SupplierListControl listSupplier = Boostrapper.Resolve<SupplierListControl>();
+            ShowUserControl(listSupplier);
         }
     }
 }

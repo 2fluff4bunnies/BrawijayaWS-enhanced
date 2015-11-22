@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Repositories
             : base(databaseFactory) { }
     }
 
-    public interface ISupplierRepository : IRepository<Supplier>
+    public interface ISupplierRepository : IRepository<Supplier, BrawijayaWorkshopDbContext>
     {
     }
 }

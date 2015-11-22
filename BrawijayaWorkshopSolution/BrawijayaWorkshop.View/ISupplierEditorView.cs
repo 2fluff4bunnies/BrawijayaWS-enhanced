@@ -7,7 +7,7 @@ namespace BrawijayaWorkshop.View
     {
         Supplier SelectedSupplier { get; set; }
 
-        string Name { get; set; }
+        string SupplierName { get; set; }
         string Address { get; set; }
         string PhoneNumber { get; set; }
     }
