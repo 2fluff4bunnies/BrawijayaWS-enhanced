@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CustomerEditorModel.cs" />
     <Compile Include="CustomerListModel.cs" />
+    <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

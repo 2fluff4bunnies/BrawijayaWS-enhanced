@@ -15,6 +15,8 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_SPAREPART = "M_SPAREPART";
         public const string MODUL_SUPPLIER = "M_SUPPLIER";
         public const string MODUL_PURCHASING = "M_PURCHASING";
+        public const string MODUL_SERVICE = "M_SERVICE";
+        public const string MODUL_APPROVAL = "M_APPROVAL";
 
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";

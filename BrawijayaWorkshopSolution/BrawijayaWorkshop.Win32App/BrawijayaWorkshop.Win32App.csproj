@@ -140,6 +140,12 @@
     <Compile Include="ModulControls\CustomerListControl.Designer.cs">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\JournalMasterListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\JournalMasterListControl.Designer.cs">
+      <DependentUpon>JournalMasterListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\SparepartListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -157,6 +163,12 @@
     </Compile>
     <Compile Include="ModulControls\VehicleListControl.Designer.cs">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\JournalMasterEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\JournalMasterEditorForm.Designer.cs">
+      <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\VehicleEditorForm.cs">
       <SubType>Form</SubType>
@@ -203,6 +215,9 @@
     <EmbeddedResource Include="ModulControls\CustomerListControl.resx">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
+      <DependentUpon>JournalMasterListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SparepartListControl.resx">
       <DependentUpon>SparepartListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
+      <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleEditorForm.resx">
       <DependentUpon>VehicleEditorForm.cs</DependentUpon>

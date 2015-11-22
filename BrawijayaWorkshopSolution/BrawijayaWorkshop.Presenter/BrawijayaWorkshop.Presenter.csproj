@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="CustomerEditorPresenter.cs" />
     <Compile Include="CustomerListPresenter.cs" />
+    <Compile Include="JournalMasterEditorPresenter.cs" />
+    <Compile Include="JournalMasterListPresenter.cs" />
     <Compile Include="LoginPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VehicleEditorPresenter.cs" />

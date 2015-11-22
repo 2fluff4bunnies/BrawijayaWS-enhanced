@@ -27,5 +27,16 @@ namespace BrawijayaWorkshop.Model
 
             return _journalMasterRepository.GetMany(jm => jm.Name.Contains(name)).OrderBy(jm => jm.Name).ToList();
         }
+
+        public List<JournalMaster> GetAllParentJournal()
+        {
+            return _journalMasterRepository.GetMany(jm => jm.ParentId == 0).OrderBy(jm => jm.Name).ToList();
+        }
+
+        public void DeleteJournal(JournalMaster journal)
+        {
+            _journalMasterRepository.Delete(journal);
+            _unitOfWork.SaveChanges();
+        }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).BeginInit();
             this.pnlAction.SuspendLayout();
             this.SuspendLayout();
@@ -48,16 +48,6 @@
             this.pnlAction.Size = new System.Drawing.Size(481, 49);
             this.pnlAction.TabIndex = 0;
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(394, 14);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Batal";
-            // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -68,6 +58,16 @@
             this.btnSave.Text = "Simpan";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(394, 14);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Batal";
+            // 
             // BaseEditorForm
             // 
             this.AcceptButton = this.btnSave;
@@ -77,6 +77,7 @@
             this.ClientSize = new System.Drawing.Size(481, 208);
             this.Controls.Add(this.pnlAction);
             this.Name = "BaseEditorForm";
+            this.ShowInTaskbar = false;
             this.Text = "BaseEditorForm";
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).EndInit();
             this.pnlAction.ResumeLayout(false);

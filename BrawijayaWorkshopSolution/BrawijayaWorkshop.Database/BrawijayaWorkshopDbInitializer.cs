@@ -67,6 +67,12 @@ namespace BrawijayaWorkshop.Database
                 UserId = managerUser.Id
             });
             context.SaveChanges();
+
+            context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_CUSTOMER,
+                ModulDescription = "Customer Modul"
+            });
             
             // todo: insert initial data here
         }
