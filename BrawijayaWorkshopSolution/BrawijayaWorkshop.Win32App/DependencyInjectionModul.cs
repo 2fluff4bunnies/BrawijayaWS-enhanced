@@ -9,8 +9,8 @@ namespace BrawijayaWorkshop.Win32App
     {
         public override void Load()
         {
-            Bind<IDatabaseFactory<BrawijayaWorkshopDbContext>>().To<AppDatabaseFactory>();
-            Bind<IUnitOfWork>().To<AppUnitOfWork>();
+            Bind<IDatabaseFactory<BrawijayaWorkshopDbContext>>().To<AppDatabaseFactory>().InSingletonScope();
+            Bind<IUnitOfWork>().To<AppUnitOfWork>().InSingletonScope();
 
             Bind<ISettingRepository>().To<SettingRepository>();
             Bind<IRoleRepository>().To<RoleRepository>();

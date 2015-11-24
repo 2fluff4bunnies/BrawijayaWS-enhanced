@@ -13,11 +13,12 @@ namespace BrawijayaWorkshop.Model
         private IVehicleRepository _vehicleRepository;
         private IUnitOfWork _unitOfWork;
 
-        public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository)
+        public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository,
+            IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
             _vehicleRepository = vehicleRepository;
-            _unitOfWork = new AppUnitOfWork(_vehicleRepository.DatabaseFactory);
+            _unitOfWork = unitOfWork;
         }
 
         public List<Customer> RetrieveCustomer()

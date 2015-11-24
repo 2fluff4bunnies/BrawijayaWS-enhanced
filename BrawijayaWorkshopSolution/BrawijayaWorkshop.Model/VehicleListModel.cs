@@ -12,10 +12,10 @@ namespace BrawijayaWorkshop.Model
         private IVehicleRepository _vehicleRepository;
         private IUnitOfWork _unitOfWork;
 
-        public VehicleListModel(IVehicleRepository vehicleRepository)
+        public VehicleListModel(IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
         {
             _vehicleRepository = vehicleRepository;
-            _unitOfWork = new AppUnitOfWork(_vehicleRepository.DatabaseFactory);
+            _unitOfWork = unitOfWork;
         }
 
         public List<Vehicle> SearchVehicle(string licenseId)

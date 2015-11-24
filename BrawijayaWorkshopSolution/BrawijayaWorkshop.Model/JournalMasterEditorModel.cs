@@ -15,10 +15,10 @@ namespace BrawijayaWorkshop.Model
         private IJournalMasterRepository _journalMasterRepository;
         private IUnitOfWork _unitOfWork;
 
-        public JournalMasterEditorModel(IJournalMasterRepository journalMasterRepository)
+        public JournalMasterEditorModel(IJournalMasterRepository journalMasterRepository, IUnitOfWork unitOfWork)
         {
             _journalMasterRepository = journalMasterRepository;
-            _unitOfWork = new AppUnitOfWork(_journalMasterRepository.DatabaseFactory);
+            _unitOfWork = unitOfWork;
         }
 
         public List<JournalMaster> GetAllParentJournal()

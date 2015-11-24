@@ -12,10 +12,10 @@ namespace BrawijayaWorkshop.Model
         private ISupplierRepository _SupplierRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SupplierEditorModel(ISupplierRepository SupplierRepository)
+        public SupplierEditorModel(ISupplierRepository SupplierRepository, IUnitOfWork unitOfWork)
         {
             _SupplierRepository = SupplierRepository;
-            _unitOfWork = new AppUnitOfWork(_SupplierRepository.DatabaseFactory);
+            _unitOfWork = unitOfWork;
         }
 
         public void InsertSupplier(Supplier Supplier)
