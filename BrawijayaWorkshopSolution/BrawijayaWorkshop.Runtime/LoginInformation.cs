@@ -35,7 +35,7 @@ namespace BrawijayaWorkshop.Runtime
             LastLogin = DateTime.Now;
 
             UserId = userId;
-            UserName = UserName;
+            UserName = userName;
             RoleId = roleId;
             RoleName = roleName;
         }
