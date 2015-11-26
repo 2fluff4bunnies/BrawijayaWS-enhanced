@@ -23,6 +23,9 @@ namespace BrawijayaWorkshop.Win32App
         {
             string applicationName = ConfigurationManager.AppSettings["LoggerAppName"];
             LoggerExtensionUtils.InitLogger(applicationName);
+            LoggerExtensionUtils.FromEmail = ConfigurationManager.AppSettings["MailFrom"];
+            LoggerExtensionUtils.DeveloperEmail = ConfigurationManager.AppSettings["MailDeveloper"];
+
             MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
 
             // Registering all dependency injection objects
