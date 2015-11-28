@@ -94,6 +94,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 valYearOfBuy.Validate())
             {
                 _presenter.SaveChanges();
+                this.Close();
             }
         }
     }

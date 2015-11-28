@@ -123,6 +123,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     MethodBase.GetCurrentMethod().Info("Save Customer's changes");
                     _presenter.SaveChanges();
+                    this.Close();
                 }
                 catch (Exception ex)
                 {

@@ -252,6 +252,13 @@ namespace BrawijayaWorkshop.Win32App
             ShowNavigationControl(navMasterData);
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
+            navMasterData.iCustomer.LinkClicked += iCustomer_LinkClicked;
+        }
+
+        private void iCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            CustomerListControl listCustomer = Boostrapper.Resolve<CustomerListControl>();
+            ShowUserControl(listCustomer);
         }
 
         private void iSupplier_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

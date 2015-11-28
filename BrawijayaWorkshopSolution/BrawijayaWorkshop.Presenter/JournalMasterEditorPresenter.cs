@@ -15,7 +15,7 @@ namespace BrawijayaWorkshop.Presenter
         public JournalMasterEditorPresenter(IJournalMasterEditorView view, JournalMasterEditorModel model)
             : base(view, model) { }
 
-        public void InitData()
+        public void InitFormData()
         {
             View.ParentDropdownList = Model.GetAllParentJournal();
             if(View.SelectedJournalMaster != null)

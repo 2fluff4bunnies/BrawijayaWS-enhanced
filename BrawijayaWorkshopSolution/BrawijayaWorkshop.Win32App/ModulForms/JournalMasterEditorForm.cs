@@ -1,60 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using BrawijayaWorkshop.Database.Entities;
+using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
-using BrawijayaWorkshop.Database.Entities;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
     public partial class JournalMasterEditorForm : BaseEditorForm, IJournalMasterEditorView
     {
-        
+        private JournalMasterEditorPresenter _presenter;
 
-        public JournalMasterEditorForm()
+        public JournalMasterEditorForm(JournalMasterEditorModel model)
         {
             InitializeComponent();
+
+            _presenter = new JournalMasterEditorPresenter(this, model);
+
+            valCode.SetIconAlignment(txtCode, ErrorIconAlignment.MiddleRight);
+            valName.SetIconAlignment(txtName, ErrorIconAlignment.MiddleRight);
+
+            this.Load += JournalMasterEditorForm_Load;
         }
 
-        public JournalMaster SelectedJournalMaster
+        private void JournalMasterEditorForm_Load(object sender, EventArgs e)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            _presenter.InitFormData();
         }
 
-        public int ParentId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public JournalMaster SelectedJournalMaster { get; set; }
 
         public List<JournalMaster> ParentDropdownList
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupJournalParent.Properties.DataSource as List<JournalMaster>;
             }
             set
             {
-                throw new NotImplementedException();
+                lookupJournalParent.Properties.DataSource = value;
+            }
+        }
+
+        #region Field Editor
+        public int ParentId
+        {
+            get
+            {
+                return lookupJournalParent.EditValue.AsInteger();
+            }
+            set
+            {
+                lookupJournalParent.EditValue = value;
             }
         }
 
@@ -62,11 +62,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtCode.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtCode.Text = value;
             }
         }
 
@@ -75,11 +75,30 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtName.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtName.Text = value;
+            }
+        } 
+        #endregion
+
+        protected override void ExecuteSave()
+        {
+            if (valCode.Validate() && valName.Validate())
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save journal account's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save journal account: '" + SelectedJournalMaster.Name + "'", ex);
+                    this.ShowError("Proses simpan data journal account: '" + SelectedJournalMaster.Name + "' gagal!");
+                }
             }
         }
     }

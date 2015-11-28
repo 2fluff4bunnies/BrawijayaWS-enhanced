@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.ModulForms;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -144,14 +145,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewJournal_Click(object sender, EventArgs e)
         {
+            JournalMasterEditorForm editor = Boostrapper.Resolve<JournalMasterEditorForm>();
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
             if(_selectedJournalMaster != null)
             {
+                JournalMasterEditorForm editor = Boostrapper.Resolve<JournalMasterEditorForm>();
+                editor.SelectedJournalMaster = _selectedJournalMaster;
+                editor.ShowDialog(this);
 
+                btnSearch.PerformClick();
             }
         }
 
