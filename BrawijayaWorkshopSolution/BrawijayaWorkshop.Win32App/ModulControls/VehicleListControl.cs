@@ -31,6 +31,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewVehicle.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
+
+            this.Load += VehicleListControl_Load;
+        }
+
+        private void VehicleListControl_Load(object sender, EventArgs e)
+        {
+            btnSearch.PerformClick();
         }
 
         private void gvvehicle_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -71,11 +78,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 if(InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridVehicle.DataSource = value; }));
+                    this.Invoke(new MethodInvoker(delegate { gridVehicle.DataSource = value; gvVehicle.BestFitColumns(); }));
                 }
                 else
                 {
                     gridVehicle.DataSource = value;
+                    gvVehicle.BestFitColumns();
                 }
             }
         }
@@ -93,6 +101,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
         {
             if (!bgwMain.IsBusy)
             {
@@ -175,8 +188,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data vehicle selesai", true);
         }
-
-
 
         public Vehicle SelectedVehicle
         {

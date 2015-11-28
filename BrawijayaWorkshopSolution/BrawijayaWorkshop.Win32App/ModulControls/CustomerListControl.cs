@@ -40,6 +40,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewCustomer.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
+
+            this.Load += CustomerListControl_Load;
+        }
+
+        private void CustomerListControl_Load(object sender, EventArgs e)
+        {
+            btnSearch.PerformClick();
         }
 
         private void gvCustomer_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -80,11 +87,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 if(InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridCustomer.DataSource = value; }));
+                    this.Invoke(new MethodInvoker(delegate { gridCustomer.DataSource = value; gvCustomer.BestFitColumns(); }));
                 }
                 else
                 {
                     gridCustomer.DataSource = value;
+                    gvCustomer.BestFitColumns();
                 }
             }
         }
@@ -102,6 +110,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
         {
             if (!bgwMain.IsBusy)
             {

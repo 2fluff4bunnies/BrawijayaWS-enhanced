@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -19,6 +20,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private JournalMasterListPresenter _presenter;
         private JournalMaster _selectedJournalMaster;
 
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_JOURNAL;
+            }
+        }
+
         public JournalMasterListControl(JournalMasterListModel model)
         {
             InitializeComponent();
@@ -31,6 +40,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewJournal.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
+
+            this.Load += JournalMasterListControl_Load;
+        }
+
+        private void JournalMasterListControl_Load(object sender, EventArgs e)
+        {
+            btnSearch.PerformClick();
         }
 
         private void gvJournalMaster_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -93,7 +109,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                gridJournalMaster.DataSource = value;
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridJournalMaster.DataSource = value; gvJournalMaster.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridJournalMaster.DataSource = value;
+                    gvJournalMaster.BestFitColumns();
+                }
             }
         }
 
@@ -134,7 +158,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(!bgwMain.IsBusy)
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
+        {
+            if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing journal data...");
                 _selectedJournalMaster = null;

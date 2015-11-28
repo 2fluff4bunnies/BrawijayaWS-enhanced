@@ -10,6 +10,14 @@ namespace BrawijayaWorkshop.View
 
         int SelectedStatus { get; set; }
 
+        List<SparepartDetailStatusItem> ListStatus { get; set; }
+
         List<SparepartDetail> SparepartDetailListData { get; set; }
+    }
+
+    public class SparepartDetailStatusItem
+    {
+        public int Status { get; set; }
+        public string Description { get; set; }
     }
 }
