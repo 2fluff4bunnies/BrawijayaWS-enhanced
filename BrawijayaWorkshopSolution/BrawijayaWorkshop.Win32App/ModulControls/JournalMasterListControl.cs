@@ -145,7 +145,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewJournal_Click(object sender, EventArgs e)
         {
-            JournalMasterEditorForm editor = Boostrapper.Resolve<JournalMasterEditorForm>();
+            JournalMasterEditorForm editor = Bootstrapper.Resolve<JournalMasterEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -155,7 +155,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if(_selectedJournalMaster != null)
             {
-                JournalMasterEditorForm editor = Boostrapper.Resolve<JournalMasterEditorForm>();
+                JournalMasterEditorForm editor = Bootstrapper.Resolve<JournalMasterEditorForm>();
                 editor.SelectedJournalMaster = _selectedJournalMaster;
                 editor.ShowDialog(this);
 

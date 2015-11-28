@@ -38,7 +38,7 @@ namespace BrawijayaWorkshop.Constant
             Deleted = -1
         }
 
-        public enum SparepartDataStatus
+        public enum SparepartDetailDataStatus
         {
             Active = 1,
             Deleted = -1,

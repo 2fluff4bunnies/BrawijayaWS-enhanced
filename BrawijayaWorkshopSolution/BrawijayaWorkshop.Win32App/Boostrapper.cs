@@ -3,7 +3,7 @@ using Ninject.Modules;
 
 namespace BrawijayaWorkshop.Win32App
 {
-    public class Boostrapper
+    public class Bootstrapper
     {
         private static IKernel _ninjectKernel;
 

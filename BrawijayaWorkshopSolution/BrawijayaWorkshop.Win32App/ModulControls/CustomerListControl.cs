@@ -122,7 +122,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewCustomer_Click(object sender, EventArgs e)
         {
-            CustomerEditorForm editor = Boostrapper.Resolve<CustomerEditorForm>();
+            CustomerEditorForm editor = Bootstrapper.Resolve<CustomerEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -132,7 +132,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedCustomer != null)
             {
-                CustomerEditorForm editor = Boostrapper.Resolve<CustomerEditorForm>();
+                CustomerEditorForm editor = Bootstrapper.Resolve<CustomerEditorForm>();
                 editor.SelectedCustomer = _selectedCustomer;
                 editor.ShowDialog(this);
 

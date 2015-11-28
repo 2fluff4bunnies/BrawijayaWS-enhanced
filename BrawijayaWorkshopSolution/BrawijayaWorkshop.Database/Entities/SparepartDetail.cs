@@ -8,6 +8,10 @@ namespace BrawijayaWorkshop.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(100)]
+        public string Code { get; set; }
+
         public int SparepartId { get; set; }
         public virtual Sparepart Sparepart { get; set; }
 

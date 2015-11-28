@@ -113,7 +113,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewvehicle_Click(object sender, EventArgs e)
         {
-            VehicleEditorForm editor = Boostrapper.Resolve<VehicleEditorForm>();
+            VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -123,7 +123,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedvehicle != null)
             {
-                VehicleEditorForm editor = Boostrapper.Resolve<VehicleEditorForm>();
+                VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
                 editor.SelectedVehicle = _selectedvehicle;
                 editor.ShowDialog(this);
 

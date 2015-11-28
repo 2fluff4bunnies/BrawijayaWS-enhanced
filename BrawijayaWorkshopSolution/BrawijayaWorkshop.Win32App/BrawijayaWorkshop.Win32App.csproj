@@ -179,6 +179,12 @@
     <Compile Include="ModulForms\JournalMasterEditorForm.Designer.cs">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SparepartDetailListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SparepartDetailListForm.Designer.cs">
+      <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\VehicleEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
+      <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleEditorForm.resx">
       <DependentUpon>VehicleEditorForm.cs</DependentUpon>

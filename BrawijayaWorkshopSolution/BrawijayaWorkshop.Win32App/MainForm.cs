@@ -49,7 +49,7 @@ namespace BrawijayaWorkshop.Win32App
             }
             else
             {
-                LoginForm login = Boostrapper.Resolve<LoginForm>();
+                LoginForm login = Bootstrapper.Resolve<LoginForm>();
                 login.ShowDialog(this);
                 if (login.DialogResult == System.Windows.Forms.DialogResult.Abort)
                 {
@@ -253,18 +253,25 @@ namespace BrawijayaWorkshop.Win32App
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
             navMasterData.iCustomer.LinkClicked += iCustomer_LinkClicked;
+            navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
         }
 
         private void iCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            CustomerListControl listCustomer = Boostrapper.Resolve<CustomerListControl>();
+            CustomerListControl listCustomer = Bootstrapper.Resolve<CustomerListControl>();
             ShowUserControl(listCustomer);
         }
 
         private void iSupplier_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            SupplierListControl listSupplier = Boostrapper.Resolve<SupplierListControl>();
+            SupplierListControl listSupplier = Bootstrapper.Resolve<SupplierListControl>();
             ShowUserControl(listSupplier);
+        }
+
+        private void iSparepart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SparepartListControl listSparepart = Bootstrapper.Resolve<SparepartListControl>();
+            ShowUserControl(listSparepart);
         }
     }
 }

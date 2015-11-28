@@ -167,7 +167,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewSparepart_Click(object sender, EventArgs e)
         {
-            SparepartEditorForm editor = Boostrapper.Resolve<SparepartEditorForm>();
+            SparepartEditorForm editor = Bootstrapper.Resolve<SparepartEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -177,7 +177,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedSparepart != null)
             {
-                SparepartEditorForm editor = Boostrapper.Resolve<SparepartEditorForm>();
+                SparepartEditorForm editor = Bootstrapper.Resolve<SparepartEditorForm>();
                 editor.SelectedSparepart = _selectedSparepart;
                 editor.ShowDialog(this);
 
