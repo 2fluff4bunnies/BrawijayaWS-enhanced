@@ -49,6 +49,8 @@
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISupplierEditorView.cs" />
     <Compile Include="ISupplierListView.cs" />
+    <Compile Include="IVehicleDetailEditorView.cs" />
+    <Compile Include="IVehicleDetailListView.cs" />
     <Compile Include="IVehicleEditorView.cs" />
     <Compile Include="IVehicleListView.cs" />
     <Compile Include="ISparepartEditorView.cs" />

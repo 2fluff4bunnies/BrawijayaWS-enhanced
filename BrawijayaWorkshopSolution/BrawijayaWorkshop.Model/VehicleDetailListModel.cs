@@ -1,12 +1,34 @@
-﻿using System;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
+using BrawijayaWorkshop.Database.Repositories;
+using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.Infrastructure.Repository;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Model
 {
-    class VehicleDetailListModel
+    public class VehicleDetailListModel : BaseModel
     {
+        private IVehicleRepository _vehicleRepository;
+        private IVehicleDetailRepository _vehicleDetailRepository;
+        private IUnitOfWork _unitOfWork;
+
+        public VehicleDetailListModel(IVehicleRepository vehicleRepository, 
+            IVehicleDetailRepository vehicleDetailRepository, IUnitOfWork unitOfWork)
+        {
+            _vehicleRepository = vehicleRepository;
+            _vehicleDetailRepository = vehicleDetailRepository;
+            _unitOfWork = unitOfWork;
+        }
+
+
+        public List<VehicleDetail> SearchVehicle(int VehicleId, DbConstant.DefaultDataStatus status)
+        {
+            List<VehicleDetail> result = _vehicleDetailRepository.GetMany(
+                spd => spd.VehicleId == VehicleId && spd.Status == (int)status).ToList();
+
+            return result;
+        }
     }
 }

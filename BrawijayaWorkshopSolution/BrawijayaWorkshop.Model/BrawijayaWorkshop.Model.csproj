@@ -59,8 +59,8 @@
     <Compile Include="SparepartDetailListModel.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />
-    <Compile Include="VehicleDetailEditor.cs" />
     <Compile Include="VehicleDetailListModel.cs" />
+    <Compile Include="VehicleDetailEditorModel.cs" />
     <Compile Include="VehicleEditorModel.cs" />
     <Compile Include="VehicleListModel.cs" />
     <Compile Include="SparepartEditorModel.cs" />

@@ -50,6 +50,8 @@
     <Compile Include="SparepartDetailListPresenter.cs" />
     <Compile Include="SupplierEditorPresenter.cs" />
     <Compile Include="SupplierListPresenter.cs" />
+    <Compile Include="VehicleDetailEditorPresenter.cs" />
+    <Compile Include="VehicleDetailListPresenter.cs" />
     <Compile Include="VehicleEditorPresenter.cs" />
     <Compile Include="VehicleListPresenter.cs" />
     <Compile Include="SparepartEditorPresenter.cs" />
