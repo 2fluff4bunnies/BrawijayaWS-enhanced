@@ -133,7 +133,7 @@
             // colSupplierSupplier
             // 
             this.colSupplierSupplier.Caption = "Nama Supplier";
-            this.colSupplierSupplier.FieldName = "SupplierName";
+            this.colSupplierSupplier.FieldName = "Name";
             this.colSupplierSupplier.Name = "colSupplierSupplier";
             this.colSupplierSupplier.Visible = true;
             this.colSupplierSupplier.VisibleIndex = 0;

@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Database
         public DbSet<Purchasing> Purchasings { get; set; }
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
         public DbSet<Reference> References { get; set; }
+        public DbSet<Mechanic> Mechanics { get; set; }
 
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }

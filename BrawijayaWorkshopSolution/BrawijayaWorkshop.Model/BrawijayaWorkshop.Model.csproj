@@ -53,6 +53,8 @@
     <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="MechanicEditorModel.cs" />
+    <Compile Include="MechanicListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />
