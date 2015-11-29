@@ -124,7 +124,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewMechanic_Click(object sender, EventArgs e)
         {
-            MechanicEditorForm editor = Boostrapper.Resolve<MechanicEditorForm>();
+            MechanicEditorForm editor = Bootstrapper.Resolve<MechanicEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -134,7 +134,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedMechanic != null)
             {
-                MechanicEditorForm editor = Boostrapper.Resolve<MechanicEditorForm>();
+                MechanicEditorForm editor = Bootstrapper.Resolve<MechanicEditorForm>();
                 editor.SelectedMechanic = _selectedMechanic;
                 editor.ShowDialog(this);
 
