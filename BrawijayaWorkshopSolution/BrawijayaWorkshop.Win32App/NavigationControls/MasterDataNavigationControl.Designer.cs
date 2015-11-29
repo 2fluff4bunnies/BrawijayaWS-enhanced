@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterDataNavigationControl));
             this.navbarMasterData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupMasterData = new DevExpress.XtraNavBar.NavBarGroup();
+            this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +47,9 @@
             this.navbarMasterData.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navbarGroupMasterData});
             this.navbarMasterData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
-            this.iSupplier});
+            this.iSupplier,
+            this.iCustomer,
+            this.iSparepart});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -58,8 +63,16 @@
             this.navbarGroupMasterData.Caption = "Master Data";
             this.navbarGroupMasterData.Expanded = true;
             this.navbarGroupMasterData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
+            // 
+            // iCustomer
+            // 
+            this.iCustomer.Caption = "Customer";
+            this.iCustomer.Name = "iCustomer";
+            this.iCustomer.SmallImageIndex = 1;
             // 
             // iSupplier
             // 
@@ -71,6 +84,14 @@
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
             this.imageCollection.Images.SetKeyName(0, "supplier_16x16.png");
+            this.imageCollection.Images.SetKeyName(1, "customer.png");
+            this.imageCollection.Images.SetKeyName(2, "sparepart.png");
+            // 
+            // iSparepart
+            // 
+            this.iSparepart.Caption = "Sparepart";
+            this.iSparepart.Name = "iSparepart";
+            this.iSparepart.SmallImageIndex = 2;
             // 
             // MasterDataNavigationControl
             // 
@@ -91,5 +112,7 @@
         private DevExpress.XtraNavBar.NavBarGroup navbarGroupMasterData;
         private DevExpress.Utils.ImageCollection imageCollection;
         public DevExpress.XtraNavBar.NavBarItem iSupplier;
+        public DevExpress.XtraNavBar.NavBarItem iCustomer;
+        public DevExpress.XtraNavBar.NavBarItem iSparepart;
     }
 }

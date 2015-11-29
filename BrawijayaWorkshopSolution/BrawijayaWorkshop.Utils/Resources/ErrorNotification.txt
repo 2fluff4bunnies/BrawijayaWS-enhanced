@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<p style="font-weight:bold;font-family:Calibri;color:#222;">Dear Developer,</p> 
+<p style="font-family:Calibri;color:#222;">Some error(s) occured at @@appname@@. Here the error message :</p>
+<p style="font-family:Calibri;color:#FF0066;font-style:italic;">@@error@@</p>
+
+<p>Thank you,</p>
+
+<p>THE Admin</p>
+</body>
+</html>

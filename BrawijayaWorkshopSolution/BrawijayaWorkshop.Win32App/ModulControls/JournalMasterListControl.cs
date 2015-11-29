@@ -1,8 +1,10 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.ModulForms;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -18,6 +20,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private JournalMasterListPresenter _presenter;
         private JournalMaster _selectedJournalMaster;
 
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_JOURNAL;
+            }
+        }
+
         public JournalMasterListControl(JournalMasterListModel model)
         {
             InitializeComponent();
@@ -30,6 +40,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewJournal.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
+
+            this.Load += JournalMasterListControl_Load;
+        }
+
+        private void JournalMasterListControl_Load(object sender, EventArgs e)
+        {
+            btnSearch.PerformClick();
         }
 
         private void gvJournalMaster_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -92,7 +109,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                gridJournalMaster.DataSource = value;
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridJournalMaster.DataSource = value; gvJournalMaster.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridJournalMaster.DataSource = value;
+                    gvJournalMaster.BestFitColumns();
+                }
             }
         }
 
@@ -133,7 +158,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(!bgwMain.IsBusy)
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
+        {
+            if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing journal data...");
                 _selectedJournalMaster = null;
@@ -144,14 +174,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewJournal_Click(object sender, EventArgs e)
         {
+            JournalMasterEditorForm editor = Bootstrapper.Resolve<JournalMasterEditorForm>();
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
             if(_selectedJournalMaster != null)
             {
+                JournalMasterEditorForm editor = Bootstrapper.Resolve<JournalMasterEditorForm>();
+                editor.SelectedJournalMaster = _selectedJournalMaster;
+                editor.ShowDialog(this);
 
+                btnSearch.PerformClick();
             }
         }
 

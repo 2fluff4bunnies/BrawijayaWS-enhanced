@@ -41,7 +41,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
 
-            _presenter.LoadSupplier();
+            this.Load += SupplierListControl_Load;
+        }
+
+        private void SupplierListControl_Load(object sender, EventArgs e)
+        {
+            btnSearch.PerformClick();
         }
 
         private void gvSupplier_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -82,11 +87,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridSupplier.DataSource = value; }));
+                    this.Invoke(new MethodInvoker(delegate { gridSupplier.DataSource = value; gvSupplier.BestFitColumns(); }));
                 }
                 else
                 {
                     gridSupplier.DataSource = value;
+                    gvSupplier.BestFitColumns();
                 }
             }
         }
@@ -104,6 +110,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
         {
             if (!bgwMain.IsBusy)
             {
@@ -124,7 +135,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewSupplier_Click(object sender, EventArgs e)
         {
-            SupplierEditorForm editor = Boostrapper.Resolve<SupplierEditorForm>();
+            SupplierEditorForm editor = Bootstrapper.Resolve<SupplierEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -134,7 +145,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedSupplier != null)
             {
-                SupplierEditorForm editor = Boostrapper.Resolve<SupplierEditorForm>();
+                SupplierEditorForm editor = Bootstrapper.Resolve<SupplierEditorForm>();
                 editor.SelectedSupplier = _selectedSupplier;
                 editor.ShowDialog(this);
 

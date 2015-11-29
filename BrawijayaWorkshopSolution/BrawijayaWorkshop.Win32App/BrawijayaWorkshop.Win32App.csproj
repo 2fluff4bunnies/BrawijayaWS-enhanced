@@ -50,6 +50,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -187,6 +190,12 @@
     </Compile>
     <Compile Include="ModulForms\MechanicEditorForm.Designer.cs">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
+</Compile>
+    <Compile Include="ModulForms\SparepartDetailListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SparepartDetailListForm.Designer.cs">
+      <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\VehicleEditorForm.cs">
       <SubType>Form</SubType>
@@ -268,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
+	  </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
+      <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleEditorForm.resx">
       <DependentUpon>VehicleEditorForm.cs</DependentUpon>
@@ -381,6 +393,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\edit_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppIcon.ico" />
+    <None Include="Resources\zoom_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

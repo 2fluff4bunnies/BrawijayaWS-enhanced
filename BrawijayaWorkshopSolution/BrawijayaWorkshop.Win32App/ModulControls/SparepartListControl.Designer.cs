@@ -45,6 +45,8 @@
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartStock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
@@ -217,16 +219,31 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewDetailToolStripMenuItem,
+            this.toolStripSeparator1,
             this.cmsEditData,
             this.cmsDeleteData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(136, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(136, 76);
+            // 
+            // viewDetailToolStripMenuItem
+            // 
+            this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
+            this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
+            this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
@@ -234,7 +251,7 @@
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
@@ -284,5 +301,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartUnit;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartStock;
         private DevExpress.XtraEditors.LookUpEdit lookUpCategory;
+        private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

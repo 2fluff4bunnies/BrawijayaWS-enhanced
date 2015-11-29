@@ -13,5 +13,24 @@ namespace BrawijayaWorkshop.Constant
         // Miscellaneous
         public const string STRING_COMA = ",";
         public const char CHARACTER_COMA = ',';
+
+        public const string ROLE_SUPERADMIN = "Super Administrator";
+        public const string ROLE_ADMIN = "Administrator";
+        public const string ROLE_MANAGER = "Manager";
+
+        public static string GetRoleDescription(this string sender)
+        {
+            switch (sender)
+            {
+                case DbConstant.ROLE_SUPERADMIN:
+                    return ROLE_SUPERADMIN;
+                case DbConstant.ROLE_ADMIN:
+                    return ROLE_ADMIN;
+                case DbConstant.ROLE_MANAGER:
+                    return ROLE_MANAGER;
+                default:
+                    return "Undefined";
+            }
+        }
     }
 }

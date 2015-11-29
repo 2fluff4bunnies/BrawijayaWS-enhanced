@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using BrawijayaWorkshop.View;
-using BrawijayaWorkshop.Presenter;
+﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.ModulForms;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using BrawijayaWorkshop.Utils;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
-using BrawijayaWorkshop.Win32App.ModulForms;
+using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
@@ -24,6 +19,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     {
         private SparepartListPresenter _presenter;
         private Sparepart _selectedSparepart;
+
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_SPAREPART;
+            }
+        }
 
         public SparepartListControl(SparepartListModel model)
         {
@@ -38,6 +41,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewSparepart.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
+
+            this.Load += SparepartListControl_Load;
+        }
+
+        private void SparepartListControl_Load(object sender, EventArgs e)
+        {
+            btnSearch.PerformClick();
         }
 
         private void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -57,6 +67,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
         {
             if (!bgwMain.IsBusy)
             {
@@ -113,11 +128,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridSparepart.DataSource = value; }));
+                    this.Invoke(new MethodInvoker(delegate { gridSparepart.DataSource = value; gvSparepart.BestFitColumns(); }));
                 }
                 else
                 {
                     gridSparepart.DataSource = value;
+                    gvSparepart.BestFitColumns();
                 }
             }
         }
@@ -167,7 +183,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewSparepart_Click(object sender, EventArgs e)
         {
-            SparepartEditorForm editor = Boostrapper.Resolve<SparepartEditorForm>();
+            SparepartEditorForm editor = Bootstrapper.Resolve<SparepartEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -177,7 +193,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedSparepart != null)
             {
-                SparepartEditorForm editor = Boostrapper.Resolve<SparepartEditorForm>();
+                SparepartEditorForm editor = Bootstrapper.Resolve<SparepartEditorForm>();
                 editor.SelectedSparepart = _selectedSparepart;
                 editor.ShowDialog(this);
 
@@ -204,6 +220,16 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete sparepart: '" + SelectedSparepart.Name + "'", ex);
                     this.ShowError("Proses hapus data sparepart: '" + SelectedSparepart.Name + "' gagal!");
                 }
+            }
+        }
+
+        private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_selectedSparepart != null)
+            {
+                SparepartDetailListForm detail = Bootstrapper.Resolve<SparepartDetailListForm>();
+                detail.SelectedSparepart = _selectedSparepart;
+                detail.ShowDialog(this);
             }
         }
     }

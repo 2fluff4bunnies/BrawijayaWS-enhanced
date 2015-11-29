@@ -39,12 +39,12 @@ namespace BrawijayaWorkshop.Model
 
             if (categoryReferenceId > 0)
             {
-                result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.SparepartDataStatus.Active &&
+                result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active &&
                     sp.CategoryReferenceId == categoryReferenceId && sp.Name.Contains(name)).ToList();
             }
             else
             {
-                result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.SparepartDataStatus.Active && sp.Name.Contains(name)).ToList();
+                result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active && sp.Name.Contains(name)).ToList();
             }
 
             return result;
@@ -56,13 +56,13 @@ namespace BrawijayaWorkshop.Model
             List<SparepartDetail> details = _sparepartDetailRepository.GetMany(spd => spd.SparepartId == sparepart.Id).ToList();
             foreach (var iDetails in details)
             {
-                iDetails.Status = (int)DbConstant.SparepartDataStatus.Deleted;
+                iDetails.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                 iDetails.ModifyDate = serverTime;
                 iDetails.ModifyUserId = userId;
                 _sparepartDetailRepository.Update(iDetails);
             }
 
-            sparepart.Status = (int)DbConstant.SparepartDataStatus.Deleted;
+            sparepart.Status = (int)DbConstant.DefaultDataStatus.Deleted;
             sparepart.ModifyDate = serverTime;
             sparepart.ModifyUserId = userId;
             _sparepartRepository.Update(sparepart);

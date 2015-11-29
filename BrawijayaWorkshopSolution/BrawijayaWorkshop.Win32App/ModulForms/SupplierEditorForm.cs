@@ -76,6 +76,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (valSupplierName.Validate() && valAddress.Validate() && valPhone.Validate())
             {
                 _presenter.SaveChanges();
+                this.Close();
             }
         }
     }

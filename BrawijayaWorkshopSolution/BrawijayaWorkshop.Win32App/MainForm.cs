@@ -22,6 +22,7 @@ using BrawijayaWorkshop.Win32App.ModulForms;
 using BrawijayaWorkshop.Win32App.ModulControls;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.Win32App.NavigationControls;
+using BrawijayaWorkshop.Constant;
 
 namespace BrawijayaWorkshop.Win32App
 {
@@ -48,22 +49,18 @@ namespace BrawijayaWorkshop.Win32App
             }
             else
             {
-                // ******* Contoh cara menampilkan user control pada main form
-                // TestUserControl control = new TestUserControl();
-                // ShowUserControl(control);
-                // *******
-
-                LoginForm login = Boostrapper.Resolve<LoginForm>();
+                LoginForm login = Bootstrapper.Resolve<LoginForm>();
                 login.ShowDialog(this);
-                if(login.DialogResult == System.Windows.Forms.DialogResult.Abort)
+                if (login.DialogResult == System.Windows.Forms.DialogResult.Abort)
                 {
                     this.FormClosing -= MainForm_FormClosing;
                     this.Close();
                 }
 
-                siInfo.Caption = string.Format("{0}: {1} - ", LoginInformation.UserName, LoginInformation.RoleName);
+                siInfo.Caption = string.Format("{0}: {1} - ", LoginInformation.UserName, RuntimeConstant.GetRoleDescription(LoginInformation.RoleName));
 
-                // todo: get login information and generate menus and navigations based on allowed modules
+                // get login information and generate menus and navigations based on allowed modules
+                GenerateRibbonMenu();
             }
         }
 
@@ -87,6 +84,14 @@ namespace BrawijayaWorkshop.Win32App
         }
 
         #region Helper
+        private void GenerateRibbonMenu()
+        {
+            if(LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
+            {
+                iMaster.Visibility = BarItemVisibility.Never;
+            }
+        }
+
         private void ShowUserControl(XtraUserControl userControl)
         {
             ClearUserControl();
@@ -228,7 +233,7 @@ namespace BrawijayaWorkshop.Win32App
         private void iNotification_ItemClick(object sender, ItemClickEventArgs e)
         {
             splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
-            
+
             ClearNavigation();
             ClearUserControl();
 
@@ -247,12 +252,26 @@ namespace BrawijayaWorkshop.Win32App
             ShowNavigationControl(navMasterData);
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
+            navMasterData.iCustomer.LinkClicked += iCustomer_LinkClicked;
+            navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
+        }
+
+        private void iCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            CustomerListControl listCustomer = Bootstrapper.Resolve<CustomerListControl>();
+            ShowUserControl(listCustomer);
         }
 
         private void iSupplier_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            SupplierListControl listSupplier = Boostrapper.Resolve<SupplierListControl>();
+            SupplierListControl listSupplier = Bootstrapper.Resolve<SupplierListControl>();
             ShowUserControl(listSupplier);
+        }
+
+        private void iSparepart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SparepartListControl listSparepart = Bootstrapper.Resolve<SparepartListControl>();
+            ShowUserControl(listSparepart);
         }
     }
 }

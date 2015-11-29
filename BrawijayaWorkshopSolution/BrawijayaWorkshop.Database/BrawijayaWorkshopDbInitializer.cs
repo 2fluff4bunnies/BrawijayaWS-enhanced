@@ -69,6 +69,17 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            ApplicationModul userControlMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_USERCONTROL,
+                ModulDescription = "User Control Modul"
+            });
+            ApplicationModul dbConfigMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_DBCONFIG,
+                ModulDescription = "Db Config Modul"
+            });
+
             ApplicationModul customerMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_CUSTOMER,
@@ -111,6 +122,19 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            // superadmin
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = userControlMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = dbConfigMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = customerMod.Id,
@@ -157,6 +181,58 @@ namespace BrawijayaWorkshop.Database
             {
                 ApplicationModulId = purchasingMod.Id,
                 RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+
+            // admin
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = customerMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = journalMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = supplierMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = serviceMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = purchasingMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+
+            // manager
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = approvalMod.Id,
+                RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.SaveChanges();
