@@ -273,5 +273,10 @@ namespace BrawijayaWorkshop.Win32App
             SparepartListControl listSparepart = Bootstrapper.Resolve<SparepartListControl>();
             ShowUserControl(listSparepart);
         }
+
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            // todo show config
+        }
     }
 }

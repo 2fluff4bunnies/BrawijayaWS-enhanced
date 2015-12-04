@@ -36,11 +36,11 @@
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.popupControlContainer2 = new DevExpress.XtraBars.PopupControlContainer(this.components);
-            this.buttonEdit = new DevExpress.XtraEditors.ButtonEdit();
+            this.btnConfig = new DevExpress.XtraEditors.SimpleButton();
+            this.iNotification = new DevExpress.XtraBars.BarButtonItem();
+            this.iMaster = new DevExpress.XtraBars.BarButtonItem();
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
             this.popupControlContainer1 = new DevExpress.XtraBars.PopupControlContainer(this.components);
-            this.someLabelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.someLabelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.ribbonImageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iNew = new DevExpress.XtraBars.BarButtonItem();
             this.iOpen = new DevExpress.XtraBars.BarButtonItem();
@@ -63,8 +63,6 @@
             this.rgbiSkins = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.biStatusProgress = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemMarqueeProgressBar2 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
-            this.iNotification = new DevExpress.XtraBars.BarButtonItem();
-            this.iMaster = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -82,9 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer2)).BeginInit();
             this.popupControlContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer1)).BeginInit();
-            this.popupControlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
@@ -99,7 +95,7 @@
             this.splitContainerControl.Padding = new System.Windows.Forms.Padding(6);
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Text = "Panel2";
-            this.splitContainerControl.Size = new System.Drawing.Size(826, 271);
+            this.splitContainerControl.Size = new System.Drawing.Size(742, 259);
             this.splitContainerControl.SplitterPosition = 165;
             this.splitContainerControl.TabIndex = 0;
             this.splitContainerControl.Text = "splitContainerControl1";
@@ -165,17 +161,17 @@
             this.repositoryItemMarqueeProgressBar1,
             this.repositoryItemMarqueeProgressBar2});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbonControl.Size = new System.Drawing.Size(826, 143);
+            this.ribbonControl.Size = new System.Drawing.Size(742, 143);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
-            this.ribbonControl.Toolbar.ItemLinks.Add(this.iNew);
-            this.ribbonControl.Toolbar.ItemLinks.Add(this.iOpen);
-            this.ribbonControl.Toolbar.ItemLinks.Add(this.iSave);
-            this.ribbonControl.Toolbar.ItemLinks.Add(this.iSaveAs);
+            this.ribbonControl.Toolbar.ItemLinks.Add(this.iNotification);
+            this.ribbonControl.Toolbar.ItemLinks.Add(this.iMaster);
             this.ribbonControl.Toolbar.ItemLinks.Add(this.iHelp);
             // 
             // appMenu
             // 
             this.appMenu.BottomPaneControlContainer = this.popupControlContainer2;
+            this.appMenu.ItemLinks.Add(this.iNotification);
+            this.appMenu.ItemLinks.Add(this.iMaster);
             this.appMenu.ItemLinks.Add(this.iExit);
             this.appMenu.Name = "appMenu";
             this.appMenu.Ribbon = this.ribbonControl;
@@ -187,30 +183,49 @@
             this.popupControlContainer2.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.popupControlContainer2.Appearance.Options.UseBackColor = true;
             this.popupControlContainer2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.popupControlContainer2.Controls.Add(this.buttonEdit);
-            this.popupControlContainer2.Location = new System.Drawing.Point(238, 289);
+            this.popupControlContainer2.Controls.Add(this.btnConfig);
+            this.popupControlContainer2.Location = new System.Drawing.Point(589, 149);
             this.popupControlContainer2.Name = "popupControlContainer2";
             this.popupControlContainer2.Ribbon = this.ribbonControl;
-            this.popupControlContainer2.Size = new System.Drawing.Size(118, 28);
+            this.popupControlContainer2.Size = new System.Drawing.Size(90, 29);
             this.popupControlContainer2.TabIndex = 3;
             this.popupControlContainer2.Visible = false;
             // 
-            // buttonEdit
+            // btnConfig
             // 
-            this.buttonEdit.EditValue = "Some Text";
-            this.buttonEdit.Location = new System.Drawing.Point(3, 5);
-            this.buttonEdit.MenuManager = this.ribbonControl;
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit.Size = new System.Drawing.Size(100, 20);
-            this.buttonEdit.TabIndex = 0;
+            this.btnConfig.Location = new System.Drawing.Point(3, 3);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(84, 23);
+            this.btnConfig.TabIndex = 0;
+            this.btnConfig.Text = "Konfigurasi";
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
+            // iNotification
+            // 
+            this.iNotification.Caption = "Notifikasi";
+            this.iNotification.Hint = "Lihat Notifikasi";
+            this.iNotification.Id = 64;
+            this.iNotification.ImageIndex = 15;
+            this.iNotification.LargeImageIndex = 9;
+            this.iNotification.Name = "iNotification";
+            this.iNotification.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.iNotification.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iNotification_ItemClick);
+            // 
+            // iMaster
+            // 
+            this.iMaster.Caption = "Master Data";
+            this.iMaster.Hint = "Master Data";
+            this.iMaster.Id = 69;
+            this.iMaster.ImageIndex = 17;
+            this.iMaster.LargeImageIndex = 11;
+            this.iMaster.Name = "iMaster";
+            this.iMaster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iMaster_ItemClick);
             // 
             // iExit
             // 
-            this.iExit.Caption = "Exit";
+            this.iExit.Caption = "Keluar";
             this.iExit.Description = "Closes this program after prompting you to save unsaved data.";
-            this.iExit.Hint = "Closes this program after prompting you to save unsaved data";
+            this.iExit.Hint = "Tutup Aplikasi";
             this.iExit.Id = 20;
             this.iExit.ImageIndex = 6;
             this.iExit.LargeImageIndex = 6;
@@ -222,30 +237,12 @@
             this.popupControlContainer1.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.popupControlContainer1.Appearance.Options.UseBackColor = true;
             this.popupControlContainer1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.popupControlContainer1.Controls.Add(this.someLabelControl2);
-            this.popupControlContainer1.Controls.Add(this.someLabelControl1);
-            this.popupControlContainer1.Location = new System.Drawing.Point(111, 197);
+            this.popupControlContainer1.Location = new System.Drawing.Point(507, 152);
             this.popupControlContainer1.Name = "popupControlContainer1";
             this.popupControlContainer1.Ribbon = this.ribbonControl;
             this.popupControlContainer1.Size = new System.Drawing.Size(76, 70);
             this.popupControlContainer1.TabIndex = 2;
             this.popupControlContainer1.Visible = false;
-            // 
-            // someLabelControl2
-            // 
-            this.someLabelControl2.Location = new System.Drawing.Point(3, 57);
-            this.someLabelControl2.Name = "someLabelControl2";
-            this.someLabelControl2.Size = new System.Drawing.Size(49, 13);
-            this.someLabelControl2.TabIndex = 0;
-            this.someLabelControl2.Text = "Some Info";
-            // 
-            // someLabelControl1
-            // 
-            this.someLabelControl1.Location = new System.Drawing.Point(3, 3);
-            this.someLabelControl1.Name = "someLabelControl1";
-            this.someLabelControl1.Size = new System.Drawing.Size(49, 13);
-            this.someLabelControl1.TabIndex = 0;
-            this.someLabelControl1.Text = "Some Info";
             // 
             // ribbonImageCollection
             // 
@@ -456,25 +453,6 @@
             // 
             this.repositoryItemMarqueeProgressBar2.Name = "repositoryItemMarqueeProgressBar2";
             // 
-            // iNotification
-            // 
-            this.iNotification.Caption = "Notifikasi";
-            this.iNotification.Id = 64;
-            this.iNotification.ImageIndex = 15;
-            this.iNotification.LargeImageIndex = 9;
-            this.iNotification.Name = "iNotification";
-            this.iNotification.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.iNotification.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iNotification_ItemClick);
-            // 
-            // iMaster
-            // 
-            this.iMaster.Caption = "Master Data";
-            this.iMaster.Id = 69;
-            this.iMaster.ImageIndex = 17;
-            this.iMaster.LargeImageIndex = 11;
-            this.iMaster.Name = "iMaster";
-            this.iMaster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iMaster_ItemClick);
-            // 
             // ribbonImageCollectionLarge
             // 
             this.ribbonImageCollectionLarge.ImageSize = new System.Drawing.Size(32, 32);
@@ -544,17 +522,17 @@
             this.ribbonStatusBar.ItemLinks.Add(this.siInfo);
             this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
             this.ribbonStatusBar.ItemLinks.Add(this.biStatusProgress);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 414);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 402);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(826, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(742, 31);
             // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 445);
+            this.ClientSize = new System.Drawing.Size(742, 433);
             this.Controls.Add(this.splitContainerControl);
             this.Controls.Add(this.popupControlContainer1);
             this.Controls.Add(this.popupControlContainer2);
@@ -574,10 +552,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer2)).EndInit();
             this.popupControlContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer1)).EndInit();
-            this.popupControlContainer1.ResumeLayout(false);
-            this.popupControlContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
@@ -619,10 +594,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup helpRibbonPageGroup;
         private DevExpress.XtraBars.Ribbon.ApplicationMenu appMenu;
         private DevExpress.XtraBars.PopupControlContainer popupControlContainer1;
-        private DevExpress.XtraEditors.LabelControl someLabelControl2;
-        private DevExpress.XtraEditors.LabelControl someLabelControl1;
         private DevExpress.XtraBars.PopupControlContainer popupControlContainer2;
-        private DevExpress.XtraEditors.ButtonEdit buttonEdit;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.Utils.ImageCollection ribbonImageCollection;
         private DevExpress.Utils.ImageCollection ribbonImageCollectionLarge;
@@ -633,6 +605,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar1;
         private DevExpress.XtraBars.BarButtonItem iNotification;
         private DevExpress.XtraBars.BarButtonItem iMaster;
+        private DevExpress.XtraEditors.SimpleButton btnConfig;
 
     }
 }
