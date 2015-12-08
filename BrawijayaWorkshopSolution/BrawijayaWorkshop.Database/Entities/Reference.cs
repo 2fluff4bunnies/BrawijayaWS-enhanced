@@ -23,7 +23,7 @@ namespace BrawijayaWorkshop.Database.Entities
         [MaxLength(100)]
         public string Value { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         public virtual Reference Parent { get; set; }
 

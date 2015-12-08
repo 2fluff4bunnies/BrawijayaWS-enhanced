@@ -1,0 +1,115 @@
+﻿using BrawijayaWorkshop.Utils;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace BrawijayaWorkshop.DataInitializerConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string dirPath = "D:/Documents/Bengkel App/";
+            string accFile = "Account Jurnal.xls";
+            string invFile = "Inv.xlsx";
+
+            try
+            {
+                try
+                {
+                    using(MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"CREATE TABLE `temp_inv` (
+                                          `Kode` varchar(100) DEFAULT NULL,
+                                          `Nama` varchar(100) DEFAULT NULL,
+                                          `Qmin` double DEFAULT NULL,
+                                          `Unit` varchar(10) DEFAULT NULL,
+                                          `Chusr` int(11) DEFAULT NULL,
+                                          `Chtime` varchar(100) DEFAULT NULL,
+                                          `Jenis` varchar(100) DEFAULT NULL,
+                                          `Price` double DEFAULT NULL,
+                                          `ACC` varchar(45) DEFAULT NULL,
+                                          `LAMA` int(11) DEFAULT NULL
+                                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex != null) { }
+                    // do nothing
+                }
+
+                // todo: read excel inventory and acc and insert into temporary table
+                DataTable result = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
+                if (result != null)
+                {
+                    // fix typing error
+                    foreach (DataRow iRow in result.Rows)
+                    {
+                        if (iRow["Kode"].ToString().Contains("["))
+                        {
+                            iRow["Kode"] = iRow["Kode"].ToString().Replace("[", "");
+                        }
+                        if (iRow["Unit"].ToString().Contains("PV"))
+                        {
+                            iRow["Unit"] = "PC";
+                        }
+                    }
+
+                    // convert to csv
+                    result.ExportDataTableToCsv(dirPath + "inv.csv");
+
+                    // insert into database
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        conn.Open();
+
+                        MySqlBulkLoader loader = new MySqlBulkLoader(conn);
+                        loader.TableName = "temp_inv";
+                        loader.FieldTerminator = "\t";
+                        loader.LineTerminator = "\n";
+                        loader.FileName = dirPath + "inv.csv";
+                        loader.NumberOfLinesToSkip = 1;
+                        int inserted = loader.Load();
+                        Console.WriteLine("Total rows: " + inserted);
+
+                        conn.Close();
+                    }
+
+                    // generate main sparepart data
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"INSERT INTO spareparts (`Code`, `Name`, `StockQty`, `UnitReferenceId`, `CategoryReferenceId`, `CreateDate`, `CreateUserId`, `ModifyDate`, `ModifyUserId`, `Status`)
+                                            SELECT Kode, Nama, 0,
+                                            IFNULL((SELECT a.`Id` FROM `references` a WHERE a.`ParentId`=(SELECT Id FROM `references` WHERE Code='REF_SPAREPARTUNIT') AND a.`Code`=Unit),
+                                            (SELECT a.`Id` FROM `references` a WHERE a.`ParentId`=(SELECT Id FROM `references` WHERE Code='REF_SPAREPARTUNIT') AND a.`Code`='-')),
+                                            IFNULL((SELECT a.`Id` FROM `references` a WHERE a.`ParentId`=(SELECT Id FROM `references` WHERE Code='REF_SPAREPARTCATEGORY') AND a.`Code`=SUBSTR(Kode, 1, LENGTH(a.`Code`))),
+                                            (SELECT a.`Id` FROM `references` a WHERE a.`ParentId`=(SELECT Id FROM `references` WHERE Code='REF_SPAREPARTCATEGORY') AND a.`Code`='-')),
+                                            current_date(), (SELECT Id FROM users WHERE UserName='superadmin'),
+                                            current_date(), (SELECT Id FROM users WHERE UserName='superadmin'), 1
+                                            FROM temp_inv";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+}
