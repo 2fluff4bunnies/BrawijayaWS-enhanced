@@ -49,12 +49,35 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     // do nothing
                 }
 
+                try
+                {
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"CREATE TABLE `temp_acc` (
+                                          `Kode` varchar(100) DEFAULT NULL,
+                                          `Nama` varchar(100) DEFAULT NULL,
+                                          `Induk` varchar(100) DEFAULT NULL
+                                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex != null) { }
+                    // do nothing
+                }
+
                 // todo: read excel inventory and acc and insert into temporary table
-                DataTable result = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
-                if (result != null)
+                DataTable resultInv = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
+                DataTable resultAcc = DataExportImportUtils.CreateDataTableFromExcel(dirPath + accFile, true);
+                if (resultInv != null)
                 {
                     // fix typing error
-                    foreach (DataRow iRow in result.Rows)
+                    foreach (DataRow iRow in resultInv.Rows)
                     {
                         if (iRow["Kode"].ToString().Contains("["))
                         {
@@ -67,7 +90,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     }
 
                     // convert to csv
-                    result.ExportDataTableToCsv(dirPath + "inv.csv");
+                    resultInv.ExportDataTableToCsv(dirPath + "inv.csv");
 
                     // insert into database
                     using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
@@ -99,6 +122,43 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                                             current_date(), (SELECT Id FROM users WHERE UserName='superadmin'),
                                             current_date(), (SELECT Id FROM users WHERE UserName='superadmin'), 1
                                             FROM temp_inv";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+                }
+
+                if (resultAcc != null)
+                {
+                    // convert to csv
+                    resultAcc.ExportDataTableToCsv(dirPath + "acc.csv");
+
+                    // insert into database
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        conn.Open();
+
+                        MySqlBulkLoader loader = new MySqlBulkLoader(conn);
+                        loader.TableName = "temp_acc";
+                        loader.FieldTerminator = "\t";
+                        loader.LineTerminator = "\n";
+                        loader.FileName = dirPath + "acc.csv";
+                        loader.NumberOfLinesToSkip = 1;
+                        int inserted = loader.Load();
+                        Console.WriteLine("Total rows: " + inserted);
+
+                        conn.Close();
+                    }
+
+                    // generate main account data
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`)
+                                            SELECT Kode, Nama,
+                                            (SELECT a.`Id` FROM journalmasters a WHERE `Code`=Induk)
+                                            FROM temp_acc";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
                         cmd.ExecuteNonQuery();
