@@ -47,6 +47,10 @@
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
+    <Compile Include="ISPKDetailMechanicListView.cs" />
+    <Compile Include="ISPKDetailSParepartListView.cs" />
+    <Compile Include="ISPKEditorView.cs" />
+    <Compile Include="ISPKListView.cs" />
     <Compile Include="ISupplierEditorView.cs" />
     <Compile Include="ISupplierListView.cs" />
     <Compile Include="IVehicleDetailEditorView.cs" />

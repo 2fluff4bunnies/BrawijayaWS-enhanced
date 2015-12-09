@@ -67,6 +67,10 @@
     <Compile Include="Configurations\RoleAccessConfiguration.cs" />
     <Compile Include="Configurations\SparepartConfiguration.cs" />
     <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
+    <Compile Include="Configurations\SPKConfiguration.cs" />
+    <Compile Include="Configurations\SPKDetailMechanicConfiguration.cs" />
+    <Compile Include="Configurations\SPKDetailSparepartConfiguration.cs" />
+    <Compile Include="Configurations\SPKDetailSparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
     <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
@@ -88,6 +92,9 @@
     <Compile Include="Entities\Sparepart.cs" />
     <Compile Include="Entities\SparepartDetail.cs" />
     <Compile Include="Entities\SPK.cs" />
+    <Compile Include="Entities\SPKDetailMechanic.cs" />
+    <Compile Include="Entities\SPKDetailSparepart.cs" />
+    <Compile Include="Entities\SPKDetailSparepartDetail.cs" />
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
@@ -110,6 +117,10 @@
     <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\SparepartDetailRepository.cs" />
     <Compile Include="Repositories\SparepartRepository.cs" />
+    <Compile Include="Repositories\SPKDetailMechanicRepository.cs" />
+    <Compile Include="Repositories\SPKDetailSparepartRepository.cs" />
+    <Compile Include="Repositories\SPKDetailSparepartDetailRepository.cs" />
+    <Compile Include="Repositories\SPKRepository.cs" />
     <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />

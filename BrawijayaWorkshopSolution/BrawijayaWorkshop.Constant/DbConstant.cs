@@ -24,6 +24,8 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
 
+        public const string REF_SPKCATEGORY = "REF_SPKCATEGORY";
+
         public enum AccessTypeEnum
         {
             Read = 1,
@@ -53,7 +55,9 @@ namespace BrawijayaWorkshop.Constant
         {
             Pending = 0,
             Approved = 1,
-            Rejected = -1
+            Rejected = -1,
+            Endorsed = 2
         }
+
     }
 }
