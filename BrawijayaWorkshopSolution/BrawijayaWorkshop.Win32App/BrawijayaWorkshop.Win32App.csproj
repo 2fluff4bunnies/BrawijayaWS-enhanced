@@ -173,6 +173,12 @@
     <Compile Include="ModulControls\TestUserControl.Designer.cs">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\VehicleDetailListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\VehicleDetailListControl.Designer.cs">
+      <DependentUpon>VehicleDetailListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\VehicleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -190,12 +196,18 @@
     </Compile>
     <Compile Include="ModulForms\MechanicEditorForm.Designer.cs">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
-</Compile>
+    </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.Designer.cs">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\VehicleDetailEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\VehicleDetailEditorForm.Designer.cs">
+      <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\VehicleEditorForm.cs">
       <SubType>Form</SubType>
@@ -269,6 +281,9 @@
     <EmbeddedResource Include="ModulControls\TestUserControl.resx">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\VehicleDetailListControl.resx">
+      <DependentUpon>VehicleDetailListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,9 +292,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
-	  </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
+      <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleEditorForm.resx">
       <DependentUpon>VehicleEditorForm.cs</DependentUpon>

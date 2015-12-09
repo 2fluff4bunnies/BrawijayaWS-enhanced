@@ -23,10 +23,10 @@ namespace BrawijayaWorkshop.Model
         }
 
 
-        public List<VehicleDetail> SearchVehicle(int VehicleId, DbConstant.DefaultDataStatus status)
+        public List<VehicleDetail> SearchVehicleDetail(int VehicleDetailId)
         {
             List<VehicleDetail> result = _vehicleDetailRepository.GetMany(
-                spd => spd.VehicleId == VehicleId && spd.Status == (int)status).ToList();
+                spd => spd.VehicleId == VehicleDetailId).ToList();
 
             return result;
         }

@@ -18,8 +18,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadDetailList()
         {
-            View.VehicleDetailListData = Model.SearchVehicle(View.SelectedVehicle.Id,
-                (DbConstant.DefaultDataStatus)View.SelectedStatus);
+            View.VehicleDetailListData = Model.SearchVehicleDetail(View.SelectedVehicle.Id);
         }
     }
 }

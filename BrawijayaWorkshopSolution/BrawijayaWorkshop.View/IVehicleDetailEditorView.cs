@@ -10,8 +10,8 @@ namespace BrawijayaWorkshop.View
         VehicleDetail SelectedVehicleDetail { get; set; }
         string LicenseNumber { get; set; }
         DateTime ExpirationDate { get; set; }
-        int SelectedStatus { get; set; }
-        List<VehicleDetailStatusItem> ListStatus { get; set; }
+        int SelectedStatus { get; }
+      
     }
 
     public class VehicleDetailStatusItem

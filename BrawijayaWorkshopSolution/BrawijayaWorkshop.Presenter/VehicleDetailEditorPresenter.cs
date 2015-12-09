@@ -18,7 +18,6 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.LicenseNumber = View.SelectedVehicleDetail.LicenseNumber;
                 View.ExpirationDate = View.SelectedVehicleDetail.ExpirationDate;
-                View.SelectedStatus = View.SelectedVehicleDetail.Status;
             }
         }
 
