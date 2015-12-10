@@ -155,6 +155,12 @@
     <Compile Include="ModulControls\MechanicListControl.Designer.cs">
       <DependentUpon>MechanicListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\PurchasingListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\PurchasingListControl.Designer.cs">
+      <DependentUpon>PurchasingListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\SupplierListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -190,7 +196,7 @@
     </Compile>
     <Compile Include="ModulForms\MechanicEditorForm.Designer.cs">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
-</Compile>
+    </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +266,9 @@
     <EmbeddedResource Include="ModulControls\MechanicListControl.resx">
       <DependentUpon>MechanicListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\PurchasingListControl.resx">
+      <DependentUpon>PurchasingListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SparepartListControl.resx">
       <DependentUpon>SparepartListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,7 +286,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
-	  </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </EmbeddedResource>

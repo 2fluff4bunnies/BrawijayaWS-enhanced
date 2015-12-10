@@ -254,6 +254,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
             navMasterData.iCustomer.LinkClicked += iCustomer_LinkClicked;
             navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
+            navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
         }
 
         private void iCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -271,6 +272,14 @@ namespace BrawijayaWorkshop.Win32App
         private void iSparepart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             SparepartListControl listSparepart = Bootstrapper.Resolve<SparepartListControl>();
+            ShowUserControl(listSparepart);
+        }
+
+        private void iMechanic_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            //MechanicListControl listMechanic = Bootstrapper.Resolve<MechanicListControl>();
+            //ShowUserControl(listMechanic);
+            PurchasingListControl listSparepart = Bootstrapper.Resolve<PurchasingListControl>();
             ShowUserControl(listSparepart);
         }
     }

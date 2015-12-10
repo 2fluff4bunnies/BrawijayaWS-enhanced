@@ -56,6 +56,7 @@
     <Compile Include="MechanicEditorModel.cs" />
     <Compile Include="MechanicListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchasingListModel.cs" />
     <Compile Include="SparepartDetailListModel.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />

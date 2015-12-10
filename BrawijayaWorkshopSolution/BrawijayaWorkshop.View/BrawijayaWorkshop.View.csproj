@@ -46,6 +46,7 @@
     <Compile Include="ILoginView.cs" />
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
+    <Compile Include="IPurchasingListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISupplierEditorView.cs" />
     <Compile Include="ISupplierListView.cs" />
