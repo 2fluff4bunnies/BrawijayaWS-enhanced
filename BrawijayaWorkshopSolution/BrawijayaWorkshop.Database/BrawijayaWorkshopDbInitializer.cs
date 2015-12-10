@@ -389,6 +389,12 @@ namespace BrawijayaWorkshop.Database
                 ParentId = refSparepartUnit.Id
             });
             context.SaveChanges();
+
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SET_MINSTOCK,
+                Value = "50"
+            });
             
             // todo: insert initial data here
         }

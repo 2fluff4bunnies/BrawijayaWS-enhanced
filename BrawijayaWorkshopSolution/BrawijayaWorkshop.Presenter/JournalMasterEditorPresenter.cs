@@ -18,9 +18,12 @@ namespace BrawijayaWorkshop.Presenter
         public void InitFormData()
         {
             View.ParentDropdownList = Model.GetAllParentJournal();
-            if(View.SelectedJournalMaster != null)
+            if (View.SelectedJournalMaster != null)
             {
-                View.ParentId = View.SelectedJournalMaster.ParentId;
+                if (View.SelectedJournalMaster.ParentId.HasValue)
+                {
+                    View.ParentId = View.SelectedJournalMaster.ParentId.Value;
+                }
                 View.Code = View.SelectedJournalMaster.Code;
                 View.JournalName = View.SelectedJournalMaster.Name;
             }
@@ -28,7 +31,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void SaveChanges()
         {
-            if(View.SelectedJournalMaster == null)
+            if (View.SelectedJournalMaster == null)
             {
                 View.SelectedJournalMaster = new JournalMaster();
             }
@@ -37,7 +40,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedJournalMaster.Code = View.Code;
             View.SelectedJournalMaster.Name = View.JournalName;
 
-            if(View.SelectedJournalMaster.Id > 0)
+            if (View.SelectedJournalMaster.Id > 0)
             {
                 Model.UpdateJournal(View.SelectedJournalMaster);
             }

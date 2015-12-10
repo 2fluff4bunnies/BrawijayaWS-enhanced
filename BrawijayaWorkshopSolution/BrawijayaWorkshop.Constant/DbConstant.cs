@@ -26,6 +26,8 @@ namespace BrawijayaWorkshop.Constant
 
         public const string REF_SPKCATEGORY = "REF_SPKCATEGORY";
 
+        public const string SET_MINSTOCK = "MINSTOCK";
+
         public enum AccessTypeEnum
         {
             Read = 1,
