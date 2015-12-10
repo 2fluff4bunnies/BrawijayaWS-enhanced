@@ -7,7 +7,7 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public JournalMasterConfiguration()
         {
-            HasRequired(jm => jm.Parent).WithMany().HasForeignKey(jm => jm.ParentId).WillCascadeOnDelete(true);
+            HasKey(jm => jm.Id).HasOptional(jm => jm.Parent).WithMany().HasForeignKey(jm => jm.ParentId).WillCascadeOnDelete(true);
         }
     }
 }

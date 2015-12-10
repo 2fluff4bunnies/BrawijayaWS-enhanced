@@ -17,6 +17,7 @@ namespace BrawijayaWorkshop.Database
         public DbSet<ApplicationModul> ApplicationModuls { get; set; }
         public DbSet<RoleAccess> RoleAccesses { get; set; }
 
+        public DbSet<JournalMaster> JournalMasters { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Purchasing> Purchasings { get; set; }
@@ -42,6 +43,7 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new ReferenceConfiguration());
             modelBuilder.Configurations.Add(new SparepartConfiguration());
             modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
+            modelBuilder.Configurations.Add(new JournalMasterConfiguration());
         }
     }
 }

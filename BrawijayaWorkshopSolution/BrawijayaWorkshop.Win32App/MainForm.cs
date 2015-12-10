@@ -281,6 +281,9 @@ namespace BrawijayaWorkshop.Win32App
             //ShowUserControl(listMechanic);
             PurchasingListControl listSparepart = Bootstrapper.Resolve<PurchasingListControl>();
             ShowUserControl(listSparepart);
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            // todo show config
         }
     }
 }

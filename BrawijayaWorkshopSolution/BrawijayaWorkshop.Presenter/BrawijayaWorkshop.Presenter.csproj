@@ -49,8 +49,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchasingListPresenter.cs" />
     <Compile Include="SparepartDetailListPresenter.cs" />
+    <Compile Include="SPKDetailMechanicListPresenter.cs" />
+    <Compile Include="SPKDetailSparepartListPresenter.cs" />
+    <Compile Include="SPKEditorPresenter.cs" />
+    <Compile Include="SPKListPresenter.cs" />
     <Compile Include="SupplierEditorPresenter.cs" />
     <Compile Include="SupplierListPresenter.cs" />
+    <Compile Include="VehicleDetailEditorPresenter.cs" />
+    <Compile Include="VehicleDetailListPresenter.cs" />
     <Compile Include="VehicleEditorPresenter.cs" />
     <Compile Include="VehicleListPresenter.cs" />
     <Compile Include="SparepartEditorPresenter.cs" />

@@ -236,6 +236,159 @@ namespace BrawijayaWorkshop.Database
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.SaveChanges();
+
+            // references
+            // -- Sparepart Category
+            Reference refSparepartCategory = context.References.Add(new Reference
+            {
+                Code = "REF_SPAREPARTCATEGORY",
+                Name = "Category",
+                Description = "Sparepart Category",
+                Value = "REF_SPAREPARTCATEGORY"
+            });
+
+            // -- Sparepart Unit
+            Reference refSparepartUnit = context.References.Add(new Reference
+            {
+                Code = "REF_SPAREPARTUNIT",
+                Name = "Unit",
+                Description = "Sparepart Unit",
+                Value = "REF_SPAREPARTUNIT"
+            });
+            context.SaveChanges();
+
+            // - Sparepart Category Child
+            context.References.Add(new Reference
+            {
+                Code = "S",
+                Name = "Service",
+                Description = "Service",
+                Value = "S",
+                ParentId = refSparepartCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "R",
+                Name = "Rusak",
+                Description = "Rusak",
+                Value = "R",
+                ParentId = refSparepartCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "TLGS",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "TLGS",
+                ParentId = refSparepartCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "TLGPS",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "TLGPS",
+                ParentId = refSparepartCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "TLGR",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "TLGR",
+                ParentId = refSparepartCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "TLGPR",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "TLGPR",
+                ParentId = refSparepartCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "-",
+                Name = "None",
+                Description = "Uncategorized",
+                Value = "-",
+                ParentId = refSparepartCategory.Id
+            });
+
+            // -- Sparepart Unit Child
+            context.References.Add(new Reference
+            {
+                Code = "BTL",
+                Name = "Botol",
+                Description = "Botol",
+                Value = "BTL",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "PC",
+                Name = "Piece",
+                Description = "Piece",
+                Value = "PC",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "KLG",
+                Name = "Kaleng",
+                Description = "Kaleng",
+                Value = "KLG",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "MTR",
+                Name = "Meter",
+                Description = "Meter",
+                Value = "MTR",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "LTR",
+                Name = "Liter",
+                Description = "Liter",
+                Value = "LTR",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "LBR",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "LBR",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "ST",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "ST",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "KG",
+                Name = "-- Should Be Update",
+                Description = "-- Should Be Update",
+                Value = "KG",
+                ParentId = refSparepartUnit.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "-",
+                Name = "None",
+                Description = "Tidak ada satuan",
+                Value = "-",
+                ParentId = refSparepartUnit.Id
+            });
+            context.SaveChanges();
             
             // todo: insert initial data here
         }

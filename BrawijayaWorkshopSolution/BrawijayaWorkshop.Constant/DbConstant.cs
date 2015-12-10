@@ -19,9 +19,12 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_SERVICE = "M_SERVICE";
         public const string MODUL_APPROVAL = "M_APPROVAL";
         public const string MODUL_MECHANIC = "M_MECHANIC";
+        public const string MODUL_VEHICLEDETAIL = "M_VEHICLEDETAIL";
 
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
+
+        public const string REF_SPKCATEGORY = "REF_SPKCATEGORY";
 
         public enum AccessTypeEnum
         {
@@ -52,7 +55,9 @@ namespace BrawijayaWorkshop.Constant
         {
             Pending = 0,
             Approved = 1,
-            Rejected = -1
+            Rejected = -1,
+            Endorsed = 2
         }
+
     }
 }

@@ -7,7 +7,7 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public ReferenceConfiguration()
         {
-            HasRequired(r => r.Parent).WithMany().HasForeignKey(r => r.ParentId).WillCascadeOnDelete(true);
+            HasKey(r => r.Id).HasOptional(r => r.Parent).WithMany().HasForeignKey(r => r.ParentId).WillCascadeOnDelete(true);
         }
     }
 }
