@@ -5,6 +5,9 @@ namespace BrawijayaWorkshop.View
 {
     public interface IMechanicEditorView : IView
     {
+        string FingerprintIP { get; set; }
+        string FingerpringPort { get; set; }
+
         Mechanic SelectedMechanic { get; set; }
 
         string Code { get; set; }

@@ -392,8 +392,18 @@ namespace BrawijayaWorkshop.Database
 
             context.Settings.Add(new Setting
             {
-                Key = DbConstant.SET_MINSTOCK,
+                Key = DbConstant.SETTING_MINTSTOCK,
                 Value = "50"
+            });
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_FINGERPRINT_IPADDRESS,
+                Value = "192.168.1.201"
+            });
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_FINGERPRINT_PORT,
+                Value = "4370"
             });
             
             // todo: insert initial data here

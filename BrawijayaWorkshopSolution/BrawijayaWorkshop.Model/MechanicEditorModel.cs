@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
@@ -9,24 +10,42 @@ namespace BrawijayaWorkshop.Model
 {
     public class MechanicEditorModel : BaseModel
     {
-        private IMechanicRepository _MechanicRepository;
+        private ISettingRepository _settingRepository;
+        private IMechanicRepository _mechanicRepository;
         private IUnitOfWork _unitOfWork;
 
-        public MechanicEditorModel(IMechanicRepository MechanicRepository, IUnitOfWork unitOfWork)
+        public MechanicEditorModel(IMechanicRepository mechanicRepository,
+            ISettingRepository settingRepository, IUnitOfWork unitOfWork)
         {
-            _MechanicRepository = MechanicRepository;
+            _mechanicRepository = mechanicRepository;
+            _settingRepository = settingRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public void InsertMechanic(Mechanic Mechanic)
+        public int GetLastCode()
         {
-            _MechanicRepository.Add(Mechanic);
+            return _mechanicRepository.GetAll().Max(m => m.Id) + 1;
+        }
+
+        public string GetFingerprintIpAddress()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_IPADDRESS).FirstOrDefault().Value;
+        }
+
+        public string GetFingerprintPort()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
+        }
+
+        public void InsertMechanic(Mechanic mechanic)
+        {
+            _mechanicRepository.Add(mechanic);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateMechanic(Mechanic Mechanic)
+        public void UpdateMechanic(Mechanic mechanic)
         {
-            _MechanicRepository.Update(Mechanic);
+            _mechanicRepository.Update(mechanic);
             _unitOfWork.SaveChanges();
         }
     }

@@ -86,6 +86,10 @@ namespace BrawijayaWorkshop.Win32App
         #region Helper
         private void GenerateRibbonMenu()
         {
+            if(LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN)
+            {
+                btnConfig.Visible = false;
+            }
             if(LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
             {
                 iMaster.Visibility = BarItemVisibility.Never;
@@ -285,7 +289,8 @@ namespace BrawijayaWorkshop.Win32App
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            // todo show config
+            ConfigEditorForm configForm = Bootstrapper.Resolve<ConfigEditorForm>();
+            configForm.ShowDialog(this);
         }
     }
 }

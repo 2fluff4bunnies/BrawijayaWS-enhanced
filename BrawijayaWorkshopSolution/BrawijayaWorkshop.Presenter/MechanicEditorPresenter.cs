@@ -24,6 +24,13 @@ namespace BrawijayaWorkshop.Presenter
                 View.Address = View.SelectedMechanic.Address;
                 View.PhoneNumber = View.SelectedMechanic.PhoneNumber;
             }
+            else
+            {
+                View.FingerprintIP = Model.GetFingerprintIpAddress();
+                View.FingerpringPort = Model.GetFingerprintPort();
+
+                View.Code = Model.GetLastCode().ToString();
+            }
         }
 
         public void SaveChanges()

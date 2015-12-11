@@ -26,7 +26,9 @@ namespace BrawijayaWorkshop.Constant
 
         public const string REF_SPKCATEGORY = "REF_SPKCATEGORY";
 
-        public const string SET_MINSTOCK = "MINSTOCK";
+        public const string SETTING_MINTSTOCK = "S_MINSTOCK";
+        public const string SETTING_FINGERPRINT_IPADDRESS = "S_FINGERPRINT_IPADDRESS";
+        public const string SETTING_FINGERPRINT_PORT = "S_FINGERPRINT_PORT";
 
         public enum AccessTypeEnum
         {
