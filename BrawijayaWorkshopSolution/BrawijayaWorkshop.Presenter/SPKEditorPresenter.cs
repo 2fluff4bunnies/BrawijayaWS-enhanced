@@ -43,8 +43,23 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.DueDate = View.DueDate;
 
 
-            Model.InsertSPK(View.SelectedSPK, LoginInformation.UserId);
+            Model.InsertSPK(View.SelectedSPK, View.MechanicList, View.SparepartList, View.SparepartDetailList, LoginInformation.UserId);
 
+        }
+
+        public List<Sparepart> loadSparepart()
+        {
+           return Model.SearchSparepart(View.SparepartName);
+        }
+
+        public List<Mechanic> loadMechanic()
+        {
+           return Model.SearchMechanic(View.MechanicName);
+        }
+
+        public void populateSparepartDetail( )
+        {
+            Model.getRandomDetails(View.SparepartId, View.SparepartQty);
         }
     }
 }

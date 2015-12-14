@@ -215,6 +215,18 @@
     <Compile Include="ModulForms\SparepartDetailListForm.Designer.cs">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SPKDetailMechanicListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKDetailMechanicListForm.Designer.cs">
+      <DependentUpon>SPKDetailMechanicListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\SPKDetailSparepartListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKDetailSparepartListForm.Designer.cs">
+      <DependentUpon>SPKDetailSparepartListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\SPKEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKDetailMechanicListForm.resx">
+      <DependentUpon>SPKDetailMechanicListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKEditorForm.resx">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
