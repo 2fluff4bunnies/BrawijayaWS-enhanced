@@ -215,6 +215,12 @@
     <Compile Include="ModulForms\SparepartDetailListForm.Designer.cs">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SPKEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKEditorForm.Designer.cs">
+      <DependentUpon>SPKEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\VehicleDetailEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKEditorForm.resx">
+      <DependentUpon>SPKEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>
@@ -432,6 +441,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Images\add_mechanic_16x16.png" />
+    <None Include="Resources\add_item_16x16.png" />
     <None Include="Resources\zoom_icon.png" />
   </ItemGroup>
   <ItemGroup>
