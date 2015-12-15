@@ -46,7 +46,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public new string Brand
+        public string Brand
         {
             get
             {

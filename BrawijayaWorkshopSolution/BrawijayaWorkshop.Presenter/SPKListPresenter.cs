@@ -2,11 +2,6 @@
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -20,12 +15,9 @@ namespace BrawijayaWorkshop.Presenter
             View.CategoryDropdownList = Model.GetSPKCategoryList();
         }
 
-        public void LoadSPKList()
+        public void LoadSPK()
         {
-            DbConstant.ApprovalStatus status = new DbConstant.ApprovalStatus();
-            status.CompareTo(View.StatusFilter);
-
-            View.SPKListData = Model.SearchSPK(View.CodeFilter, status);
+            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CreateDateFilter, View.DueDateFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.StatusFilter);
         }
     }
 }

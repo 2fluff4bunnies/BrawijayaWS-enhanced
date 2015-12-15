@@ -95,6 +95,11 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_VEHICLE,
                 ModulDescription = "Vehicle Modul"
             });
+            ApplicationModul vehicleDetailMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_VEHICLE_DETAIL,
+                ModulDescription = "Vehicle Detail Modul"
+            });
             ApplicationModul sparepartMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_SPAREPART,
@@ -120,6 +125,26 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_APPROVAL,
                 ModulDescription = "Approval Modul"
             });
+            ApplicationModul spkMod = context.ApplicationModuls.Add(new ApplicationModul { 
+                ModulName = DbConstant.MODUL_SPK,
+                ModulDescription = "SPK Modul"
+            });
+            ApplicationModul spkDetailMechanicMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_SPK_DETAIL_MECHANIC,
+                ModulDescription = "SPK Detail Mechanic Modul"
+            });
+            ApplicationModul spkDetailSparepartMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_SPK_DETAIL_SPAREPART,
+                ModulDescription = "SPK Detail Sparepart Modul"
+            });
+            ApplicationModul spkDetailSparepartDetailMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_SPK_DETAIL_SPAREPART_DETAIL,
+                ModulDescription = "SPK Detail Sparepart Detail Modul"
+            });
+
             context.SaveChanges();
 
             // superadmin
@@ -161,6 +186,12 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = vehicleDetailMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = sparepartMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
@@ -180,6 +211,29 @@ namespace BrawijayaWorkshop.Database
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = purchasingMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess { 
+                ApplicationModulId = spkMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkDetailMechanicMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkDetailSparepartMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkDetailSparepartDetailMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });

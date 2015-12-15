@@ -24,6 +24,12 @@ namespace BrawijayaWorkshop.Database
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
         public DbSet<Reference> References { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleDetail> VehicleDetails { get; set; }
+        public DbSet<SPK> SPKs { get; set; }
+        public DbSet<SPKDetailMechanic> SPKDetailMechanics { get; set; }
+        public DbSet<SPKDetailSparepart> SPKDetailSpareparts { get; set; }
+        public DbSet<SPKDetailSparepartDetail> SPKDetailSparepartDetails { get; set; }
 
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
@@ -38,12 +44,17 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new RoleAccessConfiguration());
             modelBuilder.Configurations.Add(new CustomerConfiguration());
             modelBuilder.Configurations.Add(new VehicleConfiguration());
+            modelBuilder.Configurations.Add(new VehicleDetailConfiguration());
             modelBuilder.Configurations.Add(new PurchasingConfiguration());
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
             modelBuilder.Configurations.Add(new ReferenceConfiguration());
             modelBuilder.Configurations.Add(new SparepartConfiguration());
             modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
             modelBuilder.Configurations.Add(new JournalMasterConfiguration());
+            modelBuilder.Configurations.Add(new SPKConfiguration());
+            modelBuilder.Configurations.Add(new SPKDetailMechanicConfiguration());
+            modelBuilder.Configurations.Add(new SPKDetailSparepartConfiguration());
+            modelBuilder.Configurations.Add(new SPKDetailSparepartDetailConfiguration());
         }
     }
 }

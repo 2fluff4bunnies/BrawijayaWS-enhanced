@@ -86,11 +86,11 @@ namespace BrawijayaWorkshop.Win32App
         #region Helper
         private void GenerateRibbonMenu()
         {
-            if(LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN)
+            if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN)
             {
                 btnConfig.Visible = false;
             }
-            if(LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
+            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
             {
                 iMaster.Visibility = BarItemVisibility.Never;
             }
@@ -291,6 +291,15 @@ namespace BrawijayaWorkshop.Win32App
         {
             ConfigEditorForm configForm = Bootstrapper.Resolve<ConfigEditorForm>();
             configForm.ShowDialog(this);
+        }
+
+        private void iSPK_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
+
+            SPKListControl listSPK = Bootstrapper.Resolve<SPKListControl>();
+            ShowUserControl(listSPK);
+
         }
     }
 }

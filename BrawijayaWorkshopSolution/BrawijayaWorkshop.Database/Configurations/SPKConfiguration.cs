@@ -7,11 +7,11 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public SPKConfiguration()
         {
-            HasRequired(sp => sp.CategoryReference).WithMany().HasForeignKey(sp => sp.CategoryReferenceId).WillCascadeOnDelete(true);
-            HasRequired(sp => sp.StatusApproval).WithMany().HasForeignKey(sp => sp.CategoryStatusApprovalId).WillCascadeOnDelete(true);
-            HasRequired(sp => sp.Vehicle).WithMany().HasForeignKey(sp => sp.VehicleId).WillCascadeOnDelete(true);
-            HasRequired(sp => sp.CreateUser).WithMany().HasForeignKey(sp => sp.CreateUserId).WillCascadeOnDelete(true);
-            HasRequired(sp => sp.ModifyUser).WithMany().HasForeignKey(sp => sp.ModifyUserId).WillCascadeOnDelete(true);
+            HasRequired(spk => spk.CategoryReference).WithMany().HasForeignKey(spk => spk.CategoryReferenceId).WillCascadeOnDelete(true);
+            HasRequired(spk => spk.Vehicle).WithMany().HasForeignKey(spk => spk.VehicleId).WillCascadeOnDelete(true);
+            HasRequired(spk => spk.CreateUser).WithMany().HasForeignKey(spk => spk.CreateUserId).WillCascadeOnDelete(true);
+            HasRequired(spk => spk.ModifyUser).WithMany().HasForeignKey(spk => spk.ModifyUserId).WillCascadeOnDelete(true);
+            //HasOptional(spk => spk.SPKParent)..HasForeignKey(spk => spk.SPKparentId).WillCascadeOnDelete(true);
         }
     }
 }
