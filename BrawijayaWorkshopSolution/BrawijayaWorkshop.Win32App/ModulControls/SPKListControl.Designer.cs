@@ -303,7 +303,7 @@
             // colLicenseNumber
             // 
             this.colLicenseNumber.Caption = "Nopol";
-            this.colLicenseNumber.FieldName = "Vehicle.LicenseNumber";
+            this.colLicenseNumber.FieldName = "Vehicle.ActiveLicenseNumber";
             this.colLicenseNumber.Name = "colLicenseNumber";
             this.colLicenseNumber.Visible = true;
             this.colLicenseNumber.VisibleIndex = 3;
@@ -311,7 +311,7 @@
             // colCategory
             // 
             this.colCategory.Caption = "Kategori";
-            this.colCategory.FieldName = "ReferenceCategory.Name";
+            this.colCategory.FieldName = "CategoryReference.Name";
             this.colCategory.Name = "colCategory";
             this.colCategory.Visible = true;
             this.colCategory.VisibleIndex = 4;

@@ -105,6 +105,11 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_SPAREPART,
                 ModulDescription = "Sparepart Modul"
             });
+            ApplicationModul sparepartDetailMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_SPAREPART_DETAIL,
+                ModulDescription = "Sparepart Detail Modul"
+            });
             ApplicationModul supplierMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_SUPPLIER,
@@ -193,6 +198,12 @@ namespace BrawijayaWorkshop.Database
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = sparepartMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartDetailMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });

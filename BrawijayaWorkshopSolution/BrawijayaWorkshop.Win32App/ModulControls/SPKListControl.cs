@@ -35,6 +35,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += SPKListControl_Load;
+
+            //by default active spk will displayed
+            StatusFilter = 1;
         }
 
         protected override string ModulName

@@ -24,6 +24,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
         public DbSet<Reference> References { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
+        public DbSet<Sparepart> Spareparts { get; set; }
+        public DbSet<SparepartDetail> SparepartDetails { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleDetail> VehicleDetails { get; set; }
         public DbSet<SPK> SPKs { get; set; }

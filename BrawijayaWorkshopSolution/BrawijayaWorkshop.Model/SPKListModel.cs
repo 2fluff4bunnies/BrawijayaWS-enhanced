@@ -35,17 +35,37 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPK> SearchSPK(string LicenseNumber, string code, DateTime? createDate, DateTime? dueDate, int category, DbConstant.ApprovalStatus status)
         {
-            VehicleDetail vehicleDetail = _vehicleDetailRepository.GetMany(v => string.Compare(v.LicenseNumber, LicenseNumber, true) == 1 
-                                                                                && v.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.CategoryStatusApprovalId == (int)status).ToList();
 
-            //List<SPK> result = _SPKRepository.GetMany(spk => string.IsNullOrEmpty(code) ? true : string.Compare(spk.Code, code, true) == 0
-            //                                                 && vehicleDetail == null ? true : spk.VehicleId == vehicleDetail.VehicleId
-            //                                                 && createDate == null ? true : spk.CreateDate == createDate
-            //                                                 && dueDate == null ? true : spk.DueDate == dueDate
-            //                                                 && spk.CategoryReferenceId <= 0 ? true : spk.CategoryReferenceId == category
-            //                                                 && spk.Status == (int)status
-            //                                          ).ToList();
-            List<SPK> result = _SPKRepository.GetAll().ToList();
+            if (!string.IsNullOrEmpty(LicenseNumber))
+            {
+                VehicleDetail vehicleDetail = _vehicleDetailRepository.GetMany(v => string.Compare(v.LicenseNumber, LicenseNumber, true) == 1
+                                                                                    && v.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                if (vehicleDetail != null)
+                {
+                    result = result.Where(spk => spk.VehicleId == vehicleDetail.VehicleId).ToList();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(code))
+            {
+                result = result.Where(spk => string.Compare(spk.Code, code, true) == 0).ToList();
+            }
+
+            if (createDate != null)
+            {
+                result = result.Where(spk => spk.CreateDate == createDate).ToList();
+            }
+
+            if (dueDate != null)
+            {
+                result = result.Where(spk => spk.DueDate == dueDate).ToList();
+            }
+
+            if (category > 0)
+            {
+                result = result.Where(spk => spk.CategoryReferenceId == category).ToList();
+            }
 
             return result;
         }

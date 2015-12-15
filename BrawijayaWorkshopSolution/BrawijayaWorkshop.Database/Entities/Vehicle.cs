@@ -17,6 +17,8 @@ namespace BrawijayaWorkshop.Database.Entities
         [MaxLength(100)]
         public string Type { get; set; }
 
+        public string ActiveLicenseNumber { get; set; }
+
         [Required]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
