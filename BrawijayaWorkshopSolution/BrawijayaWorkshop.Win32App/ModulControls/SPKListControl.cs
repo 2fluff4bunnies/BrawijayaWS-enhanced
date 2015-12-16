@@ -240,6 +240,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data SPK selesai", true);
+        }
+
+        private void btnNewSPK_Click(object sender, EventArgs e)
+        {
+            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }       
     }
 }

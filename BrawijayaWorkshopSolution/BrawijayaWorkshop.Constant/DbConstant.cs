@@ -75,5 +75,18 @@ namespace BrawijayaWorkshop.Constant
             Expired = -1
         }
 
+        public enum SPKCategory
+        { 
+            Rusak = 1,
+            Servis = 2,
+            Langsung = 3
+        }
+
+        public enum SPKPrintStatus
+        { 
+            pending = 0,
+            ready = 1,
+            printed = 2
+        }
     }
 }

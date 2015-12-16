@@ -35,7 +35,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPK> SearchSPK(string LicenseNumber, string code, DateTime? createDate, DateTime? dueDate, int category, DbConstant.ApprovalStatus status)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.CategoryStatusApprovalId == (int)status).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.StatusApprovalId == (int)status).ToList();
 
             if (!string.IsNullOrEmpty(LicenseNumber))
             {

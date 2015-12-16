@@ -126,14 +126,14 @@
             this.lookUpMechanic.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpMechanic.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LicenseNumber", "Kendaraan")});
-            this.lookUpMechanic.Properties.DisplayMember = "Value";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Mekanik")});
+            this.lookUpMechanic.Properties.DisplayMember = "Name";
             this.lookUpMechanic.Properties.HideSelection = false;
             this.lookUpMechanic.Properties.NullText = "";
+            this.lookUpMechanic.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpMechanic.Properties.ValueMember = "Id";
             this.lookUpMechanic.Size = new System.Drawing.Size(110, 20);
-            this.lookUpMechanic.TabIndex = 29;
-            this.lookUpMechanic.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lookUpMechanic_KeyUp);
+            this.lookUpMechanic.TabIndex = 6;
             // 
             // lookUpSparepart
             // 
@@ -144,14 +144,14 @@
             this.lookUpSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSparepart.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LicenseNumber", "Kendaraan")});
-            this.lookUpSparepart.Properties.DisplayMember = "Value";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart")});
+            this.lookUpSparepart.Properties.DisplayMember = "Name";
             this.lookUpSparepart.Properties.HideSelection = false;
             this.lookUpSparepart.Properties.NullText = "";
+            this.lookUpSparepart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpSparepart.Properties.ValueMember = "Id";
             this.lookUpSparepart.Size = new System.Drawing.Size(110, 20);
-            this.lookUpSparepart.TabIndex = 28;
-            this.lookUpSparepart.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lookUpSparepart_KeyUp);
+            this.lookUpSparepart.TabIndex = 3;
             // 
             // lblFee
             // 
@@ -167,7 +167,7 @@
             this.txtFee.Name = "txtFee";
             this.txtFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtFee.Size = new System.Drawing.Size(100, 20);
-            this.txtFee.TabIndex = 26;
+            this.txtFee.TabIndex = 7;
             // 
             // lbMechanic
             // 
@@ -191,7 +191,7 @@
             this.txtQty.Name = "txtQty";
             this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtQty.Size = new System.Drawing.Size(100, 20);
-            this.txtQty.TabIndex = 22;
+            this.txtQty.TabIndex = 4;
             // 
             // lblSparepart
             // 
@@ -265,7 +265,7 @@
             this.btnAddMechanic.Location = new System.Drawing.Point(340, 259);
             this.btnAddMechanic.Name = "btnAddMechanic";
             this.btnAddMechanic.Size = new System.Drawing.Size(123, 23);
-            this.btnAddMechanic.TabIndex = 17;
+            this.btnAddMechanic.TabIndex = 8;
             this.btnAddMechanic.Text = "Tambah Mekanik";
             this.btnAddMechanic.Click += new System.EventHandler(this.btnAddMechanic_Click);
             // 
@@ -342,7 +342,7 @@
             this.btnAddSparepart.Location = new System.Drawing.Point(340, 114);
             this.btnAddSparepart.Name = "btnAddSparepart";
             this.btnAddSparepart.Size = new System.Drawing.Size(123, 23);
-            this.btnAddSparepart.TabIndex = 15;
+            this.btnAddSparepart.TabIndex = 5;
             this.btnAddSparepart.Text = "Tambah Sparepart";
             this.btnAddSparepart.Click += new System.EventHandler(this.btnAddSparepart_Click);
             // 
@@ -373,24 +373,27 @@
             this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpDueDate.Size = new System.Drawing.Size(175, 20);
-            this.dtpDueDate.TabIndex = 11;
+            this.dtpDueDate.TabIndex = 2;
             // 
             // LookUpVehicle
             // 
-            this.LookUpVehicle.Location = new System.Drawing.Point(124, 27);
+            this.LookUpVehicle.Location = new System.Drawing.Point(124, 28);
             this.LookUpVehicle.Name = "LookUpVehicle";
             this.LookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.LookUpVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.LookUpVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.LookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LicenseNumber", "Kendaraan")});
-            this.LookUpVehicle.Properties.DisplayMember = "Value";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Customer.CompanyName", "Customer"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Brand", "Merek"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Tipe")});
+            this.LookUpVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
             this.LookUpVehicle.Properties.HideSelection = false;
             this.LookUpVehicle.Properties.NullText = "-- Pilih Kendaraan --";
             this.LookUpVehicle.Properties.ValueMember = "Id";
             this.LookUpVehicle.Size = new System.Drawing.Size(175, 20);
-            this.LookUpVehicle.TabIndex = 10;
+            this.LookUpVehicle.TabIndex = 0;
             // 
             // lookUpCategory
             // 
@@ -401,17 +404,17 @@
             this.lookUpCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Kategori")});
-            this.lookUpCategory.Properties.DisplayMember = "Value";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Kategori")});
+            this.lookUpCategory.Properties.DisplayMember = "Description";
             this.lookUpCategory.Properties.HideSelection = false;
             this.lookUpCategory.Properties.NullText = "-- Pilih Layanan --";
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(175, 20);
-            this.lookUpCategory.TabIndex = 9;
+            this.lookUpCategory.TabIndex = 1;
             // 
             // lblVehicle
             // 
-            this.lblVehicle.Location = new System.Drawing.Point(15, 30);
+            this.lblVehicle.Location = new System.Drawing.Point(15, 31);
             this.lblVehicle.Name = "lblVehicle";
             this.lblVehicle.Size = new System.Drawing.Size(52, 13);
             this.lblVehicle.TabIndex = 2;
@@ -423,13 +426,13 @@
             this.cmsEditDataSparepart,
             this.cmsDeleteDataSparepart});
             this.cmsSparepartEditor.Name = "cmsListEditor";
-            this.cmsSparepartEditor.Size = new System.Drawing.Size(153, 70);
+            this.cmsSparepartEditor.Size = new System.Drawing.Size(136, 48);
             // 
             // cmsEditDataSparepart
             // 
             this.cmsEditDataSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditDataSparepart.Name = "cmsEditDataSparepart";
-            this.cmsEditDataSparepart.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditDataSparepart.Size = new System.Drawing.Size(135, 22);
             this.cmsEditDataSparepart.Text = "Ubah Data";
             this.cmsEditDataSparepart.Click += new System.EventHandler(this.cmsEditDataSparepart_Click);
             // 
@@ -437,7 +440,7 @@
             // 
             this.cmsDeleteDataSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteDataSparepart.Name = "cmsDeleteDataSparepart";
-            this.cmsDeleteDataSparepart.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteDataSparepart.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteDataSparepart.Text = "Hapus Data";
             this.cmsDeleteDataSparepart.Click += new System.EventHandler(this.cmsDeleteDataSparepart_Click);
             // 

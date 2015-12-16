@@ -15,9 +15,12 @@ namespace BrawijayaWorkshop.View
 
         List<Vehicle> VehicleDropdownList { get; set; }
         List<Reference> CategoryDropdownList { get; set; }
-        List<SPKDetailMechanic> MechanicList { get; set; }
-        List<SPKDetailSparepart> SparepartList { get; set; }
+        List<SPKDetailMechanic> SPKMechanicList { get; set; }
+        List<SPKDetailSparepart> SPKSparepartList { get; set; }
         List<SPKDetailSparepartDetail> SparepartDetailList { get; set; }
+
+        List<Sparepart> SparepartLookupList { get; set; }
+        List<Mechanic> MechanicLookupList { get; set; }
 
         string Code { get; set; }
         DateTime DueDate { get; set; }

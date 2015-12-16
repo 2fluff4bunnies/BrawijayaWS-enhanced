@@ -21,13 +21,18 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public virtual Vehicle Vehicle { get; set; }
 
-        public int CategoryStatusApprovalId { get; set; }
+        [Required]
+        public int StatusApprovalId { get; set; }
 
+        [Required]
+        public int StatusPrintId { get; set; }
+
+        [Required]
         public int CategoryReferenceId { get; set; }
 
         public virtual Reference CategoryReference { get; set; }
 
-        public int SPKparentId { get; set; }
+        public int? SPKparentId { get; set; }
 
         public virtual SPK SPKParent { get; set; }
 

@@ -19,13 +19,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
             _presenter = new SPKEditorPresenter(this, model);
 
-            lookUpSparepart.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            lookUpSparepart.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            lookUpMechanic.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            lookUpMechanic.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-
             txtQty.ReadOnly = true;
             txtFee.ReadOnly = true;
+
+            this.Load += SPKEditorForm_Load;
+
+        }
+
+        void SPKEditorForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
         }
 
         #region Field Editor
@@ -58,7 +61,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKDetailMechanic> MechanicList
+        public List<SPKDetailMechanic> SPKMechanicList
         {
             get
             {
@@ -78,7 +81,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKDetailSparepart> SparepartList
+        public List<SPKDetailSparepart> SPKSparepartList
         {
 
             get
@@ -140,10 +143,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public int SparepartId {
+        public int SparepartId
+        {
             get
             {
-                return lookUpSparepart.EditValue.AsInteger();
+                Sparepart selected = lookUpSparepart.GetSelectedDataRow() as Sparepart;
+                if (selected == null) return 0;
+                return selected.Id;
             }
             set
             {
@@ -179,7 +185,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return lookUpMechanic.EditValue.AsInteger();
+                Mechanic selected = lookUpMechanic.GetSelectedDataRow() as Mechanic;
+                if (selected == null) return 0;
+                return selected.Id;
             }
             set
             {
@@ -210,12 +218,36 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtFee.Text = value.ToString();
             }
         }
+
+        public List<Sparepart> SparepartLookupList
+        {
+            get
+            {
+                return lookUpSparepart.Properties.DataSource as List<Sparepart>;
+            }
+            set
+            {
+                lookUpSparepart.Properties.DataSource = value;
+            }
+
+        }
+        public List<Mechanic> MechanicLookupList
+        {
+            get
+            {
+                return lookUpMechanic.Properties.DataSource as List<Mechanic>;
+            }
+            set
+            {
+                lookUpMechanic.Properties.DataSource = value;
+            }
+        }
         #endregion
 
         #region Methods
         protected override void ExecuteSave()
         {
-            if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SparepartList.Count > 0 && MechanicList.Count > 0)
+            if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0 && SPKMechanicList.Count > 0)
             {
                 try
                 {
@@ -233,7 +265,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            SparepartList.Add(new SPKDetailSparepart
+            SPKSparepartList.Add(new SPKDetailSparepart
             {
                 SparepartId = SparepartId,
                 quantity = SparepartQty
@@ -242,7 +274,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddMechanic_Click(object sender, EventArgs e)
         {
-            MechanicList.Add(new SPKDetailMechanic
+            SPKMechanicList.Add(new SPKDetailMechanic
             {
                 MechanicId = MechanicId,
                 Fee = MechanicFee
@@ -250,32 +282,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #endregion
-
-        private void lookUpSparepart_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (lookUpSparepart.SelectionLength > 3)
-            {
-                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                foreach (var item in _presenter.loadSparepart())
-                {
-                    collection.Add(item.Name);
-                }
-                lookUpSparepart.MaskBox.AutoCompleteCustomSource = collection;
-            }
-        }
-
-        private void lookUpMechanic_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (lookUpMechanic.SelectionLength > 3)
-            {
-                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                foreach (var item in _presenter.loadMechanic())
-                {
-                    collection.Add(item.Name);
-                }
-                lookUpMechanic.MaskBox.AutoCompleteCustomSource = collection;
-            }
-        }
 
         private void editDataMechanic_Click(object sender, EventArgs e)
         {
@@ -288,7 +294,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void cmsDeleteDataMechanic_Click(object sender, EventArgs e)
         {
             SPKDetailMechanic mechanicToRemove = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
-            MechanicList.Remove(mechanicToRemove);
+            SPKMechanicList.Remove(mechanicToRemove);
         }
 
         private void cmsEditDataSparepart_Click(object sender, EventArgs e)
@@ -302,7 +308,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
             SPKDetailSparepart SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepart;
-            SparepartList.Remove(SparepartToRemove);
+            SPKSparepartList.Remove(SparepartToRemove);
         }
     }
 }

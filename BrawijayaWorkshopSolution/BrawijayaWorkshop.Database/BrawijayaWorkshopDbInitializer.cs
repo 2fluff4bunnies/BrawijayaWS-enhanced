@@ -320,6 +320,16 @@ namespace BrawijayaWorkshop.Database
                 Description = "Sparepart Unit",
                 Value = "REF_SPAREPARTUNIT"
             });
+
+            // SPK Category
+            Reference refSPKCategory = context.References.Add(new Reference
+            {
+                Code = "REF_SPKCATEGORY",
+                Name = "SPKCategory",
+                Description = "SPK Category",
+                Value = "REF_SPKCATEGORY"
+            });
+
             context.SaveChanges();
 
             // - Sparepart Category Child
@@ -452,6 +462,34 @@ namespace BrawijayaWorkshop.Database
                 Description = "Tidak ada satuan",
                 Value = "-",
                 ParentId = refSparepartUnit.Id
+            });
+
+          
+
+            // SPK Category child
+            context.References.Add(new Reference
+            {
+                Code = "S",
+                Name = "Service",
+                Description = "SPK untuk Service",
+                Value = "S",
+                ParentId = refSPKCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "R",
+                Name = "Rusak",
+                Description = "SPK untuk Rusak",
+                Value = "R",
+                ParentId = refSPKCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "L",
+                Name = "Langsung",
+                Description = "SPK untuk Onderdil Langsung",
+                Value = "L",
+                ParentId = refSPKCategory.Id
             });
             context.SaveChanges();
 

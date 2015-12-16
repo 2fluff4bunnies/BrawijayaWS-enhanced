@@ -138,8 +138,6 @@
             // 
             // txtLicenseNumber
             // 
-            this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLicenseNumber.Location = new System.Drawing.Point(608, 31);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Size = new System.Drawing.Size(141, 20);
@@ -196,8 +194,6 @@
             // 
             // txtCode
             // 
-            this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCode.Location = new System.Drawing.Point(608, 61);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(141, 20);
@@ -213,13 +209,12 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(787, 28);
+            this.btnSearch.Location = new System.Drawing.Point(768, 28);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.Size = new System.Drawing.Size(80, 55);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -242,9 +237,13 @@
             this.btnNewSPK.Size = new System.Drawing.Size(103, 23);
             this.btnNewSPK.TabIndex = 4;
             this.btnNewSPK.Text = "Buat SPK Baru";
+            this.btnNewSPK.Click += new System.EventHandler(this.btnNewSPK_Click);
             // 
             // gcSPK
             // 
+            this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcSPK.Location = new System.Drawing.Point(3, 126);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";

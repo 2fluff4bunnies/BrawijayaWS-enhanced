@@ -20,6 +20,8 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
+            View.MechanicLookupList = Model.LoadMechanic();
+            View.SparepartLookupList = Model.LoadSparepart();
 
             if (View.SelectedSPK != null)
             {
@@ -43,18 +45,8 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.DueDate = View.DueDate;
 
 
-            Model.InsertSPK(View.SelectedSPK, View.MechanicList, View.SparepartList, View.SparepartDetailList, LoginInformation.UserId);
+            Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SparepartDetailList, LoginInformation.UserId);
 
-        }
-
-        public List<Sparepart> loadSparepart()
-        {
-           return Model.SearchSparepart(View.SparepartName);
-        }
-
-        public List<Mechanic> loadMechanic()
-        {
-           return Model.SearchMechanic(View.MechanicName);
         }
 
         public void populateSparepartDetail( )

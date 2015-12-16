@@ -71,25 +71,43 @@ namespace BrawijayaWorkshop.Model
             };
         }
 
-        public void InsertSPK(SPK SPK, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
+        public void InsertSPK(SPK spk, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
             List<SPKDetailSparepartDetail> sparepartDetailList, int userId)
         {
             DateTime serverTime = DateTime.Now;
-#warning Generate code?
-            // SPK.Code = GENERATE CODE HERE?
-            SPK.CreateDate = serverTime;
-            SPK.ModifyDate = serverTime;
-            SPK.ModifyUserId = userId;
-            SPK.CreateUserId = userId;
-            SPK.CategoryStatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
-            SPK.Status = (int)DbConstant.DefaultDataStatus.Active;
-            _SPKRepository.Add(SPK);
+
+            //get total SPK created today
+            List<SPK> todaySPK = _SPKRepository.GetMany(s => string.Compare(s.CreateDate.ToShortDateString(), serverTime.ToShortDateString(), true) == 1).ToList();
+
+            string code = "SPK-";
+
+            switch (spk.CategoryReferenceId)
+            {
+                case 0: code = code + "R";
+                    break;
+                case 1: code = code + "S";
+                    break;
+                case 2: code = code + "L";
+                    break;
+            }
+
+            code = code + "-" + serverTime.Month.ToString("MM") + serverTime.Day.ToString("dd") + "-" + (todaySPK.Count + 1).ToString();
+
+            spk.Code = code;
+            spk.CreateDate = serverTime;
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+            spk.CreateUserId = userId;
+            spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.ready;
+            spk.Status = (int)DbConstant.DefaultDataStatus.Active;
+            SPK insertedSPK = _SPKRepository.Add(spk);
 
             foreach (var item in mechanicList)
             {
                 item.CreateDate = serverTime;
                 item.CreateUserId = userId;
-                item.SPKId = SPK.Id;
+                item.SPKId = insertedSPK.Id;
                 item.Status = (int)DbConstant.DefaultDataStatus.Active;
                 _SPKDetailMechanicRepository.Add(item);
             }
@@ -98,16 +116,16 @@ namespace BrawijayaWorkshop.Model
             {
                 item.CreateDate = serverTime;
                 item.CreateUserId = userId;
-                item.SPKId = SPK.Id;
+                item.SPKId = insertedSPK.Id;
                 item.Status = (int)DbConstant.DefaultDataStatus.Active;
 
-                _SPKDetailSparepartRepository.Add(item);
+                SPKDetailSparepart insertedSPKDetailSparepart = _SPKDetailSparepartRepository.Add(item);
 
                 var detailList = sparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == item.SparepartId);
 
                 foreach (var itemDetail in detailList)
                 {
-                    itemDetail.SPKDetailSparepartId = item.Id;
+                    itemDetail.SPKDetailSparepartId = insertedSPKDetailSparepart.Id;
                     itemDetail.CreateDate = serverTime;
                     itemDetail.CreateUserId = userId;
                     itemDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
@@ -121,10 +139,9 @@ namespace BrawijayaWorkshop.Model
 #warning TODO Insert Approval here
         }
 
-        public List<Sparepart> SearchSparepart(string name)
+        public List<Sparepart> LoadSparepart()
         {
-            List<Sparepart> result = null;
-            result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active && sp.Name.Contains(name)).ToList();
+            List<Sparepart> result =  _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             return result;
         }
@@ -137,12 +154,11 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public List<Mechanic> SearchMechanic(string name)
+        public List<Mechanic> LoadMechanic()
         {
 #warning TODO find mechanic that present
 
-            List<Mechanic> result = _mechanicRepository.GetMany(
-                m => m.Name.Contains(name)).ToList();
+            List<Mechanic> result = _mechanicRepository.GetAll().ToList();
 
             return result;
         }

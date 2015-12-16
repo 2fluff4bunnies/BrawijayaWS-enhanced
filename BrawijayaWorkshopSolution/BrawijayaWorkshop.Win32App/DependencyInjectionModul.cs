@@ -31,6 +31,9 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IJournalMasterRepository>().To<JournalMasterRepository>();
             Bind<IMechanicRepository>().To<MechanicRepository>();
             Bind<ISPKRepository>().To<SPKRepository>();
+            Bind<ISPKDetailMechanicRepository>().To<SPKDetailMechanicRepository>();
+            Bind<ISPKDetailSparepartRepository>().To<SPKDetailSparepartRepository>();
+            Bind<ISPKDetailSparepartDetailRepository>().To<SPKDetailSparepartDetailRepository>();
 
             // todo: add binding
         }
