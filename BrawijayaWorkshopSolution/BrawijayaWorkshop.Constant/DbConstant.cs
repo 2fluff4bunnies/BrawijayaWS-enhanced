@@ -50,7 +50,8 @@ namespace BrawijayaWorkshop.Constant
             Deleted = -1,
             OutPurchase = 2,
             OutService = 3,
-            Broken = 4
+            Broken = 4,
+            NotVerified = 5
         }
 
         public enum ApprovalStatus

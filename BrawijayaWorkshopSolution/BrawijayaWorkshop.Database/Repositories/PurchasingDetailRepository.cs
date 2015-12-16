@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Database.Repositories
 {

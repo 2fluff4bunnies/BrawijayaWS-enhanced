@@ -209,6 +209,12 @@
     <Compile Include="ModulForms\MechanicEditorForm.Designer.cs">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\PurchasingEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\PurchasingEditorForm.Designer.cs">
+      <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\PurchasingEditorForm.resx">
+      <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
@@ -432,6 +441,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <Content Include="Resources\apply_32x32.png" />
+    <Content Include="Resources\app_login.png" />
+    <Content Include="Resources\cancel_32x32.png" />
+    <Content Include="Resources\delete_icon.png" />
+    <Content Include="Resources\edit_icon.png" />
     <None Include="Resources\zoom_icon.png" />
   </ItemGroup>
   <ItemGroup>

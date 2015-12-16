@@ -277,10 +277,10 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iMechanic_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            MechanicListControl listMechanic = Bootstrapper.Resolve<MechanicListControl>();
-            ShowUserControl(listMechanic);
-            //PurchasingListControl listSparepart = Bootstrapper.Resolve<PurchasingListControl>();
-            //ShowUserControl(listSparepart);
+            //MechanicListControl listMechanic = Bootstrapper.Resolve<MechanicListControl>();
+            //ShowUserControl(listMechanic);
+            PurchasingListControl listSparepart = Bootstrapper.Resolve<PurchasingListControl>();
+            ShowUserControl(listSparepart);
         }
 
         private void btnConfig_Click(object sender, EventArgs e)

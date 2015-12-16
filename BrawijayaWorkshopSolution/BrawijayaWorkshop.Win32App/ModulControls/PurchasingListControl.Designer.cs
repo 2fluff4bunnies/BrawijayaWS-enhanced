@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasingListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
@@ -43,17 +45,15 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchasing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchasing)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
@@ -70,6 +70,26 @@
             this.gcFilter.Size = new System.Drawing.Size(632, 64);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(284, 34);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(4, 13);
+            this.labelControl1.TabIndex = 5;
+            this.labelControl1.Text = "-";
+            // 
+            // txtDateFilterTo
+            // 
+            this.txtDateFilterTo.EditValue = null;
+            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
+            this.txtDateFilterTo.Name = "txtDateFilterTo";
+            this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
+            this.txtDateFilterTo.TabIndex = 4;
             // 
             // btnSearch
             // 
@@ -114,6 +134,7 @@
             this.btnNewPurchasing.Size = new System.Drawing.Size(144, 23);
             this.btnNewPurchasing.TabIndex = 3;
             this.btnNewPurchasing.Text = "Buat Penerimaan Baru";
+            this.btnNewPurchasing.Click += new System.EventHandler(this.btnNewPurchasing_Click);
             // 
             // gridPurchasing
             // 
@@ -149,6 +170,8 @@
             this.gvPurchasing.OptionsView.ShowGroupPanel = false;
             this.gvPurchasing.OptionsView.ShowViewCaption = true;
             this.gvPurchasing.ViewCaption = "Daftar Penerimaan";
+            this.gvPurchasing.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvPurchasing_PopupMenuShowing);
+            this.gvPurchasing.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvPurchasing_FocusedRowChanged);
             // 
             // colDatePurchasing
             // 
@@ -192,26 +215,7 @@
             this.cmsEditData.Name = "cmsEditData";
             this.cmsEditData.Size = new System.Drawing.Size(129, 22);
             this.cmsEditData.Text = "Ubah Data";
-            // 
-            // txtDateFilterTo
-            // 
-            this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
-            this.txtDateFilterTo.Name = "txtDateFilterTo";
-            this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
-            this.txtDateFilterTo.TabIndex = 4;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(284, 34);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(4, 13);
-            this.labelControl1.TabIndex = 5;
-            this.labelControl1.Text = "-";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
             // PurchasingListControl
             // 
@@ -225,13 +229,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchasing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchasing)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

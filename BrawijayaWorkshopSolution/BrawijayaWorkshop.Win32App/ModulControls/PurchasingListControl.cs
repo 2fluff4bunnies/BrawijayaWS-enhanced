@@ -146,21 +146,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewPurchasing_Click(object sender, EventArgs e)
         {
-            //PurchasingEditorForm editor = Bootstrapper.Resolve<PurchasingEditorForm>();
-            //editor.ShowDialog(this);
+            PurchasingEditorForm editor = Bootstrapper.Resolve<PurchasingEditorForm>();
+            editor.ShowDialog(this);
 
-            //btnSearch.PerformClick();
+            btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
             if (_selectedPurchasing != null)
             {
-                //PurchasingEditorForm editor = Bootstrapper.Resolve<PurchasingEditorForm>();
-                //editor.SelectedPurchasing = _selectedPurchasing;
-                //editor.ShowDialog(this);
+                PurchasingEditorForm editor = Bootstrapper.Resolve<PurchasingEditorForm>();
+                editor.SelectedPurchasing = _selectedPurchasing;
+                editor.ShowDialog(this);
 
-                //btnSearch.PerformClick();
+                btnSearch.PerformClick();
             }
         }
 
