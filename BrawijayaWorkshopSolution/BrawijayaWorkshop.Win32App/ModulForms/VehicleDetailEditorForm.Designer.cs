@@ -102,6 +102,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLicenseNumber.Location = new System.Drawing.Point(122, 27);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
+            this.txtLicenseNumber.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
+            this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtLicenseNumber.Size = new System.Drawing.Size(175, 20);
             this.txtLicenseNumber.TabIndex = 0;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;

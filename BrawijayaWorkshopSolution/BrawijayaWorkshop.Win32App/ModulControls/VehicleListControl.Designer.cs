@@ -88,6 +88,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilter.Location = new System.Drawing.Point(128, 30);
             this.txtFilter.Name = "txtFilter";
+            this.txtFilter.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
+            this.txtFilter.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtFilter.Size = new System.Drawing.Size(374, 20);
             this.txtFilter.TabIndex = 1;
             // 
@@ -127,7 +129,7 @@
             this.cmsViewHistoryLicenseNumber,
             this.cmsDeleteData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(181, 114);
+            this.cmsEditor.Size = new System.Drawing.Size(181, 92);
             // 
             // cmsEditData
             // 

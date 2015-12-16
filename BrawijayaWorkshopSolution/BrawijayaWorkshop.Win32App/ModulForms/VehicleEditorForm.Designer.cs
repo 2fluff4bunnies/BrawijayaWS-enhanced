@@ -103,7 +103,7 @@
             // 
             this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 144);
+            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 145);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtLicenseNumber.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
@@ -235,7 +235,7 @@
             // 
             this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 147);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 148);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(57, 13);
             this.lblLicenseNumber.TabIndex = 9;

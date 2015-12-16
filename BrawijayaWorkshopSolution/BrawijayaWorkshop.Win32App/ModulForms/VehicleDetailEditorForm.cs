@@ -16,6 +16,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             InitializeComponent();
             _presenter = new VehicleDetailEditorPresenter(this, model);
+
+            FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
         }
 
         public VehicleDetail SelectedVehicleDetail { get; set; }
