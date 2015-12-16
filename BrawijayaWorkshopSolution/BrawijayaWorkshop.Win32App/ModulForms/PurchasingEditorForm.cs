@@ -123,7 +123,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                //return gridPurchasingDetail.DataSource as List<PurchasingDetail>;
+                //return gridPurchasingDetail.DataSource as List<PurchasingDetail>; not used
                 return bsDetails.DataSource as List<PurchasingDetail>;
             }
             set
