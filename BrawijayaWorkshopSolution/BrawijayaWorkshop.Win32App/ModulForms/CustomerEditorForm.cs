@@ -112,7 +112,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
         #endregion
 
-        public List<City> ListCity { get; set; }
+        public List<City> ListCity
+        {
+            get
+            {
+                return cbCity.Properties.DataSource as List<City>;
+            }
+            set
+            {
+                cbCity.Properties.DataSource = value;
+            }
+        }
 
         protected override void ExecuteSave()
         {

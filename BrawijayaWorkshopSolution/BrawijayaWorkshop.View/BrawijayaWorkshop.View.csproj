@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConfigEditorView.cs" />
     <Compile Include="ICustomerEditorView.cs" />
     <Compile Include="ICustomerListView.cs" />
     <Compile Include="IJournalMasterEditorView.cs" />

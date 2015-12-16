@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcMechanicInfo = new DevExpress.XtraEditors.GroupControl();
+            this.btnEnroll = new DevExpress.XtraEditors.SimpleButton();
             this.lblMechanicCode = new DevExpress.XtraEditors.LabelControl();
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
             this.txtPhoneNumber = new DevExpress.XtraEditors.TextEdit();
@@ -47,7 +48,8 @@
             this.valAddress = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valPhone = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valCode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.btnEnroll = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwFingerprintConnection = new System.ComponentModel.BackgroundWorker();
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanicInfo)).BeginInit();
             this.gcMechanicInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
@@ -78,6 +80,15 @@
             this.gcMechanicInfo.TabIndex = 1;
             this.gcMechanicInfo.Text = "Informasi Mechanic";
             // 
+            // btnEnroll
+            // 
+            this.btnEnroll.Location = new System.Drawing.Point(11, 63);
+            this.btnEnroll.Name = "btnEnroll";
+            this.btnEnroll.Size = new System.Drawing.Size(362, 23);
+            this.btnEnroll.TabIndex = 14;
+            this.btnEnroll.Text = "Daftarkan Kode Pada Fingerprint";
+            this.btnEnroll.Click += new System.EventHandler(this.btnEnroll_Click);
+            // 
             // lblMechanicCode
             // 
             this.lblMechanicCode.Location = new System.Drawing.Point(11, 35);
@@ -91,15 +102,16 @@
             this.txtCode.Location = new System.Drawing.Point(127, 32);
             this.txtCode.Name = "txtCode";
             this.txtCode.Properties.Mask.EditMask = "[0-9]*";
-            this.txtCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Regular;
+            this.txtCode.Properties.Mask.SaveLiteral = false;
             this.txtCode.Size = new System.Drawing.Size(162, 20);
             this.txtCode.TabIndex = 12;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Code harus diisi!";
-            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule1);
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule2);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "Code harus diisi!";
+            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule6);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule7.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule7);
             // 
             // txtPhoneNumber
             // 
@@ -109,9 +121,9 @@
             this.txtPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPhoneNumber.Size = new System.Drawing.Size(162, 20);
             this.txtPhoneNumber.TabIndex = 11;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule1);
             // 
             // lblPhoneNumber
             // 
@@ -127,9 +139,9 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(247, 20);
             this.txtAddress.TabIndex = 5;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Alamat harus diisi!";
-            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule4);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Alamat harus diisi!";
+            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule2);
             // 
             // lblAddress
             // 
@@ -145,9 +157,9 @@
             this.txtMechanicName.Name = "txtMechanicName";
             this.txtMechanicName.Size = new System.Drawing.Size(247, 20);
             this.txtMechanicName.TabIndex = 3;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "Nama Mechanic harus diisi!";
-            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule5);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Nama Mechanic harus diisi!";
+            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule3);
             // 
             // lblMechanicName
             // 
@@ -173,13 +185,15 @@
             // 
             this.valCode.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // btnEnroll
+            // bgwFingerprintConnection
             // 
-            this.btnEnroll.Location = new System.Drawing.Point(11, 63);
-            this.btnEnroll.Name = "btnEnroll";
-            this.btnEnroll.Size = new System.Drawing.Size(362, 23);
-            this.btnEnroll.TabIndex = 14;
-            this.btnEnroll.Text = "Daftarkan Kode Pada Fingerprint";
+            this.bgwFingerprintConnection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerprintConnection_DoWork);
+            this.bgwFingerprintConnection.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerprintConnection_RunWorkerCompleted);
+            // 
+            // bgwSave
+            // 
+            this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
+            this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
             // MechanicEditorForm
             // 
@@ -223,5 +237,7 @@
         private DevExpress.XtraEditors.LabelControl lblMechanicCode;
         private DevExpress.XtraEditors.TextEdit txtCode;
         private DevExpress.XtraEditors.SimpleButton btnEnroll;
+        private System.ComponentModel.BackgroundWorker bgwFingerprintConnection;
+        private System.ComponentModel.BackgroundWorker bgwSave;
     }
 }

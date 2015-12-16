@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using System.Collections.Generic;
+using System;
 
 namespace BrawijayaWorkshop.View
 {
@@ -11,6 +12,12 @@ namespace BrawijayaWorkshop.View
         string Brand { get; set; }
 
         string Type { get; set; }
+
+        int YearOfPurchase { get; set; }
+
+        string ActiveLicenseNumber { get; set; }
+
+        DateTime ExpirationDate { get; set; }
 
         int CustomerId { get; set; }
 

@@ -105,7 +105,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Customer's changes");
+                    MethodBase.GetCurrentMethod().Info("Save Sparepart's changes");
                     _presenter.SaveChanges();
                     this.Close();
                 }

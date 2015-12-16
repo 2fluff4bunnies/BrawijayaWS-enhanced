@@ -17,11 +17,20 @@ namespace BrawijayaWorkshop.View
         List<Reference> CategoryDropdownList { get; set; }
         List<SPKDetailMechanic> MechanicList { get; set; }
         List<SPKDetailSparepart> SparepartList { get; set; }
+        List<SPKDetailSparepartDetail> SparepartDetailList { get; set; }
 
         string Code { get; set; }
         DateTime DueDate { get; set; }
         int VehicleId { get; set; }
         int CategoryId { get; set; }
+
+        int SparepartId { get; set; }
+        string SparepartName { get; set; }
+        int SparepartQty { get; set; }
+
+        int MechanicId { get; set; }
+        string MechanicName { get; set; }
+        decimal MechanicFee { get; set; }
 
     }
 }

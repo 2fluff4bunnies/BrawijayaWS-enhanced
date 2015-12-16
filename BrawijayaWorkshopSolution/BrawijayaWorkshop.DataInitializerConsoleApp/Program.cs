@@ -15,7 +15,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
         static void Main(string[] args)
         {
             string dirPath = "D:/Documents/Bengkel App/";
-            string accFile = "Account Jurnal.xls";
+            string accFile = "Account Jurnal.xlsx";
             string invFile = "Inv.xlsx";
 
             try
@@ -127,10 +127,29 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         cmd.ExecuteNonQuery();
                         conn.Clone();
                     }
+
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = "DELETE FROM temp_inv";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
                 }
 
                 if (resultAcc != null)
                 {
+                    foreach (DataRow row in resultAcc.Rows)
+                    {
+                        row["Kode"] = row["Kode"].ToString().Trim();
+                        if(string.IsNullOrEmpty(row["Induk"].ToString()))
+                        {
+                            row["Induk"] = DBNull.Value;
+                        }
+                    }
+
                     // convert to csv
                     resultAcc.ExportDataTableToCsv(dirPath + "acc.csv");
 
@@ -157,13 +176,24 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         MySqlCommand cmd = conn.CreateCommand();
                         cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`)
                                             SELECT Kode, Nama,
-                                            (SELECT a.`Id` FROM journalmasters a WHERE `Code`=Induk)
-                                            FROM temp_acc";
+                                            (SELECT a.`Id` FROM journalmasters a WHERE a.`Code`=x.`Induk`)
+                                            FROM temp_acc x";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Clone();
                     }
+
+                    //// generate main account data
+                    //using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    //{
+                    //    MySqlCommand cmd = conn.CreateCommand();
+                    //    cmd.CommandText = @"UPDATE journalmasters SET ParentId=(SELECT Id FROM journalmasters WHERE Code=";
+                    //    cmd.CommandType = CommandType.Text;
+                    //    conn.Open();
+                    //    cmd.ExecuteNonQuery();
+                    //    conn.Clone();
+                    //}
                 }
             }
             catch (Exception ex)

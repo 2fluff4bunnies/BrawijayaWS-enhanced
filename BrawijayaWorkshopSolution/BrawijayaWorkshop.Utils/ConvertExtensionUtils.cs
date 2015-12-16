@@ -61,6 +61,20 @@ namespace BrawijayaWorkshop.Utils
                     " into Double", ex);
             }
         }
+
+        public static decimal AsDecimal(this object sender)
+        {
+            try
+            {
+                return Convert.ToDecimal(sender);
+            }
+            catch (Exception ex)
+            {
+                throw new ConvertExtentionUtilsException("An error occured while trying to convert: " + sender +
+                   " into Decimal", ex);
+                throw;
+            }
+        }
     }
 
     public class ConvertExtentionUtilsException : Exception

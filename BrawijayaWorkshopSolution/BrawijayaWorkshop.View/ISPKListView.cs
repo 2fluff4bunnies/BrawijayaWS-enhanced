@@ -8,16 +8,32 @@ using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.View
 {
-   public interface ISPKListView : IView
+    public interface ISPKListView : IView
     {
         int StatusFilter { get; set; }
 
         string CodeFilter { get; set; }
+
+        DateTime? CreateDateFilter { get; set; }
+
+        DateTime? DueDateFilter { get; set; }
+
+        int CategoryFilter { get; set; }
+
+        string LicenseNumberFilter { get; set; }
 
         List<Reference> CategoryDropdownList { get; set; }
 
         List<SPK> SPKListData { get; set; }
 
         SPK SelectedSPK { get; set; }
+
+        List<SPKStatusItem> StatusDropdownList { get; set; }
+    }
+
+    public class SPKStatusItem
+    {
+        public int Status { get; set; }
+        public string Description { get; set; }
     }
 }

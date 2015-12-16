@@ -27,8 +27,10 @@ namespace BrawijayaWorkshop.Win32App
             Bind<ISparepartDetailRepository>().To<SparepartDetailRepository>();
             Bind<ISupplierRepository>().To<SupplierRepository>();
             Bind<IVehicleRepository>().To<VehicleRepository>();
+            Bind<IVehicleDetailRepository>().To<VehicleDetailRepository>();
             Bind<IJournalMasterRepository>().To<JournalMasterRepository>();
             Bind<IMechanicRepository>().To<MechanicRepository>();
+            Bind<ISPKRepository>().To<SPKRepository>();
 
             // todo: add binding
         }

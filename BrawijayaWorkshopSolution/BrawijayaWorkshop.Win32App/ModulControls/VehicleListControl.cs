@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -14,10 +15,18 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    public partial class VehicleListControl : BaseAppUserControl , IVehicleListView
+    public partial class VehicleListControl : BaseAppUserControl, IVehicleListView
     {
         private VehicleListPresenter _presenter;
-        private Vehicle _selectedvehicle;
+        private Vehicle _selectedVehicle;
+
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_VEHICLE;
+            }
+        }
 
         public VehicleListControl(VehicleListModel model)
         {
@@ -30,9 +39,63 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewVehicle.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
+            cmsUpdateLicenseNumber.Enabled = AllowEdit;
+            cmsViewHistoryLicenseNumber.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += VehicleListControl_Load;
+        }
+
+        #region Filter Fields
+
+        public string ActiveLicenseNumberFilter
+        {
+            get
+            {
+                return txtFilter.Text;
+            }
+            set
+            {
+                txtFilter.Text = value;
+            }
+        }
+
+        public List<Vehicle> VehicleListData
+        {
+            get
+            {
+                return gcVehicle.DataSource as List<Vehicle>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gcVehicle.DataSource = value; gvVehicle.BestFitColumns(); }));
+                }
+                else
+                {
+                    gcVehicle.DataSource = value;
+                    gvVehicle.BestFitColumns();
+                }
+            }
+        }
+
+        public Vehicle SelectedVehicle
+        {
+            get
+            {
+                return _selectedVehicle;
+            }
+            set
+            {
+                _selectedVehicle = value;
+            }
+        } 
+        #endregion
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
         }
 
         private void VehicleListControl_Load(object sender, EventArgs e)
@@ -42,7 +105,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvvehicle_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.Selectedvehicle = gvVehicle.GetFocusedRow() as Vehicle;
+            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
         }
 
         private void gvvehicle_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -56,62 +119,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public string CompanyNameFilter
-        {
-            get
-            {
-                return txtFilterLicenseId.Text;
-            }
-            set
-            {
-                txtFilterLicenseId.Text = value;
-            }
-        }
-
-        public List<Vehicle> vehicleListData
-        {
-            get
-            {
-                return gridVehicle.DataSource as List<Vehicle>;
-            }
-            set
-            {
-                if(InvokeRequired)
-                {
-                    this.Invoke(new MethodInvoker(delegate { gridVehicle.DataSource = value; gvVehicle.BestFitColumns(); }));
-                }
-                else
-                {
-                    gridVehicle.DataSource = value;
-                    gvVehicle.BestFitColumns();
-                }
-            }
-        }
-
-        public Vehicle Selectedvehicle
-        {
-            get
-            {
-                return _selectedvehicle;
-            }
-            set
-            {
-                _selectedvehicle = value;
-            }
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            RefreshDataView();
-        }
-
         public override void RefreshDataView()
         {
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing vehicle data...");
-                _selectedvehicle = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data vehicle...", false);
+                _selectedVehicle = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
@@ -124,7 +138,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void btnNewvehicle_Click(object sender, EventArgs e)
+        private void btnNewVehicle_Click(object sender, EventArgs e)
         {
             VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
             editor.ShowDialog(this);
@@ -134,10 +148,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
-            if (_selectedvehicle != null)
+            if (_selectedVehicle != null)
             {
                 VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
-                editor.SelectedVehicle = _selectedvehicle;
+                editor.SelectedVehicle = this.SelectedVehicle;
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
@@ -146,13 +160,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsDeleteData_Click(object sender, EventArgs e)
         {
-            if (Selectedvehicle == null) return;
+            if (SelectedVehicle == null) return;
 
-            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus vehicle: '" + Selectedvehicle.Brand + "'?") == DialogResult.Yes)
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus kendaraan dengan nomor polisi : '" + SelectedVehicle.ActiveLicenseNumber + "'?") == DialogResult.Yes)
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Mengapus vehicle: " + Selectedvehicle.Brand);
+                    MethodBase.GetCurrentMethod().Info("Mengapus kendaraan dengan nomor polisi : " + SelectedVehicle.ActiveLicenseNumber);
 
                     _presenter.DeleteVehicle();
 
@@ -160,8 +174,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 }
                 catch (Exception ex)
                 {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete vehicle: '" + Selectedvehicle.Brand + "'", ex);
-                    this.ShowError("Proses hapus data vehicle: '" + Selectedvehicle.Brand + "' gagal!");
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete vehicle with license number: '" + SelectedVehicle.ActiveLicenseNumber + "'", ex);
+                    this.ShowError("Proses hapus data vehicle dengan nomor polisi : '" + SelectedVehicle.ActiveLicenseNumber + "' gagal!");
                 }
             }
         }
@@ -186,43 +200,29 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data vehicle selesai", true);
+            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan selesai", true);
+            
         }
 
-        public Vehicle SelectedVehicle
+        private void cmsUpdateLicenseNumber_Click(object sender, EventArgs e)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            VehicleDetailEditorForm editor = Bootstrapper.Resolve<VehicleDetailEditorForm>();
+            editor.SelectedVehicle = this.SelectedVehicle;
+            editor.ShowDialog(this);
+            
+            btnSearch.PerformClick();
         }
 
-        public string LicenseIdFilter
+        private void cmsViewHistoryLicenseNumber_Click(object sender, EventArgs e)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            VehicleDetailListForm editor = Bootstrapper.Resolve<VehicleDetailListForm>();
+            editor.SelectedVehicle = this.SelectedVehicle;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }
 
-        public List<Vehicle> VehicleListData
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+     
     }
 }

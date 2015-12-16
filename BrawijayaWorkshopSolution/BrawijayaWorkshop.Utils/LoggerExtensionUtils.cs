@@ -122,15 +122,22 @@ namespace BrawijayaWorkshop.Utils
         {
             if (_isSendErrorToDeveloper)
             {
-                string emailSubject = _errorEmailSubject;
-                if(isFatal)
+                try
                 {
-                    emailSubject = _fatalErrorEmailSubject;
+                    string emailSubject = _errorEmailSubject;
+                    if (isFatal)
+                    {
+                        emailSubject = _fatalErrorEmailSubject;
+                    }
+                    string body = EmailTemplates.ErrorNotification.Replace(SimpleEmailConstants.MAIL_TEMPLATE_APPNAME, _appName)
+                        .Replace(SimpleEmailConstants.MAIL_TEMPLATE_ERRORCONTENT, GenerateErrorMessage(errorMessage, exception));
+                    SimpleEmailSenderUtils.SendEmail(emailSubject, body,
+                        DeveloperEmail, FromEmail, string.Empty, string.Empty, string.Empty);
                 }
-                string body = EmailTemplates.ErrorNotification.Replace(SimpleEmailConstants.MAIL_TEMPLATE_APPNAME, _appName)
-                    .Replace(SimpleEmailConstants.MAIL_TEMPLATE_ERRORCONTENT, GenerateErrorMessage(errorMessage, exception));
-                SimpleEmailSenderUtils.SendEmail(emailSubject, body,
-                    DeveloperEmail, FromEmail, string.Empty, string.Empty, string.Empty);
+                catch (Exception ex)
+                {
+                    _log.Warn("Unable to send error email to developer.", ex);
+                }
             }
         }
     }

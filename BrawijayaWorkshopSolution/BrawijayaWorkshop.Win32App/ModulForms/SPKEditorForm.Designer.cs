@@ -1,0 +1,542 @@
+﻿namespace BrawijayaWorkshop.Win32App.ModulForms
+{
+    partial class SPKEditorForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKEditorForm));
+            this.gcSPK = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpMechanic = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpSparepart = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblFee = new DevExpress.XtraEditors.LabelControl();
+            this.txtFee = new DevExpress.XtraEditors.TextEdit();
+            this.lbMechanic = new DevExpress.XtraEditors.LabelControl();
+            this.lblQty = new DevExpress.XtraEditors.LabelControl();
+            this.txtQty = new DevExpress.XtraEditors.TextEdit();
+            this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
+            this.gridMechanic = new DevExpress.XtraGrid.GridControl();
+            this.gvMechanic = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMechanicMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFee = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnAddMechanic = new DevExpress.XtraEditors.SimpleButton();
+            this.gridSparepart = new DevExpress.XtraGrid.GridControl();
+            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepartCategory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
+            this.lblCategory = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
+            this.LookUpVehicle = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpCategory = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
+            this.valVehicle = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valCategory = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valDueDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.cmsSparepartEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsMechanicEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
+            this.gcSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMechanic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
+            this.cmsSparepartEditor.SuspendLayout();
+            this.cmsMechanicEditor.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // gcSPK
+            // 
+            this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSPK.Controls.Add(this.lookUpMechanic);
+            this.gcSPK.Controls.Add(this.lookUpSparepart);
+            this.gcSPK.Controls.Add(this.lblFee);
+            this.gcSPK.Controls.Add(this.txtFee);
+            this.gcSPK.Controls.Add(this.lbMechanic);
+            this.gcSPK.Controls.Add(this.lblQty);
+            this.gcSPK.Controls.Add(this.txtQty);
+            this.gcSPK.Controls.Add(this.lblSparepart);
+            this.gcSPK.Controls.Add(this.gridMechanic);
+            this.gcSPK.Controls.Add(this.btnAddMechanic);
+            this.gcSPK.Controls.Add(this.gridSparepart);
+            this.gcSPK.Controls.Add(this.btnAddSparepart);
+            this.gcSPK.Controls.Add(this.lblCategory);
+            this.gcSPK.Controls.Add(this.labelControl1);
+            this.gcSPK.Controls.Add(this.dtpDueDate);
+            this.gcSPK.Controls.Add(this.LookUpVehicle);
+            this.gcSPK.Controls.Add(this.lookUpCategory);
+            this.gcSPK.Controls.Add(this.lblVehicle);
+            this.gcSPK.Location = new System.Drawing.Point(-3, -1);
+            this.gcSPK.Name = "gcSPK";
+            this.gcSPK.Size = new System.Drawing.Size(477, 391);
+            this.gcSPK.TabIndex = 0;
+            this.gcSPK.Text = "Informasi SPK";
+            // 
+            // lookUpMechanic
+            // 
+            this.lookUpMechanic.Location = new System.Drawing.Point(69, 260);
+            this.lookUpMechanic.Name = "lookUpMechanic";
+            this.lookUpMechanic.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.lookUpMechanic.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpMechanic.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpMechanic.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LicenseNumber", "Kendaraan")});
+            this.lookUpMechanic.Properties.DisplayMember = "Value";
+            this.lookUpMechanic.Properties.HideSelection = false;
+            this.lookUpMechanic.Properties.NullText = "";
+            this.lookUpMechanic.Properties.ValueMember = "Id";
+            this.lookUpMechanic.Size = new System.Drawing.Size(110, 20);
+            this.lookUpMechanic.TabIndex = 29;
+            this.lookUpMechanic.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lookUpMechanic_KeyUp);
+            // 
+            // lookUpSparepart
+            // 
+            this.lookUpSparepart.Location = new System.Drawing.Point(69, 115);
+            this.lookUpSparepart.Name = "lookUpSparepart";
+            this.lookUpSparepart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.lookUpSparepart.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpSparepart.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LicenseNumber", "Kendaraan")});
+            this.lookUpSparepart.Properties.DisplayMember = "Value";
+            this.lookUpSparepart.Properties.HideSelection = false;
+            this.lookUpSparepart.Properties.NullText = "";
+            this.lookUpSparepart.Properties.ValueMember = "Id";
+            this.lookUpSparepart.Size = new System.Drawing.Size(110, 20);
+            this.lookUpSparepart.TabIndex = 28;
+            this.lookUpSparepart.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lookUpSparepart_KeyUp);
+            // 
+            // lblFee
+            // 
+            this.lblFee.Location = new System.Drawing.Point(185, 263);
+            this.lblFee.Name = "lblFee";
+            this.lblFee.Size = new System.Drawing.Size(36, 13);
+            this.lblFee.TabIndex = 27;
+            this.lblFee.Text = "Ongkos";
+            // 
+            // txtFee
+            // 
+            this.txtFee.Location = new System.Drawing.Point(224, 260);
+            this.txtFee.Name = "txtFee";
+            this.txtFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtFee.Size = new System.Drawing.Size(100, 20);
+            this.txtFee.TabIndex = 26;
+            // 
+            // lbMechanic
+            // 
+            this.lbMechanic.Location = new System.Drawing.Point(15, 263);
+            this.lbMechanic.Name = "lbMechanic";
+            this.lbMechanic.Size = new System.Drawing.Size(38, 13);
+            this.lbMechanic.TabIndex = 25;
+            this.lbMechanic.Text = "Mekanik";
+            // 
+            // lblQty
+            // 
+            this.lblQty.Location = new System.Drawing.Point(185, 118);
+            this.lblQty.Name = "lblQty";
+            this.lblQty.Size = new System.Drawing.Size(33, 13);
+            this.lblQty.TabIndex = 23;
+            this.lblQty.Text = "Jumlah";
+            // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(224, 115);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtQty.Size = new System.Drawing.Size(100, 20);
+            this.txtQty.TabIndex = 22;
+            // 
+            // lblSparepart
+            // 
+            this.lblSparepart.Location = new System.Drawing.Point(15, 118);
+            this.lblSparepart.Name = "lblSparepart";
+            this.lblSparepart.Size = new System.Drawing.Size(48, 13);
+            this.lblSparepart.TabIndex = 21;
+            this.lblSparepart.Text = "Sparepart";
+            // 
+            // gridMechanic
+            // 
+            this.gridMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridMechanic.Location = new System.Drawing.Point(15, 288);
+            this.gridMechanic.MainView = this.gvMechanic;
+            this.gridMechanic.Name = "gridMechanic";
+            this.gridMechanic.Size = new System.Drawing.Size(448, 96);
+            this.gridMechanic.TabIndex = 18;
+            this.gridMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvMechanic});
+            // 
+            // gvMechanic
+            // 
+            this.gvMechanic.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMechanicMechanic,
+            this.gridColumnCode,
+            this.colFee});
+            this.gvMechanic.GridControl = this.gridMechanic;
+            this.gvMechanic.Name = "gvMechanic";
+            this.gvMechanic.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvMechanic.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvMechanic.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvMechanic.OptionsBehavior.Editable = false;
+            this.gvMechanic.OptionsBehavior.ReadOnly = true;
+            this.gvMechanic.OptionsCustomization.AllowColumnMoving = false;
+            this.gvMechanic.OptionsCustomization.AllowFilter = false;
+            this.gvMechanic.OptionsCustomization.AllowGroup = false;
+            this.gvMechanic.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvMechanic.OptionsView.ShowGroupPanel = false;
+            this.gvMechanic.OptionsView.ShowViewCaption = true;
+            this.gvMechanic.ViewCaption = "Mekanik Terlibat";
+            // 
+            // colMechanicMechanic
+            // 
+            this.colMechanicMechanic.Caption = "Nama Mechanic";
+            this.colMechanicMechanic.FieldName = "Name";
+            this.colMechanicMechanic.Name = "colMechanicMechanic";
+            this.colMechanicMechanic.Visible = true;
+            this.colMechanicMechanic.VisibleIndex = 1;
+            // 
+            // gridColumnCode
+            // 
+            this.gridColumnCode.Caption = "Kode";
+            this.gridColumnCode.FieldName = "Code";
+            this.gridColumnCode.Name = "gridColumnCode";
+            this.gridColumnCode.Visible = true;
+            this.gridColumnCode.VisibleIndex = 0;
+            // 
+            // colFee
+            // 
+            this.colFee.Caption = "Ongkos";
+            this.colFee.Name = "colFee";
+            this.colFee.Visible = true;
+            this.colFee.VisibleIndex = 2;
+            // 
+            // btnAddMechanic
+            // 
+            this.btnAddMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
+            this.btnAddMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAddMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAddMechanic.Location = new System.Drawing.Point(340, 259);
+            this.btnAddMechanic.Name = "btnAddMechanic";
+            this.btnAddMechanic.Size = new System.Drawing.Size(123, 23);
+            this.btnAddMechanic.TabIndex = 17;
+            this.btnAddMechanic.Text = "Tambah Mekanik";
+            this.btnAddMechanic.Click += new System.EventHandler(this.btnAddMechanic_Click);
+            // 
+            // gridSparepart
+            // 
+            this.gridSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridSparepart.Location = new System.Drawing.Point(15, 141);
+            this.gridSparepart.MainView = this.gvSparepart;
+            this.gridSparepart.Name = "gridSparepart";
+            this.gridSparepart.Size = new System.Drawing.Size(448, 98);
+            this.gridSparepart.TabIndex = 16;
+            this.gridSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvSparepart});
+            // 
+            // gvSparepart
+            // 
+            this.gvSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colSparepartCode,
+            this.colSparepartName,
+            this.colSparepartCategory,
+            this.colPrice});
+            this.gvSparepart.GridControl = this.gridSparepart;
+            this.gvSparepart.Name = "gvSparepart";
+            this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSparepart.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvSparepart.OptionsBehavior.Editable = false;
+            this.gvSparepart.OptionsBehavior.ReadOnly = true;
+            this.gvSparepart.OptionsCustomization.AllowColumnMoving = false;
+            this.gvSparepart.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvSparepart.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvSparepart.OptionsView.ShowGroupPanel = false;
+            this.gvSparepart.OptionsView.ShowViewCaption = true;
+            this.gvSparepart.ViewCaption = "Penggunaan Sparepart";
+            // 
+            // colSparepartCode
+            // 
+            this.colSparepartCode.Caption = "Kode";
+            this.colSparepartCode.FieldName = "Code";
+            this.colSparepartCode.Name = "colSparepartCode";
+            this.colSparepartCode.Visible = true;
+            this.colSparepartCode.VisibleIndex = 1;
+            // 
+            // colSparepartName
+            // 
+            this.colSparepartName.Caption = "Nama";
+            this.colSparepartName.FieldName = "Name";
+            this.colSparepartName.Name = "colSparepartName";
+            this.colSparepartName.Visible = true;
+            this.colSparepartName.VisibleIndex = 2;
+            // 
+            // colSparepartCategory
+            // 
+            this.colSparepartCategory.Caption = "Kategori";
+            this.colSparepartCategory.FieldName = "CategoryReference.Value";
+            this.colSparepartCategory.Name = "colSparepartCategory";
+            this.colSparepartCategory.Visible = true;
+            this.colSparepartCategory.VisibleIndex = 0;
+            // 
+            // colPrice
+            // 
+            this.colPrice.Caption = "Harga";
+            this.colPrice.FieldName = "SparePartDetail.Price";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.Visible = true;
+            this.colPrice.VisibleIndex = 3;
+            // 
+            // btnAddSparepart
+            // 
+            this.btnAddSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.btnAddSparepart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAddSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAddSparepart.Location = new System.Drawing.Point(340, 114);
+            this.btnAddSparepart.Name = "btnAddSparepart";
+            this.btnAddSparepart.Size = new System.Drawing.Size(123, 23);
+            this.btnAddSparepart.TabIndex = 15;
+            this.btnAddSparepart.Text = "Tambah Sparepart";
+            this.btnAddSparepart.Click += new System.EventHandler(this.btnAddSparepart_Click);
+            // 
+            // lblCategory
+            // 
+            this.lblCategory.Location = new System.Drawing.Point(15, 58);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(65, 13);
+            this.lblCategory.TabIndex = 13;
+            this.lblCategory.Text = "Jenis layanan";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(15, 84);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(59, 13);
+            this.labelControl1.TabIndex = 12;
+            this.labelControl1.Text = "Batas waktu";
+            // 
+            // dtpDueDate
+            // 
+            this.dtpDueDate.EditValue = null;
+            this.dtpDueDate.Location = new System.Drawing.Point(124, 81);
+            this.dtpDueDate.Name = "dtpDueDate";
+            this.dtpDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dtpDueDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpDueDate.Size = new System.Drawing.Size(175, 20);
+            this.dtpDueDate.TabIndex = 11;
+            // 
+            // LookUpVehicle
+            // 
+            this.LookUpVehicle.Location = new System.Drawing.Point(124, 27);
+            this.LookUpVehicle.Name = "LookUpVehicle";
+            this.LookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.LookUpVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.LookUpVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.LookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LicenseNumber", "Kendaraan")});
+            this.LookUpVehicle.Properties.DisplayMember = "Value";
+            this.LookUpVehicle.Properties.HideSelection = false;
+            this.LookUpVehicle.Properties.NullText = "-- Pilih Kendaraan --";
+            this.LookUpVehicle.Properties.ValueMember = "Id";
+            this.LookUpVehicle.Size = new System.Drawing.Size(175, 20);
+            this.LookUpVehicle.TabIndex = 10;
+            // 
+            // lookUpCategory
+            // 
+            this.lookUpCategory.Location = new System.Drawing.Point(124, 55);
+            this.lookUpCategory.Name = "lookUpCategory";
+            this.lookUpCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Kategori")});
+            this.lookUpCategory.Properties.DisplayMember = "Value";
+            this.lookUpCategory.Properties.HideSelection = false;
+            this.lookUpCategory.Properties.NullText = "-- Pilih Layanan --";
+            this.lookUpCategory.Properties.ValueMember = "Id";
+            this.lookUpCategory.Size = new System.Drawing.Size(175, 20);
+            this.lookUpCategory.TabIndex = 9;
+            // 
+            // lblVehicle
+            // 
+            this.lblVehicle.Location = new System.Drawing.Point(15, 30);
+            this.lblVehicle.Name = "lblVehicle";
+            this.lblVehicle.Size = new System.Drawing.Size(52, 13);
+            this.lblVehicle.TabIndex = 2;
+            this.lblVehicle.Text = "Kendaraan";
+            // 
+            // cmsSparepartEditor
+            // 
+            this.cmsSparepartEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsEditDataSparepart,
+            this.cmsDeleteDataSparepart});
+            this.cmsSparepartEditor.Name = "cmsListEditor";
+            this.cmsSparepartEditor.Size = new System.Drawing.Size(153, 70);
+            // 
+            // cmsEditDataSparepart
+            // 
+            this.cmsEditDataSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditDataSparepart.Name = "cmsEditDataSparepart";
+            this.cmsEditDataSparepart.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditDataSparepart.Text = "Ubah Data";
+            this.cmsEditDataSparepart.Click += new System.EventHandler(this.cmsEditDataSparepart_Click);
+            // 
+            // cmsDeleteDataSparepart
+            // 
+            this.cmsDeleteDataSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteDataSparepart.Name = "cmsDeleteDataSparepart";
+            this.cmsDeleteDataSparepart.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteDataSparepart.Text = "Hapus Data";
+            this.cmsDeleteDataSparepart.Click += new System.EventHandler(this.cmsDeleteDataSparepart_Click);
+            // 
+            // cmsMechanicEditor
+            // 
+            this.cmsMechanicEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editDataMechanic,
+            this.cmsDeleteDataMechanic});
+            this.cmsMechanicEditor.Name = "cmsListEditor";
+            this.cmsMechanicEditor.Size = new System.Drawing.Size(136, 48);
+            // 
+            // editDataMechanic
+            // 
+            this.editDataMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.editDataMechanic.Name = "editDataMechanic";
+            this.editDataMechanic.Size = new System.Drawing.Size(135, 22);
+            this.editDataMechanic.Text = "Ubah Data";
+            this.editDataMechanic.Click += new System.EventHandler(this.editDataMechanic_Click);
+            // 
+            // cmsDeleteDataMechanic
+            // 
+            this.cmsDeleteDataMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteDataMechanic.Name = "cmsDeleteDataMechanic";
+            this.cmsDeleteDataMechanic.Size = new System.Drawing.Size(135, 22);
+            this.cmsDeleteDataMechanic.Text = "Hapus Data";
+            this.cmsDeleteDataMechanic.Click += new System.EventHandler(this.cmsDeleteDataMechanic_Click);
+            // 
+            // SPKEditorForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(472, 431);
+            this.Controls.Add(this.gcSPK);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "SPKEditorForm";
+            this.Text = "SPK Editor";
+            this.Controls.SetChildIndex(this.gcSPK, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
+            this.gcSPK.ResumeLayout(false);
+            this.gcSPK.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMechanic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
+            this.cmsSparepartEditor.ResumeLayout(false);
+            this.cmsMechanicEditor.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private DevExpress.XtraEditors.GroupControl gcSPK;
+        private DevExpress.XtraEditors.LabelControl lblVehicle;
+        private DevExpress.XtraEditors.LookUpEdit lookUpCategory;
+        private DevExpress.XtraEditors.LookUpEdit LookUpVehicle;
+        private DevExpress.XtraEditors.LabelControl lblCategory;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.DateEdit dtpDueDate;
+        private DevExpress.XtraEditors.SimpleButton btnAddSparepart;
+        private DevExpress.XtraEditors.SimpleButton btnAddMechanic;
+        private DevExpress.XtraGrid.GridControl gridMechanic;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvMechanic;
+        private DevExpress.XtraGrid.Columns.GridColumn colMechanicMechanic;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colFee;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valVehicle;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valCategory;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valDueDate;
+        private DevExpress.XtraEditors.LabelControl lblFee;
+        private DevExpress.XtraEditors.TextEdit txtFee;
+        private DevExpress.XtraEditors.LabelControl lbMechanic;
+        private DevExpress.XtraEditors.LabelControl lblQty;
+        private DevExpress.XtraEditors.TextEdit txtQty;
+        private DevExpress.XtraEditors.LabelControl lblSparepart;
+        private DevExpress.XtraGrid.GridControl gridSparepart;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSparepart;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCategory;
+        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
+        private DevExpress.XtraEditors.LookUpEdit lookUpMechanic;
+        private DevExpress.XtraEditors.LookUpEdit lookUpSparepart;
+        private System.Windows.Forms.ContextMenuStrip cmsSparepartEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditDataSparepart;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteDataSparepart;
+        private System.Windows.Forms.ContextMenuStrip cmsMechanicEditor;
+        private System.Windows.Forms.ToolStripMenuItem editDataMechanic;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteDataMechanic;
+    }
+}

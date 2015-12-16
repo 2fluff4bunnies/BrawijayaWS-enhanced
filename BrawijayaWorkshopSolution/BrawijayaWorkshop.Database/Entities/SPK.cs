@@ -23,8 +23,6 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int CategoryStatusApprovalId { get; set; }
 
-        public virtual Reference StatusApproval { get; set; }
-
         public int CategoryReferenceId { get; set; }
 
         public virtual Reference CategoryReference { get; set; }

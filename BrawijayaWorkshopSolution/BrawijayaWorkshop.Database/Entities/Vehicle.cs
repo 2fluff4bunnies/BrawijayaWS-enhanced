@@ -18,6 +18,12 @@ namespace BrawijayaWorkshop.Database.Entities
         public string Type { get; set; }
 
         [Required]
+        public string ActiveLicenseNumber { get; set; }
+
+        [Required]
+        public int YearOfPurchase { get; set; }
+
+        [Required]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
     }

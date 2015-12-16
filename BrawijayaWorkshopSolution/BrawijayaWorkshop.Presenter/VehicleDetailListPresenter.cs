@@ -16,7 +16,7 @@ namespace BrawijayaWorkshop.Presenter
         public VehicleDetailListPresenter(IVehicleDetailListView view, VehicleDetailListModel model)
             : base(view, model) { }
 
-        public void LoadDetailList()
+        public void LoadVehicleDetail()
         {
             View.VehicleDetailListData = Model.SearchVehicleDetail(View.SelectedVehicle.Id);
         }

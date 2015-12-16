@@ -86,7 +86,11 @@ namespace BrawijayaWorkshop.Win32App
         #region Helper
         private void GenerateRibbonMenu()
         {
-            if(LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
+            if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN)
+            {
+                btnConfig.Visible = false;
+            }
+            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
             {
                 iMaster.Visibility = BarItemVisibility.Never;
             }
@@ -255,6 +259,13 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iCustomer.LinkClicked += iCustomer_LinkClicked;
             navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
+            navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
+        }
+
+        void iVehicle_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            VehicleListControl listVehicle = Bootstrapper.Resolve<VehicleListControl>();
+            ShowUserControl(listVehicle);
         }
 
         private void iCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -285,7 +296,17 @@ namespace BrawijayaWorkshop.Win32App
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            // todo show config
+            ConfigEditorForm configForm = Bootstrapper.Resolve<ConfigEditorForm>();
+            configForm.ShowDialog(this);
+        }
+
+        private void iSPK_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
+
+            SPKListControl listSPK = Bootstrapper.Resolve<SPKListControl>();
+            ShowUserControl(listSPK);
+
         }
     }
 }

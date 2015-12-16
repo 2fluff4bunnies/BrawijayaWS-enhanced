@@ -18,7 +18,7 @@ namespace BrawijayaWorkshop.Model
         {
             _customerRepository = customerRepository;
             _cityRepository = cityRepository;
-            _unitOfWork = _unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public List<City> RetrieveCity()
