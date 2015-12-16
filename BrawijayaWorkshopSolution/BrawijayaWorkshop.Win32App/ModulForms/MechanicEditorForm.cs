@@ -12,7 +12,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 {
     public partial class MechanicEditorForm : BaseEditorForm, IMechanicEditorView
     {
-        //public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
+        public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
 
         private MechanicEditorPresenter _presenter;
         private bool _isFingerprintConnected;

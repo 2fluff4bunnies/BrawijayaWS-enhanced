@@ -63,9 +63,9 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtFilter);
             this.gcFilter.Controls.Add(this.lblFilterCompanyName);
-            this.gcFilter.Location = new System.Drawing.Point(8, 4);
+            this.gcFilter.Location = new System.Drawing.Point(3, 4);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(575, 62);
+            this.gcFilter.Size = new System.Drawing.Size(584, 62);
             this.gcFilter.TabIndex = 6;
             this.gcFilter.Text = "Filter";
             // 
@@ -75,7 +75,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(508, 28);
+            this.btnSearch.Location = new System.Drawing.Point(517, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 2;
@@ -90,7 +90,7 @@
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
             this.txtFilter.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtFilter.Size = new System.Drawing.Size(374, 20);
+            this.txtFilter.Size = new System.Drawing.Size(383, 20);
             this.txtFilter.TabIndex = 1;
             // 
             // lblFilterCompanyName
@@ -106,7 +106,7 @@
             this.btnNewVehicle.Image = ((System.Drawing.Image)(resources.GetObject("btnNewVehicle.Image")));
             this.btnNewVehicle.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewVehicle.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewVehicle.Location = new System.Drawing.Point(8, 72);
+            this.btnNewVehicle.Location = new System.Drawing.Point(3, 72);
             this.btnNewVehicle.Name = "btnNewVehicle";
             this.btnNewVehicle.Size = new System.Drawing.Size(144, 23);
             this.btnNewVehicle.TabIndex = 8;
@@ -165,10 +165,10 @@
             this.gcVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcVehicle.Location = new System.Drawing.Point(8, 102);
+            this.gcVehicle.Location = new System.Drawing.Point(3, 102);
             this.gcVehicle.MainView = this.gvVehicle;
             this.gcVehicle.Name = "gcVehicle";
-            this.gcVehicle.Size = new System.Drawing.Size(575, 224);
+            this.gcVehicle.Size = new System.Drawing.Size(584, 224);
             this.gcVehicle.TabIndex = 9;
             this.gcVehicle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicle});
@@ -193,6 +193,7 @@
             this.gvVehicle.OptionsMenu.EnableFooterMenu = false;
             this.gvVehicle.OptionsView.EnableAppearanceEvenRow = true;
             this.gvVehicle.OptionsView.ShowFooter = true;
+            this.gvVehicle.OptionsView.ShowGroupPanel = false;
             this.gvVehicle.OptionsView.ShowViewCaption = true;
             this.gvVehicle.ViewCaption = "Daftar Kendaraan";
             // 

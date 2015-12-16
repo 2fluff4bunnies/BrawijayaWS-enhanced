@@ -144,10 +144,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     foreach (DataRow row in resultAcc.Rows)
                     {
                         row["Kode"] = row["Kode"].ToString().Trim();
-                        if(string.IsNullOrEmpty(row["Induk"].ToString()))
+                        try
                         {
-                            row["Induk"] = DBNull.Value;
+                            row["Induk"] = row["Induk"].ToString();
                         }
+                        catch { }
                     }
 
                     // convert to csv
@@ -170,30 +171,39 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         conn.Close();
                     }
 
-                    // generate main account data
                     using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
                     {
                         MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`)
-                                            SELECT Kode, Nama,
-                                            (SELECT a.`Id` FROM journalmasters a WHERE a.`Code`=x.`Induk`)
-                                            FROM temp_acc x";
+                        cmd.CommandText = @"UPDATE temp_acc SET Induk=REPLACE(REPLACE(Induk, '\r', ''), '\n', '')";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Clone();
                     }
 
-                    //// generate main account data
-                    //using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
-                    //{
-                    //    MySqlCommand cmd = conn.CreateCommand();
-                    //    cmd.CommandText = @"UPDATE journalmasters SET ParentId=(SELECT Id FROM journalmasters WHERE Code=";
-                    //    cmd.CommandType = CommandType.Text;
-                    //    conn.Open();
-                    //    cmd.ExecuteNonQuery();
-                    //    conn.Clone();
-                    //}
+                    // generate main account data
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`)
+                                            SELECT `Kode`, `Nama`,
+                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk)
+                                            FROM temp_acc";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"UPDATE journalmasters a
+                                            SET a.ParentId = (SELECT z.Id FROM (SELECT x.*, y.Kode FROM journalmasters x, temp_acc y WHERE x.Code=y.Induk) z WHERE z.Kode=a.Code)";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
                 }
             }
             catch (Exception ex)

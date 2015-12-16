@@ -179,7 +179,7 @@
             // colSparepartCategory
             // 
             this.colSparepartCategory.Caption = "Kategori";
-            this.colSparepartCategory.FieldName = "CategoryReference.Value";
+            this.colSparepartCategory.FieldName = "CategoryReference.Name";
             this.colSparepartCategory.Name = "colSparepartCategory";
             this.colSparepartCategory.Visible = true;
             this.colSparepartCategory.VisibleIndex = 0;

@@ -123,17 +123,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return gridPurchasingDetail.DataSource as List<PurchasingDetail>;
+                //return gridPurchasingDetail.DataSource as List<PurchasingDetail>;
+                return bsDetails.DataSource as List<PurchasingDetail>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridPurchasingDetail.DataSource = value; gvPurchasingDetail.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        bsDetails.DataSource = value;
+                        gridPurchasingDetail.DataSource = bsDetails;
+                        gvPurchasingDetail.BestFitColumns();
+                    }));
                 }
                 else
                 {
-                    gridPurchasingDetail.DataSource = value;
+                    bsDetails.DataSource = value;
+                    gridPurchasingDetail.DataSource = bsDetails;
                     gvPurchasingDetail.BestFitColumns();
                 }
             }

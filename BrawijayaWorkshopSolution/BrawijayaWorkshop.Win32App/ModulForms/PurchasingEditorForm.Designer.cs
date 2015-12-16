@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
@@ -46,11 +45,12 @@
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.valDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.valSupplier = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.valDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valSupplier = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.deleteSparepartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewSparepartDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bsDetails = new System.Windows.Forms.BindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).BeginInit();
@@ -63,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valSupplier)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // txtDate
@@ -76,9 +77,9 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDate.Size = new System.Drawing.Size(159, 20);
             this.txtDate.TabIndex = 0;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Tanggal penerimaan harus diisi";
-            this.valDate.SetValidationRule(this.txtDate, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Tanggal penerimaan harus diisi";
+            this.valDate.SetValidationRule(this.txtDate, conditionValidationRule1);
             // 
             // gcPurchasingInfo
             // 
@@ -109,12 +110,12 @@
             this.gridPurchasingDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridPurchasingDetail.Location = new System.Drawing.Point(3, 124);
+            this.gridPurchasingDetail.Location = new System.Drawing.Point(5, 124);
             this.gridPurchasingDetail.MainView = this.gvPurchasingDetail;
             this.gridPurchasingDetail.Name = "gridPurchasingDetail";
             this.gridPurchasingDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbSparepartGv});
-            this.gridPurchasingDetail.Size = new System.Drawing.Size(568, 193);
+            this.gridPurchasingDetail.Size = new System.Drawing.Size(566, 193);
             this.gridPurchasingDetail.TabIndex = 4;
             this.gridPurchasingDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasingDetail});
@@ -131,6 +132,7 @@
             this.gvPurchasingDetail.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             this.gvPurchasingDetail.OptionsBehavior.AutoPopulateColumns = false;
             this.gvPurchasingDetail.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gvPurchasingDetail.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             this.gvPurchasingDetail.OptionsView.EnableAppearanceEvenRow = true;
             this.gvPurchasingDetail.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvPurchasingDetail.OptionsView.ShowGroupPanel = false;
@@ -141,7 +143,7 @@
             // 
             this.colSparepart.Caption = "Sparepart";
             this.colSparepart.ColumnEdit = this.cbSparepartGv;
-            this.colSparepart.FieldName = "Id";
+            this.colSparepart.FieldName = "SparepartId";
             this.colSparepart.Name = "colSparepart";
             this.colSparepart.Visible = true;
             this.colSparepart.VisibleIndex = 0;
@@ -154,6 +156,7 @@
             this.cbSparepartGv.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart")});
             this.cbSparepartGv.DisplayMember = "Name";
+            this.cbSparepartGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.cbSparepartGv.Name = "cbSparepartGv";
             this.cbSparepartGv.NullText = "--Pilih Sparepart--";
             this.cbSparepartGv.ValidateOnEnterKey = true;
@@ -206,10 +209,10 @@
             this.cbSupplier.Properties.ValueMember = "Id";
             this.cbSupplier.Size = new System.Drawing.Size(100, 20);
             this.cbSupplier.TabIndex = 2;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule1.ErrorText = "Pilih salah satu supplier";
-            conditionValidationRule1.Value1 = "--Pilih Supplier--";
-            this.valSupplier.SetValidationRule(this.cbSupplier, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule2.ErrorText = "Pilih salah satu supplier";
+            conditionValidationRule2.Value1 = "--Pilih Supplier--";
+            this.valSupplier.SetValidationRule(this.cbSupplier, conditionValidationRule2);
             // 
             // pnlAction
             // 
@@ -288,6 +291,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valSupplier)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsDetails)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,5 +318,6 @@
         private System.Windows.Forms.ToolStripMenuItem viewSparepartDetailToolStripMenuItem;
         private DevExpress.XtraEditors.SimpleButton btnAddSparepart;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cbSparepartGv;
+        private System.Windows.Forms.BindingSource bsDetails;
     }
 }

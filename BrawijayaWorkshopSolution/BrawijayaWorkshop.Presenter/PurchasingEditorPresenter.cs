@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -13,6 +14,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.ListPurchasingDetail = new List<PurchasingDetail>();
             View.ListSupplier = Model.RetrieveSupplier();
             View.ListSparepart = Model.RetrieveSparepart();
             if (View.SelectedPurchasing != null)
