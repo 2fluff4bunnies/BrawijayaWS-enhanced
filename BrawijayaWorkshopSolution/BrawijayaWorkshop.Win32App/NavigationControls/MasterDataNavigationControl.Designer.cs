@@ -35,8 +35,9 @@
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,8 @@
             this.iSupplier,
             this.iCustomer,
             this.iSparepart,
-            this.iMechanic});
+            this.iMechanic,
+            this.iVehicle});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -68,7 +70,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
             // 
             // iCustomer
@@ -89,17 +92,24 @@
             this.iSparepart.Name = "iSparepart";
             this.iSparepart.SmallImageIndex = 2;
             // 
+            // iMechanic
+            // 
+            this.iMechanic.Caption = "Mekanik";
+            this.iMechanic.Name = "iMechanic";
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
             this.imageCollection.Images.SetKeyName(0, "supplier_16x16.png");
             this.imageCollection.Images.SetKeyName(1, "customer.png");
             this.imageCollection.Images.SetKeyName(2, "sparepart.png");
+            this.imageCollection.Images.SetKeyName(3, "Truck-Left-Green-icon-16x16.png");
             // 
-            // iMechanic
+            // iVehicle
             // 
-            this.iMechanic.Caption = "Mekanik";
-            this.iMechanic.Name = "iMechanic";
+            this.iVehicle.Caption = "Vehicle";
+            this.iVehicle.Name = "iVehicle";
+            this.iVehicle.SmallImageIndex = 3;
             // 
             // MasterDataNavigationControl
             // 
@@ -123,5 +133,6 @@
         public DevExpress.XtraNavBar.NavBarItem iCustomer;
         public DevExpress.XtraNavBar.NavBarItem iSparepart;
         public DevExpress.XtraNavBar.NavBarItem iMechanic;
+        public DevExpress.XtraNavBar.NavBarItem iVehicle;
     }
 }

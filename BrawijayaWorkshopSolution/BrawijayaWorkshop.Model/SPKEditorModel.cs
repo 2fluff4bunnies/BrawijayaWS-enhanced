@@ -78,6 +78,8 @@ namespace BrawijayaWorkshop.Model
 #warning Generate code?
             // SPK.Code = GENERATE CODE HERE?
             SPK.CreateDate = serverTime;
+            SPK.ModifyDate = serverTime;
+            SPK.ModifyUserId = userId;
             SPK.CreateUserId = userId;
             SPK.CategoryStatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
             SPK.Status = (int)DbConstant.DefaultDataStatus.Active;

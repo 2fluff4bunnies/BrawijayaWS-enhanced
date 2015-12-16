@@ -68,5 +68,11 @@ namespace BrawijayaWorkshop.Constant
             Endorsed = 2
         }
 
+        public enum LicenseNumberStatus
+        {
+            Active = 1,
+            Expired = -1
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace BrawijayaWorkshop.View
     {
         Vehicle SelectedVehicle { get; set; }
 
-        string LicenseIdFilter { get; set; }
+        string ActiveLicenseNumberFilter { get; set; }
 
         List<Vehicle> VehicleListData { get; set; }
 

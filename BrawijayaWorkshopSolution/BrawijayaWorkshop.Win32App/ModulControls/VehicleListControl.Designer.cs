@@ -32,24 +32,26 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.txtFilterLicenseId = new DevExpress.XtraEditors.TextEdit();
+            this.txtFilter = new DevExpress.XtraEditors.TextEdit();
             this.lblFilterCompanyName = new DevExpress.XtraEditors.LabelControl();
-            this.gridVehicle = new DevExpress.XtraGrid.GridControl();
-            this.gvVehicle = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colLicenseIdVehicle = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTypeVehicle = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colVehilceCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewVehicle = new DevExpress.XtraEditors.SimpleButton();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.gcVehicle = new DevExpress.XtraGrid.GridControl();
+            this.gvVehicle = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colActiveLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBrand = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colYearOfPurchase = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterLicenseId.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVehicle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicle)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
@@ -57,7 +59,7 @@
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcFilter.Controls.Add(this.btnSearch);
-            this.gcFilter.Controls.Add(this.txtFilterLicenseId);
+            this.gcFilter.Controls.Add(this.txtFilter);
             this.gcFilter.Controls.Add(this.lblFilterCompanyName);
             this.gcFilter.Location = new System.Drawing.Point(8, 4);
             this.gcFilter.Name = "gcFilter";
@@ -79,12 +81,12 @@
             // 
             // txtFilterLicenseId
             // 
-            this.txtFilterLicenseId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilterLicenseId.Location = new System.Drawing.Point(128, 30);
-            this.txtFilterLicenseId.Name = "txtFilterLicenseId";
-            this.txtFilterLicenseId.Size = new System.Drawing.Size(374, 20);
-            this.txtFilterLicenseId.TabIndex = 1;
+            this.txtFilter.Location = new System.Drawing.Point(128, 30);
+            this.txtFilter.Name = "txtFilterLicenseId";
+            this.txtFilter.Size = new System.Drawing.Size(374, 20);
+            this.txtFilter.TabIndex = 1;
             // 
             // lblFilterCompanyName
             // 
@@ -93,65 +95,6 @@
             this.lblFilterCompanyName.Size = new System.Drawing.Size(57, 13);
             this.lblFilterCompanyName.TabIndex = 0;
             this.lblFilterCompanyName.Text = "Nomor Polisi";
-            // 
-            // gridVehicle
-            // 
-            this.gridVehicle.AccessibleRole = System.Windows.Forms.AccessibleRole.IpAddress;
-            this.gridVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridVehicle.Location = new System.Drawing.Point(8, 101);
-            this.gridVehicle.MainView = this.gvVehicle;
-            this.gridVehicle.Name = "gridVehicle";
-            this.gridVehicle.Size = new System.Drawing.Size(575, 224);
-            this.gridVehicle.TabIndex = 7;
-            this.gridVehicle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvVehicle});
-            // 
-            // gvVehicle
-            // 
-            this.gvVehicle.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colLicenseIdVehicle,
-            this.colTypeVehicle,
-            this.colVehilceCustomer});
-            this.gvVehicle.GridControl = this.gridVehicle;
-            this.gvVehicle.Name = "gvVehicle";
-            this.gvVehicle.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvVehicle.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvVehicle.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvVehicle.OptionsBehavior.Editable = false;
-            this.gvVehicle.OptionsBehavior.ReadOnly = true;
-            this.gvVehicle.OptionsCustomization.AllowColumnMoving = false;
-            this.gvVehicle.OptionsCustomization.AllowFilter = false;
-            this.gvVehicle.OptionsCustomization.AllowGroup = false;
-            this.gvVehicle.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvVehicle.OptionsView.ShowGroupPanel = false;
-            this.gvVehicle.OptionsView.ShowViewCaption = true;
-            this.gvVehicle.ViewCaption = "Daftar Kendaraan";
-            // 
-            // colLicenseIdVehicle
-            // 
-            this.colLicenseIdVehicle.Caption = "Nopol";
-            this.colLicenseIdVehicle.FieldName = "NoPol";
-            this.colLicenseIdVehicle.Name = "colLicenseIdVehicle";
-            this.colLicenseIdVehicle.Visible = true;
-            this.colLicenseIdVehicle.VisibleIndex = 0;
-            // 
-            // colTypeVehicle
-            // 
-            this.colTypeVehicle.Caption = "Tipe";
-            this.colTypeVehicle.FieldName = "Type";
-            this.colTypeVehicle.Name = "colTypeVehicle";
-            this.colTypeVehicle.Visible = true;
-            this.colTypeVehicle.VisibleIndex = 1;
-            // 
-            // colVehilceCustomer
-            // 
-            this.colVehilceCustomer.Caption = "Customer";
-            this.colVehilceCustomer.FieldName = "Customer";
-            this.colVehilceCustomer.Name = "colVehilceCustomer";
-            this.colVehilceCustomer.Visible = true;
-            this.colVehilceCustomer.VisibleIndex = 2;
             // 
             // btnNewVehicle
             // 
@@ -163,13 +106,15 @@
             this.btnNewVehicle.Size = new System.Drawing.Size(144, 23);
             this.btnNewVehicle.TabIndex = 8;
             this.btnNewVehicle.Text = "Buat Kendaraan Baru";
+            this.btnNewVehicle.Click += new System.EventHandler(this.btnNewVehicle_Click);
             // 
             // cmsDeleteData
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
             this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
             // cmsEditor
             // 
@@ -177,31 +122,107 @@
             this.cmsEditData,
             this.cmsDeleteData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(136, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 70);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
             this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
+            // 
+            // gcVehicle
+            // 
+            this.gcVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcVehicle.Location = new System.Drawing.Point(8, 102);
+            this.gcVehicle.MainView = this.gvVehicle;
+            this.gcVehicle.Name = "gcVehicle";
+            this.gcVehicle.Size = new System.Drawing.Size(575, 224);
+            this.gcVehicle.TabIndex = 9;
+            this.gcVehicle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvVehicle});
+            // 
+            // gvVehicle
+            // 
+            this.gvVehicle.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colCustomer,
+            this.colActiveLicenseNumber,
+            this.colBrand,
+            this.colType,
+            this.colYearOfPurchase});
+            this.gvVehicle.GridControl = this.gcVehicle;
+            this.gvVehicle.Name = "gvVehicle";
+            this.gvVehicle.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvVehicle.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvVehicle.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvVehicle.OptionsBehavior.Editable = false;
+            this.gvVehicle.OptionsBehavior.ReadOnly = true;
+            this.gvVehicle.OptionsCustomization.AllowColumnMoving = false;
+            this.gvVehicle.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvVehicle.OptionsMenu.EnableFooterMenu = false;
+            this.gvVehicle.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvVehicle.OptionsView.ShowFooter = true;
+            this.gvVehicle.OptionsView.ShowViewCaption = true;
+            this.gvVehicle.ViewCaption = "Daftar Kendaraan";
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.Caption = "Customer";
+            this.colCustomer.FieldName = "Customer.CompanyName";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.Visible = true;
+            this.colCustomer.VisibleIndex = 1;
+            // 
+            // colActiveLicenseNumber
+            // 
+            this.colActiveLicenseNumber.Caption = "Nopol";
+            this.colActiveLicenseNumber.FieldName = "ActiveLicenseNumber";
+            this.colActiveLicenseNumber.Name = "colActiveLicenseNumber";
+            this.colActiveLicenseNumber.Visible = true;
+            this.colActiveLicenseNumber.VisibleIndex = 0;
+            // 
+            // colBrand
+            // 
+            this.colBrand.Caption = "Merek";
+            this.colBrand.FieldName = "Brand";
+            this.colBrand.Name = "colBrand";
+            this.colBrand.Visible = true;
+            this.colBrand.VisibleIndex = 2;
+            // 
+            // colType
+            // 
+            this.colType.Caption = "Tipe";
+            this.colType.FieldName = "Type";
+            this.colType.Name = "colType";
+            this.colType.Visible = true;
+            this.colType.VisibleIndex = 3;
+            // 
+            // colYearOfPurchase
+            // 
+            this.colYearOfPurchase.Caption = "Tahun Pembelian";
+            this.colYearOfPurchase.FieldName = "YearOfPurchase";
+            this.colYearOfPurchase.Name = "colYearOfPurchase";
+            this.colYearOfPurchase.Visible = true;
+            this.colYearOfPurchase.VisibleIndex = 4;
             // 
             // VehicleListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.gcVehicle);
             this.Controls.Add(this.gcFilter);
-            this.Controls.Add(this.gridVehicle);
             this.Controls.Add(this.btnNewVehicle);
             this.Name = "VehicleListControl";
             this.Size = new System.Drawing.Size(590, 329);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterLicenseId.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcVehicle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -210,17 +231,19 @@
 
         private DevExpress.XtraEditors.GroupControl gcFilter;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private DevExpress.XtraEditors.TextEdit txtFilterLicenseId;
+        private DevExpress.XtraEditors.TextEdit txtFilter;
         private DevExpress.XtraEditors.LabelControl lblFilterCompanyName;
-        private DevExpress.XtraGrid.GridControl gridVehicle;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicle;
-        private DevExpress.XtraGrid.Columns.GridColumn colLicenseIdVehicle;
-        private DevExpress.XtraGrid.Columns.GridColumn colTypeVehicle;
-        private DevExpress.XtraGrid.Columns.GridColumn colVehilceCustomer;
         private DevExpress.XtraEditors.SimpleButton btnNewVehicle;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraGrid.GridControl gcVehicle;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicle;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomer;
+        private DevExpress.XtraGrid.Columns.GridColumn colActiveLicenseNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colBrand;
+        private DevExpress.XtraGrid.Columns.GridColumn colType;
+        private DevExpress.XtraGrid.Columns.GridColumn colYearOfPurchase;
     }
 }

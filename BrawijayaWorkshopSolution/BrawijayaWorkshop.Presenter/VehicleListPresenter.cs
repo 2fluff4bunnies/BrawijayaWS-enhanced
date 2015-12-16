@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadVehicle()
         {
-            View.VehicleListData = Model.SearchVehicle(View.LicenseIdFilter);
+            View.VehicleListData = Model.SearchVehicle(View.ActiveLicenseNumberFilter);
         }
 
         public void DeleteVehicle()

@@ -4,6 +4,7 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -17,11 +18,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new VehicleEditorPresenter(this, model);
 
             // set validation alignment
-            valCustomer.SetIconAlignment(cbCustomer, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valCustomer.SetIconAlignment(lookUpCustomer, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valBrand.SetIconAlignment(txtBrand, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valType.SetIconAlignment(txtType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            valYearOfBuy.SetIconAlignment(dtpYearOfBuy, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-        
+            valYearOfBuy.SetIconAlignment(txtYearOfPurchase, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valLicenseNumber.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+
+            if (SelectedVehicle != null)
+            {
+                dtpExpirationDate.Visible = false;
+                txtLicenseNumber.ReadOnly = true;
+            }
 
             this.Load += VehicleEditorForm_Load;
         }
@@ -58,44 +65,72 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public string YearOfBuy
-        {
-            get
-            {
-                return dtpYearOfBuy.Text;
-            }
-            set
-            {
-                dtpYearOfBuy.Text = value;
-            }
-        }
-
-       
         public int CustomerId
         {
             get
             {
-                Customer selected = cbCustomer.GetSelectedDataRow() as Customer;
+                Customer selected = lookUpCustomer.GetSelectedDataRow() as Customer;
                 if (selected == null) return 0;
                 return selected.Id;
             }
             set
             {
-                cbCustomer.EditValue = value;
+                lookUpCustomer.EditValue = value;
             }
         }
-        #endregion
+
+        public int YearOfPurchase
+        {
+            get
+            {
+                return txtYearOfPurchase.Text.AsInteger();
+            }
+            set
+            {
+                txtYearOfPurchase.Text = value.ToString();
+            }
+        }
+
+        public string ActiveLicenseNumber
+        {
+            get
+            {
+                return txtLicenseNumber.Text;
+            }
+            set
+            {
+                txtLicenseNumber.Text = value;
+            }
+        }
+
+        public DateTime ExpirationDate
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public List<Customer> CustomerList { get; set; }
+        #endregion
+
+
 
         protected override void ExecuteSave()
         {
-            if(valCustomer.Validate() && valBrand.Validate() && valType.Validate() &&
-                valYearOfBuy.Validate())
+            if (valCustomer.Validate() && valBrand.Validate() && valType.Validate()
+                && valYearOfBuy.Validate() && valLicenseNumber.Validate())
             {
                 _presenter.SaveChanges();
                 this.Close();
             }
         }
+
+
+
     }
 }

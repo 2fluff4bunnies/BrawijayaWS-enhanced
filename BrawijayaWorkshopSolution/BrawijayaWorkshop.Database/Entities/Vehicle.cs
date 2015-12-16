@@ -17,7 +17,11 @@ namespace BrawijayaWorkshop.Database.Entities
         [MaxLength(100)]
         public string Type { get; set; }
 
+        [Required]
         public string ActiveLicenseNumber { get; set; }
+
+        [Required]
+        public int YearOfPurchase { get; set; }
 
         [Required]
         public int CustomerId { get; set; }

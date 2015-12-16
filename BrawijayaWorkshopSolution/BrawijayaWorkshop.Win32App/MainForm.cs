@@ -259,6 +259,13 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iCustomer.LinkClicked += iCustomer_LinkClicked;
             navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
+            navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
+        }
+
+        void iVehicle_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            VehicleListControl listVehicle = Bootstrapper.Resolve<VehicleListControl>();
+            ShowUserControl(listVehicle);
         }
 
         private void iCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
