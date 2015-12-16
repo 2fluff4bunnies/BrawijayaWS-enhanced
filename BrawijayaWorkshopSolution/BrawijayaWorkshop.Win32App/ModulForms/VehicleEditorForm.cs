@@ -18,11 +18,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new VehicleEditorPresenter(this, model);
 
             // set validation alignment
-            valCustomer.SetIconAlignment(lookUpCustomer, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            valBrand.SetIconAlignment(txtBrand, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            valType.SetIconAlignment(txtType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            valYearOfBuy.SetIconAlignment(txtYearOfPurchase, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            valLicenseNumber.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(lookUpCustomer, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(txtBrand, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(txtType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(txtYearOfPurchase, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             if (SelectedVehicle != null)
             {
@@ -128,12 +129,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
         #endregion
 
-
-
         protected override void ExecuteSave()
         {
-            if (valCustomer.Validate() && valBrand.Validate() && valType.Validate()
-                && valYearOfBuy.Validate() && valLicenseNumber.Validate())
+            if (FieldsValidator.Validate())
             {
                 _presenter.SaveChanges();
                 this.Close();

@@ -31,10 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleDetailListForm));
             this.gcVehicleDetail = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnUpdateVehicleDetail = new DevExpress.XtraEditors.SimpleButton();
             this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colExpirationDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnUpdateVehicleDetail = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleDetail)).BeginInit();
             this.SuspendLayout();
@@ -73,18 +74,6 @@
             this.gvVehicleDetail.OptionsView.ShowViewCaption = true;
             this.gvVehicleDetail.ViewCaption = "Daftar Nomor Polisi";
             // 
-            // btnUpdateVehicleDetail
-            // 
-            this.btnUpdateVehicleDetail.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateVehicleDetail.Image")));
-            this.btnUpdateVehicleDetail.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnUpdateVehicleDetail.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnUpdateVehicleDetail.Location = new System.Drawing.Point(12, 12);
-            this.btnUpdateVehicleDetail.Name = "btnUpdateVehicleDetail";
-            this.btnUpdateVehicleDetail.Size = new System.Drawing.Size(144, 23);
-            this.btnUpdateVehicleDetail.TabIndex = 9;
-            this.btnUpdateVehicleDetail.Text = "Update Nomor Polisi";
-            this.btnUpdateVehicleDetail.Click += new System.EventHandler(this.btnUpdateVehicleDetail_Click);
-            // 
             // colLicenseNumber
             // 
             this.colLicenseNumber.Caption = "Nomor Polisi";
@@ -108,6 +97,23 @@
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
             this.colStatus.VisibleIndex = 2;
+            // 
+            // btnUpdateVehicleDetail
+            // 
+            this.btnUpdateVehicleDetail.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateVehicleDetail.Image")));
+            this.btnUpdateVehicleDetail.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnUpdateVehicleDetail.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnUpdateVehicleDetail.Location = new System.Drawing.Point(12, 12);
+            this.btnUpdateVehicleDetail.Name = "btnUpdateVehicleDetail";
+            this.btnUpdateVehicleDetail.Size = new System.Drawing.Size(144, 23);
+            this.btnUpdateVehicleDetail.TabIndex = 9;
+            this.btnUpdateVehicleDetail.Text = "Update Nomor Polisi";
+            this.btnUpdateVehicleDetail.Click += new System.EventHandler(this.btnUpdateVehicleDetail_Click);
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // VehicleDetailListForm
             // 
@@ -133,5 +139,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colLicenseNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colExpirationDate;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private System.ComponentModel.BackgroundWorker bgwMain;
     }
 }

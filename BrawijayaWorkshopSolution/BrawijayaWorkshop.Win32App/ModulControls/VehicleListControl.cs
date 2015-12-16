@@ -42,6 +42,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += VehicleListControl_Load;
+            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
         }
 
         #region Filter Fields
@@ -203,15 +204,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsUpdateLicenseNumber_Click(object sender, EventArgs e)
         {
-            VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
+            VehicleDetailEditorForm editor = Bootstrapper.Resolve<VehicleDetailEditorForm>();
+            editor.SelectedVehicle = this.SelectedVehicle;
             editor.ShowDialog(this);
-
+            
             btnSearch.PerformClick();
         }
 
         private void cmsViewHistoryLicenseNumber_Click(object sender, EventArgs e)
         {
-            VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
+            VehicleDetailListForm editor = Bootstrapper.Resolve<VehicleDetailListForm>();
+            editor.SelectedVehicle = this.SelectedVehicle;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();

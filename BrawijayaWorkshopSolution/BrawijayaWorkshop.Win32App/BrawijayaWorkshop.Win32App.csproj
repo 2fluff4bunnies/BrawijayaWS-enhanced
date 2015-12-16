@@ -187,12 +187,6 @@
     <Compile Include="ModulControls\TestUserControl.Designer.cs">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulControls\VehicleDetailListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ModulControls\VehicleDetailListControl.Designer.cs">
-      <DependentUpon>VehicleDetailListControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModulControls\VehicleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,6 +240,12 @@
     </Compile>
     <Compile Include="ModulForms\VehicleDetailEditorForm.Designer.cs">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\VehicleDetailListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\VehicleDetailListForm.Designer.cs">
+      <DependentUpon>VehicleDetailListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\VehicleEditorForm.cs">
       <SubType>Form</SubType>
@@ -325,9 +325,6 @@
     <EmbeddedResource Include="ModulControls\TestUserControl.resx">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModulControls\VehicleDetailListControl.resx">
-      <DependentUpon>VehicleDetailListControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\VehicleDetailListForm.resx">
+      <DependentUpon>VehicleDetailListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleEditorForm.resx">
       <DependentUpon>VehicleEditorForm.cs</DependentUpon>
@@ -467,6 +467,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Images\history_16x16.png" />
+    <None Include="Images\license_16x16.png" />
     <None Include="Images\add_mechanic_16x16.png" />
     <None Include="Resources\add_item_16x16.png" />
     <None Include="Resources\zoom_icon.png" />

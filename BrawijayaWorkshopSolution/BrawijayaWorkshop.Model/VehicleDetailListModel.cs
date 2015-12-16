@@ -23,10 +23,10 @@ namespace BrawijayaWorkshop.Model
         }
 
 
-        public List<VehicleDetail> SearchVehicleDetail(int VehicleDetailId)
+        public List<VehicleDetail> SearchVehicleDetail(int vehicleId)
         {
             List<VehicleDetail> result = _vehicleDetailRepository.GetMany(
-                spd => spd.VehicleId == VehicleDetailId).ToList();
+                vd => vd.VehicleId == vehicleId).OrderByDescending(vd=>vd.Id).ToList();
 
             return result;
         }

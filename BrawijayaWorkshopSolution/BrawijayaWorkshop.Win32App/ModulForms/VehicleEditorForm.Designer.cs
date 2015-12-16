@@ -34,16 +34,13 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleEditorForm));
-            this.valCustomer = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.valBrand = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.txtBrand = new DevExpress.XtraEditors.TextEdit();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
-            this.valType = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.txtType = new DevExpress.XtraEditors.TextEdit();
             this.txtYearOfPurchase = new DevExpress.XtraEditors.TextEdit();
-            this.valYearOfBuy = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.lblBrand = new DevExpress.XtraEditors.LabelControl();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
@@ -52,94 +49,18 @@
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
-            this.valLicenseNumber = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.valCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valBrand)).BeginInit();
+            this.FieldsValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valYearOfBuy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).BeginInit();
             this.gcCustomerInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valLicenseNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).BeginInit();
             this.SuspendLayout();
-            // 
-            // valCustomer
-            // 
-            this.valCustomer.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
-            // 
-            // valBrand
-            // 
-            this.valBrand.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
-            // 
-            // txtBrand
-            // 
-            this.txtBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBrand.Location = new System.Drawing.Point(128, 56);
-            this.txtBrand.Name = "txtBrand";
-            this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtBrand.Size = new System.Drawing.Size(162, 20);
-            this.txtBrand.TabIndex = 1;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Nama Perusahaan harus diisi!";
-            this.valBrand.SetValidationRule(this.txtBrand, conditionValidationRule1);
-            // 
-            // txtLicenseNumber
-            // 
-            this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 144);
-            this.txtLicenseNumber.Name = "txtLicenseNumber";
-            this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtLicenseNumber.Properties.Mask.EditMask = "\\S*";
-            this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtLicenseNumber.Size = new System.Drawing.Size(162, 20);
-            this.txtLicenseNumber.TabIndex = 4;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Nama Perusahaan harus diisi!";
-            this.valBrand.SetValidationRule(this.txtLicenseNumber, conditionValidationRule2);
-            // 
-            // valType
-            // 
-            this.valType.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
-            // 
-            // txtType
-            // 
-            this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtType.Location = new System.Drawing.Point(128, 86);
-            this.txtType.Name = "txtType";
-            this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtType.Size = new System.Drawing.Size(162, 20);
-            this.txtType.TabIndex = 2;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Alamat harus diisi!";
-            this.valType.SetValidationRule(this.txtType, conditionValidationRule3);
-            // 
-            // txtYearOfPurchase
-            // 
-            this.txtYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtYearOfPurchase.Location = new System.Drawing.Point(128, 116);
-            this.txtYearOfPurchase.Name = "txtYearOfPurchase";
-            this.txtYearOfPurchase.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtYearOfPurchase.Properties.Mask.EditMask = "[12][0-9]{3}";
-            this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtYearOfPurchase.Size = new System.Drawing.Size(162, 20);
-            this.txtYearOfPurchase.TabIndex = 3;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Alamat harus diisi!";
-            this.valType.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule4);
-            // 
-            // valYearOfBuy
-            // 
-            this.valYearOfBuy.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
             // lookUpCustomer
             // 
@@ -161,10 +82,65 @@
             this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(162, 20);
             this.lookUpCustomer.TabIndex = 0;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule5.ErrorText = "Pilih salah satu kota";
-            conditionValidationRule5.Value1 = "-- Pilih Kota --";
-            this.valYearOfBuy.SetValidationRule(this.lookUpCustomer, conditionValidationRule5);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule1);
+            // 
+            // txtBrand
+            // 
+            this.txtBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBrand.Location = new System.Drawing.Point(128, 56);
+            this.txtBrand.Name = "txtBrand";
+            this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtBrand.Size = new System.Drawing.Size(162, 20);
+            this.txtBrand.TabIndex = 1;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            this.FieldsValidator.SetValidationRule(this.txtBrand, conditionValidationRule2);
+            // 
+            // txtLicenseNumber
+            // 
+            this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 144);
+            this.txtLicenseNumber.Name = "txtLicenseNumber";
+            this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtLicenseNumber.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
+            this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtLicenseNumber.Size = new System.Drawing.Size(162, 20);
+            this.txtLicenseNumber.TabIndex = 4;
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule3);
+            // 
+            // txtType
+            // 
+            this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtType.Location = new System.Drawing.Point(128, 86);
+            this.txtType.Name = "txtType";
+            this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtType.Size = new System.Drawing.Size(162, 20);
+            this.txtType.TabIndex = 2;
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "This value is not valid";
+            this.FieldsValidator.SetValidationRule(this.txtType, conditionValidationRule4);
+            // 
+            // txtYearOfPurchase
+            // 
+            this.txtYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtYearOfPurchase.Location = new System.Drawing.Point(128, 116);
+            this.txtYearOfPurchase.Name = "txtYearOfPurchase";
+            this.txtYearOfPurchase.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtYearOfPurchase.Properties.Mask.EditMask = "[12][0-9]{3}";
+            this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtYearOfPurchase.Size = new System.Drawing.Size(162, 20);
+            this.txtYearOfPurchase.TabIndex = 3;
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "This value is not valid";
+            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule5);
             // 
             // lblCustomer
             // 
@@ -241,6 +217,9 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpExpirationDate.Size = new System.Drawing.Size(162, 20);
             this.dtpExpirationDate.TabIndex = 5;
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "This value is not valid";
+            this.FieldsValidator.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
             // 
             // lblExpirationDate
             // 
@@ -262,9 +241,10 @@
             this.lblLicenseNumber.TabIndex = 9;
             this.lblLicenseNumber.Text = "Nomor Polisi";
             // 
-            // valLicenseNumber
+            // FieldsValidator
             // 
-            this.valLicenseNumber.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            this.FieldsValidator.ValidateHiddenControls = false;
+            this.FieldsValidator.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
             // VehicleEditorForm
             // 
@@ -277,31 +257,23 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vehicle Editor";
             this.Controls.SetChildIndex(this.gcCustomerInfo, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.valCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valBrand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valYearOfBuy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).EndInit();
             this.gcCustomerInfo.ResumeLayout(false);
             this.gcCustomerInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valLicenseNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valCustomer;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valYearOfBuy;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valType;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valBrand;
         private DevExpress.XtraEditors.LabelControl lblCustomer;
         private DevExpress.XtraEditors.LabelControl lblBrand;
         private DevExpress.XtraEditors.TextEdit txtBrand;
@@ -312,9 +284,9 @@
         private DevExpress.XtraEditors.GroupControl gcCustomerInfo;
         private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblLicenseNumber;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valLicenseNumber;
         private DevExpress.XtraEditors.TextEdit txtYearOfPurchase;
         private DevExpress.XtraEditors.DateEdit dtpExpirationDate;
         private DevExpress.XtraEditors.LabelControl lblExpirationDate;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider FieldsValidator;
     }
 }

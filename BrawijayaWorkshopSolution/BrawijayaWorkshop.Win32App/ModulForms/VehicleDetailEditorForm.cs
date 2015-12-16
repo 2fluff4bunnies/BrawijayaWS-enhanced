@@ -12,7 +12,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     {
         private VehicleDetailEditorPresenter _presenter;
 
-
         public VehicleDetailEditorForm(VehicleDetailEditorModel model)
         {
             InitializeComponent();
@@ -20,6 +19,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         public VehicleDetail SelectedVehicleDetail { get; set; }
+
+        public Vehicle SelectedVehicle { get; set; }
 
         public string LicenseNumber
         {
@@ -41,21 +42,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int SelectedStatus
-        {
-            get
-            {
-                return 1;
+                dtpExpirationDate.Text = value.ToString();
             }
         }
 
         protected override void ExecuteSave()
         {
-            if (valLicenseNumber.Validate() && valExpirationDate.Validate())
+            if (FieldsValidator.Validate())
             {
                 _presenter.SaveChanges();
                 this.Close();
