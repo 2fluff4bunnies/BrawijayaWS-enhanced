@@ -38,6 +38,8 @@
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsUpdateLicenseNumber = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsViewHistoryLicenseNumber = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.gcVehicle = new DevExpress.XtraGrid.GridControl();
             this.gvVehicle = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -78,13 +80,14 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // txtFilterLicenseId
+            // txtFilter
             // 
             this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilter.Location = new System.Drawing.Point(128, 30);
-            this.txtFilter.Name = "txtFilterLicenseId";
+            this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(374, 20);
             this.txtFilter.TabIndex = 1;
             // 
@@ -112,7 +115,7 @@
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(180, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
@@ -120,21 +123,45 @@
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsEditData,
+            this.cmsUpdateLicenseNumber,
+            this.cmsViewHistoryLicenseNumber,
             this.cmsDeleteData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(181, 114);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(180, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
+            // cmsUpdateLicenseNumber
+            // 
+            this.cmsUpdateLicenseNumber.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.license_16x16;
+            this.cmsUpdateLicenseNumber.Name = "cmsUpdateLicenseNumber";
+            this.cmsUpdateLicenseNumber.Size = new System.Drawing.Size(180, 22);
+            this.cmsUpdateLicenseNumber.Text = "Update Nopol";
+            this.cmsUpdateLicenseNumber.Click += new System.EventHandler(this.cmsUpdateLicenseNumber_Click);
+            // 
+            // cmsViewHistoryLicenseNumber
+            // 
+            this.cmsViewHistoryLicenseNumber.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
+            this.cmsViewHistoryLicenseNumber.Name = "cmsViewHistoryLicenseNumber";
+            this.cmsViewHistoryLicenseNumber.Size = new System.Drawing.Size(180, 22);
+            this.cmsViewHistoryLicenseNumber.Text = "Lihat Riwayat Nopol";
+            this.cmsViewHistoryLicenseNumber.Click += new System.EventHandler(this.cmsViewHistoryLicenseNumber_Click);
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
             // gcVehicle
             // 
-            this.gcVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.gcVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcVehicle.Location = new System.Drawing.Point(8, 102);
             this.gcVehicle.MainView = this.gvVehicle;
@@ -245,5 +272,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colBrand;
         private DevExpress.XtraGrid.Columns.GridColumn colType;
         private DevExpress.XtraGrid.Columns.GridColumn colYearOfPurchase;
+        private System.Windows.Forms.ToolStripMenuItem cmsUpdateLicenseNumber;
+        private System.Windows.Forms.ToolStripMenuItem cmsViewHistoryLicenseNumber;
     }
 }

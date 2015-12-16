@@ -18,9 +18,9 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<Vehicle> SearchVehicle(string licenseId)
+        public List<Vehicle> SearchVehicle(string licenseNumber)
         {
-            return _vehicleRepository.GetMany(v => v.Brand.Contains(licenseId)).OrderBy(c => c.Brand).ToList();
+            return _vehicleRepository.GetMany(v => v.ActiveLicenseNumber.Contains(licenseNumber)).OrderBy(c => c.Brand).ToList();
         }
 
         public void DeleteVehicle(Vehicle vehicle)

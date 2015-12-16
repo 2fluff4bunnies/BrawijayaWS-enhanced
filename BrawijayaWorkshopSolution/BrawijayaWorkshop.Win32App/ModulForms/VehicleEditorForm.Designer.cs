@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleEditorForm));
             this.valCustomer = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valBrand = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.txtBrand = new DevExpress.XtraEditors.TextEdit();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
             this.valType = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.txtType = new DevExpress.XtraEditors.TextEdit();
+            this.txtYearOfPurchase = new DevExpress.XtraEditors.TextEdit();
             this.valYearOfBuy = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
@@ -47,25 +49,24 @@
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblYearOfPurchase = new DevExpress.XtraEditors.LabelControl();
             this.gcCustomerInfo = new DevExpress.XtraEditors.GroupControl();
-            this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
-            this.valLicenseNumber = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
-            this.txtYearOfPurchase = new DevExpress.XtraEditors.TextEdit();
+            this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
+            this.valLicenseNumber = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.valCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valBrand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valYearOfBuy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).BeginInit();
             this.gcCustomerInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.valLicenseNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valLicenseNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // valCustomer
@@ -84,10 +85,10 @@
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtBrand.Size = new System.Drawing.Size(162, 20);
-            this.txtBrand.TabIndex = 3;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Nama Perusahaan harus diisi!";
-            this.valBrand.SetValidationRule(this.txtBrand, conditionValidationRule6);
+            this.txtBrand.TabIndex = 1;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Nama Perusahaan harus diisi!";
+            this.valBrand.SetValidationRule(this.txtBrand, conditionValidationRule1);
             // 
             // txtLicenseNumber
             // 
@@ -96,11 +97,13 @@
             this.txtLicenseNumber.Location = new System.Drawing.Point(128, 144);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtLicenseNumber.Properties.Mask.EditMask = "\\S*";
+            this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtLicenseNumber.Size = new System.Drawing.Size(162, 20);
-            this.txtLicenseNumber.TabIndex = 10;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Nama Perusahaan harus diisi!";
-            this.valBrand.SetValidationRule(this.txtLicenseNumber, conditionValidationRule1);
+            this.txtLicenseNumber.TabIndex = 4;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Nama Perusahaan harus diisi!";
+            this.valBrand.SetValidationRule(this.txtLicenseNumber, conditionValidationRule2);
             // 
             // valType
             // 
@@ -114,10 +117,25 @@
             this.txtType.Name = "txtType";
             this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtType.Size = new System.Drawing.Size(162, 20);
-            this.txtType.TabIndex = 5;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Alamat harus diisi!";
-            this.valType.SetValidationRule(this.txtType, conditionValidationRule2);
+            this.txtType.TabIndex = 2;
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Alamat harus diisi!";
+            this.valType.SetValidationRule(this.txtType, conditionValidationRule3);
+            // 
+            // txtYearOfPurchase
+            // 
+            this.txtYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtYearOfPurchase.Location = new System.Drawing.Point(128, 116);
+            this.txtYearOfPurchase.Name = "txtYearOfPurchase";
+            this.txtYearOfPurchase.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtYearOfPurchase.Properties.Mask.EditMask = "[12][0-9]{3}";
+            this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtYearOfPurchase.Size = new System.Drawing.Size(162, 20);
+            this.txtYearOfPurchase.TabIndex = 3;
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Alamat harus diisi!";
+            this.valType.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule4);
             // 
             // valYearOfBuy
             // 
@@ -134,19 +152,19 @@
             this.lookUpCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
-            this.lookUpCustomer.Properties.DisplayMember = "Name";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Customer"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama")});
+            this.lookUpCustomer.Properties.DisplayMember = "CompanyName";
             this.lookUpCustomer.Properties.HideSelection = false;
             this.lookUpCustomer.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpCustomer.Properties.NullText = "-- Pilih Customer --";
             this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(162, 20);
-            this.lookUpCustomer.TabIndex = 7;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule3.ErrorText = "Pilih salah satu kota";
-            conditionValidationRule3.Value1 = "-- Pilih Kota --";
-            this.valYearOfBuy.SetValidationRule(this.lookUpCustomer, conditionValidationRule3);
+            this.lookUpCustomer.TabIndex = 0;
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule5.ErrorText = "Pilih salah satu kota";
+            conditionValidationRule5.Value1 = "-- Pilih Kota --";
+            this.valYearOfBuy.SetValidationRule(this.lookUpCustomer, conditionValidationRule5);
             // 
             // lblCustomer
             // 
@@ -209,6 +227,31 @@
             this.gcCustomerInfo.TabIndex = 1;
             this.gcCustomerInfo.Text = "Informasi Kendaraan";
             // 
+            // dtpExpirationDate
+            // 
+            this.dtpExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpExpirationDate.EditValue = null;
+            this.dtpExpirationDate.Location = new System.Drawing.Point(128, 175);
+            this.dtpExpirationDate.Name = "dtpExpirationDate";
+            this.dtpExpirationDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dtpExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpExpirationDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpExpirationDate.Size = new System.Drawing.Size(162, 20);
+            this.dtpExpirationDate.TabIndex = 5;
+            // 
+            // lblExpirationDate
+            // 
+            this.lblExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblExpirationDate.Location = new System.Drawing.Point(12, 178);
+            this.lblExpirationDate.Name = "lblExpirationDate";
+            this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
+            this.lblExpirationDate.TabIndex = 11;
+            this.lblExpirationDate.Text = "Tgl Kadaluarsa Nopol";
+            // 
             // lblLicenseNumber
             // 
             this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -223,52 +266,13 @@
             // 
             this.valLicenseNumber.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // dtpExpirationDate
-            // 
-            this.dtpExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpExpirationDate.EditValue = null;
-            this.dtpExpirationDate.Location = new System.Drawing.Point(128, 175);
-            this.dtpExpirationDate.Name = "dtpExpirationDate";
-            this.dtpExpirationDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.dtpExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtpExpirationDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtpExpirationDate.Size = new System.Drawing.Size(162, 20);
-            this.dtpExpirationDate.TabIndex = 12;
-            // 
-            // lblExpirationDate
-            // 
-            this.lblExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblExpirationDate.Location = new System.Drawing.Point(12, 178);
-            this.lblExpirationDate.Name = "lblExpirationDate";
-            this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
-            this.lblExpirationDate.TabIndex = 11;
-            this.lblExpirationDate.Text = "Tgl Kadaluarsa Nopol";
-            // 
-            // txtYearOfPurchase
-            // 
-            this.txtYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtYearOfPurchase.Location = new System.Drawing.Point(128, 116);
-            this.txtYearOfPurchase.Name = "txtYearOfPurchase";
-            this.txtYearOfPurchase.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtYearOfPurchase.Properties.Mask.EditMask = "^[12][0-9]{3}$";
-            this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtYearOfPurchase.Size = new System.Drawing.Size(162, 20);
-            this.txtYearOfPurchase.TabIndex = 13;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Alamat harus diisi!";
-            this.valType.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule4);
-            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 253);
             this.Controls.Add(this.gcCustomerInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VehicleEditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vehicle Editor";
@@ -279,15 +283,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valYearOfBuy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).EndInit();
             this.gcCustomerInfo.ResumeLayout(false);
             this.gcCustomerInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.valLicenseNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valLicenseNumber)).EndInit();
             this.ResumeLayout(false);
 
         }

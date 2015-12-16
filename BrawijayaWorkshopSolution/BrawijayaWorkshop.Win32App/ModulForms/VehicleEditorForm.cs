@@ -107,15 +107,25 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+               return dtpExpirationDate.Text.AsDateTime();
             }
             set
             {
-                throw new NotImplementedException();
+                dtpExpirationDate.Text = value.ToString();
             }
         }
 
-        public List<Customer> CustomerList { get; set; }
+        public List<Customer> CustomerList
+        {
+            get
+            {
+                return lookUpCustomer.Properties.DataSource as List<Customer>;
+            }
+            set
+            {
+                lookUpCustomer.Properties.DataSource = value;
+            }
+        }
         #endregion
 
 

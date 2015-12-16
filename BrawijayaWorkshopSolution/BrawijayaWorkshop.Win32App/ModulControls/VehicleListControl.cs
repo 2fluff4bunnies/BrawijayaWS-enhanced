@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -19,6 +20,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private VehicleListPresenter _presenter;
         private Vehicle _selectedVehicle;
 
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_VEHICLE;
+            }
+        }
+
         public VehicleListControl(VehicleListModel model)
         {
             InitializeComponent();
@@ -34,6 +43,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             this.Load += VehicleListControl_Load;
         }
+
+        #region Filter Fields
 
         public string ActiveLicenseNumberFilter
         {
@@ -77,6 +88,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 _selectedVehicle = value;
             }
+        } 
+        #endregion
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
         }
 
         private void VehicleListControl_Load(object sender, EventArgs e)
@@ -100,18 +117,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            RefreshDataView();
-        }
-
         public override void RefreshDataView()
         {
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing vehicle data...");
                 _selectedVehicle = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data vehicle...", false);
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
@@ -186,7 +198,25 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data vehicle selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan selesai", true);
         }
+
+        private void cmsUpdateLicenseNumber_Click(object sender, EventArgs e)
+        {
+            VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsViewHistoryLicenseNumber_Click(object sender, EventArgs e)
+        {
+            VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+     
     }
 }
