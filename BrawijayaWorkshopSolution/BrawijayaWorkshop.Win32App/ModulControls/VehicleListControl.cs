@@ -39,10 +39,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewVehicle.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
+            cmsUpdateLicenseNumber.Enabled = AllowEdit;
+            cmsViewHistoryLicenseNumber.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += VehicleListControl_Load;
-            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
         }
 
         #region Filter Fields
@@ -150,7 +151,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (_selectedVehicle != null)
             {
                 VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
-                editor.SelectedVehicle = _selectedVehicle;
+                editor.SelectedVehicle = this.SelectedVehicle;
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
@@ -199,7 +200,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
+            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan selesai", true);
+            
         }
 
         private void cmsUpdateLicenseNumber_Click(object sender, EventArgs e)

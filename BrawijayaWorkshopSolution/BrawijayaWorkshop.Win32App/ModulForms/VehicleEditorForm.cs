@@ -25,17 +25,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
-            if (SelectedVehicle != null)
-            {
-                dtpExpirationDate.Visible = false;
-                txtLicenseNumber.ReadOnly = true;
-            }
-
             this.Load += VehicleEditorForm_Load;
         }
 
         private void VehicleEditorForm_Load(object sender, EventArgs e)
         {
+            if (SelectedVehicle != null)
+            {
+                lblExpirationDate.Visible = false;
+                dtpExpirationDate.Visible = false;
+                txtLicenseNumber.Enabled = false;
+            }
             _presenter.InitFormData();
         }
 

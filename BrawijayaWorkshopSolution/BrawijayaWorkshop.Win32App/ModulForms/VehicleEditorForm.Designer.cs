@@ -83,7 +83,7 @@
             this.lookUpCustomer.Size = new System.Drawing.Size(162, 20);
             this.lookUpCustomer.TabIndex = 0;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
+            conditionValidationRule1.ErrorText = "Customer harus dipilih";
             this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule1);
             // 
             // txtBrand
@@ -96,7 +96,7 @@
             this.txtBrand.Size = new System.Drawing.Size(162, 20);
             this.txtBrand.TabIndex = 1;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "This value is not valid";
+            conditionValidationRule2.ErrorText = "Merek harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtBrand, conditionValidationRule2);
             // 
             // txtLicenseNumber
@@ -111,7 +111,7 @@
             this.txtLicenseNumber.Size = new System.Drawing.Size(162, 20);
             this.txtLicenseNumber.TabIndex = 4;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
+            conditionValidationRule3.ErrorText = "Nomor Polisi harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule3);
             // 
             // txtType
@@ -124,7 +124,7 @@
             this.txtType.Size = new System.Drawing.Size(162, 20);
             this.txtType.TabIndex = 2;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "This value is not valid";
+            conditionValidationRule4.ErrorText = "Tipe harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtType, conditionValidationRule4);
             // 
             // txtYearOfPurchase
@@ -139,7 +139,7 @@
             this.txtYearOfPurchase.Size = new System.Drawing.Size(162, 20);
             this.txtYearOfPurchase.TabIndex = 3;
             conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "This value is not valid";
+            conditionValidationRule5.ErrorText = "Tahun Pembelian harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule5);
             // 
             // lblCustomer
@@ -218,7 +218,7 @@
             this.dtpExpirationDate.Size = new System.Drawing.Size(162, 20);
             this.dtpExpirationDate.TabIndex = 5;
             conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "This value is not valid";
+            conditionValidationRule6.ErrorText = "Tanggal Kadaluarsa harus diisi";
             this.FieldsValidator.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
             // 
             // lblExpirationDate
