@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Utils;
+﻿using BrawijayaWorkshop.Model.Mappers;
+using BrawijayaWorkshop.Utils;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
@@ -30,6 +31,9 @@ namespace BrawijayaWorkshop.Win32App
 
             // Registering all dependency injection objects
             Bootstrapper.Wire(new DependencyInjectionModul());
+
+            // Configure AutoMapper
+            AutoMapperConfiguration.Configure();
 
             try
             {
