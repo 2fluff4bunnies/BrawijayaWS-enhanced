@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using AutoMapper;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -44,7 +45,8 @@ namespace BrawijayaWorkshop.Model
 
         public List<PurchasingDetailViewModel> RetrievePurchasingDetail(int purchasingID)
         {
-            return _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
+            List<PurchasingDetail> listEntity = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
+            return Mapper.Map<List<PurchasingDetail>, List<PurchasingDetailViewModel>>(listEntity);
         }
 
         public void InsertPurchasing(Purchasing purchasing, List<PurchasingDetail> purchasingDetails, int userID)
@@ -111,7 +113,7 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
-            List<PurchasingDetail> purchasingDetailsDB = RetrievePurchasingDetail(purchasing.Id);
+            List<PurchasingDetailViewModel> purchasingDetailsDB = RetrievePurchasingDetail(purchasing.Id);
             List<Purchasing> list = _purchasingRepository.GetAll().ToList();
             //check for updated and deleted item
             foreach (var itemPurchasingDetailDB in purchasingDetailsDB)
@@ -196,7 +198,7 @@ namespace BrawijayaWorkshop.Model
                         _sparepartDetailRepository.Delete(itemDetailDeleted);
                     }
 
-                    _purchasingDetailRepository.Delete(itemPurchasingDetailDB);
+                    _purchasingDetailRepository.Delete(_purchasingDetailRepository.GetById<int>(itemPurchasingDetailDB.Id));
                 }
             }
 
