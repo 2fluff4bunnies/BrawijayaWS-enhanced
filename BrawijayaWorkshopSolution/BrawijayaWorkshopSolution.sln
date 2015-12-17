@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.Runtime",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.DataInitializerConsoleApp", "BrawijayaWorkshop.DataInitializerConsoleApp\BrawijayaWorkshop.DataInitializerConsoleApp.csproj", "{06A0DE0B-8BBA-45DD-B93C-0BCFA59D45C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.SharedObject", "BrawijayaWorkshop.SharedObject\BrawijayaWorkshop.SharedObject.csproj", "{BABA5337-E545-4419-A55A-CFCB5C9F5806}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{06A0DE0B-8BBA-45DD-B93C-0BCFA59D45C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06A0DE0B-8BBA-45DD-B93C-0BCFA59D45C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06A0DE0B-8BBA-45DD-B93C-0BCFA59D45C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BABA5337-E545-4419-A55A-CFCB5C9F5806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BABA5337-E545-4419-A55A-CFCB5C9F5806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BABA5337-E545-4419-A55A-CFCB5C9F5806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BABA5337-E545-4419-A55A-CFCB5C9F5806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,5 +99,6 @@ Global
 		{26119B53-0E9A-4C13-8C2E-BC032FCB1686} = {16BF9EDF-9770-4BD4-9878-A6DB5E945B73}
 		{F693D1DE-664E-4371-BB2C-C9EEB90AD7CF} = {949A10B9-2D5C-46E4-BB3F-3E652526128E}
 		{7EA16C88-7273-4683-A59C-E8DED545662E} = {16BF9EDF-9770-4BD4-9878-A6DB5E945B73}
+		{BABA5337-E545-4419-A55A-CFCB5C9F5806} = {16BF9EDF-9770-4BD4-9878-A6DB5E945B73}
 	EndGlobalSection
 EndGlobal

@@ -54,6 +54,10 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -452,6 +456,10 @@
     <ProjectReference Include="..\BrawijayaWorkshop.Runtime\BrawijayaWorkshop.Runtime.csproj">
       <Project>{7ea16c88-7273-4683-a59c-e8ded545662e}</Project>
       <Name>BrawijayaWorkshop.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BrawijayaWorkshop.SharedObject\BrawijayaWorkshop.SharedObject.csproj">
+      <Project>{baba5337-e545-4419-a55a-cfcb5c9f5806}</Project>
+      <Name>BrawijayaWorkshop.SharedObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\BrawijayaWorkshop.Utils\BrawijayaWorkshop.Utils.csproj">
       <Project>{49f696dc-cd3f-491e-a729-1b78cb550dda}</Project>
