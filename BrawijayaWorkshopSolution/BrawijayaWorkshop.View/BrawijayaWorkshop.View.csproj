@@ -73,6 +73,10 @@
       <Project>{e93349f1-53b0-453f-907a-4700ecfb6ba5}</Project>
       <Name>BrawijayaWorkshop.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BrawijayaWorkshop.SharedObject\BrawijayaWorkshop.SharedObject.csproj">
+      <Project>{baba5337-e545-4419-a55a-cfcb5c9f5806}</Project>
+      <Name>BrawijayaWorkshop.SharedObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
