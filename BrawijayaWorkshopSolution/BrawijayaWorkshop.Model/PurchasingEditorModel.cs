@@ -49,8 +49,11 @@ namespace BrawijayaWorkshop.Model
             return Mapper.Map<List<PurchasingDetail>, List<PurchasingDetailViewModel>>(listEntity);
         }
 
-        public void InsertPurchasing(Purchasing purchasing, List<PurchasingDetail> purchasingDetails, int userID)
+        public void InsertPurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetailsViewModel, int userID)
         {
+            List<PurchasingDetail> purchasingDetails = Mapper.Map<List<PurchasingDetailViewModel>, 
+                List<PurchasingDetail>>(purchasingDetailsViewModel);
+                
             DateTime serverTime = DateTime.Now;
 
             purchasing.CreateDate = serverTime;
@@ -109,11 +112,14 @@ namespace BrawijayaWorkshop.Model
             Recalculate(purchasingInserted);
         }
 
-        public void UpdatePurchasing(Purchasing purchasing, List<PurchasingDetail> purchasingDetails, int userID)
+        public void UpdatePurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetailsViewModel, int userID)
         {
             DateTime serverTime = DateTime.Now;
 
-            List<PurchasingDetailViewModel> purchasingDetailsDB = RetrievePurchasingDetail(purchasing.Id);
+            List<PurchasingDetail> purchasingDetails = Mapper.Map<List<PurchasingDetailViewModel>,
+                List<PurchasingDetail>>(purchasingDetailsViewModel);
+
+            List<PurchasingDetail> purchasingDetailsDB = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasing.Id).ToList();
             List<Purchasing> list = _purchasingRepository.GetAll().ToList();
             //check for updated and deleted item
             foreach (var itemPurchasingDetailDB in purchasingDetailsDB)
