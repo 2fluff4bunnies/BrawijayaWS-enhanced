@@ -82,8 +82,9 @@
             this.lookUpCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Kategori")});
-            this.lookUpCategory.Properties.DisplayMember = "Value";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Kode"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Kategori")});
+            this.lookUpCategory.Properties.DisplayMember = "Name";
             this.lookUpCategory.Properties.HideSelection = false;
             this.lookUpCategory.Properties.NullText = "-- Kategori --";
             this.lookUpCategory.Properties.ValueMember = "Id";

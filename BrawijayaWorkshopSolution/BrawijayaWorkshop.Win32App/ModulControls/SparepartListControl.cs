@@ -47,6 +47,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void SparepartListControl_Load(object sender, EventArgs e)
         {
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 

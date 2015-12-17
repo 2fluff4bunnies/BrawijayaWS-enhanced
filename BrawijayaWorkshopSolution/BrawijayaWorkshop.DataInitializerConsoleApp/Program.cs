@@ -17,7 +17,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             string dirPath = "D:/Documents/Bengkel App/";
             string accFile = "Account Jurnal.xlsx";
             string invFile = "Inv.xlsx";
-
+            string citFile = "City.xlsx";
             try
             {
                 try
@@ -74,6 +74,28 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 // todo: read excel inventory and acc and insert into temporary table
                 DataTable resultInv = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
                 DataTable resultAcc = DataExportImportUtils.CreateDataTableFromExcel(dirPath + accFile, true);
+                DataTable resultCit = DataExportImportUtils.CreateDataTableFromExcel(dirPath + citFile, true);
+                if (resultCit != null)
+                {
+                    resultCit.ExportDataTableToCsv(dirPath + "city.csv");
+                    // insert into database
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        conn.Open();
+
+                        MySqlBulkLoader loader = new MySqlBulkLoader(conn);
+                        loader.TableName = "cities";
+                        loader.FieldTerminator = "\t";
+                        loader.LineTerminator = "\n";
+                        loader.FileName = dirPath + "city.csv";
+                        loader.NumberOfLinesToSkip = 1;
+                        int inserted = loader.Load();
+                        Console.WriteLine("Total rows: " + inserted);
+
+                        conn.Close();
+                    }
+                }
+
                 if (resultInv != null)
                 {
                     // fix typing error
@@ -199,6 +221,26 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         MySqlCommand cmd = conn.CreateCommand();
                         cmd.CommandText = @"UPDATE journalmasters a
                                             SET a.ParentId = (SELECT z.Id FROM (SELECT x.*, y.Kode FROM journalmasters x, temp_acc y WHERE x.Code=y.Induk) z WHERE z.Kode=a.Code)";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"DROP TABLE temp_inv";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"DROP TABLE temp_acc";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
                         cmd.ExecuteNonQuery();
