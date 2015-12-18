@@ -17,10 +17,13 @@ namespace BrawijayaWorkshop.View
         List<Reference> CategoryDropdownList { get; set; }
         List<SPKDetailMechanic> SPKMechanicList { get; set; }
         List<SPKDetailSparepart> SPKSparepartList { get; set; }
-        List<SPKDetailSparepartDetail> SparepartDetailList { get; set; }
+        List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
 
         List<Sparepart> SparepartLookupList { get; set; }
         List<Mechanic> MechanicLookupList { get; set; }
+
+        Sparepart SelectedSparepart { get; }
+        Mechanic SelectedMechanic { get;}
 
         string Code { get; set; }
         DateTime DueDate { get; set; }
