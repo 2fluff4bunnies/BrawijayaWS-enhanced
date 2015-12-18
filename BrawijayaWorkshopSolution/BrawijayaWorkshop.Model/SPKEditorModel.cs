@@ -146,10 +146,20 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public List<SparepartDetail> getRandomDetails(int sparepartId, int qty)
+        public List<SPKDetailSparepartDetail> getRandomDetails(int sparepartId, int qty)
         {
-            List<SparepartDetail> result = _sparepartDetailRepository.GetMany(
+            List<SparepartDetail> sparepartDetails = _sparepartDetailRepository.GetMany(
                 spd => spd.SparepartId == sparepartId && spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active).OrderBy(spd => spd.Id).Take(qty).ToList();
+
+            List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
+
+            foreach (var item in sparepartDetails)
+            {
+                SPKDetailSparepartDetail spkSparepartDetail = new SPKDetailSparepartDetail
+                {
+                    SparepartDetailId = item.Id
+                };
+            }
 
             return result;
         }

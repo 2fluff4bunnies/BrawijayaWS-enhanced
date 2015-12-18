@@ -19,11 +19,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
             _presenter = new SPKEditorPresenter(this, model);
 
-            txtQty.ReadOnly = true;
-            txtFee.ReadOnly = true;
+            //txtQty.ReadOnly = true;
+            //txtFee.ReadOnly = true;
 
             this.Load += SPKEditorForm_Load;
 
+            SPKSparepartList = new List<SPKDetailSparepart>();
+            SPKMechanicList = new List<SPKDetailMechanic>();
         }
 
         void SPKEditorForm_Load(object sender, EventArgs e)
@@ -102,7 +104,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKDetailSparepartDetail> SparepartDetailList { get; set; }
+        public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
 
 
         public string Code { get; set; }
@@ -242,6 +244,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 lookUpMechanic.Properties.DataSource = value;
             }
         }
+
+        public Mechanic SelectedMechanic
+        {
+            get
+            {
+                return lookUpMechanic.GetSelectedDataRow() as Mechanic;
+            }
+        }
+
+        public Sparepart SelectedSparepart
+        {
+            get
+            {
+                return lookUpSparepart.GetSelectedDataRow() as Sparepart;
+            }
+        }
         #endregion
 
         #region Methods
@@ -265,11 +283,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
+            _presenter.populateSparepartDetail();
+
+            decimal totalPrice = 0;
+
+            foreach (var item in SPKSparepartDetailList)
+            {
+                totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+            }
+
             SPKSparepartList.Add(new SPKDetailSparepart
             {
                 SparepartId = SparepartId,
-                quantity = SparepartQty
+                quantity = SparepartQty,
+                TotalPrice = totalPrice
             });
+
+            gridSparepart.DataSource = SPKSparepartList;
+            gvSparepart.BestFitColumns();
         }
 
         private void btnAddMechanic_Click(object sender, EventArgs e)

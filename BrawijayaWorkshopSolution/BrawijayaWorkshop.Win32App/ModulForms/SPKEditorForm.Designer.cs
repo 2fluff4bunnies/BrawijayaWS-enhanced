@@ -144,7 +144,8 @@
             this.lookUpSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSparepart.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StokQty", "Stok")});
             this.lookUpSparepart.Properties.DisplayMember = "Name";
             this.lookUpSparepart.Properties.HideSelection = false;
             this.lookUpSparepart.Properties.NullText = "";
@@ -305,7 +306,7 @@
             // colSparepartCode
             // 
             this.colSparepartCode.Caption = "Kode";
-            this.colSparepartCode.FieldName = "Code";
+            this.colSparepartCode.FieldName = "Sparepart.Code";
             this.colSparepartCode.Name = "colSparepartCode";
             this.colSparepartCode.Visible = true;
             this.colSparepartCode.VisibleIndex = 1;
@@ -313,7 +314,7 @@
             // colSparepartName
             // 
             this.colSparepartName.Caption = "Nama";
-            this.colSparepartName.FieldName = "Name";
+            this.colSparepartName.FieldName = "Sparepart.Name";
             this.colSparepartName.Name = "colSparepartName";
             this.colSparepartName.Visible = true;
             this.colSparepartName.VisibleIndex = 2;
@@ -321,7 +322,7 @@
             // colSparepartCategory
             // 
             this.colSparepartCategory.Caption = "Kategori";
-            this.colSparepartCategory.FieldName = "CategoryReference.Value";
+            this.colSparepartCategory.FieldName = "Sparepart.CategoryReference.Value";
             this.colSparepartCategory.Name = "colSparepartCategory";
             this.colSparepartCategory.Visible = true;
             this.colSparepartCategory.VisibleIndex = 0;
@@ -329,7 +330,7 @@
             // colPrice
             // 
             this.colPrice.Caption = "Harga";
-            this.colPrice.FieldName = "SparePartDetail.Price";
+            this.colPrice.FieldName = "TotalPrice";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
             this.colPrice.VisibleIndex = 3;

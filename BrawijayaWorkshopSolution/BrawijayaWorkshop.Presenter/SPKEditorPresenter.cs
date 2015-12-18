@@ -14,7 +14,10 @@ namespace BrawijayaWorkshop.Presenter
     public class SPKEditorPresenter : BasePresenter<ISPKEditorView, SPKEditorModel>
     {
         public SPKEditorPresenter(ISPKEditorView view, SPKEditorModel model)
-            : base(view, model) { }
+            : base(view, model) { 
+        
+        
+        }
 
         public void InitFormData()
         {
@@ -45,13 +48,14 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.DueDate = View.DueDate;
 
 
-            Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SparepartDetailList, LoginInformation.UserId);
+            Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId);
 
         }
 
         public void populateSparepartDetail( )
         {
-            Model.getRandomDetails(View.SparepartId, View.SparepartQty);
+            View.SPKSparepartDetailList = Model.getRandomDetails(View.SelectedSparepart.Id, View.SparepartQty);
         }
+
     }
 }
