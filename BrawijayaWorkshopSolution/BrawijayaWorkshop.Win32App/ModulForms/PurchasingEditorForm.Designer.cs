@@ -99,6 +99,7 @@
             // 
             // btnAddSparepart
             // 
+            this.btnAddSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.btnAddSparepart.Location = new System.Drawing.Point(5, 95);
             this.btnAddSparepart.Name = "btnAddSparepart";
             this.btnAddSparepart.Size = new System.Drawing.Size(132, 23);
@@ -116,7 +117,7 @@
             this.gridPurchasingDetail.Name = "gridPurchasingDetail";
             this.gridPurchasingDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbSparepartGv});
-            this.gridPurchasingDetail.Size = new System.Drawing.Size(566, 193);
+            this.gridPurchasingDetail.Size = new System.Drawing.Size(568, 199);
             this.gridPurchasingDetail.TabIndex = 4;
             this.gridPurchasingDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasingDetail});
@@ -259,6 +260,7 @@
             // 
             // deleteSparepartToolStripMenuItem
             // 
+            this.deleteSparepartToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.deleteSparepartToolStripMenuItem.Name = "deleteSparepartToolStripMenuItem";
             this.deleteSparepartToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.deleteSparepartToolStripMenuItem.Text = "Hapus Sparepart";
@@ -266,9 +268,11 @@
             // 
             // viewSparepartDetailToolStripMenuItem
             // 
+            this.viewSparepartDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
             this.viewSparepartDetailToolStripMenuItem.Name = "viewSparepartDetailToolStripMenuItem";
             this.viewSparepartDetailToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.viewSparepartDetailToolStripMenuItem.Text = "Lihat Sparepart Detail";
+            this.viewSparepartDetailToolStripMenuItem.Click += new System.EventHandler(this.viewSparepartDetailToolStripMenuItem_Click);
             // 
             // PurchasingEditorForm
             // 
@@ -277,7 +281,7 @@
             this.ClientSize = new System.Drawing.Size(578, 372);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Name = "PurchasingEditorForm";
-            this.Text = "PurchasingEditorForm";
+            this.Text = "Form Penerimaan Barang";
             this.Controls.SetChildIndex(this.gcPurchasingInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();

@@ -5,6 +5,7 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -207,6 +208,20 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Purchasing selesai", true);
+        }
+
+        private void gvPurchasing_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            ColumnView view = sender as ColumnView;
+            if (e.Column.FieldName == "Status" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "Status");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Belum Disetujui"; break;
+                    case 1: e.DisplayText = "Telah Disetujui"; break;
+                }
+            }
         }
 
     }

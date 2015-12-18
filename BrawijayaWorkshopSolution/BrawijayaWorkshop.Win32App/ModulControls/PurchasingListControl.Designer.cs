@@ -45,6 +45,7 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -154,7 +155,8 @@
             this.gvPurchasing.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colDatePurchasing,
             this.colSupplierNamePurchasing,
-            this.colTotalPricePurchasing});
+            this.colTotalPricePurchasing,
+            this.colStatus});
             this.gvPurchasing.GridControl = this.gridPurchasing;
             this.gvPurchasing.Name = "gvPurchasing";
             this.gvPurchasing.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -172,6 +174,7 @@
             this.gvPurchasing.ViewCaption = "Daftar Penerimaan";
             this.gvPurchasing.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvPurchasing_PopupMenuShowing);
             this.gvPurchasing.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvPurchasing_FocusedRowChanged);
+            this.gvPurchasing.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvPurchasing_CustomColumnDisplayText);
             // 
             // colDatePurchasing
             // 
@@ -217,6 +220,14 @@
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 3;
+            // 
             // PurchasingListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +268,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
 
     }
 }

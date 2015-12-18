@@ -23,11 +23,20 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SparepartDetail> SearchSparepart(int sparepartId, DbConstant.SparepartDetailDataStatus status)
+        public List<SparepartDetail> SearchSparepart(int sparepartId, DbConstant.SparepartDetailDataStatus status, int purchaseDetailID)
         {
-            List<SparepartDetail> result = _sparepartDetailRepository.GetMany(
+            List<SparepartDetail> result = new List<SparepartDetail>();
+            if (purchaseDetailID > 0)
+            {
+                result = _sparepartDetailRepository.GetMany(
+                spd => spd.SparepartId == sparepartId && spd.Status == (int)status
+                    && spd.PurchasingDetailId == purchaseDetailID).ToList();
+            }
+            else
+            {
+                result = _sparepartDetailRepository.GetMany(
                 spd => spd.SparepartId == sparepartId && spd.Status == (int)status).ToList();
-
+            }
             return result;
         }
     }

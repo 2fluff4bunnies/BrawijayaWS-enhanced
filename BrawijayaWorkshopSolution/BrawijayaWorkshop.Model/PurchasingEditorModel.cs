@@ -46,20 +46,19 @@ namespace BrawijayaWorkshop.Model
         public List<PurchasingDetailViewModel> RetrievePurchasingDetail(int purchasingID)
         {
             List<PurchasingDetail> listEntity = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
-            return Mapper.Map<List<PurchasingDetail>, List<PurchasingDetailViewModel>>(listEntity);
+            List<PurchasingDetailViewModel> result = ConvertPurchasingDetailEntityToViewModel(listEntity);
+            return result;
         }
 
-        public void InsertPurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetailsViewModel, int userID)
+        public void InsertPurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
         {
-            List<PurchasingDetail> purchasingDetails = Mapper.Map<List<PurchasingDetailViewModel>, 
-                List<PurchasingDetail>>(purchasingDetailsViewModel);
-                
             DateTime serverTime = DateTime.Now;
 
             purchasing.CreateDate = serverTime;
             purchasing.CreateUserId = userID;
             purchasing.ModifyUserId = userID;
             purchasing.ModifyDate = serverTime;
+            purchasing.Status = (int)DbConstant.PurchasingStatus.NotVerified;
             Purchasing purchasingInserted = _purchasingRepository.Add(purchasing);
 
             foreach (var itemPurchasingDetail in purchasingDetails)
@@ -77,12 +76,17 @@ namespace BrawijayaWorkshop.Model
                 sparepartDB.ModifyDate = serverTime;
                 _sparepartRepository.Update(sparepartDB);
 
-                itemPurchasingDetail.CreateDate = serverTime;
-                itemPurchasingDetail.CreateUserId = userID;
-                itemPurchasingDetail.ModifyUserId = userID;
-                itemPurchasingDetail.ModifyDate = serverTime;
-                itemPurchasingDetail.PurchasingId = purchasingInserted.Id;
-                PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(itemPurchasingDetail);
+                PurchasingDetail newPurchasingDetail = new PurchasingDetail();
+                newPurchasingDetail.CreateDate = serverTime;
+                newPurchasingDetail.CreateUserId = userID;
+                newPurchasingDetail.ModifyUserId = userID;
+                newPurchasingDetail.ModifyDate = serverTime;
+                newPurchasingDetail.PurchasingId = purchasingInserted.Id;
+                newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
+                newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
+                newPurchasingDetail.Price = itemPurchasingDetail.Price;
+                newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
+                PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
 
                 for (int i = 1; i <= itemPurchasingDetail.Qty; i++)
                 {
@@ -112,19 +116,19 @@ namespace BrawijayaWorkshop.Model
             Recalculate(purchasingInserted);
         }
 
-        public void UpdatePurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetailsViewModel, int userID)
+        public void UpdatePurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
         {
             DateTime serverTime = DateTime.Now;
-
-            List<PurchasingDetail> purchasingDetails = Mapper.Map<List<PurchasingDetailViewModel>,
-                List<PurchasingDetail>>(purchasingDetailsViewModel);
+            purchasing.ModifyUserId = userID;
+            purchasing.ModifyDate = serverTime;
+            _purchasingRepository.Update(purchasing);
 
             List<PurchasingDetail> purchasingDetailsDB = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasing.Id).ToList();
             List<Purchasing> list = _purchasingRepository.GetAll().ToList();
             //check for updated and deleted item
             foreach (var itemPurchasingDetailDB in purchasingDetailsDB)
             {
-                PurchasingDetail itemUpdated = purchasingDetails.Where(i => i.Id == itemPurchasingDetailDB.Id).FirstOrDefault();
+                PurchasingDetailViewModel itemUpdated = purchasingDetails.Where(i => i.Id == itemPurchasingDetailDB.Id).FirstOrDefault();
                 if (itemUpdated != null)
                 {
                     //update
@@ -133,8 +137,10 @@ namespace BrawijayaWorkshop.Model
                         //update stock
                         Sparepart sparepartDB = _sparepartRepository.GetById(itemUpdated.SparepartId);
 
-                        SparepartDetail lastSPDetail = _sparepartDetailRepository.
-                            GetMany(c => c.SparepartId == itemUpdated.SparepartId).FirstOrDefault();
+                        SparepartDetail lastSPDetail =  _sparepartDetailRepository.
+                                                            GetMany(c => c.SparepartId == itemUpdated.SparepartId)
+                                                            .OrderByDescending(c => c.Id)
+                                                            .FirstOrDefault();
                         string lastSPID = string.Empty;
                         if (lastSPDetail != null) lastSPID = lastSPDetail.Code;
 
@@ -145,11 +151,13 @@ namespace BrawijayaWorkshop.Model
 
                         int diffQty = itemPurchasingDetailDB.Qty - itemUpdated.Qty;
                         int absDiffQty = Math.Abs(diffQty);
-                        if (diffQty < 0)
+                        if (diffQty > 0)
                         {
                             List<SparepartDetail> listDetailDeleted = _sparepartDetailRepository
-                                .GetMany(c => c.SparepartId == sparepartDB.Id).Take(absDiffQty)
-                                .OrderByDescending(c => c.Code).ToList();
+                                .GetMany(c => c.SparepartId == sparepartDB.Id && c.PurchasingDetailId == itemUpdated.Id)
+                                .OrderByDescending(c => c.Code)
+                                .Take(absDiffQty).ToList();
+                                
                             foreach (var itemDetailDeleted in listDetailDeleted)
                             {
                                 _sparepartDetailRepository.Delete(itemDetailDeleted);
@@ -159,9 +167,6 @@ namespace BrawijayaWorkshop.Model
                         {
                             for (int i = 1; i <= absDiffQty; i++)
                             {
-                                SparepartDetail spDetail = new SparepartDetail();
-                                spDetail.PurchasingDetailId = itemUpdated.Id;
-                                spDetail.SparepartId = sparepartDB.Id;
                                 string spDetailCode = string.Empty;
                                 if (string.IsNullOrEmpty(lastSPID))
                                 {
@@ -171,7 +176,11 @@ namespace BrawijayaWorkshop.Model
                                 {
                                     spDetailCode = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + i)
                                                         .ToString("D10");
-                                } 
+                                }
+                                SparepartDetail spDetail = new SparepartDetail();
+                                spDetail.PurchasingDetailId = itemUpdated.Id;
+                                spDetail.SparepartId = sparepartDB.Id;
+                                spDetail.Code = spDetailCode;
                                 spDetail.CreateDate = serverTime;
                                 spDetail.CreateUserId = userID;
                                 spDetail.ModifyUserId = userID;
@@ -181,24 +190,30 @@ namespace BrawijayaWorkshop.Model
                             }
                         }
                     }
-                    itemUpdated.ModifyUserId = userID;
-                    itemUpdated.ModifyDate = serverTime;
-                    _purchasingDetailRepository.Update(itemUpdated);
+                    PurchasingDetail purchasingDetailUpdated = _purchasingDetailRepository.GetById(itemUpdated.Id);
+                    purchasingDetailUpdated.PurchasingId = itemUpdated.PurchasingId;
+                    purchasingDetailUpdated.SparepartId = itemUpdated.SparepartId;
+                    purchasingDetailUpdated.Qty = itemUpdated.Qty;
+                    purchasingDetailUpdated.Price = itemUpdated.Price;
+                    purchasingDetailUpdated.ModifyUserId = userID;
+                    purchasingDetailUpdated.ModifyDate = serverTime;
+                    _purchasingDetailRepository.Update(purchasingDetailUpdated);
 
                     purchasingDetails.Remove(itemUpdated);
                 }
                 else
                 {
                     //delete
-                    Sparepart sparepartDB = _sparepartRepository.GetById(itemUpdated.SparepartId);
+                    Sparepart sparepartDB = _sparepartRepository.GetById(itemPurchasingDetailDB.SparepartId);
                     sparepartDB.StockQty = sparepartDB.StockQty - itemPurchasingDetailDB.Qty;
                     sparepartDB.ModifyUserId = userID;
                     sparepartDB.ModifyDate = serverTime;
                     _sparepartRepository.Update(sparepartDB);
 
                     List<SparepartDetail> listDetailDeleted = _sparepartDetailRepository
-                        .GetMany(c => c.SparepartId == sparepartDB.Id).Take(itemPurchasingDetailDB.Qty)
-                        .OrderByDescending(c => c.Code).ToList();
+                                .GetMany(c => c.SparepartId == sparepartDB.Id && c.PurchasingDetailId == itemPurchasingDetailDB.Id)
+                                .OrderByDescending(c => c.Code)
+                                .Take(itemPurchasingDetailDB.Qty).ToList();
                     foreach (var itemDetailDeleted in listDetailDeleted)
                     {
                         _sparepartDetailRepository.Delete(itemDetailDeleted);
@@ -214,7 +229,8 @@ namespace BrawijayaWorkshop.Model
                 Sparepart sparepartDB = _sparepartRepository.GetById(itemPurchasingDetail.SparepartId);
 
                 SparepartDetail lastSPDetail = _sparepartDetailRepository.
-                            GetMany(c => c.SparepartId == itemPurchasingDetail.SparepartId).FirstOrDefault();
+                            GetMany(c => c.SparepartId == itemPurchasingDetail.SparepartId)
+                            .OrderByDescending(c=>c.Id).FirstOrDefault();
                 string lastSPID = string.Empty;
                 if (lastSPDetail != null) lastSPID = lastSPDetail.Code; 
 
@@ -223,18 +239,20 @@ namespace BrawijayaWorkshop.Model
                 sparepartDB.ModifyDate = serverTime;
                 _sparepartRepository.Update(sparepartDB);
 
-                itemPurchasingDetail.PurchasingId = purchasing.Id;
-                itemPurchasingDetail.CreateDate = serverTime;
-                itemPurchasingDetail.CreateUserId = userID;
-                itemPurchasingDetail.ModifyUserId = userID;
-                itemPurchasingDetail.ModifyDate = serverTime;
-                PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(itemPurchasingDetail);
+                PurchasingDetail newPurchasingDetail = new PurchasingDetail();
+                newPurchasingDetail.PurchasingId = purchasing.Id;
+                newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
+                newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
+                newPurchasingDetail.Price = itemPurchasingDetail.Price;
+                newPurchasingDetail.CreateDate = serverTime;
+                newPurchasingDetail.CreateUserId = userID;
+                newPurchasingDetail.ModifyUserId = userID;
+                newPurchasingDetail.ModifyDate = serverTime;
+                newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
+                PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
 
                 for (int i = 1; i <= itemPurchasingDetail.Qty; i++)
                 {
-                    SparepartDetail spDetail = new SparepartDetail();
-                    spDetail.PurchasingDetailId = itemPurchasingDetail.Id;
-                    spDetail.SparepartId = sparepartDB.Id;
                     string spDetailCode = string.Empty;
                     if (string.IsNullOrEmpty(lastSPID))
                     {
@@ -245,7 +263,10 @@ namespace BrawijayaWorkshop.Model
                         spDetailCode = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + i)
                             .ToString("D10");
                     }
+                    SparepartDetail spDetail = new SparepartDetail();
+                    spDetail.SparepartId = sparepartDB.Id;
                     spDetail.PurchasingDetailId = purchasingDetailInserted.Id;
+                    spDetail.Code = spDetailCode;
                     spDetail.CreateDate = serverTime;
                     spDetail.CreateUserId = userID;
                     spDetail.ModifyUserId = userID;
@@ -255,9 +276,6 @@ namespace BrawijayaWorkshop.Model
                 }
 
             }
-            purchasing.ModifyUserId = userID;
-            purchasing.ModifyDate = serverTime;
-            _purchasingRepository.Update(purchasing);
 
             _unitOfWork.SaveChanges();
             Recalculate(purchasing);
@@ -276,5 +294,23 @@ namespace BrawijayaWorkshop.Model
             _purchasingRepository.Update(purchasing);
             _unitOfWork.SaveChanges();
         }
+
+        public List<PurchasingDetailViewModel> ConvertPurchasingDetailEntityToViewModel(List<PurchasingDetail> list)
+        {
+            List<PurchasingDetailViewModel> result = new List<PurchasingDetailViewModel>();
+            foreach (var item in list)
+            {
+                result.Add(new PurchasingDetailViewModel
+                    {
+                        PurchasingId = item.PurchasingId,
+                        SparepartId = item.SparepartId,
+                        Qty = item.Qty,
+                        Price = item.Price,
+                        Id = item.Id
+                    });
+            }
+            return result;
+        }
+
     }
 }

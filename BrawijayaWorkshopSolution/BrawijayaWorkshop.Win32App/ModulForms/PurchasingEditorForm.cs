@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using BrawijayaWorkshop.Constant;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -178,6 +179,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void deleteSparepartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gvPurchasingDetail.DeleteSelectedRows();
+        }
+
+        private void viewSparepartDetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedPurchasingDetail != null)
+            {
+                SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
+                Sparepart sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
+                editor.SelectedSparepart = sparepart;
+                editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.NotVerified;
+                editor.PurchasingDetailID = SelectedPurchasingDetail.Id;
+                editor.ShowDialog(this);
+            }
         }
     }
 }

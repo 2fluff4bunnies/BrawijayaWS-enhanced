@@ -31,6 +31,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public Sparepart SelectedSparepart { get; set; }
 
+        public int PurchasingDetailID { get; set; }
         public int SelectedStatus
         {
             get

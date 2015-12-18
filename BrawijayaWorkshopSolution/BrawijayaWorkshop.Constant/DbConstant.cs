@@ -58,7 +58,7 @@ namespace BrawijayaWorkshop.Constant
             OutPurchase = 2,
             OutService = 3,
             Broken = 4,
-            NotVerified = 5
+            NotVerified = 0
         }
 
         public enum ApprovalStatus
@@ -87,6 +87,12 @@ namespace BrawijayaWorkshop.Constant
             pending = 0,
             ready = 1,
             printed = 2
+        }
+
+        public enum PurchasingStatus
+        {
+            NotVerified = 0,
+            Active = 1,
         }
     }
 }

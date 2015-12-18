@@ -13,7 +13,7 @@ namespace BrawijayaWorkshop.Presenter
         public void LoadDetailList()
         {
             View.SparepartDetailListData = Model.SearchSparepart(View.SelectedSparepart.Id,
-                (DbConstant.SparepartDetailDataStatus)View.SelectedStatus);
+                (DbConstant.SparepartDetailDataStatus)View.SelectedStatus, View.PurchasingDetailID);
         }
     }
 }
