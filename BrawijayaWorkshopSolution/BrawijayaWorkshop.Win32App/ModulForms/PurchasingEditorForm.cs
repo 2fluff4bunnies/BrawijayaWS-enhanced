@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -32,7 +33,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void gvPurchasingDetail_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedPurchasingDetail = gvPurchasingDetail.GetFocusedRow() as PurchasingDetail;
+            this.SelectedPurchasingDetail = gvPurchasingDetail.GetFocusedRow() as PurchasingDetailViewModel;
         }
 
         private void gvPurchasingDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -52,7 +53,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         public Purchasing SelectedPurchasing { get; set; }
-        public PurchasingDetail SelectedPurchasingDetail { get; set; }
+        public PurchasingDetailViewModel SelectedPurchasingDetail { get; set; }
 
         #region Field Editor
         public DateTime Date
@@ -119,12 +120,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<PurchasingDetail> ListPurchasingDetail
+        public List<PurchasingDetailViewModel> ListPurchasingDetail
         {
             get
             {
-                //return gridPurchasingDetail.DataSource as List<PurchasingDetail>; not used
-                return bsDetails.DataSource as List<PurchasingDetail>;
+                return bsDetails.DataSource as List<PurchasingDetailViewModel>;
             }
             set
             {
@@ -159,21 +159,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 catch (Exception ex)
                 {
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
-                    this.ShowError("Proses simpan data customer: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                    this.ShowError("Proses simpan data penerimaan dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
                 }
             }
         }
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            //PurchasingDetail newItem = ListPurchasingDetail.FirstOrDefault();
-            //newItem.Id = 0;
-            //newItem.Price = 0;
-            //newItem.Qty = 0;
-            //newItem.Sparepart = ListSparepart.FirstOrDefault();
-
-            //ListPurchasingDetail.Add(newItem);
-            //gridPurchasingDetail.DataSource = ListPurchasingDetail;
             gvPurchasingDetail.AddNewRow();
         }
 

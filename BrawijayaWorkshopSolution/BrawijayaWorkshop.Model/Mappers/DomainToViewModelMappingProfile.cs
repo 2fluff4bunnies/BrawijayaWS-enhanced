@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BrawijayaWorkshop.Database.Entities;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 
 namespace BrawijayaWorkshop.Model.Mappers
 {
@@ -7,7 +9,7 @@ namespace BrawijayaWorkshop.Model.Mappers
         protected override void Configure()
         {
             //TODO: Add Mapping Entity to ViewModel
-            //Mapper.CreateMap<ApplicationModul, ApplicationModulViewModel>();
+            Mapper.CreateMap<Purchasing, PurchasingViewModel>();
         }
     }
 }

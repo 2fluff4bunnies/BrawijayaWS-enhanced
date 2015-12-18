@@ -135,7 +135,6 @@
             this.gvPurchasingDetail.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
             this.gvPurchasingDetail.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             this.gvPurchasingDetail.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvPurchasingDetail.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvPurchasingDetail.OptionsView.ShowGroupPanel = false;
             this.gvPurchasingDetail.OptionsView.ShowViewCaption = true;
             this.gvPurchasingDetail.ViewCaption = "Daftar Sparepart";
@@ -174,7 +173,7 @@
             // 
             // colPrice
             // 
-            this.colPrice.Caption = "Sub Total";
+            this.colPrice.Caption = "Harga per Item";
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
