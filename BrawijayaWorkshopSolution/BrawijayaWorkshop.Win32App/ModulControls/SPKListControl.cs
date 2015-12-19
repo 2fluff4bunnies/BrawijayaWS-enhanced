@@ -36,8 +36,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             this.Load += SPKListControl_Load;
 
-            //by default active spk will displayed
-            StatusFilter = 1;
+            //by default pending spk will displayed
+            this.StatusFilter = 0;
         }
 
         protected override string ModulName

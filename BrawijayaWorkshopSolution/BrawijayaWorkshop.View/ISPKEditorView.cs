@@ -22,8 +22,11 @@ namespace BrawijayaWorkshop.View
         List<Sparepart> SparepartLookupList { get; set; }
         List<Mechanic> MechanicLookupList { get; set; }
 
-        Sparepart SelectedSparepart { get; }
-        Mechanic SelectedMechanic { get;}
+        Sparepart SparepartToInsert { get; }
+        Mechanic MechanicToInsert { get;}
+
+        Sparepart SelectedSparepart { get; set; }
+        Mechanic SelectedMechanic { get; set; }
 
         string Code { get; set; }
         DateTime DueDate { get; set; }

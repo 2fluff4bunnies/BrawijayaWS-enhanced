@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public int Id { get; set; }
 
         [Required]
-        public int quantity { get; set; }
+        public int TotalQuantity { get; set; }
 
         [Required]
         public decimal TotalPrice { get; set; }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using BrawijayaWorkshop.Utils;
 using System.Reflection;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -24,8 +26,46 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.Load += SPKEditorForm_Load;
 
+            gvSparepart.PopupMenuShowing += gvSparepart_PopupMenuShowing;
+            gvSparepart.FocusedRowChanged += gvSparepart_FocusedRowChanged;
+
+            gvMechanic.PopupMenuShowing += gvMechanic_PopupMenuShowing;
+            gvMechanic.FocusedRowChanged += gvMechanic_FocusedRowChanged;
+
             SPKSparepartList = new List<SPKDetailSparepart>();
             SPKMechanicList = new List<SPKDetailMechanic>();
+        }
+
+        void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            this.SelectedMechanic = gvMechanic.GetFocusedRow() as Mechanic;
+        }
+
+        void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsMechanicEditor.Show(view.GridControl, e.Point);
+            }
+        }
+
+        void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            this.SelectedSparepart = gvSparepart.GetFocusedRow() as Sparepart;
+        }
+
+        void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsSparepartEditor.Show(view.GridControl, e.Point);
+            }
         }
 
         void SPKEditorForm_Load(object sender, EventArgs e)
@@ -67,17 +107,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return gridMechanic.DataSource as List<SPKDetailMechanic>;
+                return gcMechanic.DataSource as List<SPKDetailMechanic>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
                 }
                 else
                 {
-                    gridMechanic.DataSource = value;
+                    gcMechanic.DataSource = value;
                     gvMechanic.BestFitColumns();
                 }
             }
@@ -88,17 +128,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             get
             {
-                return gridSparepart.DataSource as List<SPKDetailSparepart>;
+                return gcSparepart.DataSource as List<SPKDetailSparepart>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridSparepart.DataSource = value; gvSparepart.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gcSparepart.DataSource = value; gvSparepart.BestFitColumns(); }));
                 }
                 else
                 {
-                    gridSparepart.DataSource = value;
+                    gcSparepart.DataSource = value;
                     gvSparepart.BestFitColumns();
                 }
             }
@@ -245,7 +285,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public Mechanic SelectedMechanic
+        public Mechanic MechanicToInsert
         {
             get
             {
@@ -253,13 +293,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public Sparepart SelectedSparepart
+        public Sparepart SparepartToInsert
         {
             get
             {
                 return lookUpSparepart.GetSelectedDataRow() as Sparepart;
             }
         }
+
+        public Sparepart SelectedSparepart { get; set; }
+        public Mechanic SelectedMechanic { get; set; }
         #endregion
 
         #region Methods
@@ -294,22 +337,44 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             SPKSparepartList.Add(new SPKDetailSparepart
             {
+                Sparepart = SparepartToInsert,
                 SparepartId = SparepartId,
-                quantity = SparepartQty,
+                TotalQuantity = SparepartQty,
                 TotalPrice = totalPrice
             });
 
-            gridSparepart.DataSource = SPKSparepartList;
+            gcSparepart.DataSource = SPKSparepartList;
             gvSparepart.BestFitColumns();
+
+            ClearSparepart();
+
+        }
+
+        public void ClearSparepart()
+        {
+            this.SparepartQty = 0;
+            this.SparepartName = string.Empty;
         }
 
         private void btnAddMechanic_Click(object sender, EventArgs e)
         {
             SPKMechanicList.Add(new SPKDetailMechanic
             {
+                Mechanic = MechanicToInsert,
                 MechanicId = MechanicId,
                 Fee = MechanicFee
             });
+
+            gcMechanic.DataSource = SPKMechanicList;
+            gvMechanic.BestFitColumns();
+
+            ClearMechanic();
+        }
+
+        public void ClearMechanic()
+        {
+            this.MechanicFee = 0;
+            this.MechanicName = string.Empty;
         }
 
         #endregion
@@ -333,7 +398,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             SPKDetailSparepart sparepartToEdit = gvSparepart.GetFocusedRow() as SPKDetailSparepart;
             lookUpSparepart.Text = sparepartToEdit.Sparepart.Name;
             lookUpSparepart.EditValue = sparepartToEdit.Sparepart.Id;
-            txtFee.Text = sparepartToEdit.quantity.ToString();
+            txtFee.Text = sparepartToEdit.TotalQuantity.ToString();
         }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)

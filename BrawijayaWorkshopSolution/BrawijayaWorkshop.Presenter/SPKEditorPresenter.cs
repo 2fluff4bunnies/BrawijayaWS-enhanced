@@ -44,9 +44,7 @@ namespace BrawijayaWorkshop.Presenter
 
             View.SelectedSPK.CategoryReferenceId = View.CategoryId;
             View.SelectedSPK.VehicleId = View.VehicleId;
-            View.SelectedSPK.Code = View.Code;
             View.SelectedSPK.DueDate = View.DueDate;
-
 
             Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId);
 
@@ -54,7 +52,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void populateSparepartDetail( )
         {
-            View.SPKSparepartDetailList = Model.getRandomDetails(View.SelectedSparepart.Id, View.SparepartQty);
+            View.SPKSparepartDetailList = Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty);
         }
 
     }

@@ -464,8 +464,6 @@ namespace BrawijayaWorkshop.Database
                 ParentId = refSparepartUnit.Id
             });
 
-          
-
             // SPK Category child
             context.References.Add(new Reference
             {
@@ -507,6 +505,28 @@ namespace BrawijayaWorkshop.Database
             {
                 Key = DbConstant.SETTING_FINGERPRINT_PORT,
                 Value = "4370"
+            });
+
+            // SPK Threshold Setting
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_SPK_THRESHOLD_MIN,
+                Value = "2000000"
+            });
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_SPK_THRESHOLD_MED_MIN,
+                Value = "3000000"
+            });
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_SPK_THRESHOLD_MED_MAX,
+                Value = "4000000"
+            });
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_SPK_THRESHOLD_MAX,
+                Value = "5000000"
             });
             
             // todo: insert initial data here

@@ -39,18 +39,12 @@
             this.lblQty = new DevExpress.XtraEditors.LabelControl();
             this.txtQty = new DevExpress.XtraEditors.TextEdit();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
-            this.gridMechanic = new DevExpress.XtraGrid.GridControl();
+            this.gcMechanic = new DevExpress.XtraGrid.GridControl();
             this.gvMechanic = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colMechanicMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMechanicMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddMechanic = new DevExpress.XtraEditors.SimpleButton();
-            this.gridSparepart = new DevExpress.XtraGrid.GridControl();
-            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSparepartCategory = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -62,21 +56,23 @@
             this.valCategory = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valDueDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.cmsSparepartEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsEditDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMechanicEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
+            this.gcSparepart = new DevExpress.XtraGrid.GridControl();
+            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotalQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             this.gcSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFee.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridMechanic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).BeginInit();
@@ -86,6 +82,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
             this.cmsSparepartEditor.SuspendLayout();
             this.cmsMechanicEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSPK
@@ -93,6 +91,7 @@
             this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSPK.Controls.Add(this.gcSparepart);
             this.gcSPK.Controls.Add(this.lookUpMechanic);
             this.gcSPK.Controls.Add(this.lookUpSparepart);
             this.gcSPK.Controls.Add(this.lblFee);
@@ -101,9 +100,8 @@
             this.gcSPK.Controls.Add(this.lblQty);
             this.gcSPK.Controls.Add(this.txtQty);
             this.gcSPK.Controls.Add(this.lblSparepart);
-            this.gcSPK.Controls.Add(this.gridMechanic);
+            this.gcSPK.Controls.Add(this.gcMechanic);
             this.gcSPK.Controls.Add(this.btnAddMechanic);
-            this.gcSPK.Controls.Add(this.gridSparepart);
             this.gcSPK.Controls.Add(this.btnAddSparepart);
             this.gcSPK.Controls.Add(this.lblCategory);
             this.gcSPK.Controls.Add(this.labelControl1);
@@ -204,23 +202,23 @@
             // 
             // gridMechanic
             // 
-            this.gridMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gcMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridMechanic.Location = new System.Drawing.Point(15, 288);
-            this.gridMechanic.MainView = this.gvMechanic;
-            this.gridMechanic.Name = "gridMechanic";
-            this.gridMechanic.Size = new System.Drawing.Size(448, 96);
-            this.gridMechanic.TabIndex = 18;
-            this.gridMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gcMechanic.Location = new System.Drawing.Point(15, 288);
+            this.gcMechanic.MainView = this.gvMechanic;
+            this.gcMechanic.Name = "gridMechanic";
+            this.gcMechanic.Size = new System.Drawing.Size(448, 96);
+            this.gcMechanic.TabIndex = 18;
+            this.gcMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMechanic});
             // 
             // gvMechanic
             // 
             this.gvMechanic.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colMechanicMechanic,
             this.gridColumnCode,
+            this.colMechanicMechanic,
             this.colFee});
-            this.gvMechanic.GridControl = this.gridMechanic;
+            this.gvMechanic.GridControl = this.gcMechanic;
             this.gvMechanic.Name = "gvMechanic";
             this.gvMechanic.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvMechanic.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -235,25 +233,26 @@
             this.gvMechanic.OptionsView.ShowViewCaption = true;
             this.gvMechanic.ViewCaption = "Mekanik Terlibat";
             // 
-            // colMechanicMechanic
-            // 
-            this.colMechanicMechanic.Caption = "Nama Mechanic";
-            this.colMechanicMechanic.FieldName = "Name";
-            this.colMechanicMechanic.Name = "colMechanicMechanic";
-            this.colMechanicMechanic.Visible = true;
-            this.colMechanicMechanic.VisibleIndex = 1;
-            // 
             // gridColumnCode
             // 
             this.gridColumnCode.Caption = "Kode";
-            this.gridColumnCode.FieldName = "Code";
+            this.gridColumnCode.FieldName = "Mechanic.Code";
             this.gridColumnCode.Name = "gridColumnCode";
             this.gridColumnCode.Visible = true;
             this.gridColumnCode.VisibleIndex = 0;
             // 
+            // colMechanicMechanic
+            // 
+            this.colMechanicMechanic.Caption = "Nama Mechanic";
+            this.colMechanicMechanic.FieldName = "Mechanic.Name";
+            this.colMechanicMechanic.Name = "colMechanicMechanic";
+            this.colMechanicMechanic.Visible = true;
+            this.colMechanicMechanic.VisibleIndex = 1;
+            // 
             // colFee
             // 
             this.colFee.Caption = "Ongkos";
+            this.colFee.FieldName = "Fee";
             this.colFee.Name = "colFee";
             this.colFee.Visible = true;
             this.colFee.VisibleIndex = 2;
@@ -269,71 +268,6 @@
             this.btnAddMechanic.TabIndex = 8;
             this.btnAddMechanic.Text = "Tambah Mekanik";
             this.btnAddMechanic.Click += new System.EventHandler(this.btnAddMechanic_Click);
-            // 
-            // gridSparepart
-            // 
-            this.gridSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridSparepart.Location = new System.Drawing.Point(15, 141);
-            this.gridSparepart.MainView = this.gvSparepart;
-            this.gridSparepart.Name = "gridSparepart";
-            this.gridSparepart.Size = new System.Drawing.Size(448, 98);
-            this.gridSparepart.TabIndex = 16;
-            this.gridSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvSparepart});
-            // 
-            // gvSparepart
-            // 
-            this.gvSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colSparepartCode,
-            this.colSparepartName,
-            this.colSparepartCategory,
-            this.colPrice});
-            this.gvSparepart.GridControl = this.gridSparepart;
-            this.gvSparepart.Name = "gvSparepart";
-            this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvSparepart.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvSparepart.OptionsBehavior.Editable = false;
-            this.gvSparepart.OptionsBehavior.ReadOnly = true;
-            this.gvSparepart.OptionsCustomization.AllowColumnMoving = false;
-            this.gvSparepart.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvSparepart.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvSparepart.OptionsView.ShowGroupPanel = false;
-            this.gvSparepart.OptionsView.ShowViewCaption = true;
-            this.gvSparepart.ViewCaption = "Penggunaan Sparepart";
-            // 
-            // colSparepartCode
-            // 
-            this.colSparepartCode.Caption = "Kode";
-            this.colSparepartCode.FieldName = "Sparepart.Code";
-            this.colSparepartCode.Name = "colSparepartCode";
-            this.colSparepartCode.Visible = true;
-            this.colSparepartCode.VisibleIndex = 1;
-            // 
-            // colSparepartName
-            // 
-            this.colSparepartName.Caption = "Nama";
-            this.colSparepartName.FieldName = "Sparepart.Name";
-            this.colSparepartName.Name = "colSparepartName";
-            this.colSparepartName.Visible = true;
-            this.colSparepartName.VisibleIndex = 2;
-            // 
-            // colSparepartCategory
-            // 
-            this.colSparepartCategory.Caption = "Kategori";
-            this.colSparepartCategory.FieldName = "Sparepart.CategoryReference.Value";
-            this.colSparepartCategory.Name = "colSparepartCategory";
-            this.colSparepartCategory.Visible = true;
-            this.colSparepartCategory.VisibleIndex = 0;
-            // 
-            // colPrice
-            // 
-            this.colPrice.Caption = "Harga";
-            this.colPrice.FieldName = "TotalPrice";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 3;
             // 
             // btnAddSparepart
             // 
@@ -424,18 +358,9 @@
             // cmsSparepartEditor
             // 
             this.cmsSparepartEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsEditDataSparepart,
             this.cmsDeleteDataSparepart});
             this.cmsSparepartEditor.Name = "cmsListEditor";
-            this.cmsSparepartEditor.Size = new System.Drawing.Size(136, 48);
-            // 
-            // cmsEditDataSparepart
-            // 
-            this.cmsEditDataSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsEditDataSparepart.Name = "cmsEditDataSparepart";
-            this.cmsEditDataSparepart.Size = new System.Drawing.Size(135, 22);
-            this.cmsEditDataSparepart.Text = "Ubah Data";
-            this.cmsEditDataSparepart.Click += new System.EventHandler(this.cmsEditDataSparepart_Click);
+            this.cmsSparepartEditor.Size = new System.Drawing.Size(136, 26);
             // 
             // cmsDeleteDataSparepart
             // 
@@ -448,18 +373,9 @@
             // cmsMechanicEditor
             // 
             this.cmsMechanicEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editDataMechanic,
             this.cmsDeleteDataMechanic});
             this.cmsMechanicEditor.Name = "cmsListEditor";
-            this.cmsMechanicEditor.Size = new System.Drawing.Size(136, 48);
-            // 
-            // editDataMechanic
-            // 
-            this.editDataMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.editDataMechanic.Name = "editDataMechanic";
-            this.editDataMechanic.Size = new System.Drawing.Size(135, 22);
-            this.editDataMechanic.Text = "Ubah Data";
-            this.editDataMechanic.Click += new System.EventHandler(this.editDataMechanic_Click);
+            this.cmsMechanicEditor.Size = new System.Drawing.Size(136, 26);
             // 
             // cmsDeleteDataMechanic
             // 
@@ -468,6 +384,68 @@
             this.cmsDeleteDataMechanic.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteDataMechanic.Text = "Hapus Data";
             this.cmsDeleteDataMechanic.Click += new System.EventHandler(this.cmsDeleteDataMechanic_Click);
+            // 
+            // gcSparepart
+            // 
+            this.gcSparepart.Location = new System.Drawing.Point(15, 143);
+            this.gcSparepart.MainView = this.gvSparepart;
+            this.gcSparepart.Name = "gcSparepart";
+            this.gcSparepart.Size = new System.Drawing.Size(448, 99);
+            this.gcSparepart.TabIndex = 28;
+            this.gcSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvSparepart});
+            // 
+            // gvSparepart
+            // 
+            this.gvSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colSparepartName,
+            this.colSparepartCode,
+            this.colTotalQty,
+            this.colTotalPrice});
+            this.gvSparepart.GridControl = this.gcSparepart;
+            this.gvSparepart.Name = "gvSparepart";
+            this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSparepart.OptionsBehavior.Editable = false;
+            this.gvSparepart.OptionsBehavior.ReadOnly = true;
+            this.gvSparepart.OptionsCustomization.AllowColumnMoving = false;
+            this.gvSparepart.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvSparepart.OptionsMenu.EnableFooterMenu = false;
+            this.gvSparepart.OptionsView.ShowGroupPanel = false;
+            this.gvSparepart.OptionsView.ShowViewCaption = true;
+            this.gvSparepart.ViewCaption = "Penggunaan Sparepart";
+            // 
+            // colSparepartName
+            // 
+            this.colSparepartName.Caption = "Sparepart";
+            this.colSparepartName.FieldName = "Sparepart.Name";
+            this.colSparepartName.Name = "colSparepartName";
+            this.colSparepartName.Visible = true;
+            this.colSparepartName.VisibleIndex = 0;
+            // 
+            // colSparepartCode
+            // 
+            this.colSparepartCode.Caption = "Kode";
+            this.colSparepartCode.FieldName = "Sparepart.Code";
+            this.colSparepartCode.Name = "colSparepartCode";
+            this.colSparepartCode.Visible = true;
+            this.colSparepartCode.VisibleIndex = 1;
+            // 
+            // colTotalQty
+            // 
+            this.colTotalQty.Caption = "Jumlah";
+            this.colTotalQty.FieldName = "TotalQuantity";
+            this.colTotalQty.Name = "colTotalQty";
+            this.colTotalQty.Visible = true;
+            this.colTotalQty.VisibleIndex = 2;
+            // 
+            // colTotalPrice
+            // 
+            this.colTotalPrice.Caption = "Total Harga";
+            this.colTotalPrice.FieldName = "TotalPrice";
+            this.colTotalPrice.Name = "colTotalPrice";
+            this.colTotalPrice.Visible = true;
+            this.colTotalPrice.VisibleIndex = 3;
             // 
             // SPKEditorForm
             // 
@@ -486,10 +464,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFee.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridMechanic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).EndInit();
@@ -499,6 +475,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
             this.cmsSparepartEditor.ResumeLayout(false);
             this.cmsMechanicEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -514,7 +492,7 @@
         private DevExpress.XtraEditors.DateEdit dtpDueDate;
         private DevExpress.XtraEditors.SimpleButton btnAddSparepart;
         private DevExpress.XtraEditors.SimpleButton btnAddMechanic;
-        private DevExpress.XtraGrid.GridControl gridMechanic;
+        private DevExpress.XtraGrid.GridControl gcMechanic;
         private DevExpress.XtraGrid.Views.Grid.GridView gvMechanic;
         private DevExpress.XtraGrid.Columns.GridColumn colMechanicMechanic;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCode;
@@ -526,21 +504,19 @@
         private DevExpress.XtraEditors.TextEdit txtFee;
         private DevExpress.XtraEditors.LabelControl lbMechanic;
         private DevExpress.XtraEditors.LabelControl lblQty;
-        private DevExpress.XtraEditors.TextEdit txtQty;
         private DevExpress.XtraEditors.LabelControl lblSparepart;
-        private DevExpress.XtraGrid.GridControl gridSparepart;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvSparepart;
-        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
-        private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
-        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCategory;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
         private DevExpress.XtraEditors.LookUpEdit lookUpMechanic;
-        private DevExpress.XtraEditors.LookUpEdit lookUpSparepart;
         private System.Windows.Forms.ContextMenuStrip cmsSparepartEditor;
-        private System.Windows.Forms.ToolStripMenuItem cmsEditDataSparepart;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteDataSparepart;
         private System.Windows.Forms.ContextMenuStrip cmsMechanicEditor;
-        private System.Windows.Forms.ToolStripMenuItem editDataMechanic;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteDataMechanic;
+        private DevExpress.XtraEditors.LookUpEdit lookUpSparepart;
+        private DevExpress.XtraEditors.TextEdit txtQty;
+        private DevExpress.XtraGrid.GridControl gcSparepart;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSparepart;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
     }
 }

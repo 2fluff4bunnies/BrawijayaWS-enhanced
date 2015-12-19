@@ -28,6 +28,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public int StatusPrintId { get; set; }
 
         [Required]
+        public int StatusCompletedId { get; set; }
+
+        [Required]
         public int CategoryReferenceId { get; set; }
 
         public virtual Reference CategoryReference { get; set; }
