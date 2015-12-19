@@ -489,6 +489,67 @@ namespace BrawijayaWorkshop.Database
                 Value = "L",
                 ParentId = refSPKCategory.Id
             });
+
+            // Transaction Table
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_PURCHASING,
+                Name = "Purchasing Table",
+                Description = "Tabel Transaksi Purchasing",
+                Value = DbConstant.REF_TRANSTBL_PURCHASING
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_SPK,
+                Name = "SPK Table",
+                Description = "Tabel Transaksi SPK",
+                Value = DbConstant.REF_TRANSTBL_SPK
+            });
+            context.SaveChanges();
+
+            // Purchasing Payment Method
+            Reference purchasePaymentMethodRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD,
+                Name = "Purchase Payment Method",
+                Description = "Jenis pembayaran untuk pembelian sparepart",
+                Value = DbConstant.REF_PURCHASE_PAYMENTMETHOD
+            });
+            context.SaveChanges();
+
+            // Purchasing Payment Method Children
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA,
+                Name = "Purchase Payment Method - Uang Muka",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka",
+                Value = "1.01.05",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_KAS,
+                Name = "Purchase Payment Method - Kas",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang kas",
+                Value = "1.01.01",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK,
+                Name = "Purchase Payment Method - Bank",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan transfer bank",
+                Value = "1.01.02",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG,
+                Name = "Purchase Payment Method - Utang",
+                Description = "Jenis pembayaran untuk pembelian sparepart dengan cara utang",
+                Value = "2.01",
+                ParentId = purchasePaymentMethodRef.Id
+            });
             context.SaveChanges();
 
             context.Settings.Add(new Setting

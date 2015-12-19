@@ -32,6 +32,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<SPKDetailMechanic> SPKDetailMechanics { get; set; }
         public DbSet<SPKDetailSparepart> SPKDetailSpareparts { get; set; }
         public DbSet<SPKDetailSparepartDetail> SPKDetailSparepartDetails { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionDetail> TransactionDetails { get; set; }
 
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
@@ -57,6 +59,8 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new SPKDetailMechanicConfiguration());
             modelBuilder.Configurations.Add(new SPKDetailSparepartConfiguration());
             modelBuilder.Configurations.Add(new SPKDetailSparepartDetailConfiguration());
+            modelBuilder.Configurations.Add(new TransactionConfiguration());
+            modelBuilder.Configurations.Add(new TransactionDetailConfiguration());
         }
     }
 }

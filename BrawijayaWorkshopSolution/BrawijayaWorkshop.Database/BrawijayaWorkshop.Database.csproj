@@ -71,6 +71,8 @@
     <Compile Include="Configurations\SPKDetailMechanicConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartDetailConfiguration.cs" />
+    <Compile Include="Configurations\TransactionConfiguration.cs" />
+    <Compile Include="Configurations\TransactionDetailConfiguration.cs" />
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
     <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="Entities\SPKDetailSparepart.cs" />
     <Compile Include="Entities\SPKDetailSparepartDetail.cs" />
     <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Entities\TransactionDetail.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\Vehicle.cs" />
