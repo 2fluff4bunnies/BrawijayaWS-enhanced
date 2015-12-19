@@ -113,5 +113,11 @@ namespace BrawijayaWorkshop.Constant
             NotVerified = 0,
             Active = 1,
         }
+
+        public enum PurchasingPayment
+        {
+            Cash = 1,
+            Debt = 2,
+        }
     }
 }

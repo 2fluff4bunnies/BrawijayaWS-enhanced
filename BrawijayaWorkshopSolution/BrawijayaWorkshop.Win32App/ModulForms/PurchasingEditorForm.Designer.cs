@@ -95,7 +95,7 @@
             this.gcPurchasingInfo.Name = "gcPurchasingInfo";
             this.gcPurchasingInfo.Size = new System.Drawing.Size(578, 323);
             this.gcPurchasingInfo.TabIndex = 1;
-            this.gcPurchasingInfo.Text = "Informasi Penerimaan";
+            this.gcPurchasingInfo.Text = "Informasi Pembelian";
             // 
             // btnAddSparepart
             // 
@@ -192,9 +192,9 @@
             // 
             this.lblDate.Location = new System.Drawing.Point(19, 30);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(97, 13);
+            this.lblDate.Size = new System.Drawing.Size(89, 13);
             this.lblDate.TabIndex = 1;
-            this.lblDate.Text = "Tanggal Penerimaan";
+            this.lblDate.Text = "Tanggal Pembelian";
             // 
             // cbSupplier
             // 
@@ -256,7 +256,7 @@
             this.deleteSparepartToolStripMenuItem,
             this.viewSparepartDetailToolStripMenuItem});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(187, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(187, 70);
             // 
             // deleteSparepartToolStripMenuItem
             // 
@@ -281,7 +281,7 @@
             this.ClientSize = new System.Drawing.Size(578, 372);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Name = "PurchasingEditorForm";
-            this.Text = "Form Penerimaan Barang";
+            this.Text = "Form Pembelian Barang";
             this.Controls.SetChildIndex(this.gcPurchasingInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();

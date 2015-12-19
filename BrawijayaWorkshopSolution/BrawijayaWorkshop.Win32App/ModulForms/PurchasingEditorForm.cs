@@ -160,7 +160,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 catch (Exception ex)
                 {
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
-                    this.ShowError("Proses simpan data penerimaan dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                    this.ShowError("Proses simpan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
                 }
             }
         }

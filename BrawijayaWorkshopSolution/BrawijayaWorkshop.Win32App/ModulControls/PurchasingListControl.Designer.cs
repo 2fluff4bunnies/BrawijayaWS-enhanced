@@ -42,10 +42,12 @@
             this.colDatePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSupplierNamePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPricePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.persetujuanPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lihatSelengkapnyaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -121,9 +123,9 @@
             // 
             this.lblFilterDate.Location = new System.Drawing.Point(14, 34);
             this.lblFilterDate.Name = "lblFilterDate";
-            this.lblFilterDate.Size = new System.Drawing.Size(97, 13);
+            this.lblFilterDate.Size = new System.Drawing.Size(89, 13);
             this.lblFilterDate.TabIndex = 1;
-            this.lblFilterDate.Text = "Tanggal Penerimaan";
+            this.lblFilterDate.Text = "Tanggal Pembelian";
             // 
             // btnNewPurchasing
             // 
@@ -134,7 +136,7 @@
             this.btnNewPurchasing.Name = "btnNewPurchasing";
             this.btnNewPurchasing.Size = new System.Drawing.Size(144, 23);
             this.btnNewPurchasing.TabIndex = 3;
-            this.btnNewPurchasing.Text = "Buat Penerimaan Baru";
+            this.btnNewPurchasing.Text = "Buat Pembelian Baru";
             this.btnNewPurchasing.Click += new System.EventHandler(this.btnNewPurchasing_Click);
             // 
             // gridPurchasing
@@ -171,7 +173,7 @@
             this.gvPurchasing.OptionsView.EnableAppearanceEvenRow = true;
             this.gvPurchasing.OptionsView.ShowGroupPanel = false;
             this.gvPurchasing.OptionsView.ShowViewCaption = true;
-            this.gvPurchasing.ViewCaption = "Daftar Penerimaan";
+            this.gvPurchasing.ViewCaption = "Daftar Pembelian";
             this.gvPurchasing.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvPurchasing_PopupMenuShowing);
             this.gvPurchasing.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvPurchasing_FocusedRowChanged);
             this.gvPurchasing.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvPurchasing_CustomColumnDisplayText);
@@ -200,6 +202,14 @@
             this.colTotalPricePurchasing.Visible = true;
             this.colTotalPricePurchasing.VisibleIndex = 2;
             // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 3;
+            // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
@@ -208,25 +218,32 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsEditData});
+            this.cmsEditData,
+            this.persetujuanPembelianToolStripMenuItem,
+            this.lihatSelengkapnyaToolStripMenuItem});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(130, 26);
+            this.cmsEditor.Size = new System.Drawing.Size(196, 92);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(129, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(195, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
-            // colStatus
+            // persetujuanPembelianToolStripMenuItem
             // 
-            this.colStatus.Caption = "Status";
-            this.colStatus.FieldName = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 3;
+            this.persetujuanPembelianToolStripMenuItem.Name = "persetujuanPembelianToolStripMenuItem";
+            this.persetujuanPembelianToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.persetujuanPembelianToolStripMenuItem.Text = "Persetujuan Pembelian";
+            this.persetujuanPembelianToolStripMenuItem.Click += new System.EventHandler(this.persetujuanPembelianToolStripMenuItem_Click);
+            // 
+            // lihatSelengkapnyaToolStripMenuItem
+            // 
+            this.lihatSelengkapnyaToolStripMenuItem.Name = "lihatSelengkapnyaToolStripMenuItem";
+            this.lihatSelengkapnyaToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.lihatSelengkapnyaToolStripMenuItem.Text = "Lihat Selengkapnya";
             // 
             // PurchasingListControl
             // 
@@ -269,6 +286,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private System.Windows.Forms.ToolStripMenuItem persetujuanPembelianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lihatSelengkapnyaToolStripMenuItem;
 
     }
 }

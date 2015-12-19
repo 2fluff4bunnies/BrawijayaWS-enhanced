@@ -48,6 +48,7 @@
     <Compile Include="MechanicEditorPresenter.cs" />
     <Compile Include="MechanicListPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchasingApprovalPresenter.cs" />
     <Compile Include="PurchasingEditorPresenter.cs" />
     <Compile Include="PurchasingListPresenter.cs" />
     <Compile Include="SparepartDetailListPresenter.cs" />

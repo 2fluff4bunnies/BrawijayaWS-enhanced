@@ -52,6 +52,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvPurchasing_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedPurchasing = gvPurchasing.GetFocusedRow() as Purchasing;
+            if (this.SelectedPurchasing != null)
+            {
+                if(this.SelectedPurchasing.Status == (int) DbConstant.PurchasingStatus.NotVerified)
+                {
+                    cmsEditData.Visible = true;
+                    persetujuanPembelianToolStripMenuItem.Visible = true;
+                    lihatSelengkapnyaToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                    cmsEditData.Visible = false;
+                    persetujuanPembelianToolStripMenuItem.Visible = false;
+                    lihatSelengkapnyaToolStripMenuItem.Visible = true;
+                }
+            }
         }
 
         private void gvPurchasing_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -165,28 +180,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        //private void cmsDeleteData_Click(object sender, EventArgs e)
-        //{
-        //    if (SelectedPurchasing == null) return;
-
-        //    if (this.ShowConfirmation("Apakah anda yakin ingin menghapus Purchasing: '" + SelectedPurchasing.CompanyName + "'?") == DialogResult.Yes)
-        //    {
-        //        try
-        //        {
-        //            MethodBase.GetCurrentMethod().Info("Deleting Purchasing: " + SelectedPurchasing.CompanyName);
-
-        //            _presenter.DeletePurchasing();
-
-        //            btnSearch.PerformClick(); // refresh data
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete Purchasing: '" + SelectedPurchasing.CompanyName + "'", ex);
-        //            this.ShowError("Proses hapus data Purchasing: '" + SelectedPurchasing.CompanyName + "' gagal!");
-        //        }
-        //    }
-        //}
-
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -221,6 +214,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     case 0: e.DisplayText = "Belum Disetujui"; break;
                     case 1: e.DisplayText = "Telah Disetujui"; break;
                 }
+            }
+        }
+
+        private void persetujuanPembelianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_selectedPurchasing != null)
+            {
+                PurchasingApprovalForm editor = Bootstrapper.Resolve<PurchasingApprovalForm>();
+                editor.SelectedPurchasing = _selectedPurchasing;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
             }
         }
 
