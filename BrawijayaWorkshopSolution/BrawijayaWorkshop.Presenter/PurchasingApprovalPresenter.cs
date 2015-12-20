@@ -24,12 +24,15 @@ namespace BrawijayaWorkshop.Presenter
                 View.DateStr = View.SelectedPurchasing.Date.ToString("dd-MM-yyyy");
                 View.SupplierName = View.SelectedPurchasing.Supplier.Name;
                 View.ListPurchasingDetail = Model.RetrievePurchasingDetail(View.SelectedPurchasing.Id);
+                View.ListPaymentMethod = Model.RetrievePaymentMethod();                
             }
         }
 
         public void Approve()
         {
-            Model.Approve(View.SelectedPurchasing);
+            View.SelectedPurchasing.PaymentMethodId = View.PaymentMethodId;
+            View.SelectedPurchasing.TotalHasPaid = View.TotalHasPaid;
+            Model.Approve(View.SelectedPurchasing, LoginInformation.UserId);
         }
 
         public void Reject()

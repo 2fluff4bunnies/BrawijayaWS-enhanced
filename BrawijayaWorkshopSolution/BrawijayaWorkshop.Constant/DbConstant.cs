@@ -114,10 +114,5 @@ namespace BrawijayaWorkshop.Constant
             Active = 1,
         }
 
-        public enum PurchasingPayment
-        {
-            Cash = 1,
-            Debt = 2,
-        }
     }
 }

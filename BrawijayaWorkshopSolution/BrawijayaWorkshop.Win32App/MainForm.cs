@@ -288,10 +288,9 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iMechanic_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            //MechanicListControl listMechanic = Bootstrapper.Resolve<MechanicListControl>();
-            //ShowUserControl(listMechanic);
-            PurchasingListControl listSparepart = Bootstrapper.Resolve<PurchasingListControl>();
-            ShowUserControl(listSparepart);
+            MechanicListControl listMechanic = Bootstrapper.Resolve<MechanicListControl>();
+            ShowUserControl(listMechanic);
+            
         }
 
         private void btnConfig_Click(object sender, EventArgs e)
@@ -300,13 +299,45 @@ namespace BrawijayaWorkshop.Win32App
             configForm.ShowDialog(this);
         }
 
-        private void iSPK_ItemClick(object sender, ItemClickEventArgs e)
+        private void iTransaction_ItemClick(object sender, ItemClickEventArgs e)
         {
-            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
 
+            ClearNavigation();
+            ClearUserControl();
+
+            // show navigation list
+            TransactionDataNavigationControl navTransactionData = new TransactionDataNavigationControl();
+            ShowNavigationControl(navTransactionData);
+            // init event navigation
+            navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
+            navTransactionData.iSPK.LinkClicked += iSPK_LinkClicked;
+        }
+
+        private void iPurchasing_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            PurchasingListControl listPurchasing = Bootstrapper.Resolve<PurchasingListControl>();
+            ShowUserControl(listPurchasing);
+        }
+
+        private void iSPK_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
             SPKListControl listSPK = Bootstrapper.Resolve<SPKListControl>();
             ShowUserControl(listSPK);
+        }
 
+        private void iReporting_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
+
+            ClearNavigation();
+            ClearUserControl();
+
+            // show navigation list
+            ReportingDataNavigationControl navTransactionData = new ReportingDataNavigationControl();
+            ShowNavigationControl(navTransactionData);
+            // init event navigation
+            //navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
         }
     }
 }

@@ -222,7 +222,7 @@
             this.persetujuanPembelianToolStripMenuItem,
             this.lihatSelengkapnyaToolStripMenuItem});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(196, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(196, 70);
             // 
             // cmsEditData
             // 
@@ -234,6 +234,7 @@
             // 
             // persetujuanPembelianToolStripMenuItem
             // 
+            this.persetujuanPembelianToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.approve_16x16;
             this.persetujuanPembelianToolStripMenuItem.Name = "persetujuanPembelianToolStripMenuItem";
             this.persetujuanPembelianToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.persetujuanPembelianToolStripMenuItem.Text = "Persetujuan Pembelian";
@@ -241,9 +242,11 @@
             // 
             // lihatSelengkapnyaToolStripMenuItem
             // 
+            this.lihatSelengkapnyaToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
             this.lihatSelengkapnyaToolStripMenuItem.Name = "lihatSelengkapnyaToolStripMenuItem";
             this.lihatSelengkapnyaToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.lihatSelengkapnyaToolStripMenuItem.Text = "Lihat Selengkapnya";
+            this.lihatSelengkapnyaToolStripMenuItem.Click += new System.EventHandler(this.lihatSelengkapnyaToolStripMenuItem_Click);
             // 
             // PurchasingListControl
             // 

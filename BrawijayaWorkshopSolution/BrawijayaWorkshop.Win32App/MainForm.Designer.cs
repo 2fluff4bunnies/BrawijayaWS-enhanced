@@ -63,6 +63,8 @@
             this.rgbiSkins = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.biStatusProgress = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemMarqueeProgressBar2 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
+            this.iTransaction = new DevExpress.XtraBars.BarButtonItem();
+            this.iReporting = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -72,7 +74,6 @@
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemMarqueeProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.iSPK = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).BeginInit();
@@ -150,10 +151,11 @@
             this.biStatusProgress,
             this.iNotification,
             this.iMaster,
-            this.iSPK});
+            this.iTransaction,
+            this.iReporting});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 71;
+            this.ribbonControl.MaxItemId = 72;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -268,6 +270,7 @@
             this.ribbonImageCollection.Images.SetKeyName(16, "supplier_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(17, "master_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(18, "SPK_16x16.png");
+            this.ribbonImageCollection.Images.SetKeyName(19, "reporting 16x16.png");
             // 
             // iNew
             // 
@@ -456,6 +459,24 @@
             // 
             this.repositoryItemMarqueeProgressBar2.Name = "repositoryItemMarqueeProgressBar2";
             // 
+            // iTransaction
+            // 
+            this.iTransaction.Caption = "Transaction";
+            this.iTransaction.Id = 70;
+            this.iTransaction.ImageIndex = 18;
+            this.iTransaction.LargeImageIndex = 12;
+            this.iTransaction.Name = "iTransaction";
+            this.iTransaction.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iTransaction_ItemClick);
+            // 
+            // iReporting
+            // 
+            this.iReporting.Caption = "Reporting";
+            this.iReporting.Id = 71;
+            this.iReporting.ImageIndex = 19;
+            this.iReporting.LargeImageIndex = 13;
+            this.iReporting.Name = "iReporting";
+            this.iReporting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iReporting_ItemClick);
+            // 
             // ribbonImageCollectionLarge
             // 
             this.ribbonImageCollectionLarge.ImageSize = new System.Drawing.Size(32, 32);
@@ -473,6 +494,7 @@
             this.ribbonImageCollectionLarge.Images.SetKeyName(10, "supplier_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(11, "master_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(12, "SPK_32x32.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(13, "reporting 32x32.png");
             // 
             // homeRibbonPage
             // 
@@ -487,7 +509,8 @@
             // 
             this.fileRibbonPageGroup.ItemLinks.Add(this.iNotification);
             this.fileRibbonPageGroup.ItemLinks.Add(this.iMaster);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iSPK);
+            this.fileRibbonPageGroup.ItemLinks.Add(this.iTransaction);
+            this.fileRibbonPageGroup.ItemLinks.Add(this.iReporting);
             this.fileRibbonPageGroup.Name = "fileRibbonPageGroup";
             this.fileRibbonPageGroup.Text = "Beranda";
             // 
@@ -531,15 +554,6 @@
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(742, 31);
-            // 
-            // iSPK
-            // 
-            this.iSPK.Caption = "SPK";
-            this.iSPK.Id = 70;
-            this.iSPK.ImageIndex = 18;
-            this.iSPK.LargeImageIndex = 12;
-            this.iSPK.Name = "iSPK";
-            this.iSPK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iSPK_ItemClick);
             // 
             // MainForm
             // 
@@ -620,7 +634,8 @@
         private DevExpress.XtraBars.BarButtonItem iNotification;
         private DevExpress.XtraBars.BarButtonItem iMaster;
         private DevExpress.XtraEditors.SimpleButton btnConfig;
-        private DevExpress.XtraBars.BarButtonItem iSPK;
+        private DevExpress.XtraBars.BarButtonItem iTransaction;
+        private DevExpress.XtraBars.BarButtonItem iReporting;
 
     }
 }

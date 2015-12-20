@@ -312,6 +312,18 @@
     <Compile Include="NavigationControls\MasterDataNavigationControl.Designer.cs">
       <DependentUpon>MasterDataNavigationControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="NavigationControls\ReportingDataNavigationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NavigationControls\ReportingDataNavigationControl.Designer.cs">
+      <DependentUpon>ReportingDataNavigationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationControls\TransactionDataNavigationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NavigationControls\TransactionDataNavigationControl.Designer.cs">
+      <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\InvoicePrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -416,6 +428,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\MasterDataNavigationControl.resx">
       <DependentUpon>MasterDataNavigationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavigationControls\ReportingDataNavigationControl.resx">
+      <DependentUpon>ReportingDataNavigationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavigationControls\TransactionDataNavigationControl.resx">
+      <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\InvoicePrintItem.resx">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
@@ -524,6 +542,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Images\approve 16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
     <Content Include="Resources\cancel_32x32.png" />

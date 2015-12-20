@@ -18,18 +18,21 @@ namespace BrawijayaWorkshop.Model
         private ISupplierRepository _supplierRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingEditorModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
             IPurchasingDetailRepository purchasingDetailRepository,
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            ISparepartDetailRepository sparepartDetailRepository,
+            IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
         {
             _purchasingDetailRepository = purchasingDetailRepository;
             _purchasingRepository = purchasingRepository;
             _supplierRepository = supplierRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -59,6 +62,8 @@ namespace BrawijayaWorkshop.Model
             purchasing.ModifyUserId = userID;
             purchasing.ModifyDate = serverTime;
             purchasing.Status = (int)DbConstant.PurchasingStatus.NotVerified;
+            purchasing.PaymentMethodId = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG).FirstOrDefault().Id;
+            purchasing.TotalHasPaid = 0;
             Purchasing purchasingInserted = _purchasingRepository.Add(purchasing);
 
             foreach (var itemPurchasingDetail in purchasingDetails)

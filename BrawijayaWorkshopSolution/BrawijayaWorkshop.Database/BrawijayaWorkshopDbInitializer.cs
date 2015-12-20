@@ -521,7 +521,7 @@ namespace BrawijayaWorkshop.Database
             context.References.Add(new Reference
             {
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA,
-                Name = "Purchase Payment Method - Uang Muka",
+                Name = "Uang Muka",
                 Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka",
                 Value = "1.01.05",
                 ParentId = purchasePaymentMethodRef.Id
@@ -529,7 +529,7 @@ namespace BrawijayaWorkshop.Database
             context.References.Add(new Reference
             {
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_KAS,
-                Name = "Purchase Payment Method - Kas",
+                Name = "Kas",
                 Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang kas",
                 Value = "1.01.01",
                 ParentId = purchasePaymentMethodRef.Id
@@ -537,7 +537,7 @@ namespace BrawijayaWorkshop.Database
             context.References.Add(new Reference
             {
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK,
-                Name = "Purchase Payment Method - Bank",
+                Name = "Bank",
                 Description = "Jenis pembayaran untuk pembelian sparepart menggunakan transfer bank",
                 Value = "1.01.02",
                 ParentId = purchasePaymentMethodRef.Id
@@ -545,7 +545,7 @@ namespace BrawijayaWorkshop.Database
             context.References.Add(new Reference
             {
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG,
-                Name = "Purchase Payment Method - Utang",
+                Name = "Utang",
                 Description = "Jenis pembayaran untuk pembelian sparepart dengan cara utang",
                 Value = "2.01",
                 ParentId = purchasePaymentMethodRef.Id

@@ -19,6 +19,8 @@ namespace BrawijayaWorkshop.View
         string DateStr { get; set; }
         List<PurchasingDetail> ListPurchasingDetail { get; set; }
         List<Sparepart> ListSparepart { get; set; }
+        List<Reference> ListPaymentMethod { get; set; }
+        int PaymentMethodId { get; set; }
         decimal TotalHasPaid { get; set; }
     }
 }

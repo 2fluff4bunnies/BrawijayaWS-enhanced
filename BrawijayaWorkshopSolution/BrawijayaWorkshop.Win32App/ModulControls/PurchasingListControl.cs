@@ -147,7 +147,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing Purchasing data...");
                 _selectedPurchasing = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Purchasing...", false);
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
@@ -200,7 +200,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Purchasing selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);
         }
 
         private void gvPurchasing_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
@@ -218,6 +218,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         private void persetujuanPembelianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_selectedPurchasing != null)
+            {
+                PurchasingApprovalForm editor = Bootstrapper.Resolve<PurchasingApprovalForm>();
+                editor.SelectedPurchasing = _selectedPurchasing;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void lihatSelengkapnyaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_selectedPurchasing != null)
             {

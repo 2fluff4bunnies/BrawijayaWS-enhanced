@@ -20,5 +20,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
+        public int PaymentMethodId { get; set; }
+        public virtual Reference PaymentMethod { get; set; }
     }
 }

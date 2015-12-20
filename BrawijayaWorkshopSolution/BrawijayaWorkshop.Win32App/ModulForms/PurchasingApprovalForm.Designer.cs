@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
+            this.lblDP = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnReject = new DevExpress.XtraEditors.SimpleButton();
             this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
@@ -44,7 +45,6 @@
             this.txtDP = new DevExpress.XtraEditors.TextEdit();
             this.cbPayment = new DevExpress.XtraEditors.LookUpEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.chkDP = new DevExpress.XtraEditors.CheckEdit();
             this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
             this.txtDate = new DevExpress.XtraEditors.TextEdit();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
@@ -52,6 +52,7 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lihatSparepartDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.valPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).BeginInit();
             this.gcPurchasingInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -61,7 +62,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchasingDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDP.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbPayment.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkDP.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             this.cmsEditor.SuspendLayout();
@@ -70,6 +70,7 @@
             // 
             // gcPurchasingInfo
             // 
+            this.gcPurchasingInfo.Controls.Add(this.lblDP);
             this.gcPurchasingInfo.Controls.Add(this.panelControl1);
             this.gcPurchasingInfo.Controls.Add(this.txtTotalPrice);
             this.gcPurchasingInfo.Controls.Add(this.labelControl2);
@@ -77,7 +78,6 @@
             this.gcPurchasingInfo.Controls.Add(this.txtDP);
             this.gcPurchasingInfo.Controls.Add(this.cbPayment);
             this.gcPurchasingInfo.Controls.Add(this.labelControl1);
-            this.gcPurchasingInfo.Controls.Add(this.chkDP);
             this.gcPurchasingInfo.Controls.Add(this.txtSupplier);
             this.gcPurchasingInfo.Controls.Add(this.txtDate);
             this.gcPurchasingInfo.Controls.Add(this.lblSupplier);
@@ -87,6 +87,15 @@
             this.gcPurchasingInfo.Size = new System.Drawing.Size(634, 372);
             this.gcPurchasingInfo.TabIndex = 0;
             this.gcPurchasingInfo.Text = "Informasi Pembelian";
+            // 
+            // lblDP
+            // 
+            this.lblDP.Location = new System.Drawing.Point(12, 125);
+            this.lblDP.Name = "lblDP";
+            this.lblDP.Size = new System.Drawing.Size(49, 13);
+            this.lblDP.TabIndex = 15;
+            this.lblDP.Text = "Jumlah DP";
+            this.lblDP.Visible = false;
             // 
             // panelControl1
             // 
@@ -108,6 +117,7 @@
             this.btnReject.Size = new System.Drawing.Size(75, 23);
             this.btnReject.TabIndex = 1;
             this.btnReject.Text = "Tolak";
+            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
             // 
             // btnApprove
             // 
@@ -116,6 +126,7 @@
             this.btnApprove.Size = new System.Drawing.Size(75, 23);
             this.btnApprove.TabIndex = 0;
             this.btnApprove.Text = "Setuju";
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // txtTotalPrice
             // 
@@ -199,6 +210,7 @@
             this.txtDP.Name = "txtDP";
             this.txtDP.Size = new System.Drawing.Size(167, 20);
             this.txtDP.TabIndex = 10;
+            this.txtDP.Visible = false;
             // 
             // cbPayment
             // 
@@ -206,15 +218,18 @@
             this.cbPayment.Name = "cbPayment";
             this.cbPayment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbPayment.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Metode")});
             this.cbPayment.Properties.DisplayMember = "Name";
             this.cbPayment.Properties.NullText = "--Pilih Pembayaran--";
-            this.cbPayment.Properties.ValueMember = "Value";
+            this.cbPayment.Properties.ValueMember = "Id";
             this.cbPayment.Size = new System.Drawing.Size(167, 20);
             this.cbPayment.TabIndex = 9;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
             conditionValidationRule2.ErrorText = "Pilih salah satu pembayaran";
             conditionValidationRule2.Value1 = "--Pilih Pembayaran--";
             this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule2);
+            this.cbPayment.EditValueChanged += new System.EventHandler(this.cbPayment_EditValueChanged);
             // 
             // labelControl1
             // 
@@ -223,14 +238,6 @@
             this.labelControl1.Size = new System.Drawing.Size(99, 13);
             this.labelControl1.TabIndex = 8;
             this.labelControl1.Text = "Metode Pembayaran";
-            // 
-            // chkDP
-            // 
-            this.chkDP.Location = new System.Drawing.Point(12, 122);
-            this.chkDP.Name = "chkDP";
-            this.chkDP.Properties.Caption = "DP";
-            this.chkDP.Size = new System.Drawing.Size(75, 19);
-            this.chkDP.TabIndex = 7;
             // 
             // txtSupplier
             // 
@@ -283,6 +290,11 @@
             // 
             this.valPayment.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // bgwSave
+            // 
+            this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
+            this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
+            // 
             // PurchasingApprovalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,7 +314,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchasingDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDP.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbPayment.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkDP.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             this.cmsEditor.ResumeLayout(false);
@@ -317,7 +328,6 @@
         private DevExpress.XtraEditors.LabelControl lblDate;
         private DevExpress.XtraEditors.LabelControl lblSupplier;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.CheckEdit chkDP;
         private DevExpress.XtraEditors.TextEdit txtSupplier;
         private DevExpress.XtraEditors.TextEdit txtDate;
         private DevExpress.XtraEditors.TextEdit txtDP;
@@ -335,5 +345,7 @@
         private DevExpress.XtraEditors.SimpleButton btnReject;
         private DevExpress.XtraEditors.SimpleButton btnApprove;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPayment;
+        private DevExpress.XtraEditors.LabelControl lblDP;
+        private System.ComponentModel.BackgroundWorker bgwSave;
     }
 }

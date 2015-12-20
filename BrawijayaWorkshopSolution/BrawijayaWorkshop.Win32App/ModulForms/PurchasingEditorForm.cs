@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Linq;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Constant;
+using System.ComponentModel;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -149,20 +150,43 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
+            if (!bgwSave.IsBusy)
+            {
+                MethodBase.GetCurrentMethod().Info("Save Purchasing's changes");
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses penyimpanan data pembelian...", false);
+                bgwSave.RunWorkerAsync();
+            }
+        }
+
+        private void bgwSave_DoWork(object sender, DoWorkEventArgs e)
+        {
             if (valSupplier.Validate() && valDate.Validate())
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Purchasing's changes");
                     _presenter.SaveChanges();
-                    this.Close();
                 }
                 catch (Exception ex)
                 {
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
-                    this.ShowError("Proses simpan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                    e.Result = ex;
                 }
             }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses simpan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian selesai", true);
+                this.Close();
+            }
+
+            
         }
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
