@@ -51,6 +51,7 @@
     <Compile Include="IPurchasingEditorView.cs" />
     <Compile Include="IPurchasingListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
+    <Compile Include="ISPKApprovalView.cs" />
     <Compile Include="ISPKDetailMechanicListView.cs" />
     <Compile Include="ISPKDetailSParepartListView.cs" />
     <Compile Include="ISPKEditorView.cs" />

@@ -3,21 +3,13 @@ using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Presenter
 {
     public class SPKEditorPresenter : BasePresenter<ISPKEditorView, SPKEditorModel>
     {
         public SPKEditorPresenter(ISPKEditorView view, SPKEditorModel model)
-            : base(view, model) { 
-        
-        
-        }
+            : base(view, model) { }
 
         public void InitFormData()
         {

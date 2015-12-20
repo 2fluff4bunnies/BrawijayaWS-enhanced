@@ -43,10 +43,9 @@ namespace BrawijayaWorkshop.Constant
         public const string SETTING_MINTSTOCK = "S_MINSTOCK";
         public const string SETTING_FINGERPRINT_IPADDRESS = "S_FINGERPRINT_IPADDRESS";
         public const string SETTING_FINGERPRINT_PORT = "S_FINGERPRINT_PORT";
-        public const string SETTING_SPK_THRESHOLD_MIN = "S_SPK_THRESHOLD_MIN";
-        public const string SETTING_SPK_THRESHOLD_MED_MIN = "S_SPK_THRESHOLD_MED_MIN";
-        public const string SETTING_SPK_THRESHOLD_MED_MAX = "S_SPK_THRESHOLD_MED_MAX";
-        public const string SETTING_SPK_THRESHOLD_MAX = "S_SPK_THRESHOLD_MAX";
+        public const string SETTING_SPK_THRESHOLD_P = "S_SPK_THRESHOLD_P";
+        public const string SETTING_SPK_THRESHOLD_S = "S_SPK_THRESHOLD_S";
+     
 
         public enum AccessTypeEnum
         {

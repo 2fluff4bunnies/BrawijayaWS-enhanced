@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace BrawijayaWorkshop.Model
 {
     public class SPKEditorModel : BaseModel
@@ -83,9 +82,11 @@ namespace BrawijayaWorkshop.Model
             {
                 case 20: code = code + "S";
                     break;
-                case 21: code = code + "R";
+                case 21: code = code + "P";
                     break;
                 case 22: code = code + "L";
+                    break;
+                case 23: code = code + "I";
                     break;
             }
 

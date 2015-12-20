@@ -1,14 +1,14 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
-using BrawijayaWorkshop.View;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using BrawijayaWorkshop.Utils;
-using System.Reflection;
+using BrawijayaWorkshop.View;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {

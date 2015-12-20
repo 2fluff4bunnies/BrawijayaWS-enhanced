@@ -264,6 +264,12 @@
     <Compile Include="ModulForms\SPKEditorForm.Designer.cs">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SPKViewDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKViewDetailForm.Designer.cs">
+      <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\VehicleDetailEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKEditorForm.resx">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
+      <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>

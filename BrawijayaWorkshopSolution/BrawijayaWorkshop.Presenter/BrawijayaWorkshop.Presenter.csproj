@@ -52,6 +52,7 @@
     <Compile Include="PurchasingEditorPresenter.cs" />
     <Compile Include="PurchasingListPresenter.cs" />
     <Compile Include="SparepartDetailListPresenter.cs" />
+    <Compile Include="SPKApprovalPresenter.cs" />
     <Compile Include="SPKDetailMechanicListPresenter.cs" />
     <Compile Include="SPKDetailSparepartListPresenter.cs" />
     <Compile Include="SPKEditorPresenter.cs" />

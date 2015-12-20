@@ -475,9 +475,9 @@ namespace BrawijayaWorkshop.Database
             });
             context.References.Add(new Reference
             {
-                Code = "R",
-                Name = "Rusak",
-                Description = "SPK untuk Rusak",
+                Code = "P",
+                Name = "Perbaikan",
+                Description = "SPK untuk Perbaikan",
                 Value = "R",
                 ParentId = refSPKCategory.Id
             });
@@ -486,6 +486,14 @@ namespace BrawijayaWorkshop.Database
                 Code = "L",
                 Name = "Langsung",
                 Description = "SPK untuk Onderdil Langsung",
+                Value = "L",
+                ParentId = refSPKCategory.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = "I",
+                Name = "Inventaris",
+                Description = "SPK untuk Inventaris",
                 Value = "L",
                 ParentId = refSPKCategory.Id
             });
@@ -571,24 +579,16 @@ namespace BrawijayaWorkshop.Database
             // SPK Threshold Setting
             context.Settings.Add(new Setting
             {
-                Key = DbConstant.SETTING_SPK_THRESHOLD_MIN,
-                Value = "2000000"
+                Key = DbConstant.SETTING_SPK_THRESHOLD_S,
+                Value = "15000000"
             });
+
             context.Settings.Add(new Setting
             {
-                Key = DbConstant.SETTING_SPK_THRESHOLD_MED_MIN,
-                Value = "3000000"
-            });
-            context.Settings.Add(new Setting
-            {
-                Key = DbConstant.SETTING_SPK_THRESHOLD_MED_MAX,
-                Value = "4000000"
-            });
-            context.Settings.Add(new Setting
-            {
-                Key = DbConstant.SETTING_SPK_THRESHOLD_MAX,
+                Key = DbConstant.SETTING_SPK_THRESHOLD_P,
                 Value = "5000000"
             });
+          
             
             // todo: insert initial data here
         }
