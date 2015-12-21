@@ -115,6 +115,11 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_SUPPLIER,
                 ModulDescription = "Supplier Modul"
             });
+            ApplicationModul mechanicMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_MECHANIC,
+                ModulDescription = "Mechanic Modul"
+            });
             ApplicationModul purchasingMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_PURCHASING,
@@ -180,6 +185,12 @@ namespace BrawijayaWorkshop.Database
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = supplierMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = mechanicMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -265,6 +276,12 @@ namespace BrawijayaWorkshop.Database
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = supplierMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = mechanicMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -588,7 +605,7 @@ namespace BrawijayaWorkshop.Database
                 Key = DbConstant.SETTING_SPK_THRESHOLD_P,
                 Value = "5000000"
             });
-          
+            context.SaveChanges();
             
             // todo: insert initial data here
         }

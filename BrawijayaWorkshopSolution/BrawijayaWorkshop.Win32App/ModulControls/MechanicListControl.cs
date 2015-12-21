@@ -17,6 +17,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 {
     public partial class MechanicListControl : BaseAppUserControl, IMechanicListView
     {
+        public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         private MechanicListPresenter _presenter;
         private Mechanic _selectedMechanic;
 
@@ -27,6 +28,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 return DbConstant.MODUL_MECHANIC;
             }
         }
+
+        public string FingerprintIP { get; set; }
+
+        public string FingerpringPort { get; set; }
 
         public MechanicListControl(MechanicListModel model)
         {
@@ -41,7 +46,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
 
-            _presenter.LoadMechanic();
+            this.Load += MechanicListControl_Load;
+        }
+
+        private void MechanicListControl_Load(object sender, EventArgs e)
+        {
+            if (!bgwFingerprint.IsBusy)
+            {
+                Cursor = Cursors.WaitCursor;
+
+                bgwFingerprint.RunWorkerAsync();
+            }
         }
 
         private void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -153,6 +168,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     MethodBase.GetCurrentMethod().Info("Deleting Mechanic: " + SelectedMechanic.Name);
 
                     _presenter.DeleteMechanic();
+                    if(axCZKEM1.SSR_DeleteEnrollData(1, SelectedMechanic.Code, 0))
+                    {
+                        axCZKEM1.RefreshData(1);
+                        if(axCZKEM1.SSR_DelUserTmpExt(1, SelectedMechanic.Code, 1))
+                        {
+                            axCZKEM1.RefreshData(1);
+                        }
+                    }
 
                     btnSearch.PerformClick(); // refresh data
                 }
@@ -189,6 +212,43 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 _selectedMechanic = gvMechanic.GetRow(0) as Mechanic;
             }
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Mechanic selesai", true);
+        }
+
+        private void bgwFingerprint_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.LoadMechanic();
+                bool isConnected = axCZKEM1.Connect_Net(FingerprintIP, Convert.ToInt32(FingerpringPort));
+                e.Result = isConnected;
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to connect to fingerprint device", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwFingerprint_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Cursor = Cursors.Default;
+            if (e.Result is Exception)
+            {
+                this.ShowError("Koneksi ke fingerprint gagal!");
+            }
+            else
+            {
+                if (e.Result.AsBoolean())
+                {
+                    axCZKEM1.RegEvent(1, 65535);
+                }
+                else
+                {
+                    int errorCode = 0;
+                    axCZKEM1.GetLastError(ref errorCode);
+                    this.ShowError("Koneksi ke fingerprint gagal! Kode Error=" + errorCode);
+                }
+            }
         }
     }
 }

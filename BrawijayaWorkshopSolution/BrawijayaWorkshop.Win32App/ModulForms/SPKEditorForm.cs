@@ -7,6 +7,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -14,12 +15,23 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 {
     public partial class SPKEditorForm : BaseEditorForm, ISPKEditorView
     {
+        private DateTime _today;
+        private List<string> _availableMechanic;
+        public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
+        private bool _isFingerprintConnected = false;
+
         private SPKEditorPresenter _presenter;
+
+        public string FingerprintIP { get; set; }
+
+        public string FingerpringPort { get; set; }
 
         public SPKEditorForm(SPKEditorModel model)
         {
             InitializeComponent();
             _presenter = new SPKEditorPresenter(this, model);
+            _availableMechanic = new List<string>();
+            _today = DateTime.Today;
 
             //txtQty.ReadOnly = true;
             //txtFee.ReadOnly = true;
@@ -71,6 +83,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void SPKEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            if (!bgwFingerPrint.IsBusy)
+            {
+                Cursor = Cursors.WaitCursor;
+                bgwFingerPrint.RunWorkerAsync();
+            }
         }
 
         #region Field Editor
@@ -405,6 +422,114 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             SPKDetailSparepart SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepart;
             SPKSparepartList.Remove(SparepartToRemove);
+        }
+
+        private void bgwFingerPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                bool isConnected = axCZKEM1.Connect_Net(FingerprintIP, Convert.ToInt32(FingerpringPort));
+                if (isConnected)
+                {
+                    _isFingerprintConnected = true;
+                    axCZKEM1.RegEvent(1, 65535);
+
+                    DataTable dtAttLog = new DataTable();
+                    dtAttLog.Columns.Add("idwTMachineNumber");
+                    dtAttLog.Columns.Add("idwEnrollNumber");
+                    dtAttLog.Columns.Add("idwVerifyMode");
+                    dtAttLog.Columns.Add("idwInOutMode");
+                    dtAttLog.Columns.Add("idwDateTime");
+
+                    if (axCZKEM1.ReadGeneralLogData(1))//read all the attendance records to the memory
+                    {
+                        string sdwEnrollNumber = "";
+                        int idwTMachineNumber = 0;
+                        int idwVerifyMode = 0;
+                        int idwInOutMode = 0;
+                        int idwYear = 0;
+                        int idwMonth = 0;
+                        int idwDay = 0;
+                        int idwHour = 0;
+                        int idwMinute = 0;
+                        int idwSecond = 0;
+                        int idwWorkcode = 0;
+
+                        axCZKEM1.EnableDevice(1, false);
+                        while (axCZKEM1.SSR_GetGeneralLogData(1, out sdwEnrollNumber, out idwVerifyMode,
+                           out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                        {
+                            DataRow newRow = dtAttLog.NewRow();
+                            newRow["idwTMachineNumber"] = idwTMachineNumber;
+                            newRow["idwEnrollNumber"] = sdwEnrollNumber;
+                            newRow["idwVerifyMode"] = idwVerifyMode;
+                            newRow["idwInOutMode"] = idwInOutMode;
+                            newRow["idwDateTime"] = idwYear.ToString() + "-" + idwMonth.ToString() + "-" + idwDay.ToString() + " " + idwHour.ToString() + ":" + idwMinute.ToString();
+
+                            dtAttLog.Rows.Add(newRow);
+                        }
+                        axCZKEM1.EnableDevice(1, true);
+                    }
+
+                    if (dtAttLog.Rows.Count > 0)
+                    {
+                        foreach (var item in MechanicLookupList)
+                        {
+                            string currentMechanic = string.Empty;
+                            foreach (DataRow row in dtAttLog.Rows)
+                            {
+                                DateTime currDate = row["idwDateTime"].AsDateTime();
+                                if (currDate.Date.CompareTo(_today) == 0)
+                                {
+                                    if (string.Compare(item.Code, row["idwEnrollNumber"].ToString()) == 0)
+                                    {
+                                        currentMechanic = row["idwEnrollNumber"].ToString();
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(currentMechanic))
+                            {
+                                _availableMechanic.Add(currentMechanic);
+                            }
+                        }
+                    }
+                    e.Result = true;
+                }
+                else
+                {
+                    e.Result = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to connect to fingerprint device", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwFingerPrint_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            Cursor = Cursors.Default;
+            if (e.Result is Exception)
+            {
+                this.ShowError("Koneksi ke fingerprint gagal!");
+                _isFingerprintConnected = false;
+            }
+            else
+            {
+                if (!e.Result.AsBoolean())
+                {
+                    this.ShowError("Koneksi ke fingerprint gagal! Data akan diambil dari database");
+                    _isFingerprintConnected = false;
+                }
+                else
+                {
+                    _isFingerprintConnected = true;
+                    _presenter.UpdateMechanicList(_availableMechanic);
+                }
+            }
         }
     }
 }

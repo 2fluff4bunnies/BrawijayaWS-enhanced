@@ -34,7 +34,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void MechanicEditorForm_Load(object sender, EventArgs e)
         {
-            _presenter.InitFormData();
+            try
+            {
+                _presenter.InitFormData();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to initialize form data", ex);
+                this.ShowError("Error pada aplikasi, mohon hubungi developer");
+                this.Close();
+            }
 
             if (SelectedMechanic == null)
             {
@@ -46,9 +55,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 txtCode.ReadOnly = true;
                 btnEnroll.Enabled = false;
-                Cursor = Cursors.WaitCursor;
-                bgwFingerprintConnection.RunWorkerAsync();
             }
+            Cursor = Cursors.WaitCursor;
+            bgwFingerprintConnection.RunWorkerAsync();
         }
 
         public string FingerprintIP { get; set; }
@@ -129,13 +138,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 int priv = 0;
                 bool enable = false;
 
-                axCZKEM1.GetUserInfo(1, txtCode.Text.AsInteger(), ref name, ref pass, ref priv, ref enable);
-
                 MethodBase.GetCurrentMethod().Info("Save mechanic's changes");
                 _presenter.SaveChanges();
-
-                axCZKEM1.SetUserInfo(1, txtCode.Text.AsInteger(), txtMechanicName.Text, pass, priv, true);
-
+                if (axCZKEM1.SSR_GetUserInfo(1, txtCode.Text, out name, out pass, out priv, out enable))
+                {
+                    axCZKEM1.SSR_SetUserInfo(1, txtCode.Text, txtMechanicName.Text, pass, priv, true);
+                }
                 e.Result = true;
             }
             catch (Exception ex)
@@ -169,12 +177,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             try
             {
-                int userId = txtCode.Text.AsInteger();
+                string userId = txtCode.Text;
                 int fingerIndex = 1;
 
                 axCZKEM1.CancelOperation();
-                axCZKEM1.DelUserTmp(1, userId, fingerIndex);
-                if (axCZKEM1.StartEnroll(userId, fingerIndex))
+                axCZKEM1.SSR_DelUserTmpExt(1, userId, fingerIndex);
+                if (axCZKEM1.StartEnrollEx(userId, fingerIndex, 1))
                 {
                     this.ShowWarning("Mohon letakkan jari pada fingerprint, lalu ikuti langkah-langkah verifikasi sampai selesai!");
                     axCZKEM1.StartIdentify();

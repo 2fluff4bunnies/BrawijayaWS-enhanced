@@ -65,6 +65,7 @@
             this.cmsDeleteDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMechanicEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
+            this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             this.gcSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
@@ -447,6 +448,11 @@
             this.cmsDeleteDataMechanic.Text = "Hapus Data";
             this.cmsDeleteDataMechanic.Click += new System.EventHandler(this.cmsDeleteDataMechanic_Click);
             // 
+            // bgwFingerPrint
+            // 
+            this.bgwFingerPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerPrint_DoWork);
+            this.bgwFingerPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerPrint_RunWorkerCompleted);
+            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,5 +524,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
+        private System.ComponentModel.BackgroundWorker bgwFingerPrint;
     }
 }

@@ -5,6 +5,20 @@ namespace BrawijayaWorkshop.Utils
 {
     public static class ConvertExtensionUtils
     {
+        public static byte[] StringToBytesArray(this string sender)
+        {
+            byte[] bytes = new byte[sender.Length * sizeof(char)];
+            System.Buffer.BlockCopy(sender.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
+
+        public static string BytesArrayToString(this byte[] bytes)
+        {
+            char[] chars = new char[bytes.Length / sizeof(char)];
+            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+            return new string(chars);
+        }
+
         public static bool AsBoolean(this object sender)
         {
             try

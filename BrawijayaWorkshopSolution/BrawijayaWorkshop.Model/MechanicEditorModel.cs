@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Model
 
         public int GetLastCode()
         {
-            return _mechanicRepository.GetAll().Max(m => m.Id) + 1;
+            return _mechanicRepository.GetAll().Count() > 0 ? _mechanicRepository.GetAll().Max(m => m.Id) + 1 : 1;
         }
 
         public string GetFingerprintIpAddress()

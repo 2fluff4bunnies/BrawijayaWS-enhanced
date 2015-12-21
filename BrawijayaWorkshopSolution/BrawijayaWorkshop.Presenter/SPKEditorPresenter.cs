@@ -3,6 +3,8 @@ using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -13,6 +15,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.FingerprintIP = Model.GetFingerprintIpAddress();
+            View.FingerpringPort = Model.GetFingerprintPort();
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
             View.MechanicLookupList = Model.LoadMechanic();
@@ -25,6 +29,11 @@ namespace BrawijayaWorkshop.Presenter
                 View.Code = View.SelectedSPK.Code;
                 View.DueDate = View.SelectedSPK.DueDate;
             }
+        }
+
+        public void UpdateMechanicList(List<string> availableCodes)
+        {
+            View.MechanicLookupList = View.MechanicLookupList.Where(m => availableCodes.Contains(m.Code)).ToList();
         }
 
         public void SaveChanges()

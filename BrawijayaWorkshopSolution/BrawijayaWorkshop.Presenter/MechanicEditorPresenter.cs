@@ -17,6 +17,9 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.FingerprintIP = Model.GetFingerprintIpAddress();
+            View.FingerpringPort = Model.GetFingerprintPort();
+
             if (View.SelectedMechanic != null)
             {
                 View.Code = View.SelectedMechanic.Code;
@@ -26,9 +29,6 @@ namespace BrawijayaWorkshop.Presenter
             }
             else
             {
-                View.FingerprintIP = Model.GetFingerprintIpAddress();
-                View.FingerpringPort = Model.GetFingerprintPort();
-
                 View.Code = Model.GetLastCode().ToString();
             }
         }

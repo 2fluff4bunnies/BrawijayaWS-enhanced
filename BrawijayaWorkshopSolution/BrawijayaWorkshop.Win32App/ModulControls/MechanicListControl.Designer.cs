@@ -38,12 +38,13 @@
             this.colMechanicMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colAddressMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPhoneMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewMechanic = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bgwFingerprint = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterMechanicName.Properties)).BeginInit();
@@ -154,8 +155,17 @@
             this.colPhoneMechanic.Visible = true;
             this.colPhoneMechanic.VisibleIndex = 3;
             // 
+            // gridColumnCode
+            // 
+            this.gridColumnCode.Caption = "Code";
+            this.gridColumnCode.FieldName = "Code";
+            this.gridColumnCode.Name = "gridColumnCode";
+            this.gridColumnCode.Visible = true;
+            this.gridColumnCode.VisibleIndex = 0;
+            // 
             // btnNewMechanic
             // 
+            this.btnNewMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
             this.btnNewMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewMechanic.Location = new System.Drawing.Point(3, 71);
@@ -194,13 +204,10 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // gridColumnCode
+            // bgwFingerprint
             // 
-            this.gridColumnCode.Caption = "Code";
-            this.gridColumnCode.FieldName = "Code";
-            this.gridColumnCode.Name = "gridColumnCode";
-            this.gridColumnCode.Visible = true;
-            this.gridColumnCode.VisibleIndex = 0;
+            this.bgwFingerprint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerprint_DoWork);
+            this.bgwFingerprint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerprint_RunWorkerCompleted);
             // 
             // MechanicListControl
             // 
@@ -240,5 +247,6 @@
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraGrid.Columns.GridColumn colMechanicMechanic;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCode;
+        private System.ComponentModel.BackgroundWorker bgwFingerprint;
     }
 }

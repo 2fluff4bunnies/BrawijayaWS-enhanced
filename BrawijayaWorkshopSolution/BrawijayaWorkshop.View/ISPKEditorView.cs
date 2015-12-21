@@ -7,6 +7,9 @@ namespace BrawijayaWorkshop.View
 {
     public interface ISPKEditorView : IView
     {
+        string FingerprintIP { get; set; }
+        string FingerpringPort { get; set; }
+
         SPK SelectedSPK { get; set; }
         SPK ParentSPK { get; set; }
 

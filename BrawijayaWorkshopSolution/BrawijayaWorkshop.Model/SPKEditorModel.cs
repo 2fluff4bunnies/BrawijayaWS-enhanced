@@ -13,6 +13,7 @@ namespace BrawijayaWorkshop.Model
 {
     public class SPKEditorModel : BaseModel
     {
+        private ISettingRepository _settingRepository;
         private IReferenceRepository _referenceRepository;
         private IVehicleRepository _vehicleRepository;
         private ISPKRepository _SPKRepository;
@@ -24,12 +25,13 @@ namespace BrawijayaWorkshop.Model
         private IMechanicRepository _mechanicRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SPKEditorModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
+        public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
             ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository, ISPKDetailMechanicRepository SPKDetailMechanicRepository,
             IMechanicRepository mechanicRepository, IUnitOfWork unitOfWork)
         {
+            _settingRepository = settingRepository;
             _referenceRepository = referenceRepository;
             _vehicleRepository = vehicleRepository;
             _SPKRepository = SPKRepository;
@@ -54,6 +56,15 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
+        public string GetFingerprintIpAddress()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_IPADDRESS).FirstOrDefault().Value;
+        }
+
+        public string GetFingerprintPort()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
+        }
 
         public SPK EndorseSPk(int SPKId)
         {

@@ -11,6 +11,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadMechanic()
         {
+            View.FingerprintIP = Model.GetFingerprintIpAddress();
+            View.FingerpringPort = Model.GetFingerprintPort();
             View.MechanicListData = Model.SearchMechanic(View.MechanicNameFilter);
         }
 
