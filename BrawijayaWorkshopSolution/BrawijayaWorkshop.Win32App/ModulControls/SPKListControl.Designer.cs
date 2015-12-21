@@ -58,6 +58,7 @@
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.cmsApproval = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -321,40 +322,50 @@
             this.viewDetailToolStripMenuItem,
             this.toolStripSeparator1,
             this.cmsEditData,
-            this.cmsDeleteData});
+            this.cmsDeleteData,
+            this.cmsApproval});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(136, 76);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 120);
             // 
             // viewDetailToolStripMenuItem
             // 
             this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
             this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
+            this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
             this.cmsEditData.Text = "Ubah Data";
             // 
             // cmsDeleteData
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // cmsApproval
+            // 
+            this.cmsApproval.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.apply_32x32;
+            this.cmsApproval.Name = "cmsApproval";
+            this.cmsApproval.Size = new System.Drawing.Size(152, 22);
+            this.cmsApproval.Text = "Approval";
+            this.cmsApproval.Click += new System.EventHandler(this.cmsApproval_Click);
             // 
             // SPKListControl
             // 
@@ -413,5 +424,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private System.Windows.Forms.ToolStripMenuItem cmsApproval;
     }
 }

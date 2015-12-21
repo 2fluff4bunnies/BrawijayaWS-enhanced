@@ -17,6 +17,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public DateTime DueDate { get; set; }
 
         [Required]
+        public decimal Subtotal { get; set; }
+
+        [Required]
         public int VehicleId { get; set; }
 
         public virtual Vehicle Vehicle { get; set; }
