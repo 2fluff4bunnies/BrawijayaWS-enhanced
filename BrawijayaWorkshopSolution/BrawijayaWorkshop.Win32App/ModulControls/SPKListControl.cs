@@ -248,6 +248,26 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
+        }
+
+        private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsApproval = false;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsApproval_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }       
     }
 }

@@ -25,6 +25,9 @@ namespace BrawijayaWorkshop.Presenter
                 View.CreateDate = View.SelectedSPK.CreateDate.ToShortDateString();
                 View.Customer = View.SelectedSPK.Vehicle.Customer.CompanyName;
             }
+
+            View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
+            View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
         }
 
         public void print()

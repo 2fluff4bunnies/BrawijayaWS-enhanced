@@ -14,51 +14,72 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 {
     public partial class SPKViewDetailForm : BaseDefaultForm, ISPKViewDetailView
     {
-        public SPKViewDetailForm()
+        private SPKViewDetailPresenter _presenter;
+        private bool _isApproval;
+        public SPKViewDetailForm(SPKViewDetailModel model)
         {
             InitializeComponent();
+            _presenter = new SPKViewDetailPresenter(this, model);
 
-            txtVehicle.Enabled = false;
-            txtSPKCategory.Enabled = false;
-            txtDueDate.Enabled = false;
-            txtCreateDate.Enabled = false;
-            txtCustomer.Enabled = false;
+            if (this.IsApproval)
+            {
+                btnPrint.Visible = false;
+            }
+            else
+            {
+                btnApprove.Visible = false;
+                btnReject.Visible = false;
+            }
+
+            txtCode.ReadOnly = true;
+            txtVehicle.ReadOnly = true;
+            txtSPKCategory.ReadOnly = true;
+            txtDueDate.ReadOnly = true;
+            txtCreateDate.ReadOnly = true;
+            txtCustomer.ReadOnly = true;
+
+            this.Load += SPKViewDetailForm_Load;
+        }
+
+        void SPKViewDetailForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
         }
 
         #region Field Editor
-        public SPK SelectedSPK
+        public bool IsApproval
         {
             get
             {
-                throw new NotImplementedException();
+                return _isApproval;
             }
             set
             {
-                throw new NotImplementedException();
+                _isApproval = value;
             }
         }
 
-        public SPK ParentSPK
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public SPK SelectedSPK { get; set; }
+
+        public SPK ParentSPK { get; set; }
 
         public List<SPKDetailMechanic> SPKMechanicList
         {
             get
             {
-                throw new NotImplementedException();
+                return gcMechanic.DataSource as List<SPKDetailMechanic>;
             }
             set
             {
-                throw new NotImplementedException();
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
+                }
+                else
+                {
+                    gcMechanic.DataSource = value;
+                    gvMechanic.BestFitColumns();
+                }
             }
         }
 
@@ -66,35 +87,33 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return gcSparepart.DataSource as List<SPKDetailSparepart>;
             }
             set
             {
-                throw new NotImplementedException();
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gcSparepart.DataSource = value; gvSparepart.BestFitColumns(); }));
+                }
+                else
+                {
+                    gcSparepart.DataSource = value;
+                    gvSparepart.BestFitColumns();
+                }
             }
         }
 
-        public List<SPKDetailSparepartDetail> SPKSparepartDetailList
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
 
         public string Code
         {
             get
             {
-                throw new NotImplementedException();
+                return txtCode.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtCode.Text = value;
             }
         }
 
@@ -102,11 +121,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtDueDate.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtDueDate.Text = value;
             }
         }
 
@@ -114,11 +133,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtCreateDate.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtCreateDate.Text = value;
             }
         }
 
@@ -126,11 +145,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtVehicle.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtVehicle.Text = value;
             }
         }
 
@@ -138,11 +157,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtCustomer.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtCustomer.Text = value;
             }
         }
 
@@ -150,33 +169,33 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtSPKCategory.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtSPKCategory.Text = value;
             }
-        } 
+        }
         #endregion
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-
+            _presenter.Approve();
         }
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-
+            _presenter.Reject();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            _presenter.print();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
