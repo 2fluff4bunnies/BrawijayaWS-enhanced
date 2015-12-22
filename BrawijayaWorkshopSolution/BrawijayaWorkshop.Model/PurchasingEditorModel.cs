@@ -86,7 +86,7 @@ namespace BrawijayaWorkshop.Model
                 newPurchasingDetail.CreateUserId = userID;
                 newPurchasingDetail.ModifyUserId = userID;
                 newPurchasingDetail.ModifyDate = serverTime;
-                newPurchasingDetail.PurchasingId = purchasingInserted.Id;
+                newPurchasingDetail.Purchasing = purchasingInserted;
                 newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
                 newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
                 newPurchasingDetail.Price = itemPurchasingDetail.Price;
@@ -106,7 +106,7 @@ namespace BrawijayaWorkshop.Model
                         spDetailCode = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10))+i)
                             .ToString("D10");
                     }
-                    spDetail.PurchasingDetailId = purchasingDetailInserted.Id;
+                    spDetail.PurchasingDetail = purchasingDetailInserted;
                     spDetail.SparepartId = sparepartDB.Id;
                     spDetail.Code = spDetailCode;
                     spDetail.CreateDate = serverTime;
@@ -270,7 +270,7 @@ namespace BrawijayaWorkshop.Model
                     }
                     SparepartDetail spDetail = new SparepartDetail();
                     spDetail.SparepartId = sparepartDB.Id;
-                    spDetail.PurchasingDetailId = purchasingDetailInserted.Id;
+                    spDetail.PurchasingDetail = purchasingDetailInserted;
                     spDetail.Code = spDetailCode;
                     spDetail.CreateDate = serverTime;
                     spDetail.CreateUserId = userID;
