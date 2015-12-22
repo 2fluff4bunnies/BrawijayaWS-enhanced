@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -19,6 +20,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private List<string> _availableMechanic;
         public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         private bool _isFingerprintConnected = false;
+
 
         private SPKEditorPresenter _presenter;
 
@@ -46,55 +48,47 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             SPKSparepartList = new List<SPKDetailSparepart>();
             SPKMechanicList = new List<SPKDetailMechanic>();
-        }
 
-        void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            this.SelectedMechanic = gvMechanic.GetFocusedRow() as Mechanic;
-        }
-
-        void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
-        {
-            GridView view = (GridView)sender;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
-            if (hitInfo.InRow)
-            {
-                view.FocusedRowHandle = hitInfo.RowHandle;
-                cmsMechanicEditor.Show(view.GridControl, e.Point);
-            }
-        }
-
-        void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            this.SelectedSparepart = gvSparepart.GetFocusedRow() as Sparepart;
-        }
-
-        void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
-        {
-            GridView view = (GridView)sender;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
-            if (hitInfo.InRow)
-            {
-                view.FocusedRowHandle = hitInfo.RowHandle;
-                cmsSparepartEditor.Show(view.GridControl, e.Point);
-            }
-        }
-
-        void SPKEditorForm_Load(object sender, EventArgs e)
-        {
-            _presenter.InitFormData();
-            if (!bgwFingerPrint.IsBusy)
-            {
-                Cursor = Cursors.WaitCursor;
-                bgwFingerPrint.RunWorkerAsync();
-            }
+            this.TotalSparepartPrice = 0;
+            this.IsMechanicRegistered = true;
+            ApplyMechanicSetting();
         }
 
         #region Field Editor
 
         public SPK SelectedSPK { get; set; }
-
         public SPK ParentSPK { get; set; }
+        public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
+        public string Code { get; set; }
+        public Sparepart SelectedSparepart { get; set; }
+        public Mechanic SelectedMechanic { get; set; }
+        public decimal RepairThreshold { get; set; }
+        public decimal ServiceThreshold { get; set; }
+        public bool IsNeedApproval { get; set; }
+
+        public decimal TotalSparepartPrice
+        {
+            get
+            {
+                return txtTotalSparepartPrice.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalSparepartPrice.Text = value.ToString();
+            }
+        }
+
+        public bool IsMechanicRegistered
+        {
+            get
+            {
+                return chxIsRegistered.Checked;
+            }
+            set
+            {
+                chxIsRegistered.Checked = value;
+            }
+        }
 
         public List<Vehicle> VehicleDropdownList
         {
@@ -161,10 +155,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
 
-
-        public string Code { get; set; }
 
         public DateTime DueDate
         {
@@ -258,25 +249,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return lookUpMechanic.Text;
+                return txtMechanicName.Text;
             }
             set
             {
-                lookUpMechanic.Text = value;
+                txtMechanicName.Text = value;
             }
         }
 
-        public decimal MechanicFee
-        {
-            get
-            {
-                return txtFee.Text.AsDecimal();
-            }
-            set
-            {
-                txtFee.Text = value.ToString();
-            }
-        }
 
         public List<Sparepart> SparepartLookupList
         {
@@ -318,9 +298,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public Sparepart SelectedSparepart { get; set; }
-        public Mechanic SelectedMechanic { get; set; }
         #endregion
+
+
 
         #region Methods
         protected override void ExecuteSave()
@@ -330,6 +310,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 try
                 {
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
+                    this.IsNeedApproval = ApprovalCheck();
                     _presenter.SaveChanges();
                     this.Close();
                 }
@@ -343,28 +324,36 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            _presenter.populateSparepartDetail();
-
-            decimal totalPrice = 0;
-
-            foreach (var item in SPKSparepartDetailList)
+            if (this.SparepartQty <= SparepartToInsert.StockQty)
             {
-                totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                _presenter.populateSparepartDetail();
+
+                decimal totalPrice = 0;
+
+                foreach (var item in SPKSparepartDetailList)
+                {
+                    totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                }
+
+                SPKSparepartList.Add(new SPKDetailSparepart
+                {
+                    Sparepart = SparepartToInsert,
+                    SparepartId = SparepartId,
+                    TotalQuantity = SparepartQty,
+                    TotalPrice = totalPrice
+                });
+
+                gcSparepart.DataSource = SPKSparepartList;
+                gvSparepart.BestFitColumns();
+
+                ClearSparepart();
+
+                this.TotalSparepartPrice = this.TotalSparepartPrice + totalPrice;
             }
-
-            SPKSparepartList.Add(new SPKDetailSparepart
+            else
             {
-                Sparepart = SparepartToInsert,
-                SparepartId = SparepartId,
-                TotalQuantity = SparepartQty,
-                TotalPrice = totalPrice
-            });
-
-            gcSparepart.DataSource = SPKSparepartList;
-            gvSparepart.BestFitColumns();
-
-            ClearSparepart();
-
+                this.ShowError("Jumlah sparepart yang dimasukkan melebihi stok yang ada!");
+            }
         }
 
         public void ClearSparepart()
@@ -375,12 +364,30 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddMechanic_Click(object sender, EventArgs e)
         {
-            SPKMechanicList.Add(new SPKDetailMechanic
+            if (this.IsMechanicRegistered)
             {
-                Mechanic = MechanicToInsert,
-                MechanicId = MechanicId,
-                Fee = MechanicFee
-            });
+                if (MechanicToInsert != null)
+                {
+                    SPKMechanicList.Add(new SPKDetailMechanic
+                    {
+                        Name = this.MechanicToInsert.Name,
+                        Mechanic = MechanicToInsert,
+                        MechanicId = MechanicId
+
+                    });
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(MechanicName))
+                {
+                    SPKMechanicList.Add(new SPKDetailMechanic
+                    {
+
+                        Name = this.MechanicName
+                    });
+                }
+            }
 
             gcMechanic.DataSource = SPKMechanicList;
             gvMechanic.BestFitColumns();
@@ -390,32 +397,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public void ClearMechanic()
         {
-            this.MechanicFee = 0;
+            this.SelectedMechanic = null;
             this.MechanicName = string.Empty;
         }
 
         #endregion
 
-        private void editDataMechanic_Click(object sender, EventArgs e)
-        {
-            SPKDetailMechanic mechanicToEdit = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
-            lookUpMechanic.Text = mechanicToEdit.Mechanic.Name;
-            lookUpMechanic.EditValue = mechanicToEdit.Mechanic.Id;
-            txtFee.Text = mechanicToEdit.Fee.ToString();
-        }
-
         private void cmsDeleteDataMechanic_Click(object sender, EventArgs e)
         {
             SPKDetailMechanic mechanicToRemove = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
             SPKMechanicList.Remove(mechanicToRemove);
-        }
-
-        private void cmsEditDataSparepart_Click(object sender, EventArgs e)
-        {
-            SPKDetailSparepart sparepartToEdit = gvSparepart.GetFocusedRow() as SPKDetailSparepart;
-            lookUpSparepart.Text = sparepartToEdit.Sparepart.Name;
-            lookUpSparepart.EditValue = sparepartToEdit.Sparepart.Id;
-            txtFee.Text = sparepartToEdit.TotalQuantity.ToString();
         }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
@@ -531,5 +522,86 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
+
+        private void chxIsRegistered_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyMechanicSetting();
+        }
+
+        void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            this.SelectedMechanic = gvMechanic.GetFocusedRow() as Mechanic;
+        }
+
+        void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsMechanicEditor.Show(view.GridControl, e.Point);
+            }
+        }
+
+        void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            this.SelectedSparepart = gvSparepart.GetFocusedRow() as Sparepart;
+        }
+
+        void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsSparepartEditor.Show(view.GridControl, e.Point);
+            }
+        }
+
+        void SPKEditorForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
+            if (!bgwFingerPrint.IsBusy)
+            {
+                Cursor = Cursors.WaitCursor;
+                bgwFingerPrint.RunWorkerAsync();
+            }
+        }
+
+        void ApplyMechanicSetting()
+        {
+            if (IsMechanicRegistered)
+            {
+                lookUpMechanic.Visible = true;
+                txtMechanicName.Visible = false;
+            }
+            else
+            {
+                lookUpMechanic.Visible = false;
+                txtMechanicName.Visible = true;
+            }
+        }
+
+
+
+        bool ApprovalCheck()
+        {
+            bool result = false;
+
+            if (this.CategoryId == 20 && this.TotalSparepartPrice >= this.ServiceThreshold)
+            {
+                result = true;
+            }
+
+            if (this.CategoryId == 21 && this.TotalSparepartPrice >= this.RepairThreshold)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
     }
 }

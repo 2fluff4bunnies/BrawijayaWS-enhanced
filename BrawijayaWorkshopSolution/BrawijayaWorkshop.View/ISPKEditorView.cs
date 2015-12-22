@@ -39,7 +39,11 @@ namespace BrawijayaWorkshop.View
 
         int MechanicId { get; set; }
         string MechanicName { get; set; }
-        decimal MechanicFee { get; set; }
+
+        decimal RepairThreshold { get; set; }
+        decimal ServiceThreshold { get; set; }
+
+        bool IsNeedApproval { get; set; }
 
     }
 }

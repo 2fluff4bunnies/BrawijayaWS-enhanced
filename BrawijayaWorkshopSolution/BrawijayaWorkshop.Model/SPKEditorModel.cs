@@ -83,7 +83,7 @@ namespace BrawijayaWorkshop.Model
         }
 
         public void InsertSPK(SPK spk, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
-            List<SPKDetailSparepartDetail> sparepartDetailList, int userId)
+            List<SPKDetailSparepartDetail> sparepartDetailList, int userId, bool isNeedApproval)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -113,8 +113,11 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
             spk.CreateUserId = userId;
-            spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
+          
             spk.Status = (int)DbConstant.DefaultDataStatus.Active;
+            spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
+            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.inProgress;
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.pending;
 
             SPK insertedSPK = _SPKRepository.Add(spk);
 
@@ -124,7 +127,7 @@ namespace BrawijayaWorkshop.Model
                 mechanic.CreateUserId = userId;
                 mechanic.ModifyDate = serverTime;
                 mechanic.ModifyUserId = userId;
-                mechanic.SPKId = insertedSPK.Id;
+                mechanic.SPK = insertedSPK;
                 mechanic.Status = (int)DbConstant.DefaultDataStatus.Active;
                 _SPKDetailMechanicRepository.Add(mechanic);
             }
@@ -135,7 +138,7 @@ namespace BrawijayaWorkshop.Model
                 sparepart.CreateUserId = userId;
                 sparepart.ModifyDate = serverTime;
                 sparepart.ModifyUserId = userId;
-                sparepart.SPKId = insertedSPK.Id;
+                sparepart.SPK = insertedSPK;
                 sparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
 
                 SPKDetailSparepart insertedSPKDetailSparepart = _SPKDetailSparepartRepository.Add(sparepart);
@@ -144,7 +147,7 @@ namespace BrawijayaWorkshop.Model
 
                 foreach (var sparepartDetail in detailList)
                 {
-                    sparepartDetail.SPKDetailSparepartId = insertedSPKDetailSparepart.Id;
+                    sparepartDetail.SPKDetailSparepart = insertedSPKDetailSparepart;
                     sparepartDetail.CreateDate = serverTime;
                     sparepartDetail.CreateUserId = userId;
                     sparepartDetail.ModifyDate = serverTime;
@@ -155,9 +158,18 @@ namespace BrawijayaWorkshop.Model
                 }
             }
 
-            _unitOfWork.SaveChanges();
+            if (isNeedApproval)
+            {
+#warning TODO send email for approve here
+            }
+            else
+            {
+                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.printed;
+#warning TODO print SPK here
+            }
 
-#warning TODO Insert Approval here
+            _unitOfWork.SaveChanges();
         }
 
         public List<Sparepart> LoadSparepart()
@@ -169,11 +181,8 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKDetailSparepartDetail> getRandomDetails(int sparepartId, int qty)
         {
-            //List<SparepartDetail> sparepartDetails = _sparepartDetailRepository.GetMany(
-            //    spd => spd.SparepartId == sparepartId && spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active).OrderBy(spd => spd.Id).Take(qty).ToList();
-
             List<SparepartDetail> sparepartDetails = _sparepartDetailRepository.GetMany(
-               spd => spd.SparepartId == sparepartId && spd.Status == (int)DbConstant.SparepartDetailDataStatus.NotVerified).OrderBy(spd => spd.Id).Take(qty).ToList();
+                spd => spd.SparepartId == sparepartId && spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active).OrderBy(spd => spd.Id).Take(qty).ToList();
 
             List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
 
@@ -214,6 +223,16 @@ namespace BrawijayaWorkshop.Model
             _SPKRepository.Update(spk);
 
             _unitOfWork.SaveChanges();
+        }
+
+        public string GetRepairThreshold()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_P).FirstOrDefault().Value;
+        }
+
+        public string GetServiceThreshold()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_S).FirstOrDefault().Value;
         }
 
     }

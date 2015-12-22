@@ -5,6 +5,7 @@ using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -21,6 +22,9 @@ namespace BrawijayaWorkshop.Presenter
             View.VehicleDropdownList = Model.GetSPKVehicleList();
             View.MechanicLookupList = Model.LoadMechanic();
             View.SparepartLookupList = Model.LoadSparepart();
+
+            View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
+            View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
 
             if (View.SelectedSPK != null)
             {
@@ -47,7 +51,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.VehicleId = View.VehicleId;
             View.SelectedSPK.DueDate = View.DueDate;
 
-            Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId);
+            Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
 
         }
 
@@ -55,6 +59,12 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.SPKSparepartDetailList = Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty);
         }
+
+        public void SendApproval()
+        { 
+            
+        }
+
 
     }
 }

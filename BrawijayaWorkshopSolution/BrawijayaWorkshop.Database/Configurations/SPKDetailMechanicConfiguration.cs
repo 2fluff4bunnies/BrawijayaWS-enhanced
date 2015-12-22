@@ -12,6 +12,7 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public SPKDetailMechanicConfiguration()
         {
+            //HasOptional(sp => sp.Mechanic).WithMany().HasForeignKey(sp => sp.MechanicId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.Mechanic).WithMany().HasForeignKey(sp => sp.MechanicId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.SPK).WithMany().HasForeignKey(sp => sp.SPKId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.CreateUser).WithMany().HasForeignKey(sp => sp.CreateUserId).WillCascadeOnDelete(true);
