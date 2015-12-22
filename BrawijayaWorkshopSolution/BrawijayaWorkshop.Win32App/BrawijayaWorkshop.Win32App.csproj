@@ -354,6 +354,9 @@
     <EmbeddedResource Include="AboutAppForm.resx">
       <DependentUpon>AboutAppForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BaseDefaultForm.resx">
+      <DependentUpon>BaseDefaultForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseEditorForm.resx">
       <DependentUpon>BaseEditorForm.cs</DependentUpon>
     </EmbeddedResource>

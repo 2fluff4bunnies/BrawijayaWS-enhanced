@@ -4,6 +4,7 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using System;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
@@ -18,6 +19,7 @@ namespace BrawijayaWorkshop.Presenter
             View.ListPurchasingDetail = new List<PurchasingDetailViewModel>();
             View.ListSupplier = Model.RetrieveSupplier();
             View.ListSparepart = Model.RetrieveSparepart();
+            View.Date = DateTime.Today;
             if (View.SelectedPurchasing != null)
             {
                 View.Date = View.SelectedPurchasing.Date;

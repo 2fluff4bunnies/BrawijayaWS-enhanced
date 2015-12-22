@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.lblDP = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -90,7 +90,7 @@
             // 
             // lblDP
             // 
-            this.lblDP.Location = new System.Drawing.Point(12, 125);
+            this.lblDP.Location = new System.Drawing.Point(12, 128);
             this.lblDP.Name = "lblDP";
             this.lblDP.Size = new System.Drawing.Size(49, 13);
             this.lblDP.TabIndex = 15;
@@ -112,7 +112,7 @@
             // 
             // btnReject
             // 
-            this.btnReject.Location = new System.Drawing.Point(545, 5);
+            this.btnReject.Location = new System.Drawing.Point(545, 8);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(75, 23);
             this.btnReject.TabIndex = 1;
@@ -121,7 +121,7 @@
             // 
             // btnApprove
             // 
-            this.btnApprove.Location = new System.Drawing.Point(454, 5);
+            this.btnApprove.Location = new System.Drawing.Point(454, 8);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Size = new System.Drawing.Size(75, 23);
             this.btnApprove.TabIndex = 0;
@@ -131,7 +131,7 @@
             // txtTotalPrice
             // 
             this.txtTotalPrice.Enabled = false;
-            this.txtTotalPrice.Location = new System.Drawing.Point(183, 296);
+            this.txtTotalPrice.Location = new System.Drawing.Point(155, 296);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Size = new System.Drawing.Size(167, 20);
             this.txtTotalPrice.TabIndex = 13;
@@ -206,7 +206,7 @@
             // 
             // txtDP
             // 
-            this.txtDP.Location = new System.Drawing.Point(183, 122);
+            this.txtDP.Location = new System.Drawing.Point(155, 125);
             this.txtDP.Name = "txtDP";
             this.txtDP.Size = new System.Drawing.Size(167, 20);
             this.txtDP.TabIndex = 10;
@@ -214,7 +214,7 @@
             // 
             // cbPayment
             // 
-            this.cbPayment.Location = new System.Drawing.Point(183, 87);
+            this.cbPayment.Location = new System.Drawing.Point(155, 93);
             this.cbPayment.Name = "cbPayment";
             this.cbPayment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -225,15 +225,15 @@
             this.cbPayment.Properties.ValueMember = "Id";
             this.cbPayment.Size = new System.Drawing.Size(167, 20);
             this.cbPayment.TabIndex = 9;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule2.ErrorText = "Pilih salah satu pembayaran";
-            conditionValidationRule2.Value1 = "--Pilih Pembayaran--";
-            this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule1.ErrorText = "Pilih salah satu pembayaran";
+            conditionValidationRule1.Value1 = "--Pilih Pembayaran--";
+            this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule1);
             this.cbPayment.EditValueChanged += new System.EventHandler(this.cbPayment_EditValueChanged);
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(12, 90);
+            this.labelControl1.Location = new System.Drawing.Point(12, 96);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(99, 13);
             this.labelControl1.TabIndex = 8;
@@ -242,7 +242,7 @@
             // txtSupplier
             // 
             this.txtSupplier.Enabled = false;
-            this.txtSupplier.Location = new System.Drawing.Point(183, 56);
+            this.txtSupplier.Location = new System.Drawing.Point(155, 61);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Size = new System.Drawing.Size(167, 20);
             this.txtSupplier.TabIndex = 6;
@@ -250,14 +250,14 @@
             // txtDate
             // 
             this.txtDate.Enabled = false;
-            this.txtDate.Location = new System.Drawing.Point(183, 24);
+            this.txtDate.Location = new System.Drawing.Point(155, 29);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(167, 20);
             this.txtDate.TabIndex = 5;
             // 
             // lblSupplier
             // 
-            this.lblSupplier.Location = new System.Drawing.Point(12, 59);
+            this.lblSupplier.Location = new System.Drawing.Point(12, 64);
             this.lblSupplier.Name = "lblSupplier";
             this.lblSupplier.Size = new System.Drawing.Size(38, 13);
             this.lblSupplier.TabIndex = 4;
@@ -265,7 +265,7 @@
             // 
             // lblDate
             // 
-            this.lblDate.Location = new System.Drawing.Point(12, 27);
+            this.lblDate.Location = new System.Drawing.Point(12, 32);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(89, 13);
             this.lblDate.TabIndex = 2;

@@ -78,6 +78,7 @@
             this.Controls.Add(this.pnlAction);
             this.Name = "BaseEditorForm";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BaseEditorForm";
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).EndInit();
             this.pnlAction.ResumeLayout(false);

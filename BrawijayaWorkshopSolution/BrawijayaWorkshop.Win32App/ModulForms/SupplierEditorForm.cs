@@ -1,9 +1,10 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
-using System.Collections.Generic;
+using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -75,8 +76,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (valSupplierName.Validate() && valAddress.Validate() && valPhone.Validate())
             {
-                _presenter.SaveChanges();
-                this.Close();
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save supplier's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save supplier: '" + SelectedSupplier.Name + "'", ex);
+                    this.ShowError("Proses simpan data supplier: '" + SelectedSupplier.Name + "' gagal!");
+                }
             }
         }
     }

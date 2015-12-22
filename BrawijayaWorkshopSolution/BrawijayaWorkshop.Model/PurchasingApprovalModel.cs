@@ -6,8 +6,6 @@ using BrawijayaWorkshop.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using AutoMapper;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -106,8 +104,24 @@ namespace BrawijayaWorkshop.Model
             transaction.ModifyUserId = userID;
             transaction.ModifyDate = serverTime;
             _transactionRepository.Add(transaction);
-            //to do transaction detail aka journal
-            //........
+
+            switch(purchasing.PaymentMethod.Code)
+            {
+                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK:
+                    TransactionDetail detailBank = new TransactionDetail();
+                    detailBank.Credit = purchasing.TotalHasPaid;
+                    
+                    TransactionDetail detailSparepart = new TransactionDetail();
+                    detailSparepart.Debit = purchasing.TotalPrice;
+
+                    break;
+                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_KAS:
+                    break;
+                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA:
+                    break;
+                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG:
+                    break;
+            }
 
             _unitOfWork.SaveChanges();
         }

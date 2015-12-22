@@ -1,18 +1,18 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Linq;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using BrawijayaWorkshop.Constant;
-using System.ComponentModel;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -179,14 +179,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (e.Result is Exception)
             {
                 this.ShowError("Proses simpan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
             }
             else
             {
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian selesai", true);
                 this.Close();
             }
-
-            
         }
 
         private void btnAddSparepart_Click(object sender, EventArgs e)

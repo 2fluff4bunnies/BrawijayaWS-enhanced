@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
@@ -77,11 +77,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDate.Properties.HideSelection = false;
+            this.txtDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDate.Size = new System.Drawing.Size(159, 20);
             this.txtDate.TabIndex = 0;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Tanggal penerimaan harus diisi";
-            this.valDate.SetValidationRule(this.txtDate, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Tanggal penerimaan harus diisi";
+            this.valDate.SetValidationRule(this.txtDate, conditionValidationRule1);
             // 
             // gcPurchasingInfo
             // 
@@ -212,10 +214,10 @@
             this.cbSupplier.Properties.ValueMember = "Id";
             this.cbSupplier.Size = new System.Drawing.Size(100, 20);
             this.cbSupplier.TabIndex = 2;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule1.ErrorText = "Pilih salah satu supplier";
-            conditionValidationRule1.Value1 = "--Pilih Supplier--";
-            this.valSupplier.SetValidationRule(this.cbSupplier, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule2.ErrorText = "Pilih salah satu supplier";
+            conditionValidationRule2.Value1 = "--Pilih Supplier--";
+            this.valSupplier.SetValidationRule(this.cbSupplier, conditionValidationRule2);
             // 
             // pnlAction
             // 

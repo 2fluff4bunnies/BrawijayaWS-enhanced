@@ -91,16 +91,17 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
             this.txtDateFilterTo.TabIndex = 4;
             // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(572, 28);
+            this.btnSearch.Location = new System.Drawing.Point(438, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -116,6 +117,8 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterFrom.Size = new System.Drawing.Size(138, 20);
             this.txtDateFilterFrom.TabIndex = 2;
             // 

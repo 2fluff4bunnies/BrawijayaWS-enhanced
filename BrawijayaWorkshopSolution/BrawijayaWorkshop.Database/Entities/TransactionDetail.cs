@@ -13,8 +13,8 @@ namespace BrawijayaWorkshop.Database.Entities
         public int JournalId { get; set; }
         public virtual JournalMaster Journal { get; set; }
 
-        public double Debit { get; set; }
+        public decimal? Debit { get; set; }
 
-        public double Credit { get; set; }
+        public decimal? Credit { get; set; }
     }
 }
