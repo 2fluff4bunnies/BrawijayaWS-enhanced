@@ -117,6 +117,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.ShowError("Proses memuat data gagal!");
             }
 
+            if(gvVehicleDetail.RowCount > 0)
+            {
+                SelectedVehicleDetail = gvVehicleDetail.GetRow(0) as VehicleDetail;
+            }
+
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan detail selesai", true);
         }
 

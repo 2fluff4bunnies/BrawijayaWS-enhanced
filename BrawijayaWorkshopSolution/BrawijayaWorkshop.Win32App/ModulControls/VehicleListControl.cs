@@ -200,9 +200,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
+            if(gvVehicle.RowCount > 0)
+            {
+                SelectedVehicle = gvVehicle.GetRow(0) as Vehicle;
+            }
+
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan selesai", true);
-            
         }
 
         private void cmsUpdateLicenseNumber_Click(object sender, EventArgs e)

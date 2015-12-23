@@ -171,6 +171,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
+            if(gvSparepart.RowCount > 0)
+            {
+                SelectedSparepart = gvSparepart.GetRow(0) as Sparepart;
+            }
+
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data sparepart selesai", true);
         }
 

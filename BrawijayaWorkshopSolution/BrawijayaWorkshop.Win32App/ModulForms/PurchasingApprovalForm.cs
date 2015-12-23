@@ -60,7 +60,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtDP.Enabled = false;
                 PaymentMethodId = SelectedPurchasing.PaymentMethodId;
                 TotalHasPaid = SelectedPurchasing.TotalHasPaid;
-                if (SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA)
+                if (SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||
+                    SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK)
                 {
                     lblDP.Visible = true;
                     txtDP.Visible = true;
@@ -97,6 +98,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 cbPayment.Properties.DataSource = value;
             }
         }
+
         #region Field Editor
         public DateTime Date { get; set; }
 
@@ -203,7 +205,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             Reference refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as Reference;
             if (refSelected != null)
             {
-                if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA)
+                if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||
+                    refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK)
                 {
                     txtDP.Visible = true;
                     lblDP.Visible = true;

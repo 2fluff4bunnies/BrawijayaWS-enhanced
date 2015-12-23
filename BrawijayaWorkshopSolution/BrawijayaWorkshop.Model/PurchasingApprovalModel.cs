@@ -19,6 +19,7 @@ namespace BrawijayaWorkshop.Model
         private IReferenceRepository _referenceRepository;
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
+        private IJournalMasterRepository _journalMasterRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingApprovalModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
@@ -27,7 +28,9 @@ namespace BrawijayaWorkshop.Model
             ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository,
             ITransactionRepository transactionRepository,
-            ITransactionDetailRepository transactionDetailRepository, IUnitOfWork unitOfWork)
+            ITransactionDetailRepository transactionDetailRepository,
+            IJournalMasterRepository journalMasterRepository,
+            IUnitOfWork unitOfWork)
         {
             _purchasingDetailRepository = purchasingDetailRepository;
             _purchasingRepository = purchasingRepository;
@@ -37,6 +40,7 @@ namespace BrawijayaWorkshop.Model
             _referenceRepository = referenceRepository;
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
+            _journalMasterRepository = journalMasterRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -103,25 +107,89 @@ namespace BrawijayaWorkshop.Model
             transaction.CreateUserId = userID;
             transaction.ModifyUserId = userID;
             transaction.ModifyDate = serverTime;
+            transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
             _transactionRepository.Add(transaction);
 
             switch(purchasing.PaymentMethod.Code)
             {
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK:
+
+                    // Bank Kredit --> Karena berkurang
                     TransactionDetail detailBank = new TransactionDetail();
                     detailBank.Credit = purchasing.TotalHasPaid;
-                    
-                    TransactionDetail detailSparepart = new TransactionDetail();
-                    detailSparepart.Debit = purchasing.TotalPrice;
+                    detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02").FirstOrDefault().Id;
+                    detailBank.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailBank);
 
                     break;
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_KAS:
+
+                    // Kas Kredit --> Karena berkurang
+                    TransactionDetail detailKas = new TransactionDetail();
+                    detailKas.Credit = purchasing.TotalHasPaid;
+                    detailKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01").FirstOrDefault().Id;
+                    detailKas.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailKas);
+
                     break;
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA:
+                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS:
+
+                    // Kas Kredit --> Karena berkurang
+                    TransactionDetail detailKasKarenaUangMuka = new TransactionDetail();
+                    detailKasKarenaUangMuka.Credit = purchasing.TotalHasPaid;
+                    detailKasKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01").FirstOrDefault().Id;
+                    detailKasKarenaUangMuka.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailKasKarenaUangMuka);
+
+                    // Uang Muka Debit --> Karena bertambah
+                    TransactionDetail detailUangMukaBertambahKarenaKas = new TransactionDetail();
+                    detailUangMukaBertambahKarenaKas.Debit = purchasing.TotalHasPaid;
+                    detailUangMukaBertambahKarenaKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
+                    detailUangMukaBertambahKarenaKas.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailUangMukaBertambahKarenaKas);
+
+                    // Uang Muka Kredit --> Karena berkurang
+                    TransactionDetail detailUangMukaKasBerkurang = new TransactionDetail();
+                    detailUangMukaKasBerkurang.Credit = purchasing.TotalHasPaid;
+                    detailUangMukaKasBerkurang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
+                    detailUangMukaKasBerkurang.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailUangMukaKasBerkurang);
+
+                    break;
+                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK:
+
+                    // Bank Kredit --> Karena berkurang
+                    TransactionDetail detailBankKarenaUangMuka = new TransactionDetail();
+                    detailBankKarenaUangMuka.Credit = purchasing.TotalHasPaid;
+                    detailBankKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02").FirstOrDefault().Id;
+                    detailBankKarenaUangMuka.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailBankKarenaUangMuka);
+
+                    // Uang Muka Debit --> Karena bertambah
+                    TransactionDetail detailUangMukaBertambahKarenaBank = new TransactionDetail();
+                    detailUangMukaBertambahKarenaBank.Debit = purchasing.TotalHasPaid;
+                    detailUangMukaBertambahKarenaBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
+                    detailUangMukaBertambahKarenaBank.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailUangMukaBertambahKarenaBank);
+
+                    // Uang Muka Kredit --> Karena berkurang
+                    TransactionDetail detailUangMukaBankBerkurang = new TransactionDetail();
+                    detailUangMukaBankBerkurang.Credit = purchasing.TotalHasPaid;
+                    detailUangMukaBankBerkurang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
+                    detailUangMukaBankBerkurang.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(detailUangMukaBankBerkurang);
+
                     break;
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG:
                     break;
             }
+
+            // Sparepart Debit --> Karena bertambah
+            TransactionDetail detailSparepart = new TransactionDetail();
+            detailSparepart.Debit = purchasing.TotalPrice;
+            detailSparepart.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01").FirstOrDefault().Id;
+            detailSparepart.ParentId = transaction.Id;
+            _transactionDetailRepository.Add(detailSparepart);
 
             _unitOfWork.SaveChanges();
         }

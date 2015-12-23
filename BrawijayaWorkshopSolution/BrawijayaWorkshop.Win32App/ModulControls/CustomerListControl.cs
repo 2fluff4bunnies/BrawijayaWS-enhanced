@@ -195,6 +195,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
+            if(gvCustomer.RowCount > 0)
+            {
+                SelectedCustomer = gvCustomer.GetRow(0) as Customer;
+            }
+
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data customer selesai", true);
         }
     }

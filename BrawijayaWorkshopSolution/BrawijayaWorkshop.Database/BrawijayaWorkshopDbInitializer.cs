@@ -545,9 +545,17 @@ namespace BrawijayaWorkshop.Database
             // Purchasing Payment Method Children
             context.References.Add(new Reference
             {
-                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA,
-                Name = "Uang Muka",
-                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka",
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS,
+                Name = "Uang Muka dari Kas",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari kas",
+                Value = "1.01.05",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK,
+                Name = "Uang Muka dari Bank",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari bank",
                 Value = "1.01.05",
                 ParentId = purchasePaymentMethodRef.Id
             });

@@ -200,6 +200,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
+            if (gvPurchasing.RowCount > 0)
+            {
+                SelectedPurchasing = gvPurchasing.GetRow(0) as Purchasing;
+            }
+
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);
         }
 

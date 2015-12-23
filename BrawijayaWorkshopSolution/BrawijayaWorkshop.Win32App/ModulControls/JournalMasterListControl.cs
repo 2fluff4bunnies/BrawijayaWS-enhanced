@@ -153,6 +153,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
+            if(gvJournalMaster.RowCount > 0)
+            {
+                SelectedJournalMaster = gvJournalMaster.GetRow(0) as JournalMaster;
+            }
+
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data jurnal selesai", true);
         }
 
