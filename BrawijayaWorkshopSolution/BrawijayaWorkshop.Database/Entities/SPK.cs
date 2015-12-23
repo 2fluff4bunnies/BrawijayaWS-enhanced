@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -41,6 +42,10 @@ namespace BrawijayaWorkshop.Database.Entities
         public int? SPKparentId { get; set; }
 
         public virtual SPK SPKParent { get; set; }
+
+        public virtual List<SPKDetailSparepart> ListSparepart { get; set; }
+
+        public virtual List<SPKDetailMechanic> ListMechanic { get; set; }
 
     }
 }
