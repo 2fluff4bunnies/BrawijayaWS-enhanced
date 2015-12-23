@@ -184,6 +184,20 @@ namespace BrawijayaWorkshop.Model
                     break;
             }
 
+            if(purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK ||
+               purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS)
+            {
+                if(purchasing.TotalPrice > purchasing.TotalHasPaid)
+                {
+                    // Utang Kredit --> Karena bertambah
+                    TransactionDetail utang = new TransactionDetail();
+                    utang.Credit = purchasing.TotalPrice - purchasing.TotalHasPaid;
+                    utang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01").FirstOrDefault().Id;
+                    utang.ParentId = transaction.Id;
+                    _transactionDetailRepository.Add(utang);
+                }
+            }
+
             // Sparepart Debit --> Karena bertambah
             TransactionDetail detailSparepart = new TransactionDetail();
             detailSparepart.Debit = purchasing.TotalPrice;
