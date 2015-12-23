@@ -96,19 +96,18 @@ namespace BrawijayaWorkshop.Model
                 for (int i = 1; i <= itemPurchasingDetail.Qty; i++)
                 {
                     SparepartDetail spDetail = new SparepartDetail();
-                    string spDetailCode = string.Empty;
                     if (string.IsNullOrEmpty(lastSPID))
                     {
-                        spDetailCode = sparepartDB.Code + "0000000001";
+                        lastSPID = sparepartDB.Code + "0000000001";
                     }
                     else
                     {
-                        spDetailCode = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10))+i)
+                        lastSPID = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
                             .ToString("D10");
                     }
                     spDetail.PurchasingDetail = purchasingDetailInserted;
                     spDetail.SparepartId = sparepartDB.Id;
-                    spDetail.Code = spDetailCode;
+                    spDetail.Code = lastSPID;
                     spDetail.CreateDate = serverTime;
                     spDetail.CreateUserId = userID;
                     spDetail.ModifyUserId = userID;
@@ -172,20 +171,19 @@ namespace BrawijayaWorkshop.Model
                         {
                             for (int i = 1; i <= absDiffQty; i++)
                             {
-                                string spDetailCode = string.Empty;
                                 if (string.IsNullOrEmpty(lastSPID))
                                 {
-                                    spDetailCode = sparepartDB.Code + "0000000001";
+                                    lastSPID = sparepartDB.Code + "0000000001";
                                 }
                                 else
                                 {
-                                    spDetailCode = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + i)
+                                    lastSPID = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
                                                         .ToString("D10");
                                 }
                                 SparepartDetail spDetail = new SparepartDetail();
                                 spDetail.PurchasingDetailId = itemUpdated.Id;
                                 spDetail.SparepartId = sparepartDB.Id;
-                                spDetail.Code = spDetailCode;
+                                spDetail.Code = lastSPID;
                                 spDetail.CreateDate = serverTime;
                                 spDetail.CreateUserId = userID;
                                 spDetail.ModifyUserId = userID;
@@ -258,20 +256,19 @@ namespace BrawijayaWorkshop.Model
 
                 for (int i = 1; i <= itemPurchasingDetail.Qty; i++)
                 {
-                    string spDetailCode = string.Empty;
                     if (string.IsNullOrEmpty(lastSPID))
                     {
-                        spDetailCode = sparepartDB.Code + "0000000001";
+                        lastSPID = sparepartDB.Code + "0000000001";
                     }
                     else
                     {
-                        spDetailCode = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + i)
+                        lastSPID = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
                             .ToString("D10");
                     }
                     SparepartDetail spDetail = new SparepartDetail();
                     spDetail.SparepartId = sparepartDB.Id;
                     spDetail.PurchasingDetail = purchasingDetailInserted;
-                    spDetail.Code = spDetailCode;
+                    spDetail.Code = lastSPID;
                     spDetail.CreateDate = serverTime;
                     spDetail.CreateUserId = userID;
                     spDetail.ModifyUserId = userID;

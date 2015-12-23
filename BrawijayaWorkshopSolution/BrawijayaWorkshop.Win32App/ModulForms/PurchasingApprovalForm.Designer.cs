@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.lblDP = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -130,9 +130,9 @@
             // 
             // txtTotalPrice
             // 
-            this.txtTotalPrice.Enabled = false;
             this.txtTotalPrice.Location = new System.Drawing.Point(155, 296);
             this.txtTotalPrice.Name = "txtTotalPrice";
+            this.txtTotalPrice.Properties.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(167, 20);
             this.txtTotalPrice.TabIndex = 13;
             // 
@@ -225,10 +225,10 @@
             this.cbPayment.Properties.ValueMember = "Id";
             this.cbPayment.Size = new System.Drawing.Size(167, 20);
             this.cbPayment.TabIndex = 9;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule1.ErrorText = "Pilih salah satu pembayaran";
-            conditionValidationRule1.Value1 = "--Pilih Pembayaran--";
-            this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule2.ErrorText = "Pilih salah satu pembayaran";
+            conditionValidationRule2.Value1 = "--Pilih Pembayaran--";
+            this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule2);
             this.cbPayment.EditValueChanged += new System.EventHandler(this.cbPayment_EditValueChanged);
             // 
             // labelControl1
@@ -241,17 +241,17 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Enabled = false;
             this.txtSupplier.Location = new System.Drawing.Point(155, 61);
             this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.Properties.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(167, 20);
             this.txtSupplier.TabIndex = 6;
             // 
             // txtDate
             // 
-            this.txtDate.Enabled = false;
             this.txtDate.Location = new System.Drawing.Point(155, 29);
             this.txtDate.Name = "txtDate";
+            this.txtDate.Properties.ReadOnly = true;
             this.txtDate.Size = new System.Drawing.Size(167, 20);
             this.txtDate.TabIndex = 5;
             // 

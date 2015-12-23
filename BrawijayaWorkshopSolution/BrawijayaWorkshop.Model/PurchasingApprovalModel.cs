@@ -108,7 +108,7 @@ namespace BrawijayaWorkshop.Model
             transaction.ModifyUserId = userID;
             transaction.ModifyDate = serverTime;
             transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
-            _transactionRepository.Add(transaction);
+            Transaction transactionInserted = _transactionRepository.Add(transaction);
 
             switch(purchasing.PaymentMethod.Code)
             {
@@ -118,7 +118,7 @@ namespace BrawijayaWorkshop.Model
                     TransactionDetail detailBank = new TransactionDetail();
                     detailBank.Credit = purchasing.TotalHasPaid;
                     detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02").FirstOrDefault().Id;
-                    detailBank.ParentId = transaction.Id;
+                    detailBank.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailBank);
 
                     break;
@@ -128,7 +128,7 @@ namespace BrawijayaWorkshop.Model
                     TransactionDetail detailKas = new TransactionDetail();
                     detailKas.Credit = purchasing.TotalHasPaid;
                     detailKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01").FirstOrDefault().Id;
-                    detailKas.ParentId = transaction.Id;
+                    detailKas.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailKas);
 
                     break;
@@ -138,21 +138,21 @@ namespace BrawijayaWorkshop.Model
                     TransactionDetail detailKasKarenaUangMuka = new TransactionDetail();
                     detailKasKarenaUangMuka.Credit = purchasing.TotalHasPaid;
                     detailKasKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01").FirstOrDefault().Id;
-                    detailKasKarenaUangMuka.ParentId = transaction.Id;
+                    detailKasKarenaUangMuka.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailKasKarenaUangMuka);
 
                     // Uang Muka Debit --> Karena bertambah
                     TransactionDetail detailUangMukaBertambahKarenaKas = new TransactionDetail();
                     detailUangMukaBertambahKarenaKas.Debit = purchasing.TotalHasPaid;
                     detailUangMukaBertambahKarenaKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
-                    detailUangMukaBertambahKarenaKas.ParentId = transaction.Id;
+                    detailUangMukaBertambahKarenaKas.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailUangMukaBertambahKarenaKas);
 
                     // Uang Muka Kredit --> Karena berkurang
                     TransactionDetail detailUangMukaKasBerkurang = new TransactionDetail();
                     detailUangMukaKasBerkurang.Credit = purchasing.TotalHasPaid;
                     detailUangMukaKasBerkurang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
-                    detailUangMukaKasBerkurang.ParentId = transaction.Id;
+                    detailUangMukaKasBerkurang.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailUangMukaKasBerkurang);
 
                     break;
@@ -162,21 +162,21 @@ namespace BrawijayaWorkshop.Model
                     TransactionDetail detailBankKarenaUangMuka = new TransactionDetail();
                     detailBankKarenaUangMuka.Credit = purchasing.TotalHasPaid;
                     detailBankKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02").FirstOrDefault().Id;
-                    detailBankKarenaUangMuka.ParentId = transaction.Id;
+                    detailBankKarenaUangMuka.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailBankKarenaUangMuka);
 
                     // Uang Muka Debit --> Karena bertambah
                     TransactionDetail detailUangMukaBertambahKarenaBank = new TransactionDetail();
                     detailUangMukaBertambahKarenaBank.Debit = purchasing.TotalHasPaid;
                     detailUangMukaBertambahKarenaBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
-                    detailUangMukaBertambahKarenaBank.ParentId = transaction.Id;
+                    detailUangMukaBertambahKarenaBank.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailUangMukaBertambahKarenaBank);
 
                     // Uang Muka Kredit --> Karena berkurang
                     TransactionDetail detailUangMukaBankBerkurang = new TransactionDetail();
                     detailUangMukaBankBerkurang.Credit = purchasing.TotalHasPaid;
                     detailUangMukaBankBerkurang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05").FirstOrDefault().Id;
-                    detailUangMukaBankBerkurang.ParentId = transaction.Id;
+                    detailUangMukaBankBerkurang.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailUangMukaBankBerkurang);
 
                     break;
@@ -193,7 +193,7 @@ namespace BrawijayaWorkshop.Model
                     TransactionDetail utang = new TransactionDetail();
                     utang.Credit = purchasing.TotalPrice - purchasing.TotalHasPaid;
                     utang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01").FirstOrDefault().Id;
-                    utang.ParentId = transaction.Id;
+                    utang.Parent = transactionInserted;
                     _transactionDetailRepository.Add(utang);
                 }
             }
@@ -202,7 +202,7 @@ namespace BrawijayaWorkshop.Model
             TransactionDetail detailSparepart = new TransactionDetail();
             detailSparepart.Debit = purchasing.TotalPrice;
             detailSparepart.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01").FirstOrDefault().Id;
-            detailSparepart.ParentId = transaction.Id;
+            detailSparepart.Parent = transactionInserted;
             _transactionDetailRepository.Add(detailSparepart);
 
             _unitOfWork.SaveChanges();

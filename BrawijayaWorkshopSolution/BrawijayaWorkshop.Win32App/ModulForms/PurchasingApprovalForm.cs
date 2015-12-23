@@ -56,8 +56,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.Text = "Informasi Pembelian Detail";
                 btnApprove.Visible = false;
                 btnReject.Visible = false;
-                cbPayment.Enabled = false;
-                txtDP.Enabled = false;
+                cbPayment.ReadOnly = true;
+                txtDP.ReadOnly = true;
                 PaymentMethodId = SelectedPurchasing.PaymentMethodId;
                 TotalHasPaid = SelectedPurchasing.TotalHasPaid;
                 if (SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||
