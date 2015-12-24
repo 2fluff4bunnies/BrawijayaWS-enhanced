@@ -209,14 +209,13 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Supplier")});
             this.cbSupplier.Properties.DisplayMember = "Name";
             this.cbSupplier.Properties.ImmediatePopup = true;
-            this.cbSupplier.Properties.NullText = "-- Pilih Supplier --";
+            this.cbSupplier.Properties.NullText = "--Pilih Supplier--";
             this.cbSupplier.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.cbSupplier.Properties.ValueMember = "Id";
             this.cbSupplier.Size = new System.Drawing.Size(100, 20);
             this.cbSupplier.TabIndex = 2;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule2.ErrorText = "Pilih salah satu supplier";
-            conditionValidationRule2.Value1 = "--Pilih Supplier--";
+            conditionValidationRule2.ErrorText = "This value is not valid";
             this.valSupplier.SetValidationRule(this.cbSupplier, conditionValidationRule2);
             // 
             // pnlAction

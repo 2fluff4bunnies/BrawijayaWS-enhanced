@@ -73,16 +73,43 @@ namespace BrawijayaWorkshop.Model
                 .GetMany(c => c.PurchasingId == purchasing.Id).ToList();
             foreach (var purchasingDetail in listPurchasingDetail)
             {
-                List<SparepartDetail> listSparepartDetail = _sparepartDetailRepository
-                    .GetMany(c => c.PurchasingDetailId == purchasingDetail.Id).ToList();
-                foreach (var sparepartDetail in listSparepartDetail)
-                {
-                    sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-                    _sparepartDetailRepository.Update(sparepartDetail);
+                Sparepart sparepartDB = _sparepartRepository.GetById(purchasingDetail.SparepartId);
 
+                SparepartDetail lastSPDetail = _sparepartDetailRepository.
+                    GetMany(c => c.SparepartId == purchasingDetail.SparepartId).OrderByDescending(c => c.Id)
+                    .FirstOrDefault();
+                string lastSPID = string.Empty;
+                if (lastSPDetail != null) lastSPID = lastSPDetail.Code;
+
+                for (int i = 1; i <= purchasingDetail.Qty; i++)
+                {
+                    SparepartDetail spDetail = new SparepartDetail();
+                    if (string.IsNullOrEmpty(lastSPID))
+                    {
+                        lastSPID = sparepartDB.Code + "0000000001";
+                    }
+                    else
+                    {
+                        lastSPID = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
+                            .ToString("D10");
+                    }
+                    spDetail.PurchasingDetail = purchasingDetail;
+                    spDetail.SparepartId = sparepartDB.Id;
+                    spDetail.Code = lastSPID;
+                    spDetail.CreateDate = serverTime;
+                    spDetail.CreateUserId = userID;
+                    spDetail.ModifyUserId = userID;
+                    spDetail.ModifyDate = serverTime;
+                    spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+                    _sparepartDetailRepository.Add(spDetail);
                 }
+
                 purchasingDetail.Status = (int)DbConstant.PurchasingStatus.Active;
                 _purchasingDetailRepository.Update(purchasingDetail);
+
+                Sparepart sparepart = _sparepartRepository.GetById(purchasingDetail.SparepartId);
+                sparepart.StockQty += purchasingDetail.Qty;
+                _sparepartRepository.Update(sparepart);
             }
             
             Reference refSelected = _referenceRepository.GetById(purchasing.PaymentMethodId);
