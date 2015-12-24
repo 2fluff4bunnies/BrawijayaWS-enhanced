@@ -470,7 +470,7 @@
             // 
             // iReporting
             // 
-            this.iReporting.Caption = "Reporting";
+            this.iReporting.Caption = "Laporan";
             this.iReporting.Id = 71;
             this.iReporting.ImageIndex = 19;
             this.iReporting.LargeImageIndex = 13;

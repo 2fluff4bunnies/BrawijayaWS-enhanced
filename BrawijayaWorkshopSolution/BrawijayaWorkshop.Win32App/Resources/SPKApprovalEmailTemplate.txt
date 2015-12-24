@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<p style="font-weight:bold;font-family:Calibri;color:#222;">Yth. Manager,</p> 
+<p style="font-family:Calibri;color:#222;">Mohon review SPK dengan kode: <b><span style="color:#FF0000">@@code@@</span></b></p>
+<br/>
+<p>Regards,</p>
+<br/>
+<p>Admin</p>
+</body>
+</html>

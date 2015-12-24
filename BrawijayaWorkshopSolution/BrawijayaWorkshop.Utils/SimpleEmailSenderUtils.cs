@@ -39,11 +39,10 @@ namespace BrawijayaWorkshop.Utils
             if (!IsValidEmail(to))
                 return;
             //get the mail server
-            string mailServer = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SERVER];
-            string mailServerPort = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SERVERPORT];
-            string mailUsername = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_USERNAME];
-            string mailPassword = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_PASSWORD];
-            mailPassword = mailPassword.Decrypt();
+            string mailServer = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SERVER].Decrypt();
+            string mailServerPort = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SERVERPORT].Decrypt();
+            string mailUsername = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_USERNAME].Decrypt();
+            string mailPassword = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_PASSWORD].Decrypt();
             string mailSSL = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SSL];
 
             MethodBase.GetCurrentMethod().Debug("Send email notification to :" + to + ", cc :" + cc + ", bcc : " + bcc);
@@ -56,7 +55,23 @@ namespace BrawijayaWorkshop.Utils
             smtp.Credentials = new System.Net.NetworkCredential(mailUsername, mailPassword);
             smtp.EnableSsl = false;
 
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage(from, to, emailSubject, emailBody);
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.Body = emailBody;
+            msg.Subject = emailSubject;
+            msg.From = new System.Net.Mail.MailAddress(from);
+            
+            if(to.Contains(','))
+            {
+                string[] toArray = to.Split(',');
+                for (int i = 0; i < toArray.Length; i++)
+                {
+                    msg.To.Add(toArray[i]);
+                }
+            }
+            else
+            {
+                msg.To.Add(to);
+            }
 
             // CC
             if (!string.IsNullOrEmpty(cc))

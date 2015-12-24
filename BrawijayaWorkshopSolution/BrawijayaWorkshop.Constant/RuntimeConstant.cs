@@ -7,6 +7,9 @@ namespace BrawijayaWorkshop.Constant
         public const string EMAIL_SUBJECT_ERROR = "[IMPORTANT] Brawijaya Workshop - Error Notification";
         public const string EMAIL_ERROR = "@@error@@";
 
+        public const string EMAIL_SUBJECT_REQUESTAPPROVALSPK = "[IMPORTANT] Brawijaya Workshop - SPK Approval Review";
+        public const string EMAIL_APPROVALSPK_BODY = "@@code@@";
+
         // Log Format
         public static string LOGFORMAT = "{0}: {1}";
 

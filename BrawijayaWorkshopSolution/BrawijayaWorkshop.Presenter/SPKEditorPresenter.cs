@@ -6,6 +6,7 @@ using BrawijayaWorkshop.View;
 using System.Collections.Generic;
 using System.Linq;
 using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.Constant;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -52,7 +53,6 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.DueDate = View.DueDate;
 
             Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
-
         }
 
         public void populateSparepartDetail( )
@@ -61,8 +61,10 @@ namespace BrawijayaWorkshop.Presenter
         }
 
         public void SendApproval()
-        { 
-            
+        {
+            SimpleEmailSenderUtils.SendEmail(RuntimeConstant.EMAIL_SUBJECT_REQUESTAPPROVALSPK,
+                View.ApprovalEmailBody.Replace(RuntimeConstant.EMAIL_APPROVALSPK_BODY, View.SelectedSPK.Code),
+                View.ApprovalEmailTo, View.ApprovalEmailFrom, string.Empty, string.Empty, string.Empty);
         }
 
         public int getPendingSparpartQty()

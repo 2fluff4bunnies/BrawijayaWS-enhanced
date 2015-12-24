@@ -7,6 +7,10 @@ namespace BrawijayaWorkshop.View
 {
     public interface ISPKEditorView : IView
     {
+        string ApprovalEmailBody { get; set; }
+        string ApprovalEmailFrom { get; set; }
+        string ApprovalEmailTo { get; set; }
+
         string FingerprintIP { get; set; }
         string FingerpringPort { get; set; }
 
