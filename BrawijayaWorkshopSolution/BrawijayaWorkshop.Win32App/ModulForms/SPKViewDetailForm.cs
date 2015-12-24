@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -15,7 +16,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class SPKViewDetailForm : BaseDefaultForm, ISPKViewDetailView
     {
         private SPKViewDetailPresenter _presenter;
-        private bool _isApproval;
+        private bool _isApproval = false;
         public SPKViewDetailForm(SPKViewDetailModel model)
         {
             InitializeComponent();
@@ -44,6 +45,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void SPKViewDetailForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            ApplyButtonSetting();
+        }
+
+        void ApplyButtonSetting()
+        {
+            btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+            btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+            btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
         }
 
         #region Field Editor

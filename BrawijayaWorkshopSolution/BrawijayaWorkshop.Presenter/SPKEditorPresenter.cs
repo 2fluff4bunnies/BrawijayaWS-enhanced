@@ -15,7 +15,7 @@ namespace BrawijayaWorkshop.Presenter
         public SPKEditorPresenter(ISPKEditorView view, SPKEditorModel model)
             : base(view, model) { }
 
-        public void InitFormData()
+        public void InitFormData(bool isEndorse)
         {
             View.FingerprintIP = Model.GetFingerprintIpAddress();
             View.FingerpringPort = Model.GetFingerprintPort();
@@ -33,6 +33,14 @@ namespace BrawijayaWorkshop.Presenter
                 View.VehicleId = View.SelectedSPK.VehicleId;
                 View.Code = View.SelectedSPK.Code;
                 View.DueDate = View.SelectedSPK.DueDate;
+
+                View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
+                View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
+            }
+
+            if (isEndorse)
+            {
+                View.ParentSPK = View.SelectedSPK;
             }
         }
 

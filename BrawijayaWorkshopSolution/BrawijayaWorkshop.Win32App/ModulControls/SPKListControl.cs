@@ -224,6 +224,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         void gvSPK_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedSPK = gvSPK.GetFocusedRow() as SPK;
+            ApplyCMSSetting();
+        }
+
+        void ApplyCMSSetting()
+        {
+            cmsEditData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+            cmsEndorseData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved;
+            cmsPrintData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.SPKPrintStatus.Ready;
         }
 
         void SPKListControl_Load(object sender, EventArgs e)
@@ -289,11 +297,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
-        private void cmsApproval_Click(object sender, EventArgs e)
+
+        private void cmsEditData_Click(object sender, EventArgs e)
         {
-            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
             editor.SelectedSPK = this.SelectedSPK;
-            editor.IsApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsEndorseData_Click(object sender, EventArgs e)
+        {
+            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
+            editor.ParentSPK = this.SelectedSPK;
+            editor.IsEndorse = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();

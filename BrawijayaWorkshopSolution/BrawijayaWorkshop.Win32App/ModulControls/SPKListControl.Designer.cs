@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
+            this.lblPrintStatus = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpPrintStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
             this.dtpCreateDate = new DevExpress.XtraEditors.DateEdit();
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
@@ -55,13 +57,12 @@
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsApproval = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEndorseData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.lookUpPrintStatus = new DevExpress.XtraEditors.LookUpEdit();
-            this.lblPrintStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpCreateDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -73,7 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFilter
@@ -100,6 +100,30 @@
             this.groupFilter.Size = new System.Drawing.Size(1214, 88);
             this.groupFilter.TabIndex = 1;
             this.groupFilter.Text = "Filter";
+            // 
+            // lblPrintStatus
+            // 
+            this.lblPrintStatus.Location = new System.Drawing.Point(835, 34);
+            this.lblPrintStatus.Name = "lblPrintStatus";
+            this.lblPrintStatus.Size = new System.Drawing.Size(56, 13);
+            this.lblPrintStatus.TabIndex = 14;
+            this.lblPrintStatus.Text = "Status Print";
+            // 
+            // lookUpPrintStatus
+            // 
+            this.lookUpPrintStatus.Location = new System.Drawing.Point(906, 31);
+            this.lookUpPrintStatus.Name = "lookUpPrintStatus";
+            this.lookUpPrintStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpPrintStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpPrintStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
+            this.lookUpPrintStatus.Properties.DisplayMember = "Description";
+            this.lookUpPrintStatus.Properties.HideSelection = false;
+            this.lookUpPrintStatus.Properties.NullText = "-- Status --";
+            this.lookUpPrintStatus.Properties.ValueMember = "Status";
+            this.lookUpPrintStatus.Size = new System.Drawing.Size(141, 20);
+            this.lookUpPrintStatus.TabIndex = 13;
             // 
             // dtpDueDate
             // 
@@ -329,74 +353,51 @@
             this.viewDetailToolStripMenuItem,
             this.toolStripSeparator1,
             this.cmsEditData,
-            this.cmsDeleteData,
-            this.cmsApproval});
+            this.cmsEndorseData,
+            this.cmsPrintData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(136, 98);
+            this.cmsEditor.Size = new System.Drawing.Size(134, 98);
             // 
             // viewDetailToolStripMenuItem
             // 
             this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
             this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
             this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
-            this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Size = new System.Drawing.Size(133, 22);
+            this.cmsEditData.Text = "Ubah SPK";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
-            // cmsDeleteData
+            // cmsEndorseData
             // 
-            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
-            this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
-            this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsEndorseData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEndorseData.Name = "cmsEndorseData";
+            this.cmsEndorseData.Size = new System.Drawing.Size(133, 22);
+            this.cmsEndorseData.Text = "Revisi SPK";
+            this.cmsEndorseData.Click += new System.EventHandler(this.cmsEndorseData_Click);
             // 
-            // cmsApproval
+            // cmsPrintData
             // 
-            this.cmsApproval.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.apply_32x32;
-            this.cmsApproval.Name = "cmsApproval";
-            this.cmsApproval.Size = new System.Drawing.Size(135, 22);
-            this.cmsApproval.Text = "Approval";
-            this.cmsApproval.Click += new System.EventHandler(this.cmsApproval_Click);
+            this.cmsPrintData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsPrintData.Name = "cmsPrintData";
+            this.cmsPrintData.Size = new System.Drawing.Size(133, 22);
+            this.cmsPrintData.Text = "Print";
             // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
-            // 
-            // lookUpPrintStatus
-            // 
-            this.lookUpPrintStatus.Location = new System.Drawing.Point(906, 31);
-            this.lookUpPrintStatus.Name = "lookUpPrintStatus";
-            this.lookUpPrintStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpPrintStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpPrintStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
-            this.lookUpPrintStatus.Properties.DisplayMember = "Description";
-            this.lookUpPrintStatus.Properties.HideSelection = false;
-            this.lookUpPrintStatus.Properties.NullText = "-- Status --";
-            this.lookUpPrintStatus.Properties.ValueMember = "Status";
-            this.lookUpPrintStatus.Size = new System.Drawing.Size(141, 20);
-            this.lookUpPrintStatus.TabIndex = 13;
-            // 
-            // lblPrintStatus
-            // 
-            this.lblPrintStatus.Location = new System.Drawing.Point(835, 34);
-            this.lblPrintStatus.Name = "lblPrintStatus";
-            this.lblPrintStatus.Size = new System.Drawing.Size(56, 13);
-            this.lblPrintStatus.TabIndex = 14;
-            this.lblPrintStatus.Text = "Status Print";
             // 
             // SPKListControl
             // 
@@ -410,6 +411,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpCreateDate.Properties.CalendarTimeProperties)).EndInit();
@@ -421,7 +423,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -454,10 +455,10 @@
         private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
-        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.ComponentModel.BackgroundWorker bgwMain;
-        private System.Windows.Forms.ToolStripMenuItem cmsApproval;
         private DevExpress.XtraEditors.LookUpEdit lookUpPrintStatus;
         private DevExpress.XtraEditors.LabelControl lblPrintStatus;
+        private System.Windows.Forms.ToolStripMenuItem cmsEndorseData;
+        private System.Windows.Forms.ToolStripMenuItem cmsPrintData;
     }
 }

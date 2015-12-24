@@ -15,7 +15,6 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
-
             if (View.SelectedSPK != null)
             {
                 View.Code = View.SelectedSPK.Code;

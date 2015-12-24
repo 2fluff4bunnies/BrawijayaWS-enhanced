@@ -22,12 +22,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private List<string> _availableMechanic;
         public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         private bool _isFingerprintConnected = false;
+        private bool _isEndorse = false;
 
         private SPKEditorPresenter _presenter;
 
         public string FingerprintIP { get; set; }
 
         public string FingerpringPort { get; set; }
+       
 
         public SPKEditorForm(SPKEditorModel model)
         {
@@ -67,6 +69,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public decimal RepairThreshold { get; set; }
         public decimal ServiceThreshold { get; set; }
         public bool IsNeedApproval { get; set; }
+
+        public bool IsEndorse
+        {
+            get
+            {
+                return _isEndorse;
+            }
+            set
+            {
+                _isEndorse = value;
+            }
+        }
 
         public decimal TotalSparepartPrice
         {
@@ -318,7 +332,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();
                     _presenter.SaveChanges();
-                    if(this.IsNeedApproval)
+                    if (this.IsNeedApproval)
                     {
                         _presenter.SendApproval();
                     }
@@ -600,7 +614,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void SPKEditorForm_Load(object sender, EventArgs e)
         {
-            _presenter.InitFormData();
+            _presenter.InitFormData(this.IsEndorse);
             this.ApprovalEmailBody = Resources.SPKApprovalEmailTemplate;
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();

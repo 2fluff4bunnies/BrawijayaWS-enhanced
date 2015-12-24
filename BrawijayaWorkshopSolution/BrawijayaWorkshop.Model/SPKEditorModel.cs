@@ -56,6 +56,20 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
+        public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
+        {
+            List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+
+            return result;
+        }
+
+        public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
+        {
+            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+
+            return result;
+        }
+
         public string GetFingerprintIpAddress()
         {
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_IPADDRESS).FirstOrDefault().Value;
