@@ -27,15 +27,14 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<Reference> GetSPKCategoryList()
-        {
-            Reference spkCategory = _referenceRepository.GetMany(r => string.Compare(r.Code, DbConstant.REF_SPKCATEGORY, true) == 0).FirstOrDefault();
-            return _referenceRepository.GetMany(r => r.ParentId == spkCategory.Id).ToList();
-        }
-
         public List<SPK> SearchSPK(string LicenseNumber, string code, DateTime? createDate, DateTime? dueDate, int category, DbConstant.ApprovalStatus status)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.StatusApprovalId == (int)status).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            if ((int)status != 9)
+            {
+                result = result.Where(spk => spk.StatusApprovalId == (int)status).ToList();
+            }
 
             if (!string.IsNullOrEmpty(LicenseNumber))
             {
@@ -67,6 +66,28 @@ namespace BrawijayaWorkshop.Model
                 result = result.Where(spk => spk.CategoryReferenceId == category).ToList();
             }
 
+            return result;
+        }
+
+        public List<Reference> GetSPKCategoryList()
+        {
+            Reference spkCategory = _referenceRepository.GetMany(r => string.Compare(r.Code, DbConstant.REF_SPKCATEGORY, true) == 0).FirstOrDefault();
+            List<Reference> result = _referenceRepository.GetMany(r => r.ParentId == spkCategory.Id).ToList();
+
+            result.Add(new Reference
+            {
+                Id = 0,
+                Name = "Semua Kategori",
+                Description = "Semua Kategori"
+            });
+
+            return result;
+
+        }
+
+        public List<Vehicle> GetSPKVehicleList()
+        {
+            List<Vehicle> result = _vehicleRepository.GetMany(v => v.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             return result;
         }
     }

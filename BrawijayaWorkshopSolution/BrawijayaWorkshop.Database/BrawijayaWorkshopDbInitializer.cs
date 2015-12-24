@@ -511,7 +511,7 @@ namespace BrawijayaWorkshop.Database
                 Code = "I",
                 Name = "Inventaris",
                 Description = "SPK untuk Inventaris",
-                Value = "L",
+                Value = "I",
                 ParentId = refSPKCategory.Id
             });
 

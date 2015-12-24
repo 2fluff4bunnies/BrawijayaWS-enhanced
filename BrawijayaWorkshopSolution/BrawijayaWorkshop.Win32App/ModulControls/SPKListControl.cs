@@ -36,8 +36,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             this.Load += SPKListControl_Load;
 
-            //by default pending spk will displayed
+            //by default pending & all category spk will displayed
             this.StatusFilter = 0;
+            this.CategoryFilter = 0;
         }
 
         protected override string ModulName
@@ -200,6 +201,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void SPKListControl_Load(object sender, EventArgs e)
         {
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 

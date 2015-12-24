@@ -82,7 +82,7 @@ namespace BrawijayaWorkshop.Model
             };
         }
 
-        public void InsertSPK(SPK spk, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
+        public SPK InsertSPK(SPK spk, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
             List<SPKDetailSparepartDetail> sparepartDetailList, int userId, bool isNeedApproval)
         {
             DateTime serverTime = DateTime.Now;
@@ -172,6 +172,8 @@ namespace BrawijayaWorkshop.Model
             }
 
             _unitOfWork.SaveChanges();
+
+            return spk;
         }
 
         public List<Sparepart> LoadSparepart()
