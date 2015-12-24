@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.View
 
         List<SPKStatusItem> ApprovalStatusDropdownList { get; set; }
 
-        List<SPKStatusItem> PrintStatusDropDownList { get; set; }
+        List<SPKStatusItem> PrintStatusDropdownList { get; set; }
     }
 
     public class SPKStatusItem

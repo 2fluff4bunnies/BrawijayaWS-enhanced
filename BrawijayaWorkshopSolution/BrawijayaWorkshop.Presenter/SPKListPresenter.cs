@@ -15,12 +15,12 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.ApprovalStatusDropdownList = GetApprovalStatusDropdownList();
-            View.PrintStatusDropDownList = GetPrintStatusDropdownList();
+            View.PrintStatusDropdownList = GetPrintStatusDropdownList();
         }
 
         public void LoadSPK()
         {
-            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CreateDateFilter, View.DueDateFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter));
+            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CreateDateFilter, View.DueDateFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter);
         }
 
         public List<SPKStatusItem> GetApprovalStatusDropdownList()

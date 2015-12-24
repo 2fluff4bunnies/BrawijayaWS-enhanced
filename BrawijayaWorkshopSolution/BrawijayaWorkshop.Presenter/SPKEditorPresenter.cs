@@ -27,6 +27,12 @@ namespace BrawijayaWorkshop.Presenter
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
 
+
+            if (isEndorse)
+            {
+
+            }
+
             if (View.SelectedSPK != null)
             {
                 View.CategoryId = View.SelectedSPK.CategoryReferenceId;
@@ -38,10 +44,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
             }
 
-            if (isEndorse)
-            {
-                View.ParentSPK = View.SelectedSPK;
-            }
+           
         }
 
         public void UpdateMechanicList(List<string> availableCodes)

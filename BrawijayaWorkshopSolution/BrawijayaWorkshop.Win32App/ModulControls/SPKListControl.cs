@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewSPK.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
-            cmsDeleteData.Enabled = AllowDelete;
+            cmsEndorseData.Enabled = AllowEdit;
 
             this.Load += SPKListControl_Load;
 
@@ -195,7 +195,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<SPKStatusItem> StatusPrintlDropdownList
+        public List<SPKStatusItem> PrintStatusDropdownList
         {
             get
             {
