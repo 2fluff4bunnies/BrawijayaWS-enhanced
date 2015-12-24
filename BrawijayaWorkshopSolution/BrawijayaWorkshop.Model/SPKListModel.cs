@@ -44,6 +44,10 @@ namespace BrawijayaWorkshop.Model
                 {
                     result = result.Where(spk => spk.VehicleId == vehicleDetail.VehicleId).ToList();
                 }
+                else
+                {
+                    return new List<SPK>();
+                }
             }
 
             if (!string.IsNullOrEmpty(code))

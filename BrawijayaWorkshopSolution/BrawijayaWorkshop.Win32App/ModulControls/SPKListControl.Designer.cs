@@ -273,6 +273,7 @@
             this.gvSPK.OptionsCustomization.AllowColumnMoving = false;
             this.gvSPK.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvSPK.OptionsMenu.EnableFooterMenu = false;
+            this.gvSPK.OptionsView.ShowDetailButtons = false;
             this.gvSPK.OptionsView.ShowFooter = true;
             this.gvSPK.OptionsView.ShowGroupPanel = false;
             this.gvSPK.OptionsView.ShowViewCaption = true;
