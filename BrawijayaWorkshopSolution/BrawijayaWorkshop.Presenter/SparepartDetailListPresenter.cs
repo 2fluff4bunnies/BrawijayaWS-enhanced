@@ -2,6 +2,8 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.View;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -9,6 +11,22 @@ namespace BrawijayaWorkshop.Presenter
     {
         public SparepartDetailListPresenter(ISparepartDetailListView view, SparepartDetailListModel model)
             : base(view, model) { }
+
+        public void InitFormData()
+        {
+            List<SparepartDetailStatusItem> listStatus = new List<SparepartDetailStatusItem>();
+            listStatus.Add(new SparepartDetailStatusItem
+            {
+                Status = (int)DbConstant.SparepartDetailDataStatus.Active,
+                Description = "Aktif"
+            });
+            listStatus.Add(new SparepartDetailStatusItem
+            {
+                Status = (int)DbConstant.SparepartDetailDataStatus.NotVerified,
+                Description = "Pending"
+            });
+            View.ListStatus = listStatus;
+        }
 
         public void LoadDetailList()
         {

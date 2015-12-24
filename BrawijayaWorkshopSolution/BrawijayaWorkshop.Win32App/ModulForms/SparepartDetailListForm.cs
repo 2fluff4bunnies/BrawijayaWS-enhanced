@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
@@ -26,6 +27,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void SparepartDetailListForm_Load(object sender, EventArgs e)
         {
             this.Text = string.Format(this.Text, SelectedSparepart.Code + " - " + SelectedSparepart.Name);
+            _presenter.InitFormData();
+            lookupStatus.EditValue = (int)DbConstant.SparepartDetailDataStatus.Active;
             RefreshDataView();
         }
 
@@ -78,6 +81,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void lookupStatus_EditValueChanged(object sender, EventArgs e)
         {
+            SelectedStatus = lookupStatus.EditValue.AsInteger();
             RefreshDataView();
         }
 
