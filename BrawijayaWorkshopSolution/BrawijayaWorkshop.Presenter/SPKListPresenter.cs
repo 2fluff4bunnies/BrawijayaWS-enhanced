@@ -14,40 +14,41 @@ namespace BrawijayaWorkshop.Presenter
         public void InitData()
         {
             View.CategoryDropdownList = Model.GetSPKCategoryList();
-            View.StatusDropdownList = GetStatustDropdownList();
+            View.ApprovalStatusDropdownList = GetApprovalStatusDropdownList();
+            View.PrintStatusDropDownList = GetPrintStatusDropdownList();
         }
 
         public void LoadSPK()
         {
-            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CreateDateFilter, View.DueDateFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.StatusFilter);
+            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CreateDateFilter, View.DueDateFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter));
         }
 
-        public List<SPKStatusItem> GetStatustDropdownList()
+        public List<SPKStatusItem> GetApprovalStatusDropdownList()
         {
             List<SPKStatusItem> result = new List<SPKStatusItem>();
 
             result.Add(new SPKStatusItem
             {
                 Status = (int)DbConstant.ApprovalStatus.Pending,
-                Description = "Pending"
+                Description = "Menunggu Persetujuan"
             });
 
             result.Add(new SPKStatusItem
             {
                 Status = (int)DbConstant.ApprovalStatus.Approved,
-                Description = "Approved"
+                Description = "Disetujui"
             });
 
             result.Add(new SPKStatusItem
             {
                 Status = (int)DbConstant.ApprovalStatus.Endorsed,
-                Description = "Endorsed"
+                Description = "Direvisi"
             });
 
             result.Add(new SPKStatusItem
             {
                 Status = (int)DbConstant.ApprovalStatus.Rejected,
-                Description = "Rejected"
+                Description = "Ditolak"
             });
 
             result.Add(new SPKStatusItem
@@ -55,6 +56,37 @@ namespace BrawijayaWorkshop.Presenter
                 Status = 9,
                 Description = "Semua Status"
             });
+
+            return result;
+        }
+
+        public List<SPKStatusItem> GetPrintStatusDropdownList()
+        {
+            List<SPKStatusItem> result = new List<SPKStatusItem>();
+
+            result.Add(new SPKStatusItem
+            {
+                Status = (int)DbConstant.SPKPrintStatus.Pending,
+                Description = "Menunggu Persetujuan"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = (int)DbConstant.SPKPrintStatus.Ready,
+                Description = "Siap Print"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = (int)DbConstant.SPKPrintStatus.Printed,
+                Description = "Sudah Diprint"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = 9,
+                Description = "Semua Status"
+            });        
 
             return result;
         }

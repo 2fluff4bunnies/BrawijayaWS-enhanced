@@ -10,7 +10,9 @@ namespace BrawijayaWorkshop.View
 {
     public interface ISPKListView : IView
     {
-        int StatusFilter { get; set; }
+        int ApprovalStatusFilter { get; set; }
+
+        int PrintStatusFilter { get; set; }
 
         string CodeFilter { get; set; }
 
@@ -28,7 +30,9 @@ namespace BrawijayaWorkshop.View
 
         SPK SelectedSPK { get; set; }
 
-        List<SPKStatusItem> StatusDropdownList { get; set; }
+        List<SPKStatusItem> ApprovalStatusDropdownList { get; set; }
+
+        List<SPKStatusItem> PrintStatusDropDownList { get; set; }
     }
 
     public class SPKStatusItem

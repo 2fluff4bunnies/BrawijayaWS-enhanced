@@ -300,6 +300,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #endregion
 
+        #region EmailProperties
+        public string ApprovalEmailBody { get; set; }
+
+        public string ApprovalEmailFrom { get; set; }
+
+        public string ApprovalEmailTo { get; set; }
+        #endregion
+
         #region Methods
         protected override void ExecuteSave()
         {
@@ -310,6 +318,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();
                     _presenter.SaveChanges();
+                    if(this.IsNeedApproval)
+                    {
+                        _presenter.SendApproval();
+                    }
+
                     this.Close();
                 }
                 catch (Exception ex)
@@ -630,10 +643,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             return result;
         }
 
-        public string ApprovalEmailBody { get; set; }
 
-        public string ApprovalEmailFrom { get; set; }
-
-        public string ApprovalEmailTo { get; set; }
     }
 }

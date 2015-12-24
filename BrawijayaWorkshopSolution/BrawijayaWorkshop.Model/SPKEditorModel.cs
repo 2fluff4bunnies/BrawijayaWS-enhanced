@@ -116,8 +116,8 @@ namespace BrawijayaWorkshop.Model
           
             spk.Status = (int)DbConstant.DefaultDataStatus.Active;
             spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
-            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.inProgress;
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.pending;
+            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
 
             SPK insertedSPK = _SPKRepository.Add(spk);
 
@@ -165,7 +165,7 @@ namespace BrawijayaWorkshop.Model
             else
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.printed;
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
 
                 
 #warning TODO print SPK here
@@ -219,8 +219,8 @@ namespace BrawijayaWorkshop.Model
             SPK spk = _SPKRepository.GetMany(s => s.Id == spkId).FirstOrDefault();
 
             spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.inProgress;
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.ready;
+            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
             spk.ModifyUserId = userId;
             spk.ModifyDate = serverTime;
 

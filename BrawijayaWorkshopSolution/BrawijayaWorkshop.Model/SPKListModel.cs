@@ -27,13 +27,18 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SPK> SearchSPK(string LicenseNumber, string code, DateTime? createDate, DateTime? dueDate, int category, DbConstant.ApprovalStatus status)
+        public List<SPK> SearchSPK(string LicenseNumber, string code, DateTime? createDate, DateTime? dueDate, int category, DbConstant.ApprovalStatus approvalStatus, DbConstant.SPKPrintStatus printStatus)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress).ToList();
 
-            if ((int)status != 9)
+            if ((int)printStatus != 9)
             {
-                result = result.Where(spk => spk.StatusApprovalId == (int)status).ToList();
+                result = result.Where(spk => spk.StatusPrintId == (int)printStatus).ToList();
+            }
+
+            if ((int)approvalStatus != 9)
+            {
+                result = result.Where(spk => spk.StatusApprovalId == (int)approvalStatus).ToList();
             }
 
             if (!string.IsNullOrEmpty(LicenseNumber))

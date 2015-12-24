@@ -37,7 +37,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             this.Load += SPKListControl_Load;
 
             //by default pending & all category spk will displayed
-            this.StatusFilter = 0;
+            this.ApprovalStatusFilter = 0;
             this.CategoryFilter = 0;
         }
 
@@ -50,15 +50,30 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         #region Filter Fields
-        public int StatusFilter
+
+        public SPK SelectedSPK { get; set; }
+
+        public int ApprovalStatusFilter
         {
             get
             {
-                return lookUpStatus.EditValue.AsInteger();
+                return lookUpApprovalStatus.EditValue.AsInteger();
             }
             set
             {
-                lookUpStatus.EditValue = value;
+                lookUpApprovalStatus.EditValue = value;
+            }
+        }
+
+        public int PrintStatusFilter
+        {
+            get
+            {
+                return lookUpPrintStatus.EditValue.AsInteger();
+            }
+            set
+            {
+                lookUpPrintStatus.EditValue = value;
             }
         }
 
@@ -168,19 +183,31 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public SPK SelectedSPK { get; set; }
-
-        public List<SPKStatusItem> StatusDropdownList
+        public List<SPKStatusItem> ApprovalStatusDropdownList
         {
             get
             {
-                return lookUpStatus.Properties.DataSource as List<SPKStatusItem>;
+                return lookUpApprovalStatus.Properties.DataSource as List<SPKStatusItem>;
             }
             set
             {
-                lookUpStatus.Properties.DataSource = value;
+                lookUpApprovalStatus.Properties.DataSource = value;
             }
         }
+
+        public List<SPKStatusItem> StatusPrintlDropdownList
+        {
+            get
+            {
+                return lookUpPrintStatus.Properties.DataSource as List<SPKStatusItem>;
+            }
+            set
+            {
+                lookUpPrintStatus.Properties.DataSource = value;
+            }
+        }
+
+        
         #endregion
 
         void gvSPK_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

@@ -97,15 +97,15 @@ namespace BrawijayaWorkshop.Constant
 
         public enum SPKPrintStatus
         { 
-            pending = 0,
-            ready = 1,
-            printed = 2
+            Pending = 0,
+            Ready = 1,
+            Printed = 2
         }
 
         public enum SPKCompletionStatus
         { 
-            inProgress = 0,
-            completed = 1
+            InProgress = 0,
+            Completed = 1
         }
 
         public enum PurchasingStatus
