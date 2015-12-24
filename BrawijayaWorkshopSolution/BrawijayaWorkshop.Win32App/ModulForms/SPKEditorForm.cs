@@ -4,10 +4,12 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.Properties;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
@@ -20,7 +22,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private List<string> _availableMechanic;
         public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         private bool _isFingerprintConnected = false;
-
 
         private SPKEditorPresenter _presenter;
 
@@ -155,8 +156,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
-
-
 
         public DateTime DueDate
         {
@@ -300,8 +299,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #endregion
-
-
 
         #region Methods
         protected override void ExecuteSave()
@@ -591,6 +588,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void SPKEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            this.ApprovalEmailBody = Resources.SPKApprovalEmailTemplate;
+            this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
+            this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
+
             if (!bgwFingerPrint.IsBusy)
             {
                 Cursor = Cursors.WaitCursor;
@@ -612,8 +613,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-
-
         bool ApprovalCheck()
         {
             bool result = false;
@@ -631,5 +630,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             return result;
         }
 
+        public string ApprovalEmailBody { get; set; }
+
+        public string ApprovalEmailFrom { get; set; }
+
+        public string ApprovalEmailTo { get; set; }
     }
 }
