@@ -227,12 +227,14 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iNotification_ItemClick(object sender, ItemClickEventArgs e)
         {
-            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
 
             ClearNavigation();
             ClearUserControl();
 
-            // show layout notification
+            NotificationListControl listNotification = Bootstrapper.Resolve<NotificationListControl>();
+            ShowUserControl(listNotification);
+
         }
 
         private void iMaster_ItemClick(object sender, ItemClickEventArgs e)

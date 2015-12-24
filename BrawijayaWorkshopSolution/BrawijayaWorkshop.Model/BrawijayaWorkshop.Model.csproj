@@ -63,6 +63,7 @@
     <Compile Include="Mappers\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="MechanicEditorModel.cs" />
     <Compile Include="MechanicListModel.cs" />
+    <Compile Include="NotificationListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchasingApprovalModel.cs" />
     <Compile Include="PurchasingEditorModel.cs" />

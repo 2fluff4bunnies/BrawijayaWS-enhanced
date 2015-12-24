@@ -160,7 +160,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void bgwSave_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (valSupplier.Validate() && valDate.Validate())
+            if (valSupplier.Validate() && valDate.Validate() && ListPurchasingDetail.Count > 0)
             {
                 try
                 {

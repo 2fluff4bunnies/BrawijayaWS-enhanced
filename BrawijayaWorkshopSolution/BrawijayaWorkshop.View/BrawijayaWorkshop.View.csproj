@@ -47,6 +47,7 @@
     <Compile Include="ILoginView.cs" />
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
+    <Compile Include="INotificationListView.cs" />
     <Compile Include="IPurchasingApprovalView.cs" />
     <Compile Include="IPurchasingEditorView.cs" />
     <Compile Include="IPurchasingListView.cs" />

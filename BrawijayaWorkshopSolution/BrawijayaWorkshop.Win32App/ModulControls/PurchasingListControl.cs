@@ -40,7 +40,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewPurchasing.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
-
+            persetujuanPembelianToolStripMenuItem.Enabled = AllowEdit;
             this.Load += PurchasingListControl_Load;
         }
 
