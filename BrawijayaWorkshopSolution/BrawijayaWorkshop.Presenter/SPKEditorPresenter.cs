@@ -65,6 +65,10 @@ namespace BrawijayaWorkshop.Presenter
             
         }
 
+        public int getPendingSparpartQty()
+        {
+            return Model.getPendingSparpartQty(View.SparepartId);
+        }
 
     }
 }

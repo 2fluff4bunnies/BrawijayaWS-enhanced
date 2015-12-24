@@ -54,7 +54,7 @@
             this.btnSave.Location = new System.Drawing.Point(301, 14);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Simpan";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -65,7 +65,7 @@
             this.btnCancel.Location = new System.Drawing.Point(394, 14);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Batal";
             // 
             // BaseEditorForm
@@ -78,7 +78,6 @@
             this.Controls.Add(this.pnlAction);
             this.Name = "BaseEditorForm";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BaseEditorForm";
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).EndInit();
             this.pnlAction.ResumeLayout(false);

@@ -35,8 +35,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _availableMechanic = new List<string>();
             _today = DateTime.Today;
 
-            //txtQty.ReadOnly = true;
-            //txtFee.ReadOnly = true;
+            valCategory.SetIconAlignment(lookUpCategory, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valVehicle.SetIconAlignment(LookUpVehicle, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valDueDate.SetIconAlignment(dtpDueDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += SPKEditorForm_Load;
 
@@ -320,11 +321,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan SPK gagal!");
                 }
             }
+            else
+            {
+                if (SPKSparepartList.Count == 0)
+                {
+                    this.ShowError("Tidak ada sparepart dalam daftar penggunaan sparepart! Harus ada sparepart yang digunakan, minimal 1");
+                }
+                if (SPKMechanicList.Count == 0)
+                {
+                    this.ShowError("Tidak ada mekanik yang terlibat! Harus ada mekanik yang terlibat, minimal 1");
+                }
+            }
         }
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            if (this.SparepartQty <= SparepartToInsert.StockQty)
+            int pendingRequestSparepart = _presenter.getPendingSparpartQty();
+
+            if (this.SparepartQty + pendingRequestSparepart <= SparepartToInsert.StockQty)
             {
                 _presenter.populateSparepartDetail();
 
@@ -343,8 +357,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     TotalPrice = totalPrice
                 });
 
-                gcSparepart.DataSource = SPKSparepartList;
-                gvSparepart.BestFitColumns();
+                RefreshSparepartGrid();
 
                 ClearSparepart();
 
@@ -352,7 +365,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             else
             {
-                this.ShowError("Jumlah sparepart yang dimasukkan melebihi stok yang ada!");
+                this.ShowError(string.Format("Jumlah sparepart yang dimasukkan melebihi stok yang ada! \n Stok yang diminta : {0} \n Permintaan tertunda : {1} \n Stok tersedia : {2}", SparepartQty, pendingRequestSparepart, SparepartToInsert.StockQty));
             }
         }
 
@@ -389,8 +402,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
 
-            gcMechanic.DataSource = SPKMechanicList;
-            gvMechanic.BestFitColumns();
+            RefreshMechanicGrid();
 
             ClearMechanic();
         }
@@ -403,16 +415,32 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #endregion
 
+        public void RefreshMechanicGrid()
+        {
+            gcMechanic.DataSource = SPKMechanicList;
+            gvMechanic.BestFitColumns();
+        }
+
+        public void RefreshSparepartGrid()
+        {
+            gcSparepart.DataSource = SPKMechanicList;
+            gvSparepart.BestFitColumns();
+        }
+
         private void cmsDeleteDataMechanic_Click(object sender, EventArgs e)
         {
             SPKDetailMechanic mechanicToRemove = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
             SPKMechanicList.Remove(mechanicToRemove);
+
+            RefreshMechanicGrid();
         }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
             SPKDetailSparepart SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepart;
             SPKSparepartList.Remove(SparepartToRemove);
+
+            RefreshSparepartGrid();
         }
 
         private void bgwFingerPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

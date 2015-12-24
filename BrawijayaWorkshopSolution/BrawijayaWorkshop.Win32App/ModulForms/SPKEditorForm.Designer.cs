@@ -29,8 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKEditorForm));
             this.gcSPK = new DevExpress.XtraEditors.GroupControl();
+            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
+            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.txtMechanicName = new DevExpress.XtraEditors.TextEdit();
             this.chxIsRegistered = new DevExpress.XtraEditors.CheckEdit();
             this.gcSparepart = new DevExpress.XtraGrid.GridControl();
@@ -64,10 +69,9 @@
             this.cmsMechanicEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
-            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
-            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             this.gcSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMechanicName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chxIsRegistered.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
@@ -86,7 +90,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
             this.cmsSparepartEditor.SuspendLayout();
             this.cmsMechanicEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSPK
@@ -120,6 +123,26 @@
             this.gcSPK.TabIndex = 0;
             this.gcSPK.Text = "Informasi SPK";
             // 
+            // txtTotalSparepartPrice
+            // 
+            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(363, 248);
+            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
+            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n";
+            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
+            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalSparepartPrice.TabIndex = 32;
+            // 
+            // lblTotalSparepart
+            // 
+            this.lblTotalSparepart.Location = new System.Drawing.Point(273, 251);
+            this.lblTotalSparepart.Name = "lblTotalSparepart";
+            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
+            this.lblTotalSparepart.TabIndex = 31;
+            this.lblTotalSparepart.Text = "Total Sparepart";
+            // 
             // txtMechanicName
             // 
             this.txtMechanicName.Location = new System.Drawing.Point(224, 282);
@@ -133,7 +156,7 @@
             this.chxIsRegistered.Name = "chxIsRegistered";
             this.chxIsRegistered.Properties.Caption = "Mekanik Terdaftar";
             this.chxIsRegistered.Size = new System.Drawing.Size(138, 19);
-            this.chxIsRegistered.TabIndex = 29;
+            this.chxIsRegistered.TabIndex = 6;
             this.chxIsRegistered.CheckedChanged += new System.EventHandler(this.chxIsRegistered_CheckedChanged);
             // 
             // gcSparepart
@@ -214,7 +237,7 @@
             this.lookUpMechanic.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpMechanic.Properties.ValueMember = "Id";
             this.lookUpMechanic.Size = new System.Drawing.Size(100, 20);
-            this.lookUpMechanic.TabIndex = 6;
+            this.lookUpMechanic.TabIndex = 7;
             // 
             // lookUpSparepart
             // 
@@ -357,8 +380,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dtpDueDate.Size = new System.Drawing.Size(175, 20);
             this.dtpDueDate.TabIndex = 2;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Batas waktu pengerjaan harus diisi!";
+            this.valDueDate.SetValidationRule(this.dtpDueDate, conditionValidationRule1);
             // 
             // LookUpVehicle
             // 
@@ -379,6 +406,9 @@
             this.LookUpVehicle.Properties.ValueMember = "Id";
             this.LookUpVehicle.Size = new System.Drawing.Size(175, 20);
             this.LookUpVehicle.TabIndex = 0;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Kendaraan harus dipilih!";
+            this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule2);
             // 
             // lookUpCategory
             // 
@@ -396,6 +426,9 @@
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(175, 20);
             this.lookUpCategory.TabIndex = 1;
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Kategori harus dipilih!";
+            this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule3);
             // 
             // lblVehicle
             // 
@@ -440,24 +473,6 @@
             this.bgwFingerPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerPrint_DoWork);
             this.bgwFingerPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerPrint_RunWorkerCompleted);
             // 
-            // lblTotalSparepart
-            // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(273, 251);
-            this.lblTotalSparepart.Name = "lblTotalSparepart";
-            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
-            this.lblTotalSparepart.TabIndex = 31;
-            this.lblTotalSparepart.Text = "Total Sparepart";
-            // 
-            // txtTotalSparepartPrice
-            // 
-            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(363, 248);
-            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
-            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n";
-            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
-            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(100, 20);
-            this.txtTotalSparepartPrice.TabIndex = 32;
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,12 +481,12 @@
             this.Controls.Add(this.gcSPK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKEditorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SPK Editor";
             this.Controls.SetChildIndex(this.gcSPK, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
             this.gcSPK.ResumeLayout(false);
             this.gcSPK.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMechanicName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chxIsRegistered.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
@@ -490,7 +505,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
             this.cmsSparepartEditor.ResumeLayout(false);
             this.cmsMechanicEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

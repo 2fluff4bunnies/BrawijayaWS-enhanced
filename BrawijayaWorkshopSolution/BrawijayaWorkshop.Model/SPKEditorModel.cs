@@ -166,6 +166,8 @@ namespace BrawijayaWorkshop.Model
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.printed;
+
+                
 #warning TODO print SPK here
             }
 
@@ -234,6 +236,25 @@ namespace BrawijayaWorkshop.Model
         {
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_S).FirstOrDefault().Value;
         }
+
+        public int getPendingSparpartQty(int sparepartId)
+        {
+            int result = 0;
+
+            List<SPKDetailSparepart> pendingSPKDetail = _SPKDetailSparepartRepository.GetMany(spkds => 
+                                                        spkds.SPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending
+                                                        && spkds.Sparepart.Id == sparepartId
+                                                        ).ToList();
+
+            foreach (var item in pendingSPKDetail)
+            {
+                result = result + item.TotalQuantity;
+            }
+
+            return result;
+        }
+
+
 
     }
 }

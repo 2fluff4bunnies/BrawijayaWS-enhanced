@@ -14,7 +14,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public int SPKId { get; set; }
         public virtual SPK SPK { get; set; }
 
-        public int MechanicId { get; set; }
+        public int? MechanicId { get; set; }
         public virtual Mechanic Mechanic { get; set; }
     }
 }

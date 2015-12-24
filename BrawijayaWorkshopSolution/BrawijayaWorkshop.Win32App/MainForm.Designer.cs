@@ -461,7 +461,7 @@
             // 
             // iTransaction
             // 
-            this.iTransaction.Caption = "Transaction";
+            this.iTransaction.Caption = "Transaksi";
             this.iTransaction.Id = 70;
             this.iTransaction.ImageIndex = 18;
             this.iTransaction.LargeImageIndex = 12;
