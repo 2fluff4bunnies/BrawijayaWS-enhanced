@@ -307,7 +307,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 return lookUpMechanic.GetSelectedDataRow() as Mechanic;
             }
-           
+
         }
 
         public Sparepart SparepartToInsert
@@ -316,7 +316,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 return lookUpSparepart.GetSelectedDataRow() as Sparepart;
             }
-          
+
         }
 
         public string Description
@@ -453,44 +453,51 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public void ClearSparepart()
         {
             this.lookUpSparepart.EditValue = null;
-            this.lookUpSparepart.Text = string.Empty; 
+            this.lookUpSparepart.Text = string.Empty;
             this.SparepartQty = 0;
             this.SparepartName = string.Empty;
         }
 
         private void btnAddMechanic_Click(object sender, EventArgs e)
         {
-            if (this.IsMechanicRegistered)
+            if (string.IsNullOrEmpty(this.MechanicDescription))
             {
-                if (MechanicToInsert != null)
+                if (this.IsMechanicRegistered)
                 {
-                    SPKMechanicList.Add(new SPKDetailMechanic
+                    if (MechanicToInsert != null)
                     {
-                        Name = this.MechanicToInsert.Name,
-                        Mechanic = this.MechanicToInsert,
-                        MechanicId = this.MechanicId,
-                        Description = this.MechanicDescription
-                    });
+                        SPKMechanicList.Add(new SPKDetailMechanic
+                        {
+                            Name = this.MechanicToInsert.Name,
+                            Mechanic = this.MechanicToInsert,
+                            MechanicId = this.MechanicId,
+                            Description = this.MechanicDescription
+                        });
+                    }
+                    else
+                    {
+                        this.ShowError("Mekanik harus dipilih");
+                    }
                 }
                 else
                 {
-                    this.ShowError("Mekanik harus dipilih");
+                    if (!string.IsNullOrEmpty(MechanicName))
+                    {
+                        SPKMechanicList.Add(new SPKDetailMechanic
+                        {
+                            Name = this.MechanicName,
+                            Description = this.MechanicDescription
+                        });
+                    }
+                    else
+                    {
+                        this.ShowError("Mekanik harus diisi");
+                    }
                 }
             }
             else
             {
-                if (!string.IsNullOrEmpty(MechanicName))
-                {
-                    SPKMechanicList.Add(new SPKDetailMechanic
-                    {
-                        Name = this.MechanicName,
-                        Description = this.MechanicDescription
-                    });
-                }
-                else
-                {
-                    this.ShowError("Mekanik harus diisi");
-                }
+                this.ShowError("Keterangan mekanik harus diisi");
             }
 
             RefreshMechanicGrid();
@@ -501,7 +508,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public void ClearMechanic()
         {
             this.lookUpMechanic.EditValue = null;
-            this.lookUpMechanic.Text = string.Empty; 
+            this.lookUpMechanic.Text = string.Empty;
             this.MechanicName = string.Empty;
             this.MechanicDescription = string.Empty;
         }

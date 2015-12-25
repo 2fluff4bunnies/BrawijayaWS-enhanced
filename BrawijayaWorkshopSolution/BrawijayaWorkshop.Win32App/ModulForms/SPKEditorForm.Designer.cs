@@ -34,27 +34,34 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKEditorForm));
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
-            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
-            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
-            this.txtMechanicName = new DevExpress.XtraEditors.TextEdit();
+            this.groupMechanic = new DevExpress.XtraEditors.GroupControl();
             this.chxIsRegistered = new DevExpress.XtraEditors.CheckEdit();
+            this.btnAddMechanic = new DevExpress.XtraEditors.SimpleButton();
+            this.txtMechanicDescription = new DevExpress.XtraEditors.TextEdit();
+            this.gcMechanic = new DevExpress.XtraGrid.GridControl();
+            this.gvMechanic = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMechanicName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMechanicDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lblMechanicDescprition = new DevExpress.XtraEditors.LabelControl();
+            this.lbMechanic = new DevExpress.XtraEditors.LabelControl();
+            this.txtMechanicName = new DevExpress.XtraEditors.TextEdit();
+            this.lookUpMechanic = new DevExpress.XtraEditors.LookUpEdit();
+            this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
+            this.groupSparepart = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpSparepart = new DevExpress.XtraEditors.LookUpEdit();
+            this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
+            this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
+            this.txtQty = new DevExpress.XtraEditors.TextEdit();
+            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
+            this.lblQty = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lookUpMechanic = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpSparepart = new DevExpress.XtraEditors.LookUpEdit();
-            this.lbMechanic = new DevExpress.XtraEditors.LabelControl();
-            this.lblQty = new DevExpress.XtraEditors.LabelControl();
-            this.txtQty = new DevExpress.XtraEditors.TextEdit();
-            this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
-            this.gcMechanic = new DevExpress.XtraGrid.GridControl();
-            this.gvMechanic = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colMechanicName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnAddMechanic = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
@@ -69,25 +76,24 @@
             this.cmsMechanicEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
-            this.lblMechanicDescprition = new DevExpress.XtraEditors.LabelControl();
-            this.txtMechanicDescription = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
-            this.groupSparepart = new DevExpress.XtraEditors.GroupControl();
-            this.groupMechanic = new DevExpress.XtraEditors.GroupControl();
-            this.colMechanicDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupMechanic)).BeginInit();
+            this.groupMechanic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chxIsRegistered.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).BeginInit();
+            this.groupSparepart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).BeginInit();
@@ -97,12 +103,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
             this.cmsSparepartEditor.SuspendLayout();
             this.cmsMechanicEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).BeginInit();
-            this.groupSparepart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupMechanic)).BeginInit();
-            this.groupMechanic.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupSPK
@@ -126,32 +126,21 @@
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
             // 
-            // txtTotalSparepartPrice
+            // groupMechanic
             // 
-            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(425, 199);
-            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
-            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n";
-            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
-            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(123, 20);
-            this.txtTotalSparepartPrice.TabIndex = 32;
-            // 
-            // lblTotalSparepart
-            // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(344, 202);
-            this.lblTotalSparepart.Name = "lblTotalSparepart";
-            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
-            this.lblTotalSparepart.TabIndex = 31;
-            this.lblTotalSparepart.Text = "Total Sparepart";
-            // 
-            // txtMechanicName
-            // 
-            this.txtMechanicName.Location = new System.Drawing.Point(94, 49);
-            this.txtMechanicName.Name = "txtMechanicName";
-            this.txtMechanicName.Size = new System.Drawing.Size(134, 20);
-            this.txtMechanicName.TabIndex = 30;
+            this.groupMechanic.Controls.Add(this.chxIsRegistered);
+            this.groupMechanic.Controls.Add(this.btnAddMechanic);
+            this.groupMechanic.Controls.Add(this.txtMechanicDescription);
+            this.groupMechanic.Controls.Add(this.gcMechanic);
+            this.groupMechanic.Controls.Add(this.lblMechanicDescprition);
+            this.groupMechanic.Controls.Add(this.lbMechanic);
+            this.groupMechanic.Controls.Add(this.txtMechanicName);
+            this.groupMechanic.Controls.Add(this.lookUpMechanic);
+            this.groupMechanic.Location = new System.Drawing.Point(15, 343);
+            this.groupMechanic.Name = "groupMechanic";
+            this.groupMechanic.Size = new System.Drawing.Size(556, 209);
+            this.groupMechanic.TabIndex = 4;
+            this.groupMechanic.Text = "Mekanik";
             // 
             // chxIsRegistered
             // 
@@ -161,6 +150,213 @@
             this.chxIsRegistered.Size = new System.Drawing.Size(138, 19);
             this.chxIsRegistered.TabIndex = 6;
             this.chxIsRegistered.CheckedChanged += new System.EventHandler(this.chxIsRegistered_CheckedChanged);
+            // 
+            // btnAddMechanic
+            // 
+            this.btnAddMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
+            this.btnAddMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAddMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAddMechanic.Location = new System.Drawing.Point(425, 75);
+            this.btnAddMechanic.Name = "btnAddMechanic";
+            this.btnAddMechanic.Size = new System.Drawing.Size(123, 23);
+            this.btnAddMechanic.TabIndex = 8;
+            this.btnAddMechanic.Text = "Tambah Mekanik";
+            this.btnAddMechanic.Click += new System.EventHandler(this.btnAddMechanic_Click);
+            // 
+            // txtMechanicDescription
+            // 
+            this.txtMechanicDescription.Location = new System.Drawing.Point(94, 76);
+            this.txtMechanicDescription.Name = "txtMechanicDescription";
+            this.txtMechanicDescription.Size = new System.Drawing.Size(134, 20);
+            this.txtMechanicDescription.TabIndex = 34;
+            // 
+            // gcMechanic
+            // 
+            this.gcMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcMechanic.Location = new System.Drawing.Point(14, 104);
+            this.gcMechanic.MainView = this.gvMechanic;
+            this.gcMechanic.Name = "gcMechanic";
+            this.gcMechanic.Size = new System.Drawing.Size(534, 96);
+            this.gcMechanic.TabIndex = 18;
+            this.gcMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvMechanic});
+            // 
+            // gvMechanic
+            // 
+            this.gvMechanic.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMechanicName,
+            this.colMechanicDescription});
+            this.gvMechanic.GridControl = this.gcMechanic;
+            this.gvMechanic.Name = "gvMechanic";
+            this.gvMechanic.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvMechanic.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvMechanic.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvMechanic.OptionsBehavior.Editable = false;
+            this.gvMechanic.OptionsBehavior.ReadOnly = true;
+            this.gvMechanic.OptionsCustomization.AllowColumnMoving = false;
+            this.gvMechanic.OptionsCustomization.AllowFilter = false;
+            this.gvMechanic.OptionsCustomization.AllowGroup = false;
+            this.gvMechanic.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvMechanic.OptionsView.ShowGroupPanel = false;
+            this.gvMechanic.OptionsView.ShowViewCaption = true;
+            this.gvMechanic.ViewCaption = "Mekanik Terlibat";
+            // 
+            // colMechanicName
+            // 
+            this.colMechanicName.Caption = "Nama";
+            this.colMechanicName.FieldName = "Name";
+            this.colMechanicName.Name = "colMechanicName";
+            this.colMechanicName.Visible = true;
+            this.colMechanicName.VisibleIndex = 0;
+            // 
+            // colMechanicDescription
+            // 
+            this.colMechanicDescription.Caption = "Keterangan";
+            this.colMechanicDescription.FieldName = "Description";
+            this.colMechanicDescription.Name = "colMechanicDescription";
+            this.colMechanicDescription.Visible = true;
+            this.colMechanicDescription.VisibleIndex = 1;
+            // 
+            // lblMechanicDescprition
+            // 
+            this.lblMechanicDescprition.Location = new System.Drawing.Point(14, 79);
+            this.lblMechanicDescprition.Name = "lblMechanicDescprition";
+            this.lblMechanicDescprition.Size = new System.Drawing.Size(56, 13);
+            this.lblMechanicDescprition.TabIndex = 33;
+            this.lblMechanicDescprition.Text = "Keterangan";
+            // 
+            // lbMechanic
+            // 
+            this.lbMechanic.Location = new System.Drawing.Point(14, 52);
+            this.lbMechanic.Name = "lbMechanic";
+            this.lbMechanic.Size = new System.Drawing.Size(38, 13);
+            this.lbMechanic.TabIndex = 25;
+            this.lbMechanic.Text = "Mekanik";
+            // 
+            // txtMechanicName
+            // 
+            this.txtMechanicName.Location = new System.Drawing.Point(94, 49);
+            this.txtMechanicName.Name = "txtMechanicName";
+            this.txtMechanicName.Size = new System.Drawing.Size(134, 20);
+            this.txtMechanicName.TabIndex = 30;
+            // 
+            // lookUpMechanic
+            // 
+            this.lookUpMechanic.Location = new System.Drawing.Point(94, 50);
+            this.lookUpMechanic.Name = "lookUpMechanic";
+            this.lookUpMechanic.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.lookUpMechanic.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpMechanic.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpMechanic.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Mekanik")});
+            this.lookUpMechanic.Properties.DisplayMember = "Name";
+            this.lookUpMechanic.Properties.HideSelection = false;
+            this.lookUpMechanic.Properties.NullText = "";
+            this.lookUpMechanic.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpMechanic.Properties.ValueMember = "Id";
+            this.lookUpMechanic.Size = new System.Drawing.Size(134, 20);
+            this.lookUpMechanic.TabIndex = 7;
+            // 
+            // memoDescription
+            // 
+            this.memoDescription.Location = new System.Drawing.Point(340, 29);
+            this.memoDescription.Name = "memoDescription";
+            this.memoDescription.Size = new System.Drawing.Size(231, 73);
+            this.memoDescription.TabIndex = 36;
+            // 
+            // groupSparepart
+            // 
+            this.groupSparepart.Controls.Add(this.lookUpSparepart);
+            this.groupSparepart.Controls.Add(this.btnAddSparepart);
+            this.groupSparepart.Controls.Add(this.lblSparepart);
+            this.groupSparepart.Controls.Add(this.txtQty);
+            this.groupSparepart.Controls.Add(this.txtTotalSparepartPrice);
+            this.groupSparepart.Controls.Add(this.lblQty);
+            this.groupSparepart.Controls.Add(this.lblTotalSparepart);
+            this.groupSparepart.Controls.Add(this.gcSparepart);
+            this.groupSparepart.Location = new System.Drawing.Point(15, 107);
+            this.groupSparepart.Name = "groupSparepart";
+            this.groupSparepart.Size = new System.Drawing.Size(556, 230);
+            this.groupSparepart.TabIndex = 3;
+            this.groupSparepart.Text = "Sparepart";
+            // 
+            // lookUpSparepart
+            // 
+            this.lookUpSparepart.Location = new System.Drawing.Point(94, 25);
+            this.lookUpSparepart.Name = "lookUpSparepart";
+            this.lookUpSparepart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.lookUpSparepart.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpSparepart.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StockQty", "Stok")});
+            this.lookUpSparepart.Properties.DisplayMember = "Name";
+            this.lookUpSparepart.Properties.HideSelection = false;
+            this.lookUpSparepart.Properties.NullText = "";
+            this.lookUpSparepart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpSparepart.Properties.ValueMember = "Id";
+            this.lookUpSparepart.Size = new System.Drawing.Size(134, 20);
+            this.lookUpSparepart.TabIndex = 3;
+            // 
+            // btnAddSparepart
+            // 
+            this.btnAddSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.btnAddSparepart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAddSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAddSparepart.Location = new System.Drawing.Point(425, 52);
+            this.btnAddSparepart.Name = "btnAddSparepart";
+            this.btnAddSparepart.Size = new System.Drawing.Size(123, 23);
+            this.btnAddSparepart.TabIndex = 5;
+            this.btnAddSparepart.Text = "Tambah Sparepart";
+            this.btnAddSparepart.Click += new System.EventHandler(this.btnAddSparepart_Click);
+            // 
+            // lblSparepart
+            // 
+            this.lblSparepart.Location = new System.Drawing.Point(14, 31);
+            this.lblSparepart.Name = "lblSparepart";
+            this.lblSparepart.Size = new System.Drawing.Size(48, 13);
+            this.lblSparepart.TabIndex = 21;
+            this.lblSparepart.Text = "Sparepart";
+            // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(94, 51);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Properties.Mask.EditMask = "n0";
+            this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtQty.Size = new System.Drawing.Size(134, 20);
+            this.txtQty.TabIndex = 4;
+            // 
+            // txtTotalSparepartPrice
+            // 
+            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(425, 199);
+            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
+            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
+            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
+            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(123, 20);
+            this.txtTotalSparepartPrice.TabIndex = 32;
+            // 
+            // lblQty
+            // 
+            this.lblQty.Location = new System.Drawing.Point(14, 54);
+            this.lblQty.Name = "lblQty";
+            this.lblQty.Size = new System.Drawing.Size(33, 13);
+            this.lblQty.TabIndex = 23;
+            this.lblQty.Text = "Jumlah";
+            // 
+            // lblTotalSparepart
+            // 
+            this.lblTotalSparepart.Location = new System.Drawing.Point(344, 202);
+            this.lblTotalSparepart.Name = "lblTotalSparepart";
+            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
+            this.lblTotalSparepart.TabIndex = 31;
+            this.lblTotalSparepart.Text = "Total Sparepart";
             // 
             // gcSparepart
             // 
@@ -226,139 +422,13 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 3;
             // 
-            // lookUpMechanic
+            // labelControl2
             // 
-            this.lookUpMechanic.Location = new System.Drawing.Point(94, 50);
-            this.lookUpMechanic.Name = "lookUpMechanic";
-            this.lookUpMechanic.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lookUpMechanic.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpMechanic.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpMechanic.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Mekanik")});
-            this.lookUpMechanic.Properties.DisplayMember = "Name";
-            this.lookUpMechanic.Properties.HideSelection = false;
-            this.lookUpMechanic.Properties.NullText = "";
-            this.lookUpMechanic.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.lookUpMechanic.Properties.ValueMember = "Id";
-            this.lookUpMechanic.Size = new System.Drawing.Size(134, 20);
-            this.lookUpMechanic.TabIndex = 7;
-            // 
-            // lookUpSparepart
-            // 
-            this.lookUpSparepart.Location = new System.Drawing.Point(94, 25);
-            this.lookUpSparepart.Name = "lookUpSparepart";
-            this.lookUpSparepart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lookUpSparepart.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpSparepart.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StockQty", "Stok")});
-            this.lookUpSparepart.Properties.DisplayMember = "Name";
-            this.lookUpSparepart.Properties.HideSelection = false;
-            this.lookUpSparepart.Properties.NullText = "";
-            this.lookUpSparepart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.lookUpSparepart.Properties.ValueMember = "Id";
-            this.lookUpSparepart.Size = new System.Drawing.Size(134, 20);
-            this.lookUpSparepart.TabIndex = 3;
-            // 
-            // lbMechanic
-            // 
-            this.lbMechanic.Location = new System.Drawing.Point(14, 52);
-            this.lbMechanic.Name = "lbMechanic";
-            this.lbMechanic.Size = new System.Drawing.Size(38, 13);
-            this.lbMechanic.TabIndex = 25;
-            this.lbMechanic.Text = "Mekanik";
-            // 
-            // lblQty
-            // 
-            this.lblQty.Location = new System.Drawing.Point(14, 54);
-            this.lblQty.Name = "lblQty";
-            this.lblQty.Size = new System.Drawing.Size(33, 13);
-            this.lblQty.TabIndex = 23;
-            this.lblQty.Text = "Jumlah";
-            // 
-            // txtQty
-            // 
-            this.txtQty.Location = new System.Drawing.Point(94, 51);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Properties.Mask.EditMask = "n0";
-            this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtQty.Size = new System.Drawing.Size(134, 20);
-            this.txtQty.TabIndex = 4;
-            // 
-            // lblSparepart
-            // 
-            this.lblSparepart.Location = new System.Drawing.Point(14, 31);
-            this.lblSparepart.Name = "lblSparepart";
-            this.lblSparepart.Size = new System.Drawing.Size(48, 13);
-            this.lblSparepart.TabIndex = 21;
-            this.lblSparepart.Text = "Sparepart";
-            // 
-            // gcMechanic
-            // 
-            this.gcMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcMechanic.Location = new System.Drawing.Point(14, 104);
-            this.gcMechanic.MainView = this.gvMechanic;
-            this.gcMechanic.Name = "gcMechanic";
-            this.gcMechanic.Size = new System.Drawing.Size(534, 96);
-            this.gcMechanic.TabIndex = 18;
-            this.gcMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvMechanic});
-            // 
-            // gvMechanic
-            // 
-            this.gvMechanic.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colMechanicName,
-            this.colMechanicDescription});
-            this.gvMechanic.GridControl = this.gcMechanic;
-            this.gvMechanic.Name = "gvMechanic";
-            this.gvMechanic.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvMechanic.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvMechanic.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvMechanic.OptionsBehavior.Editable = false;
-            this.gvMechanic.OptionsBehavior.ReadOnly = true;
-            this.gvMechanic.OptionsCustomization.AllowColumnMoving = false;
-            this.gvMechanic.OptionsCustomization.AllowFilter = false;
-            this.gvMechanic.OptionsCustomization.AllowGroup = false;
-            this.gvMechanic.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvMechanic.OptionsView.ShowGroupPanel = false;
-            this.gvMechanic.OptionsView.ShowViewCaption = true;
-            this.gvMechanic.ViewCaption = "Mekanik Terlibat";
-            // 
-            // colMechanicName
-            // 
-            this.colMechanicName.Caption = "Nama";
-            this.colMechanicName.FieldName = "Name";
-            this.colMechanicName.Name = "colMechanicName";
-            this.colMechanicName.Visible = true;
-            this.colMechanicName.VisibleIndex = 0;
-            // 
-            // btnAddMechanic
-            // 
-            this.btnAddMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
-            this.btnAddMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnAddMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAddMechanic.Location = new System.Drawing.Point(425, 75);
-            this.btnAddMechanic.Name = "btnAddMechanic";
-            this.btnAddMechanic.Size = new System.Drawing.Size(123, 23);
-            this.btnAddMechanic.TabIndex = 8;
-            this.btnAddMechanic.Text = "Tambah Mekanik";
-            this.btnAddMechanic.Click += new System.EventHandler(this.btnAddMechanic_Click);
-            // 
-            // btnAddSparepart
-            // 
-            this.btnAddSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
-            this.btnAddSparepart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnAddSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAddSparepart.Location = new System.Drawing.Point(425, 52);
-            this.btnAddSparepart.Name = "btnAddSparepart";
-            this.btnAddSparepart.Size = new System.Drawing.Size(123, 23);
-            this.btnAddSparepart.TabIndex = 5;
-            this.btnAddSparepart.Text = "Tambah Sparepart";
-            this.btnAddSparepart.Click += new System.EventHandler(this.btnAddSparepart_Click);
+            this.labelControl2.Location = new System.Drawing.Point(271, 33);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(63, 13);
+            this.labelControl2.TabIndex = 35;
+            this.labelControl2.Text = "Deskripsi SPK";
             // 
             // lblCategory
             // 
@@ -479,76 +549,6 @@
             this.bgwFingerPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerPrint_DoWork);
             this.bgwFingerPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerPrint_RunWorkerCompleted);
             // 
-            // lblMechanicDescprition
-            // 
-            this.lblMechanicDescprition.Location = new System.Drawing.Point(14, 79);
-            this.lblMechanicDescprition.Name = "lblMechanicDescprition";
-            this.lblMechanicDescprition.Size = new System.Drawing.Size(56, 13);
-            this.lblMechanicDescprition.TabIndex = 33;
-            this.lblMechanicDescprition.Text = "Keterangan";
-            // 
-            // txtMechanicDescription
-            // 
-            this.txtMechanicDescription.Location = new System.Drawing.Point(94, 76);
-            this.txtMechanicDescription.Name = "txtMechanicDescription";
-            this.txtMechanicDescription.Size = new System.Drawing.Size(134, 20);
-            this.txtMechanicDescription.TabIndex = 34;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(271, 33);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(63, 13);
-            this.labelControl2.TabIndex = 35;
-            this.labelControl2.Text = "Deskripsi SPK";
-            // 
-            // memoDescription
-            // 
-            this.memoDescription.Location = new System.Drawing.Point(340, 29);
-            this.memoDescription.Name = "memoDescription";
-            this.memoDescription.Size = new System.Drawing.Size(231, 73);
-            this.memoDescription.TabIndex = 36;
-            // 
-            // groupSparepart
-            // 
-            this.groupSparepart.Controls.Add(this.lookUpSparepart);
-            this.groupSparepart.Controls.Add(this.btnAddSparepart);
-            this.groupSparepart.Controls.Add(this.lblSparepart);
-            this.groupSparepart.Controls.Add(this.txtQty);
-            this.groupSparepart.Controls.Add(this.txtTotalSparepartPrice);
-            this.groupSparepart.Controls.Add(this.lblQty);
-            this.groupSparepart.Controls.Add(this.lblTotalSparepart);
-            this.groupSparepart.Controls.Add(this.gcSparepart);
-            this.groupSparepart.Location = new System.Drawing.Point(15, 107);
-            this.groupSparepart.Name = "groupSparepart";
-            this.groupSparepart.Size = new System.Drawing.Size(556, 230);
-            this.groupSparepart.TabIndex = 3;
-            this.groupSparepart.Text = "Sparepart";
-            // 
-            // groupMechanic
-            // 
-            this.groupMechanic.Controls.Add(this.chxIsRegistered);
-            this.groupMechanic.Controls.Add(this.btnAddMechanic);
-            this.groupMechanic.Controls.Add(this.txtMechanicDescription);
-            this.groupMechanic.Controls.Add(this.gcMechanic);
-            this.groupMechanic.Controls.Add(this.lblMechanicDescprition);
-            this.groupMechanic.Controls.Add(this.lbMechanic);
-            this.groupMechanic.Controls.Add(this.txtMechanicName);
-            this.groupMechanic.Controls.Add(this.lookUpMechanic);
-            this.groupMechanic.Location = new System.Drawing.Point(15, 343);
-            this.groupMechanic.Name = "groupMechanic";
-            this.groupMechanic.Size = new System.Drawing.Size(556, 209);
-            this.groupMechanic.TabIndex = 4;
-            this.groupMechanic.Text = "Mekanik";
-            // 
-            // colMechanicDescription
-            // 
-            this.colMechanicDescription.Caption = "Keterangan";
-            this.colMechanicDescription.FieldName = "Description";
-            this.colMechanicDescription.Name = "colMechanicDescription";
-            this.colMechanicDescription.Visible = true;
-            this.colMechanicDescription.VisibleIndex = 1;
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -562,16 +562,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupMechanic)).EndInit();
+            this.groupMechanic.ResumeLayout(false);
+            this.groupMechanic.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chxIsRegistered.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).EndInit();
+            this.groupSparepart.ResumeLayout(false);
+            this.groupSparepart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).EndInit();
@@ -581,14 +589,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
             this.cmsSparepartEditor.ResumeLayout(false);
             this.cmsMechanicEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtMechanicDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).EndInit();
-            this.groupSparepart.ResumeLayout(false);
-            this.groupSparepart.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupMechanic)).EndInit();
-            this.groupMechanic.ResumeLayout(false);
-            this.groupMechanic.PerformLayout();
             this.ResumeLayout(false);
 
         }

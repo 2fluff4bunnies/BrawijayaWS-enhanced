@@ -20,46 +20,117 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     {
         private SPKViewDetailPresenter _presenter;
         private bool _isApproval = false;
+
+        private string _prefix = ": ";
+
         public SPKViewDetailForm(SPKViewDetailModel model)
         {
             InitializeComponent();
             _presenter = new SPKViewDetailPresenter(this, model);
 
-            if (this.IsApproval)
-            {
-                btnPrint.Visible = false;
-            }
-            else
-            {
-                btnApprove.Visible = false;
-                btnReject.Visible = false;
-            }
-
-            txtCode.ReadOnly = true;
-            txtVehicle.ReadOnly = true;
-            txtSPKCategory.ReadOnly = true;
-            txtDueDate.ReadOnly = true;
-            txtCreateDate.ReadOnly = true;
-            txtCustomer.ReadOnly = true;
+            this.IsAbort = false;
+            this.IsSetAsComplete = false;
 
             this.Load += SPKViewDetailForm_Load;
         }
+
+        public bool IsAbort { get; set; }
+        public bool IsSetAsComplete { get; set; }
+
 
         void SPKViewDetailForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
             ApplyButtonSetting();
+
+            #region Field Setting
+            lblCodeValue.Text = _prefix + this.SelectedSPK.Code;
+            lblCustomerValue.Text = _prefix + this.SelectedSPK.Vehicle.Customer.CompanyName;
+            lblVehicleValue.Text = _prefix + this.SelectedSPK.Vehicle.ActiveLicenseNumber;
+            lblCategoryValue.Text = _prefix + this.SelectedSPK.CategoryReference.Name;
+
+            lblCreateDateValue.Text = _prefix + this.SelectedSPK.CreateDate.ToShortDateString();
+            lblDueDateValue.Text = _prefix + this.SelectedSPK.DueDate.ToShortDateString();
+
+            string statusApproval = "";
+            switch (this.SelectedSPK.StatusApprovalId)
+            {
+                case 0: statusApproval = "Menunggu Persetujuan"; break;
+                case 1: statusApproval = "Disetujui"; break;
+                case 2: statusApproval = "Direvisi"; break;
+                case -1: statusApproval = "Ditolak"; break;
+            }
+            lblStatusApprovalValue.Text = _prefix + statusApproval;
+
+            string statusPrint = "";
+            switch (this.SelectedSPK.StatusPrintId)
+            {
+                case 0: statusPrint = "Menunggu Persetujuan"; break;
+                case 1: statusPrint = "Siap Print"; break;
+                case 2: statusPrint = "Sudah Diprint"; break;
+            }
+
+            lblStatusPrintValue.Text = _prefix + statusPrint;
+
+            string statusCompleted = "";
+            switch (this.SelectedSPK.StatusCompletedId)
+            {
+                case 0: statusCompleted = "Dalam Pengerjaan"; break;
+                case 1: statusCompleted = "Selesai"; break;
+            }
+
+            lblStatusCompletedValue.Text = _prefix + statusCompleted;
+
+            if(!string.IsNullOrEmpty(this.SelectedSPK.Description))
+            {
+                string[] descriptArray = this.SelectedSPK.Description.Split(' ');
+                string newDescription = "";
+
+                for (int i = 0; i < descriptArray.Length; i++)
+                {
+                    if ((i + 1) % 4 != 0)
+                    {
+                        newDescription = newDescription + descriptArray[i] + " ";
+                    }
+                    else
+                    {
+                        newDescription = newDescription + descriptArray[i] + "\n ";
+                    }
+                }
+
+                lblDescriptionValue.Text = _prefix + newDescription;
+            }
+
+            lblTotalSparepartValue.Text = _prefix + this.SelectedSPK.TotalSparepartPrice.ToString("n0");
+            #endregion
         }
 
         void ApplyButtonSetting()
         {
-            btnApprove.Visible = btnReject.Visible = false;
-            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
-            {
-                btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
-                btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
-            }
+            btnSetAsComplete.Visible = btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
             btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
+            btnRequestPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
+
+            if (this.IsApproval)
+            {
+                if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
+                {
+                    btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+                    btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+                }             
+            }
+
+            if (this.IsAbort)
+            {
+               btnSetAsComplete.Visible = btnRequestPrint.Visible = btnPrint.Visible = btnEndorse.Visible = btnApprove.Visible = btnReject.Visible = false;
+               btnAbort.Visible = true;
+            }
+
+            if (this.IsSetAsComplete)
+            {
+                btnAbort.Visible = btnRequestPrint.Visible = btnPrint.Visible = btnEndorse.Visible = btnApprove.Visible = btnReject.Visible = false;
+                btnSetAsComplete.Visible = true;
+            }
         }
 
         #region Field Editor
@@ -121,89 +192,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
 
-        public string Code
-        {
-            get
-            {
-                return txtCode.Text;
-            }
-            set
-            {
-                txtCode.Text = value;
-            }
-        }
 
-        public string DueDate
-        {
-            get
-            {
-                return txtDueDate.Text;
-            }
-            set
-            {
-                txtDueDate.Text = value;
-            }
-        }
-
-        public string CreateDate
-        {
-            get
-            {
-                return txtCreateDate.Text;
-            }
-            set
-            {
-                txtCreateDate.Text = value;
-            }
-        }
-
-        public string Vehicle
-        {
-            get
-            {
-                return txtVehicle.Text;
-            }
-            set
-            {
-                txtVehicle.Text = value;
-            }
-        }
-
-        public string Customer
-        {
-            get
-            {
-                return txtCustomer.Text;
-            }
-            set
-            {
-                txtCustomer.Text = value;
-            }
-        }
-
-        public string Category
-        {
-            get
-            {
-                return txtSPKCategory.Text;
-            }
-            set
-            {
-                txtSPKCategory.Text = value;
-            }
-        }
-
-        public decimal TotalSparepartPrice
-        {
-            get
-            {
-                return txtTotalSparepartPrice.Text.AsDecimal();
-            }
-            set
-            {
-                txtTotalSparepartPrice.Text = value.ToString();
-            }
-        }
         #endregion
 
         private void btnApprove_Click(object sender, EventArgs e)
@@ -237,6 +226,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRequestPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnAbort_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEndorse_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
+            editor.ParentSPK = this.SelectedSPK;
+            editor.ShowDialog(this);
+        }
+
+        private void btnSetAsComplete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,17 +15,6 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
-            if (View.SelectedSPK != null)
-            {
-                View.Code = View.SelectedSPK.Code;
-                View.Category = View.SelectedSPK.CategoryReference.Name;
-                View.Vehicle = View.SelectedSPK.Vehicle.ActiveLicenseNumber;
-                View.DueDate = View.SelectedSPK.DueDate.ToShortDateString();
-                View.CreateDate = View.SelectedSPK.CreateDate.ToShortDateString();
-                View.Customer = View.SelectedSPK.Vehicle.Customer.CompanyName;
-                View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
-            }
-
             View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
             View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
             View.SPKSparepartDetailList = Model.GetSPKSparepartDetailList(View.SelectedSPK.Id);

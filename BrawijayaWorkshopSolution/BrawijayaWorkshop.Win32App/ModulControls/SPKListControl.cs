@@ -329,17 +329,27 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsAbort_Click(object sender, EventArgs e)
         {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsAbort = false;
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
+        }
+
+        private void cmsSetAsCompleted_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsSetAsComplete = false;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }
 
         private void cmsRequestPrint_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void cmsSetAsCompleted_Click(object sender, EventArgs e)
-        {
-
-        }       
     }
 }

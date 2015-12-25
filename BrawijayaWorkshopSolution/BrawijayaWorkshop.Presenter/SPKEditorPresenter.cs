@@ -35,7 +35,7 @@ namespace BrawijayaWorkshop.Presenter
                     CategoryReference = View.ParentSPK.CategoryReference,
                     DueDate = View.ParentSPK.DueDate,
                     SPKParent = View.ParentSPK,
-                    TotalSparepartPrice = View.TotalSparepartPrice,
+                    TotalSparepartPrice = View.ParentSPK.TotalSparepartPrice,
                     Description = View.Description
                 };
 
@@ -67,6 +67,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.VehicleId = View.VehicleId;
             View.SelectedSPK.DueDate = View.DueDate;
             View.SelectedSPK.TotalSparepartPrice = View.TotalSparepartPrice;
+            View.SelectedSPK.Description = View.Description;
 
             View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
         }

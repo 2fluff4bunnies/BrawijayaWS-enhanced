@@ -14,12 +14,5 @@ namespace BrawijayaWorkshop.View
         List<SPKDetailSparepart> SPKSparepartList { get; set; }
         List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
 
-        string Code { get; set; }
-        string DueDate { get; set; }
-        string CreateDate { get; set; }
-        string Vehicle { get; set; }
-        string Customer { get; set; }
-        string Category { get; set; }
-        decimal TotalSparepartPrice { get; set; }
     }
 }
