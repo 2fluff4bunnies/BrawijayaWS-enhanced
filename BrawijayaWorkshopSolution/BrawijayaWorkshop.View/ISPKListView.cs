@@ -20,6 +20,8 @@ namespace BrawijayaWorkshop.View
 
         string LicenseNumberFilter { get; set; }
 
+        int CompletedStatusFilter { get; set; }
+
         List<Reference> CategoryDropdownList { get; set; }
 
         List<SPK> SPKListData { get; set; }
@@ -29,6 +31,8 @@ namespace BrawijayaWorkshop.View
         List<SPKStatusItem> ApprovalStatusDropdownList { get; set; }
 
         List<SPKStatusItem> PrintStatusDropdownList { get; set; }
+
+        List<SPKStatusItem> CompletedStatusDropdownList { get; set; }
     }
 
     public class SPKStatusItem

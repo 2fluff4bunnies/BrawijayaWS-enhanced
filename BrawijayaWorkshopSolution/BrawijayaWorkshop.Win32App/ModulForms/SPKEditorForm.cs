@@ -473,10 +473,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             MechanicId = this.MechanicId,
                             Description = this.MechanicDescription
                         });
+
+                        ClearMechanic();
                     }
                     else
                     {
                         this.ShowError("Mekanik harus dipilih");
+                        this.lookUpMechanic.EditValue = null;
+                        this.lookUpMechanic.Text = string.Empty;
                     }
                 }
                 else
@@ -488,21 +492,25 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             Name = this.MechanicName,
                             Description = this.MechanicDescription
                         });
+
+                        ClearMechanic();
                     }
                     else
                     {
                         this.ShowError("Mekanik harus diisi");
+                        this.MechanicName = string.Empty;
                     }
                 }
             }
             else
             {
                 this.ShowError("Keterangan mekanik harus diisi");
+                this.MechanicDescription = string.Empty;
             }
 
             RefreshMechanicGrid();
 
-            ClearMechanic();
+           
         }
 
         public void ClearMechanic()

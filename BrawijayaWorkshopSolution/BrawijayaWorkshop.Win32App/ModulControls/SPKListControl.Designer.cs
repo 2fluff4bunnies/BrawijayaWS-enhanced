@@ -63,6 +63,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.lblCompletedStatus = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpCompletedStatus = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).BeginInit();
@@ -73,12 +75,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCompletedStatus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFilter
             // 
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFilter.Controls.Add(this.lblCompletedStatus);
+            this.groupFilter.Controls.Add(this.lookUpCompletedStatus);
             this.groupFilter.Controls.Add(this.lblPrintStatus);
             this.groupFilter.Controls.Add(this.lookUpPrintStatus);
             this.groupFilter.Controls.Add(this.txtLicenseNumber);
@@ -92,13 +97,13 @@
             this.groupFilter.Controls.Add(this.lblCategory);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(870, 88);
+            this.groupFilter.Size = new System.Drawing.Size(938, 88);
             this.groupFilter.TabIndex = 1;
             this.groupFilter.Text = "Filter";
             // 
             // lblPrintStatus
             // 
-            this.lblPrintStatus.Location = new System.Drawing.Point(549, 34);
+            this.lblPrintStatus.Location = new System.Drawing.Point(549, 30);
             this.lblPrintStatus.Name = "lblPrintStatus";
             this.lblPrintStatus.Size = new System.Drawing.Size(56, 13);
             this.lblPrintStatus.TabIndex = 14;
@@ -106,7 +111,7 @@
             // 
             // lookUpPrintStatus
             // 
-            this.lookUpPrintStatus.Location = new System.Drawing.Point(620, 31);
+            this.lookUpPrintStatus.Location = new System.Drawing.Point(669, 27);
             this.lookUpPrintStatus.Name = "lookUpPrintStatus";
             this.lookUpPrintStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpPrintStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -122,14 +127,14 @@
             // 
             // txtLicenseNumber
             // 
-            this.txtLicenseNumber.Location = new System.Drawing.Point(381, 31);
+            this.txtLicenseNumber.Location = new System.Drawing.Point(117, 59);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Size = new System.Drawing.Size(141, 20);
             this.txtLicenseNumber.TabIndex = 8;
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(285, 34);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(21, 62);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(76, 13);
             this.lblLicenseNumber.TabIndex = 7;
@@ -137,7 +142,7 @@
             // 
             // lookUpApprovalStatus
             // 
-            this.lookUpApprovalStatus.Location = new System.Drawing.Point(113, 31);
+            this.lookUpApprovalStatus.Location = new System.Drawing.Point(379, 59);
             this.lookUpApprovalStatus.Name = "lookUpApprovalStatus";
             this.lookUpApprovalStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpApprovalStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -153,7 +158,7 @@
             // 
             // lblApprovalStatus
             // 
-            this.lblApprovalStatus.Location = new System.Drawing.Point(13, 34);
+            this.lblApprovalStatus.Location = new System.Drawing.Point(279, 62);
             this.lblApprovalStatus.Name = "lblApprovalStatus";
             this.lblApprovalStatus.Size = new System.Drawing.Size(92, 13);
             this.lblApprovalStatus.TabIndex = 5;
@@ -161,7 +166,7 @@
             // 
             // lookUpCategory
             // 
-            this.lookUpCategory.Location = new System.Drawing.Point(113, 63);
+            this.lookUpCategory.Location = new System.Drawing.Point(379, 27);
             this.lookUpCategory.Name = "lookUpCategory";
             this.lookUpCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -178,14 +183,14 @@
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(381, 63);
+            this.txtCode.Location = new System.Drawing.Point(117, 27);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(141, 20);
             this.txtCode.TabIndex = 3;
             // 
             // lblCode
             // 
-            this.lblCode.Location = new System.Drawing.Point(285, 66);
+            this.lblCode.Location = new System.Drawing.Point(21, 30);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(45, 13);
             this.lblCode.TabIndex = 2;
@@ -196,7 +201,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(784, 27);
+            this.btnSearch.Location = new System.Drawing.Point(833, 26);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 55);
             this.btnSearch.TabIndex = 4;
@@ -205,7 +210,7 @@
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(13, 66);
+            this.lblCategory.Location = new System.Drawing.Point(279, 30);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(40, 13);
             this.lblCategory.TabIndex = 0;
@@ -231,7 +236,7 @@
             this.gcSPK.Location = new System.Drawing.Point(3, 126);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(870, 232);
+            this.gcSPK.Size = new System.Drawing.Size(938, 232);
             this.gcSPK.TabIndex = 5;
             this.gcSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPK});
@@ -340,7 +345,7 @@
             this.toolStripSeparator2,
             this.cmsAbort});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(172, 170);
+            this.cmsEditor.Size = new System.Drawing.Size(172, 148);
             // 
             // viewDetailToolStripMenuItem
             // 
@@ -405,6 +410,30 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // lblCompletedStatus
+            // 
+            this.lblCompletedStatus.Location = new System.Drawing.Point(549, 62);
+            this.lblCompletedStatus.Name = "lblCompletedStatus";
+            this.lblCompletedStatus.Size = new System.Drawing.Size(89, 13);
+            this.lblCompletedStatus.TabIndex = 16;
+            this.lblCompletedStatus.Text = "Status Pengerjaan";
+            // 
+            // lookUpCompletedStatus
+            // 
+            this.lookUpCompletedStatus.Location = new System.Drawing.Point(669, 59);
+            this.lookUpCompletedStatus.Name = "lookUpCompletedStatus";
+            this.lookUpCompletedStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpCompletedStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpCompletedStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
+            this.lookUpCompletedStatus.Properties.DisplayMember = "Description";
+            this.lookUpCompletedStatus.Properties.HideSelection = false;
+            this.lookUpCompletedStatus.Properties.NullText = "-- Status --";
+            this.lookUpCompletedStatus.Properties.ValueMember = "Status";
+            this.lookUpCompletedStatus.Size = new System.Drawing.Size(141, 20);
+            this.lookUpCompletedStatus.TabIndex = 15;
+            // 
             // SPKListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,7 +442,7 @@
             this.Controls.Add(this.btnNewSPK);
             this.Controls.Add(this.groupFilter);
             this.Name = "SPKListControl";
-            this.Size = new System.Drawing.Size(876, 361);
+            this.Size = new System.Drawing.Size(944, 361);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
@@ -425,6 +454,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCompletedStatus.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -464,5 +494,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsAbort;
         private System.Windows.Forms.ToolStripMenuItem cmsSetAsCompleted;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private DevExpress.XtraEditors.LabelControl lblCompletedStatus;
+        private DevExpress.XtraEditors.LookUpEdit lookUpCompletedStatus;
     }
 }

@@ -176,5 +176,51 @@ namespace BrawijayaWorkshop.Model
 
         }
 
+        public void RequestPrintSPK(SPK spk, int userId)
+        { 
+            DateTime serverTime = DateTime.Now;
+
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+
+            _SPKRepository.Update(spk);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        public void ApprovePrintSPK(SPK spk, int userId, bool isApproved)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            if (isApproved)
+            {
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+            }
+            else
+            {
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+            }
+
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+
+            _SPKRepository.Update(spk);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        public void SetAsCompletedSPK(SPK spk, int userId)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+
+            _SPKRepository.Update(spk);
+
+            _unitOfWork.SaveChanges();
+        }
     }
 }

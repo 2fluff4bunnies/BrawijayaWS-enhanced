@@ -6,11 +6,13 @@ using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.PrintItems;
+using BrawijayaWorkshop.Win32App.Properties;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -34,13 +36,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.Load += SPKViewDetailForm_Load;
         }
 
-        public bool IsAbort { get; set; }
-        public bool IsSetAsComplete { get; set; }
-
-
         void SPKViewDetailForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+
+            this.ApprovalEmailBody = Resources.SPKApprovalEmailTemplate;
+            this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
+            this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
+
             ApplyButtonSetting();
 
             #region Field Setting
@@ -107,7 +110,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void ApplyButtonSetting()
         {
-            btnSetAsComplete.Visible =  btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
+            btnSetAsComplete.Visible = btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
             btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
             btnRequestPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
             btnEndorse.Visible = (SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
@@ -118,6 +121,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+                }
+            }
+
+            if (this.IsPrintApproval)
+            {
+                if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
+                {
+                    btnApprove.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
+                    btnReject.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
                 }
             }
 
@@ -146,6 +158,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 _isApproval = value;
             }
         }
+
+        public bool IsPrintApproval { get; set; }
+
+        public bool IsAbort { get; set; }
+
+        public bool IsSetAsComplete { get; set; }
 
         public SPK SelectedSPK { get; set; }
 
@@ -196,15 +214,39 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #endregion
 
+        #region EmailProperties
+        public string ApprovalEmailBody { get; set; }
+
+        public string ApprovalEmailFrom { get; set; }
+
+        public string ApprovalEmailTo { get; set; }
+        #endregion
+
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            _presenter.Approve();
+            if (this._isApproval)
+            {
+                _presenter.ExecuteApproval();
+            }
+            else
+            {
+                _presenter.PrintApproval(true);
+            }
+
             this.Close();
         }
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-            _presenter.Reject();
+            if (this._isApproval)
+            {
+                _presenter.Reject();
+            }
+            else
+            {
+                _presenter.PrintApproval(false);
+            }
+
             this.Close();
         }
 
@@ -215,7 +257,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();
-            _presenter.print();
+            _presenter.Print();
 
             using (ReportPrintTool printTool = new ReportPrintTool(report))
             {
@@ -231,29 +273,34 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnRequestPrint_Click(object sender, EventArgs e)
         {
-
+            _presenter.RequestPrint();
+            this.Close();
         }
         private void btnAbort_Click(object sender, EventArgs e)
         {
-            this.ShowConfirmation("SPK yang dibatalkan tidak dapat digunakan kembali, anda yakin ingin melanjutkan ?");
-            if (this.DialogResult == DialogResult.OK)
+            if (this.ShowConfirmation("SPK yang dibatalkan tidak dapat digunakan kembali, anda yakin ingin melanjutkan ?") == DialogResult.Yes)
             {
                 _presenter.Abort();
+                this.Close();
             }
         }
 
         private void btnEndorse_Click(object sender, EventArgs e)
         {
-            this.Close();
-
             SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
             editor.ParentSPK = this.SelectedSPK;
             editor.ShowDialog(this);
+
+            this.Close();
         }
 
         private void btnSetAsComplete_Click(object sender, EventArgs e)
         {
-
+            if (this.ShowConfirmation("SPK yang sudah dianggap selesai tidak bisa direvisi kembali \nkarena akan digunakan untuk pembuatan invoice/tagihan, anda yakin ingin melanjutkan ?") == DialogResult.Yes)
+            {
+                _presenter.SetAsCompleted();
+                this.Close();
+            }
         }
     }
 }

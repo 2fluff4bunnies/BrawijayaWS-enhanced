@@ -21,7 +21,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadSPK()
         {
-            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter);
+            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter, (DbConstant.SPKCompletionStatus)View.CompletedStatusFilter);
         }
 
         public void PrintSPK()
@@ -93,6 +93,31 @@ namespace BrawijayaWorkshop.Presenter
                 Status = 9,
                 Description = "Semua Status"
             });        
+
+            return result;
+        }
+
+        public List<SPKStatusItem> GetCompletedStatusDropdownList()
+        {
+            List<SPKStatusItem> result = new List<SPKStatusItem>();
+
+            result.Add(new SPKStatusItem
+            {
+                Status = (int)DbConstant.SPKPrintStatus.Pending,
+                Description = "Dalam Pengerjaan"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = (int)DbConstant.SPKPrintStatus.Ready,
+                Description = "Selesai"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = 9,
+                Description = "Semua Status"
+            });
 
             return result;
         }
