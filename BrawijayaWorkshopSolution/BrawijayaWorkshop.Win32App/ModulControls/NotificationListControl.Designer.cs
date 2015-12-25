@@ -90,6 +90,7 @@
             this.gvPendingSPK.OptionsCustomization.AllowColumnMoving = false;
             this.gvPendingSPK.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvPendingSPK.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvPendingSPK.OptionsView.ShowDetailButtons = false;
             this.gvPendingSPK.OptionsView.ShowGroupPanel = false;
             this.gvPendingSPK.OptionsView.ShowViewCaption = true;
             this.gvPendingSPK.ViewCaption = "Daftar Pending SPK";

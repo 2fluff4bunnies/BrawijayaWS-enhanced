@@ -460,7 +460,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddMechanic_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.MechanicDescription))
+            if (!string.IsNullOrEmpty(this.MechanicDescription))
             {
                 if (this.IsMechanicRegistered)
                 {
