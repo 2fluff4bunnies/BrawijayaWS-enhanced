@@ -199,6 +199,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             cmsEndorseData.Visible =( this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
             cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
+            cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
         }
 
         void SPKListControl_Load(object sender, EventArgs e)
@@ -282,6 +283,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             report.FillDataSource();
             _presenter.PrintSPK();
 
+            btnSearch.PerformClick();
             using (ReportPrintTool printTool = new ReportPrintTool(report))
             {
                 // Invoke the Print dialog.
