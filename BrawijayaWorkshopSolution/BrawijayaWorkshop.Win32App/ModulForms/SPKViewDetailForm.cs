@@ -81,7 +81,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             lblStatusCompletedValue.Text = _prefix + statusCompleted;
 
-            if(!string.IsNullOrEmpty(this.SelectedSPK.Description))
+            if (!string.IsNullOrEmpty(this.SelectedSPK.Description))
             {
                 string[] descriptArray = this.SelectedSPK.Description.Split(' ');
                 string newDescription = "";
@@ -107,9 +107,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void ApplyButtonSetting()
         {
-            btnSetAsComplete.Visible = btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
+            btnSetAsComplete.Visible =  btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
             btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
             btnRequestPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
+            btnEndorse.Visible = (SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
 
             if (this.IsApproval)
             {
@@ -117,13 +118,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
-                }             
+                }
             }
 
             if (this.IsAbort)
             {
-               btnSetAsComplete.Visible = btnRequestPrint.Visible = btnPrint.Visible = btnEndorse.Visible = btnApprove.Visible = btnReject.Visible = false;
-               btnAbort.Visible = true;
+                btnSetAsComplete.Visible = btnRequestPrint.Visible = btnPrint.Visible = btnEndorse.Visible = btnApprove.Visible = btnReject.Visible = false;
+                btnAbort.Visible = true;
             }
 
             if (this.IsSetAsComplete)
@@ -234,7 +235,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
         private void btnAbort_Click(object sender, EventArgs e)
         {
-
+            this.ShowConfirmation("SPK yang dibatalkan tidak dapat digunakan kembali, anda yakin ingin melanjutkan ?");
+            if (this.DialogResult == DialogResult.OK)
+            {
+                _presenter.Abort();
+            }
         }
 
         private void btnEndorse_Click(object sender, EventArgs e)

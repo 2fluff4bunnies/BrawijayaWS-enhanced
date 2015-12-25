@@ -34,5 +34,10 @@ namespace BrawijayaWorkshop.Presenter
             Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, false);
         }
 
+        public void Abort()
+        {
+            Model.AbortSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId);
+        }
+
     }
 }

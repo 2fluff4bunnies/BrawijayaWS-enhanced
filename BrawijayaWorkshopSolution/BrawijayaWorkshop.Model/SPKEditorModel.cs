@@ -56,6 +56,20 @@ namespace BrawijayaWorkshop.Model
             return _vehicleRepository.GetVehicleForLookUp();
         }
 
+        public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
+        {
+            List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+
+            return result;
+        }
+
+        public List<SPKDetailSparepartDetail> GetSPKSparepartDetailList(int spkId)
+        {
+            List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
+
+            return result;
+        }
+
         public List<SPKDetailSparepart> GetEndorsedSPKSparepartList(int spkId)
         {
             List<SPKDetailSparepart> result = new List<SPKDetailSparepart>();
@@ -148,6 +162,9 @@ namespace BrawijayaWorkshop.Model
 
             if (parentSPK != null)
             {
+                // helluva method
+                AbortSPK(parentSPK, GetSPKSparepartList(parentSPK.Id), GetSPKSparepartDetailList(parentSPK.Id), userId);
+
                 parentSPK.StatusApprovalId = (int)DbConstant.SPKCompletionStatus.Completed;
                 parentSPK.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
                 parentSPK.ModifyDate = serverTime;
@@ -336,6 +353,40 @@ namespace BrawijayaWorkshop.Model
             }
 
             return result;
+        }
+
+        public void AbortSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+
+            _SPKRepository.Update(spk);
+
+            foreach (var item in spkSparepartList)
+            {
+                Sparepart sparepart = _sparepartRepository.GetById(item.Sparepart.Id);
+                sparepart.StockQty = sparepart.StockQty + item.TotalQuantity;
+                sparepart.ModifyDate = serverTime;
+                sparepart.ModifyUserId = userId;
+
+                _sparepartRepository.Update(sparepart);
+            }
+
+            foreach (var item in spkSparepartDetailList)
+            {
+                SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
+                sparepartDetail.ModifyDate = serverTime;
+                sparepartDetail.ModifyUserId = userId;
+                sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+
+                _sparepartDetailRepository.Update(sparepartDetail);
+            }
+
+            _unitOfWork.SaveChanges();
+
         }
     }
 }

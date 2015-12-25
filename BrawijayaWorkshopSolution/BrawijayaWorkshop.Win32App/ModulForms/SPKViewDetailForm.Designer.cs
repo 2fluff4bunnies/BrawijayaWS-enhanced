@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKViewDetailForm));
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
             this.groupMechanic = new DevExpress.XtraEditors.GroupControl();
             this.gcMechanic = new DevExpress.XtraGrid.GridControl();
@@ -426,7 +427,7 @@
             this.btnEndorse.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.btnEndorse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnEndorse.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnEndorse.Location = new System.Drawing.Point(10, 532);
+            this.btnEndorse.Location = new System.Drawing.Point(302, 532);
             this.btnEndorse.Name = "btnEndorse";
             this.btnEndorse.Size = new System.Drawing.Size(91, 23);
             this.btnEndorse.TabIndex = 37;
@@ -526,8 +527,9 @@
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnEndorse);
             this.Controls.Add(this.btnApprove);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKViewDetailForm";
-            this.Text = "SPKViewDetailForm";
+            this.Text = "Informasi Detail SPK";
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
