@@ -36,8 +36,6 @@ namespace BrawijayaWorkshop.Utils
 
         public static void SendEmail(string emailSubject, string emailBody, string to, string from, string cc, string bcc, string attachmentUrl)
         {
-            if (!IsValidEmail(to))
-                return;
             //get the mail server
             string mailServer = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SERVER].Decrypt();
             string mailServerPort = ConfigurationManager.AppSettings[SimpleEmailConstants.APP_SETTING_MAIL_SERVERPORT].Decrypt();
@@ -47,13 +45,11 @@ namespace BrawijayaWorkshop.Utils
 
             MethodBase.GetCurrentMethod().Debug("Send email notification to :" + to + ", cc :" + cc + ", bcc : " + bcc);
 
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(mailServer);
-            if (!string.IsNullOrEmpty(mailServerPort))
+            var smtp = new System.Net.Mail.SmtpClient(mailServer, mailServerPort.AsInteger())
             {
-                smtp.Port = int.Parse(mailServerPort);
-            }
-            smtp.Credentials = new System.Net.NetworkCredential(mailUsername, mailPassword);
-            smtp.EnableSsl = false;
+                Credentials = new System.Net.NetworkCredential(mailUsername, mailPassword),
+                EnableSsl = true
+            };
 
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
             msg.Body = emailBody;
@@ -101,15 +97,6 @@ namespace BrawijayaWorkshop.Utils
                 }
                 else
                     msg.Bcc.Add(bcc);
-            }
-
-            // SSL
-            if (!string.IsNullOrEmpty(mailSSL))
-            {
-                bool ssl = true;
-                if (!bool.TryParse(mailSSL, out ssl))
-                    smtp.EnableSsl = false;
-                smtp.EnableSsl = ssl;
             }
 
             if (attachmentUrl != string.Empty)
