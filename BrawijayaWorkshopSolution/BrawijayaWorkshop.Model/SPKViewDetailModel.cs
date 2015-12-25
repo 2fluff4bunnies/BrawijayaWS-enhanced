@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SPKViewDetailModel :BaseModel
+    public class SPKViewDetailModel : BaseModel
     {
         private IReferenceRepository _referenceRepository;
         private IVehicleRepository _vehicleRepository;
@@ -43,7 +43,7 @@ namespace BrawijayaWorkshop.Model
         }
 
         public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
-        { 
+        {
             List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
 
             return result;
@@ -51,39 +51,79 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
         {
-            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sms => sms.SPKId == spkId).ToList();
 
             return result;
         }
 
-        public bool ApproveSPK(SPK spk, DbConstant.ApprovalStatus status)
+        public List<SPKDetailSparepartDetail> GetSPKSparepartDetailList(int spkId)
+        {
+            List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
+
+            return result;
+        }
+
+        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isApproved)
         {
             bool result = false;
 
-            try
+            DateTime serverTime = DateTime.Now;
+
+            if (isApproved)
             {
-                if (status.CompareTo(DbConstant.ApprovalStatus.Approved) == 1)
+                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                //spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress; use this when printed!
+
+                spk.ModifyDate = serverTime;
+                spk.ModifyUserId = userId;
+
+                _SPKRepository.Update(spk);
+
+                foreach (var item in spkSparepartList)
                 {
-                    //TODO remove sparepart from stock
-                }
-                else if (status.CompareTo(DbConstant.ApprovalStatus.Rejected) == 1)
-                {
+                    Sparepart sparepart = _sparepartRepository.GetById(item.Sparepart.Id);
+                    sparepart.StockQty = sparepart.StockQty - item.TotalQuantity;
+                    sparepart.ModifyDate = serverTime;
+                    sparepart.ModifyUserId = userId;
+
+                    _sparepartRepository.Update(sparepart);
 
                 }
 
-                result = true;
+                foreach (var item in spkSparepartDetailList)
+                {
+                    SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
+                    sparepartDetail.ModifyDate = serverTime;
+                    sparepartDetail.ModifyUserId = userId;
+                    if (item.SPKDetailSparepart.SPK.CategoryReference.Id == 22)
+                    {
+                        sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+                    }
+                    else
+                    {
+                        sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
+                    }
+
+                    _sparepartDetailRepository.Update(sparepartDetail);
+                }
+
+                _unitOfWork.SaveChanges();
             }
-            catch (Exception ex)
+            else 
             {
 
-                result = false;
-            }       
+            }
+
+            result = true;
+
+
 
             return result;
         }
 
         public void PrintSPK(SPK spk)
-        { 
+        {
 #warning put print here
             //TODO print
         }

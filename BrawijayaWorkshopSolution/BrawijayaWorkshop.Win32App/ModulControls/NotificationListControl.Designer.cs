@@ -55,7 +55,7 @@
             this.groupPendingSPK.Controls.Add(this.gridPendingSPK);
             this.groupPendingSPK.Location = new System.Drawing.Point(3, 3);
             this.groupPendingSPK.Name = "groupPendingSPK";
-            this.groupPendingSPK.Size = new System.Drawing.Size(813, 226);
+            this.groupPendingSPK.Size = new System.Drawing.Size(813, 250);
             this.groupPendingSPK.TabIndex = 0;
             this.groupPendingSPK.Text = "Daftar Pending SPK";
             // 
@@ -67,7 +67,7 @@
             this.gridPendingSPK.Location = new System.Drawing.Point(4, 23);
             this.gridPendingSPK.MainView = this.gvPendingSPK;
             this.gridPendingSPK.Name = "gridPendingSPK";
-            this.gridPendingSPK.Size = new System.Drawing.Size(809, 204);
+            this.gridPendingSPK.Size = new System.Drawing.Size(804, 222);
             this.gridPendingSPK.TabIndex = 0;
             this.gridPendingSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPendingSPK});
@@ -165,7 +165,7 @@
             this.AutoSize = true;
             this.Controls.Add(this.groupPendingSPK);
             this.Name = "NotificationListControl";
-            this.Size = new System.Drawing.Size(819, 276);
+            this.Size = new System.Drawing.Size(819, 255);
             this.Load += new System.EventHandler(this.NotificationListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupPendingSPK)).EndInit();
             this.groupPendingSPK.ResumeLayout(false);

@@ -52,6 +52,8 @@ namespace BrawijayaWorkshop.Win32App
 
                 // get login information and generate menus and navigations based on allowed modules
                 GenerateRibbonMenu();
+
+                ShowNotification();
             }
         }
 
@@ -227,6 +229,11 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iNotification_ItemClick(object sender, ItemClickEventArgs e)
         {
+            ShowNotification();
+        }
+
+        private void ShowNotification()
+        {
             splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
 
             ClearNavigation();
@@ -234,7 +241,6 @@ namespace BrawijayaWorkshop.Win32App
 
             NotificationListControl listNotification = Bootstrapper.Resolve<NotificationListControl>();
             ShowUserControl(listNotification);
-
         }
 
         private void iMaster_ItemClick(object sender, ItemClickEventArgs e)
@@ -246,6 +252,7 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             MasterDataNavigationControl navMasterData = new MasterDataNavigationControl();
+            navMasterData.iJournal.Visible = false;
             ShowNavigationControl(navMasterData);
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
@@ -253,9 +260,16 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
             navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
+            navMasterData.iJournal.LinkClicked += iJournal_LinkClicked;
         }
 
-        void iVehicle_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iJournal_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            JournalMasterListControl listJournal = Bootstrapper.Resolve<JournalMasterListControl>();
+            ShowUserControl(listJournal);
+        }
+
+        private void iVehicle_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             VehicleListControl listVehicle = Bootstrapper.Resolve<VehicleListControl>();
             ShowUserControl(listVehicle);

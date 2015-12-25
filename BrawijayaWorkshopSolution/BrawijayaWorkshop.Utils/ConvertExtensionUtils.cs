@@ -5,6 +5,53 @@ namespace BrawijayaWorkshop.Utils
 {
     public static class ConvertExtensionUtils
     {
+        public static string NumberToWordID(this decimal sender)
+        {
+            string strterbilang = string.Empty;
+
+            // membuat array untuk mengubah 1 - 11 menjadi terbilang
+            string[] a = { "", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas" };
+
+            if (sender < 12)
+            {
+                strterbilang = " " + a[sender.AsInteger()];
+            }
+            else if (sender < 20)
+            {
+                strterbilang = NumberToWordID(sender - 10) + " belas";
+            }
+            else if (sender < 100)
+            {
+                strterbilang = NumberToWordID(sender / 10) + " puluh" + NumberToWordID(sender % 10);
+            }
+            else if (sender < 200)
+            {
+                strterbilang = " seratus" + NumberToWordID(sender - 100);
+            }
+            else if (sender < 1000)
+            {
+                strterbilang = NumberToWordID(sender / 100) + " ratus" + NumberToWordID(sender % 100);
+            }
+            else if (sender < 2000)
+            {
+                strterbilang = " seribu" + NumberToWordID(sender - 1000);
+            }
+            else if (sender < 1000000)
+            {
+                strterbilang = NumberToWordID(sender / 1000) + " ribu" + NumberToWordID(sender % 1000);
+            }
+            else if (sender < 1000000000)
+            {
+                strterbilang = NumberToWordID(sender / 1000000) + " juta" + NumberToWordID(sender % 1000000);
+            }
+
+            // menghilangkan multiple space
+            strterbilang = System.Text.RegularExpressions.Regex.Replace(strterbilang, @"^\s+|\s+$", " ");
+
+            // mengembalikan hasil terbilang
+            return strterbilang;
+        }
+
         public static byte[] StringToBytesArray(this string sender)
         {
             byte[] bytes = new byte[sender.Length * sizeof(char)];

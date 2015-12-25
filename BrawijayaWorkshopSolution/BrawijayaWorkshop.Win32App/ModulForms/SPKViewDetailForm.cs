@@ -2,10 +2,13 @@
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -50,8 +53,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void ApplyButtonSetting()
         {
-            btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
-            btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+            btnApprove.Visible = btnReject.Visible = false;
+            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
+            {
+                btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+                btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+            }
             btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
         }
 
@@ -185,11 +192,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtSPKCategory.Text = value;
             }
         }
+
+        public decimal TotalSparepartPrice
+        {
+            get
+            {
+                return txtTotalSparepartPrice.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalSparepartPrice.Text = value.ToString();
+            }
+        }
         #endregion
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
             _presenter.Approve();
+            this.Close();
         }
 
         private void btnReject_Click(object sender, EventArgs e)
@@ -199,7 +219,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _presenter.print();
+            //_presenter.print();
+            SPKPrintItem report = new SPKPrintItem();
+            List<SPK> _dataSource = new List<SPK>();
+            _dataSource.Add(SelectedSPK);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

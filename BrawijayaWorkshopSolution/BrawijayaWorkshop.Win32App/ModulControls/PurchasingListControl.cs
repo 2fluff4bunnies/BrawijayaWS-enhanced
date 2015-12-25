@@ -41,6 +41,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewPurchasing.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             persetujuanPembelianToolStripMenuItem.Enabled = AllowEdit;
+
+            txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
+
             this.Load += PurchasingListControl_Load;
         }
 

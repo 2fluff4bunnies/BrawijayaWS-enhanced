@@ -23,10 +23,12 @@ namespace BrawijayaWorkshop.Presenter
                 View.DueDate = View.SelectedSPK.DueDate.ToShortDateString();
                 View.CreateDate = View.SelectedSPK.CreateDate.ToShortDateString();
                 View.Customer = View.SelectedSPK.Vehicle.Customer.CompanyName;
+                View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
             }
 
             View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
             View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
+            View.SPKSparepartDetailList = Model.GetSPKSparepartDetailList(View.SelectedSPK.Id);
         }
 
         public void print()
@@ -36,11 +38,11 @@ namespace BrawijayaWorkshop.Presenter
 
         public void Approve()
         {
-            Model.ApproveSPK(View.SelectedSPK, DbConstant.ApprovalStatus.Approved);
+            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, true);
         }
         public void Reject()
         {
-            Model.ApproveSPK(View.SelectedSPK, DbConstant.ApprovalStatus.Rejected);
+            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, false);
         }
 
     }

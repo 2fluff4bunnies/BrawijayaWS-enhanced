@@ -17,8 +17,11 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public DateTime DueDate { get; set; }
 
-        [Required]
         public decimal Subtotal { get; set; }
+
+        public decimal TotalSparepartPrice { get; set; }
+
+        public decimal TotalMechanicFee { get; set; }
 
         [Required]
         public int VehicleId { get; set; }
@@ -36,6 +39,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         public int CategoryReferenceId { get; set; }
+
+        public string Description { get; set; }
 
         public virtual Reference CategoryReference { get; set; }
 

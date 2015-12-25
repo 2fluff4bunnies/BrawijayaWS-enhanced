@@ -37,6 +37,7 @@
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
             this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
+            this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
@@ -53,7 +54,8 @@
             this.iCustomer,
             this.iSparepart,
             this.iMechanic,
-            this.iVehicle});
+            this.iVehicle,
+            this.iJournal});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -67,6 +69,7 @@
             this.navbarGroupMasterData.Caption = "Master Data";
             this.navbarGroupMasterData.Expanded = true;
             this.navbarGroupMasterData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iJournal),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
@@ -100,9 +103,15 @@
             // 
             // iVehicle
             // 
-            this.iVehicle.Caption = "Vehicle";
+            this.iVehicle.Caption = "Kendaraan";
             this.iVehicle.Name = "iVehicle";
             this.iVehicle.SmallImageIndex = 3;
+            // 
+            // iJournal
+            // 
+            this.iJournal.Caption = "Kode Jurnal";
+            this.iJournal.Name = "iJournal";
+            this.iJournal.SmallImageIndex = 5;
             // 
             // imageCollection
             // 
@@ -112,6 +121,7 @@
             this.imageCollection.Images.SetKeyName(2, "sparepart.png");
             this.imageCollection.Images.SetKeyName(3, "Truck-Left-Green-icon-16x16.png");
             this.imageCollection.Images.SetKeyName(4, "mechanic 16x16.png");
+            this.imageCollection.Images.SetKeyName(5, "journal-icon.png");
             // 
             // MasterDataNavigationControl
             // 
@@ -136,5 +146,6 @@
         public DevExpress.XtraNavBar.NavBarItem iSparepart;
         public DevExpress.XtraNavBar.NavBarItem iMechanic;
         public DevExpress.XtraNavBar.NavBarItem iVehicle;
+        public DevExpress.XtraNavBar.NavBarItem iJournal;
     }
 }

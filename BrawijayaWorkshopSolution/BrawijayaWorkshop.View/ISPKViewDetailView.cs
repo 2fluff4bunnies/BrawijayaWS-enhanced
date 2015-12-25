@@ -20,5 +20,6 @@ namespace BrawijayaWorkshop.View
         string Vehicle { get; set; }
         string Customer { get; set; }
         string Category { get; set; }
+        decimal TotalSparepartPrice { get; set; }
     }
 }

@@ -301,6 +301,7 @@
             this.ClientSize = new System.Drawing.Size(634, 374);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Name = "PurchasingApprovalForm";
+            this.ShowInTaskbar = false;
             this.Text = "Form Persetujuan Pembelian";
             this.Load += new System.EventHandler(this.PurchasingApprovalForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).EndInit();

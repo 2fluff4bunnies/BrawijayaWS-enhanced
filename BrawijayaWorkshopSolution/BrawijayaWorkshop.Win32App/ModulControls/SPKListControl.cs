@@ -31,14 +31,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             // init editor control accessibility
             btnNewSPK.Enabled = AllowInsert;
-            cmsEditData.Enabled = AllowEdit;
             cmsEndorseData.Enabled = AllowEdit;
 
             this.Load += SPKListControl_Load;
 
             //by default pending & all category spk will displayed
-            this.ApprovalStatusFilter = 0;
+            this.ApprovalStatusFilter = 9;
             this.CategoryFilter = 0;
+            this.PrintStatusFilter = 9;
         }
 
         protected override string ModulName
@@ -89,43 +89,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public DateTime? CreateDateFilter
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(dtpCreateDate.Text))
-                {
-                    return null;
-                }
-                else
-                {
-                    return dtpCreateDate.Text.AsDateTime();
-                }
-            }
-            set
-            {
-                dtpCreateDate.Text = value.ToString();
-            }
-        }
-
-        public DateTime? DueDateFilter
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(dtpDueDate.Text))
-                {
-                    return null;
-                }
-                else
-                {
-                    return dtpDueDate.Text.AsDateTime();
-                }
-            }
-            set
-            {
-                dtpDueDate.Text = value.ToString();
-            }
-        }
 
         public int CategoryFilter
         {
@@ -224,14 +187,16 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         void gvSPK_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedSPK = gvSPK.GetFocusedRow() as SPK;
-            ApplyCMSSetting();
+            if (this.SelectedSPK != null)
+            {
+                ApplyCMSSetting();
+            }
         }
 
         void ApplyCMSSetting()
         {
-            cmsEditData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
             cmsEndorseData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved;
-            cmsPrintData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.SPKPrintStatus.Ready;
+            cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
         }
 
         void SPKListControl_Load(object sender, EventArgs e)
@@ -297,21 +262,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
-
-        private void cmsEditData_Click(object sender, EventArgs e)
-        {
-            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
-            editor.SelectedSPK = this.SelectedSPK;
-            editor.ShowDialog(this);
-
-            btnSearch.PerformClick();
-        }
-
         private void cmsEndorseData_Click(object sender, EventArgs e)
         {
             SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
             editor.ParentSPK = this.SelectedSPK;
-            editor.IsEndorse = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();

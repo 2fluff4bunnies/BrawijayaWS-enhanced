@@ -222,6 +222,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
+            if(cbPayment.EditValue == null)
+            {
+                this.ShowWarning("Pilih Metode Pembayaran");
+                return;
+            }
             if (!bgwSave.IsBusy)
             {
                 bool isValid = false;

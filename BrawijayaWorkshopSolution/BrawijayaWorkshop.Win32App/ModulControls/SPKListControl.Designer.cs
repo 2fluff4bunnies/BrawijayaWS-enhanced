@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
             this.lblPrintStatus = new DevExpress.XtraEditors.LabelControl();
             this.lookUpPrintStatus = new DevExpress.XtraEditors.LookUpEdit();
-            this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
-            this.dtpCreateDate = new DevExpress.XtraEditors.DateEdit();
-            this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
-            this.lblCreateDate = new DevExpress.XtraEditors.LabelControl();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
             this.lookUpApprovalStatus = new DevExpress.XtraEditors.LookUpEdit();
@@ -53,20 +50,15 @@
             this.colDueDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEndorseData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpCreateDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpCreateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpApprovalStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
@@ -82,10 +74,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupFilter.Controls.Add(this.lblPrintStatus);
             this.groupFilter.Controls.Add(this.lookUpPrintStatus);
-            this.groupFilter.Controls.Add(this.dtpDueDate);
-            this.groupFilter.Controls.Add(this.dtpCreateDate);
-            this.groupFilter.Controls.Add(this.lblDueDate);
-            this.groupFilter.Controls.Add(this.lblCreateDate);
             this.groupFilter.Controls.Add(this.txtLicenseNumber);
             this.groupFilter.Controls.Add(this.lblLicenseNumber);
             this.groupFilter.Controls.Add(this.lookUpApprovalStatus);
@@ -97,13 +85,13 @@
             this.groupFilter.Controls.Add(this.lblCategory);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(1214, 88);
+            this.groupFilter.Size = new System.Drawing.Size(870, 88);
             this.groupFilter.TabIndex = 1;
             this.groupFilter.Text = "Filter";
             // 
             // lblPrintStatus
             // 
-            this.lblPrintStatus.Location = new System.Drawing.Point(835, 34);
+            this.lblPrintStatus.Location = new System.Drawing.Point(549, 34);
             this.lblPrintStatus.Name = "lblPrintStatus";
             this.lblPrintStatus.Size = new System.Drawing.Size(56, 13);
             this.lblPrintStatus.TabIndex = 14;
@@ -111,7 +99,7 @@
             // 
             // lookUpPrintStatus
             // 
-            this.lookUpPrintStatus.Location = new System.Drawing.Point(906, 31);
+            this.lookUpPrintStatus.Location = new System.Drawing.Point(620, 31);
             this.lookUpPrintStatus.Name = "lookUpPrintStatus";
             this.lookUpPrintStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpPrintStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -124,48 +112,6 @@
             this.lookUpPrintStatus.Properties.ValueMember = "Status";
             this.lookUpPrintStatus.Size = new System.Drawing.Size(141, 20);
             this.lookUpPrintStatus.TabIndex = 13;
-            // 
-            // dtpDueDate
-            // 
-            this.dtpDueDate.EditValue = null;
-            this.dtpDueDate.Location = new System.Drawing.Point(652, 59);
-            this.dtpDueDate.Name = "dtpDueDate";
-            this.dtpDueDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dtpDueDate.Size = new System.Drawing.Size(141, 20);
-            this.dtpDueDate.TabIndex = 12;
-            // 
-            // dtpCreateDate
-            // 
-            this.dtpCreateDate.EditValue = null;
-            this.dtpCreateDate.Location = new System.Drawing.Point(652, 31);
-            this.dtpCreateDate.Name = "dtpCreateDate";
-            this.dtpCreateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtpCreateDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtpCreateDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dtpCreateDate.Size = new System.Drawing.Size(141, 20);
-            this.dtpCreateDate.TabIndex = 11;
-            // 
-            // lblDueDate
-            // 
-            this.lblDueDate.Location = new System.Drawing.Point(555, 66);
-            this.lblDueDate.Name = "lblDueDate";
-            this.lblDueDate.Size = new System.Drawing.Size(61, 13);
-            this.lblDueDate.TabIndex = 10;
-            this.lblDueDate.Text = "Batas Waktu";
-            // 
-            // lblCreateDate
-            // 
-            this.lblCreateDate.Location = new System.Drawing.Point(555, 34);
-            this.lblCreateDate.Name = "lblCreateDate";
-            this.lblCreateDate.Size = new System.Drawing.Size(71, 13);
-            this.lblCreateDate.TabIndex = 9;
-            this.lblCreateDate.Text = "Tgl Pembuatan";
             // 
             // txtLicenseNumber
             // 
@@ -243,7 +189,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(1089, 28);
+            this.btnSearch.Location = new System.Drawing.Point(784, 27);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 55);
             this.btnSearch.TabIndex = 4;
@@ -278,7 +224,7 @@
             this.gcSPK.Location = new System.Drawing.Point(3, 126);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(1214, 232);
+            this.gcSPK.Size = new System.Drawing.Size(870, 232);
             this.gcSPK.TabIndex = 5;
             this.gcSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPK});
@@ -352,11 +298,10 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewDetailToolStripMenuItem,
             this.toolStripSeparator1,
-            this.cmsEditData,
             this.cmsEndorseData,
             this.cmsPrintData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(134, 98);
+            this.cmsEditor.Size = new System.Drawing.Size(134, 76);
             // 
             // viewDetailToolStripMenuItem
             // 
@@ -370,14 +315,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
-            // 
-            // cmsEditData
-            // 
-            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(133, 22);
-            this.cmsEditData.Text = "Ubah SPK";
-            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
             // cmsEndorseData
             // 
@@ -407,15 +344,11 @@
             this.Controls.Add(this.btnNewSPK);
             this.Controls.Add(this.groupFilter);
             this.Name = "SPKListControl";
-            this.Size = new System.Drawing.Size(1220, 361);
+            this.Size = new System.Drawing.Size(876, 361);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpCreateDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtpCreateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpApprovalStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
@@ -438,10 +371,6 @@
         private DevExpress.XtraEditors.SimpleButton btnNewSPK;
         private DevExpress.XtraGrid.GridControl gcSPK;
         private DevExpress.XtraGrid.Views.Grid.GridView gvSPK;
-        private DevExpress.XtraEditors.DateEdit dtpDueDate;
-        private DevExpress.XtraEditors.DateEdit dtpCreateDate;
-        private DevExpress.XtraEditors.LabelControl lblDueDate;
-        private DevExpress.XtraEditors.LabelControl lblCreateDate;
         private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblLicenseNumber;
         private DevExpress.XtraEditors.LookUpEdit lookUpApprovalStatus;
@@ -454,7 +383,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraEditors.LookUpEdit lookUpPrintStatus;
         private DevExpress.XtraEditors.LabelControl lblPrintStatus;
