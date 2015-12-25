@@ -15,7 +15,7 @@ namespace BrawijayaWorkshop.Presenter
         public SPKEditorPresenter(ISPKEditorView view, SPKEditorModel model)
             : base(view, model) { }
 
-        public void InitFormData(bool isEndorse)
+        public void InitFormData()
         {
             View.FingerprintIP = Model.GetFingerprintIpAddress();
             View.FingerpringPort = Model.GetFingerprintPort();
@@ -27,24 +27,23 @@ namespace BrawijayaWorkshop.Presenter
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
 
-
-            if (isEndorse)
+            if (View.ParentSPK != null)
             {
+                View.SelectedSPK = new SPK
+                {
+                    Vehicle = View.ParentSPK.Vehicle,
+                    CategoryReference = View.ParentSPK.CategoryReference,
+                    DueDate = View.ParentSPK.DueDate,
+                    SPKParent = View.ParentSPK
+                };
 
-            }
-
-            if (View.SelectedSPK != null)
-            {
                 View.CategoryId = View.SelectedSPK.CategoryReferenceId;
                 View.VehicleId = View.SelectedSPK.VehicleId;
-                View.Code = View.SelectedSPK.Code;
                 View.DueDate = View.SelectedSPK.DueDate;
 
                 View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
                 View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
             }
-
-           
         }
 
         public void UpdateMechanicList(List<string> availableCodes)
@@ -63,12 +62,12 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.VehicleId = View.VehicleId;
             View.SelectedSPK.DueDate = View.DueDate;
 
-            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
+            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
         }
 
         public void populateSparepartDetail()
         {
-            View.SPKSparepartDetailList = Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty);
+            View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty));
         }
 
         public void SendApproval()

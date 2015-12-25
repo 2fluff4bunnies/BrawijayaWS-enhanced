@@ -37,6 +37,8 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public int CategoryReferenceId { get; set; }
 
+        public string Description { get; set; }
+
         public virtual Reference CategoryReference { get; set; }
 
         public int? SPKparentId { get; set; }

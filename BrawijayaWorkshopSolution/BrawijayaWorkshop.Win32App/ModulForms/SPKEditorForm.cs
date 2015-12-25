@@ -13,6 +13,7 @@ using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -22,14 +23,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private List<string> _availableMechanic;
         public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         private bool _isFingerprintConnected = false;
-        private bool _isEndorse = false;
 
         private SPKEditorPresenter _presenter;
 
         public string FingerprintIP { get; set; }
 
         public string FingerpringPort { get; set; }
-       
+
 
         public SPKEditorForm(SPKEditorModel model)
         {
@@ -52,6 +52,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             SPKSparepartList = new List<SPKDetailSparepart>();
             SPKMechanicList = new List<SPKDetailMechanic>();
+            SPKSparepartDetailList = new List<SPKDetailSparepartDetail>();
 
             this.TotalSparepartPrice = 0;
             this.IsMechanicRegistered = true;
@@ -69,18 +70,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public decimal RepairThreshold { get; set; }
         public decimal ServiceThreshold { get; set; }
         public bool IsNeedApproval { get; set; }
-
-        public bool IsEndorse
-        {
-            get
-            {
-                return _isEndorse;
-            }
-            set
-            {
-                _isEndorse = value;
-            }
-        }
 
         public decimal TotalSparepartPrice
         {
@@ -360,37 +349,46 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            int pendingRequestSparepart = _presenter.getPendingSparpartQty();
+            int duplicateSparepartFound = SPKSparepartList.Where(s => s.Sparepart.Id == SparepartToInsert.Id).Count();
 
-            if (this.SparepartQty + pendingRequestSparepart <= SparepartToInsert.StockQty)
+            if (duplicateSparepartFound < 1)
             {
-                _presenter.populateSparepartDetail();
+                int pendingRequestSparepart = _presenter.getPendingSparpartQty();
 
-                decimal totalPrice = 0;
-
-                foreach (var item in SPKSparepartDetailList)
+                if (this.SparepartQty + pendingRequestSparepart <= SparepartToInsert.StockQty)
                 {
-                    totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                    _presenter.populateSparepartDetail();
+
+                    decimal totalPrice = 0;
+
+                    foreach (var item in SPKSparepartDetailList.Where(ssd => ssd.SparepartDetail.Sparepart.Id == SparepartToInsert.Id))
+                    {
+                        totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                    }
+
+                    SPKSparepartList.Add(new SPKDetailSparepart
+                    {
+                        Sparepart = SparepartToInsert,
+                        SparepartId = SparepartId,
+                        TotalQuantity = SparepartQty,
+                        TotalPrice = totalPrice
+                    });
+
+                    RefreshSparepartGrid();
+
+                    this.TotalSparepartPrice = this.TotalSparepartPrice + totalPrice;
                 }
-
-                SPKSparepartList.Add(new SPKDetailSparepart
+                else
                 {
-                    Sparepart = SparepartToInsert,
-                    SparepartId = SparepartId,
-                    TotalQuantity = SparepartQty,
-                    TotalPrice = totalPrice
-                });
-
-                RefreshSparepartGrid();
-
-                ClearSparepart();
-
-                this.TotalSparepartPrice = this.TotalSparepartPrice + totalPrice;
+                    this.ShowError(string.Format("Jumlah sparepart yang dimasukkan melebihi stok yang ada! \n Stok yang diminta : {0} \n Permintaan tertunda : {1} \n Stok tersedia : {2}", SparepartQty, pendingRequestSparepart, SparepartToInsert.StockQty));
+                }
             }
             else
             {
-                this.ShowError(string.Format("Jumlah sparepart yang dimasukkan melebihi stok yang ada! \n Stok yang diminta : {0} \n Permintaan tertunda : {1} \n Stok tersedia : {2}", SparepartQty, pendingRequestSparepart, SparepartToInsert.StockQty));
+                this.ShowError("Sparepart yang dimasukkan dalam daftar tidak boleh ada yang sama!");
             }
+
+            ClearSparepart();
         }
 
         public void ClearSparepart()
@@ -447,7 +445,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public void RefreshSparepartGrid()
         {
-            gcSparepart.DataSource = SPKMechanicList;
+            gcSparepart.DataSource = SPKSparepartList;
             gvSparepart.BestFitColumns();
         }
 
@@ -614,7 +612,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void SPKEditorForm_Load(object sender, EventArgs e)
         {
-            _presenter.InitFormData(this.IsEndorse);
+            _presenter.InitFormData();
             this.ApprovalEmailBody = Resources.SPKApprovalEmailTemplate;
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();

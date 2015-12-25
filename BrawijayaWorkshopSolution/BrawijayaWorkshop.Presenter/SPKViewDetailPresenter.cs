@@ -36,11 +36,11 @@ namespace BrawijayaWorkshop.Presenter
 
         public void Approve()
         {
-            Model.ApproveSPK(View.SelectedSPK, DbConstant.ApprovalStatus.Approved);
+            Model.ApproveSPK(View.SelectedSPK,View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, DbConstant.ApprovalStatus.Approved);
         }
         public void Reject()
         {
-            Model.ApproveSPK(View.SelectedSPK, DbConstant.ApprovalStatus.Rejected);
+            Model.ApproveSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, DbConstant.ApprovalStatus.Rejected);
         }
 
     }

@@ -96,10 +96,19 @@ namespace BrawijayaWorkshop.Model
             };
         }
 
-        public SPK InsertSPK(SPK spk, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
+        public SPK InsertSPK(SPK spk, SPK parentSPK, List<SPKDetailMechanic> mechanicList, List<SPKDetailSparepart> sparepartList,
             List<SPKDetailSparepartDetail> sparepartDetailList, int userId, bool isNeedApproval)
         {
             DateTime serverTime = DateTime.Now;
+
+            if (parentSPK != null)
+            {
+                parentSPK.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
+                parentSPK.ModifyDate = serverTime;
+                parentSPK.ModifyUserId = userId;
+
+                _SPKRepository.Update(parentSPK);
+            }
 
             string code = "SPK-";
 
@@ -127,7 +136,7 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
             spk.CreateUserId = userId;
-          
+
             spk.Status = (int)DbConstant.DefaultDataStatus.Active;
             spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
             spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
@@ -172,18 +181,15 @@ namespace BrawijayaWorkshop.Model
                 }
             }
 
-            if (isNeedApproval)
-            {
-#warning TODO send email for approve here
-            }
-            else
+            if (!isNeedApproval)
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
 
-                
+
 #warning TODO print SPK here
             }
+
 
             _unitOfWork.SaveChanges();
 
@@ -257,7 +263,7 @@ namespace BrawijayaWorkshop.Model
         {
             int result = 0;
 
-            List<SPKDetailSparepart> pendingSPKDetail = _SPKDetailSparepartRepository.GetMany(spkds => 
+            List<SPKDetailSparepart> pendingSPKDetail = _SPKDetailSparepartRepository.GetMany(spkds =>
                                                         spkds.SPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending
                                                         && spkds.Sparepart.Id == sparepartId
                                                         ).ToList();

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SPKViewDetailModel :BaseModel
+    public class SPKViewDetailModel : BaseModel
     {
         private IReferenceRepository _referenceRepository;
         private IVehicleRepository _vehicleRepository;
@@ -43,7 +43,7 @@ namespace BrawijayaWorkshop.Model
         }
 
         public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
-        { 
+        {
             List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
 
             return result;
@@ -51,12 +51,21 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
         {
-            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sms => sms.SPKId == spkId).ToList();
 
             return result;
         }
 
-        public bool ApproveSPK(SPK spk, DbConstant.ApprovalStatus status)
+        public List<SPKDetailSparepartDetail> GetSPKSparepartDetailList(int spkId, int sparePartId)
+        {
+
+            List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SparepartDetail.SparepartId == sparePartId && sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
+
+            return result;
+        }
+
+        public bool ApproveSPK(SPK spk, List<SPKDetailMechanic> spkMechanicList, List<SPKDetailSparepart> spkSparepartList,
+            List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, DbConstant.ApprovalStatus status)
         {
             bool result = false;
 
@@ -64,7 +73,7 @@ namespace BrawijayaWorkshop.Model
             {
                 if (status.CompareTo(DbConstant.ApprovalStatus.Approved) == 1)
                 {
-                    //TODO remove sparepart from stock
+
                 }
                 else if (status.CompareTo(DbConstant.ApprovalStatus.Rejected) == 1)
                 {
@@ -77,13 +86,13 @@ namespace BrawijayaWorkshop.Model
             {
 
                 result = false;
-            }       
+            }
 
             return result;
         }
 
         public void PrintSPK(SPK spk)
-        { 
+        {
 #warning put print here
             //TODO print
         }

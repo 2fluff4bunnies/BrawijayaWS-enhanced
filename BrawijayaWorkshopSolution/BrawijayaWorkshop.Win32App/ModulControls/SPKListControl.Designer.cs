@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
             this.lblPrintStatus = new DevExpress.XtraEditors.LabelControl();
@@ -53,10 +54,9 @@
             this.colDueDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEndorseData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
@@ -352,38 +352,29 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewDetailToolStripMenuItem,
             this.toolStripSeparator1,
-            this.cmsEditData,
             this.cmsEndorseData,
             this.cmsPrintData});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(134, 98);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 98);
             // 
             // viewDetailToolStripMenuItem
             // 
             this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
             this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
             this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
-            // 
-            // cmsEditData
-            // 
-            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(133, 22);
-            this.cmsEditData.Text = "Ubah SPK";
-            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // cmsEndorseData
             // 
             this.cmsEndorseData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEndorseData.Name = "cmsEndorseData";
-            this.cmsEndorseData.Size = new System.Drawing.Size(133, 22);
+            this.cmsEndorseData.Size = new System.Drawing.Size(152, 22);
             this.cmsEndorseData.Text = "Revisi SPK";
             this.cmsEndorseData.Click += new System.EventHandler(this.cmsEndorseData_Click);
             // 
@@ -391,7 +382,7 @@
             // 
             this.cmsPrintData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrintData.Name = "cmsPrintData";
-            this.cmsPrintData.Size = new System.Drawing.Size(133, 22);
+            this.cmsPrintData.Size = new System.Drawing.Size(152, 22);
             this.cmsPrintData.Text = "Print";
             // 
             // bgwMain
@@ -454,7 +445,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraEditors.LookUpEdit lookUpPrintStatus;
         private DevExpress.XtraEditors.LabelControl lblPrintStatus;

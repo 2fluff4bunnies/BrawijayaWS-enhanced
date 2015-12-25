@@ -31,7 +31,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             // init editor control accessibility
             btnNewSPK.Enabled = AllowInsert;
-            cmsEditData.Enabled = AllowEdit;
             cmsEndorseData.Enabled = AllowEdit;
 
             this.Load += SPKListControl_Load;
@@ -229,7 +228,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void ApplyCMSSetting()
         {
-            cmsEditData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
             cmsEndorseData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved;
             cmsPrintData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.SPKPrintStatus.Ready;
         }
@@ -297,21 +295,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
-
-        private void cmsEditData_Click(object sender, EventArgs e)
-        {
-            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
-            editor.SelectedSPK = this.SelectedSPK;
-            editor.ShowDialog(this);
-
-            btnSearch.PerformClick();
-        }
-
         private void cmsEndorseData_Click(object sender, EventArgs e)
         {
             SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
             editor.ParentSPK = this.SelectedSPK;
-            editor.IsEndorse = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
