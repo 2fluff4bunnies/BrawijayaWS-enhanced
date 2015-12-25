@@ -56,6 +56,8 @@
             this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
+            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             this.gcSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
@@ -68,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSPK
@@ -75,6 +78,8 @@
             this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSPK.Controls.Add(this.txtTotalSparepartPrice);
+            this.gcSPK.Controls.Add(this.lblTotalSparepart);
             this.gcSPK.Controls.Add(this.txtCode);
             this.gcSPK.Controls.Add(this.lblCode);
             this.gcSPK.Controls.Add(this.txtCreateDate);
@@ -91,7 +96,7 @@
             this.gcSPK.Controls.Add(this.lblVehicle);
             this.gcSPK.Location = new System.Drawing.Point(-5, 0);
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(482, 391);
+            this.gcSPK.Size = new System.Drawing.Size(482, 424);
             this.gcSPK.TabIndex = 1;
             this.gcSPK.Text = "Informasi SPK";
             // 
@@ -112,14 +117,14 @@
             // 
             // txtCreateDate
             // 
-            this.txtCreateDate.Location = new System.Drawing.Point(354, 28);
+            this.txtCreateDate.Location = new System.Drawing.Point(357, 28);
             this.txtCreateDate.Name = "txtCreateDate";
             this.txtCreateDate.Size = new System.Drawing.Size(111, 20);
             this.txtCreateDate.TabIndex = 39;
             // 
             // txtCustomer
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(354, 81);
+            this.txtCustomer.Location = new System.Drawing.Point(357, 82);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Size = new System.Drawing.Size(111, 20);
             this.txtCustomer.TabIndex = 38;
@@ -142,7 +147,7 @@
             // 
             // txtDueDate
             // 
-            this.txtDueDate.Location = new System.Drawing.Point(354, 55);
+            this.txtDueDate.Location = new System.Drawing.Point(357, 55);
             this.txtDueDate.Name = "txtDueDate";
             this.txtDueDate.Size = new System.Drawing.Size(111, 20);
             this.txtDueDate.TabIndex = 34;
@@ -164,7 +169,7 @@
             // gcSparepart
             // 
             this.gcSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSparepart.Location = new System.Drawing.Point(15, 124);
+            this.gcSparepart.Location = new System.Drawing.Point(15, 141);
             this.gcSparepart.MainView = this.gvSparepart;
             this.gcSparepart.Name = "gcSparepart";
             this.gcSparepart.Size = new System.Drawing.Size(453, 113);
@@ -227,7 +232,7 @@
             // gcMechanic
             // 
             this.gcMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcMechanic.Location = new System.Drawing.Point(15, 256);
+            this.gcMechanic.Location = new System.Drawing.Point(15, 295);
             this.gcMechanic.MainView = this.gvMechanic;
             this.gcMechanic.Name = "gcMechanic";
             this.gcMechanic.Size = new System.Drawing.Size(453, 113);
@@ -308,7 +313,7 @@
             // 
             this.btnReject.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnReject.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnReject.Location = new System.Drawing.Point(131, 402);
+            this.btnReject.Location = new System.Drawing.Point(131, 430);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(91, 23);
             this.btnReject.TabIndex = 35;
@@ -319,7 +324,7 @@
             // 
             this.btnApprove.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnApprove.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnApprove.Location = new System.Drawing.Point(7, 402);
+            this.btnApprove.Location = new System.Drawing.Point(7, 430);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Size = new System.Drawing.Size(91, 23);
             this.btnApprove.TabIndex = 34;
@@ -330,7 +335,7 @@
             // 
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnCancel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnCancel.Location = new System.Drawing.Point(369, 402);
+            this.btnCancel.Location = new System.Drawing.Point(369, 430);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 23);
             this.btnCancel.TabIndex = 33;
@@ -341,18 +346,38 @@
             // 
             this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(248, 402);
+            this.btnPrint.Location = new System.Drawing.Point(248, 430);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(91, 23);
             this.btnPrint.TabIndex = 36;
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // txtTotalSparepartPrice
+            // 
+            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(368, 260);
+            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
+            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n";
+            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
+            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalSparepartPrice.TabIndex = 43;
+            // 
+            // lblTotalSparepart
+            // 
+            this.lblTotalSparepart.Location = new System.Drawing.Point(275, 263);
+            this.lblTotalSparepart.Name = "lblTotalSparepart";
+            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
+            this.lblTotalSparepart.TabIndex = 42;
+            this.lblTotalSparepart.Text = "Total Sparepart";
+            // 
             // SPKViewDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 431);
+            this.ClientSize = new System.Drawing.Size(472, 464);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnReject);
             this.Controls.Add(this.btnApprove);
@@ -373,6 +398,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -407,5 +433,7 @@
         private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraEditors.TextEdit txtCode;
         private DevExpress.XtraEditors.LabelControl lblCode;
+        private DevExpress.XtraEditors.TextEdit txtTotalSparepartPrice;
+        private DevExpress.XtraEditors.LabelControl lblTotalSparepart;
     }
 }

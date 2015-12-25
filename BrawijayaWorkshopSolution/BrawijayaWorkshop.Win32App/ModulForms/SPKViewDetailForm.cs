@@ -192,6 +192,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtSPKCategory.Text = value;
             }
         }
+
+        public decimal TotalSparepartPrice
+        {
+            get
+            {
+                return txtTotalSparepartPrice.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalSparepartPrice.Text = value.ToString();
+            }
+        }
         #endregion
 
         private void btnApprove_Click(object sender, EventArgs e)

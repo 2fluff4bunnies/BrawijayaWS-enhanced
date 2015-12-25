@@ -16,10 +16,6 @@ namespace BrawijayaWorkshop.View
 
         string CodeFilter { get; set; }
 
-        DateTime? CreateDateFilter { get; set; }
-
-        DateTime? DueDateFilter { get; set; }
-
         int CategoryFilter { get; set; }
 
         string LicenseNumberFilter { get; set; }

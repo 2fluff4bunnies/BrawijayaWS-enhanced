@@ -36,8 +36,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             this.Load += SPKListControl_Load;
 
             //by default pending & all category spk will displayed
-            this.ApprovalStatusFilter = 0;
+            this.ApprovalStatusFilter = 9;
             this.CategoryFilter = 0;
+            this.PrintStatusFilter = 9;
         }
 
         protected override string ModulName
@@ -88,43 +89,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public DateTime? CreateDateFilter
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(dtpCreateDate.Text))
-                {
-                    return null;
-                }
-                else
-                {
-                    return dtpCreateDate.Text.AsDateTime();
-                }
-            }
-            set
-            {
-                dtpCreateDate.Text = value.ToString();
-            }
-        }
-
-        public DateTime? DueDateFilter
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(dtpDueDate.Text))
-                {
-                    return null;
-                }
-                else
-                {
-                    return dtpDueDate.Text.AsDateTime();
-                }
-            }
-            set
-            {
-                dtpDueDate.Text = value.ToString();
-            }
-        }
 
         public int CategoryFilter
         {
