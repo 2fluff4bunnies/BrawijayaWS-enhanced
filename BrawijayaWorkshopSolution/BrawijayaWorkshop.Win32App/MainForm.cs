@@ -252,6 +252,7 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             MasterDataNavigationControl navMasterData = new MasterDataNavigationControl();
+            navMasterData.iJournal.Visible = false;
             ShowNavigationControl(navMasterData);
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;

@@ -30,7 +30,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<JournalMaster> GetAllParentJournal()
         {
-            return _journalMasterRepository.GetMany(jm => jm.ParentId == 0).OrderBy(jm => jm.Name).ToList();
+            return _journalMasterRepository.GetMany(jm => jm.ParentId == null).OrderBy(jm => jm.Name).ToList();
         }
 
         public void DeleteJournal(JournalMaster journal)

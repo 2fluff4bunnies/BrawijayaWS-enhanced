@@ -32,12 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterDataNavigationControl));
             this.navbarMasterData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupMasterData = new DevExpress.XtraNavBar.NavBarGroup();
-            this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
             this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
+            this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
@@ -69,18 +69,13 @@
             this.navbarGroupMasterData.Caption = "Master Data";
             this.navbarGroupMasterData.Expanded = true;
             this.navbarGroupMasterData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iJournal),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
-            // 
-            // iJournal
-            // 
-            this.iJournal.Caption = "Kode Jurnal";
-            this.iJournal.Name = "iJournal";
-            this.iJournal.SmallImageIndex = 5;
             // 
             // iCustomer
             // 
@@ -111,6 +106,12 @@
             this.iVehicle.Caption = "Kendaraan";
             this.iVehicle.Name = "iVehicle";
             this.iVehicle.SmallImageIndex = 3;
+            // 
+            // iJournal
+            // 
+            this.iJournal.Caption = "Kode Jurnal";
+            this.iJournal.Name = "iJournal";
+            this.iJournal.SmallImageIndex = 5;
             // 
             // imageCollection
             // 
