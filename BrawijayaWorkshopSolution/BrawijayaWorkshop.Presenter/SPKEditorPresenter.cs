@@ -34,16 +34,20 @@ namespace BrawijayaWorkshop.Presenter
                     Vehicle = View.ParentSPK.Vehicle,
                     CategoryReference = View.ParentSPK.CategoryReference,
                     DueDate = View.ParentSPK.DueDate,
-                    SPKParent = View.ParentSPK
+                    SPKParent = View.ParentSPK,
+                    TotalSparepartPrice = View.TotalSparepartPrice,
+                    Description = View.Description
                 };
 
                 View.CategoryId = View.SelectedSPK.CategoryReference.Id;
                 View.VehicleId = View.SelectedSPK.Vehicle.Id;
                 View.DueDate = View.SelectedSPK.DueDate;
                 View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
+                View.Description = View.SelectedSPK.Description;
 
-                View.SPKMechanicList = Model.GetSPKMechanicList(View.ParentSPK.Id);
-                View.SPKSparepartList = Model.GetSPKSparepartList(View.ParentSPK.Id);
+                View.SPKMechanicList = Model.GetEndorsedSPKMechanicList(View.ParentSPK.Id);
+                View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
+                View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.SelectedSPK.Id);
             }
         }
 
@@ -82,6 +86,11 @@ namespace BrawijayaWorkshop.Presenter
         public int getPendingSparpartQty()
         {
             return Model.getPendingSparpartQty(View.SparepartId);
+        }
+
+        public void Print()
+        {
+            Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
     }

@@ -219,8 +219,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "Status");
                 switch (status)
                 {
-                    case 0: e.DisplayText = "Belum Disetujui"; break;
-                    case 1: e.DisplayText = "Telah Disetujui"; break;
+                    case 0: e.DisplayText = "Menunggu Persetujuan"; break;
+                    case 1: e.DisplayText = "Disetujui"; break;
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public decimal FeeAfterCommission { get; set; }
 
-        public string Descripttion { get; set; }
+        public string Description { get; set; }
 
         public int SPKId { get; set; }
         public virtual SPK SPK { get; set; }

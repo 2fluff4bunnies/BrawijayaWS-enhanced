@@ -264,6 +264,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public string MechanicDescription
+        {
+            get
+            {
+                return txtMechanicDescription.Text;
+            }
+            set
+            {
+                txtMechanicDescription.Text = value;
+            }
+        }
+
 
         public List<Sparepart> SparepartLookupList
         {
@@ -295,6 +307,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 return lookUpMechanic.GetSelectedDataRow() as Mechanic;
             }
+           
         }
 
         public Sparepart SparepartToInsert
@@ -302,6 +315,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             get
             {
                 return lookUpSparepart.GetSelectedDataRow() as Sparepart;
+            }
+          
+        }
+
+        public string Description
+        {
+            get
+            {
+                return memoDescription.Text;
+            }
+
+            set
+            {
+                memoDescription.Text = value;
             }
         }
 
@@ -336,6 +363,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         _dataSource.Add(SelectedSPK);
                         report.DataSource = _dataSource;
                         report.FillDataSource();
+                        _presenter.Print();
 
                         using (ReportPrintTool printTool = new ReportPrintTool(report))
                         {
@@ -354,13 +382,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             else
             {
-                if (SPKSparepartList.Count == 0)
+                if (SPKSparepartList.Count == 0 && SPKMechanicList.Count == 0)
                 {
-                    this.ShowError("Tidak ada sparepart dalam daftar penggunaan sparepart! Harus ada sparepart yang digunakan, minimal 1");
+                    this.ShowError("Daftar sparepart dan mekanik kosong! masing-masing harus terisi, minimal 1");
                 }
-                if (SPKMechanicList.Count == 0)
+                else
                 {
-                    this.ShowError("Tidak ada mekanik yang terlibat! Harus ada mekanik yang terlibat, minimal 1");
+                    if (SPKSparepartList.Count == 0)
+                    {
+                        this.ShowError("Daftar sparepart kosong! Harus ada sparepart yang digunakan, minimal 1");
+                    }
+                    if (SPKMechanicList.Count == 0)
+                    {
+                        this.ShowError("Daftar mekanik kosong! Harus ada mekanik yang terlibat, minimal 1");
+                    }
                 }
             }
         }
@@ -417,6 +452,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public void ClearSparepart()
         {
+            this.lookUpSparepart.EditValue = null;
+            this.lookUpSparepart.Text = string.Empty; 
             this.SparepartQty = 0;
             this.SparepartName = string.Empty;
         }
@@ -430,10 +467,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     SPKMechanicList.Add(new SPKDetailMechanic
                     {
                         Name = this.MechanicToInsert.Name,
-                        Mechanic = MechanicToInsert,
-                        MechanicId = MechanicId
-
+                        Mechanic = this.MechanicToInsert,
+                        MechanicId = this.MechanicId,
+                        Description = this.MechanicDescription
                     });
+                }
+                else
+                {
+                    this.ShowError("Mekanik harus dipilih");
                 }
             }
             else
@@ -442,9 +483,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     SPKMechanicList.Add(new SPKDetailMechanic
                     {
-
-                        Name = this.MechanicName
+                        Name = this.MechanicName,
+                        Description = this.MechanicDescription
                     });
+                }
+                else
+                {
+                    this.ShowError("Mekanik harus diisi");
                 }
             }
 
@@ -455,8 +500,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public void ClearMechanic()
         {
-            this.SelectedMechanic = null;
+            this.lookUpMechanic.EditValue = null;
+            this.lookUpMechanic.Text = string.Empty; 
             this.MechanicName = string.Empty;
+            this.MechanicDescription = string.Empty;
         }
 
         #endregion
@@ -678,7 +725,5 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             return result;
         }
-
-
     }
 }

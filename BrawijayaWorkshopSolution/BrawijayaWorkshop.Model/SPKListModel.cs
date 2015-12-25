@@ -89,5 +89,18 @@ namespace BrawijayaWorkshop.Model
             List<Vehicle> result = _vehicleRepository.GetMany(v => v.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             return result;
         }
+
+        public void PrintSPK(SPK spk, int userId)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+
+            _SPKRepository.Update(spk);
+
+            _unitOfWork.SaveChanges();
+        }
     }
 }

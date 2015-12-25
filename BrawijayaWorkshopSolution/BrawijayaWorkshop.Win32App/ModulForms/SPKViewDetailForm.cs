@@ -54,7 +54,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void ApplyButtonSetting()
         {
             btnApprove.Visible = btnReject.Visible = false;
-            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
+            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
             {
                 btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                 btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
@@ -215,16 +215,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void btnReject_Click(object sender, EventArgs e)
         {
             _presenter.Reject();
+            this.Close();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            //_presenter.print();
             SPKPrintItem report = new SPKPrintItem();
             List<SPK> _dataSource = new List<SPK>();
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();
+            _presenter.print();
 
             using (ReportPrintTool printTool = new ReportPrintTool(report))
             {

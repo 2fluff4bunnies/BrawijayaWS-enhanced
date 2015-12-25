@@ -73,7 +73,6 @@ namespace BrawijayaWorkshop.Model
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
-                //spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress; use this when printed!
 
                 spk.ModifyDate = serverTime;
                 spk.ModifyUserId = userId;
@@ -109,23 +108,37 @@ namespace BrawijayaWorkshop.Model
                 }
 
                 _unitOfWork.SaveChanges();
+
+                result = true;
             }
             else 
             {
+                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Rejected;
 
+                spk.ModifyDate = serverTime;
+                spk.ModifyUserId = userId;
+
+                _SPKRepository.Update(spk);
+
+                _unitOfWork.SaveChanges();
+
+                result = true;
             }
-
-            result = true;
-
-
 
             return result;
         }
 
-        public void PrintSPK(SPK spk)
+        public void PrintSPK(SPK spk, int userId)
         {
-#warning put print here
-            //TODO print
+            DateTime serverTime = DateTime.Now;
+
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+            spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
+
+            _SPKRepository.Update(spk);
+
+            _unitOfWork.SaveChanges();
         }
 
     }

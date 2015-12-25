@@ -50,11 +50,18 @@
             this.colDueDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatusApproval = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatusPrint = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatusCompleted = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsEndorseData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsRequestPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsSetAsCompleted = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
@@ -236,7 +243,10 @@
             this.colCreateDate,
             this.colDueDate,
             this.colLicenseNumber,
-            this.colCategory});
+            this.colCategory,
+            this.colStatusApproval,
+            this.colStatusPrint,
+            this.colStatusCompleted});
             this.gvSPK.GridControl = this.gcSPK;
             this.gvSPK.Name = "gvSPK";
             this.gvSPK.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -252,6 +262,7 @@
             this.gvSPK.OptionsView.ShowGroupPanel = false;
             this.gvSPK.OptionsView.ShowViewCaption = true;
             this.gvSPK.ViewCaption = "Daftar SPK";
+            this.gvSPK.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvSPK_CustomColumnDisplayText);
             // 
             // colCode
             // 
@@ -293,43 +304,101 @@
             this.colCategory.Visible = true;
             this.colCategory.VisibleIndex = 4;
             // 
+            // colStatusApproval
+            // 
+            this.colStatusApproval.Caption = "Status Persetujuan";
+            this.colStatusApproval.FieldName = "StatusApprovalId";
+            this.colStatusApproval.Name = "colStatusApproval";
+            this.colStatusApproval.Visible = true;
+            this.colStatusApproval.VisibleIndex = 5;
+            // 
+            // colStatusPrint
+            // 
+            this.colStatusPrint.Caption = "Status Print";
+            this.colStatusPrint.FieldName = "StatusPrintId";
+            this.colStatusPrint.Name = "colStatusPrint";
+            this.colStatusPrint.Visible = true;
+            this.colStatusPrint.VisibleIndex = 6;
+            // 
+            // colStatusCompleted
+            // 
+            this.colStatusCompleted.Caption = "Status Pengerjaan";
+            this.colStatusCompleted.FieldName = "StatusCompletedId";
+            this.colStatusCompleted.Name = "colStatusCompleted";
+            this.colStatusCompleted.Visible = true;
+            this.colStatusCompleted.VisibleIndex = 7;
+            // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewDetailToolStripMenuItem,
             this.toolStripSeparator1,
             this.cmsEndorseData,
-            this.cmsPrintData});
+            this.cmsPrintData,
+            this.cmsRequestPrint,
+            this.cmsSetAsCompleted,
+            this.toolStripSeparator2,
+            this.cmsAbort});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(134, 76);
+            this.cmsEditor.Size = new System.Drawing.Size(172, 170);
             // 
             // viewDetailToolStripMenuItem
             // 
             this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
             this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
             this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // cmsEndorseData
             // 
             this.cmsEndorseData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEndorseData.Name = "cmsEndorseData";
-            this.cmsEndorseData.Size = new System.Drawing.Size(133, 22);
-            this.cmsEndorseData.Text = "Revisi SPK";
+            this.cmsEndorseData.Size = new System.Drawing.Size(171, 22);
+            this.cmsEndorseData.Text = "Revisi";
             this.cmsEndorseData.Click += new System.EventHandler(this.cmsEndorseData_Click);
             // 
             // cmsPrintData
             // 
             this.cmsPrintData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrintData.Name = "cmsPrintData";
-            this.cmsPrintData.Size = new System.Drawing.Size(133, 22);
+            this.cmsPrintData.Size = new System.Drawing.Size(171, 22);
             this.cmsPrintData.Text = "Print";
+            this.cmsPrintData.Click += new System.EventHandler(this.cmsPrintData_Click);
+            // 
+            // cmsRequestPrint
+            // 
+            this.cmsRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsRequestPrint.Name = "cmsRequestPrint";
+            this.cmsRequestPrint.Size = new System.Drawing.Size(171, 22);
+            this.cmsRequestPrint.Text = "Permohonan Print";
+            this.cmsRequestPrint.Click += new System.EventHandler(this.cmsRequestPrint_Click);
+            // 
+            // cmsSetAsCompleted
+            // 
+            this.cmsSetAsCompleted.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.completed_16x16;
+            this.cmsSetAsCompleted.Name = "cmsSetAsCompleted";
+            this.cmsSetAsCompleted.Size = new System.Drawing.Size(171, 22);
+            this.cmsSetAsCompleted.Text = "Set SPK Selesai";
+            this.cmsSetAsCompleted.Click += new System.EventHandler(this.cmsSetAsCompleted_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
+            // 
+            // cmsAbort
+            // 
+            this.cmsAbort.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsAbort.Name = "cmsAbort";
+            this.cmsAbort.Size = new System.Drawing.Size(171, 22);
+            this.cmsAbort.Text = "Batalkan";
+            this.cmsAbort.Click += new System.EventHandler(this.cmsAbort_Click);
             // 
             // bgwMain
             // 
@@ -388,5 +457,12 @@
         private DevExpress.XtraEditors.LabelControl lblPrintStatus;
         private System.Windows.Forms.ToolStripMenuItem cmsEndorseData;
         private System.Windows.Forms.ToolStripMenuItem cmsPrintData;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatusApproval;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatusPrint;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatusCompleted;
+        private System.Windows.Forms.ToolStripMenuItem cmsRequestPrint;
+        private System.Windows.Forms.ToolStripMenuItem cmsAbort;
+        private System.Windows.Forms.ToolStripMenuItem cmsSetAsCompleted;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

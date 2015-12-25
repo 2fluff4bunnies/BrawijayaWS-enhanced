@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void print()
         {
-            Model.PrintSPK(View.SelectedSPK);
+            Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
         public void Approve()

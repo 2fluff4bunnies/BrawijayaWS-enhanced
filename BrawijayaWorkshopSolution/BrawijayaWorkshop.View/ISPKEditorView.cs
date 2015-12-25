@@ -43,6 +43,7 @@ namespace BrawijayaWorkshop.View
 
         int MechanicId { get; set; }
         string MechanicName { get; set; }
+         string MechanicDescription { get; set; }
 
         decimal RepairThreshold { get; set; }
         decimal ServiceThreshold { get; set; }
@@ -50,6 +51,8 @@ namespace BrawijayaWorkshop.View
         bool IsNeedApproval { get; set; }
 
         decimal TotalSparepartPrice { get; set; }
+
+        string Description { get; set; }
 
     }
 }

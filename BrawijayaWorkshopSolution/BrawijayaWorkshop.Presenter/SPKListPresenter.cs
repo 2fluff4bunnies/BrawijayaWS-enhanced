@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 using System.Collections.Generic;
 
@@ -21,6 +22,11 @@ namespace BrawijayaWorkshop.Presenter
         public void LoadSPK()
         {
             View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter);
+        }
+
+        public void PrintSPK()
+        {
+            Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
         public List<SPKStatusItem> GetApprovalStatusDropdownList()

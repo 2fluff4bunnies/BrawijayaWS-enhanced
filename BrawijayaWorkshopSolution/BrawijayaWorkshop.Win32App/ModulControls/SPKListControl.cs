@@ -5,8 +5,11 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -195,7 +198,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void ApplyCMSSetting()
         {
-            cmsEndorseData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved;
+            cmsEndorseData.Visible =( this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
             cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
         }
 
@@ -269,6 +272,74 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
+        }
+
+        private void cmsPrintData_Click(object sender, EventArgs e)
+        {
+            SPKPrintItem report = new SPKPrintItem();
+            List<SPK> _dataSource = new List<SPK>();
+            _dataSource.Add(SelectedSPK);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+            _presenter.PrintSPK();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
+            }
+        }
+
+        private void gvSPK_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            ColumnView view = sender as ColumnView;
+            if (e.Column.FieldName == "StatusApprovalId" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "StatusApprovalId");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Menunggu Persetujuan"; break;
+                    case 1: e.DisplayText = "Disetujui"; break;
+                    case 2: e.DisplayText = "Direvisi"; break;
+                    case -1: e.DisplayText = "Ditolak"; break;
+                }
+            }
+
+            if (e.Column.FieldName == "StatusPrintId" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "StatusPrintId");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Menunggu Persetujuan"; break;
+                    case 1: e.DisplayText = "Siap Print"; break;
+                    case 2: e.DisplayText = "Sudah Diprint"; break;
+                }
+            }
+
+            if (e.Column.FieldName == "StatusCompletedId" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "StatusCompletedId");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Dalam Pengerjaan"; break;
+                    case 1: e.DisplayText = "Selesai"; break;
+                }
+            }
+        }
+
+        private void cmsAbort_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmsRequestPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmsSetAsCompleted_Click(object sender, EventArgs e)
+        {
+
         }       
     }
 }

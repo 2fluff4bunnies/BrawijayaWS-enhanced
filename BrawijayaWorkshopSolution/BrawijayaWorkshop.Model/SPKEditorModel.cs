@@ -56,16 +56,61 @@ namespace BrawijayaWorkshop.Model
             return _vehicleRepository.GetVehicleForLookUp();
         }
 
-        public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
+        public List<SPKDetailSparepart> GetEndorsedSPKSparepartList(int spkId)
         {
-            List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+            List<SPKDetailSparepart> result = new List<SPKDetailSparepart>();
+
+            List<SPKDetailSparepart> sparepartList = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+
+            foreach (var item in sparepartList)
+            {
+                result.Add(new SPKDetailSparepart { 
+                    Sparepart = item.Sparepart,
+                    SparepartId = item.SparepartId,
+                    TotalQuantity = item.TotalQuantity,
+                    TotalPrice = item.TotalPrice,
+                });
+            }
 
             return result;
         }
 
-        public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
+        public List<SPKDetailMechanic> GetEndorsedSPKMechanicList(int spkId)
         {
-            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+            List<SPKDetailMechanic> result = new List<SPKDetailMechanic>();
+
+            List<SPKDetailMechanic> mechanicList = _SPKDetailMechanicRepository.GetMany(sds => sds.SPKId == spkId).ToList();
+
+            foreach (var item in mechanicList)
+            {
+                result.Add(new SPKDetailMechanic
+                {
+                    Name = item.Name,
+                    Mechanic = item.Mechanic,
+                    MechanicId = item.MechanicId,
+                    Description = item.Description
+                });
+            }
+
+            return result;
+        }
+
+        public List<SPKDetailSparepartDetail> GetEndorsedSPKSparepartDetailList(int spkId)
+        {
+            List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
+
+            List<SPKDetailSparepartDetail> sparepartDetailList = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
+
+            foreach (var item in sparepartDetailList)
+            {
+                result.Add(new SPKDetailSparepartDetail
+                {
+                    SPKDetailSparepart = item.SPKDetailSparepart,
+                    SPKDetailSparepartId = item.SPKDetailSparepartId,
+                    SparepartDetail = item.SparepartDetail,
+                    SparepartDetailId = item.SparepartDetailId
+                });
+            }
 
             return result;
         }
@@ -153,8 +198,6 @@ namespace BrawijayaWorkshop.Model
                 spkMechanic.SPK = insertedSPK;
                 spkMechanic.Status = (int)DbConstant.DefaultDataStatus.Active;
                 _SPKDetailMechanicRepository.Add(spkMechanic);
-
-               
             }
 
             foreach (var spkSparepart in spkSparepartList)
@@ -214,10 +257,7 @@ namespace BrawijayaWorkshop.Model
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
-
-#warning TODO print SPK here
             }
-
 
             _unitOfWork.SaveChanges();
 
@@ -243,7 +283,7 @@ namespace BrawijayaWorkshop.Model
                 result.Add(new SPKDetailSparepartDetail
                  {
                      SparepartDetailId = item.Id,
-                     SparepartDetail = item
+                     SparepartDetail = item,
                  });
             }
 
@@ -252,25 +292,18 @@ namespace BrawijayaWorkshop.Model
 
         public List<Mechanic> LoadMechanic()
         {
-#warning TODO find mechanic that present
-
             List<Mechanic> result = _mechanicRepository.GetAll().ToList();
 
             return result;
         }
 
-
-        public void ApproveSPK(int spkId, int userId)
+        public void PrintSPK(SPK spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
-            SPK spk = _SPKRepository.GetMany(s => s.Id == spkId).FirstOrDefault();
-
-            spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
-            spk.ModifyUserId = userId;
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
             spk.ModifyDate = serverTime;
+            spk.ModifyUserId = userId;
 
             _SPKRepository.Update(spk);
 
@@ -303,8 +336,5 @@ namespace BrawijayaWorkshop.Model
 
             return result;
         }
-
-
-
     }
 }

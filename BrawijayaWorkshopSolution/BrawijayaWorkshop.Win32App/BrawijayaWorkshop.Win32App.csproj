@@ -566,6 +566,7 @@
     <None Include="Resources\SPKApprovalEmailTemplate.txt" />
     <None Include="Images\approve 16x16.png" />
     <None Include="Images\print_16x16.png" />
+    <None Include="Images\completed_16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
     <Content Include="Resources\cancel_32x32.png" />
