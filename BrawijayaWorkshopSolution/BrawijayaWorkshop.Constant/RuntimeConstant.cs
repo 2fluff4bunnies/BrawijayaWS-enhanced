@@ -10,6 +10,8 @@ namespace BrawijayaWorkshop.Constant
         public const string EMAIL_SUBJECT_REQUESTAPPROVALSPK = "[IMPORTANT] Brawijaya Workshop - SPK Approval Review";
         public const string EMAIL_APPROVALSPK_BODY = "@@code@@";
 
+        public const string EMAIL_SUBJECT_REQUESTAPPROVALPRINTSPK = "[IMPORTANT] Brawijaya Workshop - SPK Approval Print Request";
+
         // Log Format
         public static string LOGFORMAT = "{0}: {1}";
 

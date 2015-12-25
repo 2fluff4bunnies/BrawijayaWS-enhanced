@@ -427,7 +427,7 @@
             this.btnEndorse.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.btnEndorse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnEndorse.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnEndorse.Location = new System.Drawing.Point(302, 532);
+            this.btnEndorse.Location = new System.Drawing.Point(367, 532);
             this.btnEndorse.Name = "btnEndorse";
             this.btnEndorse.Size = new System.Drawing.Size(91, 23);
             this.btnEndorse.TabIndex = 37;
@@ -439,7 +439,7 @@
             this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(10, 532);
+            this.btnPrint.Location = new System.Drawing.Point(244, 532);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(91, 23);
             this.btnPrint.TabIndex = 36;
@@ -450,7 +450,7 @@
             // 
             this.btnReject.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnReject.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnReject.Location = new System.Drawing.Point(107, 532);
+            this.btnReject.Location = new System.Drawing.Point(123, 532);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(91, 23);
             this.btnReject.TabIndex = 35;
@@ -484,7 +484,7 @@
             this.btnRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnRequestPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnRequestPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnRequestPrint.Location = new System.Drawing.Point(10, 532);
+            this.btnRequestPrint.Location = new System.Drawing.Point(229, 532);
             this.btnRequestPrint.Name = "btnRequestPrint";
             this.btnRequestPrint.Size = new System.Drawing.Size(122, 23);
             this.btnRequestPrint.TabIndex = 38;
@@ -499,7 +499,7 @@
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(91, 23);
             this.btnAbort.TabIndex = 39;
-            this.btnAbort.Text = "Batalkan";
+            this.btnAbort.Text = "Batalkan SPK";
             this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
             // 
             // btnSetAsComplete
@@ -519,8 +519,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 562);
             this.Controls.Add(this.btnSetAsComplete);
-            this.Controls.Add(this.btnAbort);
             this.Controls.Add(this.btnRequestPrint);
+            this.Controls.Add(this.btnAbort);
             this.Controls.Add(this.groupSPK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnReject);

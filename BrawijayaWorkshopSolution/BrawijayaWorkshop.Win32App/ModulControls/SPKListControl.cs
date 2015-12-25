@@ -41,6 +41,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             this.ApprovalStatusFilter = 9;
             this.CategoryFilter = 0;
             this.PrintStatusFilter = 9;
+            this.CompletedStatusFilter = 9;
         }
 
         protected override string ModulName
@@ -79,6 +80,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public int CompletedStatusFilter
+        {
+            get
+            {
+                return lookUpCompletedStatus.EditValue.AsInteger();
+            }
+            set
+            {
+                lookUpCompletedStatus.EditValue = value;
+            }
+        }
+
         public string CodeFilter
         {
             get
@@ -90,7 +103,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 txtCode.Text = value;
             }
         }
-
 
         public int CategoryFilter
         {
@@ -172,7 +184,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        
+        public List<SPKStatusItem> CompletedStatusDropdownList
+        {
+            get
+            {
+                return lookUpCompletedStatus.Properties.DataSource as List<SPKStatusItem>;
+            }
+            set
+            {
+                lookUpCompletedStatus.Properties.DataSource = value;
+            }
+        }        
         #endregion
 
         void gvSPK_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -199,6 +221,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             cmsEndorseData.Visible =( this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
             cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
+            cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
+            cmsSetAsCompleted.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&  this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed && this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
         }
 
         void SPKListControl_Load(object sender, EventArgs e)
@@ -330,7 +354,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
             editor.SelectedSPK = this.SelectedSPK;
-            editor.IsAbort = false;
+            editor.IsAbort = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -340,7 +364,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
             editor.SelectedSPK = this.SelectedSPK;
-            editor.IsSetAsComplete = false;
+            editor.IsSetAsComplete = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -348,7 +372,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsRequestPrint_Click(object sender, EventArgs e)
         {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsPrintApproval = true;
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
         }
     }
 }

@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -20,12 +21,12 @@ namespace BrawijayaWorkshop.Presenter
             View.SPKSparepartDetailList = Model.GetSPKSparepartDetailList(View.SelectedSPK.Id);
         }
 
-        public void print()
+        public void Print()
         {
             Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
-        public void Approve()
+        public void ExecuteApproval()
         {
             Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, true);
         }
@@ -37,6 +38,25 @@ namespace BrawijayaWorkshop.Presenter
         public void Abort()
         {
             Model.AbortSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId);
+        }
+
+        public void RequestPrint()
+        {
+            SimpleEmailSenderUtils.SendEmail(RuntimeConstant.EMAIL_SUBJECT_REQUESTAPPROVALPRINTSPK,
+            View.ApprovalEmailBody.Replace(RuntimeConstant.EMAIL_APPROVALSPK_BODY, View.SelectedSPK.Code),
+            View.ApprovalEmailTo, View.ApprovalEmailFrom, string.Empty, string.Empty, string.Empty);
+
+            Model.RequestPrintSPK(View.SelectedSPK, LoginInformation.UserId);
+        }
+
+        public void PrintApproval(bool approved)
+        {
+            Model.ApprovePrintSPK(View.SelectedSPK, LoginInformation.UserId, approved);
+        }
+
+        public void SetAsCompleted()
+        {
+            Model.SetAsCompletedSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
     }

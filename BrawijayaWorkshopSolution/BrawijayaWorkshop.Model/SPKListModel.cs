@@ -27,9 +27,15 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SPK> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, DbConstant.SPKPrintStatus printStatus)
+        public List<SPK> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, 
+            DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            if ((int)completedStatus != 9)
+            {
+                result = result.Where(spk => spk.StatusCompletedId == (int)completedStatus).ToList();
+            }
 
             if ((int)printStatus != 9)
             {
