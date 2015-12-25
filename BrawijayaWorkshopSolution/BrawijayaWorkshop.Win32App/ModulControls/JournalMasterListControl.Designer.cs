@@ -43,6 +43,9 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
+            this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtJournalName.Properties)).BeginInit();
@@ -151,6 +154,10 @@
             // 
             // gvJournalMaster
             // 
+            this.gvJournalMaster.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colJournalCode,
+            this.colJournalName,
+            this.colParent});
             this.gvJournalMaster.GridControl = this.gridJournalMaster;
             this.gvJournalMaster.Name = "gvJournalMaster";
             this.gvJournalMaster.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -194,6 +201,30 @@
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
+            // colJournalCode
+            // 
+            this.colJournalCode.Caption = "Kode";
+            this.colJournalCode.FieldName = "Code";
+            this.colJournalCode.Name = "colJournalCode";
+            this.colJournalCode.Visible = true;
+            this.colJournalCode.VisibleIndex = 0;
+            // 
+            // colJournalName
+            // 
+            this.colJournalName.Caption = "Nama";
+            this.colJournalName.FieldName = "Name";
+            this.colJournalName.Name = "colJournalName";
+            this.colJournalName.Visible = true;
+            this.colJournalName.VisibleIndex = 1;
+            // 
+            // colParent
+            // 
+            this.colParent.Caption = "Induk";
+            this.colParent.FieldName = "Parent.Code";
+            this.colParent.Name = "colParent";
+            this.colParent.Visible = true;
+            this.colParent.VisibleIndex = 2;
+            // 
             // JournalMasterListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,5 +261,8 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
+        private DevExpress.XtraGrid.Columns.GridColumn colJournalCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
+        private DevExpress.XtraGrid.Columns.GridColumn colParent;
     }
 }

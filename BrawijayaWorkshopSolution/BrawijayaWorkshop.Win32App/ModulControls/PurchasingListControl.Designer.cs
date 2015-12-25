@@ -147,10 +147,10 @@
             this.gridPurchasing.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridPurchasing.Location = new System.Drawing.Point(5, 102);
+            this.gridPurchasing.Location = new System.Drawing.Point(3, 102);
             this.gridPurchasing.MainView = this.gvPurchasing;
             this.gridPurchasing.Name = "gridPurchasing";
-            this.gridPurchasing.Size = new System.Drawing.Size(630, 210);
+            this.gridPurchasing.Size = new System.Drawing.Size(632, 210);
             this.gridPurchasing.TabIndex = 4;
             this.gridPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasing});

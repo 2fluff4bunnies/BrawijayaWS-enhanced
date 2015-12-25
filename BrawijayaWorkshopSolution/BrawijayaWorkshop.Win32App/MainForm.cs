@@ -252,6 +252,7 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             MasterDataNavigationControl navMasterData = new MasterDataNavigationControl();
+            navMasterData.iJournal.Visible = false;
             ShowNavigationControl(navMasterData);
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;
@@ -259,9 +260,16 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iSparepart.LinkClicked += iSparepart_LinkClicked;
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
             navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
+            navMasterData.iJournal.LinkClicked += iJournal_LinkClicked;
         }
 
-        void iVehicle_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iJournal_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            JournalMasterListControl listJournal = Bootstrapper.Resolve<JournalMasterListControl>();
+            ShowUserControl(listJournal);
+        }
+
+        private void iVehicle_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             VehicleListControl listVehicle = Bootstrapper.Resolve<VehicleListControl>();
             ShowUserControl(listVehicle);
