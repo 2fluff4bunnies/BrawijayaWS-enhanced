@@ -152,33 +152,49 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwSave.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Save Purchasing's changes");
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses penyimpanan data pembelian...", false);
-                bgwSave.RunWorkerAsync();
+                bool isValid = false;
+                if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
+                {
+                    int rowGvPurchasingDetailNotValid = 0;
+                    rowGvPurchasingDetailNotValid = ListPurchasingDetail.Where(i => i.SparepartId == 0 || i.Qty == 0 || i.Price == 0).Count();
+                    if (valSupplier.Validate() && valDate.Validate() && rowGvPurchasingDetailNotValid == 0)
+                    {
+                        isValid = true;
+                    }
+                }
+                if (isValid)
+                {
+                    MethodBase.GetCurrentMethod().Info("Save Purchasing's changes");
+                    FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses penyimpanan data pembelian...", false);
+                    bgwSave.RunWorkerAsync();
+                }
+                else
+                {
+                    this.ShowError("Proses simpan data pembelian gagal!");
+                    FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
+                }
             }
         }
 
         private void bgwSave_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (valSupplier.Validate() && valDate.Validate() && ListPurchasingDetail.Count > 0)
+            try
             {
-                try
-                {
-                    _presenter.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
-                    e.Result = ex;
-                }
+                _presenter.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
+                e.Result = ex;
+            }
+
         }
 
         private void bgwSave_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result is Exception)
             {
-                this.ShowError("Proses simpan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                this.ShowError("Proses simpan data pembelian gagal!");
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
             }
             else

@@ -227,7 +227,7 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iNotification_ItemClick(object sender, ItemClickEventArgs e)
         {
-            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
 
             ClearNavigation();
             ClearUserControl();

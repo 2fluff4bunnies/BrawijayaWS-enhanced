@@ -224,10 +224,39 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwSave.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Approve Purchasing's changes");
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses persetujuan data pembelian...", false);
-                _isApprove = true;
-                bgwSave.RunWorkerAsync();
+                bool isValid = false;
+                if (SelectedPurchasing != null)
+                {
+                    if(valPayment.Validate())
+                    {
+                        if(txtDP.Visible == true)
+                        {
+                            if(TotalHasPaid > 0)
+                            {
+                                isValid = true;
+                            }
+                            else
+                            {
+                                isValid = false;
+                            }
+                        }
+                        else
+                        {
+                            isValid = true;
+                        }
+                    }
+                }
+                if (isValid)
+                {
+                    MethodBase.GetCurrentMethod().Info("Approve Purchasing's changes");
+                    FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses persetujuan data pembelian...", false);
+                    _isApprove = true;
+                    bgwSave.RunWorkerAsync();
+                }
+                else
+                {
+                    this.ShowError("Proses persetujuan data pembelian gagal!");
+                }
             }
         }
 
@@ -244,19 +273,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void bgwSave_DoWork(object sender, DoWorkEventArgs e)
         {
-            if(_isApprove)
+            if (_isApprove)
             {
-                if (valPayment.Validate())
+                try
                 {
-                    try
-                    {
-                        _presenter.Approve();
-                    }
-                    catch (Exception ex)
-                    {
-                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to approve purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
-                        e.Result = ex;
-                    }
+                    _presenter.Approve();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to approve purchasing in supplier: '" + SelectedPurchasing.SupplierId + "'" + "at date :'" + SelectedPurchasing.Date + "'", ex);
+                    e.Result = ex;
                 }
             }
             else
@@ -271,7 +297,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     e.Result = ex;
                 }
             }
-            
+
         }
 
         private void bgwSave_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -280,7 +306,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 if (e.Result is Exception)
                 {
-                    this.ShowError("Proses persetujuan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                    this.ShowError("Proses persetujuan data pembelian gagal!");
                 }
                 else
                 {
@@ -288,13 +314,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.Close();
                 }
 
-                
+
             }
             else
             {
                 if (e.Result is Exception)
                 {
-                    this.ShowError("Proses penolakan data pembelian dengan supplier: '" + SelectedPurchasing.SupplierId + "' gagal!");
+                    this.ShowError("Proses penolakan data pembelian gagal!");
                 }
                 else
                 {
@@ -302,7 +328,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.Close();
                 }
             }
-           
+
         }
     }
 }
