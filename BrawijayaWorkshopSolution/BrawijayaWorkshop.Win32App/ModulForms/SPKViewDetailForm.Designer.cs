@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gcSPK = new DevExpress.XtraEditors.GroupControl();
+            this.txtCode = new DevExpress.XtraEditors.TextEdit();
+            this.lblCode = new DevExpress.XtraEditors.LabelControl();
             this.txtCreateDate = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
@@ -54,10 +56,9 @@
             this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.txtCode = new DevExpress.XtraEditors.TextEdit();
-            this.lblCode = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             this.gcSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDueDate.Properties)).BeginInit();
@@ -67,7 +68,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSPK
@@ -94,6 +94,21 @@
             this.gcSPK.Size = new System.Drawing.Size(482, 391);
             this.gcSPK.TabIndex = 1;
             this.gcSPK.Text = "Informasi SPK";
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(116, 28);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(111, 20);
+            this.txtCode.TabIndex = 41;
+            // 
+            // lblCode
+            // 
+            this.lblCode.Location = new System.Drawing.Point(15, 31);
+            this.lblCode.Name = "lblCode";
+            this.lblCode.Size = new System.Drawing.Size(24, 13);
+            this.lblCode.TabIndex = 40;
+            this.lblCode.Text = "Kode";
             // 
             // txtCreateDate
             // 
@@ -333,21 +348,6 @@
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(116, 28);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(111, 20);
-            this.txtCode.TabIndex = 41;
-            // 
-            // lblCode
-            // 
-            this.lblCode.Location = new System.Drawing.Point(15, 31);
-            this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(24, 13);
-            this.lblCode.TabIndex = 40;
-            this.lblCode.Text = "Kode";
-            // 
             // SPKViewDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -363,6 +363,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
             this.gcSPK.ResumeLayout(false);
             this.gcSPK.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDueDate.Properties)).EndInit();
@@ -372,7 +373,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

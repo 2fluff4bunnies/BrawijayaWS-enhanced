@@ -232,7 +232,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         void ApplyCMSSetting()
         {
             cmsEndorseData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved;
-            cmsPrintData.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.SPKPrintStatus.Ready;
+            cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
         }
 
         void SPKListControl_Load(object sender, EventArgs e)

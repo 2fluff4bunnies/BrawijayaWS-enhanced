@@ -63,15 +63,18 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, DbConstant.ApprovalStatus status)
+        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isApproved)
         {
             bool result = false;
 
             DateTime serverTime = DateTime.Now;
 
-            if (status.CompareTo(DbConstant.ApprovalStatus.Approved) == 1)
+            if (isApproved)
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                //spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress; use this when printed!
+
                 spk.ModifyDate = serverTime;
                 spk.ModifyUserId = userId;
 
@@ -107,7 +110,7 @@ namespace BrawijayaWorkshop.Model
 
                 _unitOfWork.SaveChanges();
             }
-            else if (status.CompareTo(DbConstant.ApprovalStatus.Rejected) == 1)
+            else 
             {
 
             }

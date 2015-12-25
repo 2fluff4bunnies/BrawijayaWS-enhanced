@@ -14,6 +14,8 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public decimal TotalPrice { get; set; }
 
+        public decimal TotalPriceAfterCommission { get; set; }
+
         [Required]
         public int SPKId { get; set; }
         public virtual SPK SPK { get; set; }

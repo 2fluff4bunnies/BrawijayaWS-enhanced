@@ -49,5 +49,7 @@ namespace BrawijayaWorkshop.View
 
         bool IsNeedApproval { get; set; }
 
+        decimal TotalSparepartPrice { get; set; }
+
     }
 }
