@@ -5,6 +5,8 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using System;
 using System.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -24,8 +26,8 @@ namespace BrawijayaWorkshop.Win32App
         {
             string applicationName = ConfigurationManager.AppSettings["LoggerAppName"];
             LoggerExtensionUtils.InitLogger(applicationName);
-            LoggerExtensionUtils.FromEmail = ConfigurationManager.AppSettings["MailFrom"];
-            LoggerExtensionUtils.DeveloperEmail = ConfigurationManager.AppSettings["MailDeveloper"];
+            LoggerExtensionUtils.FromEmail = ConfigurationManager.AppSettings["MailFrom"].Decrypt();
+            LoggerExtensionUtils.DeveloperEmail = ConfigurationManager.AppSettings["MailDeveloper"].Decrypt();
 
             MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
 

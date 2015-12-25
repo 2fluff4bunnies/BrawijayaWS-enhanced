@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.lblDP = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -221,14 +221,13 @@
             this.cbPayment.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Metode")});
             this.cbPayment.Properties.DisplayMember = "Name";
-            this.cbPayment.Properties.NullText = "--Pilih Pembayaran--";
+            this.cbPayment.Properties.NullText = "";
             this.cbPayment.Properties.ValueMember = "Id";
             this.cbPayment.Size = new System.Drawing.Size(167, 20);
             this.cbPayment.TabIndex = 9;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule2.ErrorText = "Pilih salah satu pembayaran";
-            conditionValidationRule2.Value1 = "--Pilih Pembayaran--";
-            this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Pilih salah satu pembayaran";
+            this.valPayment.SetValidationRule(this.cbPayment, conditionValidationRule1);
             this.cbPayment.EditValueChanged += new System.EventHandler(this.cbPayment_EditValueChanged);
             // 
             // labelControl1
@@ -302,6 +301,7 @@
             this.ClientSize = new System.Drawing.Size(634, 374);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Name = "PurchasingApprovalForm";
+            this.ShowInTaskbar = false;
             this.Text = "Form Persetujuan Pembelian";
             this.Load += new System.EventHandler(this.PurchasingApprovalForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).EndInit();
