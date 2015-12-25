@@ -100,7 +100,7 @@
             // 
             // iVehicle
             // 
-            this.iVehicle.Caption = "Vehicle";
+            this.iVehicle.Caption = "Kendaraan";
             this.iVehicle.Name = "iVehicle";
             this.iVehicle.SmallImageIndex = 3;
             // 
