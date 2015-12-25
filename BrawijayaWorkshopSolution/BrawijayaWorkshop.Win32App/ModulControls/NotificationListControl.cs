@@ -18,7 +18,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class NotificationListControl : BaseAppUserControl, INotificationListView
     {
         private NotificationListPresenter _presenter;
-        private SPK _selectedSPK;
+
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_SPK;
+            }
+        }
+
         public NotificationListControl(NotificationListModel model)
         {
             InitializeComponent();
@@ -88,7 +96,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing SPK data...");
-                _selectedSPK = null;
+                SelectedSPK = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data SPK...", false);
                 bgwMain.RunWorkerAsync();
             }

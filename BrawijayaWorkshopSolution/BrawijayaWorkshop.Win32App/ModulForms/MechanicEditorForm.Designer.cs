@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MechanicEditorForm));
             this.gcMechanicInfo = new DevExpress.XtraEditors.GroupControl();
             this.btnEnroll = new DevExpress.XtraEditors.SimpleButton();
             this.lblMechanicCode = new DevExpress.XtraEditors.LabelControl();
@@ -106,12 +107,12 @@
             this.txtCode.Properties.Mask.SaveLiteral = false;
             this.txtCode.Size = new System.Drawing.Size(162, 20);
             this.txtCode.TabIndex = 12;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Code harus diisi!";
-            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule6);
-            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule7.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule7);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Code harus diisi!";
+            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule2);
             // 
             // txtPhoneNumber
             // 
@@ -121,9 +122,9 @@
             this.txtPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPhoneNumber.Size = new System.Drawing.Size(162, 20);
             this.txtPhoneNumber.TabIndex = 11;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule1);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule3);
             // 
             // lblPhoneNumber
             // 
@@ -139,9 +140,9 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(247, 20);
             this.txtAddress.TabIndex = 5;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Alamat harus diisi!";
-            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule2);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Alamat harus diisi!";
+            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule4);
             // 
             // lblAddress
             // 
@@ -157,9 +158,9 @@
             this.txtMechanicName.Name = "txtMechanicName";
             this.txtMechanicName.Size = new System.Drawing.Size(247, 20);
             this.txtMechanicName.TabIndex = 3;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Nama Mechanic harus diisi!";
-            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule3);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "Nama Mechanic harus diisi!";
+            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule5);
             // 
             // lblMechanicName
             // 
@@ -201,8 +202,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 251);
             this.Controls.Add(this.gcMechanicInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MechanicEditorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mechanic Editor";
             this.Controls.SetChildIndex(this.gcMechanicInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanicInfo)).EndInit();
