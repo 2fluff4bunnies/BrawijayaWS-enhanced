@@ -56,37 +56,65 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public List<SPKDetailSparepartDetail> GetSPKSparepartDetailList(int spkId, int sparePartId)
+        public List<SPKDetailSparepartDetail> GetSPKSparepartDetailList(int spkId)
         {
-
-            List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SparepartDetail.SparepartId == sparePartId && sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
+            List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
 
             return result;
         }
 
-        public bool ApproveSPK(SPK spk, List<SPKDetailMechanic> spkMechanicList, List<SPKDetailSparepart> spkSparepartList,
-            List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, DbConstant.ApprovalStatus status)
+        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, DbConstant.ApprovalStatus status)
         {
             bool result = false;
 
-            try
+            DateTime serverTime = DateTime.Now;
+
+            if (status.CompareTo(DbConstant.ApprovalStatus.Approved) == 1)
             {
-                if (status.CompareTo(DbConstant.ApprovalStatus.Approved) == 1)
+                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                spk.ModifyDate = serverTime;
+                spk.ModifyUserId = userId;
+
+                _SPKRepository.Update(spk);
+
+                foreach (var item in spkSparepartList)
                 {
+                    Sparepart sparepart = _sparepartRepository.GetById(item.Sparepart.Id);
+                    sparepart.StockQty = sparepart.StockQty - item.TotalQuantity;
+                    sparepart.ModifyDate = serverTime;
+                    sparepart.ModifyUserId = userId;
+
+                    _sparepartRepository.Update(sparepart);
 
                 }
-                else if (status.CompareTo(DbConstant.ApprovalStatus.Rejected) == 1)
-                {
 
+                foreach (var item in spkSparepartDetailList)
+                {
+                    SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
+                    sparepartDetail.ModifyDate = serverTime;
+                    sparepartDetail.ModifyUserId = userId;
+                    if (item.SPKDetailSparepart.SPK.CategoryReference.Id == 22)
+                    {
+                        sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+                    }
+                    else
+                    {
+                        sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
+                    }
+
+                    _sparepartDetailRepository.Update(sparepartDetail);
                 }
 
-                result = true;
+                _unitOfWork.SaveChanges();
             }
-            catch (Exception ex)
+            else if (status.CompareTo(DbConstant.ApprovalStatus.Rejected) == 1)
             {
 
-                result = false;
             }
+
+            result = true;
+
+
 
             return result;
         }

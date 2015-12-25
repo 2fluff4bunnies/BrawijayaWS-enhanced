@@ -190,6 +190,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void btnApprove_Click(object sender, EventArgs e)
         {
             _presenter.Approve();
+            this.Close();
         }
 
         private void btnReject_Click(object sender, EventArgs e)

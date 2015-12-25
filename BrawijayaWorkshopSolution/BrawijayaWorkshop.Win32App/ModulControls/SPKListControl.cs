@@ -223,7 +223,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         void gvSPK_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedSPK = gvSPK.GetFocusedRow() as SPK;
-            ApplyCMSSetting();
+            if (this.SelectedSPK != null)
+            {
+                ApplyCMSSetting();
+            }
         }
 
         void ApplyCMSSetting()

@@ -27,6 +27,7 @@ namespace BrawijayaWorkshop.Presenter
 
             View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
             View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
+            View.SPKSparepartDetailList = Model.GetSPKSparepartDetailList(View.SelectedSPK.Id);
         }
 
         public void print()
@@ -36,11 +37,11 @@ namespace BrawijayaWorkshop.Presenter
 
         public void Approve()
         {
-            Model.ApproveSPK(View.SelectedSPK,View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, DbConstant.ApprovalStatus.Approved);
+            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, DbConstant.ApprovalStatus.Approved);
         }
         public void Reject()
         {
-            Model.ApproveSPK(View.SelectedSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, DbConstant.ApprovalStatus.Rejected);
+            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, DbConstant.ApprovalStatus.Rejected);
         }
 
     }
