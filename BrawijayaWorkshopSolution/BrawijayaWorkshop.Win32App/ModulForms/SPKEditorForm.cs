@@ -14,6 +14,8 @@ using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
+using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraReports.UI;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -37,6 +39,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new SPKEditorPresenter(this, model);
             _availableMechanic = new List<string>();
             _today = DateTime.Today;
+
+            dtpDueDate.EditValue = _today;
 
             valCategory.SetIconAlignment(lookUpCategory, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valVehicle.SetIconAlignment(LookUpVehicle, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
@@ -325,6 +329,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     {
                         _presenter.SendApproval();
                     }
+                    else
+                    {
+                        SPKPrintItem report = new SPKPrintItem();
+                        List<SPK> _dataSource = new List<SPK>();
+                        _dataSource.Add(SelectedSPK);
+                        report.DataSource = _dataSource;
+                        report.FillDataSource();
+
+                        using (ReportPrintTool printTool = new ReportPrintTool(report))
+                        {
+                            // Invoke the Print dialog.
+                            printTool.PrintDialog();
+                        }
+                    }
 
                     this.Close();
                 }
@@ -349,6 +367,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
+            if (SparepartToInsert == null || txtQty.EditValue == null)
+            {
+                this.ShowWarning("Sparepart atau Jumlah harus diisi");
+                return;
+            }
+
             int duplicateSparepartFound = SPKSparepartList.Where(s => s.Sparepart.Id == SparepartToInsert.Id).Count();
 
             if (duplicateSparepartFound < 1)

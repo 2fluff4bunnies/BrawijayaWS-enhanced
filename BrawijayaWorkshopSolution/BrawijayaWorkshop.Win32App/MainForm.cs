@@ -52,6 +52,8 @@ namespace BrawijayaWorkshop.Win32App
 
                 // get login information and generate menus and navigations based on allowed modules
                 GenerateRibbonMenu();
+
+                ShowNotification();
             }
         }
 
@@ -227,14 +229,18 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iNotification_ItemClick(object sender, ItemClickEventArgs e)
         {
-            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
+            ShowNotification();
+        }
+
+        private void ShowNotification()
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
 
             ClearNavigation();
             ClearUserControl();
 
             NotificationListControl listNotification = Bootstrapper.Resolve<NotificationListControl>();
             ShowUserControl(listNotification);
-
         }
 
         private void iMaster_ItemClick(object sender, ItemClickEventArgs e)

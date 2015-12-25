@@ -52,8 +52,8 @@ namespace BrawijayaWorkshop.Model
 
         public List<Vehicle> GetSPKVehicleList()
         {
-            List<Vehicle> result = _vehicleRepository.GetMany(v => v.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
-            return result;
+            //List<Vehicle> result = _vehicleRepository.GetMany(v => v.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            return _vehicleRepository.GetVehicleForLookUp();
         }
 
         public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
