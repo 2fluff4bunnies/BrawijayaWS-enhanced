@@ -54,7 +54,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (!bgwFingerprint.IsBusy)
             {
                 Cursor = Cursors.WaitCursor;
-
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Cek koneksi ke fingerprint", false);
                 bgwFingerprint.RunWorkerAsync();
             }
         }
@@ -241,12 +241,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 if (e.Result.AsBoolean())
                 {
                     axCZKEM1.RegEvent(1, 65535);
+                    FormHelpers.CurrentMainForm.UpdateStatusInformation("Koneksi ke fingerprint berhasil", true);
                 }
                 else
                 {
                     int errorCode = 0;
                     axCZKEM1.GetLastError(ref errorCode);
                     this.ShowError("Koneksi ke fingerprint gagal! Kode Error=" + errorCode);
+                    FormHelpers.CurrentMainForm.UpdateStatusInformation("Tidak ada koneksi ke fingerprint", true);
                 }
             }
         }

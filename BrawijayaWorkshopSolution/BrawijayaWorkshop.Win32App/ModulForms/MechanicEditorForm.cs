@@ -140,9 +140,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                 MethodBase.GetCurrentMethod().Info("Save mechanic's changes");
                 _presenter.SaveChanges();
-                if (axCZKEM1.SSR_GetUserInfo(1, txtCode.Text, out name, out pass, out priv, out enable))
+                if (_isFingerprintConnected)
                 {
-                    axCZKEM1.SSR_SetUserInfo(1, txtCode.Text, txtMechanicName.Text, pass, priv, true);
+                    if (axCZKEM1.SSR_GetUserInfo(1, txtCode.Text, out name, out pass, out priv, out enable))
+                    {
+                        axCZKEM1.SSR_SetUserInfo(1, txtCode.Text, txtMechanicName.Text, pass, priv, true);
+                    }
                 }
                 e.Result = true;
             }
@@ -228,6 +231,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 this.ShowError("Koneksi ke fingerprint gagal!");
                 _isFingerprintConnected = false;
+                btnEnroll.Enabled = false;
             }
             else
             {
@@ -242,6 +246,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     axCZKEM1.GetLastError(ref errorCode);
                     this.ShowError("Koneksi ke fingerprint gagal! Kode Error=" + errorCode);
                     _isFingerprintConnected = false;
+
+#warning Comment Code Below for production
+                    // comment code below for production
+                    // ------------------------------------
+                    btnEnroll.Enabled = false;
+                    txtMechanicName.Properties.ReadOnly = false;
+                    txtPhoneNumber.Properties.ReadOnly = false;
+                    txtAddress.Properties.ReadOnly = false;
+                    // ------------------------------------
                 }
             }
         }
