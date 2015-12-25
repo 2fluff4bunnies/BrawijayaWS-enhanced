@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterDataNavigationControl));
             this.navbarMasterData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupMasterData = new DevExpress.XtraNavBar.NavBarGroup();
+            this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
@@ -53,7 +54,8 @@
             this.iCustomer,
             this.iSparepart,
             this.iMechanic,
-            this.iVehicle});
+            this.iVehicle,
+            this.iJournal});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -73,6 +75,12 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
+            // 
+            // iJournal
+            // 
+            this.iJournal.Caption = "Kode Jurnal";
+            this.iJournal.Name = "iJournal";
+            this.iJournal.SmallImageIndex = 5;
             // 
             // iCustomer
             // 
@@ -112,6 +120,7 @@
             this.imageCollection.Images.SetKeyName(2, "sparepart.png");
             this.imageCollection.Images.SetKeyName(3, "Truck-Left-Green-icon-16x16.png");
             this.imageCollection.Images.SetKeyName(4, "mechanic 16x16.png");
+            this.imageCollection.Images.SetKeyName(5, "journal-icon.png");
             // 
             // MasterDataNavigationControl
             // 
@@ -136,5 +145,6 @@
         public DevExpress.XtraNavBar.NavBarItem iSparepart;
         public DevExpress.XtraNavBar.NavBarItem iMechanic;
         public DevExpress.XtraNavBar.NavBarItem iVehicle;
+        public DevExpress.XtraNavBar.NavBarItem iJournal;
     }
 }
