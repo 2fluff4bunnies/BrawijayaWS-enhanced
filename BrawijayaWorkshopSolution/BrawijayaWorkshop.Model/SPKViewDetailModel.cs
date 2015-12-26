@@ -131,9 +131,9 @@ namespace BrawijayaWorkshop.Model
 
                 if (hasParent)
                 {
-                    spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                    spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
-                    spk.Status = (int)DbConstant.DefaultDataStatus.Active;
+                    spkParent.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                    spkParent.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
+                    spkParent.Status = (int)DbConstant.DefaultDataStatus.Active;
 
                     spkParent.ModifyDate = serverTime;
                     spkParent.ModifyUserId = userId;
