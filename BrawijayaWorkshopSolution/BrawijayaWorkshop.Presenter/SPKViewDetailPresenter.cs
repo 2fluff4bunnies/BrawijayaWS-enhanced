@@ -5,6 +5,9 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -13,6 +16,7 @@ namespace BrawijayaWorkshop.Presenter
         public SPKViewDetailPresenter(ISPKViewDetailView view, SPKViewDetailModel model)
             : base(view, model) { }
 
+        List<Sparepart> SparepartWarningList = new List<Sparepart>();
 
         public void InitFormData()
         {
@@ -26,13 +30,17 @@ namespace BrawijayaWorkshop.Presenter
             Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
-        public void ExecuteApproval()
+        public void Approve()
         {
-            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, true);
+           
+
+            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, true, out SparepartWarningList);
+
+           //TODO : Send Email for stock warning
         }
         public void Reject()
         {
-            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, false);
+            Model.ApproveSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, false, out SparepartWarningList);
         }
 
         public void Abort()

@@ -23,12 +23,13 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailMechanicRepository _SPKDetailMechanicRepository;
         private IMechanicRepository _mechanicRepository;
         private IUnitOfWork _unitOfWork;
+        private ISettingRepository _settingRepository;
 
         public SPKViewDetailModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
             ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository, ISPKDetailMechanicRepository SPKDetailMechanicRepository,
-            IMechanicRepository mechanicRepository, IUnitOfWork unitOfWork)
+            IMechanicRepository mechanicRepository,ISettingRepository settingRepository, IUnitOfWork unitOfWork)
         {
             _referenceRepository = referenceRepository;
             _vehicleRepository = vehicleRepository;
@@ -39,6 +40,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartDetailRepository = sparepartDetailRepository;
             _SPKDetailMechanicRepository = SPKDetailMechanicRepository;
             _mechanicRepository = mechanicRepository;
+            _settingRepository = settingRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -63,10 +65,12 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isApproved)
+        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isApproved, out List<Sparepart> warningList)
         {
             bool result = false;
             bool hasParent = false;
+
+            warningList = new List<Sparepart>();
 
             DateTime serverTime = DateTime.Now;
             SPK spkParent =  _SPKRepository.GetById(spk.SPKparentId);
@@ -95,6 +99,10 @@ namespace BrawijayaWorkshop.Model
 
                     _sparepartRepository.Update(sparepart);
 
+                    if (sparepart.StockQty <= GetStockThreshold())
+                    {
+                        warningList.Add(sparepart);
+                    }
                 }
 
                 foreach (var item in spkSparepartDetailList)
@@ -242,6 +250,18 @@ namespace BrawijayaWorkshop.Model
             _SPKRepository.Update(spk);
 
             _unitOfWork.SaveChanges();
+        }
+
+
+        public int GetStockThreshold()
+        {
+            int result = 0;
+            
+            string threshold = _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_P).FirstOrDefault().Value;
+
+            int.TryParse(threshold, out result);
+
+            return result;
         }
     }
 }

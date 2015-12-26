@@ -108,6 +108,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             #endregion
         }
 
+
         void ApplyButtonSetting()
         {
             btnSetAsComplete.Visible = btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
@@ -227,7 +228,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             else
             {
-                 _presenter.ExecuteApproval();
+                 _presenter.Approve();
             }
 
             this.Close();
