@@ -81,7 +81,16 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void approveToolStripItem_Click(object sender, EventArgs e)
         {
             SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
-            editor.IsApproval = true;
+            if(this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
+               this.SelectedSPK.StatusPrintId == 0)
+            {
+                editor.IsPrintApproval = true;
+            }
+            if (this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending)
+            {
+                editor.IsApproval = true;
+            }
+            
             editor.SelectedSPK = this.SelectedSPK;
             editor.ShowDialog(this);
 

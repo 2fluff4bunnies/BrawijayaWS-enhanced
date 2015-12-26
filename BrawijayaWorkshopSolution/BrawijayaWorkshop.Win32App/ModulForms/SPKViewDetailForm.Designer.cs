@@ -210,6 +210,8 @@
             this.colTotalQty,
             this.colTotalPrice});
             this.gvSparepart.GridControl = this.gcSparepart;
+            this.gvSparepart.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total Price", this.colTotalPrice, "Total: {0:#,#}")});
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -218,8 +220,9 @@
             this.gvSparepart.OptionsCustomization.AllowColumnMoving = false;
             this.gvSparepart.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvSparepart.OptionsMenu.EnableFooterMenu = false;
+            this.gvSparepart.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvSparepart.OptionsView.ShowGroupedColumns = true;
             this.gvSparepart.OptionsView.ShowGroupPanel = false;
-            this.gvSparepart.OptionsView.ShowViewCaption = true;
             this.gvSparepart.ViewCaption = "Penggunaan Sparepart";
             // 
             // colSparepartName
@@ -249,6 +252,8 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Harga";
+            this.colTotalPrice.DisplayFormat.FormatString = "#,#";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;

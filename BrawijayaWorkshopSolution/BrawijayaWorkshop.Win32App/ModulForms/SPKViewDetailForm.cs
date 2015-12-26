@@ -257,13 +257,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();
-            _presenter.Print();
 
             using (ReportPrintTool printTool = new ReportPrintTool(report))
             {
                 // Invoke the Print dialog.
                 printTool.PrintDialog();
             }
+
+            _presenter.Print();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

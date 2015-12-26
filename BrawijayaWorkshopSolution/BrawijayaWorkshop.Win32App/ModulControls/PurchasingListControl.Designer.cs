@@ -200,6 +200,8 @@
             // colTotalPricePurchasing
             // 
             this.colTotalPricePurchasing.Caption = "Total Harga";
+            this.colTotalPricePurchasing.DisplayFormat.FormatString = "#,#";
+            this.colTotalPricePurchasing.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPricePurchasing.FieldName = "TotalPrice";
             this.colTotalPricePurchasing.Name = "colTotalPricePurchasing";
             this.colTotalPricePurchasing.Visible = true;

@@ -219,14 +219,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void ApplyCMSSetting()
         {
-            cmsEndorseData.Visible =( this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
+            cmsEndorseData.Visible =( this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved ||
+                this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) &&
+                this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
             cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
-<<<<<<< HEAD
+
             cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
-=======
-            cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
-            cmsSetAsCompleted.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&  this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed && this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
->>>>>>> origin/master
+            cmsSetAsCompleted.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
+                this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed &&
+                this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
+
+            toolStripSeparator1.Visible = cmsEndorseData.Visible && cmsPrintData.Visible && cmsRequestPrint.Visible &&
+                cmsSetAsCompleted.Visible;
         }
 
         void SPKListControl_Load(object sender, EventArgs e)
@@ -308,14 +312,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();
-            _presenter.PrintSPK();
-
-            btnSearch.PerformClick();
+            
             using (ReportPrintTool printTool = new ReportPrintTool(report))
             {
                 // Invoke the Print dialog.
-                printTool.PrintDialog();
+                bool? result = printTool.PrintDialog();
+                if (result.HasValue && result.Value)
+                {
+                    _presenter.PrintSPK();
+                }
             }
+
+            btnSearch.PerformClick();
         }
 
         private void gvSPK_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)

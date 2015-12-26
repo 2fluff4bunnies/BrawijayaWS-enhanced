@@ -20,7 +20,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPK> SearchSPKPending()
         {
-            return _spkRepository.GetMany(c => c.StatusApprovalId == 0).OrderByDescending(c => c.Id).ToList();
+            return _spkRepository.GetMany(c => c.StatusApprovalId == 0 || c.StatusPrintId ==0).OrderByDescending(c => c.Id).ToList();
         }
     }
 }
