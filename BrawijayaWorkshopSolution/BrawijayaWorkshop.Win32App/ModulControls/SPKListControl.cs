@@ -205,16 +205,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
+                this.SelectedSPK = gvSPK.GetRow(view.FocusedRowHandle) as SPK;
+                ApplyCMSSetting();
             }
         }
 
         void gvSPK_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSPK = gvSPK.GetFocusedRow() as SPK;
-            if (this.SelectedSPK != null)
-            {
-                ApplyCMSSetting();
-            }
+            this.SelectedSPK = gvSPK.GetRow(e.FocusedRowHandle) as SPK;
         }
 
         void ApplyCMSSetting()

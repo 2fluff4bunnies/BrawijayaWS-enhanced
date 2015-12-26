@@ -79,11 +79,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalSparepartPrice.Text.AsDecimal();
+                return txtTotalSparepartPrice.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalSparepartPrice.Text = value.ToString();
+                txtTotalSparepartPrice.EditValue = value;
             }
         }
 

@@ -111,7 +111,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtTotalPrice.EditValue = value.ToString();
+                txtTotalPrice.EditValue = value.ToString("#,#");
             }
         }
 
