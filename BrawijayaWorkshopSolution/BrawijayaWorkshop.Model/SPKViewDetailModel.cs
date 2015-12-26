@@ -66,8 +66,15 @@ namespace BrawijayaWorkshop.Model
         public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isApproved)
         {
             bool result = false;
+            bool hasParent = false;
 
             DateTime serverTime = DateTime.Now;
+            SPK spkParent =  _SPKRepository.GetById(spk.SPKparentId);
+
+            if(spkParent != null)
+            {
+                hasParent = true;
+            }
 
             if (isApproved)
             {
@@ -119,6 +126,19 @@ namespace BrawijayaWorkshop.Model
                 spk.ModifyUserId = userId;
 
                 _SPKRepository.Update(spk);
+
+
+                if (hasParent)
+                {
+                    spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                    spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
+                    spk.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                    spkParent.ModifyDate = serverTime;
+                    spkParent.ModifyUserId = userId;
+
+                    _SPKRepository.Update(spkParent);
+                }
 
                 _unitOfWork.SaveChanges();
 

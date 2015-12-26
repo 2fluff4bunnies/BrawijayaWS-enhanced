@@ -139,22 +139,6 @@ namespace BrawijayaWorkshop.Model
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
         }
 
-        public SPK EndorseSPk(int SPKId)
-        {
-            SPK spk = _SPKRepository.GetById(SPKId);
-
-            spk.Status = (int)DbConstant.ApprovalStatus.Endorsed;
-
-            _SPKRepository.Add(spk);
-
-            return new SPK
-            {
-                DueDate = spk.DueDate,
-                VehicleId = spk.VehicleId,
-                CategoryReferenceId = spk.CategoryReferenceId,
-            };
-        }
-
         public SPK InsertSPK(SPK spk, SPK parentSPK, List<SPKDetailMechanic> spkMechanicList, List<SPKDetailSparepart> spkSparepartList,
             List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isNeedApproval)
         {
@@ -165,8 +149,10 @@ namespace BrawijayaWorkshop.Model
                 // helluva method
                 AbortSPK(parentSPK, GetSPKSparepartList(parentSPK.Id), GetSPKSparepartDetailList(parentSPK.Id), userId);
 
-                parentSPK.StatusApprovalId = (int)DbConstant.SPKCompletionStatus.Completed;
+                parentSPK.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
                 parentSPK.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
+                parentSPK.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+
                 parentSPK.ModifyDate = serverTime;
                 parentSPK.ModifyUserId = userId;
 
