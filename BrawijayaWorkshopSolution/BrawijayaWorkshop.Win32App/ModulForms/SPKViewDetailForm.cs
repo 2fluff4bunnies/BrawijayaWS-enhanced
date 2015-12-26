@@ -115,23 +115,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             btnRequestPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
             btnEndorse.Visible = (SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
 
-            if (this.IsApproval)
+            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
             {
-                if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
+                if (this.IsPrintApproval)
+                {
+                    btnApprove.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
+                    btnReject.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
+                }
+                else
                 {
                     btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                 }
             }
 
-            if (this.IsPrintApproval)
-            {
-                if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
-                {
-                    btnApprove.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
-                    btnReject.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
-                }
-            }
 
             if (this.IsAbort)
             {
@@ -224,13 +221,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            if (this._isApproval)
+            if (this.IsPrintApproval)
             {
-                _presenter.ExecuteApproval();
+                _presenter.PrintApproval(true);
             }
             else
             {
-                _presenter.PrintApproval(true);
+                 _presenter.ExecuteApproval();
             }
 
             this.Close();
@@ -238,13 +235,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-            if (this._isApproval)
+            if (this.IsPrintApproval)
             {
-                _presenter.Reject();
+                _presenter.PrintApproval(false);
             }
             else
             {
-                _presenter.PrintApproval(false);
+                _presenter.Reject();
             }
 
             this.Close();

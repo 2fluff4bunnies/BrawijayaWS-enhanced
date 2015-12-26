@@ -435,7 +435,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     RefreshSparepartGrid();
 
-                    this.TotalSparepartPrice = this.TotalSparepartPrice + totalPrice;
+                    foreach (var item in SPKSparepartList)
+                    {
+                        this.TotalSparepartPrice = this.TotalSparepartPrice + item.TotalPrice;
+                    }
+
+                   
                 }
                 else
                 {
@@ -533,6 +538,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             gcSparepart.DataSource = SPKSparepartList;
             gvSparepart.BestFitColumns();
+            this.TotalSparepartPrice = 0;
         }
 
         private void cmsDeleteDataMechanic_Click(object sender, EventArgs e)

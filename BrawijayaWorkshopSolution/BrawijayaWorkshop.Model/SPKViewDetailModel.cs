@@ -121,6 +121,7 @@ namespace BrawijayaWorkshop.Model
             else
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Rejected;
+                spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
 
                 spk.ModifyDate = serverTime;
                 spk.ModifyUserId = userId;
