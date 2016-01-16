@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -29,7 +30,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if(View.SelectedCustomer == null)
             {
-                View.SelectedCustomer = new Customer();
+                View.SelectedCustomer = new CustomerViewModel();
             }
 
             View.SelectedCustomer.Code = View.Code;

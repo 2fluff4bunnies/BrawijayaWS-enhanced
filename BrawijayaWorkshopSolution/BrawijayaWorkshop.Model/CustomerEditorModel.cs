@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,20 +22,27 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<City> RetrieveCity()
+        public List<CityViewModel> RetrieveCity()
         {
-            return _cityRepository.GetAll().ToList();
+            List<City> result = _cityRepository.GetAll().ToList();
+            List<CityViewModel> mappedResult = new List<CityViewModel>();
+            AutoMapper.Mapper.Map(result, mappedResult);
+            return mappedResult;
         }
 
-        public void InsertCustomer(Customer customer)
+        public void InsertCustomer(CustomerViewModel customer)
         {
-            _customerRepository.Add(customer);
+            Customer entity = new Customer();
+            AutoMapper.Mapper.Map(customer, entity);
+            _customerRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(CustomerViewModel customer)
         {
-            _customerRepository.Update(customer);
+            Customer entity = _customerRepository.GetById<int>(customer.Id);
+            AutoMapper.Mapper.Map(customer, entity);
+            _customerRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
     }

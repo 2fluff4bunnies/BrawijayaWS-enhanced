@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -18,7 +19,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class CustomerListControl : BaseAppUserControl, ICustomerListView
     {
         private CustomerListPresenter _presenter;
-        private Customer _selectedCustomer;
+        private CustomerViewModel _selectedCustomer;
 
         protected override string ModulName
         {
@@ -51,7 +52,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvCustomer_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedCustomer = gvCustomer.GetFocusedRow() as Customer;
+            this.SelectedCustomer = gvCustomer.GetFocusedRow() as CustomerViewModel;
         }
 
         private void gvCustomer_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -77,11 +78,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Customer> CustomerListData
+        public List<CustomerViewModel> CustomerListData
         {
             get
             {
-                return gridCustomer.DataSource as List<Customer>;
+                return gridCustomer.DataSource as List<CustomerViewModel>;
             }
             set
             {
@@ -97,7 +98,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public Customer SelectedCustomer
+        public CustomerViewModel SelectedCustomer
         {
             get
             {
@@ -197,7 +198,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if(gvCustomer.RowCount > 0)
             {
-                SelectedCustomer = gvCustomer.GetRow(0) as Customer;
+                SelectedCustomer = gvCustomer.GetRow(0) as CustomerViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data customer selesai", true);

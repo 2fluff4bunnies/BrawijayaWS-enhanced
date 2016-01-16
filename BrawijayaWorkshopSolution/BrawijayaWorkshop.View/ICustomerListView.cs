@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
@@ -8,8 +8,8 @@ namespace BrawijayaWorkshop.View
     {
         string CompanyNameFilter { get; set; }
 
-        List<Customer> CustomerListData { get; set; }
+        List<CustomerViewModel> CustomerListData { get; set; }
 
-        Customer SelectedCustomer { get; set; }
+        CustomerViewModel SelectedCustomer { get; set; }
     }
 }

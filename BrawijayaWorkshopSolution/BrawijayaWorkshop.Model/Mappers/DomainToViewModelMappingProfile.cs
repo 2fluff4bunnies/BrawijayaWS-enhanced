@@ -10,6 +10,9 @@ namespace BrawijayaWorkshop.Model.Mappers
         {
             //TODO: Add Mapping Entity to ViewModel
             Mapper.CreateMap<Purchasing, PurchasingViewModel>();
+            Mapper.CreateMap<City, CityViewModel>();
+            Mapper.CreateMap<Customer, CustomerViewModel>();
+            
         }
     }
 }

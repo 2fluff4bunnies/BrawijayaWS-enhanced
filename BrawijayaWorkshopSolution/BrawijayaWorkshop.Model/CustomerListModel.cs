@@ -2,6 +2,8 @@
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.Model.Mappers;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,16 +18,22 @@ namespace BrawijayaWorkshop.Model
         {
             _customerRepository = customerRepository;
             _unitOfWork = unitOfWork;
+
+            AutoMapperConfiguration.Configure();
         }
 
-        public List<Customer> SearchCustomer(string companyName)
+        public List<CustomerViewModel> SearchCustomer(string companyName)
         {
-            return _customerRepository.GetMany(c => c.CompanyName.Contains(companyName)).OrderBy(c => c.CompanyName).ToList();
+            List<Customer> result = _customerRepository.GetMany(c => c.CompanyName.Contains(companyName)).OrderBy(c => c.CompanyName).ToList();
+            List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            AutoMapper.Mapper.Map(result, mappedResult);
+            return mappedResult;
         }
 
-        public void DeleteCustomer(Customer customer)
+        public void DeleteCustomer(CustomerViewModel customer)
         {
-            _customerRepository.Delete(customer);
+            Customer selectedCustomer = _customerRepository.GetById<int>(customer.Id);
+            _customerRepository.Delete(selectedCustomer);
             _unitOfWork.SaveChanges();
         }
     }

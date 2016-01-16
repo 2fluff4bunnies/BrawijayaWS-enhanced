@@ -1,6 +1,6 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -34,7 +34,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
-        public Customer SelectedCustomer { get; set; }
+        public CustomerViewModel SelectedCustomer { get; set; }
 
         #region Field Editor
         public string Code
@@ -101,7 +101,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                City selected = cbCity.GetSelectedDataRow() as City;
+                CityViewModel selected = cbCity.GetSelectedDataRow() as CityViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
@@ -112,11 +112,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
         #endregion
 
-        public List<City> ListCity
+        public List<CityViewModel> ListCity
         {
             get
             {
-                return cbCity.Properties.DataSource as List<City>;
+                return cbCity.Properties.DataSource as List<CityViewModel>;
             }
             set
             {

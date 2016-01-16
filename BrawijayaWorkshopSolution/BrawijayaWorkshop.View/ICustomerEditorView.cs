@@ -1,12 +1,13 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface ICustomerEditorView : IView
     {
-        Customer SelectedCustomer { get; set; }
+        CustomerViewModel SelectedCustomer { get; set; }
 
         string Code { get; set; }
         string CompanyName { get; set; }
@@ -15,6 +16,6 @@ namespace BrawijayaWorkshop.View
         string ContactPerson { get; set; }
         int CityId { get; set; }
 
-        List<City> ListCity { get; set; }
+        List<CityViewModel> ListCity { get; set; }
     }
 }
