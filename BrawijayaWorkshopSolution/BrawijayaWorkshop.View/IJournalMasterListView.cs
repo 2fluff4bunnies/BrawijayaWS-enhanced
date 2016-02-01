@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
@@ -9,10 +9,10 @@ namespace BrawijayaWorkshop.View
         string NameFilter { get; set; }
         int ParentId { get; set; }
 
-        List<JournalMaster> ParentDropdownList { get; set; }
+        List<JournalMasterViewModel> ParentDropdownList { get; set; }
 
-        List<JournalMaster> JournalMasterListData { get; set; }
+        List<JournalMasterViewModel> JournalMasterListData { get; set; }
 
-        JournalMaster SelectedJournalMaster { get; set; }
+        JournalMasterViewModel SelectedJournalMaster { get; set; }
     }
 }

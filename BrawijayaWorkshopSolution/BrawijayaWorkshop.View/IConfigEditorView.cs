@@ -1,12 +1,12 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface IConfigEditorView : IView
     {
-        List<Setting> ListSettings { get; set; }
+        List<SettingViewModel> ListSettings { get; set; }
 
         string MinStockQuantity { get; set; }
 

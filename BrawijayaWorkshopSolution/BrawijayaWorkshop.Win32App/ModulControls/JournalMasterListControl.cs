@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -18,7 +19,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class JournalMasterListControl : BaseAppUserControl, IJournalMasterListView
     {
         private JournalMasterListPresenter _presenter;
-        private JournalMaster _selectedJournalMaster;
+        private JournalMasterViewModel _selectedJournalMaster;
 
         protected override string ModulName
         {
@@ -63,7 +64,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvJournalMaster_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            _selectedJournalMaster = gvJournalMaster.GetFocusedRow() as JournalMaster;
+            _selectedJournalMaster = gvJournalMaster.GetFocusedRow() as JournalMasterViewModel;
         }
 
         public string NameFilter
@@ -90,11 +91,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<JournalMaster> ParentDropdownList
+        public List<JournalMasterViewModel> ParentDropdownList
         {
             get
             {
-                return lookupJournalParent.Properties.DataSource as List<JournalMaster>;
+                return lookupJournalParent.Properties.DataSource as List<JournalMasterViewModel>;
             }
             set
             {
@@ -102,11 +103,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<JournalMaster> JournalMasterListData
+        public List<JournalMasterViewModel> JournalMasterListData
         {
             get
             {
-                return gridJournalMaster.DataSource as List<JournalMaster>;
+                return gridJournalMaster.DataSource as List<JournalMasterViewModel>;
             }
             set
             {
@@ -122,7 +123,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public JournalMaster SelectedJournalMaster
+        public JournalMasterViewModel SelectedJournalMaster
         {
             get
             {
@@ -156,7 +157,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if(gvJournalMaster.RowCount > 0)
             {
-                SelectedJournalMaster = gvJournalMaster.GetRow(0) as JournalMaster;
+                SelectedJournalMaster = gvJournalMaster.GetRow(0) as JournalMasterViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data jurnal selesai", true);

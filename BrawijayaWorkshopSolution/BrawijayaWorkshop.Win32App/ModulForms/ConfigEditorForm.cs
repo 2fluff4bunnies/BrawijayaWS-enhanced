@@ -1,6 +1,6 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -31,7 +31,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
-        public List<Setting> ListSettings { get; set; }
+        public List<SettingViewModel> ListSettings { get; set; }
 
         public string MinStockQuantity
         {

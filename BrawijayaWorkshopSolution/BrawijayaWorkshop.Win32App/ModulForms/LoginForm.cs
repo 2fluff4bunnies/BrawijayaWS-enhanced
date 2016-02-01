@@ -1,6 +1,6 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -42,7 +42,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public void SetLoginResult(User user)
+        public void SetLoginResult(UserViewModel user)
         {
             if (user == null)
             {

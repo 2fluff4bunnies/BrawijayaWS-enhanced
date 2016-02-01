@@ -1,6 +1,6 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -31,13 +31,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
-        public JournalMaster SelectedJournalMaster { get; set; }
+        public JournalMasterViewModel SelectedJournalMaster { get; set; }
 
-        public List<JournalMaster> ParentDropdownList
+        public List<JournalMasterViewModel> ParentDropdownList
         {
             get
             {
-                return lookupJournalParent.Properties.DataSource as List<JournalMaster>;
+                return lookupJournalParent.Properties.DataSource as List<JournalMasterViewModel>;
             }
             set
             {

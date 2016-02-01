@@ -252,7 +252,14 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             MasterDataNavigationControl navMasterData = new MasterDataNavigationControl();
-            navMasterData.iJournal.Visible = false;
+
+            navMasterData.iSupplier.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SUPPLIER);
+            navMasterData.iCustomer.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_CUSTOMER);
+            navMasterData.iSparepart.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
+            navMasterData.iMechanic.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MECHANIC);
+            navMasterData.iVehicle.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLE);
+            navMasterData.iJournal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
+
             ShowNavigationControl(navMasterData);
             // init event navigation
             navMasterData.iSupplier.LinkClicked += iSupplier_LinkClicked;

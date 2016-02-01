@@ -1,16 +1,16 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface IJournalMasterEditorView : IView
     {
-        JournalMaster SelectedJournalMaster { get; set; }
+        JournalMasterViewModel SelectedJournalMaster { get; set; }
 
         int ParentId { get; set; }
 
-        List<JournalMaster> ParentDropdownList { get; set; }
+        List<JournalMasterViewModel> ParentDropdownList { get; set; }
 
         string Code { get; set; }
 

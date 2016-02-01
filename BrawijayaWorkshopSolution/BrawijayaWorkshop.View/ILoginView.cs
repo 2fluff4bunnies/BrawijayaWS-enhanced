@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 
 namespace BrawijayaWorkshop.View
 {
@@ -8,6 +8,6 @@ namespace BrawijayaWorkshop.View
         string UserName { get; set; }
         string Password { get; set; }
 
-        void SetLoginResult(User user);
+        void SetLoginResult(UserViewModel user);
     }
 }

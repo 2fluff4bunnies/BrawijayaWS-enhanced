@@ -2,32 +2,38 @@
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class ConfigEditorModel : BaseModel
+    public class ConfigEditorModel : AppBaseModel
     {
         private ISettingRepository _settingRepository;
         private IUnitOfWork _unitOfWork;
 
         public ConfigEditorModel(ISettingRepository settingRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _settingRepository = settingRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<Setting> GetAllSettings()
+        public List<SettingViewModel> GetAllSettings()
         {
-            return _settingRepository.GetAll().ToList();
+            List<Setting> result = _settingRepository.GetAll().ToList();
+            List<SettingViewModel> mappedResult = new List<SettingViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public void SaveSettings(List<Setting> listSettings)
+        public void SaveSettings(List<SettingViewModel> listSettings)
         {
             foreach (var setting in listSettings)
             {
-                _settingRepository.Update(setting);
+                Setting dbObject = new Setting();
+                Map(setting, dbObject);
+                _settingRepository.Update(dbObject);
             }
             _unitOfWork.SaveChanges();
         }

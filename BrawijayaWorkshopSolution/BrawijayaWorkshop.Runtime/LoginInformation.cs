@@ -18,6 +18,11 @@ namespace BrawijayaWorkshop.Runtime
 
         public static List<ModulInfo> AllowedModules { get; private set; }
 
+        public static bool IsModulAllowed(string modulName)
+        {
+            return AllowedModules.Where(am => am.ModulName == modulName).Count() > 0;
+        }
+
         static LoginInformation()
         {
             if (AllowedModules == null)
@@ -61,7 +66,7 @@ namespace BrawijayaWorkshop.Runtime
 
         public static ModulInfo GetModul(string modulName)
         {
-            if(IsLoggedIn)
+            if (IsLoggedIn)
             {
                 return AllowedModules.Where(modul => string.Compare(modul.ModulName, modulName, true) == 0).FirstOrDefault();
             }
@@ -71,7 +76,7 @@ namespace BrawijayaWorkshop.Runtime
 
         public static bool Validate(this ModulInfo sender, DbConstant.AccessTypeEnum accessType)
         {
-            if(sender != null)
+            if (sender != null)
             {
                 return IsAccessible(sender.AccessCode, accessType);
             }

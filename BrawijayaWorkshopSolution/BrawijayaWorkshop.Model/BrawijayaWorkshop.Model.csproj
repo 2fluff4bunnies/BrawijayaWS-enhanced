@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppBaseModel.cs" />
     <Compile Include="ConfigEditorModel.cs" />
     <Compile Include="CustomerEditorModel.cs" />
     <Compile Include="CustomerListModel.cs" />

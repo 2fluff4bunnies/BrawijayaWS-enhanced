@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System.Linq;
 
@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Presenter
             Model.SaveSettings(View.ListSettings);
         }
 
-        private Setting GetSetting(string key)
+        public SettingViewModel GetSetting(string key)
         {
             return View.ListSettings.Where(s => s.Key == key).FirstOrDefault();
         }

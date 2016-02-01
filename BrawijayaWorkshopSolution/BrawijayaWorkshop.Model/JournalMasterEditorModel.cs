@@ -1,40 +1,44 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using System;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class JournalMasterEditorModel : BaseModel
+    public class JournalMasterEditorModel : AppBaseModel
     {
         private IJournalMasterRepository _journalMasterRepository;
         private IUnitOfWork _unitOfWork;
 
         public JournalMasterEditorModel(IJournalMasterRepository journalMasterRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _journalMasterRepository = journalMasterRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<JournalMaster> GetAllParentJournal()
+        public List<JournalMasterViewModel> GetAllParentJournal()
         {
-            return _journalMasterRepository.GetMany(jm => jm.ParentId == null).OrderBy(jm => jm.Name).ToList();
+            List<JournalMaster> result = _journalMasterRepository.GetMany(jm => jm.ParentId == null).OrderBy(jm => jm.Name).ToList();
+            List<JournalMasterViewModel> mappedResult = new List<JournalMasterViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public void InsertJournal(JournalMaster journal)
+        public void InsertJournal(JournalMasterViewModel journal)
         {
-            _journalMasterRepository.Add(journal);
+            JournalMaster entity = new JournalMaster();
+            Map(journal, entity);
+            _journalMasterRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateJournal(JournalMaster journal)
+        public void UpdateJournal(JournalMasterViewModel journal)
         {
-            _journalMasterRepository.Update(journal);
+            JournalMaster entity = _journalMasterRepository.GetById(journal.Id);
+            Map(journal, entity);
+            _journalMasterRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
     }

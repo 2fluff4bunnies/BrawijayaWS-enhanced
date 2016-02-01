@@ -1,7 +1,7 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             try
             {
-                User loginResult = Model.ValidateLogin(View.UserName, View.Password.Encrypt());
+                UserViewModel loginResult = Model.ValidateLogin(View.UserName, View.Password.Encrypt());
                 View.SetLoginResult(loginResult);
             }
             catch (Exception ex)
@@ -30,7 +30,7 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
-        public void CompileLoginInformation(User user)
+        public void CompileLoginInformation(UserViewModel user)
         {
             if (user == null)
             {
@@ -43,10 +43,10 @@ namespace BrawijayaWorkshop.Presenter
             try
             {
                 // get role for user
-                UserRole userRole = Model.GetUserRolesByUserId(user.Id);
+                UserRoleViewModel userRole = Model.GetUserRolesByUserId(user.Id);
 
                 // get allowed modules for current user's role
-                List<RoleAccess> listAllowedModules = Model.GetRoleAccessByRoleId(userRole.RoleId);
+                List<RoleAccessViewModel> listAllowedModules = Model.GetRoleAccessByRoleId(userRole.RoleId);
 
                 LoginInformation.SetLoggedInInformation(user.Id, user.UserName, userRole.RoleId, userRole.Role.Name);
                 listAllowedModules.ForEach(item =>

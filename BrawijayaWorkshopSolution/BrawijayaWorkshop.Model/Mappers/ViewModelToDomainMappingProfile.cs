@@ -12,7 +12,13 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<PurchasingViewModel, Purchasing>();
             Mapper.CreateMap<CityViewModel, City>();
             Mapper.CreateMap<CustomerViewModel, Customer>();
-            
+            Mapper.CreateMap<JournalMasterViewModel, JournalMaster>();
+            Mapper.CreateMap<RoleViewModel, Role>();
+            Mapper.CreateMap<UserViewModel, User>();
+            Mapper.CreateMap<UserRoleViewModel, UserRole>();
+            Mapper.CreateMap<RoleAccessViewModel, RoleAccess>();
+            Mapper.CreateMap<SettingViewModel, Setting>();
+            Mapper.CreateMap<ApplicationModulViewModel, ApplicationModul>();
         }
     }
 }

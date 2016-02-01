@@ -39,13 +39,13 @@
             this.btnNewJournal = new DevExpress.XtraEditors.SimpleButton();
             this.gridJournalMaster = new DevExpress.XtraGrid.GridControl();
             this.gvJournalMaster = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
-            this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtJournalName.Properties)).BeginInit();
@@ -170,7 +170,33 @@
             this.gvJournalMaster.OptionsView.EnableAppearanceEvenRow = true;
             this.gvJournalMaster.OptionsView.ShowGroupPanel = false;
             this.gvJournalMaster.OptionsView.ShowViewCaption = true;
+            this.gvJournalMaster.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colJournalCode, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvJournalMaster.ViewCaption = "Daftar Account";
+            // 
+            // colJournalCode
+            // 
+            this.colJournalCode.Caption = "Kode";
+            this.colJournalCode.FieldName = "Code";
+            this.colJournalCode.Name = "colJournalCode";
+            this.colJournalCode.Visible = true;
+            this.colJournalCode.VisibleIndex = 0;
+            // 
+            // colJournalName
+            // 
+            this.colJournalName.Caption = "Nama";
+            this.colJournalName.FieldName = "Name";
+            this.colJournalName.Name = "colJournalName";
+            this.colJournalName.Visible = true;
+            this.colJournalName.VisibleIndex = 1;
+            // 
+            // colParent
+            // 
+            this.colParent.Caption = "Induk";
+            this.colParent.FieldName = "Parent.Code";
+            this.colParent.Name = "colParent";
+            this.colParent.Visible = true;
+            this.colParent.VisibleIndex = 2;
             // 
             // bgwMain
             // 
@@ -200,30 +226,6 @@
             this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
-            // 
-            // colJournalCode
-            // 
-            this.colJournalCode.Caption = "Kode";
-            this.colJournalCode.FieldName = "Code";
-            this.colJournalCode.Name = "colJournalCode";
-            this.colJournalCode.Visible = true;
-            this.colJournalCode.VisibleIndex = 0;
-            // 
-            // colJournalName
-            // 
-            this.colJournalName.Caption = "Nama";
-            this.colJournalName.FieldName = "Name";
-            this.colJournalName.Name = "colJournalName";
-            this.colJournalName.Visible = true;
-            this.colJournalName.VisibleIndex = 1;
-            // 
-            // colParent
-            // 
-            this.colParent.Caption = "Induk";
-            this.colParent.FieldName = "Parent.Code";
-            this.colParent.Name = "colParent";
-            this.colParent.Visible = true;
-            this.colParent.VisibleIndex = 2;
             // 
             // JournalMasterListControl
             // 
