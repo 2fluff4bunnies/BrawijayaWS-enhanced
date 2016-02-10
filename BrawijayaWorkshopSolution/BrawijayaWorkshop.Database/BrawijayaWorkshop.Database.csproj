@@ -60,6 +60,7 @@
     <Compile Include="BrawijayaWorkshopDbContext.cs" />
     <Compile Include="BrawijayaWorkshopDbInitializer.cs" />
     <Compile Include="Configurations\CustomerConfiguration.cs" />
+    <Compile Include="Configurations\GuestBookConfiguration.cs" />
     <Compile Include="Configurations\JournalMasterConfiguration.cs" />
     <Compile Include="Configurations\PurchasingConfiguration.cs" />
     <Compile Include="Configurations\PurchasingDetailConfiguration.cs" />
@@ -71,11 +72,15 @@
     <Compile Include="Configurations\SPKDetailMechanicConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartDetailConfiguration.cs" />
+    <Compile Include="Configurations\SPKScheduleConfiguration.cs" />
     <Compile Include="Configurations\TransactionConfiguration.cs" />
     <Compile Include="Configurations\TransactionDetailConfiguration.cs" />
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
     <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
+    <Compile Include="Configurations\VehicleWheelConfiguration.cs" />
+    <Compile Include="Configurations\WheelConfiguration.cs" />
+    <Compile Include="Configurations\WheelDetailConfiguration.cs" />
     <Compile Include="DatabaseConfigurationHelper.cs" />
     <Compile Include="Entities\ApplicationModul.cs" />
     <Compile Include="Entities\BaseModifierEntity.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="Repositories\AppUnitOfWork.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\GuestBookRepostory.cs" />
     <Compile Include="Repositories\JournalMasterRepository.cs" />
     <Compile Include="Repositories\MechanicRepository.cs" />
     <Compile Include="Repositories\PurchasingDetailRepository.cs" />
@@ -130,6 +136,7 @@
     <Compile Include="Repositories\SPKDetailSparepartRepository.cs" />
     <Compile Include="Repositories\SPKDetailSparepartDetailRepository.cs" />
     <Compile Include="Repositories\SPKRepository.cs" />
+    <Compile Include="Repositories\SPKScheduleRepository.cs" />
     <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\TransactionDetailRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
@@ -137,6 +144,9 @@
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\VehicleDetailRepository.cs" />
     <Compile Include="Repositories\VehicleRepository.cs" />
+    <Compile Include="Repositories\VehicleWheelRepository.cs" />
+    <Compile Include="Repositories\WheelDetailRepository.cs" />
+    <Compile Include="Repositories\WheelRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
