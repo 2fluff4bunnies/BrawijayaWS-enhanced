@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(20)]
         public string Brand { get; set; }
 
         [Required]

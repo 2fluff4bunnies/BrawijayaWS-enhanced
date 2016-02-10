@@ -38,6 +38,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public int StatusCompletedId { get; set; }
 
         [Required]
+        public int StatusOverLimit { get; set; }
+
+        [Required]
         public int CategoryReferenceId { get; set; }
 
         public string Description { get; set; }

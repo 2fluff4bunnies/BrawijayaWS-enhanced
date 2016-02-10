@@ -22,5 +22,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [MaxLength(50)]
         public string PhoneNumber { get; set; }
+
+        [Required]
+        public decimal BaseFee { get; set; }
     }
 }
