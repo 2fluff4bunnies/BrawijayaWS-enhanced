@@ -61,6 +61,8 @@
     <Compile Include="BrawijayaWorkshopDbInitializer.cs" />
     <Compile Include="Configurations\CustomerConfiguration.cs" />
     <Compile Include="Configurations\GuestBookConfiguration.cs" />
+    <Compile Include="Configurations\InvoiceConfiguration.cs" />
+    <Compile Include="Configurations\InvoiceDetailConfiguration.cs" />
     <Compile Include="Configurations\JournalMasterConfiguration.cs" />
     <Compile Include="Configurations\PurchasingConfiguration.cs" />
     <Compile Include="Configurations\PurchasingDetailConfiguration.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Configurations\RoleAccessConfiguration.cs" />
     <Compile Include="Configurations\SparepartConfiguration.cs" />
     <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
+    <Compile Include="Configurations\SparepartManualTransactionConfiguration.cs" />
     <Compile Include="Configurations\SPKConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailMechanicConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartConfiguration.cs" />
@@ -75,6 +78,8 @@
     <Compile Include="Configurations\SPKScheduleConfiguration.cs" />
     <Compile Include="Configurations\TransactionConfiguration.cs" />
     <Compile Include="Configurations\TransactionDetailConfiguration.cs" />
+    <Compile Include="Configurations\UsedGoodsConfiguration.cs" />
+    <Compile Include="Configurations\UsedGoodsTransactionConfiguration.cs" />
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
     <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
@@ -89,6 +94,8 @@
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\GuestBook.cs" />
+    <Compile Include="Entities\Invoice.cs" />
+    <Compile Include="Entities\InvoiceDetail.cs" />
     <Compile Include="Entities\JournalMaster.cs" />
     <Compile Include="Entities\Mechanic.cs" />
     <Compile Include="Entities\Purchasing.cs" />
@@ -99,6 +106,7 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Sparepart.cs" />
     <Compile Include="Entities\SparepartDetail.cs" />
+    <Compile Include="Entities\SparepartManualTransaction.cs" />
     <Compile Include="Entities\SPK.cs" />
     <Compile Include="Entities\SPKDetailMechanic %28Deleted%29.cs" />
     <Compile Include="Entities\SPKDetailSparepart.cs" />
@@ -107,6 +115,8 @@
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TransactionDetail.cs" />
+    <Compile Include="Entities\UsedGoods.cs" />
+    <Compile Include="Entities\UsedGoodsTransaction.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\Vehicle.cs" />
@@ -122,6 +132,8 @@
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\GuestBookRepostory.cs" />
+    <Compile Include="Repositories\InvoiceDetailRepository.cs" />
+    <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\JournalMasterRepository.cs" />
     <Compile Include="Repositories\MechanicRepository.cs" />
     <Compile Include="Repositories\PurchasingDetailRepository.cs" />
@@ -131,6 +143,7 @@
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\SparepartDetailRepository.cs" />
+    <Compile Include="Repositories\SparepartManualTransactionRepository.cs" />
     <Compile Include="Repositories\SparepartRepository.cs" />
     <Compile Include="Repositories\SPKDetailMechanicRepository.cs" />
     <Compile Include="Repositories\SPKDetailSparepartRepository.cs" />
@@ -140,6 +153,8 @@
     <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\TransactionDetailRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
+    <Compile Include="Repositories\UsedGoodsRepository.cs" />
+    <Compile Include="Repositories\UsedGoodsTransactionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\VehicleDetailRepository.cs" />

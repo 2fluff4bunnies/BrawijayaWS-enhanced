@@ -17,5 +17,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int PurchasingDetailId { get; set; }
         public virtual PurchasingDetail PurchasingDetail { get; set; }
+
+        public int SparepartManualTransactionId { get; set; }
+        public virtual SparepartManualTransaction SparepartManualTransaction { get; set; }
     }
 }
