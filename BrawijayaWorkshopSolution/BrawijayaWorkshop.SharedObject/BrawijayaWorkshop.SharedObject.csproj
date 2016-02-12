@@ -46,15 +46,28 @@
     <Compile Include="ViewModels\BaseStatusEntityViewModel.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\GuestBookViewModel.cs" />
     <Compile Include="ViewModels\JournalMasterViewModel.cs" />
+    <Compile Include="ViewModels\MechanicViewModel.cs" />
     <Compile Include="ViewModels\PurchasingDetailViewModel.cs" />
     <Compile Include="ViewModels\PurchasingViewModel.cs" />
     <Compile Include="ViewModels\ReferenceViewModel.cs" />
     <Compile Include="ViewModels\RoleAccessViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
+    <Compile Include="ViewModels\SparepartDetailViewModel.cs" />
+    <Compile Include="ViewModels\SparepartViewModel.cs" />
+    <Compile Include="ViewModels\SPKDetailSparepartDetailViewModel.cs" />
+    <Compile Include="ViewModels\SPKDetailSparepartViewModel.cs" />
+    <Compile Include="ViewModels\SPKScheduleViewModel.cs" />
+    <Compile Include="ViewModels\SPKViewModel.cs" />
+    <Compile Include="ViewModels\SupplierViewModel.cs" />
+    <Compile Include="ViewModels\TransactionDetailViewModel.cs" />
+    <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\VehicleDetailViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

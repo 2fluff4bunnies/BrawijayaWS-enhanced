@@ -1,9 +1,5 @@
-﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using System.Collections.Generic;
-using System.Linq;
-
 
 namespace BrawijayaWorkshop.Database.Repositories
 {
@@ -12,7 +8,6 @@ namespace BrawijayaWorkshop.Database.Repositories
         public SPKScheduleRepository(IDatabaseFactory<BrawijayaWorkshopDbContext> databaseFactory)
             : base(databaseFactory) { }
     }
-
 
     public interface ISPKScheduleRepository : IRepository<SPKSchedule, BrawijayaWorkshopDbContext>
     {

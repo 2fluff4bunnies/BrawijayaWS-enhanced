@@ -69,6 +69,11 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            ApplicationModul accMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_ACCESSIBILITY,
+                ModulDescription = "Accessibility Modul"
+            });
             ApplicationModul userControlMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_USERCONTROL,
@@ -158,6 +163,12 @@ namespace BrawijayaWorkshop.Database
             context.SaveChanges();
 
             // superadmin
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = accMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = userControlMod.Id,
@@ -315,6 +326,12 @@ namespace BrawijayaWorkshop.Database
             {
                 ApplicationModulId = approvalMod.Id,
                 RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = userControlMod.Id,
+                RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.SaveChanges();

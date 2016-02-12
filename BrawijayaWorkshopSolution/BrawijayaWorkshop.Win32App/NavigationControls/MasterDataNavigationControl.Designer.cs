@@ -32,12 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterDataNavigationControl));
             this.navbarMasterData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupMasterData = new DevExpress.XtraNavBar.NavBarGroup();
+            this.iManageRole = new DevExpress.XtraNavBar.NavBarItem();
+            this.iManageRoleAccess = new DevExpress.XtraNavBar.NavBarItem();
+            this.iManageUser = new DevExpress.XtraNavBar.NavBarItem();
+            this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
             this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
-            this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
@@ -55,7 +58,10 @@
             this.iSparepart,
             this.iMechanic,
             this.iVehicle,
-            this.iJournal});
+            this.iJournal,
+            this.iManageRole,
+            this.iManageUser,
+            this.iManageRoleAccess});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -69,6 +75,9 @@
             this.navbarGroupMasterData.Caption = "Master Data";
             this.navbarGroupMasterData.Expanded = true;
             this.navbarGroupMasterData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iManageRole),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iManageRoleAccess),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iManageUser),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournal),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
@@ -76,6 +85,30 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
+            // 
+            // iManageRole
+            // 
+            this.iManageRole.Caption = "Role Manager";
+            this.iManageRole.Name = "iManageRole";
+            this.iManageRole.SmallImageIndex = 7;
+            // 
+            // iManageRoleAccess
+            // 
+            this.iManageRoleAccess.Caption = "Role Accessibility";
+            this.iManageRoleAccess.Name = "iManageRoleAccess";
+            this.iManageRoleAccess.SmallImageIndex = 8;
+            // 
+            // iManageUser
+            // 
+            this.iManageUser.Caption = "User Manager";
+            this.iManageUser.Name = "iManageUser";
+            this.iManageUser.SmallImageIndex = 6;
+            // 
+            // iJournal
+            // 
+            this.iJournal.Caption = "Kode Jurnal";
+            this.iJournal.Name = "iJournal";
+            this.iJournal.SmallImageIndex = 5;
             // 
             // iCustomer
             // 
@@ -107,12 +140,6 @@
             this.iVehicle.Name = "iVehicle";
             this.iVehicle.SmallImageIndex = 3;
             // 
-            // iJournal
-            // 
-            this.iJournal.Caption = "Kode Jurnal";
-            this.iJournal.Name = "iJournal";
-            this.iJournal.SmallImageIndex = 5;
-            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -122,6 +149,9 @@
             this.imageCollection.Images.SetKeyName(3, "Truck-Left-Green-icon-16x16.png");
             this.imageCollection.Images.SetKeyName(4, "mechanic 16x16.png");
             this.imageCollection.Images.SetKeyName(5, "journal-icon.png");
+            this.imageCollection.Images.SetKeyName(6, "users_32x32.png");
+            this.imageCollection.Images.SetKeyName(7, "role_32x32.png");
+            this.imageCollection.Images.SetKeyName(8, "role_access_16x16.png");
             // 
             // MasterDataNavigationControl
             // 
@@ -147,5 +177,8 @@
         public DevExpress.XtraNavBar.NavBarItem iMechanic;
         public DevExpress.XtraNavBar.NavBarItem iVehicle;
         public DevExpress.XtraNavBar.NavBarItem iJournal;
+        public DevExpress.XtraNavBar.NavBarItem iManageRole;
+        public DevExpress.XtraNavBar.NavBarItem iManageUser;
+        public DevExpress.XtraNavBar.NavBarItem iManageRoleAccess;
     }
 }
