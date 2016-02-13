@@ -120,12 +120,22 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewRoleAccess_Click(object sender, EventArgs e)
         {
+            RoleAccessEditorForm editor = Bootstrapper.Resolve<RoleAccessEditorForm>();
+            editor.ShowDialog(this);
 
+            RefreshDataView();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
+            if(_selectedRoleAccess != null)
+            {
+                RoleAccessEditorForm editor = Bootstrapper.Resolve<RoleAccessEditorForm>();
+                editor.SelectedRoleAccess = _selectedRoleAccess;
+                editor.ShowDialog(this);
 
+                RefreshDataView();
+            }
         }
 
         private void cmsDeleteData_Click(object sender, EventArgs e)

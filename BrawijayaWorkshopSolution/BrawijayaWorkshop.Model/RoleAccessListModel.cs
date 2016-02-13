@@ -12,21 +12,27 @@ namespace BrawijayaWorkshop.Model
     {
         private IRoleAccessRepository _roleAccessRepository;
         private IRoleRepository _roleRepository;
+        private IApplicationModulRepository _applicationModulRepository;
         private IUnitOfWork _unitOfWork;
 
         public RoleAccessListModel(IRoleAccessRepository roleAccessRepository,
-            IRoleRepository roleRepository, IUnitOfWork unitOfWork)
+            IRoleRepository roleRepository, IApplicationModulRepository applicationModulRepository,
+            IUnitOfWork unitOfWork)
             :base()
         {
             _roleAccessRepository = roleAccessRepository;
+
             _roleRepository = roleRepository;
+            _applicationModulRepository = applicationModulRepository;
+
             _unitOfWork = unitOfWork;
         }
 
         public List<RoleAccessViewModel> RetrieveAllRoleAccess()
         {
             Role superAdminRole = _roleRepository.GetMany(r => string.Compare(r.Name, DbConstant.ROLE_SUPERADMIN, true) == 0).FirstOrDefault();
-            List<RoleAccess> result = _roleAccessRepository.GetMany(ra => ra.RoleId != superAdminRole.Id).ToList();
+            ApplicationModul accessibilityModul = _applicationModulRepository.GetMany(a => string.Compare(a.ModulName, DbConstant.MODUL_ACCESSIBILITY, true) == 0).FirstOrDefault();
+            List<RoleAccess> result = _roleAccessRepository.GetMany(ra => ra.RoleId != superAdminRole.Id && ra.ApplicationModulId != accessibilityModul.Id).ToList();
             List<RoleAccessViewModel> mappedResult = new List<RoleAccessViewModel>();
             return Map(result, mappedResult);
         }

@@ -84,7 +84,7 @@ namespace BrawijayaWorkshop.Win32App
                 btnConfig.Visible = false;
                 
             }
-            if (LoginInformation.RoleName != DbConstant.ROLE_MANAGER &&
+            if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN &&
                 LoginInformation.RoleName != DbConstant.ROLE_ADMIN &&
                 LoginInformation.RoleName != DbConstant.ROLE_MANAGER)
             {

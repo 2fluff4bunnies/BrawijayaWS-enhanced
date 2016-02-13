@@ -109,6 +109,10 @@
       <Project>{baba5337-e545-4419-a55a-cfcb5c9f5806}</Project>
       <Name>BrawijayaWorkshop.SharedObject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BrawijayaWorkshop.Utils\BrawijayaWorkshop.Utils.csproj">
+      <Project>{49f696dc-cd3f-491e-a729-1b78cb550dda}</Project>
+      <Name>BrawijayaWorkshop.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

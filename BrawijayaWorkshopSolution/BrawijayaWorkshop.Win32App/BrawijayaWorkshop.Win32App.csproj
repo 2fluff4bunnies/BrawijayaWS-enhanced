@@ -259,6 +259,12 @@
     <Compile Include="ModulForms\PurchasingEditorForm.Designer.cs">
       <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\RoleAccessEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\RoleAccessEditorForm.Designer.cs">
+      <DependentUpon>RoleAccessEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\RoleEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -438,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\PurchasingEditorForm.resx">
       <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\RoleAccessEditorForm.resx">
+      <DependentUpon>RoleAccessEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\RoleEditorForm.resx">
       <DependentUpon>RoleEditorForm.cs</DependentUpon>
