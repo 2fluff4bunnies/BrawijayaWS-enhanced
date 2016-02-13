@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace BrawijayaWorkshop.Database.Configurations
 {
-    internal class UsedGoodsConfiguration : EntityTypeConfiguration<UsedGoods>
+    internal class UsedGoodsConfiguration : EntityTypeConfiguration<UsedGood>
     {
         public UsedGoodsConfiguration()
         {

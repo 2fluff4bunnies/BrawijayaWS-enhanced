@@ -115,8 +115,8 @@
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TransactionDetail.cs" />
-    <Compile Include="Entities\UsedGoods.cs" />
-    <Compile Include="Entities\UsedGoodsTransaction.cs" />
+    <Compile Include="Entities\UsedGood.cs" />
+    <Compile Include="Entities\UsedGoodTransaction.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\Vehicle.cs" />

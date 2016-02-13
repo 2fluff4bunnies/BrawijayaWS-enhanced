@@ -39,8 +39,8 @@
             this.gvRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colRoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ubahDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hapusDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
@@ -74,6 +74,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtFilterRole
             // 
@@ -102,6 +103,7 @@
             this.btnNewRole.Size = new System.Drawing.Size(120, 23);
             this.btnNewRole.TabIndex = 3;
             this.btnNewRole.Text = "Buat Role Baru";
+            this.btnNewRole.Click += new System.EventHandler(this.btnNewRole_Click);
             // 
             // gridRole
             // 
@@ -147,24 +149,31 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ubahDataToolStripMenuItem,
-            this.hapusDataToolStripMenuItem});
+            this.cmsEditData,
+            this.cmsDeleteData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(136, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 70);
             // 
-            // ubahDataToolStripMenuItem
+            // cmsEditData
             // 
-            this.ubahDataToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.ubahDataToolStripMenuItem.Name = "ubahDataToolStripMenuItem";
-            this.ubahDataToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.ubahDataToolStripMenuItem.Text = "Ubah Data";
+            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditData.Name = "cmsEditData";
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
-            // hapusDataToolStripMenuItem
+            // cmsDeleteData
             // 
-            this.hapusDataToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
-            this.hapusDataToolStripMenuItem.Name = "hapusDataToolStripMenuItem";
-            this.hapusDataToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.hapusDataToolStripMenuItem.Text = "Hapus Data";
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // RoleListControl
             // 
@@ -197,8 +206,8 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvRole;
         private DevExpress.XtraGrid.Columns.GridColumn colRoleName;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem ubahDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hapusDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.ComponentModel.BackgroundWorker bgwMain;
     }
 }

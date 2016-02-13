@@ -187,6 +187,12 @@
     <Compile Include="ModulControls\PurchasingListControl.Designer.cs">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\RoleAccessListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\RoleAccessListControl.Designer.cs">
+      <DependentUpon>RoleAccessListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\RoleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,6 +258,12 @@
     </Compile>
     <Compile Include="ModulForms\PurchasingEditorForm.Designer.cs">
       <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\RoleEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\RoleEditorForm.Designer.cs">
+      <DependentUpon>RoleEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.cs">
       <SubType>Form</SubType>
@@ -391,6 +403,9 @@
     <EmbeddedResource Include="ModulControls\PurchasingListControl.resx">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\RoleAccessListControl.resx">
+      <DependentUpon>RoleAccessListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RoleListControl.resx">
       <DependentUpon>RoleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\PurchasingEditorForm.resx">
       <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\RoleEditorForm.resx">
+      <DependentUpon>RoleEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>

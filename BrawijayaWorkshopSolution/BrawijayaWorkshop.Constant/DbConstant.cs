@@ -47,7 +47,6 @@ namespace BrawijayaWorkshop.Constant
         public const string SETTING_FINGERPRINT_PORT = "S_FINGERPRINT_PORT";
         public const string SETTING_SPK_THRESHOLD_P = "S_SPK_THRESHOLD_P";
         public const string SETTING_SPK_THRESHOLD_S = "S_SPK_THRESHOLD_S";
-     
 
         public enum AccessTypeEnum
         {
@@ -114,6 +113,5 @@ namespace BrawijayaWorkshop.Constant
             NotVerified = 0,
             Active = 1,
         }
-
     }
 }

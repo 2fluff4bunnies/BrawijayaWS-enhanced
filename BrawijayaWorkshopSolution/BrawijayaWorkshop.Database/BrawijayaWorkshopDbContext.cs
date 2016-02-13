@@ -20,20 +20,30 @@ namespace BrawijayaWorkshop.Database
         public DbSet<JournalMaster> JournalMasters { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Purchasing> Purchasings { get; set; }
-        public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Reference> References { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
         public DbSet<Sparepart> Spareparts { get; set; }
         public DbSet<SparepartDetail> SparepartDetails { get; set; }
+        public DbSet<Wheel> Wheels { get; set; }
+        public DbSet<WheelDetail> WheelDetails { get; set; }
+        public DbSet<Purchasing> Purchasings { get; set; }
+        public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleDetail> VehicleDetails { get; set; }
+        public DbSet<VehicleWheel> VehicleWheels { get; set; }
+        public DbSet<GuestBook> GuestBooks { get; set; }
         public DbSet<SPK> SPKs { get; set; }
-        public DbSet<SPKDetailMechanic> SPKDetailMechanics { get; set; }
+        public DbSet<SPKDetailMechanic> SPKDetailMechanics { get; set; } // must be deleted
+        public DbSet<SPKSchedule> SPKSchedules { get; set; }
         public DbSet<SPKDetailSparepart> SPKDetailSpareparts { get; set; }
         public DbSet<SPKDetailSparepartDetail> SPKDetailSparepartDetails { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
+        public DbSet<UsedGood> UsedGoods { get; set; }
+        public DbSet<UsedGoodTransaction> UsedGoodsTransactions { get; set; }
 
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }

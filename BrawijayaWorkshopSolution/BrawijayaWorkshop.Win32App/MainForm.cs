@@ -82,8 +82,11 @@ namespace BrawijayaWorkshop.Win32App
             if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN)
             {
                 btnConfig.Visible = false;
+                
             }
-            if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER)
+            if (LoginInformation.RoleName != DbConstant.ROLE_MANAGER &&
+                LoginInformation.RoleName != DbConstant.ROLE_ADMIN &&
+                LoginInformation.RoleName != DbConstant.ROLE_MANAGER)
             {
                 iMaster.Visibility = BarItemVisibility.Never;
             }
@@ -252,13 +255,16 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             MasterDataNavigationControl navMasterData = new MasterDataNavigationControl();
-
+            // init visibility based on role access
             navMasterData.iSupplier.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SUPPLIER);
             navMasterData.iCustomer.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_CUSTOMER);
             navMasterData.iSparepart.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
             navMasterData.iMechanic.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MECHANIC);
             navMasterData.iVehicle.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLE);
             navMasterData.iJournal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
+            navMasterData.iManageRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
+            navMasterData.iManageRoleAccess.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
+            navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -268,6 +274,25 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
             navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
             navMasterData.iJournal.LinkClicked += iJournal_LinkClicked;
+            navMasterData.iManageRole.LinkClicked += iManageRole_LinkClicked;
+            navMasterData.iManageRoleAccess.LinkClicked += iManageRoleAccess_LinkClicked;
+            navMasterData.iManageUser.LinkClicked += iManageUser_LinkClicked;
+        }
+
+        private void iManageUser_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void iManageRoleAccess_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void iManageRole_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            RoleListControl listRole = Bootstrapper.Resolve<RoleListControl>();
+            ShowUserControl(listRole);
         }
 
         private void iJournal_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class UsedGoodsTransaction : BaseModifierEntity
+    public class UsedGoodTransaction : BaseModifierEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -13,7 +13,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public DateTime TransactionDate { get; set; }
 
         public int UsedGoodsId { get; set; }
-        public virtual UsedGoods UsedGoods { get; set; }
+        public virtual UsedGood UsedGoods { get; set; }
 
         [Required]
         public double TotalPrice { get; set; }
