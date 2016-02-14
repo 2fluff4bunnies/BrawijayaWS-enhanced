@@ -26,5 +26,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int TypeReferenceId { get; set; }
         public virtual Reference TypeReference { get; set; }
+
+        public string Remark { get; set; }
     }
 }

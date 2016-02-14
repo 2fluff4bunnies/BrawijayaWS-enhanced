@@ -157,11 +157,23 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\CreditListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\CreditListControl.Designer.cs">
+      <DependentUpon>CreditListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\CustomerListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ModulControls\CustomerListControl.Designer.cs">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\DebtListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\DebtListControl.Designer.cs">
+      <DependentUpon>DebtListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\JournalMasterListControl.cs">
       <SubType>UserControl</SubType>
@@ -222,6 +234,12 @@
     </Compile>
     <Compile Include="ModulControls\TestUserControl.Designer.cs">
       <DependentUpon>TestUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\UsedGoodsListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\UsedGoodsListControl.Designer.cs">
+      <DependentUpon>UsedGoodsListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\VehicleListControl.cs">
       <SubType>UserControl</SubType>
@@ -300,6 +318,18 @@
     </Compile>
     <Compile Include="ModulForms\SPKViewDetailForm.Designer.cs">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\UsedGoodsEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\UsedGoodsEditorForm.Designer.cs">
+      <DependentUpon>UsedGoodsEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\UsedGoodsTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\UsedGoodsTransactionForm.Designer.cs">
+      <DependentUpon>UsedGoodsTransactionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\VehicleDetailEditorForm.cs">
       <SubType>Form</SubType>
@@ -394,8 +424,14 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\CreditListControl.resx">
+      <DependentUpon>CreditListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\CustomerListControl.resx">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\DebtListControl.resx">
+      <DependentUpon>DebtListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
@@ -426,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\TestUserControl.resx">
       <DependentUpon>TestUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\UsedGoodsListControl.resx">
+      <DependentUpon>UsedGoodsListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
@@ -462,6 +501,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\UsedGoodsEditorForm.resx">
+      <DependentUpon>UsedGoodsEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\UsedGoodsTransactionForm.resx">
+      <DependentUpon>UsedGoodsTransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>
