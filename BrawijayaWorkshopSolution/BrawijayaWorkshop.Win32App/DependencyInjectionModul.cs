@@ -25,18 +25,26 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IReferenceRepository>().To<ReferenceRepository>();
             Bind<ISparepartRepository>().To<SparepartRepository>();
             Bind<ISparepartDetailRepository>().To<SparepartDetailRepository>();
+            Bind<ISparepartManualTransactionRepository>().To<SparepartManualTransactionRepository>();
             Bind<ISupplierRepository>().To<SupplierRepository>();
             Bind<IVehicleRepository>().To<VehicleRepository>();
             Bind<IVehicleDetailRepository>().To<VehicleDetailRepository>();
+            Bind<IVehicleWheelRepository>().To<VehicleWheelRepository>();
+            Bind<IWheelRepository>().To<WheelRepository>();
+            Bind<IWheelDetailRepository>().To<WheelDetailRepository>();
             Bind<IJournalMasterRepository>().To<JournalMasterRepository>();
             Bind<IMechanicRepository>().To<MechanicRepository>();
             Bind<ISPKRepository>().To<SPKRepository>();
-            Bind<ISPKDetailMechanicRepository>().To<SPKDetailMechanicRepository>();
             Bind<ISPKDetailSparepartRepository>().To<SPKDetailSparepartRepository>();
             Bind<ISPKDetailSparepartDetailRepository>().To<SPKDetailSparepartDetailRepository>();
+            Bind<ISPKScheduleRepository>().To<SPKScheduleRepository>();
             Bind<ITransactionDetailRepository>().To<TransactionDetailRepository>();
             Bind<ITransactionRepository>().To<TransactionRepository>();
-
+            Bind<IInvoiceRepository>().To<InvoiceRepository>();
+            Bind<IInvoiceDetailRepository>().To<InvoiceDetailRepository>();
+            Bind<IUsedGoodRepository>().To<UsedGoodRepository>();
+            Bind<IUsedGoodTransactionRepository>().To<UsedGoodTransactionRepository>();
+            Bind<IGuestBookRepository>().To<GuestBookRepositories>();
             // todo: add binding
         }
     }

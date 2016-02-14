@@ -223,6 +223,12 @@
     <Compile Include="ModulControls\TestUserControl.Designer.cs">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\UserListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\UserListControl.Designer.cs">
+      <DependentUpon>UserListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\VehicleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -300,6 +306,12 @@
     </Compile>
     <Compile Include="ModulForms\SPKViewDetailForm.Designer.cs">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\UserEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\UserEditorForm.Designer.cs">
+      <DependentUpon>UserEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\VehicleDetailEditorForm.cs">
       <SubType>Form</SubType>
@@ -427,6 +439,9 @@
     <EmbeddedResource Include="ModulControls\TestUserControl.resx">
       <DependentUpon>TestUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\UserListControl.resx">
+      <DependentUpon>UserListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -462,6 +477,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\UserEditorForm.resx">
+      <DependentUpon>UserEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>

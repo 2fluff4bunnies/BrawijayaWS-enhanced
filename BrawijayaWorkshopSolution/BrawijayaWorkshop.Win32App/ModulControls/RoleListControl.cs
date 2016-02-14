@@ -194,5 +194,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data role selesai", true);
         }
+
+        private void txtFilterRole_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+            }
+        }
     }
 }
