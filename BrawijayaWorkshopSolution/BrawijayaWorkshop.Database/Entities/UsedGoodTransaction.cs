@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class UsedGoodTransaction : BaseModifierEntity
+    public class UsedGoodTransaction : BaseModifierWithStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
