@@ -1,15 +1,15 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SPKListModel : BaseModel
+    public class SPKListModel : AppBaseModel
     {
         private ISPKRepository _SPKRepository;
         private IVehicleRepository _vehicleRepository;
@@ -19,6 +19,7 @@ namespace BrawijayaWorkshop.Model
 
         public SPKListModel(ISPKRepository SPKRepository, IReferenceRepository referenceRepository,
             IVehicleRepository vehicleRepository, IVehicleDetailRepository vehicleDetailRepository, IUnitOfWork unitOfWork)
+            :base()
         {
             _SPKRepository = SPKRepository;
             _vehicleRepository = vehicleRepository;
@@ -27,7 +28,7 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SPK> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, 
+        public List<SPKViewModel> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, 
             DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus)
         {
             List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
@@ -57,7 +58,7 @@ namespace BrawijayaWorkshop.Model
                 }
                 else
                 {
-                    return new List<SPK>();
+                    return new List<SPKViewModel>();
                 }
             }
 
@@ -71,10 +72,12 @@ namespace BrawijayaWorkshop.Model
                 result = result.Where(spk => spk.CategoryReferenceId == category).ToList();
             }
 
-            return result;
+            List<SPKViewModel> mappedResult = new List<SPKViewModel>();
+
+            return Map(result, mappedResult);
         }
 
-        public List<Reference> GetSPKCategoryList()
+        public List<ReferenceViewModel> GetSPKCategoryList()
         {
             Reference spkCategory = _referenceRepository.GetMany(r => string.Compare(r.Code, DbConstant.REF_SPKCATEGORY, true) == 0).FirstOrDefault();
             List<Reference> result = _referenceRepository.GetMany(r => r.ParentId == spkCategory.Id).ToList();
@@ -86,17 +89,20 @@ namespace BrawijayaWorkshop.Model
                 Description = "Semua Kategori"
             });
 
-            return result;
+            List<ReferenceViewModel> mappedResult = new List<ReferenceViewModel>();
+
+            return Map(result, mappedResult);
 
         }
 
-        public List<Vehicle> GetSPKVehicleList()
+        public List<VehicleViewModel> GetSPKVehicleList()
         {
             List<Vehicle> result = _vehicleRepository.GetMany(v => v.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
-            return result;
+            List<VehicleViewModel> mappedResult = new List<VehicleViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public void PrintSPK(SPK spk, int userId)
+        public void PrintSPK(SPKViewModel spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -104,7 +110,9 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
 
-            _SPKRepository.Update(spk);
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            Map(spk, entity);
+            _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
         }

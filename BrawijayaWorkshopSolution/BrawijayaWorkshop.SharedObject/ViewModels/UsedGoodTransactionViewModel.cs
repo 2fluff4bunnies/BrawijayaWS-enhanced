@@ -2,7 +2,7 @@
 
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
-    public class UsedGoodTransactionViewModel: BaseModifierWithStatusViewModel
+    public class UsedGoodTransactionViewModel: BaseModifierEntityViewModel
     {
         public int Id { get; set; }
         public DateTime TransactionDate { get; set; }

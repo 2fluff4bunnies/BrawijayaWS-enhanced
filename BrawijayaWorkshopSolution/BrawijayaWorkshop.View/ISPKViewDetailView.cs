@@ -1,6 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
-using System;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
@@ -11,14 +10,12 @@ namespace BrawijayaWorkshop.View
         string ApprovalEmailFrom { get; set; }
         string ApprovalEmailTo { get; set; }
 
-        SPK SelectedSPK { get; set; }
-        SPK ParentSPK { get; set; }
+        SPKViewModel SelectedSPK { get; set; }
+        SPKViewModel ParentSPK { get; set; }
 
-        List<SPKDetailMechanic> SPKMechanicList { get; set; }
-        List<SPKDetailSparepart> SPKSparepartList { get; set; }
-        List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
+        //List<SPKDetailMechanic> SPKMechanicList { get; set; }
 
-
-
+        List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }
+        List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
     }
 }

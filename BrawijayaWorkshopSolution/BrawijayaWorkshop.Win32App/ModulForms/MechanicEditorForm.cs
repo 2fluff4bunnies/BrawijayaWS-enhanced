@@ -1,10 +1,9 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
-using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.View;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -64,7 +63,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public string FingerpringPort { get; set; }
 
-        public Mechanic SelectedMechanic { get; set; }
+        public MechanicViewModel SelectedMechanic { get; set; }
 
         #region Field Editor
 

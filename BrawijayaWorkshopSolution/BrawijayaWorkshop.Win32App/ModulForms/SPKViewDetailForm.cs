@@ -1,19 +1,16 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.PrintItems;
 using BrawijayaWorkshop.Win32App.Properties;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
@@ -163,35 +160,35 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public bool IsSetAsComplete { get; set; }
 
-        public SPK SelectedSPK { get; set; }
+        public SPKViewModel SelectedSPK { get; set; }
 
-        public SPK ParentSPK { get; set; }
+        public SPKViewModel ParentSPK { get; set; }
 
-        public List<SPKDetailMechanic> SPKMechanicList
+        //public List<SPKDetailMechanic> SPKMechanicList
+        //{
+        //    get
+        //    {
+        //        return gcMechanic.DataSource as List<SPKDetailMechanic>;
+        //    }
+        //    set
+        //    {
+        //        if (InvokeRequired)
+        //        {
+        //            this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
+        //        }
+        //        else
+        //        {
+        //            gcMechanic.DataSource = value;
+        //            gvMechanic.BestFitColumns();
+        //        }
+        //    }
+        //}
+
+        public List<SPKDetailSparepartViewModel> SPKSparepartList
         {
             get
             {
-                return gcMechanic.DataSource as List<SPKDetailMechanic>;
-            }
-            set
-            {
-                if (InvokeRequired)
-                {
-                    this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
-                }
-                else
-                {
-                    gcMechanic.DataSource = value;
-                    gvMechanic.BestFitColumns();
-                }
-            }
-        }
-
-        public List<SPKDetailSparepart> SPKSparepartList
-        {
-            get
-            {
-                return gcSparepart.DataSource as List<SPKDetailSparepart>;
+                return gcSparepart.DataSource as List<SPKDetailSparepartViewModel>;
             }
             set
             {
@@ -207,7 +204,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
+        public List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
 
 
         #endregion
@@ -251,7 +248,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void btnPrint_Click(object sender, EventArgs e)
         {
             SPKPrintItem report = new SPKPrintItem();
-            List<SPK> _dataSource = new List<SPK>();
+            List<SPKViewModel> _dataSource = new List<SPKViewModel>();
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();

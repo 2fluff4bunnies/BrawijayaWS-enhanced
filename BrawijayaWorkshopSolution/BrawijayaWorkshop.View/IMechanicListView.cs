@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
@@ -11,8 +11,8 @@ namespace BrawijayaWorkshop.View
 
         string MechanicNameFilter { get; set; }
 
-        List<Mechanic> MechanicListData { get; set; }
+        List<MechanicViewModel> MechanicListData { get; set; }
 
-        Mechanic SelectedMechanic { get; set; }
+        MechanicViewModel SelectedMechanic { get; set; }
     }
 }

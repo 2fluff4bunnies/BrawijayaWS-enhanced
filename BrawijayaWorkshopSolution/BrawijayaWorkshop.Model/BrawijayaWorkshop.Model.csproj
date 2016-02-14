@@ -81,6 +81,7 @@
     <Compile Include="SPKListModel.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />
+    <Compile Include="UserListModel.cs" />
     <Compile Include="VehicleDetailListModel.cs" />
     <Compile Include="VehicleDetailEditorModel.cs" />
     <Compile Include="VehicleEditorModel.cs" />

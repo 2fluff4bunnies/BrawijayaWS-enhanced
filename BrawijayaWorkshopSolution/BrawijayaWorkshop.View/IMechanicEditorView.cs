@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 
 namespace BrawijayaWorkshop.View
 {
@@ -8,7 +8,7 @@ namespace BrawijayaWorkshop.View
         string FingerprintIP { get; set; }
         string FingerpringPort { get; set; }
 
-        Mechanic SelectedMechanic { get; set; }
+        MechanicViewModel SelectedMechanic { get; set; }
 
         string Code { get; set; }
         string MechanicName { get; set; }
