@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -54,7 +54,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         #region Filter Fields
 
-        public SPK SelectedSPK { get; set; }
+        public SPKViewModel SelectedSPK { get; set; }
 
         public int ApprovalStatusFilter
         {
@@ -128,11 +128,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Reference> CategoryDropdownList
+        public List<ReferenceViewModel> CategoryDropdownList
         {
             get
             {
-                return lookUpCategory.Properties.DataSource as List<Reference>;
+                return lookUpCategory.Properties.DataSource as List<ReferenceViewModel>;
             }
             set
             {
@@ -140,11 +140,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<SPK> SPKListData
+        public List<SPKViewModel> SPKListData
         {
             get
             {
-                return gcSPK.DataSource as List<SPK>;
+                return gcSPK.DataSource as List<SPKViewModel>;
             }
             set
             {
@@ -205,14 +205,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
-                this.SelectedSPK = gvSPK.GetRow(view.FocusedRowHandle) as SPK;
+                this.SelectedSPK = gvSPK.GetRow(view.FocusedRowHandle) as SPKViewModel;
                 ApplyCMSSetting();
             }
         }
 
         void gvSPK_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSPK = gvSPK.GetRow(e.FocusedRowHandle) as SPK;
+            this.SelectedSPK = gvSPK.GetRow(e.FocusedRowHandle) as SPKViewModel;
         }
 
         void ApplyCMSSetting()
@@ -306,7 +306,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void cmsPrintData_Click(object sender, EventArgs e)
         {
             SPKPrintItem report = new SPKPrintItem();
-            List<SPK> _dataSource = new List<SPK>();
+            List<SPKViewModel> _dataSource = new List<SPKViewModel>();
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();

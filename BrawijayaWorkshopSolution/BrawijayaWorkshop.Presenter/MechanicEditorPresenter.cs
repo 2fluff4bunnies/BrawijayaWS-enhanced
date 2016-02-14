@@ -1,12 +1,7 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -37,7 +32,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedMechanic == null)
             {
-                View.SelectedMechanic = new Mechanic();
+                View.SelectedMechanic = new MechanicViewModel();
             }
 
             View.SelectedMechanic.Code = View.Code;

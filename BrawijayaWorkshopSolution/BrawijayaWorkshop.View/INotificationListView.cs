@@ -1,13 +1,13 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface INotificationListView : IView
     {
-        List<SPK> SPKListData { get; set; }
+        List<SPKViewModel> SPKListData { get; set; }
 
-        SPK SelectedSPK { get; set; }
+        SPKViewModel SelectedSPK { get; set; }
     }
 }

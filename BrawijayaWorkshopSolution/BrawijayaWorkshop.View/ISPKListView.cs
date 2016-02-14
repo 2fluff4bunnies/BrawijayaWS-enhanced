@@ -1,10 +1,6 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
-using System;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.View
 {
@@ -22,11 +18,11 @@ namespace BrawijayaWorkshop.View
 
         int CompletedStatusFilter { get; set; }
 
-        List<Reference> CategoryDropdownList { get; set; }
+        List<ReferenceViewModel> CategoryDropdownList { get; set; }
 
-        List<SPK> SPKListData { get; set; }
+        List<SPKViewModel> SPKListData { get; set; }
 
-        SPK SelectedSPK { get; set; }
+        SPKViewModel SelectedSPK { get; set; }
 
         List<SPKStatusItem> ApprovalStatusDropdownList { get; set; }
 

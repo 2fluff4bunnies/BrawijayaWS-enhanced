@@ -281,12 +281,14 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iManageUser_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            throw new NotImplementedException();
+            UserListControl listUser = Bootstrapper.Resolve<UserListControl>();
+            ShowUserControl(listUser);
         }
 
         private void iManageRoleAccess_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            throw new NotImplementedException();
+            RoleAccessListControl listRoleAccess = Bootstrapper.Resolve<RoleAccessListControl>();
+            ShowUserControl(listRoleAccess);
         }
 
         private void iManageRole_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

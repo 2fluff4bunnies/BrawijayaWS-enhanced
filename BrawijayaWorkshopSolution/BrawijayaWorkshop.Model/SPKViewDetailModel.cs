@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SPKViewDetailModel : BaseModel
+    public class SPKViewDetailModel : AppBaseModel
     {
         private IReferenceRepository _referenceRepository;
         private IVehicleRepository _vehicleRepository;
@@ -29,7 +30,8 @@ namespace BrawijayaWorkshop.Model
             ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository, ISPKDetailMechanicRepository SPKDetailMechanicRepository,
-            IMechanicRepository mechanicRepository,ISettingRepository settingRepository, IUnitOfWork unitOfWork)
+            IMechanicRepository mechanicRepository, ISettingRepository settingRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _referenceRepository = referenceRepository;
             _vehicleRepository = vehicleRepository;
@@ -44,38 +46,38 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SPKDetailSparepart> GetSPKSparepartList(int spkId)
+        public List<SPKDetailSparepartViewModel> GetSPKSparepartList(int spkId)
         {
             List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
-
-            return result;
+            List<SPKDetailSparepartViewModel> mappedResult = new List<SPKDetailSparepartViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
-        {
-            List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sms => sms.SPKId == spkId).ToList();
+        //public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
+        //{
+        //    List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sms => sms.SPKId == spkId).ToList();
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        public List<SPKDetailSparepartDetail> GetSPKSparepartDetailList(int spkId)
+        public List<SPKDetailSparepartDetailViewModel> GetSPKSparepartDetailList(int spkId)
         {
             List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
-
-            return result;
+            List<SPKDetailSparepartDetailViewModel> mappedResult = new List<SPKDetailSparepartDetailViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public bool ApproveSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId, bool isApproved, out List<Sparepart> warningList)
+        public bool ApproveSPK(SPKViewModel spk, List<SPKDetailSparepartViewModel> spkSparepartList, List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList, int userId, bool isApproved, out List<SparepartViewModel> warningList)
         {
             bool result = false;
             bool hasParent = false;
 
-            warningList = new List<Sparepart>();
+            warningList = new List<SparepartViewModel>();
 
             DateTime serverTime = DateTime.Now;
-            SPK spkParent =  _SPKRepository.GetById(spk.SPKparentId);
+            SPK spkParent = _SPKRepository.GetById(spk.SPKparentId);
 
-            if(spkParent != null)
+            if (spkParent != null)
             {
                 hasParent = true;
             }
@@ -88,7 +90,10 @@ namespace BrawijayaWorkshop.Model
                 spk.ModifyDate = serverTime;
                 spk.ModifyUserId = userId;
 
-                _SPKRepository.Update(spk);
+                SPK entity = _SPKRepository.GetById(spk.Id);
+                Map(spk, entity);
+
+                _SPKRepository.Update(entity);
 
                 foreach (var item in spkSparepartList)
                 {
@@ -101,7 +106,9 @@ namespace BrawijayaWorkshop.Model
 
                     if (sparepart.StockQty <= GetStockThreshold())
                     {
-                        warningList.Add(sparepart);
+                        SparepartViewModel viewModel = new SparepartViewModel();
+                        Map(sparepart, viewModel);
+                        warningList.Add(viewModel);
                     }
                 }
 
@@ -134,8 +141,10 @@ namespace BrawijayaWorkshop.Model
                 spk.ModifyDate = serverTime;
                 spk.ModifyUserId = userId;
 
-                _SPKRepository.Update(spk);
+                SPK entity = _SPKRepository.GetById(spk.Id);
+                Map(spk, entity);
 
+                _SPKRepository.Update(entity);
 
                 if (hasParent)
                 {
@@ -157,7 +166,7 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public void PrintSPK(SPK spk, int userId)
+        public void PrintSPK(SPKViewModel spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -165,13 +174,16 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
 
-            _SPKRepository.Update(spk);
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            Map(spk, entity);
+
+            _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
         }
 
 
-        public void AbortSPK(SPK spk, List<SPKDetailSparepart> spkSparepartList, List<SPKDetailSparepartDetail> spkSparepartDetailList, int userId)
+        public void AbortSPK(SPKViewModel spk, List<SPKDetailSparepartViewModel> spkSparepartList, List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -179,7 +191,10 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
 
-            _SPKRepository.Update(spk);
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            Map(spk, entity);
+
+            _SPKRepository.Update(entity);
 
             foreach (var item in spkSparepartList)
             {
@@ -205,20 +220,23 @@ namespace BrawijayaWorkshop.Model
 
         }
 
-        public void RequestPrintSPK(SPK spk, int userId)
-        { 
+        public void RequestPrintSPK(SPKViewModel spk, int userId)
+        {
             DateTime serverTime = DateTime.Now;
 
             spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
 
-            _SPKRepository.Update(spk);
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            Map(spk, entity);
+
+            _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
         }
 
-        public void ApprovePrintSPK(SPK spk, int userId, bool isApproved)
+        public void ApprovePrintSPK(SPKViewModel spk, int userId, bool isApproved)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -234,12 +252,15 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
 
-            _SPKRepository.Update(spk);
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            Map(spk, entity);
+
+            _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
         }
 
-        public void SetAsCompletedSPK(SPK spk, int userId)
+        public void SetAsCompletedSPK(SPKViewModel spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -247,7 +268,10 @@ namespace BrawijayaWorkshop.Model
             spk.ModifyDate = serverTime;
             spk.ModifyUserId = userId;
 
-            _SPKRepository.Update(spk);
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            Map(spk, entity);
+
+            _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
         }
@@ -256,7 +280,7 @@ namespace BrawijayaWorkshop.Model
         public int GetStockThreshold()
         {
             int result = 0;
-            
+
             string threshold = _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_P).FirstOrDefault().Value;
 
             int.TryParse(threshold, out result);

@@ -2,7 +2,7 @@
 
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
-    public class BaseModifierWithStatusViewModel
+    public class BaseModifierWithStatusViewModel : BaseStatusEntityViewModel
     {
         public DateTime CreateDate { get; set; }
         public int CreateUserId { get; set; }

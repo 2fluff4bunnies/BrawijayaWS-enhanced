@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     {
         public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         private MechanicListPresenter _presenter;
-        private Mechanic _selectedMechanic;
+        private MechanicViewModel _selectedMechanic;
 
         protected override string ModulName
         {
@@ -61,7 +61,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedMechanic = gvMechanic.GetFocusedRow() as Mechanic;
+            this.SelectedMechanic = gvMechanic.GetFocusedRow() as MechanicViewModel;
         }
 
         private void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -87,11 +87,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Mechanic> MechanicListData
+        public List<MechanicViewModel> MechanicListData
         {
             get
             {
-                return gridMechanic.DataSource as List<Mechanic>;
+                return gridMechanic.DataSource as List<MechanicViewModel>;
             }
             set
             {
@@ -106,7 +106,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public Mechanic SelectedMechanic
+        public MechanicViewModel SelectedMechanic
         {
             get
             {
@@ -209,7 +209,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (MechanicListData.Count > 0)
             {
                 gvMechanic.FocusedRowHandle = 0;
-                _selectedMechanic = gvMechanic.GetRow(0) as Mechanic;
+                _selectedMechanic = gvMechanic.GetRow(0) as MechanicViewModel;
             }
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Mechanic selesai", true);
         }

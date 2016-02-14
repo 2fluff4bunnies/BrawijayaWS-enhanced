@@ -1,12 +1,11 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
+using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System.Collections.Generic;
-using System.Linq;
-using BrawijayaWorkshop.Utils;
-using BrawijayaWorkshop.Constant;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -21,7 +20,7 @@ namespace BrawijayaWorkshop.Presenter
             View.FingerpringPort = Model.GetFingerprintPort();
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
-            View.MechanicLookupList = Model.LoadMechanic();
+            //View.MechanicLookupList = Model.LoadMechanic();
             View.SparepartLookupList = Model.LoadSparepart();
 
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
@@ -29,7 +28,7 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.ParentSPK != null)
             {
-                View.SelectedSPK = new SPK
+                View.SelectedSPK = new SPKViewModel
                 {
                     Vehicle = View.ParentSPK.Vehicle,
                     CategoryReference = View.ParentSPK.CategoryReference,
@@ -45,7 +44,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
                 View.Description = View.SelectedSPK.Description;
 
-                View.SPKMechanicList = Model.GetEndorsedSPKMechanicList(View.ParentSPK.Id);
+                //View.SPKMechanicList = Model.GetEndorsedSPKMechanicList(View.ParentSPK.Id);
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.SelectedSPK.Id);
             }
@@ -53,14 +52,14 @@ namespace BrawijayaWorkshop.Presenter
 
         public void UpdateMechanicList(List<string> availableCodes)
         {
-            View.MechanicLookupList = View.MechanicLookupList.Where(m => availableCodes.Contains(m.Code)).ToList();
+            //View.MechanicLookupList = View.MechanicLookupList.Where(m => availableCodes.Contains(m.Code)).ToList();
         }
 
         public void SaveChanges()
         {
             if (View.SelectedSPK == null)
             {
-                View.SelectedSPK = new SPK();
+                View.SelectedSPK = new SPKViewModel();
             }
 
             View.SelectedSPK.CategoryReferenceId = View.CategoryId;
@@ -69,7 +68,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.TotalSparepartPrice = View.TotalSparepartPrice;
             View.SelectedSPK.Description = View.Description;
 
-            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKMechanicList, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
+            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
         }
 
         public void populateSparepartDetail()

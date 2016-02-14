@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -40,13 +41,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             this.Load += NotificationListControl_Load;
         }
 
-        public SPK SelectedSPK { get; set; }
+        public SPKViewModel SelectedSPK { get; set; }
 
-        public List<SPK> SPKListData
+        public List<SPKViewModel> SPKListData
         {
             get
             {
-                return gridPendingSPK.DataSource as List<SPK>;
+                return gridPendingSPK.DataSource as List<SPKViewModel>;
             }
             set
             {
@@ -75,7 +76,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void gvPendingSPK_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSPK = gvPendingSPK.GetFocusedRow() as SPK;
+            this.SelectedSPK = gvPendingSPK.GetFocusedRow() as SPKViewModel;
         }
 
         private void approveToolStripItem_Click(object sender, EventArgs e)

@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 
@@ -14,23 +14,23 @@ namespace BrawijayaWorkshop.View
         string FingerprintIP { get; set; }
         string FingerpringPort { get; set; }
 
-        SPK SelectedSPK { get; set; }
-        SPK ParentSPK { get; set; }
+        SPKViewModel SelectedSPK { get; set; }
+        SPKViewModel ParentSPK { get; set; }
 
-        List<Vehicle> VehicleDropdownList { get; set; }
-        List<Reference> CategoryDropdownList { get; set; }
-        List<SPKDetailMechanic> SPKMechanicList { get; set; }
-        List<SPKDetailSparepart> SPKSparepartList { get; set; }
-        List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
+        List<VehicleViewModel> VehicleDropdownList { get; set; }
+        List<ReferenceViewModel> CategoryDropdownList { get; set; }
+        //List<SPKDetailMechanic> SPKMechanicList { get; set; }
+        List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }
+        List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
 
-        List<Sparepart> SparepartLookupList { get; set; }
-        List<Mechanic> MechanicLookupList { get; set; }
+        List<SparepartViewModel> SparepartLookupList { get; set; }
+        //List<MechanicViewModel> MechanicLookupList { get; set; }
 
-        Sparepart SparepartToInsert { get; }
-        Mechanic MechanicToInsert { get;}
+        SparepartViewModel SparepartToInsert { get; }
+        //MechanicViewModel MechanicToInsert { get; }
 
-        Sparepart SelectedSparepart { get; set; }
-        Mechanic SelectedMechanic { get; set; }
+        SparepartViewModel SelectedSparepart { get; set; }
+        //MechanicViewModel SelectedMechanic { get; set; }
 
         string Code { get; set; }
         DateTime DueDate { get; set; }
@@ -43,7 +43,7 @@ namespace BrawijayaWorkshop.View
 
         int MechanicId { get; set; }
         string MechanicName { get; set; }
-         string MechanicDescription { get; set; }
+        string MechanicDescription { get; set; }
 
         decimal RepairThreshold { get; set; }
         decimal ServiceThreshold { get; set; }

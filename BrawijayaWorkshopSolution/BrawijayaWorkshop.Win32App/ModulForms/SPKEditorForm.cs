@@ -1,21 +1,21 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using BrawijayaWorkshop.Win32App.Properties;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Linq;
-using BrawijayaWorkshop.Win32App.PrintItems;
-using DevExpress.XtraReports.UI;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -54,9 +54,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvMechanic.PopupMenuShowing += gvMechanic_PopupMenuShowing;
             gvMechanic.FocusedRowChanged += gvMechanic_FocusedRowChanged;
 
-            SPKSparepartList = new List<SPKDetailSparepart>();
-            SPKMechanicList = new List<SPKDetailMechanic>();
-            SPKSparepartDetailList = new List<SPKDetailSparepartDetail>();
+            SPKSparepartList = new List<SPKDetailSparepartViewModel>();
+            //SPKMechanicList = new List<SPKDetailMechanicViewModel>();
+            SPKSparepartDetailList = new List<SPKDetailSparepartDetailViewModel>();
 
             this.TotalSparepartPrice = 0;
             this.IsMechanicRegistered = true;
@@ -65,12 +65,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #region Field Editor
 
-        public SPK SelectedSPK { get; set; }
-        public SPK ParentSPK { get; set; }
-        public List<SPKDetailSparepartDetail> SPKSparepartDetailList { get; set; }
+        public SPKViewModel SelectedSPK { get; set; }
+        public SPKViewModel ParentSPK { get; set; }
+        public List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
         public string Code { get; set; }
-        public Sparepart SelectedSparepart { get; set; }
-        public Mechanic SelectedMechanic { get; set; }
+        public SparepartViewModel SelectedSparepart { get; set; }
+        public MechanicViewModel SelectedMechanic { get; set; }
         public decimal RepairThreshold { get; set; }
         public decimal ServiceThreshold { get; set; }
         public bool IsNeedApproval { get; set; }
@@ -99,11 +99,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<Vehicle> VehicleDropdownList
+        public List<VehicleViewModel> VehicleDropdownList
         {
             get
             {
-                return LookUpVehicle.Properties.DataSource as List<Vehicle>;
+                return LookUpVehicle.Properties.DataSource as List<VehicleViewModel>;
             }
             set
             {
@@ -111,11 +111,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<Reference> CategoryDropdownList
+        public List<ReferenceViewModel> CategoryDropdownList
         {
             get
             {
-                return lookUpCategory.Properties.DataSource as List<Reference>;
+                return lookUpCategory.Properties.DataSource as List<ReferenceViewModel>;
             }
             set
             {
@@ -123,32 +123,32 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKDetailMechanic> SPKMechanicList
+        //public List<SPKDetailMechanic> SPKMechanicList
+        //{
+        //    get
+        //    {
+        //        return gcMechanic.DataSource as List<SPKDetailMechanic>;
+        //    }
+        //    set
+        //    {
+        //        if (InvokeRequired)
+        //        {
+        //            this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
+        //        }
+        //        else
+        //        {
+        //            gcMechanic.DataSource = value;
+        //            gvMechanic.BestFitColumns();
+        //        }
+        //    }
+        //}
+
+        public List<SPKDetailSparepartViewModel> SPKSparepartList
         {
+
             get
             {
-                return gcMechanic.DataSource as List<SPKDetailMechanic>;
-            }
-            set
-            {
-                if (InvokeRequired)
-                {
-                    this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
-                }
-                else
-                {
-                    gcMechanic.DataSource = value;
-                    gvMechanic.BestFitColumns();
-                }
-            }
-        }
-
-        public List<SPKDetailSparepart> SPKSparepartList
-        {
-
-            get
-            {
-                return gcSparepart.DataSource as List<SPKDetailSparepart>;
+                return gcSparepart.DataSource as List<SPKDetailSparepartViewModel>;
             }
             set
             {
@@ -204,7 +204,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                Sparepart selected = lookUpSparepart.GetSelectedDataRow() as Sparepart;
+                SparepartViewModel selected = lookUpSparepart.GetSelectedDataRow() as SparepartViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
@@ -242,7 +242,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                Mechanic selected = lookUpMechanic.GetSelectedDataRow() as Mechanic;
+                MechanicViewModel selected = lookUpMechanic.GetSelectedDataRow() as MechanicViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
@@ -277,11 +277,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
 
-        public List<Sparepart> SparepartLookupList
+        public List<SparepartViewModel> SparepartLookupList
         {
             get
             {
-                return lookUpSparepart.Properties.DataSource as List<Sparepart>;
+                return lookUpSparepart.Properties.DataSource as List<SparepartViewModel>;
             }
             set
             {
@@ -289,11 +289,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
 
         }
-        public List<Mechanic> MechanicLookupList
+        public List<MechanicViewModel> MechanicLookupList
         {
             get
             {
-                return lookUpMechanic.Properties.DataSource as List<Mechanic>;
+                return lookUpMechanic.Properties.DataSource as List<MechanicViewModel>;
             }
             set
             {
@@ -301,20 +301,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public Mechanic MechanicToInsert
+        public MechanicViewModel MechanicToInsert
         {
             get
             {
-                return lookUpMechanic.GetSelectedDataRow() as Mechanic;
+                return lookUpMechanic.GetSelectedDataRow() as MechanicViewModel;
             }
 
         }
 
-        public Sparepart SparepartToInsert
+        public SparepartViewModel SparepartToInsert
         {
             get
             {
-                return lookUpSparepart.GetSelectedDataRow() as Sparepart;
+                return lookUpSparepart.GetSelectedDataRow() as SparepartViewModel;
             }
 
         }
@@ -345,7 +345,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         #region Methods
         protected override void ExecuteSave()
         {
-            if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0 && SPKMechanicList.Count > 0)
+            if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0)// && SPKMechanicList.Count > 0)
             {
                 try
                 {
@@ -359,7 +359,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     else
                     {
                         SPKPrintItem report = new SPKPrintItem();
-                        List<SPK> _dataSource = new List<SPK>();
+                        List<SPKViewModel> _dataSource = new List<SPKViewModel>();
                         _dataSource.Add(SelectedSPK);
                         report.DataSource = _dataSource;
                         report.FillDataSource();
@@ -382,7 +382,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             else
             {
-                if (SPKSparepartList.Count == 0 && SPKMechanicList.Count == 0)
+                if (SPKSparepartList.Count == 0)// && SPKMechanicList.Count == 0)
                 {
                     this.ShowError("Daftar sparepart dan mekanik kosong! masing-masing harus terisi, minimal 1");
                 }
@@ -392,10 +392,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     {
                         this.ShowError("Daftar sparepart kosong! Harus ada sparepart yang digunakan, minimal 1");
                     }
-                    if (SPKMechanicList.Count == 0)
-                    {
-                        this.ShowError("Daftar mekanik kosong! Harus ada mekanik yang terlibat, minimal 1");
-                    }
+                    //if (SPKMechanicList.Count == 0)
+                    //{
+                    //    this.ShowError("Daftar mekanik kosong! Harus ada mekanik yang terlibat, minimal 1");
+                    //}
                 }
             }
         }
@@ -425,7 +425,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
                     }
 
-                    SPKSparepartList.Add(new SPKDetailSparepart
+                    SPKSparepartList.Add(new SPKDetailSparepartViewModel
                     {
                         Sparepart = SparepartToInsert,
                         SparepartId = SparepartId,
@@ -440,7 +440,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         this.TotalSparepartPrice = this.TotalSparepartPrice + item.TotalPrice;
                     }
 
-                   
+
                 }
                 else
                 {
@@ -471,13 +471,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     if (MechanicToInsert != null)
                     {
-                        SPKMechanicList.Add(new SPKDetailMechanic
-                        {
-                            Name = this.MechanicToInsert.Name,
-                            Mechanic = this.MechanicToInsert,
-                            MechanicId = this.MechanicId,
-                            Description = this.MechanicDescription
-                        });
+                        //SPKMechanicList.Add(new SPKDetailMechanic
+                        //{
+                        //    Name = this.MechanicToInsert.Name,
+                        //    Mechanic = this.MechanicToInsert,
+                        //    MechanicId = this.MechanicId,
+                        //    Description = this.MechanicDescription
+                        //});
 
                         ClearMechanic();
                     }
@@ -492,11 +492,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     if (!string.IsNullOrEmpty(MechanicName))
                     {
-                        SPKMechanicList.Add(new SPKDetailMechanic
-                        {
-                            Name = this.MechanicName,
-                            Description = this.MechanicDescription
-                        });
+                        //SPKMechanicList.Add(new SPKDetailMechanic
+                        //{
+                        //    Name = this.MechanicName,
+                        //    Description = this.MechanicDescription
+                        //});
 
                         ClearMechanic();
                     }
@@ -515,7 +515,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             RefreshMechanicGrid();
 
-           
+
         }
 
         public void ClearMechanic()
@@ -530,8 +530,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public void RefreshMechanicGrid()
         {
-            gcMechanic.DataSource = SPKMechanicList;
-            gvMechanic.BestFitColumns();
+            //gcMechanic.DataSource = SPKMechanicList;
+            //gvMechanic.BestFitColumns();
         }
 
         public void RefreshSparepartGrid()
@@ -543,15 +543,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void cmsDeleteDataMechanic_Click(object sender, EventArgs e)
         {
-            SPKDetailMechanic mechanicToRemove = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
-            SPKMechanicList.Remove(mechanicToRemove);
+            //SPKDetailMechanic mechanicToRemove = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
+            //SPKMechanicList.Remove(mechanicToRemove);
 
             RefreshMechanicGrid();
         }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
-            SPKDetailSparepart SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepart;
+            SPKDetailSparepartViewModel SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepartViewModel;
             SPKSparepartList.Remove(SparepartToRemove);
 
             RefreshSparepartGrid();
@@ -672,7 +672,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedMechanic = gvMechanic.GetFocusedRow() as Mechanic;
+            this.SelectedMechanic = gvMechanic.GetFocusedRow() as MechanicViewModel;
         }
 
         void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -688,7 +688,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSparepart = gvSparepart.GetFocusedRow() as Sparepart;
+            this.SelectedSparepart = gvSparepart.GetFocusedRow() as SparepartViewModel;
         }
 
         void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)

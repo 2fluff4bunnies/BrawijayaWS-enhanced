@@ -1,14 +1,13 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using System.Collections.Generic;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class MechanicEditorModel : BaseModel
+    public class MechanicEditorModel : AppBaseModel
     {
         private ISettingRepository _settingRepository;
         private IMechanicRepository _mechanicRepository;
@@ -16,6 +15,7 @@ namespace BrawijayaWorkshop.Model
 
         public MechanicEditorModel(IMechanicRepository mechanicRepository,
             ISettingRepository settingRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _mechanicRepository = mechanicRepository;
             _settingRepository = settingRepository;
@@ -37,15 +37,19 @@ namespace BrawijayaWorkshop.Model
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
         }
 
-        public void InsertMechanic(Mechanic mechanic)
+        public void InsertMechanic(MechanicViewModel mechanic)
         {
-            _mechanicRepository.Add(mechanic);
+            Mechanic entity = new Mechanic();
+            Map(mechanic, entity);
+            _mechanicRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateMechanic(Mechanic mechanic)
+        public void UpdateMechanic(MechanicViewModel mechanic)
         {
-            _mechanicRepository.Update(mechanic);
+            Mechanic entity = _mechanicRepository.GetById(mechanic.Id);
+            Map(mechanic, entity);
+            _mechanicRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
     }
