@@ -240,12 +240,18 @@
     </Compile>
     <Compile Include="ModulControls\UsedGoodsListControl.Designer.cs">
       <DependentUpon>UsedGoodsListControl.cs</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="ModulControls\UserListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ModulControls\UserListControl.Designer.cs">
       <DependentUpon>UserListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\UserRoleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\UserRoleListControl.Designer.cs">
+      <DependentUpon>UserRoleListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\VehicleListControl.cs">
       <SubType>UserControl</SubType>
@@ -336,7 +342,7 @@
     </Compile>
     <Compile Include="ModulForms\UsedGoodsTransactionForm.Designer.cs">
       <DependentUpon>UsedGoodsTransactionForm.cs</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="ModulForms\UserEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,6 +487,9 @@
     <EmbeddedResource Include="ModulControls\UserListControl.resx">
       <DependentUpon>UserListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\UserRoleListControl.resx">
+      <DependentUpon>UserRoleListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -522,7 +531,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\UsedGoodsTransactionForm.resx">
       <DependentUpon>UsedGoodsTransactionForm.cs</DependentUpon>
-     </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\UserEditorForm.resx">
       <DependentUpon>UserEditorForm.cs</DependentUpon>
     </EmbeddedResource>

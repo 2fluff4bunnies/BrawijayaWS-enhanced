@@ -65,6 +65,7 @@
     <Compile Include="ISupplierListView.cs" />
     <Compile Include="IUserEditorView.cs" />
     <Compile Include="IUserListView.cs" />
+    <Compile Include="IUserRoleListView.cs" />
     <Compile Include="IVehicleDetailEditorView.cs" />
     <Compile Include="IVehicleDetailListView.cs" />
     <Compile Include="IVehicleEditorView.cs" />
