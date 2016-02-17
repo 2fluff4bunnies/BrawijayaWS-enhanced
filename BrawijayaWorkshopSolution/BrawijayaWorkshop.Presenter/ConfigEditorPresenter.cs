@@ -1,8 +1,10 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Utils;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
@@ -28,6 +30,23 @@ namespace BrawijayaWorkshop.Presenter
         public SettingViewModel GetSetting(string key)
         {
             return View.ListSettings.Where(s => s.Key == key).FirstOrDefault();
+        }
+
+        public bool ValidatePassword()
+        {
+            return Model.ValidateOldPassword(LoginInformation.UserId, View.OldPassword.Encrypt());
+        }
+
+        public void SavePasswordChanges()
+        {
+            Model.UpdatePassword(LoginInformation.UserId, View.NewPassword.Encrypt());
+        }
+
+        public void ClearChangePasswordForm()
+        {
+            View.OldPassword = string.Empty;
+            View.NewPassword = string.Empty;
+            View.ReTypeNewPassword = string.Empty;
         }
     }
 }

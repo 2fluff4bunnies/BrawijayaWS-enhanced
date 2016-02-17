@@ -13,5 +13,9 @@ namespace BrawijayaWorkshop.View
         string FingerprintIpAddress { get; set; }
 
         string FingerprintPort { get; set; }
+
+        string OldPassword { get; set; }
+        string NewPassword { get; set; }
+        string ReTypeNewPassword { get; set; }
     }
 }

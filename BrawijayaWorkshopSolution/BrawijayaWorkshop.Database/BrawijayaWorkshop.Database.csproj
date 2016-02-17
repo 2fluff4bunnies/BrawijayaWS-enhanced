@@ -153,8 +153,8 @@
     <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\TransactionDetailRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
-    <Compile Include="Repositories\UsedGoodsRepository.cs" />
-    <Compile Include="Repositories\UsedGoodsTransactionRepository.cs" />
+    <Compile Include="Repositories\UsedGoodRepository.cs" />
+    <Compile Include="Repositories\UsedGoodTransactionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\VehicleDetailRepository.cs" />

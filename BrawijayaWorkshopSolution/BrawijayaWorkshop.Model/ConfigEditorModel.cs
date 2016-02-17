@@ -10,12 +10,14 @@ namespace BrawijayaWorkshop.Model
 {
     public class ConfigEditorModel : AppBaseModel
     {
+        private IUserRepository _userRepository;
         private ISettingRepository _settingRepository;
         private IUnitOfWork _unitOfWork;
 
-        public ConfigEditorModel(ISettingRepository settingRepository, IUnitOfWork unitOfWork)
+        public ConfigEditorModel(IUserRepository userRepository, ISettingRepository settingRepository, IUnitOfWork unitOfWork)
             : base()
         {
+            _userRepository = userRepository;
             _settingRepository = settingRepository;
             _unitOfWork = unitOfWork;
         }
@@ -35,6 +37,20 @@ namespace BrawijayaWorkshop.Model
                 Map(setting, dbObject);
                 _settingRepository.Update(dbObject);
             }
+            _unitOfWork.SaveChanges();
+        }
+
+        public bool ValidateOldPassword(int userId, string oldPassword)
+        {
+            return _userRepository.GetMany(u => u.Id == userId &&
+                u.Password == oldPassword).FirstOrDefault() != null;
+        }
+
+        public void UpdatePassword(int userId, string newPassword)
+        {
+            User entity = _userRepository.GetById(userId);
+            entity.Password = newPassword;
+            _userRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
     }

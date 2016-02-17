@@ -23,6 +23,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             _presenter = new ConfigEditorPresenter(this, model);
 
+            valOldPassword.SetIconAlignment(txtOldPassword, ErrorIconAlignment.MiddleRight);
+            valNewPassword.SetIconAlignment(txtNewPassword, ErrorIconAlignment.MiddleRight);
+            valReTypeNewPass.SetIconAlignment(txtReTypeNewPassword, ErrorIconAlignment.MiddleRight);
+
             this.Load += ConfigEditorForm_Load;
         }
 
@@ -66,6 +70,42 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtPort.Text = value;
+            }
+        }
+
+        public string OldPassword
+        {
+            get
+            {
+                return txtOldPassword.Text;
+            }
+            set
+            {
+                txtOldPassword.Text = value;
+            }
+        }
+
+        public string NewPassword
+        {
+            get
+            {
+                return txtNewPassword.Text;
+            }
+            set
+            {
+                txtNewPassword.Text = value;
+            }
+        }
+
+        public string ReTypeNewPassword
+        {
+            get
+            {
+                return txtReTypeNewPassword.Text;
+            }
+            set
+            {
+                txtReTypeNewPassword.Text = value;
             }
         }
 
@@ -147,6 +187,27 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             else
             {
                 this.ShowInformation("Proses simpan berhasil");
+            }
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            if(valOldPassword.Validate() && valNewPassword.Validate() && valReTypeNewPass.Validate())
+            {
+                if(_presenter.ValidatePassword())
+                {
+                    _presenter.SavePasswordChanges();
+                }
+                else
+                {
+                    this.ShowWarning("Password Lama salah!");
+                }
+
+                _presenter.ClearChangePasswordForm();
+
+                valOldPassword.RemoveControlError(txtOldPassword);
+                valNewPassword.RemoveControlError(txtNewPassword);
+                valReTypeNewPass.RemoveControlError(txtReTypeNewPassword);
             }
         }
     }
