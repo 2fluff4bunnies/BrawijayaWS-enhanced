@@ -349,6 +349,12 @@
     <Compile Include="ModulForms\UserEditorForm.Designer.cs">
       <DependentUpon>UserEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\UserRoleEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\UserRoleEditorForm.Designer.cs">
+      <DependentUpon>UserRoleEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\VehicleDetailEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -534,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\UserEditorForm.resx">
       <DependentUpon>UserEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\UserRoleEditorForm.resx">
+      <DependentUpon>UserRoleEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleDetailEditorForm.resx">
       <DependentUpon>VehicleDetailEditorForm.cs</DependentUpon>

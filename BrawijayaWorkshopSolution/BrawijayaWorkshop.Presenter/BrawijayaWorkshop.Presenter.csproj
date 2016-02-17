@@ -66,6 +66,7 @@
     <Compile Include="SupplierListPresenter.cs" />
     <Compile Include="UserEditorPresenter.cs" />
     <Compile Include="UserListPresenter.cs" />
+    <Compile Include="UserRoleEditorPresenter.cs" />
     <Compile Include="UserRoleListPresenter.cs" />
     <Compile Include="VehicleDetailEditorPresenter.cs" />
     <Compile Include="VehicleDetailListPresenter.cs" />

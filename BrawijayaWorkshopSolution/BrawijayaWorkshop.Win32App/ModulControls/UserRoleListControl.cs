@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.ModulForms;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -114,7 +115,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewUserRole_Click(object sender, EventArgs e)
         {
+            UserRoleEditorForm editor = Bootstrapper.Resolve<UserRoleEditorForm>();
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
         }
 
         private void cmsDeleteData_Click(object sender, EventArgs e)

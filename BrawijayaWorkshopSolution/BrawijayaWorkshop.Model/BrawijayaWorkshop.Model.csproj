@@ -83,6 +83,7 @@
     <Compile Include="SupplierListModel.cs" />
     <Compile Include="UserEditorModel.cs" />
     <Compile Include="UserListModel.cs" />
+    <Compile Include="UserRoleEditorModel.cs" />
     <Compile Include="UserRoleListModel.cs" />
     <Compile Include="VehicleDetailListModel.cs" />
     <Compile Include="VehicleDetailEditorModel.cs" />
