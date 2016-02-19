@@ -31,22 +31,21 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.gridCredit = new DevExpress.XtraGrid.GridControl();
-            this.gvDebt = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.columnPaidDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTransactionDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvCredit = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTotalPayment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCreditAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lihatDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnNewCredit = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.lihatDaftarPembayaranToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -54,7 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCredit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDebt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCredit)).BeginInit();
             this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +71,17 @@
             this.gcFilter.Size = new System.Drawing.Size(636, 64);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnSearch.Location = new System.Drawing.Point(457, 28);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "cari";
             // 
             // labelControl1
             // 
@@ -113,9 +123,9 @@
             // 
             this.lblFilterDate.Location = new System.Drawing.Point(14, 34);
             this.lblFilterDate.Name = "lblFilterDate";
-            this.lblFilterDate.Size = new System.Drawing.Size(101, 13);
+            this.lblFilterDate.Size = new System.Drawing.Size(86, 13);
             this.lblFilterDate.TabIndex = 1;
-            this.lblFilterDate.Text = "Tanggal Pembayaran";
+            this.lblFilterDate.Text = "Tanggal Transaksi";
             // 
             // gridCredit
             // 
@@ -123,114 +133,92 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridCredit.Location = new System.Drawing.Point(0, 99);
-            this.gridCredit.MainView = this.gvDebt;
+            this.gridCredit.MainView = this.gvCredit;
             this.gridCredit.Name = "gridCredit";
             this.gridCredit.Size = new System.Drawing.Size(636, 213);
             this.gridCredit.TabIndex = 5;
             this.gridCredit.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvDebt});
+            this.gvCredit});
             // 
-            // gvDebt
+            // gvCredit
             // 
-            this.gvDebt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.columnPaidDate,
-            this.colTransactionDate,
+            this.gvCredit.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colTransDate,
             this.colCustomer,
             this.colTotalPrice,
-            this.colTotalPayment});
-            this.gvDebt.GridControl = this.gridCredit;
-            this.gvDebt.Name = "gvDebt";
-            this.gvDebt.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvDebt.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvDebt.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvDebt.OptionsBehavior.Editable = false;
-            this.gvDebt.OptionsBehavior.ReadOnly = true;
-            this.gvDebt.OptionsCustomization.AllowColumnMoving = false;
-            this.gvDebt.OptionsCustomization.AllowFilter = false;
-            this.gvDebt.OptionsCustomization.AllowGroup = false;
-            this.gvDebt.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvDebt.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvDebt.OptionsView.ShowGroupPanel = false;
-            this.gvDebt.OptionsView.ShowViewCaption = true;
-            this.gvDebt.ViewCaption = "Daftar Pembayaran Piutang";
+            this.colCreditAmount});
+            this.gvCredit.GridControl = this.gridCredit;
+            this.gvCredit.Name = "gvCredit";
+            this.gvCredit.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvCredit.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvCredit.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvCredit.OptionsBehavior.Editable = false;
+            this.gvCredit.OptionsBehavior.ReadOnly = true;
+            this.gvCredit.OptionsCustomization.AllowColumnMoving = false;
+            this.gvCredit.OptionsCustomization.AllowFilter = false;
+            this.gvCredit.OptionsCustomization.AllowGroup = false;
+            this.gvCredit.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvCredit.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvCredit.OptionsView.ShowGroupPanel = false;
+            this.gvCredit.OptionsView.ShowViewCaption = true;
+            this.gvCredit.ViewCaption = "Daftar Piutang";
             // 
-            // columnPaidDate
+            // colTransDate
             // 
-            this.columnPaidDate.Caption = "Tgl Pembayaran";
-            this.columnPaidDate.FieldName = "TransactionDate";
-            this.columnPaidDate.Name = "columnPaidDate";
-            this.columnPaidDate.Visible = true;
-            this.columnPaidDate.VisibleIndex = 0;
-            // 
-            // colTransactionDate
-            // 
-            this.colTransactionDate.Caption = "Tgl Transaksi";
-            this.colTransactionDate.Name = "colTransactionDate";
-            this.colTransactionDate.Visible = true;
-            this.colTransactionDate.VisibleIndex = 1;
+            this.colTransDate.Caption = "Tgl Transaksi";
+            this.colTransDate.FieldName = "Date";
+            this.colTransDate.Name = "colTransDate";
+            this.colTransDate.Visible = true;
+            this.colTransDate.VisibleIndex = 0;
             // 
             // colCustomer
             // 
             this.colCustomer.Caption = "Customer";
+            this.colCustomer.FieldName = "Customer.Name";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.Visible = true;
-            this.colCustomer.VisibleIndex = 2;
+            this.colCustomer.VisibleIndex = 1;
             // 
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 3;
+            this.colTotalPrice.VisibleIndex = 2;
             // 
-            // colTotalPayment
+            // colCreditAmount
             // 
-            this.colTotalPayment.Caption = "Jml Pembayaran";
-            this.colTotalPayment.Name = "colTotalPayment";
-            this.colTotalPayment.Visible = true;
-            this.colTotalPayment.VisibleIndex = 4;
+            this.colCreditAmount.Caption = "Total Belum Terbayar";
+            this.colCreditAmount.Name = "colCreditAmount";
+            this.colCreditAmount.Visible = true;
+            this.colCreditAmount.VisibleIndex = 3;
             // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lihatDetailToolStripMenuItem});
+            this.lihatDetailToolStripMenuItem,
+            this.lihatDaftarPembayaranToolStripMenuItem});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(134, 26);
+            this.cmsEditor.Size = new System.Drawing.Size(205, 70);
             // 
             // lihatDetailToolStripMenuItem
             // 
-            this.lihatDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
+            this.lihatDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.lihatDetailToolStripMenuItem.Name = "lihatDetailToolStripMenuItem";
-            this.lihatDetailToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.lihatDetailToolStripMenuItem.Text = "Lihat Detail";
+            this.lihatDetailToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.lihatDetailToolStripMenuItem.Text = "Buat Pembayaran";
             // 
-            // btnNewCredit
+            // lihatDaftarPembayaranToolStripMenuItem
             // 
-            this.btnNewCredit.Image = ((System.Drawing.Image)(resources.GetObject("btnNewCredit.Image")));
-            this.btnNewCredit.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnNewCredit.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewCredit.Location = new System.Drawing.Point(3, 70);
-            this.btnNewCredit.Name = "btnNewCredit";
-            this.btnNewCredit.Size = new System.Drawing.Size(150, 23);
-            this.btnNewCredit.TabIndex = 6;
-            this.btnNewCredit.Text = "Buat Pembayaran Baru";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(457, 28);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "cari";
+            this.lihatDaftarPembayaranToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
+            this.lihatDaftarPembayaranToolStripMenuItem.Name = "lihatDaftarPembayaranToolStripMenuItem";
+            this.lihatDaftarPembayaranToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.lihatDaftarPembayaranToolStripMenuItem.Text = "Lihat Daftar Pembayaran";
             // 
             // CreditListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnNewCredit);
             this.Controls.Add(this.gridCredit);
             this.Controls.Add(this.gcFilter);
             this.Name = "CreditListControl";
@@ -243,7 +231,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCredit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDebt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCredit)).EndInit();
             this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -257,16 +245,15 @@
         private DevExpress.XtraEditors.LabelControl lblFilterDate;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
         private DevExpress.XtraGrid.GridControl gridCredit;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvDebt;
-        private DevExpress.XtraGrid.Columns.GridColumn columnPaidDate;
-        private DevExpress.XtraGrid.Columns.GridColumn colTransactionDate;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvCredit;
+        private DevExpress.XtraGrid.Columns.GridColumn colTransDate;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomer;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotalPayment;
+        private DevExpress.XtraGrid.Columns.GridColumn colCreditAmount;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem lihatDetailToolStripMenuItem;
-        private DevExpress.XtraEditors.SimpleButton btnNewCredit;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private System.Windows.Forms.ToolStripMenuItem lihatDaftarPembayaranToolStripMenuItem;
     }
 }

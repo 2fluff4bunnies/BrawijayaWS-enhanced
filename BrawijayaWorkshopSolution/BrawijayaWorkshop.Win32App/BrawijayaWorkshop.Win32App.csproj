@@ -265,6 +265,30 @@
     <Compile Include="ModulForms\ConfigEditorForm.Designer.cs">
       <DependentUpon>ConfigEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\CreditEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\CreditEditorForm.Designer.cs">
+      <DependentUpon>CreditEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\CreditPaymentListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\CreditPaymentListForm.Designer.cs">
+      <DependentUpon>CreditPaymentListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\DebtEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\DebtEditorForm.Designer.cs">
+      <DependentUpon>DebtEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\DebtPaymentListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\DebtPaymentListForm.Designer.cs">
+      <DependentUpon>DebtPaymentListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\JournalMasterEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -501,6 +525,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\ConfigEditorForm.resx">
       <DependentUpon>ConfigEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\CreditEditorForm.resx">
+      <DependentUpon>CreditEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\CreditPaymentListForm.resx">
+      <DependentUpon>CreditPaymentListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\DebtEditorForm.resx">
+      <DependentUpon>DebtEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\DebtPaymentListForm.resx">
+      <DependentUpon>DebtPaymentListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
