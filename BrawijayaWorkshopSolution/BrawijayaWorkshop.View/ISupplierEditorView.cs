@@ -1,11 +1,11 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 
 namespace BrawijayaWorkshop.View
 {
     public interface ISupplierEditorView : IView
     {
-        Supplier SelectedSupplier { get; set; }
+        SupplierViewModel SelectedSupplier { get; set; }
 
         string SupplierName { get; set; }
         string Address { get; set; }

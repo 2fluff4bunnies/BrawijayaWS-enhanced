@@ -1,7 +1,7 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedVehicleDetail == null)
             {
-                View.SelectedVehicleDetail = new VehicleDetail();
+                View.SelectedVehicleDetail = new VehicleDetailViewModel();
             }
 
             View.SelectedVehicleDetail.LicenseNumber = View.LicenseNumber;

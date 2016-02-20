@@ -1,13 +1,13 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
-using System.Collections.Generic;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface IVehicleEditorView : IView
     {
-        Vehicle SelectedVehicle { get; set; }
+        VehicleViewModel SelectedVehicle { get; set; }
 
         string Brand { get; set; }
 
@@ -21,6 +21,6 @@ namespace BrawijayaWorkshop.View
 
         int CustomerId { get; set; }
 
-        List<Customer> CustomerList { get; set; }
+        List<CustomerViewModel> CustomerList { get; set; }
     }
 }

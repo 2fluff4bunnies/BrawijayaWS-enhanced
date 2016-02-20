@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -19,7 +20,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class PurchasingListControl : BaseAppUserControl, IPurchasingListView
     {
         private PurchasingListPresenter _presenter;
-        private Purchasing _selectedPurchasing;
+        private PurchasingViewModel _selectedPurchasing;
 
         protected override string ModulName
         {
@@ -54,7 +55,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvPurchasing_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedPurchasing = gvPurchasing.GetFocusedRow() as Purchasing;
+            this.SelectedPurchasing = gvPurchasing.GetFocusedRow() as PurchasingViewModel;
         }
 
         private void gvPurchasing_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -66,7 +67,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
 
-                this.SelectedPurchasing = gvPurchasing.GetRow(view.FocusedRowHandle) as Purchasing;
+                this.SelectedPurchasing = gvPurchasing.GetRow(view.FocusedRowHandle) as PurchasingViewModel;
                 if (this.SelectedPurchasing != null)
                 {
                     if (this.SelectedPurchasing.Status == (int)DbConstant.PurchasingStatus.NotVerified)
@@ -109,11 +110,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Purchasing> PurchasingListData
+        public List<PurchasingViewModel> PurchasingListData
         {
             get
             {
-                return gridPurchasing.DataSource as List<Purchasing>;
+                return gridPurchasing.DataSource as List<PurchasingViewModel>;
             }
             set
             {
@@ -129,7 +130,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public Purchasing SelectedPurchasing
+        public PurchasingViewModel SelectedPurchasing
         {
             get
             {
@@ -207,7 +208,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if (gvPurchasing.RowCount > 0)
             {
-                SelectedPurchasing = gvPurchasing.GetRow(0) as Purchasing;
+                SelectedPurchasing = gvPurchasing.GetRow(0) as PurchasingViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);

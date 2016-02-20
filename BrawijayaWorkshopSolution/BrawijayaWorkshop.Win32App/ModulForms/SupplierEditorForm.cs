@@ -1,6 +1,6 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -30,7 +30,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
-        public Supplier SelectedSupplier { get; set; }
+        public SupplierViewModel SelectedSupplier { get; set; }
 
         #region Field Editor
 

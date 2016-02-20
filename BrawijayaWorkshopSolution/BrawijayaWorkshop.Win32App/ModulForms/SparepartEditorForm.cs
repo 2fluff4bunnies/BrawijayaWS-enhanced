@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -23,13 +24,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             valName.SetIconAlignment(txtName, ErrorIconAlignment.MiddleRight);
         }
 
-        public Database.Entities.Sparepart SelectedSparepart { get; set; }
+        public SparepartViewModel SelectedSparepart { get; set; }
 
-        public List<Database.Entities.Reference> CategoryDropdownList
+        public List<ReferenceViewModel> CategoryDropdownList
         {
             get
             {
-                return lookUpCategory.Properties.DataSource as List<Database.Entities.Reference>;
+                return lookUpCategory.Properties.DataSource as List<ReferenceViewModel>;
             }
             set
             {
@@ -37,11 +38,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<Database.Entities.Reference> UnitDropdownList
+        public List<ReferenceViewModel> UnitDropdownList
         {
             get
             {
-                return lookUpUnit.Properties.DataSource as List<Database.Entities.Reference>;
+                return lookUpUnit.Properties.DataSource as List<ReferenceViewModel>;
             }
             set
             {

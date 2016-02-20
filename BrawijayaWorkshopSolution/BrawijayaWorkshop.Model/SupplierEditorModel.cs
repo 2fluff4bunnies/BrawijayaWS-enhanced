@@ -1,32 +1,35 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using System.Collections.Generic;
-using System.Linq;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SupplierEditorModel : BaseModel
+    public class SupplierEditorModel : AppBaseModel
     {
-        private ISupplierRepository _SupplierRepository;
+        private ISupplierRepository _supplierRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SupplierEditorModel(ISupplierRepository SupplierRepository, IUnitOfWork unitOfWork)
+        public SupplierEditorModel(ISupplierRepository supplierRepository, IUnitOfWork unitOfWork)
+            : base()
         {
-            _SupplierRepository = SupplierRepository;
+            _supplierRepository = supplierRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public void InsertSupplier(Supplier Supplier)
+        public void InsertSupplier(SupplierViewModel supplier)
         {
-            _SupplierRepository.Add(Supplier);
+            Supplier entity = new Supplier();
+            Map(supplier, entity);
+            _supplierRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateSupplier(Supplier Supplier)
+        public void UpdateSupplier(SupplierViewModel supplier)
         {
-            _SupplierRepository.Update(Supplier);
+            Supplier entity = _supplierRepository.GetById(supplier.Id);
+            Map(supplier, entity);
+            _supplierRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
     }

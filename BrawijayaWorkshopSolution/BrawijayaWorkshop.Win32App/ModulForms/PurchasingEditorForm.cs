@@ -1,5 +1,4 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -54,7 +53,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
-        public Purchasing SelectedPurchasing { get; set; }
+        public PurchasingViewModel SelectedPurchasing { get; set; }
         public PurchasingDetailViewModel SelectedPurchasingDetail { get; set; }
 
         #region Field Editor
@@ -87,7 +86,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                Supplier selected = cbSupplier.GetSelectedDataRow() as Supplier;
+                SupplierViewModel selected = cbSupplier.GetSelectedDataRow() as SupplierViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
@@ -98,11 +97,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
         #endregion
 
-        public List<Supplier> ListSupplier
+        public List<SupplierViewModel> ListSupplier
         {
             get
             {
-                return cbSupplier.Properties.DataSource as List<Supplier>;
+                return cbSupplier.Properties.DataSource as List<SupplierViewModel>;
             }
             set
             {
@@ -110,11 +109,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<Sparepart> ListSparepart
+        public List<SparepartViewModel> ListSparepart
         {
             get
             {
-                return cbSparepartGv.DataSource as List<Sparepart>;
+                return cbSparepartGv.DataSource as List<SparepartViewModel>;
             }
             set
             {
@@ -225,7 +224,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (SelectedPurchasingDetail != null)
             {
                 SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
-                Sparepart sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
+                SparepartViewModel sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
                 editor.SelectedSparepart = sparepart;
                 editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.NotVerified;
                 editor.PurchasingDetailID = SelectedPurchasingDetail.Id;

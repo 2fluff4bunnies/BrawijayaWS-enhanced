@@ -1,5 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
@@ -10,10 +10,10 @@ namespace BrawijayaWorkshop.View
 
         string NameFilter { get; set; }
 
-        List<Reference> CategoryDropdownList { get; set; }
+        List<ReferenceViewModel> CategoryDropdownList { get; set; }
 
-        List<Sparepart> SparepartListData { get; set; }
+        List<SparepartViewModel> SparepartListData { get; set; }
 
-        Sparepart SelectedSparepart { get; set; }
+        SparepartViewModel SelectedSparepart { get; set; }
     }
 }

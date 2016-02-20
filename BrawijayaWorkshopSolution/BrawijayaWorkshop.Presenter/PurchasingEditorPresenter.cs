@@ -1,5 +1,4 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -33,7 +32,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedPurchasing == null)
             {
-                View.SelectedPurchasing = new Purchasing();
+                View.SelectedPurchasing = new PurchasingViewModel();
             }
 
             View.SelectedPurchasing.SupplierId = View.SupplierId;

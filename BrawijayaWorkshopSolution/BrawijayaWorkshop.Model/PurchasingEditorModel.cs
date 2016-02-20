@@ -1,17 +1,15 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using AutoMapper;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class PurchasingEditorModel : BaseModel
+    public class PurchasingEditorModel : AppBaseModel
     {
         private IPurchasingRepository _purchasingRepository;
         private IPurchasingDetailRepository _purchasingDetailRepository;
@@ -26,6 +24,7 @@ namespace BrawijayaWorkshop.Model
             ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _purchasingDetailRepository = purchasingDetailRepository;
             _purchasingRepository = purchasingRepository;
@@ -36,24 +35,28 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<Supplier> RetrieveSupplier()
+        public List<SupplierViewModel> RetrieveSupplier()
         {
-            return _supplierRepository.GetAll().ToList();
+            List<Supplier> result = _supplierRepository.GetAll().ToList();
+            List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public List<Sparepart> RetrieveSparepart()
+        public List<SparepartViewModel> RetrieveSparepart()
         {
-            return _sparepartRepository.GetAll().ToList();
+            List<Sparepart> result = _sparepartRepository.GetAll().ToList();
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+            return Map(result, mappedResult);
         }
 
         public List<PurchasingDetailViewModel> RetrievePurchasingDetail(int purchasingID)
         {
-            List<PurchasingDetail> listEntity = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
-            List<PurchasingDetailViewModel> result = ConvertPurchasingDetailEntityToViewModel(listEntity);
-            return result;
+            List<PurchasingDetail> result = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
+            List<PurchasingDetailViewModel> mappedResult = new List<PurchasingDetailViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public void InsertPurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
+        public void InsertPurchasing(PurchasingViewModel purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -64,7 +67,9 @@ namespace BrawijayaWorkshop.Model
             purchasing.Status = (int)DbConstant.PurchasingStatus.NotVerified;
             purchasing.PaymentMethodId = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG).FirstOrDefault().Id;
             purchasing.TotalHasPaid = 0;
-            Purchasing purchasingInserted = _purchasingRepository.Add(purchasing);
+            Purchasing entity = new Purchasing();
+            Map(purchasing, entity);
+            Purchasing purchasingInserted = _purchasingRepository.Add(entity);
 
             foreach (var itemPurchasingDetail in purchasingDetails)
             {
@@ -84,12 +89,14 @@ namespace BrawijayaWorkshop.Model
             Recalculate(purchasingInserted);
         }
 
-        public void UpdatePurchasing(Purchasing purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
+        public void UpdatePurchasing(PurchasingViewModel purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
         {
             DateTime serverTime = DateTime.Now;
             purchasing.ModifyUserId = userID;
             purchasing.ModifyDate = serverTime;
-            _purchasingRepository.Update(purchasing);
+            Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
+            Map(purchasing, entity);
+            _purchasingRepository.Update(entity);
 
             List<PurchasingDetail> purchasingDetailsDB = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasing.Id).ToList();
             //check for updated and deleted item
@@ -133,7 +140,7 @@ namespace BrawijayaWorkshop.Model
             }
 
             _unitOfWork.SaveChanges();
-            Recalculate(purchasing);
+            Recalculate(entity);
         }
 
         public void Recalculate(Purchasing purchasing)
@@ -166,6 +173,5 @@ namespace BrawijayaWorkshop.Model
             }
             return result;
         }
-
     }
 }

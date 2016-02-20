@@ -1,18 +1,17 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Linq;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using BrawijayaWorkshop.Constant;
-using System.ComponentModel;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -34,7 +33,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void gvPurchasingDetail_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedPurchasingDetail = gvPurchasingDetail.GetFocusedRow() as PurchasingDetail;
+            this.SelectedPurchasingDetail = gvPurchasingDetail.GetFocusedRow() as PurchasingDetailViewModel;
         }
 
         private void gvPurchasingDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -70,14 +69,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
         private bool _isApprove = false;
 
-        public Purchasing SelectedPurchasing { get; set; }
-        public PurchasingDetail SelectedPurchasingDetail { get; set; }
-        public List<Sparepart> ListSparepart { get; set; }
+        public PurchasingViewModel SelectedPurchasing { get; set; }
+        public PurchasingDetailViewModel SelectedPurchasingDetail { get; set; }
+        public List<SparepartViewModel> ListSparepart { get; set; }
         public int PaymentMethodId
         {
             get
             {
-                Reference selected = cbPayment.GetSelectedDataRow() as Reference;
+                ReferenceViewModel selected = cbPayment.GetSelectedDataRow() as ReferenceViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
@@ -87,11 +86,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<Reference> ListPaymentMethod
+        public List<ReferenceViewModel> ListPaymentMethod
         {
             get
             {
-                return cbPayment.Properties.DataSource as List<Reference>;
+                return cbPayment.Properties.DataSource as List<ReferenceViewModel>;
             }
             set
             {
@@ -155,11 +154,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #endregion
 
-        public List<PurchasingDetail> ListPurchasingDetail
+        public List<PurchasingDetailViewModel> ListPurchasingDetail
         {
             get
             {
-                return gridPurchasingDetail.DataSource as List<PurchasingDetail>;
+                return gridPurchasingDetail.DataSource as List<PurchasingDetailViewModel>;
             }
             set
             {
@@ -184,7 +183,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (SelectedPurchasingDetail != null)
             {
                 SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
-                Sparepart sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
+                SparepartViewModel sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
                 editor.SelectedSparepart = sparepart;
                 if (SelectedPurchasingDetail.Status == (int)DbConstant.PurchasingStatus.NotVerified)
                 {
@@ -202,7 +201,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void cbPayment_EditValueChanged(object sender, EventArgs e)
         {
-            Reference refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as Reference;
+            ReferenceViewModel refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as ReferenceViewModel;
             if (refSelected != null)
             {
                 if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||
@@ -318,8 +317,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     FormHelpers.CurrentMainForm.UpdateStatusInformation("proses persetujuan data pembelian selesai", true);
                     this.Close();
                 }
-
-
             }
             else
             {
@@ -333,7 +330,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.Close();
                 }
             }
-
         }
     }
 }

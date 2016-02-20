@@ -1,15 +1,15 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface ISparepartEditorView : IView
     {
-        Sparepart SelectedSparepart { get; set; }
+        SparepartViewModel SelectedSparepart { get; set; }
 
-        List<Reference> CategoryDropdownList { get; set; }
-        List<Reference> UnitDropdownList { get; set; }
+        List<ReferenceViewModel> CategoryDropdownList { get; set; }
+        List<ReferenceViewModel> UnitDropdownList { get; set; }
 
         int CategoryId { get; set; }
         int UnitId { get; set; }

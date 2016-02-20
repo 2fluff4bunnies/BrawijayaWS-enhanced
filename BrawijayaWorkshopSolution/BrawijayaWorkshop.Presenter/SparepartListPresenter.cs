@@ -1,7 +1,7 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System.Collections.Generic;
 
@@ -14,8 +14,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitData()
         {
-            List<Reference> result = Model.GetSparepartCategoryList();
-            result.Insert(0, new Reference
+            List<ReferenceViewModel> result = Model.GetSparepartCategoryList();
+            result.Insert(0, new ReferenceViewModel
             {
                 Id = 0,
                 Name = "-- Kategori --",

@@ -1,7 +1,7 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -29,7 +29,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedSparepart == null)
             {
-                View.SelectedSparepart = new Sparepart();
+                View.SelectedSparepart = new SparepartViewModel();
             }
 
             View.SelectedSparepart.CategoryReferenceId = View.CategoryId;

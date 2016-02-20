@@ -1,10 +1,7 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
-using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
-using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {

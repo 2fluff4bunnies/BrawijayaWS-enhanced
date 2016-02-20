@@ -1,10 +1,11 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
+using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
-using BrawijayaWorkshop.Utils;
+using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -39,7 +40,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
-        public Vehicle SelectedVehicle { get; set; }
+        public VehicleViewModel SelectedVehicle { get; set; }
 
         #region Field Editor
         public string Type
@@ -70,7 +71,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                Customer selected = lookUpCustomer.GetSelectedDataRow() as Customer;
+                CustomerViewModel selected = lookUpCustomer.GetSelectedDataRow() as CustomerViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
@@ -116,11 +117,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<Customer> CustomerList
+        public List<CustomerViewModel> CustomerList
         {
             get
             {
-                return lookUpCustomer.Properties.DataSource as List<Customer>;
+                return lookUpCustomer.Properties.DataSource as List<CustomerViewModel>;
             }
             set
             {
@@ -133,12 +134,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (FieldsValidator.Validate())
             {
-                _presenter.SaveChanges();
-                this.Close();
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
+                    this.ShowError("Proses simpan data Kendaraan gagal!");
+                }
             }
         }
-
-
-
     }
 }
