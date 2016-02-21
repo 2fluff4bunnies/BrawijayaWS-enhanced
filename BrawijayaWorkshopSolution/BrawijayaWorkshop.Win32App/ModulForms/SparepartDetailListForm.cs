@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             RefreshDataView();
         }
 
-        public Sparepart SelectedSparepart { get; set; }
+        public SparepartViewModel SelectedSparepart { get; set; }
 
         public int PurchasingDetailID { get; set; }
         public int SelectedStatus
@@ -59,11 +59,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SparepartDetail> SparepartDetailListData
+        public List<SparepartDetailViewModel> SparepartDetailListData
         {
             get
             {
-                return gridSparepartDetail.DataSource as List<SparepartDetail>;
+                return gridSparepartDetail.DataSource as List<SparepartDetailViewModel>;
             }
             set
             {

@@ -1,15 +1,14 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class VehicleDetailEditorModel : BaseModel
+    public class VehicleDetailEditorModel : AppBaseModel
     {
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
@@ -18,6 +17,7 @@ namespace BrawijayaWorkshop.Model
 
         public VehicleDetailEditorModel(IVehicleRepository vehicleRepository, IReferenceRepository referenceRepository,
             IVehicleDetailRepository vehicleDetailRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _vehicleRepository = vehicleRepository;
             _vehicleDetailRepository = vehicleDetailRepository;
@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public void UpdateVehicleDetail(VehicleDetail vehicleDetail, Vehicle vehicle, int userId)
+        public void UpdateVehicleDetail(VehicleDetailViewModel vehicleDetail, VehicleViewModel vehicle, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -45,7 +45,9 @@ namespace BrawijayaWorkshop.Model
             vehicleDetail.ModifyUserId = userId;
             vehicleDetail.VehicleId = vehicle.Id;
             vehicleDetail.Status = (int)DbConstant.LicenseNumberStatus.Active;
-            _vehicleDetailRepository.Add(vehicleDetail);
+            VehicleDetail entityDetail = new VehicleDetail();
+            Map(vehicleDetail, entityDetail);
+            _vehicleDetailRepository.Add(entityDetail);
 
             //update active license number in vehicle
             if (vehicle != null)
@@ -53,11 +55,12 @@ namespace BrawijayaWorkshop.Model
                 vehicle.ModifyDate = serverTime;
                 vehicle.ModifyUserId = userId;
                 vehicle.ActiveLicenseNumber = vehicleDetail.LicenseNumber;
-                _vehicleRepository.Update(vehicle);
+                Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
+                Map(vehicle, entity);
+                _vehicleRepository.Update(entity);
             }
 
             _unitOfWork.SaveChanges();
         }
-
     }
 }

@@ -1,15 +1,15 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SparepartListModel : BaseModel
+    public class SparepartListModel : AppBaseModel
     {
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
@@ -20,6 +20,7 @@ namespace BrawijayaWorkshop.Model
             ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository,
             IUnitOfWork unitOfWork)
+            : base()
         {
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
@@ -27,13 +28,15 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<Reference> GetSparepartCategoryList()
+        public List<ReferenceViewModel> GetSparepartCategoryList()
         {
             Reference sparePartCategory = _referenceRepository.GetMany(r => string.Compare(r.Code, DbConstant.REF_SPAREPARTCATEGORY, true) == 0).FirstOrDefault();
-            return _referenceRepository.GetMany(r => r.ParentId == sparePartCategory.Id).ToList();
+            List<Reference> result = _referenceRepository.GetMany(r => r.ParentId == sparePartCategory.Id).ToList();
+            List<ReferenceViewModel> mappedResult = new List<ReferenceViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public List<Sparepart> SearchSparepart(int categoryReferenceId, string name)
+        public List<SparepartViewModel> SearchSparepart(int categoryReferenceId, string name)
         {
             List<Sparepart> result = null;
 
@@ -47,10 +50,11 @@ namespace BrawijayaWorkshop.Model
                 result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active && sp.Name.Contains(name)).ToList();
             }
 
-            return result;
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public void DeleteSparepart(Sparepart sparepart, int userId)
+        public void DeleteSparepart(SparepartViewModel sparepart, int userId)
         {
             DateTime serverTime = DateTime.Now;
             List<SparepartDetail> details = _sparepartDetailRepository.GetMany(spd => spd.SparepartId == sparepart.Id).ToList();
@@ -65,7 +69,9 @@ namespace BrawijayaWorkshop.Model
             sparepart.Status = (int)DbConstant.DefaultDataStatus.Deleted;
             sparepart.ModifyDate = serverTime;
             sparepart.ModifyUserId = userId;
-            _sparepartRepository.Update(sparepart);
+            Sparepart entity = _sparepartRepository.GetById(sparepart.Id);
+            Map(sparepart, entity);
+            _sparepartRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
         }

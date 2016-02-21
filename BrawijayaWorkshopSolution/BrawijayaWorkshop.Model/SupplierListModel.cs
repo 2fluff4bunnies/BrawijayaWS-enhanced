@@ -1,31 +1,35 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SupplierListModel : BaseModel
+    public class SupplierListModel : AppBaseModel
     {
-        private ISupplierRepository _SupplierRepository;
+        private ISupplierRepository _supplierRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SupplierListModel(ISupplierRepository SupplierRepository, IUnitOfWork unitOfWork)
+        public SupplierListModel(ISupplierRepository supplierRepository, IUnitOfWork unitOfWork)
+            : base()
         {
-            _SupplierRepository = SupplierRepository;
+            _supplierRepository = supplierRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<Supplier> SearchSupplier(string supplierName)
+        public List<SupplierViewModel> SearchSupplier(string supplierName)
         {
-            return _SupplierRepository.GetMany(c => c.Name.Contains(supplierName)).OrderBy(c => c.Name).ToList();
+            List<Supplier> result = _supplierRepository.GetMany(c => c.Name.Contains(supplierName)).OrderBy(c => c.Name).ToList();
+            List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
+            return Map(result, mappedResult);
         }
 
-        public void DeleteSupplier(Supplier Supplier)
+        public void DeleteSupplier(SupplierViewModel supplier)
         {
-            _SupplierRepository.Delete(Supplier);
+            Supplier entity = _supplierRepository.GetById(supplier.Id);
+            _supplierRepository.Delete(entity);
             _unitOfWork.SaveChanges();
         }
     }

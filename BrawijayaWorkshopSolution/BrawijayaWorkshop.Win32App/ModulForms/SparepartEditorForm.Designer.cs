@@ -98,7 +98,7 @@
             // 
             this.txtCode.Location = new System.Drawing.Point(113, 92);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(162, 20);
+            this.txtCode.Size = new System.Drawing.Size(274, 20);
             this.txtCode.TabIndex = 5;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "Kode harus diisi!";
@@ -125,7 +125,7 @@
             this.lookUpUnit.Properties.HideSelection = false;
             this.lookUpUnit.Properties.NullText = "-- Pilih Unit/Satuan --";
             this.lookUpUnit.Properties.ValueMember = "Id";
-            this.lookUpUnit.Size = new System.Drawing.Size(162, 20);
+            this.lookUpUnit.Size = new System.Drawing.Size(274, 20);
             this.lookUpUnit.TabIndex = 3;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
             conditionValidationRule3.ErrorText = "Pilih salah satu Unit/Satuan!";
@@ -153,7 +153,7 @@
             this.lookUpCategory.Properties.HideSelection = false;
             this.lookUpCategory.Properties.NullText = "-- Pilih Kategori --";
             this.lookUpCategory.Properties.ValueMember = "Id";
-            this.lookUpCategory.Size = new System.Drawing.Size(162, 20);
+            this.lookUpCategory.Size = new System.Drawing.Size(274, 20);
             this.lookUpCategory.TabIndex = 1;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
             conditionValidationRule4.ErrorText = "Pilih salah satu Kategori!";
@@ -192,7 +192,6 @@
             this.Controls.Add(this.gcSparepartInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparepartEditorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sparepart Editor";
             this.Controls.SetChildIndex(this.gcSparepartInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepartInfo)).EndInit();

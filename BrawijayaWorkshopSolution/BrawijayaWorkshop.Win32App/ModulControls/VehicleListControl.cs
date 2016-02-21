@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -18,7 +18,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class VehicleListControl : BaseAppUserControl, IVehicleListView
     {
         private VehicleListPresenter _presenter;
-        private Vehicle _selectedVehicle;
+        private VehicleViewModel _selectedVehicle;
 
         protected override string ModulName
         {
@@ -60,11 +60,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Vehicle> VehicleListData
+        public List<VehicleViewModel> VehicleListData
         {
             get
             {
-                return gcVehicle.DataSource as List<Vehicle>;
+                return gcVehicle.DataSource as List<VehicleViewModel>;
             }
             set
             {
@@ -80,7 +80,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public Vehicle SelectedVehicle
+        public VehicleViewModel SelectedVehicle
         {
             get
             {
@@ -105,7 +105,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvvehicle_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedVehicle = gvVehicle.GetFocusedRow() as Vehicle;
+            this.SelectedVehicle = gvVehicle.GetFocusedRow() as VehicleViewModel;
         }
 
         private void gvvehicle_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -202,7 +202,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if(gvVehicle.RowCount > 0)
             {
-                SelectedVehicle = gvVehicle.GetRow(0) as Vehicle;
+                SelectedVehicle = gvVehicle.GetRow(0) as VehicleViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan selesai", true);
@@ -226,6 +226,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
-     
+        private void cmsViewVehicleWheel_Click(object sender, EventArgs e)
+        {
+            VehicleWheelEditorForm editor = Bootstrapper.Resolve<VehicleWheelEditorForm>();
+            //editor.SelectedVehicle = this.SelectedVehicle;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
     }
 }

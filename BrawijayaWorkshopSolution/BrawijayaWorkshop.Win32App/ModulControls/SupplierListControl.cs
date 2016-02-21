@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -18,7 +18,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class SupplierListControl : BaseAppUserControl, ISupplierListView
     {
         private SupplierListPresenter _presenter;
-        private Supplier _selectedSupplier;
+        private SupplierViewModel _selectedSupplier;
 
         protected override string ModulName
         {
@@ -51,7 +51,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvSupplier_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSupplier = gvSupplier.GetFocusedRow() as Supplier;
+            this.SelectedSupplier = gvSupplier.GetFocusedRow() as SupplierViewModel;
         }
 
         private void gvSupplier_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -77,11 +77,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Supplier> SupplierListData
+        public List<SupplierViewModel> SupplierListData
         {
             get
             {
-                return gridSupplier.DataSource as List<Supplier>;
+                return gridSupplier.DataSource as List<SupplierViewModel>;
             }
             set
             {
@@ -97,7 +97,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public Supplier SelectedSupplier
+        public SupplierViewModel SelectedSupplier
         {
             get
             {
@@ -197,7 +197,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if(SupplierListData.Count > 0)
             {
                 gvSupplier.FocusedRowHandle = 0;
-                _selectedSupplier = gvSupplier.GetRow(0) as Supplier;
+                _selectedSupplier = gvSupplier.GetRow(0) as SupplierViewModel;
             }
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Supplier selesai", true);
         }

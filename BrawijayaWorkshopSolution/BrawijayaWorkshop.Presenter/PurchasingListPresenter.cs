@@ -13,6 +13,5 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.PurchasingListData = Model.SearchPurchasing(View.DateFilterFrom, View.DateFilterTo);
         }
-
     }
 }

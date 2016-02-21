@@ -1,16 +1,16 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface IVehicleListView : IView
     {
-        Vehicle SelectedVehicle { get; set; }
+        VehicleViewModel SelectedVehicle { get; set; }
 
         string ActiveLicenseNumberFilter { get; set; }
 
-        List<Vehicle> VehicleListData { get; set; }
+        List<VehicleViewModel> VehicleListData { get; set; }
 
     }
 }

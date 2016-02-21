@@ -1,15 +1,15 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class PurchasingApprovalModel : BaseModel
+    public class PurchasingApprovalModel : AppBaseModel
     {
         private IPurchasingRepository _purchasingRepository;
         private IPurchasingDetailRepository _purchasingDetailRepository;
@@ -31,6 +31,7 @@ namespace BrawijayaWorkshop.Model
             ITransactionDetailRepository transactionDetailRepository,
             IJournalMasterRepository journalMasterRepository,
             IUnitOfWork unitOfWork)
+            : base()
         {
             _purchasingDetailRepository = purchasingDetailRepository;
             _purchasingRepository = purchasingRepository;
@@ -44,28 +45,32 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchasingDetail> RetrievePurchasingDetail(int purchasingID)
+        public List<PurchasingDetailViewModel> RetrievePurchasingDetail(int purchasingID)
         {
-            List<PurchasingDetail> listEntity = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
-            return listEntity;
+            List<PurchasingDetail> result = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
+            List<PurchasingDetailViewModel> mappedResult = new List<PurchasingDetailViewModel>();
+            return Map(result, mappedResult);
         }
-        public List<Sparepart> RetrieveSparepart()
+        public List<SparepartViewModel> RetrieveSparepart()
         {
-            return _sparepartRepository.GetAll().ToList();
+            List<Sparepart> result = _sparepartRepository.GetAll().ToList();
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+            return Map(result, mappedResult);
         }
-        public List<Reference> RetrievePaymentMethod()
+        public List<ReferenceViewModel> RetrievePaymentMethod()
         {
-            Reference parent =  _referenceRepository
-                .GetMany(c=>c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD).FirstOrDefault();
+            Reference parent = _referenceRepository
+                .GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD).FirstOrDefault();
             List<Reference> list = new List<Reference>();
-            if(parent != null)
+            if (parent != null)
             {
                 list = _referenceRepository.GetMany(c => c.ParentId == parent.Id).ToList();
             }
-            return list;
+            List<ReferenceViewModel> mappedResult = new List<ReferenceViewModel>();
+            return Map(list, mappedResult);
         }
 
-        public void Approve(Purchasing purchasing, int userID)
+        public void Approve(PurchasingViewModel purchasing, int userID)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -111,7 +116,7 @@ namespace BrawijayaWorkshop.Model
                 sparepart.StockQty += purchasingDetail.Qty;
                 _sparepartRepository.Update(sparepart);
             }
-            
+
             Reference refSelected = _referenceRepository.GetById(purchasing.PaymentMethodId);
             purchasing.Status = (int)DbConstant.PurchasingStatus.Active;
             if (refSelected != null &&
@@ -121,9 +126,11 @@ namespace BrawijayaWorkshop.Model
             {
                 purchasing.TotalHasPaid = purchasing.TotalPrice;
             }
-            _purchasingRepository.Update(purchasing);
+            Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
+            Map(purchasing, entity);
+            _purchasingRepository.Update(entity);
 
-            Reference transactionReferenceTable = _referenceRepository.GetMany(c=>c.Code == DbConstant.REF_TRANSTBL_PURCHASING).FirstOrDefault();
+            Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASING).FirstOrDefault();
             Transaction transaction = new Transaction();
             transaction.TransactionDate = purchasing.Date;
             transaction.TotalPayment = Convert.ToDouble(purchasing.TotalHasPaid);
@@ -137,7 +144,7 @@ namespace BrawijayaWorkshop.Model
             transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
             Transaction transactionInserted = _transactionRepository.Add(transaction);
 
-            switch(purchasing.PaymentMethod.Code)
+            switch (purchasing.PaymentMethod.Code)
             {
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK:
 
@@ -211,10 +218,10 @@ namespace BrawijayaWorkshop.Model
                     break;
             }
 
-            if(purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK ||
+            if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK ||
                purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS)
             {
-                if(purchasing.TotalPrice > purchasing.TotalHasPaid)
+                if (purchasing.TotalPrice > purchasing.TotalHasPaid)
                 {
                     // Utang Kredit --> Karena bertambah
                     TransactionDetail utang = new TransactionDetail();
@@ -235,22 +242,23 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork.SaveChanges();
         }
 
-        public void Reject(Purchasing purchasing)
+        public void Reject(PurchasingViewModel purchasing)
         {
             List<PurchasingDetail> listPurchasingDetail = _purchasingDetailRepository
                 .GetMany(c => c.PurchasingId == purchasing.Id).ToList();
             foreach (var purchasingDetail in listPurchasingDetail)
-	        {
+            {
                 List<SparepartDetail> listSparepartDetail = _sparepartDetailRepository
-                    .GetMany(c=>c.PurchasingDetailId == purchasingDetail.Id).ToList();
+                    .GetMany(c => c.PurchasingDetailId == purchasingDetail.Id).ToList();
                 foreach (var sparepartDetail in listSparepartDetail)
-	            {
+                {
                     _sparepartDetailRepository.Delete(sparepartDetail);
-		 
-	            }
+
+                }
                 _purchasingDetailRepository.Delete(purchasingDetail);
-	        }
-            _purchasingRepository.Delete(purchasing);
+            }
+            Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
+            _purchasingRepository.Delete(entity);
             _unitOfWork.SaveChanges();
         }
     }

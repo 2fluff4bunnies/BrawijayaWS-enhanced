@@ -1,15 +1,14 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using System;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SparepartDetailListModel : BaseModel
+    public class SparepartDetailListModel : AppBaseModel
     {
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
@@ -17,13 +16,15 @@ namespace BrawijayaWorkshop.Model
 
         public SparepartDetailListModel(ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<SparepartDetail> SearchSparepart(int sparepartId, DbConstant.SparepartDetailDataStatus status, int purchaseDetailID)
+        public List<SparepartDetailViewModel> SearchSparepart(int sparepartId,
+            DbConstant.SparepartDetailDataStatus status, int purchaseDetailID)
         {
             List<SparepartDetail> result = new List<SparepartDetail>();
             if (purchaseDetailID > 0)
@@ -37,7 +38,8 @@ namespace BrawijayaWorkshop.Model
                 result = _sparepartDetailRepository.GetMany(
                 spd => spd.SparepartId == sparepartId && spd.Status == (int)status).ToList();
             }
-            return result;
+            List<SparepartDetailViewModel> mappedResult = new List<SparepartDetailViewModel>();
+            return Map(result, mappedResult);
         }
     }
 }

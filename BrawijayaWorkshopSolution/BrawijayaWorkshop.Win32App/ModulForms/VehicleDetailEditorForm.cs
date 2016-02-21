@@ -1,10 +1,10 @@
-﻿using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
-using System.Collections.Generic;
+using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -21,9 +21,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
         }
 
-        public VehicleDetail SelectedVehicleDetail { get; set; }
+        public VehicleDetailViewModel SelectedVehicleDetail { get; set; }
 
-        public Vehicle SelectedVehicle { get; set; }
+        public VehicleViewModel SelectedVehicle { get; set; }
 
         public string LicenseNumber
         {
@@ -53,11 +53,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (FieldsValidator.Validate())
             {
-                _presenter.SaveChanges();
-                this.Close();
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save Vehicle Detail's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle Detail", ex);
+                    this.ShowError("Proses simpan data Detail Kendaraan gagal!");
+                }
             }
         }
-
-
     }
 }

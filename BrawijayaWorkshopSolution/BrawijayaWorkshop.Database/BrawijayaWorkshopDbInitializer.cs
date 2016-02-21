@@ -159,6 +159,11 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_SPK_DETAIL_SPAREPART_DETAIL,
                 ModulDescription = "SPK Detail Sparepart Detail Modul"
             });
+            ApplicationModul manageAppUserMode = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_MANAGE_APP_USER,
+                ModulDescription = "Manage Application User"
+            });
 
             context.SaveChanges();
 
@@ -270,6 +275,12 @@ namespace BrawijayaWorkshop.Database
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = manageAppUserMode.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // admin
             context.RoleAccesses.Add(new RoleAccess
@@ -332,6 +343,12 @@ namespace BrawijayaWorkshop.Database
             {
                 ApplicationModulId = userControlMod.Id,
                 RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = manageAppUserMode.Id,
+                RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.SaveChanges();

@@ -1,7 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
@@ -18,7 +18,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class SparepartListControl : BaseAppUserControl, ISparepartListView
     {
         private SparepartListPresenter _presenter;
-        private Sparepart _selectedSparepart;
+        private SparepartViewModel _selectedSparepart;
 
         protected override string ModulName
         {
@@ -64,7 +64,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSparepart = gvSparepart.GetFocusedRow() as Sparepart;
+            this.SelectedSparepart = gvSparepart.GetFocusedRow() as SparepartViewModel;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -107,11 +107,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Reference> CategoryDropdownList
+        public List<ReferenceViewModel> CategoryDropdownList
         {
             get
             {
-                return lookUpCategory.Properties.DataSource as List<Reference>;
+                return lookUpCategory.Properties.DataSource as List<ReferenceViewModel>;
             }
             set
             {
@@ -119,11 +119,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<Sparepart> SparepartListData
+        public List<SparepartViewModel> SparepartListData
         {
             get
             {
-                return gridSparepart.DataSource as List<Sparepart>;
+                return gridSparepart.DataSource as List<SparepartViewModel>;
             }
             set
             {
@@ -139,7 +139,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public Sparepart SelectedSparepart
+        public SparepartViewModel SelectedSparepart
         {
             get
             {
@@ -173,7 +173,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if(gvSparepart.RowCount > 0)
             {
-                SelectedSparepart = gvSparepart.GetRow(0) as Sparepart;
+                SelectedSparepart = gvSparepart.GetRow(0) as SparepartViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data sparepart selesai", true);

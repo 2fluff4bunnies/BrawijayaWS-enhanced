@@ -216,6 +216,26 @@ namespace BrawijayaWorkshop.Win32App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Tire_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Tire_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Truck_Left_Green_icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Truck-Left-Green-icon-16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap zoom_icon {
             get {
                 object obj = ResourceManager.GetObject("zoom_icon", resourceCulture);

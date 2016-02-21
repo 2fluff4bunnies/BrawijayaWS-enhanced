@@ -1,21 +1,21 @@
-﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Infrastructure.Repository;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class VehicleDetailListModel : BaseModel
+    public class VehicleDetailListModel : AppBaseModel
     {
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IUnitOfWork _unitOfWork;
 
-        public VehicleDetailListModel(IVehicleRepository vehicleRepository, 
+        public VehicleDetailListModel(IVehicleRepository vehicleRepository,
             IVehicleDetailRepository vehicleDetailRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _vehicleRepository = vehicleRepository;
             _vehicleDetailRepository = vehicleDetailRepository;
@@ -23,12 +23,13 @@ namespace BrawijayaWorkshop.Model
         }
 
 
-        public List<VehicleDetail> SearchVehicleDetail(int vehicleId)
+        public List<VehicleDetailViewModel> SearchVehicleDetail(int vehicleId)
         {
             List<VehicleDetail> result = _vehicleDetailRepository.GetMany(
-                vd => vd.VehicleId == vehicleId).OrderByDescending(vd=>vd.Id).ToList();
+                vd => vd.VehicleId == vehicleId).OrderByDescending(vd => vd.Id).ToList();
+            List<VehicleDetailViewModel> mappedResult = new List<VehicleDetailViewModel>();
 
-            return result;
+            return Map(result, mappedResult);
         }
     }
 }

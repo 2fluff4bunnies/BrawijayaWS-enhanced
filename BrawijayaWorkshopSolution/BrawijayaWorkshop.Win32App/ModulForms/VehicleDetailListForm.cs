@@ -1,12 +1,9 @@
 ﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
-using BrawijayaWorkshop.Win32App.ModulForms;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +15,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class VehicleDetailListForm : BaseDefaultForm, IVehicleDetailListView
     {
         private VehicleDetailListPresenter _presenter;
-        private VehicleDetail _selectedVehicleDetail;
+        private VehicleDetailViewModel _selectedVehicleDetail;
 
         protected override string ModulName
         {
@@ -29,11 +26,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #region Properties
-        public List<VehicleDetail> VehicleDetailListData
+        public List<VehicleDetailViewModel> VehicleDetailListData
         {
             get
             {
-                return gcVehicleDetail.DataSource as List<VehicleDetail>;
+                return gcVehicleDetail.DataSource as List<VehicleDetailViewModel>;
             }
             set
             {
@@ -49,7 +46,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public VehicleDetail SelectedVehicleDetail
+        public VehicleDetailViewModel SelectedVehicleDetail
         {
             get
             {
@@ -61,7 +58,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public Vehicle SelectedVehicle { get; set; }
+        public VehicleViewModel SelectedVehicle { get; set; }
         #endregion
 
         public VehicleDetailListForm(VehicleDetailListModel model)
@@ -119,7 +116,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if(gvVehicleDetail.RowCount > 0)
             {
-                SelectedVehicleDetail = gvVehicleDetail.GetRow(0) as VehicleDetail;
+                SelectedVehicleDetail = gvVehicleDetail.GetRow(0) as VehicleDetailViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan detail selesai", true);

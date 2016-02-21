@@ -1,8 +1,7 @@
-﻿using BrawijayaWorkshop.Infrastructure.MVP;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
-using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.View;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
