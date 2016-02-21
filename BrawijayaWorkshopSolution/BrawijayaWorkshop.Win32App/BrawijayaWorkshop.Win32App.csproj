@@ -175,6 +175,12 @@
     <Compile Include="ModulControls\DebtListControl.Designer.cs">
       <DependentUpon>DebtListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\InvoiceListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\InvoiceListControl.Designer.cs">
+      <DependentUpon>InvoiceListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\JournalMasterListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -288,6 +294,18 @@
     </Compile>
     <Compile Include="ModulForms\DebtPaymentListForm.Designer.cs">
       <DependentUpon>DebtPaymentListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\InvoiceDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\InvoiceDetailForm.Designer.cs">
+      <DependentUpon>InvoiceDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\InvoiceEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\InvoiceEditorForm.Designer.cs">
+      <DependentUpon>InvoiceEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\JournalMasterEditorForm.cs">
       <SubType>Form</SubType>
@@ -481,6 +499,9 @@
     <EmbeddedResource Include="ModulControls\DebtListControl.resx">
       <DependentUpon>DebtListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
+      <DependentUpon>InvoiceListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -537,6 +558,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\DebtPaymentListForm.resx">
       <DependentUpon>DebtPaymentListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\InvoiceDetailForm.resx">
+      <DependentUpon>InvoiceDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\InvoiceEditorForm.resx">
+      <DependentUpon>InvoiceEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
