@@ -259,6 +259,12 @@
     <Compile Include="ModulControls\VehicleListControl.Designer.cs">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\WheelListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\WheelListControl.Designer.cs">
+      <DependentUpon>WheelListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\ConfigEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -421,6 +427,24 @@
     <Compile Include="ModulForms\SparepartEditorForm.Designer.cs">
       <DependentUpon>SparepartEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\VehicleWheelEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\VehicleWheelEditorForm.Designer.cs">
+      <DependentUpon>VehicleWheelEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\WheelDetailListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\WheelDetailListForm.Designer.cs">
+      <DependentUpon>WheelDetailListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\WheelEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\WheelEditorForm.Designer.cs">
+      <DependentUpon>WheelEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NavigationControls\MasterDataNavigationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -523,6 +547,9 @@
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\WheelListControl.resx">
+      <DependentUpon>WheelListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\ConfigEditorForm.resx">
       <DependentUpon>ConfigEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -600,6 +627,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartEditorForm.resx">
       <DependentUpon>SparepartEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\VehicleWheelEditorForm.resx">
+      <DependentUpon>VehicleWheelEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\WheelDetailListForm.resx">
+      <DependentUpon>WheelDetailListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\WheelEditorForm.resx">
+      <DependentUpon>WheelEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\MasterDataNavigationControl.resx">
       <DependentUpon>MasterDataNavigationControl.cs</DependentUpon>
@@ -721,6 +757,7 @@
     <None Include="Images\approve 16x16.png" />
     <None Include="Images\print_16x16.png" />
     <None Include="Images\completed_16x16.png" />
+    <None Include="Images\Tire_16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
     <Content Include="Resources\cancel_32x32.png" />

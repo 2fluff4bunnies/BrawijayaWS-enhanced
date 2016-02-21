@@ -114,7 +114,7 @@
             // 
             // colCodeDetail
             // 
-            this.colCodeDetail.Caption = "Nomor Seri";
+            this.colCodeDetail.Caption = "Kode";
             this.colCodeDetail.FieldName = "Code";
             this.colCodeDetail.Name = "colCodeDetail";
             this.colCodeDetail.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
@@ -137,7 +137,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparepartDetailListForm";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detil Sparepart : {0}";
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
