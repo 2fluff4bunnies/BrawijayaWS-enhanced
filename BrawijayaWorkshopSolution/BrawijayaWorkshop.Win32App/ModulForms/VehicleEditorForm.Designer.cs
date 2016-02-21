@@ -50,6 +50,10 @@
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
             this.FieldsValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
+            this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCodeDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
@@ -60,13 +64,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             this.SuspendLayout();
             // 
             // lookUpCustomer
             // 
             this.lookUpCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lookUpCustomer.Location = new System.Drawing.Point(128, 27);
+            this.lookUpCustomer.Location = new System.Drawing.Point(128, 145);
             this.lookUpCustomer.Name = "lookUpCustomer";
             this.lookUpCustomer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -80,7 +86,7 @@
             this.lookUpCustomer.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpCustomer.Properties.NullText = "-- Pilih Customer --";
             this.lookUpCustomer.Properties.ValueMember = "Id";
-            this.lookUpCustomer.Size = new System.Drawing.Size(162, 20);
+            this.lookUpCustomer.Size = new System.Drawing.Size(257, 20);
             this.lookUpCustomer.TabIndex = 0;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Customer harus dipilih";
@@ -93,7 +99,7 @@
             this.txtBrand.Location = new System.Drawing.Point(128, 56);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtBrand.Size = new System.Drawing.Size(162, 20);
+            this.txtBrand.Size = new System.Drawing.Size(257, 20);
             this.txtBrand.TabIndex = 1;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "Merek harus diisi";
@@ -103,12 +109,12 @@
             // 
             this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 145);
+            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 25);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtLicenseNumber.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
             this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtLicenseNumber.Size = new System.Drawing.Size(162, 20);
+            this.txtLicenseNumber.Size = new System.Drawing.Size(257, 20);
             this.txtLicenseNumber.TabIndex = 4;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule3.ErrorText = "Nomor Polisi harus diisi";
@@ -121,7 +127,7 @@
             this.txtType.Location = new System.Drawing.Point(128, 86);
             this.txtType.Name = "txtType";
             this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtType.Size = new System.Drawing.Size(162, 20);
+            this.txtType.Size = new System.Drawing.Size(257, 20);
             this.txtType.TabIndex = 2;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule4.ErrorText = "Tipe harus diisi";
@@ -136,7 +142,7 @@
             this.txtYearOfPurchase.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtYearOfPurchase.Properties.Mask.EditMask = "[12][0-9]{3}";
             this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtYearOfPurchase.Size = new System.Drawing.Size(162, 20);
+            this.txtYearOfPurchase.Size = new System.Drawing.Size(257, 20);
             this.txtYearOfPurchase.TabIndex = 3;
             conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule5.ErrorText = "Tahun Pembelian harus diisi";
@@ -146,7 +152,7 @@
             // 
             this.lblCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomer.Location = new System.Drawing.Point(12, 30);
+            this.lblCustomer.Location = new System.Drawing.Point(12, 148);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 0;
@@ -184,6 +190,7 @@
             // 
             // gcCustomerInfo
             // 
+            this.gcCustomerInfo.Controls.Add(this.gridVehicleWheel);
             this.gcCustomerInfo.Controls.Add(this.txtYearOfPurchase);
             this.gcCustomerInfo.Controls.Add(this.dtpExpirationDate);
             this.gcCustomerInfo.Controls.Add(this.lblExpirationDate);
@@ -199,7 +206,7 @@
             this.gcCustomerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcCustomerInfo.Location = new System.Drawing.Point(0, 0);
             this.gcCustomerInfo.Name = "gcCustomerInfo";
-            this.gcCustomerInfo.Size = new System.Drawing.Size(309, 204);
+            this.gcCustomerInfo.Size = new System.Drawing.Size(404, 436);
             this.gcCustomerInfo.TabIndex = 1;
             this.gcCustomerInfo.Text = "Informasi Kendaraan";
             // 
@@ -218,7 +225,7 @@
             this.dtpExpirationDate.Properties.HideSelection = false;
             this.dtpExpirationDate.Properties.HighlightTodayCell = DevExpress.Utils.DefaultBoolean.True;
             this.dtpExpirationDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dtpExpirationDate.Size = new System.Drawing.Size(162, 20);
+            this.dtpExpirationDate.Size = new System.Drawing.Size(257, 20);
             this.dtpExpirationDate.TabIndex = 5;
             conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule6.ErrorText = "Tanggal Kadaluarsa harus diisi";
@@ -238,7 +245,7 @@
             // 
             this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 148);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(57, 13);
             this.lblLicenseNumber.TabIndex = 9;
@@ -249,11 +256,62 @@
             this.FieldsValidator.ValidateHiddenControls = false;
             this.FieldsValidator.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // gridVehicleWheel
+            // 
+            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 205);
+            this.gridVehicleWheel.MainView = this.gvVehicleWheel;
+            this.gridVehicleWheel.Name = "gridVehicleWheel";
+            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 169);
+            this.gridVehicleWheel.TabIndex = 12;
+            this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvVehicleWheel});
+            // 
+            // gvVehicleWheel
+            // 
+            this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colCodeDetail,
+            this.colSerialNumber});
+            this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
+            this.gvVehicleWheel.Name = "gvVehicleWheel";
+            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvVehicleWheel.OptionsBehavior.Editable = false;
+            this.gvVehicleWheel.OptionsBehavior.ReadOnly = true;
+            this.gvVehicleWheel.OptionsCustomization.AllowColumnMoving = false;
+            this.gvVehicleWheel.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvVehicleWheel.OptionsMenu.EnableFooterMenu = false;
+            this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvVehicleWheel.OptionsView.ShowFooter = true;
+            this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
+            this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
+            // 
+            // colCodeDetail
+            // 
+            this.colCodeDetail.Caption = "Kode";
+            this.colCodeDetail.FieldName = "Code";
+            this.colCodeDetail.Name = "colCodeDetail";
+            this.colCodeDetail.Visible = true;
+            this.colCodeDetail.VisibleIndex = 0;
+            // 
+            // colSerialNumber
+            // 
+            this.colSerialNumber.Caption = "Nomor Seri";
+            this.colSerialNumber.Name = "colSerialNumber";
+            this.colSerialNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "", "Jumlah Data: {0}")});
+            this.colSerialNumber.Visible = true;
+            this.colSerialNumber.VisibleIndex = 1;
+            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 253);
+            this.ClientSize = new System.Drawing.Size(404, 436);
             this.Controls.Add(this.gcCustomerInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VehicleEditorForm";
@@ -270,6 +328,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,5 +350,9 @@
         private DevExpress.XtraEditors.DateEdit dtpExpirationDate;
         private DevExpress.XtraEditors.LabelControl lblExpirationDate;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider FieldsValidator;
+        private DevExpress.XtraGrid.GridControl gridVehicleWheel;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
+        private DevExpress.XtraGrid.Columns.GridColumn colCodeDetail;
+        private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
     }
 }

@@ -11,16 +11,11 @@ using DevExpress.XtraEditors;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class VehicleWheelEditorForm : DevExpress.XtraEditors.XtraForm
+    public partial class GuestBookEditorForm : BaseEditorForm
     {
-        public VehicleWheelEditorForm()
+        public GuestBookEditorForm()
         {
             InitializeComponent();
-        }
-
-        private void btnUpdateVehicleWheel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
