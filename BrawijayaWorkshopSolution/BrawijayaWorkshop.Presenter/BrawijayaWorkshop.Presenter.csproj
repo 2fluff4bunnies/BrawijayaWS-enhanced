@@ -74,6 +74,8 @@
     <Compile Include="VehicleListPresenter.cs" />
     <Compile Include="SparepartEditorPresenter.cs" />
     <Compile Include="SparepartListPresenter.cs" />
+    <Compile Include="WheelEditorPresenter.cs" />
+    <Compile Include="WheelListPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">

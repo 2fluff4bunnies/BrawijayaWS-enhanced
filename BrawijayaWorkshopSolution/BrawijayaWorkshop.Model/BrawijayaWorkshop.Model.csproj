@@ -91,6 +91,8 @@
     <Compile Include="VehicleListModel.cs" />
     <Compile Include="SparepartEditorModel.cs" />
     <Compile Include="SparepartListModel.cs" />
+    <Compile Include="WheelEditorModel.cs" />
+    <Compile Include="WheelListModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">
