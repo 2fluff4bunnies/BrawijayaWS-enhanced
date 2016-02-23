@@ -12,5 +12,7 @@ namespace BrawijayaWorkshop.View
 
         List<UserRoleViewModel> UserRoleListData { get; set; }
         UserRoleViewModel SelectedUserRole { get; set; }
+
+        bool IsActive { get; set; }
     }
 }

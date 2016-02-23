@@ -83,5 +83,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 throw new NotImplementedException();
             }
         }
+
+        public bool IsActive
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
