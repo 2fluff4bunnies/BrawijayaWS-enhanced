@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Model
         public UserViewModel ValidateLogin(string userName, string password)
         {
             User result = _userRepository.GetMany(u => string.Compare(userName, u.UserName, true) == 0 &&
-                string.Compare(password, u.Password, false) == 0).FirstOrDefault();
+                string.Compare(password, u.Password, false) == 0 && u.IsActive).FirstOrDefault();
             UserViewModel mappedResult = new UserViewModel();
             return Map(result, mappedResult);
         }

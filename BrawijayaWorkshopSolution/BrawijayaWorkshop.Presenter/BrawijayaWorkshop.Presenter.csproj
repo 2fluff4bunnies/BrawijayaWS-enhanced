@@ -45,6 +45,7 @@
     <Compile Include="JournalMasterEditorPresenter.cs" />
     <Compile Include="JournalMasterListPresenter.cs" />
     <Compile Include="LoginPresenter.cs" />
+    <Compile Include="ManageUserListPresenter.cs" />
     <Compile Include="MechanicEditorPresenter.cs" />
     <Compile Include="MechanicListPresenter.cs" />
     <Compile Include="NotificationListPresenter.cs" />

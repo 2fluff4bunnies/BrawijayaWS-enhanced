@@ -180,7 +180,7 @@
     </Compile>
     <Compile Include="ModulControls\InvoiceListControl.Designer.cs">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="ModulControls\GuestBookListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -192,6 +192,12 @@
     </Compile>
     <Compile Include="ModulControls\JournalMasterListControl.Designer.cs">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\ManageUserListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\ManageUserListControl.Designer.cs">
+      <DependentUpon>ManageUserListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\MechanicListControl.cs">
       <SubType>UserControl</SubType>
@@ -318,7 +324,7 @@
     </Compile>
     <Compile Include="ModulForms\InvoiceEditorForm.Designer.cs">
       <DependentUpon>InvoiceEditorForm.cs</DependentUpon>
-</Compile>
+    </Compile>
     <Compile Include="ModulForms\GuestBookEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -531,12 +537,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
-</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\ManageUserListControl.resx">
+      <DependentUpon>ManageUserListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\MechanicListControl.resx">
       <DependentUpon>MechanicListControl.cs</DependentUpon>
@@ -600,7 +609,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\InvoiceEditorForm.resx">
       <DependentUpon>InvoiceEditorForm.cs</DependentUpon>
-</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\GuestBookEditorForm.resx">
       <DependentUpon>GuestBookEditorForm.cs</DependentUpon>
     </EmbeddedResource>
