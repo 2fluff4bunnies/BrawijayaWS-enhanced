@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -45,6 +46,10 @@
             this.colRole = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsActive = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbxFilterIsActive.Properties)).BeginInit();
@@ -53,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCheckEdit)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gcFilter
@@ -82,6 +88,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // cbxFilterIsActive
             // 
@@ -140,6 +147,7 @@
             this.btnNewUser.Size = new System.Drawing.Size(114, 23);
             this.btnNewUser.TabIndex = 4;
             this.btnNewUser.Text = "Buat User Baru";
+            this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
             // 
             // gridUser
             // 
@@ -226,6 +234,35 @@
             this.repoCheckEdit.AutoHeight = false;
             this.repoCheckEdit.Name = "repoCheckEdit";
             // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // cmsEditor
+            // 
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsEditData,
+            this.cmsDeleteData});
+            this.cmsEditor.Name = "cmsEditor";
+            this.cmsEditor.Size = new System.Drawing.Size(136, 48);
+            // 
+            // cmsEditData
+            // 
+            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditData.Name = "cmsEditData";
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
+            // 
+            // cmsDeleteData
+            // 
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
             // ManageUserListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,6 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCheckEdit)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,5 +304,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colRole;
         private DevExpress.XtraGrid.Columns.GridColumn colIsActive;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckEdit;
+        private System.ComponentModel.BackgroundWorker bgwMain;
+        private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
     }
 }

@@ -11,10 +11,11 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.IsActive = true;
             View.RoleDropdownListData = Model.RetrieveRoles();
         }
 
-        public void SearchData()
+        public void LoadData()
         {
             View.UserRoleListData = Model.RetrieveUsers(View.SelectedRoleId, View.FilterName);
         }
