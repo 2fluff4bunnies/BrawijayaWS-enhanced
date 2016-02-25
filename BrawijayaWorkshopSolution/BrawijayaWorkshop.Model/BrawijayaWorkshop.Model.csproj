@@ -59,6 +59,7 @@
     <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="ManageUserEditorModel.cs" />
     <Compile Include="ManageUserListModel.cs" />
     <Compile Include="Mappers\AutoMapperConfiguration.cs" />
     <Compile Include="Mappers\DomainToViewModelMappingProfile.cs" />

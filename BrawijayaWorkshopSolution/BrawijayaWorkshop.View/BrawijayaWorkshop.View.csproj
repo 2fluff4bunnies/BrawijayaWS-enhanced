@@ -76,6 +76,7 @@
     <Compile Include="ISparepartListView.cs" />
     <Compile Include="IWheelEditorView.cs" />
     <Compile Include="IWheelListView.cs" />
+    <Compile Include="IManageUserEditorView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

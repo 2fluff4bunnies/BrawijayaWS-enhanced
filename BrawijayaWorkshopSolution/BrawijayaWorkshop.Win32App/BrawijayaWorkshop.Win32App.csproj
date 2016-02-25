@@ -337,6 +337,12 @@
     <Compile Include="ModulForms\JournalMasterEditorForm.Designer.cs">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\ManageUserEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\ManageUserEditorForm.Designer.cs">
+      <DependentUpon>ManageUserEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\MechanicEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -615,6 +621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\ManageUserEditorForm.resx">
+      <DependentUpon>ManageUserEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
