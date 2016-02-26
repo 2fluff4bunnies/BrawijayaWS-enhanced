@@ -58,7 +58,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public void DisableUser(int userId)
+        public void DeleteUser(int userId)
         {
             User entity = _userRepository.GetById(userId);
             entity.IsActive = false;

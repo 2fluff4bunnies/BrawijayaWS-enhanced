@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcUserRoleInfo = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpRole = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblRole = new DevExpress.XtraEditors.LabelControl();
             this.cbxIsActive = new DevExpress.XtraEditors.CheckEdit();
             this.txtReTypePassword = new DevExpress.XtraEditors.TextEdit();
             this.lblReTypePassword = new DevExpress.XtraEditors.LabelControl();
@@ -42,10 +50,14 @@
             this.lblFirstName = new DevExpress.XtraEditors.LabelControl();
             this.txtUserName = new DevExpress.XtraEditors.TextEdit();
             this.lblUserName = new DevExpress.XtraEditors.LabelControl();
-            this.lblRole = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpRole = new DevExpress.XtraEditors.LookUpEdit();
+            this.valUserName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valFirstName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valLastName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valPassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valReTypePassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcUserRoleInfo)).BeginInit();
             this.gcUserRoleInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxIsActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReTypePassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -53,7 +65,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMiddleName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valUserName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valFirstName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valLastName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valReTypePassword)).BeginInit();
             this.SuspendLayout();
             // 
             // gcUserRoleInfo
@@ -66,6 +82,27 @@
             this.gcUserRoleInfo.Size = new System.Drawing.Size(370, 326);
             this.gcUserRoleInfo.TabIndex = 1;
             this.gcUserRoleInfo.Text = "Informasi User";
+            // 
+            // lookUpRole
+            // 
+            this.lookUpRole.Location = new System.Drawing.Point(116, 287);
+            this.lookUpRole.Name = "lookUpRole";
+            this.lookUpRole.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpRole.Properties.HideSelection = false;
+            this.lookUpRole.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpRole.Properties.NullText = "-- Pilih Role --";
+            this.lookUpRole.Size = new System.Drawing.Size(149, 20);
+            this.lookUpRole.TabIndex = 1;
+            // 
+            // lblRole
+            // 
+            this.lblRole.Location = new System.Drawing.Point(12, 290);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(21, 13);
+            this.lblRole.TabIndex = 0;
+            this.lblRole.Text = "Role";
             // 
             // cbxIsActive
             // 
@@ -82,6 +119,10 @@
             this.txtReTypePassword.Properties.UseSystemPasswordChar = true;
             this.txtReTypePassword.Size = new System.Drawing.Size(149, 20);
             this.txtReTypePassword.TabIndex = 24;
+            compareAgainstControlValidationRule1.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Equals;
+            compareAgainstControlValidationRule1.Control = this.txtPassword;
+            compareAgainstControlValidationRule1.ErrorText = "Password harus sama!";
+            this.valReTypePassword.SetValidationRule(this.txtReTypePassword, compareAgainstControlValidationRule1);
             // 
             // lblReTypePassword
             // 
@@ -98,6 +139,9 @@
             this.txtPassword.Properties.UseSystemPasswordChar = true;
             this.txtPassword.Size = new System.Drawing.Size(149, 20);
             this.txtPassword.TabIndex = 22;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Password harus diisi!";
+            this.valPassword.SetValidationRule(this.txtPassword, conditionValidationRule1);
             // 
             // lblPassword
             // 
@@ -115,6 +159,9 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(242, 20);
             this.txtLastName.TabIndex = 20;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Nama Belakang harus diisi!";
+            this.valLastName.SetValidationRule(this.txtLastName, conditionValidationRule2);
             // 
             // lblLastName
             // 
@@ -149,6 +196,9 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(242, 20);
             this.txtFirstName.TabIndex = 16;
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Nama Depan harus diisi!";
+            this.valFirstName.SetValidationRule(this.txtFirstName, conditionValidationRule3);
             // 
             // lblFirstName
             // 
@@ -166,6 +216,9 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(242, 20);
             this.txtUserName.TabIndex = 14;
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Username harus diisi!";
+            this.valUserName.SetValidationRule(this.txtUserName, conditionValidationRule4);
             // 
             // lblUserName
             // 
@@ -175,26 +228,25 @@
             this.lblUserName.TabIndex = 13;
             this.lblUserName.Text = "Username";
             // 
-            // lblRole
+            // valUserName
             // 
-            this.lblRole.Location = new System.Drawing.Point(12, 290);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(21, 13);
-            this.lblRole.TabIndex = 0;
-            this.lblRole.Text = "Role";
+            this.valUserName.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // lookUpRole
+            // valFirstName
             // 
-            this.lookUpRole.Location = new System.Drawing.Point(116, 287);
-            this.lookUpRole.Name = "lookUpRole";
-            this.lookUpRole.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpRole.Properties.HideSelection = false;
-            this.lookUpRole.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lookUpRole.Properties.NullText = "-- Pilih Role --";
-            this.lookUpRole.Size = new System.Drawing.Size(149, 20);
-            this.lookUpRole.TabIndex = 1;
+            this.valFirstName.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            // 
+            // valLastName
+            // 
+            this.valLastName.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            // 
+            // valPassword
+            // 
+            this.valPassword.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            // 
+            // valReTypePassword
+            // 
+            this.valReTypePassword.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
             // ManageUserEditorForm
             // 
@@ -234,6 +286,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcUserRoleInfo)).EndInit();
             this.gcUserRoleInfo.ResumeLayout(false);
             this.gcUserRoleInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxIsActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReTypePassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
@@ -241,7 +294,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMiddleName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valUserName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valFirstName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valLastName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valReTypePassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +322,10 @@
         private DevExpress.XtraEditors.LabelControl lblFirstName;
         private DevExpress.XtraEditors.TextEdit txtUserName;
         private DevExpress.XtraEditors.LabelControl lblUserName;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valReTypePassword;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPassword;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valLastName;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valFirstName;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valUserName;
     }
 }

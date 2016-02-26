@@ -20,11 +20,11 @@ namespace BrawijayaWorkshop.Presenter
             View.UserRoleListData = Model.RetrieveUsers(View.SelectedRoleId, View.FilterName);
         }
 
-        public void DisableUser()
+        public void DeleteUser()
         {
             if (View.SelectedUserRole != null)
             {
-                Model.DisableUser(View.SelectedUserRole.UserId);
+                Model.DeleteUser(View.SelectedUserRole.UserId);
             }
         }
     }

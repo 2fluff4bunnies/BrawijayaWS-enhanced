@@ -29,6 +29,18 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
+        public bool ValidateUser()
+        {
+            if (View.SelectedUserRole != null && View.SelectedUserRole.UserId > 0)
+            {
+                return Model.Validate(View.UserName, View.SelectedUserRole.UserId);
+            }
+            else
+            {
+                return Model.Validate(View.UserName);
+            }
+        }
+
         public void SaveChanges()
         {
             if(View.SelectedUserRole == null)

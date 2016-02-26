@@ -6,6 +6,7 @@ using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -16,6 +17,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             InitializeComponent();
             _presenter = new ManageUserEditorPresenter(this, model);
+
+            valUserName.SetIconAlignment(txtUserName, ErrorIconAlignment.MiddleRight);
+            valFirstName.SetIconAlignment(txtFirstName, ErrorIconAlignment.MiddleRight);
+            valLastName.SetIconAlignment(txtLastName, ErrorIconAlignment.MiddleRight);
+            valPassword.SetIconAlignment(txtPassword, ErrorIconAlignment.MiddleRight);
+            valReTypePassword.SetIconAlignment(txtReTypePassword, ErrorIconAlignment.MiddleRight);
 
             this.Load += ManageUserEditorForm_Load;
         }
@@ -29,11 +36,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return lookUpRole.Properties.DataSource as List<RoleViewModel>;
             }
             set
             {
-                throw new NotImplementedException();
+                lookUpRole.Properties.DataSource = value;
             }
         }
 
@@ -41,35 +48,25 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return lookUpRole.EditValue.AsInteger();
             }
             set
             {
-                throw new NotImplementedException();
+                lookUpRole.EditValue = value;
             }
         }
 
-        public UserRoleViewModel SelectedUserRole
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public UserRoleViewModel SelectedUserRole { get; set; }
 
         public string UserName
         {
             get
             {
-                throw new NotImplementedException();
+                return txtUserName.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtUserName.Text = value;
             }
         }
 
@@ -77,11 +74,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtFirstName.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtFirstName.Text = value;
             }
         }
 
@@ -89,11 +86,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtLastName.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtLastName.Text = value;
             }
         }
 
@@ -101,11 +98,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtMiddleName.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtMiddleName.Text = value;
             }
         }
 
@@ -113,11 +110,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtPassword.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtPassword.Text = value;
             }
         }
 
@@ -125,11 +122,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtReTypePassword.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtReTypePassword.Text = value;
             }
         }
 
@@ -137,11 +134,37 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return cbxIsActive.EditValue.AsBoolean();
             }
             set
             {
-                throw new NotImplementedException();
+                cbxIsActive.EditValue = value;
+            }
+        }
+
+        protected override void ExecuteSave()
+        {
+            if (valUserName.Validate() && valFirstName.Validate() && valLastName.Validate() &&
+                valPassword.Validate() && valReTypePassword.Validate())
+            {
+                if (_presenter.ValidateUser())
+                {
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save User's changes");
+                        _presenter.SaveChanges();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save user: '" + this.FirstName + "'", ex);
+                        this.ShowError("Proses simpan data user: '" + this.FirstName + "' gagal!");
+                    }
+                }
+                else
+                {
+                    this.ShowWarning("Username '" + this.UserName + "' sudah terpakai");
+                }
             }
         }
     }

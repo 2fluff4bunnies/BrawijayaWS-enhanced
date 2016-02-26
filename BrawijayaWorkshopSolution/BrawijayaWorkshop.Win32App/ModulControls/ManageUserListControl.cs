@@ -139,17 +139,45 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewUser_Click(object sender, EventArgs e)
         {
+            ManageUserEditorForm editor = Bootstrapper.Resolve<ManageUserEditorForm>();
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
+            if (SelectedUserRole != null)
+            {
+                ManageUserEditorForm editor = Bootstrapper.Resolve<ManageUserEditorForm>();
+                editor.SelectedUserRole = SelectedUserRole;
+                editor.ShowDialog(this);
 
+                btnSearch.PerformClick();
+            }
         }
 
         private void cmsDeleteData_Click(object sender, EventArgs e)
         {
+            if (SelectedUserRole != null)
+            {
+                if (this.ShowConfirmation("Apakah anda yakin ingin menghapus user: '" + SelectedUserRole.User.UserName + "'?") == DialogResult.Yes)
+                {
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Deleting user: " + SelectedUserRole.User.UserName);
 
+                        _presenter.DeleteUser();
+
+                        btnSearch.PerformClick(); // refresh data
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete user: '" + SelectedUserRole.User.UserName + "'", ex);
+                        this.ShowError("Proses hapus data user: '" + SelectedUserRole.User.UserName + "' gagal!");
+                    }
+                }
+            }
         }
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
