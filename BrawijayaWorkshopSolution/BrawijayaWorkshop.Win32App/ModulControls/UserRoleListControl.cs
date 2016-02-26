@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
@@ -17,6 +18,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class UserRoleListControl : BaseAppUserControl, IUserRoleListView
     {
         private UserRoleListPresenter _presenter;
+
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_ACCESSIBILITY;
+            }
+        }
+
         public UserRoleListControl(UserRoleListModel model)
         {
             InitializeComponent();
@@ -24,6 +34,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             gvUserRole.FocusedRowChanged += gvUserRole_FocusedRowChanged;
             gvUserRole.PopupMenuShowing += gvUserRole_PopupMenuShowing;
+
+            // init editor control accessibility
+            btnNewUserRole.Enabled = AllowInsert;
+            //cmsEditData.Enabled = AllowEdit;
+            cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += UserRoleListControl_Load;
         }

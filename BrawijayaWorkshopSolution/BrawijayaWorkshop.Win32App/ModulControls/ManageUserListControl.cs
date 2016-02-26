@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
@@ -18,6 +19,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     {
         private ManageUserListPresenter _presenter;
 
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_MANAGE_APP_USER;
+            }
+        }
+
         public ManageUserListControl(ManageUserListModel model)
         {
             InitializeComponent();
@@ -25,6 +34,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             gvUser.FocusedRowChanged += gvUser_FocusedRowChanged;
             gvUser.PopupMenuShowing += gvUser_PopupMenuShowing;
+
+            // init editor control accessibility
+            btnNewUser.Enabled = AllowInsert;
+            cmsEditData.Enabled = AllowEdit;
+            cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += ManageUserListControl_Load;
         }
