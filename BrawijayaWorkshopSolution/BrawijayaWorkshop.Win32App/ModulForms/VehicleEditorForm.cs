@@ -50,8 +50,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     sender = null;
                 }
             }
-           
-
         }
 
         private void VehicleEditorForm_Load(object sender, EventArgs e)
@@ -154,7 +152,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        List<VehicleWheelViewModel> VehicleWheelList
+        public List<VehicleWheelViewModel> VehicleWheelList
         {
             get
             {
@@ -174,7 +172,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        List<WheelDetailViewModel> WheelDetailList
+        public List<WheelDetailViewModel> WheelDetailList
         {
             get
             {
@@ -186,7 +184,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        List<VehicleWheelViewModel> VehicleWheelExchangedList { get; set; }
+        public List<VehicleWheelViewModel> VehicleWheelExchangedList { get; set; }
         #endregion
 
         protected override void ExecuteSave()
@@ -206,7 +204,5 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
-
-
     }
 }
