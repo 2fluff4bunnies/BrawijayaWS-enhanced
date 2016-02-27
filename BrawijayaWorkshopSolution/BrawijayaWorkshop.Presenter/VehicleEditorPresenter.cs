@@ -14,7 +14,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
-            View.CustomerList = Model.RetrieveCustomer();
+            View.CustomerList = Model.RetrieveCustomers();
+            View.WheelDetailList = Model.RetrieveWheelDetails();
 
             if (View.SelectedVehicle != null)
             {
@@ -23,7 +24,10 @@ namespace BrawijayaWorkshop.Presenter
                 View.Type = View.SelectedVehicle.Type;
                 View.CustomerId = View.SelectedVehicle.CustomerId;
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
+                View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
             }
+
+            View.VehicleWheelExchangedList = new System.Collections.Generic.List<VehicleWheelViewModel>();
         }
 
         public void SaveChanges()
@@ -41,12 +45,23 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedVehicle.Id > 0)
             {
-                Model.UpdateVehicle(View.SelectedVehicle, LoginInformation.UserId);
+                Model.UpdateVehicle(View.SelectedVehicle, LoginInformation.UserId, View.VehicleWheelList, View.VehicleWheelExchangedList);
             }
             else
             {
                 Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, LoginInformation.UserId);
             }
         }
+
+        public VehicleWheelViewModel IsWheelUsedByOtherVehicle(int wheelDetailId)
+        {
+            return Model.IsWheelUsedByOtherVehicle(wheelDetailId, View.SelectedVehicle.Id);
+        }
+
+        public int GetCurrentInstalledWheel(int wheelDetailId)
+        {
+            return Model.GetCurrentWheelDetailId(wheelDetailId);
+        }
+
     }
 }

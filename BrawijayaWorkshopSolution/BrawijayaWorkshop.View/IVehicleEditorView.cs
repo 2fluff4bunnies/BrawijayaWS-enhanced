@@ -22,5 +22,11 @@ namespace BrawijayaWorkshop.View
         int CustomerId { get; set; }
 
         List<CustomerViewModel> CustomerList { get; set; }
+
+        List<VehicleWheelViewModel> VehicleWheelList { get; set; }
+
+        List<VehicleWheelViewModel> VehicleWheelExchangedList { get; set; }
+
+        List<WheelDetailViewModel> WheelDetailList { get; set; }
     }
 }
