@@ -72,6 +72,7 @@ namespace BrawijayaWorkshop.Constant
             OutPurchase = 2,
             OutService = 3,
             Broken = 4,
+            OutInstalled = 5,
             NotVerified = 0
         }
 
