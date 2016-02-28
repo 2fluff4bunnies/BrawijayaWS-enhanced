@@ -16,11 +16,12 @@ namespace BrawijayaWorkshop.Model
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private IWheelDetailRepository _wheelDetailRepository;
+        private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository,
            IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
-            IWheelDetailRepository wheelDetailRepository, IUnitOfWork unitOfWork)
+            IWheelDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _customerRepository = customerRepository;
@@ -28,6 +29,7 @@ namespace BrawijayaWorkshop.Model
             _vehicleDetailRepository = vehicleDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
             _wheelDetailRepository = wheelDetailRepository;
+            _sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -38,14 +40,27 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<WheelDetailViewModel> RetrieveWheelDetails()
+        public List<WheelDetailViewModel> RetrieveAllWheelDetails()
         {
-            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready ||
+                                                                            wd.Status == (int)DbConstant.WheelDetailStatus.Installed) &&
+                                                                            wd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
+                                                                      ).ToList();
             List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
             return Map(result, mappedResult);
         }
 
-        public void InsertVehicle(VehicleViewModel vehicle, DateTime expirationDate, int userId)
+        public List<WheelDetailViewModel> RetrieveReadyWheelDetails()
+        {
+            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready &&
+                                                                            wd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
+                                                                     ).ToList();
+            List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public void InsertVehicle(VehicleViewModel vehicle, DateTime expirationDate,
+             List<VehicleWheelViewModel> vehicleWheels, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
@@ -66,16 +81,43 @@ namespace BrawijayaWorkshop.Model
                 ModifyDate = serverTime,
                 ModifyUserId = userId,
                 CreateUserId = userId,
-                Status = (int)DbConstant.LicenseNumberStatus.Expired
+                Status = (int)DbConstant.LicenseNumberStatus.Active
             };
+
+            foreach (var vw in vehicleWheels)
+            {
+                vw.VehicleId = insertedVehicle.Id;
+                vw.CreateDate = serverTime;
+                vw.CreateUserId = userId;
+                vw.ModifyDate = serverTime;
+                vw.ModifyUserId = userId;
+                vw.Status = (int)DbConstant.DefaultDataStatus.Active;
+                VehicleWheel vwEntity = new VehicleWheel();
+                Map(vw, vwEntity);
+
+                _vehicleWheelRepository.Add(vwEntity);
+
+                WheelDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
+                wdEntity.ModifyDate = serverTime;
+                wdEntity.ModifyUserId = userId;
+                wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
+
+                _wheelDetailRepository.Update(wdEntity);
+
+#warning is this necessary?
+                SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
+                spdEntity.ModifyDate = serverTime;
+                spdEntity.ModifyUserId = userId;
+                spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
+            }
 
             _vehicleDetailRepository.Add(vehicleDetail);
 
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateVehicle(VehicleViewModel vehicle, int userId,
-            List<VehicleWheelViewModel> vehicleWheels, List<VehicleWheelViewModel> vehicleWheelExchanged)
+        public void UpdateVehicle(VehicleViewModel vehicle, List<VehicleWheelViewModel> vehicleWheels,
+            List<VehicleWheelViewModel> vehicleWheelExchanged, int userId)
         {
             DateTime serverTime = DateTime.Now;
 

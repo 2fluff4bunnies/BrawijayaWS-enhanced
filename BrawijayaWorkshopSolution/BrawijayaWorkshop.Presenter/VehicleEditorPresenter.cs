@@ -15,7 +15,6 @@ namespace BrawijayaWorkshop.Presenter
         public void InitFormData()
         {
             View.CustomerList = Model.RetrieveCustomers();
-            View.WheelDetailList = Model.RetrieveWheelDetails();
 
             if (View.SelectedVehicle != null)
             {
@@ -25,6 +24,11 @@ namespace BrawijayaWorkshop.Presenter
                 View.CustomerId = View.SelectedVehicle.CustomerId;
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
+                View.WheelDetailList = Model.RetrieveAllWheelDetails();
+            }
+            else
+            {
+                View.WheelDetailList = Model.RetrieveReadyWheelDetails();
             }
 
             View.VehicleWheelExchangedList = new System.Collections.Generic.List<VehicleWheelViewModel>();
@@ -45,11 +49,11 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedVehicle.Id > 0)
             {
-                Model.UpdateVehicle(View.SelectedVehicle, LoginInformation.UserId, View.VehicleWheelList, View.VehicleWheelExchangedList);
+                Model.UpdateVehicle(View.SelectedVehicle, View.VehicleWheelList, View.VehicleWheelExchangedList, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, LoginInformation.UserId);
+                Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, View.VehicleWheelList, LoginInformation.UserId);
             }
         }
 

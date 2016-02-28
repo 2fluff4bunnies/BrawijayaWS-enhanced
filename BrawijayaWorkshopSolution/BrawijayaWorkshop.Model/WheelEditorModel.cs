@@ -26,24 +26,25 @@ namespace BrawijayaWorkshop.Model
         }
 
 
-        public void InsertWheel(WheelViewModel Wheel, int userId)
+        public void InsertWheel(WheelViewModel wheel, int userId)
         {
             DateTime serverTime = DateTime.Now;
-            Wheel.CreateDate = serverTime;
-            Wheel.CreateUserId = userId;
+            wheel.CreateDate = serverTime;
+            wheel.CreateUserId = userId;
+            wheel.Status = (int)DbConstant.DefaultDataStatus.Active;
             Wheel entity = new Wheel();
-            Map(Wheel, entity);
+            Map(wheel, entity);
             _wheelRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateWheel(WheelViewModel Wheel, int userId)
+        public void UpdateWheel(WheelViewModel wheel, int userId)
         {
             DateTime serverTime = DateTime.Now;
-            Wheel.ModifyDate = serverTime;
-            Wheel.ModifyUserId = userId;
-            Wheel entity = _wheelRepository.GetById(Wheel.Id);
-            Map(Wheel, entity);
+            wheel.ModifyDate = serverTime;
+            wheel.ModifyUserId = userId;
+            Wheel entity = _wheelRepository.GetById(wheel.Id);
+            Map(wheel, entity);
             _wheelRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

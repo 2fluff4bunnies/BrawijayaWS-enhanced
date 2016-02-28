@@ -114,5 +114,11 @@ namespace BrawijayaWorkshop.Constant
             NotVerified = 0,
             Active = 1,
         }
+
+        public enum WheelDetailStatus
+        { 
+            Ready = 1,
+            Installed = 2,
+        }
     }
 }
