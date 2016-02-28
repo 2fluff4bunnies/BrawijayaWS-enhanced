@@ -13,18 +13,26 @@ namespace BrawijayaWorkshop.Model
     {
         private IWheelRepository _wheelRepository;
         private IReferenceRepository _referenceRepository;
+        private ISparepartRepository _sparepartRepository;
         private IUnitOfWork _unitOfWork;
 
-
         public WheelEditorModel(IWheelRepository WheelRepository, IReferenceRepository referenceRepository,
-           IUnitOfWork unitOfWork)
+           ISparepartRepository sparepartRepository,IUnitOfWork unitOfWork)
             : base()
         {
             _wheelRepository = WheelRepository;
             _referenceRepository = referenceRepository;
+            _sparepartRepository = sparepartRepository;
             _unitOfWork = unitOfWork;
         }
 
+        public List<SparepartViewModel> GetSparepartLookupList()
+        {
+            List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+
+            return Map(result, mappedResult);
+        }
 
         public void InsertWheel(WheelViewModel wheel, int userId)
         {

@@ -42,9 +42,8 @@ namespace BrawijayaWorkshop.Model
 
         public List<WheelDetailViewModel> RetrieveAllWheelDetails()
         {
-            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready ||
-                                                                            wd.Status == (int)DbConstant.WheelDetailStatus.Installed) &&
-                                                                            wd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
+            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready ||
+                                                                            wd.Status == (int)DbConstant.WheelDetailStatus.Installed
                                                                       ).ToList();
             List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
             return Map(result, mappedResult);
@@ -52,9 +51,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<WheelDetailViewModel> RetrieveReadyWheelDetails()
         {
-            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready &&
-                                                                            wd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
-                                                                     ).ToList();
+            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready).ToList();
             List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
             return Map(result, mappedResult);
         }
@@ -104,11 +101,11 @@ namespace BrawijayaWorkshop.Model
 
                 _wheelDetailRepository.Update(wdEntity);
 
-#warning is this necessary?
                 SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
                 spdEntity.ModifyDate = serverTime;
                 spdEntity.ModifyUserId = userId;
-                spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
+#warning change to outinstalled
+                spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutService; 
             }
 
             _vehicleDetailRepository.Add(vehicleDetail);

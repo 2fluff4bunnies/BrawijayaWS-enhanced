@@ -20,9 +20,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
             _presenter = new WheelEditorPresenter(this, model);
 
-
-            valCode.SetIconAlignment(txtCode, ErrorIconAlignment.MiddleRight);
-            valName.SetIconAlignment(txtName, ErrorIconAlignment.MiddleRight);
+            valSparepart.SetIconAlignment(lookUpSparepart, ErrorIconAlignment.MiddleRight);
         }
 
 
@@ -57,31 +55,43 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtCode.Text;
+                return lblCodeValue.Text;
             }
             set
             {
-                txtCode.Text = value;
+                lblCodeValue.Text = value;
             }
         }
 
-        public string WheelName
-        {
+        public List<SparepartViewModel> SparepartList {
             get
             {
-                return txtName.Text;
+                return lookUpSparepart.Properties.DataSource as List<SparepartViewModel>;
             }
             set
             {
-                txtName.Text = value;
+                lookUpSparepart.Properties.DataSource = value;
             }
         }
+
+        public int SparepartId
+        {
+            get
+            {
+                return lookUpSparepart.EditValue.AsInteger();
+            }
+            set
+            {
+                lookUpSparepart.EditValue = value;
+            }
+        }
+
         #endregion
 
 
         protected override void ExecuteSave()
         {
-            if (valCode.Validate() && valName.Validate())
+            if (valSparepart.Validate())
             {
                 try
                 {

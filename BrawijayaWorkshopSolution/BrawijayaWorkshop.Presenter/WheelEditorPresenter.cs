@@ -13,12 +13,14 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.SparepartList = Model.GetSparepartLookupList();
+
             if (View.SelectedWheel != null)
             {
                 View.Category = View.SelectedWheel.Sparepart.CategoryReference.Name;
                 View.Unit = View.SelectedWheel.Sparepart.UnitReference.Name;
                 View.Code = View.SelectedWheel.Sparepart.Code;
-                View.WheelName = View.SelectedWheel.Sparepart.Name;
+               
             }
         }
 
@@ -29,8 +31,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedWheel = new WheelViewModel();
             }
 
-            View.SelectedWheel.Sparepart.Code = View.Code;
-            View.SelectedWheel.Sparepart.Name = View.WheelName;
+            View.SelectedWheel.SparepartId = View.SparepartId;
 
             if (View.SelectedWheel.Id > 0)
             {

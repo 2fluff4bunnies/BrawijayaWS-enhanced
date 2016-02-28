@@ -8,10 +8,12 @@ namespace BrawijayaWorkshop.View
     {
         WheelViewModel SelectedWheel { get; set; }
 
+        List<SparepartViewModel> SparepartList { get; set; }
+        int SparepartId { get; set; }
+
         string Category { get; set; }
         string Unit { get; set; }
 
         string Code { get; set; }
-        string WheelName { get; set; }
     }
 }
