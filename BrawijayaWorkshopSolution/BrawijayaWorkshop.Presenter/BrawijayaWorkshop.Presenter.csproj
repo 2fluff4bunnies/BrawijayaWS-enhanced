@@ -47,6 +47,7 @@
     <Compile Include="LoginPresenter.cs" />
     <Compile Include="ManageUserEditorPresenter.cs" />
     <Compile Include="ManageUserListPresenter.cs" />
+    <Compile Include="ManualTransactionListPresenter.cs" />
     <Compile Include="MechanicEditorPresenter.cs" />
     <Compile Include="MechanicListPresenter.cs" />
     <Compile Include="NotificationListPresenter.cs" />

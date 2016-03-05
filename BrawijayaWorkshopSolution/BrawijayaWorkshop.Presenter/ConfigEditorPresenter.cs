@@ -20,6 +20,8 @@ namespace BrawijayaWorkshop.Presenter
             View.FingerprintIpAddress = GetSetting(DbConstant.SETTING_FINGERPRINT_IPADDRESS).Value;
             View.FingerprintPort = GetSetting(DbConstant.SETTING_FINGERPRINT_PORT).Value;
             View.MinStockQuantity = GetSetting(DbConstant.SETTING_MINTSTOCK).Value;
+            View.SPKServiceLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_S).Value;
+            View.SPKRepairLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_P).Value;
         }
 
         public void SaveAllConfig()

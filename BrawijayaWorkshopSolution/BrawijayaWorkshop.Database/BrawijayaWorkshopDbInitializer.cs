@@ -564,6 +564,13 @@ namespace BrawijayaWorkshop.Database
                 Description = "Tabel Transaksi SPK",
                 Value = DbConstant.REF_TRANSTBL_SPK
             });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_MANUAL,
+                Name = "Manual Transaction Table",
+                Description = "Tabel Manual Transaksi",
+                Value = DbConstant.REF_TRANSTBL_MANUAL
+            });
             context.SaveChanges();
 
             // Purchasing Payment Method

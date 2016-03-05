@@ -199,6 +199,12 @@
     <Compile Include="ModulControls\ManageUserListControl.Designer.cs">
       <DependentUpon>ManageUserListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\ManualTransactionListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\ManualTransactionListControl.Designer.cs">
+      <DependentUpon>ManualTransactionListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\MechanicListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -552,6 +558,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\ManageUserListControl.resx">
       <DependentUpon>ManageUserListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\ManualTransactionListControl.resx">
+      <DependentUpon>ManualTransactionListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\MechanicListControl.resx">
       <DependentUpon>MechanicListControl.cs</DependentUpon>
