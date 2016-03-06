@@ -27,6 +27,7 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_SPK_DETAIL_SPAREPART = "M_SPK_DETAIL_SPAREPART";
         public const string MODUL_SPK_DETAIL_SPAREPART_DETAIL = "M_SPK_DETAIL_SPAREPART_DETAIL";
         public const string MODUL_MANAGE_APP_USER = "M_MANAGE_APP_USER";
+        public const string MODUL_MANUAL_TRANSACTION = "M_MANUAL_TRANS";
 
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";

@@ -28,30 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManualTransactionListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
-            this.lblDateFilter = new DevExpress.XtraEditors.LabelControl();
-            this.deFrom = new DevExpress.XtraEditors.DateEdit();
-            this.lblDateFilterTo = new DevExpress.XtraEditors.LabelControl();
-            this.deTo = new DevExpress.XtraEditors.DateEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.deTo = new DevExpress.XtraEditors.DateEdit();
+            this.lblDateFilterTo = new DevExpress.XtraEditors.LabelControl();
+            this.deFrom = new DevExpress.XtraEditors.DateEdit();
+            this.lblDateFilter = new DevExpress.XtraEditors.LabelControl();
             this.btnNewTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.gridManualTransaction = new DevExpress.XtraGrid.GridControl();
             this.gvManualTransaction = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colCodeCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCompanyCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colAddressCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCityCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPhoneCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContactPersonCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTransAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTransDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridManualTransaction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvManualTransaction)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gcFilter
@@ -69,39 +72,18 @@
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
             // 
-            // lblDateFilter
+            // btnSearch
             // 
-            this.lblDateFilter.Location = new System.Drawing.Point(12, 33);
-            this.lblDateFilter.Name = "lblDateFilter";
-            this.lblDateFilter.Size = new System.Drawing.Size(86, 13);
-            this.lblDateFilter.TabIndex = 0;
-            this.lblDateFilter.Text = "Tanggal Transaksi";
-            // 
-            // deFrom
-            // 
-            this.deFrom.EditValue = null;
-            this.deFrom.Location = new System.Drawing.Point(128, 30);
-            this.deFrom.Name = "deFrom";
-            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy";
-            this.deFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.deFrom.Properties.HideSelection = false;
-            this.deFrom.Properties.NullDate = "";
-            this.deFrom.Properties.NullText = "-- Pilih Tanggal --";
-            this.deFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.deFrom.Size = new System.Drawing.Size(106, 20);
-            this.deFrom.TabIndex = 1;
-            // 
-            // lblDateFilterTo
-            // 
-            this.lblDateFilterTo.Location = new System.Drawing.Point(240, 33);
-            this.lblDateFilterTo.Name = "lblDateFilterTo";
-            this.lblDateFilterTo.Size = new System.Drawing.Size(15, 13);
-            this.lblDateFilterTo.TabIndex = 2;
-            this.lblDateFilterTo.Text = "s/d";
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnSearch.Location = new System.Drawing.Point(373, 28);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.TabIndex = 4;
+            this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // deTo
             // 
@@ -121,17 +103,39 @@
             this.deTo.Size = new System.Drawing.Size(106, 20);
             this.deTo.TabIndex = 3;
             // 
-            // btnSearch
+            // lblDateFilterTo
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(373, 27);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
-            this.btnSearch.TabIndex = 4;
-            this.btnSearch.Text = "cari";
+            this.lblDateFilterTo.Location = new System.Drawing.Point(240, 33);
+            this.lblDateFilterTo.Name = "lblDateFilterTo";
+            this.lblDateFilterTo.Size = new System.Drawing.Size(15, 13);
+            this.lblDateFilterTo.TabIndex = 2;
+            this.lblDateFilterTo.Text = "s/d";
+            // 
+            // deFrom
+            // 
+            this.deFrom.EditValue = null;
+            this.deFrom.Location = new System.Drawing.Point(128, 30);
+            this.deFrom.Name = "deFrom";
+            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy";
+            this.deFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deFrom.Properties.HideSelection = false;
+            this.deFrom.Properties.NullDate = "";
+            this.deFrom.Properties.NullText = "-- Pilih Tanggal --";
+            this.deFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deFrom.Size = new System.Drawing.Size(106, 20);
+            this.deFrom.TabIndex = 1;
+            // 
+            // lblDateFilter
+            // 
+            this.lblDateFilter.Location = new System.Drawing.Point(12, 33);
+            this.lblDateFilter.Name = "lblDateFilter";
+            this.lblDateFilter.Size = new System.Drawing.Size(86, 13);
+            this.lblDateFilter.TabIndex = 0;
+            this.lblDateFilter.Text = "Tanggal Transaksi";
             // 
             // btnNewTransaction
             // 
@@ -143,6 +147,7 @@
             this.btnNewTransaction.Size = new System.Drawing.Size(144, 23);
             this.btnNewTransaction.TabIndex = 3;
             this.btnNewTransaction.Text = "Buat Transaksi Baru";
+            this.btnNewTransaction.Click += new System.EventHandler(this.btnNewTransaction_Click);
             // 
             // gridManualTransaction
             // 
@@ -160,12 +165,9 @@
             // gvManualTransaction
             // 
             this.gvManualTransaction.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colCodeCustomer,
-            this.colCompanyCustomer,
-            this.colAddressCustomer,
-            this.colCityCustomer,
-            this.colPhoneCustomer,
-            this.colContactPersonCustomer});
+            this.colTransDate,
+            this.colTransAmount,
+            this.colTransDescription});
             this.gvManualTransaction.GridControl = this.gridManualTransaction;
             this.gvManualTransaction.Name = "gvManualTransaction";
             this.gvManualTransaction.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -182,53 +184,62 @@
             this.gvManualTransaction.OptionsView.ShowViewCaption = true;
             this.gvManualTransaction.ViewCaption = "Daftar Transaksi Manual";
             // 
-            // colCodeCustomer
+            // colTransDate
             // 
-            this.colCodeCustomer.Caption = "Kode";
-            this.colCodeCustomer.FieldName = "Code";
-            this.colCodeCustomer.Name = "colCodeCustomer";
-            this.colCodeCustomer.Visible = true;
-            this.colCodeCustomer.VisibleIndex = 0;
+            this.colTransDate.Caption = "Tanggal";
+            this.colTransDate.DisplayFormat.FormatString = "dd MMM yyyy";
+            this.colTransDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.colTransDate.FieldName = "TransactionDate";
+            this.colTransDate.Name = "colTransDate";
+            this.colTransDate.Visible = true;
+            this.colTransDate.VisibleIndex = 0;
             // 
-            // colCompanyCustomer
+            // colTransAmount
             // 
-            this.colCompanyCustomer.Caption = "Nama Perusahaan";
-            this.colCompanyCustomer.FieldName = "CompanyName";
-            this.colCompanyCustomer.Name = "colCompanyCustomer";
-            this.colCompanyCustomer.Visible = true;
-            this.colCompanyCustomer.VisibleIndex = 1;
+            this.colTransAmount.Caption = "Jumlah";
+            this.colTransAmount.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTransAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colTransAmount.FieldName = "TotalTransaction";
+            this.colTransAmount.Name = "colTransAmount";
+            this.colTransAmount.Visible = true;
+            this.colTransAmount.VisibleIndex = 1;
             // 
-            // colAddressCustomer
+            // colTransDescription
             // 
-            this.colAddressCustomer.Caption = "Alamat";
-            this.colAddressCustomer.FieldName = "Address";
-            this.colAddressCustomer.Name = "colAddressCustomer";
-            this.colAddressCustomer.Visible = true;
-            this.colAddressCustomer.VisibleIndex = 2;
+            this.colTransDescription.Caption = "Keterangan";
+            this.colTransDescription.FieldName = "Description";
+            this.colTransDescription.Name = "colTransDescription";
+            this.colTransDescription.Visible = true;
+            this.colTransDescription.VisibleIndex = 2;
             // 
-            // colCityCustomer
+            // bgwMain
             // 
-            this.colCityCustomer.Caption = "Kota";
-            this.colCityCustomer.FieldName = "City.Name";
-            this.colCityCustomer.Name = "colCityCustomer";
-            this.colCityCustomer.Visible = true;
-            this.colCityCustomer.VisibleIndex = 3;
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // colPhoneCustomer
+            // cmsEditor
             // 
-            this.colPhoneCustomer.Caption = "No. Telp.";
-            this.colPhoneCustomer.FieldName = "PhoneNumber";
-            this.colPhoneCustomer.Name = "colPhoneCustomer";
-            this.colPhoneCustomer.Visible = true;
-            this.colPhoneCustomer.VisibleIndex = 4;
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsEditData,
+            this.cmsDeleteData});
+            this.cmsEditor.Name = "cmsEditor";
+            this.cmsEditor.Size = new System.Drawing.Size(153, 70);
             // 
-            // colContactPersonCustomer
+            // cmsEditData
             // 
-            this.colContactPersonCustomer.Caption = "Nama Kontak";
-            this.colContactPersonCustomer.FieldName = "ContactPerson";
-            this.colContactPersonCustomer.Name = "colContactPersonCustomer";
-            this.colContactPersonCustomer.Visible = true;
-            this.colContactPersonCustomer.VisibleIndex = 5;
+            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditData.Name = "cmsEditData";
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
+            // 
+            // cmsDeleteData
+            // 
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
             // ManualTransactionListControl
             // 
@@ -242,12 +253,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridManualTransaction)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvManualTransaction)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -263,11 +275,12 @@
         private DevExpress.XtraEditors.SimpleButton btnNewTransaction;
         private DevExpress.XtraGrid.GridControl gridManualTransaction;
         private DevExpress.XtraGrid.Views.Grid.GridView gvManualTransaction;
-        private DevExpress.XtraGrid.Columns.GridColumn colCodeCustomer;
-        private DevExpress.XtraGrid.Columns.GridColumn colCompanyCustomer;
-        private DevExpress.XtraGrid.Columns.GridColumn colAddressCustomer;
-        private DevExpress.XtraGrid.Columns.GridColumn colCityCustomer;
-        private DevExpress.XtraGrid.Columns.GridColumn colPhoneCustomer;
-        private DevExpress.XtraGrid.Columns.GridColumn colContactPersonCustomer;
+        private DevExpress.XtraGrid.Columns.GridColumn colTransDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colTransAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn colTransDescription;
+        private System.ComponentModel.BackgroundWorker bgwMain;
+        private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
     }
 }

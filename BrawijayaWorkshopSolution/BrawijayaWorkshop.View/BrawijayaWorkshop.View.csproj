@@ -46,6 +46,7 @@
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />
     <Compile Include="IManageUserListView.cs" />
+    <Compile Include="IManualTransactionEditorView.cs" />
     <Compile Include="IManualTransactionListView.cs" />
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />

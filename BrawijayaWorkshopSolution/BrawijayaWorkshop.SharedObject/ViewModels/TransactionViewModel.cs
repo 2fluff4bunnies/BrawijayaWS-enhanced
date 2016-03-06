@@ -12,5 +12,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int PrimaryKeyValue { get; set; }
         public double TotalTransaction { get; set; }
         public double TotalPayment { get; set; }
+
+        public string Description { get; set; }
     }
 }
