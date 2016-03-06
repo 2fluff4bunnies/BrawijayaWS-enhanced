@@ -159,10 +159,15 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_SPK_DETAIL_SPAREPART_DETAIL,
                 ModulDescription = "SPK Detail Sparepart Detail Modul"
             });
-            ApplicationModul manageAppUserMode = context.ApplicationModuls.Add(new ApplicationModul
+            ApplicationModul manageAppUserMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_MANAGE_APP_USER,
                 ModulDescription = "Manage Application User"
+            });
+            ApplicationModul manualTransMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_MANUAL_TRANSACTION,
+                ModulDescription = "Manual Transaction"
             });
 
             context.SaveChanges();
@@ -277,7 +282,13 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = manageAppUserMode.Id,
+                ApplicationModulId = manageAppUserMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = manualTransMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -331,6 +342,12 @@ namespace BrawijayaWorkshop.Database
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = manualTransMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // manager
             context.RoleAccesses.Add(new RoleAccess
@@ -341,13 +358,13 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = userControlMod.Id,
-                RoleId = superAdminRole.Id,
+                ApplicationModulId = manageAppUserMod.Id,
+                RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = manageAppUserMode.Id,
+                ApplicationModulId = manualTransMod.Id,
                 RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });

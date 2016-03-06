@@ -164,6 +164,7 @@ namespace BrawijayaWorkshop.Model
             transaction.ModifyUserId = userID;
             transaction.ModifyDate = serverTime;
             transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+            transaction.Description = "Pembelian sparepart";
             Transaction transactionInserted = _transactionRepository.Add(transaction);
 
             switch (purchasing.PaymentMethod.Code)

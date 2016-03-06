@@ -26,7 +26,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<TransactionViewModel> RetrieveManualTransaction(DateTime from, DateTime to)
         {
-            Reference manualRefTable = _referenceRepository.GetMany(r => r.Name == DbConstant.REF_TRANSTBL_MANUAL).FirstOrDefault();
+            Reference manualRefTable = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_MANUAL).FirstOrDefault();
             List<Transaction> result = _transactionRepository.GetMany(
                 t => t.TransactionDate >= from && t.TransactionDate <= to &&
                     t.ReferenceTableId == manualRefTable.Id).ToList();
