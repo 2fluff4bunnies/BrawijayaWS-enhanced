@@ -42,6 +42,8 @@
     <Compile Include="IConfigEditorView.cs" />
     <Compile Include="ICustomerEditorView.cs" />
     <Compile Include="ICustomerListView.cs" />
+    <Compile Include="IGuestBookEditorView.cs" />
+    <Compile Include="IGuestBookListView.cs" />
     <Compile Include="IJournalMasterEditorView.cs" />
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />

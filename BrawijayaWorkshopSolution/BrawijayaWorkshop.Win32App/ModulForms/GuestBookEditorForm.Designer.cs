@@ -28,43 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GuestBookEditorForm));
             this.gcCustomerInfo = new DevExpress.XtraEditors.GroupControl();
+            this.rtbDescription = new System.Windows.Forms.RichTextBox();
+            this.lblDescription = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpVehicle = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblExpirationDateValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblCustomerValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblYearOfBuyValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblTypeValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblBrandValue = new DevExpress.XtraEditors.LabelControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCodeDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
-            this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
             this.lblYearOfPurchase = new DevExpress.XtraEditors.LabelControl();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblBrand = new DevExpress.XtraEditors.LabelControl();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.lblBrandValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblTypeValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblYearOfBuyValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblCustomerValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblExpirationDateValue = new DevExpress.XtraEditors.LabelControl();
+            this.VehicleValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).BeginInit();
             this.gcCustomerInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VehicleValidator)).BeginInit();
             this.SuspendLayout();
             // 
             // gcCustomerInfo
             // 
+            this.gcCustomerInfo.Controls.Add(this.rtbDescription);
+            this.gcCustomerInfo.Controls.Add(this.lblDescription);
+            this.gcCustomerInfo.Controls.Add(this.lookUpVehicle);
             this.gcCustomerInfo.Controls.Add(this.lblExpirationDateValue);
             this.gcCustomerInfo.Controls.Add(this.lblCustomerValue);
             this.gcCustomerInfo.Controls.Add(this.lblYearOfBuyValue);
             this.gcCustomerInfo.Controls.Add(this.lblTypeValue);
             this.gcCustomerInfo.Controls.Add(this.lblBrandValue);
-            this.gcCustomerInfo.Controls.Add(this.btnSearch);
             this.gcCustomerInfo.Controls.Add(this.gridVehicleWheel);
             this.gcCustomerInfo.Controls.Add(this.lblExpirationDate);
-            this.gcCustomerInfo.Controls.Add(this.txtLicenseNumber);
             this.gcCustomerInfo.Controls.Add(this.lblLicenseNumber);
             this.gcCustomerInfo.Controls.Add(this.lblYearOfPurchase);
             this.gcCustomerInfo.Controls.Add(this.lblType);
@@ -73,9 +79,102 @@
             this.gcCustomerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcCustomerInfo.Location = new System.Drawing.Point(0, 0);
             this.gcCustomerInfo.Name = "gcCustomerInfo";
-            this.gcCustomerInfo.Size = new System.Drawing.Size(404, 436);
+            this.gcCustomerInfo.Size = new System.Drawing.Size(606, 387);
             this.gcCustomerInfo.TabIndex = 2;
             this.gcCustomerInfo.Text = "Informasi Kendaraan";
+            // 
+            // rtbDescription
+            // 
+            this.rtbDescription.Location = new System.Drawing.Point(361, 25);
+            this.rtbDescription.Name = "rtbDescription";
+            this.rtbDescription.Size = new System.Drawing.Size(233, 166);
+            this.rtbDescription.TabIndex = 21;
+            this.rtbDescription.Text = "";
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDescription.Location = new System.Drawing.Point(289, 28);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(56, 13);
+            this.lblDescription.TabIndex = 20;
+            this.lblDescription.Text = "Keterangan";
+            // 
+            // lookUpVehicle
+            // 
+            this.lookUpVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lookUpVehicle.Location = new System.Drawing.Point(128, 25);
+            this.lookUpVehicle.Name = "lookUpVehicle";
+            this.lookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.lookUpVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Customer"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama")});
+            this.lookUpVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
+            this.lookUpVehicle.Properties.HideSelection = false;
+            this.lookUpVehicle.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpVehicle.Properties.NullText = "-- Pilih Kendaraan --";
+            this.lookUpVehicle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpVehicle.Properties.ValueMember = "Id";
+            this.lookUpVehicle.Size = new System.Drawing.Size(115, 20);
+            this.lookUpVehicle.TabIndex = 19;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Kendaraan Harus Dipilih!";
+            this.VehicleValidator.SetValidationRule(this.lookUpVehicle, conditionValidationRule1);
+            // 
+            // lblExpirationDateValue
+            // 
+            this.lblExpirationDateValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblExpirationDateValue.Location = new System.Drawing.Point(128, 178);
+            this.lblExpirationDateValue.Name = "lblExpirationDateValue";
+            this.lblExpirationDateValue.Size = new System.Drawing.Size(8, 13);
+            this.lblExpirationDateValue.TabIndex = 18;
+            this.lblExpirationDateValue.Text = "--";
+            // 
+            // lblCustomerValue
+            // 
+            this.lblCustomerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCustomerValue.Location = new System.Drawing.Point(128, 148);
+            this.lblCustomerValue.Name = "lblCustomerValue";
+            this.lblCustomerValue.Size = new System.Drawing.Size(8, 13);
+            this.lblCustomerValue.TabIndex = 17;
+            this.lblCustomerValue.Text = "--";
+            // 
+            // lblYearOfBuyValue
+            // 
+            this.lblYearOfBuyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblYearOfBuyValue.Location = new System.Drawing.Point(128, 119);
+            this.lblYearOfBuyValue.Name = "lblYearOfBuyValue";
+            this.lblYearOfBuyValue.Size = new System.Drawing.Size(8, 13);
+            this.lblYearOfBuyValue.TabIndex = 16;
+            this.lblYearOfBuyValue.Text = "--";
+            // 
+            // lblTypeValue
+            // 
+            this.lblTypeValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTypeValue.Location = new System.Drawing.Point(128, 89);
+            this.lblTypeValue.Name = "lblTypeValue";
+            this.lblTypeValue.Size = new System.Drawing.Size(8, 13);
+            this.lblTypeValue.TabIndex = 15;
+            this.lblTypeValue.Text = "--";
+            // 
+            // lblBrandValue
+            // 
+            this.lblBrandValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBrandValue.Location = new System.Drawing.Point(128, 59);
+            this.lblBrandValue.Name = "lblBrandValue";
+            this.lblBrandValue.Size = new System.Drawing.Size(8, 13);
+            this.lblBrandValue.TabIndex = 14;
+            this.lblBrandValue.Text = "--";
             // 
             // gridVehicleWheel
             // 
@@ -85,7 +184,7 @@
             this.gridVehicleWheel.Location = new System.Drawing.Point(12, 205);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 169);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(575, 182);
             this.gridVehicleWheel.TabIndex = 12;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -138,18 +237,6 @@
             this.lblExpirationDate.TabIndex = 11;
             this.lblExpirationDate.Text = "Tgl Kadaluarsa Nopol";
             // 
-            // txtLicenseNumber
-            // 
-            this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 25);
-            this.txtLicenseNumber.Name = "txtLicenseNumber";
-            this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtLicenseNumber.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
-            this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtLicenseNumber.Size = new System.Drawing.Size(196, 20);
-            this.txtLicenseNumber.TabIndex = 4;
-            // 
             // lblLicenseNumber
             // 
             this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -200,73 +287,16 @@
             this.lblCustomer.TabIndex = 0;
             this.lblCustomer.Text = "Customer";
             // 
-            // btnSearch
+            // VehicleValidator
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(330, 23);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
-            this.btnSearch.TabIndex = 13;
-            this.btnSearch.Text = "cari";
-            // 
-            // lblBrandValue
-            // 
-            this.lblBrandValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBrandValue.Location = new System.Drawing.Point(128, 59);
-            this.lblBrandValue.Name = "lblBrandValue";
-            this.lblBrandValue.Size = new System.Drawing.Size(8, 13);
-            this.lblBrandValue.TabIndex = 14;
-            this.lblBrandValue.Text = "--";
-            // 
-            // lblTypeValue
-            // 
-            this.lblTypeValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTypeValue.Location = new System.Drawing.Point(128, 89);
-            this.lblTypeValue.Name = "lblTypeValue";
-            this.lblTypeValue.Size = new System.Drawing.Size(8, 13);
-            this.lblTypeValue.TabIndex = 15;
-            this.lblTypeValue.Text = "--";
-            // 
-            // lblYearOfBuyValue
-            // 
-            this.lblYearOfBuyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblYearOfBuyValue.Location = new System.Drawing.Point(128, 119);
-            this.lblYearOfBuyValue.Name = "lblYearOfBuyValue";
-            this.lblYearOfBuyValue.Size = new System.Drawing.Size(8, 13);
-            this.lblYearOfBuyValue.TabIndex = 16;
-            this.lblYearOfBuyValue.Text = "--";
-            // 
-            // lblCustomerValue
-            // 
-            this.lblCustomerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomerValue.Location = new System.Drawing.Point(128, 148);
-            this.lblCustomerValue.Name = "lblCustomerValue";
-            this.lblCustomerValue.Size = new System.Drawing.Size(8, 13);
-            this.lblCustomerValue.TabIndex = 17;
-            this.lblCustomerValue.Text = "--";
-            // 
-            // lblExpirationDateValue
-            // 
-            this.lblExpirationDateValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblExpirationDateValue.Location = new System.Drawing.Point(128, 178);
-            this.lblExpirationDateValue.Name = "lblExpirationDateValue";
-            this.lblExpirationDateValue.Size = new System.Drawing.Size(8, 13);
-            this.lblExpirationDateValue.TabIndex = 18;
-            this.lblExpirationDateValue.Text = "--";
+            this.VehicleValidator.ValidateHiddenControls = false;
+            this.VehicleValidator.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
             // GuestBookEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 436);
+            this.ClientSize = new System.Drawing.Size(606, 436);
             this.Controls.Add(this.gcCustomerInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GuestBookEditorForm";
@@ -275,9 +305,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).EndInit();
             this.gcCustomerInfo.ResumeLayout(false);
             this.gcCustomerInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VehicleValidator)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,7 +321,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCodeDetail;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
         private DevExpress.XtraEditors.LabelControl lblExpirationDate;
-        private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblYearOfPurchase;
         private DevExpress.XtraEditors.LabelControl lblType;
@@ -301,6 +331,9 @@
         private DevExpress.XtraEditors.LabelControl lblYearOfBuyValue;
         private DevExpress.XtraEditors.LabelControl lblTypeValue;
         private DevExpress.XtraEditors.LabelControl lblBrandValue;
-        private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraEditors.LookUpEdit lookUpVehicle;
+        private System.Windows.Forms.RichTextBox rtbDescription;
+        private DevExpress.XtraEditors.LabelControl lblDescription;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider VehicleValidator;
     }
 }

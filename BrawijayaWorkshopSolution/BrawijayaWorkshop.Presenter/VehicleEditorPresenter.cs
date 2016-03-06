@@ -14,7 +14,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
-            View.CustomerList = Model.RetrieveCustomers();
+            View.CustomerList = Model.GetCustomersList();
 
             if (View.SelectedVehicle != null)
             {

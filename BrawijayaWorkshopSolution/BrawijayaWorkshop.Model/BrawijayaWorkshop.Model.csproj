@@ -56,6 +56,8 @@
     <Compile Include="ConfigEditorModel.cs" />
     <Compile Include="CustomerEditorModel.cs" />
     <Compile Include="CustomerListModel.cs" />
+    <Compile Include="GuestBookEditorModel.cs" />
+    <Compile Include="GuestBookListModel.cs" />
     <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />

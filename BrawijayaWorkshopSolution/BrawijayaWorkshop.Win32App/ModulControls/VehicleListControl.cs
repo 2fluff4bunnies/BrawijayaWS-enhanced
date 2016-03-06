@@ -175,7 +175,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 catch (Exception ex)
                 {
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete vehicle with license number: '" + SelectedVehicle.ActiveLicenseNumber + "'", ex);
-                    this.ShowError("Proses hapus data vehicle dengan nomor polisi : '" + SelectedVehicle.ActiveLicenseNumber + "' gagal!");
+                    this.ShowError("Proses hapus data kendaraan dengan nomor polisi : '" + SelectedVehicle.ActiveLicenseNumber + "' gagal!");
                 }
             }
         }

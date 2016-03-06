@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<CustomerViewModel> RetrieveCustomers()
+        public List<CustomerViewModel> GetCustomersList()
         {
             List<Customer> result = _customerRepository.GetAll().ToList();
             List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
@@ -67,6 +67,8 @@ namespace BrawijayaWorkshop.Model
             vehicle.ModifyUserId = userId;
             vehicle.Status = (int)DbConstant.DefaultDataStatus.Active;
             Vehicle entity = new Vehicle();
+            Map(vehicle, entity);
+
             var insertedVehicle = _vehicleRepository.Add(entity);
 
             VehicleDetail vehicleDetail = new VehicleDetail
