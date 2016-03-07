@@ -204,5 +204,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
+
+        private void btnNewVehicleWheel_Click(object sender, EventArgs e)
+        {
+            gvVehicleWheel.AddNewRow();
+        }
     }
 }

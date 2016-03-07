@@ -4,6 +4,8 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.ModulForms;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -17,6 +19,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class ManualTransactionListControl : BaseAppUserControl, IManualTransactionListView
     {
         private ManualTransactionListPresenter _presenter;
+
         protected override string ModulName
         {
             get
@@ -41,7 +44,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             this.Load += ManualTransactionListControl_Load;
         }
 
-        #region View's Member
+       #region View's Member
         public DateTime From
         {
             get
@@ -87,7 +90,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         public TransactionViewModel SelectedTransaction { get; set; } 
-        #endregion
+        #endregion 
 
         private void gvManualTransaction_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
@@ -157,12 +160,22 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewTransaction_Click(object sender, EventArgs e)
         {
+            ManualTransactionEditorForm editor = Bootstrapper.Resolve<ManualTransactionEditorForm>();
+            editor.ShowDialog(this);
 
+            btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
+            if (this.SelectedTransaction != null)
+            {
+                ManualTransactionEditorForm editor = Bootstrapper.Resolve<ManualTransactionEditorForm>();
+                editor.SelectedTransaction = this.SelectedTransaction;
+                editor.ShowDialog(this);
 
+                btnSearch.PerformClick();
+            }
         }
 
         private void cmsDeleteData_Click(object sender, EventArgs e)

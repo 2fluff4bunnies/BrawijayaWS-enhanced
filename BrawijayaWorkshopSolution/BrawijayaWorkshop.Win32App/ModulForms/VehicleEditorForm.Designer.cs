@@ -54,6 +54,7 @@
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
             this.FieldsValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.btnNewVehicleWheel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
@@ -191,6 +192,7 @@
             // 
             // gcVehicleInfo
             // 
+            this.gcVehicleInfo.Controls.Add(this.btnNewVehicleWheel);
             this.gcVehicleInfo.Controls.Add(this.gridVehicleWheel);
             this.gcVehicleInfo.Controls.Add(this.txtYearOfPurchase);
             this.gcVehicleInfo.Controls.Add(this.dtpExpirationDate);
@@ -216,12 +218,12 @@
             this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 201);
+            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 241);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
             this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbWheelDetailGv});
-            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 186);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 140);
             this.gridVehicleWheel.TabIndex = 12;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -311,6 +313,18 @@
             this.FieldsValidator.ValidateHiddenControls = false;
             this.FieldsValidator.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // btnNewVehicleWheel
+            // 
+            this.btnNewVehicleWheel.Image = ((System.Drawing.Image)(resources.GetObject("btnNewVehicleWheel.Image")));
+            this.btnNewVehicleWheel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnNewVehicleWheel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnNewVehicleWheel.Location = new System.Drawing.Point(12, 212);
+            this.btnNewVehicleWheel.Name = "btnNewVehicleWheel";
+            this.btnNewVehicleWheel.Size = new System.Drawing.Size(100, 23);
+            this.btnNewVehicleWheel.TabIndex = 13;
+            this.btnNewVehicleWheel.Text = "Tambah Ban";
+            this.btnNewVehicleWheel.Click += new System.EventHandler(this.btnNewVehicleWheel_Click);
+            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,5 +373,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cbWheelDetailGv;
+        private DevExpress.XtraEditors.SimpleButton btnNewVehicleWheel;
     }
 }
