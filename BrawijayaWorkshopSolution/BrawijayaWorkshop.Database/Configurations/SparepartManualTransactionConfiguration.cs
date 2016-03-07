@@ -10,6 +10,7 @@ namespace BrawijayaWorkshop.Database.Configurations
             HasRequired(c => c.Sparepart).WithMany().HasForeignKey(c => c.SparepartId).WillCascadeOnDelete(true);
             HasRequired(c => c.CreateUser).WithMany().HasForeignKey(c => c.CreateUserId).WillCascadeOnDelete(true);
             HasRequired(c => c.ModifyUser).WithMany().HasForeignKey(c => c.CreateUserId).WillCascadeOnDelete(true);
+            HasRequired(c => c.UpdateType).WithMany().HasForeignKey(c => c.UpdateTypeId).WillCascadeOnDelete(true); 
         }
     }
 }

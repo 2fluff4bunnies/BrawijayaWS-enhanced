@@ -1,4 +1,4 @@
-﻿namespace BrawijayaWorkshop.Win32App.ModulForms
+﻿namespace BrawijayaWorkshop.Win32App.ModulControls
 {
     partial class DebtPaymentListForm
     {
@@ -44,6 +44,7 @@
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
             this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtPaymentListInfo)).BeginInit();
             this.gcDebtPaymentListInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDebtPayment)).BeginInit();
@@ -211,13 +212,13 @@
             this.lblTransactionDate.TabIndex = 12;
             this.lblTransactionDate.Text = "Tanggal Transaksi";
             // 
-            // DebtPaymentListForm
+            // DebtPaymentListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 367);
             this.Controls.Add(this.gcDebtPaymentListInfo);
-            this.Name = "DebtPaymentListForm";
+            this.Name = "DebtPaymentListControl";
             this.Text = "Daftar Pembayaran Hutang";
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtPaymentListInfo)).EndInit();
             this.gcDebtPaymentListInfo.ResumeLayout(false);
@@ -251,6 +252,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentDate;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPayment;
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentType;
+        private System.ComponentModel.BackgroundWorker bgwMain;
 
     }
 }

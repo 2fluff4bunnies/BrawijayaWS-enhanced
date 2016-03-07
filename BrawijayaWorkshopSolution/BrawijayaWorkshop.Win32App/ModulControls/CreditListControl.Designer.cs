@@ -44,8 +44,8 @@
             this.colCreditAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lihatDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lihatDaftarPembayaranToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -196,24 +196,24 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lihatDetailToolStripMenuItem,
-            this.lihatDaftarPembayaranToolStripMenuItem});
+            this.cmsNewPayment,
+            this.cmsListPayment});
             this.cmsEditor.Name = "cmsEditor";
             this.cmsEditor.Size = new System.Drawing.Size(205, 70);
             // 
-            // lihatDetailToolStripMenuItem
+            // cmsNewPayment
             // 
-            this.lihatDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
-            this.lihatDetailToolStripMenuItem.Name = "lihatDetailToolStripMenuItem";
-            this.lihatDetailToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.lihatDetailToolStripMenuItem.Text = "Buat Pembayaran";
+            this.cmsNewPayment.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.cmsNewPayment.Name = "cmsNewPayment";
+            this.cmsNewPayment.Size = new System.Drawing.Size(204, 22);
+            this.cmsNewPayment.Text = "Buat Pembayaran";
             // 
-            // lihatDaftarPembayaranToolStripMenuItem
+            // cmsListPayment
             // 
-            this.lihatDaftarPembayaranToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
-            this.lihatDaftarPembayaranToolStripMenuItem.Name = "lihatDaftarPembayaranToolStripMenuItem";
-            this.lihatDaftarPembayaranToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.lihatDaftarPembayaranToolStripMenuItem.Text = "Lihat Daftar Pembayaran";
+            this.cmsListPayment.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
+            this.cmsListPayment.Name = "cmsListPayment";
+            this.cmsListPayment.Size = new System.Drawing.Size(204, 22);
+            this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             // 
             // CreditListControl
             // 
@@ -252,8 +252,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCreditAmount;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem lihatDetailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmsNewPayment;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private System.Windows.Forms.ToolStripMenuItem lihatDaftarPembayaranToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmsListPayment;
     }
 }

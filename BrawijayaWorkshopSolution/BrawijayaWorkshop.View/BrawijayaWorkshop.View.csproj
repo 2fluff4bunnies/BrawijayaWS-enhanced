@@ -39,9 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICreditPaymentListView.cs" />
     <Compile Include="IConfigEditorView.cs" />
+    <Compile Include="ICreditEditorView.cs" />
+    <Compile Include="ICreditListView.cs" />
     <Compile Include="ICustomerEditorView.cs" />
     <Compile Include="ICustomerListView.cs" />
+    <Compile Include="IDebtEditorView.cs" />
+    <Compile Include="IDebtListView.cs" />
+    <Compile Include="IDebtPaymentListView.cs" />
+    <Compile Include="IInvoiceEditorView.cs" />
+    <Compile Include="IInvoiceListView.cs" />
     <Compile Include="IJournalMasterEditorView.cs" />
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />
@@ -56,6 +64,7 @@
     <Compile Include="IRoleEditorView.cs" />
     <Compile Include="IRoleListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
+    <Compile Include="ISparepartManualTransactionEditorView.cs" />
     <Compile Include="ISPKViewDetailView.cs" />
     <Compile Include="ISPKDetailMechanicListView.cs" />
     <Compile Include="ISPKDetailSParepartListView.cs" />
@@ -63,6 +72,10 @@
     <Compile Include="ISPKListView.cs" />
     <Compile Include="ISupplierEditorView.cs" />
     <Compile Include="ISupplierListView.cs" />
+    <Compile Include="IUsedGoodEditorView.cs" />
+    <Compile Include="IUsedGoodListView.cs" />
+    <Compile Include="IUsedGoodTransactionEditorView.cs" />
+    <Compile Include="IUsedGoodTransactionListView.cs" />
     <Compile Include="IUserEditorView.cs" />
     <Compile Include="IUserListView.cs" />
     <Compile Include="IUserRoleEditorView.cs" />

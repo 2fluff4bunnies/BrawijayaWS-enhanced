@@ -13,6 +13,14 @@ namespace BrawijayaWorkshop.Database.Entities
         public virtual SPK SPK { get; set; }
 
         [Required]
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
+
+        [Required]
+        public decimal TotalHasPaid { get; set; }
+
+        public int PaymentMethodId { get; set; }
+        public virtual Reference PaymentMethod { get; set; }
+        public int PaymentStatus { get; set; }
+
     }
 }

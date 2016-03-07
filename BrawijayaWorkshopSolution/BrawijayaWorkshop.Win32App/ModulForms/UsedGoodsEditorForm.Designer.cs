@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.cbSparepart = new DevExpress.XtraEditors.LookUpEdit();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcUsedGoodsEditor = new DevExpress.XtraEditors.GroupControl();
+            this.valSparepart = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.cbSparepart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsEditor)).BeginInit();
             this.gcUsedGoodsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.valSparepart)).BeginInit();
             this.SuspendLayout();
             // 
             // cbSparepart
@@ -49,10 +53,15 @@
             this.cbSparepart.Properties.DisplayMember = "Name";
             this.cbSparepart.Properties.HideSelection = false;
             this.cbSparepart.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbSparepart.Properties.NullText = "-- Pilih Sparepart --";
+            this.cbSparepart.Properties.NullText = "--Pilih Sparepart--";
             this.cbSparepart.Properties.ValueMember = "Id";
             this.cbSparepart.Size = new System.Drawing.Size(208, 20);
             this.cbSparepart.TabIndex = 9;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule1.ErrorText = "Pilih salah satu sparepart";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
+            conditionValidationRule1.Value1 = "--Pilih Sparepart--";
+            this.valSparepart.SetValidationRule(this.cbSparepart, conditionValidationRule1);
             // 
             // lblSparepart
             // 
@@ -86,6 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsEditor)).EndInit();
             this.gcUsedGoodsEditor.ResumeLayout(false);
             this.gcUsedGoodsEditor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.valSparepart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -95,5 +105,6 @@
         private DevExpress.XtraEditors.LookUpEdit cbSparepart;
         private DevExpress.XtraEditors.LabelControl lblSparepart;
         private DevExpress.XtraEditors.GroupControl gcUsedGoodsEditor;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valSparepart;
     }
 }

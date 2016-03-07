@@ -54,8 +54,16 @@
   <ItemGroup>
     <Compile Include="AppBaseModel.cs" />
     <Compile Include="ConfigEditorModel.cs" />
+    <Compile Include="CreditEditorModel.cs" />
+    <Compile Include="CreditListModel.cs" />
+    <Compile Include="CreditPaymentListModel.cs" />
     <Compile Include="CustomerEditorModel.cs" />
     <Compile Include="CustomerListModel.cs" />
+    <Compile Include="DebtEditorModel.cs" />
+    <Compile Include="DebtListModel.cs" />
+    <Compile Include="DebtPaymentListModel.cs" />
+    <Compile Include="InvoiceEditorModel.cs" />
+    <Compile Include="InvoiceListModel.cs" />
     <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
@@ -74,6 +82,7 @@
     <Compile Include="RoleEditorModel.cs" />
     <Compile Include="RoleListModel.cs" />
     <Compile Include="SparepartDetailListModel.cs" />
+    <Compile Include="SparepartManualTransactionEditorModel.cs" />
     <Compile Include="SPKViewDetailModel.cs" />
     <Compile Include="SPKDetailMechanicListModel.cs" />
     <Compile Include="SPKDetailSparepartListModel.cs" />
@@ -81,6 +90,10 @@
     <Compile Include="SPKListModel.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />
+    <Compile Include="UsedGoodEditorModel.cs" />
+    <Compile Include="UsedGoodListModel.cs" />
+    <Compile Include="UsedGoodTransactionEditorModel.cs" />
+    <Compile Include="UsedGoodTransactionListModel.cs" />
     <Compile Include="UserEditorModel.cs" />
     <Compile Include="UserListModel.cs" />
     <Compile Include="UserRoleEditorModel.cs" />

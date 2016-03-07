@@ -28,24 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
             this.txtStok = new DevExpress.XtraEditors.TextEdit();
             this.gcUsedGoodsManualEditor = new DevExpress.XtraEditors.GroupControl();
+            this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
+            this.lblRemark = new DevExpress.XtraEditors.LabelControl();
             this.cbMode = new DevExpress.XtraEditors.LookUpEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.cbSparepart = new DevExpress.XtraEditors.LookUpEdit();
             this.txtQtyUpdate = new DevExpress.XtraEditors.TextEdit();
             this.lblQtyUpdaate = new DevExpress.XtraEditors.LabelControl();
-            this.lblRemark = new DevExpress.XtraEditors.LabelControl();
-            this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
+            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.lblItemPrice = new DevExpress.XtraEditors.LabelControl();
+            this.txtItemPrice = new DevExpress.XtraEditors.TextEdit();
+            this.txtTotalPrice = new DevExpress.XtraEditors.TextEdit();
+            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbMode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbSparepart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQtyUpdate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valQty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valMode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtItemPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSparepart
@@ -70,11 +81,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStok.Location = new System.Drawing.Point(130, 60);
             this.txtStok.Name = "txtStok";
+            this.txtStok.Properties.ReadOnly = true;
             this.txtStok.Size = new System.Drawing.Size(104, 20);
             this.txtStok.TabIndex = 12;
             // 
             // gcUsedGoodsManualEditor
             // 
+            this.gcUsedGoodsManualEditor.Controls.Add(this.txtTotalPrice);
+            this.gcUsedGoodsManualEditor.Controls.Add(this.lblTotalPrice);
+            this.gcUsedGoodsManualEditor.Controls.Add(this.txtItemPrice);
+            this.gcUsedGoodsManualEditor.Controls.Add(this.lblItemPrice);
             this.gcUsedGoodsManualEditor.Controls.Add(this.txtRemark);
             this.gcUsedGoodsManualEditor.Controls.Add(this.lblRemark);
             this.gcUsedGoodsManualEditor.Controls.Add(this.cbMode);
@@ -88,9 +104,24 @@
             this.gcUsedGoodsManualEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcUsedGoodsManualEditor.Location = new System.Drawing.Point(0, 0);
             this.gcUsedGoodsManualEditor.Name = "gcUsedGoodsManualEditor";
-            this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(335, 258);
+            this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(335, 322);
             this.gcUsedGoodsManualEditor.TabIndex = 13;
             this.gcUsedGoodsManualEditor.Text = "Informasi Stok Barang Bekas";
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(130, 168);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(193, 51);
+            this.txtRemark.TabIndex = 20;
+            // 
+            // lblRemark
+            // 
+            this.lblRemark.Location = new System.Drawing.Point(12, 170);
+            this.lblRemark.Name = "lblRemark";
+            this.lblRemark.Size = new System.Drawing.Size(56, 13);
+            this.lblRemark.TabIndex = 18;
+            this.lblRemark.Text = "Keterangan";
             // 
             // cbMode
             // 
@@ -132,6 +163,7 @@
             this.cbSparepart.Properties.HideSelection = false;
             this.cbSparepart.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.cbSparepart.Properties.NullText = "-- Pilih Sparepart --";
+            this.cbSparepart.Properties.ReadOnly = true;
             this.cbSparepart.Properties.ValueMember = "Id";
             this.cbSparepart.Size = new System.Drawing.Size(193, 20);
             this.cbSparepart.TabIndex = 15;
@@ -153,26 +185,50 @@
             this.lblQtyUpdaate.TabIndex = 13;
             this.lblQtyUpdaate.Text = "Jumlah Update";
             // 
-            // lblRemark
+            // lblItemPrice
             // 
-            this.lblRemark.Location = new System.Drawing.Point(12, 170);
-            this.lblRemark.Name = "lblRemark";
-            this.lblRemark.Size = new System.Drawing.Size(56, 13);
-            this.lblRemark.TabIndex = 18;
-            this.lblRemark.Text = "Keterangan";
+            this.lblItemPrice.Location = new System.Drawing.Point(12, 242);
+            this.lblItemPrice.Name = "lblItemPrice";
+            this.lblItemPrice.Size = new System.Drawing.Size(73, 13);
+            this.lblItemPrice.TabIndex = 21;
+            this.lblItemPrice.Text = "Harga per Item";
+            this.lblItemPrice.Visible = false;
             // 
-            // txtRemark
+            // txtItemPrice
             // 
-            this.txtRemark.Location = new System.Drawing.Point(130, 168);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(193, 51);
-            this.txtRemark.TabIndex = 20;
+            this.txtItemPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItemPrice.Location = new System.Drawing.Point(130, 239);
+            this.txtItemPrice.Name = "txtItemPrice";
+            this.txtItemPrice.Size = new System.Drawing.Size(145, 20);
+            this.txtItemPrice.TabIndex = 22;
+            this.txtItemPrice.Visible = false;
+            // 
+            // txtTotalPrice
+            // 
+            this.txtTotalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotalPrice.Location = new System.Drawing.Point(130, 275);
+            this.txtTotalPrice.Name = "txtTotalPrice";
+            this.txtTotalPrice.Properties.ReadOnly = true;
+            this.txtTotalPrice.Size = new System.Drawing.Size(145, 20);
+            this.txtTotalPrice.TabIndex = 24;
+            this.txtTotalPrice.Visible = false;
+            // 
+            // lblTotalPrice
+            // 
+            this.lblTotalPrice.Location = new System.Drawing.Point(12, 278);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(56, 13);
+            this.lblTotalPrice.TabIndex = 23;
+            this.lblTotalPrice.Text = "Total Harga";
+            this.lblTotalPrice.Visible = false;
             // 
             // UsedGoodsTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 307);
+            this.ClientSize = new System.Drawing.Size(335, 371);
             this.Controls.Add(this.gcUsedGoodsManualEditor);
             this.Name = "UsedGoodsTransactionForm";
             this.Text = "Form Stok Barang Bekas";
@@ -181,10 +237,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).EndInit();
             this.gcUsedGoodsManualEditor.ResumeLayout(false);
             this.gcUsedGoodsManualEditor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbMode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbSparepart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQtyUpdate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valQty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valMode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtItemPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -202,5 +262,11 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl lblRemark;
         private DevExpress.XtraEditors.MemoEdit txtRemark;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valQty;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valMode;
+        private DevExpress.XtraEditors.TextEdit txtTotalPrice;
+        private DevExpress.XtraEditors.LabelControl lblTotalPrice;
+        private DevExpress.XtraEditors.TextEdit txtItemPrice;
+        private DevExpress.XtraEditors.LabelControl lblItemPrice;
     }
 }

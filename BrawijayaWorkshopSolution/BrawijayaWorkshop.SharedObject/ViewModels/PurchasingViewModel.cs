@@ -13,5 +13,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SupplierViewModel Supplier { get; set; }
         public int PaymentMethodId { get; set; }
         public ReferenceViewModel PaymentMethod { get; set; }
+        public int PaymentStatus { get; set; }
     }
 }

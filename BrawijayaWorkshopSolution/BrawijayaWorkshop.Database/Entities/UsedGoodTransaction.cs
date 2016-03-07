@@ -12,8 +12,8 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public DateTime TransactionDate { get; set; }
 
-        public int UsedGoodsId { get; set; }
-        public virtual UsedGood UsedGoods { get; set; }
+        public int UsedGoodId { get; set; }
+        public virtual UsedGood UsedGood { get; set; }
 
         [Required]
         public double TotalPrice { get; set; }

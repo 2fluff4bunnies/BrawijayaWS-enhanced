@@ -180,7 +180,7 @@
     </Compile>
     <Compile Include="ModulControls\InvoiceListControl.Designer.cs">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="ModulControls\GuestBookListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -253,6 +253,12 @@
     <Compile Include="ModulControls\UsedGoodsListControl.Designer.cs">
       <DependentUpon>UsedGoodsListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\UsedGoodsTransactionListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\UsedGoodsTransactionListControl.Designer.cs">
+      <DependentUpon>UsedGoodsTransactionListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\UserListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -318,7 +324,7 @@
     </Compile>
     <Compile Include="ModulForms\InvoiceEditorForm.Designer.cs">
       <DependentUpon>InvoiceEditorForm.cs</DependentUpon>
-</Compile>
+    </Compile>
     <Compile Include="ModulForms\GuestBookEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +372,12 @@
     </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.Designer.cs">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\SparepartManualTransactionEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SparepartManualTransactionEditorForm.Designer.cs">
+      <DependentUpon>SparepartManualTransactionEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\SPKDetailMechanicListForm.cs">
       <SubType>Form</SubType>
@@ -531,7 +543,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
-</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -568,6 +580,9 @@
     <EmbeddedResource Include="ModulControls\UsedGoodsListControl.resx">
       <DependentUpon>UsedGoodsListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\UsedGoodsTransactionListControl.resx">
+      <DependentUpon>UsedGoodsTransactionListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\UserListControl.resx">
       <DependentUpon>UserListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -600,7 +615,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\InvoiceEditorForm.resx">
       <DependentUpon>InvoiceEditorForm.cs</DependentUpon>
-</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\GuestBookEditorForm.resx">
       <DependentUpon>GuestBookEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -624,6 +639,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SparepartManualTransactionEditorForm.resx">
+      <DependentUpon>SparepartManualTransactionEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKDetailMechanicListForm.resx">
       <DependentUpon>SPKDetailMechanicListForm.cs</DependentUpon>

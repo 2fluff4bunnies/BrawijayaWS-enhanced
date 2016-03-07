@@ -40,8 +40,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigEditorPresenter.cs" />
+    <Compile Include="CreditEditorPresenter.cs" />
+    <Compile Include="CreditListPresenter.cs" />
+    <Compile Include="CreditPaymentListPresenter.cs" />
     <Compile Include="CustomerEditorPresenter.cs" />
     <Compile Include="CustomerListPresenter.cs" />
+    <Compile Include="DebtEditorPresenter.cs" />
+    <Compile Include="DebtListPresenter.cs" />
+    <Compile Include="DebtPaymentListPresenter.cs" />
+    <Compile Include="InvoiceEditorPresenter.cs" />
+    <Compile Include="InvoiceListPresenter.cs" />
     <Compile Include="JournalMasterEditorPresenter.cs" />
     <Compile Include="JournalMasterListPresenter.cs" />
     <Compile Include="LoginPresenter.cs" />
@@ -57,6 +65,7 @@
     <Compile Include="RoleEditorPresenter.cs" />
     <Compile Include="RoleListPresenter.cs" />
     <Compile Include="SparepartDetailListPresenter.cs" />
+    <Compile Include="SparepartManualTransactionEditorPresenter.cs" />
     <Compile Include="SPKViewDetailPresenter.cs" />
     <Compile Include="SPKDetailMechanicListPresenter.cs" />
     <Compile Include="SPKDetailSparepartListPresenter.cs" />
@@ -64,6 +73,10 @@
     <Compile Include="SPKListPresenter.cs" />
     <Compile Include="SupplierEditorPresenter.cs" />
     <Compile Include="SupplierListPresenter.cs" />
+    <Compile Include="UsedGoodEditorPresenter.cs" />
+    <Compile Include="UsedGoodListPresenter.cs" />
+    <Compile Include="UsedGoodTransactionEditorPresenter.cs" />
+    <Compile Include="UsedGoodTransactionListPresenter.cs" />
     <Compile Include="UserEditorPresenter.cs" />
     <Compile Include="UserListPresenter.cs" />
     <Compile Include="UserRoleEditorPresenter.cs" />

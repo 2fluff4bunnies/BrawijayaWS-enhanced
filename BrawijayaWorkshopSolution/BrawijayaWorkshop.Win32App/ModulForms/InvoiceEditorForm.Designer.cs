@@ -29,30 +29,40 @@
         private void InitializeComponent()
         {
             this.gcInvoiceInfo = new DevExpress.XtraEditors.GroupControl();
+            this.txtTotalTransaction = new DevExpress.XtraEditors.TextEdit();
+            this.lblTotalTransaction = new DevExpress.XtraEditors.LabelControl();
+            this.gridSparepart = new DevExpress.XtraGrid.GridControl();
+            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFeePctg = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFinalSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
-            this.gridSparepart = new DevExpress.XtraGrid.GridControl();
-            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtTotalTransaction = new DevExpress.XtraEditors.TextEdit();
-            this.lblTotalTransaction = new DevExpress.XtraEditors.LabelControl();
-            this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFeePctg = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFinalSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cbPaymentType = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblPaymentType = new DevExpress.XtraEditors.LabelControl();
+            this.txtTotalPayment = new DevExpress.XtraEditors.TextEdit();
+            this.lblTotalPayment = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).BeginInit();
             this.gcInvoiceInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalPayment.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcInvoiceInfo
             // 
+            this.gcInvoiceInfo.Controls.Add(this.cbPaymentType);
+            this.gcInvoiceInfo.Controls.Add(this.lblPaymentType);
+            this.gcInvoiceInfo.Controls.Add(this.txtTotalPayment);
+            this.gcInvoiceInfo.Controls.Add(this.lblTotalPayment);
             this.gcInvoiceInfo.Controls.Add(this.txtTotalTransaction);
             this.gcInvoiceInfo.Controls.Add(this.lblTotalTransaction);
             this.gcInvoiceInfo.Controls.Add(this.gridSparepart);
@@ -63,41 +73,25 @@
             this.gcInvoiceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcInvoiceInfo.Location = new System.Drawing.Point(0, 0);
             this.gcInvoiceInfo.Name = "gcInvoiceInfo";
-            this.gcInvoiceInfo.Size = new System.Drawing.Size(451, 335);
+            this.gcInvoiceInfo.Size = new System.Drawing.Size(451, 391);
             this.gcInvoiceInfo.TabIndex = 1;
             this.gcInvoiceInfo.Text = "Informasi Invoice";
             // 
-            // txtCustomer
+            // txtTotalTransaction
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(130, 60);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Properties.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(247, 20);
-            this.txtCustomer.TabIndex = 7;
+            this.txtTotalTransaction.Location = new System.Drawing.Point(130, 296);
+            this.txtTotalTransaction.Name = "txtTotalTransaction";
+            this.txtTotalTransaction.Properties.ReadOnly = true;
+            this.txtTotalTransaction.Size = new System.Drawing.Size(157, 20);
+            this.txtTotalTransaction.TabIndex = 10;
             // 
-            // lblCustomer
+            // lblTotalTransaction
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(14, 63);
-            this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(46, 13);
-            this.lblCustomer.TabIndex = 6;
-            this.lblCustomer.Text = "Customer";
-            // 
-            // txtTransactionDate
-            // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(130, 32);
-            this.txtTransactionDate.Name = "txtTransactionDate";
-            this.txtTransactionDate.Properties.ReadOnly = true;
-            this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
-            this.txtTransactionDate.TabIndex = 5;
-            // 
-            // lblTransactionDate
-            // 
-            this.lblTransactionDate.Location = new System.Drawing.Point(14, 33);
-            this.lblTransactionDate.Name = "lblTransactionDate";
-            this.lblTransactionDate.Size = new System.Drawing.Size(86, 13);
-            this.lblTransactionDate.TabIndex = 4;
-            this.lblTransactionDate.Text = "Tanggal Transaksi";
+            this.lblTotalTransaction.Location = new System.Drawing.Point(14, 299);
+            this.lblTotalTransaction.Name = "lblTotalTransaction";
+            this.lblTotalTransaction.Size = new System.Drawing.Size(72, 13);
+            this.lblTotalTransaction.TabIndex = 9;
+            this.lblTotalTransaction.Text = "Total Transaksi";
             // 
             // gridSparepart
             // 
@@ -134,22 +128,6 @@
             this.gvSparepart.OptionsView.ShowViewCaption = true;
             this.gvSparepart.ViewCaption = "Daftar Sparepart";
             // 
-            // txtTotalTransaction
-            // 
-            this.txtTotalTransaction.Location = new System.Drawing.Point(130, 296);
-            this.txtTotalTransaction.Name = "txtTotalTransaction";
-            this.txtTotalTransaction.Properties.ReadOnly = true;
-            this.txtTotalTransaction.Size = new System.Drawing.Size(134, 20);
-            this.txtTotalTransaction.TabIndex = 10;
-            // 
-            // lblTotalTransaction
-            // 
-            this.lblTotalTransaction.Location = new System.Drawing.Point(14, 299);
-            this.lblTotalTransaction.Name = "lblTotalTransaction";
-            this.lblTotalTransaction.Size = new System.Drawing.Size(72, 13);
-            this.lblTotalTransaction.TabIndex = 9;
-            this.lblTotalTransaction.Text = "Total Transaksi";
-            // 
             // colSparepart
             // 
             this.colSparepart.Caption = "Sparepart";
@@ -164,19 +142,19 @@
             this.colQty.Visible = true;
             this.colQty.VisibleIndex = 1;
             // 
-            // colFeePctg
-            // 
-            this.colFeePctg.Caption = "Tambahan Biaya (%)";
-            this.colFeePctg.Name = "colFeePctg";
-            this.colFeePctg.Visible = true;
-            this.colFeePctg.VisibleIndex = 3;
-            // 
             // colSubTotal
             // 
             this.colSubTotal.Caption = "Sub Total";
             this.colSubTotal.Name = "colSubTotal";
             this.colSubTotal.Visible = true;
             this.colSubTotal.VisibleIndex = 2;
+            // 
+            // colFeePctg
+            // 
+            this.colFeePctg.Caption = "Tambahan Biaya (%)";
+            this.colFeePctg.Name = "colFeePctg";
+            this.colFeePctg.Visible = true;
+            this.colFeePctg.VisibleIndex = 3;
             // 
             // colFinalSubTotal
             // 
@@ -185,11 +163,84 @@
             this.colFinalSubTotal.Visible = true;
             this.colFinalSubTotal.VisibleIndex = 4;
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Location = new System.Drawing.Point(130, 60);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Properties.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(247, 20);
+            this.txtCustomer.TabIndex = 7;
+            // 
+            // lblCustomer
+            // 
+            this.lblCustomer.Location = new System.Drawing.Point(14, 63);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(46, 13);
+            this.lblCustomer.TabIndex = 6;
+            this.lblCustomer.Text = "Customer";
+            // 
+            // txtTransactionDate
+            // 
+            this.txtTransactionDate.Location = new System.Drawing.Point(130, 32);
+            this.txtTransactionDate.Name = "txtTransactionDate";
+            this.txtTransactionDate.Properties.ReadOnly = true;
+            this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
+            this.txtTransactionDate.TabIndex = 5;
+            // 
+            // lblTransactionDate
+            // 
+            this.lblTransactionDate.Location = new System.Drawing.Point(14, 33);
+            this.lblTransactionDate.Name = "lblTransactionDate";
+            this.lblTransactionDate.Size = new System.Drawing.Size(86, 13);
+            this.lblTransactionDate.TabIndex = 4;
+            this.lblTransactionDate.Text = "Tanggal Transaksi";
+            // 
+            // cbPaymentType
+            // 
+            this.cbPaymentType.Location = new System.Drawing.Point(130, 349);
+            this.cbPaymentType.Name = "cbPaymentType";
+            this.cbPaymentType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbPaymentType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.cbPaymentType.Properties.DisplayMember = "Name";
+            this.cbPaymentType.Properties.HideSelection = false;
+            this.cbPaymentType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.cbPaymentType.Properties.NullText = "-- Pilih Pembayaran --";
+            this.cbPaymentType.Properties.ValueMember = "Id";
+            this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
+            this.cbPaymentType.TabIndex = 19;
+            // 
+            // lblPaymentType
+            // 
+            this.lblPaymentType.Location = new System.Drawing.Point(14, 355);
+            this.lblPaymentType.Name = "lblPaymentType";
+            this.lblPaymentType.Size = new System.Drawing.Size(87, 13);
+            this.lblPaymentType.TabIndex = 18;
+            this.lblPaymentType.Text = "Jenis Pembayaran";
+            // 
+            // txtTotalPayment
+            // 
+            this.txtTotalPayment.Location = new System.Drawing.Point(130, 322);
+            this.txtTotalPayment.Name = "txtTotalPayment";
+            this.txtTotalPayment.Size = new System.Drawing.Size(157, 20);
+            this.txtTotalPayment.TabIndex = 17;
+            // 
+            // lblTotalPayment
+            // 
+            this.lblTotalPayment.Location = new System.Drawing.Point(14, 328);
+            this.lblTotalPayment.Name = "lblTotalPayment";
+            this.lblTotalPayment.Size = new System.Drawing.Size(91, 13);
+            this.lblTotalPayment.TabIndex = 16;
+            this.lblTotalPayment.Text = "Total Akan Dibayar";
+            // 
             // InvoiceEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 384);
+            this.ClientSize = new System.Drawing.Size(451, 440);
             this.Controls.Add(this.gcInvoiceInfo);
             this.Name = "InvoiceEditorForm";
             this.Text = "Form Editor Invoice";
@@ -197,11 +248,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).EndInit();
             this.gcInvoiceInfo.ResumeLayout(false);
             this.gcInvoiceInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalPayment.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -222,5 +275,9 @@
         private DevExpress.XtraEditors.LabelControl lblCustomer;
         private DevExpress.XtraEditors.TextEdit txtTransactionDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
+        private DevExpress.XtraEditors.LookUpEdit cbPaymentType;
+        private DevExpress.XtraEditors.LabelControl lblPaymentType;
+        private DevExpress.XtraEditors.TextEdit txtTotalPayment;
+        private DevExpress.XtraEditors.LabelControl lblTotalPayment;
     }
 }

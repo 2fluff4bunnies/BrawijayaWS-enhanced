@@ -18,6 +18,9 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public decimal TotalHasPaid { get; set; }
 
+        [Required]
+        public int PaymentStatus { get; set; }
+
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
         public int PaymentMethodId { get; set; }

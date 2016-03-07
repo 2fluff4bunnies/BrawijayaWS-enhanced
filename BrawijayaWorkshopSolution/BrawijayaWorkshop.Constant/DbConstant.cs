@@ -27,7 +27,12 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_SPK_DETAIL_SPAREPART = "M_SPK_DETAIL_SPAREPART";
         public const string MODUL_SPK_DETAIL_SPAREPART_DETAIL = "M_SPK_DETAIL_SPAREPART_DETAIL";
         public const string MODUL_MANAGE_APP_USER = "M_MANAGE_APP_USER";
-
+        public const string MODUL_USEDGOOD = "M_USEDGOOD";
+        public const string MODUL_USEDGOOD_TRANSACTION = "M_USEDGOOD_TRANSACTION";
+        public const string MODUL_CREDIT = "M_CREDIT";
+        public const string MODUL_DEBT = "M_DEBT";
+        public const string MODUL_INVOICE = "M_INVOICE";
+        
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
 
@@ -42,6 +47,19 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_PURCHASE_PAYMENTMETHOD_UTANG = "REF_PURCHASE_PAYMENTMETHOD_UTANG";
         public const string REF_PURCHASE_PAYMENTMETHOD_KAS = "REF_PURCHASE_PAYMENTMETHOD_KAS";
         public const string REF_PURCHASE_PAYMENTMETHOD_BANK = "REF_PURCHASE_PAYMENTMETHOD_BANK";
+
+        public const string REF_USEDGOOD_TRANSACTION_TYPE = "REF_USEDGOOD_TRANSACTION_TYPE";
+        public const string REF_USEDGOOD_TRANSACTION_TYPE_SOLD = "REF_USEDGOOD_TRANSACTION_TYPE_SOLD";
+        public const string REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE = "REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE";
+
+        public const string REF_USEDGOOD_TRANSACTION_MANUAL_TYPE = "REF_USEDGOOD_TRANSACTION_MANUAL_TYPE";
+        public const string REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS = "REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS";
+        public const string REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_MINUS = "REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_MINUS";
+
+        public const string REF_SPAREPART_TRANSACTION_MANUAL_TYPE = "REF_SPAREPART_TRANSACTION_MANUAL_TYPE";
+        public const string REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS = "REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS";
+        public const string REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS = "REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS";
+        
 
         public const string SETTING_MINTSTOCK = "S_MINSTOCK";
         public const string SETTING_FINGERPRINT_IPADDRESS = "S_FINGERPRINT_IPADDRESS";
@@ -113,6 +131,19 @@ namespace BrawijayaWorkshop.Constant
         {
             NotVerified = 0,
             Active = 1,
+        }
+
+        public enum PaymentStatus
+        {
+            NotSettled = 0,
+            Settled = 1,
+        }
+
+        public enum InvoiceStatus
+        {
+            FeeNotFixed = 0,
+            NotPrinted = 1,
+            Printed = 2,
         }
     }
 }

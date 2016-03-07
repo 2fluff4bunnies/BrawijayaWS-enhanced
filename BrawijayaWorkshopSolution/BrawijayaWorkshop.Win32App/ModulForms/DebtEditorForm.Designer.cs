@@ -35,23 +35,23 @@
             this.lblTotalPayment = new DevExpress.XtraEditors.LabelControl();
             this.txtTotalNotPaid = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalNotPaid = new DevExpress.XtraEditors.LabelControl();
-            this.ttTotalPaid = new DevExpress.XtraEditors.TextEdit();
+            this.txtTotalPaid = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalPaid = new DevExpress.XtraEditors.LabelControl();
             this.txtTotalTransaction = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalTransaction = new DevExpress.XtraEditors.LabelControl();
-            this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
-            this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
             this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
+            this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
+            this.txtDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtInfo)).BeginInit();
             this.gcDebtInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPayment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalNotPaid.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ttTotalPaid.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalPaid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcDebtInfo
@@ -62,13 +62,13 @@
             this.gcDebtInfo.Controls.Add(this.lblTotalPayment);
             this.gcDebtInfo.Controls.Add(this.txtTotalNotPaid);
             this.gcDebtInfo.Controls.Add(this.lblTotalNotPaid);
-            this.gcDebtInfo.Controls.Add(this.ttTotalPaid);
+            this.gcDebtInfo.Controls.Add(this.txtTotalPaid);
             this.gcDebtInfo.Controls.Add(this.lblTotalPaid);
             this.gcDebtInfo.Controls.Add(this.txtTotalTransaction);
             this.gcDebtInfo.Controls.Add(this.lblTotalTransaction);
-            this.gcDebtInfo.Controls.Add(this.txtCustomer);
-            this.gcDebtInfo.Controls.Add(this.lblSupplier);
             this.gcDebtInfo.Controls.Add(this.txtSupplier);
+            this.gcDebtInfo.Controls.Add(this.lblSupplier);
+            this.gcDebtInfo.Controls.Add(this.txtDate);
             this.gcDebtInfo.Controls.Add(this.lblTransactionDate);
             this.gcDebtInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcDebtInfo.Location = new System.Drawing.Point(0, 0);
@@ -134,13 +134,13 @@
             this.lblTotalNotPaid.TabIndex = 10;
             this.lblTotalNotPaid.Text = "Total Belum Terbayar";
             // 
-            // ttTotalPaid
+            // txtTotalPaid
             // 
-            this.ttTotalPaid.Location = new System.Drawing.Point(200, 105);
-            this.ttTotalPaid.Name = "ttTotalPaid";
-            this.ttTotalPaid.Properties.ReadOnly = true;
-            this.ttTotalPaid.Size = new System.Drawing.Size(157, 20);
-            this.ttTotalPaid.TabIndex = 9;
+            this.txtTotalPaid.Location = new System.Drawing.Point(200, 105);
+            this.txtTotalPaid.Name = "txtTotalPaid";
+            this.txtTotalPaid.Properties.ReadOnly = true;
+            this.txtTotalPaid.Size = new System.Drawing.Size(157, 20);
+            this.txtTotalPaid.TabIndex = 9;
             // 
             // lblTotalPaid
             // 
@@ -166,13 +166,13 @@
             this.lblTotalTransaction.TabIndex = 6;
             this.lblTotalTransaction.Text = "Total Transaksi";
             // 
-            // txtCustomer
+            // txtSupplier
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(200, 50);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Properties.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(157, 20);
-            this.txtCustomer.TabIndex = 5;
+            this.txtSupplier.Location = new System.Drawing.Point(200, 50);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.Properties.ReadOnly = true;
+            this.txtSupplier.Size = new System.Drawing.Size(157, 20);
+            this.txtSupplier.TabIndex = 5;
             // 
             // lblSupplier
             // 
@@ -182,13 +182,13 @@
             this.lblSupplier.TabIndex = 4;
             this.lblSupplier.Text = "Supplier";
             // 
-            // txtSupplier
+            // txtDate
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(200, 24);
-            this.txtSupplier.Name = "txtSupplier";
-            this.txtSupplier.Properties.ReadOnly = true;
-            this.txtSupplier.Size = new System.Drawing.Size(157, 20);
-            this.txtSupplier.TabIndex = 3;
+            this.txtDate.Location = new System.Drawing.Point(200, 24);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Properties.ReadOnly = true;
+            this.txtDate.Size = new System.Drawing.Size(157, 20);
+            this.txtDate.TabIndex = 3;
             // 
             // lblTransactionDate
             // 
@@ -213,10 +213,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPayment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalNotPaid.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ttTotalPaid.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalPaid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,18 +224,18 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl gcDebtInfo;
-        private DevExpress.XtraEditors.TextEdit txtSupplier;
+        private DevExpress.XtraEditors.TextEdit txtDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
         private DevExpress.XtraEditors.LabelControl lblPaymentType;
         private DevExpress.XtraEditors.TextEdit txtTotalPayment;
         private DevExpress.XtraEditors.LabelControl lblTotalPayment;
         private DevExpress.XtraEditors.TextEdit txtTotalNotPaid;
         private DevExpress.XtraEditors.LabelControl lblTotalNotPaid;
-        private DevExpress.XtraEditors.TextEdit ttTotalPaid;
+        private DevExpress.XtraEditors.TextEdit txtTotalPaid;
         private DevExpress.XtraEditors.LabelControl lblTotalPaid;
         private DevExpress.XtraEditors.TextEdit txtTotalTransaction;
         private DevExpress.XtraEditors.LabelControl lblTotalTransaction;
-        private DevExpress.XtraEditors.TextEdit txtCustomer;
+        private DevExpress.XtraEditors.TextEdit txtSupplier;
         private DevExpress.XtraEditors.LabelControl lblSupplier;
         private DevExpress.XtraEditors.LookUpEdit cbPaymentType;
     }

@@ -45,9 +45,9 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.buatInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cetakInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cetakInvoiceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAddData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).BeginInit();
@@ -215,32 +215,32 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buatInvoiceToolStripMenuItem,
-            this.cetakInvoiceToolStripMenuItem,
-            this.cetakInvoiceToolStripMenuItem1});
+            this.cmsAddData,
+            this.cmsEditData,
+            this.cmsPrint});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(146, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 92);
             // 
-            // buatInvoiceToolStripMenuItem
+            // cmsAddData
             // 
-            this.buatInvoiceToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
-            this.buatInvoiceToolStripMenuItem.Name = "buatInvoiceToolStripMenuItem";
-            this.buatInvoiceToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.buatInvoiceToolStripMenuItem.Text = "Buat Invoice";
+            this.cmsAddData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.cmsAddData.Name = "cmsAddData";
+            this.cmsAddData.Size = new System.Drawing.Size(152, 22);
+            this.cmsAddData.Text = "Buat Invoice";
             // 
-            // cetakInvoiceToolStripMenuItem
+            // cmsEditData
             // 
-            this.cetakInvoiceToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cetakInvoiceToolStripMenuItem.Name = "cetakInvoiceToolStripMenuItem";
-            this.cetakInvoiceToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.cetakInvoiceToolStripMenuItem.Text = "Ubah Data";
+            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditData.Name = "cmsEditData";
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Text = "Ubah Data";
             // 
-            // cetakInvoiceToolStripMenuItem1
+            // cmsPrint
             // 
-            this.cetakInvoiceToolStripMenuItem1.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
-            this.cetakInvoiceToolStripMenuItem1.Name = "cetakInvoiceToolStripMenuItem1";
-            this.cetakInvoiceToolStripMenuItem1.Size = new System.Drawing.Size(145, 22);
-            this.cetakInvoiceToolStripMenuItem1.Text = "Cetak Invoice";
+            this.cmsPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsPrint.Name = "cmsPrint";
+            this.cmsPrint.Size = new System.Drawing.Size(152, 22);
+            this.cmsPrint.Text = "Cetak Invoice";
             // 
             // InvoiceListControl
             // 
@@ -282,9 +282,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem buatInvoiceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cetakInvoiceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cetakInvoiceToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cmsAddData;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem cmsPrint;
 
     }
 }

@@ -7,8 +7,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int Id { get; set; }
         public DateTime TransactionDate { get; set; }
 
-        public int UsedGoodsId { get; set; }
-        public UsedGoodViewModel UsedGoods { get; set; }
+        public int UsedGoodId { get; set; }
+        public UsedGoodViewModel UsedGood { get; set; }
         public double TotalPrice { get; set; }
         public double ItemPrice { get; set; }
         public int Qty { get; set; }

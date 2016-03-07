@@ -19,5 +19,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int SparepartId { get; set; }
         public virtual Sparepart Sparepart { get; set; }
+
+        public int UpdateTypeId { get; set; }
+        public virtual Reference UpdateType { get; set; }
     }
 }

@@ -34,20 +34,21 @@
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilterSparepartName = new DevExpress.XtraEditors.TextEdit();
             this.lblFilterCompanyName = new DevExpress.XtraEditors.LabelControl();
-            this.btnNewUsedGoods = new DevExpress.XtraEditors.SimpleButton();
-            this.gridUsedGoods = new DevExpress.XtraGrid.GridControl();
-            this.gvUsedGoods = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.btnNewUsedGood = new DevExpress.XtraEditors.SimpleButton();
+            this.gridUsedGood = new DevExpress.XtraGrid.GridControl();
+            this.gvUsedGood = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Sparepart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Stock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsUpdateStok = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsUpdateStok = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterSparepartName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridUsedGoods)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsedGoods)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridUsedGood)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsedGood)).BeginInit();
             this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,50 +94,50 @@
             this.lblFilterCompanyName.TabIndex = 1;
             this.lblFilterCompanyName.Text = "Nama Sparepart";
             // 
-            // btnNewUsedGoods
+            // btnNewUsedGood
             // 
-            this.btnNewUsedGoods.Image = ((System.Drawing.Image)(resources.GetObject("btnNewUsedGoods.Image")));
-            this.btnNewUsedGoods.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnNewUsedGoods.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewUsedGoods.Location = new System.Drawing.Point(3, 71);
-            this.btnNewUsedGoods.Name = "btnNewUsedGoods";
-            this.btnNewUsedGoods.Size = new System.Drawing.Size(164, 23);
-            this.btnNewUsedGoods.TabIndex = 3;
-            this.btnNewUsedGoods.Text = "Buat Barang Bekas Baru";
+            this.btnNewUsedGood.Image = ((System.Drawing.Image)(resources.GetObject("btnNewUsedGood.Image")));
+            this.btnNewUsedGood.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnNewUsedGood.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnNewUsedGood.Location = new System.Drawing.Point(3, 71);
+            this.btnNewUsedGood.Name = "btnNewUsedGood";
+            this.btnNewUsedGood.Size = new System.Drawing.Size(164, 23);
+            this.btnNewUsedGood.TabIndex = 3;
+            this.btnNewUsedGood.Text = "Buat Barang Bekas Baru";
             // 
-            // gridUsedGoods
+            // gridUsedGood
             // 
-            this.gridUsedGoods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gridUsedGood.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridUsedGoods.Location = new System.Drawing.Point(3, 100);
-            this.gridUsedGoods.MainView = this.gvUsedGoods;
-            this.gridUsedGoods.Name = "gridUsedGoods";
-            this.gridUsedGoods.Size = new System.Drawing.Size(575, 224);
-            this.gridUsedGoods.TabIndex = 4;
-            this.gridUsedGoods.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvUsedGoods});
+            this.gridUsedGood.Location = new System.Drawing.Point(3, 100);
+            this.gridUsedGood.MainView = this.gvUsedGood;
+            this.gridUsedGood.Name = "gridUsedGood";
+            this.gridUsedGood.Size = new System.Drawing.Size(575, 224);
+            this.gridUsedGood.TabIndex = 4;
+            this.gridUsedGood.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvUsedGood});
             // 
-            // gvUsedGoods
+            // gvUsedGood
             // 
-            this.gvUsedGoods.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvUsedGood.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.Sparepart,
             this.Stock});
-            this.gvUsedGoods.GridControl = this.gridUsedGoods;
-            this.gvUsedGoods.Name = "gvUsedGoods";
-            this.gvUsedGoods.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvUsedGoods.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvUsedGoods.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvUsedGoods.OptionsBehavior.Editable = false;
-            this.gvUsedGoods.OptionsBehavior.ReadOnly = true;
-            this.gvUsedGoods.OptionsCustomization.AllowColumnMoving = false;
-            this.gvUsedGoods.OptionsCustomization.AllowFilter = false;
-            this.gvUsedGoods.OptionsCustomization.AllowGroup = false;
-            this.gvUsedGoods.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvUsedGoods.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvUsedGoods.OptionsView.ShowGroupPanel = false;
-            this.gvUsedGoods.OptionsView.ShowViewCaption = true;
-            this.gvUsedGoods.ViewCaption = "Daftar Barang Bekas";
+            this.gvUsedGood.GridControl = this.gridUsedGood;
+            this.gvUsedGood.Name = "gvUsedGood";
+            this.gvUsedGood.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvUsedGood.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvUsedGood.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvUsedGood.OptionsBehavior.Editable = false;
+            this.gvUsedGood.OptionsBehavior.ReadOnly = true;
+            this.gvUsedGood.OptionsCustomization.AllowColumnMoving = false;
+            this.gvUsedGood.OptionsCustomization.AllowFilter = false;
+            this.gvUsedGood.OptionsCustomization.AllowGroup = false;
+            this.gvUsedGood.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvUsedGood.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvUsedGood.OptionsView.ShowGroupPanel = false;
+            this.gvUsedGood.OptionsView.ShowViewCaption = true;
+            this.gvUsedGood.ViewCaption = "Daftar Barang Bekas";
             // 
             // Sparepart
             // 
@@ -157,29 +158,39 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsEditData,
-            this.tsUpdateStok});
+            this.cmsEditData,
+            this.cmsUpdateStok,
+            this.cmsDeleteData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(130, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(136, 70);
             // 
-            // tsEditData
+            // cmsEditData
             // 
-            this.tsEditData.Name = "tsEditData";
-            this.tsEditData.Size = new System.Drawing.Size(152, 22);
-            this.tsEditData.Text = "Ubah Data";
+            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditData.Name = "cmsEditData";
+            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
+            this.cmsEditData.Text = "Ubah Data";
             // 
-            // tsUpdateStok
+            // cmsUpdateStok
             // 
-            this.tsUpdateStok.Name = "tsUpdateStok";
-            this.tsUpdateStok.Size = new System.Drawing.Size(129, 22);
-            this.tsUpdateStok.Text = "Ubah Stok";
+            this.cmsUpdateStok.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsUpdateStok.Name = "cmsUpdateStok";
+            this.cmsUpdateStok.Size = new System.Drawing.Size(135, 22);
+            this.cmsUpdateStok.Text = "Ubah Stok";
+            // 
+            // cmsDeleteData
+            // 
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
+            this.cmsDeleteData.Text = "Hapus Data";
             // 
             // UsedGoodsListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gridUsedGoods);
-            this.Controls.Add(this.btnNewUsedGoods);
+            this.Controls.Add(this.gridUsedGood);
+            this.Controls.Add(this.btnNewUsedGood);
             this.Controls.Add(this.gcFilter);
             this.Name = "UsedGoodsListControl";
             this.Size = new System.Drawing.Size(581, 327);
@@ -187,8 +198,8 @@
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterSparepartName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridUsedGoods)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsedGoods)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridUsedGood)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsedGood)).EndInit();
             this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -200,14 +211,15 @@
         private DevExpress.XtraEditors.LabelControl lblFilterCompanyName;
         private DevExpress.XtraEditors.TextEdit txtFilterSparepartName;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private DevExpress.XtraEditors.SimpleButton btnNewUsedGoods;
-        private DevExpress.XtraGrid.GridControl gridUsedGoods;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvUsedGoods;
+        private DevExpress.XtraEditors.SimpleButton btnNewUsedGood;
+        private DevExpress.XtraGrid.GridControl gridUsedGood;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvUsedGood;
         private DevExpress.XtraGrid.Columns.GridColumn Sparepart;
         private DevExpress.XtraGrid.Columns.GridColumn Stock;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem tsEditData;
-        private System.Windows.Forms.ToolStripMenuItem tsUpdateStok;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem cmsUpdateStok;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
     }
 }
