@@ -50,9 +50,15 @@
     <Compile Include="DebtPaymentListPresenter.cs" />
     <Compile Include="InvoiceEditorPresenter.cs" />
     <Compile Include="InvoiceListPresenter.cs" />
+    <Compile Include="GuestBookEditorPresenter.cs" />
+    <Compile Include="GuestBookListPresenter.cs" />
     <Compile Include="JournalMasterEditorPresenter.cs" />
     <Compile Include="JournalMasterListPresenter.cs" />
     <Compile Include="LoginPresenter.cs" />
+    <Compile Include="ManageUserEditorPresenter.cs" />
+    <Compile Include="ManageUserListPresenter.cs" />
+    <Compile Include="ManualTransactionEditorPresenter.cs" />
+    <Compile Include="ManualTransactionListPresenter.cs" />
     <Compile Include="MechanicEditorPresenter.cs" />
     <Compile Include="MechanicListPresenter.cs" />
     <Compile Include="NotificationListPresenter.cs" />
@@ -87,6 +93,9 @@
     <Compile Include="VehicleListPresenter.cs" />
     <Compile Include="SparepartEditorPresenter.cs" />
     <Compile Include="SparepartListPresenter.cs" />
+    <Compile Include="WheelDetailListPresenter.cs" />
+    <Compile Include="WheelEditorPresenter.cs" />
+    <Compile Include="WheelListPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">

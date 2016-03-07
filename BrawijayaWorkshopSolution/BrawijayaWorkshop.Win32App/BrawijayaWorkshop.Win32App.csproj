@@ -193,6 +193,18 @@
     <Compile Include="ModulControls\JournalMasterListControl.Designer.cs">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\ManageUserListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\ManageUserListControl.Designer.cs">
+      <DependentUpon>ManageUserListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\ManualTransactionListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\ManualTransactionListControl.Designer.cs">
+      <DependentUpon>ManualTransactionListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\MechanicListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -336,6 +348,18 @@
     </Compile>
     <Compile Include="ModulForms\JournalMasterEditorForm.Designer.cs">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\ManageUserEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\ManageUserEditorForm.Designer.cs">
+      <DependentUpon>ManageUserEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\ManualTransactionEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\ManualTransactionEditorForm.Designer.cs">
+      <DependentUpon>ManualTransactionEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\MechanicEditorForm.cs">
       <SubType>Form</SubType>
@@ -550,6 +574,12 @@
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\ManageUserListControl.resx">
+      <DependentUpon>ManageUserListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\ManualTransactionListControl.resx">
+      <DependentUpon>ManualTransactionListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\MechanicListControl.resx">
       <DependentUpon>MechanicListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -621,6 +651,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\ManageUserEditorForm.resx">
+      <DependentUpon>ManageUserEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\ManualTransactionEditorForm.resx">
+      <DependentUpon>ManualTransactionEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>

@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigEditorForm));
+            this.txtNewPassword = new DevExpress.XtraEditors.TextEdit();
             this.configTabControl = new DevExpress.XtraTab.XtraTabControl();
             this.tpFingerprint = new DevExpress.XtraTab.XtraTabPage();
             this.lblFingerprintStatus = new DevExpress.XtraEditors.LabelControl();
@@ -41,40 +42,58 @@
             this.lblPort = new DevExpress.XtraEditors.LabelControl();
             this.txtIpAddress = new DevExpress.XtraEditors.TextEdit();
             this.lblIpAddress = new DevExpress.XtraEditors.LabelControl();
+            this.tpUserAccount = new DevExpress.XtraTab.XtraTabPage();
+            this.gcChangePassword = new DevExpress.XtraEditors.GroupControl();
+            this.btnChangePassword = new DevExpress.XtraEditors.SimpleButton();
+            this.txtReTypeNewPassword = new DevExpress.XtraEditors.TextEdit();
+            this.lblReTypeNewPass = new DevExpress.XtraEditors.LabelControl();
+            this.lblNewPass = new DevExpress.XtraEditors.LabelControl();
+            this.txtOldPassword = new DevExpress.XtraEditors.TextEdit();
+            this.lblOldPassword = new DevExpress.XtraEditors.LabelControl();
             this.tpSparepart = new DevExpress.XtraTab.XtraTabPage();
             this.txtMinStockQty = new DevExpress.XtraEditors.TextEdit();
             this.lblStockMinQty = new DevExpress.XtraEditors.LabelControl();
+            this.tpSPK = new DevExpress.XtraTab.XtraTabPage();
             this.bgwFingerprint = new System.ComponentModel.BackgroundWorker();
             this.bgwSaveData = new System.ComponentModel.BackgroundWorker();
-            this.tpUserAccount = new DevExpress.XtraTab.XtraTabPage();
-            this.gcChangePassword = new DevExpress.XtraEditors.GroupControl();
-            this.lblOldPassword = new DevExpress.XtraEditors.LabelControl();
-            this.txtOldPassword = new DevExpress.XtraEditors.TextEdit();
-            this.lblNewPass = new DevExpress.XtraEditors.LabelControl();
-            this.txtNewPassword = new DevExpress.XtraEditors.TextEdit();
-            this.lblReTypeNewPass = new DevExpress.XtraEditors.LabelControl();
-            this.txtReTypeNewPassword = new DevExpress.XtraEditors.TextEdit();
-            this.btnChangePassword = new DevExpress.XtraEditors.SimpleButton();
             this.valOldPassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valNewPassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valReTypeNewPass = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.lblSPKServiceLimit = new DevExpress.XtraEditors.LabelControl();
+            this.txtSPKServiceLimit = new DevExpress.XtraEditors.TextEdit();
+            this.lblSPKRepairLimit = new DevExpress.XtraEditors.LabelControl();
+            this.txtSPKRepairLimit = new DevExpress.XtraEditors.TextEdit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configTabControl)).BeginInit();
             this.configTabControl.SuspendLayout();
             this.tpFingerprint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIpAddress.Properties)).BeginInit();
-            this.tpSparepart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMinStockQty.Properties)).BeginInit();
             this.tpUserAccount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcChangePassword)).BeginInit();
             this.gcChangePassword.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOldPassword.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReTypeNewPassword.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOldPassword.Properties)).BeginInit();
+            this.tpSparepart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMinStockQty.Properties)).BeginInit();
+            this.tpSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valOldPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valNewPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valReTypeNewPass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKServiceLimit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKRepairLimit.Properties)).BeginInit();
             this.SuspendLayout();
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.Location = new System.Drawing.Point(147, 64);
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Properties.UseSystemPasswordChar = true;
+            this.txtNewPassword.Size = new System.Drawing.Size(232, 20);
+            this.txtNewPassword.TabIndex = 3;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Password Baru harus diisi";
+            this.valNewPassword.SetValidationRule(this.txtNewPassword, conditionValidationRule1);
             // 
             // configTabControl
             // 
@@ -87,7 +106,8 @@
             this.configTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tpUserAccount,
             this.tpFingerprint,
-            this.tpSparepart});
+            this.tpSparepart,
+            this.tpSPK});
             // 
             // tpFingerprint
             // 
@@ -98,7 +118,7 @@
             this.tpFingerprint.Controls.Add(this.txtIpAddress);
             this.tpFingerprint.Controls.Add(this.lblIpAddress);
             this.tpFingerprint.Name = "tpFingerprint";
-            this.tpFingerprint.Size = new System.Drawing.Size(482, 165);
+            this.tpFingerprint.Size = new System.Drawing.Size(402, 165);
             this.tpFingerprint.Text = "Fingerprint";
             // 
             // lblFingerprintStatus
@@ -155,42 +175,6 @@
             this.lblIpAddress.TabIndex = 0;
             this.lblIpAddress.Text = "IP";
             // 
-            // tpSparepart
-            // 
-            this.tpSparepart.Controls.Add(this.txtMinStockQty);
-            this.tpSparepart.Controls.Add(this.lblStockMinQty);
-            this.tpSparepart.Name = "tpSparepart";
-            this.tpSparepart.Size = new System.Drawing.Size(482, 165);
-            this.tpSparepart.Text = "Sparepart";
-            // 
-            // txtMinStockQty
-            // 
-            this.txtMinStockQty.EditValue = "50";
-            this.txtMinStockQty.Location = new System.Drawing.Point(137, 14);
-            this.txtMinStockQty.Name = "txtMinStockQty";
-            this.txtMinStockQty.Properties.Mask.EditMask = "[0-9]*";
-            this.txtMinStockQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Regular;
-            this.txtMinStockQty.Size = new System.Drawing.Size(110, 20);
-            this.txtMinStockQty.TabIndex = 1;
-            // 
-            // lblStockMinQty
-            // 
-            this.lblStockMinQty.Location = new System.Drawing.Point(11, 17);
-            this.lblStockMinQty.Name = "lblStockMinQty";
-            this.lblStockMinQty.Size = new System.Drawing.Size(64, 13);
-            this.lblStockMinQty.TabIndex = 0;
-            this.lblStockMinQty.Text = "Stok Minimum";
-            // 
-            // bgwFingerprint
-            // 
-            this.bgwFingerprint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerprint_DoWork);
-            this.bgwFingerprint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerprint_RunWorkerCompleted);
-            // 
-            // bgwSaveData
-            // 
-            this.bgwSaveData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSaveData_DoWork);
-            this.bgwSaveData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSaveData_RunWorkerCompleted);
-            // 
             // tpUserAccount
             // 
             this.tpUserAccount.Controls.Add(this.gcChangePassword);
@@ -216,51 +200,14 @@
             this.gcChangePassword.TabIndex = 0;
             this.gcChangePassword.Text = "Ganti Password";
             // 
-            // lblOldPassword
+            // btnChangePassword
             // 
-            this.lblOldPassword.Location = new System.Drawing.Point(12, 35);
-            this.lblOldPassword.Name = "lblOldPassword";
-            this.lblOldPassword.Size = new System.Drawing.Size(74, 13);
-            this.lblOldPassword.TabIndex = 0;
-            this.lblOldPassword.Text = "Password Lama";
-            // 
-            // txtOldPassword
-            // 
-            this.txtOldPassword.Location = new System.Drawing.Point(147, 32);
-            this.txtOldPassword.Name = "txtOldPassword";
-            this.txtOldPassword.Properties.UseSystemPasswordChar = true;
-            this.txtOldPassword.Size = new System.Drawing.Size(232, 20);
-            this.txtOldPassword.TabIndex = 1;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Password Lama harus diisi";
-            this.valOldPassword.SetValidationRule(this.txtOldPassword, conditionValidationRule2);
-            // 
-            // lblNewPass
-            // 
-            this.lblNewPass.Location = new System.Drawing.Point(12, 67);
-            this.lblNewPass.Name = "lblNewPass";
-            this.lblNewPass.Size = new System.Drawing.Size(71, 13);
-            this.lblNewPass.TabIndex = 2;
-            this.lblNewPass.Text = "Password Baru";
-            // 
-            // txtNewPassword
-            // 
-            this.txtNewPassword.Location = new System.Drawing.Point(147, 64);
-            this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Properties.UseSystemPasswordChar = true;
-            this.txtNewPassword.Size = new System.Drawing.Size(232, 20);
-            this.txtNewPassword.TabIndex = 3;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Password Baru harus diisi";
-            this.valNewPassword.SetValidationRule(this.txtNewPassword, conditionValidationRule1);
-            // 
-            // lblReTypeNewPass
-            // 
-            this.lblReTypeNewPass.Location = new System.Drawing.Point(12, 99);
-            this.lblReTypeNewPass.Name = "lblReTypeNewPass";
-            this.lblReTypeNewPass.Size = new System.Drawing.Size(103, 13);
-            this.lblReTypeNewPass.TabIndex = 4;
-            this.lblReTypeNewPass.Text = "Ulangi Password Baru";
+            this.btnChangePassword.Location = new System.Drawing.Point(147, 128);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(131, 23);
+            this.btnChangePassword.TabIndex = 6;
+            this.btnChangePassword.Text = "Ubah Password";
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // txtReTypeNewPassword
             // 
@@ -274,14 +221,86 @@
             compareAgainstControlValidationRule1.ErrorText = "Isian Password Baru harus sama";
             this.valReTypeNewPass.SetValidationRule(this.txtReTypeNewPassword, compareAgainstControlValidationRule1);
             // 
-            // btnChangePassword
+            // lblReTypeNewPass
             // 
-            this.btnChangePassword.Location = new System.Drawing.Point(147, 128);
-            this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(131, 23);
-            this.btnChangePassword.TabIndex = 6;
-            this.btnChangePassword.Text = "Ubah Password";
-            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            this.lblReTypeNewPass.Location = new System.Drawing.Point(12, 99);
+            this.lblReTypeNewPass.Name = "lblReTypeNewPass";
+            this.lblReTypeNewPass.Size = new System.Drawing.Size(103, 13);
+            this.lblReTypeNewPass.TabIndex = 4;
+            this.lblReTypeNewPass.Text = "Ulangi Password Baru";
+            // 
+            // lblNewPass
+            // 
+            this.lblNewPass.Location = new System.Drawing.Point(12, 67);
+            this.lblNewPass.Name = "lblNewPass";
+            this.lblNewPass.Size = new System.Drawing.Size(71, 13);
+            this.lblNewPass.TabIndex = 2;
+            this.lblNewPass.Text = "Password Baru";
+            // 
+            // txtOldPassword
+            // 
+            this.txtOldPassword.Location = new System.Drawing.Point(147, 32);
+            this.txtOldPassword.Name = "txtOldPassword";
+            this.txtOldPassword.Properties.UseSystemPasswordChar = true;
+            this.txtOldPassword.Size = new System.Drawing.Size(232, 20);
+            this.txtOldPassword.TabIndex = 1;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Password Lama harus diisi";
+            this.valOldPassword.SetValidationRule(this.txtOldPassword, conditionValidationRule2);
+            // 
+            // lblOldPassword
+            // 
+            this.lblOldPassword.Location = new System.Drawing.Point(12, 35);
+            this.lblOldPassword.Name = "lblOldPassword";
+            this.lblOldPassword.Size = new System.Drawing.Size(74, 13);
+            this.lblOldPassword.TabIndex = 0;
+            this.lblOldPassword.Text = "Password Lama";
+            // 
+            // tpSparepart
+            // 
+            this.tpSparepart.Controls.Add(this.txtMinStockQty);
+            this.tpSparepart.Controls.Add(this.lblStockMinQty);
+            this.tpSparepart.Name = "tpSparepart";
+            this.tpSparepart.Size = new System.Drawing.Size(402, 165);
+            this.tpSparepart.Text = "Sparepart";
+            // 
+            // txtMinStockQty
+            // 
+            this.txtMinStockQty.EditValue = "50";
+            this.txtMinStockQty.Location = new System.Drawing.Point(137, 14);
+            this.txtMinStockQty.Name = "txtMinStockQty";
+            this.txtMinStockQty.Properties.Mask.EditMask = "[0-9]*";
+            this.txtMinStockQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Regular;
+            this.txtMinStockQty.Size = new System.Drawing.Size(110, 20);
+            this.txtMinStockQty.TabIndex = 1;
+            // 
+            // lblStockMinQty
+            // 
+            this.lblStockMinQty.Location = new System.Drawing.Point(11, 17);
+            this.lblStockMinQty.Name = "lblStockMinQty";
+            this.lblStockMinQty.Size = new System.Drawing.Size(64, 13);
+            this.lblStockMinQty.TabIndex = 0;
+            this.lblStockMinQty.Text = "Stok Minimum";
+            // 
+            // tpSPK
+            // 
+            this.tpSPK.Controls.Add(this.txtSPKRepairLimit);
+            this.tpSPK.Controls.Add(this.lblSPKRepairLimit);
+            this.tpSPK.Controls.Add(this.txtSPKServiceLimit);
+            this.tpSPK.Controls.Add(this.lblSPKServiceLimit);
+            this.tpSPK.Name = "tpSPK";
+            this.tpSPK.Size = new System.Drawing.Size(402, 165);
+            this.tpSPK.Text = "SPK";
+            // 
+            // bgwFingerprint
+            // 
+            this.bgwFingerprint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerprint_DoWork);
+            this.bgwFingerprint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerprint_RunWorkerCompleted);
+            // 
+            // bgwSaveData
+            // 
+            this.bgwSaveData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSaveData_DoWork);
+            this.bgwSaveData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSaveData_RunWorkerCompleted);
             // 
             // valOldPassword
             // 
@@ -295,6 +314,40 @@
             // 
             this.valReTypeNewPass.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // lblSPKServiceLimit
+            // 
+            this.lblSPKServiceLimit.Location = new System.Drawing.Point(11, 17);
+            this.lblSPKServiceLimit.Name = "lblSPKServiceLimit";
+            this.lblSPKServiceLimit.Size = new System.Drawing.Size(59, 13);
+            this.lblSPKServiceLimit.TabIndex = 0;
+            this.lblSPKServiceLimit.Text = "Limit Service";
+            // 
+            // txtSPKServiceLimit
+            // 
+            this.txtSPKServiceLimit.Location = new System.Drawing.Point(103, 14);
+            this.txtSPKServiceLimit.Name = "txtSPKServiceLimit";
+            this.txtSPKServiceLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKServiceLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKServiceLimit.Size = new System.Drawing.Size(199, 20);
+            this.txtSPKServiceLimit.TabIndex = 1;
+            // 
+            // lblSPKRepairLimit
+            // 
+            this.lblSPKRepairLimit.Location = new System.Drawing.Point(11, 55);
+            this.lblSPKRepairLimit.Name = "lblSPKRepairLimit";
+            this.lblSPKRepairLimit.Size = new System.Drawing.Size(71, 13);
+            this.lblSPKRepairLimit.TabIndex = 2;
+            this.lblSPKRepairLimit.Text = "Limit Perbaikan";
+            // 
+            // txtSPKRepairLimit
+            // 
+            this.txtSPKRepairLimit.Location = new System.Drawing.Point(103, 52);
+            this.txtSPKRepairLimit.Name = "txtSPKRepairLimit";
+            this.txtSPKRepairLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKRepairLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKRepairLimit.Size = new System.Drawing.Size(199, 20);
+            this.txtSPKRepairLimit.TabIndex = 3;
+            // 
             // ConfigEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,25 +358,29 @@
             this.Name = "ConfigEditorForm";
             this.Text = "Konfigurasi";
             this.Controls.SetChildIndex(this.configTabControl, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.configTabControl)).EndInit();
             this.configTabControl.ResumeLayout(false);
             this.tpFingerprint.ResumeLayout(false);
             this.tpFingerprint.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIpAddress.Properties)).EndInit();
-            this.tpSparepart.ResumeLayout(false);
-            this.tpSparepart.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMinStockQty.Properties)).EndInit();
             this.tpUserAccount.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcChangePassword)).EndInit();
             this.gcChangePassword.ResumeLayout(false);
             this.gcChangePassword.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOldPassword.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReTypeNewPassword.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOldPassword.Properties)).EndInit();
+            this.tpSparepart.ResumeLayout(false);
+            this.tpSparepart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMinStockQty.Properties)).EndInit();
+            this.tpSPK.ResumeLayout(false);
+            this.tpSPK.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valOldPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valNewPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valReTypeNewPass)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKServiceLimit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKRepairLimit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -355,5 +412,10 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valOldPassword;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valNewPassword;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valReTypeNewPass;
+        private DevExpress.XtraTab.XtraTabPage tpSPK;
+        private DevExpress.XtraEditors.TextEdit txtSPKRepairLimit;
+        private DevExpress.XtraEditors.LabelControl lblSPKRepairLimit;
+        private DevExpress.XtraEditors.TextEdit txtSPKServiceLimit;
+        private DevExpress.XtraEditors.LabelControl lblSPKServiceLimit;
     }
 }

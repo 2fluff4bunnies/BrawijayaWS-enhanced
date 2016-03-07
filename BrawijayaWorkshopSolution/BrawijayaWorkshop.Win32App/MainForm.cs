@@ -79,11 +79,6 @@ namespace BrawijayaWorkshop.Win32App
         #region Helper
         private void GenerateRibbonMenu()
         {
-            if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN)
-            {
-                btnConfig.Visible = false;
-                
-            }
             if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN &&
                 LoginInformation.RoleName != DbConstant.ROLE_ADMIN &&
                 LoginInformation.RoleName != DbConstant.ROLE_MANAGER)
@@ -264,7 +259,9 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iJournal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
             navMasterData.iManageRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iManageRoleAccess.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
-            navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
+            navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USERCONTROL);
+            navMasterData.iManageUserRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
+            navMasterData.iUserList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANAGE_APP_USER);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -277,6 +274,20 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageRole.LinkClicked += iManageRole_LinkClicked;
             navMasterData.iManageRoleAccess.LinkClicked += iManageRoleAccess_LinkClicked;
             navMasterData.iManageUser.LinkClicked += iManageUser_LinkClicked;
+            navMasterData.iManageUserRole.LinkClicked += iManageUserRole_LinkClicked;
+            navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
+        }
+
+        private void iUserList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            ManageUserListControl manageUserListControl = Bootstrapper.Resolve<ManageUserListControl>();
+            ShowUserControl(manageUserListControl);
+        }
+
+        private void iManageUserRole_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            UserRoleListControl listUserRole = Bootstrapper.Resolve<UserRoleListControl>();
+            ShowUserControl(listUserRole);
         }
 
         private void iManageUser_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

@@ -64,9 +64,15 @@
     <Compile Include="DebtPaymentListModel.cs" />
     <Compile Include="InvoiceEditorModel.cs" />
     <Compile Include="InvoiceListModel.cs" />
+    <Compile Include="GuestBookEditorModel.cs" />
+    <Compile Include="GuestBookListModel.cs" />
     <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="ManageUserEditorModel.cs" />
+    <Compile Include="ManageUserListModel.cs" />
+    <Compile Include="ManualTransactionEditorModel.cs" />
+    <Compile Include="ManualTransactionListModel.cs" />
     <Compile Include="Mappers\AutoMapperConfiguration.cs" />
     <Compile Include="Mappers\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Mappers\ViewModelToDomainMappingProfile.cs" />
@@ -104,6 +110,9 @@
     <Compile Include="VehicleListModel.cs" />
     <Compile Include="SparepartEditorModel.cs" />
     <Compile Include="SparepartListModel.cs" />
+    <Compile Include="WheelDetailListModel.cs" />
+    <Compile Include="WheelEditorModel.cs" />
+    <Compile Include="WheelListModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">

@@ -90,7 +90,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 _selectedVehicle = value;
             }
-        } 
+        }
         #endregion
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 catch (Exception ex)
                 {
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete vehicle with license number: '" + SelectedVehicle.ActiveLicenseNumber + "'", ex);
-                    this.ShowError("Proses hapus data vehicle dengan nomor polisi : '" + SelectedVehicle.ActiveLicenseNumber + "' gagal!");
+                    this.ShowError("Proses hapus data kendaraan dengan nomor polisi : '" + SelectedVehicle.ActiveLicenseNumber + "' gagal!");
                 }
             }
         }
@@ -200,7 +200,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            if(gvVehicle.RowCount > 0)
+            if (gvVehicle.RowCount > 0)
             {
                 SelectedVehicle = gvVehicle.GetRow(0) as VehicleViewModel;
             }
@@ -213,7 +213,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             VehicleDetailEditorForm editor = Bootstrapper.Resolve<VehicleDetailEditorForm>();
             editor.SelectedVehicle = this.SelectedVehicle;
             editor.ShowDialog(this);
-            
+
             btnSearch.PerformClick();
         }
 
@@ -228,9 +228,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsViewVehicleWheel_Click(object sender, EventArgs e)
         {
-            VehicleWheelEditorForm editor = Bootstrapper.Resolve<VehicleWheelEditorForm>();
-            //editor.SelectedVehicle = this.SelectedVehicle;
-            editor.ShowDialog(this);
+            // VehicleWheelEditorForm editor = Bootstrapper.Resolve<VehicleWheelEditorForm>();
+            // editor.SelectedVehicle = this.SelectedVehicle;
+            // editor.ShowDialog(this);
 
             btnSearch.PerformClick();
         }

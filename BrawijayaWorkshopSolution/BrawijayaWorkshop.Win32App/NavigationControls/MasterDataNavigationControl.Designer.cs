@@ -35,6 +35,8 @@
             this.iManageRole = new DevExpress.XtraNavBar.NavBarItem();
             this.iManageRoleAccess = new DevExpress.XtraNavBar.NavBarItem();
             this.iManageUser = new DevExpress.XtraNavBar.NavBarItem();
+            this.iManageUserRole = new DevExpress.XtraNavBar.NavBarItem();
+            this.iUserList = new DevExpress.XtraNavBar.NavBarItem();
             this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
@@ -61,7 +63,9 @@
             this.iJournal,
             this.iManageRole,
             this.iManageUser,
-            this.iManageRoleAccess});
+            this.iManageRoleAccess,
+            this.iUserList,
+            this.iManageUserRole});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -78,6 +82,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iManageRole),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iManageRoleAccess),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iManageUser),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iManageUserRole),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUserList),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournal),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
@@ -103,6 +109,18 @@
             this.iManageUser.Caption = "User Manager";
             this.iManageUser.Name = "iManageUser";
             this.iManageUser.SmallImageIndex = 6;
+            // 
+            // iManageUserRole
+            // 
+            this.iManageUserRole.Caption = "User Role Manager";
+            this.iManageUserRole.Name = "iManageUserRole";
+            this.iManageUserRole.SmallImageIndex = 9;
+            // 
+            // iUserList
+            // 
+            this.iUserList.Caption = "Daftar User";
+            this.iUserList.Name = "iUserList";
+            this.iUserList.SmallImageIndex = 6;
             // 
             // iJournal
             // 
@@ -152,6 +170,7 @@
             this.imageCollection.Images.SetKeyName(6, "users_32x32.png");
             this.imageCollection.Images.SetKeyName(7, "role_32x32.png");
             this.imageCollection.Images.SetKeyName(8, "role_access_16x16.png");
+            this.imageCollection.Images.SetKeyName(9, "user_role_16x16.png");
             // 
             // MasterDataNavigationControl
             // 
@@ -180,5 +199,7 @@
         public DevExpress.XtraNavBar.NavBarItem iManageRole;
         public DevExpress.XtraNavBar.NavBarItem iManageUser;
         public DevExpress.XtraNavBar.NavBarItem iManageRoleAccess;
+        public DevExpress.XtraNavBar.NavBarItem iUserList;
+        public DevExpress.XtraNavBar.NavBarItem iManageUserRole;
     }
 }

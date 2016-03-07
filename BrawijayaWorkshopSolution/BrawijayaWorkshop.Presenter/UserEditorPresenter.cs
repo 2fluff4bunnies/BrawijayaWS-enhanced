@@ -30,13 +30,13 @@ namespace BrawijayaWorkshop.Presenter
 
         public bool ValidateUser()
         {
-            if(View.SelectedUser.Id > 0)
+            if(View.SelectedUser != null && View.SelectedUser.Id > 0)
             {
-                return Model.Validate(View.SelectedUser.UserName, View.SelectedUser.Id);
+                return Model.Validate(View.UserName, View.SelectedUser.Id);
             }
             else
             {
-                return Model.Validate(View.SelectedUser.UserName);
+                return Model.Validate(View.UserName);
             }
         }
 

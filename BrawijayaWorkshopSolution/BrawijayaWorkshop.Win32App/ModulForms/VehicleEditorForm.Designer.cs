@@ -45,27 +45,29 @@
             this.lblBrand = new DevExpress.XtraEditors.LabelControl();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblYearOfPurchase = new DevExpress.XtraEditors.LabelControl();
-            this.gcCustomerInfo = new DevExpress.XtraEditors.GroupControl();
+            this.gcVehicleInfo = new DevExpress.XtraEditors.GroupControl();
+            this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
+            this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cbWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
             this.FieldsValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
-            this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colCodeDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnNewVehicleWheel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).BeginInit();
-            this.gcCustomerInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
+            this.gcVehicleInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             this.SuspendLayout();
             // 
             // lookUpCustomer
@@ -188,27 +190,82 @@
             this.lblYearOfPurchase.TabIndex = 6;
             this.lblYearOfPurchase.Text = "Tahun Pembelian";
             // 
-            // gcCustomerInfo
+            // gcVehicleInfo
             // 
-            this.gcCustomerInfo.Controls.Add(this.gridVehicleWheel);
-            this.gcCustomerInfo.Controls.Add(this.txtYearOfPurchase);
-            this.gcCustomerInfo.Controls.Add(this.dtpExpirationDate);
-            this.gcCustomerInfo.Controls.Add(this.lblExpirationDate);
-            this.gcCustomerInfo.Controls.Add(this.txtLicenseNumber);
-            this.gcCustomerInfo.Controls.Add(this.lblLicenseNumber);
-            this.gcCustomerInfo.Controls.Add(this.lookUpCustomer);
-            this.gcCustomerInfo.Controls.Add(this.lblYearOfPurchase);
-            this.gcCustomerInfo.Controls.Add(this.txtType);
-            this.gcCustomerInfo.Controls.Add(this.lblType);
-            this.gcCustomerInfo.Controls.Add(this.txtBrand);
-            this.gcCustomerInfo.Controls.Add(this.lblBrand);
-            this.gcCustomerInfo.Controls.Add(this.lblCustomer);
-            this.gcCustomerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcCustomerInfo.Location = new System.Drawing.Point(0, 0);
-            this.gcCustomerInfo.Name = "gcCustomerInfo";
-            this.gcCustomerInfo.Size = new System.Drawing.Size(404, 436);
-            this.gcCustomerInfo.TabIndex = 1;
-            this.gcCustomerInfo.Text = "Informasi Kendaraan";
+            this.gcVehicleInfo.Controls.Add(this.btnNewVehicleWheel);
+            this.gcVehicleInfo.Controls.Add(this.gridVehicleWheel);
+            this.gcVehicleInfo.Controls.Add(this.txtYearOfPurchase);
+            this.gcVehicleInfo.Controls.Add(this.dtpExpirationDate);
+            this.gcVehicleInfo.Controls.Add(this.lblExpirationDate);
+            this.gcVehicleInfo.Controls.Add(this.txtLicenseNumber);
+            this.gcVehicleInfo.Controls.Add(this.lblLicenseNumber);
+            this.gcVehicleInfo.Controls.Add(this.lookUpCustomer);
+            this.gcVehicleInfo.Controls.Add(this.lblYearOfPurchase);
+            this.gcVehicleInfo.Controls.Add(this.txtType);
+            this.gcVehicleInfo.Controls.Add(this.lblType);
+            this.gcVehicleInfo.Controls.Add(this.txtBrand);
+            this.gcVehicleInfo.Controls.Add(this.lblBrand);
+            this.gcVehicleInfo.Controls.Add(this.lblCustomer);
+            this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcVehicleInfo.Location = new System.Drawing.Point(0, 0);
+            this.gcVehicleInfo.Name = "gcVehicleInfo";
+            this.gcVehicleInfo.Size = new System.Drawing.Size(404, 387);
+            this.gcVehicleInfo.TabIndex = 1;
+            this.gcVehicleInfo.Text = "Informasi Kendaraan";
+            // 
+            // gridVehicleWheel
+            // 
+            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 241);
+            this.gridVehicleWheel.MainView = this.gvVehicleWheel;
+            this.gridVehicleWheel.Name = "gridVehicleWheel";
+            this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.cbWheelDetailGv});
+            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 140);
+            this.gridVehicleWheel.TabIndex = 12;
+            this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvVehicleWheel});
+            // 
+            // gvVehicleWheel
+            // 
+            this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colWheelDetail});
+            this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
+            this.gvVehicleWheel.Name = "gvVehicleWheel";
+            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvVehicleWheel.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gvVehicleWheel.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
+            this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
+            // 
+            // colWheelDetail
+            // 
+            this.colWheelDetail.Caption = "Nomor Seri Ban";
+            this.colWheelDetail.ColumnEdit = this.cbWheelDetailGv;
+            this.colWheelDetail.FieldName = "Id";
+            this.colWheelDetail.Name = "colWheelDetail";
+            this.colWheelDetail.Visible = true;
+            this.colWheelDetail.VisibleIndex = 0;
+            // 
+            // cbWheelDetailGv
+            // 
+            this.cbWheelDetailGv.AutoHeight = false;
+            this.cbWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbWheelDetailGv.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart")});
+            this.cbWheelDetailGv.DisplayMember = "SerialNumber";
+            this.cbWheelDetailGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.cbWheelDetailGv.Name = "cbWheelDetailGv";
+            this.cbWheelDetailGv.NullText = "-- Pilih Ban --";
+            this.cbWheelDetailGv.ValidateOnEnterKey = true;
+            this.cbWheelDetailGv.ValueMember = "Id";
             // 
             // dtpExpirationDate
             // 
@@ -256,80 +313,42 @@
             this.FieldsValidator.ValidateHiddenControls = false;
             this.FieldsValidator.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // gridVehicleWheel
+            // btnNewVehicleWheel
             // 
-            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 205);
-            this.gridVehicleWheel.MainView = this.gvVehicleWheel;
-            this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 169);
-            this.gridVehicleWheel.TabIndex = 12;
-            this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvVehicleWheel});
-            // 
-            // gvVehicleWheel
-            // 
-            this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colCodeDetail,
-            this.colSerialNumber});
-            this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
-            this.gvVehicleWheel.Name = "gvVehicleWheel";
-            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvVehicleWheel.OptionsBehavior.Editable = false;
-            this.gvVehicleWheel.OptionsBehavior.ReadOnly = true;
-            this.gvVehicleWheel.OptionsCustomization.AllowColumnMoving = false;
-            this.gvVehicleWheel.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvVehicleWheel.OptionsMenu.EnableFooterMenu = false;
-            this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvVehicleWheel.OptionsView.ShowFooter = true;
-            this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
-            this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
-            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
-            // 
-            // colCodeDetail
-            // 
-            this.colCodeDetail.Caption = "Kode";
-            this.colCodeDetail.FieldName = "Code";
-            this.colCodeDetail.Name = "colCodeDetail";
-            this.colCodeDetail.Visible = true;
-            this.colCodeDetail.VisibleIndex = 0;
-            // 
-            // colSerialNumber
-            // 
-            this.colSerialNumber.Caption = "Nomor Seri";
-            this.colSerialNumber.Name = "colSerialNumber";
-            this.colSerialNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "", "Jumlah Data: {0}")});
-            this.colSerialNumber.Visible = true;
-            this.colSerialNumber.VisibleIndex = 1;
+            this.btnNewVehicleWheel.Image = ((System.Drawing.Image)(resources.GetObject("btnNewVehicleWheel.Image")));
+            this.btnNewVehicleWheel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnNewVehicleWheel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnNewVehicleWheel.Location = new System.Drawing.Point(12, 212);
+            this.btnNewVehicleWheel.Name = "btnNewVehicleWheel";
+            this.btnNewVehicleWheel.Size = new System.Drawing.Size(100, 23);
+            this.btnNewVehicleWheel.TabIndex = 13;
+            this.btnNewVehicleWheel.Text = "Tambah Ban";
+            this.btnNewVehicleWheel.Click += new System.EventHandler(this.btnNewVehicleWheel_Click);
             // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 436);
-            this.Controls.Add(this.gcCustomerInfo);
+            this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VehicleEditorForm";
             this.Text = "Vehicle Editor";
-            this.Controls.SetChildIndex(this.gcCustomerInfo, 0);
+            this.Controls.SetChildIndex(this.gcVehicleInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).EndInit();
-            this.gcCustomerInfo.ResumeLayout(false);
-            this.gcCustomerInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).EndInit();
+            this.gcVehicleInfo.ResumeLayout(false);
+            this.gcVehicleInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbWheelDetailGv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -343,7 +362,7 @@
         private DevExpress.XtraEditors.TextEdit txtType;
         private DevExpress.XtraEditors.LabelControl lblYearOfPurchase;
         private DevExpress.XtraEditors.LookUpEdit lookUpCustomer;
-        private DevExpress.XtraEditors.GroupControl gcCustomerInfo;
+        private DevExpress.XtraEditors.GroupControl gcVehicleInfo;
         private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblLicenseNumber;
         private DevExpress.XtraEditors.TextEdit txtYearOfPurchase;
@@ -352,7 +371,8 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider FieldsValidator;
         private DevExpress.XtraGrid.GridControl gridVehicleWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
-        private DevExpress.XtraGrid.Columns.GridColumn colCodeDetail;
-        private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cbWheelDetailGv;
+        private DevExpress.XtraEditors.SimpleButton btnNewVehicleWheel;
     }
 }

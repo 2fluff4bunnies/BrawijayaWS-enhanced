@@ -50,9 +50,14 @@
     <Compile Include="IDebtPaymentListView.cs" />
     <Compile Include="IInvoiceEditorView.cs" />
     <Compile Include="IInvoiceListView.cs" />
+    <Compile Include="IGuestBookEditorView.cs" />
+    <Compile Include="IGuestBookListView.cs" />
     <Compile Include="IJournalMasterEditorView.cs" />
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="ILoginView.cs" />
+    <Compile Include="IManageUserListView.cs" />
+    <Compile Include="IManualTransactionEditorView.cs" />
+    <Compile Include="IManualTransactionListView.cs" />
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
     <Compile Include="INotificationListView.cs" />
@@ -86,6 +91,10 @@
     <Compile Include="IVehicleListView.cs" />
     <Compile Include="ISparepartEditorView.cs" />
     <Compile Include="ISparepartListView.cs" />
+    <Compile Include="IWheelDetailListView.cs" />
+    <Compile Include="IWheelEditorView.cs" />
+    <Compile Include="IWheelListView.cs" />
+    <Compile Include="IManageUserEditorView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

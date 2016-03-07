@@ -1,12 +1,8 @@
 ﻿using BrawijayaWorkshop.Utils;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace BrawijayaWorkshop.DataInitializerConsoleApp
 {
@@ -14,7 +10,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
     {
         static void Main(string[] args)
         {
-            string dirPath = "D:/Documents/Bengkel App/";
+            string dirPath = "D:/Documents/Bengkel App/Data";
             string accFile = "Account Jurnal.xlsx";
             string invFile = "Inv.xlsx";
             string citFile = "City.xlsx";

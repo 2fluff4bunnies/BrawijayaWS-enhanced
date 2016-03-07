@@ -39,6 +39,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvRoleAccess.PopupMenuShowing += gvRoleAccess_PopupMenuShowing;
             gvRoleAccess.FocusedRowChanged += gvRoleAccess_FocusedRowChanged;
 
+            // init editor control accessibility
+            btnNewRoleAccess.Enabled = AllowInsert;
+            cmsEditData.Enabled = AllowEdit;
+            cmsDeleteData.Enabled = AllowDelete;
+
             this.Load += RoleAccessListControl_Load;
         }
 

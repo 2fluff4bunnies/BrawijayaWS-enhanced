@@ -11,32 +11,101 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class WheelEditorForm : BaseEditorForm
+    public partial class WheelEditorForm : BaseEditorForm, IWheelEditorView
     {
-        public WheelEditorForm()
+        private WheelEditorPresenter _presenter;
+
+        public WheelEditorForm(WheelEditorModel model)
         {
             InitializeComponent();
+            _presenter = new WheelEditorPresenter(this, model);
 
-            valCode.SetIconAlignment(txtCode, ErrorIconAlignment.MiddleRight);
-            valName.SetIconAlignment(txtName, ErrorIconAlignment.MiddleRight);
+            valSparepart.SetIconAlignment(lookUpSparepart, ErrorIconAlignment.MiddleRight);
         }
+
+
+        #region Properties
+        public WheelViewModel SelectedWheel { get; set; }
+
+        public string Category
+        {
+            get
+            {
+                return lblCategoryValue.Text;
+            }
+            set
+            {
+                lblCategoryValue.Text = value;
+            }
+        }
+
+        public string Unit
+        {
+            get
+            {
+                return lblUnitValue.Text;
+            }
+            set
+            {
+                lblUnitValue.Text = value;
+            }
+        }
+
+        public string Code
+        {
+            get
+            {
+                return lblCodeValue.Text;
+            }
+            set
+            {
+                lblCodeValue.Text = value;
+            }
+        }
+
+        public List<SparepartViewModel> SparepartList {
+            get
+            {
+                return lookUpSparepart.Properties.DataSource as List<SparepartViewModel>;
+            }
+            set
+            {
+                lookUpSparepart.Properties.DataSource = value;
+            }
+        }
+
+        public int SparepartId
+        {
+            get
+            {
+                return lookUpSparepart.EditValue.AsInteger();
+            }
+            set
+            {
+                lookUpSparepart.EditValue = value;
+            }
+        }
+
+        #endregion
+
 
         protected override void ExecuteSave()
         {
-            if (valCode.Validate() && valName.Validate())
+            if (valSparepart.Validate())
             {
                 try
                 {
                     MethodBase.GetCurrentMethod().Info("Save Wheel's changes");
-                    //_presenter.SaveChanges();
+                    _presenter.SaveChanges();
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    //MethodBase.GetCurrentMethod().Fatal("An error occored while trying to save sparepart: '" + SelectedSparepart.Name + "'", ex);
-                    this.ShowError("Proses simpan sparepart gagal!");
+                    MethodBase.GetCurrentMethod().Fatal("An error occored while trying to save wheel: '" + SelectedWheel.Sparepart.Name + "'", ex);
+                    this.ShowError("Proses simpan ban gagal!");
                 }
             }
         }
+       
     }
 }

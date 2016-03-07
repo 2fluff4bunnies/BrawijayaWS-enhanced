@@ -23,5 +23,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         public double TotalPayment { get; set; }
+
+        public string Description { get; set; }
     }
 }

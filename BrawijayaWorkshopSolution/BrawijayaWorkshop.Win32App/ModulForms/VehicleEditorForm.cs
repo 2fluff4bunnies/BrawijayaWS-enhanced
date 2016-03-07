@@ -6,6 +6,7 @@ using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -27,6 +28,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += VehicleEditorForm_Load;
+            cbWheelDetailGv.EditValueChanged += cbWheelDetailGv_EditValueChanged;
+        }
+
+        void cbWheelDetailGv_EditValueChanged(object sender, EventArgs e)
+        {
+            WheelDetailViewModel selectedWheelDetail = sender as WheelDetailViewModel;
+            VehicleWheelViewModel foundConflict = _presenter.IsWheelUsedByOtherVehicle(selectedWheelDetail.Id);
+
+            if (foundConflict != null)
+            {
+                if (this.ShowConfirmation("Ban dengan nomor seri " + selectedWheelDetail.SerialNumber +
+                   " sudah digunakan pada kendaraan dengan nopol " + foundConflict.Vehicle.ActiveLicenseNumber + "!" +
+                   "\n\n Apakah anda yakin ingin menukar?") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    foundConflict.WheelDetailId = _presenter.GetCurrentInstalledWheel(selectedWheelDetail.Id);
+                    this.VehicleWheelExchangedList.Add(foundConflict);
+                }
+                else
+                {
+                    sender = null;
+                }
+            }
         }
 
         private void VehicleEditorForm_Load(object sender, EventArgs e)
@@ -109,7 +132,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-               return dtpExpirationDate.Text.AsDateTime();
+                return dtpExpirationDate.Text.AsDateTime();
             }
             set
             {
@@ -128,6 +151,40 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 lookUpCustomer.Properties.DataSource = value;
             }
         }
+
+        public List<VehicleWheelViewModel> VehicleWheelList
+        {
+            get
+            {
+                return gridVehicleWheel.DataSource as List<VehicleWheelViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridVehicleWheel.DataSource = value; gvVehicleWheel.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridVehicleWheel.DataSource = value;
+                    gvVehicleWheel.BestFitColumns();
+                }
+            }
+        }
+
+        public List<WheelDetailViewModel> WheelDetailList
+        {
+            get
+            {
+                return cbWheelDetailGv.DataSource as List<WheelDetailViewModel>;
+            }
+            set
+            {
+                cbWheelDetailGv.DataSource = value;
+            }
+        }
+
+        public List<VehicleWheelViewModel> VehicleWheelExchangedList { get; set; }
         #endregion
 
         protected override void ExecuteSave()
@@ -146,6 +203,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan data Kendaraan gagal!");
                 }
             }
+        }
+
+        private void btnNewVehicleWheel_Click(object sender, EventArgs e)
+        {
+            gvVehicleWheel.AddNewRow();
         }
     }
 }

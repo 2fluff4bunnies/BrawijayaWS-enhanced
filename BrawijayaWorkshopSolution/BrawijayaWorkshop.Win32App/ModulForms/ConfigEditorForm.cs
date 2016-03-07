@@ -109,6 +109,30 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public string SPKServiceLimit
+        {
+            get
+            {
+                return txtSPKServiceLimit.Text;
+            }
+            set
+            {
+                txtSPKServiceLimit.Text = value;
+            }
+        }
+
+        public string SPKRepairLimit
+        {
+            get
+            {
+                return txtSPKRepairLimit.Text;
+            }
+            set
+            {
+                txtSPKRepairLimit.Text = value;
+            }
+        }
+
         private void btnCheckFingerprintConnection_Click(object sender, EventArgs e)
         {
             if(!bgwFingerprint.IsBusy)

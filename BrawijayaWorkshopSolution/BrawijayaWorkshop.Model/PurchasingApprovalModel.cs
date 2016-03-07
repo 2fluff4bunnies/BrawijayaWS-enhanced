@@ -20,6 +20,8 @@ namespace BrawijayaWorkshop.Model
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
         private IJournalMasterRepository _journalMasterRepository;
+        private IWheelRepository _wheelRepository;
+        private IWheelDetailRepository _wheelDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingApprovalModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
@@ -30,6 +32,8 @@ namespace BrawijayaWorkshop.Model
             ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IJournalMasterRepository journalMasterRepository,
+            IWheelRepository wheelRepository,
+            IWheelDetailRepository wheelDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -42,6 +46,8 @@ namespace BrawijayaWorkshop.Model
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
             _journalMasterRepository = journalMasterRepository;
+            _wheelRepository = wheelRepository;
+            _wheelDetailRepository = wheelDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -86,6 +92,8 @@ namespace BrawijayaWorkshop.Model
                 string lastSPID = string.Empty;
                 if (lastSPDetail != null) lastSPID = lastSPDetail.Code;
 
+                Wheel wheel = _wheelRepository.GetMany(w => w.SparepartId == sparepartDB.Id && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+
                 for (int i = 1; i <= purchasingDetail.Qty; i++)
                 {
                     SparepartDetail spDetail = new SparepartDetail();
@@ -106,7 +114,21 @@ namespace BrawijayaWorkshop.Model
                     spDetail.ModifyUserId = userID;
                     spDetail.ModifyDate = serverTime;
                     spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-                    _sparepartDetailRepository.Add(spDetail);
+                    SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
+
+                    if (wheel != null)
+                    {
+                        WheelDetail wd = new WheelDetail();
+                        wd.CreateUserId = userID;
+                        wd.CreateDate = serverTime;
+                        wd.ModifyUserId = userID;
+                        wd.ModifyDate = serverTime;
+                        wd.WheelId = wheel.Id;
+                        wd.SparepartDetailId = insertedSpDetail.Id;
+                        wd.Status = (int)DbConstant.WheelDetailStatus.Ready;
+
+                        _wheelDetailRepository.Add(wd);
+                    }
                 }
 
                 purchasingDetail.Status = (int)DbConstant.PurchasingStatus.Active;
@@ -142,6 +164,7 @@ namespace BrawijayaWorkshop.Model
             transaction.ModifyUserId = userID;
             transaction.ModifyDate = serverTime;
             transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+            transaction.Description = "Pembelian sparepart";
             Transaction transactionInserted = _transactionRepository.Add(transaction);
 
             switch (purchasing.PaymentMethod.Code)

@@ -33,6 +33,8 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_DEBT = "M_DEBT";
         public const string MODUL_INVOICE = "M_INVOICE";
         
+        public const string MODUL_MANUAL_TRANSACTION = "M_MANUAL_TRANS";
+
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
 
@@ -40,6 +42,7 @@ namespace BrawijayaWorkshop.Constant
 
         public const string REF_TRANSTBL_PURCHASING = "REF_TRANSTBL_PURCHASING";
         public const string REF_TRANSTBL_SPK = "REF_TRANSTBL_SPK";
+        public const string REF_TRANSTBL_MANUAL = "REF_TRANSTBL_MANUAL";
 
         public const string REF_PURCHASE_PAYMENTMETHOD = "REF_PURCHASE_PAYMENTMETHOD";
         public const string REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS = "REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS";
@@ -90,6 +93,7 @@ namespace BrawijayaWorkshop.Constant
             OutPurchase = 2,
             OutService = 3,
             Broken = 4,
+            OutInstalled = 5,
             NotVerified = 0
         }
 
@@ -144,6 +148,11 @@ namespace BrawijayaWorkshop.Constant
             FeeNotFixed = 0,
             NotPrinted = 1,
             Printed = 2,
+        }
+        public enum WheelDetailStatus
+        { 
+            Ready = 1,
+            Installed = 2,
         }
     }
 }
