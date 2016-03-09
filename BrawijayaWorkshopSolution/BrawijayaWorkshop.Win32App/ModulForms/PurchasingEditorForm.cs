@@ -29,7 +29,40 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             valDate.SetIconAlignment(txtDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             gvPurchasingDetail.PopupMenuShowing += gvPurchasingDetail_PopupMenuShowing;
             gvPurchasingDetail.FocusedRowChanged += gvPurchasingDetail_FocusedRowChanged;
+            cbSparepartGv.EditValueChanged += cbSparepartGv_EditValueChanged;
+            gvPurchasingDetail.ShowingEditor += gvPurchasingDetail_ShowingEditor;
+            
             this.Load += PurchasingEditorForm_Load;
+        }
+
+        void gvPurchasingDetail_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            GridView View = sender as GridView;
+            if (View.FocusedColumn.FieldName == "SerialNumber" && !this.SelectedPurchasingDetail.IsWheel)
+            {
+                e.Cancel = true;
+            }
+
+            if (View.FocusedColumn.FieldName == "Qty" && this.SelectedPurchasingDetail.IsWheel)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        void cbSparepartGv_EditValueChanged(object sender, EventArgs e)
+        {
+            DevExpress.XtraEditors.LookUpEdit lookup = sender as DevExpress.XtraEditors.LookUpEdit;
+            if (_presenter.IsSparepartWheel(lookup.EditValue.AsInteger()))
+            {
+                this.SelectedPurchasingDetail.IsWheel = true;
+                this.SelectedPurchasingDetail.Qty = 1;
+                this.SelectedPurchasingDetail.SparepartId = lookup.EditValue.AsInteger();
+            }
+            else
+            {
+                this.SelectedPurchasingDetail.Qty = 0;
+                this.SelectedPurchasingDetail.IsWheel = false;
+            }
         }
 
         private void gvPurchasingDetail_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -68,7 +101,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtDate.EditValue = value;
             }
         }
-
 
         public decimal TotalPrice
         {
@@ -151,6 +183,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwSave.IsBusy)
             {
+                List<PurchasingDetailViewModel> missingSerialNumber = new List<PurchasingDetailViewModel>();
+
                 bool isValid = false;
                 if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
                 {
@@ -158,9 +192,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     rowGvPurchasingDetailNotValid = ListPurchasingDetail.Where(i => i.SparepartId == 0 || i.Qty == 0 || i.Price == 0).Count();
                     if (valSupplier.Validate() && valDate.Validate() && rowGvPurchasingDetailNotValid == 0)
                     {
-                        isValid = true;
+                        foreach (var item in this.ListPurchasingDetail)
+                        {
+                            if (item.IsWheel && string.IsNullOrEmpty(item.SerialNumber))
+                            {
+                                missingSerialNumber.Add(item);
+                            }
+                        }
+                        if (missingSerialNumber.Count == 0)
+                        {
+                            isValid = true;
+                        }
                     }
                 }
+
                 if (isValid)
                 {
                     MethodBase.GetCurrentMethod().Info("Save Purchasing's changes");
@@ -169,8 +214,21 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
                 else
                 {
-                    this.ShowError("Proses simpan data pembelian gagal!");
-                    FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
+                    if (missingSerialNumber.Count > 0)
+                    {
+                        string requiredMessage = "";
+                        foreach (var item in missingSerialNumber)
+                        {
+                            requiredMessage = requiredMessage + item.Sparepart.Name +"\n";
+                        }
+                        this.ShowWarning("Terdapat ban yang belum memiliki serial number : " + requiredMessage);
+                        FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
+                    }
+                    else
+                    {
+                        this.ShowError("Proses simpan data pembelian gagal!");
+                        FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
+                    }
                 }
             }
         }

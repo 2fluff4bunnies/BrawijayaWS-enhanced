@@ -6,6 +6,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int Id { get; set; }
         public int Qty { get; set; }
         public decimal Price { get; set; }
+        public bool IsWheel { get; set; }
+        public string SerialNumber { get; set; }
 
         public int PurchasingId { get; set; }
         public PurchasingViewModel Purchasing { get; set; }

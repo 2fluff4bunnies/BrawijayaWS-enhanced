@@ -39,6 +39,8 @@ namespace BrawijayaWorkshop.Model
             DateTime serverTime = DateTime.Now;
             wheel.CreateDate = serverTime;
             wheel.CreateUserId = userId;
+            wheel.ModifyDate = serverTime;
+            wheel.ModifyUserId = userId;
             wheel.Status = (int)DbConstant.DefaultDataStatus.Active;
             Wheel entity = new Wheel();
             Map(wheel, entity);

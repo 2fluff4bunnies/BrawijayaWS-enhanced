@@ -15,6 +15,8 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public decimal Price { get; set; }
 
+        public string SerialNumber { get; set; }
+
         public int PurchasingId { get; set; }
         public virtual Purchasing Purchasing { get; set; }
 

@@ -131,6 +131,11 @@
             this.lblFilterStatus.TabIndex = 2;
             this.lblFilterStatus.Text = "Status";
             // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
             // WheelDetailListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

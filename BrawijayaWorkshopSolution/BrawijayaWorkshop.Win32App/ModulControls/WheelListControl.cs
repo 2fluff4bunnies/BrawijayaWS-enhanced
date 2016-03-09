@@ -51,11 +51,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return txtWheelName.Text;
+                return txtFilter.Text;
             }
             set
             {
-                txtWheelName.Text = value;
+                txtFilter.Text = value;
             }
         }
 
@@ -67,7 +67,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                throw new NotImplementedException();
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gcWheel.DataSource = value; gvWheel.BestFitColumns(); }));
+                }
+                else
+                {
+                    gcWheel.DataSource = value;
+                    gvWheel.BestFitColumns();
+                }
             }
         }
 
@@ -120,7 +128,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_selectedWheel != null)
+            {
+                WheelDetailListForm listForm = Bootstrapper.Resolve<WheelDetailListForm>();
+                listForm.SelectedWheel = _selectedWheel;
+                listForm.ShowDialog(this);
 
+                btnSearch.PerformClick();
+            }
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)

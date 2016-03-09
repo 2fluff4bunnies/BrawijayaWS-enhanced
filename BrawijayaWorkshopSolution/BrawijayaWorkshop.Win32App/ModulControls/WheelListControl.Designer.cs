@@ -28,20 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WheelListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.txtWheelName = new DevExpress.XtraEditors.TextEdit();
+            this.txtFilter = new DevExpress.XtraEditors.TextEdit();
             this.lblName = new DevExpress.XtraEditors.LabelControl();
             this.gcWheel = new DevExpress.XtraGrid.GridControl();
             this.gvWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartStock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewWheel = new DevExpress.XtraEditors.SimpleButton();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +48,7 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWheelName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWheel)).BeginInit();
             this.cmsEditor.SuspendLayout();
@@ -60,7 +59,7 @@
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupFilter.Controls.Add(this.btnSearch);
-            this.groupFilter.Controls.Add(this.txtWheelName);
+            this.groupFilter.Controls.Add(this.txtFilter);
             this.groupFilter.Controls.Add(this.lblName);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
@@ -70,7 +69,6 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
@@ -81,18 +79,16 @@
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // txtWheelName
+            // txtFilter
             // 
-            this.txtWheelName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtWheelName.Location = new System.Drawing.Point(82, 31);
-            this.txtWheelName.Name = "txtWheelName";
-            this.txtWheelName.Size = new System.Drawing.Size(345, 20);
-            this.txtWheelName.TabIndex = 3;
-            this.txtWheelName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWheelName_KeyDown);
+            this.txtFilter.Location = new System.Drawing.Point(82, 31);
+            this.txtFilter.Name = "txtFilter";
+            this.txtFilter.Size = new System.Drawing.Size(345, 20);
+            this.txtFilter.TabIndex = 3;
+            this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWheelName_KeyDown);
             // 
             // lblName
             // 
-            this.lblName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblName.Location = new System.Drawing.Point(10, 34);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(48, 13);
@@ -115,8 +111,8 @@
             // gvWheel
             // 
             this.gvWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colSparepartCode,
             this.colSparepartName,
+            this.colSparepartCode,
             this.colSparepartUnit,
             this.colSparepartStock});
             this.gvWheel.GridControl = this.gcWheel;
@@ -131,28 +127,28 @@
             this.gvWheel.OptionsView.EnableAppearanceEvenRow = true;
             this.gvWheel.OptionsView.ShowGroupPanel = false;
             this.gvWheel.OptionsView.ShowViewCaption = true;
-            this.gvWheel.ViewCaption = "Daftar Sparepart";
-            // 
-            // colSparepartCode
-            // 
-            this.colSparepartCode.Caption = "Kode";
-            this.colSparepartCode.FieldName = "Code";
-            this.colSparepartCode.Name = "colSparepartCode";
-            this.colSparepartCode.Visible = true;
-            this.colSparepartCode.VisibleIndex = 0;
+            this.gvWheel.ViewCaption = "Daftar Ban";
             // 
             // colSparepartName
             // 
             this.colSparepartName.Caption = "Nama";
-            this.colSparepartName.FieldName = "Name";
+            this.colSparepartName.FieldName = "Sparepart.Name";
             this.colSparepartName.Name = "colSparepartName";
             this.colSparepartName.Visible = true;
-            this.colSparepartName.VisibleIndex = 1;
+            this.colSparepartName.VisibleIndex = 0;
+            // 
+            // colSparepartCode
+            // 
+            this.colSparepartCode.Caption = "Kode Sparepart";
+            this.colSparepartCode.FieldName = "Sparepart.Code";
+            this.colSparepartCode.Name = "colSparepartCode";
+            this.colSparepartCode.Visible = true;
+            this.colSparepartCode.VisibleIndex = 1;
             // 
             // colSparepartUnit
             // 
             this.colSparepartUnit.Caption = "Unit/Satuan";
-            this.colSparepartUnit.FieldName = "UnitReference.Value";
+            this.colSparepartUnit.FieldName = "Sparepart.UnitReference.Name";
             this.colSparepartUnit.Name = "colSparepartUnit";
             this.colSparepartUnit.Visible = true;
             this.colSparepartUnit.VisibleIndex = 2;
@@ -160,7 +156,7 @@
             // colSparepartStock
             // 
             this.colSparepartStock.Caption = "Stok";
-            this.colSparepartStock.FieldName = "StockQty";
+            this.colSparepartStock.FieldName = "Sparepart.StockQty";
             this.colSparepartStock.Name = "colSparepartStock";
             this.colSparepartStock.Visible = true;
             this.colSparepartStock.VisibleIndex = 3;
@@ -233,7 +229,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWheelName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWheel)).EndInit();
             this.cmsEditor.ResumeLayout(false);
@@ -245,7 +241,7 @@
 
         private DevExpress.XtraEditors.GroupControl groupFilter;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private DevExpress.XtraEditors.TextEdit txtWheelName;
+        private DevExpress.XtraEditors.TextEdit txtFilter;
         private DevExpress.XtraEditors.LabelControl lblName;
         private DevExpress.XtraGrid.GridControl gcWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvWheel;
