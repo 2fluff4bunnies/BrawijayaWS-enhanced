@@ -263,6 +263,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUserRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iUserList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANAGE_APP_USER);
             navMasterData.iWheel.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
+            navMasterData.iUsedGood.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -278,6 +279,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUserRole.LinkClicked += iManageUserRole_LinkClicked;
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
             navMasterData.iWheel.LinkClicked += iWheel_LinkClicked;
+            navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
         }
 
         private void iUserList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -352,6 +354,12 @@ namespace BrawijayaWorkshop.Win32App
             ShowUserControl(wheelListControl);
         }
 
+        void iUsedGood_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            UsedGoodsListControl usedGoodListtControl = Bootstrapper.Resolve<UsedGoodsListControl>();
+            ShowUserControl(usedGoodListtControl);
+        }
+
         private void btnConfig_Click(object sender, EventArgs e)
         {
             ConfigEditorForm configForm = Bootstrapper.Resolve<ConfigEditorForm>();
@@ -371,6 +379,7 @@ namespace BrawijayaWorkshop.Win32App
             // init event navigation
             navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
             navTransactionData.iSPK.LinkClicked += iSPK_LinkClicked;
+            navTransactionData.iUsedGoodTrans.LinkClicked += iUsedGoodTrans_LinkClicked;
         }
 
         private void iPurchasing_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -383,6 +392,11 @@ namespace BrawijayaWorkshop.Win32App
         {
             SPKListControl listSPK = Bootstrapper.Resolve<SPKListControl>();
             ShowUserControl(listSPK);
+        }
+        private void iUsedGoodTrans_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            UsedGoodsListControl listUsedGoodsTrans = Bootstrapper.Resolve<UsedGoodsListControl>();
+            ShowUserControl(listUsedGoodsTrans);
         }
 
         private void iReporting_ItemClick(object sender, ItemClickEventArgs e)
