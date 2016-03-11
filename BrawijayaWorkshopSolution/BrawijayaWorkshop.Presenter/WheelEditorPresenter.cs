@@ -20,7 +20,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.Category = View.SelectedWheel.Sparepart.CategoryReference.Name;
                 View.Unit = View.SelectedWheel.Sparepart.UnitReference.Name;
                 View.Code = View.SelectedWheel.Sparepart.Code;
-               
+                View.SparepartId = View.SelectedWheel.SparepartId;
             }
         }
 

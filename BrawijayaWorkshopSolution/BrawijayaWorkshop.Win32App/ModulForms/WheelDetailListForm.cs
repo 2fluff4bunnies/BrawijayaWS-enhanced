@@ -16,9 +16,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     {
         private WheelDetailListPresenter _presenter;
 
-        public WheelDetailListForm()
+        public WheelDetailListForm(WheelDetailListModel model)
         {
             InitializeComponent();
+
+            _presenter = new WheelDetailListPresenter(this, model);
 
             this.Load += WheelDetailEditorForm_Load;
         }

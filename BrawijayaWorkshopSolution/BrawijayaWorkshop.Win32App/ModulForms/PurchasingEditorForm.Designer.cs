@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
@@ -47,12 +46,12 @@
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.valDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.valSupplier = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.valDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valSupplier = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.deleteSparepartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewSparepartDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bsDetails = new System.Windows.Forms.BindingSource(this.components);
+            this.bsDetails = new System.Windows.Forms.BindingSource();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
