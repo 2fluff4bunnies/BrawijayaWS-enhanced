@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.valUser = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.lookUpUser = new DevExpress.XtraEditors.LookUpEdit();
             this.valRole = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
@@ -60,15 +60,21 @@
             this.lookUpUser.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpUser.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("UserName", "Username"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FirstName", "First Name"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LastName", "Last Name")});
+            this.lookUpUser.Properties.DisplayMember = "UserName";
             this.lookUpUser.Properties.HideSelection = false;
             this.lookUpUser.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpUser.Properties.NullText = "-- Pilih User --";
+            this.lookUpUser.Properties.ValueMember = "Id";
             this.lookUpUser.Size = new System.Drawing.Size(274, 20);
             this.lookUpUser.TabIndex = 1;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule3.ErrorText = "Pilih salah satu user";
-            conditionValidationRule3.Value1 = "-- Pilih User --";
-            this.valUser.SetValidationRule(this.lookUpUser, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule1.ErrorText = "Pilih salah satu user";
+            conditionValidationRule1.Value1 = "-- Pilih User --";
+            this.valUser.SetValidationRule(this.lookUpUser, conditionValidationRule1);
             // 
             // valRole
             // 
@@ -83,15 +89,19 @@
             this.lookUpRole.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpRole.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Role")});
+            this.lookUpRole.Properties.DisplayMember = "Name";
             this.lookUpRole.Properties.HideSelection = false;
             this.lookUpRole.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpRole.Properties.NullText = "-- Pilih Role --";
+            this.lookUpRole.Properties.ValueMember = "Id";
             this.lookUpRole.Size = new System.Drawing.Size(274, 20);
             this.lookUpRole.TabIndex = 3;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule1.ErrorText = "Pilih salah satu role";
-            conditionValidationRule1.Value1 = "-- Pilih Role --";
-            this.valRole.SetValidationRule(this.lookUpRole, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule2.ErrorText = "Pilih salah satu role";
+            conditionValidationRule2.Value1 = "-- Pilih Role --";
+            this.valRole.SetValidationRule(this.lookUpRole, conditionValidationRule2);
             // 
             // gcUserRoleInfo
             // 

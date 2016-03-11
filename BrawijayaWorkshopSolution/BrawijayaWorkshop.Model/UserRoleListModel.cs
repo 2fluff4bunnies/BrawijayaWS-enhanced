@@ -28,16 +28,16 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<UserRoleViewModel> RetrieveUserRoleByRoleId(int roleId)
+        public List<UserRoleViewModel> RetrieveUserRoleByRoleId(int senderUserId, int roleId)
         {
             List<UserRole> result = null;
             if (roleId > 0)
             {
-                result = _userRoleRepository.GetMany(ur => ur.RoleId == roleId).ToList();
+                result = _userRoleRepository.GetMany(ur => ur.RoleId == roleId && ur.UserId != senderUserId).ToList();
             }
             else
             {
-                result = _userRoleRepository.GetAll().ToList();
+                result = _userRoleRepository.GetMany(ur => ur.UserId != senderUserId).ToList();
             }
             List<UserRoleViewModel> mappedResult = new List<UserRoleViewModel>();
             return Map(result, mappedResult);

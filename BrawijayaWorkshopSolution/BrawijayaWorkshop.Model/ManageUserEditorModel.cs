@@ -60,17 +60,21 @@ namespace BrawijayaWorkshop.Model
         {
             if (parameters.Length > 1)
             {
+                string username = parameters[0].ToString();
+                int userId = parameters[1].AsInteger();
+                int roleId = parameters[2].AsInteger();
                 return _userRepository.GetMany(u =>
-                    string.Compare(u.UserName, parameters[0].ToString(), true) == 0 &&
-                    u.Id != parameters[1].AsInteger()).FirstOrDefault() == null &&
+                    string.Compare(u.UserName, username, true) == 0 &&
+                    u.Id != userId).FirstOrDefault() == null &&
                     _userRoleRepository.GetMany(ur =>
-                        ur.UserId == parameters[0].AsInteger() &&
-                        ur.RoleId == parameters[1].AsInteger()).FirstOrDefault() == null;
+                        ur.UserId == userId &&
+                        ur.RoleId == roleId).FirstOrDefault() == null;
             }
             else
             {
+                string username = parameters[0].ToString();
                 return _userRepository.GetMany(u =>
-                    string.Compare(u.UserName, parameters[0].ToString(), true) == 0).FirstOrDefault() == null;
+                    string.Compare(u.UserName, username, true) == 0).FirstOrDefault() == null;
             }
         }
     }
