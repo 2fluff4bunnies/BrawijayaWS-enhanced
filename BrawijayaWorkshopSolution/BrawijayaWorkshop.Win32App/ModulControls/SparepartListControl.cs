@@ -246,6 +246,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 SparepartManualTransactionEditorForm detail = Bootstrapper.Resolve<SparepartManualTransactionEditorForm>();
                 detail.Sparepart = _selectedSparepart;
                 detail.ShowDialog(this);
+                btnSearch.PerformClick();
             }
         }
     }

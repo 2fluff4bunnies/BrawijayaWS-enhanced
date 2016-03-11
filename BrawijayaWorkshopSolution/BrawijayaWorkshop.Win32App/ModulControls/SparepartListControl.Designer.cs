@@ -224,8 +224,8 @@
             this.viewDetailToolStripMenuItem,
             this.toolStripSeparator1,
             this.cmsEditData,
-            this.cmsDeleteData,
-            this.cmsManageStock});
+            this.cmsManageStock,
+            this.cmsDeleteData});
             this.cmsEditor.Name = "cmsListEditor";
             this.cmsEditor.Size = new System.Drawing.Size(153, 120);
             // 
@@ -260,6 +260,7 @@
             // 
             // cmsManageStock
             // 
+            this.cmsManageStock.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsManageStock.Name = "cmsManageStock";
             this.cmsManageStock.Size = new System.Drawing.Size(152, 22);
             this.cmsManageStock.Text = "Atur Stok";

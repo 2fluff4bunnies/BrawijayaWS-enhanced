@@ -13,15 +13,20 @@ namespace BrawijayaWorkshop.Model
     {
         private ISparepartManualTransactionRepository _sparepartManualTransactionRepository;
         private ISparepartRepository _sparepartRepository;
+        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository, ISparepartRepository sparepartRepository, IReferenceRepository referenceRepository,
+        public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository, 
+            ISparepartRepository sparepartRepository,
+            ISparepartDetailRepository sparepartDetailRepository, 
+            IReferenceRepository referenceRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
             _sparepartManualTransactionRepository = sparepartManualTransactionRepository;
             _sparepartRepository = sparepartRepository;
+            _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
@@ -40,36 +45,76 @@ namespace BrawijayaWorkshop.Model
             return Map(list, mappedResult);
         }
 
-        public void InsertSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction)
+        public void InsertSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction, int userId)
         {
-            //sparepartManualTransaction.TransactionDate = DateTime.Now;
-            //Reference updateType = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
-            //Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
-            //if(updateType != null && sparepartUpdated != null)
-            //{
-            //    if(updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
-            //    {
-            //        sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
-            //    }
-            //    else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
-            //    {
-            //        sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
-            //    }
-            //    SparepartManualTransaction entity = new SparepartManualTransaction();
-            //    Map(sparepartManualTransaction, entity);
-            //    _sparepartManualTransactionRepository.Add(entity);
-            //    _sparepartRepository.Update(sparepartUpdated);
-            //    _unitOfWork.SaveChanges();
-            //}
-            SparepartManualTransaction entity = new SparepartManualTransaction();
-            Map(sparepartManualTransaction, entity);
-            _sparepartManualTransactionRepository.Add(entity);
-            _unitOfWork.SaveChanges();
+            DateTime serverTime = DateTime.Now;
+            sparepartManualTransaction.CreateDate = serverTime;
+            sparepartManualTransaction.CreateUserId = userId;
+            sparepartManualTransaction.ModifyDate = serverTime;
+            sparepartManualTransaction.ModifyUserId = userId;
+            sparepartManualTransaction.TransactionDate = serverTime;
+            Reference updateType = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
+            Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
+            if (updateType != null && sparepartUpdated != null)
+            {
+                SparepartManualTransaction entity = new SparepartManualTransaction();
+                Map(sparepartManualTransaction, entity);
+                SparepartManualTransaction manualTransaction = _sparepartManualTransactionRepository.Add(entity);
+                
+                if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
+                {
+                    sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
+
+                    SparepartDetail lastSPDetail = _sparepartDetailRepository.
+                    GetMany(c => c.SparepartId == sparepartManualTransaction.SparepartId).OrderByDescending(c => c.Id)
+                    .FirstOrDefault();
+                    string lastSPID = string.Empty;
+                    if (lastSPDetail != null) lastSPID = lastSPDetail.Code;
+                    for (int i = 1; i <= sparepartManualTransaction.Qty; i++)
+                    {
+                        SparepartDetail spDetail = new SparepartDetail();
+                        if (string.IsNullOrEmpty(lastSPID))
+                        {
+                            lastSPID = sparepartUpdated.Code + "0000000001";
+                        }
+                        else
+                        {
+                            lastSPID = sparepartUpdated.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
+                                .ToString("D10");
+                        }
+                        spDetail.SparepartManualTransaction = manualTransaction;
+                        spDetail.SparepartId = sparepartUpdated.Id;
+                        spDetail.Code = lastSPID;
+                        spDetail.CreateDate = serverTime;
+                        spDetail.CreateUserId = userId;
+                        spDetail.ModifyUserId = userId;
+                        spDetail.ModifyDate = serverTime;
+                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+                        SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
+                    }
+                }
+                else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
+                {
+                    sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
+
+                    List<SparepartDetail> spDetails = _sparepartDetailRepository.
+                    GetMany(c => c.SparepartId == sparepartManualTransaction.SparepartId).OrderByDescending(c => c.Id)
+                    .Take(sparepartManualTransaction.Qty).ToList();
+                    foreach (var spDetail in spDetails)
+                    {
+                        _sparepartDetailRepository.Delete(spDetail);
+                    }
+                }
+                _sparepartRepository.Update(sparepartUpdated);
+                _unitOfWork.SaveChanges();
+            }
         }
 
-        public void UpdateSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction)
+        public void UpdateSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction, int userId)
         {
-            Reference updateTypeNew = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
+            DateTime serverTime = DateTime.Now;
+            sparepartManualTransaction.ModifyDate = serverTime;
+            sparepartManualTransaction.ModifyUserId = userId; Reference updateTypeNew = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
             SparepartManualTransaction manualTransactionOld = _sparepartManualTransactionRepository.GetById(sparepartManualTransaction.Id);
             Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
             if (manualTransactionOld != null && updateTypeNew != null && sparepartUpdated != null)

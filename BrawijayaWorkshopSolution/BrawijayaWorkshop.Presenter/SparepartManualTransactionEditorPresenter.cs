@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
@@ -39,14 +40,13 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSparepartManualTransaction.Qty = View.StockUpdate;
             View.SelectedSparepartManualTransaction.Remark = View.Remark;
             View.SelectedSparepartManualTransaction.UpdateTypeId = View.TransactionTypeId;
-            View.SelectedSparepartManualTransaction.Sparepart = View.Sparepart;
             if (View.SelectedSparepartManualTransaction.Id > 0)
             {
-                Model.UpdateSparepartManualTransaction(View.SelectedSparepartManualTransaction);
+                Model.UpdateSparepartManualTransaction(View.SelectedSparepartManualTransaction, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertSparepartManualTransaction(View.SelectedSparepartManualTransaction);
+                Model.InsertSparepartManualTransaction(View.SelectedSparepartManualTransaction, LoginInformation.UserId);
             }
         }
     }
