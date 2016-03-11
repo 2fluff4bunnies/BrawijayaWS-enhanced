@@ -36,6 +36,8 @@
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
             this.txtStok = new DevExpress.XtraEditors.TextEdit();
             this.gcUsedGoodsManualEditor = new DevExpress.XtraEditors.GroupControl();
+            this.txtSerialNumber = new DevExpress.XtraEditors.TextEdit();
+            this.lblSerialNumber = new DevExpress.XtraEditors.LabelControl();
             this.txtSparepartName = new DevExpress.XtraEditors.TextEdit();
             this.txtTotalPrice = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
@@ -52,6 +54,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSerialNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSparepartName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemPrice.Properties)).BeginInit();
@@ -85,11 +88,13 @@
             this.txtStok.Location = new System.Drawing.Point(130, 60);
             this.txtStok.Name = "txtStok";
             this.txtStok.Properties.ReadOnly = true;
-            this.txtStok.Size = new System.Drawing.Size(104, 20);
+            this.txtStok.Size = new System.Drawing.Size(193, 20);
             this.txtStok.TabIndex = 12;
             // 
             // gcUsedGoodsManualEditor
             // 
+            this.gcUsedGoodsManualEditor.Controls.Add(this.txtSerialNumber);
+            this.gcUsedGoodsManualEditor.Controls.Add(this.lblSerialNumber);
             this.gcUsedGoodsManualEditor.Controls.Add(this.txtSparepartName);
             this.gcUsedGoodsManualEditor.Controls.Add(this.txtTotalPrice);
             this.gcUsedGoodsManualEditor.Controls.Add(this.lblTotalPrice);
@@ -107,9 +112,26 @@
             this.gcUsedGoodsManualEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcUsedGoodsManualEditor.Location = new System.Drawing.Point(0, 0);
             this.gcUsedGoodsManualEditor.Name = "gcUsedGoodsManualEditor";
-            this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(335, 322);
+            this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(335, 340);
             this.gcUsedGoodsManualEditor.TabIndex = 13;
             this.gcUsedGoodsManualEditor.Text = "Informasi Stok Sparepart";
+            // 
+            // txtSerialNumber
+            // 
+            this.txtSerialNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSerialNumber.Location = new System.Drawing.Point(130, 165);
+            this.txtSerialNumber.Name = "txtSerialNumber";
+            this.txtSerialNumber.Size = new System.Drawing.Size(193, 20);
+            this.txtSerialNumber.TabIndex = 27;
+            // 
+            // lblSerialNumber
+            // 
+            this.lblSerialNumber.Location = new System.Drawing.Point(12, 168);
+            this.lblSerialNumber.Name = "lblSerialNumber";
+            this.lblSerialNumber.Size = new System.Drawing.Size(81, 13);
+            this.lblSerialNumber.TabIndex = 26;
+            this.lblSerialNumber.Text = "Nomor Seri (Ban)";
             // 
             // txtSparepartName
             // 
@@ -118,23 +140,23 @@
             this.txtSparepartName.Location = new System.Drawing.Point(130, 27);
             this.txtSparepartName.Name = "txtSparepartName";
             this.txtSparepartName.Properties.ReadOnly = true;
-            this.txtSparepartName.Size = new System.Drawing.Size(168, 20);
+            this.txtSparepartName.Size = new System.Drawing.Size(193, 20);
             this.txtSparepartName.TabIndex = 25;
             // 
             // txtTotalPrice
             // 
             this.txtTotalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalPrice.Location = new System.Drawing.Point(130, 275);
+            this.txtTotalPrice.Location = new System.Drawing.Point(130, 309);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Properties.ReadOnly = true;
-            this.txtTotalPrice.Size = new System.Drawing.Size(145, 20);
+            this.txtTotalPrice.Size = new System.Drawing.Size(193, 20);
             this.txtTotalPrice.TabIndex = 24;
             this.txtTotalPrice.Visible = false;
             // 
             // lblTotalPrice
             // 
-            this.lblTotalPrice.Location = new System.Drawing.Point(12, 278);
+            this.lblTotalPrice.Location = new System.Drawing.Point(12, 312);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(56, 13);
             this.lblTotalPrice.TabIndex = 23;
@@ -145,15 +167,15 @@
             // 
             this.txtItemPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItemPrice.Location = new System.Drawing.Point(130, 239);
+            this.txtItemPrice.Location = new System.Drawing.Point(130, 271);
             this.txtItemPrice.Name = "txtItemPrice";
-            this.txtItemPrice.Size = new System.Drawing.Size(145, 20);
+            this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;
             this.txtItemPrice.Visible = false;
             // 
             // lblItemPrice
             // 
-            this.lblItemPrice.Location = new System.Drawing.Point(12, 242);
+            this.lblItemPrice.Location = new System.Drawing.Point(12, 274);
             this.lblItemPrice.Name = "lblItemPrice";
             this.lblItemPrice.Size = new System.Drawing.Size(73, 13);
             this.lblItemPrice.TabIndex = 21;
@@ -162,14 +184,14 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(130, 168);
+            this.txtRemark.Location = new System.Drawing.Point(130, 203);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(193, 51);
             this.txtRemark.TabIndex = 20;
             // 
             // lblRemark
             // 
-            this.lblRemark.Location = new System.Drawing.Point(12, 170);
+            this.lblRemark.Location = new System.Drawing.Point(12, 205);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(56, 13);
             this.lblRemark.TabIndex = 18;
@@ -206,7 +228,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQtyUpdate.Location = new System.Drawing.Point(130, 93);
             this.txtQtyUpdate.Name = "txtQtyUpdate";
-            this.txtQtyUpdate.Size = new System.Drawing.Size(104, 20);
+            this.txtQtyUpdate.Size = new System.Drawing.Size(193, 20);
             this.txtQtyUpdate.TabIndex = 14;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
@@ -224,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 371);
+            this.ClientSize = new System.Drawing.Size(335, 389);
             this.Controls.Add(this.gcUsedGoodsManualEditor);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparepartManualTransactionEditorForm";
@@ -234,6 +256,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).EndInit();
             this.gcUsedGoodsManualEditor.ResumeLayout(false);
             this.gcUsedGoodsManualEditor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSerialNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSparepartName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemPrice.Properties)).EndInit();
@@ -265,5 +288,7 @@
         private DevExpress.XtraEditors.TextEdit txtItemPrice;
         private DevExpress.XtraEditors.LabelControl lblItemPrice;
         private DevExpress.XtraEditors.TextEdit txtSparepartName;
+        private DevExpress.XtraEditors.TextEdit txtSerialNumber;
+        private DevExpress.XtraEditors.LabelControl lblSerialNumber;
     }
 }

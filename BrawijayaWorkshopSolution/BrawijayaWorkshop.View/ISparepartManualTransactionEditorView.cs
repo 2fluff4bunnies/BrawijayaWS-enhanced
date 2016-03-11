@@ -16,6 +16,9 @@ namespace BrawijayaWorkshop.View
         string Remark { get; set; }
         int TransactionTypeId { get; set; }
 
+        string SerialNumber { get; set; }
+        bool IsWheel { get; set; }
+
         List<ReferenceViewModel> ListTransactionTypeReference { get; set; }
         SparepartViewModel Sparepart { get; set; }
     }

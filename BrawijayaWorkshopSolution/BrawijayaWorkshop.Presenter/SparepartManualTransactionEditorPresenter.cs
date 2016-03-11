@@ -20,6 +20,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.SparepartId = View.Sparepart.Id;
                 View.SparepartName = View.Sparepart.Name;
                 View.Stock = View.Sparepart.StockQty;
+                View.IsWheel = Model.IsThisWheel(View.SparepartId);
             }
             if (View.SelectedSparepartManualTransaction != null)
             {
@@ -40,6 +41,8 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSparepartManualTransaction.Qty = View.StockUpdate;
             View.SelectedSparepartManualTransaction.Remark = View.Remark;
             View.SelectedSparepartManualTransaction.UpdateTypeId = View.TransactionTypeId;
+            View.SelectedSparepartManualTransaction.SerialNumber = View.SerialNumber;
+
             if (View.SelectedSparepartManualTransaction.Id > 0)
             {
                 Model.UpdateSparepartManualTransaction(View.SelectedSparepartManualTransaction, LoginInformation.UserId);

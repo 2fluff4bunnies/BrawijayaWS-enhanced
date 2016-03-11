@@ -14,12 +14,16 @@ namespace BrawijayaWorkshop.Model
         private ISparepartManualTransactionRepository _sparepartManualTransactionRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private IWheelRepository _wheelRepository;
+        private IWheelDetailRepository _wheelDetailRepository;
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository, 
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, 
+            ISparepartDetailRepository sparepartDetailRepository,
+            IWheelRepository wheelRepository,
+            IWheelDetailRepository wheelDetailRepository,
             IReferenceRepository referenceRepository,
             IUnitOfWork unitOfWork)
             : base()
@@ -27,6 +31,8 @@ namespace BrawijayaWorkshop.Model
             _sparepartManualTransactionRepository = sparepartManualTransactionRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _wheelRepository = wheelRepository;
+            _wheelDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
@@ -91,6 +97,26 @@ namespace BrawijayaWorkshop.Model
                         spDetail.ModifyDate = serverTime;
                         spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
                         SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
+
+                        if (string.IsNullOrEmpty(sparepartManualTransaction.SerialNumber))
+                        { 
+                            Wheel wheel = _wheelRepository.GetMany(w=> w.SparepartId == sparepartUpdated.Id).FirstOrDefault();
+
+                            if (wheel != null)
+                            {
+                                WheelDetail wDetail = new WheelDetail();
+                                wDetail.SparepartDetail = insertedSpDetail;
+                                wDetail.WheelId = wheel.Id;
+                                wDetail.CreateDate = serverTime;
+                                wDetail.CreateUserId = userId;
+                                wDetail.ModifyUserId = userId;
+                                wDetail.ModifyDate = serverTime;
+                                spDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
+
+                                _wheelDetailRepository.Add(wDetail);
+                            }
+                        }
+
                     }
                 }
                 else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
@@ -145,6 +171,13 @@ namespace BrawijayaWorkshop.Model
                 _sparepartRepository.Update(sparepartUpdated);
                 _unitOfWork.SaveChanges();
             }
+        }
+
+        public bool IsThisWheel(int sparepartId)
+        {
+            Wheel wheel = _wheelRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+
+            return wheel != null;
         }
     }
 }

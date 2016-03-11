@@ -27,6 +27,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void SparepartsTransactionEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+
+            if (this.IsWheel)
+            {
+                txtSerialNumber.Enabled = true;
+                txtQtyUpdate.Text = "1";
+                txtQtyUpdate.Enabled = false;
+            }
+            else
+            {
+                txtSerialNumber.Enabled = false;
+                txtQtyUpdate.Text = "0";
+                txtQtyUpdate.Enabled = true;
+            }
         }
 
         public SparepartManualTransactionViewModel SelectedSparepartManualTransaction { get; set; }
@@ -45,7 +58,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 cbMode.Properties.DataSource = value;
             }
         }
-
 
         public string SparepartName
         {
@@ -109,6 +121,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
         public int SparepartId { get; set; }
+
+        public string SerialNumber
+        {
+            get
+            {
+                return txtSerialNumber.Text;
+            }
+            set
+            {
+                txtSerialNumber.Text = value;
+            }
+        }
+        public bool IsWheel { get; set; }
+
         #endregion
         public SparepartViewModel Sparepart { get; set; }
 
