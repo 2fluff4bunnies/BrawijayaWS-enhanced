@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
             this.txtStok = new DevExpress.XtraEditors.TextEdit();
@@ -44,8 +43,8 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtQtyUpdate = new DevExpress.XtraEditors.TextEdit();
             this.lblQtyUpdaate = new DevExpress.XtraEditors.LabelControl();
-            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();

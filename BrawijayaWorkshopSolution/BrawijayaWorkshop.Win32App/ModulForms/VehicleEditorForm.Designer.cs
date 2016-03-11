@@ -49,7 +49,7 @@
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.cbWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
@@ -66,7 +66,7 @@
             this.gcVehicleInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbWheelDetailGv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).BeginInit();
@@ -238,7 +238,7 @@
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
             this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.cbWheelDetailGv});
+            this.lookupWheelDetailGv});
             this.gridVehicleWheel.Size = new System.Drawing.Size(373, 140);
             this.gridVehicleWheel.TabIndex = 12;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -263,26 +263,23 @@
             // colWheelDetail
             // 
             this.colWheelDetail.Caption = "Nomor Seri Ban";
-            this.colWheelDetail.ColumnEdit = this.cbWheelDetailGv;
+            this.colWheelDetail.ColumnEdit = this.lookupWheelDetailGv;
             this.colWheelDetail.FieldName = "WheelDetailId";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
             this.colWheelDetail.VisibleIndex = 0;
             // 
-            // cbWheelDetailGv
+            // lookupWheelDetailGv
             // 
-            this.cbWheelDetailGv.AutoHeight = false;
-            this.cbWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lookupWheelDetailGv.AutoHeight = false;
+            this.lookupWheelDetailGv.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
+            this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbWheelDetailGv.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart")});
-            this.cbWheelDetailGv.DisplayMember = "SerialNumber";
-            this.cbWheelDetailGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbWheelDetailGv.Name = "cbWheelDetailGv";
-            this.cbWheelDetailGv.NullText = "-- Pilih Ban --";
-            this.cbWheelDetailGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.cbWheelDetailGv.ValidateOnEnterKey = true;
-            this.cbWheelDetailGv.ValueMember = "Id";
+            this.lookupWheelDetailGv.DisplayMember = "SerialNumber";
+            this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
+            this.lookupWheelDetailGv.NullText = "-- Pilih Ban --";
+            this.lookupWheelDetailGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookupWheelDetailGv.ValueMember = "Id";
             // 
             // dtpExpirationDate
             // 
@@ -365,7 +362,7 @@
             this.gcVehicleInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbWheelDetailGv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).EndInit();
@@ -394,10 +391,10 @@
         private DevExpress.XtraGrid.GridControl gridVehicleWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cbWheelDetailGv;
         private DevExpress.XtraEditors.SimpleButton btnNewVehicleWheel;
         private System.Windows.Forms.BindingSource bsVehicleWheel;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem deleteWheelDetailToolStripMenuItem;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
     }
 }
