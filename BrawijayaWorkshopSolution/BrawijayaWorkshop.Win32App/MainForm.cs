@@ -395,7 +395,7 @@ namespace BrawijayaWorkshop.Win32App
         }
         private void iUsedGoodTrans_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            UsedGoodsListControl listUsedGoodsTrans = Bootstrapper.Resolve<UsedGoodsListControl>();
+            UsedGoodsTransactionListControl listUsedGoodsTrans = Bootstrapper.Resolve<UsedGoodsTransactionListControl>();
             ShowUserControl(listUsedGoodsTrans);
         }
 
