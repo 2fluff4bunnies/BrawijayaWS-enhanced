@@ -86,13 +86,14 @@ namespace BrawijayaWorkshop.Presenter
                 Model.DeleteTransactionDetail(View.SelectedTransactionDetail);
             }
             View.TransactionDetailList.Remove(View.SelectedTransactionDetail);
+            View.TransactionDetailList = View.TransactionDetailList;
         }
 
         public bool ValidateTransaction()
         {
             if(View.TransactionDetailList.Count > 0)
             {
-                double totalTransaction = View.TransactionDetailList.Sum(td => td.Credit - td.Debit).AsDouble();
+                double totalTransaction = View.TransactionDetailList.Sum(td => td.Credit ?? 0 - td.Debit ?? 0).AsDouble();
                 return totalTransaction == 0;
             }
             return false;

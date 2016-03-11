@@ -33,7 +33,6 @@
             this.gcTransactionParent = new DevExpress.XtraEditors.GroupControl();
             this.txtTransTotal = new DevExpress.XtraEditors.TextEdit();
             this.lblTransTotal = new DevExpress.XtraEditors.LabelControl();
-            this.txtTransDesc = new DevExpress.XtraEditors.MemoEdit();
             this.lblTransDesc = new DevExpress.XtraEditors.LabelControl();
             this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             this.lblTransDate = new DevExpress.XtraEditors.LabelControl();
@@ -47,10 +46,10 @@
             this.btnNewTransDetail = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtTransDesc = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTransactionParent)).BeginInit();
             this.gcTransactionParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransTotal.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTransactionDetail)).BeginInit();
@@ -59,21 +58,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactionDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpJournalGv)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTransDesc.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcTransactionParent
             // 
             this.gcTransactionParent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcTransactionParent.Controls.Add(this.txtTransDesc);
             this.gcTransactionParent.Controls.Add(this.txtTransTotal);
             this.gcTransactionParent.Controls.Add(this.lblTransTotal);
-            this.gcTransactionParent.Controls.Add(this.txtTransDesc);
             this.gcTransactionParent.Controls.Add(this.lblTransDesc);
             this.gcTransactionParent.Controls.Add(this.deTransDate);
             this.gcTransactionParent.Controls.Add(this.lblTransDate);
             this.gcTransactionParent.Location = new System.Drawing.Point(12, 12);
             this.gcTransactionParent.Name = "gcTransactionParent";
-            this.gcTransactionParent.Size = new System.Drawing.Size(722, 136);
+            this.gcTransactionParent.Size = new System.Drawing.Size(722, 88);
             this.gcTransactionParent.TabIndex = 1;
             this.gcTransactionParent.Text = "Transaksi";
             // 
@@ -97,13 +97,6 @@
             this.lblTransTotal.Size = new System.Drawing.Size(72, 13);
             this.lblTransTotal.TabIndex = 4;
             this.lblTransTotal.Text = "Total Transaksi";
-            // 
-            // txtTransDesc
-            // 
-            this.txtTransDesc.Location = new System.Drawing.Point(98, 56);
-            this.txtTransDesc.Name = "txtTransDesc";
-            this.txtTransDesc.Size = new System.Drawing.Size(248, 68);
-            this.txtTransDesc.TabIndex = 3;
             // 
             // lblTransDesc
             // 
@@ -144,9 +137,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcTransactionDetail.Controls.Add(this.gridTransactionDetail);
             this.gcTransactionDetail.Controls.Add(this.btnNewTransDetail);
-            this.gcTransactionDetail.Location = new System.Drawing.Point(12, 154);
+            this.gcTransactionDetail.Location = new System.Drawing.Point(12, 106);
             this.gcTransactionDetail.Name = "gcTransactionDetail";
-            this.gcTransactionDetail.Size = new System.Drawing.Size(722, 210);
+            this.gcTransactionDetail.Size = new System.Drawing.Size(722, 258);
             this.gcTransactionDetail.TabIndex = 2;
             this.gcTransactionDetail.Text = "Detail Transaksi";
             // 
@@ -160,7 +153,7 @@
             this.gridTransactionDetail.Name = "gridTransactionDetail";
             this.gridTransactionDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.lookUpJournalGv});
-            this.gridTransactionDetail.Size = new System.Drawing.Size(712, 153);
+            this.gridTransactionDetail.Size = new System.Drawing.Size(712, 201);
             this.gridTransactionDetail.TabIndex = 3;
             this.gridTransactionDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvTransactionDetail});
@@ -245,15 +238,22 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsDeleteData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(142, 26);
             // 
             // cmsDeleteData
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(141, 22);
             this.cmsDeleteData.Text = "Hapus Detail";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
+            // txtTransDesc
+            // 
+            this.txtTransDesc.Location = new System.Drawing.Point(98, 55);
+            this.txtTransDesc.Name = "txtTransDesc";
+            this.txtTransDesc.Size = new System.Drawing.Size(248, 20);
+            this.txtTransDesc.TabIndex = 6;
             // 
             // ManualTransactionEditorForm
             // 
@@ -271,7 +271,6 @@
             this.gcTransactionParent.ResumeLayout(false);
             this.gcTransactionParent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransTotal.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransDesc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTransactionDetail)).EndInit();
@@ -280,6 +279,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactionDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpJournalGv)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtTransDesc.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -291,7 +291,6 @@
         private DevExpress.XtraEditors.LabelControl lblTransDate;
         private DevExpress.XtraEditors.DateEdit deTransDate;
         private DevExpress.XtraEditors.LabelControl lblTransTotal;
-        private DevExpress.XtraEditors.MemoEdit txtTransDesc;
         private DevExpress.XtraEditors.LabelControl lblTransDesc;
         private DevExpress.XtraEditors.SimpleButton btnNewTransDetail;
         private DevExpress.XtraGrid.GridControl gridTransactionDetail;
@@ -303,5 +302,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDebit;
         private DevExpress.XtraGrid.Columns.GridColumn colCredit;
         private DevExpress.XtraEditors.TextEdit txtTransTotal;
+        private DevExpress.XtraEditors.TextEdit txtTransDesc;
     }
 }
