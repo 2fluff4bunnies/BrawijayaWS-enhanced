@@ -10,6 +10,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public string Remark { get; set; }
 
+        public string SerialNumber { get; set; }
+
         public int SparepartId { get; set; }
         public SparepartViewModel Sparepart { get; set; }
         public int UpdateTypeId { get; set; }
