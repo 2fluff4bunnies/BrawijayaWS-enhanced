@@ -116,15 +116,16 @@ namespace BrawijayaWorkshop.Model
                     spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
                     SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
 
-                    if (wheel != null)
+                    if (!string.IsNullOrEmpty(purchasingDetail.SerialNumber) && wheel != null)
                     {
                         WheelDetail wd = new WheelDetail();
+                        wd.SerialNumber = purchasingDetail.SerialNumber;
                         wd.CreateUserId = userID;
                         wd.CreateDate = serverTime;
                         wd.ModifyUserId = userID;
                         wd.ModifyDate = serverTime;
                         wd.WheelId = wheel.Id;
-                        wd.SparepartDetailId = insertedSpDetail.Id;
+                        wd.SparepartDetail = insertedSpDetail;
                         wd.Status = (int)DbConstant.WheelDetailStatus.Ready;
 
                         _wheelDetailRepository.Add(wd);

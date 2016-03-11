@@ -48,5 +48,10 @@ namespace BrawijayaWorkshop.Presenter
                 Model.InsertPurchasing(View.SelectedPurchasing, View.ListPurchasingDetail, LoginInformation.UserId);
             }
         }
+
+        public bool IsSparepartWheel(int sparepartId)
+        {
+            return Model.IsSparepartWheel(sparepartId);
+        }
     }
 }

@@ -262,6 +262,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USERCONTROL);
             navMasterData.iManageUserRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iUserList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANAGE_APP_USER);
+            navMasterData.iWheel.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -276,6 +277,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUser.LinkClicked += iManageUser_LinkClicked;
             navMasterData.iManageUserRole.LinkClicked += iManageUserRole_LinkClicked;
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
+            navMasterData.iWheel.LinkClicked += iWheel_LinkClicked;
         }
 
         private void iUserList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -342,7 +344,12 @@ namespace BrawijayaWorkshop.Win32App
         {
             MechanicListControl listMechanic = Bootstrapper.Resolve<MechanicListControl>();
             ShowUserControl(listMechanic);
-            
+        }
+
+        void iWheel_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            WheelListControl wheelListControl = Bootstrapper.Resolve<WheelListControl>();
+            ShowUserControl(wheelListControl);
         }
 
         private void btnConfig_Click(object sender, EventArgs e)

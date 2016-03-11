@@ -40,6 +40,7 @@
             this.cbSparepartGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
             this.lblDate = new DevExpress.XtraEditors.LabelControl();
             this.cbSupplier = new DevExpress.XtraEditors.LookUpEdit();
@@ -130,7 +131,8 @@
             this.gvPurchasingDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSparepart,
             this.colQty,
-            this.colPrice});
+            this.colPrice,
+            this.colSerialNumber});
             this.gvPurchasingDetail.GridControl = this.gridPurchasingDetail;
             this.gvPurchasingDetail.Name = "gvPurchasingDetail";
             this.gvPurchasingDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -164,6 +166,7 @@
             this.cbSparepartGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.cbSparepartGv.Name = "cbSparepartGv";
             this.cbSparepartGv.NullText = "--Pilih Sparepart--";
+            this.cbSparepartGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.cbSparepartGv.ValidateOnEnterKey = true;
             this.cbSparepartGv.ValueMember = "Id";
             // 
@@ -184,6 +187,14 @@
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
             this.colPrice.VisibleIndex = 2;
+            // 
+            // colSerialNumber
+            // 
+            this.colSerialNumber.Caption = "Nomor Seri (Khusus Ban)";
+            this.colSerialNumber.FieldName = "SerialNumber";
+            this.colSerialNumber.Name = "colSerialNumber";
+            this.colSerialNumber.Visible = true;
+            this.colSerialNumber.VisibleIndex = 3;
             // 
             // lblSupplier
             // 
@@ -334,5 +345,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cbSparepartGv;
         private System.Windows.Forms.BindingSource bsDetails;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
     }
 }

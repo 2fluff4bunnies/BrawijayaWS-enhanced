@@ -17,12 +17,16 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
+        private IWheelRepository _wheelRepository;
+        private IWheelDetailRepository _wheelDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingEditorModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
             IPurchasingDetailRepository purchasingDetailRepository,
             ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
+            IWheelRepository wheelRepository,
+            IWheelDetailRepository wheelDetailRepository,
             IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
             : base()
         {
@@ -31,6 +35,8 @@ namespace BrawijayaWorkshop.Model
             _supplierRepository = supplierRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _wheelRepository = wheelRepository;
+            _wheelDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
@@ -82,8 +88,10 @@ namespace BrawijayaWorkshop.Model
                 newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
                 newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
                 newPurchasingDetail.Price = itemPurchasingDetail.Price;
+                newPurchasingDetail.SerialNumber = itemPurchasingDetail.SerialNumber;
                 newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
                 PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
+
             }
             _unitOfWork.SaveChanges();
             Recalculate(purchasingInserted);
@@ -172,6 +180,13 @@ namespace BrawijayaWorkshop.Model
                     });
             }
             return result;
+        }
+
+        public bool IsSparepartWheel(int sparepartId)
+        {
+            Wheel wheelSparepart = _wheelRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+
+            return wheelSparepart != null;
         }
     }
 }

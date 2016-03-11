@@ -21,6 +21,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new WheelEditorPresenter(this, model);
 
             valSparepart.SetIconAlignment(lookUpSparepart, ErrorIconAlignment.MiddleRight);
+            this.Load += WheelEditorForm_Load;
+        }
+
+        void WheelEditorForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
         }
 
 
@@ -63,7 +69,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SparepartViewModel> SparepartList {
+        public List<SparepartViewModel> SparepartList
+        {
             get
             {
                 return lookUpSparepart.Properties.DataSource as List<SparepartViewModel>;
@@ -106,6 +113,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
-       
+
+        private void lookUpSparepart_EditValueChanged(object sender, EventArgs e)
+        {
+            SparepartViewModel sparepart = lookUpSparepart.GetSelectedDataRow() as SparepartViewModel;
+
+            this.Code = sparepart.Code;
+            this.Category = sparepart.CategoryReference.Name;
+            this.Unit = sparepart.UnitReference.Name;
+        }
+
     }
 }
