@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartManualTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
             this.txtStok = new DevExpress.XtraEditors.TextEdit();
@@ -106,7 +108,7 @@
             this.gcUsedGoodsManualEditor.Name = "gcUsedGoodsManualEditor";
             this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(335, 322);
             this.gcUsedGoodsManualEditor.TabIndex = 13;
-            this.gcUsedGoodsManualEditor.Text = "Informasi Stok Barang Bekas";
+            this.gcUsedGoodsManualEditor.Text = "Informasi Stok Sparepart";
             // 
             // txtSparepartName
             // 
@@ -184,7 +186,7 @@
             this.cbMode.Properties.DisplayMember = "Name";
             this.cbMode.Properties.HideSelection = false;
             this.cbMode.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbMode.Properties.NullText = "-- Pilih Jenis Transaksi --";
+            this.cbMode.Properties.NullText = "";
             this.cbMode.Properties.ValueMember = "Id";
             this.cbMode.Size = new System.Drawing.Size(193, 20);
             this.cbMode.TabIndex = 17;
@@ -205,6 +207,9 @@
             this.txtQtyUpdate.Name = "txtQtyUpdate";
             this.txtQtyUpdate.Size = new System.Drawing.Size(104, 20);
             this.txtQtyUpdate.TabIndex = 14;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
+            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule1);
             // 
             // lblQtyUpdaate
             // 
@@ -220,8 +225,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(335, 371);
             this.Controls.Add(this.gcUsedGoodsManualEditor);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparepartManualTransactionEditorForm";
-            this.Text = "Form Stok Barang Bekas";
+            this.Text = "Form Manual Sparepart";
             this.Controls.SetChildIndex(this.gcUsedGoodsManualEditor, 0);
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).EndInit();

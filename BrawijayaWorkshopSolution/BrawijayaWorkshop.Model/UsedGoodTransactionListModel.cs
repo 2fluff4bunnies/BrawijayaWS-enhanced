@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -21,7 +22,10 @@ namespace BrawijayaWorkshop.Model
 
         public List<UsedGoodTransactionViewModel> SearchUsedGoodTransaction(string sparepartName)
         {
-            List<UsedGoodTransaction> result = _usedGoodTransactionRepository.GetMany(c => c.UsedGood.Sparepart.Name.Contains(sparepartName)).OrderBy(c => c.UsedGood.Sparepart.Name).ToList();
+            List<UsedGoodTransaction> result = _usedGoodTransactionRepository.GetMany(c => c.UsedGood.Sparepart.Name.Contains(sparepartName)
+                && (c.TypeReference.Code == DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SOLD
+                || c.TypeReference.Code == DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE))
+                .OrderBy(c => c.UsedGood.Sparepart.Name).ToList();
             List<UsedGoodTransactionViewModel> mappedResult = new List<UsedGoodTransactionViewModel>();
             return Map(result, mappedResult);
         }

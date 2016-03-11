@@ -37,7 +37,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewUsedGoodTrans.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
-            cmsDeleteData.Enabled = AllowDelete;
             this.Load += UsedGoodsListTransactionControl_Load;
         }
 
@@ -132,7 +131,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewTransaction_Click(object sender, EventArgs e)
         {
-            UsedGoodsTransactionForm editor = Bootstrapper.Resolve<UsedGoodsTransactionForm>();
+            UsedGoodTransactionEditorForm editor = Bootstrapper.Resolve<UsedGoodTransactionEditorForm>();
+            editor.IsManual = false;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -142,33 +142,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedUsedGoodTransaction != null)
             {
-                UsedGoodsTransactionForm editor = Bootstrapper.Resolve<UsedGoodsTransactionForm>();
+                UsedGoodTransactionEditorForm editor = Bootstrapper.Resolve<UsedGoodTransactionEditorForm>();
                 editor.SelectedUsedGoodTransaction = _selectedUsedGoodTransaction;
+                editor.UsedGood = _selectedUsedGoodTransaction.UsedGood;
+                editor.IsManual = false;
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
-            }
-        }
-
-        private void cmsDeleteData_Click(object sender, EventArgs e)
-        {
-            if (SelectedUsedGoodTransaction == null) return;
-
-            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus transaksi barang bekas: '" + SelectedUsedGoodTransaction.UsedGood.Sparepart.Name + "'?") == DialogResult.Yes)
-            {
-                try
-                {
-                    MethodBase.GetCurrentMethod().Info("Deleting transaksi barang bekas: " + SelectedUsedGoodTransaction.UsedGood.Sparepart.Name);
-
-                    _presenter.DeleteUsedGoodTransaction();
-
-                    btnSearch.PerformClick(); // refresh data
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete UsedGood: '" + SelectedUsedGoodTransaction.UsedGood.Sparepart.Name + "'", ex);
-                    this.ShowError("Proses hapus data barang bekas: '" + SelectedUsedGoodTransaction.UsedGood.Sparepart.Name + "' gagal!");
-                }
             }
         }
 

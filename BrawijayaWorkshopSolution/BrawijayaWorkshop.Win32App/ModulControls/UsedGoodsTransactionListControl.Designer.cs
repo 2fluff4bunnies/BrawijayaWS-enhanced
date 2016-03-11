@@ -36,14 +36,14 @@
             this.lblFilterCompanyName = new DevExpress.XtraEditors.LabelControl();
             this.gridUsedGoodTrans = new DevExpress.XtraGrid.GridControl();
             this.gvUsedGoodTrans = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewUsedGoodTrans = new DevExpress.XtraEditors.SimpleButton();
-            this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterSparepartName.Properties)).BeginInit();
@@ -76,6 +76,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtFilterSparepartName
             // 
@@ -112,7 +113,8 @@
             this.gvUsedGoodTrans.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colTransDate,
             this.colSparepart,
-            this.colQty});
+            this.colQty,
+            this.colType});
             this.gvUsedGoodTrans.GridControl = this.gridUsedGoodTrans;
             this.gvUsedGoodTrans.Name = "gvUsedGoodTrans";
             this.gvUsedGoodTrans.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -129,10 +131,18 @@
             this.gvUsedGoodTrans.OptionsView.ShowViewCaption = true;
             this.gvUsedGoodTrans.ViewCaption = "Daftar Transaksi Barang Bekas";
             // 
+            // colTransDate
+            // 
+            this.colTransDate.Caption = "Tanggal Transaksi";
+            this.colTransDate.FieldName = "TransactionDate";
+            this.colTransDate.Name = "colTransDate";
+            this.colTransDate.Visible = true;
+            this.colTransDate.VisibleIndex = 0;
+            // 
             // colSparepart
             // 
             this.colSparepart.Caption = "Sparepart";
-            this.colSparepart.FieldName = "Sparepart.Name";
+            this.colSparepart.FieldName = "UsedGood.Sparepart.Name";
             this.colSparepart.Name = "colSparepart";
             this.colSparepart.Visible = true;
             this.colSparepart.VisibleIndex = 1;
@@ -140,10 +150,18 @@
             // colQty
             // 
             this.colQty.Caption = "Stock Keluar";
-            this.colQty.FieldName = "Stock";
+            this.colQty.FieldName = "Qty";
             this.colQty.Name = "colQty";
             this.colQty.Visible = true;
             this.colQty.VisibleIndex = 2;
+            // 
+            // colType
+            // 
+            this.colType.Caption = "Tipe";
+            this.colType.FieldName = "TypeReference.Name";
+            this.colType.Name = "colType";
+            this.colType.Visible = true;
+            this.colType.VisibleIndex = 3;
             // 
             // btnNewUsedGoodTrans
             // 
@@ -155,21 +173,19 @@
             this.btnNewUsedGoodTrans.Size = new System.Drawing.Size(219, 23);
             this.btnNewUsedGoodTrans.TabIndex = 5;
             this.btnNewUsedGoodTrans.Text = "Buat Transaksi Barang Bekas Baru";
+            this.btnNewUsedGoodTrans.Click += new System.EventHandler(this.btnNewTransaction_Click);
             // 
-            // colTransDate
+            // bgwMain
             // 
-            this.colTransDate.Caption = "Tanggal Transaksi";
-            this.colTransDate.Name = "colTransDate";
-            this.colTransDate.Visible = true;
-            this.colTransDate.VisibleIndex = 0;
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsEditData,
-            this.cmsDeleteData});
+            this.cmsEditData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 48);
             // 
             // cmsEditData
             // 
@@ -177,13 +193,7 @@
             this.cmsEditData.Name = "cmsEditData";
             this.cmsEditData.Size = new System.Drawing.Size(152, 22);
             this.cmsEditData.Text = "Edit Data";
-            // 
-            // cmsDeleteData
-            // 
-            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
-            this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
-            this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
             // UsedGoodsTransactionListControl
             // 
@@ -194,6 +204,7 @@
             this.Controls.Add(this.gcFilter);
             this.Name = "UsedGoodsTransactionListControl";
             this.Size = new System.Drawing.Size(581, 327);
+            this.Load += new System.EventHandler(this.UsedGoodsListTransactionControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -220,6 +231,6 @@
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
-        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
+        private DevExpress.XtraGrid.Columns.GridColumn colType;
     }
 }

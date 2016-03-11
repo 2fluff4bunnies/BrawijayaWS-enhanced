@@ -63,7 +63,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtStok.Text.AsInteger();
+                return !string.IsNullOrEmpty(txtStok.Text) ? txtStok.Text.AsInteger() : 0;
             }
             set
             {
@@ -75,7 +75,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtQtyUpdate.Text.AsInteger();
+                return !string.IsNullOrEmpty(txtQtyUpdate.Text) ? txtQtyUpdate.Text.AsInteger() : 0;
             }
             set
             {
@@ -114,7 +114,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valMode.Validate())
+            if (valMode.Validate() && valQty.Validate())
             {
                 try
                 {

@@ -37,7 +37,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewUsedGood.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
-            cmsUpdateStok.Enabled = AllowEdit;
+            cmsManageStok.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
             this.Load += UsedGoodsListControl_Load;
         }
@@ -131,7 +131,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void btnNewCustomer_Click(object sender, EventArgs e)
+        private void btnNewUsedGood_Click(object sender, EventArgs e)
         {
             UsedGoodsEditorForm editor = Bootstrapper.Resolve<UsedGoodsEditorForm>();
             editor.ShowDialog(this);
@@ -145,6 +145,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 UsedGoodsEditorForm editor = Bootstrapper.Resolve<UsedGoodsEditorForm>();
                 editor.SelectedUsedGood = _selectedUsedGood;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void cmsManageStock_Click(object sender, EventArgs e)
+        {
+            if (_selectedUsedGood != null)
+            {
+                UsedGoodTransactionEditorForm editor = Bootstrapper.Resolve<UsedGoodTransactionEditorForm>();
+                editor.UsedGood = _selectedUsedGood;
+                editor.IsManual = true;
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();

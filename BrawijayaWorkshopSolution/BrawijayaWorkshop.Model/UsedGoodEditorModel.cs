@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -29,10 +30,11 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public void InsertUsedGood(UsedGoodViewModel UsedGood)
+        public void InsertUsedGood(UsedGoodViewModel usedGood)
         {
+            usedGood.Status = (int)DbConstant.DefaultDataStatus.Active;
             UsedGood entity = new UsedGood();
-            Map(UsedGood, entity);
+            Map(usedGood, entity);
             _usedGoodRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }

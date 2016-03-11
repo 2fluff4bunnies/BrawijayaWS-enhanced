@@ -114,7 +114,8 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
             sparepartManualTransaction.ModifyDate = serverTime;
-            sparepartManualTransaction.ModifyUserId = userId; Reference updateTypeNew = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
+            sparepartManualTransaction.ModifyUserId = userId; 
+            Reference updateTypeNew = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
             SparepartManualTransaction manualTransactionOld = _sparepartManualTransactionRepository.GetById(sparepartManualTransaction.Id);
             Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
             if (manualTransactionOld != null && updateTypeNew != null && sparepartUpdated != null)

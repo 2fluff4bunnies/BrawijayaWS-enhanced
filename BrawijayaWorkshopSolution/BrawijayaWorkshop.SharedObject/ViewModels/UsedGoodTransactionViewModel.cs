@@ -15,5 +15,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public int TypeReferenceId { get; set; }
         public ReferenceViewModel TypeReference { get; set; }
+        public string Remark { get; set; }
     }
 }

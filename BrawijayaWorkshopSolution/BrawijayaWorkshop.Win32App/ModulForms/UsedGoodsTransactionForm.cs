@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
@@ -9,11 +10,11 @@ using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class UsedGoodsTransactionForm : BaseEditorForm, IUsedGoodTransactionEditorView
+    public partial class UsedGoodTransactionEditorForm : BaseEditorForm, IUsedGoodTransactionEditorView
     {
         private UsedGoodTransactionEditorPresenter _presenter;
 
-        public UsedGoodsTransactionForm(UsedGoodTransactionEditorModel model)
+        public UsedGoodTransactionEditorForm(UsedGoodTransactionEditorModel model)
         {
             InitializeComponent();
             _presenter = new UsedGoodTransactionEditorPresenter(this, model);
@@ -21,50 +22,143 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             // set validation alignment
             valMode.SetIconAlignment(cbMode, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
-            this.Load += UsedGoodsTransactionEditorForm_Load;
+            this.Load += UsedGoodTransactionEditorForm_Load;
         }
 
-        private void UsedGoodsTransactionEditorForm_Load(object sender, EventArgs e)
+        private void UsedGoodTransactionEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            txtItemPrice.Visible = false;
+            lblItemPrice.Visible = false;
+                
+            if (IsManual)
+            {
+                cbUsedGood.ReadOnly = true;
+            }
+            else
+            {
+                cbUsedGood.ReadOnly = false;
+            }
         }
 
         public UsedGoodTransactionViewModel SelectedUsedGoodTransaction { get; set; }
 
         #region Field Editor
-        public int UsedGoodId
+        public bool IsManual { get; set; }
+
+        public List<ReferenceViewModel> ListTransactionTypeReference
         {
             get
             {
-                UsedGoodViewModel selected = cbSparepart.GetSelectedDataRow() as UsedGoodViewModel;
+                return cbMode.Properties.DataSource as List<ReferenceViewModel>;
+            }
+            set
+            {
+                cbMode.Properties.DataSource = value;
+            }
+        }
+        public List<UsedGoodViewModel> UsedGoodListCombo
+        {
+            get
+            {
+                return cbUsedGood.Properties.DataSource as List<UsedGoodViewModel>;
+            }
+            set
+            {
+                cbUsedGood.Properties.DataSource = value;
+            }
+        }
+        public int Stock
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(txtStok.Text) ? txtStok.Text.AsInteger() : 0;
+            }
+            set
+            {
+                txtStok.Text = value.ToString();
+            }
+        }
+
+        public int StockUpdate
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(txtQtyUpdate.Text) ? txtQtyUpdate.Text.AsInteger() : 0;
+            }
+            set
+            {
+                txtQtyUpdate.Text = value.ToString();
+            }
+        }
+
+        public double ItemPrice
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(txtItemPrice.Text) ? txtItemPrice.Text.AsDouble() : 0;
+            }
+            set
+            {
+                txtItemPrice.Text = value.ToString();
+            }
+        }
+
+        public string Remark
+        {
+            get
+            {
+                return txtRemark.Text;
+            }
+            set
+            {
+                txtRemark.Text = value;
+            }
+        }
+
+        public int TransactionTypeId
+        {
+            get
+            {
+                ReferenceViewModel selected = cbMode.GetSelectedDataRow() as ReferenceViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
             set
             {
-                cbSparepart.EditValue = value;
+                cbMode.EditValue = value;
             }
         }
-        #endregion
-        public UsedGoodViewModel UsedGood
+        public int UsedGoodId
         {
             get
             {
-                return cbSparepart.Properties.DataSource as UsedGoodViewModel;
+                UsedGoodViewModel selected = cbUsedGood.GetSelectedDataRow() as UsedGoodViewModel;
+                if (selected == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return selected.Id;
+                }
+                
             }
             set
             {
-                cbSparepart.Properties.DataSource = value;
+                cbUsedGood.EditValue = value;
             }
         }
+        #endregion
+        public UsedGoodViewModel UsedGood { get; set; }
 
         protected override void ExecuteSave()
         {
-            if (valMode.Validate())
+            if (valMode.Validate() && valQty.Validate())
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Save UsedGood Transaction's changes");
+                    MethodBase.GetCurrentMethod().Info("Save Used Good Transaction's changes");
                     _presenter.SaveChanges();
                     this.Close();
                 }
@@ -76,29 +170,25 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-
-
-        public bool IsManual
+        private void cbUsedGood_EditValueChanged(object sender, EventArgs e)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            UsedGoodViewModel model = cbUsedGood.GetSelectedDataRow() as UsedGoodViewModel; ;
+            this.Stock = model.Stock;
         }
 
-        public List<ReferenceViewModel> ListTransactionTypeReference
+        private void cbMode_EditValueChanged(object sender, EventArgs e)
         {
-            get
+            ReferenceViewModel model = cbMode.GetSelectedDataRow() as ReferenceViewModel; ;
+            if(model.Code == DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SOLD)
             {
-                throw new NotImplementedException();
+                txtItemPrice.Visible = true;
+                lblItemPrice.Visible = true;
             }
-            set
+            else
             {
-                throw new NotImplementedException();
+                txtItemPrice.Visible = false;
+                lblItemPrice.Visible = false;
+                this.ItemPrice = 0;
             }
         }
     }

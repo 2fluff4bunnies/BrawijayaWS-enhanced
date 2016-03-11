@@ -42,7 +42,7 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsUpdateStok = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsManageStok = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
@@ -76,6 +76,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtFilterSparepartName
             // 
@@ -104,6 +105,7 @@
             this.btnNewUsedGood.Size = new System.Drawing.Size(164, 23);
             this.btnNewUsedGood.TabIndex = 3;
             this.btnNewUsedGood.Text = "Buat Barang Bekas Baru";
+            this.btnNewUsedGood.Click += new System.EventHandler(this.btnNewUsedGood_Click);
             // 
             // gridUsedGood
             // 
@@ -155,11 +157,16 @@
             this.Stock.Visible = true;
             this.Stock.VisibleIndex = 1;
             // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsEditData,
-            this.cmsUpdateStok,
+            this.cmsManageStok,
             this.cmsDeleteData});
             this.cmsEditor.Name = "cmsEditor";
             this.cmsEditor.Size = new System.Drawing.Size(136, 70);
@@ -170,13 +177,15 @@
             this.cmsEditData.Name = "cmsEditData";
             this.cmsEditData.Size = new System.Drawing.Size(135, 22);
             this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
-            // cmsUpdateStok
+            // cmsManageStok
             // 
-            this.cmsUpdateStok.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsUpdateStok.Name = "cmsUpdateStok";
-            this.cmsUpdateStok.Size = new System.Drawing.Size(135, 22);
-            this.cmsUpdateStok.Text = "Ubah Stok";
+            this.cmsManageStok.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsManageStok.Name = "cmsManageStok";
+            this.cmsManageStok.Size = new System.Drawing.Size(135, 22);
+            this.cmsManageStok.Text = "Atur Stok";
+            this.cmsManageStok.Click += new System.EventHandler(this.cmsManageStock_Click);
             // 
             // cmsDeleteData
             // 
@@ -184,6 +193,7 @@
             this.cmsDeleteData.Name = "cmsDeleteData";
             this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
             // UsedGoodsListControl
             // 
@@ -194,6 +204,7 @@
             this.Controls.Add(this.gcFilter);
             this.Name = "UsedGoodsListControl";
             this.Size = new System.Drawing.Size(581, 327);
+            this.Load += new System.EventHandler(this.UsedGoodsListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -219,7 +230,7 @@
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
-        private System.Windows.Forms.ToolStripMenuItem cmsUpdateStok;
+        private System.Windows.Forms.ToolStripMenuItem cmsManageStok;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
     }
 }

@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsedGoodsEditorForm));
             this.cbSparepart = new DevExpress.XtraEditors.LookUpEdit();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcUsedGoodsEditor = new DevExpress.XtraEditors.GroupControl();
@@ -48,20 +49,19 @@
             this.cbSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbSparepart.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Sparepart.Id", "Sparepart ID"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
             this.cbSparepart.Properties.DisplayMember = "Name";
             this.cbSparepart.Properties.HideSelection = false;
             this.cbSparepart.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbSparepart.Properties.NullText = "--Pilih Sparepart--";
+            this.cbSparepart.Properties.NullText = "";
             this.cbSparepart.Properties.ValueMember = "Id";
             this.cbSparepart.Size = new System.Drawing.Size(208, 20);
             this.cbSparepart.TabIndex = 9;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule1.ErrorText = "Pilih salah satu sparepart";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
-            conditionValidationRule1.Value1 = "--Pilih Sparepart--";
-            this.valSparepart.SetValidationRule(this.cbSparepart, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule2.ErrorText = "Pilih salah satu sparepart";
+            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
+            conditionValidationRule2.Value1 = "--Pilih Sparepart--";
+            this.valSparepart.SetValidationRule(this.cbSparepart, conditionValidationRule2);
             // 
             // lblSparepart
             // 
@@ -88,8 +88,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(301, 122);
             this.Controls.Add(this.gcUsedGoodsEditor);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UsedGoodsEditorForm";
             this.Text = "Form Barang Bekas";
+            this.Load += new System.EventHandler(this.UsedGoodEditorForm_Load);
             this.Controls.SetChildIndex(this.gcUsedGoodsEditor, 0);
             ((System.ComponentModel.ISupportInitialize)(this.cbSparepart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsEditor)).EndInit();
