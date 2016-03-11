@@ -33,6 +33,13 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
+        public void InsertNewRecord()
+        {
+            List<TransactionDetailViewModel> listDetail = View.TransactionDetailList;
+            listDetail.Add(new TransactionDetailViewModel());
+            View.TransactionDetailList = listDetail;
+        }
+
         public void SaveChanges()
         {
             if (!ValidateTransaction()) return;
@@ -70,6 +77,15 @@ namespace BrawijayaWorkshop.Presenter
                 }
             }
             View.TotalTransaction = result;
+        }
+
+        public void RemoveDetail()
+        {
+            if(View.SelectedTransactionDetail.Id > 0)
+            {
+                Model.DeleteTransactionDetail(View.SelectedTransactionDetail);
+            }
+            View.TransactionDetailList.Remove(View.SelectedTransactionDetail);
         }
 
         public bool ValidateTransaction()

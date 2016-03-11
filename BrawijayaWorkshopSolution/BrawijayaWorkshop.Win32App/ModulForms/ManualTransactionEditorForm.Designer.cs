@@ -42,11 +42,11 @@
             this.gvTransactionDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colJournal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lookUpJournalGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colDebit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCredit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewTransDetail = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TransactionDateValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcTransactionParent)).BeginInit();
             this.gcTransactionParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransTotal.Properties)).BeginInit();
@@ -58,7 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridTransactionDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactionDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpJournalGv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TransactionDateValidator)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gcTransactionParent
@@ -85,6 +85,7 @@
             this.txtTransTotal.Properties.Appearance.Options.UseBackColor = true;
             this.txtTransTotal.Properties.DisplayFormat.FormatString = "{0:#,#}";
             this.txtTransTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtTransTotal.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTransTotal.Properties.ReadOnly = true;
             this.txtTransTotal.Size = new System.Drawing.Size(216, 20);
             this.txtTransTotal.TabIndex = 5;
@@ -168,28 +169,26 @@
             // 
             this.gvTransactionDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colJournal,
-            this.colCode,
-            this.colParent});
+            this.colDebit,
+            this.colCredit});
             this.gvTransactionDetail.GridControl = this.gridTransactionDetail;
             this.gvTransactionDetail.Name = "gvTransactionDetail";
-            this.gvTransactionDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvTransactionDetail.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvTransactionDetail.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvTransactionDetail.OptionsBehavior.Editable = false;
-            this.gvTransactionDetail.OptionsBehavior.ReadOnly = true;
             this.gvTransactionDetail.OptionsCustomization.AllowColumnMoving = false;
             this.gvTransactionDetail.OptionsCustomization.AllowFilter = false;
             this.gvTransactionDetail.OptionsCustomization.AllowGroup = false;
             this.gvTransactionDetail.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvTransactionDetail.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvTransactionDetail.OptionsView.ShowFooter = true;
             this.gvTransactionDetail.OptionsView.ShowGroupPanel = false;
             this.gvTransactionDetail.OptionsView.ShowViewCaption = true;
-            this.gvTransactionDetail.ViewCaption = "Daftar Customer";
+            this.gvTransactionDetail.ViewCaption = "Detail Transaksi";
             // 
             // colJournal
             // 
             this.colJournal.Caption = "Jurnal";
             this.colJournal.ColumnEdit = this.lookUpJournalGv;
+            this.colJournal.FieldName = "JournalId";
             this.colJournal.Name = "colJournal";
             this.colJournal.Visible = true;
             this.colJournal.VisibleIndex = 0;
@@ -199,11 +198,35 @@
             this.lookUpJournalGv.AutoHeight = false;
             this.lookUpJournalGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpJournalGv.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama Akun")});
             this.lookUpJournalGv.DisplayMember = "Name";
+            this.lookUpJournalGv.HideSelection = false;
+            this.lookUpJournalGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpJournalGv.Name = "lookUpJournalGv";
-            this.lookUpJournalGv.NullText = "-- Pilih Value --";
-            this.lookUpJournalGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpJournalGv.NullText = "-- Pilih Jurnal --";
             this.lookUpJournalGv.ValueMember = "Id";
+            // 
+            // colDebit
+            // 
+            this.colDebit.Caption = "Debit";
+            this.colDebit.FieldName = "Debit";
+            this.colDebit.Name = "colDebit";
+            this.colDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Debit", "{0:#,#}")});
+            this.colDebit.Visible = true;
+            this.colDebit.VisibleIndex = 1;
+            // 
+            // colCredit
+            // 
+            this.colCredit.Caption = "Credit";
+            this.colCredit.FieldName = "Credit";
+            this.colCredit.Name = "colCredit";
+            this.colCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Credit", "{0:#,#}")});
+            this.colCredit.Visible = true;
+            this.colCredit.VisibleIndex = 2;
             // 
             // btnNewTransDetail
             // 
@@ -219,29 +242,18 @@
             // 
             // cmsEditor
             // 
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsDeleteData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(61, 4);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 48);
             // 
-            // colCode
+            // cmsDeleteData
             // 
-            this.colCode.Caption = "Kode";
-            this.colCode.FieldName = "Code";
-            this.colCode.Name = "colCode";
-            this.colCode.Visible = true;
-            this.colCode.VisibleIndex = 1;
-            // 
-            // colParent
-            // 
-            this.colParent.Caption = "Induk";
-            this.colParent.FieldName = "Parent.Name";
-            this.colParent.Name = "colParent";
-            this.colParent.Visible = true;
-            this.colParent.VisibleIndex = 2;
-            // 
-            // TransDateValidator
-            // 
-            this.TransactionDateValidator.ValidateHiddenControls = false;
-            this.TransactionDateValidator.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Text = "Hapus Detail";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
             // ManualTransactionEditorForm
             // 
@@ -267,7 +279,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridTransactionDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactionDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpJournalGv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TransactionDateValidator)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -278,7 +290,6 @@
         private DevExpress.XtraEditors.GroupControl gcTransactionDetail;
         private DevExpress.XtraEditors.LabelControl lblTransDate;
         private DevExpress.XtraEditors.DateEdit deTransDate;
-        private DevExpress.XtraEditors.TextEdit txtTransTotal;
         private DevExpress.XtraEditors.LabelControl lblTransTotal;
         private DevExpress.XtraEditors.MemoEdit txtTransDesc;
         private DevExpress.XtraEditors.LabelControl lblTransDesc;
@@ -288,8 +299,9 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpJournalGv;
         private DevExpress.XtraGrid.Columns.GridColumn colJournal;
-        private DevExpress.XtraGrid.Columns.GridColumn colCode;
-        private DevExpress.XtraGrid.Columns.GridColumn colParent;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider TransactionDateValidator;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
+        private DevExpress.XtraGrid.Columns.GridColumn colDebit;
+        private DevExpress.XtraGrid.Columns.GridColumn colCredit;
+        private DevExpress.XtraEditors.TextEdit txtTransTotal;
     }
 }

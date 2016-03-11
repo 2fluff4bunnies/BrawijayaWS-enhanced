@@ -8,6 +8,7 @@ namespace BrawijayaWorkshop.View
     public interface IManualTransactionEditorView : IView
     {
         TransactionViewModel SelectedTransaction { get; set; }
+        TransactionDetailViewModel SelectedTransactionDetail { get; set; }
         List<TransactionDetailViewModel> TransactionDetailList { get; set; }
 
         List<JournalMasterViewModel> JournalList { get; set; }
