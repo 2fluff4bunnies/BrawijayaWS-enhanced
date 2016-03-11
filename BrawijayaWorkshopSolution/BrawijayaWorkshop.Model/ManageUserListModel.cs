@@ -34,7 +34,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<UserRoleViewModel> RetrieveUsers(int roleId, string name, bool isActive = true)
+        public List<UserRoleViewModel> RetrieveUsers(int senderUserId, int roleId, string name, bool isActive = true)
         {
             List<UserRole> result = new List<UserRole>();
             Expression<Func<UserRole, bool>> where = null;
@@ -44,14 +44,18 @@ namespace BrawijayaWorkshop.Model
                     (ur.User.FirstName.Contains(name) ||
                      ur.User.LastName.Contains(name) ||
                      ur.User.UserName.Contains(name)) &&
-                     ur.User.IsActive == isActive;
+                     ur.User.IsActive == isActive &&
+                     string.Compare(ur.User.UserName, "superadmin", true) != 0 &&
+                     ur.UserId != senderUserId;
             }
             else
             {
-                where = ur => ur.User.FirstName.Contains(name) ||
+                where = ur => (ur.User.FirstName.Contains(name) ||
                               ur.User.LastName.Contains(name) ||
-                              ur.User.UserName.Contains(name) &&
-                              ur.User.IsActive == isActive;
+                              ur.User.UserName.Contains(name)) &&
+                              ur.User.IsActive == isActive &&
+                              string.Compare(ur.User.UserName, "superadmin", true) != 0 &&
+                              ur.UserId != senderUserId;
             }
             result = _userRoleRepository.GetMany(where).ToList();
             List<UserRoleViewModel> mappedResult = new List<UserRoleViewModel>();

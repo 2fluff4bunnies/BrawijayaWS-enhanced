@@ -54,9 +54,11 @@ namespace BrawijayaWorkshop.Model
 
         public override bool Validate(params object[] parameters)
         {
+            int userId = parameters[0].AsInteger();
+            int roleId = parameters[1].AsInteger();
             return _userRoleRepository.GetMany(ur =>
-                ur.UserId == parameters[0].AsInteger() &&
-                ur.RoleId == parameters[1].AsInteger()).FirstOrDefault() == null;
+                ur.UserId == userId &&
+                ur.RoleId == roleId).FirstOrDefault() == null;
         }
     }
 }

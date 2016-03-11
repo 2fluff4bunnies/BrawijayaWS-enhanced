@@ -39,14 +39,17 @@ namespace BrawijayaWorkshop.Model
         {
             if(parameters.Length > 1)
             {
+                string username =  parameters[0].ToString();
+                int id = parameters[1].AsInteger();
                 return _userRepository.GetMany(u =>
-                    string.Compare(u.UserName, parameters[0].ToString(), true) == 0 &&
-                    u.Id != parameters[1].AsInteger()).FirstOrDefault() == null;
+                    string.Compare(u.UserName,username, true) == 0 &&
+                    u.Id != id).FirstOrDefault() == null;
             }
             else
             {
+                string username = parameters[0].ToString();
                 return _userRepository.GetMany(u =>
-                    string.Compare(u.UserName, parameters[0].ToString(), true) == 0).FirstOrDefault() == null;
+                    string.Compare(u.UserName, username, true) == 0).FirstOrDefault() == null;
             }
         }
     }

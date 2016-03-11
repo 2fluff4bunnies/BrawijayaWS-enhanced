@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -16,7 +17,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadUserRole()
         {
-            View.UserRoleListData = Model.RetrieveUserRoleByRoleId(View.SelectedRoleId);
+            View.UserRoleListData = Model.RetrieveUserRoleByRoleId(LoginInformation.UserId, View.SelectedRoleId);
         }
 
         public void DeleteUserRole()

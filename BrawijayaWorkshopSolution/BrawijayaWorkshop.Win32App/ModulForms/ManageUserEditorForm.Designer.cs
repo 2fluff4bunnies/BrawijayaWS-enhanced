@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            this.txtPassword = new DevExpress.XtraEditors.TextEdit();
             this.gcUserRoleInfo = new DevExpress.XtraEditors.GroupControl();
             this.lookUpRole = new DevExpress.XtraEditors.LookUpEdit();
             this.lblRole = new DevExpress.XtraEditors.LabelControl();
             this.cbxIsActive = new DevExpress.XtraEditors.CheckEdit();
             this.txtReTypePassword = new DevExpress.XtraEditors.TextEdit();
             this.lblReTypePassword = new DevExpress.XtraEditors.LabelControl();
-            this.txtPassword = new DevExpress.XtraEditors.TextEdit();
             this.lblPassword = new DevExpress.XtraEditors.LabelControl();
             this.txtLastName = new DevExpress.XtraEditors.TextEdit();
             this.lblLastName = new DevExpress.XtraEditors.LabelControl();
@@ -55,12 +55,12 @@
             this.valLastName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valPassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valReTypePassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUserRoleInfo)).BeginInit();
             this.gcUserRoleInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxIsActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReTypePassword.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMiddleName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).BeginInit();
@@ -71,6 +71,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.valPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valReTypePassword)).BeginInit();
             this.SuspendLayout();
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(116, 181);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Properties.UseSystemPasswordChar = true;
+            this.txtPassword.Size = new System.Drawing.Size(149, 20);
+            this.txtPassword.TabIndex = 22;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Password harus diisi!";
+            this.valPassword.SetValidationRule(this.txtPassword, conditionValidationRule1);
             // 
             // gcUserRoleInfo
             // 
@@ -90,9 +101,13 @@
             this.lookUpRole.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpRole.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Role")});
+            this.lookUpRole.Properties.DisplayMember = "Name";
             this.lookUpRole.Properties.HideSelection = false;
             this.lookUpRole.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpRole.Properties.NullText = "-- Pilih Role --";
+            this.lookUpRole.Properties.ValueMember = "Id";
             this.lookUpRole.Size = new System.Drawing.Size(149, 20);
             this.lookUpRole.TabIndex = 1;
             // 
@@ -131,17 +146,6 @@
             this.lblReTypePassword.Size = new System.Drawing.Size(90, 13);
             this.lblReTypePassword.TabIndex = 23;
             this.lblReTypePassword.Text = "Re-Type Password";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(116, 181);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Properties.UseSystemPasswordChar = true;
-            this.txtPassword.Size = new System.Drawing.Size(149, 20);
-            this.txtPassword.TabIndex = 22;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Password harus diisi!";
-            this.valPassword.SetValidationRule(this.txtPassword, conditionValidationRule1);
             // 
             // lblPassword
             // 
@@ -283,13 +287,13 @@
             this.Controls.SetChildIndex(this.lblReTypePassword, 0);
             this.Controls.SetChildIndex(this.txtReTypePassword, 0);
             this.Controls.SetChildIndex(this.cbxIsActive, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUserRoleInfo)).EndInit();
             this.gcUserRoleInfo.ResumeLayout(false);
             this.gcUserRoleInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxIsActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReTypePassword.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMiddleName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).EndInit();

@@ -43,14 +43,17 @@ namespace BrawijayaWorkshop.Model
         {
             if (parameters.Length > 1)
             {
+                string name = parameters[0].ToString();
+                int id = parameters[1].AsInteger();
                 return _roleRepository.GetMany(r =>
-                    string.Compare(r.Name, parameters[0].ToString(), true) == 0 &&
-                    r.Id != parameters[1].AsInteger()).FirstOrDefault() == null;
+                    string.Compare(r.Name, name, true) == 0 &&
+                    r.Id != id).FirstOrDefault() == null;
             }
             else
             {
+                string name = parameters[0].ToString();
                 return _roleRepository.GetMany(r =>
-                string.Compare(r.Name, parameters[0].ToString(), true) == 0).FirstOrDefault() == null;
+                string.Compare(r.Name, name, true) == 0).FirstOrDefault() == null;
             }
         }
     }

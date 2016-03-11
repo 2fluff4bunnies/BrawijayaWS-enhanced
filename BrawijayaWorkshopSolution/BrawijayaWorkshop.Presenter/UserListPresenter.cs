@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -10,7 +11,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadUser()
         {
-            View.UserListData = Model.SearchUser(View.FilterName, View.FilterIsActive);
+            View.UserListData = Model.SearchUser(LoginInformation.UserId, View.FilterName, View.FilterIsActive);
         }
 
         public void DeleteUser()

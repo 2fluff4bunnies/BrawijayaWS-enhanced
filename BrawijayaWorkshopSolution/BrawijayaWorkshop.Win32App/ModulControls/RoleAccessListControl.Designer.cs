@@ -132,6 +132,7 @@
             // 
             this.colRead.Caption = "Read";
             this.colRead.ColumnEdit = this.repoCheckEdit;
+            this.colRead.FieldName = "Read";
             this.colRead.Name = "colRead";
             this.colRead.Visible = true;
             this.colRead.VisibleIndex = 3;
@@ -140,11 +141,13 @@
             // 
             this.repoCheckEdit.AutoHeight = false;
             this.repoCheckEdit.Name = "repoCheckEdit";
+            this.repoCheckEdit.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
             // colCreate
             // 
             this.colCreate.Caption = "Create";
             this.colCreate.ColumnEdit = this.repoCheckEdit;
+            this.colCreate.FieldName = "Create";
             this.colCreate.Name = "colCreate";
             this.colCreate.Visible = true;
             this.colCreate.VisibleIndex = 4;
@@ -153,6 +156,7 @@
             // 
             this.colUpdate.Caption = "Update";
             this.colUpdate.ColumnEdit = this.repoCheckEdit;
+            this.colUpdate.FieldName = "Update";
             this.colUpdate.Name = "colUpdate";
             this.colUpdate.Visible = true;
             this.colUpdate.VisibleIndex = 5;
@@ -161,6 +165,7 @@
             // 
             this.colDelete.Caption = "Delete";
             this.colDelete.ColumnEdit = this.repoCheckEdit;
+            this.colDelete.FieldName = "Delete";
             this.colDelete.Name = "colDelete";
             this.colDelete.Visible = true;
             this.colDelete.VisibleIndex = 6;
