@@ -29,7 +29,7 @@ namespace BrawijayaWorkshop.Model
             Reference manualRefTable = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_MANUAL).FirstOrDefault();
             List<Transaction> result = _transactionRepository.GetMany(
                 t => t.TransactionDate >= from && t.TransactionDate <= to &&
-                    t.ReferenceTableId == manualRefTable.Id).ToList();
+                    t.ReferenceTableId == manualRefTable.Id && t.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<TransactionViewModel> mappedResult = new List<TransactionViewModel>();
             return Map(result, mappedResult);
         }
