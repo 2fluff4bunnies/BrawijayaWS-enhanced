@@ -32,10 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionDataNavigationControl));
             this.navbarTransactionData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupTransactionData = new DevExpress.XtraNavBar.NavBarGroup();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
-            this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.iPurchasing = new DevExpress.XtraNavBar.NavBarItem();
             this.iSPK = new DevExpress.XtraNavBar.NavBarItem();
+            this.iUsedGoodTrans = new DevExpress.XtraNavBar.NavBarItem();
+            this.iManualTransaction = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +50,9 @@
             this.navbarGroupTransactionData});
             this.navbarTransactionData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.iPurchasing,
-            this.iSPK});
+            this.iSPK,
+            this.iUsedGoodTrans,
+            this.iManualTransaction});
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
             this.navbarTransactionData.Name = "navbarTransactionData";
             this.navbarTransactionData.OptionsNavPane.ExpandedWidth = 249;
@@ -63,19 +67,10 @@
             this.navbarGroupTransactionData.Expanded = true;
             this.navbarGroupTransactionData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchasing),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPK)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPK),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGoodTrans),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iManualTransaction)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
-            // 
-            // imageCollection
-            // 
-            this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
-            this.imageCollection.Images.SetKeyName(0, "purchasing 16x16.png");
-            this.imageCollection.Images.SetKeyName(1, "SPK_16x16.png");
-            // 
-            // navBarItem1
-            // 
-            this.navBarItem1.Caption = "navBarItem1";
-            this.navBarItem1.Name = "navBarItem1";
             // 
             // iPurchasing
             // 
@@ -89,6 +84,31 @@
             this.iSPK.LargeImageIndex = 1;
             this.iSPK.Name = "iSPK";
             this.iSPK.SmallImageIndex = 1;
+            // 
+            // iUsedGoodTrans
+            // 
+            this.iUsedGoodTrans.Caption = "Barang Bekas";
+            this.iUsedGoodTrans.Name = "iUsedGoodTrans";
+            this.iUsedGoodTrans.SmallImageIndex = 2;
+            // 
+            // iManualTransaction
+            // 
+            this.iManualTransaction.Caption = "Biaya | Pendapatan";
+            this.iManualTransaction.Name = "iManualTransaction";
+            this.iManualTransaction.SmallImageIndex = 3;
+            // 
+            // imageCollection
+            // 
+            this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
+            this.imageCollection.Images.SetKeyName(0, "purchasing 16x16.png");
+            this.imageCollection.Images.SetKeyName(1, "SPK_16x16.png");
+            this.imageCollection.Images.SetKeyName(2, "usedgood_16x16.png");
+            this.imageCollection.Images.SetKeyName(3, "manual_trans_16x16.png");
+            // 
+            // navBarItem1
+            // 
+            this.navBarItem1.Caption = "navBarItem1";
+            this.navBarItem1.Name = "navBarItem1";
             // 
             // TransactionDataNavigationControl
             // 
@@ -111,5 +131,7 @@
         private DevExpress.XtraNavBar.NavBarItem navBarItem1;
         public DevExpress.XtraNavBar.NavBarItem iPurchasing;
         public DevExpress.XtraNavBar.NavBarItem iSPK;
+        public DevExpress.XtraNavBar.NavBarItem iUsedGoodTrans;
+        public DevExpress.XtraNavBar.NavBarItem iManualTransaction;
     }
 }

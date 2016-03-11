@@ -2,8 +2,10 @@
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -19,10 +21,14 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<UserViewModel> SearchUser(string name, bool isActive = true)
+        public List<UserViewModel> SearchUser(int senderUserId, string name, bool isActive = true)
         {
-            List<User> result = _userRepository.GetMany(u =>
-                (u.FirstName.Contains(name) || u.LastName.Contains(name)) && u.IsActive == isActive).ToList();
+            Expression<Func<User, bool>> where = ur => (ur.FirstName.Contains(name) ||
+                              ur.LastName.Contains(name) ||
+                              ur.UserName.Contains(name)) &&
+                              string.Compare(ur.UserName, "superadmin", true) != 0 &&
+                              ur.Id != senderUserId;
+            List<User> result = _userRepository.GetMany(where).ToList();
             List<UserViewModel> mappedResult = new List<UserViewModel>();
             return Map(result, mappedResult);
         }

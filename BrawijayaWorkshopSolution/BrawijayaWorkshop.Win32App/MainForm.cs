@@ -263,6 +263,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUserRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iUserList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANAGE_APP_USER);
             navMasterData.iWheel.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
+            navMasterData.iUsedGood.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -278,6 +279,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUserRole.LinkClicked += iManageUserRole_LinkClicked;
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
             navMasterData.iWheel.LinkClicked += iWheel_LinkClicked;
+            navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
         }
 
         private void iUserList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -352,6 +354,12 @@ namespace BrawijayaWorkshop.Win32App
             ShowUserControl(wheelListControl);
         }
 
+        void iUsedGood_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            UsedGoodsListControl usedGoodListtControl = Bootstrapper.Resolve<UsedGoodsListControl>();
+            ShowUserControl(usedGoodListtControl);
+        }
+
         private void btnConfig_Click(object sender, EventArgs e)
         {
             ConfigEditorForm configForm = Bootstrapper.Resolve<ConfigEditorForm>();
@@ -367,10 +375,24 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             TransactionDataNavigationControl navTransactionData = new TransactionDataNavigationControl();
+            // init visibility based on role access
+            navTransactionData.iPurchasing.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_PURCHASING);
+            navTransactionData.iSPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
+            navTransactionData.iUsedGoodTrans.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD_TRANSACTION);
+            navTransactionData.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANUAL_TRANSACTION);
+
             ShowNavigationControl(navTransactionData);
             // init event navigation
             navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
             navTransactionData.iSPK.LinkClicked += iSPK_LinkClicked;
+            navTransactionData.iUsedGoodTrans.LinkClicked += iUsedGoodTrans_LinkClicked;
+            navTransactionData.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
+        }
+
+        private void iManualTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            ManualTransactionListControl listManualTrans = Bootstrapper.Resolve<ManualTransactionListControl>();
+            ShowUserControl(listManualTrans);
         }
 
         private void iPurchasing_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -383,6 +405,11 @@ namespace BrawijayaWorkshop.Win32App
         {
             SPKListControl listSPK = Bootstrapper.Resolve<SPKListControl>();
             ShowUserControl(listSPK);
+        }
+        private void iUsedGoodTrans_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            UsedGoodsTransactionListControl listUsedGoodsTrans = Bootstrapper.Resolve<UsedGoodsTransactionListControl>();
+            ShowUserControl(listUsedGoodsTrans);
         }
 
         private void iReporting_ItemClick(object sender, ItemClickEventArgs e)

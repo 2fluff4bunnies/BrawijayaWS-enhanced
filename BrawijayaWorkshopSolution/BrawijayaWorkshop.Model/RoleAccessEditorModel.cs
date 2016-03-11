@@ -66,14 +66,19 @@ namespace BrawijayaWorkshop.Model
         {
             if (parameters.Length > 2)
             {
-                return _roleAccessRepository.GetMany(ra => ra.RoleId == parameters[0].AsInteger() &&
-                    ra.ApplicationModulId == parameters[1].AsInteger() &&
-                    ra.Id != parameters[2].AsInteger()).FirstOrDefault() == null;
+                int roleId = parameters[0].AsInteger();
+                int appId = parameters[1].AsInteger();
+                int id = parameters[2].AsInteger();
+                return _roleAccessRepository.GetMany(ra => ra.RoleId == roleId &&
+                    ra.ApplicationModulId == appId &&
+                    ra.Id != id).FirstOrDefault() == null;
             }
             else
             {
-                return _roleAccessRepository.GetMany(ra => ra.RoleId == parameters[0].AsInteger() &&
-                    ra.ApplicationModulId == parameters[1].AsInteger()).FirstOrDefault() == null;
+                int roleId = parameters[0].AsInteger();
+                int appId = parameters[1].AsInteger();
+                return _roleAccessRepository.GetMany(ra => ra.RoleId == roleId &&
+                    ra.ApplicationModulId == appId).FirstOrDefault() == null;
             }
         }
     }

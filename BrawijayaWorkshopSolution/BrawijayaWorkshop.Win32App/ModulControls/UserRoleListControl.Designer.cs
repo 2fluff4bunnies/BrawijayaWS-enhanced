@@ -34,18 +34,25 @@
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
-            this.lblRole = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpRole = new DevExpress.XtraEditors.LookUpEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.lookUpRole = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblRole = new DevExpress.XtraEditors.LabelControl();
             this.btnNewUserRole = new DevExpress.XtraEditors.SimpleButton();
             this.gridUserRole = new DevExpress.XtraGrid.GridControl();
             this.gvUserRole = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colFirstName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLastName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUserName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colRole = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIsActive = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridUserRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvUserRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCheckEdit)).BeginInit();
             this.SuspendLayout();
             // 
             // cmsEditor
@@ -59,7 +66,7 @@
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
@@ -81,13 +88,17 @@
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
-            // lblRole
+            // btnSearch
             // 
-            this.lblRole.Location = new System.Drawing.Point(13, 33);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(21, 13);
-            this.lblRole.TabIndex = 0;
-            this.lblRole.Text = "Role";
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnSearch.Location = new System.Drawing.Point(216, 27);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.TabIndex = 3;
+            this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lookUpRole
             // 
@@ -106,17 +117,13 @@
             this.lookUpRole.Size = new System.Drawing.Size(155, 20);
             this.lookUpRole.TabIndex = 1;
             // 
-            // btnSearch
+            // lblRole
             // 
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(216, 27);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
-            this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "cari";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.lblRole.Location = new System.Drawing.Point(13, 33);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(21, 13);
+            this.lblRole.TabIndex = 0;
+            this.lblRole.Text = "Role";
             // 
             // btnNewUserRole
             // 
@@ -138,13 +145,21 @@
             this.gridUserRole.Location = new System.Drawing.Point(3, 100);
             this.gridUserRole.MainView = this.gvUserRole;
             this.gridUserRole.Name = "gridUserRole";
+            this.gridUserRole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repoCheckEdit});
             this.gridUserRole.Size = new System.Drawing.Size(741, 218);
-            this.gridUserRole.TabIndex = 4;
+            this.gridUserRole.TabIndex = 6;
             this.gridUserRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvUserRole});
             // 
             // gvUserRole
             // 
+            this.gvUserRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colFirstName,
+            this.colLastName,
+            this.colUserName,
+            this.colRole,
+            this.colIsActive});
             this.gvUserRole.GridControl = this.gridUserRole;
             this.gvUserRole.Name = "gvUserRole";
             this.gvUserRole.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -160,6 +175,52 @@
             this.gvUserRole.OptionsView.ShowGroupPanel = false;
             this.gvUserRole.OptionsView.ShowViewCaption = true;
             this.gvUserRole.ViewCaption = "Daftar User Role";
+            // 
+            // colFirstName
+            // 
+            this.colFirstName.Caption = "Nama Depan";
+            this.colFirstName.FieldName = "User.FirstName";
+            this.colFirstName.Name = "colFirstName";
+            this.colFirstName.Visible = true;
+            this.colFirstName.VisibleIndex = 0;
+            // 
+            // colLastName
+            // 
+            this.colLastName.Caption = "Nama Belakang";
+            this.colLastName.FieldName = "User.LastName";
+            this.colLastName.Name = "colLastName";
+            this.colLastName.Visible = true;
+            this.colLastName.VisibleIndex = 1;
+            // 
+            // colUserName
+            // 
+            this.colUserName.Caption = "Username";
+            this.colUserName.FieldName = "User.UserName";
+            this.colUserName.Name = "colUserName";
+            this.colUserName.Visible = true;
+            this.colUserName.VisibleIndex = 2;
+            // 
+            // colRole
+            // 
+            this.colRole.Caption = "Role";
+            this.colRole.FieldName = "Role.Name";
+            this.colRole.Name = "colRole";
+            this.colRole.Visible = true;
+            this.colRole.VisibleIndex = 3;
+            // 
+            // colIsActive
+            // 
+            this.colIsActive.Caption = "Aktif";
+            this.colIsActive.ColumnEdit = this.repoCheckEdit;
+            this.colIsActive.FieldName = "User.IsActive";
+            this.colIsActive.Name = "colIsActive";
+            this.colIsActive.Visible = true;
+            this.colIsActive.VisibleIndex = 4;
+            // 
+            // repoCheckEdit
+            // 
+            this.repoCheckEdit.AutoHeight = false;
+            this.repoCheckEdit.Name = "repoCheckEdit";
             // 
             // UserRoleListControl
             // 
@@ -177,6 +238,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridUserRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvUserRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCheckEdit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -193,5 +255,11 @@
         private DevExpress.XtraEditors.SimpleButton btnNewUserRole;
         private DevExpress.XtraGrid.GridControl gridUserRole;
         private DevExpress.XtraGrid.Views.Grid.GridView gvUserRole;
+        private DevExpress.XtraGrid.Columns.GridColumn colFirstName;
+        private DevExpress.XtraGrid.Columns.GridColumn colLastName;
+        private DevExpress.XtraGrid.Columns.GridColumn colUserName;
+        private DevExpress.XtraGrid.Columns.GridColumn colRole;
+        private DevExpress.XtraGrid.Columns.GridColumn colIsActive;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckEdit;
     }
 }

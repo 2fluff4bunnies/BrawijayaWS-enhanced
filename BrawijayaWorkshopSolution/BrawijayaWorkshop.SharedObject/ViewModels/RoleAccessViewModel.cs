@@ -12,5 +12,10 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public virtual ApplicationModulViewModel ApplicationModul { get; set; }
 
         public int AccessCode { get; set; }
+
+        public bool Read { get; set; }
+        public bool Create { get; set; }
+        public bool Update { get; set; }
+        public bool Delete { get; set; }
     }
 }

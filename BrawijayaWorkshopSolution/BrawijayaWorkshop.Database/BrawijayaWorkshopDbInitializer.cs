@@ -169,6 +169,16 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_MANUAL_TRANSACTION,
                 ModulDescription = "Manual Transaction"
             });
+            ApplicationModul usedGoodMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_USEDGOOD,
+                ModulDescription = "Modul Barang Bekas"
+            });
+            ApplicationModul usedGoodTransMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_USEDGOOD_TRANSACTION,
+                ModulDescription = "Modul Transaksi Barang Bekas"
+            });
 
             context.SaveChanges();
 
@@ -292,6 +302,18 @@ namespace BrawijayaWorkshop.Database
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodTransMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // admin
             context.RoleAccesses.Add(new RoleAccess
@@ -348,6 +370,18 @@ namespace BrawijayaWorkshop.Database
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodTransMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // manager
             context.RoleAccesses.Add(new RoleAccess
@@ -365,6 +399,18 @@ namespace BrawijayaWorkshop.Database
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = manualTransMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodTransMod.Id,
                 RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });

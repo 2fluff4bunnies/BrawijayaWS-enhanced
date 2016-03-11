@@ -43,8 +43,9 @@
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
             this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iWheel = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +68,8 @@
             this.iManageRoleAccess,
             this.iUserList,
             this.iManageUserRole,
-            this.iWheel});
+            this.iWheel,
+            this.iUsedGood});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -92,7 +94,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iWheel)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iWheel),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGood)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
             // 
             // iManageRole
@@ -161,6 +164,12 @@
             this.iVehicle.Name = "iVehicle";
             this.iVehicle.SmallImageIndex = 3;
             // 
+            // iWheel
+            // 
+            this.iWheel.Caption = "Ban";
+            this.iWheel.Name = "iWheel";
+            this.iWheel.SmallImageIndex = 10;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -175,12 +184,13 @@
             this.imageCollection.Images.SetKeyName(8, "role_access_16x16.png");
             this.imageCollection.Images.SetKeyName(9, "user_role_16x16.png");
             this.imageCollection.Images.SetKeyName(10, "Tire_16x16.png");
+            this.imageCollection.Images.SetKeyName(11, "usedgood_16x16.png");
             // 
-            // iWheel
+            // iUsedGood
             // 
-            this.iWheel.Caption = "Ban";
-            this.iWheel.Name = "iWheel";
-            this.iWheel.SmallImageIndex = 10;
+            this.iUsedGood.Caption = "Barang Bekas";
+            this.iUsedGood.Name = "iUsedGood";
+            this.iUsedGood.SmallImageIndex = 11;
             // 
             // MasterDataNavigationControl
             // 
@@ -212,5 +222,6 @@
         public DevExpress.XtraNavBar.NavBarItem iUserList;
         public DevExpress.XtraNavBar.NavBarItem iManageUserRole;
         public DevExpress.XtraNavBar.NavBarItem iWheel;
+        public DevExpress.XtraNavBar.NavBarItem iUsedGood;
     }
 }

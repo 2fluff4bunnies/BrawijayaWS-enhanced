@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedUserRole != null && View.SelectedUserRole.UserId > 0)
             {
-                return Model.Validate(View.UserName, View.SelectedUserRole.UserId);
+                return Model.Validate(View.UserName, View.SelectedUserRole.UserId, View.SelectedRoleId);
             }
             else
             {
