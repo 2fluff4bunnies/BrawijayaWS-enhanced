@@ -29,6 +29,7 @@ namespace BrawijayaWorkshop.Presenter
             else
             {
                 View.WheelDetailList = Model.RetrieveReadyWheelDetails();
+                View.VehicleWheelList = new System.Collections.Generic.List<VehicleWheelViewModel>();
             }
 
             View.VehicleWheelExchangedList = new System.Collections.Generic.List<VehicleWheelViewModel>();

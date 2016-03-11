@@ -9,6 +9,8 @@ namespace BrawijayaWorkshop.View
     {
         VehicleViewModel SelectedVehicle { get; set; }
 
+        VehicleWheelViewModel SelectedVehicleWheel { get; set; }
+
         string Brand { get; set; }
 
         string Type { get; set; }

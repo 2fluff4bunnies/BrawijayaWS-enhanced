@@ -79,7 +79,7 @@
             // colCodeDetail
             // 
             this.colCodeDetail.Caption = "Kode";
-            this.colCodeDetail.FieldName = "Code";
+            this.colCodeDetail.FieldName = "SparepartDetail.Code";
             this.colCodeDetail.Name = "colCodeDetail";
             this.colCodeDetail.Visible = true;
             this.colCodeDetail.VisibleIndex = 0;
@@ -87,9 +87,10 @@
             // colSerialNumber
             // 
             this.colSerialNumber.Caption = "Nomor Seri";
+            this.colSerialNumber.FieldName = "SerialNumber";
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "", "Jumlah Data: {0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "SerialNumber", "Jumlah Data: {0}")});
             this.colSerialNumber.Visible = true;
             this.colSerialNumber.VisibleIndex = 1;
             // 

@@ -3,10 +3,14 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -28,44 +32,47 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += VehicleEditorForm_Load;
-            cbWheelDetailGv.EditValueChanged += cbWheelDetailGv_EditValueChanged;
+            lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
+            gvVehicleWheel.PopupMenuShowing += gvVehicleWheel_PopupMenuShowing;
+            gvVehicleWheel.FocusedRowChanged += gvVehicleWheel_FocusedRowChanged;
+
+            //collumn setting for lookup wheel in grid
+            LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
+
+            coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
+            //coll.Add(new LookUpColumnInfo("SparepartDetail.Sparepart.Name", 0, "Sparepart"));
+            lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
+            lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
+            lookupWheelDetailGv.AutoSearchColumnIndex = 1;
         }
 
-        void cbWheelDetailGv_EditValueChanged(object sender, EventArgs e)
+        void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
         {
-            WheelDetailViewModel selectedWheelDetail = sender as WheelDetailViewModel;
-            VehicleWheelViewModel foundConflict = _presenter.IsWheelUsedByOtherVehicle(selectedWheelDetail.Id);
 
-            if (foundConflict != null)
+            if (this.SelectedVehicle != null)
             {
-                if (this.ShowConfirmation("Ban dengan nomor seri " + selectedWheelDetail.SerialNumber +
-                   " sudah digunakan pada kendaraan dengan nopol " + foundConflict.Vehicle.ActiveLicenseNumber + "!" +
-                   "\n\n Apakah anda yakin ingin menukar?") == System.Windows.Forms.DialogResult.Yes)
+                DevExpress.XtraEditors.LookUpEdit lookup = sender as DevExpress.XtraEditors.LookUpEdit;
+                VehicleWheelViewModel foundConflict = _presenter.IsWheelUsedByOtherVehicle(lookup.EditValue.AsInteger());
+
+                if (foundConflict != null)
                 {
-                    foundConflict.WheelDetailId = _presenter.GetCurrentInstalledWheel(selectedWheelDetail.Id);
-                    this.VehicleWheelExchangedList.Add(foundConflict);
-                }
-                else
-                {
-                    sender = null;
+                    if (this.ShowConfirmation("Ban dengan nomor seri " + lookup.SelectedText +
+                       " sudah digunakan pada kendaraan dengan nopol " + foundConflict.Vehicle.ActiveLicenseNumber + "!" +
+                       "\n\n Apakah anda yakin ingin menukar?") == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        foundConflict.WheelDetailId = _presenter.GetCurrentInstalledWheel(lookup.EditValue.AsInteger());
+                        this.VehicleWheelExchangedList.Add(foundConflict);
+                    }
+                    else
+                    {
+                        sender = null;
+                    }
                 }
             }
         }
-
-        private void VehicleEditorForm_Load(object sender, EventArgs e)
-        {
-            if (SelectedVehicle != null)
-            {
-                lblExpirationDate.Visible = false;
-                dtpExpirationDate.Visible = false;
-                txtLicenseNumber.Enabled = false;
-            }
-            _presenter.InitFormData();
-        }
-
-        public VehicleViewModel SelectedVehicle { get; set; }
 
         #region Field Editor
+        public VehicleViewModel SelectedVehicle { get; set; }
         public string Type
         {
             get
@@ -156,17 +163,23 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return gridVehicleWheel.DataSource as List<VehicleWheelViewModel>;
+                return bsVehicleWheel.DataSource as List<VehicleWheelViewModel>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridVehicleWheel.DataSource = value; gvVehicleWheel.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        bsVehicleWheel.DataSource = value;
+                        gridVehicleWheel.DataSource = bsVehicleWheel;
+                        gvVehicleWheel.BestFitColumns();
+                    }));
                 }
                 else
                 {
-                    gridVehicleWheel.DataSource = value;
+                    bsVehicleWheel.DataSource = value;
+                    gridVehicleWheel.DataSource = bsVehicleWheel;
                     gvVehicleWheel.BestFitColumns();
                 }
             }
@@ -176,20 +189,56 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return cbWheelDetailGv.DataSource as List<WheelDetailViewModel>;
+                return lookupWheelDetailGv.DataSource as List<WheelDetailViewModel>;
             }
             set
             {
-                cbWheelDetailGv.DataSource = value;
+                lookupWheelDetailGv.DataSource = value;
             }
         }
 
         public List<VehicleWheelViewModel> VehicleWheelExchangedList { get; set; }
+
+        public VehicleWheelViewModel SelectedVehicleWheel { get; set; }
         #endregion
+
+        void gvVehicleWheel_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            this.SelectedVehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+        }
+
+        void gvVehicleWheel_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsEditor.Show(view.GridControl, e.Point);
+            }
+        }
+
+        private void VehicleEditorForm_Load(object sender, EventArgs e)
+        {
+            if (SelectedVehicle != null)
+            {
+                lblExpirationDate.Visible = false;
+                dtpExpirationDate.Visible = false;
+                txtLicenseNumber.Enabled = false;
+            }
+            else
+            {
+                if (this.WheelDetailList.Count <= 0)
+                {
+                    this.ShowWarning("Tidak ada ban yang siap dipakai updata data ban terlebih dahulu!");
+                }
+            }
+            _presenter.InitFormData();
+        }
 
         protected override void ExecuteSave()
         {
-            if (FieldsValidator.Validate())
+            if (FieldsValidator.Validate() && VehicleWheelList.Count >= 4)
             {
                 try
                 {
@@ -203,11 +252,36 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan data Kendaraan gagal!");
                 }
             }
+            else
+            {
+                if (VehicleWheelList.Count < 4)
+                {
+                    this.ShowWarning("Ban yang terpasang pada kendaraan minimal 4!");
+                }
+            }
         }
 
         private void btnNewVehicleWheel_Click(object sender, EventArgs e)
         {
+            foreach (var item in this.VehicleWheelList)
+            {
+                WheelDetailViewModel toRemove = WheelDetailList.Where(wd => wd.Id == item.WheelDetailId).FirstOrDefault();
+                if (toRemove != null)
+                {
+                    this.WheelDetailList.Remove(toRemove);
+                }
+            }
+
             gvVehicleWheel.AddNewRow();
+        }
+
+        private void deleteWheelDetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedVehicleWheel != null)
+            {
+                this.WheelDetailList.Add(this.SelectedVehicleWheel.WheelDetail);
+            }
+            gvVehicleWheel.DeleteSelectedRows();
         }
     }
 }

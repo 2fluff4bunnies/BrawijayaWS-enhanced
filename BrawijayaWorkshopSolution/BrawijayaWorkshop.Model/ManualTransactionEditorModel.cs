@@ -50,17 +50,24 @@ namespace BrawijayaWorkshop.Model
         {
             Reference refTable = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_MANUAL).FirstOrDefault();
 
+            DateTime currentTime = DateTime.Now;
             Transaction parentEntity = new Transaction();
             Map(parentTransaction, parentEntity);
             parentEntity.CreateUserId = userId;
-            parentEntity.CreateDate = DateTime.Now;
+            parentEntity.CreateDate = currentTime;
+            parentEntity.ModifyUserId = userId;
+            parentEntity.ModifyDate = currentTime;
             parentEntity.ReferenceTableId = refTable.Id;
+            parentEntity.PrimaryKeyValue = -1;
             parentEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
             parentEntity = _transactionRepository.Add(parentEntity);
+            _unitOfWork.SaveChanges();
 
             // update primary key value into previous inserted transaction id
+            parentEntity = _transactionRepository.GetById(parentEntity.Id);
             parentEntity.PrimaryKeyValue = parentEntity.Id;
             _transactionRepository.Update(parentEntity);
+            _unitOfWork.SaveChanges();
 
             foreach (var detailTransaction in detailTransactionList)
             {
@@ -81,14 +88,31 @@ namespace BrawijayaWorkshop.Model
             parentEntity.ModifyUserId = userId;
             parentEntity.ModifyDate = DateTime.Now;
             _transactionRepository.Update(parentEntity);
+            _unitOfWork.SaveChanges();
 
             foreach (var detailTransaction in detailTransactionList)
             {
-                TransactionDetail detailEntity = _transactionDetailRepository.GetById(detailTransaction.Id);
-                Map(detailTransaction, detailEntity);
-                _transactionDetailRepository.Update(detailEntity);
+                if (detailTransaction.Id > 0)
+                {
+                    TransactionDetail detailEntity = _transactionDetailRepository.GetById(detailTransaction.Id);
+                    Map(detailTransaction, detailEntity);
+                    _transactionDetailRepository.Update(detailEntity);
+                }
+                else
+                {
+                    TransactionDetail detailEntity = new TransactionDetail();
+                    Map(detailTransaction, detailEntity);
+                    detailEntity.ParentId = parentEntity.Id;
+                    _transactionDetailRepository.Add(detailEntity);
+                }
             }
+            _unitOfWork.SaveChanges();
+        }
 
+        public void DeleteTransactionDetail(TransactionDetailViewModel detail)
+        {
+            TransactionDetail entity = _transactionDetailRepository.GetById(detail.Id);
+            _transactionDetailRepository.Delete(entity);
             _unitOfWork.SaveChanges();
         }
     }

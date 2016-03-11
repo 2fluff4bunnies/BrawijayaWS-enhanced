@@ -85,7 +85,6 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var vw in vehicleWheels)
             {
-                vw.VehicleId = insertedVehicle.Id;
                 vw.CreateDate = serverTime;
                 vw.CreateUserId = userId;
                 vw.ModifyDate = serverTime;
@@ -93,6 +92,7 @@ namespace BrawijayaWorkshop.Model
                 vw.Status = (int)DbConstant.DefaultDataStatus.Active;
                 VehicleWheel vwEntity = new VehicleWheel();
                 Map(vw, vwEntity);
+                vwEntity.Vehicle = insertedVehicle;
 
                 _vehicleWheelRepository.Add(vwEntity);
 
@@ -106,8 +106,9 @@ namespace BrawijayaWorkshop.Model
                 SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
                 spdEntity.ModifyDate = serverTime;
                 spdEntity.ModifyUserId = userId;
-#warning change to outinstalled
-                spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutService; 
+                spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutInstalled;
+
+                _sparepartDetailRepository.Update(spdEntity);
             }
 
             _vehicleDetailRepository.Add(vehicleDetail);
