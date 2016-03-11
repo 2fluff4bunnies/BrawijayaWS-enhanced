@@ -643,6 +643,93 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            // Sparepart Manual Transaction Type
+            Reference sparepartManualTransactionRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE,
+                Name = "Sparepart Manual Transaction Type",
+                Description = "Jenis tipe transaksi manual sparepart",
+                Value = DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE
+            });
+            context.SaveChanges();
+
+            // Sparepart Manual Transaction Type Children
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS,
+                Name = "Tipe Penambahan Sparepart Manual",
+                Description = "Tipe Penambahan Sparepart Manual",
+                Value = DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS,
+                ParentId = sparepartManualTransactionRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS,
+                Name = "Tipe Pengurangan Sparepart Manual",
+                Description = "Tipe Pengurangan Sparepart Manual",
+                Value = DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS,
+                ParentId = sparepartManualTransactionRef.Id
+            });
+            context.SaveChanges();
+
+            // Used Good Transaction Manual Type
+            Reference usedGoodManualTransactionRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE,
+                Name = "Barang Bekas Manual Transaction Type",
+                Description = "Jenis tipe transaksi manual barang bekas",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE
+            });
+            context.SaveChanges();
+
+            // Used Good Manual Transaction Type Children
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS,
+                Name = "Tipe Penambahan Barang Bekas Manual",
+                Description = "Tipe Penambahan Barang Bekas Manual",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS,
+                ParentId = usedGoodManualTransactionRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_MINUS,
+                Name = "Tipe Pengurangan Barang Bekas Manual",
+                Description = "Tipe Pengurangan Barang Bekas Manual",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_MINUS,
+                ParentId = usedGoodManualTransactionRef.Id
+            });
+            context.SaveChanges();
+
+            // Used Good Transaction Type
+            Reference usedGoodTransactionRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE,
+                Name = "Barang Bekas Transaction Type",
+                Description = "Jenis tipe transaksi barang bekas",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE
+            });
+            context.SaveChanges();
+
+            // Used Good Transaction Type Children
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE,
+                Name = "Tipe Recycle Barang Bekas",
+                Description = "Tipe Recycle Barang Bekas",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE,
+                ParentId = usedGoodTransactionRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SOLD,
+                Name = "Tipe Penjualan Barang Bekas",
+                Description = "Tipe Penjualan Barang Bekas",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SOLD,
+                ParentId = usedGoodTransactionRef.Id
+            });
+            context.SaveChanges();
+
             context.Settings.Add(new Setting
             {
                 Key = DbConstant.SETTING_MINTSTOCK,

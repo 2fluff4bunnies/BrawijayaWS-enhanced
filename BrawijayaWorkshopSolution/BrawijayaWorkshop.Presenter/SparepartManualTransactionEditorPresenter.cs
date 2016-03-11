@@ -6,7 +6,7 @@ using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class SparepartManualTransactionEditorPresenter : BasePresenter<ISparepartManualTransactionEditorView, SparepartManualTransactionEditorModel>
+    public class  SparepartManualTransactionEditorPresenter : BasePresenter<ISparepartManualTransactionEditorView, SparepartManualTransactionEditorModel>
     {
         public SparepartManualTransactionEditorPresenter(ISparepartManualTransactionEditorView view, SparepartManualTransactionEditorModel model)
             : base(view, model) { }
@@ -14,10 +14,17 @@ namespace BrawijayaWorkshop.Presenter
         public void InitFormData()
         {
             View.ListTransactionTypeReference = Model.RetrieveTransactionType();
-
+            if(View.Sparepart != null)
+            {
+                View.SparepartId = View.Sparepart.Id;
+                View.SparepartName = View.Sparepart.Name;
+                View.Stock = View.Sparepart.StockQty;
+            }
             if (View.SelectedSparepartManualTransaction != null)
             {
-                View.SparepartId = View.SelectedSparepartManualTransaction.SparepartId;
+                View.TransactionTypeId = View.SelectedSparepartManualTransaction.UpdateTypeId;
+                View.StockUpdate = View.SelectedSparepartManualTransaction.Qty;
+                View.Remark = View.SelectedSparepartManualTransaction.Remark;
             }
         }
 
@@ -29,7 +36,10 @@ namespace BrawijayaWorkshop.Presenter
             }
 
             View.SelectedSparepartManualTransaction.SparepartId = View.SparepartId;
-
+            View.SelectedSparepartManualTransaction.Qty = View.StockUpdate;
+            View.SelectedSparepartManualTransaction.Remark = View.Remark;
+            View.SelectedSparepartManualTransaction.UpdateTypeId = View.TransactionTypeId;
+            View.SelectedSparepartManualTransaction.Sparepart = View.Sparepart;
             if (View.SelectedSparepartManualTransaction.Id > 0)
             {
                 Model.UpdateSparepartManualTransaction(View.SelectedSparepartManualTransaction);

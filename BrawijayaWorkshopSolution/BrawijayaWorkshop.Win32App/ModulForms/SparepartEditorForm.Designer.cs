@@ -193,6 +193,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparepartEditorForm";
             this.Text = "Sparepart Editor";
+            this.Load += new System.EventHandler(this.SparepartEditorForm_Load);
             this.Controls.SetChildIndex(this.gcSparepartInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepartInfo)).EndInit();
             this.gcSparepartInfo.ResumeLayout(false);

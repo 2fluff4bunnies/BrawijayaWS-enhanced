@@ -44,6 +44,9 @@ namespace BrawijayaWorkshop.Model
             DateTime serverTime = DateTime.Now;
             sparepart.CreateDate = serverTime;
             sparepart.CreateUserId = userId;
+            sparepart.ModifyDate = serverTime;
+            sparepart.ModifyUserId = userId;
+            sparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
             Sparepart entity = new Sparepart();
             Map(sparepart, entity);
             _sparepartRepository.Add(entity);

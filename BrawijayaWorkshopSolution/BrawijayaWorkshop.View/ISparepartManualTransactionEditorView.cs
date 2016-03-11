@@ -10,9 +10,13 @@ namespace BrawijayaWorkshop.View
         SparepartManualTransactionViewModel SelectedSparepartManualTransaction { get; set; }
 
         int SparepartId { get; set; }
+        string SparepartName { get; set; }
+        int Stock { get; set; }
+        int StockUpdate { get; set; }
+        string Remark { get; set; }
+        int TransactionTypeId { get; set; }
 
         List<ReferenceViewModel> ListTransactionTypeReference { get; set; }
-
         SparepartViewModel Sparepart { get; set; }
     }
 }

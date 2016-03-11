@@ -32,31 +32,85 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public SparepartManualTransactionViewModel SelectedSparepartManualTransaction { get; set; }
 
         #region Field Editor
-        public int SparepartId
+        public bool IsManual { get; set; }
+
+        public List<ReferenceViewModel> ListTransactionTypeReference
         {
             get
             {
-                SparepartViewModel selected = cbSparepart.GetSelectedDataRow() as SparepartViewModel;
+                return cbMode.Properties.DataSource as List<ReferenceViewModel>;
+            }
+            set
+            {
+                cbMode.Properties.DataSource = value;
+            }
+        }
+
+
+        public string SparepartName
+        {
+            get
+            {
+                return txtSparepartName.Text;
+            }
+            set
+            {
+                txtSparepartName.Text = value;
+            }
+        }
+
+        public int Stock
+        {
+            get
+            {
+                return txtStok.Text.AsInteger();
+            }
+            set
+            {
+                txtStok.Text = value.ToString();
+            }
+        }
+
+        public int StockUpdate
+        {
+            get
+            {
+                return txtQtyUpdate.Text.AsInteger();
+            }
+            set
+            {
+                txtQtyUpdate.Text = value.ToString();
+            }
+        }
+
+        public string Remark
+        {
+            get
+            {
+                return txtRemark.Text;
+            }
+            set
+            {
+                txtRemark.Text = value;
+            }
+        }
+
+        public int TransactionTypeId
+        {
+            get
+            {
+                ReferenceViewModel selected = cbMode.GetSelectedDataRow() as ReferenceViewModel;
                 if (selected == null) return 0;
                 return selected.Id;
             }
             set
             {
-                cbSparepart.EditValue = value;
+                cbMode.EditValue = value;
             }
         }
+        public int SparepartId { get; set; }
         #endregion
-        public SparepartViewModel Sparepart
-        {
-            get
-            {
-                return cbSparepart.Properties.DataSource as SparepartViewModel;
-            }
-            set
-            {
-                cbSparepart.Properties.DataSource = value;
-            }
-        }
+        public SparepartViewModel Sparepart { get; set; }
 
         protected override void ExecuteSave()
         {
@@ -73,32 +127,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save SparepartManualTransaction: '" + SelectedSparepartManualTransaction.Sparepart.Name + "'", ex);
                     this.ShowError("Proses simpan data transaksi barang bekas: '" + SelectedSparepartManualTransaction.Sparepart.Name + "' gagal!");
                 }
-            }
-        }
-
-
-
-        public bool IsManual
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public List<ReferenceViewModel> ListTransactionTypeReference
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
             }
         }
     }

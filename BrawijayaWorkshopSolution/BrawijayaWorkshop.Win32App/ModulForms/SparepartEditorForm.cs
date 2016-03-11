@@ -17,11 +17,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             InitializeComponent();
             _presenter = new SparepartEditorPresenter(this, model);
-
             valCategory.SetIconAlignment(lookUpCategory, ErrorIconAlignment.MiddleRight);
             valUnit.SetIconAlignment(lookUpUnit, ErrorIconAlignment.MiddleRight);
             valCode.SetIconAlignment(txtCode, ErrorIconAlignment.MiddleRight);
             valName.SetIconAlignment(txtName, ErrorIconAlignment.MiddleRight);
+            this.Load += SparepartEditorForm_Load;
+        }
+
+        public void SparepartEditorForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
         }
 
         public SparepartViewModel SelectedSparepart { get; set; }

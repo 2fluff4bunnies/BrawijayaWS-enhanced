@@ -238,5 +238,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 detail.ShowDialog(this);
             }
         }
+
+        private void cmsManageStock_Click(object sender, EventArgs e)
+        {
+            if (_selectedSparepart != null)
+            {
+                SparepartManualTransactionEditorForm detail = Bootstrapper.Resolve<SparepartManualTransactionEditorForm>();
+                detail.Sparepart = _selectedSparepart;
+                detail.ShowDialog(this);
+            }
+        }
     }
 }

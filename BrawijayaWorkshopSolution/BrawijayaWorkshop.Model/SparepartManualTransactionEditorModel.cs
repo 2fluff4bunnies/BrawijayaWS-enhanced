@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,6 +42,25 @@ namespace BrawijayaWorkshop.Model
 
         public void InsertSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction)
         {
+            //sparepartManualTransaction.TransactionDate = DateTime.Now;
+            //Reference updateType = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
+            //Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
+            //if(updateType != null && sparepartUpdated != null)
+            //{
+            //    if(updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
+            //    {
+            //        sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
+            //    }
+            //    else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
+            //    {
+            //        sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
+            //    }
+            //    SparepartManualTransaction entity = new SparepartManualTransaction();
+            //    Map(sparepartManualTransaction, entity);
+            //    _sparepartManualTransactionRepository.Add(entity);
+            //    _sparepartRepository.Update(sparepartUpdated);
+            //    _unitOfWork.SaveChanges();
+            //}
             SparepartManualTransaction entity = new SparepartManualTransaction();
             Map(sparepartManualTransaction, entity);
             _sparepartManualTransactionRepository.Add(entity);
@@ -49,10 +69,36 @@ namespace BrawijayaWorkshop.Model
 
         public void UpdateSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction)
         {
-            SparepartManualTransaction entity = _sparepartManualTransactionRepository.GetById<int>(sparepartManualTransaction.Id);
-            Map(sparepartManualTransaction, entity);
-            _sparepartManualTransactionRepository.Update(entity);
-            _unitOfWork.SaveChanges();
+            Reference updateTypeNew = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
+            SparepartManualTransaction manualTransactionOld = _sparepartManualTransactionRepository.GetById(sparepartManualTransaction.Id);
+            Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
+            if (manualTransactionOld != null && updateTypeNew != null && sparepartUpdated != null)
+            {
+                Reference updateTypeOld = _referenceRepository.GetById(manualTransactionOld.UpdateTypeId);
+            
+                if (updateTypeOld.Code == (DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS))
+                {
+                    sparepartUpdated.StockQty -= manualTransactionOld.Qty;
+                }
+                else if (updateTypeOld.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
+                {
+                    sparepartUpdated.StockQty += manualTransactionOld.Qty;
+                }
+
+                if (updateTypeNew.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
+                {
+                    sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
+                }
+                else if (updateTypeNew.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
+                {
+                    sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
+                }
+                SparepartManualTransaction entity = new SparepartManualTransaction();
+                Map(sparepartManualTransaction, entity);
+                _sparepartManualTransactionRepository.Update(entity);
+                _sparepartRepository.Update(sparepartUpdated);
+                _unitOfWork.SaveChanges();
+            }
         }
     }
 }
