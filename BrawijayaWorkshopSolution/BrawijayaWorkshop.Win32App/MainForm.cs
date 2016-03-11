@@ -375,11 +375,24 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             TransactionDataNavigationControl navTransactionData = new TransactionDataNavigationControl();
+            // init visibility based on role access
+            navTransactionData.iPurchasing.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_PURCHASING);
+            navTransactionData.iSPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
+            navTransactionData.iUsedGoodTrans.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD_TRANSACTION);
+            navTransactionData.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANUAL_TRANSACTION);
+
             ShowNavigationControl(navTransactionData);
             // init event navigation
             navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
             navTransactionData.iSPK.LinkClicked += iSPK_LinkClicked;
             navTransactionData.iUsedGoodTrans.LinkClicked += iUsedGoodTrans_LinkClicked;
+            navTransactionData.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
+        }
+
+        private void iManualTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            ManualTransactionListControl listManualTrans = Bootstrapper.Resolve<ManualTransactionListControl>();
+            ShowUserControl(listManualTrans);
         }
 
         private void iPurchasing_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
