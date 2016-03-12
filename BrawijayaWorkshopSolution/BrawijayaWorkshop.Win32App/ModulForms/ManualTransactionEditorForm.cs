@@ -15,6 +15,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class ManualTransactionEditorForm : BaseEditorForm, IManualTransactionEditorView
     {
         private ManualTransactionEditorPresenter _presenter;
+        private bool _isSave;
 
         public ManualTransactionEditorForm(ManualTransactionEditorModel model)
         {
@@ -30,9 +31,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void ManualTransactionEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!_presenter.ValidateTransaction())
+            if (!_isSave && SelectedTransaction != null && SelectedTransaction.Id > 0 && !_presenter.ValidateTransaction())
             {
-                this.ShowWarning("Total debit dan credit harus sama!");
+                this.ShowWarning("Jurnal harus dipilih atau Total debit dan credit harus sama!");
                 e.Cancel = true;
             }
         }
@@ -144,6 +145,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     MethodBase.GetCurrentMethod().Info("Save Manual Transaction's changes");
                     _presenter.SaveChanges();
+                    _isSave = true;
                     this.Close();
                 }
                 catch (Exception ex)
@@ -154,7 +156,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             else
             {
-                this.ShowWarning("Total debit dan credit harus sama!");
+                this.ShowWarning("Jurnal harus dipilih atau Total debit dan credit harus sama!");
             }
         }
 
