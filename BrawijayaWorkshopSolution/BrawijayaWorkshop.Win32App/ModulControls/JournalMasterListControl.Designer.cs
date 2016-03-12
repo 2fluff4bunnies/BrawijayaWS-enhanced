@@ -87,15 +87,15 @@
             // 
             this.txtJournalName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtJournalName.Location = new System.Drawing.Point(368, 29);
+            this.txtJournalName.Location = new System.Drawing.Point(456, 29);
             this.txtJournalName.Name = "txtJournalName";
-            this.txtJournalName.Size = new System.Drawing.Size(340, 20);
+            this.txtJournalName.Size = new System.Drawing.Size(252, 20);
             this.txtJournalName.TabIndex = 3;
             this.txtJournalName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtJournalName_KeyDown);
             // 
             // lblJournalName
             // 
-            this.lblJournalName.Location = new System.Drawing.Point(272, 32);
+            this.lblJournalName.Location = new System.Drawing.Point(381, 32);
             this.lblJournalName.Name = "lblJournalName";
             this.lblJournalName.Size = new System.Drawing.Size(69, 13);
             this.lblJournalName.TabIndex = 2;
@@ -103,7 +103,7 @@
             // 
             // lookupJournalParent
             // 
-            this.lookupJournalParent.Location = new System.Drawing.Point(109, 29);
+            this.lookupJournalParent.Location = new System.Drawing.Point(87, 29);
             this.lookupJournalParent.Name = "lookupJournalParent";
             this.lookupJournalParent.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupJournalParent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -111,12 +111,12 @@
             this.lookupJournalParent.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
-            this.lookupJournalParent.Properties.DisplayMember = "Id";
+            this.lookupJournalParent.Properties.DisplayMember = "Name";
             this.lookupJournalParent.Properties.HideSelection = false;
             this.lookupJournalParent.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupJournalParent.Properties.NullText = "-- Induk Account --";
-            this.lookupJournalParent.Properties.ValueMember = "Code";
-            this.lookupJournalParent.Size = new System.Drawing.Size(115, 20);
+            this.lookupJournalParent.Properties.ValueMember = "Id";
+            this.lookupJournalParent.Size = new System.Drawing.Size(259, 20);
             this.lookupJournalParent.TabIndex = 1;
             // 
             // lblParent

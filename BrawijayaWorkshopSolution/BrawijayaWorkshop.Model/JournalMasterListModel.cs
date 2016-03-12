@@ -26,9 +26,10 @@ namespace BrawijayaWorkshop.Model
             {
                 result = _journalMasterRepository.GetMany(jm => jm.ParentId == parentId && jm.Name.Contains(name)).OrderBy(jm => jm.Name).ToList();
             }
-
-            result = _journalMasterRepository.GetMany(jm => jm.Name.Contains(name)).OrderBy(jm => jm.Name).ToList();
-
+            else
+            {
+                result = _journalMasterRepository.GetMany(jm => jm.Name.Contains(name)).OrderBy(jm => jm.Name).ToList();
+            }
             List<JournalMasterViewModel> mappedResult = new List<JournalMasterViewModel>();
             return Map(result, mappedResult);
         }

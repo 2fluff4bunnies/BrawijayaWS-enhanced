@@ -1,6 +1,8 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -11,7 +13,14 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitData()
         {
-            View.ParentDropdownList = Model.GetAllParentJournal();
+            List<JournalMasterViewModel> listParent = Model.GetAllParentJournal();
+            listParent.Insert(0, new JournalMasterViewModel
+            {
+                Id = 0,
+                Code = "-- Pilih Account --",
+                Name = "-- Pilih Account --"
+            });
+            View.ParentDropdownList = listParent;
         }
 
         public void LoadData()
