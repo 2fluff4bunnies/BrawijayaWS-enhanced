@@ -60,7 +60,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                        " sudah digunakan pada kendaraan dengan nopol " + foundConflict.Vehicle.ActiveLicenseNumber + "!" +
                        "\n\n Apakah anda yakin ingin menukar?") == System.Windows.Forms.DialogResult.Yes)
                     {
-                        foundConflict.WheelDetailId = _presenter.GetCurrentInstalledWheel(lookup.EditValue.AsInteger());
+                        foundConflict.WheelDetailId = _presenter.GetCurrentInstalledWheel(this.SelectedVehicleWheel.Id);
                         this.VehicleWheelExchangedList.Add(foundConflict);
                     }
                     else
@@ -220,6 +220,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void VehicleEditorForm_Load(object sender, EventArgs e)
         {
+            _presenter.InitFormData();
+
             if (SelectedVehicle != null)
             {
                 lblExpirationDate.Visible = false;
@@ -233,7 +235,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowWarning("Tidak ada ban yang siap dipakai updata data ban terlebih dahulu!");
                 }
             }
-            _presenter.InitFormData();
         }
 
         protected override void ExecuteSave()

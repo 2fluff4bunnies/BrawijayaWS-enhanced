@@ -127,24 +127,30 @@ namespace BrawijayaWorkshop.Model
             Map(vehicle, entity);
             _vehicleRepository.Update(entity);
 
-            foreach (var vw in vehicleWheels)
-            {
-                VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vw.Id);
-                vwEntity.ModifyDate = serverTime;
-                vwEntity.ModifyUserId = userId;
-                _vehicleWheelRepository.Update(vwEntity);
-            }
-
             if (vehicleWheelExchanged.Count > 0)
             {
                 foreach (var vw in vehicleWheelExchanged)
                 {
                     VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vw.Id);
+                    vwEntity.WheelDetailId = vw.WheelDetailId;
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
+
                     _vehicleWheelRepository.Update(vwEntity);
                 }
             }
+
+            foreach (var vw in vehicleWheels)
+            {
+                VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vw.Id);
+                vwEntity.WheelDetailId = vw.WheelDetailId;
+                vwEntity.ModifyDate = serverTime;
+                vwEntity.ModifyUserId = userId;
+
+                _vehicleWheelRepository.Update(vwEntity);
+            }
+
+          
 
             _unitOfWork.SaveChanges();
         }

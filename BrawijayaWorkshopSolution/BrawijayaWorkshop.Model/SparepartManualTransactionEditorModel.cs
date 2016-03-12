@@ -98,7 +98,7 @@ namespace BrawijayaWorkshop.Model
                         spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
                         SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
 
-                        if (string.IsNullOrEmpty(sparepartManualTransaction.SerialNumber))
+                        if (!string.IsNullOrEmpty(sparepartManualTransaction.SerialNumber))
                         { 
                             Wheel wheel = _wheelRepository.GetMany(w=> w.SparepartId == sparepartUpdated.Id).FirstOrDefault();
 
@@ -107,11 +107,12 @@ namespace BrawijayaWorkshop.Model
                                 WheelDetail wDetail = new WheelDetail();
                                 wDetail.SparepartDetail = insertedSpDetail;
                                 wDetail.WheelId = wheel.Id;
+                                wDetail.SerialNumber = sparepartManualTransaction.SerialNumber;
                                 wDetail.CreateDate = serverTime;
                                 wDetail.CreateUserId = userId;
                                 wDetail.ModifyUserId = userId;
                                 wDetail.ModifyDate = serverTime;
-                                spDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
+                                wDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
 
                                 _wheelDetailRepository.Add(wDetail);
                             }
