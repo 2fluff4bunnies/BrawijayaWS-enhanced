@@ -64,6 +64,8 @@
     <Compile Include="Configurations\InvoiceConfiguration.cs" />
     <Compile Include="Configurations\InvoiceDetailConfiguration.cs" />
     <Compile Include="Configurations\JournalMasterConfiguration.cs" />
+    <Compile Include="Configurations\LastBalanceConfiguration.cs" />
+    <Compile Include="Configurations\LastBalanceDetailConfiguration.cs" />
     <Compile Include="Configurations\PurchasingConfiguration.cs" />
     <Compile Include="Configurations\PurchasingDetailConfiguration.cs" />
     <Compile Include="Configurations\ReferenceConfiguration.cs" />
@@ -97,6 +99,8 @@
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\InvoiceDetail.cs" />
     <Compile Include="Entities\JournalMaster.cs" />
+    <Compile Include="Entities\LastBalance.cs" />
+    <Compile Include="Entities\LastBalanceDetail.cs" />
     <Compile Include="Entities\Mechanic.cs" />
     <Compile Include="Entities\Purchasing.cs" />
     <Compile Include="Entities\PurchasingDetail.cs" />

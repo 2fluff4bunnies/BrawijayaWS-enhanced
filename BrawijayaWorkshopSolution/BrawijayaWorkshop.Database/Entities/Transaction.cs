@@ -25,5 +25,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public double TotalPayment { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsReconciliation { get; set; }
     }
 }

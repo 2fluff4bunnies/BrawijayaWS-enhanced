@@ -42,6 +42,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
+        public DbSet<LastBalance> LastBalances { get; set; }
+        public DbSet<LastBalanceDetail> LastBalanceDetails { get; set; }
         public DbSet<UsedGood> UsedGoods { get; set; }
         public DbSet<UsedGoodTransaction> UsedGoodsTransactions { get; set; }
 
@@ -71,6 +73,8 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new SPKDetailSparepartDetailConfiguration());
             modelBuilder.Configurations.Add(new TransactionConfiguration());
             modelBuilder.Configurations.Add(new TransactionDetailConfiguration());
+            modelBuilder.Configurations.Add(new LastBalanceConfiguration());
+            modelBuilder.Configurations.Add(new LastBalanceDetailConfiguration());
         }
     }
 }
