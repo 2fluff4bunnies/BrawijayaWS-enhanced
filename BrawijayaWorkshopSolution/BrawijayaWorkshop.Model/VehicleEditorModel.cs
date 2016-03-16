@@ -42,8 +42,9 @@ namespace BrawijayaWorkshop.Model
 
         public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails()
         {
-            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready ||
-                                                                            wd.Status == (int)DbConstant.WheelDetailStatus.Installed
+            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready 
+                                                                            || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
+                                                                            && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
                                                                       ).ToList();
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
@@ -51,7 +52,8 @@ namespace BrawijayaWorkshop.Model
 
         public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails()
         {
-            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready).ToList();
+            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready
+                                                                                       && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL).ToList();
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
         }

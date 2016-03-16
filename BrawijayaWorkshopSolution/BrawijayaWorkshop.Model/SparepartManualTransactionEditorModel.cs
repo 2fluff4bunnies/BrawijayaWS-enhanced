@@ -106,7 +106,7 @@ namespace BrawijayaWorkshop.Model
                             {
                                 SpecialSparepartDetail wDetail = new SpecialSparepartDetail();
                                 wDetail.SparepartDetail = insertedSpDetail;
-                                wDetail.WheelId = specialSparepart.Id;
+                                wDetail.SpecialSparepartId = specialSparepart.Id;
                                 wDetail.SerialNumber = sparepartManualTransaction.SerialNumber;
                                 wDetail.CreateDate = serverTime;
                                 wDetail.CreateUserId = userId;

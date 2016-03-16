@@ -40,7 +40,7 @@ namespace BrawijayaWorkshop.Model
         public void DeleteWheel(SpecialSparepartViewModel SpecialSparepart, int userId)
         {
             DateTime serverTime = DateTime.Now;
-            List<SpecialSparepartDetail> details = _specialSparepartDetailRepository.GetMany(spd => spd.WheelId == SpecialSparepart.Id).ToList();
+            List<SpecialSparepartDetail> details = _specialSparepartDetailRepository.GetMany(spd => spd.SpecialSparepartId == SpecialSparepart.Id).ToList();
             foreach (var iDetails in details)
             {
                 iDetails.Status = (int)DbConstant.DefaultDataStatus.Deleted;

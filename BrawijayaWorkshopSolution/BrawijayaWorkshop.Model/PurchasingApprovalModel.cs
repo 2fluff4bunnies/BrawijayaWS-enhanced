@@ -124,7 +124,7 @@ namespace BrawijayaWorkshop.Model
                         wd.CreateDate = serverTime;
                         wd.ModifyUserId = userID;
                         wd.ModifyDate = serverTime;
-                        wd.WheelId = specialSparepart.Id;
+                        wd.SpecialSparepartId = specialSparepart.Id;
                         wd.SparepartDetail = insertedSpDetail;
                         wd.Status = (int)DbConstant.WheelDetailStatus.Ready;
 

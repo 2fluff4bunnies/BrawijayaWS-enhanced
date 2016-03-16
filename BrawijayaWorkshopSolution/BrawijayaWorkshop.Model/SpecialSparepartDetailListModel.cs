@@ -30,13 +30,13 @@ namespace BrawijayaWorkshop.Model
             if (purchaseDetailID > 0)
             {
                 result = _WheelDetailRepository.GetMany(
-                whd => whd.WheelId == WheelId && whd.SparepartDetail.Status == (int)status
+                whd => whd.SpecialSparepartId == WheelId && whd.SparepartDetail.Status == (int)status
                     && whd.SparepartDetail.PurchasingDetailId == purchaseDetailID).ToList();
             }
             else
             {
                 result = _WheelDetailRepository.GetMany(
-                spd => spd.WheelId == WheelId && spd.Status == (int)status).ToList();
+                spd => spd.SpecialSparepartId == WheelId && spd.Status == (int)status).ToList();
             }
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
