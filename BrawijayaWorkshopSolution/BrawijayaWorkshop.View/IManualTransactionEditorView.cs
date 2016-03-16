@@ -11,6 +11,8 @@ namespace BrawijayaWorkshop.View
         TransactionDetailViewModel SelectedTransactionDetail { get; set; }
         List<TransactionDetailViewModel> TransactionDetailList { get; set; }
 
+        List<TransactionDetailViewModel> DeletedDetailList { get; set; }
+
         List<JournalMasterViewModel> JournalList { get; set; }
 
         DateTime TransactionDate { get; set; }

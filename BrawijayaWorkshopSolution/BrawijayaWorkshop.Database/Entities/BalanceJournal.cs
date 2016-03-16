@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         public int Year { get; set; }
+
+        public bool IsFirst { get; set; }
     }
 }

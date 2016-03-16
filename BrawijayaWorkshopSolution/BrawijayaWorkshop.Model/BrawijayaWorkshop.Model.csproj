@@ -62,6 +62,7 @@
     <Compile Include="DebtEditorModel.cs" />
     <Compile Include="DebtListModel.cs" />
     <Compile Include="DebtPaymentListModel.cs" />
+    <Compile Include="FirstBalanceListModel.cs" />
     <Compile Include="InvoiceEditorModel.cs" />
     <Compile Include="InvoiceListModel.cs" />
     <Compile Include="GuestBookEditorModel.cs" />

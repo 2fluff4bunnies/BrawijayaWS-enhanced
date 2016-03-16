@@ -26,16 +26,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvTransactionDetail.PopupMenuShowing += gvTransactionDetail_PopupMenuShowing;
 
             this.Load += ManualTransactionEditorForm_Load;
-            this.FormClosing += ManualTransactionEditorForm_FormClosing;
-        }
-
-        private void ManualTransactionEditorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!_isSave && SelectedTransaction != null && SelectedTransaction.Id > 0 && !_presenter.ValidateTransaction())
-            {
-                this.ShowWarning("Jurnal harus dipilih atau Total debit dan credit harus sama!");
-                e.Cancel = true;
-            }
         }
 
         private void gvTransactionDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -81,6 +71,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
+
+        public List<TransactionDetailViewModel> DeletedDetailList { get; set; }
 
         public List<JournalMasterViewModel> JournalList {
         

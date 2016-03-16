@@ -21,6 +21,10 @@ namespace BrawijayaWorkshop.Database
             {
                 Name = DbConstant.ROLE_MANAGER
             });
+            Role financeRole = context.Roles.Add(new Role
+            {
+                Name = DbConstant.ROLE_FINANCE
+            });
 
             User superAdminUser = context.Users.Add(new User
             {
@@ -28,7 +32,7 @@ namespace BrawijayaWorkshop.Database
                 LastName = "Admin",
                 IsActive = true,
                 UserName = "superadmin",
-                Password = "!0superadmin123".Encrypt()
+                Password = "!0sp123".Encrypt()
             });
 
             User adminUser = context.Users.Add(new User
@@ -37,7 +41,7 @@ namespace BrawijayaWorkshop.Database
                 LastName = "-",
                 IsActive = true,
                 UserName = "admin",
-                Password = "!0admin123".Encrypt()
+                Password = "!0ad123".Encrypt()
             });
 
             User managerUser = context.Users.Add(new User
@@ -46,7 +50,16 @@ namespace BrawijayaWorkshop.Database
                 LastName = "-",
                 IsActive = true,
                 UserName = "manager",
-                Password = "!0manager123".Encrypt()
+                Password = "!0mg123".Encrypt()
+            });
+
+            User financeUser = context.Users.Add(new User
+            {
+                FirstName = "Finance",
+                LastName = "-",
+                IsActive = true,
+                UserName = "finance",
+                Password = "!0fn123".Encrypt()
             });
             context.SaveChanges();
 
@@ -66,6 +79,12 @@ namespace BrawijayaWorkshop.Database
             {
                 RoleId = managerRole.Id,
                 UserId = managerUser.Id
+            });
+
+            context.UserRoles.Add(new UserRole
+            {
+                RoleId = financeRole.Id,
+                UserId = financeUser.Id
             });
             context.SaveChanges();
 
@@ -164,10 +183,10 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_MANAGE_APP_USER,
                 ModulDescription = "Manage Application User"
             });
-            ApplicationModul manualTransMod = context.ApplicationModuls.Add(new ApplicationModul
+            ApplicationModul accountingMod = context.ApplicationModuls.Add(new ApplicationModul
             {
-                ModulName = DbConstant.MODUL_MANUAL_TRANSACTION,
-                ModulDescription = "Manual Transaction"
+                ModulName = DbConstant.MODUL_ACCOUNTING,
+                ModulDescription = "Manual Accounting"
             });
             ApplicationModul usedGoodMod = context.ApplicationModuls.Add(new ApplicationModul
             {
@@ -298,7 +317,7 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = manualTransMod.Id,
+                ApplicationModulId = accountingMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -366,12 +385,6 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = manualTransMod.Id,
-                RoleId = adminRole.Id,
-                AccessCode = (int)DbConstant.AccessTypeEnum.All
-            });
-            context.RoleAccesses.Add(new RoleAccess
-            {
                 ApplicationModulId = usedGoodMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
@@ -398,7 +411,7 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = manualTransMod.Id,
+                ApplicationModulId = accountingMod.Id,
                 RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -412,6 +425,14 @@ namespace BrawijayaWorkshop.Database
             {
                 ApplicationModulId = usedGoodTransMod.Id,
                 RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+
+            // finance
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = accountingMod.Id,
+                RoleId = financeRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.SaveChanges();
@@ -775,6 +796,37 @@ namespace BrawijayaWorkshop.Database
                 ParentId = usedGoodTransactionRef.Id
             });
             context.SaveChanges();
+
+            // Special Sparepart Type
+            Reference specialSparepartRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_SPECIAL_SPAREPART_TYPE,
+                Name = "Tipe Sparepart",
+                Description = "Jenis tipe sparepart (eg: ban, biasa)",
+                Value = DbConstant.REF_SPECIAL_SPAREPART_TYPE
+            });
+            context.SaveChanges();
+
+            // Special Sparepart Type Children
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL,
+                Name = "Tipe Sparepart Ban",
+                Description = "Tipe Sparepart Ban",
+                Value = DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL,
+                ParentId = specialSparepartRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_SPECIAL_SPAREPART_TYPE_REGULAR,
+                Name = "Tipe Sparepart Biasa",
+                Description = "Tipe Sparepart Biasa",
+                Value = DbConstant.REF_SPECIAL_SPAREPART_TYPE_REGULAR,
+                ParentId = specialSparepartRef.Id
+            });
+            context.SaveChanges();
+
+            // Settings
 
             context.Settings.Add(new Setting
             {

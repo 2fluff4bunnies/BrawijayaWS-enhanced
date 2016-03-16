@@ -6,6 +6,7 @@ namespace BrawijayaWorkshop.Constant
         public const string ROLE_SUPERADMIN = "R_SUPERADMIN";
         public const string ROLE_ADMIN = "R_ADMIN";
         public const string ROLE_MANAGER = "R_MANAGER";
+        public const string ROLE_FINANCE = "R_FINANCE";
 
         public const string MODUL_ACCESSIBILITY = "M_ACCESSIBILITY";
         public const string MODUL_USERCONTROL = "M_USERCONTROL";
@@ -33,7 +34,7 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_DEBT = "M_DEBT";
         public const string MODUL_INVOICE = "M_INVOICE";
         
-        public const string MODUL_MANUAL_TRANSACTION = "M_MANUAL_TRANS";
+        public const string MODUL_ACCOUNTING = "M_ACCOUNTING";
 
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";
         public const string REF_SPAREPARTUNIT = "REF_SPAREPARTUNIT";
@@ -54,6 +55,10 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_USEDGOOD_TRANSACTION_TYPE = "REF_USEDGOOD_TRANSACTION_TYPE";
         public const string REF_USEDGOOD_TRANSACTION_TYPE_SOLD = "REF_USEDGOOD_TRANSACTION_TYPE_SOLD";
         public const string REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE = "REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE";
+
+        public const string REF_SPECIAL_SPAREPART_TYPE = "REF_SPECIAL_SPAREPART_TYPE";
+        public const string REF_SPECIAL_SPAREPART_TYPE_WHEEL = "REF_SPECIAL_SPAREPART_TYPE_WHEEL";
+        public const string REF_SPECIAL_SPAREPART_TYPE_REGULAR = "REF_SPECIAL_SPAREPART_TYPE_REGULAR";
 
         public const string REF_USEDGOOD_TRANSACTION_MANUAL_TYPE = "REF_USEDGOOD_TRANSACTION_MANUAL_TYPE";
         public const string REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS = "REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS";
@@ -149,6 +154,7 @@ namespace BrawijayaWorkshop.Constant
             NotPrinted = 1,
             Printed = 2,
         }
+
         public enum WheelDetailStatus
         { 
             Ready = 1,

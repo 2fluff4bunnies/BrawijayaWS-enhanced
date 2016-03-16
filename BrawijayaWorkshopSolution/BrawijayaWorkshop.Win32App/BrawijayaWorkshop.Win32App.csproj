@@ -253,12 +253,6 @@
     <Compile Include="ModulControls\SparepartListControl.Designer.cs">
       <DependentUpon>SparepartListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulControls\TestUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ModulControls\TestUserControl.Designer.cs">
-      <DependentUpon>TestUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModulControls\UsedGoodsListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -603,9 +597,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SupplierListControl.resx">
       <DependentUpon>SupplierListControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModulControls\TestUserControl.resx">
-      <DependentUpon>TestUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\UsedGoodsListControl.resx">
       <DependentUpon>UsedGoodsListControl.cs</DependentUpon>

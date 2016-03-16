@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return DbConstant.MODUL_MANUAL_TRANSACTION;
+                return DbConstant.MODUL_ACCOUNTING;
             }
         }
 

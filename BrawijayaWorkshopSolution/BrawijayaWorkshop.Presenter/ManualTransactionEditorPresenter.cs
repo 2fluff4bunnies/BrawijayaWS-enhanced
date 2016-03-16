@@ -2,8 +2,8 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
-using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.JournalList = Model.RetrieveAllJournal();
             View.TransactionDate = DateTime.Today;
+            View.DeletedDetailList = new List<TransactionDetailViewModel>();
 
             if(View.SelectedTransaction != null)
             {
@@ -64,6 +65,14 @@ namespace BrawijayaWorkshop.Presenter
                 Model.InsertTransaction(View.SelectedTransaction, View.TransactionDetailList,
                     LoginInformation.UserId);
             }
+
+            foreach (var deletedItem in View.DeletedDetailList)
+            {
+                if (deletedItem.Id > 0)
+                {
+                    Model.DeleteTransactionDetail(deletedItem);
+                }
+            }
         }
 
         public void CalculateTotalTransaction()
@@ -81,10 +90,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void RemoveDetail()
         {
-            if(View.SelectedTransactionDetail.Id > 0)
-            {
-                Model.DeleteTransactionDetail(View.SelectedTransactionDetail);
-            }
+            View.DeletedDetailList.Add(View.SelectedTransactionDetail);
             View.TransactionDetailList.Remove(View.SelectedTransactionDetail);
             View.TransactionDetailList = View.TransactionDetailList;
         }

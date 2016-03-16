@@ -379,7 +379,7 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iPurchasing.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_PURCHASING);
             navTransactionData.iSPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
             navTransactionData.iUsedGoodTrans.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD_TRANSACTION);
-            navTransactionData.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANUAL_TRANSACTION);
+            navTransactionData.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
 
             ShowNavigationControl(navTransactionData);
             // init event navigation
