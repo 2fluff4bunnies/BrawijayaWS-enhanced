@@ -64,8 +64,8 @@
     <Compile Include="Configurations\InvoiceConfiguration.cs" />
     <Compile Include="Configurations\InvoiceDetailConfiguration.cs" />
     <Compile Include="Configurations\JournalMasterConfiguration.cs" />
-    <Compile Include="Configurations\LastBalanceConfiguration.cs" />
-    <Compile Include="Configurations\LastBalanceDetailConfiguration.cs" />
+    <Compile Include="Configurations\BalanceJournalConfiguration.cs" />
+    <Compile Include="Configurations\BalanceJournalDetailConfiguration.cs" />
     <Compile Include="Configurations\PurchasingConfiguration.cs" />
     <Compile Include="Configurations\PurchasingDetailConfiguration.cs" />
     <Compile Include="Configurations\ReferenceConfiguration.cs" />
@@ -74,7 +74,6 @@
     <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\SparepartManualTransactionConfiguration.cs" />
     <Compile Include="Configurations\SPKConfiguration.cs" />
-    <Compile Include="Configurations\SPKDetailMechanicConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\SPKScheduleConfiguration.cs" />
@@ -99,8 +98,8 @@
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\InvoiceDetail.cs" />
     <Compile Include="Entities\JournalMaster.cs" />
-    <Compile Include="Entities\LastBalance.cs" />
-    <Compile Include="Entities\LastBalanceDetail.cs" />
+    <Compile Include="Entities\BalanceJournal.cs" />
+    <Compile Include="Entities\BalanceJournalDetail.cs" />
     <Compile Include="Entities\Mechanic.cs" />
     <Compile Include="Entities\Purchasing.cs" />
     <Compile Include="Entities\PurchasingDetail.cs" />
@@ -112,7 +111,6 @@
     <Compile Include="Entities\SparepartDetail.cs" />
     <Compile Include="Entities\SparepartManualTransaction.cs" />
     <Compile Include="Entities\SPK.cs" />
-    <Compile Include="Entities\SPKDetailMechanic %28Deleted%29.cs" />
     <Compile Include="Entities\SPKDetailSparepart.cs" />
     <Compile Include="Entities\SPKDetailSparepartDetail.cs" />
     <Compile Include="Entities\SPKSchedule.cs" />
@@ -133,6 +131,8 @@
     <Compile Include="Repositories\AppDatabaseFactory.cs" />
     <Compile Include="Repositories\ApplicationModulRepository.cs" />
     <Compile Include="Repositories\AppUnitOfWork.cs" />
+    <Compile Include="Repositories\BalanceJournalDetailRepository.cs" />
+    <Compile Include="Repositories\BalanceJournalRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\GuestBookRepostory.cs" />
@@ -149,7 +149,6 @@
     <Compile Include="Repositories\SparepartDetailRepository.cs" />
     <Compile Include="Repositories\SparepartManualTransactionRepository.cs" />
     <Compile Include="Repositories\SparepartRepository.cs" />
-    <Compile Include="Repositories\SPKDetailMechanicRepository.cs" />
     <Compile Include="Repositories\SPKDetailSparepartRepository.cs" />
     <Compile Include="Repositories\SPKDetailSparepartDetailRepository.cs" />
     <Compile Include="Repositories\SPKRepository.cs" />

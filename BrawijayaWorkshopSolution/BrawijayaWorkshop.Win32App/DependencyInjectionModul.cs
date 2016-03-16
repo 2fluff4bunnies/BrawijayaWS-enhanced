@@ -45,6 +45,8 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IUsedGoodRepository>().To<UsedGoodRepository>();
             Bind<IUsedGoodTransactionRepository>().To<UsedGoodTransactionRepository>();
             Bind<IGuestBookRepository>().To<GuestBookRepositories>();
+            Bind<IBalanceJournalRepository>().To<BalanceJournalRepository>();
+            Bind<IBalanceJournalDetailRepository>().To<BalanceJournalDetailRepository>();
             // todo: add binding
         }
     }

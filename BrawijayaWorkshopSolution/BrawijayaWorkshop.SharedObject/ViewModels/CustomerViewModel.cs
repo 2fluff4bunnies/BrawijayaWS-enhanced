@@ -16,6 +16,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public string ContactPerson { get; set; }
 
         public int CityId { get; set; }
-        public virtual CityViewModel City { get; set; }
+        public CityViewModel City { get; set; }
     }
 }

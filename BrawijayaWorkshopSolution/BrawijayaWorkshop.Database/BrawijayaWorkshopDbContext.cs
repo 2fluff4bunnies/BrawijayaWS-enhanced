@@ -25,6 +25,7 @@ namespace BrawijayaWorkshop.Database
         public DbSet<Mechanic> Mechanics { get; set; }
         public DbSet<Sparepart> Spareparts { get; set; }
         public DbSet<SparepartDetail> SparepartDetails { get; set; }
+        public DbSet<SparepartManualTransaction> SparepartManualTransactions { get; set; }
         public DbSet<Wheel> Wheels { get; set; }
         public DbSet<WheelDetail> WheelDetails { get; set; }
         public DbSet<Purchasing> Purchasings { get; set; }
@@ -34,7 +35,6 @@ namespace BrawijayaWorkshop.Database
         public DbSet<VehicleWheel> VehicleWheels { get; set; }
         public DbSet<GuestBook> GuestBooks { get; set; }
         public DbSet<SPK> SPKs { get; set; }
-        public DbSet<SPKDetailMechanic> SPKDetailMechanics { get; set; } // must be deleted
         public DbSet<SPKSchedule> SPKSchedules { get; set; }
         public DbSet<SPKDetailSparepart> SPKDetailSpareparts { get; set; }
         public DbSet<SPKDetailSparepartDetail> SPKDetailSparepartDetails { get; set; }
@@ -42,8 +42,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
-        public DbSet<LastBalance> LastBalances { get; set; }
-        public DbSet<LastBalanceDetail> LastBalanceDetails { get; set; }
+        public DbSet<BalanceJournal> BalanceJournals { get; set; }
+        public DbSet<BalanceJournalDetail> BalanceJournalDetails { get; set; }
         public DbSet<UsedGood> UsedGoods { get; set; }
         public DbSet<UsedGoodTransaction> UsedGoodsTransactions { get; set; }
 
@@ -59,22 +59,30 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new RoleAccessConfiguration());
             modelBuilder.Configurations.Add(new CustomerConfiguration());
+            modelBuilder.Configurations.Add(new GuestBookConfiguration());
             modelBuilder.Configurations.Add(new VehicleConfiguration());
             modelBuilder.Configurations.Add(new VehicleDetailConfiguration());
+            modelBuilder.Configurations.Add(new WheelConfiguration());
+            modelBuilder.Configurations.Add(new WheelDetailConfiguration());
             modelBuilder.Configurations.Add(new PurchasingConfiguration());
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
             modelBuilder.Configurations.Add(new ReferenceConfiguration());
             modelBuilder.Configurations.Add(new SparepartConfiguration());
             modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
+            modelBuilder.Configurations.Add(new SparepartManualTransactionConfiguration());
             modelBuilder.Configurations.Add(new JournalMasterConfiguration());
             modelBuilder.Configurations.Add(new SPKConfiguration());
-            modelBuilder.Configurations.Add(new SPKDetailMechanicConfiguration());
             modelBuilder.Configurations.Add(new SPKDetailSparepartConfiguration());
             modelBuilder.Configurations.Add(new SPKDetailSparepartDetailConfiguration());
+            modelBuilder.Configurations.Add(new SPKScheduleConfiguration());
+            modelBuilder.Configurations.Add(new InvoiceConfiguration());
+            modelBuilder.Configurations.Add(new InvoiceDetailConfiguration());
             modelBuilder.Configurations.Add(new TransactionConfiguration());
             modelBuilder.Configurations.Add(new TransactionDetailConfiguration());
-            modelBuilder.Configurations.Add(new LastBalanceConfiguration());
-            modelBuilder.Configurations.Add(new LastBalanceDetailConfiguration());
+            modelBuilder.Configurations.Add(new BalanceJournalConfiguration());
+            modelBuilder.Configurations.Add(new BalanceJournalDetailConfiguration());
+            modelBuilder.Configurations.Add(new UsedGoodsConfiguration());
+            modelBuilder.Configurations.Add(new UsedGoodsTransactionConfiguration());
         }
     }
 }

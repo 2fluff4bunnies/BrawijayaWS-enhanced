@@ -90,7 +90,6 @@
     <Compile Include="SparepartDetailListModel.cs" />
     <Compile Include="SparepartManualTransactionEditorModel.cs" />
     <Compile Include="SPKViewDetailModel.cs" />
-    <Compile Include="SPKDetailMechanicListModel.cs" />
     <Compile Include="SPKDetailSparepartListModel.cs" />
     <Compile Include="SPKEditorModel.cs" />
     <Compile Include="SPKListModel.cs" />

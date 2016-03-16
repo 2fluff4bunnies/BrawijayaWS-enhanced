@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public double TotalPayment { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsReconciliation { get; set; }
     }
 }

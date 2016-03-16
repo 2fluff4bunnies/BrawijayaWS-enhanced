@@ -18,5 +18,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int? ParentId { get; set; }
         public virtual JournalMaster Parent { get; set; }
+
+        public bool IsProfitLoss { get; set; }
     }
 }

@@ -19,14 +19,13 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailSparepartDetailRepository _SPKDetailSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
-        private ISPKDetailMechanicRepository _SPKDetailMechanicRepository;
         private IMechanicRepository _mechanicRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
             ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, ISPKDetailMechanicRepository SPKDetailMechanicRepository,
+            ISparepartDetailRepository sparepartDetailRepository,
             IMechanicRepository mechanicRepository, IUnitOfWork unitOfWork)
             :base()
         {
@@ -38,7 +37,6 @@ namespace BrawijayaWorkshop.Model
             _SPKDetailSparepartDetailRepository = SPKDetailSparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
-            _SPKDetailMechanicRepository = SPKDetailMechanicRepository;
             _mechanicRepository = mechanicRepository;
             _unitOfWork = unitOfWork;
         }

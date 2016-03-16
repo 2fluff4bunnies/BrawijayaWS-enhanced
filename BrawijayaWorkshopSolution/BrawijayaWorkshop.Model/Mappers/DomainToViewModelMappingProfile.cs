@@ -41,6 +41,8 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<VehicleWheel, VehicleWheelViewModel>();
             Mapper.CreateMap<Wheel, WheelViewModel>();
             Mapper.CreateMap<WheelDetail, WheelDetailViewModel>();
+            Mapper.CreateMap<BalanceJournal, BalanceJournalViewModel>();
+            Mapper.CreateMap<BalanceJournalDetail, BalanceJournalDetailViewModel>();
         }
     }
 }
