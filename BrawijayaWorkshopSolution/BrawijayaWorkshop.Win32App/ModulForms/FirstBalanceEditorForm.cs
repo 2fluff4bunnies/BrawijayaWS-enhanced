@@ -3,9 +3,12 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -17,23 +20,42 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
             _presenter = new FirstBalanceEditorPresenter(this, model);
 
+            gvFirstBalanceDetail.FocusedRowChanged += gvFirstBalanceDetail_FocusedRowChanged;
+            gvFirstBalanceDetail.PopupMenuShowing += gvFirstBalanceDetail_PopupMenuShowing;
+
             this.Load += FirstBalanceEditorForm_Load;
+        }
+
+        private void gvFirstBalanceDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsEditor.Show(view.GridControl, e.Point);
+            }
+        }
+
+        private void gvFirstBalanceDetail_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            SelectedFirstBalanceDetailJournal = gvFirstBalanceDetail.GetFocusedRow() as BalanceJournalDetailViewModel;
         }
 
         private void FirstBalanceEditorForm_Load(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.InitFormData();
         }
 
         public DateTime FirstBalanceDate
         {
             get
             {
-                throw new NotImplementedException();
+                return deFirstBalanceDate.EditValue.AsDateTime();
             }
             set
             {
-                throw new NotImplementedException();
+                deFirstBalanceDate.EditValue = value;
             }
         }
 
@@ -41,59 +63,75 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return lookUpJournalGv.DataSource as List<JournalMasterViewModel>;
             }
             set
             {
-                throw new NotImplementedException();
+                lookUpJournalGv.DataSource = value;
             }
         }
 
-        public BalanceJournalViewModel SelectedFirstBalanceJournal
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public BalanceJournalViewModel SelectedFirstBalanceJournal { get; set; }
 
-        public BalanceJournalDetailViewModel SelectedFirstBalanceDetailJournal
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public BalanceJournalDetailViewModel SelectedFirstBalanceDetailJournal { get; set; }
 
         public List<BalanceJournalDetailViewModel> FirstBalanceJournalDetailList
         {
             get
             {
-                throw new NotImplementedException();
+                return gridFirstBalanceDetail.DataSource as List<BalanceJournalDetailViewModel>;
             }
             set
             {
-                throw new NotImplementedException();
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridFirstBalanceDetail.DataSource = value; gvFirstBalanceDetail.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridFirstBalanceDetail.DataSource = value;
+                    gvFirstBalanceDetail.BestFitColumns();
+                }
             }
         }
 
-        public List<BalanceJournalDetailViewModel> DeletedDetailList
+        public List<BalanceJournalDetailViewModel> DeletedDetailList { get; set; }
+
+        private void btnNewDetailData_Click(object sender, EventArgs e)
         {
-            get
+            _presenter.InsertNewRecord();
+        }
+
+        private void cmsDeleteData_Click(object sender, EventArgs e)
+        {
+            if (SelectedFirstBalanceDetailJournal != null)
             {
-                throw new NotImplementedException();
+                if (this.ShowConfirmation("Apakah anda yakin ingin menghapus detail berikut?") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    _presenter.RemoveDetail();
+                }
             }
-            set
+        }
+
+        protected override void ExecuteSave()
+        {
+            if (_presenter.ValidateBalanceData())
             {
-                throw new NotImplementedException();
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save First Balance's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save first balance", ex);
+                    this.ShowError("Proses simpan data saldo awal gagal!");
+                }
+            }
+            else
+            {
+                this.ShowWarning("Jurnal harus dipilih atau Total debit dan credit harus sama!");
             }
         }
     }

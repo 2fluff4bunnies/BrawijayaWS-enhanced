@@ -348,13 +348,13 @@ namespace BrawijayaWorkshop.Win32App
             ShowUserControl(listMechanic);
         }
 
-        void iWheel_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iWheel_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             WheelListControl wheelListControl = Bootstrapper.Resolve<WheelListControl>();
             ShowUserControl(wheelListControl);
         }
 
-        void iUsedGood_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iUsedGood_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             UsedGoodsListControl usedGoodListtControl = Bootstrapper.Resolve<UsedGoodsListControl>();
             ShowUserControl(usedGoodListtControl);
@@ -379,20 +379,12 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iPurchasing.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_PURCHASING);
             navTransactionData.iSPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
             navTransactionData.iUsedGoodTrans.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD_TRANSACTION);
-            navTransactionData.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
 
             ShowNavigationControl(navTransactionData);
             // init event navigation
             navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
             navTransactionData.iSPK.LinkClicked += iSPK_LinkClicked;
             navTransactionData.iUsedGoodTrans.LinkClicked += iUsedGoodTrans_LinkClicked;
-            navTransactionData.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
-        }
-
-        private void iManualTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
-        {
-            ManualTransactionListControl listManualTrans = Bootstrapper.Resolve<ManualTransactionListControl>();
-            ShowUserControl(listManualTrans);
         }
 
         private void iPurchasing_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -420,10 +412,39 @@ namespace BrawijayaWorkshop.Win32App
             ClearUserControl();
 
             // show navigation list
-            ReportingDataNavigationControl navTransactionData = new ReportingDataNavigationControl();
-            ShowNavigationControl(navTransactionData);
+            ReportingDataNavigationControl navReporting = new ReportingDataNavigationControl();
+            ShowNavigationControl(navReporting);
             // init event navigation
             //navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
+        }
+
+        private void iAccounting_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
+
+            ClearNavigation();
+            ClearUserControl();
+
+            AccountingNavigationControl navAccounting = new AccountingNavigationControl();
+            navAccounting.iFirstBalance.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+
+            ShowNavigationControl(navAccounting);
+
+            navAccounting.iFirstBalance.LinkClicked += iFirstBalance_LinkClicked;
+            navAccounting.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
+        }
+
+        private void iFirstBalance_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            FirstBalanceListControl firstBalanceList = Bootstrapper.Resolve<FirstBalanceListControl>();
+            ShowUserControl(firstBalanceList);
+        }
+
+        private void iManualTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            ManualTransactionListControl listManualTrans = Bootstrapper.Resolve<ManualTransactionListControl>();
+            ShowUserControl(listManualTrans);
         }
     }
 }

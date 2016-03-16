@@ -35,7 +35,6 @@
             this.iPurchasing = new DevExpress.XtraNavBar.NavBarItem();
             this.iSPK = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGoodTrans = new DevExpress.XtraNavBar.NavBarItem();
-            this.iManualTransaction = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).BeginInit();
@@ -51,8 +50,7 @@
             this.navbarTransactionData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.iPurchasing,
             this.iSPK,
-            this.iUsedGoodTrans,
-            this.iManualTransaction});
+            this.iUsedGoodTrans});
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
             this.navbarTransactionData.Name = "navbarTransactionData";
             this.navbarTransactionData.OptionsNavPane.ExpandedWidth = 249;
@@ -68,8 +66,7 @@
             this.navbarGroupTransactionData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchasing),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSPK),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGoodTrans),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iManualTransaction)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGoodTrans)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
             // 
             // iPurchasing
@@ -90,12 +87,6 @@
             this.iUsedGoodTrans.Caption = "Barang Bekas";
             this.iUsedGoodTrans.Name = "iUsedGoodTrans";
             this.iUsedGoodTrans.SmallImageIndex = 2;
-            // 
-            // iManualTransaction
-            // 
-            this.iManualTransaction.Caption = "Biaya | Pendapatan";
-            this.iManualTransaction.Name = "iManualTransaction";
-            this.iManualTransaction.SmallImageIndex = 3;
             // 
             // imageCollection
             // 
@@ -132,6 +123,5 @@
         public DevExpress.XtraNavBar.NavBarItem iPurchasing;
         public DevExpress.XtraNavBar.NavBarItem iSPK;
         public DevExpress.XtraNavBar.NavBarItem iUsedGoodTrans;
-        public DevExpress.XtraNavBar.NavBarItem iManualTransaction;
     }
 }

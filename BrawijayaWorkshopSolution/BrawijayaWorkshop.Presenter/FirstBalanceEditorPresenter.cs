@@ -70,6 +70,13 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
+        public void InsertNewRecord()
+        {
+            List<BalanceJournalDetailViewModel> listDetail = View.FirstBalanceJournalDetailList;
+            listDetail.Add(new BalanceJournalDetailViewModel());
+            View.FirstBalanceJournalDetailList = listDetail;
+        }
+
         public void RemoveDetail()
         {
             View.DeletedDetailList.Add(View.SelectedFirstBalanceDetailJournal);

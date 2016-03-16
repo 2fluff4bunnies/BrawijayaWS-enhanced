@@ -511,6 +511,12 @@
     <Compile Include="ModulForms\WheelEditorForm.Designer.cs">
       <DependentUpon>WheelEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NavigationControls\AccountingNavigationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NavigationControls\AccountingNavigationControl.Designer.cs">
+      <DependentUpon>AccountingNavigationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="NavigationControls\MasterDataNavigationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -735,6 +741,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\WheelEditorForm.resx">
       <DependentUpon>WheelEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavigationControls\AccountingNavigationControl.resx">
+      <DependentUpon>AccountingNavigationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\MasterDataNavigationControl.resx">
       <DependentUpon>MasterDataNavigationControl.cs</DependentUpon>

@@ -4,6 +4,7 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.ModulForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,11 +117,22 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void btnNewData_Click(object sender, EventArgs e)
         {
             if (bgwMain.IsBusy) return;
+
+            FirstBalanceEditorForm editor = Bootstrapper.Resolve<FirstBalanceEditorForm>();
+            editor.ShowDialog(this);
+
+            RefreshDataView();
         }
 
         private void btnEditData_Click(object sender, EventArgs e)
         {
             if (bgwMain.IsBusy) return;
+
+            FirstBalanceEditorForm editor = Bootstrapper.Resolve<FirstBalanceEditorForm>();
+            editor.SelectedFirstBalanceJournal = SelectedFirstBalanceJournal;
+            editor.ShowDialog(this);
+
+            RefreshDataView();
         }
 
         private void btnDeleteData_Click(object sender, EventArgs e)

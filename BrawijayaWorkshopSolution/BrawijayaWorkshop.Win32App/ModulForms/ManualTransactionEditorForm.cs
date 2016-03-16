@@ -15,7 +15,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class ManualTransactionEditorForm : BaseEditorForm, IManualTransactionEditorView
     {
         private ManualTransactionEditorPresenter _presenter;
-        private bool _isSave;
 
         public ManualTransactionEditorForm(ManualTransactionEditorModel model)
         {
@@ -74,9 +73,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public List<TransactionDetailViewModel> DeletedDetailList { get; set; }
 
-        public List<JournalMasterViewModel> JournalList {
-        
-        get
+        public List<JournalMasterViewModel> JournalList
+        {
+            get
             {
                 return lookUpJournalGv.DataSource as List<JournalMasterViewModel>;
             }
@@ -137,7 +136,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     MethodBase.GetCurrentMethod().Info("Save Manual Transaction's changes");
                     _presenter.SaveChanges();
-                    _isSave = true;
                     this.Close();
                 }
                 catch (Exception ex)
@@ -156,7 +154,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (SelectedTransactionDetail != null)
             {
-                if(this.ShowConfirmation("Apakah anda yakin ingin menghapus detail berikut?") == System.Windows.Forms.DialogResult.Yes)
+                if (this.ShowConfirmation("Apakah anda yakin ingin menghapus detail berikut?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     _presenter.RemoveDetail();
                 }
