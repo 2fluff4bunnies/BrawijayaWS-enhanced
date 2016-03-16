@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
-    public interface IWheelListView : IView
+    public interface ISpecialSparepartListView : IView
     {
         string NameFilter { get; set; }
 
-        List<WheelViewModel> WheelListData { get; set; }
+        List<SpecialSparepartViewModel> SpecialSparepartListData { get; set; }
 
-        WheelViewModel SelectedWheel { get; set; }
+        SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
 
     }
 }

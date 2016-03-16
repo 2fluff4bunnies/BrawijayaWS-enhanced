@@ -12,6 +12,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.ListCity = Model.RetrieveCity();
+
             if (View.SelectedSupplier != null)
             {
                 View.SupplierName = View.SelectedSupplier.Name;

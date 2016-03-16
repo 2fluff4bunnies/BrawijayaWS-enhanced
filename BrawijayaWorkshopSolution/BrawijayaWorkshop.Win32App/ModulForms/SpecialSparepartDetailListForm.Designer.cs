@@ -1,6 +1,6 @@
 ﻿namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    partial class WheelDetailListForm
+    partial class SpecialSparepartDetailListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,53 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WheelDetailListForm));
-            this.gridWheelDetail = new DevExpress.XtraGrid.GridControl();
-            this.gvWheelDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpecialSparepartDetailListForm));
+            this.gridSpecialSparepartDetail = new DevExpress.XtraGrid.GridControl();
+            this.gvSpecialSparepartDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCodeDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupInfo = new DevExpress.XtraEditors.GroupControl();
             this.lookupStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.lblFilterStatus = new DevExpress.XtraEditors.LabelControl();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)(this.gridWheelDetail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWheelDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSpecialSparepartDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSpecialSparepartDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupInfo)).BeginInit();
             this.groupInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupStatus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridWheelDetail
+            // gridSpecialSparepartDetail
             // 
-            this.gridWheelDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridWheelDetail.Location = new System.Drawing.Point(0, 62);
-            this.gridWheelDetail.MainView = this.gvWheelDetail;
-            this.gridWheelDetail.Name = "gridWheelDetail";
-            this.gridWheelDetail.Size = new System.Drawing.Size(692, 237);
-            this.gridWheelDetail.TabIndex = 2;
-            this.gridWheelDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvWheelDetail});
+            this.gridSpecialSparepartDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridSpecialSparepartDetail.Location = new System.Drawing.Point(0, 62);
+            this.gridSpecialSparepartDetail.MainView = this.gvSpecialSparepartDetail;
+            this.gridSpecialSparepartDetail.Name = "gridSpecialSparepartDetail";
+            this.gridSpecialSparepartDetail.Size = new System.Drawing.Size(692, 237);
+            this.gridSpecialSparepartDetail.TabIndex = 2;
+            this.gridSpecialSparepartDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvSpecialSparepartDetail});
             // 
-            // gvWheelDetail
+            // gvSpecialSparepartDetail
             // 
-            this.gvWheelDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvSpecialSparepartDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCodeDetail,
             this.colSerialNumber});
-            this.gvWheelDetail.GridControl = this.gridWheelDetail;
-            this.gvWheelDetail.Name = "gvWheelDetail";
-            this.gvWheelDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvWheelDetail.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvWheelDetail.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvWheelDetail.OptionsBehavior.Editable = false;
-            this.gvWheelDetail.OptionsBehavior.ReadOnly = true;
-            this.gvWheelDetail.OptionsCustomization.AllowColumnMoving = false;
-            this.gvWheelDetail.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvWheelDetail.OptionsMenu.EnableFooterMenu = false;
-            this.gvWheelDetail.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvWheelDetail.OptionsView.ShowFooter = true;
-            this.gvWheelDetail.OptionsView.ShowGroupPanel = false;
-            this.gvWheelDetail.OptionsView.ShowViewCaption = true;
-            this.gvWheelDetail.ViewCaption = "Daftar Ban Satuan";
+            this.gvSpecialSparepartDetail.GridControl = this.gridSpecialSparepartDetail;
+            this.gvSpecialSparepartDetail.Name = "gvSpecialSparepartDetail";
+            this.gvSpecialSparepartDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSpecialSparepartDetail.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSpecialSparepartDetail.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvSpecialSparepartDetail.OptionsBehavior.Editable = false;
+            this.gvSpecialSparepartDetail.OptionsBehavior.ReadOnly = true;
+            this.gvSpecialSparepartDetail.OptionsCustomization.AllowColumnMoving = false;
+            this.gvSpecialSparepartDetail.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvSpecialSparepartDetail.OptionsMenu.EnableFooterMenu = false;
+            this.gvSpecialSparepartDetail.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvSpecialSparepartDetail.OptionsView.ShowFooter = true;
+            this.gvSpecialSparepartDetail.OptionsView.ShowGroupPanel = false;
+            this.gvSpecialSparepartDetail.OptionsView.ShowViewCaption = true;
+            this.gvSpecialSparepartDetail.ViewCaption = "Daftar Sparepart Spesial Per Item";
             // 
             // colCodeDetail
             // 
@@ -137,18 +137,18 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // WheelDetailListForm
+            // SpecialSparepartDetailListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(692, 299);
-            this.Controls.Add(this.gridWheelDetail);
+            this.Controls.Add(this.gridSpecialSparepartDetail);
             this.Controls.Add(this.groupInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "WheelDetailListForm";
-            this.Text = "Detil Ban : {0}";
-            ((System.ComponentModel.ISupportInitialize)(this.gridWheelDetail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWheelDetail)).EndInit();
+            this.Name = "SpecialSparepartDetailListForm";
+            this.Text = "Detil Sparepart Spesial: {0}";
+            ((System.ComponentModel.ISupportInitialize)(this.gridSpecialSparepartDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSpecialSparepartDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupInfo)).EndInit();
             this.groupInfo.ResumeLayout(false);
             this.groupInfo.PerformLayout();
@@ -159,8 +159,8 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridWheelDetail;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvWheelDetail;
+        private DevExpress.XtraGrid.GridControl gridSpecialSparepartDetail;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSpecialSparepartDetail;
         private DevExpress.XtraGrid.Columns.GridColumn colCodeDetail;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
         private DevExpress.XtraEditors.GroupControl groupInfo;

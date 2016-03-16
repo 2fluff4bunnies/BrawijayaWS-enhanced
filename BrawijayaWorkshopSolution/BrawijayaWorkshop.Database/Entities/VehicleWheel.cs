@@ -15,6 +15,6 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         public int WheelDetailId { get; set; }
-        public virtual WheelDetail WheelDetail { get; set; }
+        public virtual SpecialSparepartDetail WheelDetail { get; set; }
     }
 }

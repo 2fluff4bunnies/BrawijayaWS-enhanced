@@ -7,6 +7,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int VehicleId { get; set; }
         public VehicleViewModel Vehicle { get; set; }
         public int WheelDetailId { get; set; }
-        public WheelDetailViewModel WheelDetail { get; set; }
+        public SpecialSparepartDetailViewModel WheelDetail { get; set; }
     }
 }

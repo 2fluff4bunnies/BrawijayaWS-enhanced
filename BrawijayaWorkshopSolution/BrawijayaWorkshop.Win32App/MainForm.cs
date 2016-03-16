@@ -262,7 +262,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USERCONTROL);
             navMasterData.iManageUserRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iUserList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANAGE_APP_USER);
-            navMasterData.iWheel.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
+            navMasterData.iSpecialSparepart.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
             navMasterData.iUsedGood.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD);
 
             ShowNavigationControl(navMasterData);
@@ -278,7 +278,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iManageUser.LinkClicked += iManageUser_LinkClicked;
             navMasterData.iManageUserRole.LinkClicked += iManageUserRole_LinkClicked;
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
-            navMasterData.iWheel.LinkClicked += iWheel_LinkClicked;
+            navMasterData.iSpecialSparepart.LinkClicked += iSpecialSparepart_LinkClicked;
             navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
         }
 
@@ -348,10 +348,10 @@ namespace BrawijayaWorkshop.Win32App
             ShowUserControl(listMechanic);
         }
 
-        private void iWheel_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iSpecialSparepart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            WheelListControl wheelListControl = Bootstrapper.Resolve<WheelListControl>();
-            ShowUserControl(wheelListControl);
+            SpecialSparepartListControl specialSparepartListControl = Bootstrapper.Resolve<SpecialSparepartListControl>();
+            ShowUserControl(specialSparepartListControl);
         }
 
         private void iUsedGood_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

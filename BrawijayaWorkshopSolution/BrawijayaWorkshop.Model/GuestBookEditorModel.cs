@@ -15,13 +15,13 @@ namespace BrawijayaWorkshop.Model
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
-        private IWheelDetailRepository _wheelDetailRepository;
+        private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public GuestBookEditorModel(IGuestBookRepository guestBookRepository, IVehicleRepository vehicleRepository,
            IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
-            IWheelDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            ISpecialSparepartDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _guestBookRepository = guestBookRepository;

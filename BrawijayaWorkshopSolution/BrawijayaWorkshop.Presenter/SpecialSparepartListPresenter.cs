@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class WheelListPresenter : BasePresenter<IWheelListView, WheelListModel>
+    public class SpecialSparepartListPresenter : BasePresenter<ISpecialSparepartListView, SpecialSparepartListModel>
     {
         
-        public WheelListPresenter(IWheelListView view, WheelListModel model)
+        public SpecialSparepartListPresenter(ISpecialSparepartListView view, SpecialSparepartListModel model)
             : base(view, model) { }
 
         //public void InitData()
@@ -18,14 +18,14 @@ namespace BrawijayaWorkshop.Presenter
             
         //}
 
-        public void LoadWheel()
+        public void LoadSpecialSparepart()
         {
-            View.WheelListData = Model.SearchWheel(View.NameFilter);
+            View.SpecialSparepartListData = Model.SearchWheel(View.NameFilter);
         }
 
         public void DeleteWheel()
         {
-            Model.DeleteWheel(View.SelectedWheel, LoginInformation.UserId);
+            Model.DeleteWheel(View.SelectedSpecialSparepart, LoginInformation.UserId);
         }
     }
 }

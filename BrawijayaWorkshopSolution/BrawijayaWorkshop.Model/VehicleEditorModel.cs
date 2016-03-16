@@ -15,13 +15,13 @@ namespace BrawijayaWorkshop.Model
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
-        private IWheelDetailRepository _wheelDetailRepository;
+        private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository,
            IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
-            IWheelDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            ISpecialSparepartDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _customerRepository = customerRepository;
@@ -40,19 +40,19 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<WheelDetailViewModel> RetrieveAllWheelDetails()
+        public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails()
         {
-            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready ||
+            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready ||
                                                                             wd.Status == (int)DbConstant.WheelDetailStatus.Installed
                                                                       ).ToList();
-            List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
         }
 
-        public List<WheelDetailViewModel> RetrieveReadyWheelDetails()
+        public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails()
         {
-            List<WheelDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready).ToList();
-            List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
+            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready).ToList();
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
         }
 
@@ -96,7 +96,7 @@ namespace BrawijayaWorkshop.Model
 
                 _vehicleWheelRepository.Add(vwEntity);
 
-                WheelDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
+                SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
                 wdEntity.ModifyDate = serverTime;
                 wdEntity.ModifyUserId = userId;
                 wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
@@ -149,8 +149,6 @@ namespace BrawijayaWorkshop.Model
 
                 _vehicleWheelRepository.Update(vwEntity);
             }
-
-          
 
             _unitOfWork.SaveChanges();
         }

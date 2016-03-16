@@ -8,25 +8,25 @@ using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class WheelDetailListModel : AppBaseModel
+    public class SpecialSparepartDetailListModel : AppBaseModel
     {
-        private IWheelRepository _wheelRepository;
-        private IWheelDetailRepository _WheelDetailRepository;
+        private ISpecialSparepartRepository _specialSparepartRepository;
+        private ISpecialSparepartDetailRepository _WheelDetailRepository;
         private IUnitOfWork _unitOfWork;
 
-          public WheelDetailListModel(IWheelRepository WheelRepository,
-            IWheelDetailRepository WheelDetailRepository, IUnitOfWork unitOfWork)
+          public SpecialSparepartDetailListModel(ISpecialSparepartRepository WheelRepository,
+            ISpecialSparepartDetailRepository WheelDetailRepository, IUnitOfWork unitOfWork)
             : base()    
         {
-            _wheelRepository = WheelRepository;
+            _specialSparepartRepository = WheelRepository;
             _WheelDetailRepository = WheelDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<WheelDetailViewModel> SearchWheel(int WheelId,
+        public List<SpecialSparepartDetailViewModel> SearchWheel(int WheelId,
             DbConstant.SparepartDetailDataStatus status, int purchaseDetailID)
         {
-            List<WheelDetail> result = new List<WheelDetail>();
+            List<SpecialSparepartDetail> result = new List<SpecialSparepartDetail>();
             if (purchaseDetailID > 0)
             {
                 result = _WheelDetailRepository.GetMany(
@@ -38,7 +38,7 @@ namespace BrawijayaWorkshop.Model
                 result = _WheelDetailRepository.GetMany(
                 spd => spd.WheelId == WheelId && spd.Status == (int)status).ToList();
             }
-            List<WheelDetailViewModel> mappedResult = new List<WheelDetailViewModel>();
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
         }
     }

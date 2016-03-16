@@ -92,9 +92,9 @@
     <Compile Include="IVehicleListView.cs" />
     <Compile Include="ISparepartEditorView.cs" />
     <Compile Include="ISparepartListView.cs" />
-    <Compile Include="IWheelDetailListView.cs" />
-    <Compile Include="IWheelEditorView.cs" />
-    <Compile Include="IWheelListView.cs" />
+    <Compile Include="ISpecialSparepartDetailListView.cs" />
+    <Compile Include="ISpecialSparepartEditorView.cs" />
+    <Compile Include="ISpecialSparepartListView.cs" />
     <Compile Include="IManageUserEditorView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    partial class WheelListControl
+    partial class SpecialSparepartListControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WheelListControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpecialSparepartListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilter = new DevExpress.XtraEditors.TextEdit();
             this.lblName = new DevExpress.XtraEditors.LabelControl();
-            this.gcWheel = new DevExpress.XtraGrid.GridControl();
-            this.gvWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcSpecialSparepart = new DevExpress.XtraGrid.GridControl();
+            this.gvSpecialSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartStock = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnNewWheel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNewSpecialSparepart = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -49,8 +49,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSpecialSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSpecialSparepart)).BeginInit();
             this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +85,7 @@
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(345, 20);
             this.txtFilter.TabIndex = 3;
-            this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWheelName_KeyDown);
+            this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSpecialSparepartName_KeyDown);
             // 
             // lblName
             // 
@@ -95,39 +95,39 @@
             this.lblName.TabIndex = 2;
             this.lblName.Text = "Nama Ban";
             // 
-            // gcWheel
+            // gcSpecialSparepart
             // 
-            this.gcWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gcSpecialSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcWheel.Location = new System.Drawing.Point(3, 101);
-            this.gcWheel.MainView = this.gvWheel;
-            this.gcWheel.Name = "gcWheel";
-            this.gcWheel.Size = new System.Drawing.Size(825, 337);
-            this.gcWheel.TabIndex = 5;
-            this.gcWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvWheel});
+            this.gcSpecialSparepart.Location = new System.Drawing.Point(3, 101);
+            this.gcSpecialSparepart.MainView = this.gvSpecialSparepart;
+            this.gcSpecialSparepart.Name = "gcSpecialSparepart";
+            this.gcSpecialSparepart.Size = new System.Drawing.Size(825, 337);
+            this.gcSpecialSparepart.TabIndex = 5;
+            this.gcSpecialSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvSpecialSparepart});
             // 
-            // gvWheel
+            // gvSpecialSparepart
             // 
-            this.gvWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvSpecialSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSparepartName,
             this.colSparepartCode,
             this.colSparepartUnit,
             this.colSparepartStock});
-            this.gvWheel.GridControl = this.gcWheel;
-            this.gvWheel.Name = "gvWheel";
-            this.gvWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvWheel.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvWheel.OptionsBehavior.Editable = false;
-            this.gvWheel.OptionsBehavior.ReadOnly = true;
-            this.gvWheel.OptionsCustomization.AllowColumnMoving = false;
-            this.gvWheel.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvWheel.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvWheel.OptionsView.ShowGroupPanel = false;
-            this.gvWheel.OptionsView.ShowViewCaption = true;
-            this.gvWheel.ViewCaption = "Daftar Ban";
+            this.gvSpecialSparepart.GridControl = this.gcSpecialSparepart;
+            this.gvSpecialSparepart.Name = "gvSpecialSparepart";
+            this.gvSpecialSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSpecialSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSpecialSparepart.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvSpecialSparepart.OptionsBehavior.Editable = false;
+            this.gvSpecialSparepart.OptionsBehavior.ReadOnly = true;
+            this.gvSpecialSparepart.OptionsCustomization.AllowColumnMoving = false;
+            this.gvSpecialSparepart.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvSpecialSparepart.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvSpecialSparepart.OptionsView.ShowGroupPanel = false;
+            this.gvSpecialSparepart.OptionsView.ShowViewCaption = true;
+            this.gvSpecialSparepart.ViewCaption = "Daftar Ban";
             // 
             // colSparepartName
             // 
@@ -163,15 +163,15 @@
             // 
             // btnNewWheel
             // 
-            this.btnNewWheel.Image = ((System.Drawing.Image)(resources.GetObject("btnNewWheel.Image")));
-            this.btnNewWheel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnNewWheel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewWheel.Location = new System.Drawing.Point(3, 72);
-            this.btnNewWheel.Name = "btnNewWheel";
-            this.btnNewWheel.Size = new System.Drawing.Size(105, 23);
-            this.btnNewWheel.TabIndex = 6;
-            this.btnNewWheel.Text = "Buat Ban Baru";
-            this.btnNewWheel.Click += new System.EventHandler(this.btnNewWheel_Click);
+            this.btnNewSpecialSparepart.Image = ((System.Drawing.Image)(resources.GetObject("btnNewWheel.Image")));
+            this.btnNewSpecialSparepart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnNewSpecialSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnNewSpecialSparepart.Location = new System.Drawing.Point(3, 72);
+            this.btnNewSpecialSparepart.Name = "btnNewWheel";
+            this.btnNewSpecialSparepart.Size = new System.Drawing.Size(105, 23);
+            this.btnNewSpecialSparepart.TabIndex = 6;
+            this.btnNewSpecialSparepart.Text = "Buat Ban Baru";
+            this.btnNewSpecialSparepart.Click += new System.EventHandler(this.btnNewSpecialSparepart_Click);
             // 
             // cmsEditor
             // 
@@ -221,8 +221,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnNewWheel);
-            this.Controls.Add(this.gcWheel);
+            this.Controls.Add(this.btnNewSpecialSparepart);
+            this.Controls.Add(this.gcSpecialSparepart);
             this.Controls.Add(this.groupFilter);
             this.Name = "WheelListControl";
             this.Size = new System.Drawing.Size(831, 441);
@@ -230,8 +230,8 @@
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSpecialSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSpecialSparepart)).EndInit();
             this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -243,13 +243,13 @@
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.TextEdit txtFilter;
         private DevExpress.XtraEditors.LabelControl lblName;
-        private DevExpress.XtraGrid.GridControl gcWheel;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvWheel;
+        private DevExpress.XtraGrid.GridControl gcSpecialSparepart;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSpecialSparepart;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartUnit;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartStock;
-        private DevExpress.XtraEditors.SimpleButton btnNewWheel;
+        private DevExpress.XtraEditors.SimpleButton btnNewSpecialSparepart;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

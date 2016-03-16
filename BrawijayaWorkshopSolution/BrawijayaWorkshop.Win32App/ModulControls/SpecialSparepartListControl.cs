@@ -15,10 +15,10 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    public partial class WheelListControl : BaseAppUserControl, IWheelListView
+    public partial class SpecialSparepartListControl : BaseAppUserControl, ISpecialSparepartListView
     {
-        private WheelListPresenter _presenter;
-        private WheelViewModel _selectedWheel;
+        private SpecialSparepartListPresenter _presenter;
+        private SpecialSparepartViewModel _selectedSpecialSparepart;
        
         protected override string ModulName
         {
@@ -28,21 +28,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public WheelListControl(WheelListModel model)
+        public SpecialSparepartListControl(SpecialSparepartListModel model)
         {
             InitializeComponent();
 
             // init editor control accessibility
-            btnNewWheel.Enabled = AllowInsert;
+            btnNewSpecialSparepart.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
 
-            _presenter = new WheelListPresenter(this, model);
+            _presenter = new SpecialSparepartListPresenter(this, model);
 
-            gvWheel.FocusedRowChanged += gvWheel_FocusedRowChanged;
-            gvWheel.PopupMenuShowing += gvWheel_PopupMenuShowing;
+            gvSpecialSparepart.FocusedRowChanged += gvSpecialSparepart_FocusedRowChanged;
+            gvSpecialSparepart.PopupMenuShowing += gvSpecialSparepart_PopupMenuShowing;
 
-            this.Load += WheelListControl_Load;
+            this.Load += SpecialSparepartListControl_Load;
         }
 
         #region Properties
@@ -59,35 +59,35 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<WheelViewModel> WheelListData
+        public List<SpecialSparepartViewModel> SpecialSparepartListData
         {
             get
             {
-                return gcWheel.DataSource as List<WheelViewModel>;
+                return gcSpecialSparepart.DataSource as List<SpecialSparepartViewModel>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gcWheel.DataSource = value; gvWheel.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gcSpecialSparepart.DataSource = value; gvSpecialSparepart.BestFitColumns(); }));
                 }
                 else
                 {
-                    gcWheel.DataSource = value;
-                    gvWheel.BestFitColumns();
+                    gcSpecialSparepart.DataSource = value;
+                    gvSpecialSparepart.BestFitColumns();
                 }
             }
         }
 
-        public WheelViewModel SelectedWheel
+        public SpecialSparepartViewModel SelectedSpecialSparepart
         {
             get
             {
-                return _selectedWheel;
+                return _selectedSpecialSparepart;
             }
             set
             {
-                _selectedWheel = value;
+                _selectedSpecialSparepart = value;
             }
         }
 
@@ -95,22 +95,22 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             try
             {
-                _presenter.LoadWheel();
+                _presenter.LoadSpecialSparepart();
             }
             catch (Exception ex)
             {
-                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadWheel()", ex);
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadSpecialSparepart()", ex);
                 e.Result = ex;
             }
         }
         #endregion
 
-        void WheelListControl_Load(object sender, EventArgs e)
+        void SpecialSparepartListControl_Load(object sender, EventArgs e)
         {
             btnSearch.PerformClick();
         }
 
-        void gvWheel_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        void gvSpecialSparepart_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             GridView view = (GridView)sender;
             GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
@@ -121,17 +121,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        void gvWheel_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        void gvSpecialSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedWheel = gvWheel.GetFocusedRow() as WheelViewModel;
+            this.SelectedSpecialSparepart = gvSpecialSparepart.GetFocusedRow() as SpecialSparepartViewModel;
         }
 
         private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_selectedWheel != null)
+            if (_selectedSpecialSparepart != null)
             {
-                WheelDetailListForm listForm = Bootstrapper.Resolve<WheelDetailListForm>();
-                listForm.SelectedWheel = _selectedWheel;
+                SpecialSparepartDetailListForm listForm = Bootstrapper.Resolve<SpecialSparepartDetailListForm>();
+                listForm.SelectedSpecialSparepart = _selectedSpecialSparepart;
                 listForm.ShowDialog(this);
 
                 btnSearch.PerformClick();
@@ -140,10 +140,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
-            if (_selectedWheel != null)
+            if (_selectedSpecialSparepart != null)
             {
-                WheelEditorForm editor = Bootstrapper.Resolve<WheelEditorForm>();
-                editor.SelectedWheel = _selectedWheel;
+                SpecialSparepartEditorForm editor = Bootstrapper.Resolve<SpecialSparepartEditorForm>();
+                editor.SelectedSpecialSparepart = _selectedSpecialSparepart;
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
@@ -152,13 +152,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsDeleteData_Click(object sender, EventArgs e)
         {
-            if (SelectedWheel == null) return;
+            if (SelectedSpecialSparepart == null) return;
 
-            if (this.ShowConfirmation("Apakah anda yakin ingin ban: '" + SelectedWheel.Sparepart.Name + "'?") == DialogResult.Yes)
+            if (this.ShowConfirmation("Apakah anda yakin ingin ban: '" + SelectedSpecialSparepart.Sparepart.Name + "'?") == DialogResult.Yes)
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Deleting wheel: " + SelectedWheel.Sparepart.Name);
+                    MethodBase.GetCurrentMethod().Info("Deleting specialSparepart: " + SelectedSpecialSparepart.Sparepart.Name);
 
                     _presenter.DeleteWheel();
 
@@ -166,15 +166,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 }
                 catch (Exception ex)
                 {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete wheel: '" + SelectedWheel.Sparepart.Name + "'", ex);
-                    this.ShowError("Proses hapus data ban: '" + SelectedWheel.Sparepart.Name + "' gagal!");
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete special sparepart: '" + SelectedSpecialSparepart.Sparepart.Name + "'", ex);
+                    this.ShowError("Proses hapus data ban: '" + SelectedSpecialSparepart.Sparepart.Name + "' gagal!");
                 }
             }
         }
 
-        private void btnNewWheel_Click(object sender, EventArgs e)
+        private void btnNewSpecialSparepart_Click(object sender, EventArgs e)
         {
-            WheelEditorForm editor = Bootstrapper.Resolve<WheelEditorForm>();
+            SpecialSparepartEditorForm editor = Bootstrapper.Resolve<SpecialSparepartEditorForm>();
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
@@ -189,8 +189,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (!bgwMain.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Fecthing wheel data...");
-                _selectedWheel = null;
+                MethodBase.GetCurrentMethod().Info("Fecthing specialSparepart data...");
+                _selectedSpecialSparepart = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data ban...", false);
                 bgwMain.RunWorkerAsync();
             }
@@ -205,15 +205,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            if (gvWheel.RowCount > 0)
+            if (gvSpecialSparepart.RowCount > 0)
             {
-                SelectedWheel = gvWheel.GetRow(0) as WheelViewModel;
+                SelectedSpecialSparepart = gvSpecialSparepart.GetRow(0) as SpecialSparepartViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data ban selesai", true);
         }
 
-        private void txtWheelName_KeyDown(object sender, KeyEventArgs e)
+        private void txtSpecialSparepartName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class Wheel : BaseModifierWithStatus
+    public class SpecialSparepart : BaseModifierWithStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -12,5 +12,9 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public int SparepartId { get; set; }
         public virtual Sparepart Sparepart { get; set; }
+
+        [Required]
+        public int ReferenceCategoryId { get; set; }
+        public virtual Reference ReferenceCategory { get; set; }        
     }
 }

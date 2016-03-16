@@ -19,5 +19,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [MaxLength(50)]
         public string PhoneNumber { get; set; }
+
+        public int CityId { get; set; }
+        public virtual City City { get; set; }
     }
 }

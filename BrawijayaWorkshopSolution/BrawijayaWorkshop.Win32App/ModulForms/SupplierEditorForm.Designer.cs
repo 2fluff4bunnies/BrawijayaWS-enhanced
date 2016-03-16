@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcSupplierInfo = new DevExpress.XtraEditors.GroupControl();
             this.txtPhoneNumber = new DevExpress.XtraEditors.TextEdit();
             this.lblPhoneNumber = new DevExpress.XtraEditors.LabelControl();
@@ -42,6 +42,8 @@
             this.valSupplierName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valAddress = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valPhone = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.cbCity = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblCity = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcSupplierInfo)).BeginInit();
             this.gcSupplierInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPhoneNumber.Properties)).BeginInit();
@@ -50,10 +52,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.valSupplierName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPhone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCity.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSupplierInfo
             // 
+            this.gcSupplierInfo.Controls.Add(this.cbCity);
+            this.gcSupplierInfo.Controls.Add(this.lblCity);
             this.gcSupplierInfo.Controls.Add(this.txtPhoneNumber);
             this.gcSupplierInfo.Controls.Add(this.lblPhoneNumber);
             this.gcSupplierInfo.Controls.Add(this.txtAddress);
@@ -73,11 +78,11 @@
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Properties.Mask.EditMask = "[0-9]*";
             this.txtPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtPhoneNumber.Size = new System.Drawing.Size(162, 20);
+            this.txtPhoneNumber.Size = new System.Drawing.Size(246, 20);
             this.txtPhoneNumber.TabIndex = 11;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule1);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule4);
             // 
             // lblPhoneNumber
             // 
@@ -93,9 +98,9 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(247, 20);
             this.txtAddress.TabIndex = 5;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Alamat harus diisi!";
-            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Alamat harus diisi!";
+            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule1);
             // 
             // lblAddress
             // 
@@ -111,9 +116,9 @@
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(247, 20);
             this.txtSupplierName.TabIndex = 3;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Nama Supplier harus diisi!";
-            this.valSupplierName.SetValidationRule(this.txtSupplierName, conditionValidationRule3);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Nama Supplier harus diisi!";
+            this.valSupplierName.SetValidationRule(this.txtSupplierName, conditionValidationRule2);
             // 
             // lblSupplierName
             // 
@@ -135,6 +140,32 @@
             // 
             this.valPhone.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // cbCity
+            // 
+            this.cbCity.Location = new System.Drawing.Point(129, 123);
+            this.cbCity.Name = "cbCity";
+            this.cbCity.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.cbCity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbCity.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.cbCity.Properties.DisplayMember = "Name";
+            this.cbCity.Properties.HideSelection = false;
+            this.cbCity.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.cbCity.Properties.NullText = "-- Pilih Kota --";
+            this.cbCity.Properties.ValueMember = "Id";
+            this.cbCity.Size = new System.Drawing.Size(246, 20);
+            this.cbCity.TabIndex = 13;
+            // 
+            // lblCity
+            // 
+            this.lblCity.Location = new System.Drawing.Point(13, 126);
+            this.lblCity.Name = "lblCity";
+            this.lblCity.Size = new System.Drawing.Size(22, 13);
+            this.lblCity.TabIndex = 12;
+            this.lblCity.Text = "Kota";
+            // 
             // SupplierEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,7 +173,6 @@
             this.ClientSize = new System.Drawing.Size(386, 221);
             this.Controls.Add(this.gcSupplierInfo);
             this.Name = "SupplierEditorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supplier Editor";
             this.Controls.SetChildIndex(this.gcSupplierInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcSupplierInfo)).EndInit();
@@ -154,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valSupplierName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPhone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCity.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,5 +202,7 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPhone;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valAddress;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valSupplierName;
+        private DevExpress.XtraEditors.LookUpEdit cbCity;
+        private DevExpress.XtraEditors.LabelControl lblCity;
     }
 }

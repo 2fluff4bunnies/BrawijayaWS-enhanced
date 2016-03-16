@@ -289,11 +289,11 @@
     <Compile Include="ModulControls\VehicleListControl.Designer.cs">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulControls\WheelListControl.cs">
+    <Compile Include="ModulControls\SpecialSparepartListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ModulControls\WheelListControl.Designer.cs">
-      <DependentUpon>WheelListControl.cs</DependentUpon>
+    <Compile Include="ModulControls\SpecialSparepartListControl.Designer.cs">
+      <DependentUpon>SpecialSparepartListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\ConfigEditorForm.cs">
       <SubType>Form</SubType>
@@ -499,17 +499,17 @@
     <Compile Include="ModulForms\SparepartEditorForm.Designer.cs">
       <DependentUpon>SparepartEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulForms\WheelDetailListForm.cs">
+    <Compile Include="ModulForms\SpecialSparepartDetailListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModulForms\WheelDetailListForm.Designer.cs">
-      <DependentUpon>WheelDetailListForm.cs</DependentUpon>
+    <Compile Include="ModulForms\SpecialSparepartDetailListForm.Designer.cs">
+      <DependentUpon>SpecialSparepartDetailListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulForms\WheelEditorForm.cs">
+    <Compile Include="ModulForms\SpecialSparepartEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModulForms\WheelEditorForm.Designer.cs">
-      <DependentUpon>WheelEditorForm.cs</DependentUpon>
+    <Compile Include="ModulForms\SpecialSparepartEditorForm.Designer.cs">
+      <DependentUpon>SpecialSparepartEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NavigationControls\AccountingNavigationControl.cs">
       <SubType>UserControl</SubType>
@@ -634,8 +634,8 @@
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModulControls\WheelListControl.resx">
-      <DependentUpon>WheelListControl.cs</DependentUpon>
+    <EmbeddedResource Include="ModulControls\SpecialSparepartListControl.resx">
+      <DependentUpon>SpecialSparepartListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\ConfigEditorForm.resx">
       <DependentUpon>ConfigEditorForm.cs</DependentUpon>
@@ -736,11 +736,11 @@
     <EmbeddedResource Include="ModulForms\SparepartEditorForm.resx">
       <DependentUpon>SparepartEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModulForms\WheelDetailListForm.resx">
-      <DependentUpon>WheelDetailListForm.cs</DependentUpon>
+    <EmbeddedResource Include="ModulForms\SpecialSparepartDetailListForm.resx">
+      <DependentUpon>SpecialSparepartDetailListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModulForms\WheelEditorForm.resx">
-      <DependentUpon>WheelEditorForm.cs</DependentUpon>
+    <EmbeddedResource Include="ModulForms\SpecialSparepartEditorForm.resx">
+      <DependentUpon>SpecialSparepartEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\AccountingNavigationControl.resx">
       <DependentUpon>AccountingNavigationControl.cs</DependentUpon>

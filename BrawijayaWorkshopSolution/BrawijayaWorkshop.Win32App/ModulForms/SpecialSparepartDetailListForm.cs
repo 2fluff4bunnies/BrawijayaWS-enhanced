@@ -12,15 +12,15 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class WheelDetailListForm : BaseDefaultForm, IWheelDetailListView
+    public partial class SpecialSparepartDetailListForm : BaseDefaultForm, ISpecialSparepartDetailListView
     {
-        private WheelDetailListPresenter _presenter;
+        private SpecialSparepartDetailListPresenter _presenter;
 
-        public WheelDetailListForm(WheelDetailListModel model)
+        public SpecialSparepartDetailListForm(SpecialSparepartDetailListModel model)
         {
             InitializeComponent();
 
-            _presenter = new WheelDetailListPresenter(this, model);
+            _presenter = new SpecialSparepartDetailListPresenter(this, model);
 
             this.Load += WheelDetailEditorForm_Load;
         }
@@ -37,7 +37,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #region Properties
-        public WheelViewModel SelectedWheel { get; set; }
+        public SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
         public int PurchasingDetailID { get; set; }
 
         public int SelectedStatus
@@ -64,22 +64,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<WheelDetailViewModel> WheelDetailListData
+        public List<SpecialSparepartDetailViewModel> WheelDetailListData
         {
             get
             {
-                return gridWheelDetail.DataSource as List<WheelDetailViewModel>;
+                return gridSpecialSparepartDetail.DataSource as List<SpecialSparepartDetailViewModel>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridWheelDetail.DataSource = value; gvWheelDetail.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gridSpecialSparepartDetail.DataSource = value; gvSpecialSparepartDetail.BestFitColumns(); }));
                 }
                 else
                 {
-                    gridWheelDetail.DataSource = value;
-                    gvWheelDetail.BestFitColumns();
+                    gridSpecialSparepartDetail.DataSource = value;
+                    gvSpecialSparepartDetail.BestFitColumns();
                 }
             }
         } 
@@ -89,7 +89,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwMain.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Fecthing wheel detail data...");
+                MethodBase.GetCurrentMethod().Info("Fecthing specialSparepart detail data...");
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data ban detail...", false);
                 bgwMain.RunWorkerAsync();
             }

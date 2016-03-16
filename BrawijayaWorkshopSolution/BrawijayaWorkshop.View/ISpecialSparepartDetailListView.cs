@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
-    public interface IWheelDetailListView : IView
+    public interface ISpecialSparepartDetailListView : IView
     {
-        WheelViewModel SelectedWheel { get; set; }
+        SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
 
         int SelectedStatus { get; set; }
 
         List<WheelDetailStatusItem> ListStatus { get; set; }
 
-        List<WheelDetailViewModel> WheelDetailListData { get; set; }
+        List<SpecialSparepartDetailViewModel> WheelDetailListData { get; set; }
 
         int PurchasingDetailID { get; set; }
     }

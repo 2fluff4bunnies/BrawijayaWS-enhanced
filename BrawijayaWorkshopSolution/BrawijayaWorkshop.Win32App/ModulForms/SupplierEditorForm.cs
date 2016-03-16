@@ -4,6 +4,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
@@ -70,6 +71,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public int CityId
+        {
+            get
+            {
+                CityViewModel selected = cbCity.GetSelectedDataRow() as CityViewModel;
+                if (selected == null) return 0;
+                return selected.Id;
+            }
+            set
+            {
+                cbCity.EditValue = value;
+            }
+        }
+
+        public List<CityViewModel> ListCity
+        {
+            get
+            {
+                return cbCity.Properties.DataSource as List<CityViewModel>;
+            }
+            set
+            {
+                cbCity.Properties.DataSource = value;
+            }
+        }
         #endregion
 
         protected override void ExecuteSave()

@@ -26,8 +26,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<Sparepart> Spareparts { get; set; }
         public DbSet<SparepartDetail> SparepartDetails { get; set; }
         public DbSet<SparepartManualTransaction> SparepartManualTransactions { get; set; }
-        public DbSet<Wheel> Wheels { get; set; }
-        public DbSet<WheelDetail> WheelDetails { get; set; }
+        public DbSet<SpecialSparepart> Wheels { get; set; }
+        public DbSet<SpecialSparepartDetail> WheelDetails { get; set; }
         public DbSet<Purchasing> Purchasings { get; set; }
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -59,11 +59,12 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new RoleAccessConfiguration());
             modelBuilder.Configurations.Add(new CustomerConfiguration());
+            modelBuilder.Configurations.Add(new SupplierConfiguration());
             modelBuilder.Configurations.Add(new GuestBookConfiguration());
             modelBuilder.Configurations.Add(new VehicleConfiguration());
             modelBuilder.Configurations.Add(new VehicleDetailConfiguration());
-            modelBuilder.Configurations.Add(new WheelConfiguration());
-            modelBuilder.Configurations.Add(new WheelDetailConfiguration());
+            modelBuilder.Configurations.Add(new SpecialSparepartConfiguration());
+            modelBuilder.Configurations.Add(new SpecialSparepartDetailConfiguration());
             modelBuilder.Configurations.Add(new PurchasingConfiguration());
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
             modelBuilder.Configurations.Add(new ReferenceConfiguration());

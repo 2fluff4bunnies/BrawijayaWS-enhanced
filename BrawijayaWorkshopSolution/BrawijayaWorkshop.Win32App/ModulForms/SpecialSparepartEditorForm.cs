@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class WheelEditorForm : BaseEditorForm, IWheelEditorView
+    public partial class SpecialSparepartEditorForm : BaseEditorForm, ISpecialSparepartEditorView
     {
-        private WheelEditorPresenter _presenter;
+        private SpecialSparepartEditorPresenter _presenter;
 
-        public WheelEditorForm(WheelEditorModel model)
+        public SpecialSparepartEditorForm(SpecialSparepartEditorModel model)
         {
             InitializeComponent();
-            _presenter = new WheelEditorPresenter(this, model);
+            _presenter = new SpecialSparepartEditorPresenter(this, model);
 
             valSparepart.SetIconAlignment(lookUpSparepart, ErrorIconAlignment.MiddleRight);
             this.Load += WheelEditorForm_Load;
@@ -31,17 +31,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
 
         #region Properties
-        public WheelViewModel SelectedWheel { get; set; }
+        public SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
 
-        public string Category
+        public int CategoryReferenceId
         {
             get
             {
-                return lblCategoryValue.Text;
+                return lookUpCategory.EditValue.AsInteger();
             }
             set
             {
-                lblCategoryValue.Text = value;
+                lookUpCategory.EditValue = value;
+            }
+        }
+
+        public List<ReferenceViewModel> CategoryReferenceList
+        {
+            get
+            {
+                return lookUpCategory.Properties.DataSource as List<ReferenceViewModel>;
+            }
+            set
+            {
+                lookUpCategory.Properties.DataSource = value;
             }
         }
 
@@ -102,13 +114,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Wheel's changes");
+                    MethodBase.GetCurrentMethod().Info("Save SpecialSparepart's changes");
                     _presenter.SaveChanges();
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    MethodBase.GetCurrentMethod().Fatal("An error occored while trying to save wheel: '" + SelectedWheel.Sparepart.Name + "'", ex);
+                    MethodBase.GetCurrentMethod().Fatal("An error occored while trying to save specialSparepart: '" + SelectedSpecialSparepart.Sparepart.Name + "'", ex);
                     this.ShowError("Proses simpan ban gagal!");
                 }
             }
@@ -119,7 +131,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             SparepartViewModel sparepart = lookUpSparepart.GetSelectedDataRow() as SparepartViewModel;
 
             this.Code = sparepart.Code;
-            this.Category = sparepart.CategoryReference.Name;
             this.Unit = sparepart.UnitReference.Name;
         }
 

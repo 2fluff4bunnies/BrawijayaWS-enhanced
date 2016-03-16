@@ -36,7 +36,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvVehicleWheel.PopupMenuShowing += gvVehicleWheel_PopupMenuShowing;
             gvVehicleWheel.FocusedRowChanged += gvVehicleWheel_FocusedRowChanged;
 
-            //collumn setting for lookup wheel in grid
+            //collumn setting for lookup specialSparepart in grid
             LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
             coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
@@ -185,11 +185,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<WheelDetailViewModel> WheelDetailList
+        public List<SpecialSparepartDetailViewModel> WheelDetailList
         {
             get
             {
-                return lookupWheelDetailGv.DataSource as List<WheelDetailViewModel>;
+                return lookupWheelDetailGv.DataSource as List<SpecialSparepartDetailViewModel>;
             }
             set
             {
@@ -266,7 +266,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             foreach (var item in this.VehicleWheelList)
             {
-                WheelDetailViewModel toRemove = WheelDetailList.Where(wd => wd.Id == item.WheelDetailId).FirstOrDefault();
+                SpecialSparepartDetailViewModel toRemove = WheelDetailList.Where(wd => wd.Id == item.WheelDetailId).FirstOrDefault();
                 if (toRemove != null)
                 {
                     this.WheelDetailList.Remove(toRemove);

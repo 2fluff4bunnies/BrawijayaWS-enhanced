@@ -29,6 +29,6 @@ namespace BrawijayaWorkshop.View
 
         List<VehicleWheelViewModel> VehicleWheelExchangedList { get; set; }
 
-        List<WheelDetailViewModel> WheelDetailList { get; set; }
+        List<SpecialSparepartDetailViewModel> WheelDetailList { get; set; }
     }
 }

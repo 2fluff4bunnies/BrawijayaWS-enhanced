@@ -76,8 +76,8 @@
     <Compile Include="ViewModels\VehicleDetailViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\VehicleWheelViewModel.cs" />
-    <Compile Include="ViewModels\WheelDetailViewModel.cs" />
-    <Compile Include="ViewModels\WheelViewModel.cs" />
+    <Compile Include="ViewModels\SpecialSparepartDetailViewModel.cs" />
+    <Compile Include="ViewModels\SpecialSparepartViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

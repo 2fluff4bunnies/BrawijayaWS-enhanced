@@ -34,7 +34,7 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.WheelDetailList == null)
             {
-                View.WheelDetailList = new System.Collections.Generic.List<WheelDetailViewModel>();
+                View.WheelDetailList = new System.Collections.Generic.List<SpecialSparepartDetailViewModel>();
             }
 
             View.VehicleWheelExchangedList = new System.Collections.Generic.List<VehicleWheelViewModel>();

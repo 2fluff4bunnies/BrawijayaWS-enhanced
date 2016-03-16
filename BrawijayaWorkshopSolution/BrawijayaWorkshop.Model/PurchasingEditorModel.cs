@@ -17,16 +17,16 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
-        private IWheelRepository _wheelRepository;
-        private IWheelDetailRepository _wheelDetailRepository;
+        private ISpecialSparepartRepository _specialSparepartRepository;
+        private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingEditorModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
             IPurchasingDetailRepository purchasingDetailRepository,
             ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
-            IWheelRepository wheelRepository,
-            IWheelDetailRepository wheelDetailRepository,
+            ISpecialSparepartRepository wheelRepository,
+            ISpecialSparepartDetailRepository wheelDetailRepository,
             IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
             : base()
         {
@@ -35,7 +35,7 @@ namespace BrawijayaWorkshop.Model
             _supplierRepository = supplierRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
-            _wheelRepository = wheelRepository;
+            _specialSparepartRepository = wheelRepository;
             _wheelDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
@@ -184,7 +184,7 @@ namespace BrawijayaWorkshop.Model
 
         public bool IsSparepartWheel(int sparepartId)
         {
-            Wheel wheelSparepart = _wheelRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+            SpecialSparepart wheelSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
 
             return wheelSparepart != null;
         }

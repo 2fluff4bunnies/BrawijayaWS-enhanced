@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class WheelDetailListPresenter: BasePresenter<IWheelDetailListView, WheelDetailListModel>
+    public class SpecialSparepartDetailListPresenter: BasePresenter<ISpecialSparepartDetailListView, SpecialSparepartDetailListModel>
     {
-        public WheelDetailListPresenter(IWheelDetailListView view, WheelDetailListModel model)
+        public SpecialSparepartDetailListPresenter(ISpecialSparepartDetailListView view, SpecialSparepartDetailListModel model)
             : base(view, model) { }
 
         public void InitFormData()
@@ -29,7 +29,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadDetailList()
         {
-            View.WheelDetailListData = Model.SearchWheel(View.SelectedWheel.Id,
+            View.WheelDetailListData = Model.SearchWheel(View.SelectedSpecialSparepart.Id,
                 (DbConstant.SparepartDetailDataStatus)View.SelectedStatus, View.PurchasingDetailID);
         }
     }

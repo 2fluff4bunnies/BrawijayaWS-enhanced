@@ -14,16 +14,16 @@ namespace BrawijayaWorkshop.Model
         private ISparepartManualTransactionRepository _sparepartManualTransactionRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
-        private IWheelRepository _wheelRepository;
-        private IWheelDetailRepository _wheelDetailRepository;
+        private ISpecialSparepartRepository _specialSparepartRepository;
+        private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository, 
             ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
-            IWheelRepository wheelRepository,
-            IWheelDetailRepository wheelDetailRepository,
+            ISpecialSparepartRepository wheelRepository,
+            ISpecialSparepartDetailRepository wheelDetailRepository,
             IReferenceRepository referenceRepository,
             IUnitOfWork unitOfWork)
             : base()
@@ -31,7 +31,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartManualTransactionRepository = sparepartManualTransactionRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
-            _wheelRepository = wheelRepository;
+            _specialSparepartRepository = wheelRepository;
             _wheelDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
@@ -100,13 +100,13 @@ namespace BrawijayaWorkshop.Model
 
                         if (!string.IsNullOrEmpty(sparepartManualTransaction.SerialNumber))
                         { 
-                            Wheel wheel = _wheelRepository.GetMany(w=> w.SparepartId == sparepartUpdated.Id).FirstOrDefault();
+                            SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w=> w.SparepartId == sparepartUpdated.Id).FirstOrDefault();
 
-                            if (wheel != null)
+                            if (specialSparepart != null)
                             {
-                                WheelDetail wDetail = new WheelDetail();
+                                SpecialSparepartDetail wDetail = new SpecialSparepartDetail();
                                 wDetail.SparepartDetail = insertedSpDetail;
-                                wDetail.WheelId = wheel.Id;
+                                wDetail.WheelId = specialSparepart.Id;
                                 wDetail.SerialNumber = sparepartManualTransaction.SerialNumber;
                                 wDetail.CreateDate = serverTime;
                                 wDetail.CreateUserId = userId;
@@ -176,9 +176,9 @@ namespace BrawijayaWorkshop.Model
 
         public bool IsThisWheel(int sparepartId)
         {
-            Wheel wheel = _wheelRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+            SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
 
-            return wheel != null;
+            return specialSparepart != null;
         }
     }
 }
