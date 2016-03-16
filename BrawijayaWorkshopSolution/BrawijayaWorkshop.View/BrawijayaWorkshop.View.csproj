@@ -48,6 +48,7 @@
     <Compile Include="IDebtEditorView.cs" />
     <Compile Include="IDebtListView.cs" />
     <Compile Include="IDebtPaymentListView.cs" />
+    <Compile Include="IFirstBalanceEditorView.cs" />
     <Compile Include="IFirstBalanceListView.cs" />
     <Compile Include="IInvoiceEditorView.cs" />
     <Compile Include="IInvoiceListView.cs" />

@@ -48,6 +48,7 @@
     <Compile Include="DebtEditorPresenter.cs" />
     <Compile Include="DebtListPresenter.cs" />
     <Compile Include="DebtPaymentListPresenter.cs" />
+    <Compile Include="FirstBalanceEditorPresenter.cs" />
     <Compile Include="FirstBalanceListPresenter.cs" />
     <Compile Include="InvoiceEditorPresenter.cs" />
     <Compile Include="InvoiceListPresenter.cs" />
