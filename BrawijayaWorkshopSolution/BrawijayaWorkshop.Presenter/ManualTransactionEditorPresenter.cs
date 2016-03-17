@@ -26,6 +26,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.TransactionDate = View.SelectedTransaction.TransactionDate;
                 View.TotalTransaction = View.SelectedTransaction.TotalTransaction;
                 View.TransactionDescription = View.SelectedTransaction.Description;
+                View.IsReconciliation = View.SelectedTransaction.IsReconciliation;
                 View.TransactionDetailList = Model.RetrieveTransactionDetail(View.SelectedTransaction.Id);
             }
             else
@@ -54,6 +55,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedTransaction.Description = View.TransactionDescription;
             View.SelectedTransaction.TotalTransaction = View.TotalTransaction;
             View.SelectedTransaction.TotalPayment = View.TotalTransaction;
+            View.SelectedTransaction.IsReconciliation = View.IsReconciliation;
 
             if(View.SelectedTransaction.Id > 0)
             {

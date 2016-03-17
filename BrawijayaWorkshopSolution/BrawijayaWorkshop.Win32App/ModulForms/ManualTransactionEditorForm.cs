@@ -121,11 +121,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public bool IsReconciliation
+        {
+            get
+            {
+                return cbxIsReconciliation.Checked;
+            }
+            set
+            {
+                cbxIsReconciliation.Checked = value;
+            }
+        }
+
         private void btnNewTransDetail_Click(object sender, EventArgs e)
         {
             _presenter.InsertNewRecord();
         }
-
 
         protected override void ExecuteSave()
         {
