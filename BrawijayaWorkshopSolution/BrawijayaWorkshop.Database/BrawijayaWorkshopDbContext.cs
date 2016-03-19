@@ -42,6 +42,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
+        public DbSet<HPPHeader> HPPHeaders { get; set; }
+        public DbSet<HPPDetail> HPPDetails { get; set; }
         public DbSet<BalanceJournal> BalanceJournals { get; set; }
         public DbSet<BalanceJournalDetail> BalanceJournalDetails { get; set; }
         public DbSet<UsedGood> UsedGoods { get; set; }
@@ -82,6 +84,8 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new TransactionDetailConfiguration());
             modelBuilder.Configurations.Add(new BalanceJournalConfiguration());
             modelBuilder.Configurations.Add(new BalanceJournalDetailConfiguration());
+            modelBuilder.Configurations.Add(new HPPHeaderConfiguration());
+            modelBuilder.Configurations.Add(new HPPDetailConfiguration());
             modelBuilder.Configurations.Add(new UsedGoodsConfiguration());
             modelBuilder.Configurations.Add(new UsedGoodsTransactionConfiguration());
         }

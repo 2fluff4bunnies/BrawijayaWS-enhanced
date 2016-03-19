@@ -19,5 +19,7 @@ namespace BrawijayaWorkshop.View
         string TransactionDescription { get; set; }
 
         double TotalTransaction { get; set; }
+
+        bool IsReconciliation { get; set; }
     }
 }

@@ -826,6 +826,80 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            // HPP Journal Collection
+            Reference hppJournalRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_HPP_JOURNAL,
+                Name = "Tipe HPP",
+                Description = "Journal HPP",
+                Value = DbConstant.REF_HPP_JOURNAL
+            });
+            context.SaveChanges();
+
+            // HPP Journal Children Collection
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_HPP_JOURNAL_SPAREPART,
+                Name = "Tipe HPP Sparepart",
+                Description = "Kode Akun HPP Sparepart",
+                Value = DbConstant.REF_HPP_JOURNAL_SPAREPART,
+                ParentId = hppJournalRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC,
+                Name = "Tipe HPP Tukang Harian",
+                Description = "Kode Akun HPP Tukang Harian",
+                Value = DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC,
+                ParentId = hppJournalRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC,
+                Name = "Tipe HPP Tukang Borongan",
+                Description = "Kode Akun HPP Tukang Borongan",
+                Value = DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC,
+                ParentId = hppJournalRef.Id
+            });
+            context.SaveChanges();
+
+            // HPP Journal Collection
+            Reference stockJournalRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_STOCK_JOURNAL,
+                Name = "Tipe Stok",
+                Description = "Journal Stok",
+                Value = DbConstant.REF_STOCK_JOURNAL
+            });
+            context.SaveChanges();
+
+            // Stock Journal Children Collection
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_STOCK_JOURNAL_SPAREPART,
+                Name = "Tipe Stok Sparepart",
+                Description = "Kode Akun Stok Sparepart",
+                Value = DbConstant.REF_STOCK_JOURNAL_SPAREPART,
+                ParentId = stockJournalRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_STOCK_JOURNAL_DAILYMECHANIC,
+                Name = "Tipe Stok Tukang Harian",
+                Description = "Kode Akun Stok Tukang Harian",
+                Value = DbConstant.REF_STOCK_JOURNAL_DAILYMECHANIC,
+                ParentId = stockJournalRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_STOCK_JOURNAL_OUTSOURCEMECHANIC,
+                Name = "Tipe Stok Tukang Borongan",
+                Description = "Kode Akun Stok Tukang Borongan",
+                Value = DbConstant.REF_STOCK_JOURNAL_OUTSOURCEMECHANIC,
+                ParentId = stockJournalRef.Id
+            });
+            context.SaveChanges();
+
             // Settings
 
             context.Settings.Add(new Setting
