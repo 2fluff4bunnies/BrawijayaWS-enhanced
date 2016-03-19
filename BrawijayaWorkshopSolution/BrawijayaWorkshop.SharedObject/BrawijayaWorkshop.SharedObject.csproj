@@ -53,11 +53,15 @@
     <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\JournalMasterViewModel.cs" />
     <Compile Include="ViewModels\MechanicViewModel.cs" />
+    <Compile Include="ViewModels\PurchaseReturnDetailViewModel.cs" />
+    <Compile Include="ViewModels\PurchaseReturnViewModel.cs" />
     <Compile Include="ViewModels\PurchasingDetailViewModel.cs" />
     <Compile Include="ViewModels\PurchasingViewModel.cs" />
     <Compile Include="ViewModels\ReferenceViewModel.cs" />
     <Compile Include="ViewModels\RoleAccessViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\SalesReturnDetailViewModel.cs" />
+    <Compile Include="ViewModels\SalesReturnViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\SparepartDetailViewModel.cs" />
     <Compile Include="ViewModels\SparepartManualTransactionViewModel.cs" />

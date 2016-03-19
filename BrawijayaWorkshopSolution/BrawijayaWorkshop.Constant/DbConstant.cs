@@ -33,7 +33,9 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_CREDIT = "M_CREDIT";
         public const string MODUL_DEBT = "M_DEBT";
         public const string MODUL_INVOICE = "M_INVOICE";
-        
+        public const string MODUL_PURCHASE_RETURN = "M_PURCHASE_RETURN";
+        public const string MODUL_SALES_RETURN = "M_SALES_RETURN";
+
         public const string MODUL_ACCOUNTING = "M_ACCOUNTING";
 
         public const string REF_SPAREPARTCATEGORY = "REF_SPAREPARTCATEGORY";

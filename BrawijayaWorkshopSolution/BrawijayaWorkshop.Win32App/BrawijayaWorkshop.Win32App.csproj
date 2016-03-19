@@ -223,6 +223,12 @@
     <Compile Include="ModulControls\NotificationListControl.Designer.cs">
       <DependentUpon>NotificationListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\PurchaseReturnListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\PurchaseReturnListControl.Designer.cs">
+      <DependentUpon>PurchaseReturnListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\PurchasingListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,6 +246,12 @@
     </Compile>
     <Compile Include="ModulControls\RoleListControl.Designer.cs">
       <DependentUpon>RoleListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\SalesReturnListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SalesReturnListControl.Designer.cs">
+      <DependentUpon>SalesReturnListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\SPKListControl.cs">
       <SubType>UserControl</SubType>
@@ -601,6 +613,9 @@
     <EmbeddedResource Include="ModulControls\NotificationListControl.resx">
       <DependentUpon>NotificationListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\PurchaseReturnListControl.resx">
+      <DependentUpon>PurchaseReturnListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\PurchasingListControl.resx">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -609,6 +624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RoleListControl.resx">
       <DependentUpon>RoleListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SalesReturnListControl.resx">
+      <DependentUpon>SalesReturnListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SparepartListControl.resx">
       <DependentUpon>SparepartListControl.cs</DependentUpon>

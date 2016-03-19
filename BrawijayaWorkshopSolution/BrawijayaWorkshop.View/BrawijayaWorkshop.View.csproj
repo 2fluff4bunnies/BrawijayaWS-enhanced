@@ -63,6 +63,7 @@
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
     <Compile Include="INotificationListView.cs" />
+    <Compile Include="IPurchaseReturnListView.cs" />
     <Compile Include="IPurchasingApprovalView.cs" />
     <Compile Include="IPurchasingEditorView.cs" />
     <Compile Include="IPurchasingListView.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="IRoleAccessListView.cs" />
     <Compile Include="IRoleEditorView.cs" />
     <Compile Include="IRoleListView.cs" />
+    <Compile Include="ISalesReturnListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISparepartManualTransactionEditorView.cs" />
     <Compile Include="ISPKViewDetailView.cs" />
