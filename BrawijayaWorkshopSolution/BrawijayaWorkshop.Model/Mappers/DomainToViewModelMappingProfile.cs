@@ -43,6 +43,8 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<SpecialSparepartDetail, SpecialSparepartDetailViewModel>();
             Mapper.CreateMap<BalanceJournal, BalanceJournalViewModel>();
             Mapper.CreateMap<BalanceJournalDetail, BalanceJournalDetailViewModel>();
+            Mapper.CreateMap<HPPHeader, HPPHeaderViewModel>();
+            Mapper.CreateMap<HPPDetail, HPPDetailViewModel>();
         }
     }
 }
