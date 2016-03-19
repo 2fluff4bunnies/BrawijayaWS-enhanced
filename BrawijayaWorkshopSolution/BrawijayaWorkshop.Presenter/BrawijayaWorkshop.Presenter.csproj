@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BalanceJournalListPresenter.cs" />
     <Compile Include="ConfigEditorPresenter.cs" />
     <Compile Include="CreditEditorPresenter.cs" />
     <Compile Include="CreditListPresenter.cs" />

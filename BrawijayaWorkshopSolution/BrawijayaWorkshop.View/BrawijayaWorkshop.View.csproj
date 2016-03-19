@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBalanceJournalListView.cs" />
     <Compile Include="ICreditPaymentListView.cs" />
     <Compile Include="IConfigEditorView.cs" />
     <Compile Include="ICreditEditorView.cs" />
