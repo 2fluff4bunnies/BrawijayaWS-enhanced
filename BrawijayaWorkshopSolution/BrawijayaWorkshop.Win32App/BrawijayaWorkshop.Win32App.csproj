@@ -181,6 +181,12 @@
     <Compile Include="ModulControls\FirstBalanceListControl.Designer.cs">
       <DependentUpon>FirstBalanceListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\HPPListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\HPPListControl.Designer.cs">
+      <DependentUpon>HPPListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\InvoiceListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -580,6 +586,9 @@
     <EmbeddedResource Include="ModulControls\FirstBalanceListControl.resx">
       <DependentUpon>FirstBalanceListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\HPPListControl.resx">
+      <DependentUpon>HPPListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -869,6 +878,7 @@
     <None Include="Images\Truck-Left-Green-icon-16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
+    <None Include="Resources\calculator_16x16.png" />
     <Content Include="Resources\cancel_32x32.png" />
     <Content Include="Resources\delete_icon.png" />
     <Content Include="Resources\edit_icon.png" />

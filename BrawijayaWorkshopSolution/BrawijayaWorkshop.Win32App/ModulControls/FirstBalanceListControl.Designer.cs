@@ -38,6 +38,10 @@
             this.btnEditData = new DevExpress.XtraEditors.SimpleButton();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.btnDeleteData = new DevExpress.XtraEditors.SimpleButton();
+            this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLastDebit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLastCredit = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFirstBalance)).BeginInit();
             this.gcFirstBalance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridFirstBalance)).BeginInit();
@@ -99,6 +103,11 @@
             // 
             // gvFirstBalance
             // 
+            this.gvFirstBalance.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colJournalCode,
+            this.colJournalName,
+            this.colLastDebit,
+            this.colLastCredit});
             this.gvFirstBalance.GridControl = this.gridFirstBalance;
             this.gvFirstBalance.Name = "gvFirstBalance";
             this.gvFirstBalance.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -144,6 +153,38 @@
             this.btnDeleteData.Text = "Hapus Saldo Awal";
             this.btnDeleteData.Click += new System.EventHandler(this.btnDeleteData_Click);
             // 
+            // colJournalCode
+            // 
+            this.colJournalCode.Caption = "Kode Akun";
+            this.colJournalCode.FieldName = "Journal.Code";
+            this.colJournalCode.Name = "colJournalCode";
+            this.colJournalCode.Visible = true;
+            this.colJournalCode.VisibleIndex = 0;
+            // 
+            // colJournalName
+            // 
+            this.colJournalName.Caption = "Nama";
+            this.colJournalName.FieldName = "Journal.Name";
+            this.colJournalName.Name = "colJournalName";
+            this.colJournalName.Visible = true;
+            this.colJournalName.VisibleIndex = 1;
+            // 
+            // colLastDebit
+            // 
+            this.colLastDebit.Caption = "Debet";
+            this.colLastDebit.FieldName = "LastDebit";
+            this.colLastDebit.Name = "colLastDebit";
+            this.colLastDebit.Visible = true;
+            this.colLastDebit.VisibleIndex = 2;
+            // 
+            // colLastCredit
+            // 
+            this.colLastCredit.Caption = "Kredit";
+            this.colLastCredit.FieldName = "LastCredit";
+            this.colLastCredit.Name = "colLastCredit";
+            this.colLastCredit.Visible = true;
+            this.colLastCredit.VisibleIndex = 3;
+            // 
             // FirstBalanceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,5 +216,9 @@
         private DevExpress.XtraEditors.SimpleButton btnEditData;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraEditors.SimpleButton btnDeleteData;
+        private DevExpress.XtraGrid.Columns.GridColumn colJournalCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
+        private DevExpress.XtraGrid.Columns.GridColumn colLastDebit;
+        private DevExpress.XtraGrid.Columns.GridColumn colLastCredit;
     }
 }
