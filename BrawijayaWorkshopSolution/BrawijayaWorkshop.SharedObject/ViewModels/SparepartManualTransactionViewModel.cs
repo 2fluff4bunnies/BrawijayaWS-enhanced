@@ -16,5 +16,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SparepartViewModel Sparepart { get; set; }
         public int UpdateTypeId { get; set; }
         public ReferenceViewModel UpdateType { get; set; }
+        public decimal Price { get; set; }
     }
 }

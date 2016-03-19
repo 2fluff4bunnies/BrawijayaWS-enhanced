@@ -22,5 +22,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int UpdateTypeId { get; set; }
         public virtual Reference UpdateType { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
     }
 }

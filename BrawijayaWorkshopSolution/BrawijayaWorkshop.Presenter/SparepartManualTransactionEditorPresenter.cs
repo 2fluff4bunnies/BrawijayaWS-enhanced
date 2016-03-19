@@ -26,6 +26,7 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.TransactionTypeId = View.SelectedSparepartManualTransaction.UpdateTypeId;
                 View.StockUpdate = View.SelectedSparepartManualTransaction.Qty;
+                View.Price = View.SelectedSparepartManualTransaction.Price;
                 View.Remark = View.SelectedSparepartManualTransaction.Remark;
             }
         }
@@ -39,6 +40,7 @@ namespace BrawijayaWorkshop.Presenter
 
             View.SelectedSparepartManualTransaction.SparepartId = View.SparepartId;
             View.SelectedSparepartManualTransaction.Qty = View.StockUpdate;
+            View.SelectedSparepartManualTransaction.Price = View.Price;
             View.SelectedSparepartManualTransaction.Remark = View.Remark;
             View.SelectedSparepartManualTransaction.UpdateTypeId = View.TransactionTypeId;
             View.SelectedSparepartManualTransaction.SerialNumber = View.SerialNumber;

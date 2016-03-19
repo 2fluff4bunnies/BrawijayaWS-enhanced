@@ -95,6 +95,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public decimal Price
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(txtItemPrice.Text) ? txtItemPrice.Text.AsDecimal() : 0;
+            }
+            set
+            {
+                txtItemPrice.Text = value.ToString();
+            }
+        }
+
         public string Remark
         {
             get

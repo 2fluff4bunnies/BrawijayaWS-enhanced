@@ -18,6 +18,7 @@ namespace BrawijayaWorkshop.View
 
         string SerialNumber { get; set; }
         bool IsWheel { get; set; }
+        decimal Price { get; set; }
 
         List<ReferenceViewModel> ListTransactionTypeReference { get; set; }
         SparepartViewModel Sparepart { get; set; }
