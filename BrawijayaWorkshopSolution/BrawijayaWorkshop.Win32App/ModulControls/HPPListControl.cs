@@ -4,7 +4,6 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
-using BrawijayaWorkshop.Win32App.ModulForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,19 +24,39 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public int SelectedMonth { get; set; }
-
-        public int SelectedYear { get; set; }
-
-        public List<dynamic> ListMonth
+        public int SelectedMonth
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupMonth.EditValue.AsInteger();
             }
             set
             {
-                throw new NotImplementedException();
+                lookupMonth.EditValue = value;
+            }
+        }
+
+        public int SelectedYear
+        {
+            get
+            {
+                return lookupYear.EditValue.AsInteger();
+            }
+            set
+            {
+                lookupYear.EditValue = value;
+            }
+        }
+
+        public Dictionary<int, string> ListMonth
+        {
+            get
+            {
+                return lookupMonth.Properties.DataSource as Dictionary<int, string>;
+            }
+            set
+            {
+                lookupMonth.Properties.DataSource = value;
             }
         }
 
@@ -45,11 +64,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupYear.Properties.DataSource as List<int>;
             }
             set
             {
-                throw new NotImplementedException();
+                lookupYear.Properties.DataSource = value;
             }
         }
 
@@ -85,7 +104,86 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void HPPListControl_Load(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.InitFormData();
+            btnSearch.PerformClick();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
+        }
+
+        public override void RefreshDataView()
+        {
+            if (!bgwMain.IsBusy)
+            {
+                MethodBase.GetCurrentMethod().Info("Fecthing HPP data...");
+                AvailableHeader = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data HPP...", false);
+                bgwMain.RunWorkerAsync();
+            }
+        }
+
+        private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.LoadData();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadData()", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwMain_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses memuat data gagal!");
+            }
+
+            if (gvHPP.RowCount > 0)
+            {
+                AvailableHeader = gvHPP.GetRow(0) as HPPHeaderViewModel;
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data HPP selesai", true);
+        }
+
+        private void btnRecalculateHPP_Click(object sender, EventArgs e)
+        {
+            if(!bgwMain.IsBusy && !bgwRecalculate.IsBusy)
+            {
+                MethodBase.GetCurrentMethod().Info("Recalculate HPP data...");
+                AvailableHeader = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang HPP...", false);
+                bgwMain.RunWorkerAsync();
+            }
+        }
+
+        private void bgwRecalculate_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.Recalculate();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.Recalculate()", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwRecalculate_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses menghitung HPP gagal!");
+            }
+
+            btnSearch.PerformClick();
         }
     }
 }

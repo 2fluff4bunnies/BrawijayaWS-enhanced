@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.View
         int SelectedMonth { get; set; }
         int SelectedYear { get; set; }
 
-        List<dynamic> ListMonth { get; set; }
+        Dictionary<int, string> ListMonth { get; set; }
         List<int> ListYear { get; set; }
 
         HPPHeaderViewModel AvailableHeader { get; set; }

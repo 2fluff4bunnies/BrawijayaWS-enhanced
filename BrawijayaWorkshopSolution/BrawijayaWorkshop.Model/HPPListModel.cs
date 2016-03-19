@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
@@ -45,6 +46,26 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public Dictionary<int, string> GenerateMonth()
+        {
+            Dictionary<int, string> result = new Dictionary<int, string>();
+            for (int i = 1; i <= 12; i++)
+            {
+                result.Add(i, DateTimeFormatInfo.CurrentInfo.GetMonthName(i));
+            }
+            return result;
+        }
+
+        public List<int> GenerateYear()
+        {
+            List<int> result = new List<int>();
+            for (int i = 2016; i <= DateTime.Today.Year; i++)
+            {
+                result.Add(i);
+            }
+            return result;
         }
 
         public HPPHeaderViewModel RetrieveHPPHeader(int month, int year)
