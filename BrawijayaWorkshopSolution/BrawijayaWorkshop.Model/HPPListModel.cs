@@ -91,6 +91,15 @@ namespace BrawijayaWorkshop.Model
                 DeleteHPP(header.Id, userId);
             }
 
+            HPPHeader newHeader = new HPPHeader();
+            newHeader.CreateUserId = newHeader.ModifyUserId = userId;
+            newHeader.CreateDate = newHeader.ModifyDate = DateTime.Now;
+            newHeader.Month = month;
+            newHeader.Year = year;
+            newHeader.Status = (int)DbConstant.DefaultDataStatus.Active;
+            newHeader = _hppHeaderRepository.Add(newHeader);
+            _unitOfWork.SaveChanges();
+
             // TODO : Recalculate
             // 1. Ambil persediaan awal sparepart (Akhir bulan sebelumnya) + Pembelian sparepart bulan ini
             // 2. Ambil persediaan awal tukang harian (akhir bulan sebelumnya) + Pemakaian tukang bulan ini
@@ -112,9 +121,10 @@ namespace BrawijayaWorkshop.Model
             Reference stockJournal = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_STOCK_JOURNAL).FirstOrDefault();
             List<Reference> stockJournalList = _referenceRepository.GetMany(r => r.ParentId == stockJournal.Id).ToList();
 
-            // HPP sparepart this month
-            double lastSparepartBalance = 0;
+            // Calculate HPP sparepart this month
+            double lastPrevSparepartBalance = 0;
             double totalPurchase = 0;
+            double lastSparepartBalance = 0;
             if(lastJournal != null)
             {
                 string stockSparepartCode = stockJournalList.Where(j => j.Code == DbConstant.REF_STOCK_JOURNAL_SPAREPART).FirstOrDefault().Value;
@@ -122,7 +132,7 @@ namespace BrawijayaWorkshop.Model
                 BalanceJournalDetail details = _balanceJournalDetailRepository.GetMany(d => d.ParentId == lastJournal.Id &&
                     d.JournalId == sparepartStockJournal.Id).FirstOrDefault();
                 // persediaan awal (bulan sebelumnya)
-                lastSparepartBalance = details.LastDebit.AsDouble();
+                lastPrevSparepartBalance = details.LastDebit.AsDouble();
 
                 // pembelian sparepart
                 List<Purchasing> listPurchasing = _purchasingRepository.GetMany(p =>
@@ -131,8 +141,31 @@ namespace BrawijayaWorkshop.Model
                 totalPurchase = listPurchasing.Sum(p => p.TotalPrice).AsDouble();
 
                 // persediaan akhir
-
+                List<SparepartDetail> sparepartDetailList = _sparepartDetailRepository.GetMany(sp =>
+                    sp.Status == (int)DbConstant.SparepartDetailDataStatus.Active).ToList();
+                lastSparepartBalance = sparepartDetailList.Sum(sp =>
+                    sp.PurchasingDetailId.HasValue ? sp.PurchasingDetail.Price :
+                                                     sp.SparepartManualTransaction.Price).AsDouble();
             }
+            double hppSparepartAmount = lastPrevSparepartBalance + totalPurchase - lastSparepartBalance;
+            double hppSparepartWithServiceAmount = hppSparepartAmount * 0.1;
+
+            string sparepartHPPCode = hppJournalList.Where(r => r.Code == DbConstant.REF_HPP_JOURNAL_SPAREPART).FirstOrDefault().Value;
+            JournalMaster sparepartHPPJournal = _journalMasterRepository.GetMany(jm => jm.Code == sparepartHPPCode).FirstOrDefault();
+
+            HPPDetail hppSparepartDetail = new HPPDetail();
+            hppSparepartDetail.BaseAmount = hppSparepartAmount.AsDecimal();
+            hppSparepartDetail.ServicePercentage = 10;
+            hppSparepartDetail.ServiceAmount = hppSparepartWithServiceAmount.AsDecimal();
+            hppSparepartDetail.TotalAmount = hppSparepartDetail.BaseAmount + hppSparepartDetail.ServiceAmount;
+            hppSparepartDetail.HeaderId = newHeader.Id;
+            hppSparepartDetail.JournalId = sparepartHPPJournal.Id;
+            _hppDetailRepository.Add(hppSparepartDetail);
+            _unitOfWork.SaveChanges();
+            // End calculate HPP sparepart this month
+
+            // TODO: Calculate Daily Tukang
+            // TODO: Calculate Borongan Tukang
         }
 
         public void DeleteHPP(int headerId, int userId)
