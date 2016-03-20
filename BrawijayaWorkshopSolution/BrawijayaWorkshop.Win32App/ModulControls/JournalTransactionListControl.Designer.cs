@@ -1,6 +1,6 @@
 ﻿namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    partial class HPPListControl
+    partial class JournalTransactionListControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,40 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HPPListControl));
-            this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.bgwRecalculate = new System.ComponentModel.BackgroundWorker();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JournalTransactionListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.lookupYear = new DevExpress.XtraEditors.LookUpEdit();
             this.lblFilterYear = new DevExpress.XtraEditors.LabelControl();
             this.lookupMonth = new DevExpress.XtraEditors.LookUpEdit();
             this.lblFilterMonth = new DevExpress.XtraEditors.LabelControl();
-            this.btnRecalculateHPP = new DevExpress.XtraEditors.SimpleButton();
-            this.gridHPP = new DevExpress.XtraGrid.GridControl();
-            this.gvHPP = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridTransaction = new DevExpress.XtraGrid.GridControl();
+            this.gvTransaction = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colBaseAmount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colServiceAmount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colJournalDebit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colJournalCredit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupMonth.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridHPP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvHPP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridTransaction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvTransaction)).BeginInit();
             this.SuspendLayout();
-            // 
-            // bgwMain
-            // 
-            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
-            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
-            // 
-            // bgwRecalculate
-            // 
-            this.bgwRecalculate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRecalculate_DoWork);
-            this.bgwRecalculate.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwRecalculate_RunWorkerCompleted);
             // 
             // gcFilter
             // 
@@ -74,8 +61,8 @@
             this.gcFilter.Controls.Add(this.lblFilterMonth);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(611, 66);
-            this.gcFilter.TabIndex = 0;
+            this.gcFilter.Size = new System.Drawing.Size(784, 66);
+            this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
             // btnSearch
@@ -136,55 +123,42 @@
             this.lblFilterMonth.TabIndex = 0;
             this.lblFilterMonth.Text = "Bulan:";
             // 
-            // btnRecalculateHPP
+            // gridTransaction
             // 
-            this.btnRecalculateHPP.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.calculator_16x16;
-            this.btnRecalculateHPP.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnRecalculateHPP.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnRecalculateHPP.Location = new System.Drawing.Point(3, 75);
-            this.btnRecalculateHPP.Name = "btnRecalculateHPP";
-            this.btnRecalculateHPP.Size = new System.Drawing.Size(96, 29);
-            this.btnRecalculateHPP.TabIndex = 1;
-            this.btnRecalculateHPP.Text = "Hitung HPP";
-            this.btnRecalculateHPP.Click += new System.EventHandler(this.btnRecalculateHPP_Click);
-            // 
-            // gridHPP
-            // 
-            this.gridHPP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gridTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridHPP.Location = new System.Drawing.Point(3, 110);
-            this.gridHPP.MainView = this.gvHPP;
-            this.gridHPP.Name = "gridHPP";
-            this.gridHPP.Size = new System.Drawing.Size(611, 235);
-            this.gridHPP.TabIndex = 6;
-            this.gridHPP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvHPP});
+            this.gridTransaction.Location = new System.Drawing.Point(3, 75);
+            this.gridTransaction.MainView = this.gvTransaction;
+            this.gridTransaction.Name = "gridTransaction";
+            this.gridTransaction.Size = new System.Drawing.Size(784, 345);
+            this.gridTransaction.TabIndex = 5;
+            this.gridTransaction.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvTransaction});
             // 
-            // gvHPP
+            // gvTransaction
             // 
-            this.gvHPP.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvTransaction.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colJournalCode,
             this.colJournalName,
-            this.colBaseAmount,
-            this.colServiceAmount,
-            this.colTotal});
-            this.gvHPP.GridControl = this.gridHPP;
-            this.gvHPP.Name = "gvHPP";
-            this.gvHPP.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvHPP.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvHPP.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvHPP.OptionsBehavior.Editable = false;
-            this.gvHPP.OptionsBehavior.ReadOnly = true;
-            this.gvHPP.OptionsCustomization.AllowColumnMoving = false;
-            this.gvHPP.OptionsCustomization.AllowFilter = false;
-            this.gvHPP.OptionsCustomization.AllowGroup = false;
-            this.gvHPP.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvHPP.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvHPP.OptionsView.ShowFooter = true;
-            this.gvHPP.OptionsView.ShowGroupPanel = false;
-            this.gvHPP.OptionsView.ShowViewCaption = true;
-            this.gvHPP.ViewCaption = "Harga Pokok Penjualan";
+            this.colJournalDebit,
+            this.colJournalCredit});
+            this.gvTransaction.GridControl = this.gridTransaction;
+            this.gvTransaction.Name = "gvTransaction";
+            this.gvTransaction.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvTransaction.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvTransaction.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvTransaction.OptionsBehavior.Editable = false;
+            this.gvTransaction.OptionsBehavior.ReadOnly = true;
+            this.gvTransaction.OptionsCustomization.AllowColumnMoving = false;
+            this.gvTransaction.OptionsCustomization.AllowFilter = false;
+            this.gvTransaction.OptionsCustomization.AllowGroup = false;
+            this.gvTransaction.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvTransaction.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvTransaction.OptionsView.ShowFooter = true;
+            this.gvTransaction.OptionsView.ShowGroupPanel = false;
+            this.gvTransaction.OptionsView.ShowViewCaption = true;
+            this.gvTransaction.ViewCaption = "Daftar Transaksi Jurnal";
             // 
             // colJournalCode
             // 
@@ -202,79 +176,68 @@
             this.colJournalName.Visible = true;
             this.colJournalName.VisibleIndex = 1;
             // 
-            // colBaseAmount
+            // colJournalDebit
             // 
-            this.colBaseAmount.Caption = "Jumlah";
-            this.colBaseAmount.DisplayFormat.FormatString = "{0:#,#}";
-            this.colBaseAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colBaseAmount.FieldName = "BaseAmount";
-            this.colBaseAmount.Name = "colBaseAmount";
-            this.colBaseAmount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BaseAmount", "{0:#,#}")});
-            this.colBaseAmount.Visible = true;
-            this.colBaseAmount.VisibleIndex = 2;
+            this.colJournalDebit.Caption = "Debet";
+            this.colJournalDebit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colJournalDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colJournalDebit.FieldName = "Debit";
+            this.colJournalDebit.Name = "colJournalDebit";
+            this.colJournalDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Debit", "{0:#,#}")});
+            this.colJournalDebit.Visible = true;
+            this.colJournalDebit.VisibleIndex = 2;
             // 
-            // colServiceAmount
+            // colJournalCredit
             // 
-            this.colServiceAmount.Caption = "Jasa 10%";
-            this.colServiceAmount.DisplayFormat.FormatString = "{0:#,#}";
-            this.colServiceAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colServiceAmount.FieldName = "ServiceAmount";
-            this.colServiceAmount.Name = "colServiceAmount";
-            this.colServiceAmount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ServiceAmount", "{0:#,#}")});
-            this.colServiceAmount.Visible = true;
-            this.colServiceAmount.VisibleIndex = 3;
+            this.colJournalCredit.Caption = "Kredit";
+            this.colJournalCredit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colJournalCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colJournalCredit.FieldName = "Credit";
+            this.colJournalCredit.Name = "colJournalCredit";
+            this.colJournalCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Credit", "{0:#,#}")});
+            this.colJournalCredit.Visible = true;
+            this.colJournalCredit.VisibleIndex = 3;
             // 
-            // colTotal
+            // bgwMain
             // 
-            this.colTotal.Caption = "Total";
-            this.colTotal.DisplayFormat.FormatString = "{0:#,#}";
-            this.colTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colTotal.FieldName = "TotalAmount";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalAmount", "{0:#,#}")});
-            this.colTotal.Visible = true;
-            this.colTotal.VisibleIndex = 4;
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // HPPListControl
+            // JournalTransactionListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gridHPP);
-            this.Controls.Add(this.btnRecalculateHPP);
+            this.Controls.Add(this.gridTransaction);
             this.Controls.Add(this.gcFilter);
-            this.Name = "HPPListControl";
-            this.Size = new System.Drawing.Size(617, 348);
+            this.Name = "JournalTransactionListControl";
+            this.Size = new System.Drawing.Size(790, 423);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupMonth.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridHPP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvHPP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridTransaction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvTransaction)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker bgwMain;
-        private System.ComponentModel.BackgroundWorker bgwRecalculate;
         private DevExpress.XtraEditors.GroupControl gcFilter;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraEditors.LookUpEdit lookupYear;
         private DevExpress.XtraEditors.LabelControl lblFilterYear;
         private DevExpress.XtraEditors.LookUpEdit lookupMonth;
         private DevExpress.XtraEditors.LabelControl lblFilterMonth;
-        private DevExpress.XtraEditors.SimpleButton btnRecalculateHPP;
-        private DevExpress.XtraGrid.GridControl gridHPP;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvHPP;
+        private DevExpress.XtraGrid.GridControl gridTransaction;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvTransaction;
         private DevExpress.XtraGrid.Columns.GridColumn colJournalCode;
         private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
-        private DevExpress.XtraGrid.Columns.GridColumn colBaseAmount;
-        private DevExpress.XtraGrid.Columns.GridColumn colServiceAmount;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotal;
-        private DevExpress.XtraEditors.LookUpEdit lookupYear;
-        private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraGrid.Columns.GridColumn colJournalDebit;
+        private DevExpress.XtraGrid.Columns.GridColumn colJournalCredit;
+        private System.ComponentModel.BackgroundWorker bgwMain;
     }
 }
