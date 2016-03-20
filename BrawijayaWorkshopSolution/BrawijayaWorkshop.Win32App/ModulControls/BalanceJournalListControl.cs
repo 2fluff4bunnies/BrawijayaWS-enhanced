@@ -4,6 +4,8 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -99,7 +101,26 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             InitializeComponent();
             _presenter = new BalanceJournalListPresenter(this, model);
 
+            gvBalanceJournal.CustomSummaryCalculate += gvBalanceJournal_CustomSummaryCalculate;
+
             this.Load += BalanceJournalListControl_Load;
+        }
+
+        private void gvBalanceJournal_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            GridColumnSummaryItem item = e.Item as GridColumnSummaryItem;
+            GridView view = sender as GridView;
+            //if (Equals("Count", item.Tag))
+            //{
+            //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Start)
+            //        validRowCount = 0;
+            //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Calculate)
+            //    {
+            //        if (!Convert.ToBoolean(view.GetRowCellValue(e.RowHandle, "Discontinued"))) validRowCount++;
+            //    }
+            //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
+            //        e.TotalValue = validRowCount;
+            //}
         }
 
         private void BalanceJournalListControl_Load(object sender, EventArgs e)
@@ -151,6 +172,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (!bgwMain.IsBusy && !bgwRecalculate.IsBusy)
             {
+                btnRecalculateBalanceJournal.Enabled = false;
                 MethodBase.GetCurrentMethod().Info("Recalculate balance journal data...");
                 AvailableBalanceJournal = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang neraca...", false);
@@ -177,6 +199,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 this.ShowError("Proses menghitung neraca gagal!");
             }
+
+            btnRecalculateBalanceJournal.Enabled = true;
 
             btnSearch.PerformClick();
         }

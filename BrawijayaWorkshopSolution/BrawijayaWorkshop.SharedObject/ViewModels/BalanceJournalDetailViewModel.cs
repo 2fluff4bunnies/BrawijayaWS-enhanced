@@ -17,11 +17,14 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public decimal? MutationDebit { get; set; }
         public decimal? MutationCredit { get; set; }
 
+        public decimal? BalanceAfterMutationDebit { get; set; }
+        public decimal? BalanceAfterMutationCredit { get; set; }
+
         public decimal? ReconciliationDebit { get; set; }
         public decimal? ReconciliationCredit { get; set; }
 
-        public decimal? BalanceAfterReconDebit { get; set; }
-        public decimal? BalanceAfterReconCredit { get; set; }
+        public decimal? BalanceAfterReconciliationDebit { get; set; }
+        public decimal? BalanceAfterReconciliationCredit { get; set; }
 
         public decimal? ProfitLossDebit { get; set; }
         public decimal? ProfitLossCredit { get; set; }

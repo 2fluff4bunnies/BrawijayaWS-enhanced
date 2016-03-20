@@ -151,6 +151,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if(!bgwMain.IsBusy && !bgwRecalculate.IsBusy)
             {
+                btnRecalculateHPP.Enabled = false;
                 MethodBase.GetCurrentMethod().Info("Recalculate HPP data...");
                 AvailableHeader = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang HPP...", false);
@@ -177,6 +178,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 this.ShowError("Proses menghitung HPP gagal!");
             }
+
+            btnRecalculateHPP.Enabled = true;
 
             btnSearch.PerformClick();
         }

@@ -182,6 +182,28 @@ namespace BrawijayaWorkshop.Model
             foreach (var item in tempListBalanceDetailViewModel)
             {
                 // update saldo awal (saldo akhir + mutasi)
+                item.BalanceAfterMutationDebit = item.FirstDebit ?? 0 + item.MutationDebit ?? 0;
+                item.BalanceAfterMutationCredit = item.FirstCredit ?? 0 + item.MutationCredit ?? 0;
+
+                decimal totalAfterReconciliation =
+                    (item.BalanceAfterMutationDebit ?? 0 + item.ReconciliationDebit ?? 0) -
+                    (item.BalanceAfterMutationCredit ?? 0 + item.ReconciliationCredit ?? 0);
+                if(totalAfterReconciliation > 0)
+                {
+                    item.BalanceAfterReconciliationDebit = totalAfterReconciliation;
+                    item.BalanceAfterReconciliationCredit = 0;
+                }
+                else
+                {
+                    item.BalanceAfterReconciliationDebit = 0;
+                    item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
+                }
+
+                if(item.Journal.IsProfitLoss)
+                {
+                    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
+                    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
+                }
             }
 
             // 5. Insert Keb Balance Header & Balance Detail
