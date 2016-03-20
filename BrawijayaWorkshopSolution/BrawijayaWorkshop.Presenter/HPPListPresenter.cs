@@ -21,6 +21,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadData()
         {
+            if (View.SelectedMonth == 0 || View.SelectedYear == 0) return;
+
             View.AvailableHeader = Model.RetrieveHPPHeader(View.SelectedMonth, View.SelectedYear);
             if (View.AvailableHeader != null)
             {

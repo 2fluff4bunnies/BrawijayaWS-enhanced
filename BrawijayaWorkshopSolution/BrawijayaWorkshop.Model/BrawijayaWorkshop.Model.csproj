@@ -72,6 +72,7 @@
     <Compile Include="GuestBookListModel.cs" />
     <Compile Include="JournalMasterEditorModel.cs" />
     <Compile Include="JournalMasterListModel.cs" />
+    <Compile Include="JournalTransactionListModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="ManageUserEditorModel.cs" />
     <Compile Include="ManageUserListModel.cs" />

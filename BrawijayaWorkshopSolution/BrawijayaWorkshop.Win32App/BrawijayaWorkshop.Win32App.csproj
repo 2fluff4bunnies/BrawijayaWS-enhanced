@@ -211,6 +211,12 @@
     <Compile Include="ModulControls\JournalMasterListControl.Designer.cs">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\JournalTransactionListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\JournalTransactionListControl.Designer.cs">
+      <DependentUpon>JournalTransactionListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\ManageUserListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -618,6 +624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\JournalTransactionListControl.resx">
+      <DependentUpon>JournalTransactionListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\ManageUserListControl.resx">
       <DependentUpon>ManageUserListControl.cs</DependentUpon>

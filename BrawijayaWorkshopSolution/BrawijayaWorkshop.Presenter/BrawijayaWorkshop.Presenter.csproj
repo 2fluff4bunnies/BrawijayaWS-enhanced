@@ -58,6 +58,7 @@
     <Compile Include="GuestBookListPresenter.cs" />
     <Compile Include="JournalMasterEditorPresenter.cs" />
     <Compile Include="JournalMasterListPresenter.cs" />
+    <Compile Include="JournalTransactionListPresenter.cs" />
     <Compile Include="LoginPresenter.cs" />
     <Compile Include="ManageUserEditorPresenter.cs" />
     <Compile Include="ManageUserListPresenter.cs" />
