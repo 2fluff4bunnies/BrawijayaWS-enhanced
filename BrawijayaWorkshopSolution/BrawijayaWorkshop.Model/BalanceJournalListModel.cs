@@ -79,12 +79,23 @@ namespace BrawijayaWorkshop.Model
 
         public void RecalculateBalanceJournal(int month, int year, int userId)
         {
-            
+            BalanceJournalViewModel prevCalculated = RetrieveBalanceJournalHeader(month, year);
+            if(prevCalculated != null)
+            {
+                DeleteBalanceJournal(prevCalculated.Id, userId);
+            }
+
+            // calculate neraca
         }
 
         public void DeleteBalanceJournal(int headerId, int userId)
         {
-            
+            BalanceJournal entity = _balanceJournalRepository.GetById(headerId);
+            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            entity.ModifyDate = DateTime.Now;
+            entity.ModifyUserId = userId;
+            _balanceJournalRepository.Update(entity);
+            _unitOfWork.SaveChanges();
         }
     }
 }

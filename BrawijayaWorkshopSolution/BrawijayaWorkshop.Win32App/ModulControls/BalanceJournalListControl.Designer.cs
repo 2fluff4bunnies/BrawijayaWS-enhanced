@@ -68,14 +68,16 @@
             // 
             // gcFilter
             // 
+            this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.lookupYear);
             this.gcFilter.Controls.Add(this.lblFilterYear);
             this.gcFilter.Controls.Add(this.lookupMonth);
             this.gcFilter.Controls.Add(this.lblFilterMonth);
-            this.gcFilter.Location = new System.Drawing.Point(0, 0);
+            this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(1244, 66);
+            this.gcFilter.Size = new System.Drawing.Size(814, 66);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
@@ -143,7 +145,7 @@
             this.btnRecalculateBalanceJournal.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.calculator_16x16;
             this.btnRecalculateBalanceJournal.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnRecalculateBalanceJournal.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnRecalculateBalanceJournal.Location = new System.Drawing.Point(3, 72);
+            this.btnRecalculateBalanceJournal.Location = new System.Drawing.Point(3, 75);
             this.btnRecalculateBalanceJournal.Name = "btnRecalculateBalanceJournal";
             this.btnRecalculateBalanceJournal.Size = new System.Drawing.Size(113, 29);
             this.btnRecalculateBalanceJournal.TabIndex = 2;
@@ -155,10 +157,10 @@
             this.gridBalanceJournal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridBalanceJournal.Location = new System.Drawing.Point(3, 107);
+            this.gridBalanceJournal.Location = new System.Drawing.Point(3, 110);
             this.gridBalanceJournal.MainView = this.gvBalanceJournal;
             this.gridBalanceJournal.Name = "gridBalanceJournal";
-            this.gridBalanceJournal.Size = new System.Drawing.Size(889, 238);
+            this.gridBalanceJournal.Size = new System.Drawing.Size(814, 235);
             this.gridBalanceJournal.TabIndex = 7;
             this.gridBalanceJournal.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBalanceJournal});
@@ -437,7 +439,7 @@
             this.Controls.Add(this.btnRecalculateBalanceJournal);
             this.Controls.Add(this.gcFilter);
             this.Name = "BalanceJournalListControl";
-            this.Size = new System.Drawing.Size(895, 348);
+            this.Size = new System.Drawing.Size(820, 348);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
