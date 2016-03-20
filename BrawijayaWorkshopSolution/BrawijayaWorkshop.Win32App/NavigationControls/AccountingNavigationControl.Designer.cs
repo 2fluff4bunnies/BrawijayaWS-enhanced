@@ -33,8 +33,12 @@
             this.navbarAccounting = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupAccounting = new DevExpress.XtraNavBar.NavBarGroup();
             this.iFirstBalance = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iManualTransaction = new DevExpress.XtraNavBar.NavBarItem();
+            this.iJournalTransaction = new DevExpress.XtraNavBar.NavBarItem();
+            this.iHPPList = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iProfitLoss = new DevExpress.XtraNavBar.NavBarItem();
+            this.iBalanceTotal = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarAccounting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +51,11 @@
             this.navbarGroupAccounting});
             this.navbarAccounting.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.iFirstBalance,
-            this.iManualTransaction});
+            this.iManualTransaction,
+            this.iJournalTransaction,
+            this.iHPPList,
+            this.iProfitLoss,
+            this.iBalanceTotal});
             this.navbarAccounting.Location = new System.Drawing.Point(0, 0);
             this.navbarAccounting.Name = "navbarAccounting";
             this.navbarAccounting.OptionsNavPane.ExpandedWidth = 275;
@@ -62,7 +70,11 @@
             this.navbarGroupAccounting.Expanded = true;
             this.navbarGroupAccounting.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.iFirstBalance),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iManualTransaction)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iManualTransaction),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iJournalTransaction),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iHPPList),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iProfitLoss),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceTotal)});
             this.navbarGroupAccounting.Name = "navbarGroupAccounting";
             // 
             // iFirstBalance
@@ -70,6 +82,24 @@
             this.iFirstBalance.Caption = "Saldo Awal";
             this.iFirstBalance.Name = "iFirstBalance";
             this.iFirstBalance.SmallImageIndex = 2;
+            // 
+            // iManualTransaction
+            // 
+            this.iManualTransaction.Caption = "Transaksi Manual";
+            this.iManualTransaction.Name = "iManualTransaction";
+            this.iManualTransaction.SmallImageIndex = 5;
+            // 
+            // iJournalTransaction
+            // 
+            this.iJournalTransaction.Caption = "Lihat Semua Transaksi Jurnal";
+            this.iJournalTransaction.Name = "iJournalTransaction";
+            this.iJournalTransaction.SmallImageIndex = 4;
+            // 
+            // iHPPList
+            // 
+            this.iHPPList.Caption = "HPP";
+            this.iHPPList.Name = "iHPPList";
+            this.iHPPList.SmallImageIndex = 6;
             // 
             // imageCollection
             // 
@@ -80,12 +110,20 @@
             this.imageCollection.Images.SetKeyName(3, "sheet_16x16.png");
             this.imageCollection.Images.SetKeyName(4, "Sheet2_16x16.png");
             this.imageCollection.Images.SetKeyName(5, "manual_trans_16x16.png");
+            this.imageCollection.Images.SetKeyName(6, "hpp_16x16.png");
+            this.imageCollection.Images.SetKeyName(7, "profitloss_16x16.png");
             // 
-            // iManualTransaction
+            // iProfitLoss
             // 
-            this.iManualTransaction.Caption = "Transaksi Manual";
-            this.iManualTransaction.Name = "iManualTransaction";
-            this.iManualTransaction.SmallImageIndex = 5;
+            this.iProfitLoss.Caption = "Laba / Rugi";
+            this.iProfitLoss.Name = "iProfitLoss";
+            this.iProfitLoss.SmallImageIndex = 7;
+            // 
+            // iBalanceTotal
+            // 
+            this.iBalanceTotal.Caption = "Neraca";
+            this.iBalanceTotal.Name = "iBalanceTotal";
+            this.iBalanceTotal.SmallImageIndex = 1;
             // 
             // AccountingNavigationControl
             // 
@@ -103,9 +141,13 @@
         #endregion
 
         private DevExpress.XtraNavBar.NavBarControl navbarAccounting;
-        private DevExpress.XtraNavBar.NavBarGroup navbarGroupAccounting;
         private DevExpress.Utils.ImageCollection imageCollection;
         public DevExpress.XtraNavBar.NavBarItem iFirstBalance;
         public DevExpress.XtraNavBar.NavBarItem iManualTransaction;
+        public DevExpress.XtraNavBar.NavBarGroup navbarGroupAccounting;
+        public DevExpress.XtraNavBar.NavBarItem iJournalTransaction;
+        public DevExpress.XtraNavBar.NavBarItem iHPPList;
+        public DevExpress.XtraNavBar.NavBarItem iProfitLoss;
+        public DevExpress.XtraNavBar.NavBarItem iBalanceTotal;
     }
 }

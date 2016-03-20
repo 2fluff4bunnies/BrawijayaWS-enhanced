@@ -37,19 +37,25 @@
             this.lblFilterMonth = new DevExpress.XtraEditors.LabelControl();
             this.btnRecalculateBalanceJournal = new DevExpress.XtraEditors.SimpleButton();
             this.gridBalanceJournal = new DevExpress.XtraGrid.GridControl();
-            this.gvBalanceJournal = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFirstBalanceDebit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFirstBalanceCredit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colMutationDebit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colMutationCredit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colReconcilDebit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colReconcilCredit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colProfitLossDebit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colProfitLossCredit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colLastDebiit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colLastCredit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvBalanceJournal = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gbJournalCode = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.colJournalCode = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.colJournalName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbFirstBalance = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.colFirstBalanceDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.colFirstBalanceCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbMutation = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.colMutationDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.colMutationCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbReconciliation = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.colReconcilDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.colReconcilCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbProfitLoss = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.colProfitLossDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.colProfitLossCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbLastBalance = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.colLastDebiit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.colLastCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.bgwRecalculate = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
@@ -83,6 +89,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lookupYear
             // 
@@ -149,14 +156,21 @@
             this.gridBalanceJournal.Location = new System.Drawing.Point(3, 107);
             this.gridBalanceJournal.MainView = this.gvBalanceJournal;
             this.gridBalanceJournal.Name = "gridBalanceJournal";
-            this.gridBalanceJournal.Size = new System.Drawing.Size(1238, 235);
+            this.gridBalanceJournal.Size = new System.Drawing.Size(889, 238);
             this.gridBalanceJournal.TabIndex = 7;
             this.gridBalanceJournal.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBalanceJournal});
             // 
             // gvBalanceJournal
             // 
-            this.gvBalanceJournal.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvBalanceJournal.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gbJournalCode,
+            this.gbFirstBalance,
+            this.gbMutation,
+            this.gbReconciliation,
+            this.gbProfitLoss,
+            this.gbLastBalance});
+            this.gvBalanceJournal.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.colJournalCode,
             this.colJournalName,
             this.colFirstBalanceDebit,
@@ -186,25 +200,52 @@
             this.gvBalanceJournal.OptionsView.ShowViewCaption = true;
             this.gvBalanceJournal.ViewCaption = "Neraca";
             // 
+            // gbJournalCode
+            // 
+            this.gbJournalCode.Columns.Add(this.colJournalCode);
+            this.gbJournalCode.Columns.Add(this.colJournalName);
+            this.gbJournalCode.Name = "gbJournalCode";
+            this.gbJournalCode.OptionsBand.ShowCaption = false;
+            this.gbJournalCode.OptionsBand.ShowInCustomizationForm = false;
+            this.gbJournalCode.VisibleIndex = 0;
+            this.gbJournalCode.Width = 150;
+            // 
             // colJournalCode
             // 
+            this.colJournalCode.AppearanceHeader.Options.UseTextOptions = true;
+            this.colJournalCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colJournalCode.Caption = "Kode Akun";
             this.colJournalCode.FieldName = "Journal.Code";
+            this.colJournalCode.MinWidth = 30;
             this.colJournalCode.Name = "colJournalCode";
             this.colJournalCode.Visible = true;
-            this.colJournalCode.VisibleIndex = 0;
             // 
             // colJournalName
             // 
+            this.colJournalName.AppearanceHeader.Options.UseTextOptions = true;
+            this.colJournalName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colJournalName.Caption = "Nama";
             this.colJournalName.FieldName = "Journal.Name";
             this.colJournalName.Name = "colJournalName";
             this.colJournalName.Visible = true;
-            this.colJournalName.VisibleIndex = 1;
+            // 
+            // gbFirstBalance
+            // 
+            this.gbFirstBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbFirstBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbFirstBalance.Caption = "Saldo Awal";
+            this.gbFirstBalance.Columns.Add(this.colFirstBalanceDebit);
+            this.gbFirstBalance.Columns.Add(this.colFirstBalanceCredit);
+            this.gbFirstBalance.Name = "gbFirstBalance";
+            this.gbFirstBalance.OptionsBand.ShowInCustomizationForm = false;
+            this.gbFirstBalance.VisibleIndex = 1;
+            this.gbFirstBalance.Width = 150;
             // 
             // colFirstBalanceDebit
             // 
-            this.colFirstBalanceDebit.Caption = "Saldo Debet";
+            this.colFirstBalanceDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colFirstBalanceDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colFirstBalanceDebit.Caption = "Debet";
             this.colFirstBalanceDebit.DisplayFormat.FormatString = "{0:#,#}";
             this.colFirstBalanceDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFirstBalanceDebit.FieldName = "FirstDebit";
@@ -212,11 +253,12 @@
             this.colFirstBalanceDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "FirstDebit", "{0:#,#}")});
             this.colFirstBalanceDebit.Visible = true;
-            this.colFirstBalanceDebit.VisibleIndex = 2;
             // 
             // colFirstBalanceCredit
             // 
-            this.colFirstBalanceCredit.Caption = "Saldo Kredit";
+            this.colFirstBalanceCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colFirstBalanceCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colFirstBalanceCredit.Caption = "Kredit";
             this.colFirstBalanceCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colFirstBalanceCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFirstBalanceCredit.FieldName = "FirstCredit";
@@ -224,11 +266,24 @@
             this.colFirstBalanceCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "FirstCredit", "{0:#,#}")});
             this.colFirstBalanceCredit.Visible = true;
-            this.colFirstBalanceCredit.VisibleIndex = 3;
+            // 
+            // gbMutation
+            // 
+            this.gbMutation.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbMutation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbMutation.Caption = "Mutasi";
+            this.gbMutation.Columns.Add(this.colMutationDebit);
+            this.gbMutation.Columns.Add(this.colMutationCredit);
+            this.gbMutation.Name = "gbMutation";
+            this.gbMutation.OptionsBand.ShowInCustomizationForm = false;
+            this.gbMutation.VisibleIndex = 2;
+            this.gbMutation.Width = 150;
             // 
             // colMutationDebit
             // 
-            this.colMutationDebit.Caption = "Mutasi Debet";
+            this.colMutationDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colMutationDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colMutationDebit.Caption = "Debet";
             this.colMutationDebit.DisplayFormat.FormatString = "{0:#,#}";
             this.colMutationDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colMutationDebit.FieldName = "MutationDebit";
@@ -236,11 +291,12 @@
             this.colMutationDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "MutationDebit", "{0:#,#}")});
             this.colMutationDebit.Visible = true;
-            this.colMutationDebit.VisibleIndex = 4;
             // 
             // colMutationCredit
             // 
-            this.colMutationCredit.Caption = "Mutasi Kredit";
+            this.colMutationCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colMutationCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colMutationCredit.Caption = "Kredit";
             this.colMutationCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colMutationCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colMutationCredit.FieldName = "MutationCredit";
@@ -248,22 +304,36 @@
             this.colMutationCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "MutationCredit", "{0:#,#}")});
             this.colMutationCredit.Visible = true;
-            this.colMutationCredit.VisibleIndex = 5;
+            // 
+            // gbReconciliation
+            // 
+            this.gbReconciliation.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbReconciliation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbReconciliation.Caption = "Penyesuaian";
+            this.gbReconciliation.Columns.Add(this.colReconcilDebit);
+            this.gbReconciliation.Columns.Add(this.colReconcilCredit);
+            this.gbReconciliation.Name = "gbReconciliation";
+            this.gbReconciliation.OptionsBand.ShowInCustomizationForm = false;
+            this.gbReconciliation.VisibleIndex = 3;
+            this.gbReconciliation.Width = 150;
             // 
             // colReconcilDebit
             // 
-            this.colReconcilDebit.Caption = "Penyesuaian Debet";
+            this.colReconcilDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colReconcilDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colReconcilDebit.Caption = "Debet";
             this.colReconcilDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colReconcilDebit.FieldName = "ReconciliationDebit";
             this.colReconcilDebit.Name = "colReconcilDebit";
             this.colReconcilDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ReconciliationDebit", "{0:#,#}")});
             this.colReconcilDebit.Visible = true;
-            this.colReconcilDebit.VisibleIndex = 6;
             // 
             // colReconcilCredit
             // 
-            this.colReconcilCredit.Caption = "Penyesuaian Kredit";
+            this.colReconcilCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colReconcilCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colReconcilCredit.Caption = "Kredit";
             this.colReconcilCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colReconcilCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colReconcilCredit.FieldName = "ReconciliationCredit";
@@ -271,11 +341,23 @@
             this.colReconcilCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ReconciliationCredit", "{0:#,#}")});
             this.colReconcilCredit.Visible = true;
-            this.colReconcilCredit.VisibleIndex = 7;
+            // 
+            // gbProfitLoss
+            // 
+            this.gbProfitLoss.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbProfitLoss.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbProfitLoss.Caption = "Laba / Rugi";
+            this.gbProfitLoss.Columns.Add(this.colProfitLossDebit);
+            this.gbProfitLoss.Columns.Add(this.colProfitLossCredit);
+            this.gbProfitLoss.Name = "gbProfitLoss";
+            this.gbProfitLoss.VisibleIndex = 4;
+            this.gbProfitLoss.Width = 150;
             // 
             // colProfitLossDebit
             // 
-            this.colProfitLossDebit.Caption = "Rugi/Laba Debet";
+            this.colProfitLossDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colProfitLossDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colProfitLossDebit.Caption = "Debet";
             this.colProfitLossDebit.DisplayFormat.FormatString = "{0:#,#}";
             this.colProfitLossDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colProfitLossDebit.FieldName = "ProfitLossDebit";
@@ -283,11 +365,12 @@
             this.colProfitLossDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ProfitLossDebit", "{0:#,#}")});
             this.colProfitLossDebit.Visible = true;
-            this.colProfitLossDebit.VisibleIndex = 8;
             // 
             // colProfitLossCredit
             // 
-            this.colProfitLossCredit.Caption = "Rugi/Laba Kredit";
+            this.colProfitLossCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colProfitLossCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colProfitLossCredit.Caption = "Kredit";
             this.colProfitLossCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colProfitLossCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colProfitLossCredit.FieldName = "ProfitLossCredit";
@@ -295,11 +378,24 @@
             this.colProfitLossCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ProfitLossCredit", "{0:#,#}")});
             this.colProfitLossCredit.Visible = true;
-            this.colProfitLossCredit.VisibleIndex = 9;
+            // 
+            // gbLastBalance
+            // 
+            this.gbLastBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbLastBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbLastBalance.Caption = "Saldo Akhir";
+            this.gbLastBalance.Columns.Add(this.colLastDebiit);
+            this.gbLastBalance.Columns.Add(this.colLastCredit);
+            this.gbLastBalance.Name = "gbLastBalance";
+            this.gbLastBalance.OptionsBand.ShowInCustomizationForm = false;
+            this.gbLastBalance.VisibleIndex = 5;
+            this.gbLastBalance.Width = 150;
             // 
             // colLastDebiit
             // 
-            this.colLastDebiit.Caption = "Saldo Akhir Debet";
+            this.colLastDebiit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colLastDebiit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colLastDebiit.Caption = "Debet";
             this.colLastDebiit.DisplayFormat.FormatString = "{0:#,#}";
             this.colLastDebiit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colLastDebiit.FieldName = "LastDebit";
@@ -307,11 +403,12 @@
             this.colLastDebiit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastDebit", "{0:#,#}")});
             this.colLastDebiit.Visible = true;
-            this.colLastDebiit.VisibleIndex = 11;
             // 
             // colLastCredit
             // 
-            this.colLastCredit.Caption = "Saldo Akhir Kredit";
+            this.colLastCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colLastCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colLastCredit.Caption = "Kredit";
             this.colLastCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colLastCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colLastCredit.FieldName = "LastCredit";
@@ -319,7 +416,6 @@
             this.colLastCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastCredit", "{0:#,#}")});
             this.colLastCredit.Visible = true;
-            this.colLastCredit.VisibleIndex = 10;
             // 
             // BalanceJournalListControl
             // 
@@ -329,7 +425,7 @@
             this.Controls.Add(this.btnRecalculateBalanceJournal);
             this.Controls.Add(this.gcFilter);
             this.Name = "BalanceJournalListControl";
-            this.Size = new System.Drawing.Size(1244, 348);
+            this.Size = new System.Drawing.Size(895, 348);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -351,20 +447,26 @@
         private DevExpress.XtraEditors.LabelControl lblFilterMonth;
         private DevExpress.XtraEditors.SimpleButton btnRecalculateBalanceJournal;
         private DevExpress.XtraGrid.GridControl gridBalanceJournal;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvBalanceJournal;
-        private DevExpress.XtraGrid.Columns.GridColumn colJournalCode;
-        private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
-        private DevExpress.XtraGrid.Columns.GridColumn colFirstBalanceDebit;
-        private DevExpress.XtraGrid.Columns.GridColumn colFirstBalanceCredit;
-        private DevExpress.XtraGrid.Columns.GridColumn colMutationDebit;
-        private DevExpress.XtraGrid.Columns.GridColumn colMutationCredit;
-        private DevExpress.XtraGrid.Columns.GridColumn colReconcilDebit;
-        private DevExpress.XtraGrid.Columns.GridColumn colReconcilCredit;
-        private DevExpress.XtraGrid.Columns.GridColumn colProfitLossDebit;
-        private DevExpress.XtraGrid.Columns.GridColumn colProfitLossCredit;
-        private DevExpress.XtraGrid.Columns.GridColumn colLastDebiit;
-        private DevExpress.XtraGrid.Columns.GridColumn colLastCredit;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.ComponentModel.BackgroundWorker bgwRecalculate;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView gvBalanceJournal;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbJournalCode;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colJournalCode;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colJournalName;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbFirstBalance;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colFirstBalanceDebit;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colFirstBalanceCredit;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbMutation;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colMutationDebit;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colMutationCredit;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbReconciliation;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colReconcilDebit;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colReconcilCredit;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbProfitLoss;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colProfitLossDebit;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colProfitLossCredit;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbLastBalance;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colLastDebiit;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colLastCredit;
     }
 }

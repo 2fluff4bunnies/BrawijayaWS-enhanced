@@ -117,42 +117,68 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (!bgwMain.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Fecthing BalanceJournal data...");
+                MethodBase.GetCurrentMethod().Info("Fecthing balance journal data...");
                 AvailableBalanceJournal = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data BalanceJournal...", false);
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data neraca...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            try
+            {
+                _presenter.LoadData();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadData()", ex);
+                e.Result = ex;
+            }
         }
 
         private void bgwMain_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses memuat data gagal!");
+            }
 
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data neraca selesai", true);
         }
 
         private void btnRecalculateBalanceJournal_Click(object sender, EventArgs e)
         {
             if (!bgwMain.IsBusy && !bgwRecalculate.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Recalculate BalanceJournal data...");
+                MethodBase.GetCurrentMethod().Info("Recalculate balance journal data...");
                 AvailableBalanceJournal = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang BalanceJournal...", false);
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang neraca...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
 
         private void bgwRecalculate_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            try
+            {
+                _presenter.Recalculate();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.Recalculate()", ex);
+                e.Result = ex;
+            }
         }
 
         private void bgwRecalculate_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses menghitung neraca gagal!");
+            }
 
+            btnSearch.PerformClick();
         }
     }
 }

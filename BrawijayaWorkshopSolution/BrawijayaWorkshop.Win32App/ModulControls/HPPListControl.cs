@@ -144,11 +144,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            if (gvHPP.RowCount > 0)
-            {
-                AvailableHeader = gvHPP.GetRow(0) as HPPHeaderViewModel;
-            }
-
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data HPP selesai", true);
         }
 

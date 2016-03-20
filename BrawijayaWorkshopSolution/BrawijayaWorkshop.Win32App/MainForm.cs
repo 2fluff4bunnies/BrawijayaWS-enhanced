@@ -428,11 +428,42 @@ namespace BrawijayaWorkshop.Win32App
             AccountingNavigationControl navAccounting = new AccountingNavigationControl();
             navAccounting.iFirstBalance.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iJournalTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iHPPList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iProfitLoss.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iBalanceTotal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
 
             ShowNavigationControl(navAccounting);
 
             navAccounting.iFirstBalance.LinkClicked += iFirstBalance_LinkClicked;
             navAccounting.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
+            navAccounting.iJournalTransaction.LinkClicked += iJournalTransaction_LinkClicked;
+            navAccounting.iHPPList.LinkClicked += iHPPList_LinkClicked;
+            navAccounting.iProfitLoss.LinkClicked += iProfitLoss_LinkClicked;
+            navAccounting.iBalanceTotal.LinkClicked += iBalanceTotal_LinkClicked;
+        }
+
+        private void iBalanceTotal_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            BalanceJournalListControl balance = Bootstrapper.Resolve<BalanceJournalListControl>();
+            ShowUserControl(balance);
+        }
+
+        private void iProfitLoss_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            // TODO: Show Profit Loss
+        }
+
+        private void iHPPList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            HPPListControl hppList = Bootstrapper.Resolve<HPPListControl>();
+            ShowUserControl(hppList);
+        }
+
+        private void iJournalTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            JournalTransactionListControl journalTransactionList = Bootstrapper.Resolve<JournalTransactionListControl>();
+            ShowUserControl(journalTransactionList);
         }
 
         private void iFirstBalance_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
