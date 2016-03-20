@@ -87,6 +87,7 @@
             this.lookupYear.Properties.HideSelection = false;
             this.lookupYear.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupYear.Properties.NullText = "-- Pilih Tahun --";
+            this.lookupYear.Properties.ShowHeader = false;
             this.lookupYear.Size = new System.Drawing.Size(100, 20);
             this.lookupYear.TabIndex = 3;
             // 

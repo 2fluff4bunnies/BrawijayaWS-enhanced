@@ -101,6 +101,7 @@
             this.lookupYear.Properties.HideSelection = false;
             this.lookupYear.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupYear.Properties.NullText = "-- Pilih Tahun --";
+            this.lookupYear.Properties.ShowHeader = false;
             this.lookupYear.Size = new System.Drawing.Size(100, 20);
             this.lookupYear.TabIndex = 3;
             // 
@@ -147,6 +148,7 @@
             this.btnRecalculateBalanceJournal.Size = new System.Drawing.Size(113, 29);
             this.btnRecalculateBalanceJournal.TabIndex = 2;
             this.btnRecalculateBalanceJournal.Text = "Hitung Neraca";
+            this.btnRecalculateBalanceJournal.Click += new System.EventHandler(this.btnRecalculateBalanceJournal_Click);
             // 
             // gridBalanceJournal
             // 
@@ -416,6 +418,16 @@
             this.colLastCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastCredit", "{0:#,#}")});
             this.colLastCredit.Visible = true;
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // bgwRecalculate
+            // 
+            this.bgwRecalculate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRecalculate_DoWork);
+            this.bgwRecalculate.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwRecalculate_RunWorkerCompleted);
             // 
             // BalanceJournalListControl
             // 

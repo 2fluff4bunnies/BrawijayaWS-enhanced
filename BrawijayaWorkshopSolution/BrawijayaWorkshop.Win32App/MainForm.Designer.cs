@@ -65,6 +65,7 @@
             this.repositoryItemMarqueeProgressBar2 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
             this.iTransaction = new DevExpress.XtraBars.BarButtonItem();
             this.iReporting = new DevExpress.XtraBars.BarButtonItem();
+            this.iAccounting = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -74,7 +75,6 @@
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemMarqueeProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.iAccounting = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).BeginInit();
@@ -99,7 +99,7 @@
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Text = "Panel2";
             this.splitContainerControl.Size = new System.Drawing.Size(742, 259);
-            this.splitContainerControl.SplitterPosition = 165;
+            this.splitContainerControl.SplitterPosition = 204;
             this.splitContainerControl.TabIndex = 0;
             this.splitContainerControl.Text = "splitContainerControl1";
             // 
@@ -480,6 +480,15 @@
             this.iReporting.Name = "iReporting";
             this.iReporting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iReporting_ItemClick);
             // 
+            // iAccounting
+            // 
+            this.iAccounting.Caption = "Accounting";
+            this.iAccounting.Id = 72;
+            this.iAccounting.ImageIndex = 20;
+            this.iAccounting.LargeImageIndex = 14;
+            this.iAccounting.Name = "iAccounting";
+            this.iAccounting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iAccounting_ItemClick);
+            // 
             // ribbonImageCollectionLarge
             // 
             this.ribbonImageCollectionLarge.ImageSize = new System.Drawing.Size(32, 32);
@@ -559,15 +568,6 @@
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(742, 31);
-            // 
-            // iAccounting
-            // 
-            this.iAccounting.Caption = "Accounting";
-            this.iAccounting.Id = 72;
-            this.iAccounting.ImageIndex = 20;
-            this.iAccounting.LargeImageIndex = 14;
-            this.iAccounting.Name = "iAccounting";
-            this.iAccounting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iAccounting_ItemClick);
             // 
             // MainForm
             // 
