@@ -23,6 +23,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public decimal? ReconciliationDebit { get; set; }
         public decimal? ReconciliationCredit { get; set; }
 
+        public decimal? BalanceAfterReconDebit { get; set; }
+        public decimal? BalanceAfterReconCredit { get; set; }
+
         public decimal? ProfitLossDebit { get; set; }
         public decimal? ProfitLossCredit { get; set; }
 
