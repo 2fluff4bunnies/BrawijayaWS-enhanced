@@ -14,5 +14,19 @@ namespace BrawijayaWorkshop.View
         GuestBookViewModel SelectedGuestBook { get; set; }
 
         string Description { get; set; }
+
+        List<VehicleWheelViewModel> VehicleWheelList { get; set; }
+
+        string Brand { get; set; }
+
+        string Type { get; set; }
+
+        string YearOfPurchase { get; set; }
+
+        string ExpirationDate { get; set; }
+
+        string Customer { get; set; }
+
+        VehicleViewModel SelectedVehicle { get; set; }
     }
 }

@@ -31,18 +31,18 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GuestBookEditorForm));
-            this.gcCustomerInfo = new DevExpress.XtraEditors.GroupControl();
+            this.gcVehicleInfo = new DevExpress.XtraEditors.GroupControl();
             this.rtbDescription = new System.Windows.Forms.RichTextBox();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
             this.lookUpVehicle = new DevExpress.XtraEditors.LookUpEdit();
             this.lblExpirationDateValue = new DevExpress.XtraEditors.LabelControl();
             this.lblCustomerValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblYearOfBuyValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblYearOfpurchaseValue = new DevExpress.XtraEditors.LabelControl();
             this.lblTypeValue = new DevExpress.XtraEditors.LabelControl();
             this.lblBrandValue = new DevExpress.XtraEditors.LabelControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colCodeDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
@@ -51,37 +51,37 @@
             this.lblBrand = new DevExpress.XtraEditors.LabelControl();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.VehicleValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).BeginInit();
-            this.gcCustomerInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
+            this.gcVehicleInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VehicleValidator)).BeginInit();
             this.SuspendLayout();
             // 
-            // gcCustomerInfo
+            // gcVehicleInfo
             // 
-            this.gcCustomerInfo.Controls.Add(this.rtbDescription);
-            this.gcCustomerInfo.Controls.Add(this.lblDescription);
-            this.gcCustomerInfo.Controls.Add(this.lookUpVehicle);
-            this.gcCustomerInfo.Controls.Add(this.lblExpirationDateValue);
-            this.gcCustomerInfo.Controls.Add(this.lblCustomerValue);
-            this.gcCustomerInfo.Controls.Add(this.lblYearOfBuyValue);
-            this.gcCustomerInfo.Controls.Add(this.lblTypeValue);
-            this.gcCustomerInfo.Controls.Add(this.lblBrandValue);
-            this.gcCustomerInfo.Controls.Add(this.gridVehicleWheel);
-            this.gcCustomerInfo.Controls.Add(this.lblExpirationDate);
-            this.gcCustomerInfo.Controls.Add(this.lblLicenseNumber);
-            this.gcCustomerInfo.Controls.Add(this.lblYearOfPurchase);
-            this.gcCustomerInfo.Controls.Add(this.lblType);
-            this.gcCustomerInfo.Controls.Add(this.lblBrand);
-            this.gcCustomerInfo.Controls.Add(this.lblCustomer);
-            this.gcCustomerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcCustomerInfo.Location = new System.Drawing.Point(0, 0);
-            this.gcCustomerInfo.Name = "gcCustomerInfo";
-            this.gcCustomerInfo.Size = new System.Drawing.Size(606, 387);
-            this.gcCustomerInfo.TabIndex = 2;
-            this.gcCustomerInfo.Text = "Informasi Kendaraan";
+            this.gcVehicleInfo.Controls.Add(this.rtbDescription);
+            this.gcVehicleInfo.Controls.Add(this.lblDescription);
+            this.gcVehicleInfo.Controls.Add(this.lookUpVehicle);
+            this.gcVehicleInfo.Controls.Add(this.lblExpirationDateValue);
+            this.gcVehicleInfo.Controls.Add(this.lblCustomerValue);
+            this.gcVehicleInfo.Controls.Add(this.lblYearOfpurchaseValue);
+            this.gcVehicleInfo.Controls.Add(this.lblTypeValue);
+            this.gcVehicleInfo.Controls.Add(this.lblBrandValue);
+            this.gcVehicleInfo.Controls.Add(this.gridVehicleWheel);
+            this.gcVehicleInfo.Controls.Add(this.lblExpirationDate);
+            this.gcVehicleInfo.Controls.Add(this.lblLicenseNumber);
+            this.gcVehicleInfo.Controls.Add(this.lblYearOfPurchase);
+            this.gcVehicleInfo.Controls.Add(this.lblType);
+            this.gcVehicleInfo.Controls.Add(this.lblBrand);
+            this.gcVehicleInfo.Controls.Add(this.lblCustomer);
+            this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcVehicleInfo.Location = new System.Drawing.Point(0, 0);
+            this.gcVehicleInfo.Name = "gcVehicleInfo";
+            this.gcVehicleInfo.Size = new System.Drawing.Size(606, 387);
+            this.gcVehicleInfo.TabIndex = 2;
+            this.gcVehicleInfo.Text = "Informasi Kendaraan";
             // 
             // rtbDescription
             // 
@@ -112,8 +112,7 @@
             this.lookUpVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Customer"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol")});
             this.lookUpVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
             this.lookUpVehicle.Properties.HideSelection = false;
             this.lookUpVehicle.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
@@ -125,6 +124,7 @@
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Kendaraan Harus Dipilih!";
             this.VehicleValidator.SetValidationRule(this.lookUpVehicle, conditionValidationRule1);
+            this.lookUpVehicle.EditValueChanged += new System.EventHandler(this.lookUpVehicle_EditValueChanged);
             // 
             // lblExpirationDateValue
             // 
@@ -146,15 +146,15 @@
             this.lblCustomerValue.TabIndex = 17;
             this.lblCustomerValue.Text = "--";
             // 
-            // lblYearOfBuyValue
+            // lblYearOfpurchaseValue
             // 
-            this.lblYearOfBuyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblYearOfpurchaseValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblYearOfBuyValue.Location = new System.Drawing.Point(128, 119);
-            this.lblYearOfBuyValue.Name = "lblYearOfBuyValue";
-            this.lblYearOfBuyValue.Size = new System.Drawing.Size(8, 13);
-            this.lblYearOfBuyValue.TabIndex = 16;
-            this.lblYearOfBuyValue.Text = "--";
+            this.lblYearOfpurchaseValue.Location = new System.Drawing.Point(128, 119);
+            this.lblYearOfpurchaseValue.Name = "lblYearOfpurchaseValue";
+            this.lblYearOfpurchaseValue.Size = new System.Drawing.Size(8, 13);
+            this.lblYearOfpurchaseValue.TabIndex = 16;
+            this.lblYearOfpurchaseValue.Text = "--";
             // 
             // lblTypeValue
             // 
@@ -184,7 +184,7 @@
             this.gridVehicleWheel.Location = new System.Drawing.Point(12, 205);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(575, 182);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(575, 177);
             this.gridVehicleWheel.TabIndex = 12;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -192,7 +192,7 @@
             // gvVehicleWheel
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colCodeDetail,
+            this.colName,
             this.colSerialNumber});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
             this.gvVehicleWheel.Name = "gvVehicleWheel";
@@ -210,22 +210,23 @@
             this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
             this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
             // 
-            // colCodeDetail
+            // colName
             // 
-            this.colCodeDetail.Caption = "Kode";
-            this.colCodeDetail.FieldName = "Code";
-            this.colCodeDetail.Name = "colCodeDetail";
-            this.colCodeDetail.Visible = true;
-            this.colCodeDetail.VisibleIndex = 0;
+            this.colName.Caption = "Nama";
+            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 1;
             // 
             // colSerialNumber
             // 
             this.colSerialNumber.Caption = "Nomor Seri";
+            this.colSerialNumber.FieldName = "WheelDetail.SerialNumber";
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "", "Jumlah Data: {0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "SpecialSparepart.SerialNumber", "Jumlah Data: {0}")});
             this.colSerialNumber.Visible = true;
-            this.colSerialNumber.VisibleIndex = 1;
+            this.colSerialNumber.VisibleIndex = 0;
             // 
             // lblExpirationDate
             // 
@@ -297,14 +298,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 436);
-            this.Controls.Add(this.gcCustomerInfo);
+            this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GuestBookEditorForm";
             this.Text = "GuestBookEditorForm";
-            this.Controls.SetChildIndex(this.gcCustomerInfo, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.gcCustomerInfo)).EndInit();
-            this.gcCustomerInfo.ResumeLayout(false);
-            this.gcCustomerInfo.PerformLayout();
+            this.Controls.SetChildIndex(this.gcVehicleInfo, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).EndInit();
+            this.gcVehicleInfo.ResumeLayout(false);
+            this.gcVehicleInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
@@ -315,11 +316,7 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.GroupControl gcCustomerInfo;
-        private DevExpress.XtraGrid.GridControl gridVehicleWheel;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
-        private DevExpress.XtraGrid.Columns.GridColumn colCodeDetail;
-        private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
+        private DevExpress.XtraEditors.GroupControl gcVehicleInfo;
         private DevExpress.XtraEditors.LabelControl lblExpirationDate;
         private DevExpress.XtraEditors.LabelControl lblLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblYearOfPurchase;
@@ -328,12 +325,16 @@
         private DevExpress.XtraEditors.LabelControl lblCustomer;
         private DevExpress.XtraEditors.LabelControl lblExpirationDateValue;
         private DevExpress.XtraEditors.LabelControl lblCustomerValue;
-        private DevExpress.XtraEditors.LabelControl lblYearOfBuyValue;
+        private DevExpress.XtraEditors.LabelControl lblYearOfpurchaseValue;
         private DevExpress.XtraEditors.LabelControl lblTypeValue;
         private DevExpress.XtraEditors.LabelControl lblBrandValue;
         private DevExpress.XtraEditors.LookUpEdit lookUpVehicle;
         private System.Windows.Forms.RichTextBox rtbDescription;
         private DevExpress.XtraEditors.LabelControl lblDescription;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider VehicleValidator;
+        private DevExpress.XtraGrid.GridControl gridVehicleWheel;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
     }
 }

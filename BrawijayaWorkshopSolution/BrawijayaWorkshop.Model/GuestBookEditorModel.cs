@@ -55,8 +55,9 @@ namespace BrawijayaWorkshop.Model
             Map(guestBook, entity);
 
             _guestBookRepository.Add(entity);
-        }
 
+            _unitOfWork.SaveChanges();
+        }
 
         public void UpdateGuestBook(GuestBookViewModel guestBook, int userId)
         {
@@ -69,6 +70,23 @@ namespace BrawijayaWorkshop.Model
             Map(guestBook, entity);
 
             _guestBookRepository.Update(entity);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
+        {
+            List<VehicleWheel> result = _vehicleWheelRepository.GetMany(
+                vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
+
+            return Map(result, mappedResult);
+        }
+
+        public DateTime GetLicenseNumberExpirationDate(string licenseNumber)
+        {
+            return _vehicleDetailRepository.GetMany(vd => string.Compare(vd.LicenseNumber, licenseNumber, true) == 0).FirstOrDefault().ExpirationDate;
         }
     }
 }

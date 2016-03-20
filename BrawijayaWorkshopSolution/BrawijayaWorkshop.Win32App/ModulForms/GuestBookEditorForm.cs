@@ -63,7 +63,87 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 rtbDescription.Text = value;
             }
         }
-        
+
+        public List<VehicleWheelViewModel> VehicleWheelList
+        {
+            get
+            {
+                return gridVehicleWheel.DataSource as List<VehicleWheelViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridVehicleWheel.DataSource = value; gvVehicleWheel.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridVehicleWheel.DataSource = value;
+                    gvVehicleWheel.BestFitColumns();
+                }
+            }
+        }
+        public string Type
+        {
+            get
+            {
+                return lblTypeValue.Text;
+            }
+            set
+            {
+                lblTypeValue.Text = value;
+            }
+        }
+
+        public string Brand
+        {
+            get
+            {
+                return lblBrandValue.Text;
+            }
+            set
+            {
+                lblBrandValue.Text = value;
+            }
+        }
+
+        public string Customer
+        {
+            get
+            {
+                return lblCustomerValue.Text;
+            }
+            set
+            {
+                lblCustomerValue.Text = value;
+            }
+        }
+
+        public string YearOfPurchase
+        {
+            get
+            {
+                return lblYearOfpurchaseValue.Text;
+            }
+            set
+            {
+                lblYearOfpurchaseValue.Text = value.ToString();
+            }
+        }
+
+        public string ExpirationDate
+        {
+            get
+            {
+                return lblExpirationDateValue.Text;
+            }
+            set
+            {
+                lblExpirationDateValue.Text = value;
+            }
+        }
+
+        public VehicleViewModel SelectedVehicle { get; set; }
         #endregion
 
         void GuestBookEditorForm_Load(object sender, EventArgs e)
@@ -87,6 +167,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan daftar hadir kendaraan gagal!");
                 }
             }
+        }
+
+        private void lookUpVehicle_EditValueChanged(object sender, EventArgs e)
+        {
+            this.SelectedVehicle = lookUpVehicle.GetSelectedDataRow() as VehicleViewModel;
+            _presenter.LoadDataVehicle();
         }
     }
 }

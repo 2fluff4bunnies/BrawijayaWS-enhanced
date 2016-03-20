@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GuestBookListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.dtpCreatedDate = new DevExpress.XtraEditors.DateEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilter = new DevExpress.XtraEditors.TextEdit();
             this.lblFilterCompanyName = new DevExpress.XtraEditors.LabelControl();
@@ -42,6 +44,7 @@
             this.colBrand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCreatedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +53,8 @@
             this.cmsViewVehicle = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpCreatedDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpCreatedDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcGuestBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvGuestBook)).BeginInit();
@@ -60,14 +65,42 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.dtpCreatedDate);
+            this.gcFilter.Controls.Add(this.labelControl1);
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtFilter);
             this.gcFilter.Controls.Add(this.lblFilterCompanyName);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(691, 62);
+            this.gcFilter.Size = new System.Drawing.Size(691, 95);
             this.gcFilter.TabIndex = 7;
             this.gcFilter.Text = "Filter";
+            // 
+            // dtpArrivalTime
+            // 
+            this.dtpCreatedDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpCreatedDate.EditValue = null;
+            this.dtpCreatedDate.Location = new System.Drawing.Point(75, 64);
+            this.dtpCreatedDate.Name = "dtpArrivalTime";
+            this.dtpCreatedDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dtpCreatedDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpCreatedDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpCreatedDate.Properties.HideSelection = false;
+            this.dtpCreatedDate.Properties.HighlightTodayCell = DevExpress.Utils.DefaultBoolean.True;
+            this.dtpCreatedDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dtpCreatedDate.Size = new System.Drawing.Size(115, 20);
+            this.dtpCreatedDate.TabIndex = 11;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(12, 67);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(38, 13);
+            this.labelControl1.TabIndex = 3;
+            this.labelControl1.Text = "Tanggal";
             // 
             // btnSearch
             // 
@@ -75,9 +108,9 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(624, 28);
+            this.btnSearch.Location = new System.Drawing.Point(196, 27);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.Size = new System.Drawing.Size(70, 57);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -86,11 +119,11 @@
             // 
             this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilter.Location = new System.Drawing.Point(128, 30);
+            this.txtFilter.Location = new System.Drawing.Point(75, 30);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
             this.txtFilter.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtFilter.Size = new System.Drawing.Size(490, 20);
+            this.txtFilter.Size = new System.Drawing.Size(115, 20);
             this.txtFilter.TabIndex = 1;
             // 
             // lblFilterCompanyName
@@ -106,21 +139,22 @@
             this.btnNewGuestBook.Image = ((System.Drawing.Image)(resources.GetObject("btnNewGuestBook.Image")));
             this.btnNewGuestBook.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewGuestBook.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewGuestBook.Location = new System.Drawing.Point(3, 71);
+            this.btnNewGuestBook.Location = new System.Drawing.Point(3, 104);
             this.btnNewGuestBook.Name = "btnNewGuestBook";
             this.btnNewGuestBook.Size = new System.Drawing.Size(170, 23);
             this.btnNewGuestBook.TabIndex = 9;
             this.btnNewGuestBook.Text = "Tambah Daftar Hadir Baru";
+            this.btnNewGuestBook.Click += new System.EventHandler(this.btnNewGuestBook_Click);
             // 
             // gcGuestBook
             // 
             this.gcGuestBook.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcGuestBook.Location = new System.Drawing.Point(3, 100);
+            this.gcGuestBook.Location = new System.Drawing.Point(3, 133);
             this.gcGuestBook.MainView = this.gvGuestBook;
             this.gcGuestBook.Name = "gcGuestBook";
-            this.gcGuestBook.Size = new System.Drawing.Size(691, 307);
+            this.gcGuestBook.Size = new System.Drawing.Size(691, 316);
             this.gcGuestBook.TabIndex = 10;
             this.gcGuestBook.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvGuestBook});
@@ -132,7 +166,8 @@
             this.colActiveLicenseNumber,
             this.colBrand,
             this.colType,
-            this.colDescription});
+            this.colDescription,
+            this.colCreatedDate});
             this.gvGuestBook.GridControl = this.gcGuestBook;
             this.gvGuestBook.Name = "gvGuestBook";
             this.gvGuestBook.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -155,7 +190,7 @@
             this.colCustomer.FieldName = "Vehicle.Customer.CompanyName";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.Visible = true;
-            this.colCustomer.VisibleIndex = 1;
+            this.colCustomer.VisibleIndex = 2;
             // 
             // colActiveLicenseNumber
             // 
@@ -163,7 +198,7 @@
             this.colActiveLicenseNumber.FieldName = "Vehicle.ActiveLicenseNumber";
             this.colActiveLicenseNumber.Name = "colActiveLicenseNumber";
             this.colActiveLicenseNumber.Visible = true;
-            this.colActiveLicenseNumber.VisibleIndex = 0;
+            this.colActiveLicenseNumber.VisibleIndex = 1;
             // 
             // colBrand
             // 
@@ -171,7 +206,7 @@
             this.colBrand.FieldName = "Vehicle.Brand";
             this.colBrand.Name = "colBrand";
             this.colBrand.Visible = true;
-            this.colBrand.VisibleIndex = 2;
+            this.colBrand.VisibleIndex = 3;
             // 
             // colType
             // 
@@ -179,7 +214,7 @@
             this.colType.FieldName = "Vehicle.Type";
             this.colType.Name = "colType";
             this.colType.Visible = true;
-            this.colType.VisibleIndex = 3;
+            this.colType.VisibleIndex = 4;
             // 
             // colDescription
             // 
@@ -187,7 +222,15 @@
             this.colDescription.FieldName = "Description";
             this.colDescription.Name = "colDescription";
             this.colDescription.Visible = true;
-            this.colDescription.VisibleIndex = 4;
+            this.colDescription.VisibleIndex = 5;
+            // 
+            // colCreatedDate
+            // 
+            this.colCreatedDate.Caption = "Waktu Kedatangan";
+            this.colCreatedDate.FieldName = "ArrivalTime";
+            this.colCreatedDate.Name = "colCreatedDate";
+            this.colCreatedDate.Visible = true;
+            this.colCreatedDate.VisibleIndex = 0;
             // 
             // bgwMain
             // 
@@ -241,10 +284,12 @@
             this.Controls.Add(this.btnNewGuestBook);
             this.Controls.Add(this.gcFilter);
             this.Name = "GuestBookListControl";
-            this.Size = new System.Drawing.Size(697, 410);
+            this.Size = new System.Drawing.Size(697, 452);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpCreatedDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpCreatedDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcGuestBook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvGuestBook)).EndInit();
@@ -273,5 +318,8 @@
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem cmsViewVehicle;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraGrid.Columns.GridColumn colCreatedDate;
+        private DevExpress.XtraEditors.DateEdit dtpCreatedDate;
     }
 }

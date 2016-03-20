@@ -49,17 +49,27 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void GuestBookListControl_Load(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(this.dtpCreatedDate.Text))
+            {
+                this.dtpCreatedDate.Text = DateTime.Now.ToShortDateString();
+            }
+            btnSearch.PerformClick();
         }
 
         void gvGuestBook_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.SelectedGuestBook = gvGuestBook.GetFocusedRow() as GuestBookViewModel;
         }
 
         void gvGuestBook_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            throw new NotImplementedException();
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsEditor.Show(view.GridControl, e.Point);
+            }
         }
 
         #region Properties
@@ -105,7 +115,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     gvGuestBook.BestFitColumns();
                 }
             }
-        } 
+        }
+
+        public DateTime CreatedDate
+        {
+            get
+            {
+                return dtpCreatedDate.Text.AsDateTime();
+            }
+            set
+            {
+                dtpCreatedDate.Text = value.ToString();
+            }
+        }
         #endregion
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -196,6 +218,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat daftar hadir selesai", true);
+        }
+
+        private void btnNewGuestBook_Click(object sender, EventArgs e)
+        {
+            GuestBookEditorForm editor = Bootstrapper.Resolve<GuestBookEditorForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }
 
 

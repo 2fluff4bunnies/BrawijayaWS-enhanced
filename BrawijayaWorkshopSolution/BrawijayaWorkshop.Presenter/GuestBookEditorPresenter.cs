@@ -14,11 +14,12 @@ namespace BrawijayaWorkshop.Presenter
         public void InitFormData()
         {
             View.VehicleList = Model.GetVehiclesList();
+            View.VehicleWheelList = new System.Collections.Generic.List<VehicleWheelViewModel>();
 
             if (View.SelectedGuestBook != null)
             {
-                View.VehicleId = View.VehicleId;
-                View.Description = View.Description;
+                View.VehicleId = View.SelectedGuestBook.VehicleId;
+                View.Description = View.SelectedGuestBook.Description;
             }
         }
 
@@ -30,7 +31,7 @@ namespace BrawijayaWorkshop.Presenter
             }
 
             View.SelectedGuestBook.VehicleId = View.VehicleId;
-
+            View.SelectedGuestBook.Description = View.Description;
 
             if (View.SelectedGuestBook.Id > 0)
             {
@@ -40,6 +41,16 @@ namespace BrawijayaWorkshop.Presenter
             {
                 Model.InsertGuestBook(View.SelectedGuestBook, LoginInformation.UserId);
             }
+        }
+
+        public void LoadDataVehicle()
+        {
+            View.Brand = View.SelectedVehicle.Brand;
+            View.Type = View.SelectedVehicle.Type;
+            View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase.ToString();
+            View.Customer = View.SelectedVehicle.Customer.CompanyName;
+            View.ExpirationDate = Model.GetLicenseNumberExpirationDate(View.SelectedVehicle.ActiveLicenseNumber).ToShortDateString();
+            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId);
         }
     }
 

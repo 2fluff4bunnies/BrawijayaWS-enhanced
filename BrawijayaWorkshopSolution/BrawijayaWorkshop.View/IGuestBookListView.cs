@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.View
         string ActiveLicenseNumberFilter { get; set; }
 
         List<GuestBookViewModel> GuestBookListData { get; set; }
+
+        DateTime CreatedDate { get; set; }
     }
 }

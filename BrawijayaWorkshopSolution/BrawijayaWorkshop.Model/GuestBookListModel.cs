@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace BrawijayaWorkshop.Model
         private IVehicleRepository _vehicleRepository;
         private IUnitOfWork _unitOfWork;
 
-        public GuestBookListModel(IGuestBookRepository guestBookRepository, 
+        public GuestBookListModel(IGuestBookRepository guestBookRepository,
             IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
         {
             _guestBookRepository = guestBookRepository;
@@ -22,12 +23,23 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<GuestBookViewModel> SearchGuestBook(string licenseNumber)
+        public List<GuestBookViewModel> SearchGuestBook(string licenseNumber, DateTime createdDate)
         {
-            List<GuestBook> result = _guestBookRepository.GetMany(gb => gb.Vehicle.ActiveLicenseNumber.Contains(licenseNumber) &&
-                gb.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
+            List<GuestBook> result = _guestBookRepository.GetMany(gb => gb.Vehicle.ActiveLicenseNumber.Contains(licenseNumber)
+                && gb.Status == (int)DbConstant.DefaultDataStatus.Active
+                ).OrderBy(c => c.CreateDate).ToList();
+
             List<GuestBookViewModel> mappedResult = new List<GuestBookViewModel>();
-            return Map(result, mappedResult);
+            Map(result, mappedResult);
+
+            foreach (var item in mappedResult)
+            {
+                item.ArrivalTime = item.CreateDate.ToShortTimeString();
+            }
+
+            //mappedResult = mappedResult.Where(gb => gb.CreateDate.ToShortDateString() == createdDate.ToShortDateString()).ToList();
+
+            return mappedResult;
         }
 
         public void DeleteGuestBook(GuestBookViewModel GuestBook)
