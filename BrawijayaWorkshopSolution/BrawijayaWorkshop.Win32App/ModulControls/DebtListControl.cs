@@ -37,8 +37,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvDebt.FocusedRowChanged += gvDebt_FocusedRowChanged;
 
             // init editor control accessibility
-            cmsNewPayment.Enabled = AllowInsert;
-            cmsListPayment.Enabled = AllowEdit;
+            cmsNewPayment.Enabled = true;
+            cmsListPayment.Enabled = true;
 
             this.Load += DebtListControl_Load;
         }
@@ -149,9 +149,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedPurchasing != null)
             {
-                //DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
-                //editor.SelectedDebt = _selectedDebt;
-                //editor.ShowDialog(this);
+                DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
+                editor.SelectedPurchasing = SelectedPurchasing;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -161,9 +161,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedPurchasing != null)
             {
-                //DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
-                //editor.SelectedDebt = _selectedDebt;
-                //editor.ShowDialog(this);
+                DebtPaymentListForm list = Bootstrapper.Resolve<DebtPaymentListForm>();
+                list.SelectedPurchasing = SelectedPurchasing;
+                list.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }

@@ -380,12 +380,21 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iSPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
             navTransactionData.iUsedGoodTrans.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD_TRANSACTION);
             navTransactionData.iGuestBook.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLE);
+            navTransactionData.iDebt.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_DEBT);
+
             ShowNavigationControl(navTransactionData);
             // init event navigation
             navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
             navTransactionData.iSPK.LinkClicked += iSPK_LinkClicked;
             navTransactionData.iUsedGoodTrans.LinkClicked += iUsedGoodTrans_LinkClicked;
             navTransactionData.iGuestBook.LinkClicked += iGuestBook_LinkClicked;
+            navTransactionData.iDebt.LinkClicked += iDebt_LinkClicked;
+        }
+
+        void iDebt_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            DebtListControl listDebt = Bootstrapper.Resolve<DebtListControl>();
+            ShowUserControl(listDebt);
         }
 
         void iGuestBook_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

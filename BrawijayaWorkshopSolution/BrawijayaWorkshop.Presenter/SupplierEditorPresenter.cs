@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSupplier.Name = View.SupplierName;
             View.SelectedSupplier.Address = View.Address;
             View.SelectedSupplier.PhoneNumber = View.PhoneNumber;
-
+            View.SelectedSupplier.CityId = View.CityId;
             if (View.SelectedSupplier.Id > 0)
             {
                 Model.UpdateSupplier(View.SelectedSupplier);

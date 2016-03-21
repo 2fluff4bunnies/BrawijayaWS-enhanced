@@ -35,9 +35,10 @@
             this.iPurchasing = new DevExpress.XtraNavBar.NavBarItem();
             this.iSPK = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGoodTrans = new DevExpress.XtraNavBar.NavBarItem();
+            this.iGuestBook = new DevExpress.XtraNavBar.NavBarItem();
+            this.iDebt = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
-            this.iGuestBook = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +53,8 @@
             this.iPurchasing,
             this.iSPK,
             this.iUsedGoodTrans,
-            this.iGuestBook});
+            this.iGuestBook,
+            this.iDebt});
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
             this.navbarTransactionData.Name = "navbarTransactionData";
             this.navbarTransactionData.OptionsNavPane.ExpandedWidth = 249;
@@ -69,7 +71,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchasing),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSPK),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGoodTrans),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iGuestBook)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iGuestBook),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iDebt)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
             // 
             // iPurchasing
@@ -91,6 +94,18 @@
             this.iUsedGoodTrans.Name = "iUsedGoodTrans";
             this.iUsedGoodTrans.SmallImageIndex = 2;
             // 
+            // iGuestBook
+            // 
+            this.iGuestBook.Caption = "Daftar Kendaraan Masuk";
+            this.iGuestBook.Name = "iGuestBook";
+            this.iGuestBook.SmallImageIndex = 4;
+            // 
+            // iDebt
+            // 
+            this.iDebt.Caption = "Pembayaran Utang";
+            this.iDebt.Name = "iDebt";
+            this.iDebt.SmallImageIndex = 5;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -99,17 +114,12 @@
             this.imageCollection.Images.SetKeyName(2, "usedgood_16x16.png");
             this.imageCollection.Images.SetKeyName(3, "manual_trans_16x16.png");
             this.imageCollection.Images.SetKeyName(4, "Truck-Left-Green-icon-16x16.png");
+            this.imageCollection.Images.SetKeyName(5, "payment 16x16.png");
             // 
             // navBarItem1
             // 
             this.navBarItem1.Caption = "navBarItem1";
             this.navBarItem1.Name = "navBarItem1";
-            // 
-            // iGuestBook
-            // 
-            this.iGuestBook.Caption = "Daftar Kendaraan Masuk";
-            this.iGuestBook.Name = "iGuestBook";
-            this.iGuestBook.SmallImageIndex = 4;
             // 
             // TransactionDataNavigationControl
             // 
@@ -134,5 +144,6 @@
         public DevExpress.XtraNavBar.NavBarItem iSPK;
         public DevExpress.XtraNavBar.NavBarItem iUsedGoodTrans;
         public DevExpress.XtraNavBar.NavBarItem iGuestBook;
+        public DevExpress.XtraNavBar.NavBarItem iDebt;
     }
 }

@@ -5,6 +5,7 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.Runtime;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -17,12 +18,14 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.ListPaymentMethod = Model.RetrievePaymentMethod();
 
-            if (View.SelectedDebt != null)
+            if (View.SelectedPurchasing != null)
             {
                 View.Date = View.SelectedPurchasing.Date;
                 View.TotalTransaction = View.SelectedPurchasing.TotalPrice;
                 View.TotalPaid = View.SelectedPurchasing.TotalHasPaid;
                 View.TotalNotPaid = View.SelectedPurchasing.TotalPrice - View.SelectedPurchasing.TotalHasPaid;
+                View.SuppierName = View.SelectedPurchasing.Supplier.Name;
+                View.PaymentMethodId = View.SelectedPurchasing.PaymentMethodId;
             }
         }
 
@@ -43,7 +46,7 @@ namespace BrawijayaWorkshop.Presenter
             }
             else
             {
-                Model.InsertDebt(View.SelectedDebt);
+                Model.InsertDebt(View.SelectedDebt,View.SelectedPurchasing, LoginInformation.UserId);
             }
         }
     }

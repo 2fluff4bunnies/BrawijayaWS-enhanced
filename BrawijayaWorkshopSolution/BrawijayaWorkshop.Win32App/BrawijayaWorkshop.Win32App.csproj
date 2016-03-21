@@ -912,6 +912,7 @@
     <None Include="Images\completed_16x16.png" />
     <None Include="Images\Tire_16x16.png" />
     <None Include="Images\Truck-Left-Green-icon-16x16.png" />
+    <None Include="Images\payment 16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
     <None Include="Resources\calculator_16x16.png" />

@@ -199,14 +199,16 @@
             this.lblTransactionDate.TabIndex = 2;
             this.lblTransactionDate.Text = "Tanggal Transaksi";
             // 
-            // CreditPaymentListControl
+            // CreditEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 334);
             this.Controls.Add(this.gcCreditInfo);
-            this.Name = "CreditPaymentListControl";
+            this.Name = "CreditEditorForm";
             this.Text = "Form Pembayaran Piutang";
+            this.Load += new System.EventHandler(this.CreditEditorForm_Load);
+            this.Controls.SetChildIndex(this.gcCreditInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcCreditInfo)).EndInit();
             this.gcCreditInfo.ResumeLayout(false);
             this.gcCreditInfo.PerformLayout();

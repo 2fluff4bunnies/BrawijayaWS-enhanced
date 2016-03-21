@@ -85,7 +85,6 @@
             this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbPaymentType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
             this.cbPaymentType.Properties.DisplayMember = "Name";
             this.cbPaymentType.Properties.HideSelection = false;
@@ -94,6 +93,7 @@
             this.cbPaymentType.Properties.ValueMember = "Id";
             this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
             this.cbPaymentType.TabIndex = 15;
+            this.cbPaymentType.EditValueChanged += new System.EventHandler(this.cbPaymentType_EditValueChanged);
             // 
             // lblPaymentType
             // 
@@ -206,6 +206,7 @@
             this.Controls.Add(this.gcDebtInfo);
             this.Name = "DebtEditorForm";
             this.Text = "Form Pembayaran Hutang";
+            this.Load += new System.EventHandler(this.DebtEditorForm_Load);
             this.Controls.SetChildIndex(this.gcDebtInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtInfo)).EndInit();
             this.gcDebtInfo.ResumeLayout(false);

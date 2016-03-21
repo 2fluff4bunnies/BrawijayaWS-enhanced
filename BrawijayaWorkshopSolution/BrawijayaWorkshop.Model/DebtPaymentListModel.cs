@@ -24,11 +24,11 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<TransactionViewModel> SearchTransactionByTableRef(int referenceId)
+        public List<TransactionViewModel> SearchTransactionByTableRefPK(int referencePK)
         {
             List<Transaction> result = null;
 
-            result = _transactionRepository.GetMany(c => c.ReferenceTableId == referenceId).OrderBy(c => c.CreateDate).ToList();
+            result = _transactionRepository.GetMany(c => c.PrimaryKeyValue == referencePK).OrderBy(c => c.CreateDate).ToList();
 
 
             List<TransactionViewModel> mappedResult = new List<TransactionViewModel>();

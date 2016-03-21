@@ -60,7 +60,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 PaymentMethodId = SelectedPurchasing.PaymentMethodId;
                 TotalHasPaid = SelectedPurchasing.TotalHasPaid;
                 if (SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||
-                    SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK)
+                    SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI ||
+                    SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1 ||
+                    SelectedPurchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2)
                 {
                     lblDP.Visible = true;
                     txtDP.Visible = true;
@@ -202,10 +204,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void cbPayment_EditValueChanged(object sender, EventArgs e)
         {
             ReferenceViewModel refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as ReferenceViewModel;
+            SelectedPurchasing.PaymentMethod = refSelected;
             if (refSelected != null)
             {
                 if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||
-                    refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK)
+                    refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI ||
+                    refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1 ||
+                    refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2)
                 {
                     txtDP.Visible = true;
                     lblDP.Visible = true;

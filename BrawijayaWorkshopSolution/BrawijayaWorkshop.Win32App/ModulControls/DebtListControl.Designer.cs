@@ -41,7 +41,7 @@
             this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDebtAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDebtPaid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,6 +82,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // labelControl1
             // 
@@ -146,7 +147,7 @@
             this.colTransDate,
             this.colSupplier,
             this.colTotalPrice,
-            this.colDebtAmount});
+            this.colDebtPaid});
             this.gvDebt.GridControl = this.gridDebt;
             this.gvDebt.Name = "gvDebt";
             this.gvDebt.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -182,16 +183,24 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
+            this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 2;
             // 
-            // colDebtAmount
+            // colDebtPaid
             // 
-            this.colDebtAmount.Caption = "Total Belum Terbayar";
-            this.colDebtAmount.Name = "colDebtAmount";
-            this.colDebtAmount.Visible = true;
-            this.colDebtAmount.VisibleIndex = 3;
+            this.colDebtPaid.Caption = "Total Terbayar";
+            this.colDebtPaid.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colDebtPaid.FieldName = "TotalHasPaid";
+            this.colDebtPaid.Name = "colDebtPaid";
+            this.colDebtPaid.Visible = true;
+            this.colDebtPaid.VisibleIndex = 3;
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // cmsEditor
             // 
@@ -199,7 +208,7 @@
             this.cmsNewPayment,
             this.cmsListPayment});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(205, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(205, 48);
             // 
             // cmsNewPayment
             // 
@@ -207,6 +216,7 @@
             this.cmsNewPayment.Name = "cmsNewPayment";
             this.cmsNewPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsNewPayment.Text = "Buat Pembayaran";
+            this.cmsNewPayment.Click += new System.EventHandler(this.cmsNewPayment_Click);
             // 
             // cmsListPayment
             // 
@@ -214,6 +224,7 @@
             this.cmsListPayment.Name = "cmsListPayment";
             this.cmsListPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
+            this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
             // 
             // DebtListControl
             // 
@@ -249,7 +260,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTransDate;
         private DevExpress.XtraGrid.Columns.GridColumn colSupplier;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn colDebtAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn colDebtPaid;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsNewPayment;

@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
     {
         static void Main(string[] args)
         {
-            string dirPath = "D:/Documents/Bengkel App/Data/";
+            string dirPath = "E:/Project/Brawijaya/Document/";
             string accFile = "Account Jurnal.xlsx";
             string invFile = "Inv.xlsx";
             string citFile = "City.xlsx";

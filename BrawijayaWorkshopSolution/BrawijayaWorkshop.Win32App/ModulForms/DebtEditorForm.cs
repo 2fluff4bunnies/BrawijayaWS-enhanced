@@ -156,17 +156,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public PurchasingViewModel SelectedPurchasing { get; set; }
 
-        public PurchasingViewModel SelectedPurchasing
+        private void cbPaymentType_EditValueChanged(object sender, EventArgs e)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            ReferenceViewModel refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as ReferenceViewModel;
+            SelectedPurchasing.PaymentMethod = refSelected;
         }
     }
 }

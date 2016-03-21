@@ -198,7 +198,31 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_USEDGOOD_TRANSACTION,
                 ModulDescription = "Modul Transaksi Barang Bekas"
             });
-
+            ApplicationModul creditMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_CREDIT,
+                ModulDescription = "Modul Transaksi Pembayaran Piutang"
+            });
+            ApplicationModul debtMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_DEBT,
+                ModulDescription = "Modul Transaksi Pembayaran Piutang"
+            });
+            ApplicationModul invoiceMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_INVOICE,
+                ModulDescription = "Modul Invoice"
+            });
+            ApplicationModul purchaseReturnMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_PURCHASE_RETURN,
+                ModulDescription = "Modul Transaksi Retur Pembelian"
+            });
+            ApplicationModul salesReturnMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_SALES_RETURN,
+                ModulDescription = "Modul Transaksi Retur Penjualan"
+            });
             context.SaveChanges();
 
             // superadmin
@@ -673,15 +697,31 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS,
                 Name = "Uang Muka dari Kas",
                 Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari kas",
-                Value = "1.01.05",
+                Value = "1.01.01.01",
                 ParentId = purchasePaymentMethodRef.Id
             });
             context.References.Add(new Reference
             {
-                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK,
-                Name = "Uang Muka dari Bank",
-                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari bank",
-                Value = "1.01.05",
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI,
+                Name = "Uang Muka dari Bank Ekonomi",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari bank ekonomi",
+                Value = "1.01.02.01",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1,
+                Name = "Uang Muka dari Bank BCA 1",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari bank bca 1",
+                Value = "1.01.02.02",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2,
+                Name = "Uang Muka dari Bank BCA 2",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang muka dari bank bca 2",
+                Value = "1.01.02.03",
                 ParentId = purchasePaymentMethodRef.Id
             });
             context.References.Add(new Reference
@@ -689,15 +729,31 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_KAS,
                 Name = "Kas",
                 Description = "Jenis pembayaran untuk pembelian sparepart menggunakan uang kas",
-                Value = "1.01.01",
+                Value = "1.01.01.01",
                 ParentId = purchasePaymentMethodRef.Id
             });
             context.References.Add(new Reference
             {
-                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK,
-                Name = "Bank",
-                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan transfer bank",
-                Value = "1.01.02",
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_EKONOMI,
+                Name = "Bank Ekonomi",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan transfer bank ekonomi",
+                Value = "1.01.02.01",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA1,
+                Name = "Bank BCA 1",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan transfer bank bca 1",
+                Value = "1.01.02.02",
+                ParentId = purchasePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA2,
+                Name = "Bank BCA 2",
+                Description = "Jenis pembayaran untuk pembelian sparepart menggunakan transfer bank bca 2",
+                Value = "1.01.02.03",
                 ParentId = purchasePaymentMethodRef.Id
             });
             context.References.Add(new Reference
