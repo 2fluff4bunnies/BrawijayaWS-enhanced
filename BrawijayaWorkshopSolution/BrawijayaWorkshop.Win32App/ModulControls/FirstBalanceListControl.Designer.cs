@@ -143,6 +143,8 @@
             // 
             // colLastDebit
             // 
+            this.colLastDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colLastDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colLastDebit.Caption = "Debet";
             this.colLastDebit.DisplayFormat.FormatString = "{0:#,#}";
             this.colLastDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -155,6 +157,8 @@
             // 
             // colLastCredit
             // 
+            this.colLastCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colLastCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colLastCredit.Caption = "Kredit";
             this.colLastCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colLastCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
