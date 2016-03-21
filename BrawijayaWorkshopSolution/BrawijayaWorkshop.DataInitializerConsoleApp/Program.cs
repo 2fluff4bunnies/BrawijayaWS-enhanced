@@ -23,7 +23,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
 
                 try
                 {
-                    using(MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
                     {
                         MySqlCommand cmd = conn.CreateCommand();
                         cmd.CommandText = @"CREATE TABLE `temp_inv` (
