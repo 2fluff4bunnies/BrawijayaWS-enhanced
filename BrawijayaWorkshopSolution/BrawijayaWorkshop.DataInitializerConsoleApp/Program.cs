@@ -205,7 +205,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         MySqlCommand cmd = conn.CreateCommand();
                         cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`, `IsProfitLoss`)
                                             SELECT `Kode`, `Nama`,
-                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk), true
+                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk), ProfitLoss
                                             FROM temp_acc";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();

@@ -19,18 +19,18 @@ namespace BrawijayaWorkshop.View
 
         List<VehicleViewModel> VehicleDropdownList { get; set; }
         List<ReferenceViewModel> CategoryDropdownList { get; set; }
-        //List<SPKDetailMechanic> SPKMechanicList { get; set; }
+     
         List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }
         List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
 
         List<SparepartViewModel> SparepartLookupList { get; set; }
-        //List<MechanicViewModel> MechanicLookupList { get; set; }
+      
 
         SparepartViewModel SparepartToInsert { get; }
-        //MechanicViewModel MechanicToInsert { get; }
+    
 
         SparepartViewModel SelectedSparepart { get; set; }
-        //MechanicViewModel SelectedMechanic { get; set; }
+      
 
         string Code { get; set; }
         DateTime DueDate { get; set; }
@@ -40,10 +40,6 @@ namespace BrawijayaWorkshop.View
         int SparepartId { get; set; }
         string SparepartName { get; set; }
         int SparepartQty { get; set; }
-
-        int MechanicId { get; set; }
-        string MechanicName { get; set; }
-        string MechanicDescription { get; set; }
 
         decimal RepairThreshold { get; set; }
         decimal ServiceThreshold { get; set; }

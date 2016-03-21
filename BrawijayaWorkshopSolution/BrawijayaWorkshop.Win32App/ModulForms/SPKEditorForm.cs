@@ -51,16 +51,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvSparepart.PopupMenuShowing += gvSparepart_PopupMenuShowing;
             gvSparepart.FocusedRowChanged += gvSparepart_FocusedRowChanged;
 
-            gvMechanic.PopupMenuShowing += gvMechanic_PopupMenuShowing;
-            gvMechanic.FocusedRowChanged += gvMechanic_FocusedRowChanged;
 
             SPKSparepartList = new List<SPKDetailSparepartViewModel>();
             //SPKMechanicList = new List<SPKDetailMechanicViewModel>();
             SPKSparepartDetailList = new List<SPKDetailSparepartDetailViewModel>();
 
             this.TotalSparepartPrice = 0;
-            this.IsMechanicRegistered = true;
-            ApplyMechanicSetting();
+         
         }
 
         #region Field Editor
@@ -84,18 +81,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtTotalSparepartPrice.EditValue = value;
-            }
-        }
-
-        public bool IsMechanicRegistered
-        {
-            get
-            {
-                return chxIsRegistered.Checked;
-            }
-            set
-            {
-                chxIsRegistered.Checked = value;
             }
         }
 
@@ -123,26 +108,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        //public List<SPKDetailMechanic> SPKMechanicList
-        //{
-        //    get
-        //    {
-        //        return gcMechanic.DataSource as List<SPKDetailMechanic>;
-        //    }
-        //    set
-        //    {
-        //        if (InvokeRequired)
-        //        {
-        //            this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
-        //        }
-        //        else
-        //        {
-        //            gcMechanic.DataSource = value;
-        //            gvMechanic.BestFitColumns();
-        //        }
-        //    }
-        //}
-
+   
         public List<SPKDetailSparepartViewModel> SPKSparepartList
         {
 
@@ -238,44 +204,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public int MechanicId
-        {
-            get
-            {
-                MechanicViewModel selected = lookUpMechanic.GetSelectedDataRow() as MechanicViewModel;
-                if (selected == null) return 0;
-                return selected.Id;
-            }
-            set
-            {
-                lookUpMechanic.EditValue = value;
-            }
-        }
-
-        public string MechanicName
-        {
-            get
-            {
-                return txtMechanicName.Text;
-            }
-            set
-            {
-                txtMechanicName.Text = value;
-            }
-        }
-
-        public string MechanicDescription
-        {
-            get
-            {
-                return txtMechanicDescription.Text;
-            }
-            set
-            {
-                txtMechanicDescription.Text = value;
-            }
-        }
-
 
         public List<SparepartViewModel> SparepartLookupList
         {
@@ -287,27 +215,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 lookUpSparepart.Properties.DataSource = value;
             }
-
-        }
-        public List<MechanicViewModel> MechanicLookupList
-        {
-            get
-            {
-                return lookUpMechanic.Properties.DataSource as List<MechanicViewModel>;
-            }
-            set
-            {
-                lookUpMechanic.Properties.DataSource = value;
-            }
-        }
-
-        public MechanicViewModel MechanicToInsert
-        {
-            get
-            {
-                return lookUpMechanic.GetSelectedDataRow() as MechanicViewModel;
-            }
-
         }
 
         public SparepartViewModel SparepartToInsert
@@ -463,69 +370,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.SparepartName = string.Empty;
         }
 
-        private void btnAddMechanic_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(this.MechanicDescription))
-            {
-                if (this.IsMechanicRegistered)
-                {
-                    if (MechanicToInsert != null)
-                    {
-                        //SPKMechanicList.Add(new SPKDetailMechanic
-                        //{
-                        //    Name = this.MechanicToInsert.Name,
-                        //    Mechanic = this.MechanicToInsert,
-                        //    MechanicId = this.MechanicId,
-                        //    Description = this.MechanicDescription
-                        //});
-
-                        ClearMechanic();
-                    }
-                    else
-                    {
-                        this.ShowError("Mekanik harus dipilih");
-                        this.lookUpMechanic.EditValue = null;
-                        this.lookUpMechanic.Text = string.Empty;
-                    }
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(MechanicName))
-                    {
-                        //SPKMechanicList.Add(new SPKDetailMechanic
-                        //{
-                        //    Name = this.MechanicName,
-                        //    Description = this.MechanicDescription
-                        //});
-
-                        ClearMechanic();
-                    }
-                    else
-                    {
-                        this.ShowError("Mekanik harus diisi");
-                        this.MechanicName = string.Empty;
-                    }
-                }
-            }
-            else
-            {
-                this.ShowError("Keterangan mekanik harus diisi");
-                this.MechanicDescription = string.Empty;
-            }
-
-            RefreshMechanicGrid();
-
-
-        }
-
-        public void ClearMechanic()
-        {
-            this.lookUpMechanic.EditValue = null;
-            this.lookUpMechanic.Text = string.Empty;
-            this.MechanicName = string.Empty;
-            this.MechanicDescription = string.Empty;
-        }
-
+       
         #endregion
 
         public void RefreshMechanicGrid()
@@ -557,123 +402,113 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             RefreshSparepartGrid();
         }
 
-        private void bgwFingerPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            try
-            {
-                bool isConnected = axCZKEM1.Connect_Net(FingerprintIP, Convert.ToInt32(FingerpringPort));
-                if (isConnected)
-                {
-                    _isFingerprintConnected = true;
-                    axCZKEM1.RegEvent(1, 65535);
+        //private void bgwFingerPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        //{
+        //    try
+        //    {
+        //        bool isConnected = axCZKEM1.Connect_Net(FingerprintIP, Convert.ToInt32(FingerpringPort));
+        //        if (isConnected)
+        //        {
+        //            _isFingerprintConnected = true;
+        //            axCZKEM1.RegEvent(1, 65535);
 
-                    DataTable dtAttLog = new DataTable();
-                    dtAttLog.Columns.Add("idwTMachineNumber");
-                    dtAttLog.Columns.Add("idwEnrollNumber");
-                    dtAttLog.Columns.Add("idwVerifyMode");
-                    dtAttLog.Columns.Add("idwInOutMode");
-                    dtAttLog.Columns.Add("idwDateTime");
+        //            DataTable dtAttLog = new DataTable();
+        //            dtAttLog.Columns.Add("idwTMachineNumber");
+        //            dtAttLog.Columns.Add("idwEnrollNumber");
+        //            dtAttLog.Columns.Add("idwVerifyMode");
+        //            dtAttLog.Columns.Add("idwInOutMode");
+        //            dtAttLog.Columns.Add("idwDateTime");
 
-                    if (axCZKEM1.ReadGeneralLogData(1))//read all the attendance records to the memory
-                    {
-                        string sdwEnrollNumber = "";
-                        int idwTMachineNumber = 0;
-                        int idwVerifyMode = 0;
-                        int idwInOutMode = 0;
-                        int idwYear = 0;
-                        int idwMonth = 0;
-                        int idwDay = 0;
-                        int idwHour = 0;
-                        int idwMinute = 0;
-                        int idwSecond = 0;
-                        int idwWorkcode = 0;
+        //            if (axCZKEM1.ReadGeneralLogData(1))//read all the attendance records to the memory
+        //            {
+        //                string sdwEnrollNumber = "";
+        //                int idwTMachineNumber = 0;
+        //                int idwVerifyMode = 0;
+        //                int idwInOutMode = 0;
+        //                int idwYear = 0;
+        //                int idwMonth = 0;
+        //                int idwDay = 0;
+        //                int idwHour = 0;
+        //                int idwMinute = 0;
+        //                int idwSecond = 0;
+        //                int idwWorkcode = 0;
 
-                        axCZKEM1.EnableDevice(1, false);
-                        while (axCZKEM1.SSR_GetGeneralLogData(1, out sdwEnrollNumber, out idwVerifyMode,
-                           out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
-                        {
-                            DataRow newRow = dtAttLog.NewRow();
-                            newRow["idwTMachineNumber"] = idwTMachineNumber;
-                            newRow["idwEnrollNumber"] = sdwEnrollNumber;
-                            newRow["idwVerifyMode"] = idwVerifyMode;
-                            newRow["idwInOutMode"] = idwInOutMode;
-                            newRow["idwDateTime"] = idwYear.ToString() + "-" + idwMonth.ToString() + "-" + idwDay.ToString() + " " + idwHour.ToString() + ":" + idwMinute.ToString();
+        //                axCZKEM1.EnableDevice(1, false);
+        //                while (axCZKEM1.SSR_GetGeneralLogData(1, out sdwEnrollNumber, out idwVerifyMode,
+        //                   out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+        //                {
+        //                    DataRow newRow = dtAttLog.NewRow();
+        //                    newRow["idwTMachineNumber"] = idwTMachineNumber;
+        //                    newRow["idwEnrollNumber"] = sdwEnrollNumber;
+        //                    newRow["idwVerifyMode"] = idwVerifyMode;
+        //                    newRow["idwInOutMode"] = idwInOutMode;
+        //                    newRow["idwDateTime"] = idwYear.ToString() + "-" + idwMonth.ToString() + "-" + idwDay.ToString() + " " + idwHour.ToString() + ":" + idwMinute.ToString();
 
-                            dtAttLog.Rows.Add(newRow);
-                        }
-                        axCZKEM1.EnableDevice(1, true);
-                    }
+        //                    dtAttLog.Rows.Add(newRow);
+        //                }
+        //                axCZKEM1.EnableDevice(1, true);
+        //            }
 
-                    if (dtAttLog.Rows.Count > 0)
-                    {
-                        foreach (var item in MechanicLookupList)
-                        {
-                            string currentMechanic = string.Empty;
-                            foreach (DataRow row in dtAttLog.Rows)
-                            {
-                                DateTime currDate = row["idwDateTime"].AsDateTime();
-                                if (currDate.Date.CompareTo(_today) == 0)
-                                {
-                                    if (string.Compare(item.Code, row["idwEnrollNumber"].ToString()) == 0)
-                                    {
-                                        currentMechanic = row["idwEnrollNumber"].ToString();
-                                        break;
-                                    }
-                                }
-                            }
+        //            if (dtAttLog.Rows.Count > 0)
+        //            {
+        //                foreach (var item in MechanicLookupList)
+        //                {
+        //                    string currentMechanic = string.Empty;
+        //                    foreach (DataRow row in dtAttLog.Rows)
+        //                    {
+        //                        DateTime currDate = row["idwDateTime"].AsDateTime();
+        //                        if (currDate.Date.CompareTo(_today) == 0)
+        //                        {
+        //                            if (string.Compare(item.Code, row["idwEnrollNumber"].ToString()) == 0)
+        //                            {
+        //                                currentMechanic = row["idwEnrollNumber"].ToString();
+        //                                break;
+        //                            }
+        //                        }
+        //                    }
 
-                            if (!string.IsNullOrEmpty(currentMechanic))
-                            {
-                                _availableMechanic.Add(currentMechanic);
-                            }
-                        }
-                    }
-                    e.Result = true;
-                }
-                else
-                {
-                    e.Result = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to connect to fingerprint device", ex);
-                e.Result = ex;
-            }
-        }
+        //                    if (!string.IsNullOrEmpty(currentMechanic))
+        //                    {
+        //                        _availableMechanic.Add(currentMechanic);
+        //                    }
+        //                }
+        //            }
+        //            e.Result = true;
+        //        }
+        //        else
+        //        {
+        //            e.Result = false;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to connect to fingerprint device", ex);
+        //        e.Result = ex;
+        //    }
+        //}
 
-        private void bgwFingerPrint_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            Cursor = Cursors.Default;
-            if (e.Result is Exception)
-            {
-                this.ShowError("Koneksi ke fingerprint gagal!");
-                _isFingerprintConnected = false;
-            }
-            else
-            {
-                if (!e.Result.AsBoolean())
-                {
-                    this.ShowError("Koneksi ke fingerprint gagal! Data akan diambil dari database");
-                    _isFingerprintConnected = false;
-                }
-                else
-                {
-                    _isFingerprintConnected = true;
-                    _presenter.UpdateMechanicList(_availableMechanic);
-                }
-            }
-        }
-
-        private void chxIsRegistered_CheckedChanged(object sender, EventArgs e)
-        {
-            ApplyMechanicSetting();
-        }
-
-        void gvMechanic_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            this.SelectedMechanic = gvMechanic.GetFocusedRow() as MechanicViewModel;
-        }
+        //private void bgwFingerPrint_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        //{
+        //    Cursor = Cursors.Default;
+        //    if (e.Result is Exception)
+        //    {
+        //        this.ShowError("Koneksi ke fingerprint gagal!");
+        //        _isFingerprintConnected = false;
+        //    }
+        //    else
+        //    {
+        //        if (!e.Result.AsBoolean())
+        //        {
+        //            this.ShowError("Koneksi ke fingerprint gagal! Data akan diambil dari database");
+        //            _isFingerprintConnected = false;
+        //        }
+        //        else
+        //        {
+        //            _isFingerprintConnected = true;
+        //            _presenter.UpdateMechanicList(_availableMechanic);
+        //        }
+        //    }
+        //}
 
         void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
@@ -713,20 +548,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 Cursor = Cursors.WaitCursor;
                 bgwFingerPrint.RunWorkerAsync();
-            }
-        }
-
-        void ApplyMechanicSetting()
-        {
-            if (IsMechanicRegistered)
-            {
-                lookUpMechanic.Visible = true;
-                txtMechanicName.Visible = false;
-            }
-            else
-            {
-                lookUpMechanic.Visible = false;
-                txtMechanicName.Visible = true;
             }
         }
 

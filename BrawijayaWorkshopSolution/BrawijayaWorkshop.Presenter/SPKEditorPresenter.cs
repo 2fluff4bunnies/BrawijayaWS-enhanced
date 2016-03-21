@@ -20,7 +20,6 @@ namespace BrawijayaWorkshop.Presenter
             View.FingerpringPort = Model.GetFingerprintPort();
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
-            //View.MechanicLookupList = Model.LoadMechanic();
             View.SparepartLookupList = Model.LoadSparepart();
 
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
@@ -44,16 +43,13 @@ namespace BrawijayaWorkshop.Presenter
                 View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
                 View.Description = View.SelectedSPK.Description;
 
-                //View.SPKMechanicList = Model.GetEndorsedSPKMechanicList(View.ParentSPK.Id);
+              
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.SelectedSPK.Id);
             }
         }
 
-        public void UpdateMechanicList(List<string> availableCodes)
-        {
-            //View.MechanicLookupList = View.MechanicLookupList.Where(m => availableCodes.Contains(m.Code)).ToList();
-        }
+ 
 
         public void SaveChanges()
         {
