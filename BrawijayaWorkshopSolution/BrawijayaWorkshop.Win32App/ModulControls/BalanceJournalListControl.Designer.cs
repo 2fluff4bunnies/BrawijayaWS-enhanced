@@ -38,26 +38,26 @@
             this.btnRecalculateBalanceJournal = new DevExpress.XtraEditors.SimpleButton();
             this.gridBalanceJournal = new DevExpress.XtraGrid.GridControl();
             this.gvBalanceJournal = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gbJournalCode = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.colJournalCode = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbFirstBalance = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.colFirstBalanceDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colFirstBalanceCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbRecociliation = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.colReconciliationDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colReconciliationCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbAfterReconciliation = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.colAfterReconcilDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colAfterReconcilCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbProfitLoss = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.colProfitLossDebit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colProfitLossCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gbLastBalance = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.colLastDebiit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colLastCredit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.bgwRecalculate = new System.ComponentModel.BackgroundWorker();
-            this.gbJournalCode = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gbFirstBalance = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gbRecociliation = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gbAfterReconciliation = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gbProfitLoss = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gbLastBalance = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -204,6 +204,16 @@
             this.gvBalanceJournal.OptionsView.ShowViewCaption = true;
             this.gvBalanceJournal.ViewCaption = "Neraca";
             // 
+            // gbJournalCode
+            // 
+            this.gbJournalCode.Columns.Add(this.colJournalCode);
+            this.gbJournalCode.Columns.Add(this.colJournalName);
+            this.gbJournalCode.Name = "gbJournalCode";
+            this.gbJournalCode.OptionsBand.ShowCaption = false;
+            this.gbJournalCode.OptionsBand.ShowInCustomizationForm = false;
+            this.gbJournalCode.VisibleIndex = 0;
+            this.gbJournalCode.Width = 150;
+            // 
             // colJournalCode
             // 
             this.colJournalCode.AppearanceHeader.Options.UseTextOptions = true;
@@ -222,6 +232,18 @@
             this.colJournalName.FieldName = "Journal.Name";
             this.colJournalName.Name = "colJournalName";
             this.colJournalName.Visible = true;
+            // 
+            // gbFirstBalance
+            // 
+            this.gbFirstBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbFirstBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbFirstBalance.Caption = "Saldo";
+            this.gbFirstBalance.Columns.Add(this.colFirstBalanceDebit);
+            this.gbFirstBalance.Columns.Add(this.colFirstBalanceCredit);
+            this.gbFirstBalance.Name = "gbFirstBalance";
+            this.gbFirstBalance.OptionsBand.ShowInCustomizationForm = false;
+            this.gbFirstBalance.VisibleIndex = 1;
+            this.gbFirstBalance.Width = 150;
             // 
             // colFirstBalanceDebit
             // 
@@ -249,6 +271,18 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterMutationDebit", "{0:#,#}")});
             this.colFirstBalanceCredit.Visible = true;
             // 
+            // gbRecociliation
+            // 
+            this.gbRecociliation.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbRecociliation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbRecociliation.Caption = "Penyesuaian";
+            this.gbRecociliation.Columns.Add(this.colReconciliationDebit);
+            this.gbRecociliation.Columns.Add(this.colReconciliationCredit);
+            this.gbRecociliation.Name = "gbRecociliation";
+            this.gbRecociliation.OptionsBand.ShowInCustomizationForm = false;
+            this.gbRecociliation.VisibleIndex = 2;
+            this.gbRecociliation.Width = 150;
+            // 
             // colReconciliationDebit
             // 
             this.colReconciliationDebit.AppearanceHeader.Options.UseTextOptions = true;
@@ -275,11 +309,24 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ReconciliationCredit", "{0:#,#}")});
             this.colReconciliationCredit.Visible = true;
             // 
+            // gbAfterReconciliation
+            // 
+            this.gbAfterReconciliation.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbAfterReconciliation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbAfterReconciliation.Caption = "NS. Penyesuaian";
+            this.gbAfterReconciliation.Columns.Add(this.colAfterReconcilDebit);
+            this.gbAfterReconciliation.Columns.Add(this.colAfterReconcilCredit);
+            this.gbAfterReconciliation.Name = "gbAfterReconciliation";
+            this.gbAfterReconciliation.OptionsBand.ShowInCustomizationForm = false;
+            this.gbAfterReconciliation.VisibleIndex = 3;
+            this.gbAfterReconciliation.Width = 150;
+            // 
             // colAfterReconcilDebit
             // 
             this.colAfterReconcilDebit.AppearanceHeader.Options.UseTextOptions = true;
             this.colAfterReconcilDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colAfterReconcilDebit.Caption = "Debet";
+            this.colAfterReconcilDebit.DisplayFormat.FormatString = "{0:#,#}";
             this.colAfterReconcilDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colAfterReconcilDebit.FieldName = "BalanceAfterReconciliationDebit";
             this.colAfterReconcilDebit.Name = "colAfterReconcilDebit";
@@ -299,6 +346,17 @@
             this.colAfterReconcilCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationCredit", "{0:#,#}")});
             this.colAfterReconcilCredit.Visible = true;
+            // 
+            // gbProfitLoss
+            // 
+            this.gbProfitLoss.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbProfitLoss.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbProfitLoss.Caption = "Laba / Rugi";
+            this.gbProfitLoss.Columns.Add(this.colProfitLossDebit);
+            this.gbProfitLoss.Columns.Add(this.colProfitLossCredit);
+            this.gbProfitLoss.Name = "gbProfitLoss";
+            this.gbProfitLoss.VisibleIndex = 4;
+            this.gbProfitLoss.Width = 150;
             // 
             // colProfitLossDebit
             // 
@@ -329,6 +387,18 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ProfitLossCredit", "{0:#,#}", "ProfitLossCredit"),
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ProfitLossCredit", "{0:#,#}", "ProfitLossCreditResult")});
             this.colProfitLossCredit.Visible = true;
+            // 
+            // gbLastBalance
+            // 
+            this.gbLastBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbLastBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbLastBalance.Caption = "Saldo Akhir";
+            this.gbLastBalance.Columns.Add(this.colLastDebiit);
+            this.gbLastBalance.Columns.Add(this.colLastCredit);
+            this.gbLastBalance.Name = "gbLastBalance";
+            this.gbLastBalance.OptionsBand.ShowInCustomizationForm = false;
+            this.gbLastBalance.VisibleIndex = 5;
+            this.gbLastBalance.Width = 150;
             // 
             // colLastDebiit
             // 
@@ -369,75 +439,6 @@
             // 
             this.bgwRecalculate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRecalculate_DoWork);
             this.bgwRecalculate.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwRecalculate_RunWorkerCompleted);
-            // 
-            // gbJournalCode
-            // 
-            this.gbJournalCode.Columns.Add(this.colJournalCode);
-            this.gbJournalCode.Columns.Add(this.colJournalName);
-            this.gbJournalCode.Name = "gbJournalCode";
-            this.gbJournalCode.OptionsBand.ShowCaption = false;
-            this.gbJournalCode.OptionsBand.ShowInCustomizationForm = false;
-            this.gbJournalCode.VisibleIndex = 0;
-            this.gbJournalCode.Width = 150;
-            // 
-            // gbFirstBalance
-            // 
-            this.gbFirstBalance.AppearanceHeader.Options.UseTextOptions = true;
-            this.gbFirstBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gbFirstBalance.Caption = "Saldo";
-            this.gbFirstBalance.Columns.Add(this.colFirstBalanceDebit);
-            this.gbFirstBalance.Columns.Add(this.colFirstBalanceCredit);
-            this.gbFirstBalance.Name = "gbFirstBalance";
-            this.gbFirstBalance.OptionsBand.ShowInCustomizationForm = false;
-            this.gbFirstBalance.VisibleIndex = 1;
-            this.gbFirstBalance.Width = 150;
-            // 
-            // gbRecociliation
-            // 
-            this.gbRecociliation.AppearanceHeader.Options.UseTextOptions = true;
-            this.gbRecociliation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gbRecociliation.Caption = "Penyesuaian";
-            this.gbRecociliation.Columns.Add(this.colReconciliationDebit);
-            this.gbRecociliation.Columns.Add(this.colReconciliationCredit);
-            this.gbRecociliation.Name = "gbRecociliation";
-            this.gbRecociliation.OptionsBand.ShowInCustomizationForm = false;
-            this.gbRecociliation.VisibleIndex = 2;
-            this.gbRecociliation.Width = 150;
-            // 
-            // gbAfterReconciliation
-            // 
-            this.gbAfterReconciliation.AppearanceHeader.Options.UseTextOptions = true;
-            this.gbAfterReconciliation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gbAfterReconciliation.Caption = "NS. Penyesuaian";
-            this.gbAfterReconciliation.Columns.Add(this.colAfterReconcilDebit);
-            this.gbAfterReconciliation.Columns.Add(this.colAfterReconcilCredit);
-            this.gbAfterReconciliation.Name = "gbAfterReconciliation";
-            this.gbAfterReconciliation.OptionsBand.ShowInCustomizationForm = false;
-            this.gbAfterReconciliation.VisibleIndex = 3;
-            this.gbAfterReconciliation.Width = 150;
-            // 
-            // gbProfitLoss
-            // 
-            this.gbProfitLoss.AppearanceHeader.Options.UseTextOptions = true;
-            this.gbProfitLoss.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gbProfitLoss.Caption = "Laba / Rugi";
-            this.gbProfitLoss.Columns.Add(this.colProfitLossDebit);
-            this.gbProfitLoss.Columns.Add(this.colProfitLossCredit);
-            this.gbProfitLoss.Name = "gbProfitLoss";
-            this.gbProfitLoss.VisibleIndex = 4;
-            this.gbProfitLoss.Width = 150;
-            // 
-            // gbLastBalance
-            // 
-            this.gbLastBalance.AppearanceHeader.Options.UseTextOptions = true;
-            this.gbLastBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gbLastBalance.Caption = "Saldo Akhir";
-            this.gbLastBalance.Columns.Add(this.colLastDebiit);
-            this.gbLastBalance.Columns.Add(this.colLastCredit);
-            this.gbLastBalance.Name = "gbLastBalance";
-            this.gbLastBalance.OptionsBand.ShowInCustomizationForm = false;
-            this.gbLastBalance.VisibleIndex = 5;
-            this.gbLastBalance.Width = 150;
             // 
             // BalanceJournalListControl
             // 

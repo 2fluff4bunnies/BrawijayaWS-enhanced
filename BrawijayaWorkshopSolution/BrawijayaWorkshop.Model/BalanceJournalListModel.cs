@@ -80,7 +80,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<BalanceJournalDetailViewModel> RetrieveBalanceJournalDetailsByHeaderId(int headerId)
         {
-            List<BalanceJournalDetail> result = _balanceJournalDetailRepository.GetMany(bj => bj.JournalId == headerId).ToList();
+            List<BalanceJournalDetail> result = _balanceJournalDetailRepository.GetMany(bj => bj.ParentId == headerId).ToList();
             List<BalanceJournalDetailViewModel> mappedResult = new List<BalanceJournalDetailViewModel>();
             return Map(result, mappedResult);
         }
@@ -96,6 +96,8 @@ namespace BrawijayaWorkshop.Model
             DateTime firstDay = new DateTime(year, month, 1);
             DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
             DateTime prevMonth = firstDay.AddDays(-1);
+
+            List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
 
             // calculate neraca
             // ------------------------------------------------------------------------------
@@ -199,14 +201,37 @@ namespace BrawijayaWorkshop.Model
                     item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
                 }
 
-                if(item.Journal.IsProfitLoss)
+                JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
+                if (currentJournal.IsProfitLoss)
                 {
                     item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
                     item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
                 }
+                else
+                {
+                    item.LastDebit = item.BalanceAfterReconciliationDebit;
+                    item.LastCredit = item.BalanceAfterReconciliationCredit;
+                }
             }
 
             // 5. Insert Keb Balance Header & Balance Detail
+            BalanceJournal newBalanceHeader = new BalanceJournal();
+            newBalanceHeader.Month = month;
+            newBalanceHeader.Year = year;
+            newBalanceHeader.Status = (int)DbConstant.DefaultDataStatus.Active;
+            newBalanceHeader.CreateDate = newBalanceHeader.ModifyDate = DateTime.Now;
+            newBalanceHeader.CreateUserId = newBalanceHeader.ModifyUserId = userId;
+            newBalanceHeader = _balanceJournalRepository.Add(newBalanceHeader);
+            _unitOfWork.SaveChanges();
+
+            foreach (var item in tempListBalanceDetailViewModel)
+            {
+                BalanceJournalDetail newBalanceDetail = new BalanceJournalDetail();
+                Map(item, newBalanceDetail);
+                newBalanceDetail.ParentId = newBalanceHeader.Id;
+                _balanceJournalDetailRepository.Add(newBalanceDetail);
+            }
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteBalanceJournal(int headerId, int userId)

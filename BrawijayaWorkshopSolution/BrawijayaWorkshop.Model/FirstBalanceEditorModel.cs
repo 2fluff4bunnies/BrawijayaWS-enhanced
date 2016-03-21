@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -55,6 +56,8 @@ namespace BrawijayaWorkshop.Model
         {
             BalanceJournal entity = new BalanceJournal();
             Map(parent, entity);
+            entity.IsFirst = true;
+            entity.Status = (int)DbConstant.DefaultDataStatus.Active;
             entity.CreateUserId = entity.ModifyUserId = userId;
             entity.CreateDate = entity.ModifyDate = DateTime.Now;
             entity = _balanceJournalRepository.Add(entity);

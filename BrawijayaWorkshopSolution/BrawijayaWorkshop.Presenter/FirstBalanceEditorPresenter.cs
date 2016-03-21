@@ -21,6 +21,8 @@ namespace BrawijayaWorkshop.Presenter
             var todayMonth = new DateTime(today.Year, today.Month, 1);
             var previousDate = todayMonth.AddDays(-1);
 
+            View.JournalList = Model.RetrieveAllJournal();
+
             View.FirstBalanceDate = previousDate;
             View.DeletedDetailList = new List<BalanceJournalDetailViewModel>();
 

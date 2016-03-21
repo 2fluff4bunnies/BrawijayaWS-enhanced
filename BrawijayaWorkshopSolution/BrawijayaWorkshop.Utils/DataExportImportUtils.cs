@@ -148,6 +148,9 @@ namespace BrawijayaWorkshop.Utils
                                     case CellType.Numeric:
                                         newRow[colIndex] = cell.NumericCellValue;
                                         break;
+                                    case CellType.Boolean:
+                                        newRow[colIndex] = cell.BooleanCellValue;
+                                        break;
                                     default:
                                         newRow[colIndex] = cell.StringCellValue;
                                         break;
