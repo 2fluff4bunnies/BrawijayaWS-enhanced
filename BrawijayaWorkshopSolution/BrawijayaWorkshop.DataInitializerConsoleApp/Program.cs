@@ -16,6 +16,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             string citFile = "City.xlsx";
             try
             {
+                // todo: read excel inventory and acc and insert into temporary table
+                DataTable resultInv = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
+                DataTable resultAcc = DataExportImportUtils.CreateDataTableFromExcel(dirPath + accFile, true);
+                DataTable resultCit = DataExportImportUtils.CreateDataTableFromExcel(dirPath + citFile, true);
+
                 try
                 {
                     using(MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
@@ -68,10 +73,6 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     // do nothing
                 }
 
-                // todo: read excel inventory and acc and insert into temporary table
-                DataTable resultInv = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
-                DataTable resultAcc = DataExportImportUtils.CreateDataTableFromExcel(dirPath + accFile, true);
-                DataTable resultCit = DataExportImportUtils.CreateDataTableFromExcel(dirPath + citFile, true);
                 if (resultCit != null)
                 {
                     resultCit.ExportDataTableToCsv(dirPath + "city.csv");
