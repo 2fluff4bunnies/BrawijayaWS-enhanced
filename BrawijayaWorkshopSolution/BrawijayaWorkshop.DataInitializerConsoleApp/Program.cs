@@ -53,7 +53,8 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         cmd.CommandText = @"CREATE TABLE `temp_acc` (
                                           `Kode` varchar(100) DEFAULT NULL,
                                           `Nama` varchar(100) DEFAULT NULL,
-                                          `Induk` varchar(100) DEFAULT NULL
+                                          `Induk` varchar(100) DEFAULT NULL,
+                                          `ProfitLoss` BIT DEFAULT FALSE
                                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
