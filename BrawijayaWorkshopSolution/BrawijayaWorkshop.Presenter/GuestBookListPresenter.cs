@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadGuestBook()
         {
-            View.GuestBookListData = Model.SearchGuestBook(View.ActiveLicenseNumberFilter, View.CreatedDate);
+            View.GuestBookListData = Model.SearchGuestBook(View.ActiveLicenseNumberFilter, View.CreatedDateFilter);
         }
 
         public void DeleteGuestBook()

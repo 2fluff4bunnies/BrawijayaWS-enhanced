@@ -37,7 +37,7 @@ namespace BrawijayaWorkshop.Model
                 item.ArrivalTime = item.CreateDate.ToShortTimeString();
             }
 
-            //mappedResult = mappedResult.Where(gb => gb.CreateDate.ToShortDateString() == createdDate.ToShortDateString()).ToList();
+            mappedResult = mappedResult.Where(gb => gb.CreateDate.ToShortDateString() == createdDate.ToShortDateString()).ToList();
 
             return mappedResult;
         }

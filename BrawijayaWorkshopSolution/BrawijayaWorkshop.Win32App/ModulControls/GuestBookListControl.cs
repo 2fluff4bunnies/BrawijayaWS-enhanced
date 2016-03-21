@@ -13,12 +13,12 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 
+
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
     public partial class GuestBookListControl : BaseAppUserControl, IGuestBookListView
     {
         private GuestBookListPresenter _presenter;
-        private GuestBookViewModel _selectedGuestBook;
 
         protected override string ModulName
         {
@@ -39,51 +39,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             btnNewGuestBook.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
-            cmsViewVehicle.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
 
-            this.Load += GuestBookListControl_Load;
+            this.CreatedDateFilter = System.DateTime.Now;
 
-            InitializeComponent();
+            this.Load +=GuestBookListControl_Load;
         }
 
         void GuestBookListControl_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.dtpCreatedDate.Text))
-            {
-                this.dtpCreatedDate.Text = DateTime.Now.ToShortDateString();
-            }
             btnSearch.PerformClick();
         }
 
-        void gvGuestBook_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            this.SelectedGuestBook = gvGuestBook.GetFocusedRow() as GuestBookViewModel;
-        }
-
-        void gvGuestBook_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
-        {
-            GridView view = (GridView)sender;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
-            if (hitInfo.InRow)
-            {
-                view.FocusedRowHandle = hitInfo.RowHandle;
-                cmsEditor.Show(view.GridControl, e.Point);
-            }
-        }
-
         #region Properties
-        public GuestBookViewModel SelectedGuestBook
-        {
-            get
-            {
-                return _selectedGuestBook;
-            }
-            set
-            {
-                _selectedGuestBook = value;
-            }
-        }
+
+        public GuestBookViewModel SelectedGuestBook { get; set; }
 
         public string ActiveLicenseNumberFilter
         {
@@ -117,7 +87,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public DateTime CreatedDate
+        public DateTime CreatedDateFilter
         {
             get
             {
@@ -125,59 +95,24 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                dtpCreatedDate.Text = value.ToString();
+                dtpCreatedDate.Text = value.ToShortDateString();
             }
         }
         #endregion
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        void gvGuestBook_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            RefreshDataView();
+            this.SelectedGuestBook = gvGuestBook.GetFocusedRow() as GuestBookViewModel;
         }
 
-        private void cmsViewVehicle_Click(object sender, EventArgs e)
+        void gvGuestBook_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (_selectedGuestBook != null)
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
             {
-                VehicleEditorForm editor = Bootstrapper.Resolve<VehicleEditorForm>();
-                editor.SelectedVehicle = SelectedGuestBook.Vehicle;
-                editor.ShowDialog(this);
-
-                btnSearch.PerformClick();
-            }
-        }
-
-        private void cmsDeleteData_Click(object sender, EventArgs e)
-        {
-            if (SelectedGuestBook == null) return;
-
-            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus dafar hadir kendaraan dengan nomor polisi : '" + SelectedGuestBook.Vehicle.ActiveLicenseNumber + "'?") == DialogResult.Yes)
-            {
-                try
-                {
-                    MethodBase.GetCurrentMethod().Info("Mengapus daftar hadir dengan nomor polisi : " + SelectedGuestBook.Vehicle.ActiveLicenseNumber);
-
-                    _presenter.DeleteGuestBook();
-
-                    btnSearch.PerformClick(); // refresh data
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete guestbook with license number: '" + SelectedGuestBook.Vehicle.ActiveLicenseNumber + "'", ex);
-                    this.ShowError("Proses hapus daftar dengan nomor polisi : '" + SelectedGuestBook.Vehicle.ActiveLicenseNumber + "' gagal!");
-                }
-            }
-        }
-
-        private void cmsEditData_Click(object sender, EventArgs e)
-        {
-            if (_selectedGuestBook != null)
-            {
-                GuestBookEditorForm editor = Bootstrapper.Resolve<GuestBookEditorForm>();
-                editor.SelectedGuestBook = this.SelectedGuestBook;
-                editor.ShowDialog(this);
-
-                btnSearch.PerformClick();
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsEditor.Show(view.GridControl, e.Point);
             }
         }
 
@@ -185,8 +120,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (!bgwMain.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Fecthing guest book data...");
-                _selectedGuestBook = null;
+                MethodBase.GetCurrentMethod().Info("Fecthing daftar hadir kendaraan data...");
+                this.SelectedGuestBook = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat daftar hadir...", false);
                 bgwMain.RunWorkerAsync();
             }
@@ -214,10 +149,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if (gvGuestBook.RowCount > 0)
             {
-                SelectedGuestBook = gvGuestBook.GetRow(0) as GuestBookViewModel;
+                this.SelectedGuestBook = gvGuestBook.GetRow(0) as GuestBookViewModel;
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat daftar hadir selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data kendaraan selesai", true);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshDataView();
         }
 
         private void btnNewGuestBook_Click(object sender, EventArgs e)
@@ -228,6 +168,36 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
+        private void cmsEditData_Click(object sender, EventArgs e)
+        {
+            GuestBookEditorForm editor = Bootstrapper.Resolve<GuestBookEditorForm>();
+            editor.SelectedGuestBook = this.SelectedGuestBook;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsDeleteData_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedGuestBook == null) return;
+
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus daftar hadir kendaraan dengan nomor polisi : '" + SelectedGuestBook.Vehicle.ActiveLicenseNumber + "'?") == DialogResult.Yes)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Mengapus daftar hadir kendaraan dengan nomor polisi : " + SelectedGuestBook.Vehicle.ActiveLicenseNumber);
+
+                    _presenter.DeleteGuestBook();
+
+                    btnSearch.PerformClick(); // refresh data
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete vehicle with license number: '" + SelectedGuestBook.Vehicle.ActiveLicenseNumber + "'", ex);
+                    this.ShowError("Proses hapus daftar hadir kendaraan dengan nomor polisi : '" + SelectedGuestBook.Vehicle.ActiveLicenseNumber + "' gagal!");
+                }
+            }
+        }
 
     }
 }

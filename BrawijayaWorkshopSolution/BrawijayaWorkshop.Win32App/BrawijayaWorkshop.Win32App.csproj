@@ -187,6 +187,12 @@
     <Compile Include="ModulControls\FirstBalanceListControl.Designer.cs">
       <DependentUpon>FirstBalanceListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\GuestBookListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\GuestBookListControl.Designer.cs">
+      <DependentUpon>GuestBookListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\HPPListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,12 +204,6 @@
     </Compile>
     <Compile Include="ModulControls\InvoiceListControl.Designer.cs">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ModulControls\GuestBookListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ModulControls\GuestBookListControl.Designer.cs">
-      <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\JournalMasterListControl.cs">
       <SubType>UserControl</SubType>
@@ -613,14 +613,14 @@
     <EmbeddedResource Include="ModulControls\FirstBalanceListControl.resx">
       <DependentUpon>FirstBalanceListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
+      <DependentUpon>GuestBookListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\HPPListControl.resx">
       <DependentUpon>HPPListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
-      <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
