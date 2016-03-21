@@ -96,6 +96,22 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public decimal? ProfitLossDebitTemp { get; set; }
+
+        public decimal? ProfitLossCreditTemp { get; set; }
+
+        public decimal? ProfitLossDebitResult { get; set; }
+
+        public decimal? ProfitLossCreditResult { get; set; }
+
+        public decimal? LastDebitTemp { get; set; }
+
+        public decimal? LastCreditTemp { get; set; }
+
+        public decimal? LastDebitResult { get; set; }
+
+        public decimal? LastCreditResult { get; set; }
+
         public BalanceJournalListControl(BalanceJournalListModel model)
         {
             InitializeComponent();
@@ -110,6 +126,42 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             GridColumnSummaryItem item = e.Item as GridColumnSummaryItem;
             GridView view = sender as GridView;
+
+            if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
+            {
+                if (Equals("ProfitLossDebit", item.Tag))
+                {
+                    e.TotalValue = this.ProfitLossDebitTemp;
+                }
+                if (Equals("ProfitLossCredit", item.Tag))
+                {
+                    e.TotalValue = this.ProfitLossCreditTemp;
+                }
+                if (Equals("ProfitLossDebitResult", item.Tag))
+                {
+                    e.TotalValue = this.ProfitLossDebitResult;
+                }
+                if (Equals("ProfitLossCreditResult", item.Tag))
+                {
+                    e.TotalValue = this.ProfitLossCreditResult;
+                }
+                if (Equals("LastDebit", item.Tag))
+                {
+                    e.TotalValue = this.LastDebitTemp;
+                }
+                if (Equals("LastCredit", item.Tag))
+                {
+                    e.TotalValue = this.LastCreditTemp;
+                }
+                if (Equals("LastDebitResult", item.Tag))
+                {
+                    e.TotalValue = this.LastDebitResult;
+                }
+                if (Equals("LastCreditResult", item.Tag))
+                {
+                    e.TotalValue = this.LastCreditResult;
+                }
+            }
             //if (Equals("Count", item.Tag))
             //{
             //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Start)

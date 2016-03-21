@@ -1,8 +1,11 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -24,7 +27,31 @@ namespace BrawijayaWorkshop.Presenter
             View.AvailableBalanceJournal = Model.RetrieveBalanceJournalHeader(View.SelectedMonth, View.SelectedYear);
             if (View.AvailableBalanceJournal != null)
             {
-                View.BalanceJournalDetailList = Model.RetrieveBalanceJournalDetailsByHeaderId(View.AvailableBalanceJournal.Id);
+                List<BalanceJournalDetailViewModel> result = Model.RetrieveBalanceJournalDetailsByHeaderId(View.AvailableBalanceJournal.Id);
+                decimal sumProfitLossDebit = result.Sum(pl => pl.ProfitLossDebit ?? 0);
+                decimal sumProfitLossCredit = result.Sum(pl => pl.ProfitLossCredit ?? 0);
+                decimal sumLastDebit = result.Sum(l => l.LastDebit ?? 0);
+                decimal sumLastCredit = result.Sum(l => l.LastCredit ?? 0);
+
+                decimal sumProfitLossResult = sumProfitLossDebit - sumProfitLossCredit;
+                if (sumProfitLossResult < 0)
+                {
+                    View.ProfitLossDebitTemp = Math.Abs(sumProfitLossResult);
+                    View.LastCreditTemp = View.ProfitLossDebitTemp;
+                }
+                else
+                {
+                    View.ProfitLossCreditTemp = Math.Abs(sumProfitLossResult);
+                    View.LastDebitTemp = View.ProfitLossCreditTemp;
+                }
+
+                View.ProfitLossDebitResult = sumProfitLossDebit + View.ProfitLossDebitTemp ?? sumProfitLossDebit;
+                View.ProfitLossCreditResult = sumProfitLossCredit + View.ProfitLossCreditTemp ?? sumProfitLossCredit;
+
+                View.LastDebitResult = sumLastDebit + View.LastDebitTemp ?? sumLastDebit;
+                View.LastCreditResult = sumLastCredit + View.LastCreditTemp ?? sumLastCredit;
+
+                View.BalanceJournalDetailList = result;
             }
         }
 
