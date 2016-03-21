@@ -265,7 +265,7 @@
             this.colFirstBalanceCredit.Caption = "Kredit";
             this.colFirstBalanceCredit.DisplayFormat.FormatString = "{0:#,#}";
             this.colFirstBalanceCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colFirstBalanceCredit.FieldName = "BalanceAfterMutationDebit";
+            this.colFirstBalanceCredit.FieldName = "BalanceAfterMutationCredit";
             this.colFirstBalanceCredit.Name = "colFirstBalanceCredit";
             this.colFirstBalanceCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterMutationDebit", "{0:#,#}")});

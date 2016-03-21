@@ -162,17 +162,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     e.TotalValue = this.LastCreditResult;
                 }
             }
-            //if (Equals("Count", item.Tag))
-            //{
-            //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Start)
-            //        validRowCount = 0;
-            //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Calculate)
-            //    {
-            //        if (!Convert.ToBoolean(view.GetRowCellValue(e.RowHandle, "Discontinued"))) validRowCount++;
-            //    }
-            //    if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
-            //        e.TotalValue = validRowCount;
-            //}
         }
 
         private void BalanceJournalListControl_Load(object sender, EventArgs e)
