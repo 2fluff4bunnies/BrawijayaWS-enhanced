@@ -140,16 +140,20 @@ namespace BrawijayaWorkshop.Utils
                         while (colIndex < iRow.Cells.Count)
                         {
                             ICell cell = iRow.GetCell(colIndex);
-                            switch(cell.CellType)
+
+                            if (cell != null)
                             {
-                                case CellType.Numeric:
-                                    newRow[colIndex] = cell.NumericCellValue;
-                                    break;
-                                default:
-                                    newRow[colIndex] = cell.StringCellValue;
-                                    break;
+                                switch (cell.CellType)
+                                {
+                                    case CellType.Numeric:
+                                        newRow[colIndex] = cell.NumericCellValue;
+                                        break;
+                                    default:
+                                        newRow[colIndex] = cell.StringCellValue;
+                                        break;
+                                }
                             }
-                            
+
                             colIndex++;
                         }
                         result.Rows.Add(newRow);
