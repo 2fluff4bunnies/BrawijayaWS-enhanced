@@ -53,5 +53,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public virtual List<SPKDetailSparepart> ListSparepart { get; set; }
 
+        public bool isContractWork { get; set; }
+
     }
 }
