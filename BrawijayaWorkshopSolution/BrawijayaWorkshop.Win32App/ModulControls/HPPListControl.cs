@@ -155,7 +155,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 MethodBase.GetCurrentMethod().Info("Recalculate HPP data...");
                 AvailableHeader = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang HPP...", false);
-                bgwMain.RunWorkerAsync();
+                bgwRecalculate.RunWorkerAsync();
             }
         }
 

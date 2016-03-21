@@ -165,20 +165,24 @@
             // colDebit
             // 
             this.colDebit.Caption = "Debit";
+            this.colDebit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colDebit.FieldName = "LastDebit";
             this.colDebit.Name = "colDebit";
             this.colDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Debit", "{0:#,#}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastDebit", "{0:#,#}")});
             this.colDebit.Visible = true;
             this.colDebit.VisibleIndex = 1;
             // 
             // colCredit
             // 
             this.colCredit.Caption = "Credit";
+            this.colCredit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCredit.FieldName = "LastCredit";
             this.colCredit.Name = "colCredit";
             this.colCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Credit", "{0:#,#}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastCredit", "{0:#,#}")});
             this.colCredit.Visible = true;
             this.colCredit.VisibleIndex = 2;
             // 

@@ -176,7 +176,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 MethodBase.GetCurrentMethod().Info("Recalculate balance journal data...");
                 AvailableBalanceJournal = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang neraca...", false);
-                bgwMain.RunWorkerAsync();
+                bgwRecalculate.RunWorkerAsync();
             }
         }
 

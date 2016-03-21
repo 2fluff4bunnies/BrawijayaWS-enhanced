@@ -35,13 +35,13 @@
             this.lblMonth = new DevExpress.XtraEditors.LabelControl();
             this.gridFirstBalance = new DevExpress.XtraGrid.GridControl();
             this.gvFirstBalance = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnEditData = new DevExpress.XtraEditors.SimpleButton();
-            this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.btnDeleteData = new DevExpress.XtraEditors.SimpleButton();
             this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLastDebit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLastCredit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnEditData = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.btnDeleteData = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFirstBalance)).BeginInit();
             this.gcFirstBalance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridFirstBalance)).BeginInit();
@@ -120,9 +120,50 @@
             this.gvFirstBalance.OptionsCustomization.AllowGroup = false;
             this.gvFirstBalance.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvFirstBalance.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvFirstBalance.OptionsView.ShowFooter = true;
             this.gvFirstBalance.OptionsView.ShowGroupPanel = false;
             this.gvFirstBalance.OptionsView.ShowViewCaption = true;
             this.gvFirstBalance.ViewCaption = "Detail Saldo Awal";
+            // 
+            // colJournalCode
+            // 
+            this.colJournalCode.Caption = "Kode Akun";
+            this.colJournalCode.FieldName = "Journal.Code";
+            this.colJournalCode.Name = "colJournalCode";
+            this.colJournalCode.Visible = true;
+            this.colJournalCode.VisibleIndex = 0;
+            // 
+            // colJournalName
+            // 
+            this.colJournalName.Caption = "Nama";
+            this.colJournalName.FieldName = "Journal.Name";
+            this.colJournalName.Name = "colJournalName";
+            this.colJournalName.Visible = true;
+            this.colJournalName.VisibleIndex = 1;
+            // 
+            // colLastDebit
+            // 
+            this.colLastDebit.Caption = "Debet";
+            this.colLastDebit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colLastDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colLastDebit.FieldName = "LastDebit";
+            this.colLastDebit.Name = "colLastDebit";
+            this.colLastDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastDebit", "{0:#,#}")});
+            this.colLastDebit.Visible = true;
+            this.colLastDebit.VisibleIndex = 2;
+            // 
+            // colLastCredit
+            // 
+            this.colLastCredit.Caption = "Kredit";
+            this.colLastCredit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colLastCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colLastCredit.FieldName = "LastCredit";
+            this.colLastCredit.Name = "colLastCredit";
+            this.colLastCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastCredit", "{0:#,#}")});
+            this.colLastCredit.Visible = true;
+            this.colLastCredit.VisibleIndex = 3;
             // 
             // btnEditData
             // 
@@ -152,38 +193,6 @@
             this.btnDeleteData.TabIndex = 7;
             this.btnDeleteData.Text = "Hapus Saldo Awal";
             this.btnDeleteData.Click += new System.EventHandler(this.btnDeleteData_Click);
-            // 
-            // colJournalCode
-            // 
-            this.colJournalCode.Caption = "Kode Akun";
-            this.colJournalCode.FieldName = "Journal.Code";
-            this.colJournalCode.Name = "colJournalCode";
-            this.colJournalCode.Visible = true;
-            this.colJournalCode.VisibleIndex = 0;
-            // 
-            // colJournalName
-            // 
-            this.colJournalName.Caption = "Nama";
-            this.colJournalName.FieldName = "Journal.Name";
-            this.colJournalName.Name = "colJournalName";
-            this.colJournalName.Visible = true;
-            this.colJournalName.VisibleIndex = 1;
-            // 
-            // colLastDebit
-            // 
-            this.colLastDebit.Caption = "Debet";
-            this.colLastDebit.FieldName = "LastDebit";
-            this.colLastDebit.Name = "colLastDebit";
-            this.colLastDebit.Visible = true;
-            this.colLastDebit.VisibleIndex = 2;
-            // 
-            // colLastCredit
-            // 
-            this.colLastCredit.Caption = "Kredit";
-            this.colLastCredit.FieldName = "LastCredit";
-            this.colLastCredit.Name = "colLastCredit";
-            this.colLastCredit.Visible = true;
-            this.colLastCredit.VisibleIndex = 3;
             // 
             // FirstBalanceListControl
             // 
