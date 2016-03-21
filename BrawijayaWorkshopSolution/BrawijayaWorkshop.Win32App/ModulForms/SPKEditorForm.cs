@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private DateTime _today;
         private List<string> _availableMechanic;
         public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
-        private bool _isFingerprintConnected = false;
+        //private bool _isFingerprintConnected = false;
 
         private SPKEditorPresenter _presenter;
 
@@ -53,11 +53,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
 
             SPKSparepartList = new List<SPKDetailSparepartViewModel>();
-            //SPKMechanicList = new List<SPKDetailMechanicViewModel>();
             SPKSparepartDetailList = new List<SPKDetailSparepartDetailViewModel>();
 
             this.TotalSparepartPrice = 0;
-         
+
         }
 
         #region Field Editor
@@ -108,7 +107,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-   
         public List<SPKDetailSparepartViewModel> SPKSparepartList
         {
 
@@ -204,7 +202,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-
         public List<SparepartViewModel> SparepartLookupList
         {
             get
@@ -239,6 +236,104 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public bool IsUsedSparepartRequired
+        {
+            get
+            {
+                return ckeIsReturnRequired.Checked;
+            }
+            set
+            {
+                ckeIsReturnRequired.Checked = value;
+            }
+        }
+        public SPKDetailSparepartViewModel LastUsageRecord { get; set; }
+
+        public List<SpecialSparepartDetailViewModel> SSDetailList
+        {
+            get
+            {
+                return lookUpSerialNumber.Properties.DataSource as List<SpecialSparepartDetailViewModel>;
+            }
+            set
+            {
+                lookUpSerialNumber.Properties.DataSource = value;
+            }
+        }
+
+        public int SSDetailId
+        {
+            get
+            {
+                return lookUpSerialNumber.EditValue.AsInteger();
+            }
+            set
+            {
+                lookUpSerialNumber.EditValue = value;
+            }
+        }
+
+        public string SparepartLastUsageDate
+        {
+            get
+            {
+                return lblValLastUsageDate.Text;
+            }
+            set
+            {
+                lblValLastUsageDate.Text = value;
+            }
+        }
+
+        public string SparepartLastUsageQty
+        {
+            get
+            {
+                return lblValLastUsageQty.Text;
+            }
+            set
+            {
+                lblValLastUsageQty.Text = value;
+            }
+        }
+
+        public List<VehicleWheelViewModel> VehicleWheelList
+        {
+            get
+            {
+                return bsVehicleWheel.DataSource as List<VehicleWheelViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        bsVehicleWheel.DataSource = value;
+                        gridVehicleWheel.DataSource = bsVehicleWheel;
+                        gvVehicleWheel.BestFitColumns();
+                    }));
+                }
+                else
+                {
+                    bsVehicleWheel.DataSource = value;
+                    gridVehicleWheel.DataSource = bsVehicleWheel;
+                    gvVehicleWheel.BestFitColumns();
+                }
+            }
+        }
+
+        public List<SpecialSparepartDetailViewModel> WheelDetailList
+        {
+            get
+            {
+                return lookupWheelDetailGv.DataSource as List<SpecialSparepartDetailViewModel>;
+            }
+            set
+            {
+                lookupWheelDetailGv.DataSource = value;
+            }
+        }
         #endregion
 
         #region EmailProperties
@@ -370,14 +465,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.SparepartName = string.Empty;
         }
 
-       
-        #endregion
 
-        public void RefreshMechanicGrid()
-        {
-            //gcMechanic.DataSource = SPKMechanicList;
-            //gvMechanic.BestFitColumns();
-        }
+        #endregion
 
         public void RefreshSparepartGrid()
         {
@@ -386,13 +475,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.TotalSparepartPrice = 0;
         }
 
-        private void cmsDeleteDataMechanic_Click(object sender, EventArgs e)
-        {
-            //SPKDetailMechanic mechanicToRemove = gvMechanic.GetFocusedRow() as SPKDetailMechanic;
-            //SPKMechanicList.Remove(mechanicToRemove);
-
-            RefreshMechanicGrid();
-        }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
@@ -402,6 +484,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             RefreshSparepartGrid();
         }
 
+        #region fingerprint
         //private void bgwFingerPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         //{
         //    try
@@ -508,18 +591,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         //            _presenter.UpdateMechanicList(_availableMechanic);
         //        }
         //    }
-        //}
-
-        void gvMechanic_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
-        {
-            GridView view = (GridView)sender;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
-            if (hitInfo.InRow)
-            {
-                view.FocusedRowHandle = hitInfo.RowHandle;
-                cmsMechanicEditor.Show(view.GridControl, e.Point);
-            }
-        }
+        //} 
+        #endregion
 
         void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
@@ -544,11 +617,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
 
-            if (!bgwFingerPrint.IsBusy)
-            {
-                Cursor = Cursors.WaitCursor;
-                bgwFingerPrint.RunWorkerAsync();
-            }
+            //if (!bgwFingerPrint.IsBusy)
+            //{
+            //    Cursor = Cursors.WaitCursor;
+            //    bgwFingerPrint.RunWorkerAsync();
+            //}
         }
 
         bool ApprovalCheck()
@@ -566,6 +639,39 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
 
             return result;
+        }
+
+        private void lookUpSparepart_EditValueChanged(object sender, EventArgs e)
+        {
+            //check if special sparepart
+            SpecialSparepartViewModel ss = _presenter.GetSpecialSparepart();
+            if (ss != null)
+            {
+                lookUpSerialNumber.Enabled = true;
+                _presenter.LoadSSDetails(ss.Id);
+                txtQty.Text = "1";
+                txtQty.Enabled = false;
+            }
+            else
+            {
+                lookUpSerialNumber.Enabled = false;
+                txtQty.Text = "0";
+                txtQty.Enabled = true;
+            }
+
+            //check if used good
+            _presenter.CheckIsUsedSparepartRequired();
+            ckeIsReturnRequired.Enabled = this.IsUsedSparepartRequired;            
+
+            //get last usage info
+            _presenter.GetLastUsageRecord();
+            lblValLastUsageDate.Text = this.LastUsageRecord.CreateDate.ToShortDateString();
+            lblValLastUsageQty.Text = this.LastUsageRecord.TotalQuantity.ToString();
+        }
+
+        private void LookUpVehicle_EditValueChanged(object sender, EventArgs e)
+        {
+            _presenter.LoadVehicleWheel();
         }
     }
 }

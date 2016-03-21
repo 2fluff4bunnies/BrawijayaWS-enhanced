@@ -1,4 +1,5 @@
 ﻿
+using System;
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
     public class SPKDetailSparepartViewModel : BaseModifierWithStatusViewModel
@@ -13,5 +14,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public int SparepartId { get; set; }
         public SparepartViewModel Sparepart { get; set; }
+
+        public string SerialNumber { get; set; }
     }
 }

@@ -33,29 +33,31 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKEditorForm));
+            this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
-            this.lblContractPrice = new DevExpress.XtraEditors.LabelControl();
-            this.ckeIsContractWork = new DevExpress.XtraEditors.CheckEdit();
-            this.txtContractPrice = new DevExpress.XtraEditors.TextEdit();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lblContractPrice = new DevExpress.XtraEditors.LabelControl();
+            this.ckeIsContractWork = new DevExpress.XtraEditors.CheckEdit();
+            this.txtContractPrice = new DevExpress.XtraEditors.TextEdit();
             this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
             this.groupSparepart = new DevExpress.XtraEditors.GroupControl();
+            this.lblValLastUsageQty = new DevExpress.XtraEditors.LabelControl();
+            this.lblValLastUsageDate = new DevExpress.XtraEditors.LabelControl();
+            this.lblLastUsedQty = new DevExpress.XtraEditors.LabelControl();
+            this.lblLastUsageDate = new DevExpress.XtraEditors.LabelControl();
             this.ckeIsReturnRequired = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpSerialNumber = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpSparepart = new DevExpress.XtraEditors.LookUpEdit();
             this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.txtQty = new DevExpress.XtraEditors.TextEdit();
-            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             this.lblQty = new DevExpress.XtraEditors.LabelControl();
-            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -67,56 +69,71 @@
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
             this.LookUpVehicle = new DevExpress.XtraEditors.LookUpEdit();
+            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             this.lookUpCategory = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
             this.valVehicle = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valCategory = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valDueDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.cmsSparepartEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsMechanicEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsDeleteDataMechanic = new System.Windows.Forms.ToolStripMenuItem();
-            this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
-            this.groupSPK.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractPrice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
+            this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
+            this.groupSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).BeginInit();
             this.groupSparepart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsReturnRequired.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSerialNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
             this.cmsSparepartEditor.SuspendLayout();
-            this.cmsMechanicEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lookupWheelDetailGv
+            // 
+            this.lookupWheelDetailGv.AutoHeight = false;
+            this.lookupWheelDetailGv.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
+            this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupWheelDetailGv.DisplayMember = "SerialNumber";
+            this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
+            this.lookupWheelDetailGv.NullText = "-- Pilih Ban --";
+            this.lookupWheelDetailGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookupWheelDetailGv.ValueMember = "Id";
+            // 
+            // ckeIsUsedWheelRetrieved
+            // 
+            this.ckeIsUsedWheelRetrieved.AutoHeight = false;
+            this.ckeIsUsedWheelRetrieved.Name = "ckeIsUsedWheelRetrieved";
             // 
             // groupSPK
             // 
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSPK.Controls.Add(this.gridVehicleWheel);
             this.groupSPK.Controls.Add(this.lblContractPrice);
             this.groupSPK.Controls.Add(this.ckeIsContractWork);
             this.groupSPK.Controls.Add(this.txtContractPrice);
-            this.groupSPK.Controls.Add(this.groupControl1);
             this.groupSPK.Controls.Add(this.memoDescription);
             this.groupSPK.Controls.Add(this.groupSparepart);
             this.groupSPK.Controls.Add(this.labelControl2);
@@ -124,61 +141,25 @@
             this.groupSPK.Controls.Add(this.lblDueDate);
             this.groupSPK.Controls.Add(this.dtpDueDate);
             this.groupSPK.Controls.Add(this.LookUpVehicle);
+            this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
             this.groupSPK.Controls.Add(this.lookUpCategory);
+            this.groupSPK.Controls.Add(this.lblTotalSparepart);
             this.groupSPK.Controls.Add(this.lblVehicle);
             this.groupSPK.Location = new System.Drawing.Point(-3, -1);
             this.groupSPK.Name = "groupSPK";
-            this.groupSPK.Size = new System.Drawing.Size(586, 582);
+            this.groupSPK.Size = new System.Drawing.Size(1156, 406);
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
-            // 
-            // lblContractPrice
-            // 
-            this.lblContractPrice.Location = new System.Drawing.Point(15, 135);
-            this.lblContractPrice.Name = "lblContractPrice";
-            this.lblContractPrice.Size = new System.Drawing.Size(71, 13);
-            this.lblContractPrice.TabIndex = 38;
-            this.lblContractPrice.Text = "Tarif Borongan";
-            // 
-            // ckeIsContractWork
-            // 
-            this.ckeIsContractWork.Location = new System.Drawing.Point(15, 107);
-            this.ckeIsContractWork.Name = "ckeIsContractWork";
-            this.ckeIsContractWork.Properties.Caption = "Borongan";
-            this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.ckeIsContractWork.Size = new System.Drawing.Size(98, 19);
-            this.ckeIsContractWork.TabIndex = 40;
-            // 
-            // txtContractPrice
-            // 
-            this.txtContractPrice.Location = new System.Drawing.Point(96, 132);
-            this.txtContractPrice.Name = "txtContractPrice";
-            this.txtContractPrice.Properties.Mask.EditMask = "n0";
-            this.txtContractPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtContractPrice.Size = new System.Drawing.Size(161, 20);
-            this.txtContractPrice.TabIndex = 35;
-            // 
-            // groupControl1
-            // 
-            this.groupControl1.Controls.Add(this.gridVehicleWheel);
-            this.groupControl1.Location = new System.Drawing.Point(15, 168);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(556, 164);
-            this.groupControl1.TabIndex = 37;
-            this.groupControl1.Text = "Ban";
             // 
             // gridVehicleWheel
             // 
             this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(14, 23);
+            this.gridVehicleWheel.Location = new System.Drawing.Point(15, 171);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.lookupWheelDetailGv,
-            this.ckeIsUsedWheelRetrieved});
-            this.gridVehicleWheel.Size = new System.Drawing.Size(534, 136);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(556, 198);
             this.gridVehicleWheel.TabIndex = 38;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -187,7 +168,8 @@
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colWheelDetail,
-            this.colIsUsedGoodReceived});
+            this.colIsUsedGoodReceived,
+            this.colPrice});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
             this.gvVehicleWheel.Name = "gvVehicleWheel";
             this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -209,18 +191,6 @@
             this.colWheelDetail.Visible = true;
             this.colWheelDetail.VisibleIndex = 0;
             // 
-            // lookupWheelDetailGv
-            // 
-            this.lookupWheelDetailGv.AutoHeight = false;
-            this.lookupWheelDetailGv.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
-            this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookupWheelDetailGv.DisplayMember = "SerialNumber";
-            this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
-            this.lookupWheelDetailGv.NullText = "-- Pilih Ban --";
-            this.lookupWheelDetailGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.lookupWheelDetailGv.ValueMember = "Id";
-            // 
             // colIsUsedGoodReceived
             // 
             this.colIsUsedGoodReceived.Caption = "Ban Bekas Diterima";
@@ -230,71 +200,135 @@
             this.colIsUsedGoodReceived.Visible = true;
             this.colIsUsedGoodReceived.VisibleIndex = 1;
             // 
-            // ckeIsUsedWheelRetrieved
+            // colPrice
             // 
-            this.ckeIsUsedWheelRetrieved.AutoHeight = false;
-            this.ckeIsUsedWheelRetrieved.Name = "ckeIsUsedWheelRetrieved";
+            this.colPrice.Caption = "Harga";
+            this.colPrice.FieldName = "Price";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.Visible = true;
+            this.colPrice.VisibleIndex = 2;
+            // 
+            // lblContractPrice
+            // 
+            this.lblContractPrice.Location = new System.Drawing.Point(15, 137);
+            this.lblContractPrice.Name = "lblContractPrice";
+            this.lblContractPrice.Size = new System.Drawing.Size(71, 13);
+            this.lblContractPrice.TabIndex = 38;
+            this.lblContractPrice.Text = "Tarif Borongan";
+            // 
+            // ckeIsContractWork
+            // 
+            this.ckeIsContractWork.Location = new System.Drawing.Point(13, 109);
+            this.ckeIsContractWork.Name = "ckeIsContractWork";
+            this.ckeIsContractWork.Properties.Caption = "Borongan";
+            this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.ckeIsContractWork.Size = new System.Drawing.Size(98, 19);
+            this.ckeIsContractWork.TabIndex = 40;
+            // 
+            // txtContractPrice
+            // 
+            this.txtContractPrice.Location = new System.Drawing.Point(96, 134);
+            this.txtContractPrice.Name = "txtContractPrice";
+            this.txtContractPrice.Properties.Mask.EditMask = "n0";
+            this.txtContractPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtContractPrice.Size = new System.Drawing.Size(161, 20);
+            this.txtContractPrice.TabIndex = 35;
             // 
             // memoDescription
             // 
-            this.memoDescription.Location = new System.Drawing.Point(340, 29);
+            this.memoDescription.Location = new System.Drawing.Point(361, 31);
             this.memoDescription.Name = "memoDescription";
-            this.memoDescription.Size = new System.Drawing.Size(231, 123);
+            this.memoDescription.Size = new System.Drawing.Size(210, 123);
             this.memoDescription.TabIndex = 36;
             // 
             // groupSparepart
             // 
+            this.groupSparepart.Controls.Add(this.lblValLastUsageQty);
+            this.groupSparepart.Controls.Add(this.lblValLastUsageDate);
+            this.groupSparepart.Controls.Add(this.lblLastUsedQty);
+            this.groupSparepart.Controls.Add(this.lblLastUsageDate);
             this.groupSparepart.Controls.Add(this.ckeIsReturnRequired);
             this.groupSparepart.Controls.Add(this.labelControl1);
-            this.groupSparepart.Controls.Add(this.lookUpEdit1);
+            this.groupSparepart.Controls.Add(this.lookUpSerialNumber);
             this.groupSparepart.Controls.Add(this.lookUpSparepart);
             this.groupSparepart.Controls.Add(this.btnAddSparepart);
             this.groupSparepart.Controls.Add(this.lblSparepart);
             this.groupSparepart.Controls.Add(this.txtQty);
-            this.groupSparepart.Controls.Add(this.txtTotalSparepartPrice);
             this.groupSparepart.Controls.Add(this.lblQty);
-            this.groupSparepart.Controls.Add(this.lblTotalSparepart);
             this.groupSparepart.Controls.Add(this.gcSparepart);
-            this.groupSparepart.Location = new System.Drawing.Point(15, 338);
+            this.groupSparepart.Location = new System.Drawing.Point(588, 23);
             this.groupSparepart.Name = "groupSparepart";
-            this.groupSparepart.Size = new System.Drawing.Size(556, 230);
+            this.groupSparepart.Size = new System.Drawing.Size(556, 355);
             this.groupSparepart.TabIndex = 3;
             this.groupSparepart.Text = "Sparepart";
             // 
+            // lblValLastUsageQty
+            // 
+            this.lblValLastUsageQty.Location = new System.Drawing.Point(416, 90);
+            this.lblValLastUsageQty.Name = "lblValLastUsageQty";
+            this.lblValLastUsageQty.Size = new System.Drawing.Size(8, 13);
+            this.lblValLastUsageQty.TabIndex = 45;
+            this.lblValLastUsageQty.Text = "--";
+            // 
+            // lblValLastUsageDate
+            // 
+            this.lblValLastUsageDate.Location = new System.Drawing.Point(416, 60);
+            this.lblValLastUsageDate.Name = "lblValLastUsageDate";
+            this.lblValLastUsageDate.Size = new System.Drawing.Size(8, 13);
+            this.lblValLastUsageDate.TabIndex = 44;
+            this.lblValLastUsageDate.Text = "--";
+            // 
+            // lblLastUsedQty
+            // 
+            this.lblLastUsedQty.Location = new System.Drawing.Point(258, 90);
+            this.lblLastUsedQty.Name = "lblLastUsedQty";
+            this.lblLastUsedQty.Size = new System.Drawing.Size(136, 13);
+            this.lblLastUsedQty.TabIndex = 43;
+            this.lblLastUsedQty.Text = "Jumlah penggantian terkahir";
+            // 
+            // lblLastUsageDate
+            // 
+            this.lblLastUsageDate.Location = new System.Drawing.Point(258, 59);
+            this.lblLastUsageDate.Name = "lblLastUsageDate";
+            this.lblLastUsageDate.Size = new System.Drawing.Size(141, 13);
+            this.lblLastUsageDate.TabIndex = 42;
+            this.lblLastUsageDate.Text = "Tanggal penggantian terkahir";
+            // 
             // ckeIsReturnRequired
             // 
-            this.ckeIsReturnRequired.Location = new System.Drawing.Point(285, 52);
+            this.ckeIsReturnRequired.Location = new System.Drawing.Point(258, 26);
             this.ckeIsReturnRequired.Name = "ckeIsReturnRequired";
-            this.ckeIsReturnRequired.Properties.Caption = "Barang Bekas Diterima";
-            this.ckeIsReturnRequired.Size = new System.Drawing.Size(128, 19);
+            this.ckeIsReturnRequired.Properties.Caption = "BS Diterima";
+            this.ckeIsReturnRequired.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.ckeIsReturnRequired.Size = new System.Drawing.Size(175, 19);
             this.ckeIsReturnRequired.TabIndex = 41;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(221, 28);
+            this.labelControl1.Location = new System.Drawing.Point(12, 90);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(52, 13);
             this.labelControl1.TabIndex = 34;
             this.labelControl1.Text = "Nomor Seri";
             // 
-            // lookUpEdit1
+            // lookUpSerialNumber
             // 
-            this.lookUpEdit1.Location = new System.Drawing.Point(285, 24);
-            this.lookUpEdit1.Name = "lookUpEdit1";
-            this.lookUpEdit1.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lookUpEdit1.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lookUpSerialNumber.Location = new System.Drawing.Point(81, 87);
+            this.lookUpSerialNumber.Name = "lookUpSerialNumber";
+            this.lookUpSerialNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.lookUpSerialNumber.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpSerialNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            this.lookUpSerialNumber.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StockQty", "Stok")});
-            this.lookUpEdit1.Properties.DisplayMember = "Name";
-            this.lookUpEdit1.Properties.HideSelection = false;
-            this.lookUpEdit1.Properties.NullText = "";
-            this.lookUpEdit1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.lookUpEdit1.Properties.ValueMember = "Id";
-            this.lookUpEdit1.Size = new System.Drawing.Size(134, 20);
-            this.lookUpEdit1.TabIndex = 33;
+            this.lookUpSerialNumber.Properties.DisplayMember = "Name";
+            this.lookUpSerialNumber.Properties.HideSelection = false;
+            this.lookUpSerialNumber.Properties.NullText = "";
+            this.lookUpSerialNumber.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpSerialNumber.Properties.ValueMember = "Id";
+            this.lookUpSerialNumber.Size = new System.Drawing.Size(161, 20);
+            this.lookUpSerialNumber.TabIndex = 33;
             // 
             // lookUpSparepart
             // 
@@ -312,15 +346,16 @@
             this.lookUpSparepart.Properties.NullText = "";
             this.lookUpSparepart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpSparepart.Properties.ValueMember = "Id";
-            this.lookUpSparepart.Size = new System.Drawing.Size(134, 20);
+            this.lookUpSparepart.Size = new System.Drawing.Size(161, 20);
             this.lookUpSparepart.TabIndex = 3;
+            this.lookUpSparepart.EditValueChanged += new System.EventHandler(this.lookUpSparepart_EditValueChanged);
             // 
             // btnAddSparepart
             // 
             this.btnAddSparepart.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.btnAddSparepart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnAddSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAddSparepart.Location = new System.Drawing.Point(425, 52);
+            this.btnAddSparepart.Location = new System.Drawing.Point(12, 119);
             this.btnAddSparepart.Name = "btnAddSparepart";
             this.btnAddSparepart.Size = new System.Drawing.Size(123, 23);
             this.btnAddSparepart.TabIndex = 5;
@@ -329,7 +364,7 @@
             // 
             // lblSparepart
             // 
-            this.lblSparepart.Location = new System.Drawing.Point(17, 27);
+            this.lblSparepart.Location = new System.Drawing.Point(12, 28);
             this.lblSparepart.Name = "lblSparepart";
             this.lblSparepart.Size = new System.Drawing.Size(48, 13);
             this.lblSparepart.TabIndex = 21;
@@ -337,51 +372,29 @@
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(81, 51);
+            this.txtQty.Location = new System.Drawing.Point(81, 56);
             this.txtQty.Name = "txtQty";
             this.txtQty.Properties.Mask.EditMask = "n0";
             this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtQty.Size = new System.Drawing.Size(134, 20);
+            this.txtQty.Size = new System.Drawing.Size(161, 20);
             this.txtQty.TabIndex = 4;
-            // 
-            // txtTotalSparepartPrice
-            // 
-            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(425, 199);
-            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
-            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "#,#";
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
-            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
-            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(123, 20);
-            this.txtTotalSparepartPrice.TabIndex = 32;
             // 
             // lblQty
             // 
-            this.lblQty.Location = new System.Drawing.Point(17, 54);
+            this.lblQty.Location = new System.Drawing.Point(12, 60);
             this.lblQty.Name = "lblQty";
             this.lblQty.Size = new System.Drawing.Size(33, 13);
             this.lblQty.TabIndex = 23;
             this.lblQty.Text = "Jumlah";
             // 
-            // lblTotalSparepart
-            // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(344, 202);
-            this.lblTotalSparepart.Name = "lblTotalSparepart";
-            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
-            this.lblTotalSparepart.TabIndex = 31;
-            this.lblTotalSparepart.Text = "Total Sparepart";
-            // 
             // gcSparepart
             // 
             this.gcSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSparepart.Location = new System.Drawing.Point(14, 81);
+            this.gcSparepart.Location = new System.Drawing.Point(12, 148);
             this.gcSparepart.MainView = this.gvSparepart;
             this.gcSparepart.Name = "gcSparepart";
-            this.gcSparepart.Size = new System.Drawing.Size(534, 112);
+            this.gcSparepart.Size = new System.Drawing.Size(534, 198);
             this.gcSparepart.TabIndex = 28;
             this.gcSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSparepart});
@@ -442,7 +455,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(271, 33);
+            this.labelControl2.Location = new System.Drawing.Point(292, 33);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(63, 13);
             this.labelControl2.TabIndex = 35;
@@ -458,7 +471,7 @@
             // 
             // lblDueDate
             // 
-            this.lblDueDate.Location = new System.Drawing.Point(15, 84);
+            this.lblDueDate.Location = new System.Drawing.Point(15, 86);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(62, 13);
             this.lblDueDate.TabIndex = 12;
@@ -467,7 +480,7 @@
             // dtpDueDate
             // 
             this.dtpDueDate.EditValue = null;
-            this.dtpDueDate.Location = new System.Drawing.Point(96, 81);
+            this.dtpDueDate.Location = new System.Drawing.Point(96, 83);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dtpDueDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -503,6 +516,21 @@
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "Kendaraan harus dipilih!";
             this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule2);
+            this.LookUpVehicle.EditValueChanged += new System.EventHandler(this.LookUpVehicle_EditValueChanged);
+            // 
+            // txtTotalSparepartPrice
+            // 
+            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(1011, 381);
+            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
+            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "#,#";
+            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
+            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
+            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(123, 20);
+            this.txtTotalSparepartPrice.TabIndex = 32;
             // 
             // lookUpCategory
             // 
@@ -523,6 +551,14 @@
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule3.ErrorText = "Kategori harus dipilih!";
             this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule3);
+            // 
+            // lblTotalSparepart
+            // 
+            this.lblTotalSparepart.Location = new System.Drawing.Point(898, 384);
+            this.lblTotalSparepart.Name = "lblTotalSparepart";
+            this.lblTotalSparepart.Size = new System.Drawing.Size(107, 13);
+            this.lblTotalSparepart.TabIndex = 31;
+            this.lblTotalSparepart.Text = "Total Harga Sparepart";
             // 
             // lblVehicle
             // 
@@ -547,62 +583,45 @@
             this.cmsDeleteDataSparepart.Text = "Hapus Data";
             this.cmsDeleteDataSparepart.Click += new System.EventHandler(this.cmsDeleteDataSparepart_Click);
             // 
-            // cmsMechanicEditor
-            // 
-            this.cmsMechanicEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsDeleteDataMechanic});
-            this.cmsMechanicEditor.Name = "cmsListEditor";
-            this.cmsMechanicEditor.Size = new System.Drawing.Size(136, 26);
-            // 
-            // cmsDeleteDataMechanic
-            // 
-            this.cmsDeleteDataMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
-            this.cmsDeleteDataMechanic.Name = "cmsDeleteDataMechanic";
-            this.cmsDeleteDataMechanic.Size = new System.Drawing.Size(135, 22);
-            this.cmsDeleteDataMechanic.Text = "Hapus Data";
-            this.cmsDeleteDataMechanic.Click += new System.EventHandler(this.cmsDeleteDataMechanic_Click);
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 622);
+            this.ClientSize = new System.Drawing.Size(1146, 446);
             this.Controls.Add(this.groupSPK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKEditorForm";
             this.Text = "SPK Editor";
             this.Controls.SetChildIndex(this.groupSPK, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractPrice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).EndInit();
             this.groupSparepart.ResumeLayout(false);
             this.groupSparepart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsReturnRequired.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSerialNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
             this.cmsSparepartEditor.ResumeLayout(false);
-            this.cmsMechanicEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -624,8 +643,6 @@
         private DevExpress.XtraEditors.LabelControl lblSparepart;
         private System.Windows.Forms.ContextMenuStrip cmsSparepartEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteDataSparepart;
-        private System.Windows.Forms.ContextMenuStrip cmsMechanicEditor;
-        private System.Windows.Forms.ToolStripMenuItem cmsDeleteDataMechanic;
         private DevExpress.XtraEditors.LookUpEdit lookUpSparepart;
         private DevExpress.XtraEditors.TextEdit txtQty;
         private DevExpress.XtraGrid.GridControl gcSparepart;
@@ -634,24 +651,28 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
-        private System.ComponentModel.BackgroundWorker bgwFingerPrint;
         private DevExpress.XtraEditors.LabelControl lblTotalSparepart;
         private DevExpress.XtraEditors.TextEdit txtTotalSparepartPrice;
         private DevExpress.XtraEditors.MemoEdit memoDescription;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.GroupControl groupSparepart;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl lblContractPrice;
         private DevExpress.XtraEditors.TextEdit txtContractPrice;
         private DevExpress.XtraGrid.GridControl gridVehicleWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit1;
+        private DevExpress.XtraEditors.LookUpEdit lookUpSerialNumber;
         private DevExpress.XtraEditors.CheckEdit ckeIsContractWork;
         private DevExpress.XtraGrid.Columns.GridColumn colIsUsedGoodReceived;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit ckeIsUsedWheelRetrieved;
         private DevExpress.XtraEditors.CheckEdit ckeIsReturnRequired;
+        private DevExpress.XtraEditors.LabelControl lblValLastUsageQty;
+        private DevExpress.XtraEditors.LabelControl lblValLastUsageDate;
+        private DevExpress.XtraEditors.LabelControl lblLastUsedQty;
+        private DevExpress.XtraEditors.LabelControl lblLastUsageDate;
+        private System.Windows.Forms.BindingSource bsVehicleWheel;
+        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit ckeIsUsedWheelRetrieved;
     }
 }

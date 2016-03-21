@@ -19,15 +19,22 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailSparepartDetailRepository _SPKDetailSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
-        private IMechanicRepository _mechanicRepository;
+        private IUsedGoodRepository _usedGoodRepository;
+        private ISpecialSparepartRepository _specialSparepartRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
+        private IVehicleWheelRepository _vehicleWheelRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
             ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
-            IMechanicRepository mechanicRepository, IUnitOfWork unitOfWork)
-            :base()
+            IUsedGoodRepository usedGoodRepository,
+            ISpecialSparepartRepository specialSparepartRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
+            IVehicleWheelRepository vehicleWheelRepository,
+            IUnitOfWork unitOfWork)
+            : base()
         {
             _settingRepository = settingRepository;
             _referenceRepository = referenceRepository;
@@ -37,7 +44,10 @@ namespace BrawijayaWorkshop.Model
             _SPKDetailSparepartDetailRepository = SPKDetailSparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
-            _mechanicRepository = mechanicRepository;
+            _usedGoodRepository = usedGoodRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
+            _specialSparepartRepository = specialSparepartRepository;
+            _vehicleWheelRepository = vehicleWheelRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -80,7 +90,8 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var item in sparepartList)
             {
-                result.Add(new SPKDetailSparepart { 
+                result.Add(new SPKDetailSparepart
+                {
                     Sparepart = item.Sparepart,
                     SparepartId = item.SparepartId,
                     TotalQuantity = item.TotalQuantity,
@@ -92,26 +103,6 @@ namespace BrawijayaWorkshop.Model
 
             return Map(result, mappedResult);
         }
-
-        //public List<SPKDetailMechanic> GetEndorsedSPKMechanicList(int spkId)
-        //{
-        //    List<SPKDetailMechanic> result = new List<SPKDetailMechanic>();
-
-        //    List<SPKDetailMechanic> mechanicList = _SPKDetailMechanicRepository.GetMany(sds => sds.SPKId == spkId).ToList();
-
-        //    foreach (var item in mechanicList)
-        //    {
-        //        result.Add(new SPKDetailMechanic
-        //        {
-        //            Name = item.Name,
-        //            Mechanic = item.Mechanic,
-        //            MechanicId = item.MechanicId,
-        //            Description = item.Description
-        //        });
-        //    }
-
-        //    return result;
-        //}
 
         public List<SPKDetailSparepartDetailViewModel> GetEndorsedSPKSparepartDetailList(int spkId)
         {
@@ -208,17 +199,6 @@ namespace BrawijayaWorkshop.Model
             SPKViewModel insertedSPKViewModel = new SPKViewModel();
             Map(insertedSPK, insertedSPKViewModel);
 
-            //foreach (var spkMechanic in spkMechanicList)
-            //{
-            //    spkMechanic.CreateDate = serverTime;
-            //    spkMechanic.CreateUserId = userId;
-            //    spkMechanic.ModifyDate = serverTime;
-            //    spkMechanic.ModifyUserId = userId;
-            //    spkMechanic.SPK = insertedSPK;
-            //    spkMechanic.Status = (int)DbConstant.DefaultDataStatus.Active;
-            //    _SPKDetailMechanicRepository.Add(spkMechanic);
-            //}
-
             foreach (var spkSparepart in spkSparepartList)
             {
                 spkSparepart.CreateDate = serverTime;
@@ -290,11 +270,48 @@ namespace BrawijayaWorkshop.Model
             return spk;
         }
 
+        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
+        {
+            List<VehicleWheel> result = _vehicleWheelRepository.GetMany(
+                vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
+
+            return Map(result, mappedResult);
+        }
+
+        public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails()
+        {
+            List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready
+                                                                                       && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL).ToList();
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<SpecialSparepartViewModel> LoadWheel()
+        {
+            List<SpecialSparepart> result = _specialSparepartRepository.GetMany(ss => ss.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                && ss.Status == (int)DbConstant.DefaultDataStatus.Active
+                ).ToList();
+            List<SpecialSparepartViewModel> mappedResult = new List<SpecialSparepartViewModel>();
+
+            return Map(result, mappedResult);
+        }
+
         public List<SparepartViewModel> LoadSparepart()
         {
+            List<SpecialSparepartViewModel> wheelList = LoadWheel();
             List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            var getSpInWheel = (from sp in result
+                                join wh in wheelList on sp.Id equals wh.SparepartId
+                                select sp).ToList(); // return sparepart object which in list
+
+            var finalResult = result.Except(getSpInWheel);
+
             List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
-            return Map(result, mappedResult);
+
+            return Map(finalResult, mappedResult);
         }
 
         public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty)
@@ -317,13 +334,6 @@ namespace BrawijayaWorkshop.Model
 
             return Map(result, mappedResult);
         }
-
-        //public List<Mechanic> LoadMechanic()
-        //{
-        //    List<Mechanic> result = _mechanicRepository.GetAll().ToList();
-
-        //    return result;
-        //}
 
         public void PrintSPK(SPKViewModel spk, int userId)
         {
@@ -402,5 +412,41 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork.SaveChanges();
 
         }
+
+        public SpecialSparepartViewModel GetSparepartSpecial(int sparepartId)
+        {
+            SpecialSparepart result = _specialSparepartRepository.GetMany(ss => ss.SparepartId == sparepartId && ss.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+
+            SpecialSparepartViewModel mappedResult = new SpecialSparepartViewModel();
+
+            return Map(result, mappedResult);
+        }
+
+        public bool IsUsedSparepartRequired(int sparepartId)
+        {
+            var foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == sparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+
+            return foundUsedGood != null;
+        }
+
+        public SPKDetailSparepartViewModel GetSparepartLastUsageRecord(int vehicleId, int sparepartId)
+        {
+            SPKDetailSparepart result = _SPKDetailSparepartRepository.GetMany(spks => spks.SPK.VehicleId == vehicleId
+                && spks.SparepartId == sparepartId).OrderBy(s => s.Id).LastOrDefault();
+
+            SPKDetailSparepartViewModel mappedResult = new SPKDetailSparepartViewModel();
+
+            return Map(result, mappedResult);
+        }
+
+        public List<SpecialSparepartDetailViewModel> loadSSDetail(int specialSparepartId)
+        {
+            List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SpecialSparepartId == specialSparepartId).ToList();
+
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
+
+            return Map(result, mappedResult);
+        }
+
     }
 }

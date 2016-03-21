@@ -19,19 +19,18 @@ namespace BrawijayaWorkshop.View
 
         List<VehicleViewModel> VehicleDropdownList { get; set; }
         List<ReferenceViewModel> CategoryDropdownList { get; set; }
-     
+
         List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }
         List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
-
         List<SparepartViewModel> SparepartLookupList { get; set; }
-      
-
         SparepartViewModel SparepartToInsert { get; }
-    
-
         SparepartViewModel SelectedSparepart { get; set; }
-      
+        SPKDetailSparepartViewModel LastUsageRecord { get; set; }
+        List<SpecialSparepartDetailViewModel> SSDetailList { get; set; }
+        List<SpecialSparepartDetailViewModel> WheelDetailList { get; set; }
+        List<VehicleWheelViewModel> VehicleWheelList { get; set; }
 
+        int SSDetailId { get; set; }
         string Code { get; set; }
         DateTime DueDate { get; set; }
         int VehicleId { get; set; }
@@ -45,10 +44,11 @@ namespace BrawijayaWorkshop.View
         decimal ServiceThreshold { get; set; }
 
         bool IsNeedApproval { get; set; }
-
         decimal TotalSparepartPrice { get; set; }
-
         string Description { get; set; }
+        bool IsUsedSparepartRequired { get; set; }
 
+        string SparepartLastUsageDate { get; set; }
+        string SparepartLastUsageQty { get; set; }      
     }
 }

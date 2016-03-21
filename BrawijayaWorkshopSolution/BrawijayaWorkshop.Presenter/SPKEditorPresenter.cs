@@ -24,6 +24,7 @@ namespace BrawijayaWorkshop.Presenter
 
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
+            
 
             if (View.ParentSPK != null)
             {
@@ -43,13 +44,12 @@ namespace BrawijayaWorkshop.Presenter
                 View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
                 View.Description = View.SelectedSPK.Description;
 
-              
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.SelectedSPK.Id);
+
+                LoadVehicleWheel();
             }
         }
-
- 
 
         public void SaveChanges()
         {
@@ -87,6 +87,32 @@ namespace BrawijayaWorkshop.Presenter
         public void Print()
         {
             Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
+        }
+
+        public SpecialSparepartViewModel GetSpecialSparepart()
+        {
+            return Model.GetSparepartSpecial(View.SparepartId);
+        }
+
+        public void CheckIsUsedSparepartRequired()
+        {
+            View.IsUsedSparepartRequired = Model.IsUsedSparepartRequired(View.SparepartId);
+        }
+
+        public void GetLastUsageRecord()
+        {
+            View.LastUsageRecord = Model.GetSparepartLastUsageRecord(View.VehicleId, View.SparepartId);
+        }
+
+        public void LoadSSDetails(int specialSparepartId)
+        {
+            View.SSDetailList = Model.loadSSDetail(specialSparepartId);
+        }
+
+        public void LoadVehicleWheel()
+        {
+            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId);
+            View.WheelDetailList = Model.RetrieveReadyWheelDetails();
         }
 
     }
