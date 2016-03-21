@@ -70,7 +70,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-
         public string JournalName
         {
             get
@@ -81,7 +80,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 txtName.Text = value;
             }
-        } 
+        }
+
+        public bool IsProfitLoss
+        {
+            get
+            {
+                return cbxIsProfitLoss.EditValue.AsBoolean();
+            }
+            set
+            {
+                cbxIsProfitLoss.EditValue = value;
+            }
+        }
         #endregion
 
         protected override void ExecuteSave()

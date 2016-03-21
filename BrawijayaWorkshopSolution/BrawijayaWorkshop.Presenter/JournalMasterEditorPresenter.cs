@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Presenter
                 }
                 View.Code = View.SelectedJournalMaster.Code;
                 View.JournalName = View.SelectedJournalMaster.Name;
+                View.IsProfitLoss = View.SelectedJournalMaster.IsProfitLoss;
             }
         }
 
@@ -34,6 +35,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedJournalMaster.ParentId = View.ParentId;
             View.SelectedJournalMaster.Code = View.Code;
             View.SelectedJournalMaster.Name = View.JournalName;
+            View.SelectedJournalMaster.IsProfitLoss = View.IsProfitLoss;
 
             if (View.SelectedJournalMaster.Id > 0)
             {

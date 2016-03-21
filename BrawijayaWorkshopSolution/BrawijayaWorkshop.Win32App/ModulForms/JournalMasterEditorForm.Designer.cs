@@ -41,6 +41,7 @@
             this.lblParent = new DevExpress.XtraEditors.LabelControl();
             this.valCode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.cbxIsProfitLoss = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupJournalInfo)).BeginInit();
             this.groupJournalInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
@@ -48,10 +49,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupJournalParent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsProfitLoss.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupJournalInfo
             // 
+            this.groupJournalInfo.Controls.Add(this.cbxIsProfitLoss);
             this.groupJournalInfo.Controls.Add(this.txtName);
             this.groupJournalInfo.Controls.Add(this.lblName);
             this.groupJournalInfo.Controls.Add(this.txtCode);
@@ -61,7 +64,7 @@
             this.groupJournalInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupJournalInfo.Location = new System.Drawing.Point(0, 0);
             this.groupJournalInfo.Name = "groupJournalInfo";
-            this.groupJournalInfo.Size = new System.Drawing.Size(403, 124);
+            this.groupJournalInfo.Size = new System.Drawing.Size(403, 154);
             this.groupJournalInfo.TabIndex = 1;
             this.groupJournalInfo.Text = "Informasi Account";
             // 
@@ -139,15 +142,22 @@
             // 
             this.valName.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // cbxIsProfitLoss
+            // 
+            this.cbxIsProfitLoss.Location = new System.Drawing.Point(126, 126);
+            this.cbxIsProfitLoss.Name = "cbxIsProfitLoss";
+            this.cbxIsProfitLoss.Properties.Caption = "Rugi Laba";
+            this.cbxIsProfitLoss.Size = new System.Drawing.Size(75, 19);
+            this.cbxIsProfitLoss.TabIndex = 8;
+            // 
             // JournalMasterEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 173);
+            this.ClientSize = new System.Drawing.Size(403, 203);
             this.Controls.Add(this.groupJournalInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "JournalMasterEditorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Account Journal Editor";
             this.Controls.SetChildIndex(this.groupJournalInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.groupJournalInfo)).EndInit();
@@ -158,6 +168,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupJournalParent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsProfitLoss.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,5 +184,6 @@
         private DevExpress.XtraEditors.LabelControl lblParent;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valName;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valCode;
+        private DevExpress.XtraEditors.CheckEdit cbxIsProfitLoss;
     }
 }
