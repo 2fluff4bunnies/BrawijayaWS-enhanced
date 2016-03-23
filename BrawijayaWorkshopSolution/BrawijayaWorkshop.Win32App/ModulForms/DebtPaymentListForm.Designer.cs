@@ -212,14 +212,20 @@
             this.lblTransactionDate.TabIndex = 12;
             this.lblTransactionDate.Text = "Tanggal Transaksi";
             // 
-            // DebtPaymentListControl
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // DebtPaymentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 367);
             this.Controls.Add(this.gcDebtPaymentListInfo);
-            this.Name = "DebtPaymentListControl";
+            this.Name = "DebtPaymentListForm";
             this.Text = "Daftar Pembayaran Hutang";
+            this.Load += new System.EventHandler(this.DebtPaymentListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtPaymentListInfo)).EndInit();
             this.gcDebtPaymentListInfo.ResumeLayout(false);
             this.gcDebtPaymentListInfo.PerformLayout();

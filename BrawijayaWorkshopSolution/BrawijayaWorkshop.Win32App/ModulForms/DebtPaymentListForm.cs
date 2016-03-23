@@ -46,7 +46,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void DebtPaymentListControl_Load(object sender, EventArgs e)
         {
-            //btnSearch.PerformClick();
+            RefreshDataView();
         }
 
         private void gvDebtPayment_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -108,9 +108,65 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 _selectedTransaction = value;
             }
         }
-        private void btnSearch_Click(object sender, EventArgs e)
+
+        public DateTime TransactionDate
         {
-            RefreshDataView();
+            get
+            {
+                return txtTransactionDate.Text.AsDateTime();
+            }
+            set
+            {
+                txtTransactionDate.Text = value.ToString("dd/MM/yyyy");
+            }
+        }
+
+        public string SupplierName
+        {
+            get
+            {
+                return txtSupplier.Text;
+            }
+            set
+            {
+                txtSupplier.Text = value;
+            }
+        }
+
+        public decimal TotalPrice
+        {
+            get
+            {
+                return txtTotalTransaction.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalTransaction.Text = value.ToString("#.###");
+            }
+        }
+
+        public decimal TotalHasPaid
+        {
+            get
+            {
+                return ttTotalPaid.Text.AsDecimal();
+            }
+            set
+            {
+                ttTotalPaid.Text = value.ToString("#.###");
+            }
+        }
+
+        public decimal TotalNotPaid
+        {
+            get
+            {
+                return txtTotalNotPaid.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalNotPaid.Text = value.ToString("#.###");
+            }
         }
 
         public override void RefreshDataView()

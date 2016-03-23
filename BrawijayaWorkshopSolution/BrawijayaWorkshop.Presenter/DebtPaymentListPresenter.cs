@@ -11,7 +11,15 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadTransactionList()
         {
-            View.TransactionListData = Model.SearchTransactionByTableRef(View.SelectedPurchasing.Id);
+            if(View.SelectedPurchasing != null)
+            {
+                View.SupplierName = View.SelectedPurchasing.Supplier.Name;
+                View.TransactionDate = View.SelectedPurchasing.Date;
+                View.TotalPrice = View.SelectedPurchasing.TotalPrice;
+                View.TotalHasPaid = View.SelectedPurchasing.TotalHasPaid;
+                View.TotalNotPaid = View.SelectedPurchasing.TotalPrice - View.SelectedPurchasing.TotalHasPaid; 
+            }
+            View.TransactionListData = Model.SearchTransactionByTableRefPK(View.SelectedPurchasing.Id);
         }
     }
 }
