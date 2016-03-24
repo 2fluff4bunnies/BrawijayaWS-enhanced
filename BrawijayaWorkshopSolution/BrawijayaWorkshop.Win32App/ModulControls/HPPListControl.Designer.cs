@@ -45,6 +45,7 @@
             this.colBaseAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colServiceAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAddinAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -169,6 +170,7 @@
             this.colJournalName,
             this.colBaseAmount,
             this.colServiceAmount,
+            this.colAddinAmount,
             this.colTotal});
             this.gvHPP.GridControl = this.gridHPP;
             this.gvHPP.Name = "gvHPP";
@@ -237,7 +239,17 @@
             this.colTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalAmount", "{0:#,#}")});
             this.colTotal.Visible = true;
-            this.colTotal.VisibleIndex = 4;
+            this.colTotal.VisibleIndex = 5;
+            // 
+            // colAddinAmount
+            // 
+            this.colAddinAmount.Caption = "Biaya Tambahan 20%";
+            this.colAddinAmount.DisplayFormat.FormatString = "{0:#,#}";
+            this.colAddinAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colAddinAmount.FieldName = "BaseAmountWithModifierPercentageResult";
+            this.colAddinAmount.Name = "colAddinAmount";
+            this.colAddinAmount.Visible = true;
+            this.colAddinAmount.VisibleIndex = 4;
             // 
             // HPPListControl
             // 
@@ -277,5 +289,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTotal;
         private DevExpress.XtraEditors.LookUpEdit lookupYear;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraGrid.Columns.GridColumn colAddinAmount;
     }
 }
