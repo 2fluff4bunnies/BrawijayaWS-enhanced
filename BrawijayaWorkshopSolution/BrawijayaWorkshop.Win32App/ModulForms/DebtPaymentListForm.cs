@@ -18,7 +18,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class DebtPaymentListForm : BaseDefaultForm, IDebtPaymentListView
     {
         private DebtPaymentListPresenter _presenter;
-        private PurchasingViewModel _selectedPurchasing;
         private TransactionViewModel _selectedTransaction;
 
         protected override string ModulName
@@ -38,8 +37,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvDebtPayment.FocusedRowChanged += gvDebtPayment_FocusedRowChanged;
 
             // init editor control accessibility
-            //cmsNewPayment.Enabled = AllowInsert;
-            //cmsListPayment.Enabled = AllowEdit;
+            cmsEdit.Enabled = AllowInsert;
+            cmsDelete.Enabled = AllowEdit;
 
             this.Load += DebtPaymentListControl_Load;
         }
@@ -61,7 +60,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (hitInfo.InRow)
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
-                //cmsEditor.Show(view.GridControl, e.Point);
+                cmsEditor.Show(view.GridControl, e.Point);
             }
         }
 
@@ -85,17 +84,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public PurchasingViewModel SelectedPurchasing
-        {
-            get
-            {
-                return _selectedPurchasing;
-            }
-            set
-            {
-                _selectedPurchasing = value;
-            }
-        }
+        public PurchasingViewModel SelectedPurchasing { get; set; }
 
         public TransactionViewModel SelectedTransaction
         {
@@ -174,15 +163,24 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing Debt data...");
-                _selectedPurchasing = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Debt...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
 
-        private void cmsListPayment_Click(object sender, EventArgs e)
+        private void cmsEditData_Click(object sender, EventArgs e)
         {
-            if (_selectedPurchasing != null)
+            if (_selectedTransaction != null)
+            {
+                //DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
+                //editor.SelectedDebt = _selectedDebt;
+                //editor.ShowDialog(this);
+            }
+        }
+
+        private void cmsDeleteData_Click(object sender, EventArgs e)
+        {
+            if (_selectedTransaction != null)
             {
                 //DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
                 //editor.SelectedDebt = _selectedDebt;

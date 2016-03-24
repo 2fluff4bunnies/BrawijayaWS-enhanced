@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gcDebtPaymentListInfo = new DevExpress.XtraEditors.GroupControl();
             this.gridDebtPayment = new DevExpress.XtraGrid.GridControl();
             this.gvDebtPayment = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -45,6 +46,9 @@
             this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtPaymentListInfo)).BeginInit();
             this.gcDebtPaymentListInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDebtPayment)).BeginInit();
@@ -54,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gcDebtPaymentListInfo
@@ -114,6 +119,7 @@
             // colPaymentDate
             // 
             this.colPaymentDate.Caption = "Tanggal Pmbayaran";
+            this.colPaymentDate.FieldName = "TransactionDate";
             this.colPaymentDate.Name = "colPaymentDate";
             this.colPaymentDate.Visible = true;
             this.colPaymentDate.VisibleIndex = 0;
@@ -121,6 +127,7 @@
             // colTotalPayment
             // 
             this.colTotalPayment.Caption = "Jumlah Pembayaran";
+            this.colTotalPayment.FieldName = "TotalPayment";
             this.colTotalPayment.Name = "colTotalPayment";
             this.colTotalPayment.Visible = true;
             this.colTotalPayment.VisibleIndex = 1;
@@ -128,6 +135,7 @@
             // colPaymentType
             // 
             this.colPaymentType.Caption = "Jenis Pembayaran";
+            this.colPaymentType.FieldName = "PaymentMethod";
             this.colPaymentType.Name = "colPaymentType";
             this.colPaymentType.Visible = true;
             this.colPaymentType.VisibleIndex = 2;
@@ -217,6 +225,30 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // cmsEditor
+            // 
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsEdit,
+            this.cmsDelete});
+            this.cmsEditor.Name = "cmsEditor";
+            this.cmsEditor.Size = new System.Drawing.Size(136, 48);
+            // 
+            // cmsEdit
+            // 
+            this.cmsEdit.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEdit.Name = "cmsEdit";
+            this.cmsEdit.Size = new System.Drawing.Size(135, 22);
+            this.cmsEdit.Text = "Ubah Data";
+            this.cmsEdit.Click += new System.EventHandler(this.cmsEditData_Click);
+            // 
+            // cmsDelete
+            // 
+            this.cmsDelete.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDelete.Name = "cmsDelete";
+            this.cmsDelete.Size = new System.Drawing.Size(135, 22);
+            this.cmsDelete.Text = "Hapus Data";
+            this.cmsDelete.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
             // DebtPaymentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,6 +268,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -259,6 +292,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPayment;
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentType;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsEdit;
+        private System.Windows.Forms.ToolStripMenuItem cmsDelete;
 
     }
 }
