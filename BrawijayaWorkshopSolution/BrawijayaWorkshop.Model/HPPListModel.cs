@@ -27,13 +27,16 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
 
+        private IInvoiceRepository _invoiceRepository;
+
         private IUnitOfWork _unitOfWork;
 
         public HPPListModel(IHPPHeaderRepository hppHeaderRepository, IHPPDetailRepository hppDetailRepository,
             IBalanceJournalRepository balanceJournalRepository, IBalanceJournalDetailRepository balanceJournalDetailRepository,
             IJournalMasterRepository journalMasterRepository, IReferenceRepository referenceRepository,
             IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            ISparepartDetailRepository sparepartDetailRepository, IInvoiceRepository invoiceRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _hppHeaderRepository = hppHeaderRepository;
@@ -45,6 +48,7 @@ namespace BrawijayaWorkshop.Model
             _purchasingRepository = purchasingRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _invoiceRepository = invoiceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -148,24 +152,76 @@ namespace BrawijayaWorkshop.Model
                                                      sp.SparepartManualTransaction.Price).AsDouble();
             }
             double hppSparepartAmount = lastPrevSparepartBalance + totalPurchase - lastSparepartBalance;
-            double hppSparepartWithServiceAmount = hppSparepartAmount * 0.1;
+            double hppSparepartWithFeeAmount = hppSparepartAmount + (hppSparepartAmount * 0.1);
 
             string sparepartHPPCode = hppJournalList.Where(r => r.Code == DbConstant.REF_HPP_JOURNAL_SPAREPART).FirstOrDefault().Value;
             JournalMaster sparepartHPPJournal = _journalMasterRepository.GetMany(jm => jm.Code == sparepartHPPCode).FirstOrDefault();
 
             HPPDetail hppSparepartDetail = new HPPDetail();
-            hppSparepartDetail.BaseAmount = hppSparepartAmount.AsDecimal();
-            hppSparepartDetail.ServicePercentage = 10;
-            hppSparepartDetail.ServiceAmount = hppSparepartWithServiceAmount.AsDecimal();
-            hppSparepartDetail.TotalAmount = hppSparepartDetail.BaseAmount + hppSparepartDetail.ServiceAmount;
             hppSparepartDetail.HeaderId = newHeader.Id;
             hppSparepartDetail.JournalId = sparepartHPPJournal.Id;
+
+            hppSparepartDetail.BaseAmount = hppSparepartAmount.AsDecimal();
+            hppSparepartDetail.ServicePercentage = 10;
+            hppSparepartDetail.ServiceAmount = hppSparepartWithFeeAmount.AsDecimal();
+            hppSparepartDetail.TotalAmount = hppSparepartDetail.BaseAmount + hppSparepartDetail.ServiceAmount;
+            
             _hppDetailRepository.Add(hppSparepartDetail);
-            _unitOfWork.SaveChanges();
             // End calculate HPP sparepart this month
 
-            // TODO: Calculate Daily Tukang
-            // TODO: Calculate Borongan Tukang
+            string dailyMechanicHPPCode = hppJournalList.Where(r => r.Code == DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC).FirstOrDefault().Value;
+            JournalMaster dailyMechanicHPPJournal = _journalMasterRepository.GetMany(jm => jm.Code == dailyMechanicHPPCode).FirstOrDefault();
+            // Calculate Daily Tukang
+            List<Invoice> listMonthlyInvoices = _invoiceRepository.GetMany(i => i.CreateDate >= firstDay && i.CreateDate <= lastDay).ToList();
+            decimal hppDailyMechanicAmount = 0;
+            decimal hppDailyMechanicFeeAmount = 0;
+            foreach (var item in listMonthlyInvoices)
+            {
+                if (item.SPK.isContractWork) continue;
+                hppDailyMechanicAmount += item.TotalService;
+                hppDailyMechanicFeeAmount += item.TotalServicePlusFee - item.TotalService;
+            }
+            HPPDetail hppDailyMechanic = new HPPDetail();
+            hppDailyMechanic.HeaderId = newHeader.Id;
+            hppDailyMechanic.JournalId = dailyMechanicHPPJournal.Id;
+
+            hppDailyMechanic.BaseAmount = hppDailyMechanicAmount;
+            hppDailyMechanic.ServicePercentage = 10;
+            hppDailyMechanic.ServiceAmount = hppDailyMechanicFeeAmount;
+            hppDailyMechanic.TotalAmount = hppDailyMechanic.BaseAmount + hppDailyMechanic.ServiceAmount;
+
+            _hppDetailRepository.Add(hppDailyMechanic);
+            // End calculate HPP daily mechanic this month
+
+            string outSourceMechanicHPPCode = hppJournalList.Where(r => r.Code == DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC).FirstOrDefault().Value;
+            JournalMaster outSourceMechanicHPPJournal = _journalMasterRepository.GetMany(jm => jm.Code == outSourceMechanicHPPCode).FirstOrDefault();
+            // Calculate Borongan Tukang
+            decimal hppOutSourceMechanicAmount = 0;
+            decimal hppOutSourceMechanicFeeAmount = 0;
+            decimal hppOutSourceMechanicAddInAmount = 0;
+            foreach (var item in listMonthlyInvoices)
+            {
+                if (!item.SPK.isContractWork) continue;
+                hppOutSourceMechanicAmount += item.TotalService;
+                hppOutSourceMechanicFeeAmount += item.TotalService * 0.1M;
+                hppOutSourceMechanicAddInAmount += item.TotalService * 0.2M;
+            }
+
+            HPPDetail hppOutSourceMechanic = new HPPDetail();
+            hppOutSourceMechanic.HeaderId = newHeader.Id;
+            hppOutSourceMechanic.JournalId = outSourceMechanicHPPJournal.Id;
+
+            hppOutSourceMechanic.BaseAmount = hppOutSourceMechanicAmount;
+            hppOutSourceMechanic.ServicePercentage = 10;
+            hppOutSourceMechanic.ServiceAmount = hppOutSourceMechanicFeeAmount;
+            hppOutSourceMechanic.BaseAmountModifierPercentage = 20;
+            hppOutSourceMechanic.BaseAmountWithModifierPercentageResult = hppOutSourceMechanicAddInAmount;
+            hppOutSourceMechanic.TotalAmount = hppOutSourceMechanic.BaseAmount + hppOutSourceMechanic.ServiceAmount + hppOutSourceMechanic.BaseAmountWithModifierPercentageResult;
+
+            _hppDetailRepository.Add(hppOutSourceMechanic);
+            // End calculate HPP outsource mechanic this month
+
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteHPP(int headerId, int userId)
