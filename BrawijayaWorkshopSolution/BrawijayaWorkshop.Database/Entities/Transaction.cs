@@ -15,6 +15,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public int ReferenceTableId { get; set; }
         public virtual Reference ReferenceTable { get; set; }
 
+        public int? PaymentMethodId { get; set; }
+        public virtual Reference PaymentMethod { get; set; }
+
         [Required]
         public int PrimaryKeyValue { get; set; }
 

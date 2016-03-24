@@ -9,6 +9,10 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public int ReferenceTableId { get; set; }
         public ReferenceViewModel ReferenceTable { get; set; }
+
+        public int? PaymentMethodId { get; set; }
+        public ReferenceViewModel PaymentMethod { get; set; }
+
         public int PrimaryKeyValue { get; set; }
         public double TotalTransaction { get; set; }
         public double TotalPayment { get; set; }
