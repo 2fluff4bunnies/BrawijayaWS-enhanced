@@ -46,6 +46,7 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.colPaymentStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -147,7 +148,8 @@
             this.colTransDate,
             this.colSupplier,
             this.colTotalPrice,
-            this.colDebtPaid});
+            this.colDebtPaid,
+            this.colPaymentStatus});
             this.gvDebt.GridControl = this.gridDebt;
             this.gvDebt.Name = "gvDebt";
             this.gvDebt.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -162,7 +164,8 @@
             this.gvDebt.OptionsView.EnableAppearanceEvenRow = true;
             this.gvDebt.OptionsView.ShowGroupPanel = false;
             this.gvDebt.OptionsView.ShowViewCaption = true;
-            this.gvDebt.ViewCaption = "Daftar Utang";
+            this.gvDebt.ViewCaption = "Daftar Transaksi Pembelian";
+            this.gvDebt.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvDebt_CustomColumnDisplayText);
             // 
             // colTransDate
             // 
@@ -183,6 +186,8 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
@@ -191,6 +196,7 @@
             // colDebtPaid
             // 
             this.colDebtPaid.Caption = "Total Terbayar";
+            this.colDebtPaid.DisplayFormat.FormatString = "{0:#,#}";
             this.colDebtPaid.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colDebtPaid.FieldName = "TotalHasPaid";
             this.colDebtPaid.Name = "colDebtPaid";
@@ -225,6 +231,14 @@
             this.cmsListPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
+            // 
+            // colPaymentStatus
+            // 
+            this.colPaymentStatus.Caption = "Status Bayar";
+            this.colPaymentStatus.FieldName = "PaymentStatus";
+            this.colPaymentStatus.Name = "colPaymentStatus";
+            this.colPaymentStatus.Visible = true;
+            this.colPaymentStatus.VisibleIndex = 4;
             // 
             // DebtListControl
             // 
@@ -266,5 +280,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsNewPayment;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.ToolStripMenuItem cmsListPayment;
+        private DevExpress.XtraGrid.Columns.GridColumn colPaymentStatus;
     }
 }

@@ -168,6 +168,7 @@ namespace BrawijayaWorkshop.Model
             transaction.ModifyDate = serverTime;
             transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
             transaction.Description = "Pembelian sparepart";
+            transaction.PaymentMethodId = purchasing.PaymentMethodId;
             Transaction transactionInserted = _transactionRepository.Add(transaction);
 
             switch (purchasing.PaymentMethod.Code)
@@ -254,7 +255,7 @@ namespace BrawijayaWorkshop.Model
                     
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG:
                     TransactionDetail utang = new TransactionDetail();
-                    utang.Credit = purchasing.TotalPrice - purchasing.TotalPrice;
+                    utang.Credit = purchasing.TotalPrice - purchasing.TotalHasPaid;
                     utang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
                     utang.Parent = transactionInserted;
                     _transactionDetailRepository.Add(utang);

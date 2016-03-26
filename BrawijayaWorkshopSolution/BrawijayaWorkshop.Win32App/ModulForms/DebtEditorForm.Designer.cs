@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebtEditorForm));
             this.gcDebtInfo = new DevExpress.XtraEditors.GroupControl();
             this.cbPaymentType = new DevExpress.XtraEditors.LookUpEdit();
             this.lblPaymentType = new DevExpress.XtraEditors.LabelControl();
@@ -43,6 +47,8 @@
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
             this.txtDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
+            this.valTotalPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valPaymentMethod = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtInfo)).BeginInit();
             this.gcDebtInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).BeginInit();
@@ -52,6 +58,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valTotalPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).BeginInit();
             this.SuspendLayout();
             // 
             // gcDebtInfo
@@ -89,11 +97,13 @@
             this.cbPaymentType.Properties.DisplayMember = "Name";
             this.cbPaymentType.Properties.HideSelection = false;
             this.cbPaymentType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbPaymentType.Properties.NullText = "-- Pilih Pembayaran --";
+            this.cbPaymentType.Properties.NullText = "";
             this.cbPaymentType.Properties.ValueMember = "Id";
             this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
             this.cbPaymentType.TabIndex = 15;
-            this.cbPaymentType.EditValueChanged += new System.EventHandler(this.cbPaymentType_EditValueChanged);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Pilih salah satu jenis pembayaran";
+            this.valTotalPayment.SetValidationRule(this.cbPaymentType, conditionValidationRule3);
             // 
             // lblPaymentType
             // 
@@ -109,6 +119,9 @@
             this.txtTotalPayment.Name = "txtTotalPayment";
             this.txtTotalPayment.Size = new System.Drawing.Size(157, 20);
             this.txtTotalPayment.TabIndex = 13;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Isi total akan dibayar";
+            this.valTotalPayment.SetValidationRule(this.txtTotalPayment, conditionValidationRule1);
             // 
             // lblTotalPayment
             // 
@@ -204,6 +217,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 334);
             this.Controls.Add(this.gcDebtInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DebtEditorForm";
             this.Text = "Form Pembayaran Hutang";
             this.Load += new System.EventHandler(this.DebtEditorForm_Load);
@@ -218,6 +232,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valTotalPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -239,5 +255,7 @@
         private DevExpress.XtraEditors.TextEdit txtSupplier;
         private DevExpress.XtraEditors.LabelControl lblSupplier;
         private DevExpress.XtraEditors.LookUpEdit cbPaymentType;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valTotalPayment;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPaymentMethod;
     }
 }

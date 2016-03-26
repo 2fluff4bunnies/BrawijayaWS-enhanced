@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
@@ -37,8 +38,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvDebtPayment.FocusedRowChanged += gvDebtPayment_FocusedRowChanged;
 
             // init editor control accessibility
-            cmsEdit.Enabled = AllowInsert;
-            cmsDelete.Enabled = AllowEdit;
+            cmsEdit.Enabled = true;//AllowInsert;
+            cmsDelete.Enabled = true;//AllowEdit;
 
             this.Load += DebtPaymentListControl_Load;
         }
@@ -50,7 +51,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvDebtPayment_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedPurchasing = gvDebtPayment.GetFocusedRow() as PurchasingViewModel;
+            this.SelectedTransaction = gvDebtPayment.GetFocusedRow() as TransactionViewModel;
         }
 
         private void gvDebtPayment_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -130,7 +131,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                txtTotalTransaction.Text = value.ToString("#.###");
+                txtTotalTransaction.Text = value.ToString("#,#");
             }
         }
 
@@ -142,7 +143,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                ttTotalPaid.Text = value.ToString("#.###");
+                ttTotalPaid.Text = value.ToString("#,#");
             }
         }
 
@@ -154,66 +155,54 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                txtTotalNotPaid.Text = value.ToString("#.###");
+                txtTotalNotPaid.Text = value.ToString("#,#");
             }
         }
 
         public override void RefreshDataView()
         {
-            if (!bgwMain.IsBusy)
-            {
-                MethodBase.GetCurrentMethod().Info("Fecthing Debt data...");
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Debt...", false);
-                bgwMain.RunWorkerAsync();
-            }
+            MethodBase.GetCurrentMethod().Info("Fecthing Debt data...");
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Debt...", false);
+            _presenter.LoadTransactionList();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
             if (_selectedTransaction != null)
             {
-                //DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
-                //editor.SelectedDebt = _selectedDebt;
-                //editor.ShowDialog(this);
+                if(_selectedTransaction == TransactionListData.First())
+                {
+                    this.ShowError("Data pembayaran purchasing tidak dapat diubah pada menu ini");
+                }
+                else
+                {
+                    DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
+                    editor.SelectedDebt = _selectedTransaction;
+                    editor.ShowDialog(this);
+                    RefreshDataView();
+                }
             }
         }
 
         private void cmsDeleteData_Click(object sender, EventArgs e)
         {
-            if (_selectedTransaction != null)
-            {
-                //DebtEditorForm editor = Bootstrapper.Resolve<DebtEditorForm>();
-                //editor.SelectedDebt = _selectedDebt;
-                //editor.ShowDialog(this);
-            }
-        }
+            if (SelectedTransaction == null) return;
 
-        private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus pembayaran hutang: '" + SelectedTransaction.Description + "'?") == DialogResult.Yes)
             {
-                _presenter.LoadTransactionList();
-            }
-            catch (Exception ex)
-            {
-                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadDebt()", ex);
-                e.Result = ex;
-            }
-        }
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Deleting debt: " + SelectedTransaction.Description);
 
-        private void bgwMain_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Result is Exception)
-            {
-                this.ShowError("Proses memuat data gagal!");
+                    _presenter.DeleteData();
+                    RefreshDataView();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete debt: '" + SelectedTransaction.Description + "'", ex);
+                    this.ShowError("Proses hapus data pembayaran hutang: '" + SelectedTransaction.Description + "' gagal!");
+                }
             }
-
-            if (gvDebtPayment.RowCount > 0)
-            {
-                SelectedPurchasing = gvDebtPayment.GetRow(0) as PurchasingViewModel;
-            }
-
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Debt selesai", true);
         }
     }
 }
