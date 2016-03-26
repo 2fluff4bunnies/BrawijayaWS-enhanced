@@ -422,6 +422,7 @@ namespace BrawijayaWorkshop.Model
             // End HPP
 
             // Sale
+
             // End Sale
 
             _transactionDetailRepository.Add(sparepartDetailTransaction);
