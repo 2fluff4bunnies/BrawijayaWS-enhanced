@@ -942,7 +942,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_HPP_JOURNAL_SPAREPART,
                 Name = "Tipe HPP Sparepart",
                 Description = "Kode Akun HPP Sparepart",
-                Value = DbConstant.REF_HPP_JOURNAL_SPAREPART,
+                Value = "3.04.01",
                 ParentId = hppJournalRef.Id
             });
             context.References.Add(new Reference
@@ -950,7 +950,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC,
                 Name = "Tipe HPP Tukang Harian",
                 Description = "Kode Akun HPP Tukang Harian",
-                Value = DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC,
+                Value = "3.04.04",
                 ParentId = hppJournalRef.Id
             });
             context.References.Add(new Reference
@@ -958,7 +958,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC,
                 Name = "Tipe HPP Tukang Borongan",
                 Description = "Kode Akun HPP Tukang Borongan",
-                Value = DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC,
+                Value = "3.04.05",
                 ParentId = hppJournalRef.Id
             });
             context.SaveChanges();

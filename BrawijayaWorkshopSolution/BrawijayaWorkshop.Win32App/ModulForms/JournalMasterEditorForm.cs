@@ -93,6 +93,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 cbxIsProfitLoss.EditValue = value;
             }
         }
+
+        public bool IsSummaryBalanceSheet
+        {
+            get
+            {
+                return cbxIsBalanceSheet.EditValue.AsBoolean();
+            }
+            set
+            {
+                cbxIsBalanceSheet.EditValue = value;
+            }
+        }
         #endregion
 
         protected override void ExecuteSave()

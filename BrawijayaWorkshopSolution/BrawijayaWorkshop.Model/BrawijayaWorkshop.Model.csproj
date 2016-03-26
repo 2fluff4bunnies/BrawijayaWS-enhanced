@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AppBaseModel.cs" />
     <Compile Include="BalanceJournalListModel.cs" />
+    <Compile Include="BalanceSheetBaseModel.cs" />
     <Compile Include="ConfigEditorModel.cs" />
     <Compile Include="CreditEditorModel.cs" />
     <Compile Include="CreditListModel.cs" />

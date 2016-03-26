@@ -111,6 +111,18 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 throw ex;
             }
         }
+
+        public virtual IEnumerable<T> GetByQuery(string query, params object[] parameters)
+        {
+            try
+            {
+                return _dataContext.Database.SqlQuery<T>(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
     }
 }
