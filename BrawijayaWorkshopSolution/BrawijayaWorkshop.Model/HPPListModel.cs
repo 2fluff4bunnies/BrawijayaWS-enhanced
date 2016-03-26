@@ -152,7 +152,7 @@ namespace BrawijayaWorkshop.Model
                                                      sp.SparepartManualTransaction.Price).AsDouble();
             }
             double hppSparepartAmount = lastPrevSparepartBalance + totalPurchase - lastSparepartBalance;
-            double hppSparepartWithFeeAmount = hppSparepartAmount + (hppSparepartAmount * 0.1);
+            double hppSparepartFeeAmount = hppSparepartAmount * 0.1;
 
             string sparepartHPPCode = hppJournalList.Where(r => r.Code == DbConstant.REF_HPP_JOURNAL_SPAREPART).FirstOrDefault().Value;
             JournalMaster sparepartHPPJournal = _journalMasterRepository.GetMany(jm => jm.Code == sparepartHPPCode).FirstOrDefault();
@@ -163,7 +163,7 @@ namespace BrawijayaWorkshop.Model
 
             hppSparepartDetail.BaseAmount = hppSparepartAmount.AsDecimal();
             hppSparepartDetail.ServicePercentage = 10;
-            hppSparepartDetail.ServiceAmount = hppSparepartWithFeeAmount.AsDecimal();
+            hppSparepartDetail.ServiceAmount = hppSparepartFeeAmount.AsDecimal();
             hppSparepartDetail.TotalAmount = hppSparepartDetail.BaseAmount + hppSparepartDetail.ServiceAmount;
             
             _hppDetailRepository.Add(hppSparepartDetail);

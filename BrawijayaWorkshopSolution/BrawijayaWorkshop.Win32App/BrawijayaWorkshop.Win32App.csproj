@@ -415,6 +415,12 @@
     <Compile Include="ModulForms\PurchasingEditorForm.Designer.cs">
       <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\PurchasingReturnEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\PurchasingReturnEditorForm.Designer.cs">
+      <DependentUpon>PurchasingReturnEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\RoleAccessEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -426,6 +432,12 @@
     </Compile>
     <Compile Include="ModulForms\RoleEditorForm.Designer.cs">
       <DependentUpon>RoleEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\SalesReturnEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SalesReturnEditorForm.Designer.cs">
+      <DependentUpon>SalesReturnEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.cs">
       <SubType>Form</SubType>
