@@ -1,54 +1,26 @@
-﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Database.Repositories;
+﻿using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using BrawijayaWorkshop.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using MoreLinq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class BalanceJournalListModel : AppBaseModel
+    public class BalanceJournalListModel : BalanceSheetBaseModel
     {
-        private IBalanceJournalRepository _balanceJournalRepository;
-        private IBalanceJournalDetailRepository _balanceJournalDetailRepository;
-
-        private IJournalMasterRepository _journalMasterRepository;
-        private IReferenceRepository _referenceRepository;
-
-        private IPurchasingRepository _purchasingRepository;
-
-        private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
-
-        private ITransactionRepository _transactionRepository;
-        private ITransactionDetailRepository _transactionDetailRepository;
-
-        private IUnitOfWork _unitOfWork;
-
-        public BalanceJournalListModel(IBalanceJournalRepository balanceJournalRepository, IBalanceJournalDetailRepository balanceJournalDetailRepository,
+        public BalanceJournalListModel(IBalanceJournalRepository balanceJournalRepository,
+            IBalanceJournalDetailRepository balanceJournalDetailRepository,
             IJournalMasterRepository journalMasterRepository, IReferenceRepository referenceRepository,
             IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository, ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
+            IHPPHeaderRepository hppHeaderRepository, IHPPDetailRepository hppDetailRepository,
+            IInvoiceRepository invoiceRepository,
             IUnitOfWork unitOfWork)
-            : base()
-        {
-            _balanceJournalRepository = balanceJournalRepository;
-            _balanceJournalDetailRepository = balanceJournalDetailRepository;
-            _journalMasterRepository = journalMasterRepository;
-            _referenceRepository = referenceRepository;
-            _purchasingRepository = purchasingRepository;
-            _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
-            _transactionRepository = transactionRepository;
-            _transactionDetailRepository = transactionDetailRepository;
-            _unitOfWork = unitOfWork;
-        }
+            : base(balanceJournalRepository, balanceJournalDetailRepository, journalMasterRepository,
+                   referenceRepository, purchasingRepository, sparepartRepository, sparepartDetailRepository,
+                   transactionRepository, transactionDetailRepository, hppHeaderRepository,
+                   hppDetailRepository, invoiceRepository, unitOfWork) { }
 
         public Dictionary<int, string> GenerateMonth()
         {
@@ -68,180 +40,6 @@ namespace BrawijayaWorkshop.Model
                 result.Add(i);
             }
             return result;
-        }
-
-        public BalanceJournalViewModel RetrieveBalanceJournalHeader(int month, int year)
-        {
-            BalanceJournal result = _balanceJournalRepository.GetMany(bj => bj.Month == month && bj.Year == year &&
-                bj.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-            BalanceJournalViewModel mappedResult = new BalanceJournalViewModel();
-            return Map(result, mappedResult);
-        }
-
-        public List<BalanceJournalDetailViewModel> RetrieveBalanceJournalDetailsByHeaderId(int headerId)
-        {
-            List<BalanceJournalDetail> result = _balanceJournalDetailRepository.GetMany(bj => bj.ParentId == headerId).ToList();
-            List<BalanceJournalDetailViewModel> mappedResult = new List<BalanceJournalDetailViewModel>();
-            return Map(result, mappedResult);
-        }
-
-        public void RecalculateBalanceJournal(int month, int year, int userId)
-        {
-            BalanceJournalViewModel prevCalculated = RetrieveBalanceJournalHeader(month, year);
-            if (prevCalculated != null)
-            {
-                DeleteBalanceJournal(prevCalculated.Id, userId);
-            }
-
-            DateTime firstDay = new DateTime(year, month, 1);
-            DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            DateTime prevMonth = firstDay.AddDays(-1);
-
-            List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
-
-            // calculate neraca
-            // ------------------------------------------------------------------------------
-            // List semua akun jurnal dari tabel transaksi
-            List<TransactionDetail> listTransaction = _transactionDetailRepository.GetMany(t =>
-                t.Parent.TransactionDate >= firstDay && t.Parent.TransactionDate <= lastDay &&
-                t.Parent.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
-
-            var journalTransactionList = listTransaction.DistinctBy(t => t.JournalId).Select(t => t.JournalId);
-            List<BalanceJournalDetailViewModel> tempListBalanceDetailViewModel = new List<BalanceJournalDetailViewModel>();
-            foreach (var item in journalTransactionList)
-            {
-                BalanceJournalDetailViewModel detailViewModel = new BalanceJournalDetailViewModel();
-                detailViewModel.JournalId = item;
-                tempListBalanceDetailViewModel.Add(detailViewModel);
-            }
-            // end init semua akun
-
-            // 1. Ambil Saldo Awal dari Saldo Akhir Bulan Sebelumnya
-            BalanceJournal lastJournal = _balanceJournalRepository.GetMany(bj =>
-                bj.Month == prevMonth.Month && bj.Year == prevMonth.Year &&
-                bj.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-
-            if (lastJournal != null)
-            {
-                // check apakah semua jurnal di last journal ada di temp list
-                List<BalanceJournalDetail> lastJournalDetail = _balanceJournalDetailRepository.GetMany(bjd => bjd.ParentId == lastJournal.Id).ToList();
-                foreach (var item in lastJournalDetail)
-                {
-                    if(tempListBalanceDetailViewModel.Where(temp => temp.JournalId == item.JournalId).Count() == 0)
-                    {
-                        tempListBalanceDetailViewModel.Add(new BalanceJournalDetailViewModel
-                        {
-                            JournalId = item.JournalId
-                        });
-                    }
-                }
-
-                // update temp list untuk saldo awal
-                foreach (var item in tempListBalanceDetailViewModel)
-                {
-                    BalanceJournalDetail entityDetail = lastJournalDetail.Where(i => i.JournalId == item.JournalId).FirstOrDefault();
-                    item.FirstDebit = entityDetail.LastDebit;
-                    item.FirstCredit = entityDetail.LastCredit;
-                }
-            }
-
-            // 2. Ambil mutasi Debet Kredit dari transaksi bulan berjalan
-            foreach (var item in listTransaction)
-            {
-                if(tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).Count() == 0)
-                {
-                    tempListBalanceDetailViewModel.Add(new BalanceJournalDetailViewModel
-                    {
-                        JournalId = item.JournalId
-                    });
-                }
-
-                BalanceJournalDetailViewModel currentViewModel = tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).FirstOrDefault();
-                int currentIndex = tempListBalanceDetailViewModel.IndexOf(currentViewModel);
-                currentViewModel.MutationDebit = currentViewModel.MutationDebit ?? 0;
-                currentViewModel.MutationCredit = currentViewModel.MutationCredit ?? 0;
-                currentViewModel.ReconciliationDebit = currentViewModel.ReconciliationDebit ?? 0;
-                currentViewModel.ReconciliationCredit = currentViewModel.ReconciliationCredit ?? 0;
-
-                if(!item.Parent.IsReconciliation)
-                {
-                    currentViewModel.MutationCredit += item.Credit ?? 0;
-                    currentViewModel.MutationDebit += item.Debit ?? 0;
-                }
-                else
-                {
-                    currentViewModel.ReconciliationDebit += item.Debit ?? 0;
-                    currentViewModel.ReconciliationCredit += item.Credit ?? 0;
-                }
-
-                tempListBalanceDetailViewModel[currentIndex] = currentViewModel;
-            }
-
-            // 3. Hitung Laba / Rugi
-            // TODO:
-
-            // 4. Hitung Saldo Akhir
-            foreach (var item in tempListBalanceDetailViewModel)
-            {
-                // update saldo awal (saldo akhir + mutasi)
-                item.BalanceAfterMutationDebit = item.FirstDebit ?? 0 + item.MutationDebit ?? 0;
-                item.BalanceAfterMutationCredit = item.FirstCredit ?? 0 + item.MutationCredit ?? 0;
-
-                decimal totalAfterReconciliation =
-                    (item.BalanceAfterMutationDebit ?? 0 + item.ReconciliationDebit ?? 0) -
-                    (item.BalanceAfterMutationCredit ?? 0 + item.ReconciliationCredit ?? 0);
-                if(totalAfterReconciliation > 0)
-                {
-                    item.BalanceAfterReconciliationDebit = totalAfterReconciliation;
-                    item.BalanceAfterReconciliationCredit = 0;
-                }
-                else
-                {
-                    item.BalanceAfterReconciliationDebit = 0;
-                    item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
-                }
-
-                JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
-                if (currentJournal.IsProfitLoss)
-                {
-                    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
-                    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
-                }
-                else
-                {
-                    item.LastDebit = item.BalanceAfterReconciliationDebit;
-                    item.LastCredit = item.BalanceAfterReconciliationCredit;
-                }
-            }
-
-            // 5. Insert Keb Balance Header & Balance Detail
-            BalanceJournal newBalanceHeader = new BalanceJournal();
-            newBalanceHeader.Month = month;
-            newBalanceHeader.Year = year;
-            newBalanceHeader.Status = (int)DbConstant.DefaultDataStatus.Active;
-            newBalanceHeader.CreateDate = newBalanceHeader.ModifyDate = DateTime.Now;
-            newBalanceHeader.CreateUserId = newBalanceHeader.ModifyUserId = userId;
-            newBalanceHeader = _balanceJournalRepository.Add(newBalanceHeader);
-            _unitOfWork.SaveChanges();
-
-            foreach (var item in tempListBalanceDetailViewModel)
-            {
-                BalanceJournalDetail newBalanceDetail = new BalanceJournalDetail();
-                Map(item, newBalanceDetail);
-                newBalanceDetail.ParentId = newBalanceHeader.Id;
-                _balanceJournalDetailRepository.Add(newBalanceDetail);
-            }
-            _unitOfWork.SaveChanges();
-        }
-
-        public void DeleteBalanceJournal(int headerId, int userId)
-        {
-            BalanceJournal entity = _balanceJournalRepository.GetById(headerId);
-            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            entity.ModifyDate = DateTime.Now;
-            entity.ModifyUserId = userId;
-            _balanceJournalRepository.Update(entity);
-            _unitOfWork.SaveChanges();
         }
     }
 }
