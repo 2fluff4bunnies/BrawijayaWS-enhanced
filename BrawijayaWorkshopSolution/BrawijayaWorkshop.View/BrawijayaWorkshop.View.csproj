@@ -77,6 +77,7 @@
     <Compile Include="ISalesReturnListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISparepartManualTransactionEditorView.cs" />
+    <Compile Include="ISPKSaleListView.cs" />
     <Compile Include="ISPKScheduleEditorView.cs" />
     <Compile Include="ISPKScheduleListView.cs" />
     <Compile Include="ISPKViewDetailView.cs" />

@@ -97,6 +97,11 @@ namespace BrawijayaWorkshop.Constant
         public const string SETTING_SPK_THRESHOLD_P = "S_SPK_THRESHOLD_P";
         public const string SETTING_SPK_THRESHOLD_S = "S_SPK_THRESHOLD_S";
 
+        public const string REF_SPK_CATEGORY_SERVICE = "REF_SPKCATEGORY_SERVICE";
+        public const string REF_SPK_CATEGORY_REPAIR = "REF_SPKCATEGORY_REPAIR";
+        public const string REF_SPK_CATEGORY_SALE = "REF_SPKCATEGORY_SALE";
+        public const string REF_SPK_CATEGORY_INVENTORY= "REF_SPKCATEGORY_INVENTORY";
+
         public enum AccessTypeEnum
         {
             Read = 1,

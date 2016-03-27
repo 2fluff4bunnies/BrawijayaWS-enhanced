@@ -626,7 +626,7 @@ namespace BrawijayaWorkshop.Database
             // SPK Category child
             context.References.Add(new Reference
             {
-                Code = "S",
+                Code = DbConstant.REF_SPK_CATEGORY_SERVICE,
                 Name = "Service",
                 Description = "SPK untuk Service",
                 Value = "S",
@@ -634,7 +634,7 @@ namespace BrawijayaWorkshop.Database
             });
             context.References.Add(new Reference
             {
-                Code = "P",
+                Code = DbConstant.REF_SPK_CATEGORY_REPAIR,
                 Name = "Perbaikan",
                 Description = "SPK untuk Perbaikan",
                 Value = "R",
@@ -642,7 +642,7 @@ namespace BrawijayaWorkshop.Database
             });
             context.References.Add(new Reference
             {
-                Code = "L",
+                Code = DbConstant.REF_SPK_CATEGORY_SALE,
                 Name = "Langsung",
                 Description = "SPK untuk Onderdil Langsung",
                 Value = "L",
@@ -650,7 +650,7 @@ namespace BrawijayaWorkshop.Database
             });
             context.References.Add(new Reference
             {
-                Code = "I",
+                Code = DbConstant.REF_SPK_CATEGORY_INVENTORY,
                 Name = "Inventaris",
                 Description = "SPK untuk Inventaris",
                 Value = "I",

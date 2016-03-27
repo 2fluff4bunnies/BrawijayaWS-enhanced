@@ -101,6 +101,7 @@
     <Compile Include="SalesReturnListModel.cs" />
     <Compile Include="SparepartDetailListModel.cs" />
     <Compile Include="SparepartManualTransactionEditorModel.cs" />
+    <Compile Include="SPKSaleListModel.cs" />
     <Compile Include="SPKScheduleEditorModel.cs" />
     <Compile Include="SPKScheduleListModel.cs" />
     <Compile Include="SPKViewDetailModel.cs" />
