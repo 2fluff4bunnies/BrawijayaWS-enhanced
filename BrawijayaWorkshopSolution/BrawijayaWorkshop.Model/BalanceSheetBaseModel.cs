@@ -389,8 +389,47 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork.SaveChanges();
 
             // insert it into transaction table
+            Reference refTableHPP = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_HPP).FirstOrDefault();
             Transaction hppSaleTransaction = new Transaction();
+            hppSaleTransaction.CreateUserId = hppSaleTransaction.ModifyUserId = userId;
+            hppSaleTransaction.CreateDate = hppSaleTransaction.ModifyDate = newHeader.CreateDate;
+            hppSaleTransaction.TransactionDate = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            hppSaleTransaction.ReferenceTableId = refTableHPP.Id;
+            hppSaleTransaction.PrimaryKeyValue = newHeader.Id;
+            hppSaleTransaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+            hppSaleTransaction.TotalTransaction = (hppSparepartDetail.TotalAmount + hppDailyMechanic.TotalAmount + hppOutSourceMechanic.TotalAmount).AsDouble();
+            hppSaleTransaction.TotalPayment = hppSaleTransaction.TotalTransaction;
+            hppSaleTransaction = _transactionRepository.Add(hppSaleTransaction);
 
+            _unitOfWork.SaveChanges();
+
+            // insert transaction detail
+            // HPP
+            TransactionDetail sparepartDetailTransaction = new TransactionDetail();
+            sparepartDetailTransaction.ParentId = hppSaleTransaction.Id;
+            sparepartDetailTransaction.JournalId = sparepartHPPJournal.Id;
+            sparepartDetailTransaction.Debit = hppSparepartDetail.TotalAmount;
+
+            TransactionDetail dailyMechanicTransaction = new TransactionDetail();
+            dailyMechanicTransaction.ParentId = hppSaleTransaction.Id;
+            dailyMechanicTransaction.JournalId = dailyMechanicHPPJournal.Id;
+            dailyMechanicTransaction.Debit = hppDailyMechanic.TotalAmount;
+
+            TransactionDetail outSourceMechanicTransaction = new TransactionDetail();
+            outSourceMechanicTransaction.ParentId = hppSaleTransaction.Id;
+            outSourceMechanicTransaction.JournalId = outSourceMechanicHPPJournal.Id;
+            outSourceMechanicTransaction.Debit = hppOutSourceMechanic.TotalAmount;
+            // End HPP
+
+            // Sale
+
+            // End Sale
+
+            _transactionDetailRepository.Add(sparepartDetailTransaction);
+            _transactionDetailRepository.Add(dailyMechanicTransaction);
+            _transactionDetailRepository.Add(outSourceMechanicTransaction);
+
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteHPP(int headerId, int userId)
@@ -400,6 +439,12 @@ namespace BrawijayaWorkshop.Model
             entity.ModifyUserId = userId;
             entity.ModifyDate = DateTime.Now;
             _hppHeaderRepository.Update(entity);
+
+            Transaction transEntity = _transactionRepository.GetMany(t => t.PrimaryKeyValue == headerId).FirstOrDefault();
+            transEntity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            transEntity.ModifyUserId = userId;
+            transEntity.ModifyDate = DateTime.Now;
+            _transactionRepository.Update(transEntity);
         }
     }
 }

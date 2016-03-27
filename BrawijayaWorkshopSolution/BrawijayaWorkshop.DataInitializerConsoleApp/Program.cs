@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
     {
         static void Main(string[] args)
         {
-            string dirPath = "E:/Project/Brawijaya/Document/";
+            string dirPath = "D:/Documents/Bengkel App/Data/";
             string accFile = "Account Jurnal.xlsx";
             string invFile = "Inv.xlsx";
             string citFile = "City.xlsx";
@@ -59,7 +59,8 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                                           `Kode` varchar(100) DEFAULT NULL,
                                           `Nama` varchar(100) DEFAULT NULL,
                                           `Induk` varchar(100) DEFAULT NULL,
-                                          `ProfitLoss` BIT DEFAULT FALSE
+                                          `ProfitLoss` BIT DEFAULT FALSE,
+                                          `Summary` BIT DEFAULT FALSE
                                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
@@ -205,9 +206,9 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
                     {
                         MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`, `IsProfitLoss`)
+                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`, `IsProfitLoss`, `IsSummaryBalanceSheet`)
                                             SELECT `Kode`, `Nama`,
-                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk), ProfitLoss
+                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk), ProfitLoss, Summary
                                             FROM temp_acc";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
