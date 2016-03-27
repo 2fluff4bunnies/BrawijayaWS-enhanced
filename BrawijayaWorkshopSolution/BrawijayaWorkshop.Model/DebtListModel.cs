@@ -29,11 +29,11 @@ namespace BrawijayaWorkshop.Model
             List<Purchasing> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo).OrderBy(c => c.Date).ToList();
             }
             else
             {
-                result = _purchasingRepository.GetMany(c => c.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetAll().OrderBy(c => c.Date).ToList();
             }
 
             List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();

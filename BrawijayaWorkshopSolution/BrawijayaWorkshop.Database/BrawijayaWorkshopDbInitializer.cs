@@ -766,6 +766,50 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            // Purchasing Payment Method
+            Reference debtPaymentMethodRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_DEBT_PAYMENTMETHOD,
+                Name = "Debt Payment Method",
+                Description = "Jenis pembayaran untuk hutang",
+                Value = DbConstant.REF_DEBT_PAYMENTMETHOD
+            });
+            context.SaveChanges();
+
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_DEBT_PAYMENTMETHOD_KAS,
+                Name = "Kas",
+                Description = "Jenis pembayaran untuk hutang menggunakan uang kas",
+                Value = "1.01.01.01",
+                ParentId = debtPaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_EKONOMI,
+                Name = "Bank Ekonomi",
+                Description = "Jenis pembayaran untuk hutang menggunakan transfer bank ekonomi",
+                Value = "1.01.02.01",
+                ParentId = debtPaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA1,
+                Name = "Bank BCA 1",
+                Description = "Jenis pembayaran untuk hutang menggunakan transfer bank bca 1",
+                Value = "1.01.02.02",
+                ParentId = debtPaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA2,
+                Name = "Bank BCA 2",
+                Description = "Jenis pembayaran untuk hutang menggunakan transfer bank bca 2",
+                Value = "1.01.02.03",
+                ParentId = debtPaymentMethodRef.Id
+            });
+            context.SaveChanges();
+
             // Sparepart Manual Transaction Type
             Reference sparepartManualTransactionRef = context.References.Add(new Reference
             {
@@ -898,7 +942,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_HPP_JOURNAL_SPAREPART,
                 Name = "Tipe HPP Sparepart",
                 Description = "Kode Akun HPP Sparepart",
-                Value = DbConstant.REF_HPP_JOURNAL_SPAREPART,
+                Value = "3.04.01",
                 ParentId = hppJournalRef.Id
             });
             context.References.Add(new Reference
@@ -906,7 +950,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC,
                 Name = "Tipe HPP Tukang Harian",
                 Description = "Kode Akun HPP Tukang Harian",
-                Value = DbConstant.REF_HPP_JOURNAL_DAILYMECHANIC,
+                Value = "3.04.04",
                 ParentId = hppJournalRef.Id
             });
             context.References.Add(new Reference
@@ -914,7 +958,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC,
                 Name = "Tipe HPP Tukang Borongan",
                 Description = "Kode Akun HPP Tukang Borongan",
-                Value = DbConstant.REF_HPP_JOURNAL_OUTSOURCEMECHANIC,
+                Value = "3.04.05",
                 ParentId = hppJournalRef.Id
             });
             context.SaveChanges();

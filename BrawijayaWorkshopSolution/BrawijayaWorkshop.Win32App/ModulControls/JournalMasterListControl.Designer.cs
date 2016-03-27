@@ -46,6 +46,9 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
+            this.colIsProfitLoss = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtJournalName.Properties)).BeginInit();
@@ -53,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridJournalMaster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvJournalMaster)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCheckBox)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFilter
@@ -147,6 +151,8 @@
             this.gridJournalMaster.Location = new System.Drawing.Point(3, 98);
             this.gridJournalMaster.MainView = this.gvJournalMaster;
             this.gridJournalMaster.Name = "gridJournalMaster";
+            this.gridJournalMaster.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repoCheckBox});
             this.gridJournalMaster.Size = new System.Drawing.Size(774, 303);
             this.gridJournalMaster.TabIndex = 4;
             this.gridJournalMaster.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -157,7 +163,9 @@
             this.gvJournalMaster.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colJournalCode,
             this.colJournalName,
-            this.colParent});
+            this.colParent,
+            this.colIsProfitLoss,
+            this.gridColumn1});
             this.gvJournalMaster.GridControl = this.gridJournalMaster;
             this.gvJournalMaster.Name = "gvJournalMaster";
             this.gvJournalMaster.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -227,6 +235,30 @@
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
+            // colIsProfitLoss
+            // 
+            this.colIsProfitLoss.Caption = "Rugi Laba";
+            this.colIsProfitLoss.ColumnEdit = this.repoCheckBox;
+            this.colIsProfitLoss.FieldName = "IsProfitLoss";
+            this.colIsProfitLoss.Name = "colIsProfitLoss";
+            this.colIsProfitLoss.Visible = true;
+            this.colIsProfitLoss.VisibleIndex = 3;
+            // 
+            // repoCheckBox
+            // 
+            this.repoCheckBox.AutoHeight = false;
+            this.repoCheckBox.Name = "repoCheckBox";
+            this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Neraca Saldo";
+            this.gridColumn1.ColumnEdit = this.repoCheckBox;
+            this.gridColumn1.FieldName = "IsSummaryBalanceSheet";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 4;
+            // 
             // JournalMasterListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,6 +276,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridJournalMaster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvJournalMaster)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.repoCheckBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,5 +299,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colJournalCode;
         private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
         private DevExpress.XtraGrid.Columns.GridColumn colParent;
+        private DevExpress.XtraGrid.Columns.GridColumn colIsProfitLoss;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckBox;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

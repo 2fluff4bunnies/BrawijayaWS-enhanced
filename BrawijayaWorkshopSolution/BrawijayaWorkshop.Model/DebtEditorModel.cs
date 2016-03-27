@@ -38,7 +38,7 @@ namespace BrawijayaWorkshop.Model
         public List<ReferenceViewModel> RetrievePaymentMethod()
         {
             Reference parent = _referenceRepository
-                .GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD).FirstOrDefault();
+                .GetMany(c => c.Code == DbConstant.REF_DEBT_PAYMENTMETHOD).FirstOrDefault();
             List<Reference> list = new List<Reference>();
             if (parent != null)
             {
@@ -48,7 +48,15 @@ namespace BrawijayaWorkshop.Model
             return Map(list, mappedResult);
         }
 
-        public void InsertDebt(TransactionViewModel transaction, PurchasingViewModel purchasing,int userID)
+        public PurchasingViewModel GetSelectedPurchasingByTransaction(int purchasingID)
+        {
+            Purchasing purchasing = _purchasingRepository
+                .GetById(purchasingID);
+            PurchasingViewModel mappedResult = new PurchasingViewModel();
+            return Map(purchasing, mappedResult);
+        }
+
+        public void InsertDebt(TransactionViewModel transaction, decimal purchasingPrice, int userID)
         {
             DateTime serverTime = DateTime.Now;
             Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASING).FirstOrDefault();
@@ -57,38 +65,43 @@ namespace BrawijayaWorkshop.Model
             transaction.CreateUserId = userID;
             transaction.ModifyUserId = userID;
             transaction.TransactionDate = serverTime;
-            transaction.TotalTransaction = purchasing.TotalPrice.AsDouble();
+            transaction.TotalTransaction = purchasingPrice.AsDouble();
             transaction.ReferenceTableId = transactionReferenceTable.Id;
+            transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+            transaction.Description = "Pembayaran hutang";
 
             Transaction entity = new Transaction();
             Map(transaction, entity);
             Transaction transactionInserted = _transactionRepository.Add(entity);
+
             Purchasing purchasingEntity = _purchasingRepository.GetById(transaction.PrimaryKeyValue);
             purchasingEntity.TotalHasPaid += transaction.TotalPayment.AsDecimal();
-            if(purchasingEntity.TotalHasPaid == purchasingEntity.TotalPrice)
+            if (purchasingEntity.TotalHasPaid == purchasingEntity.TotalPrice)
             {
                 purchasingEntity.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
             }
             _purchasingRepository.Update(purchasingEntity);
 
-            switch (purchasing.PaymentMethod.Code)
+            Reference paymentMethod = _referenceRepository.GetById(transaction.PaymentMethodId);
+
+            switch (paymentMethod.Code)
             {
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_EKONOMI:
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA1:
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA2:
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_EKONOMI:
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA1:
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA2:
                     {
                         // Bank Kredit --> Karena berkurang
                         TransactionDetail detailBank = new TransactionDetail();
-                        detailBank.Credit = purchasing.TotalHasPaid;
-                        if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_EKONOMI)
+                        detailBank.Credit = transaction.TotalPayment.AsDecimal();
+                        if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_EKONOMI)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.01").FirstOrDefault().Id;
                         }
-                        else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA1)
+                        else if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA1)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.02").FirstOrDefault().Id;
                         }
-                        else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA2)
+                        else if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA2)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.03").FirstOrDefault().Id;
                         }
@@ -97,79 +110,97 @@ namespace BrawijayaWorkshop.Model
                         break;
                     }
 
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_KAS:
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_KAS:
                     // Kas Kredit --> Karena berkurang
                     TransactionDetail detailKas = new TransactionDetail();
-                    detailKas.Credit = purchasing.TotalHasPaid;
+                    detailKas.Credit = transaction.TotalPayment.AsDecimal();
                     detailKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01.01").FirstOrDefault().Id;
                     detailKas.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailKas);
                     break;
-
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS:
-                    // Kas Kredit --> Karena berkurang
-                    TransactionDetail detailKasKarenaUangMuka = new TransactionDetail();
-                    detailKasKarenaUangMuka.Credit = purchasing.TotalHasPaid;
-                    detailKasKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01.01").FirstOrDefault().Id;
-                    detailKasKarenaUangMuka.Parent = transactionInserted;
-                    _transactionDetailRepository.Add(detailKasKarenaUangMuka);
-
-                    // Uang Muka Debit --> Karena bertambah
-                    TransactionDetail detailUangMukaBertambahKarenaKas = new TransactionDetail();
-                    detailUangMukaBertambahKarenaKas.Debit = purchasing.TotalHasPaid;
-                    detailUangMukaBertambahKarenaKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
-                    detailUangMukaBertambahKarenaKas.Parent = transactionInserted;
-                    _transactionDetailRepository.Add(detailUangMukaBertambahKarenaKas);
-                    break;
-
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI:
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1:
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2:
-                    {
-                        // Bank Kredit --> Karena berkurang
-                        TransactionDetail detailBankKarenaUangMuka = new TransactionDetail();
-                        detailBankKarenaUangMuka.Credit = purchasing.TotalHasPaid;
-                        if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI)
-                        {
-                            detailBankKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.01").FirstOrDefault().Id;
-                        }
-                        else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1)
-                        {
-                            detailBankKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.02").FirstOrDefault().Id;
-                        }
-                        else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2)
-                        {
-                            detailBankKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.03").FirstOrDefault().Id;
-                        }
-                        detailBankKarenaUangMuka.Parent = transactionInserted;
-                        _transactionDetailRepository.Add(detailBankKarenaUangMuka);
-
-                        // Uang Muka Debit --> Karena bertambah
-                        TransactionDetail detailUangMukaBertambahKarenaBank = new TransactionDetail();
-                        detailUangMukaBertambahKarenaBank.Debit = purchasing.TotalHasPaid;
-                        detailUangMukaBertambahKarenaBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
-                        detailUangMukaBertambahKarenaBank.Parent = transactionInserted;
-                        _transactionDetailRepository.Add(detailUangMukaBertambahKarenaBank);
-                        break;
-                    }
-
-                case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG:
-                    TransactionDetail utang = new TransactionDetail();
-                    utang.Credit = purchasing.TotalPrice - purchasing.TotalPrice;
-                    utang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
-                    utang.Parent = transactionInserted;
-                    _transactionDetailRepository.Add(utang);
-                    break;
             }
+
+            TransactionDetail detailDebt = new TransactionDetail();
+            detailDebt.Debit = transaction.TotalPayment.AsDecimal();
+            detailDebt.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
+            detailDebt.Parent = transactionInserted;
+            _transactionDetailRepository.Add(detailDebt);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateDebt(TransactionViewModel transaction)
+        public void UpdateDebt(TransactionViewModel transaction, int userID)
         {
-            Transaction entity = _transactionRepository.GetById<int>(transaction.Id);
-            Map(transaction, entity);
-            _transactionRepository.Update(entity);
+            DateTime serverTime = DateTime.Now;
+
+            transaction.ModifyDate = serverTime;
+            transaction.CreateUserId = userID;
+
+            Transaction transactionUpdated = _transactionRepository.GetById<int>(transaction.Id);
+            Transaction transactionOld = transactionUpdated;
+            
+            Purchasing purchasingEntity = _purchasingRepository.GetById(transaction.PrimaryKeyValue);
+            NeutralizePurchasing(ref purchasingEntity, transactionOld);
+
+            purchasingEntity.TotalHasPaid += transaction.TotalPayment.AsDecimal();
+            if (purchasingEntity.TotalHasPaid == purchasingEntity.TotalPrice)
+            {
+                purchasingEntity.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+            }
+            _purchasingRepository.Update(purchasingEntity);
+
+            Map(transaction, transactionUpdated);
+            _transactionRepository.Update(transactionUpdated);
+
+            Reference paymentMethod = _referenceRepository.GetById(transaction.PaymentMethodId);
+            
+            TransactionDetail debitDetail = _transactionDetailRepository.GetMany(x=>x.ParentId == transaction.Id && x.Credit == null).FirstOrDefault();
+            TransactionDetail creditDetail = _transactionDetailRepository.GetMany(x => x.ParentId == transaction.Id && x.Debit == null).FirstOrDefault();
+                        
+            switch (paymentMethod.Code)
+            {
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_EKONOMI:
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA1:
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA2:
+                    {
+                        // Bank Kredit --> Karena berkurang
+                        creditDetail.Credit = transaction.TotalPayment.AsDecimal();
+                        if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_EKONOMI)
+                        {
+                            creditDetail.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.01").FirstOrDefault().Id;
+                        }
+                        else if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA1)
+                        {
+                            creditDetail.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.02").FirstOrDefault().Id;
+                        }
+                        else if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_BCA2)
+                        {
+                            creditDetail.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.03").FirstOrDefault().Id;
+                        }
+                        _transactionDetailRepository.Update(creditDetail);
+                        break;
+                    }
+
+                case DbConstant.REF_DEBT_PAYMENTMETHOD_KAS:
+                    // Kas Kredit --> Karena berkurang
+                    creditDetail.Credit = transaction.TotalPayment.AsDecimal();
+                    creditDetail.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01.01").FirstOrDefault().Id;
+                    _transactionDetailRepository.Update(creditDetail);
+                    break;
+            }
+
+            debitDetail.Debit = transaction.TotalPayment.AsDecimal();
+            debitDetail.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
+            _transactionDetailRepository.Update(debitDetail);
             _unitOfWork.SaveChanges();
+        }
+
+        public void NeutralizePurchasing(ref Purchasing purchasing, Transaction oldTransaction)
+        {
+            purchasing.TotalHasPaid -= oldTransaction.TotalPayment.AsDecimal();
+            if (purchasing.TotalHasPaid != purchasing.TotalPrice)
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            }
         }
     }
 }

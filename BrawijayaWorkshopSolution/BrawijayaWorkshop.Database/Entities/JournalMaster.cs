@@ -20,5 +20,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public virtual JournalMaster Parent { get; set; }
 
         public bool IsProfitLoss { get; set; }
+
+        public bool IsSummaryBalanceSheet { get; set; }
     }
 }

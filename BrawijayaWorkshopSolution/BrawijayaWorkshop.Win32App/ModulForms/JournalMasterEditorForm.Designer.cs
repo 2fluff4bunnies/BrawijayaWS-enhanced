@@ -33,6 +33,7 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JournalMasterEditorForm));
             this.groupJournalInfo = new DevExpress.XtraEditors.GroupControl();
+            this.cbxIsProfitLoss = new DevExpress.XtraEditors.CheckEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.lblName = new DevExpress.XtraEditors.LabelControl();
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
@@ -41,19 +42,21 @@
             this.lblParent = new DevExpress.XtraEditors.LabelControl();
             this.valCode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.cbxIsProfitLoss = new DevExpress.XtraEditors.CheckEdit();
+            this.cbxIsBalanceSheet = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupJournalInfo)).BeginInit();
             this.groupJournalInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsProfitLoss.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupJournalParent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbxIsProfitLoss.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsBalanceSheet.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupJournalInfo
             // 
+            this.groupJournalInfo.Controls.Add(this.cbxIsBalanceSheet);
             this.groupJournalInfo.Controls.Add(this.cbxIsProfitLoss);
             this.groupJournalInfo.Controls.Add(this.txtName);
             this.groupJournalInfo.Controls.Add(this.lblName);
@@ -64,9 +67,17 @@
             this.groupJournalInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupJournalInfo.Location = new System.Drawing.Point(0, 0);
             this.groupJournalInfo.Name = "groupJournalInfo";
-            this.groupJournalInfo.Size = new System.Drawing.Size(403, 154);
+            this.groupJournalInfo.Size = new System.Drawing.Size(403, 193);
             this.groupJournalInfo.TabIndex = 1;
             this.groupJournalInfo.Text = "Informasi Account";
+            // 
+            // cbxIsProfitLoss
+            // 
+            this.cbxIsProfitLoss.Location = new System.Drawing.Point(126, 126);
+            this.cbxIsProfitLoss.Name = "cbxIsProfitLoss";
+            this.cbxIsProfitLoss.Properties.Caption = "Rugi Laba";
+            this.cbxIsProfitLoss.Size = new System.Drawing.Size(75, 19);
+            this.cbxIsProfitLoss.TabIndex = 8;
             // 
             // txtName
             // 
@@ -142,19 +153,19 @@
             // 
             this.valName.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // cbxIsProfitLoss
+            // cbxIsBalanceSheet
             // 
-            this.cbxIsProfitLoss.Location = new System.Drawing.Point(126, 126);
-            this.cbxIsProfitLoss.Name = "cbxIsProfitLoss";
-            this.cbxIsProfitLoss.Properties.Caption = "Rugi Laba";
-            this.cbxIsProfitLoss.Size = new System.Drawing.Size(75, 19);
-            this.cbxIsProfitLoss.TabIndex = 8;
+            this.cbxIsBalanceSheet.Location = new System.Drawing.Point(126, 155);
+            this.cbxIsBalanceSheet.Name = "cbxIsBalanceSheet";
+            this.cbxIsBalanceSheet.Properties.Caption = "Neraca Saldo";
+            this.cbxIsBalanceSheet.Size = new System.Drawing.Size(115, 19);
+            this.cbxIsBalanceSheet.TabIndex = 9;
             // 
             // JournalMasterEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 203);
+            this.ClientSize = new System.Drawing.Size(403, 242);
             this.Controls.Add(this.groupJournalInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "JournalMasterEditorForm";
@@ -163,12 +174,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupJournalInfo)).EndInit();
             this.groupJournalInfo.ResumeLayout(false);
             this.groupJournalInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsProfitLoss.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupJournalParent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbxIsProfitLoss.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsBalanceSheet.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,5 +197,6 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valName;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valCode;
         private DevExpress.XtraEditors.CheckEdit cbxIsProfitLoss;
+        private DevExpress.XtraEditors.CheckEdit cbxIsBalanceSheet;
     }
 }

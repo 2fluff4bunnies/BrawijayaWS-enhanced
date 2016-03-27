@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -13,6 +14,9 @@ namespace BrawijayaWorkshop.Presenter
         {
             if(View.SelectedPurchasing != null)
             {
+                //get latest purchasing info
+                View.SelectedPurchasing = Model.GetLatestPurchasingInfo(View.SelectedPurchasing.Id);
+                
                 View.SupplierName = View.SelectedPurchasing.Supplier.Name;
                 View.TransactionDate = View.SelectedPurchasing.Date;
                 View.TotalPrice = View.SelectedPurchasing.TotalPrice;
@@ -20,6 +24,11 @@ namespace BrawijayaWorkshop.Presenter
                 View.TotalNotPaid = View.SelectedPurchasing.TotalPrice - View.SelectedPurchasing.TotalHasPaid; 
             }
             View.TransactionListData = Model.SearchTransactionByTableRefPK(View.SelectedPurchasing.Id);
+        }
+
+        public void DeleteData()
+        {
+            Model.DeleteDebt(View.SelectedTransaction, LoginInformation.UserId);
         }
     }
 }
