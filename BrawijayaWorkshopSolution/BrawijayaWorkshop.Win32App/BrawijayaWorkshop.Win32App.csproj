@@ -277,6 +277,12 @@
     <Compile Include="ModulControls\SPKListControl.Designer.cs">
       <DependentUpon>SPKListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\SPKScheduleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SPKScheduleListControl.Designer.cs">
+      <DependentUpon>SPKScheduleListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\SupplierListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -456,6 +462,12 @@
     </Compile>
     <Compile Include="ModulForms\SPKEditorForm.Designer.cs">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\SPKScheduleEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKScheduleEditorForm.Designer.cs">
+      <DependentUpon>SPKScheduleEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\SPKViewDetailForm.cs">
       <SubType>Form</SubType>
@@ -661,6 +673,9 @@
     <EmbeddedResource Include="ModulControls\SPKListControl.resx">
       <DependentUpon>SPKListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SPKScheduleListControl.resx">
+      <DependentUpon>SPKScheduleListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SupplierListControl.resx">
       <DependentUpon>SupplierListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -744,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKEditorForm.resx">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKScheduleEditorForm.resx">
+      <DependentUpon>SPKScheduleEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>

@@ -147,7 +147,7 @@
             this.groupSPK.Controls.Add(this.lblVehicle);
             this.groupSPK.Location = new System.Drawing.Point(-3, -1);
             this.groupSPK.Name = "groupSPK";
-            this.groupSPK.Size = new System.Drawing.Size(1156, 406);
+            this.groupSPK.Size = new System.Drawing.Size(1156, 417);
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
             // 
@@ -159,7 +159,7 @@
             this.gridVehicleWheel.Location = new System.Drawing.Point(15, 171);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(556, 198);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(556, 209);
             this.gridVehicleWheel.TabIndex = 38;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -258,7 +258,7 @@
             this.groupSparepart.Controls.Add(this.gcSparepart);
             this.groupSparepart.Location = new System.Drawing.Point(588, 23);
             this.groupSparepart.Name = "groupSparepart";
-            this.groupSparepart.Size = new System.Drawing.Size(556, 355);
+            this.groupSparepart.Size = new System.Drawing.Size(556, 357);
             this.groupSparepart.TabIndex = 3;
             this.groupSparepart.Text = "Sparepart";
             // 
@@ -520,7 +520,7 @@
             // 
             // txtTotalSparepartPrice
             // 
-            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(1011, 381);
+            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(1011, 387);
             this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
             this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
             this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -554,7 +554,7 @@
             // 
             // lblTotalSparepart
             // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(898, 384);
+            this.lblTotalSparepart.Location = new System.Drawing.Point(898, 390);
             this.lblTotalSparepart.Name = "lblTotalSparepart";
             this.lblTotalSparepart.Size = new System.Drawing.Size(107, 13);
             this.lblTotalSparepart.TabIndex = 31;
@@ -587,7 +587,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 446);
+            this.ClientSize = new System.Drawing.Size(1146, 457);
             this.Controls.Add(this.groupSPK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKEditorForm";
