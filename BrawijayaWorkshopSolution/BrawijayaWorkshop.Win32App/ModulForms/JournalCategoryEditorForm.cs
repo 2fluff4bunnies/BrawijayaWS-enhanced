@@ -25,7 +25,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             valCatDescription.SetIconAlignment(txtCatDescription, ErrorIconAlignment.MiddleRight);
             valCatCode.SetIconAlignment(txtCatCode, ErrorIconAlignment.MiddleRight);
 
+            lookUpJournal.Properties.EditValueChanged += Properties_EditValueChanged;
+
             this.Load += JournalCategoryEditorForm_Load;
+        }
+
+        private void Properties_EditValueChanged(object sender, EventArgs e)
+        {
+            JournalMasterViewModel selectedJournal = lookUpJournal.GetSelectedDataRow() as JournalMasterViewModel;
+            this.Code = "REF_CAT_JOURNAL_" + selectedJournal.Code;
+            this.CategoryName = this.SelectedChildren == null ? selectedJournal.Name : this.CategoryName;
+            this.CategoryDescription = this.SelectedChildren == null ? selectedJournal.Name : this.CategoryDescription;
         }
 
         private void JournalCategoryEditorForm_Load(object sender, EventArgs e)
@@ -75,7 +85,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public JournalMasterViewModel SelectedJournal { get; set; }
+        public JournalMasterViewModel SelectedJournal
+        {
+            get
+            {
+                return lookUpJournal.GetSelectedDataRow() as JournalMasterViewModel;
+            }
+            set
+            {
+                lookUpJournal.EditValue = value.Code;
+            }
+        }
 
         public List<JournalMasterViewModel> JournalMasterList
         {

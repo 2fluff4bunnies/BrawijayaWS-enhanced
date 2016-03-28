@@ -124,9 +124,9 @@
             // gvCatJournal
             // 
             this.gvCatJournal.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colParent,
             this.colJournalCode,
-            this.colJournalName,
-            this.colParent});
+            this.colJournalName});
             this.gvCatJournal.GridControl = this.gridCatJournal;
             this.gvCatJournal.Name = "gvCatJournal";
             this.gvCatJournal.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -140,7 +140,7 @@
             this.gvCatJournal.OptionsView.ShowGroupPanel = false;
             this.gvCatJournal.OptionsView.ShowViewCaption = true;
             this.gvCatJournal.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colJournalCode, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colParent, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvCatJournal.ViewCaption = "Daftar Akun Jurnal";
             // 
             // colJournalCode
@@ -149,7 +149,7 @@
             this.colJournalCode.FieldName = "Value";
             this.colJournalCode.Name = "colJournalCode";
             this.colJournalCode.Visible = true;
-            this.colJournalCode.VisibleIndex = 0;
+            this.colJournalCode.VisibleIndex = 1;
             // 
             // colJournalName
             // 
@@ -157,7 +157,7 @@
             this.colJournalName.FieldName = "Description";
             this.colJournalName.Name = "colJournalName";
             this.colJournalName.Visible = true;
-            this.colJournalName.VisibleIndex = 1;
+            this.colJournalName.VisibleIndex = 2;
             // 
             // colParent
             // 
@@ -165,7 +165,7 @@
             this.colParent.FieldName = "Parent.Description";
             this.colParent.Name = "colParent";
             this.colParent.Visible = true;
-            this.colParent.VisibleIndex = 2;
+            this.colParent.VisibleIndex = 0;
             // 
             // repoCheckBox
             // 

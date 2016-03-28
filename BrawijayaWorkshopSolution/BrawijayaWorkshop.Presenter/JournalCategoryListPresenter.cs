@@ -13,7 +13,13 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
-            View.ParentDropdownList = Model.RetrieveAllJournalCategory();
+            List<ReferenceViewModel> listAllJournalCategory = Model.RetrieveAllJournalCategory();
+            listAllJournalCategory.Insert(0, new ReferenceViewModel
+            {
+                Id = 0,
+                Description = "-- Pilih Jurnal Kategori --"
+            });
+            View.ParentDropdownList = listAllJournalCategory;
         }
 
         public void LoadData()

@@ -761,6 +761,13 @@ namespace BrawijayaWorkshop.Database
                 Description = "Tabel Manual Transaksi",
                 Value = DbConstant.REF_TRANSTBL_MANUAL
             });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_HPP,
+                Name = "HPP Transaction Table",
+                Description = "Tabel Transaksi HPP",
+                Value = DbConstant.REF_TRANSTBL_HPP
+            });
             context.SaveChanges();
 
             // Purchasing Payment Method

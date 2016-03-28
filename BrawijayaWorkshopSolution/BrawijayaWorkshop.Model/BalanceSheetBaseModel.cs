@@ -468,17 +468,20 @@ namespace BrawijayaWorkshop.Model
             _hppHeaderRepository.Update(entity);
 
             Transaction transEntity = _transactionRepository.GetMany(t => t.PrimaryKeyValue == headerId).FirstOrDefault();
-            transEntity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            transEntity.ModifyUserId = userId;
-            transEntity.ModifyDate = DateTime.Now;
-            _transactionRepository.Update(transEntity);
+            if (transEntity != null)
+            {
+                transEntity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                transEntity.ModifyUserId = userId;
+                transEntity.ModifyDate = DateTime.Now;
+                _transactionRepository.Update(transEntity);
+            }
         }
 
         protected bool IsCurrentJournalValid(JournalMasterViewModel currentJournal, string codeToCompare)
         {
             if (currentJournal.Code == codeToCompare) return true;
 
-            if(currentJournal.Parent != null)
+            if (currentJournal.Parent != null)
             {
                 return IsCurrentJournalValid(currentJournal.Parent, codeToCompare);
             }
