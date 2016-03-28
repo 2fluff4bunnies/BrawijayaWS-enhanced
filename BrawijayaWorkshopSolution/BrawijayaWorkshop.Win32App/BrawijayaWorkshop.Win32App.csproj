@@ -283,6 +283,12 @@
     <Compile Include="ModulControls\SPKListControl.Designer.cs">
       <DependentUpon>SPKListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\SPKSaleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SPKSaleListControl.Designer.cs">
+      <DependentUpon>SPKSaleListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\SPKScheduleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -693,6 +699,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SPKListControl.resx">
       <DependentUpon>SPKListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SPKSaleListControl.resx">
+      <DependentUpon>SPKSaleListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SPKScheduleListControl.resx">
       <DependentUpon>SPKScheduleListControl.cs</DependentUpon>
