@@ -312,17 +312,13 @@ namespace BrawijayaWorkshop.Model
             Reference hppJournal = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_HPP_JOURNAL).FirstOrDefault();
             List<Reference> hppJournalList = _referenceRepository.GetMany(r => r.ParentId == hppJournal.Id).ToList();
 
-            // daftar kode akun untuk stok / persediaan
-            Reference stockJournal = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_STOCK_JOURNAL).FirstOrDefault();
-            List<Reference> stockJournalList = _referenceRepository.GetMany(r => r.ParentId == stockJournal.Id).ToList();
-
             // Calculate HPP sparepart this month
             double lastPrevSparepartBalance = 0;
             double totalPurchase = 0;
             double lastSparepartBalance = 0;
             if (lastJournal != null)
             {
-                string stockSparepartCode = stockJournalList.Where(j => j.Code == DbConstant.REF_STOCK_JOURNAL_SPAREPART).FirstOrDefault().Value;
+                string stockSparepartCode = "1.01.04.01";
                 JournalMaster sparepartStockJournal = _journalMasterRepository.GetMany(jm => jm.Code == stockSparepartCode).FirstOrDefault();
                 BalanceJournalDetail details = _balanceJournalDetailRepository.GetMany(d => d.ParentId == lastJournal.Id &&
                     d.JournalId == sparepartStockJournal.Id).FirstOrDefault();

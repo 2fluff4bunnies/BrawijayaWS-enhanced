@@ -1045,45 +1045,7 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
-            // HPP Journal Collection
-            Reference stockJournalRef = context.References.Add(new Reference
-            {
-                Code = DbConstant.REF_STOCK_JOURNAL,
-                Name = "Tipe Stok",
-                Description = "Journal Stok",
-                Value = DbConstant.REF_STOCK_JOURNAL
-            });
-            context.SaveChanges();
-
-            // Stock Journal Children Collection
-            context.References.Add(new Reference
-            {
-                Code = DbConstant.REF_STOCK_JOURNAL_SPAREPART,
-                Name = "Tipe Stok Sparepart",
-                Description = "Kode Akun Stok Sparepart",
-                Value = "3.04.01",
-                ParentId = stockJournalRef.Id
-            });
-            context.References.Add(new Reference
-            {
-                Code = DbConstant.REF_STOCK_JOURNAL_DAILYMECHANIC,
-                Name = "Tipe Stok Tukang Harian",
-                Description = "Kode Akun Stok Tukang Harian",
-                Value = "3.04.04",
-                ParentId = stockJournalRef.Id
-            });
-            context.References.Add(new Reference
-            {
-                Code = DbConstant.REF_STOCK_JOURNAL_OUTSOURCEMECHANIC,
-                Name = "Tipe Stok Tukang Borongan",
-                Description = "Kode Akun Stok Tukang Borongan",
-                Value = "3.04.05",
-                ParentId = stockJournalRef.Id
-            });
-            context.SaveChanges();
-
             // Settings
-
             context.Settings.Add(new Setting
             {
                 Key = DbConstant.SETTING_MINTSTOCK,

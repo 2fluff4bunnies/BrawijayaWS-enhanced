@@ -43,6 +43,7 @@
     <Compile Include="ViewModels\ApplicationModulViewModel.cs" />
     <Compile Include="ViewModels\BalanceJournalDetailViewModel.cs" />
     <Compile Include="ViewModels\BalanceJournalViewModel.cs" />
+    <Compile Include="ViewModels\BalanceSheetViewModel.cs" />
     <Compile Include="ViewModels\BaseModifierEntityViewModel.cs" />
     <Compile Include="ViewModels\BaseModifierWithStatusViewModel.cs" />
     <Compile Include="ViewModels\BaseStatusEntityViewModel.cs" />

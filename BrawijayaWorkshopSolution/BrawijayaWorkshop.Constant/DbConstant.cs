@@ -103,11 +103,6 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_CAT_JOURNAL_INCOME = "REF_CAT_JOURNAL_INCOME";
         // End kategori jurnal
 
-        public const string REF_STOCK_JOURNAL = "REF_STOCK_JOURNAL";
-        public const string REF_STOCK_JOURNAL_SPAREPART = "REF_STOCK_JOURNAL_SPAREPART";
-        public const string REF_STOCK_JOURNAL_DAILYMECHANIC = "REF_STOCK_JOURNAL_DAILYMECHANIC";
-        public const string REF_STOCK_JOURNAL_OUTSOURCEMECHANIC = "REF_STOCK_JOURNAL_OUTSOURCEMECHANIC";
-
         public const string SETTING_MINTSTOCK = "S_MINSTOCK";
         public const string SETTING_FINGERPRINT_IPADDRESS = "S_FINGERPRINT_IPADDRESS";
         public const string SETTING_FINGERPRINT_PORT = "S_FINGERPRINT_PORT";

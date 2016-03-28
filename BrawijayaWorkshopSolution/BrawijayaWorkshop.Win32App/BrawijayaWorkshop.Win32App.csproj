@@ -163,6 +163,12 @@
     <Compile Include="ModulControls\BalanceJournalListControl.Designer.cs">
       <DependentUpon>BalanceJournalListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\BalanceSheetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\BalanceSheetControl.Designer.cs">
+      <DependentUpon>BalanceSheetControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\CreditListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -396,6 +402,12 @@
     </Compile>
     <Compile Include="ModulForms\GuestBookEditorForm.Designer.cs">
       <DependentUpon>GuestBookEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\JournalCategoryEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\JournalCategoryEditorForm.Designer.cs">
+      <DependentUpon>JournalCategoryEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\JournalMasterEditorForm.cs">
       <SubType>Form</SubType>
@@ -637,6 +649,9 @@
     <EmbeddedResource Include="ModulControls\BalanceJournalListControl.resx">
       <DependentUpon>BalanceJournalListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\BalanceSheetControl.resx">
+      <DependentUpon>BalanceSheetControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\CreditListControl.resx">
       <DependentUpon>CreditListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -753,6 +768,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\GuestBookEditorForm.resx">
       <DependentUpon>GuestBookEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\JournalCategoryEditorForm.resx">
+      <DependentUpon>JournalCategoryEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
