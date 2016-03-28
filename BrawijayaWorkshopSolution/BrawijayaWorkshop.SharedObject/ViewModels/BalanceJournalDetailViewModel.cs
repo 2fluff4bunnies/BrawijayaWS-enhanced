@@ -14,6 +14,14 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public decimal? FirstDebit { get; set; }
         public decimal? FirstCredit { get; set; }
 
+        public decimal FirstBalance
+        {
+            get
+            {
+                return (FirstDebit ?? 0) - (FirstCredit ?? 0);
+            }
+        }
+
         public decimal? MutationDebit { get; set; }
         public decimal? MutationCredit { get; set; }
 
@@ -31,5 +39,15 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public decimal? LastDebit { get; set; }
         public decimal? LastCredit { get; set; }
+
+        public decimal LastBalance
+        {
+            get
+            {
+                return (LastDebit ?? 0) - (LastCredit ?? 0);
+            }
+        }
+
+        public bool IsChecked { get; set; }
     }
 }

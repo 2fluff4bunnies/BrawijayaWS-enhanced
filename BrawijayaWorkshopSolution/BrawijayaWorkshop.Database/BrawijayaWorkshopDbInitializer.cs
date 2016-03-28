@@ -1061,7 +1061,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_STOCK_JOURNAL_SPAREPART,
                 Name = "Tipe Stok Sparepart",
                 Description = "Kode Akun Stok Sparepart",
-                Value = DbConstant.REF_STOCK_JOURNAL_SPAREPART,
+                Value = "3.04.01",
                 ParentId = stockJournalRef.Id
             });
             context.References.Add(new Reference
@@ -1069,7 +1069,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_STOCK_JOURNAL_DAILYMECHANIC,
                 Name = "Tipe Stok Tukang Harian",
                 Description = "Kode Akun Stok Tukang Harian",
-                Value = DbConstant.REF_STOCK_JOURNAL_DAILYMECHANIC,
+                Value = "3.04.04",
                 ParentId = stockJournalRef.Id
             });
             context.References.Add(new Reference
@@ -1077,7 +1077,7 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_STOCK_JOURNAL_OUTSOURCEMECHANIC,
                 Name = "Tipe Stok Tukang Borongan",
                 Description = "Kode Akun Stok Tukang Borongan",
-                Value = DbConstant.REF_STOCK_JOURNAL_OUTSOURCEMECHANIC,
+                Value = "3.04.05",
                 ParentId = stockJournalRef.Id
             });
             context.SaveChanges();

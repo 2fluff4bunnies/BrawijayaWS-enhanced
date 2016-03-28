@@ -92,6 +92,21 @@ namespace BrawijayaWorkshop.Model
 
             List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
 
+            Reference catJournalService = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_SERVICE).FirstOrDefault();
+            Reference catJournalCost = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_COST).FirstOrDefault();
+            Reference catJournalIncome = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_INCOME).FirstOrDefault();
+
+            List<string> catJournalServiceCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalService.Id).Select(r => r.Value).ToList();
+            List<string> catJournalCostCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalCost.Id).Select(r => r.Value).ToList();
+            List<string> catJournalIncomeCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalIncome.Id).Select(r => r.Value).ToList();
+
+            List<JournalMaster> listProfitLossJournalParents = listAllJournal.Where(j =>
+                catJournalServiceCodeList.Contains(j.Code) ||
+                catJournalCostCodeList.Contains(j.Code) ||
+                catJournalIncomeCodeList.Contains(j.Code)).ToList();
+            List<JournalMasterViewModel> mappedListProfitLossJournalParents = new List<JournalMasterViewModel>();
+            Map(listProfitLossJournalParents, mappedListProfitLossJournalParents);
+
             // calculate neraca
             // ------------------------------------------------------------------------------
             // List semua akun jurnal dari tabel transaksi
@@ -122,8 +137,10 @@ namespace BrawijayaWorkshop.Model
                 {
                     if (tempListBalanceDetailViewModel.Where(temp => temp.JournalId == item.JournalId).Count() == 0)
                     {
+                        JournalMasterViewModel mappedJournal = new JournalMasterViewModel();
                         tempListBalanceDetailViewModel.Add(new BalanceJournalDetailViewModel
                         {
+                            Journal = Map(item.Journal, mappedJournal),
                             JournalId = item.JournalId
                         });
                     }
@@ -170,9 +187,6 @@ namespace BrawijayaWorkshop.Model
                 tempListBalanceDetailViewModel[currentIndex] = currentViewModel;
             }
 
-            // 3. Hitung Laba / Rugi
-            // TODO:
-
             // 4. Hitung Saldo Akhir
             foreach (var item in tempListBalanceDetailViewModel)
             {
@@ -194,17 +208,28 @@ namespace BrawijayaWorkshop.Model
                     item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
                 }
 
-                //JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
-                //if (currentJournal.IsProfitLoss)
-                //{
-                //    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
-                //    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
-                //}
-                //else
-                //{
-                //    item.LastDebit = item.BalanceAfterReconciliationDebit;
-                //    item.LastCredit = item.BalanceAfterReconciliationCredit;
-                //}
+                bool isProfitLoss = false;
+                foreach (var iJournalParent in mappedListProfitLossJournalParents)
+                {
+                    isProfitLoss = IsCurrentJournalValid(item.Journal, iJournalParent.Code);
+
+                    if (isProfitLoss) break;
+                }
+
+                JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
+                if (isProfitLoss)
+                {
+                    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
+                    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
+                }
+                else
+                {
+                    item.LastDebit = item.BalanceAfterReconciliationDebit;
+                    item.LastCredit = item.BalanceAfterReconciliationCredit;
+                }
+
+                item.LastDebit = item.BalanceAfterReconciliationDebit;
+                item.LastCredit = item.BalanceAfterReconciliationCredit;
             }
 
             // 5. Insert Keb Balance Header & Balance Detail
@@ -219,6 +244,7 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var item in tempListBalanceDetailViewModel)
             {
+                item.Journal = null;
                 BalanceJournalDetail newBalanceDetail = new BalanceJournalDetail();
                 Map(item, newBalanceDetail);
                 newBalanceDetail.ParentId = newBalanceHeader.Id;
@@ -397,7 +423,7 @@ namespace BrawijayaWorkshop.Model
             hppSaleTransaction.ReferenceTableId = refTableHPP.Id;
             hppSaleTransaction.PrimaryKeyValue = newHeader.Id;
             hppSaleTransaction.Status = (int)DbConstant.DefaultDataStatus.Active;
-            hppSaleTransaction.TotalTransaction = (hppSparepartDetail.TotalAmount + hppDailyMechanic.TotalAmount + hppOutSourceMechanic.TotalAmount).AsDouble();
+            hppSaleTransaction.TotalTransaction = (hppSparepartDetail.BaseAmount + hppDailyMechanic.BaseAmount + hppOutSourceMechanic.BaseAmount).AsDouble();
             hppSaleTransaction.TotalPayment = hppSaleTransaction.TotalTransaction;
             hppSaleTransaction = _transactionRepository.Add(hppSaleTransaction);
 
@@ -408,26 +434,31 @@ namespace BrawijayaWorkshop.Model
             TransactionDetail sparepartDetailTransaction = new TransactionDetail();
             sparepartDetailTransaction.ParentId = hppSaleTransaction.Id;
             sparepartDetailTransaction.JournalId = sparepartHPPJournal.Id;
-            sparepartDetailTransaction.Debit = hppSparepartDetail.TotalAmount;
+            sparepartDetailTransaction.Debit = hppSparepartDetail.BaseAmount;
 
             TransactionDetail dailyMechanicTransaction = new TransactionDetail();
             dailyMechanicTransaction.ParentId = hppSaleTransaction.Id;
             dailyMechanicTransaction.JournalId = dailyMechanicHPPJournal.Id;
-            dailyMechanicTransaction.Debit = hppDailyMechanic.TotalAmount;
+            dailyMechanicTransaction.Debit = hppDailyMechanic.BaseAmount;
 
             TransactionDetail outSourceMechanicTransaction = new TransactionDetail();
             outSourceMechanicTransaction.ParentId = hppSaleTransaction.Id;
             outSourceMechanicTransaction.JournalId = outSourceMechanicHPPJournal.Id;
-            outSourceMechanicTransaction.Debit = hppOutSourceMechanic.TotalAmount;
+            outSourceMechanicTransaction.Debit = hppOutSourceMechanic.BaseAmount;
             // End HPP
 
-            // Sale
-
-            // End Sale
+            // All Stock
+            JournalMaster allStockJournal = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.01").FirstOrDefault();
+            TransactionDetail sparepartStockTransaction = new TransactionDetail();
+            sparepartStockTransaction.ParentId = hppSaleTransaction.Id;
+            sparepartStockTransaction.JournalId = allStockJournal.Id;
+            sparepartStockTransaction.Credit = hppSaleTransaction.TotalTransaction.AsDecimal();
+            // End All Stock
 
             _transactionDetailRepository.Add(sparepartDetailTransaction);
             _transactionDetailRepository.Add(dailyMechanicTransaction);
             _transactionDetailRepository.Add(outSourceMechanicTransaction);
+            _transactionDetailRepository.Add(sparepartStockTransaction);
 
             _unitOfWork.SaveChanges();
         }
@@ -445,6 +476,18 @@ namespace BrawijayaWorkshop.Model
             transEntity.ModifyUserId = userId;
             transEntity.ModifyDate = DateTime.Now;
             _transactionRepository.Update(transEntity);
+        }
+
+        protected bool IsCurrentJournalValid(JournalMasterViewModel currentJournal, string codeToCompare)
+        {
+            if (currentJournal.Code == codeToCompare) return true;
+
+            if(currentJournal.Parent != null)
+            {
+                return IsCurrentJournalValid(currentJournal.Parent, codeToCompare);
+            }
+
+            return false;
         }
     }
 }
