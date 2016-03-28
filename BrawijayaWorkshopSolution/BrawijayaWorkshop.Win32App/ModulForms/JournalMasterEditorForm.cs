@@ -81,30 +81,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtName.Text = value;
             }
         }
-
-        public bool IsProfitLoss
-        {
-            get
-            {
-                return cbxIsProfitLoss.EditValue.AsBoolean();
-            }
-            set
-            {
-                cbxIsProfitLoss.EditValue = value;
-            }
-        }
-
-        public bool IsSummaryBalanceSheet
-        {
-            get
-            {
-                return cbxIsBalanceSheet.EditValue.AsBoolean();
-            }
-            set
-            {
-                cbxIsBalanceSheet.EditValue = value;
-            }
-        }
         #endregion
 
         protected override void ExecuteSave()

@@ -194,17 +194,17 @@ namespace BrawijayaWorkshop.Model
                     item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
                 }
 
-                JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
-                if (currentJournal.IsProfitLoss)
-                {
-                    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
-                    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
-                }
-                else
-                {
-                    item.LastDebit = item.BalanceAfterReconciliationDebit;
-                    item.LastCredit = item.BalanceAfterReconciliationCredit;
-                }
+                //JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
+                //if (currentJournal.IsProfitLoss)
+                //{
+                //    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
+                //    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
+                //}
+                //else
+                //{
+                //    item.LastDebit = item.BalanceAfterReconciliationDebit;
+                //    item.LastCredit = item.BalanceAfterReconciliationCredit;
+                //}
             }
 
             // 5. Insert Keb Balance Header & Balance Detail

@@ -462,6 +462,88 @@ namespace BrawijayaWorkshop.Database
             context.SaveChanges();
 
             // references
+            // Journal Category
+            Reference refCatJournal = context.References.Add(new Reference
+            {
+                Code = "REF_CAT_JOURNAL",
+                Name = "Journal Category",
+                Description = "Kategori akun jurnal",
+                Value = "REF_CAT_JOURNAL"
+            });
+            context.SaveChanges();
+
+            // children journal category
+            // neraca saldo
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_BALANCESHEET",
+                Name = "Balance Sheet Journal Category",
+                Description = "Kategori akun jurnal Neraca Saldo",
+                Value = "REF_CAT_JOURNAL_BALANCESHEET"
+            });
+
+            // neraca
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_CURRENTASSET",
+                Name = "Current Asset Journal Category",
+                Description = "Kategori akun jurnal Aktiva Lancar",
+                Value = "REF_CAT_JOURNAL_CURRENTASSET"
+            });
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_FIXEDASSET",
+                Name = "Fixed Asset Journal Category",
+                Description = "Kategori akun jurnal Aktiva Tetap",
+                Value = "REF_CAT_JOURNAL_FIXEDASSET"
+            });
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_OBLIGATION",
+                Name = "Obligation Journal Category",
+                Description = "Kategori akun jurnal Kewajiban",
+                Value = "REF_CAT_JOURNAL_OBLIGATION"
+            });
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_FUND",
+                Name = "Fund Journal Category",
+                Description = "Kategori akun jurnal Modal",
+                Value = "REF_CAT_JOURNAL_FUND"
+            });
+
+            // rugi laba
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_SERVICE",
+                Name = "Service Journal Category",
+                Description = "Kategori akun jurnal Jasa",
+                Value = "REF_CAT_JOURNAL_SERVICE"
+            });
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_COST",
+                Name = "Cost Journal Category",
+                Description = "Kategori akun jurnal Biaya",
+                Value = "REF_CAT_JOURNAL_COST"
+            });
+            context.References.Add(new Reference
+            {
+                ParentId = refCatJournal.Id,
+                Code = "REF_CAT_JOURNAL_INCOME",
+                Name = "Income Journal Category",
+                Description = "Kategori akun jurnal Pendapatan",
+                Value = "REF_CAT_JOURNAL_INCOME"
+            });
+            context.SaveChanges();
+
             // -- Sparepart Category
             Reference refSparepartCategory = context.References.Add(new Reference
             {

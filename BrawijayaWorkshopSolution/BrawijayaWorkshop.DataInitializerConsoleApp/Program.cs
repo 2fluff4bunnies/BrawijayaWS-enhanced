@@ -58,9 +58,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         cmd.CommandText = @"CREATE TABLE `temp_acc` (
                                           `Kode` varchar(100) DEFAULT NULL,
                                           `Nama` varchar(100) DEFAULT NULL,
-                                          `Induk` varchar(100) DEFAULT NULL,
-                                          `ProfitLoss` BIT DEFAULT FALSE,
-                                          `Summary` BIT DEFAULT FALSE
+                                          `Induk` varchar(100) DEFAULT NULL
                                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();
@@ -206,9 +204,9 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
                     {
                         MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`, `IsProfitLoss`, `IsSummaryBalanceSheet`)
+                        cmd.CommandText = @"INSERT INTO journalmasters (`Code`, `Name`, `ParentId`)
                                             SELECT `Kode`, `Nama`,
-                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk), ProfitLoss, Summary
+                                            (SELECT a.Id FROM journalmasters a, temp_acc b WHERE a.Code=b.Induk)
                                             FROM temp_acc";
                         cmd.CommandType = CommandType.Text;
                         conn.Open();

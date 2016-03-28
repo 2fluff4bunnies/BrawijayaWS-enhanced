@@ -42,21 +42,19 @@
             this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
-            this.colIsProfitLoss = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtJournalName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupJournalParent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridJournalMaster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvJournalMaster)).BeginInit();
-            this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.repoCheckBox)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupFilter
@@ -91,23 +89,23 @@
             // 
             this.txtJournalName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtJournalName.Location = new System.Drawing.Point(456, 29);
+            this.txtJournalName.Location = new System.Drawing.Point(444, 29);
             this.txtJournalName.Name = "txtJournalName";
-            this.txtJournalName.Size = new System.Drawing.Size(252, 20);
+            this.txtJournalName.Size = new System.Drawing.Size(264, 20);
             this.txtJournalName.TabIndex = 3;
             this.txtJournalName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtJournalName_KeyDown);
             // 
             // lblJournalName
             // 
-            this.lblJournalName.Location = new System.Drawing.Point(381, 32);
+            this.lblJournalName.Location = new System.Drawing.Point(369, 32);
             this.lblJournalName.Name = "lblJournalName";
-            this.lblJournalName.Size = new System.Drawing.Size(69, 13);
+            this.lblJournalName.Size = new System.Drawing.Size(54, 13);
             this.lblJournalName.TabIndex = 2;
-            this.lblJournalName.Text = "Nama Account";
+            this.lblJournalName.Text = "Nama Akun";
             // 
             // lookupJournalParent
             // 
-            this.lookupJournalParent.Location = new System.Drawing.Point(87, 29);
+            this.lookupJournalParent.Location = new System.Drawing.Point(72, 29);
             this.lookupJournalParent.Name = "lookupJournalParent";
             this.lookupJournalParent.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupJournalParent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -118,7 +116,7 @@
             this.lookupJournalParent.Properties.DisplayMember = "Name";
             this.lookupJournalParent.Properties.HideSelection = false;
             this.lookupJournalParent.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lookupJournalParent.Properties.NullText = "-- Induk Account --";
+            this.lookupJournalParent.Properties.NullText = "-- Pilih Induk Akun --";
             this.lookupJournalParent.Properties.ValueMember = "Id";
             this.lookupJournalParent.Size = new System.Drawing.Size(259, 20);
             this.lookupJournalParent.TabIndex = 1;
@@ -127,9 +125,9 @@
             // 
             this.lblParent.Location = new System.Drawing.Point(12, 32);
             this.lblParent.Name = "lblParent";
-            this.lblParent.Size = new System.Drawing.Size(69, 13);
+            this.lblParent.Size = new System.Drawing.Size(54, 13);
             this.lblParent.TabIndex = 0;
-            this.lblParent.Text = "Induk Account";
+            this.lblParent.Text = "Induk Akun";
             // 
             // btnNewJournal
             // 
@@ -138,9 +136,9 @@
             this.btnNewJournal.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewJournal.Location = new System.Drawing.Point(3, 69);
             this.btnNewJournal.Name = "btnNewJournal";
-            this.btnNewJournal.Size = new System.Drawing.Size(124, 23);
+            this.btnNewJournal.Size = new System.Drawing.Size(117, 23);
             this.btnNewJournal.TabIndex = 3;
-            this.btnNewJournal.Text = "Buat Account Baru";
+            this.btnNewJournal.Text = "Buat Akun Baru";
             this.btnNewJournal.Click += new System.EventHandler(this.btnNewJournal_Click);
             // 
             // gridJournalMaster
@@ -163,9 +161,7 @@
             this.gvJournalMaster.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colJournalCode,
             this.colJournalName,
-            this.colParent,
-            this.colIsProfitLoss,
-            this.gridColumn1});
+            this.colParent});
             this.gvJournalMaster.GridControl = this.gridJournalMaster;
             this.gvJournalMaster.Name = "gvJournalMaster";
             this.gvJournalMaster.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -180,7 +176,7 @@
             this.gvJournalMaster.OptionsView.ShowViewCaption = true;
             this.gvJournalMaster.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colJournalCode, DevExpress.Data.ColumnSortOrder.Ascending)});
-            this.gvJournalMaster.ViewCaption = "Daftar Account";
+            this.gvJournalMaster.ViewCaption = "Daftar Akun Jurnal";
             // 
             // colJournalCode
             // 
@@ -205,6 +201,12 @@
             this.colParent.Name = "colParent";
             this.colParent.Visible = true;
             this.colParent.VisibleIndex = 2;
+            // 
+            // repoCheckBox
+            // 
+            this.repoCheckBox.AutoHeight = false;
+            this.repoCheckBox.Name = "repoCheckBox";
+            this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
             // bgwMain
             // 
@@ -235,30 +237,6 @@
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
-            // colIsProfitLoss
-            // 
-            this.colIsProfitLoss.Caption = "Rugi Laba";
-            this.colIsProfitLoss.ColumnEdit = this.repoCheckBox;
-            this.colIsProfitLoss.FieldName = "IsProfitLoss";
-            this.colIsProfitLoss.Name = "colIsProfitLoss";
-            this.colIsProfitLoss.Visible = true;
-            this.colIsProfitLoss.VisibleIndex = 3;
-            // 
-            // repoCheckBox
-            // 
-            this.repoCheckBox.AutoHeight = false;
-            this.repoCheckBox.Name = "repoCheckBox";
-            this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Neraca Saldo";
-            this.gridColumn1.ColumnEdit = this.repoCheckBox;
-            this.gridColumn1.FieldName = "IsSummaryBalanceSheet";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 4;
-            // 
             // JournalMasterListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,8 +253,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupJournalParent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridJournalMaster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvJournalMaster)).EndInit();
-            this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.repoCheckBox)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -299,8 +277,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colJournalCode;
         private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
         private DevExpress.XtraGrid.Columns.GridColumn colParent;
-        private DevExpress.XtraGrid.Columns.GridColumn colIsProfitLoss;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckBox;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

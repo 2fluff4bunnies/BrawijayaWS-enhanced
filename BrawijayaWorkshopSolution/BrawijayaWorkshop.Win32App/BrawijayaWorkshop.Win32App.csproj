@@ -205,6 +205,12 @@
     <Compile Include="ModulControls\InvoiceListControl.Designer.cs">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\JournalCategoryListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\JournalCategoryListControl.Designer.cs">
+      <DependentUpon>JournalCategoryListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\JournalMasterListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -645,6 +651,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\JournalCategoryListControl.resx">
+      <DependentUpon>JournalCategoryListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>

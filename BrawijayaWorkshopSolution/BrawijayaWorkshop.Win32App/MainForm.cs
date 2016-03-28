@@ -257,6 +257,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iMechanic.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MECHANIC);
             navMasterData.iVehicle.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLE);
             navMasterData.iJournal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
+            navMasterData.iJournalCategory.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
             navMasterData.iManageRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iManageRoleAccess.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USERCONTROL);
@@ -273,6 +274,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
             navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
             navMasterData.iJournal.LinkClicked += iJournal_LinkClicked;
+            navMasterData.iJournalCategory.LinkClicked += iJournalCategory_LinkClicked;
             navMasterData.iManageRole.LinkClicked += iManageRole_LinkClicked;
             navMasterData.iManageRoleAccess.LinkClicked += iManageRoleAccess_LinkClicked;
             navMasterData.iManageUser.LinkClicked += iManageUser_LinkClicked;
@@ -280,6 +282,12 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
             navMasterData.iSpecialSparepart.LinkClicked += iSpecialSparepart_LinkClicked;
             navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
+        }
+
+        private void iJournalCategory_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            JournalCategoryListControl manageJournalCategoryListControl = Bootstrapper.Resolve<JournalCategoryListControl>();
+            ShowUserControl(manageJournalCategoryListControl);
         }
 
         private void iUserList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

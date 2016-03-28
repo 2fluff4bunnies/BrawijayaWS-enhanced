@@ -56,6 +56,8 @@
     <Compile Include="IInvoiceListView.cs" />
     <Compile Include="IGuestBookEditorView.cs" />
     <Compile Include="IGuestBookListView.cs" />
+    <Compile Include="IJournalCategoryEditorView.cs" />
+    <Compile Include="IJournalCategoryListView.cs" />
     <Compile Include="IJournalMasterEditorView.cs" />
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="IJournalTransactionListView.cs" />

@@ -46,6 +46,7 @@
             this.iSpecialSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iJournalCategory = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +70,8 @@
             this.iUserList,
             this.iManageUserRole,
             this.iSpecialSparepart,
-            this.iUsedGood});
+            this.iUsedGood,
+            this.iJournalCategory});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -89,6 +91,7 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iManageUserRole),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iUserList),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournal),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iJournalCategory),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
@@ -192,6 +195,13 @@
             this.imageCollection.Images.SetKeyName(10, "Tire_16x16.png");
             this.imageCollection.Images.SetKeyName(11, "usedgood_16x16.png");
             this.imageCollection.Images.SetKeyName(12, "barcode_16x16.png");
+            this.imageCollection.Images.SetKeyName(13, "category_16x16.png");
+            // 
+            // iJournalCategory
+            // 
+            this.iJournalCategory.Caption = "Kategori Jurnal";
+            this.iJournalCategory.Name = "iJournalCategory";
+            this.iJournalCategory.SmallImageIndex = 13;
             // 
             // MasterDataNavigationControl
             // 
@@ -224,5 +234,6 @@
         public DevExpress.XtraNavBar.NavBarItem iManageUserRole;
         public DevExpress.XtraNavBar.NavBarItem iSpecialSparepart;
         public DevExpress.XtraNavBar.NavBarItem iUsedGood;
+        public DevExpress.XtraNavBar.NavBarItem iJournalCategory;
     }
 }
