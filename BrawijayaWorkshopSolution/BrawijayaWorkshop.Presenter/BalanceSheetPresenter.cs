@@ -1,11 +1,8 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
-using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {

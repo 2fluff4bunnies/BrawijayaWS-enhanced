@@ -35,10 +35,10 @@
             this.iFirstBalance = new DevExpress.XtraNavBar.NavBarItem();
             this.iManualTransaction = new DevExpress.XtraNavBar.NavBarItem();
             this.iJournalTransaction = new DevExpress.XtraNavBar.NavBarItem();
-            this.iHPPList = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
-            this.iProfitLoss = new DevExpress.XtraNavBar.NavBarItem();
             this.iBalanceTotal = new DevExpress.XtraNavBar.NavBarItem();
+            this.iBalanceSheet = new DevExpress.XtraNavBar.NavBarItem();
+            this.iProfitLoss = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarAccounting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -53,9 +53,9 @@
             this.iFirstBalance,
             this.iManualTransaction,
             this.iJournalTransaction,
-            this.iHPPList,
             this.iProfitLoss,
-            this.iBalanceTotal});
+            this.iBalanceTotal,
+            this.iBalanceSheet});
             this.navbarAccounting.Location = new System.Drawing.Point(0, 0);
             this.navbarAccounting.Name = "navbarAccounting";
             this.navbarAccounting.OptionsNavPane.ExpandedWidth = 275;
@@ -72,9 +72,9 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iFirstBalance),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iManualTransaction),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournalTransaction),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iHPPList),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iProfitLoss),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceTotal)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceTotal),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceSheet),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iProfitLoss)});
             this.navbarGroupAccounting.Name = "navbarGroupAccounting";
             // 
             // iFirstBalance
@@ -95,11 +95,23 @@
             this.iJournalTransaction.Name = "iJournalTransaction";
             this.iJournalTransaction.SmallImageIndex = 4;
             // 
-            // iHPPList
+            // iBalanceTotal
             // 
-            this.iHPPList.Caption = "HPP";
-            this.iHPPList.Name = "iHPPList";
-            this.iHPPList.SmallImageIndex = 6;
+            this.iBalanceTotal.Caption = "Neraca Saldo";
+            this.iBalanceTotal.Name = "iBalanceTotal";
+            this.iBalanceTotal.SmallImageIndex = 1;
+            // 
+            // iBalanceSheet
+            // 
+            this.iBalanceSheet.Caption = "Neraca";
+            this.iBalanceSheet.Name = "iBalanceSheet";
+            this.iBalanceSheet.SmallImageIndex = 1;
+            // 
+            // iProfitLoss
+            // 
+            this.iProfitLoss.Caption = "Laba / Rugi";
+            this.iProfitLoss.Name = "iProfitLoss";
+            this.iProfitLoss.SmallImageIndex = 7;
             // 
             // imageCollection
             // 
@@ -112,18 +124,6 @@
             this.imageCollection.Images.SetKeyName(5, "manual_trans_16x16.png");
             this.imageCollection.Images.SetKeyName(6, "hpp_16x16.png");
             this.imageCollection.Images.SetKeyName(7, "profitloss_16x16.png");
-            // 
-            // iProfitLoss
-            // 
-            this.iProfitLoss.Caption = "Laba / Rugi";
-            this.iProfitLoss.Name = "iProfitLoss";
-            this.iProfitLoss.SmallImageIndex = 7;
-            // 
-            // iBalanceTotal
-            // 
-            this.iBalanceTotal.Caption = "Neraca";
-            this.iBalanceTotal.Name = "iBalanceTotal";
-            this.iBalanceTotal.SmallImageIndex = 1;
             // 
             // AccountingNavigationControl
             // 
@@ -146,8 +146,8 @@
         public DevExpress.XtraNavBar.NavBarItem iManualTransaction;
         public DevExpress.XtraNavBar.NavBarGroup navbarGroupAccounting;
         public DevExpress.XtraNavBar.NavBarItem iJournalTransaction;
-        public DevExpress.XtraNavBar.NavBarItem iHPPList;
         public DevExpress.XtraNavBar.NavBarItem iProfitLoss;
         public DevExpress.XtraNavBar.NavBarItem iBalanceTotal;
+        public DevExpress.XtraNavBar.NavBarItem iBalanceSheet;
     }
 }

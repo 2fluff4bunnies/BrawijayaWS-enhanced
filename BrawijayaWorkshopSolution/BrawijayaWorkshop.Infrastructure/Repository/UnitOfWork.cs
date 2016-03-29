@@ -5,14 +5,13 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
 {
     public class UnitOfWork<T> : IUnitOfWork where T : DbContext
     {
-        private T _dbContext;
         private readonly IDatabaseFactory<T> _dbFactory;
 
         protected T DbContext
         {
             get
             {
-                return _dbContext ?? _dbFactory.Get();
+                return _dbFactory.Get();
             }
         }
 

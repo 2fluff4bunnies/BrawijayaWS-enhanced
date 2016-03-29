@@ -52,7 +52,6 @@
     <Compile Include="DebtPaymentListPresenter.cs" />
     <Compile Include="FirstBalanceEditorPresenter.cs" />
     <Compile Include="FirstBalanceListPresenter.cs" />
-    <Compile Include="HPPListPresenter.cs" />
     <Compile Include="InvoiceEditorPresenter.cs" />
     <Compile Include="InvoiceListPresenter.cs" />
     <Compile Include="GuestBookEditorPresenter.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="MechanicEditorPresenter.cs" />
     <Compile Include="MechanicListPresenter.cs" />
     <Compile Include="NotificationListPresenter.cs" />
+    <Compile Include="ProfitLossPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseReturnListPresenter.cs" />
     <Compile Include="PurchasingApprovalPresenter.cs" />

@@ -453,18 +453,24 @@ namespace BrawijayaWorkshop.Win32App
             navAccounting.iFirstBalance.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iJournalTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
-            navAccounting.iHPPList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iProfitLoss.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iBalanceTotal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iBalanceSheet.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
 
             ShowNavigationControl(navAccounting);
 
             navAccounting.iFirstBalance.LinkClicked += iFirstBalance_LinkClicked;
             navAccounting.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
             navAccounting.iJournalTransaction.LinkClicked += iJournalTransaction_LinkClicked;
-            navAccounting.iHPPList.LinkClicked += iHPPList_LinkClicked;
             navAccounting.iProfitLoss.LinkClicked += iProfitLoss_LinkClicked;
             navAccounting.iBalanceTotal.LinkClicked += iBalanceTotal_LinkClicked;
+            navAccounting.iBalanceSheet.LinkClicked += iBalanceSheet_LinkClicked;
+        }
+
+        private void iBalanceSheet_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            BalanceSheetControl balanceSheet = Bootstrapper.Resolve<BalanceSheetControl>();
+            ShowUserControl(balanceSheet);
         }
 
         private void iBalanceTotal_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -475,13 +481,8 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iProfitLoss_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            // TODO: Show Profit Loss
-        }
-
-        private void iHPPList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
-        {
-            HPPListControl hppList = Bootstrapper.Resolve<HPPListControl>();
-            ShowUserControl(hppList);
+            ProfitLossControl profitLoss = Bootstrapper.Resolve<ProfitLossControl>();
+            ShowUserControl(profitLoss);
         }
 
         private void iJournalTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

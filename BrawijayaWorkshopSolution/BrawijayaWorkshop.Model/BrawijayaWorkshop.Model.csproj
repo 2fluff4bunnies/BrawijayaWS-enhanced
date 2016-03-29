@@ -71,7 +71,6 @@
     <Compile Include="DebtPaymentListModel.cs" />
     <Compile Include="FirstBalanceEditorModel.cs" />
     <Compile Include="FirstBalanceListModel.cs" />
-    <Compile Include="HPPListModel.cs" />
     <Compile Include="InvoiceEditorModel.cs" />
     <Compile Include="InvoiceListModel.cs" />
     <Compile Include="GuestBookEditorModel.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="MechanicEditorModel.cs" />
     <Compile Include="MechanicListModel.cs" />
     <Compile Include="NotificationListModel.cs" />
+    <Compile Include="ProfitLossModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseReturnListModel.cs" />
     <Compile Include="PurchasingApprovalModel.cs" />

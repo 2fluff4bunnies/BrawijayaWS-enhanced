@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBalanceBaseView.cs" />
     <Compile Include="IBalanceJournalListView.cs" />
     <Compile Include="IBalanceSheetView.cs" />
     <Compile Include="ICreditPaymentListView.cs" />
@@ -52,7 +53,6 @@
     <Compile Include="IDebtPaymentListView.cs" />
     <Compile Include="IFirstBalanceEditorView.cs" />
     <Compile Include="IFirstBalanceListView.cs" />
-    <Compile Include="IHPPListView.cs" />
     <Compile Include="IInvoiceEditorView.cs" />
     <Compile Include="IInvoiceListView.cs" />
     <Compile Include="IGuestBookEditorView.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
     <Compile Include="INotificationListView.cs" />
+    <Compile Include="IProfitLossView.cs" />
     <Compile Include="IPurchaseReturnListView.cs" />
     <Compile Include="IPurchasingApprovalView.cs" />
     <Compile Include="IPurchasingEditorView.cs" />

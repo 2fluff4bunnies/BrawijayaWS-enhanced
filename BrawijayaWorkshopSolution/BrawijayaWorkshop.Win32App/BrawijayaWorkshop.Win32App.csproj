@@ -199,12 +199,6 @@
     <Compile Include="ModulControls\GuestBookListControl.Designer.cs">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulControls\HPPListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ModulControls\HPPListControl.Designer.cs">
-      <DependentUpon>HPPListControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModulControls\InvoiceListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,6 +246,12 @@
     </Compile>
     <Compile Include="ModulControls\NotificationListControl.Designer.cs">
       <DependentUpon>NotificationListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\ProfitLossControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\ProfitLossControl.Designer.cs">
+      <DependentUpon>ProfitLossControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\PurchaseReturnListControl.cs">
       <SubType>UserControl</SubType>
@@ -667,9 +667,6 @@
     <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModulControls\HPPListControl.resx">
-      <DependentUpon>HPPListControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -693,6 +690,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\NotificationListControl.resx">
       <DependentUpon>NotificationListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\ProfitLossControl.resx">
+      <DependentUpon>ProfitLossControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\PurchaseReturnListControl.resx">
       <DependentUpon>PurchaseReturnListControl.cs</DependentUpon>

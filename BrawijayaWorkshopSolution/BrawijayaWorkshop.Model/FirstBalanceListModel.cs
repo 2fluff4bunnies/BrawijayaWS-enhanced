@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Model
         {
             _balanceJournalRepository = balanceJournalRepository;
             _balanceJournalDetailRespository = balanceJournalDetailRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public BalanceJournalViewModel RetrieveFirstBalance()
