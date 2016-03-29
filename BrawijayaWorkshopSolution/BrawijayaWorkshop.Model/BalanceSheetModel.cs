@@ -57,7 +57,8 @@ namespace BrawijayaWorkshop.Model
                     {
                         if (base.IsCurrentJournalValid(itemBalance.Journal, item.Value))
                         {
-                            detail.Amount += Math.Abs(itemBalance.LastDebit ?? 0 - itemBalance.LastCredit ?? 0);
+                            decimal currentAmount = (itemBalance.LastDebit ?? 0) - (itemBalance.LastCredit ?? 0);
+                            detail.Amount += Math.Abs(currentAmount);
 
                             cachedItems.Add(itemBalance.Id);
                         }
@@ -89,7 +90,8 @@ namespace BrawijayaWorkshop.Model
                     {
                         if (base.IsCurrentJournalValid(itemBalance.Journal, item.Value))
                         {
-                            detail.Amount += Math.Abs(itemBalance.LastDebit ?? 0 - itemBalance.LastCredit ?? 0);
+                            decimal currentAmount = (itemBalance.LastDebit ?? 0) - (itemBalance.LastCredit ?? 0);
+                            detail.Amount += Math.Abs(currentAmount);
 
                             cachedItems.Add(itemBalance.Id);
                         }
@@ -123,7 +125,8 @@ namespace BrawijayaWorkshop.Model
                     {
                         if (base.IsCurrentJournalValid(itemBalance.Journal, item.Value))
                         {
-                            detail.Amount += Math.Abs(itemBalance.LastDebit ?? 0 - itemBalance.LastCredit ?? 0);
+                            decimal currentAmount = (itemBalance.LastDebit ?? 0) - (itemBalance.LastCredit ?? 0);
+                            detail.Amount += Math.Abs(currentAmount);
 
                             cachedItems.Add(itemBalance.Id);
                         }
@@ -155,7 +158,8 @@ namespace BrawijayaWorkshop.Model
                     {
                         if (base.IsCurrentJournalValid(itemBalance.Journal, item.Value))
                         {
-                            detail.Amount += Math.Abs(itemBalance.LastDebit ?? 0 - itemBalance.LastCredit ?? 0);
+                            decimal currentAmount = (itemBalance.LastDebit ?? 0) - (itemBalance.LastCredit ?? 0);
+                            detail.Amount += Math.Abs(currentAmount);
 
                             cachedItems.Add(itemBalance.Id);
                         }

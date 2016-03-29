@@ -33,27 +33,47 @@ namespace BrawijayaWorkshop.Model
             foreach (var itemJournal in listBalanceSheetJournal)
             {
                 BalanceJournalDetailViewModel itemResult = new BalanceJournalDetailViewModel();
+                itemResult.Parent = base.RetrieveBalanceJournalHeaderById(headerId);
                 itemResult.ParentId = headerId;
+
+                JournalMasterViewModel selectedJournal = base.RetrieveJournalByCode(itemJournal.Value);
+                itemResult.Journal = selectedJournal;
+                itemResult.JournalId = selectedJournal.Id;
+
+                itemResult.FirstDebit = 0;
+                itemResult.FirstCredit = 0;
+                itemResult.MutationDebit = 0;
+                itemResult.MutationCredit = 0;
+                itemResult.BalanceAfterMutationDebit = 0;
+                itemResult.BalanceAfterMutationCredit = 0;
+                itemResult.ReconciliationDebit = 0;
+                itemResult.ReconciliationCredit = 0;
+                itemResult.BalanceAfterReconciliationDebit = 0;
+                itemResult.BalanceAfterReconciliationCredit = 0;
+                itemResult.ProfitLossDebit = 0;
+                itemResult.ProfitLossCredit = 0;
+                itemResult.LastDebit = 0;
+                itemResult.LastCredit = 0;
 
                 List<int> cachedItems = new List<int>();
                 foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
                 {
-                    if(base.IsCurrentJournalValid(itemBalance.Journal, itemJournal.Value))
+                    if (base.IsCurrentJournalValid(itemBalance.Journal, itemJournal.Value))
                     {
-                        itemResult.FirstDebit += itemBalance.FirstDebit ?? 0;
-                        itemResult.FirstCredit += itemBalance.FirstCredit ?? 0;
-                        itemResult.MutationDebit += itemBalance.MutationDebit ?? 0;
-                        itemResult.MutationCredit += itemBalance.MutationCredit ?? 0;
-                        itemResult.BalanceAfterMutationDebit += itemBalance.BalanceAfterMutationDebit ?? 0;
-                        itemResult.BalanceAfterMutationCredit += itemBalance.BalanceAfterMutationCredit ?? 0;
-                        itemResult.ReconciliationDebit += itemBalance.ReconciliationDebit ?? 0;
-                        itemResult.ReconciliationCredit += itemBalance.ReconciliationCredit ?? 0;
-                        itemResult.BalanceAfterReconciliationDebit += itemBalance.BalanceAfterReconciliationDebit ?? 0;
-                        itemResult.BalanceAfterReconciliationCredit += itemBalance.BalanceAfterReconciliationCredit ?? 0;
-                        itemResult.ProfitLossDebit += itemBalance.ProfitLossDebit ?? 0;
-                        itemResult.ProfitLossCredit += itemBalance.ProfitLossCredit ?? 0;
-                        itemResult.LastDebit += itemBalance.LastDebit ?? 0;
-                        itemResult.LastCredit += itemBalance.LastCredit ?? 0;
+                        itemResult.FirstDebit += (itemBalance.FirstDebit ?? 0);
+                        itemResult.FirstCredit += (itemBalance.FirstCredit ?? 0);
+                        itemResult.MutationDebit += (itemBalance.MutationDebit ?? 0);
+                        itemResult.MutationCredit += (itemBalance.MutationCredit ?? 0);
+                        itemResult.BalanceAfterMutationDebit += (itemBalance.BalanceAfterMutationDebit ?? 0);
+                        itemResult.BalanceAfterMutationCredit += (itemBalance.BalanceAfterMutationCredit ?? 0);
+                        itemResult.ReconciliationDebit += (itemBalance.ReconciliationDebit ?? 0);
+                        itemResult.ReconciliationCredit += (itemBalance.ReconciliationCredit ?? 0);
+                        itemResult.BalanceAfterReconciliationDebit += (itemBalance.BalanceAfterReconciliationDebit ?? 0);
+                        itemResult.BalanceAfterReconciliationCredit += (itemBalance.BalanceAfterReconciliationCredit ?? 0);
+                        itemResult.ProfitLossDebit += (itemBalance.ProfitLossDebit ?? 0);
+                        itemResult.ProfitLossCredit += (itemBalance.ProfitLossCredit ?? 0);
+                        itemResult.LastDebit += (itemBalance.LastDebit ?? 0);
+                        itemResult.LastCredit += (itemBalance.LastCredit ?? 0);
 
                         cachedItems.Add(itemBalance.Id);
                     }

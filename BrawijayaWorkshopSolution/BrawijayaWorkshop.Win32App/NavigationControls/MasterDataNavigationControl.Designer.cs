@@ -38,6 +38,7 @@
             this.iManageUserRole = new DevExpress.XtraNavBar.NavBarItem();
             this.iUserList = new DevExpress.XtraNavBar.NavBarItem();
             this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
+            this.iJournalCategory = new DevExpress.XtraNavBar.NavBarItem();
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
@@ -46,7 +47,6 @@
             this.iSpecialSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
-            this.iJournalCategory = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -133,9 +133,15 @@
             // 
             // iJournal
             // 
-            this.iJournal.Caption = "Kode Jurnal";
+            this.iJournal.Caption = "Daftar Akun Jurnal";
             this.iJournal.Name = "iJournal";
             this.iJournal.SmallImageIndex = 5;
+            // 
+            // iJournalCategory
+            // 
+            this.iJournalCategory.Caption = "Daftar Kategori Jurnal";
+            this.iJournalCategory.Name = "iJournalCategory";
+            this.iJournalCategory.SmallImageIndex = 13;
             // 
             // iCustomer
             // 
@@ -196,12 +202,6 @@
             this.imageCollection.Images.SetKeyName(11, "usedgood_16x16.png");
             this.imageCollection.Images.SetKeyName(12, "barcode_16x16.png");
             this.imageCollection.Images.SetKeyName(13, "category_16x16.png");
-            // 
-            // iJournalCategory
-            // 
-            this.iJournalCategory.Caption = "Kategori Jurnal";
-            this.iJournalCategory.Name = "iJournalCategory";
-            this.iJournalCategory.SmallImageIndex = 13;
             // 
             // MasterDataNavigationControl
             // 

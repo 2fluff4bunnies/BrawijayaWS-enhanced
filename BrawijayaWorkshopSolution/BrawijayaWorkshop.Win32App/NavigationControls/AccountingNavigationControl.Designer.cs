@@ -91,7 +91,7 @@
             // 
             // iJournalTransaction
             // 
-            this.iJournalTransaction.Caption = "Lihat Semua Transaksi Jurnal";
+            this.iJournalTransaction.Caption = "Daftar Transaksi Jurnal";
             this.iJournalTransaction.Name = "iJournalTransaction";
             this.iJournalTransaction.SmallImageIndex = 4;
             // 

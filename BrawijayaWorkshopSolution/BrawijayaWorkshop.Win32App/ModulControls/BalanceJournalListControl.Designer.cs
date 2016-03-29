@@ -42,11 +42,11 @@
             this.gvBalanceJournal = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.colFirstBalance = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDebitMutation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreditMutation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLastBalance = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -209,59 +209,59 @@
             this.colJournalName.Visible = true;
             this.colJournalName.VisibleIndex = 1;
             // 
-            // repoCheckBox
-            // 
-            this.repoCheckBox.AutoHeight = false;
-            this.repoCheckBox.Name = "repoCheckBox";
-            this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            // 
             // colFirstBalance
             // 
             this.colFirstBalance.Caption = "Saldo Awal";
-            this.colFirstBalance.DisplayFormat.FormatString = "{0:#,#;(#,#)}";
+            this.colFirstBalance.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colFirstBalance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFirstBalance.FieldName = "FirstBalance";
             this.colFirstBalance.Name = "colFirstBalance";
             this.colFirstBalance.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "FirstBalance", "{0:#,#;(#,#)}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "FirstBalance", "{0:#,#;(#,#);0}")});
             this.colFirstBalance.Visible = true;
             this.colFirstBalance.VisibleIndex = 2;
             // 
             // colDebitMutation
             // 
             this.colDebitMutation.Caption = "Debet";
-            this.colDebitMutation.DisplayFormat.FormatString = "{0:#,#}";
+            this.colDebitMutation.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colDebitMutation.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colDebitMutation.FieldName = "BalanceAfterReconciliationDebit";
             this.colDebitMutation.Name = "colDebitMutation";
             this.colDebitMutation.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationDebit", "{0:#,#}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationDebit", "{0:#,#;(#,#);0}")});
             this.colDebitMutation.Visible = true;
             this.colDebitMutation.VisibleIndex = 3;
             // 
             // colCreditMutation
             // 
             this.colCreditMutation.Caption = "Kredit";
-            this.colCreditMutation.DisplayFormat.FormatString = "{0:#,#}";
+            this.colCreditMutation.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colCreditMutation.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCreditMutation.FieldName = "BalanceAfterReconciliationCredit";
             this.colCreditMutation.Name = "colCreditMutation";
             this.colCreditMutation.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationCredit", "{0:#,#}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationCredit", "{0:#,#;(#,#);0}")});
             this.colCreditMutation.Visible = true;
             this.colCreditMutation.VisibleIndex = 4;
             // 
             // colLastBalance
             // 
             this.colLastBalance.Caption = "Saldo Akhir";
-            this.colLastBalance.DisplayFormat.FormatString = "{0:#,#;(#,#)}";
+            this.colLastBalance.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colLastBalance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colLastBalance.FieldName = "LastBalance";
             this.colLastBalance.Name = "colLastBalance";
             this.colLastBalance.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastBalance", "{0:#,#;(#,#)}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LastBalance", "{0:#,#;(#,#);0}")});
             this.colLastBalance.Visible = true;
             this.colLastBalance.VisibleIndex = 5;
+            // 
+            // repoCheckBox
+            // 
+            this.repoCheckBox.AutoHeight = false;
+            this.repoCheckBox.Name = "repoCheckBox";
+            this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
             // BalanceJournalListControl
             // 

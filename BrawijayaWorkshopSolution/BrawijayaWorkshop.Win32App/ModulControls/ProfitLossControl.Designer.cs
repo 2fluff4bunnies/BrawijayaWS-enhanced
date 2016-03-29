@@ -162,6 +162,8 @@
             this.colActivaAmount});
             this.gvActiva.GridControl = this.gridActiva;
             this.gvActiva.GroupCount = 1;
+            this.gvActiva.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Amount", this.colActivaAmount, "{0:#,#;(#,#);0}")});
             this.gvActiva.Name = "gvActiva";
             this.gvActiva.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvActiva.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -172,6 +174,7 @@
             this.gvActiva.OptionsCustomization.AllowColumnMoving = false;
             this.gvActiva.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvActiva.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvActiva.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
             this.gvActiva.OptionsView.ShowFooter = true;
             this.gvActiva.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gvActiva.OptionsView.ShowGroupPanel = false;
@@ -199,12 +202,12 @@
             // colActivaAmount
             // 
             this.colActivaAmount.Caption = "Jumlah";
-            this.colActivaAmount.DisplayFormat.FormatString = "{0:#,#;(#,#)}";
+            this.colActivaAmount.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colActivaAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colActivaAmount.FieldName = "Amount";
             this.colActivaAmount.Name = "colActivaAmount";
             this.colActivaAmount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Amount", "{0:#,#;(#,#)}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Amount", "{0:#,#;(#,#);0}")});
             this.colActivaAmount.Visible = true;
             this.colActivaAmount.VisibleIndex = 1;
             // 

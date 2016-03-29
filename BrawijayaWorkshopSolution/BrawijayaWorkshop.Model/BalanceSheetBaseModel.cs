@@ -82,6 +82,20 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
+        public BalanceJournalViewModel RetrieveBalanceJournalHeaderById(int headerId)
+        {
+            BalanceJournal result = _balanceJournalRepository.GetById(headerId);
+            BalanceJournalViewModel mappedResult = new BalanceJournalViewModel();
+            return Map(result, mappedResult);
+        }
+
+        public JournalMasterViewModel RetrieveJournalByCode(string code)
+        {
+            JournalMaster result = _journalMasterRepository.GetMany(jm => jm.Code == code).FirstOrDefault();
+            JournalMasterViewModel mappedResult = new JournalMasterViewModel();
+            return Map(result, mappedResult);
+        }
+
         public List<BalanceJournalDetailViewModel> RetrieveBalanceJournalDetailsByHeaderId(int headerId)
         {
             List<BalanceJournalDetail> result = _balanceJournalDetailRepository.GetMany(bj => bj.ParentId == headerId).ToList();
@@ -179,20 +193,20 @@ namespace BrawijayaWorkshop.Model
 
                 BalanceJournalDetailViewModel currentViewModel = tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).FirstOrDefault();
                 int currentIndex = tempListBalanceDetailViewModel.IndexOf(currentViewModel);
-                currentViewModel.MutationDebit = currentViewModel.MutationDebit ?? 0;
-                currentViewModel.MutationCredit = currentViewModel.MutationCredit ?? 0;
-                currentViewModel.ReconciliationDebit = currentViewModel.ReconciliationDebit ?? 0;
-                currentViewModel.ReconciliationCredit = currentViewModel.ReconciliationCredit ?? 0;
+                currentViewModel.MutationDebit = (currentViewModel.MutationDebit ?? 0);
+                currentViewModel.MutationCredit = (currentViewModel.MutationCredit ?? 0);
+                currentViewModel.ReconciliationDebit = (currentViewModel.ReconciliationDebit ?? 0);
+                currentViewModel.ReconciliationCredit = (currentViewModel.ReconciliationCredit ?? 0);
 
                 if (!item.Parent.IsReconciliation)
                 {
-                    currentViewModel.MutationCredit += item.Credit ?? 0;
-                    currentViewModel.MutationDebit += item.Debit ?? 0;
+                    currentViewModel.MutationCredit += (item.Credit ?? 0);
+                    currentViewModel.MutationDebit += (item.Debit ?? 0);
                 }
                 else
                 {
-                    currentViewModel.ReconciliationDebit += item.Debit ?? 0;
-                    currentViewModel.ReconciliationCredit += item.Credit ?? 0;
+                    currentViewModel.ReconciliationDebit += (item.Debit ?? 0);
+                    currentViewModel.ReconciliationCredit += (item.Credit ?? 0);
                 }
 
                 tempListBalanceDetailViewModel[currentIndex] = currentViewModel;
@@ -202,12 +216,12 @@ namespace BrawijayaWorkshop.Model
             foreach (var item in tempListBalanceDetailViewModel)
             {
                 // update saldo awal (saldo akhir + mutasi)
-                item.BalanceAfterMutationDebit = item.FirstDebit ?? 0 + item.MutationDebit ?? 0;
-                item.BalanceAfterMutationCredit = item.FirstCredit ?? 0 + item.MutationCredit ?? 0;
+                item.BalanceAfterMutationDebit = (item.MutationDebit ?? 0);
+                item.BalanceAfterMutationCredit = (item.MutationCredit ?? 0);
 
                 decimal totalAfterReconciliation =
-                    (item.BalanceAfterMutationDebit ?? 0 + item.ReconciliationDebit ?? 0) -
-                    (item.BalanceAfterMutationCredit ?? 0 + item.ReconciliationCredit ?? 0);
+                    ((item.BalanceAfterMutationDebit ?? 0) + (item.ReconciliationDebit ?? 0)) -
+                    ((item.BalanceAfterMutationCredit ?? 0) + (item.ReconciliationCredit ?? 0));
                 if (totalAfterReconciliation > 0)
                 {
                     item.BalanceAfterReconciliationDebit = totalAfterReconciliation;
@@ -230,17 +244,12 @@ namespace BrawijayaWorkshop.Model
                 JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
                 if (isProfitLoss)
                 {
-                    item.ProfitLossDebit = item.BalanceAfterReconciliationDebit ?? 0;
-                    item.ProfitLossCredit = item.BalanceAfterReconciliationCredit ?? 0;
-                }
-                else
-                {
-                    item.LastDebit = item.BalanceAfterReconciliationDebit;
-                    item.LastCredit = item.BalanceAfterReconciliationCredit;
+                    item.ProfitLossDebit = (item.BalanceAfterReconciliationDebit ?? 0);
+                    item.ProfitLossCredit = (item.BalanceAfterReconciliationCredit ?? 0);
                 }
 
-                item.LastDebit = item.BalanceAfterReconciliationDebit;
-                item.LastCredit = item.BalanceAfterReconciliationCredit;
+                item.LastDebit = (item.FirstDebit ?? 0) + item.BalanceAfterReconciliationDebit;
+                item.LastCredit = (item.FirstCredit ?? 0) + item.BalanceAfterReconciliationCredit;
             }
 
             // 5. Insert Keb Balance Header & Balance Detail
