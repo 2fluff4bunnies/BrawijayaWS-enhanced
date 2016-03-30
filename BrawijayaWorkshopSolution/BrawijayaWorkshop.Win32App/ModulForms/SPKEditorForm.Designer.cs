@@ -222,8 +222,9 @@
             this.ckeIsContractWork.Name = "ckeIsContractWork";
             this.ckeIsContractWork.Properties.Caption = "Borongan";
             this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.ckeIsContractWork.Size = new System.Drawing.Size(98, 19);
+            this.ckeIsContractWork.Size = new System.Drawing.Size(101, 19);
             this.ckeIsContractWork.TabIndex = 40;
+            this.ckeIsContractWork.CheckedChanged += new System.EventHandler(this.ckeIsContractWork_CheckedChanged);
             // 
             // txtContractPrice
             // 

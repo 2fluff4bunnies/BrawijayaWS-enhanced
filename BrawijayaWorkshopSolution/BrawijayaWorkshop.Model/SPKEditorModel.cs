@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -23,6 +24,8 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
+        private IInvoiceRepository _invoiceRepository;
+        private IInvoiceDetailRepository _invoiceDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -33,6 +36,8 @@ namespace BrawijayaWorkshop.Model
             ISpecialSparepartRepository specialSparepartRepository,
             ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IVehicleWheelRepository vehicleWheelRepository,
+            IInvoiceRepository invoiceRepository,
+            IInvoiceDetailRepository invoiceDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -48,6 +53,8 @@ namespace BrawijayaWorkshop.Model
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _specialSparepartRepository = specialSparepartRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
+            _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -140,6 +147,8 @@ namespace BrawijayaWorkshop.Model
             List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList, int userId, bool isNeedApproval)
         {
             DateTime serverTime = DateTime.Now;
+            Invoice insertedInvoice = new Invoice();
+            bool isSPKSales = spk.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE;
 
             if (parentSPK != null)
             {
@@ -157,19 +166,20 @@ namespace BrawijayaWorkshop.Model
                 Map(parentSPK, entity);
 
                 _SPKRepository.Update(entity);
+
             }
 
             string code = "SPK-";
 
-            switch (spk.CategoryReferenceId)
+            switch (spk.CategoryReference.Code)
             {
-                case 20: code = code + "S";
+                case DbConstant.REF_SPK_CATEGORY_SERVICE: code = code + "S";
                     break;
-                case 21: code = code + "P";
+                case DbConstant.REF_SPK_CATEGORY_REPAIR: code = code + "R";
                     break;
-                case 22: code = code + "L";
+                case DbConstant.REF_SPK_CATEGORY_SALE: code = code + "L";
                     break;
-                case 23: code = code + "I";
+                case DbConstant.REF_SPK_CATEGORY_INVENTORY: code = code + "I";
                     break;
             }
 
@@ -188,7 +198,31 @@ namespace BrawijayaWorkshop.Model
 
             spk.Status = (int)DbConstant.DefaultDataStatus.Active;
             spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
-            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
+
+            if (isSPKSales)
+            {
+                spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
+
+                //insert invoice
+
+                Invoice invc = new Invoice();
+
+                invc.TotalPrice = spk.TotalSparepartPrice;
+                invc.PaymentStatus = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+                invc.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                invc.CreateDate = serverTime;
+                invc.ModifyDate = serverTime;
+                invc.ModifyUserId = userId;
+                invc.CreateUserId = userId;
+
+                insertedInvoice = _invoiceRepository.Add(invc);
+            }
+            else
+            {
+                spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
+            }
+
             spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
 
             SPK entityChild = new SPK();
@@ -238,7 +272,7 @@ namespace BrawijayaWorkshop.Model
 
                     SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
                     Map(spkSparepartDetail, entityNewSparepartDetail);
-                    _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
+                    SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
 
                     if (!isNeedApproval)
                     {
@@ -254,7 +288,29 @@ namespace BrawijayaWorkshop.Model
                             sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
                         }
 
-                        _sparepartDetailRepository.Update(sparepartDetail);
+                         _sparepartDetailRepository.Update(sparepartDetail);
+                    }
+
+                    //insert invoice detail
+
+                    if (isSPKSales)
+                    {
+                        foreach (var detailSp in spkSparepartDetailList)
+                        {
+                            InvoiceDetail invcDtl = new InvoiceDetail();
+
+                            invcDtl.Invoice = insertedInvoice;
+                            invcDtl.SPKDetailSparepartDetail = insertedSPKSpDtl;
+                            invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+                            invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                            invcDtl.CreateDate = serverTime;
+                            invcDtl.ModifyDate = serverTime;
+                            invcDtl.ModifyUserId = userId;
+                            invcDtl.CreateUserId = userId;
+
+                            _invoiceDetailRepository.Add(invcDtl);
+                        }
                     }
                 }
             }
@@ -267,8 +323,11 @@ namespace BrawijayaWorkshop.Model
 
             _unitOfWork.SaveChanges();
 
-            return spk;
+            SPKViewModel mappedResult = new SPKViewModel();
+
+            return Map(insertedSPK, mappedResult);
         }
+
 
         public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
         {

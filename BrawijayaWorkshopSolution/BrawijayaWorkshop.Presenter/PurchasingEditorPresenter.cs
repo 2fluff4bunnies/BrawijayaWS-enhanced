@@ -49,7 +49,7 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
-        public bool IsSparepartWheel(int sparepartId)
+        public bool IsSparepartSpecial(int sparepartId)
         {
             return Model.IsSparepartWheel(sparepartId);
         }

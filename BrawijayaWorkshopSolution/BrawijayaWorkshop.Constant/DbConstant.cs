@@ -172,7 +172,8 @@ namespace BrawijayaWorkshop.Constant
         public enum SPKCompletionStatus
         { 
             InProgress = 0,
-            Completed = 1
+            Completed = 1,
+            Invoiced = 2,
         }
 
         public enum PurchasingStatus

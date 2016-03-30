@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -18,7 +19,8 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailSparepartDetailRepository _SPKDetailSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
-        private IMechanicRepository _mechanicRepository;
+        private IInvoiceRepository _invoiceRepository;
+        private IInvoiceDetailRepository _invoiceDetailRepository;
         private IUnitOfWork _unitOfWork;
         private ISettingRepository _settingRepository;
 
@@ -26,7 +28,10 @@ namespace BrawijayaWorkshop.Model
             ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
-            IMechanicRepository mechanicRepository, ISettingRepository settingRepository, IUnitOfWork unitOfWork)
+            ISettingRepository settingRepository,
+            IInvoiceRepository invoiceRepository,
+            IInvoiceDetailRepository invoiceDetailRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _referenceRepository = referenceRepository;
@@ -36,8 +41,9 @@ namespace BrawijayaWorkshop.Model
             _SPKDetailSparepartDetailRepository = SPKDetailSparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
-            _mechanicRepository = mechanicRepository;
             _settingRepository = settingRepository;
+            _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -47,13 +53,6 @@ namespace BrawijayaWorkshop.Model
             List<SPKDetailSparepartViewModel> mappedResult = new List<SPKDetailSparepartViewModel>();
             return Map(result, mappedResult);
         }
-
-        //public List<SPKDetailMechanic> GetSPKMechanicList(int spkId)
-        //{
-        //    List<SPKDetailMechanic> result = _SPKDetailMechanicRepository.GetMany(sms => sms.SPKId == spkId).ToList();
-
-        //    return result;
-        //}
 
         public List<SPKDetailSparepartDetailViewModel> GetSPKSparepartDetailList(int spkId)
         {
@@ -267,6 +266,43 @@ namespace BrawijayaWorkshop.Model
             Map(spk, entity);
 
             _SPKRepository.Update(entity);
+
+            Invoice invc = new Invoice();
+
+            invc.TotalPrice = spk.TotalSparepartPrice;
+            invc.PaymentStatus = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+            invc.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+            invc.CreateDate = serverTime;
+            invc.ModifyDate = serverTime;
+            invc.ModifyUserId = userId;
+            invc.CreateUserId = userId;
+
+            Invoice insertedInvoice = _invoiceRepository.Add(invc);
+
+            List<SPKDetailSparepart> SPKSpList = _SPKDetailSparepartRepository.GetMany(sp => sp.SPKId == spk.Id).ToList();
+
+            foreach (SPKDetailSparepart spkSp in SPKSpList)
+            {
+                List<SPKDetailSparepartDetail> SPKSpDetailList = _SPKDetailSparepartDetailRepository.GetMany(spdt => spdt.SPKDetailSparepartId == spkSp.Id).ToList();
+
+                foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)
+                {
+                    InvoiceDetail invcDtl = new InvoiceDetail();
+
+                    invcDtl.Invoice = insertedInvoice;
+                    invcDtl.SPKDetailSparepartDetail.Id = spkSpDtl.Id;
+                    invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+                    invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                    invcDtl.CreateDate = serverTime;
+                    invcDtl.ModifyDate = serverTime;
+                    invcDtl.ModifyUserId = userId;
+                    invcDtl.CreateUserId = userId;
+
+                    _invoiceDetailRepository.Add(invcDtl);
+                }
+            }
 
             _unitOfWork.SaveChanges();
         }

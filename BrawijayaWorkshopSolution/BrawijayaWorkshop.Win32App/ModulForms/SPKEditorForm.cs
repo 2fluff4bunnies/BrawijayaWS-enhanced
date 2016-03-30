@@ -6,6 +6,7 @@ using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.PrintItems;
 using BrawijayaWorkshop.Win32App.Properties;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
@@ -32,7 +33,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public string FingerpringPort { get; set; }
 
-
+        public bool IsSPKSales { get; set; }
+        
         public SPKEditorForm(SPKEditorModel model)
         {
             InitializeComponent();
@@ -57,6 +59,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.TotalSparepartPrice = 0;
 
+            txtContractPrice.Enabled = false;
         }
 
         #region Field Editor
@@ -672,6 +675,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void LookUpVehicle_EditValueChanged(object sender, EventArgs e)
         {
             _presenter.LoadVehicleWheel();
+        }
+
+        private void ckeIsContractWork_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckEdit edit = sender as CheckEdit;
+            bool currenValue = edit.Checked;
+
+            if (currenValue)
+            {
+                txtContractPrice.Enabled = true;
+            }
+            else
+            {
+                txtContractPrice.Enabled = false;
+            }
+           
         }
     }
 }

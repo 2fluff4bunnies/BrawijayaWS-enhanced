@@ -30,16 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKSaleListControl));
-            this.lihatSelengkapnyaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.persetujuanPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.colTotalPricePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colVehicleNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreatedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvSPKSales = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gcSPKSale = new DevExpress.XtraGrid.GridControl();
+            this.gcSPKSales = new DevExpress.XtraGrid.GridControl();
             this.btnNewSale = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
@@ -49,7 +47,7 @@
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -58,35 +56,25 @@
             this.gcFilter.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lihatSelengkapnyaToolStripMenuItem
-            // 
-            this.lihatSelengkapnyaToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
-            this.lihatSelengkapnyaToolStripMenuItem.Name = "lihatSelengkapnyaToolStripMenuItem";
-            this.lihatSelengkapnyaToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.lihatSelengkapnyaToolStripMenuItem.Text = "Lihat Selengkapnya";
-            // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(195, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
             this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsEditData,
-            this.persetujuanPembelianToolStripMenuItem,
-            this.lihatSelengkapnyaToolStripMenuItem});
+            this.cmsEditData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(196, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(130, 26);
             // 
-            // persetujuanPembelianToolStripMenuItem
+            // bgwMain
             // 
-            this.persetujuanPembelianToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.approve_16x16;
-            this.persetujuanPembelianToolStripMenuItem.Name = "persetujuanPembelianToolStripMenuItem";
-            this.persetujuanPembelianToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.persetujuanPembelianToolStripMenuItem.Text = "Persetujuan Pembelian";
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // colTotalPricePurchasing
             // 
@@ -120,7 +108,7 @@
             this.colCreatedDate,
             this.colVehicleNumber,
             this.colTotalPricePurchasing});
-            this.gvSPKSales.GridControl = this.gcSPKSale;
+            this.gvSPKSales.GridControl = this.gcSPKSales;
             this.gvSPKSales.Name = "gvSPKSales";
             this.gvSPKSales.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvSPKSales.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -136,17 +124,17 @@
             this.gvSPKSales.OptionsView.ShowViewCaption = true;
             this.gvSPKSales.ViewCaption = "Daftar Pembelian";
             // 
-            // gcSPKSale
+            // gcSPKSales
             // 
-            this.gcSPKSale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gcSPKSales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSPKSale.Location = new System.Drawing.Point(3, 102);
-            this.gcSPKSale.MainView = this.gvSPKSales;
-            this.gcSPKSale.Name = "gcSPKSale";
-            this.gcSPKSale.Size = new System.Drawing.Size(632, 210);
-            this.gcSPKSale.TabIndex = 7;
-            this.gcSPKSale.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gcSPKSales.Location = new System.Drawing.Point(3, 102);
+            this.gcSPKSales.MainView = this.gvSPKSales;
+            this.gcSPKSales.Name = "gcSPKSales";
+            this.gcSPKSales.Size = new System.Drawing.Size(632, 210);
+            this.gcSPKSales.TabIndex = 7;
+            this.gcSPKSales.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPKSales});
             // 
             // btnNewSale
@@ -159,6 +147,7 @@
             this.btnNewSale.Size = new System.Drawing.Size(144, 23);
             this.btnNewSale.TabIndex = 6;
             this.btnNewSale.Text = "Buat Penjualan Baru";
+            this.btnNewSale.Click += new System.EventHandler(this.btnNewSale_Click);
             // 
             // labelControl1
             // 
@@ -192,6 +181,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtDateFilterFrom
             // 
@@ -234,14 +224,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gcSPKSale);
+            this.Controls.Add(this.gcSPKSales);
             this.Controls.Add(this.btnNewSale);
             this.Controls.Add(this.gcFilter);
             this.Name = "SPKSaleListControl";
             this.Size = new System.Drawing.Size(638, 315);
             this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -255,16 +245,14 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem lihatSelengkapnyaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem persetujuanPembelianToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPricePurchasing;
         private DevExpress.XtraGrid.Columns.GridColumn colVehicleNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCreatedDate;
         private DevExpress.XtraGrid.Views.Grid.GridView gvSPKSales;
-        private DevExpress.XtraGrid.GridControl gcSPKSale;
+        private DevExpress.XtraGrid.GridControl gcSPKSales;
         private DevExpress.XtraEditors.SimpleButton btnNewSale;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
