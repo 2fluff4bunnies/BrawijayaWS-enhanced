@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.gcCreditInfo = new DevExpress.XtraEditors.GroupControl();
             this.cbPaymentType = new DevExpress.XtraEditors.LookUpEdit();
             this.lblPaymentType = new DevExpress.XtraEditors.LabelControl();
@@ -43,7 +46,8 @@
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.txtDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
-            this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.valTotalPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valPaymentMethod = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcCreditInfo)).BeginInit();
             this.gcCreditInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).BeginInit();
@@ -53,6 +57,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valTotalPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).BeginInit();
             this.SuspendLayout();
             // 
             // gcCreditInfo
@@ -74,7 +80,7 @@
             this.gcCreditInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcCreditInfo.Location = new System.Drawing.Point(0, 0);
             this.gcCreditInfo.Name = "gcCreditInfo";
-            this.gcCreditInfo.Size = new System.Drawing.Size(389, 334);
+            this.gcCreditInfo.Size = new System.Drawing.Size(389, 285);
             this.gcCreditInfo.TabIndex = 1;
             this.gcCreditInfo.Text = "Informasi Pembayaran";
             // 
@@ -86,15 +92,17 @@
             this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbPaymentType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
             this.cbPaymentType.Properties.DisplayMember = "Name";
             this.cbPaymentType.Properties.HideSelection = false;
             this.cbPaymentType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbPaymentType.Properties.NullText = "-- Pilih Pembayaran --";
+            this.cbPaymentType.Properties.NullText = "";
             this.cbPaymentType.Properties.ValueMember = "Id";
             this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
             this.cbPaymentType.TabIndex = 15;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Pilih salah satu jenis pembayaran";
+            this.valPaymentMethod.SetValidationRule(this.cbPaymentType, conditionValidationRule1);
             // 
             // lblPaymentType
             // 
@@ -110,6 +118,9 @@
             this.txtTotalPayment.Name = "txtTotalPayment";
             this.txtTotalPayment.Size = new System.Drawing.Size(157, 20);
             this.txtTotalPayment.TabIndex = 13;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Isi total akan dibayar";
+            this.valTotalPayment.SetValidationRule(this.txtTotalPayment, conditionValidationRule2);
             // 
             // lblTotalPayment
             // 
@@ -219,6 +230,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valTotalPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -240,6 +253,7 @@
         private DevExpress.XtraEditors.TextEdit txtCustomer;
         private DevExpress.XtraEditors.LabelControl lblCustomer;
         private DevExpress.XtraEditors.LookUpEdit cbPaymentType;
-        private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valTotalPayment;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPaymentMethod;
     }
 }

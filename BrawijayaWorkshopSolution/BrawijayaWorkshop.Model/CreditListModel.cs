@@ -27,13 +27,16 @@ namespace BrawijayaWorkshop.Model
         public List<InvoiceViewModel> SearchTransaction(DateTime? dateFrom, DateTime? dateTo)
         {
             List<Invoice> result = null;
+
             if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && c.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled).OrderBy(c => c.CreateDate).ToList();
+                dateFrom = dateFrom.Value.Date;
+                dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
+                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.CreateDate).ToList();
             }
             else
             {
-                result = _invoiceRepository.GetMany(c => c.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled).OrderBy(c => c.CreateDate).ToList();
+                result = _invoiceRepository.GetAll().OrderBy(c => c.CreateDate).ToList();
             }
 
             List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();

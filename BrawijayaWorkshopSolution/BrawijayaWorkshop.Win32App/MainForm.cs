@@ -381,6 +381,8 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iUsedGoodTrans.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD_TRANSACTION);
             navTransactionData.iGuestBook.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLE);
             navTransactionData.iDebt.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_DEBT);
+            navTransactionData.iCredit.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_CREDIT);
+            navTransactionData.iInvoice.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_INVOICE);
 
             ShowNavigationControl(navTransactionData);
             // init event navigation
@@ -389,6 +391,20 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iUsedGoodTrans.LinkClicked += iUsedGoodTrans_LinkClicked;
             navTransactionData.iGuestBook.LinkClicked += iGuestBook_LinkClicked;
             navTransactionData.iDebt.LinkClicked += iDebt_LinkClicked;
+            navTransactionData.iCredit.LinkClicked += iCredit_LinkClicked;
+            navTransactionData.iInvoice.LinkClicked += iInvoice_LinkClicked;
+        }
+
+        void iInvoice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            InvoiceListControl listInvoice = Bootstrapper.Resolve<InvoiceListControl>();
+            ShowUserControl(listInvoice);
+        }
+
+        void iCredit_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            CreditListControl listCredit = Bootstrapper.Resolve<CreditListControl>();
+            ShowUserControl(listCredit);
         }
 
         void iDebt_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

@@ -27,8 +27,11 @@ namespace BrawijayaWorkshop.Model
         public List<PurchasingViewModel> SearchTransaction(DateTime? dateFrom, DateTime? dateTo)
         {
             List<Purchasing> result = null;
+
             if (dateFrom.HasValue && dateTo.HasValue)
             {
+                dateFrom = dateFrom.Value.Date;
+                dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
                 result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo).OrderBy(c => c.Date).ToList();
             }
             else

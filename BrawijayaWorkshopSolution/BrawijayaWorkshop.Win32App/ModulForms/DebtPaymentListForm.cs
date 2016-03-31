@@ -38,8 +38,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvDebtPayment.FocusedRowChanged += gvDebtPayment_FocusedRowChanged;
 
             // init editor control accessibility
-            cmsEdit.Enabled = true;//AllowInsert;
-            cmsDelete.Enabled = true;//AllowEdit;
+            cmsEdit.Enabled = AllowInsert;
+            cmsDelete.Enabled = AllowEdit;
 
             this.Load += DebtPaymentListControl_Load;
         }
@@ -192,10 +192,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Deleting debt: " + SelectedTransaction.Description);
+                    if (_selectedTransaction == TransactionListData.First())
+                    {
+                        this.ShowError("Data pembayaran purchasing tidak dapat diubah pada menu ini");
+                    }
+                    else
+                    {
+                        MethodBase.GetCurrentMethod().Info("Deleting debt: " + SelectedTransaction.Description);
 
-                    _presenter.DeleteData();
-                    RefreshDataView();
+                        _presenter.DeleteData();
+                        RefreshDataView();
+                    } 
                 }
                 catch (Exception ex)
                 {

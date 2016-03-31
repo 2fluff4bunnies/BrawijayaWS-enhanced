@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Presenter
         public CreditListPresenter(ICreditListView view, CreditListModel model)
             : base(view, model) { }
 
-        public void LoadSPKList()
+        public void LoadInvoiceList()
         {
             View.InvoiceListData = Model.SearchTransaction(View.DateFromFilter, View.DateToFilter);
         }

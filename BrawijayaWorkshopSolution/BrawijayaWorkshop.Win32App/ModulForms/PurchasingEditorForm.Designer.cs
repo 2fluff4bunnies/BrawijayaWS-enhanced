@@ -113,8 +113,8 @@
             // 
             // gridPurchasingDetail
             // 
-            this.gridPurchasingDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.gridPurchasingDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridPurchasingDetail.Location = new System.Drawing.Point(5, 124);
             this.gridPurchasingDetail.MainView = this.gvPurchasingDetail;

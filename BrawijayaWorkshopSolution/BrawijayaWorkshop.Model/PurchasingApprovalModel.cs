@@ -171,7 +171,7 @@ namespace BrawijayaWorkshop.Model
             transaction.PaymentMethodId = purchasing.PaymentMethodId;
             Transaction transactionInserted = _transactionRepository.Add(transaction);
 
-            switch (purchasing.PaymentMethod.Code)
+            switch (refSelected.Code)
             {
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_EKONOMI:
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA1:
@@ -180,15 +180,15 @@ namespace BrawijayaWorkshop.Model
                         // Bank Kredit --> Karena berkurang
                         TransactionDetail detailBank = new TransactionDetail();
                         detailBank.Credit = purchasing.TotalHasPaid;
-                        if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_EKONOMI)
+                        if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_EKONOMI)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.01").FirstOrDefault().Id;
                         }
-                        else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA1)
+                        else if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA1)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.02").FirstOrDefault().Id;
                         }
-                        else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA2)
+                        else if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_BANK_BCA2)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.03").FirstOrDefault().Id;
                         }
@@ -220,6 +220,13 @@ namespace BrawijayaWorkshop.Model
                     detailUangMukaBertambahKarenaKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
                     detailUangMukaBertambahKarenaKas.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailUangMukaBertambahKarenaKas);
+
+                    // Uang Muka Kredit --> Karena berkurang
+                    TransactionDetail detailUangMukaBerkurangKarenaKas = new TransactionDetail();
+                    detailUangMukaBerkurangKarenaKas.Credit = purchasing.TotalHasPaid;
+                    detailUangMukaBerkurangKarenaKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
+                    detailUangMukaBerkurangKarenaKas.Parent = transactionInserted;
+                    _transactionDetailRepository.Add(detailUangMukaBerkurangKarenaKas); 
                     break;
 
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI:
@@ -250,6 +257,13 @@ namespace BrawijayaWorkshop.Model
                         detailUangMukaBertambahKarenaBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
                         detailUangMukaBertambahKarenaBank.Parent = transactionInserted;
                         _transactionDetailRepository.Add(detailUangMukaBertambahKarenaBank);
+
+                        // Uang Muka Kredit --> Karena berkurang
+                        TransactionDetail detailUangMukaBerkurangKarenaBank = new TransactionDetail();
+                        detailUangMukaBerkurangKarenaBank.Credit = purchasing.TotalHasPaid;
+                        detailUangMukaBerkurangKarenaBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
+                        detailUangMukaBerkurangKarenaBank.Parent = transactionInserted;
+                        _transactionDetailRepository.Add(detailUangMukaBerkurangKarenaBank);
                         break;
                     }
                     

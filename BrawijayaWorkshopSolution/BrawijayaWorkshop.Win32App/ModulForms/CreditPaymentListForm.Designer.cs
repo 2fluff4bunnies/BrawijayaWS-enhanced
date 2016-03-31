@@ -1,4 +1,4 @@
-﻿namespace BrawijayaWorkshop.Win32App.ModulForms
+﻿namespace BrawijayaWorkshop.Win32App.ModulControls
 {
     partial class CreditPaymentListForm
     {
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditPaymentListForm));
             this.gcCreditPaymentListInfo = new DevExpress.XtraEditors.GroupControl();
             this.gridCreditPayment = new DevExpress.XtraGrid.GridControl();
             this.gvCreditPayment = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -44,6 +46,9 @@
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcCreditPaymentListInfo)).BeginInit();
             this.gcCreditPaymentListInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCreditPayment)).BeginInit();
@@ -53,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gcCreditPaymentListInfo
@@ -109,10 +115,13 @@
             this.gvCreditPayment.OptionsView.ShowGroupPanel = false;
             this.gvCreditPayment.OptionsView.ShowViewCaption = true;
             this.gvCreditPayment.ViewCaption = "Daftar Pembayaran";
+            this.gvCreditPayment.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvCreditPayment_PopupMenuShowing);
+            this.gvCreditPayment.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvCreditPayment_FocusedRowChanged);
             // 
             // colPaymentDate
             // 
             this.colPaymentDate.Caption = "Tanggal Pmbayaran";
+            this.colPaymentDate.FieldName = "TransactionDate";
             this.colPaymentDate.Name = "colPaymentDate";
             this.colPaymentDate.Visible = true;
             this.colPaymentDate.VisibleIndex = 0;
@@ -120,6 +129,9 @@
             // colTotalPayment
             // 
             this.colTotalPayment.Caption = "Jumlah Pembayaran";
+            this.colTotalPayment.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPayment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colTotalPayment.FieldName = "TotalPayment";
             this.colTotalPayment.Name = "colTotalPayment";
             this.colTotalPayment.Visible = true;
             this.colTotalPayment.VisibleIndex = 1;
@@ -127,6 +139,7 @@
             // colPaymentType
             // 
             this.colPaymentType.Caption = "Jenis Pembayaran";
+            this.colPaymentType.FieldName = "PaymentMethod.Name";
             this.colPaymentType.Name = "colPaymentType";
             this.colPaymentType.Visible = true;
             this.colPaymentType.VisibleIndex = 2;
@@ -211,14 +224,40 @@
             this.lblTransactionDate.TabIndex = 12;
             this.lblTransactionDate.Text = "Tanggal Transaksi";
             // 
+            // cmsEditor
+            // 
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsEdit,
+            this.cmsDelete});
+            this.cmsEditor.Name = "cmsEditor";
+            this.cmsEditor.Size = new System.Drawing.Size(136, 48);
+            // 
+            // cmsEdit
+            // 
+            this.cmsEdit.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEdit.Name = "cmsEdit";
+            this.cmsEdit.Size = new System.Drawing.Size(135, 22);
+            this.cmsEdit.Text = "Ubah Data";
+            this.cmsEdit.Click += new System.EventHandler(this.cmsEditData_Click);
+            // 
+            // cmsDelete
+            // 
+            this.cmsDelete.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDelete.Name = "cmsDelete";
+            this.cmsDelete.Size = new System.Drawing.Size(135, 22);
+            this.cmsDelete.Text = "Hapus Data";
+            this.cmsDelete.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
             // CreditPaymentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 367);
             this.Controls.Add(this.gcCreditPaymentListInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreditPaymentListForm";
             this.Text = "Daftar Pembayaran Piutang";
+            this.Load += new System.EventHandler(this.CreditPaymentListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcCreditPaymentListInfo)).EndInit();
             this.gcCreditPaymentListInfo.ResumeLayout(false);
             this.gcCreditPaymentListInfo.PerformLayout();
@@ -229,6 +268,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -251,6 +291,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentDate;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPayment;
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentType;
+        private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsEdit;
+        private System.Windows.Forms.ToolStripMenuItem cmsDelete;
 
     }
 }

@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.View;
+using System;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
@@ -10,6 +11,14 @@ namespace BrawijayaWorkshop.Presenter
     {
         public InvoiceListPresenter(IInvoiceListView view, InvoiceListModel model)
             : base(view, model) { }
+
+        public void InitData()
+        {
+            View.InvoiceStatusList = GetInvoiceStatusDropdownList();
+            View.DateFromFilter = DateTime.Now;
+            View.DateToFilter = DateTime.Now;
+            View.InvoiceStatusFilter = 9;
+        }
 
         public void LoadInvoiceList()
         {

@@ -13,5 +13,13 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public double FeePctg { get; set; }
         public double SubTotalPrice { get; set; }
+
+        public decimal ItemPrice
+        {
+            get
+            {
+                return SPKDetailSparepartDetail.SparepartDetail.PurchasingDetailId.HasValue ? SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail.Price : SPKDetailSparepartDetail.SparepartDetail.SparepartManualTransaction.Price;
+            }
+        }
     }
 }

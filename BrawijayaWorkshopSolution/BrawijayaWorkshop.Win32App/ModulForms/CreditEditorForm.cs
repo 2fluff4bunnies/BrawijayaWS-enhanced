@@ -18,15 +18,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
             _presenter = new CreditEditorPresenter(this, model);
 
-            // set validation alignment
-            //valCode.SetIconAlignment(txtCode, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valCompanyName.SetIconAlignment(txtCompanyName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valAddress.SetIconAlignment(txtAddress, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valCity.SetIconAlignment(cbCity, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valContact.SetIconAlignment(txtContactName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valPhone.SetIconAlignment(txtPhoneNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-
-            this.Load += CreditEditorForm_Load;
+            valPaymentMethod.SetIconAlignment(cbPaymentType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valTotalPayment.SetIconAlignment(txtTotalPayment, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
         }
 
         private void CreditEditorForm_Load(object sender, EventArgs e)
@@ -69,7 +62,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtTotalTransaction.Text = value.ToString();
+                txtTotalTransaction.Text = value.ToString("#,#");
             }
         }
 
@@ -81,7 +74,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtTotalPaid.Text = value.ToString();
+                txtTotalPaid.Text = value.ToString("#,#");
             }
         }
 
@@ -93,7 +86,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtTotalNotPaid.Text = value.ToString();
+                txtTotalNotPaid.Text = value.ToString("#,#");
             }
         }
 
@@ -105,7 +98,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtTotalPayment.Text = value.ToString();
+                txtTotalPayment.Text = value.ToString("#,#");
             }
         }
 
@@ -138,9 +131,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            //if (valCode.Validate() && valCompanyName.Validate() && valAddress.Validate() &&
-            //    valCity.Validate() && valPhone.Validate() && valContact.Validate())
-            if (true)
+            if (valPaymentMethod.Validate() && valTotalPayment.Validate())
             {
                 try
                 {
@@ -156,17 +147,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public InvoiceViewModel SelectedInvoice { get; set; }
 
-        public InvoiceViewModel SelectedInvoice
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }

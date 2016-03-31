@@ -204,7 +204,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void cbPayment_EditValueChanged(object sender, EventArgs e)
         {
             ReferenceViewModel refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as ReferenceViewModel;
-            SelectedPurchasing.PaymentMethod = refSelected;
             if (refSelected != null)
             {
                 if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS ||

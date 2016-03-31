@@ -5,6 +5,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -45,12 +46,27 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void CreditListControl_Load(object sender, EventArgs e)
         {
+            DateFromFilter = DateTime.Now;
+            DateToFilter = DateTime.Now;
             btnSearch.PerformClick();
         }
 
         private void gvCredit_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedInvoice = gvCredit.GetFocusedRow() as InvoiceViewModel;
+            if (this.SelectedInvoice != null)
+            {
+                if (this.SelectedInvoice.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled)
+                {
+                    cmsNewPayment.Visible = true;
+                    cmsListPayment.Visible = true;
+                }
+                else if (this.SelectedInvoice.Status == (int)DbConstant.PaymentStatus.Settled)
+                {
+                    cmsNewPayment.Visible = false;
+                    cmsListPayment.Visible = true;
+                }
+            }
         }
 
         private void gvCredit_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -84,7 +100,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                txtDateFilterFrom.EditValue = value;
+                txtDateFilterTo.EditValue = value;
             }
         }
 
@@ -136,22 +152,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void txtFilterCompanyName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSearch.PerformClick();
-            }
-        }
-
-
         private void cmsNewPayment_Click(object sender, EventArgs e)
         {
             if (_selectedInvoice != null)
             {
-                //CreditEditorForm editor = Bootstrapper.Resolve<CreditEditorForm>();
-                //editor.SelectedCredit = _selectedCredit;
-                //editor.ShowDialog(this);
+                CreditEditorForm editor = Bootstrapper.Resolve<CreditEditorForm>();
+                editor.SelectedInvoice = SelectedInvoice;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -161,9 +168,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedInvoice != null)
             {
-                //CreditEditorForm editor = Bootstrapper.Resolve<CreditEditorForm>();
-                //editor.SelectedCredit = _selectedCredit;
-                //editor.ShowDialog(this);
+                CreditPaymentListForm list = Bootstrapper.Resolve<CreditPaymentListForm>();
+                list.SelectedInvoice = SelectedInvoice;
+                list.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -173,7 +180,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             try
             {
-                _presenter.LoadSPKList();
+                _presenter.LoadInvoiceList();
             }
             catch (Exception ex)
             {
@@ -195,6 +202,20 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Credit selesai", true);
+        }
+
+        private void gvCredit_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            ColumnView view = sender as ColumnView;
+            if (e.Column.FieldName == "PaymentStatus" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "PaymentStatus");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Belum Lunas"; break;
+                    case 1: e.DisplayText = "Lunas"; break;
+                }
+            }
         }
     }
 }

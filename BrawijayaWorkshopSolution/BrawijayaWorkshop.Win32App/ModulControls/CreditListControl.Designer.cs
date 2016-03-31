@@ -40,12 +40,14 @@
             this.gvCredit = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLicense = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreditAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -82,6 +84,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // labelControl1
             // 
@@ -145,8 +148,10 @@
             this.gvCredit.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colTransDate,
             this.colCustomer,
+            this.colLicense,
             this.colTotalPrice,
-            this.colCreditAmount});
+            this.colCreditAmount,
+            this.colStatus});
             this.gvCredit.GridControl = this.gridCredit;
             this.gvCredit.Name = "gvCredit";
             this.gvCredit.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -161,12 +166,15 @@
             this.gvCredit.OptionsView.EnableAppearanceEvenRow = true;
             this.gvCredit.OptionsView.ShowGroupPanel = false;
             this.gvCredit.OptionsView.ShowViewCaption = true;
-            this.gvCredit.ViewCaption = "Daftar Piutang";
+            this.gvCredit.ViewCaption = "Daftar Transaksi Penjualan";
+            this.gvCredit.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvCredit_PopupMenuShowing);
+            this.gvCredit.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvCredit_FocusedRowChanged);
+            this.gvCredit.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvCredit_CustomColumnDisplayText);
             // 
             // colTransDate
             // 
             this.colTransDate.Caption = "Tgl Transaksi";
-            this.colTransDate.FieldName = "Date";
+            this.colTransDate.FieldName = "TransactionDate";
             this.colTransDate.Name = "colTransDate";
             this.colTransDate.Visible = true;
             this.colTransDate.VisibleIndex = 0;
@@ -174,24 +182,43 @@
             // colCustomer
             // 
             this.colCustomer.Caption = "Customer";
-            this.colCustomer.FieldName = "Customer.Name";
+            this.colCustomer.FieldName = "SPK.Vehicle.Customer.CompanyName";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.Visible = true;
             this.colCustomer.VisibleIndex = 1;
             // 
+            // colLicense
+            // 
+            this.colLicense.Caption = "Nomor Polisi";
+            this.colLicense.FieldName = "SPK.Vehicle.ActiveLicenseNumber";
+            this.colLicense.Name = "colLicense";
+            this.colLicense.Visible = true;
+            this.colLicense.VisibleIndex = 2;
+            // 
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 2;
+            this.colTotalPrice.VisibleIndex = 3;
             // 
             // colCreditAmount
             // 
-            this.colCreditAmount.Caption = "Total Belum Terbayar";
+            this.colCreditAmount.Caption = "Total Terbayar";
+            this.colCreditAmount.DisplayFormat.FormatString = "{0:#,#}";
+            this.colCreditAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colCreditAmount.FieldName = "TotalHasPaid";
             this.colCreditAmount.Name = "colCreditAmount";
             this.colCreditAmount.Visible = true;
-            this.colCreditAmount.VisibleIndex = 3;
+            this.colCreditAmount.VisibleIndex = 4;
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // cmsEditor
             // 
@@ -199,7 +226,7 @@
             this.cmsNewPayment,
             this.cmsListPayment});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(205, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(205, 48);
             // 
             // cmsNewPayment
             // 
@@ -207,6 +234,7 @@
             this.cmsNewPayment.Name = "cmsNewPayment";
             this.cmsNewPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsNewPayment.Text = "Buat Pembayaran";
+            this.cmsNewPayment.Click += new System.EventHandler(this.cmsNewPayment_Click);
             // 
             // cmsListPayment
             // 
@@ -214,6 +242,15 @@
             this.cmsListPayment.Name = "cmsListPayment";
             this.cmsListPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
+            this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "colStatus";
+            this.colStatus.FieldName = "PaymentStatusId";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 5;
             // 
             // CreditListControl
             // 
@@ -223,6 +260,7 @@
             this.Controls.Add(this.gcFilter);
             this.Name = "CreditListControl";
             this.Size = new System.Drawing.Size(636, 315);
+            this.Load += new System.EventHandler(this.CreditListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -255,5 +293,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsNewPayment;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.ToolStripMenuItem cmsListPayment;
+        private DevExpress.XtraGrid.Columns.GridColumn colLicense;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
     }
 }

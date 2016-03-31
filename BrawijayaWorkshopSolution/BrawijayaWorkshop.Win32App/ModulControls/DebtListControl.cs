@@ -38,20 +38,35 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvDebt.FocusedRowChanged += gvDebt_FocusedRowChanged;
 
             // init editor control accessibility
-            cmsNewPayment.Enabled = true;
-            cmsListPayment.Enabled = true;
+            cmsNewPayment.Enabled = AllowInsert;
+            cmsListPayment.Enabled = AllowEdit;
 
             this.Load += DebtListControl_Load;
         }
 
         private void DebtListControl_Load(object sender, EventArgs e)
         {
+            DateFromFilter = DateTime.Now;
+            DateToFilter = DateTime.Now;
             btnSearch.PerformClick();
         }
 
         private void gvDebt_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedPurchasing = gvDebt.GetFocusedRow() as PurchasingViewModel;
+            if (this.SelectedPurchasing != null)
+            {
+                if (this.SelectedPurchasing.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled)
+                {
+                    cmsNewPayment.Visible = true;
+                    cmsListPayment.Visible = true;
+                }
+                else if (this.SelectedPurchasing.Status == (int)DbConstant.PaymentStatus.Settled)
+                {
+                    cmsNewPayment.Visible = false;
+                    cmsListPayment.Visible = true;
+                }
+            }
         }
 
         private void gvDebt_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -85,7 +100,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                txtDateFilterFrom.EditValue = value;
+                txtDateFilterTo.EditValue = value;
             }
         }
 

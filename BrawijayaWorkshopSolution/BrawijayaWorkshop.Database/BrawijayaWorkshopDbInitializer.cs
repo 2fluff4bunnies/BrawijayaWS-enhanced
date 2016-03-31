@@ -357,6 +357,37 @@ namespace BrawijayaWorkshop.Database
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = debtMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = creditMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = invoiceMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = purchaseReturnMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = salesReturnMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+
 
             // admin
             context.RoleAccesses.Add(new RoleAccess
@@ -667,10 +698,10 @@ namespace BrawijayaWorkshop.Database
             });
             context.References.Add(new Reference
             {
-                Code = DbConstant.REF_TRANSTBL_SPK,
-                Name = "SPK Table",
-                Description = "Tabel Transaksi SPK",
-                Value = DbConstant.REF_TRANSTBL_SPK
+                Code = DbConstant.REF_TRANSTBL_INVOICE,
+                Name = "Invoice Table",
+                Description = "Tabel Transaksi Invoice",
+                Value = DbConstant.REF_TRANSTBL_INVOICE
             });
             context.References.Add(new Reference
             {
@@ -761,12 +792,97 @@ namespace BrawijayaWorkshop.Database
                 Code = DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG,
                 Name = "Utang",
                 Description = "Jenis pembayaran untuk pembelian sparepart dengan cara utang",
-                Value = "2.01",
+                Value = "2.01.01.01",
                 ParentId = purchasePaymentMethodRef.Id
             });
             context.SaveChanges();
 
-            // Purchasing Payment Method
+            // Invoice Payment Method
+            Reference invoicePaymentMethodRef = context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD,
+                Name = "Invoice Payment Method",
+                Description = "Jenis pembayaran untuk invoice",
+                Value = DbConstant.REF_INVOICE_PAYMENTMETHOD
+            });
+            context.SaveChanges();
+
+            // Invoice Payment Method Children
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_KAS,
+                Name = "Uang Muka dari Kas",
+                Description = "Jenis pembayaran untuk invoice menggunakan uang muka dari kas",
+                Value = "1.01.01.01",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI,
+                Name = "Uang Muka dari Bank Ekonomi",
+                Description = "Jenis pembayaran untuk invoice menggunakan uang muka dari bank ekonomi",
+                Value = "1.01.02.01",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1,
+                Name = "Uang Muka dari Bank BCA 1",
+                Description = "Jenis pembayaran untuk invoice menggunakan uang muka dari bank bca 1",
+                Value = "1.01.02.02",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2,
+                Name = "Uang Muka dari Bank BCA 2",
+                Description = "Jenis pembayaran untuk invoice menggunakan uang muka dari bank bca 2",
+                Value = "1.01.02.03",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_KAS,
+                Name = "Kas",
+                Description = "Jenis pembayaran untuk invoice menggunakan uang kas",
+                Value = "1.01.01.01",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_BANK_EKONOMI,
+                Name = "Bank Ekonomi",
+                Description = "Jenis pembayaran untuk invoice menggunakan transfer bank ekonomi",
+                Value = "1.01.02.01",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_BANK_BCA1,
+                Name = "Bank BCA 1",
+                Description = "Jenis pembayaran untuk invoice menggunakan transfer bank bca 1",
+                Value = "1.01.02.02",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_BANK_BCA2,
+                Name = "Bank BCA 2",
+                Description = "Jenis pembayaran untuk invoice menggunakan transfer bank bca 2",
+                Value = "1.01.02.03",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG,
+                Name = "Piutang",
+                Description = "Jenis pembayaran untuk invoice dengan cara piutang",
+                Value = "2.01.01.01",
+                ParentId = invoicePaymentMethodRef.Id
+            });
+            context.SaveChanges();
+
+            // Debt Payment Method
             Reference debtPaymentMethodRef = context.References.Add(new Reference
             {
                 Code = DbConstant.REF_DEBT_PAYMENTMETHOD,

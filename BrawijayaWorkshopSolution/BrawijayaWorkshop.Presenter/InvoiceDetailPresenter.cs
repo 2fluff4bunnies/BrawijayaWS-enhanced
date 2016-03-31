@@ -10,9 +10,9 @@ using BrawijayaWorkshop.Runtime;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class InvoiceEditorPresenter : BasePresenter<IInvoiceEditorView, InvoiceEditorModel>
+    public class InvoiceDetailPresenter : BasePresenter<IInvoiceDetailView, InvoiceDetailModel>
     {
-        public InvoiceEditorPresenter(IInvoiceEditorView view, InvoiceEditorModel model)
+        public InvoiceDetailPresenter(IInvoiceDetailView view, InvoiceDetailModel model)
             : base(view, model) { }
 
         public void InitFormData()
@@ -36,23 +36,8 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
-        public void SaveChanges()
+        public void Print()
         {
-            if (View.SelectedInvoice == null)
-            {
-                View.SelectedInvoice = new InvoiceViewModel();
-            }
-
-            View.SelectedInvoice.PaymentMethodId = View.PaymentMethodId;
-            View.SelectedInvoice.TotalHasPaid = View.TotalPayment;
-            View.SelectedInvoice.TotalService = View.TotalService;
-            View.SelectedInvoice.TotalServicePlusFee = View.TotalServicePlusFee;
-            View.SelectedInvoice.TotalPrice = View.TotalTransaction;
-
-            if (View.SelectedInvoice.Id > 0)
-            {
-                Model.UpdateInvoice(View.SelectedInvoice, View.ListInvoiceDetail, LoginInformation.UserId);
-            }
         }
     }
 }

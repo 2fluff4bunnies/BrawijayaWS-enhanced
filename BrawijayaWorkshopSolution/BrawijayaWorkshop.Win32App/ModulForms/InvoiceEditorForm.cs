@@ -3,9 +3,13 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using DevExpress.XtraGrid.Views.Base;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
+using System.Windows.Forms;
+using BrawijayaWorkshop.Constant;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -19,12 +23,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new InvoiceEditorPresenter(this, model);
 
             // set validation alignment
-            //valCode.SetIconAlignment(txtCode, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valCompanyName.SetIconAlignment(txtCompanyName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valAddress.SetIconAlignment(txtAddress, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valCity.SetIconAlignment(cbCity, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valContact.SetIconAlignment(txtContactName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            //valPhone.SetIconAlignment(txtPhoneNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valPaymentMethod.SetIconAlignment(cbPaymentType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);;
 
             this.Load += InvoiceEditorForm_Load;
         }
@@ -70,7 +69,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtTotalTransaction.Text = value.ToString();
+                txtTotalTransaction.Text = value.ToString("#,##");
             }
         }
 
@@ -78,11 +77,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalPayment.Text.AsDecimal();
+                return string.IsNullOrEmpty(txtTotalPayment.Text) ? 0 : txtTotalPayment.Text.AsDecimal();
             }
             set
             {
-                txtTotalPayment.Text = value.ToString();
+                txtTotalPayment.Text = value.ToString("#,##");
             }
         }
 
@@ -117,19 +116,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return gridSparepart.DataSource as List<InvoiceDetailViewModel>;
+                return bsSparepart.DataSource as List<InvoiceDetailViewModel>;
             }
             set
             {
-                gridSparepart.DataSource = value;
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        bsSparepart.DataSource = value;
+                        gridSparepart.DataSource = bsSparepart;
+                        gvSparepart.BestFitColumns();
+                    }));
+                }
+                else
+                {
+                    bsSparepart.DataSource = value;
+                    gridSparepart.DataSource = bsSparepart;
+                    gvSparepart.BestFitColumns();
+                }
             }
         }
 
         protected override void ExecuteSave()
         {
-            //if (valCode.Validate() && valCompanyName.Validate() && valAddress.Validate() &&
-            //    valCity.Validate() && valPhone.Validate() && valContact.Validate())
-            if (true)
+            if (valPaymentMethod.Validate() && this.TotalPayment <= this.TotalTransaction)
             {
                 try
                 {
@@ -142,6 +153,162 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Invoice: '" + SelectedInvoice.Id + "'", ex);
                     this.ShowError("Proses simpan data Invoice: '" + SelectedInvoice.Id + "' gagal!");
                 }
+            }
+        }
+
+
+        public decimal TotalSparepart
+        {
+            get
+            {
+                return txtTotalSparepart.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalSparepart.Text = value.ToString("#,##");
+            }
+        }
+
+        public decimal TotalSparepartPlusFee
+        {
+            get
+            {
+                return txtTotalSparepartPlusFee.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalSparepartPlusFee.Text = value.ToString("#,##");
+            }
+        }
+
+        public decimal TotalService
+        {
+            get
+            {
+                return txtTotalService.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalService.Text = value.ToString("#,##");
+            }
+        }
+        public decimal TotalServicePlusFee
+        {
+            get
+            {
+                return txtTotalServicePlusFee.Text.AsDecimal();
+            }
+            set
+            {
+                txtTotalServicePlusFee.Text = value.ToString("#,##");
+            }
+        }
+
+        public bool IsApplyToAll
+        {
+            get
+            {
+                return chkApplyToAll.Checked;
+            }
+            set
+            {
+                chkApplyToAll.Checked = value;
+            }
+        }
+
+        public double MasterFee
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(txtMasterFee.Text) ? txtMasterFee.Text.AsDouble() : 0;
+            }
+            set
+            {
+                txtMasterFee.Text = value.ToString();
+            }
+        }
+
+        private void txtMasterFee_EditValueChanged(object sender, EventArgs e)
+        {
+            if(chkApplyToAll.Checked)
+            {
+                foreach (var itemInvoice in ListInvoiceDetail)
+                {
+                    itemInvoice.FeePctg = MasterFee.AsDouble();
+                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
+                }
+                TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
+                TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
+            }
+        }
+
+        private void chkApplyToAll_EditValueChanged(object sender, EventArgs e)
+        {
+            if(chkApplyToAll.Checked)
+            {
+                List<InvoiceDetailViewModel> list = ListInvoiceDetail;
+                foreach (var itemInvoice in list)
+                {
+                    itemInvoice.FeePctg = MasterFee.AsDouble();
+                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
+                }
+                ListInvoiceDetail = list;
+                TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
+                TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
+            }
+        }
+
+        private void gvSparepart_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName != "FeePctg") return;
+            double cellValue = e.Value.AsDouble();
+            if (MasterFee != cellValue)
+            {
+                chkApplyToAll.Checked = false;
+            }
+            List<InvoiceDetailViewModel> list = ListInvoiceDetail;
+            foreach (var itemInvoice in list)
+            {
+                itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
+            }
+            ListInvoiceDetail = list; 
+            TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
+            TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+            TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
+        }
+
+        private void cbPaymentType_EditValueChanged(object sender, EventArgs e)
+        {
+            ReferenceViewModel refSelected = (sender as DevExpress.XtraEditors.LookUpEdit).GetSelectedDataRow() as ReferenceViewModel;
+            if (refSelected != null)
+            {
+                if (refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_KAS ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1 ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2 ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG)
+                {
+                    TotalPayment = 0;
+                }
+                else
+                {
+                    TotalPayment = TotalTransaction;
+                }
+
+                if (refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_KAS ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1 ||
+                    refSelected.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2)
+                {
+                    txtTotalPayment.ReadOnly = false;
+                }
+                else
+                {
+                    txtTotalPayment.ReadOnly = true;
+                }
+
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
-    public interface IInvoiceEditorView : IView
+    public interface IInvoiceDetailView : IView
     {
         InvoiceViewModel SelectedInvoice { get; set; }
         DateTime Date { get; set; }
@@ -18,8 +18,6 @@ namespace BrawijayaWorkshop.View
         decimal TotalTransaction { get; set; }
         decimal TotalPayment { get; set; }
         int PaymentMethodId { get; set; }
-        bool IsApplyToAll { get; set; }
-        double MasterFee { get; set; }
 
         List<InvoiceDetailViewModel> ListInvoiceDetail { get; set; }
         List<ReferenceViewModel> ListPaymentMethod { get; set; }

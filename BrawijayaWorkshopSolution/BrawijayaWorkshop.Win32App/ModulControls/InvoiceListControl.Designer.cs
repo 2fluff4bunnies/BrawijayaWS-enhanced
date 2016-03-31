@@ -42,6 +42,7 @@
             this.gvInvoice = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colVehicle = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -92,10 +93,10 @@
             this.cbStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Metode")});
-            this.cbStatus.Properties.DisplayMember = "Name";
-            this.cbStatus.Properties.NullText = "All";
-            this.cbStatus.Properties.ValueMember = "Id";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Metode")});
+            this.cbStatus.Properties.DisplayMember = "Description";
+            this.cbStatus.Properties.NullText = "";
+            this.cbStatus.Properties.ValueMember = "Status";
             this.cbStatus.Size = new System.Drawing.Size(93, 20);
             this.cbStatus.TabIndex = 10;
             // 
@@ -123,6 +124,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // labelControl1
             // 
@@ -172,6 +174,7 @@
             this.gvInvoice.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colTransDate,
             this.colCustomer,
+            this.colVehicle,
             this.colStatus});
             this.gvInvoice.GridControl = this.gridInvoice;
             this.gvInvoice.Name = "gvInvoice";
@@ -188,11 +191,12 @@
             this.gvInvoice.OptionsView.ShowGroupPanel = false;
             this.gvInvoice.OptionsView.ShowViewCaption = true;
             this.gvInvoice.ViewCaption = "Daftar Invoice";
+            this.gvInvoice.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvInvoice_CustomColumnDisplayText);
             // 
             // colTransDate
             // 
             this.colTransDate.Caption = "Tgl Transaksi";
-            this.colTransDate.FieldName = "Date";
+            this.colTransDate.FieldName = "CreateDate";
             this.colTransDate.Name = "colTransDate";
             this.colTransDate.Visible = true;
             this.colTransDate.VisibleIndex = 0;
@@ -200,17 +204,31 @@
             // colCustomer
             // 
             this.colCustomer.Caption = "Customer";
-            this.colCustomer.FieldName = "Customer.Name";
+            this.colCustomer.FieldName = "SPK.Vehicle.Customer.CompanyName";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.Visible = true;
             this.colCustomer.VisibleIndex = 1;
             // 
+            // colVehicle
+            // 
+            this.colVehicle.Caption = "Kendaraan";
+            this.colVehicle.FieldName = "SPK.Vehicle.ActiveLicenseNumber";
+            this.colVehicle.Name = "colVehicle";
+            this.colVehicle.Visible = true;
+            this.colVehicle.VisibleIndex = 2;
+            // 
             // colStatus
             // 
             this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 2;
+            this.colStatus.VisibleIndex = 3;
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
             // cmsEditor
             // 
@@ -219,28 +237,31 @@
             this.cmsEditData,
             this.cmsPrint});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(146, 70);
             // 
             // cmsAddData
             // 
             this.cmsAddData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddData.Name = "cmsAddData";
-            this.cmsAddData.Size = new System.Drawing.Size(152, 22);
+            this.cmsAddData.Size = new System.Drawing.Size(145, 22);
             this.cmsAddData.Text = "Buat Invoice";
+            this.cmsAddData.Click += new System.EventHandler(this.cmsNewData_Click);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(145, 22);
             this.cmsEditData.Text = "Ubah Data";
+            this.cmsEditData.Click += new System.EventHandler(this.cmEditData_Click);
             // 
             // cmsPrint
             // 
             this.cmsPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrint.Name = "cmsPrint";
-            this.cmsPrint.Size = new System.Drawing.Size(152, 22);
+            this.cmsPrint.Size = new System.Drawing.Size(145, 22);
             this.cmsPrint.Text = "Cetak Invoice";
+            this.cmsPrint.Click += new System.EventHandler(this.cmsPrint_Click);
             // 
             // InvoiceListControl
             // 
@@ -250,6 +271,7 @@
             this.Controls.Add(this.gcFilter);
             this.Name = "InvoiceListControl";
             this.Size = new System.Drawing.Size(636, 305);
+            this.Load += new System.EventHandler(this.InvoiceListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -285,6 +307,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsAddData;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsPrint;
+        private DevExpress.XtraGrid.Columns.GridColumn colVehicle;
 
     }
 }

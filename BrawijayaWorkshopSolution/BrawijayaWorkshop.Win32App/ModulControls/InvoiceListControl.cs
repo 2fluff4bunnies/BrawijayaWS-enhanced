@@ -5,6 +5,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -37,22 +38,43 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvInvoice.FocusedRowChanged += gvInvoice_FocusedRowChanged;
 
             // init editor control accessibility
-            cmsAddData.Enabled = AllowInsert;
-            cmsEditData.Enabled = AllowEdit;
-            cmsPrint.Enabled = AllowEdit;
+            cmsAddData.Enabled = true;//tAllowInsert;
+            cmsEditData.Enabled = true;//AllowEdit;
+            cmsPrint.Enabled = true;//AllowEdit;
 
             this.Load += InvoiceListControl_Load;
-            this.InvoiceStatusFilter = 9;
         }
 
         private void InvoiceListControl_Load(object sender, EventArgs e)
         {
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 
         private void gvInvoice_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedInvoice = gvInvoice.GetFocusedRow() as InvoiceViewModel;
+            if(this.SelectedInvoice != null)
+            {
+                if(this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.FeeNotFixed)
+                {
+                    cmsAddData.Visible = true;
+                    cmsEditData.Visible = false;
+                    cmsPrint.Visible = false;
+                }
+                else if(this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
+                {
+                    cmsAddData.Visible = false;
+                    cmsEditData.Visible = true;
+                    cmsPrint.Visible = true;
+                }
+                else
+                {
+                    cmsAddData.Visible = false;
+                    cmsEditData.Visible = false;
+                    cmsPrint.Visible = false;
+                }
+            }
         }
 
         private void gvInvoice_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -86,7 +108,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             set
             {
-                txtDateFilterFrom.EditValue = value;
+                txtDateFilterTo.EditValue = value;
             }
         }
 
@@ -165,9 +187,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedInvoice != null)
             {
-                //InvoiceEditorForm editor = Bootstrapper.Resolve<InvoiceEditorForm>();
-                //editor.SelectedInvoice = _selectedInvoice;
-                //editor.ShowDialog(this);
+                InvoiceEditorForm editor = Bootstrapper.Resolve<InvoiceEditorForm>();
+                editor.SelectedInvoice = _selectedInvoice;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -177,9 +199,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedInvoice != null)
             {
-                //InvoiceEditorForm editor = Bootstrapper.Resolve<InvoiceEditorForm>();
-                //editor.SelectedInvoice = _selectedInvoice;
-                //editor.ShowDialog(this);
+                InvoiceEditorForm editor = Bootstrapper.Resolve<InvoiceEditorForm>();
+                editor.SelectedInvoice = _selectedInvoice;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -189,9 +211,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedInvoice != null)
             {
-                //InvoiceEditorForm editor = Bootstrapper.Resolve<InvoiceEditorForm>();
-                //editor.SelectedInvoice = _selectedInvoice;
-                //editor.ShowDialog(this);
+                InvoiceDetailForm detail = Bootstrapper.Resolve<InvoiceDetailForm>();
+                detail.SelectedInvoice = _selectedInvoice;
+                detail.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -202,7 +224,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             try
             {
                 _presenter.LoadInvoiceList();
-                _presenter.GetInvoiceStatusDropdownList();
             }
             catch (Exception ex)
             {
@@ -224,6 +245,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Invoice selesai", true);
+        }
+
+        private void gvInvoice_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            ColumnView view = sender as ColumnView;
+            if (e.Column.FieldName == "Status" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "Status");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Belum Dibuat"; break;
+                    case 1: e.DisplayText = "Belum Dicetak"; break;
+                    case 2: e.DisplayText = "Telah Dicetak"; break;
+                }
+            }
         }
     }
 }

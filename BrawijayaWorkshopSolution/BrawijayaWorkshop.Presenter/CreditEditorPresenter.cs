@@ -5,6 +5,7 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.Runtime;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -17,12 +18,27 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.ListPaymentMethod = Model.RetrievePaymentMethod();
 
-            if (View.SelectedCredit != null)
+            if (View.SelectedCredit != null && View.SelectedCredit.Id > 0)
             {
-                View.Date = View.SelectedCredit.CreateDate;
-                View.TotalTransaction =  View.SelectedInvoice.TotalPrice;
+                View.SelectedInvoice = Model.GetSelectedInvoiceByTransaction(View.SelectedCredit.PrimaryKeyValue);
+                if (View.SelectedInvoice != null)
+                {
+                    View.Date = View.SelectedInvoice.CreateDate;
+                    View.TotalTransaction = View.SelectedInvoice.TotalPrice;
+                    View.TotalPaid = View.SelectedInvoice.TotalHasPaid;
+                    View.TotalNotPaid = View.SelectedInvoice.TotalPrice - View.SelectedInvoice.TotalHasPaid;
+                    View.CustomerName = View.SelectedInvoice.SPK.Vehicle.Customer.CompanyName;
+                    View.PaymentMethodId = View.SelectedCredit.PaymentMethodId.Value;
+                    View.TotalPayment = View.SelectedCredit.TotalPayment.AsDecimal();
+                }
+            }
+            else
+            {
+                View.Date = View.SelectedInvoice.CreateDate;
+                View.TotalTransaction = View.SelectedInvoice.TotalPrice;
                 View.TotalPaid = View.SelectedInvoice.TotalHasPaid;
                 View.TotalNotPaid = View.SelectedInvoice.TotalPrice - View.SelectedInvoice.TotalHasPaid;
+                View.CustomerName = View.SelectedInvoice.SPK.Vehicle.Customer.CompanyName;
             }
         }
 
@@ -36,14 +52,15 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedCredit.PrimaryKeyValue = View.SelectedInvoice.Id;
             View.SelectedCredit.TotalTransaction = View.TotalTransaction.AsDouble();
             View.SelectedCredit.TotalPayment = View.TotalPayment.AsDouble();
+            View.SelectedCredit.PaymentMethodId = View.PaymentMethodId;
 
             if (View.SelectedCredit.Id > 0)
             {
-                Model.UpdateCredit(View.SelectedCredit);
+                Model.UpdateCredit(View.SelectedCredit, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertCredit(View.SelectedCredit);
+                Model.InsertCredit(View.SelectedCredit, View.SelectedInvoice.TotalPrice, LoginInformation.UserId);
             }
         }
     }
