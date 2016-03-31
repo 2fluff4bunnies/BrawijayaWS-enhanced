@@ -61,8 +61,6 @@
     <Compile Include="BrawijayaWorkshopDbInitializer.cs" />
     <Compile Include="Configurations\CustomerConfiguration.cs" />
     <Compile Include="Configurations\GuestBookConfiguration.cs" />
-    <Compile Include="Configurations\HPPDetailConfiguration.cs" />
-    <Compile Include="Configurations\HPPHeaderConfiguration.cs" />
     <Compile Include="Configurations\InvoiceConfiguration.cs" />
     <Compile Include="Configurations\InvoiceDetailConfiguration.cs" />
     <Compile Include="Configurations\JournalMasterConfiguration.cs" />
@@ -102,8 +100,6 @@
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\GuestBook.cs" />
-    <Compile Include="Entities\HPPDetail.cs" />
-    <Compile Include="Entities\HPPHeader.cs" />
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\InvoiceDetail.cs" />
     <Compile Include="Entities\JournalMaster.cs" />
@@ -149,8 +145,6 @@
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\GuestBookRepostory.cs" />
-    <Compile Include="Repositories\HPPDetailRepository.cs" />
-    <Compile Include="Repositories\HPPHeaderRepository.cs" />
     <Compile Include="Repositories\InvoiceDetailRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\JournalMasterRepository.cs" />

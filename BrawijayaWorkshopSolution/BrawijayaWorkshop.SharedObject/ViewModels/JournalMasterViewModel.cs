@@ -8,9 +8,5 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public string Name { get; set; }
         public int? ParentId { get; set; }
         public JournalMasterViewModel Parent { get; set; }
-
-        public bool IsProfitLoss { get; set; }
-
-        public bool IsSummaryBalanceSheet { get; set; }
     }
 }

@@ -203,7 +203,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (SelectedJournalMaster == null) return;
 
-            if (this.ShowConfirmation("Apakah anda yakin ingin jurnal: '" + SelectedJournalMaster.Name + "'?") == DialogResult.Yes)
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus jurnal: '" + SelectedJournalMaster.Name + "'?") == DialogResult.Yes)
             {
                 try
                 {

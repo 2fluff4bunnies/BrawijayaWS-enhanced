@@ -12,15 +12,35 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    public partial class HPPListControl : BaseAppUserControl, IHPPListView
+    public partial class ProfitLossControl : BaseAppUserControl, IProfitLossView
     {
-        private HPPListPresenter _presenter;
+        private ProfitLossPresenter _presenter;
 
         protected override string ModulName
         {
             get
             {
                 return DbConstant.MODUL_ACCOUNTING;
+            }
+        }
+
+        public List<BalanceSheetDetailViewModel> ProfitLossList
+        {
+            get
+            {
+                return gridActiva.DataSource as List<BalanceSheetDetailViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridActiva.DataSource = value; gvActiva.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridActiva.DataSource = value;
+                    gvActiva.BestFitColumns();
+                }
             }
         }
 
@@ -72,37 +92,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public HPPHeaderViewModel AvailableHeader { get; set; }
+        public BalanceJournalViewModel AvailableBalanceJournal { get; set; }
 
-        public List<HPPDetailViewModel> HPPDetailList
-        {
-            get
-            {
-                return gridHPP.DataSource as List<HPPDetailViewModel>;
-            }
-            set
-            {
-                if (InvokeRequired)
-                {
-                    this.Invoke(new MethodInvoker(delegate { gridHPP.DataSource = value; gvHPP.BestFitColumns(); }));
-                }
-                else
-                {
-                    gridHPP.DataSource = value;
-                    gvHPP.BestFitColumns();
-                }
-            }
-        }
-
-        public HPPListControl(HPPListModel model)
+        public ProfitLossControl(ProfitLossModel model)
         {
             InitializeComponent();
-            _presenter = new HPPListPresenter(this, model);
+            _presenter = new ProfitLossPresenter(this, model);
 
-            this.Load += HPPListControl_Load;
+            this.Load += ProfitLossControl_Load;
         }
 
-        private void HPPListControl_Load(object sender, EventArgs e)
+        private void ProfitLossControl_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
             btnSearch.PerformClick();
@@ -117,9 +117,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (!bgwMain.IsBusy)
             {
-                MethodBase.GetCurrentMethod().Info("Fecthing HPP data...");
-                AvailableHeader = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data HPP...", false);
+                MethodBase.GetCurrentMethod().Info("Fecthing profit loss data...");
+                AvailableBalanceJournal = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Rugi Laba...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
@@ -144,17 +144,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data HPP selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data rugi laba selesai", true);
         }
 
-        private void btnRecalculateHPP_Click(object sender, EventArgs e)
+        private void btnRecalculateBalanceJournal_Click(object sender, EventArgs e)
         {
-            if(!bgwMain.IsBusy && !bgwRecalculate.IsBusy)
+            if (!bgwMain.IsBusy && !bgwRecalculate.IsBusy)
             {
-                btnRecalculateHPP.Enabled = false;
-                MethodBase.GetCurrentMethod().Info("Recalculate HPP data...");
-                AvailableHeader = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang HPP...", false);
+                btnRecalculateBalanceJournal.Enabled = false;
+                MethodBase.GetCurrentMethod().Info("Recalculate balance journal data...");
+                AvailableBalanceJournal = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Menghitung ulang neraca...", false);
                 bgwRecalculate.RunWorkerAsync();
             }
         }
@@ -176,10 +176,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (e.Result is Exception)
             {
-                this.ShowError("Proses menghitung HPP gagal!");
+                this.ShowError("Proses menghitung neraca gagal!");
             }
 
-            btnRecalculateHPP.Enabled = true;
+            btnRecalculateBalanceJournal.Enabled = true;
 
             btnSearch.PerformClick();
         }

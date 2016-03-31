@@ -31,19 +31,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvPurchasingDetail.FocusedRowChanged += gvPurchasingDetail_FocusedRowChanged;
             cbSparepartGv.EditValueChanged += cbSparepartGv_EditValueChanged;
             gvPurchasingDetail.ShowingEditor += gvPurchasingDetail_ShowingEditor;
-            
+
             this.Load += PurchasingEditorForm_Load;
         }
 
         void gvPurchasingDetail_ShowingEditor(object sender, CancelEventArgs e)
         {
             GridView View = sender as GridView;
-            if (View.FocusedColumn.FieldName == "SerialNumber" && !this.SelectedPurchasingDetail.IsWheel)
+            if (View.FocusedColumn.FieldName == "SerialNumber" && !this.SelectedPurchasingDetail.IsSpecialSparepart)
             {
                 e.Cancel = true;
             }
 
-            if (View.FocusedColumn.FieldName == "Qty" && this.SelectedPurchasingDetail.IsWheel)
+            if (View.FocusedColumn.FieldName == "Qty" && this.SelectedPurchasingDetail.IsSpecialSparepart)
             {
                 e.Cancel = true;
             }
@@ -52,16 +52,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void cbSparepartGv_EditValueChanged(object sender, EventArgs e)
         {
             DevExpress.XtraEditors.LookUpEdit lookup = sender as DevExpress.XtraEditors.LookUpEdit;
-            if (_presenter.IsSparepartWheel(lookup.EditValue.AsInteger()))
+            if (_presenter.IsSparepartSpecial(lookup.EditValue.AsInteger()))
             {
-                this.SelectedPurchasingDetail.IsWheel = true;
+                this.SelectedPurchasingDetail.IsSpecialSparepart = true;
                 this.SelectedPurchasingDetail.Qty = 1;
                 this.SelectedPurchasingDetail.SparepartId = lookup.EditValue.AsInteger();
             }
             else
             {
                 this.SelectedPurchasingDetail.Qty = 0;
-                this.SelectedPurchasingDetail.IsWheel = false;
+                this.SelectedPurchasingDetail.IsSpecialSparepart = false;
             }
         }
 
@@ -185,6 +185,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 List<PurchasingDetailViewModel> missingSerialNumber = new List<PurchasingDetailViewModel>();
 
+                List<string> duplicatedSerialNumber = (from item in ListPurchasingDetail
+                                                       select item.SerialNumber).Distinct().ToList();
+
                 bool isValid = false;
                 if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
                 {
@@ -194,12 +197,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     {
                         foreach (var item in this.ListPurchasingDetail)
                         {
-                            if (item.IsWheel && string.IsNullOrEmpty(item.SerialNumber))
+                            if (item.IsSpecialSparepart && string.IsNullOrEmpty(item.SerialNumber))
                             {
                                 missingSerialNumber.Add(item);
                             }
                         }
-                        if (missingSerialNumber.Count == 0)
+                        if (missingSerialNumber.Count == 0 && duplicatedSerialNumber.Count == 0)
                         {
                             isValid = true;
                         }
@@ -214,14 +217,34 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
                 else
                 {
-                    if (missingSerialNumber.Count > 0)
+                    if (missingSerialNumber.Count > 0 || duplicatedSerialNumber.Count > 0)
                     {
-                        string requiredMessage = "";
-                        foreach (var item in missingSerialNumber)
+                        string message = "";
+                        string duplicate = "";
+
+                        if (missingSerialNumber.Count > 0)
                         {
-                            requiredMessage = requiredMessage + item.Sparepart.Name +"\n";
+
+                            foreach (var item in missingSerialNumber)
+                            {
+                                message = message + item.Sparepart.Name + "\n";
+                            }
+
+                            message = "Terdapat sparepart spesial yang belum memiliki serial number : " + message;
                         }
-                        this.ShowWarning("Terdapat ban yang belum memiliki serial number : " + requiredMessage);
+
+                        if (duplicatedSerialNumber.Count > 0)
+                        {
+                            foreach (var item in duplicatedSerialNumber)
+                            {
+                                duplicate = duplicate + item + "\n";
+                            }
+
+                            duplicate = "Terdapat nomor seri sama : " + duplicate;
+
+                        }
+
+                        this.ShowWarning(message + "\n" + duplicate);
                         FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data pembelian gagal", true);
                     }
                     else

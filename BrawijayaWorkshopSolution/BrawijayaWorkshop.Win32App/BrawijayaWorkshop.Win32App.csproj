@@ -163,6 +163,12 @@
     <Compile Include="ModulControls\BalanceJournalListControl.Designer.cs">
       <DependentUpon>BalanceJournalListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\BalanceSheetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\BalanceSheetControl.Designer.cs">
+      <DependentUpon>BalanceSheetControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\CreditListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -193,17 +199,17 @@
     <Compile Include="ModulControls\GuestBookListControl.Designer.cs">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulControls\HPPListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ModulControls\HPPListControl.Designer.cs">
-      <DependentUpon>HPPListControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModulControls\InvoiceListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ModulControls\InvoiceListControl.Designer.cs">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\JournalCategoryListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\JournalCategoryListControl.Designer.cs">
+      <DependentUpon>JournalCategoryListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\JournalMasterListControl.cs">
       <SubType>UserControl</SubType>
@@ -241,6 +247,12 @@
     <Compile Include="ModulControls\NotificationListControl.Designer.cs">
       <DependentUpon>NotificationListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\ProfitLossControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\ProfitLossControl.Designer.cs">
+      <DependentUpon>ProfitLossControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\PurchaseReturnListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -276,6 +288,18 @@
     </Compile>
     <Compile Include="ModulControls\SPKListControl.Designer.cs">
       <DependentUpon>SPKListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\SPKSaleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SPKSaleListControl.Designer.cs">
+      <DependentUpon>SPKSaleListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\SPKScheduleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SPKScheduleListControl.Designer.cs">
+      <DependentUpon>SPKScheduleListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\SupplierListControl.cs">
       <SubType>UserControl</SubType>
@@ -379,6 +403,12 @@
     <Compile Include="ModulForms\GuestBookEditorForm.Designer.cs">
       <DependentUpon>GuestBookEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\JournalCategoryEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\JournalCategoryEditorForm.Designer.cs">
+      <DependentUpon>JournalCategoryEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\JournalMasterEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -468,6 +498,12 @@
     </Compile>
     <Compile Include="ModulForms\SPKEditorForm.Designer.cs">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\SPKScheduleEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKScheduleEditorForm.Designer.cs">
+      <DependentUpon>SPKScheduleEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\SPKViewDetailForm.cs">
       <SubType>Form</SubType>
@@ -613,6 +649,9 @@
     <EmbeddedResource Include="ModulControls\BalanceJournalListControl.resx">
       <DependentUpon>BalanceJournalListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\BalanceSheetControl.resx">
+      <DependentUpon>BalanceSheetControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\CreditListControl.resx">
       <DependentUpon>CreditListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -628,11 +667,11 @@
     <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModulControls\HPPListControl.resx">
-      <DependentUpon>HPPListControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\JournalCategoryListControl.resx">
+      <DependentUpon>JournalCategoryListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\JournalMasterListControl.resx">
       <DependentUpon>JournalMasterListControl.cs</DependentUpon>
@@ -651,6 +690,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\NotificationListControl.resx">
       <DependentUpon>NotificationListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\ProfitLossControl.resx">
+      <DependentUpon>ProfitLossControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\PurchaseReturnListControl.resx">
       <DependentUpon>PurchaseReturnListControl.cs</DependentUpon>
@@ -672,6 +714,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SPKListControl.resx">
       <DependentUpon>SPKListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SPKSaleListControl.resx">
+      <DependentUpon>SPKSaleListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SPKScheduleListControl.resx">
+      <DependentUpon>SPKScheduleListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SupplierListControl.resx">
       <DependentUpon>SupplierListControl.cs</DependentUpon>
@@ -721,6 +769,9 @@
     <EmbeddedResource Include="ModulForms\GuestBookEditorForm.resx">
       <DependentUpon>GuestBookEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\JournalCategoryEditorForm.resx">
+      <DependentUpon>JournalCategoryEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\JournalMasterEditorForm.resx">
       <DependentUpon>JournalMasterEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -756,6 +807,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKEditorForm.resx">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKScheduleEditorForm.resx">
+      <DependentUpon>SPKScheduleEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>

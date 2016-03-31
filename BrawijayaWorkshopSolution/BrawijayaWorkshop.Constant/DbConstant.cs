@@ -97,16 +97,33 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_HPP_JOURNAL_DAILYMECHANIC = "REF_HPP_JOURNAL_DAILYMECHANIC";
         public const string REF_HPP_JOURNAL_OUTSOURCEMECHANIC = "REF_HPP_JOURNAL_OUTSOURCEMECHANIC";
 
-        public const string REF_STOCK_JOURNAL = "REF_STOCK_JOURNAL";
-        public const string REF_STOCK_JOURNAL_SPAREPART = "REF_STOCK_JOURNAL_SPAREPART";
-        public const string REF_STOCK_JOURNAL_DAILYMECHANIC = "REF_STOCK_JOURNAL_DAILYMECHANIC";
-        public const string REF_STOCK_JOURNAL_OUTSOURCEMECHANIC = "REF_STOCK_JOURNAL_OUTSOURCEMECHANIC";
+        // Kategori Jurnal
+        public const string REF_CAT_JOURNAL = "REF_CAT_JOURNAL";
+        // neraca saldo
+        public const string REF_CAT_JOURNAL_BALANCESHEET = "REF_CAT_JOURNAL_BALANCESHEET";
+
+        // neraca
+        public const string REF_CAT_JOURNAL_CURRENTASSET = "REF_CAT_JOURNAL_CURRENTASSET";
+        public const string REF_CAT_JOURNAL_FIXEDASSET = "REF_CAT_JOURNAL_FIXEDASSET";
+        public const string REF_CAT_JOURNAL_OBLIGATION = "REF_CAT_JOURNAL_OBLIGATION";
+        public const string REF_CAT_JOURNAL_FUND = "REF_CAT_JOURNAL_FUND";
+
+        // rugi laba
+        public const string REF_CAT_JOURNAL_SERVICE = "REF_CAT_JOURNAL_SERVICE";
+        public const string REF_CAT_JOURNAL_COST = "REF_CAT_JOURNAL_COST";
+        public const string REF_CAT_JOURNAL_INCOME = "REF_CAT_JOURNAL_INCOME";
+        // End kategori jurnal
 
         public const string SETTING_MINTSTOCK = "S_MINSTOCK";
         public const string SETTING_FINGERPRINT_IPADDRESS = "S_FINGERPRINT_IPADDRESS";
         public const string SETTING_FINGERPRINT_PORT = "S_FINGERPRINT_PORT";
         public const string SETTING_SPK_THRESHOLD_P = "S_SPK_THRESHOLD_P";
         public const string SETTING_SPK_THRESHOLD_S = "S_SPK_THRESHOLD_S";
+
+        public const string REF_SPK_CATEGORY_SERVICE = "REF_SPKCATEGORY_SERVICE";
+        public const string REF_SPK_CATEGORY_REPAIR = "REF_SPKCATEGORY_REPAIR";
+        public const string REF_SPK_CATEGORY_SALE = "REF_SPKCATEGORY_SALE";
+        public const string REF_SPK_CATEGORY_INVENTORY= "REF_SPKCATEGORY_INVENTORY";
 
         public enum AccessTypeEnum
         {
@@ -166,7 +183,8 @@ namespace BrawijayaWorkshop.Constant
         public enum SPKCompletionStatus
         { 
             InProgress = 0,
-            Completed = 1
+            Completed = 1,
+            Invoiced = 2,
         }
 
         public enum PurchasingStatus

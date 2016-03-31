@@ -15,9 +15,5 @@ namespace BrawijayaWorkshop.View
         string Code { get; set; }
 
         string JournalName { get; set; }
-
-        bool IsProfitLoss { get; set; }
-
-        bool IsSummaryBalanceSheet { get; set; }
     }
 }

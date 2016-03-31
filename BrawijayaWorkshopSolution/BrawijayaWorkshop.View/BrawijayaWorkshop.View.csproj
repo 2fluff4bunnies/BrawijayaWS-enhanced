@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBalanceBaseView.cs" />
     <Compile Include="IBalanceJournalListView.cs" />
+    <Compile Include="IBalanceSheetView.cs" />
     <Compile Include="ICreditPaymentListView.cs" />
     <Compile Include="IConfigEditorView.cs" />
     <Compile Include="ICreditEditorView.cs" />
@@ -57,6 +59,8 @@
     <Compile Include="IInvoiceListView.cs" />
     <Compile Include="IGuestBookEditorView.cs" />
     <Compile Include="IGuestBookListView.cs" />
+    <Compile Include="IJournalCategoryEditorView.cs" />
+    <Compile Include="IJournalCategoryListView.cs" />
     <Compile Include="IJournalMasterEditorView.cs" />
     <Compile Include="IJournalMasterListView.cs" />
     <Compile Include="IJournalTransactionListView.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="IMechanicEditorView.cs" />
     <Compile Include="IMechanicListView.cs" />
     <Compile Include="INotificationListView.cs" />
+    <Compile Include="IProfitLossView.cs" />
     <Compile Include="IPurchaseReturnListView.cs" />
     <Compile Include="IPurchasingApprovalView.cs" />
     <Compile Include="IPurchasingEditorView.cs" />
@@ -78,6 +83,9 @@
     <Compile Include="ISalesReturnListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISparepartManualTransactionEditorView.cs" />
+    <Compile Include="ISPKSaleListView.cs" />
+    <Compile Include="ISPKScheduleEditorView.cs" />
+    <Compile Include="ISPKScheduleListView.cs" />
     <Compile Include="ISPKViewDetailView.cs" />
     <Compile Include="ISPKDetailSParepartListView.cs" />
     <Compile Include="ISPKEditorView.cs" />

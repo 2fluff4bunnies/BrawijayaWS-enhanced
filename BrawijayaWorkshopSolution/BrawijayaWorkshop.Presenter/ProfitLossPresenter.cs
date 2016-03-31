@@ -6,9 +6,9 @@ using System;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class HPPListPresenter : BasePresenter<IHPPListView, HPPListModel>
+    public class ProfitLossPresenter : BasePresenter<IProfitLossView, ProfitLossModel>
     {
-        public HPPListPresenter(IHPPListView view, HPPListModel model)
+        public ProfitLossPresenter(IProfitLossView view, ProfitLossModel model)
             : base(view, model) { }
 
         public void InitFormData()
@@ -21,18 +21,16 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadData()
         {
-            if (View.SelectedMonth == 0 || View.SelectedYear == 0) return;
-
-            View.AvailableHeader = Model.RetrieveHPPHeader(View.SelectedMonth, View.SelectedYear);
-            if (View.AvailableHeader != null)
+            View.AvailableBalanceJournal = Model.RetrieveBalanceJournalHeader(View.SelectedMonth, View.SelectedYear);
+            if (View.AvailableBalanceJournal != null)
             {
-                View.HPPDetailList = Model.RetrieveHPPDetailsByHeaderId(View.AvailableHeader.Id);
+                View.ProfitLossList = Model.RetrieveProfitLoss(View.AvailableBalanceJournal.Id);
             }
         }
 
         public void Recalculate()
         {
-            Model.RecalculateHPP(View.SelectedMonth, View.SelectedYear, LoginInformation.UserId);
+            Model.RecalculateBalanceJournal(View.SelectedMonth, View.SelectedYear, LoginInformation.UserId);
         }
     }
 }

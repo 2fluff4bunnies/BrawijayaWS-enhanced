@@ -1,8 +1,10 @@
-﻿using BrawijayaWorkshop.Database.Repositories;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
+using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
-using System;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -14,32 +16,81 @@ namespace BrawijayaWorkshop.Model
             IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository, ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
-            IHPPHeaderRepository hppHeaderRepository, IHPPDetailRepository hppDetailRepository,
             IInvoiceRepository invoiceRepository,
             IUnitOfWork unitOfWork)
             : base(balanceJournalRepository, balanceJournalDetailRepository, journalMasterRepository,
                    referenceRepository, purchasingRepository, sparepartRepository, sparepartDetailRepository,
-                   transactionRepository, transactionDetailRepository, hppHeaderRepository,
-                   hppDetailRepository, invoiceRepository, unitOfWork) { }
+                   transactionRepository, transactionDetailRepository, invoiceRepository, unitOfWork) { }
 
-        public Dictionary<int, string> GenerateMonth()
+        public List<BalanceJournalDetailViewModel> RetrieveFormattedBalanceJournalDetailsByHeaderId(int headerId)
         {
-            Dictionary<int, string> result = new Dictionary<int, string>();
-            for (int i = 1; i <= 12; i++)
-            {
-                result.Add(i, DateTimeFormatInfo.CurrentInfo.GetMonthName(i));
-            }
-            return result;
-        }
+            List<BalanceJournalDetailViewModel> mappedResult = base.RetrieveBalanceJournalDetailsByHeaderId(headerId);
+            List<BalanceJournalDetailViewModel> formattedResult = new List<BalanceJournalDetailViewModel>();
 
-        public List<int> GenerateYear()
-        {
-            List<int> result = new List<int>();
-            for (int i = 2016; i <= DateTime.Today.Year; i++)
+            Reference catBalanceSheetJournal = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_BALANCESHEET).FirstOrDefault();
+            List<Reference> listBalanceSheetJournal = _referenceRepository.GetMany(r => r.ParentId == catBalanceSheetJournal.Id).ToList();
+
+            foreach (var itemJournal in listBalanceSheetJournal)
             {
-                result.Add(i);
+                BalanceJournalDetailViewModel itemResult = new BalanceJournalDetailViewModel();
+                itemResult.Parent = base.RetrieveBalanceJournalHeaderById(headerId);
+                itemResult.ParentId = headerId;
+
+                JournalMasterViewModel selectedJournal = base.RetrieveJournalByCode(itemJournal.Value);
+                itemResult.Journal = selectedJournal;
+                itemResult.JournalId = selectedJournal.Id;
+
+                itemResult.FirstDebit = 0;
+                itemResult.FirstCredit = 0;
+                itemResult.MutationDebit = 0;
+                itemResult.MutationCredit = 0;
+                itemResult.BalanceAfterMutationDebit = 0;
+                itemResult.BalanceAfterMutationCredit = 0;
+                itemResult.ReconciliationDebit = 0;
+                itemResult.ReconciliationCredit = 0;
+                itemResult.BalanceAfterReconciliationDebit = 0;
+                itemResult.BalanceAfterReconciliationCredit = 0;
+                itemResult.ProfitLossDebit = 0;
+                itemResult.ProfitLossCredit = 0;
+                itemResult.LastDebit = 0;
+                itemResult.LastCredit = 0;
+
+                List<int> cachedItems = new List<int>();
+                foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                {
+                    if (base.IsCurrentJournalValid(itemBalance.Journal, itemJournal.Value))
+                    {
+                        itemResult.FirstDebit += (itemBalance.FirstDebit ?? 0);
+                        itemResult.FirstCredit += (itemBalance.FirstCredit ?? 0);
+                        itemResult.MutationDebit += (itemBalance.MutationDebit ?? 0);
+                        itemResult.MutationCredit += (itemBalance.MutationCredit ?? 0);
+                        itemResult.BalanceAfterMutationDebit += (itemBalance.BalanceAfterMutationDebit ?? 0);
+                        itemResult.BalanceAfterMutationCredit += (itemBalance.BalanceAfterMutationCredit ?? 0);
+                        itemResult.ReconciliationDebit += (itemBalance.ReconciliationDebit ?? 0);
+                        itemResult.ReconciliationCredit += (itemBalance.ReconciliationCredit ?? 0);
+                        itemResult.BalanceAfterReconciliationDebit += (itemBalance.BalanceAfterReconciliationDebit ?? 0);
+                        itemResult.BalanceAfterReconciliationCredit += (itemBalance.BalanceAfterReconciliationCredit ?? 0);
+                        itemResult.ProfitLossDebit += (itemBalance.ProfitLossDebit ?? 0);
+                        itemResult.ProfitLossCredit += (itemBalance.ProfitLossCredit ?? 0);
+                        itemResult.LastDebit += (itemBalance.LastDebit ?? 0);
+                        itemResult.LastCredit += (itemBalance.LastCredit ?? 0);
+
+                        cachedItems.Add(itemBalance.Id);
+                    }
+                }
+
+                formattedResult.Add(itemResult);
+
+                foreach (var iCache in cachedItems)
+                {
+                    BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                    int iCacheIndex = mappedResult.IndexOf(current);
+                    current.IsChecked = true;
+                    mappedResult[iCacheIndex] = current;
+                }
             }
-            return result;
+
+            return formattedResult;
         }
     }
 }

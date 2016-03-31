@@ -44,7 +44,7 @@ namespace BrawijayaWorkshop.Utils
         {
             string errorMessage = string.Format(LOGFORMAT, method.GetMethodFullName(), message);
             _log.Error(errorMessage, exception);
-            //SendErrorToDeveloper(false, errorMessage, exception);
+            SendErrorToDeveloper(false, errorMessage, exception);
         }
 
         public static void Debug(this MethodBase method, string message)
@@ -66,7 +66,7 @@ namespace BrawijayaWorkshop.Utils
         {
             string errorMessage = string.Format(LOGFORMAT, method.GetMethodFullName(), message);
             _log.Fatal(errorMessage, exception);
-            //SendErrorToDeveloper(true, errorMessage, exception);
+            SendErrorToDeveloper(true, errorMessage, exception);
         }
 
         private static string GetMethodFullName(this MethodBase method)

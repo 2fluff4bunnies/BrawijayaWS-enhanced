@@ -85,12 +85,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridFirstBalanceDetail.DataSource = value; gvFirstBalanceDetail.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gridFirstBalanceDetail.DataSource = value; gvFirstBalanceDetail.BestFitColumns(); gvFirstBalanceDetail.RefreshData(); }));
                 }
                 else
                 {
                     gridFirstBalanceDetail.DataSource = value;
                     gvFirstBalanceDetail.BestFitColumns();
+                    gvFirstBalanceDetail.RefreshData();
                 }
             }
         }

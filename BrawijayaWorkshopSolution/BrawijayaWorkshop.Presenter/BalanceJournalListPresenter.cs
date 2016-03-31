@@ -27,30 +27,7 @@ namespace BrawijayaWorkshop.Presenter
             View.AvailableBalanceJournal = Model.RetrieveBalanceJournalHeader(View.SelectedMonth, View.SelectedYear);
             if (View.AvailableBalanceJournal != null)
             {
-                List<BalanceJournalDetailViewModel> result = Model.RetrieveBalanceJournalDetailsByHeaderId(View.AvailableBalanceJournal.Id);
-                decimal sumProfitLossDebit = result.Sum(pl => pl.ProfitLossDebit ?? 0);
-                decimal sumProfitLossCredit = result.Sum(pl => pl.ProfitLossCredit ?? 0);
-                decimal sumLastDebit = result.Sum(l => l.LastDebit ?? 0);
-                decimal sumLastCredit = result.Sum(l => l.LastCredit ?? 0);
-
-                decimal sumProfitLossResult = sumProfitLossDebit - sumProfitLossCredit;
-                if (sumProfitLossResult < 0)
-                {
-                    View.ProfitLossDebitTemp = Math.Abs(sumProfitLossResult);
-                    View.LastCreditTemp = View.ProfitLossDebitTemp;
-                }
-                else
-                {
-                    View.ProfitLossCreditTemp = Math.Abs(sumProfitLossResult);
-                    View.LastDebitTemp = View.ProfitLossCreditTemp;
-                }
-
-                View.ProfitLossDebitResult = sumProfitLossDebit + View.ProfitLossDebitTemp ?? sumProfitLossDebit;
-                View.ProfitLossCreditResult = sumProfitLossCredit + View.ProfitLossCreditTemp ?? sumProfitLossCredit;
-
-                View.LastDebitResult = sumLastDebit + View.LastDebitTemp ?? sumLastDebit;
-                View.LastCreditResult = sumLastCredit + View.LastCreditTemp ?? sumLastCredit;
-
+                List<BalanceJournalDetailViewModel> result = Model.RetrieveFormattedBalanceJournalDetailsByHeaderId(View.AvailableBalanceJournal.Id);
                 View.BalanceJournalDetailList = result;
             }
         }

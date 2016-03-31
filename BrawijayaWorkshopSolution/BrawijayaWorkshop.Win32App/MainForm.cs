@@ -257,6 +257,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iMechanic.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MECHANIC);
             navMasterData.iVehicle.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLE);
             navMasterData.iJournal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
+            navMasterData.iJournalCategory.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_JOURNAL);
             navMasterData.iManageRole.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iManageRoleAccess.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCESSIBILITY);
             navMasterData.iManageUser.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USERCONTROL);
@@ -273,6 +274,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iMechanic.LinkClicked += iMechanic_LinkClicked;
             navMasterData.iVehicle.LinkClicked += iVehicle_LinkClicked;
             navMasterData.iJournal.LinkClicked += iJournal_LinkClicked;
+            navMasterData.iJournalCategory.LinkClicked += iJournalCategory_LinkClicked;
             navMasterData.iManageRole.LinkClicked += iManageRole_LinkClicked;
             navMasterData.iManageRoleAccess.LinkClicked += iManageRoleAccess_LinkClicked;
             navMasterData.iManageUser.LinkClicked += iManageUser_LinkClicked;
@@ -280,6 +282,12 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
             navMasterData.iSpecialSparepart.LinkClicked += iSpecialSparepart_LinkClicked;
             navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
+        }
+
+        private void iJournalCategory_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            JournalCategoryListControl manageJournalCategoryListControl = Bootstrapper.Resolve<JournalCategoryListControl>();
+            ShowUserControl(manageJournalCategoryListControl);
         }
 
         private void iUserList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -461,18 +469,24 @@ namespace BrawijayaWorkshop.Win32App
             navAccounting.iFirstBalance.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iManualTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iJournalTransaction.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
-            navAccounting.iHPPList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iProfitLoss.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iBalanceTotal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iBalanceSheet.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
 
             ShowNavigationControl(navAccounting);
 
             navAccounting.iFirstBalance.LinkClicked += iFirstBalance_LinkClicked;
             navAccounting.iManualTransaction.LinkClicked += iManualTransaction_LinkClicked;
             navAccounting.iJournalTransaction.LinkClicked += iJournalTransaction_LinkClicked;
-            navAccounting.iHPPList.LinkClicked += iHPPList_LinkClicked;
             navAccounting.iProfitLoss.LinkClicked += iProfitLoss_LinkClicked;
             navAccounting.iBalanceTotal.LinkClicked += iBalanceTotal_LinkClicked;
+            navAccounting.iBalanceSheet.LinkClicked += iBalanceSheet_LinkClicked;
+        }
+
+        private void iBalanceSheet_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            BalanceSheetControl balanceSheet = Bootstrapper.Resolve<BalanceSheetControl>();
+            ShowUserControl(balanceSheet);
         }
 
         private void iBalanceTotal_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -483,13 +497,8 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iProfitLoss_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            // TODO: Show Profit Loss
-        }
-
-        private void iHPPList_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
-        {
-            HPPListControl hppList = Bootstrapper.Resolve<HPPListControl>();
-            ShowUserControl(hppList);
+            ProfitLossControl profitLoss = Bootstrapper.Resolve<ProfitLossControl>();
+            ShowUserControl(profitLoss);
         }
 
         private void iJournalTransaction_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

@@ -43,14 +43,13 @@
     <Compile Include="ViewModels\ApplicationModulViewModel.cs" />
     <Compile Include="ViewModels\BalanceJournalDetailViewModel.cs" />
     <Compile Include="ViewModels\BalanceJournalViewModel.cs" />
+    <Compile Include="ViewModels\BalanceSheetViewModel.cs" />
     <Compile Include="ViewModels\BaseModifierEntityViewModel.cs" />
     <Compile Include="ViewModels\BaseModifierWithStatusViewModel.cs" />
     <Compile Include="ViewModels\BaseStatusEntityViewModel.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\GuestBookViewModel.cs" />
-    <Compile Include="ViewModels\HPPDetailViewModel.cs" />
-    <Compile Include="ViewModels\HPPHeaderViewModel.cs" />
     <Compile Include="ViewModels\InvoiceDetailViewModel.cs" />
     <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\JournalMasterViewModel.cs" />

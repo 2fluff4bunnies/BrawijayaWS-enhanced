@@ -190,7 +190,7 @@
             // 
             // colSerialNumber
             // 
-            this.colSerialNumber.Caption = "Nomor Seri (Khusus Ban)";
+            this.colSerialNumber.Caption = "Nomor Seri";
             this.colSerialNumber.FieldName = "SerialNumber";
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.Visible = true;
@@ -225,7 +225,7 @@
             this.cbSupplier.Properties.NullText = "";
             this.cbSupplier.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.cbSupplier.Properties.ValueMember = "Id";
-            this.cbSupplier.Size = new System.Drawing.Size(100, 20);
+            this.cbSupplier.Size = new System.Drawing.Size(159, 20);
             this.cbSupplier.TabIndex = 2;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "Pilih salah satu supplier";
