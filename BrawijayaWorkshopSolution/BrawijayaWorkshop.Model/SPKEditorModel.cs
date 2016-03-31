@@ -148,7 +148,9 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
             Invoice insertedInvoice = new Invoice();
-            bool isSPKSales = spk.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE;
+            Reference spkReference = _referenceRepository.GetById(spk.CategoryReferenceId);
+
+            bool isSPKSales = spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE;
 
             if (parentSPK != null)
             {
@@ -171,7 +173,7 @@ namespace BrawijayaWorkshop.Model
 
             string code = "SPK-";
 
-            switch (spk.CategoryReference.Code)
+            switch (spkReference.Code)
             {
                 case DbConstant.REF_SPK_CATEGORY_SERVICE: code = code + "S";
                     break;
@@ -230,16 +232,12 @@ namespace BrawijayaWorkshop.Model
 
             SPK insertedSPK = _SPKRepository.Add(entityChild);
 
-            SPKViewModel insertedSPKViewModel = new SPKViewModel();
-            Map(insertedSPK, insertedSPKViewModel);
-
             foreach (var spkSparepart in spkSparepartList)
             {
                 spkSparepart.CreateDate = serverTime;
                 spkSparepart.CreateUserId = userId;
                 spkSparepart.ModifyDate = serverTime;
                 spkSparepart.ModifyUserId = userId;
-                spkSparepart.SPK = insertedSPKViewModel;
                 spkSparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
 
                 if (!isNeedApproval)
@@ -254,16 +252,15 @@ namespace BrawijayaWorkshop.Model
 
                 SPKDetailSparepart entitySPKDetailSparepart = new SPKDetailSparepart();
                 Map(spkSparepart, entitySPKDetailSparepart);
+                entitySPKDetailSparepart.SPK = insertedSPK;
 
-                SPKDetailSparepart insertedSPKDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
-                SPKDetailSparepartViewModel insertedSPKDetailSparepartViewModel = new SPKDetailSparepartViewModel();
-                Map(insertedSPKDetailSparepart, insertedSPKDetailSparepartViewModel);
+                SPKDetailSparepart insertedSPkDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
 
                 var detailList = spkSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == spkSparepart.SparepartId);
 
                 foreach (var spkSparepartDetail in detailList)
                 {
-                    spkSparepartDetail.SPKDetailSparepart = insertedSPKDetailSparepartViewModel;
+
                     spkSparepartDetail.CreateDate = serverTime;
                     spkSparepartDetail.CreateUserId = userId;
                     spkSparepartDetail.ModifyDate = serverTime;
@@ -272,6 +269,8 @@ namespace BrawijayaWorkshop.Model
 
                     SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
                     Map(spkSparepartDetail, entityNewSparepartDetail);
+                    entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
+
                     SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
 
                     if (!isNeedApproval)
@@ -279,7 +278,8 @@ namespace BrawijayaWorkshop.Model
                         SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(spkSparepartDetail.SparepartDetail.Id);
                         sparepartDetail.ModifyDate = serverTime;
                         sparepartDetail.ModifyUserId = userId;
-                        if (spkSparepartDetail.SPKDetailSparepart.SPK.CategoryReference.Id == 22)
+
+                        if (spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE)
                         {
                             sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
                         }
@@ -288,7 +288,7 @@ namespace BrawijayaWorkshop.Model
                             sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
                         }
 
-                         _sparepartDetailRepository.Update(sparepartDetail);
+                        _sparepartDetailRepository.Update(sparepartDetail);
                     }
 
                     //insert invoice detail

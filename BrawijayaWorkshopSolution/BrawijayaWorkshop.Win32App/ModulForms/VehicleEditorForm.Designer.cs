@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
@@ -53,9 +54,9 @@
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
-            this.FieldsValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
-            this.bsVehicleWheel = new System.Windows.Forms.BindingSource();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.FieldsValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteWheelDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();

@@ -185,8 +185,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 List<PurchasingDetailViewModel> missingSerialNumber = new List<PurchasingDetailViewModel>();
 
-                List<string> duplicatedSerialNumber = (from item in ListPurchasingDetail
-                                                       select item.SerialNumber).Distinct().ToList();
+                List<string> duplicatedSerialNumber = ListPurchasingDetail.GroupBy(x => x.SerialNumber)
+                        .Where(group => group.Count() > 1)
+                        .Select(group => group.Key).ToList();
 
                 bool isValid = false;
                 if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
@@ -201,6 +202,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             {
                                 missingSerialNumber.Add(item);
                             }
+
+
                         }
                         if (missingSerialNumber.Count == 0 && duplicatedSerialNumber.Count == 0)
                         {
@@ -217,27 +220,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
                 else
                 {
-                    if (missingSerialNumber.Count > 0 || duplicatedSerialNumber.Count > 0)
+                    if (missingSerialNumber.Count > 0 || duplicatedSerialNumber.Count > 0 && !string.IsNullOrEmpty(duplicatedSerialNumber[0]))
                     {
                         string message = "";
                         string duplicate = "";
 
                         if (missingSerialNumber.Count > 0)
                         {
-
-                            foreach (var item in missingSerialNumber)
-                            {
-                                message = message + item.Sparepart.Name + "\n";
-                            }
-
-                            message = "Terdapat sparepart spesial yang belum memiliki serial number : " + message;
+                            message = "Terdapat sparepart spesial yang belum memiliki serial number";
                         }
 
-                        if (duplicatedSerialNumber.Count > 0)
+                        if (duplicatedSerialNumber.Count > 0 && !string.IsNullOrEmpty(duplicatedSerialNumber[0]))
                         {
                             foreach (var item in duplicatedSerialNumber)
                             {
-                                duplicate = duplicate + item + "\n";
+                                if (!string.IsNullOrEmpty(item))
+                                {
+                                    duplicate = duplicate + item + "\n";
+                                }
                             }
 
                             duplicate = "Terdapat nomor seri sama : " + duplicate;

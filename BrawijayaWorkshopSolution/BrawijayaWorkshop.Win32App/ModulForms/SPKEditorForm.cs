@@ -60,6 +60,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.TotalSparepartPrice = 0;
 
             txtContractPrice.Enabled = false;
+            groupSparepart.Enabled = false;
         }
 
         #region Field Editor
@@ -407,7 +408,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            if (SparepartToInsert == null || txtQty.EditValue == null)
+            if (SparepartToInsert == null || txtQty.Text == "0" || string.IsNullOrEmpty(txtQty.Text))
             {
                 this.ShowWarning("Sparepart atau Jumlah harus diisi");
                 return;
@@ -646,35 +647,49 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void lookUpSparepart_EditValueChanged(object sender, EventArgs e)
         {
-            //check if special sparepart
-            SpecialSparepartViewModel ss = _presenter.GetSpecialSparepart();
-            if (ss != null)
+            if (this.SparepartId > 0)
             {
-                lookUpSerialNumber.Enabled = true;
-                _presenter.LoadSSDetails(ss.Id);
-                txtQty.Text = "1";
-                txtQty.Enabled = false;
-            }
-            else
-            {
-                lookUpSerialNumber.Enabled = false;
-                txtQty.Text = "0";
-                txtQty.Enabled = true;
-            }
+                //check if special sparepart
+                SpecialSparepartViewModel ss = _presenter.GetSpecialSparepart();
+                if (ss != null)
+                {
+                    lookUpSerialNumber.Enabled = true;
+                    _presenter.LoadSSDetails(ss.Id);
+                    txtQty.Text = "1";
+                    txtQty.Enabled = false;
+                }
+                else
+                {
+                    lookUpSerialNumber.Enabled = false;
+                    txtQty.Text = "0";
+                    txtQty.Enabled = true;
+                }
 
-            //check if used good
-            _presenter.CheckIsUsedSparepartRequired();
-            ckeIsReturnRequired.Enabled = this.IsUsedSparepartRequired;            
+                //check if used good
+                _presenter.CheckIsUsedSparepartRequired();
+                ckeIsReturnRequired.Enabled = this.IsUsedSparepartRequired;
 
-            //get last usage info
-            _presenter.GetLastUsageRecord();
-            lblValLastUsageDate.Text = this.LastUsageRecord.CreateDate.ToShortDateString();
-            lblValLastUsageQty.Text = this.LastUsageRecord.TotalQuantity.ToString();
+                //get last usage info
+                _presenter.GetLastUsageRecord();
+                if (this.LastUsageRecord != null)
+                {
+                    lblValLastUsageDate.Text = this.LastUsageRecord.CreateDate.ToShortDateString();
+                    lblValLastUsageQty.Text = this.LastUsageRecord.TotalQuantity.ToString();
+                }
+            }
         }
 
         private void LookUpVehicle_EditValueChanged(object sender, EventArgs e)
         {
             _presenter.LoadVehicleWheel();
+            if (this.VehicleId > 0)
+            {
+                groupSparepart.Enabled = true;
+            }
+            else
+            {
+                groupSparepart.Enabled = false;
+            }
         }
 
         private void ckeIsContractWork_CheckedChanged(object sender, EventArgs e)
