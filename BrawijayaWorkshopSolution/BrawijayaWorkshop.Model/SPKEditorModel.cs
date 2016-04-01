@@ -507,5 +507,15 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
+
+        public VehicleWheelViewModel GetVehicleWHeelById(int VehicleWheelid)
+        {
+           VehicleWheel entity = _vehicleWheelRepository.GetById(VehicleWheelid);
+
+           VehicleWheelViewModel result = new VehicleWheelViewModel();
+
+           return Map(entity, result);
+        }
+
     }
 }

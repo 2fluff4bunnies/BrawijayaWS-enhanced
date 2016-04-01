@@ -29,6 +29,7 @@ namespace BrawijayaWorkshop.View
         List<SpecialSparepartDetailViewModel> SSDetailList { get; set; }
         List<SpecialSparepartDetailViewModel> WheelDetailList { get; set; }
         List<VehicleWheelViewModel> VehicleWheelList { get; set; }
+        VehicleWheelViewModel SelectedVehicleWheel { get; set; }
 
         int SSDetailId { get; set; }
         string Code { get; set; }

@@ -10,5 +10,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SpecialSparepartDetailViewModel WheelDetail { get; set; }
         public bool IsUsedWheelRetrieved { get; set; }
         public decimal Price { get; set; }
+        public int ReplaceWithWheelDetailId { get; set; }
     }
 }

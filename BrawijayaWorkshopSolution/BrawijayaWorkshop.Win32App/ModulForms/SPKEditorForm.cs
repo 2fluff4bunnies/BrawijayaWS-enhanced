@@ -7,6 +7,7 @@ using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.PrintItems;
 using BrawijayaWorkshop.Win32App.Properties;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
@@ -34,7 +35,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public string FingerpringPort { get; set; }
 
         public bool IsSPKSales { get; set; }
-        
+
         public SPKEditorForm(SPKEditorModel model)
         {
             InitializeComponent();
@@ -53,6 +54,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvSparepart.PopupMenuShowing += gvSparepart_PopupMenuShowing;
             gvSparepart.FocusedRowChanged += gvSparepart_FocusedRowChanged;
 
+            gvVehicleWheel.PopupMenuShowing += gvVehicleWheel_PopupMenuShowing;
+            gvVehicleWheel.FocusedRowChanged += gvVehicleWheel_FocusedRowChanged;
+
 
             SPKSparepartList = new List<SPKDetailSparepartViewModel>();
             SPKSparepartDetailList = new List<SPKDetailSparepartDetailViewModel>();
@@ -61,6 +65,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             txtContractPrice.Enabled = false;
             groupSparepart.Enabled = false;
+
+            //collumn setting for lookup specialSparepart in grid
+            LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
+
+            coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
+            //coll.Add(new LookUpColumnInfo("SparepartDetail.Sparepart.Name", 0, "Sparepart"));
+            lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
+            lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
+            lookupWheelDetailGv.AutoSearchColumnIndex = 1;
         }
 
         #region Field Editor
@@ -338,6 +351,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 lookupWheelDetailGv.DataSource = value;
             }
         }
+
+        public VehicleWheelViewModel SelectedVehicleWheel { get; set; }
         #endregion
 
         #region EmailProperties
@@ -614,6 +629,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        void gvVehicleWheel_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            this.SelectedVehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+        }
+
+        void gvVehicleWheel_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsVehicleWheel.Show(view.GridControl, e.Point);
+            }
+        }
+
         void SPKEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
@@ -705,7 +736,21 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 txtContractPrice.Enabled = false;
             }
-           
+
+        }
+
+        private void cmsVehicleWheelItemReset_Click(object sender, EventArgs e)
+        {
+            int index = this.VehicleWheelList.FindIndex(vw => vw.Id == this.SelectedVehicleWheel.Id);
+            VehicleWheelViewModel vwheel = _presenter.ResetSelectedWheel(this.SelectedVehicleWheel.Id);
+
+            this.VehicleWheelList[index] = vwheel;
+
+            //System.Data.DataRow row = gvVehicleWheel.GetDataRow(gvVehicleWheel.FocusedRowHandle);
+            //row[1] = null;
+
+
+            //_presenter.LoadVehicleWheel();
         }
     }
 }

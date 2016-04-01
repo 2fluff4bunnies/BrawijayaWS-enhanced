@@ -39,6 +39,7 @@
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblContractPrice = new DevExpress.XtraEditors.LabelControl();
@@ -79,6 +80,8 @@
             this.cmsSparepartEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteDataSparepart = new System.Windows.Forms.ToolStripMenuItem();
             this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
+            this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -106,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
+            this.cmsVehicleWheel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -168,6 +172,7 @@
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colWheelDetail,
+            this.colWheelDetailReplace,
             this.colIsUsedGoodReceived,
             this.colPrice});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
@@ -184,12 +189,20 @@
             // 
             // colWheelDetail
             // 
-            this.colWheelDetail.Caption = "Nomor Seri Ban";
-            this.colWheelDetail.ColumnEdit = this.lookupWheelDetailGv;
-            this.colWheelDetail.FieldName = "WheelDetailId";
+            this.colWheelDetail.Caption = "Nomor Seri (Terpasang)";
+            this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
             this.colWheelDetail.VisibleIndex = 0;
+            // 
+            // colWheelDetailReplace
+            // 
+            this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
+            this.colWheelDetailReplace.ColumnEdit = this.lookupWheelDetailGv;
+            this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailId";
+            this.colWheelDetailReplace.Name = "colWheelDetailReplace";
+            this.colWheelDetailReplace.Visible = true;
+            this.colWheelDetailReplace.VisibleIndex = 1;
             // 
             // colIsUsedGoodReceived
             // 
@@ -198,7 +211,7 @@
             this.colIsUsedGoodReceived.FieldName = "IsUsedWheelRetrieved";
             this.colIsUsedGoodReceived.Name = "colIsUsedGoodReceived";
             this.colIsUsedGoodReceived.Visible = true;
-            this.colIsUsedGoodReceived.VisibleIndex = 1;
+            this.colIsUsedGoodReceived.VisibleIndex = 2;
             // 
             // colPrice
             // 
@@ -206,7 +219,7 @@
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 2;
+            this.colPrice.VisibleIndex = 3;
             // 
             // lblContractPrice
             // 
@@ -584,6 +597,21 @@
             this.cmsDeleteDataSparepart.Text = "Hapus Data";
             this.cmsDeleteDataSparepart.Click += new System.EventHandler(this.cmsDeleteDataSparepart_Click);
             // 
+            // cmsVehicleWheel
+            // 
+            this.cmsVehicleWheel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsVehicleWheelItemReset});
+            this.cmsVehicleWheel.Name = "cmsListEditor";
+            this.cmsVehicleWheel.Size = new System.Drawing.Size(130, 26);
+            // 
+            // cmsVehicleWheelItemReset
+            // 
+            this.cmsVehicleWheelItemReset.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources._1459465829_refresh;
+            this.cmsVehicleWheelItemReset.Name = "cmsVehicleWheelItemReset";
+            this.cmsVehicleWheelItemReset.Size = new System.Drawing.Size(129, 22);
+            this.cmsVehicleWheelItemReset.Text = "Reset Data";
+            this.cmsVehicleWheelItemReset.Click += new System.EventHandler(this.cmsVehicleWheelItemReset_Click);
+            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,6 +651,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
+            this.cmsVehicleWheel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -661,7 +690,7 @@
         private DevExpress.XtraEditors.TextEdit txtContractPrice;
         private DevExpress.XtraGrid.GridControl gridVehicleWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
-        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LookUpEdit lookUpSerialNumber;
         private DevExpress.XtraEditors.CheckEdit ckeIsContractWork;
@@ -675,5 +704,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPrice;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit ckeIsUsedWheelRetrieved;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
+        private System.Windows.Forms.ContextMenuStrip cmsVehicleWheel;
+        private System.Windows.Forms.ToolStripMenuItem cmsVehicleWheelItemReset;
     }
 }

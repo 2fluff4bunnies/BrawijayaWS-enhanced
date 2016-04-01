@@ -115,5 +115,10 @@ namespace BrawijayaWorkshop.Presenter
             View.WheelDetailList = Model.RetrieveReadyWheelDetails();
         }
 
+
+        public VehicleWheelViewModel ResetSelectedWheel(int VehicleWheelId)
+        {
+            return Model.GetVehicleWHeelById(VehicleWheelId);
+        }
     }
 }
