@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Model
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
+        private IUsedGoodRepository _usedGoodRepository;
         private IUnitOfWork _unitOfWork;
         private ISettingRepository _settingRepository;
 
@@ -31,6 +32,7 @@ namespace BrawijayaWorkshop.Model
             ISettingRepository settingRepository,
             IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
+            IUsedGoodRepository usedGoodrepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -44,6 +46,7 @@ namespace BrawijayaWorkshop.Model
             _settingRepository = settingRepository;
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
+            _usedGoodRepository = usedGoodrepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -302,6 +305,10 @@ namespace BrawijayaWorkshop.Model
 
                     _invoiceDetailRepository.Add(invcDtl);
                 }
+
+                UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;
+                _usedGoodRepository.Update(foundUsedGood);
             }
 
             _unitOfWork.SaveChanges();

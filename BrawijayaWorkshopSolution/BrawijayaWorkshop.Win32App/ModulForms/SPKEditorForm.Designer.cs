@@ -36,6 +36,7 @@
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
+            this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,7 +71,6 @@
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
             this.LookUpVehicle = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             this.lookUpCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
@@ -102,7 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCategory)).BeginInit();
@@ -134,6 +133,7 @@
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSPK.Controls.Add(this.lblTotalSparepartValue);
             this.groupSPK.Controls.Add(this.gridVehicleWheel);
             this.groupSPK.Controls.Add(this.lblContractPrice);
             this.groupSPK.Controls.Add(this.ckeIsContractWork);
@@ -145,7 +145,6 @@
             this.groupSPK.Controls.Add(this.lblDueDate);
             this.groupSPK.Controls.Add(this.dtpDueDate);
             this.groupSPK.Controls.Add(this.LookUpVehicle);
-            this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
             this.groupSPK.Controls.Add(this.lookUpCategory);
             this.groupSPK.Controls.Add(this.lblTotalSparepart);
             this.groupSPK.Controls.Add(this.lblVehicle);
@@ -154,6 +153,14 @@
             this.groupSPK.Size = new System.Drawing.Size(1156, 417);
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
+            // 
+            // lblTotalSparepartValue
+            // 
+            this.lblTotalSparepartValue.Location = new System.Drawing.Point(1011, 390);
+            this.lblTotalSparepartValue.Name = "lblTotalSparepartValue";
+            this.lblTotalSparepartValue.Size = new System.Drawing.Size(8, 13);
+            this.lblTotalSparepartValue.TabIndex = 41;
+            this.lblTotalSparepartValue.Text = "--";
             // 
             // gridVehicleWheel
             // 
@@ -216,6 +223,8 @@
             // colPrice
             // 
             this.colPrice.Caption = "Harga";
+            this.colPrice.DisplayFormat.FormatString = "#,#";
+            this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
@@ -517,7 +526,6 @@
             this.LookUpVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.LookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Customer.CompanyName", "Customer"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Brand", "Merek"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Tipe")});
@@ -531,20 +539,6 @@
             conditionValidationRule2.ErrorText = "Kendaraan harus dipilih!";
             this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule2);
             this.LookUpVehicle.EditValueChanged += new System.EventHandler(this.LookUpVehicle_EditValueChanged);
-            // 
-            // txtTotalSparepartPrice
-            // 
-            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(1011, 387);
-            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
-            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "#,#";
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
-            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtTotalSparepartPrice.Properties.ReadOnly = true;
-            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(123, 20);
-            this.txtTotalSparepartPrice.TabIndex = 32;
             // 
             // lookUpCategory
             // 
@@ -568,11 +562,11 @@
             // 
             // lblTotalSparepart
             // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(898, 390);
+            this.lblTotalSparepart.Location = new System.Drawing.Point(880, 390);
             this.lblTotalSparepart.Name = "lblTotalSparepart";
-            this.lblTotalSparepart.Size = new System.Drawing.Size(107, 13);
+            this.lblTotalSparepart.Size = new System.Drawing.Size(114, 13);
             this.lblTotalSparepart.TabIndex = 31;
-            this.lblTotalSparepart.Text = "Total Harga Sparepart";
+            this.lblTotalSparepart.Text = "Total Harga Sparepart :";
             // 
             // lblVehicle
             // 
@@ -644,7 +638,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCategory)).EndInit();
@@ -682,7 +675,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
         private DevExpress.XtraEditors.LabelControl lblTotalSparepart;
-        private DevExpress.XtraEditors.TextEdit txtTotalSparepartPrice;
         private DevExpress.XtraEditors.MemoEdit memoDescription;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.GroupControl groupSparepart;
@@ -707,5 +699,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
         private System.Windows.Forms.ContextMenuStrip cmsVehicleWheel;
         private System.Windows.Forms.ToolStripMenuItem cmsVehicleWheelItemReset;
+        private DevExpress.XtraEditors.LabelControl lblTotalSparepartValue;
     }
 }

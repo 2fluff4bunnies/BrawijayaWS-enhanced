@@ -57,7 +57,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvVehicleWheel.PopupMenuShowing += gvVehicleWheel_PopupMenuShowing;
             gvVehicleWheel.FocusedRowChanged += gvVehicleWheel_FocusedRowChanged;
 
-
             SPKSparepartList = new List<SPKDetailSparepartViewModel>();
             SPKSparepartDetailList = new List<SPKDetailSparepartDetailViewModel>();
 
@@ -65,15 +64,75 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             txtContractPrice.Enabled = false;
             groupSparepart.Enabled = false;
-
+            gridVehicleWheel.Enabled = false;
+            ckeIsReturnRequired.Enabled = false;
+            lookUpSerialNumber.Enabled = false;
+          
             //collumn setting for lookup specialSparepart in grid
             LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
             coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
-            //coll.Add(new LookUpColumnInfo("SparepartDetail.Sparepart.Name", 0, "Sparepart"));
             lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
             lookupWheelDetailGv.AutoSearchColumnIndex = 1;
+
+            //Vehicle wheel handler
+            ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
+            gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
+            lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
+
+            //SPK sales handler
+            if (this.IsSPKSales)
+            {
+                this.CategoryId = _presenter.SPKSalesCategoryReferenceId();
+                this.lookUpCategory.Enabled = false;
+            }
+        }
+
+        void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
+        {
+            ResetSelecteVehicleWheel();
+
+            LookUpEdit lookup = sender as LookUpEdit;
+             _presenter.SetSelectedWheelDetailToChange(lookup.EditValue.AsInteger());
+        }
+
+        void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            GridView View = sender as GridView;
+            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId == 0 || this.SelectedVehicleWheel.Price > 0))
+            {
+                e.Cancel = true;
+            }
+
+            if (View.FocusedColumn.FieldName == "Price")
+            {
+                e.Cancel = true;
+            }
+        }
+
+        void ckeIsUsedWheelRetrieved_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckEdit check = sender as CheckEdit;
+
+            if (this.SelectedVehicleWheel.ReplaceWithWheelDetailId > 0)
+            {
+                if (check.Checked)
+                {
+                    this.SelectedVehicleWheel.Price = this.SelectedVehicleWheel.WheelDetail.SparepartDetail.PurchasingDetail.Price;
+                    gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
+                    this.TotalSparepartPrice = this.TotalSparepartPrice + this.SelectedVehicleWheel.Price;
+
+                    SPKDetailSparepartDetailViewModel newDetail = new SPKDetailSparepartDetailViewModel
+                    {
+                        SparepartDetailId = this.SelectedWheelDetailToChange.SparepartDetail.Id,
+                        SparepartDetail = SelectedWheelDetailToChange.SparepartDetail
+                    };
+
+                    this.SPKSparepartDetailList.Add(newDetail);
+                }
+            }
+            check.Enabled = false;
         }
 
         #region Field Editor
@@ -92,11 +151,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalSparepartPrice.EditValue.AsDecimal();
+                return String.Format("{0:n}", lblTotalSparepartValue.Text).AsDecimal();
             }
             set
             {
-                txtTotalSparepartPrice.EditValue = value;
+                lblTotalSparepartValue.Text = String.Format("{0:n}", value.ToString());
             }
         }
 
@@ -353,6 +412,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         public VehicleWheelViewModel SelectedVehicleWheel { get; set; }
+
+        public SpecialSparepartDetailViewModel SelectedWheelDetailToChange { get; set; }
         #endregion
 
         #region EmailProperties
@@ -413,10 +474,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     {
                         this.ShowError("Daftar sparepart kosong! Harus ada sparepart yang digunakan, minimal 1");
                     }
-                    //if (SPKMechanicList.Count == 0)
-                    //{
-                    //    this.ShowError("Daftar mekanik kosong! Harus ada mekanik yang terlibat, minimal 1");
-                    //}
                 }
             }
         }
@@ -491,7 +548,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             gcSparepart.DataSource = SPKSparepartList;
             gvSparepart.BestFitColumns();
-            this.TotalSparepartPrice = 0;
         }
 
 
@@ -716,10 +772,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.VehicleId > 0)
             {
                 groupSparepart.Enabled = true;
+                gridVehicleWheel.Enabled = true;
             }
             else
             {
                 groupSparepart.Enabled = false;
+                gridVehicleWheel.Enabled = false;
             }
         }
 
@@ -741,16 +799,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void cmsVehicleWheelItemReset_Click(object sender, EventArgs e)
         {
-            int index = this.VehicleWheelList.FindIndex(vw => vw.Id == this.SelectedVehicleWheel.Id);
-            VehicleWheelViewModel vwheel = _presenter.ResetSelectedWheel(this.SelectedVehicleWheel.Id);
-
-            this.VehicleWheelList[index] = vwheel;
-
-            //System.Data.DataRow row = gvVehicleWheel.GetDataRow(gvVehicleWheel.FocusedRowHandle);
-            //row[1] = null;
+            this.SelectedVehicleWheel.ReplaceWithWheelDetailId = 0;
+            ResetSelecteVehicleWheel();
+        }
 
 
-            //_presenter.LoadVehicleWheel();
+        private void ResetSelecteVehicleWheel()
+        {
+            this.TotalSparepartPrice = this.TotalSparepartPrice - this.SelectedVehicleWheel.Price;
+            this.SelectedVehicleWheel.IsUsedWheelRetrieved = false;
+            this.SelectedVehicleWheel.Price = 0;
+            gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
+            gvVehicleWheel.SetFocusedRowCellValue("IsUsedWheelRetrieved", this.SelectedVehicleWheel.IsUsedWheelRetrieved);
+
+            SPKDetailSparepartDetailViewModel detailToRemove = this.SPKSparepartDetailList.Where(d => d.SparepartDetail.SparepartId == this.SelectedWheelDetailToChange.SparepartDetail.SparepartId).FirstOrDefault();
+            if (detailToRemove != null)
+            {
+                this.SPKSparepartDetailList.Remove(detailToRemove);
+            }
         }
     }
 }
