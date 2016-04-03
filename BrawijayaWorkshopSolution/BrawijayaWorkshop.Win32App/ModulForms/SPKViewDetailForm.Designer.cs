@@ -30,25 +30,35 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKViewDetailForm));
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
-            this.groupMechanic = new DevExpress.XtraEditors.GroupControl();
-            this.gcMechanic = new DevExpress.XtraGrid.GridControl();
-            this.gvMechanic = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colMechanicMechanic = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.groupSparepart = new DevExpress.XtraEditors.GroupControl();
+            this.ckeIsContractWork = new DevExpress.XtraEditors.CheckEdit();
+            this.lblContractWorkFeeValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblContractWorkFee = new DevExpress.XtraEditors.LabelControl();
+            this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
+            this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
+            this.btnSetAsComplete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnRequestPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAbort = new DevExpress.XtraEditors.SimpleButton();
             this.lblDescriptionValue = new DevExpress.XtraEditors.LabelControl();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
+            this.btnReject = new DevExpress.XtraEditors.SimpleButton();
             this.lblStatusCompletedValue = new DevExpress.XtraEditors.LabelControl();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.lblStatusCompleted = new DevExpress.XtraEditors.LabelControl();
+            this.btnEndorse = new DevExpress.XtraEditors.SimpleButton();
             this.lblStatusPrintValue = new DevExpress.XtraEditors.LabelControl();
+            this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
             this.lblStatusPrint = new DevExpress.XtraEditors.LabelControl();
             this.lblStatusApprovalValue = new DevExpress.XtraEditors.LabelControl();
             this.lblStatusApproval = new DevExpress.XtraEditors.LabelControl();
@@ -64,37 +74,39 @@
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
-            this.btnEndorse = new DevExpress.XtraEditors.SimpleButton();
-            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.btnReject = new DevExpress.XtraEditors.SimpleButton();
-            this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.btnRequestPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAbort = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSetAsComplete = new DevExpress.XtraEditors.SimpleButton();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupMechanic)).BeginInit();
-            this.groupMechanic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).BeginInit();
-            this.groupSparepart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupSPK
             // 
-            this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupSPK.Controls.Add(this.groupMechanic);
-            this.groupSPK.Controls.Add(this.groupSparepart);
+            this.groupSPK.Controls.Add(this.ckeIsContractWork);
+            this.groupSPK.Controls.Add(this.lblContractWorkFeeValue);
+            this.groupSPK.Controls.Add(this.lblContractWorkFee);
+            this.groupSPK.Controls.Add(this.gridVehicleWheel);
+            this.groupSPK.Controls.Add(this.lblTotalSparepartValue);
+            this.groupSPK.Controls.Add(this.lblTotalSparepart);
+            this.groupSPK.Controls.Add(this.gcSparepart);
+            this.groupSPK.Controls.Add(this.btnSetAsComplete);
+            this.groupSPK.Controls.Add(this.btnRequestPrint);
+            this.groupSPK.Controls.Add(this.btnAbort);
             this.groupSPK.Controls.Add(this.lblDescriptionValue);
+            this.groupSPK.Controls.Add(this.btnCancel);
             this.groupSPK.Controls.Add(this.lblDescription);
+            this.groupSPK.Controls.Add(this.btnReject);
             this.groupSPK.Controls.Add(this.lblStatusCompletedValue);
+            this.groupSPK.Controls.Add(this.btnPrint);
             this.groupSPK.Controls.Add(this.lblStatusCompleted);
+            this.groupSPK.Controls.Add(this.btnEndorse);
             this.groupSPK.Controls.Add(this.lblStatusPrintValue);
+            this.groupSPK.Controls.Add(this.btnApprove);
             this.groupSPK.Controls.Add(this.lblStatusPrint);
             this.groupSPK.Controls.Add(this.lblStatusApprovalValue);
             this.groupSPK.Controls.Add(this.lblStatusApproval);
@@ -110,95 +122,118 @@
             this.groupSPK.Controls.Add(this.lblCategory);
             this.groupSPK.Controls.Add(this.lblDueDate);
             this.groupSPK.Controls.Add(this.lblVehicle);
-            this.groupSPK.Location = new System.Drawing.Point(-5, 0);
+            this.groupSPK.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupSPK.Location = new System.Drawing.Point(0, 0);
             this.groupSPK.Name = "groupSPK";
-            this.groupSPK.Size = new System.Drawing.Size(610, 526);
+            this.groupSPK.Size = new System.Drawing.Size(1146, 457);
             this.groupSPK.TabIndex = 1;
             this.groupSPK.Text = "Informasi SPK";
             // 
-            // groupMechanic
+            // ckeIsContractWork
             // 
-            this.groupMechanic.Controls.Add(this.gcMechanic);
-            this.groupMechanic.Location = new System.Drawing.Point(15, 364);
-            this.groupMechanic.Name = "groupMechanic";
-            this.groupMechanic.Size = new System.Drawing.Size(583, 162);
-            this.groupMechanic.TabIndex = 29;
-            this.groupMechanic.Text = "Mekanik";
+            this.ckeIsContractWork.Location = new System.Drawing.Point(15, 121);
+            this.ckeIsContractWork.Name = "ckeIsContractWork";
+            this.ckeIsContractWork.Properties.Caption = "Borongan                        :";
+            this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.ckeIsContractWork.Size = new System.Drawing.Size(150, 19);
+            this.ckeIsContractWork.TabIndex = 64;
             // 
-            // gcMechanic
+            // lblContractWorkFeeValue
             // 
-            this.gcMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcMechanic.Location = new System.Drawing.Point(5, 36);
-            this.gcMechanic.MainView = this.gvMechanic;
-            this.gcMechanic.Name = "gcMechanic";
-            this.gcMechanic.Size = new System.Drawing.Size(573, 113);
-            this.gcMechanic.TabIndex = 18;
-            this.gcMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvMechanic});
+            this.lblContractWorkFeeValue.Location = new System.Drawing.Point(135, 142);
+            this.lblContractWorkFeeValue.Name = "lblContractWorkFeeValue";
+            this.lblContractWorkFeeValue.Size = new System.Drawing.Size(4, 13);
+            this.lblContractWorkFeeValue.TabIndex = 63;
+            this.lblContractWorkFeeValue.Text = ":";
             // 
-            // gvMechanic
+            // lblContractWorkFee
             // 
-            this.gvMechanic.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colMechanicMechanic,
-            this.colDescription});
-            this.gvMechanic.GridControl = this.gcMechanic;
-            this.gvMechanic.Name = "gvMechanic";
-            this.gvMechanic.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvMechanic.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvMechanic.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvMechanic.OptionsBehavior.Editable = false;
-            this.gvMechanic.OptionsBehavior.ReadOnly = true;
-            this.gvMechanic.OptionsCustomization.AllowColumnMoving = false;
-            this.gvMechanic.OptionsCustomization.AllowFilter = false;
-            this.gvMechanic.OptionsCustomization.AllowGroup = false;
-            this.gvMechanic.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvMechanic.OptionsView.ShowGroupPanel = false;
-            this.gvMechanic.OptionsView.ShowViewCaption = true;
-            this.gvMechanic.ViewCaption = "Mekanik Terlibat";
+            this.lblContractWorkFee.Location = new System.Drawing.Point(15, 142);
+            this.lblContractWorkFee.Name = "lblContractWorkFee";
+            this.lblContractWorkFee.Size = new System.Drawing.Size(71, 13);
+            this.lblContractWorkFee.TabIndex = 62;
+            this.lblContractWorkFee.Text = "Tarif Borongan";
             // 
-            // colMechanicMechanic
+            // gridVehicleWheel
             // 
-            this.colMechanicMechanic.Caption = "Nama Mechanic";
-            this.colMechanicMechanic.FieldName = "Mechanic.Name";
-            this.colMechanicMechanic.Name = "colMechanicMechanic";
-            this.colMechanicMechanic.Visible = true;
-            this.colMechanicMechanic.VisibleIndex = 0;
+            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 174);
+            this.gridVehicleWheel.MainView = this.gvVehicleWheel;
+            this.gridVehicleWheel.Name = "gridVehicleWheel";
+            this.gridVehicleWheel.Size = new System.Drawing.Size(556, 242);
+            this.gridVehicleWheel.TabIndex = 61;
+            this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvVehicleWheel});
             // 
-            // colDescription
+            // gvVehicleWheel
             // 
-            this.colDescription.Caption = "Keterangan";
-            this.colDescription.FieldName = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.Visible = true;
-            this.colDescription.VisibleIndex = 1;
+            this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colWheelDetail,
+            this.colPrice,
+            this.colName});
+            this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
+            this.gvVehicleWheel.Name = "gvVehicleWheel";
+            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvVehicleWheel.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gvVehicleWheel.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
+            this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
             // 
-            // groupSparepart
+            // colWheelDetail
             // 
-            this.groupSparepart.Controls.Add(this.lblTotalSparepartValue);
-            this.groupSparepart.Controls.Add(this.gcSparepart);
-            this.groupSparepart.Controls.Add(this.lblTotalSparepart);
-            this.groupSparepart.Location = new System.Drawing.Point(15, 170);
-            this.groupSparepart.Name = "groupSparepart";
-            this.groupSparepart.Size = new System.Drawing.Size(583, 186);
-            this.groupSparepart.TabIndex = 30;
-            this.groupSparepart.Text = "Sparepart";
+            this.colWheelDetail.Caption = "Nomor Seri ";
+            this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
+            this.colWheelDetail.Name = "colWheelDetail";
+            this.colWheelDetail.Visible = true;
+            this.colWheelDetail.VisibleIndex = 1;
+            // 
+            // colPrice
+            // 
+            this.colPrice.Caption = "Harga";
+            this.colPrice.DisplayFormat.FormatString = "#,#";
+            this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colPrice.FieldName = "Price";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.Visible = true;
+            this.colPrice.VisibleIndex = 2;
+            // 
+            // colName
+            // 
+            this.colName.Caption = "Nama";
+            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
             // 
             // lblTotalSparepartValue
             // 
-            this.lblTotalSparepartValue.Location = new System.Drawing.Point(461, 157);
+            this.lblTotalSparepartValue.Location = new System.Drawing.Point(135, 107);
             this.lblTotalSparepartValue.Name = "lblTotalSparepartValue";
             this.lblTotalSparepartValue.Size = new System.Drawing.Size(4, 13);
-            this.lblTotalSparepartValue.TabIndex = 58;
+            this.lblTotalSparepartValue.TabIndex = 60;
             this.lblTotalSparepartValue.Text = ":";
+            // 
+            // lblTotalSparepart
+            // 
+            this.lblTotalSparepart.Location = new System.Drawing.Point(15, 107);
+            this.lblTotalSparepart.Name = "lblTotalSparepart";
+            this.lblTotalSparepart.Size = new System.Drawing.Size(107, 13);
+            this.lblTotalSparepart.TabIndex = 59;
+            this.lblTotalSparepart.Text = "Total Harga Sparepart";
             // 
             // gcSparepart
             // 
-            this.gcSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSparepart.Location = new System.Drawing.Point(5, 38);
+            this.gcSparepart.Location = new System.Drawing.Point(600, 23);
             this.gcSparepart.MainView = this.gvSparepart;
             this.gcSparepart.Name = "gcSparepart";
-            this.gcSparepart.Size = new System.Drawing.Size(573, 113);
-            this.gcSparepart.TabIndex = 28;
+            this.gcSparepart.Size = new System.Drawing.Size(534, 393);
+            this.gcSparepart.TabIndex = 58;
             this.gcSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSparepart});
             // 
@@ -210,8 +245,6 @@
             this.colTotalQty,
             this.colTotalPrice});
             this.gvSparepart.GridControl = this.gcSparepart;
-            this.gvSparepart.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total Price", this.colTotalPrice, "Total: {0:#,#}")});
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -220,9 +253,8 @@
             this.gvSparepart.OptionsCustomization.AllowColumnMoving = false;
             this.gvSparepart.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvSparepart.OptionsMenu.EnableFooterMenu = false;
-            this.gvSparepart.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvSparepart.OptionsView.ShowGroupedColumns = true;
             this.gvSparepart.OptionsView.ShowGroupPanel = false;
+            this.gvSparepart.OptionsView.ShowViewCaption = true;
             this.gvSparepart.ViewCaption = "Penggunaan Sparepart";
             // 
             // colSparepartName
@@ -259,57 +291,148 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 3;
             // 
-            // lblTotalSparepart
+            // btnSetAsComplete
             // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(357, 157);
-            this.lblTotalSparepart.Name = "lblTotalSparepart";
-            this.lblTotalSparepart.Size = new System.Drawing.Size(75, 13);
-            this.lblTotalSparepart.TabIndex = 42;
-            this.lblTotalSparepart.Text = "Total Sparepart";
+            this.btnSetAsComplete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSetAsComplete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnSetAsComplete.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnSetAsComplete.Location = new System.Drawing.Point(306, 429);
+            this.btnSetAsComplete.Name = "btnSetAsComplete";
+            this.btnSetAsComplete.Size = new System.Drawing.Size(91, 23);
+            this.btnSetAsComplete.TabIndex = 40;
+            this.btnSetAsComplete.Text = "Set SPK Selesai";
+            this.btnSetAsComplete.Click += new System.EventHandler(this.btnSetAsComplete_Click);
+            // 
+            // btnRequestPrint
+            // 
+            this.btnRequestPrint.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnRequestPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnRequestPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnRequestPrint.Location = new System.Drawing.Point(519, 429);
+            this.btnRequestPrint.Name = "btnRequestPrint";
+            this.btnRequestPrint.Size = new System.Drawing.Size(122, 23);
+            this.btnRequestPrint.TabIndex = 38;
+            this.btnRequestPrint.Text = "Print Request";
+            this.btnRequestPrint.Click += new System.EventHandler(this.btnRequestPrint_Click);
+            // 
+            // btnAbort
+            // 
+            this.btnAbort.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAbort.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAbort.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAbort.Location = new System.Drawing.Point(306, 429);
+            this.btnAbort.Name = "btnAbort";
+            this.btnAbort.Size = new System.Drawing.Size(91, 23);
+            this.btnAbort.TabIndex = 39;
+            this.btnAbort.Text = "Batalkan SPK";
+            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
             // 
             // lblDescriptionValue
             // 
-            this.lblDescriptionValue.Location = new System.Drawing.Point(394, 89);
+            this.lblDescriptionValue.Location = new System.Drawing.Point(391, 124);
             this.lblDescriptionValue.Name = "lblDescriptionValue";
             this.lblDescriptionValue.Size = new System.Drawing.Size(4, 13);
             this.lblDescriptionValue.TabIndex = 57;
             this.lblDescriptionValue.Text = ":";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnCancel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnCancel.Location = new System.Drawing.Point(747, 429);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(94, 23);
+            this.btnCancel.TabIndex = 33;
+            this.btnCancel.Text = "Tutup";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(290, 88);
+            this.lblDescription.Location = new System.Drawing.Point(287, 123);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(42, 13);
             this.lblDescription.TabIndex = 56;
             this.lblDescription.Text = "Deskripsi";
             // 
+            // btnReject
+            // 
+            this.btnReject.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnReject.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnReject.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnReject.Location = new System.Drawing.Point(412, 429);
+            this.btnReject.Name = "btnReject";
+            this.btnReject.Size = new System.Drawing.Size(91, 23);
+            this.btnReject.TabIndex = 35;
+            this.btnReject.Text = "Tolak";
+            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
+            // 
             // lblStatusCompletedValue
             // 
-            this.lblStatusCompletedValue.Location = new System.Drawing.Point(394, 70);
+            this.lblStatusCompletedValue.Location = new System.Drawing.Point(391, 105);
             this.lblStatusCompletedValue.Name = "lblStatusCompletedValue";
             this.lblStatusCompletedValue.Size = new System.Drawing.Size(4, 13);
             this.lblStatusCompletedValue.TabIndex = 55;
             this.lblStatusCompletedValue.Text = ":";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrint.Location = new System.Drawing.Point(534, 429);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(91, 23);
+            this.btnPrint.TabIndex = 36;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // lblStatusCompleted
             // 
-            this.lblStatusCompleted.Location = new System.Drawing.Point(290, 69);
+            this.lblStatusCompleted.Location = new System.Drawing.Point(287, 104);
             this.lblStatusCompleted.Name = "lblStatusCompleted";
             this.lblStatusCompleted.Size = new System.Drawing.Size(89, 13);
             this.lblStatusCompleted.TabIndex = 54;
             this.lblStatusCompleted.Text = "Status Pengerjaan";
             // 
+            // btnEndorse
+            // 
+            this.btnEndorse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEndorse.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.btnEndorse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnEndorse.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnEndorse.Location = new System.Drawing.Point(649, 429);
+            this.btnEndorse.Name = "btnEndorse";
+            this.btnEndorse.Size = new System.Drawing.Size(91, 23);
+            this.btnEndorse.TabIndex = 37;
+            this.btnEndorse.Text = "Revisi";
+            this.btnEndorse.Click += new System.EventHandler(this.btnEndorse_Click);
+            // 
             // lblStatusPrintValue
             // 
-            this.lblStatusPrintValue.Location = new System.Drawing.Point(394, 51);
+            this.lblStatusPrintValue.Location = new System.Drawing.Point(391, 86);
             this.lblStatusPrintValue.Name = "lblStatusPrintValue";
             this.lblStatusPrintValue.Size = new System.Drawing.Size(4, 13);
             this.lblStatusPrintValue.TabIndex = 53;
             this.lblStatusPrintValue.Text = ":";
             // 
+            // btnApprove
+            // 
+            this.btnApprove.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnApprove.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnApprove.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnApprove.Location = new System.Drawing.Point(306, 429);
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(91, 23);
+            this.btnApprove.TabIndex = 34;
+            this.btnApprove.Text = "Setuju";
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
+            // 
             // lblStatusPrint
             // 
-            this.lblStatusPrint.Location = new System.Drawing.Point(290, 50);
+            this.lblStatusPrint.Location = new System.Drawing.Point(287, 85);
             this.lblStatusPrint.Name = "lblStatusPrint";
             this.lblStatusPrint.Size = new System.Drawing.Size(56, 13);
             this.lblStatusPrint.TabIndex = 52;
@@ -317,7 +440,7 @@
             // 
             // lblStatusApprovalValue
             // 
-            this.lblStatusApprovalValue.Location = new System.Drawing.Point(394, 32);
+            this.lblStatusApprovalValue.Location = new System.Drawing.Point(391, 67);
             this.lblStatusApprovalValue.Name = "lblStatusApprovalValue";
             this.lblStatusApprovalValue.Size = new System.Drawing.Size(4, 13);
             this.lblStatusApprovalValue.TabIndex = 51;
@@ -325,7 +448,7 @@
             // 
             // lblStatusApproval
             // 
-            this.lblStatusApproval.Location = new System.Drawing.Point(290, 31);
+            this.lblStatusApproval.Location = new System.Drawing.Point(287, 66);
             this.lblStatusApproval.Name = "lblStatusApproval";
             this.lblStatusApproval.Size = new System.Drawing.Size(92, 13);
             this.lblStatusApproval.TabIndex = 50;
@@ -333,7 +456,7 @@
             // 
             // lblCreateDateValue
             // 
-            this.lblCreateDateValue.Location = new System.Drawing.Point(119, 107);
+            this.lblCreateDateValue.Location = new System.Drawing.Point(391, 31);
             this.lblCreateDateValue.Name = "lblCreateDateValue";
             this.lblCreateDateValue.Size = new System.Drawing.Size(4, 13);
             this.lblCreateDateValue.TabIndex = 49;
@@ -341,7 +464,7 @@
             // 
             // lblDueDateValue
             // 
-            this.lblDueDateValue.Location = new System.Drawing.Point(119, 126);
+            this.lblDueDateValue.Location = new System.Drawing.Point(391, 48);
             this.lblDueDateValue.Name = "lblDueDateValue";
             this.lblDueDateValue.Size = new System.Drawing.Size(4, 13);
             this.lblDueDateValue.TabIndex = 48;
@@ -349,7 +472,7 @@
             // 
             // lblCategoryValue
             // 
-            this.lblCategoryValue.Location = new System.Drawing.Point(119, 88);
+            this.lblCategoryValue.Location = new System.Drawing.Point(135, 88);
             this.lblCategoryValue.Name = "lblCategoryValue";
             this.lblCategoryValue.Size = new System.Drawing.Size(4, 13);
             this.lblCategoryValue.TabIndex = 47;
@@ -357,7 +480,7 @@
             // 
             // lblVehicleValue
             // 
-            this.lblVehicleValue.Location = new System.Drawing.Point(119, 69);
+            this.lblVehicleValue.Location = new System.Drawing.Point(135, 69);
             this.lblVehicleValue.Name = "lblVehicleValue";
             this.lblVehicleValue.Size = new System.Drawing.Size(4, 13);
             this.lblVehicleValue.TabIndex = 46;
@@ -365,7 +488,7 @@
             // 
             // lblCustomerValue
             // 
-            this.lblCustomerValue.Location = new System.Drawing.Point(119, 50);
+            this.lblCustomerValue.Location = new System.Drawing.Point(135, 50);
             this.lblCustomerValue.Name = "lblCustomerValue";
             this.lblCustomerValue.Size = new System.Drawing.Size(4, 13);
             this.lblCustomerValue.TabIndex = 45;
@@ -373,7 +496,7 @@
             // 
             // lblCodeValue
             // 
-            this.lblCodeValue.Location = new System.Drawing.Point(119, 31);
+            this.lblCodeValue.Location = new System.Drawing.Point(135, 31);
             this.lblCodeValue.Name = "lblCodeValue";
             this.lblCodeValue.Size = new System.Drawing.Size(4, 13);
             this.lblCodeValue.TabIndex = 44;
@@ -397,7 +520,7 @@
             // 
             // lblCreateDate
             // 
-            this.lblCreateDate.Location = new System.Drawing.Point(15, 107);
+            this.lblCreateDate.Location = new System.Drawing.Point(287, 31);
             this.lblCreateDate.Name = "lblCreateDate";
             this.lblCreateDate.Size = new System.Drawing.Size(95, 13);
             this.lblCreateDate.TabIndex = 35;
@@ -413,7 +536,7 @@
             // 
             // lblDueDate
             // 
-            this.lblDueDate.Location = new System.Drawing.Point(15, 126);
+            this.lblDueDate.Location = new System.Drawing.Point(287, 48);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(59, 13);
             this.lblDueDate.TabIndex = 12;
@@ -427,126 +550,28 @@
             this.lblVehicle.TabIndex = 2;
             this.lblVehicle.Text = "Kendaraan";
             // 
-            // btnEndorse
+            // gridView1
             // 
-            this.btnEndorse.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.btnEndorse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnEndorse.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnEndorse.Location = new System.Drawing.Point(367, 532);
-            this.btnEndorse.Name = "btnEndorse";
-            this.btnEndorse.Size = new System.Drawing.Size(91, 23);
-            this.btnEndorse.TabIndex = 37;
-            this.btnEndorse.Text = "Revisi";
-            this.btnEndorse.Click += new System.EventHandler(this.btnEndorse_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
-            this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(244, 532);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(91, 23);
-            this.btnPrint.TabIndex = 36;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnReject
-            // 
-            this.btnReject.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnReject.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnReject.Location = new System.Drawing.Point(123, 532);
-            this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(91, 23);
-            this.btnReject.TabIndex = 35;
-            this.btnReject.Text = "Tolak";
-            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
-            // 
-            // btnApprove
-            // 
-            this.btnApprove.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnApprove.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnApprove.Location = new System.Drawing.Point(10, 532);
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(91, 23);
-            this.btnApprove.TabIndex = 34;
-            this.btnApprove.Text = "Setuju";
-            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnCancel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnCancel.Location = new System.Drawing.Point(499, 532);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(94, 23);
-            this.btnCancel.TabIndex = 33;
-            this.btnCancel.Text = "Tutup";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnRequestPrint
-            // 
-            this.btnRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
-            this.btnRequestPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnRequestPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnRequestPrint.Location = new System.Drawing.Point(229, 532);
-            this.btnRequestPrint.Name = "btnRequestPrint";
-            this.btnRequestPrint.Size = new System.Drawing.Size(122, 23);
-            this.btnRequestPrint.TabIndex = 38;
-            this.btnRequestPrint.Text = "Print Request";
-            this.btnRequestPrint.Click += new System.EventHandler(this.btnRequestPrint_Click);
-            // 
-            // btnAbort
-            // 
-            this.btnAbort.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnAbort.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAbort.Location = new System.Drawing.Point(10, 532);
-            this.btnAbort.Name = "btnAbort";
-            this.btnAbort.Size = new System.Drawing.Size(91, 23);
-            this.btnAbort.TabIndex = 39;
-            this.btnAbort.Text = "Batalkan SPK";
-            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
-            // 
-            // btnSetAsComplete
-            // 
-            this.btnSetAsComplete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnSetAsComplete.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSetAsComplete.Location = new System.Drawing.Point(10, 532);
-            this.btnSetAsComplete.Name = "btnSetAsComplete";
-            this.btnSetAsComplete.Size = new System.Drawing.Size(91, 23);
-            this.btnSetAsComplete.TabIndex = 40;
-            this.btnSetAsComplete.Text = "Set SPK Selesai";
-            this.btnSetAsComplete.Click += new System.EventHandler(this.btnSetAsComplete_Click);
+            this.gridView1.Name = "gridView1";
             // 
             // SPKViewDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 562);
-            this.Controls.Add(this.btnSetAsComplete);
-            this.Controls.Add(this.btnRequestPrint);
-            this.Controls.Add(this.btnAbort);
+            this.ClientSize = new System.Drawing.Size(1146, 457);
             this.Controls.Add(this.groupSPK);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnReject);
-            this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.btnEndorse);
-            this.Controls.Add(this.btnApprove);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKViewDetailForm";
             this.Text = "Informasi Detail SPK";
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupMechanic)).EndInit();
-            this.groupMechanic.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcMechanic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvMechanic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).EndInit();
-            this.groupSparepart.ResumeLayout(false);
-            this.groupSparepart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -554,16 +579,6 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl groupSPK;
-        private DevExpress.XtraGrid.GridControl gcSparepart;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvSparepart;
-        private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
-        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
-        private DevExpress.XtraGrid.GridControl gcMechanic;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvMechanic;
-        private DevExpress.XtraGrid.Columns.GridColumn colMechanicMechanic;
-        private DevExpress.XtraGrid.Columns.GridColumn colDescription;
         private DevExpress.XtraEditors.LabelControl lblCategory;
         private DevExpress.XtraEditors.LabelControl lblDueDate;
         private DevExpress.XtraEditors.LabelControl lblVehicle;
@@ -574,7 +589,6 @@
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraEditors.LabelControl lblCode;
-        private DevExpress.XtraEditors.LabelControl lblTotalSparepart;
         private DevExpress.XtraEditors.SimpleButton btnEndorse;
         private DevExpress.XtraEditors.LabelControl lblDescription;
         private DevExpress.XtraEditors.LabelControl lblStatusCompletedValue;
@@ -590,11 +604,25 @@
         private DevExpress.XtraEditors.LabelControl lblCustomerValue;
         private DevExpress.XtraEditors.LabelControl lblCodeValue;
         private DevExpress.XtraEditors.LabelControl lblDescriptionValue;
-        private DevExpress.XtraEditors.LabelControl lblTotalSparepartValue;
-        private DevExpress.XtraEditors.GroupControl groupMechanic;
-        private DevExpress.XtraEditors.GroupControl groupSparepart;
         private DevExpress.XtraEditors.SimpleButton btnRequestPrint;
         private DevExpress.XtraEditors.SimpleButton btnAbort;
         private DevExpress.XtraEditors.SimpleButton btnSetAsComplete;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.GridControl gcSparepart;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSparepart;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
+        private DevExpress.XtraEditors.LabelControl lblTotalSparepartValue;
+        private DevExpress.XtraEditors.LabelControl lblTotalSparepart;
+        private DevExpress.XtraGrid.GridControl gridVehicleWheel;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
+        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraEditors.LabelControl lblContractWorkFeeValue;
+        private DevExpress.XtraEditors.LabelControl lblContractWorkFee;
+        private DevExpress.XtraEditors.CheckEdit ckeIsContractWork;
     }
 }

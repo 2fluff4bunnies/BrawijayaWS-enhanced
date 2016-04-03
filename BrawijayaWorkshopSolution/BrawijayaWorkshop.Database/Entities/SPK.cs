@@ -55,5 +55,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public bool isContractWork { get; set; }
 
+        public decimal ContractWorkFee { get; set; }
+
     }
 }

@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private IUsedGoodRepository _usedGoodRepository;
+        private IVehicleWheelRepository _vehicleWheelRepository;
         private IUnitOfWork _unitOfWork;
         private ISettingRepository _settingRepository;
 
@@ -33,6 +34,7 @@ namespace BrawijayaWorkshop.Model
             IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
             IUsedGoodRepository usedGoodrepository,
+            IVehicleWheelRepository vehicleWheelRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -46,6 +48,7 @@ namespace BrawijayaWorkshop.Model
             _settingRepository = settingRepository;
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
+            _vehicleWheelRepository = vehicleWheelRepository;
             _usedGoodRepository = usedGoodrepository;
             _unitOfWork = unitOfWork;
         }
@@ -324,6 +327,16 @@ namespace BrawijayaWorkshop.Model
             int.TryParse(threshold, out result);
 
             return result;
+        }
+
+        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
+        {
+            List<VehicleWheel> result = _vehicleWheelRepository.GetMany(
+                vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
+
+            return Map(result, mappedResult);
         }
     }
 }

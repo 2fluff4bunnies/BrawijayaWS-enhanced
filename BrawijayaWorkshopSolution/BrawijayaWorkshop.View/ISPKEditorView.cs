@@ -51,6 +51,10 @@ namespace BrawijayaWorkshop.View
         bool IsUsedSparepartRequired { get; set; }
 
         string SparepartLastUsageDate { get; set; }
-        string SparepartLastUsageQty { get; set; }      
+        string SparepartLastUsageQty { get; set; }
+
+        bool isContractWork { get; set; }
+        decimal ContractWorkFee { get; set; }
+
     }
 }

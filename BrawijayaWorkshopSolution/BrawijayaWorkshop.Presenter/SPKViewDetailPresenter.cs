@@ -66,5 +66,9 @@ namespace BrawijayaWorkshop.Presenter
             Model.SetAsCompletedSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
+        public void LoadVehicleWheel()
+        {
+            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedSPK.VehicleId);
+        }
     }
 }

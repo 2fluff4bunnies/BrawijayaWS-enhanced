@@ -45,7 +45,7 @@
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblContractPrice = new DevExpress.XtraEditors.LabelControl();
             this.ckeIsContractWork = new DevExpress.XtraEditors.CheckEdit();
-            this.txtContractPrice = new DevExpress.XtraEditors.TextEdit();
+            this.txtContractWorkFee = new DevExpress.XtraEditors.TextEdit();
             this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
             this.groupSparepart = new DevExpress.XtraEditors.GroupControl();
             this.lblValLastUsageQty = new DevExpress.XtraEditors.LabelControl();
@@ -82,6 +82,7 @@
             this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -89,7 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractWorkFee.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).BeginInit();
             this.groupSparepart.SuspendLayout();
@@ -137,7 +138,7 @@
             this.groupSPK.Controls.Add(this.gridVehicleWheel);
             this.groupSPK.Controls.Add(this.lblContractPrice);
             this.groupSPK.Controls.Add(this.ckeIsContractWork);
-            this.groupSPK.Controls.Add(this.txtContractPrice);
+            this.groupSPK.Controls.Add(this.txtContractWorkFee);
             this.groupSPK.Controls.Add(this.memoDescription);
             this.groupSPK.Controls.Add(this.groupSparepart);
             this.groupSPK.Controls.Add(this.labelControl2);
@@ -178,6 +179,7 @@
             // gvVehicleWheel
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colName,
             this.colWheelDetail,
             this.colWheelDetailReplace,
             this.colIsUsedGoodReceived,
@@ -200,7 +202,7 @@
             this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
-            this.colWheelDetail.VisibleIndex = 0;
+            this.colWheelDetail.VisibleIndex = 1;
             // 
             // colWheelDetailReplace
             // 
@@ -209,7 +211,7 @@
             this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailId";
             this.colWheelDetailReplace.Name = "colWheelDetailReplace";
             this.colWheelDetailReplace.Visible = true;
-            this.colWheelDetailReplace.VisibleIndex = 1;
+            this.colWheelDetailReplace.VisibleIndex = 2;
             // 
             // colIsUsedGoodReceived
             // 
@@ -218,7 +220,7 @@
             this.colIsUsedGoodReceived.FieldName = "IsUsedWheelRetrieved";
             this.colIsUsedGoodReceived.Name = "colIsUsedGoodReceived";
             this.colIsUsedGoodReceived.Visible = true;
-            this.colIsUsedGoodReceived.VisibleIndex = 2;
+            this.colIsUsedGoodReceived.VisibleIndex = 3;
             // 
             // colPrice
             // 
@@ -228,7 +230,7 @@
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 3;
+            this.colPrice.VisibleIndex = 4;
             // 
             // lblContractPrice
             // 
@@ -250,12 +252,12 @@
             // 
             // txtContractPrice
             // 
-            this.txtContractPrice.Location = new System.Drawing.Point(96, 134);
-            this.txtContractPrice.Name = "txtContractPrice";
-            this.txtContractPrice.Properties.Mask.EditMask = "n0";
-            this.txtContractPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtContractPrice.Size = new System.Drawing.Size(161, 20);
-            this.txtContractPrice.TabIndex = 35;
+            this.txtContractWorkFee.Location = new System.Drawing.Point(96, 134);
+            this.txtContractWorkFee.Name = "txtContractPrice";
+            this.txtContractWorkFee.Properties.Mask.EditMask = "n0";
+            this.txtContractWorkFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtContractWorkFee.Size = new System.Drawing.Size(161, 20);
+            this.txtContractWorkFee.TabIndex = 35;
             // 
             // memoDescription
             // 
@@ -606,6 +608,14 @@
             this.cmsVehicleWheelItemReset.Text = "Reset Data";
             this.cmsVehicleWheelItemReset.Click += new System.EventHandler(this.cmsVehicleWheelItemReset_Click);
             // 
+            // colName
+            // 
+            this.colName.Caption = "Nama";
+            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
+            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,7 +634,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractWorkFee.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSparepart)).EndInit();
             this.groupSparepart.ResumeLayout(false);
@@ -679,7 +689,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.GroupControl groupSparepart;
         private DevExpress.XtraEditors.LabelControl lblContractPrice;
-        private DevExpress.XtraEditors.TextEdit txtContractPrice;
+        private DevExpress.XtraEditors.TextEdit txtContractWorkFee;
         private DevExpress.XtraGrid.GridControl gridVehicleWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
@@ -700,5 +710,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsVehicleWheel;
         private System.Windows.Forms.ToolStripMenuItem cmsVehicleWheelItemReset;
         private DevExpress.XtraEditors.LabelControl lblTotalSparepartValue;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
     }
 }

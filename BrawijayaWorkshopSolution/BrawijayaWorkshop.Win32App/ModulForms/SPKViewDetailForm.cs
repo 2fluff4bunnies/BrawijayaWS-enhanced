@@ -40,7 +40,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.ApprovalEmailBody = Resources.SPKApprovalEmailTemplate;
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
-
+            ckeIsContractWork.Enabled = false;
             ApplyButtonSetting();
 
             #region Field Setting
@@ -48,9 +48,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lblCustomerValue.Text = _prefix + this.SelectedSPK.Vehicle.Customer.CompanyName;
             lblVehicleValue.Text = _prefix + this.SelectedSPK.Vehicle.ActiveLicenseNumber;
             lblCategoryValue.Text = _prefix + this.SelectedSPK.CategoryReference.Name;
-
             lblCreateDateValue.Text = _prefix + this.SelectedSPK.CreateDate.ToShortDateString();
             lblDueDateValue.Text = _prefix + this.SelectedSPK.DueDate.ToShortDateString();
+            ckeIsContractWork.Checked = this.SelectedSPK.isContractWork;
+            if (ckeIsContractWork.Checked)
+            {
+                lblContractWorkFeeValue.Text = this.SelectedSPK.ContractWorkFee.ToString("{0:n}");
+            }
+            else
+            {
+                lblContractWorkFeeValue.Text = "--";
+            }
 
             string statusApproval = "";
             switch (this.SelectedSPK.StatusApprovalId)
@@ -164,26 +172,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public SPKViewModel ParentSPK { get; set; }
 
-        //public List<SPKDetailMechanic> SPKMechanicList
-        //{
-        //    get
-        //    {
-        //        return gcMechanic.DataSource as List<SPKDetailMechanic>;
-        //    }
-        //    set
-        //    {
-        //        if (InvokeRequired)
-        //        {
-        //            this.Invoke(new MethodInvoker(delegate { gcMechanic.DataSource = value; gvMechanic.BestFitColumns(); }));
-        //        }
-        //        else
-        //        {
-        //            gcMechanic.DataSource = value;
-        //            gvMechanic.BestFitColumns();
-        //        }
-        //    }
-        //}
-
         public List<SPKDetailSparepartViewModel> SPKSparepartList
         {
             get
@@ -206,7 +194,25 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
 
-
+        public List<VehicleWheelViewModel> VehicleWheelList
+        {
+            get
+            {
+                return gridVehicleWheel.DataSource as List<VehicleWheelViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridVehicleWheel.DataSource = value; gvVehicleWheel.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridVehicleWheel.DataSource = value;
+                    gvVehicleWheel.BestFitColumns();
+                }
+            }
+        }
         #endregion
 
         #region EmailProperties

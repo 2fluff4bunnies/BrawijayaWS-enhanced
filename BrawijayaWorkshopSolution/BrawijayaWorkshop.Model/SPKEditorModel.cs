@@ -143,8 +143,12 @@ namespace BrawijayaWorkshop.Model
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
         }
 
-        public SPKViewModel InsertSPK(SPKViewModel spk, SPKViewModel parentSPK, List<SPKDetailSparepartViewModel> spkSparepartList,
-            List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList, List<VehicleWheelViewModel> vehicleWheelList, int userId, bool isNeedApproval)
+        public SPKViewModel InsertSPK(SPKViewModel spk, SPKViewModel parentSPK, 
+            List<SPKDetailSparepartViewModel> spkSparepartList,
+            List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList, 
+            List<VehicleWheelViewModel> vehicleWheelList, 
+            int userId, 
+            bool isNeedApproval)
         {
             DateTime serverTime = DateTime.Now;
             Invoice insertedInvoice = new Invoice();
@@ -339,8 +343,6 @@ namespace BrawijayaWorkshop.Model
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
             }
-
-
 
             _unitOfWork.SaveChanges();
 

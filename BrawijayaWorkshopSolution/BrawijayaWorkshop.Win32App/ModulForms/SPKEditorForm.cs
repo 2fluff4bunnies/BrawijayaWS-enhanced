@@ -62,7 +62,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.TotalSparepartPrice = 0;
 
-            txtContractPrice.Enabled = false;
+            txtContractWorkFee.Enabled = false;
             groupSparepart.Enabled = false;
             gridVehicleWheel.Enabled = false;
             ckeIsReturnRequired.Enabled = false;
@@ -414,6 +414,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public VehicleWheelViewModel SelectedVehicleWheel { get; set; }
 
         public SpecialSparepartDetailViewModel SelectedWheelDetailToChange { get; set; }
+
+        public bool isContractWork
+        {
+            get
+            {
+                return ckeIsContractWork.Checked;
+            }
+            set
+            {
+                ckeIsContractWork.Checked = value;
+            }
+        }
+
+        public decimal ContractWorkFee
+        {
+            get
+            {
+                return txtContractWorkFee.Text.AsDecimal();
+            }
+            set
+            {
+                txtContractWorkFee.Text = value.ToString();
+            }
+        }
+
         #endregion
 
         #region EmailProperties
@@ -788,11 +813,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (currenValue)
             {
-                txtContractPrice.Enabled = true;
+                txtContractWorkFee.Enabled = true;
             }
             else
             {
-                txtContractPrice.Enabled = false;
+                txtContractWorkFee.Enabled = false;
             }
 
         }
