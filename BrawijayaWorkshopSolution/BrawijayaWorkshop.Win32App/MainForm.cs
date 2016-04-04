@@ -391,6 +391,8 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iDebt.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_DEBT);
             navTransactionData.iCredit.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_CREDIT);
             navTransactionData.iInvoice.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_INVOICE);
+            navTransactionData.iSPKSales.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
+            navTransactionData.iSPKSchedule.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
 
             ShowNavigationControl(navTransactionData);
             // init event navigation
@@ -401,6 +403,20 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iDebt.LinkClicked += iDebt_LinkClicked;
             navTransactionData.iCredit.LinkClicked += iCredit_LinkClicked;
             navTransactionData.iInvoice.LinkClicked += iInvoice_LinkClicked;
+            navTransactionData.iSPKSales.LinkClicked += iSPKSales_LinkClicked;
+            navTransactionData.iSPKSchedule.LinkClicked += iSPKSchedule_LinkClicked;
+        }
+
+        void iSPKSchedule_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SPKScheduleListControl listSPKSchedule = Bootstrapper.Resolve<SPKScheduleListControl>();
+            ShowUserControl(listSPKSchedule);
+        }
+
+        void iSPKSales_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SPKSaleListControl listSPKSales = Bootstrapper.Resolve<SPKSaleListControl>();
+            ShowUserControl(listSPKSales);
         }
 
         void iInvoice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

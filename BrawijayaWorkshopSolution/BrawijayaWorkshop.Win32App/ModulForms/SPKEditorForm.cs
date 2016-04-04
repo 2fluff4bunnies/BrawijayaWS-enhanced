@@ -81,12 +81,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
 
-            //SPK sales handler
-            if (this.IsSPKSales)
-            {
-                this.CategoryId = _presenter.SPKSalesCategoryReferenceId();
-                this.lookUpCategory.Enabled = false;
-            }
         }
 
         void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
@@ -733,11 +727,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
 
-            //if (!bgwFingerPrint.IsBusy)
-            //{
-            //    Cursor = Cursors.WaitCursor;
-            //    bgwFingerPrint.RunWorkerAsync();
-            //}
+
+            //SPK sales handler
+            if (this.IsSPKSales)
+            {
+                this.CategoryId = _presenter.SPKSalesCategoryReferenceId();
+                this.lookUpCategory.Enabled = false;
+            }
         }
 
         bool ApprovalCheck()
