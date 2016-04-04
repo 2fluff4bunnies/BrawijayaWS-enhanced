@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
     public class InvoiceViewModel : BaseModifierWithStatusViewModel
@@ -13,5 +14,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int PaymentMethodId { get; set; }
         public ReferenceViewModel PaymentMethod { get; set; }
         public int PaymentStatus { get; set; }
+
+        public List<InvoiceDetailViewModel> InvoiceDetails { get; set; }
     }
 }

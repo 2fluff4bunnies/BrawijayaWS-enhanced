@@ -35,9 +35,6 @@
             this.lblDueDate = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblSpkName = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblSpkDate = new DevExpress.XtraReports.UI.XRLabel();
@@ -104,9 +101,6 @@
             this.lblDueDate,
             this.xrLabel10,
             this.xrLabel1,
-            this.xrLabel5,
-            this.lblSpkName,
-            this.xrLabel3,
             this.xrLabel2,
             this.xrLabel4,
             this.lblSpkDate,
@@ -120,7 +114,7 @@
             this.xrLabel11,
             this.lblLicenseNumber,
             this.title});
-            this.ReportHeader.HeightF = 120.6875F;
+            this.ReportHeader.HeightF = 94.64582F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // lblDueDate
@@ -162,47 +156,6 @@
             this.xrLabel1.StylePriority.UseTextAlignment = false;
             this.xrLabel1.Text = "Perkiraan Selesai";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel5
-            // 
-            this.xrLabel5.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 90.47916F);
-            this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(95.22916F, 22.99999F);
-            this.xrLabel5.StylePriority.UseFont = false;
-            this.xrLabel5.StylePriority.UsePadding = false;
-            this.xrLabel5.StylePriority.UseTextAlignment = false;
-            this.xrLabel5.Text = "Nama Teknisi";
-            this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // lblSpkName
-            // 
-            this.lblSpkName.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ListMechanic.Mechanic.Name")});
-            this.lblSpkName.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.lblSpkName.LocationFloat = new DevExpress.Utils.PointFloat(108.7708F, 90.47915F);
-            this.lblSpkName.Name = "lblSpkName";
-            this.lblSpkName.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblSpkName.SizeF = new System.Drawing.SizeF(277.0833F, 23F);
-            this.lblSpkName.StylePriority.UseFont = false;
-            this.lblSpkName.StylePriority.UsePadding = false;
-            this.lblSpkName.StylePriority.UseTextAlignment = false;
-            this.lblSpkName.Text = "[Mechanic Name]";
-            this.lblSpkName.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel3
-            // 
-            this.xrLabel3.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(95.22915F, 90.47916F);
-            this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(13.54166F, 23F);
-            this.xrLabel3.StylePriority.UseFont = false;
-            this.xrLabel3.StylePriority.UsePadding = false;
-            this.xrLabel3.StylePriority.UseTextAlignment = false;
-            this.xrLabel3.Text = ":";
-            this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel2
             // 
@@ -652,9 +605,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel6;
         private DevExpress.XtraReports.UI.XRLabel xrLabel7;
         private DevExpress.XtraReports.UI.XRLabel lblSpkNumber;
-        private DevExpress.XtraReports.UI.XRLabel lblSpkName;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel3;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel5;
         private DevExpress.XtraReports.UI.XRLabel lblDueDate;
         private DevExpress.XtraReports.UI.XRLabel xrLabel10;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
