@@ -233,8 +233,9 @@ namespace BrawijayaWorkshop.Model
                 Invoice invc = new Invoice();
 
                 invc.TotalPrice = spk.TotalSparepartPrice;
-                invc.PaymentStatus = (int)DbConstant.InvoiceStatus.FeeNotFixed;
-                invc.Status = (int)DbConstant.DefaultDataStatus.Active;
+                invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+                invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+                invc.TotalHasPaid = 0;
 
                 invc.CreateDate = serverTime;
                 invc.ModifyDate = serverTime;
@@ -326,6 +327,7 @@ namespace BrawijayaWorkshop.Model
                             invcDtl.SPKDetailSparepartDetail = insertedSPKSpDtl;
                             invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
                             invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
+                            invcDtl.FeePctg = 0;
 
                             invcDtl.CreateDate = serverTime;
                             invcDtl.ModifyDate = serverTime;
