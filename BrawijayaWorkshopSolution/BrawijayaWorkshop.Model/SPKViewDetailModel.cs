@@ -24,6 +24,8 @@ namespace BrawijayaWorkshop.Model
         private IUsedGoodRepository _usedGoodRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private IUnitOfWork _unitOfWork;
+        private ISPKScheduleRepository _SPKScheduleReposistory;
+        private IMechanicRepository _mechanicRepository;
         private ISettingRepository _settingRepository;
 
         public SPKViewDetailModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -35,6 +37,8 @@ namespace BrawijayaWorkshop.Model
             IInvoiceDetailRepository invoiceDetailRepository,
             IUsedGoodRepository usedGoodrepository,
             IVehicleWheelRepository vehicleWheelRepository,
+            ISPKScheduleRepository SPKScheduleReposistory,
+            IMechanicRepository mechanicRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -50,6 +54,8 @@ namespace BrawijayaWorkshop.Model
             _invoiceDetailRepository = invoiceDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
             _usedGoodRepository = usedGoodrepository;
+            _SPKScheduleReposistory = SPKScheduleReposistory;
+            _mechanicRepository = mechanicRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -274,15 +280,43 @@ namespace BrawijayaWorkshop.Model
             _SPKRepository.Update(entity);
 
             Invoice invc = new Invoice();
-
-            invc.TotalPrice = spk.TotalSparepartPrice;
-            invc.PaymentStatus = (int)DbConstant.InvoiceStatus.FeeNotFixed;
-            invc.Status = (int)DbConstant.DefaultDataStatus.Active;
-
             invc.CreateDate = serverTime;
             invc.ModifyDate = serverTime;
             invc.ModifyUserId = userId;
             invc.CreateUserId = userId;
+
+            invc.TotalPrice = spk.TotalSparepartPrice;
+            invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+            invc.TotalHasPaid = 0;
+
+            if (spk.isContractWork)
+            {
+                invc.TotalPrice = spk.TotalSparepartPrice + spk.ContractWorkFee + (spk.ContractWorkFee * (0.2).AsDecimal());
+            }
+            else
+            {
+                decimal ServiceFee = 0;
+
+                int SPKWorkingDays = serverTime.Day - spk.CreateDate.Day;
+
+                for (int i = 0; i < SPKWorkingDays; i++)
+                {
+                    List<SPKSchedule> involvedMechanic = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i).ToList();
+
+                    foreach (SPKSchedule mechanic in involvedMechanic)
+                    {
+                        int mechanicJobForToday = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
+
+                        decimal mechanicFeeForToday = mechanic.Mechanic.BaseFee / mechanicJobForToday;
+
+                        ServiceFee = ServiceFee + mechanicFeeForToday;
+                    }
+                }
+
+
+                invc.TotalPrice = spk.TotalSparepartPrice + ServiceFee + (ServiceFee * (0.1).AsDecimal());
+            }
 
             Invoice insertedInvoice = _invoiceRepository.Add(invc);
 
@@ -290,6 +324,8 @@ namespace BrawijayaWorkshop.Model
 
             foreach (SPKDetailSparepart spkSp in SPKSpList)
             {
+
+
                 List<SPKDetailSparepartDetail> SPKSpDetailList = _SPKDetailSparepartDetailRepository.GetMany(spdt => spdt.SPKDetailSparepartId == spkSp.Id).ToList();
 
                 foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)
