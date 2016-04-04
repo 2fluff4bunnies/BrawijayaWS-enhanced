@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
@@ -53,6 +54,8 @@
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblTotalInWords = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel22 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel19 = new DevExpress.XtraReports.UI.XRLabel();
@@ -82,11 +85,9 @@
             this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel24 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
-            this.invoiceDataSource = new DevExpress.Persistent.Base.ReportsV2.CollectionDataSource();
+            this.dataSourceInvoiceViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceDataSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSourceInvoiceViewModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -408,6 +409,35 @@
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.PrintAtBottom = true;
             // 
+            // xrLabel10
+            // 
+            this.xrLabel10.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(469.7916F, 47.99998F);
+            this.xrLabel10.Name = "xrLabel10";
+            this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
+            this.xrLabel10.SizeF = new System.Drawing.SizeF(179.0001F, 23F);
+            this.xrLabel10.StylePriority.UseFont = false;
+            this.xrLabel10.StylePriority.UsePadding = false;
+            this.xrLabel10.StylePriority.UseTextAlignment = false;
+            this.xrLabel10.Text = "Total Harga Sparepart";
+            this.xrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // xrLabel15
+            // 
+            this.xrLabel15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.ListSparepart.TotalPriceAfterCommission")});
+            this.xrLabel15.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(648.7916F, 47.99998F);
+            this.xrLabel15.Name = "xrLabel15";
+            this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
+            this.xrLabel15.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
+            this.xrLabel15.StylePriority.UseFont = false;
+            this.xrLabel15.StylePriority.UsePadding = false;
+            this.xrLabel15.StylePriority.UseTextAlignment = false;
+            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrLabel15.Summary = xrSummary1;
+            this.xrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
             // lblTotalInWords
             // 
             this.lblTotalInWords.Font = new System.Drawing.Font("Tahoma", 8F);
@@ -648,7 +678,7 @@
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.DetailSparepart});
             this.DetailReport.DataMember = "SPK.ListSparepart";
-            this.DetailReport.DataSource = this.invoiceDataSource;
+            this.DetailReport.DataSource = this.dataSourceInvoiceViewModel;
             this.DetailReport.Level = 0;
             this.DetailReport.Name = "DetailReport";
             // 
@@ -762,40 +792,10 @@
             this.xrLabel23.StylePriority.UseTextAlignment = false;
             this.xrLabel23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrLabel10
+            // dataSourceInvoiceViewModel
             // 
-            this.xrLabel10.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(469.7916F, 47.99998F);
-            this.xrLabel10.Name = "xrLabel10";
-            this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.xrLabel10.SizeF = new System.Drawing.SizeF(179.0001F, 23F);
-            this.xrLabel10.StylePriority.UseFont = false;
-            this.xrLabel10.StylePriority.UsePadding = false;
-            this.xrLabel10.StylePriority.UseTextAlignment = false;
-            this.xrLabel10.Text = "Total Harga Sparepart";
-            this.xrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel15
-            // 
-            this.xrLabel15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.ListSparepart.TotalPriceAfterCommission")});
-            this.xrLabel15.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(648.7916F, 47.99998F);
-            this.xrLabel15.Name = "xrLabel15";
-            this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.xrLabel15.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
-            this.xrLabel15.StylePriority.UseFont = false;
-            this.xrLabel15.StylePriority.UsePadding = false;
-            this.xrLabel15.StylePriority.UseTextAlignment = false;
-            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
-            this.xrLabel15.Summary = xrSummary1;
-            this.xrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
-            // invoiceDataSource
-            // 
-            this.invoiceDataSource.Name = "invoiceDataSource";
-            this.invoiceDataSource.ObjectTypeName = "BrawijayaWorkshop.Database.Entities.Invoice";
-            this.invoiceDataSource.TopReturnedRecords = 0;
+            this.dataSourceInvoiceViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.InvoiceViewModel);
+            this.dataSourceInvoiceViewModel.Name = "dataSourceInvoiceViewModel";
             // 
             // InvoicePrintItem
             // 
@@ -809,8 +809,8 @@
             this.PageFooter,
             this.DetailReport});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
-            this.invoiceDataSource});
-            this.DataSource = this.invoiceDataSource;
+            this.dataSourceInvoiceViewModel});
+            this.DataSource = this.dataSourceInvoiceViewModel;
             this.Margins = new System.Drawing.Printing.Margins(24, 24, 24, 24);
             this.PageHeight = 600;
             this.PageWidth = 827;
@@ -820,7 +820,7 @@
             this.ShowPrintStatusDialog = false;
             this.Version = "15.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceDataSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSourceInvoiceViewModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -872,7 +872,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel18;
         private DevExpress.XtraReports.UI.XRLabel lblTotalInWords;
         private DevExpress.XtraReports.UI.XRLabel xrLabel22;
-        protected DevExpress.Persistent.Base.ReportsV2.CollectionDataSource invoiceDataSource;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private DevExpress.XtraReports.UI.DetailBand DetailSparepart;
         private DevExpress.XtraReports.UI.XRLabel xrLabel23;
@@ -883,5 +882,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel27;
         private DevExpress.XtraReports.UI.XRLabel xrLabel10;
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource dataSourceInvoiceViewModel;
     }
 }
