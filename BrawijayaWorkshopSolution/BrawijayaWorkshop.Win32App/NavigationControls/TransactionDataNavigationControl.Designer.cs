@@ -39,8 +39,6 @@
             this.iDebt = new DevExpress.XtraNavBar.NavBarItem();
             this.iCredit = new DevExpress.XtraNavBar.NavBarItem();
             this.iInvoice = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
-            this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.iPurchaseReturn = new DevExpress.XtraNavBar.NavBarItem();
             this.iSalesReturn = new DevExpress.XtraNavBar.NavBarItem();
             this.iSPKSales = new DevExpress.XtraNavBar.NavBarItem();
@@ -66,7 +64,7 @@
             this.iCredit,
             this.iInvoice,
             this.iPurchaseReturn,
-            this.iSalesReturn});
+            this.iSalesReturn,
             this.iSPKSales,
             this.iSPKSchedule});
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
@@ -90,7 +88,7 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCredit),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iInvoice),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchaseReturn),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iSalesReturn)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSalesReturn),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSales),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSchedule)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
