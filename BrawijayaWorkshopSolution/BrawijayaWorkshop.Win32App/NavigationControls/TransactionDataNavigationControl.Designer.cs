@@ -43,6 +43,10 @@
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.iPurchaseReturn = new DevExpress.XtraNavBar.NavBarItem();
             this.iSalesReturn = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSPKSales = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSPKSchedule = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +67,8 @@
             this.iInvoice,
             this.iPurchaseReturn,
             this.iSalesReturn});
+            this.iSPKSales,
+            this.iSPKSchedule});
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
             this.navbarTransactionData.Name = "navbarTransactionData";
             this.navbarTransactionData.OptionsNavPane.ExpandedWidth = 249;
@@ -85,6 +91,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iInvoice),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchaseReturn),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSalesReturn)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSales),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSchedule)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
             // 
             // iPurchasing
@@ -130,6 +138,18 @@
             this.iInvoice.Name = "iInvoice";
             this.iInvoice.SmallImageIndex = 5;
             // 
+            // iSPKSales
+            // 
+            this.iSPKSales.Caption = "Penjualan Sparepart";
+            this.iSPKSales.Name = "iSPKSales";
+            this.iSPKSales.SmallImageIndex = 6;
+            // 
+            // iSPKSchedule
+            // 
+            this.iSPKSchedule.Caption = "Update Harian SPK";
+            this.iSPKSchedule.Name = "iSPKSchedule";
+            this.iSPKSchedule.SmallImageIndex = 1;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -139,6 +159,7 @@
             this.imageCollection.Images.SetKeyName(3, "manual_trans_16x16.png");
             this.imageCollection.Images.SetKeyName(4, "Truck-Left-Green-icon-16x16.png");
             this.imageCollection.Images.SetKeyName(5, "payment 16x16.png");
+            this.imageCollection.Images.SetKeyName(6, "1459804460_Shopping_Cart.png");
             // 
             // navBarItem1
             // 
@@ -185,5 +206,7 @@
         public DevExpress.XtraNavBar.NavBarItem iInvoice;
         public DevExpress.XtraNavBar.NavBarItem iPurchaseReturn;
         public DevExpress.XtraNavBar.NavBarItem iSalesReturn;
+        public DevExpress.XtraNavBar.NavBarItem iSPKSales;
+        public DevExpress.XtraNavBar.NavBarItem iSPKSchedule;
     }
 }

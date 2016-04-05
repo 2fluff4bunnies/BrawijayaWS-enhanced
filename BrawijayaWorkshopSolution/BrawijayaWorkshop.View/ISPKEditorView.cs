@@ -30,6 +30,7 @@ namespace BrawijayaWorkshop.View
         List<SpecialSparepartDetailViewModel> WheelDetailList { get; set; }
         List<VehicleWheelViewModel> VehicleWheelList { get; set; }
         VehicleWheelViewModel SelectedVehicleWheel { get; set; }
+        SpecialSparepartDetailViewModel SelectedWheelDetailToChange { get; set; }
 
         int SSDetailId { get; set; }
         string Code { get; set; }
@@ -50,6 +51,10 @@ namespace BrawijayaWorkshop.View
         bool IsUsedSparepartRequired { get; set; }
 
         string SparepartLastUsageDate { get; set; }
-        string SparepartLastUsageQty { get; set; }      
+        string SparepartLastUsageQty { get; set; }
+
+        bool isContractWork { get; set; }
+        decimal ContractWorkFee { get; set; }
+
     }
 }

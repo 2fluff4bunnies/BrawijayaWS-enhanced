@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,5 +26,6 @@ namespace BrawijayaWorkshop.Database.Entities
         public virtual Reference PaymentMethod { get; set; }
         public int PaymentStatus { get; set; }
 
+        public virtual List<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }

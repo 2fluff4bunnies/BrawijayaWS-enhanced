@@ -21,10 +21,8 @@ namespace BrawijayaWorkshop.Presenter
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
             View.SparepartLookupList = Model.LoadSparepart();
-
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
-            
 
             if (View.ParentSPK != null)
             {
@@ -35,7 +33,9 @@ namespace BrawijayaWorkshop.Presenter
                     DueDate = View.ParentSPK.DueDate,
                     SPKParent = View.ParentSPK,
                     TotalSparepartPrice = View.ParentSPK.TotalSparepartPrice,
-                    Description = View.Description
+                    Description = View.Description,
+                    isContractWork = View.ParentSPK.isContractWork,
+                    ContractWorkFee = View.ParentSPK.ContractWorkFee
                 };
 
                 View.CategoryId = View.SelectedSPK.CategoryReference.Id;
@@ -43,7 +43,8 @@ namespace BrawijayaWorkshop.Presenter
                 View.DueDate = View.SelectedSPK.DueDate;
                 View.TotalSparepartPrice = View.SelectedSPK.TotalSparepartPrice;
                 View.Description = View.SelectedSPK.Description;
-
+                View.isContractWork = View.SelectedSPK.isContractWork;
+                View.ContractWorkFee = View.SelectedSPK.ContractWorkFee;
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.SelectedSPK.Id);
 
@@ -64,12 +65,17 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.TotalSparepartPrice = View.TotalSparepartPrice;
             View.SelectedSPK.Description = View.Description;
 
-            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKSparepartList, View.SPKSparepartDetailList, LoginInformation.UserId, View.IsNeedApproval);
+            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKSparepartList, View.SPKSparepartDetailList, View.VehicleWheelList, LoginInformation.UserId, View.IsNeedApproval);
         }
 
         public void populateSparepartDetail()
         {
             View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty));
+        }
+
+        public void SetSelectedWheelDetailToChange(int wheelDetailId)
+        {
+            View.SelectedWheelDetailToChange = Model.GetWheelDetailById(wheelDetailId);
         }
 
         public void SendApproval()
@@ -115,10 +121,15 @@ namespace BrawijayaWorkshop.Presenter
             View.WheelDetailList = Model.RetrieveReadyWheelDetails();
         }
 
-
         public VehicleWheelViewModel ResetSelectedWheel(int VehicleWheelId)
         {
             return Model.GetVehicleWHeelById(VehicleWheelId);
         }
+
+        public int SPKSalesCategoryReferenceId()
+        {
+            return Model.SPKSalesCategoryReferenceId();
+        }
+
     }
 }

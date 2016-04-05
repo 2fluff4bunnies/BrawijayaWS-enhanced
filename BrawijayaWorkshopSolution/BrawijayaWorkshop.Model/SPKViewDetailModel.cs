@@ -21,7 +21,11 @@ namespace BrawijayaWorkshop.Model
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
+        private IUsedGoodRepository _usedGoodRepository;
+        private IVehicleWheelRepository _vehicleWheelRepository;
         private IUnitOfWork _unitOfWork;
+        private ISPKScheduleRepository _SPKScheduleReposistory;
+        private IMechanicRepository _mechanicRepository;
         private ISettingRepository _settingRepository;
 
         public SPKViewDetailModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -31,6 +35,10 @@ namespace BrawijayaWorkshop.Model
             ISettingRepository settingRepository,
             IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
+            IUsedGoodRepository usedGoodrepository,
+            IVehicleWheelRepository vehicleWheelRepository,
+            ISPKScheduleRepository SPKScheduleReposistory,
+            IMechanicRepository mechanicRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -44,6 +52,10 @@ namespace BrawijayaWorkshop.Model
             _settingRepository = settingRepository;
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
+            _vehicleWheelRepository = vehicleWheelRepository;
+            _usedGoodRepository = usedGoodrepository;
+            _SPKScheduleReposistory = SPKScheduleReposistory;
+            _mechanicRepository = mechanicRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -268,15 +280,43 @@ namespace BrawijayaWorkshop.Model
             _SPKRepository.Update(entity);
 
             Invoice invc = new Invoice();
-
-            invc.TotalPrice = spk.TotalSparepartPrice;
-            invc.PaymentStatus = (int)DbConstant.InvoiceStatus.FeeNotFixed;
-            invc.Status = (int)DbConstant.DefaultDataStatus.Active;
-
             invc.CreateDate = serverTime;
             invc.ModifyDate = serverTime;
             invc.ModifyUserId = userId;
             invc.CreateUserId = userId;
+
+            invc.TotalPrice = spk.TotalSparepartPrice;
+            invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+            invc.TotalHasPaid = 0;
+
+            if (spk.isContractWork)
+            {
+                invc.TotalPrice = spk.TotalSparepartPrice + spk.ContractWorkFee + (spk.ContractWorkFee * (0.2).AsDecimal());
+            }
+            else
+            {
+                decimal ServiceFee = 0;
+
+                int SPKWorkingDays = serverTime.Day - spk.CreateDate.Day;
+
+                for (int i = 0; i < SPKWorkingDays; i++)
+                {
+                    List<SPKSchedule> involvedMechanic = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i).ToList();
+
+                    foreach (SPKSchedule mechanic in involvedMechanic)
+                    {
+                        int mechanicJobForToday = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
+
+                        decimal mechanicFeeForToday = mechanic.Mechanic.BaseFee / mechanicJobForToday;
+
+                        ServiceFee = ServiceFee + mechanicFeeForToday;
+                    }
+                }
+
+
+                invc.TotalPrice = spk.TotalSparepartPrice + ServiceFee + (ServiceFee * (0.1).AsDecimal());
+            }
 
             Invoice insertedInvoice = _invoiceRepository.Add(invc);
 
@@ -284,6 +324,8 @@ namespace BrawijayaWorkshop.Model
 
             foreach (SPKDetailSparepart spkSp in SPKSpList)
             {
+
+
                 List<SPKDetailSparepartDetail> SPKSpDetailList = _SPKDetailSparepartDetailRepository.GetMany(spdt => spdt.SPKDetailSparepartId == spkSp.Id).ToList();
 
                 foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)
@@ -302,6 +344,10 @@ namespace BrawijayaWorkshop.Model
 
                     _invoiceDetailRepository.Add(invcDtl);
                 }
+
+                UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;
+                _usedGoodRepository.Update(foundUsedGood);
             }
 
             _unitOfWork.SaveChanges();
@@ -317,6 +363,16 @@ namespace BrawijayaWorkshop.Model
             int.TryParse(threshold, out result);
 
             return result;
+        }
+
+        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
+        {
+            List<VehicleWheel> result = _vehicleWheelRepository.GetMany(
+                vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
+
+            return Map(result, mappedResult);
         }
     }
 }

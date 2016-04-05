@@ -32,5 +32,10 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SPKViewModel SPKParent { get; set; }
 
         public List<SPKDetailSparepartViewModel> ListSparepart { get; set; }
+
+        public bool isContractWork { get; set; }
+
+        public decimal ContractWorkFee { get; set; }
+
     }
 }

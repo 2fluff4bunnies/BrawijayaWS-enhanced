@@ -13,7 +13,7 @@ namespace BrawijayaWorkshop.View
         SPKViewModel SelectedSPK { get; set; }
         SPKViewModel ParentSPK { get; set; }
 
-        //List<SPKDetailMechanic> SPKMechanicList { get; set; }
+        List<VehicleWheelViewModel> VehicleWheelList { get; set; }
 
         List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }
         List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }

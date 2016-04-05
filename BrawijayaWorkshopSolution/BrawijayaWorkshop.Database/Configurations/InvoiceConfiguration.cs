@@ -7,10 +7,12 @@ namespace BrawijayaWorkshop.Database.Configurations
     {
         public InvoiceConfiguration()
         {
-            HasRequired(p => p.CreateUser).WithMany().HasForeignKey(p => p.CreateUserId).WillCascadeOnDelete(true);
-            HasRequired(p => p.ModifyUser).WithMany().HasForeignKey(p => p.ModifyUserId).WillCascadeOnDelete(true);
-            HasRequired(p => p.SPK).WithMany().HasForeignKey(p => p.SPKId).WillCascadeOnDelete(true);
-            HasRequired(p => p.PaymentMethod).WithMany().HasForeignKey(p => p.PaymentMethodId).WillCascadeOnDelete(true);
+            HasRequired(i => i.CreateUser).WithMany().HasForeignKey(i => i.CreateUserId).WillCascadeOnDelete(true);
+            HasRequired(i => i.ModifyUser).WithMany().HasForeignKey(i => i.ModifyUserId).WillCascadeOnDelete(true);
+            HasRequired(i => i.SPK).WithMany().HasForeignKey(i => i.SPKId).WillCascadeOnDelete(true);
+            HasRequired(i => i.PaymentMethod).WithMany().HasForeignKey(i => i.PaymentMethodId).WillCascadeOnDelete(true);
+
+            HasMany(i =>i.InvoiceDetails).WithRequired().HasForeignKey(i => i.InvoiceId);
         }
     }
 }

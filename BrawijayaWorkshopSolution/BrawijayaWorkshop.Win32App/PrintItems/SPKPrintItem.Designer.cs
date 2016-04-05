@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -35,9 +36,6 @@
             this.lblDueDate = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblSpkName = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblSpkDate = new DevExpress.XtraReports.UI.XRLabel();
@@ -63,7 +61,6 @@
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
-            this.dataSourceSPK = new DevExpress.Persistent.Base.ReportsV2.CollectionDataSource();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.DetailSparepart = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
@@ -72,9 +69,10 @@
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.dataSourceSPKViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSourceSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSourceSPKViewModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -104,9 +102,6 @@
             this.lblDueDate,
             this.xrLabel10,
             this.xrLabel1,
-            this.xrLabel5,
-            this.lblSpkName,
-            this.xrLabel3,
             this.xrLabel2,
             this.xrLabel4,
             this.lblSpkDate,
@@ -120,7 +115,7 @@
             this.xrLabel11,
             this.lblLicenseNumber,
             this.title});
-            this.ReportHeader.HeightF = 120.6875F;
+            this.ReportHeader.HeightF = 94.64582F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // lblDueDate
@@ -163,47 +158,6 @@
             this.xrLabel1.Text = "Perkiraan Selesai";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrLabel5
-            // 
-            this.xrLabel5.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 90.47916F);
-            this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(95.22916F, 22.99999F);
-            this.xrLabel5.StylePriority.UseFont = false;
-            this.xrLabel5.StylePriority.UsePadding = false;
-            this.xrLabel5.StylePriority.UseTextAlignment = false;
-            this.xrLabel5.Text = "Nama Teknisi";
-            this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // lblSpkName
-            // 
-            this.lblSpkName.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ListMechanic.Mechanic.Name")});
-            this.lblSpkName.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.lblSpkName.LocationFloat = new DevExpress.Utils.PointFloat(108.7708F, 90.47915F);
-            this.lblSpkName.Name = "lblSpkName";
-            this.lblSpkName.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblSpkName.SizeF = new System.Drawing.SizeF(277.0833F, 23F);
-            this.lblSpkName.StylePriority.UseFont = false;
-            this.lblSpkName.StylePriority.UsePadding = false;
-            this.lblSpkName.StylePriority.UseTextAlignment = false;
-            this.lblSpkName.Text = "[Mechanic Name]";
-            this.lblSpkName.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel3
-            // 
-            this.xrLabel3.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(95.22915F, 90.47916F);
-            this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(13.54166F, 23F);
-            this.xrLabel3.StylePriority.UseFont = false;
-            this.xrLabel3.StylePriority.UsePadding = false;
-            this.xrLabel3.StylePriority.UseTextAlignment = false;
-            this.xrLabel3.Text = ":";
-            this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
             // xrLabel2
             // 
             this.xrLabel2.Font = new System.Drawing.Font("Tahoma", 8F);
@@ -234,7 +188,7 @@
             // 
             this.lblSpkDate.CanShrink = true;
             this.lblSpkDate.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "CreateDate", "{0:dd MMM yyyy}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPKParent.CreateDate", "{0:dd MMM yyyy}")});
             this.lblSpkDate.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblSpkDate.LocationFloat = new DevExpress.Utils.PointFloat(108.7708F, 27.39584F);
             this.lblSpkDate.Name = "lblSpkDate";
@@ -498,18 +452,12 @@
             this.xrLabel20.Text = "(.......................)";
             this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
-            // dataSourceSPK
-            // 
-            this.dataSourceSPK.Name = "dataSourceSPK";
-            this.dataSourceSPK.ObjectTypeName = "BrawijayaWorkshop.Database.Entities.SPK";
-            this.dataSourceSPK.TopReturnedRecords = 0;
-            // 
             // DetailReport
             // 
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.DetailSparepart});
             this.DetailReport.DataMember = "ListSparepart";
-            this.DetailReport.DataSource = this.dataSourceSPK;
+            this.DetailReport.DataSource = this.dataSourceSPKViewModel;
             this.DetailReport.Level = 0;
             this.DetailReport.Name = "DetailReport";
             // 
@@ -564,9 +512,10 @@
             // 
             this.xrTableCell6.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrTableCell6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ListSparepart.Sparepart.Name")});
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StylePriority.UseBorders = false;
-            this.xrTableCell6.Text = "[ListSparepart.Sparepart.Name]";
             this.xrTableCell6.Weight = 2.5079163409264433D;
             // 
             // xrTableCell7
@@ -595,6 +544,11 @@
             this.xrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell8.Weight = 0.56477464582706038D;
             // 
+            // dataSourceSPKViewModel
+            // 
+            this.dataSourceSPKViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.SPKViewModel);
+            this.dataSourceSPKViewModel.Name = "dataSourceSPKViewModel";
+            // 
             // SPKPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -607,8 +561,8 @@
             this.ReportFooter,
             this.DetailReport});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
-            this.dataSourceSPK});
-            this.DataSource = this.dataSourceSPK;
+            this.dataSourceSPKViewModel});
+            this.DataSource = this.dataSourceSPKViewModel;
             this.DesignerOptions.ShowDesignerHints = false;
             this.DesignerOptions.ShowExportWarnings = false;
             this.DesignerOptions.ShowPrintingWarnings = false;
@@ -618,8 +572,8 @@
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Version = "15.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSourceSPK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSourceSPKViewModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -652,16 +606,12 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel6;
         private DevExpress.XtraReports.UI.XRLabel xrLabel7;
         private DevExpress.XtraReports.UI.XRLabel lblSpkNumber;
-        private DevExpress.XtraReports.UI.XRLabel lblSpkName;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel3;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel5;
         private DevExpress.XtraReports.UI.XRLabel lblDueDate;
         private DevExpress.XtraReports.UI.XRLabel xrLabel10;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRLabel xrLabel18;
         private DevExpress.XtraReports.UI.XRLabel xrLabel20;
-        protected DevExpress.Persistent.Base.ReportsV2.CollectionDataSource dataSourceSPK;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private DevExpress.XtraReports.UI.DetailBand DetailSparepart;
         private DevExpress.XtraReports.UI.XRTable xrTable2;
@@ -670,5 +620,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource dataSourceSPKViewModel;
     }
 }

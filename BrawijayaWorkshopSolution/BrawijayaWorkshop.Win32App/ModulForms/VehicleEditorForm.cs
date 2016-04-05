@@ -48,7 +48,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
         {
-
             if (this.SelectedVehicle != null)
             {
                 DevExpress.XtraEditors.LookUpEdit lookup = sender as DevExpress.XtraEditors.LookUpEdit;
