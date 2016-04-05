@@ -30,6 +30,8 @@ namespace BrawijayaWorkshop.Model
             List<Purchasing> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
+                dateFrom = dateFrom.Value.Date;
+                dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
                 result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.Date).ToList();
             }
             else

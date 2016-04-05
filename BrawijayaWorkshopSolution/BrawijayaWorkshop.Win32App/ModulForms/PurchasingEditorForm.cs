@@ -189,6 +189,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         .Where(group => group.Count() > 1)
                         .Select(group => group.Key).ToList();
 
+                List<string> duplicatedSerialNumberNullEmpty = duplicatedSerialNumber.Where(x => string.IsNullOrEmpty(x)).ToList();
+                foreach (var itemNull in duplicatedSerialNumberNullEmpty)
+                {
+                    duplicatedSerialNumber.Remove(itemNull);
+                }
+
                 bool isValid = false;
                 if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
                 {

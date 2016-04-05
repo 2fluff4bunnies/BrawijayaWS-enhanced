@@ -150,12 +150,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void btnReturn_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
             //editor.ShowDialog(this);
 
-            btnSearch.PerformClick();
+            //btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)

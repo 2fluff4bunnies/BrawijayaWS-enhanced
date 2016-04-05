@@ -151,6 +151,15 @@ namespace BrawijayaWorkshop.Model
             {
                 purchasing.TotalHasPaid = purchasing.TotalPrice;
             }
+
+            if (purchasing.TotalHasPaid != purchasing.TotalPrice)
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            }
+            else
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+            }
             Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
             Map(purchasing, entity);
             _purchasingRepository.Update(entity);

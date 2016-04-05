@@ -189,9 +189,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedPurchasing != null)
             {
-                //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
-                //editor.SelectedPurchaseReturn = _selectedPurchaseReturn;
-                //editor.ShowDialog(this);
+                PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
+                editor.SelectedPurchasing = _selectedPurchasing;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -201,9 +201,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedPurchasing != null)
             {
-                //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
-                //editor.SelectedPurchaseReturn = _selectedPurchaseReturn;
-                //editor.ShowDialog(this);
+                PurchaseReturnTransactionListForm editor = Bootstrapper.Resolve<PurchaseReturnTransactionListForm>();
+                editor.SelectedPurchasing = _selectedPurchasing;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }

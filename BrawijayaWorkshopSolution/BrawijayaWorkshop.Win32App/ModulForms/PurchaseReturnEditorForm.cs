@@ -32,6 +32,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
         }
 
+        public PurchasingViewModel SelectedPurchasing { get; set; }
         public PurchaseReturnViewModel SelectedPurchaseReturn { get; set; }
         public List<PurchaseReturnDetailViewModel> ListPurchaseReturnDetail { get; set; }
 

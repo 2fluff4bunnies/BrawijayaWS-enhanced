@@ -46,7 +46,10 @@ namespace BrawijayaWorkshop.Database
         public DbSet<BalanceJournalDetail> BalanceJournalDetails { get; set; }
         public DbSet<UsedGood> UsedGoods { get; set; }
         public DbSet<UsedGoodTransaction> UsedGoodsTransactions { get; set; }
-
+        public DbSet<PurchaseReturn> PurchaseReturns { get; set; }
+        public DbSet<PurchaseReturnDetail> PurchaseReturnDetails { get; set; }
+        public DbSet<SalesReturn> SalesReturns { get; set; }
+        public DbSet<SalesReturnDetail> SalesReturnDetails { get; set; }
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
 
@@ -84,6 +87,10 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new BalanceJournalDetailConfiguration());
             modelBuilder.Configurations.Add(new UsedGoodsConfiguration());
             modelBuilder.Configurations.Add(new UsedGoodsTransactionConfiguration());
+            modelBuilder.Configurations.Add(new PurchaseReturnConfiguration());
+            modelBuilder.Configurations.Add(new PurchaseReturnDetailConfiguration());
+            modelBuilder.Configurations.Add(new SalesReturnConfiguration());
+            modelBuilder.Configurations.Add(new SalesReturnDetailConfiguration());
         }
     }
 }
