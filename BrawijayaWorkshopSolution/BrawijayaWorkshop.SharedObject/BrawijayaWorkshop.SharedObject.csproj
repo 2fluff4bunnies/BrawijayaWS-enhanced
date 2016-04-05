@@ -59,6 +59,7 @@
     <Compile Include="ViewModels\PurchasingDetailViewModel.cs" />
     <Compile Include="ViewModels\PurchasingViewModel.cs" />
     <Compile Include="ViewModels\ReferenceViewModel.cs" />
+    <Compile Include="ViewModels\ReturnViewModel.cs" />
     <Compile Include="ViewModels\RoleAccessViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SalesReturnDetailViewModel.cs" />

@@ -72,7 +72,9 @@
     <Compile Include="NotificationListPresenter.cs" />
     <Compile Include="ProfitLossPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseReturnEditorPresenter.cs" />
     <Compile Include="PurchaseReturnListPresenter.cs" />
+    <Compile Include="PurchaseReturnTransactionListPresenter.cs" />
     <Compile Include="PurchasingApprovalPresenter.cs" />
     <Compile Include="PurchasingEditorPresenter.cs" />
     <Compile Include="PurchasingListPresenter.cs" />

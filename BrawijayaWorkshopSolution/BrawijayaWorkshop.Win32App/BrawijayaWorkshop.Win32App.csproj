@@ -433,6 +433,12 @@
     <Compile Include="ModulForms\MechanicEditorForm.Designer.cs">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\PurchaseReturnTransactionListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\PurchaseReturnTransactionListForm.Designer.cs">
+      <DependentUpon>PurchaseReturnTransactionListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\PurchasingApprovalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -445,11 +451,11 @@
     <Compile Include="ModulForms\PurchasingEditorForm.Designer.cs">
       <DependentUpon>PurchasingEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulForms\PurchasingReturnEditorForm.cs">
+    <Compile Include="ModulForms\PurchaseReturnEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModulForms\PurchasingReturnEditorForm.Designer.cs">
-      <DependentUpon>PurchasingReturnEditorForm.cs</DependentUpon>
+    <Compile Include="ModulForms\PurchaseReturnEditorForm.Designer.cs">
+      <DependentUpon>PurchaseReturnEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\RoleAccessEditorForm.cs">
       <SubType>Form</SubType>
@@ -783,6 +789,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\MechanicEditorForm.resx">
       <DependentUpon>MechanicEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\PurchaseReturnEditorForm.resx">
+      <DependentUpon>PurchaseReturnEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\PurchaseReturnTransactionListForm.resx">
+      <DependentUpon>PurchaseReturnTransactionListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\PurchasingApprovalForm.resx">
       <DependentUpon>PurchasingApprovalForm.cs</DependentUpon>

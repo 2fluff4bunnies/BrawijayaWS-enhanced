@@ -1,13 +1,13 @@
 ﻿namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    partial class PurchaseReturnListControl
+    partial class PurchaseReturnTransactionListForm
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,40 +20,38 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnListControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnTransactionListForm));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
-            this.btnListReturn = new DevExpress.XtraEditors.SimpleButton();
-            this.gridPurchasing = new DevExpress.XtraGrid.GridControl();
-            this.gvPurchasing = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridReturn = new DevExpress.XtraGrid.GridControl();
+            this.gvReturn = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsListReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridPurchasing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvPurchasing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridReturn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvReturn)).BeginInit();
             this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,10 +64,10 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtDateFilterFrom);
             this.gcFilter.Controls.Add(this.lblFilterDate);
-            this.gcFilter.Location = new System.Drawing.Point(0, 0);
+            this.gcFilter.Location = new System.Drawing.Point(-4, 2);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(638, 67);
-            this.gcFilter.TabIndex = 1;
+            this.gcFilter.Size = new System.Drawing.Size(641, 67);
+            this.gcFilter.TabIndex = 2;
             this.gcFilter.Text = "Filter";
             // 
             // labelControl1
@@ -104,7 +102,6 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "cari";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtDateFilterFrom
             // 
@@ -124,56 +121,43 @@
             // 
             this.lblFilterDate.Location = new System.Drawing.Point(14, 34);
             this.lblFilterDate.Name = "lblFilterDate";
-            this.lblFilterDate.Size = new System.Drawing.Size(89, 13);
+            this.lblFilterDate.Size = new System.Drawing.Size(68, 13);
             this.lblFilterDate.TabIndex = 1;
-            this.lblFilterDate.Text = "Tanggal Pembelian";
+            this.lblFilterDate.Text = "Tanggal Retur";
             // 
-            // btnListReturn
+            // gridReturn
             // 
-            this.btnListReturn.Image = ((System.Drawing.Image)(resources.GetObject("btnListReturn.Image")));
-            this.btnListReturn.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnListReturn.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnListReturn.Location = new System.Drawing.Point(3, 73);
-            this.btnListReturn.Name = "btnListReturn";
-            this.btnListReturn.Size = new System.Drawing.Size(175, 23);
-            this.btnListReturn.TabIndex = 5;
-            this.btnListReturn.Text = "Lihat Daftar Retur Pembelian";
-            this.btnListReturn.Click += new System.EventHandler(this.btnListReturn_Click);
-            // 
-            // gridPurchasing
-            // 
-            this.gridPurchasing.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gridReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridPurchasing.Location = new System.Drawing.Point(3, 105);
-            this.gridPurchasing.MainView = this.gvPurchasing;
-            this.gridPurchasing.Name = "gridPurchasing";
-            this.gridPurchasing.Size = new System.Drawing.Size(632, 210);
-            this.gridPurchasing.TabIndex = 6;
-            this.gridPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvPurchasing});
+            this.gridReturn.Location = new System.Drawing.Point(-4, 87);
+            this.gridReturn.MainView = this.gvReturn;
+            this.gridReturn.Name = "gridReturn";
+            this.gridReturn.Size = new System.Drawing.Size(641, 210);
+            this.gridReturn.TabIndex = 7;
+            this.gridReturn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvReturn});
             // 
-            // gvPurchasing
+            // gvReturn
             // 
-            this.gvPurchasing.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvReturn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colDate,
-            this.colSupplierName,
-            this.colTotalPrice});
-            this.gvPurchasing.GridControl = this.gridPurchasing;
-            this.gvPurchasing.Name = "gvPurchasing";
-            this.gvPurchasing.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvPurchasing.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvPurchasing.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvPurchasing.OptionsBehavior.Editable = false;
-            this.gvPurchasing.OptionsBehavior.ReadOnly = true;
-            this.gvPurchasing.OptionsCustomization.AllowColumnMoving = false;
-            this.gvPurchasing.OptionsCustomization.AllowFilter = false;
-            this.gvPurchasing.OptionsCustomization.AllowGroup = false;
-            this.gvPurchasing.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvPurchasing.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvPurchasing.OptionsView.ShowGroupPanel = false;
-            this.gvPurchasing.OptionsView.ShowViewCaption = true;
-            this.gvPurchasing.ViewCaption = "Daftar Pembelian";
+            this.colSupplierName});
+            this.gvReturn.GridControl = this.gridReturn;
+            this.gvReturn.Name = "gvReturn";
+            this.gvReturn.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvReturn.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvReturn.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvReturn.OptionsBehavior.Editable = false;
+            this.gvReturn.OptionsBehavior.ReadOnly = true;
+            this.gvReturn.OptionsCustomization.AllowColumnMoving = false;
+            this.gvReturn.OptionsCustomization.AllowFilter = false;
+            this.gvReturn.OptionsCustomization.AllowGroup = false;
+            this.gvReturn.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvReturn.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvReturn.OptionsView.ShowGroupPanel = false;
+            this.gvReturn.OptionsView.ShowViewCaption = true;
+            this.gvReturn.ViewCaption = "Daftar Retur Pembelian";
             // 
             // colDate
             // 
@@ -191,53 +175,37 @@
             this.colSupplierName.Visible = true;
             this.colSupplierName.VisibleIndex = 1;
             // 
-            // colTotalPrice
-            // 
-            this.colTotalPrice.Caption = "Total Transaksi";
-            this.colTotalPrice.FieldName = "TotalPrice";
-            this.colTotalPrice.Name = "colTotalPrice";
-            this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 2;
-            // 
-            // bgwMain
-            // 
-            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
-            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
-            // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsAddReturn,
-            this.cmsListReturn});
+            this.cmsEditData,
+            this.cmsDeleteData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(184, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 70);
             // 
-            // cmsAddReturn
+            // cmsEditData
             // 
-            this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
-            this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(183, 22);
-            this.cmsAddReturn.Text = "Tambah Retur";
-            this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
+            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditData.Name = "cmsEditData";
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Text = "Ubah Data";
             // 
-            // cmsListReturn
+            // cmsDeleteData
             // 
-            this.cmsListReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
-            this.cmsListReturn.Name = "cmsListReturn";
-            this.cmsListReturn.Size = new System.Drawing.Size(183, 22);
-            this.cmsListReturn.Text = "Lihat Transaksi Retur";
-            this.cmsListReturn.Click += new System.EventHandler(this.cmsListReturn_Click);
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Text = "Hapus Data";
             // 
-            // PurchaseReturnListControl
+            // PurchaseReturnTransactionListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gridPurchasing);
-            this.Controls.Add(this.btnListReturn);
+            this.ClientSize = new System.Drawing.Size(634, 261);
+            this.Controls.Add(this.gridReturn);
             this.Controls.Add(this.gcFilter);
-            this.Name = "PurchaseReturnListControl";
-            this.Size = new System.Drawing.Size(638, 315);
-            this.Load += new System.EventHandler(this.PurchaseReturnListControl_Load);
+            this.Name = "PurchaseReturnTransactionListForm";
+            this.Text = "From Daftar Retur Pembelian";
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -245,8 +213,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridPurchasing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvPurchasing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridReturn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvReturn)).EndInit();
             this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -260,15 +228,13 @@
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
         private DevExpress.XtraEditors.LabelControl lblFilterDate;
-        private DevExpress.XtraEditors.SimpleButton btnListReturn;
-        private DevExpress.XtraGrid.GridControl gridPurchasing;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvPurchasing;
+        private DevExpress.XtraGrid.GridControl gridReturn;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvReturn;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
         private DevExpress.XtraGrid.Columns.GridColumn colSupplierName;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem cmsListReturn;
-        private System.Windows.Forms.ToolStripMenuItem cmsAddReturn;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
     }
 }

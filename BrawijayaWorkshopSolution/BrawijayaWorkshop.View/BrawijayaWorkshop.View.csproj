@@ -71,7 +71,9 @@
     <Compile Include="IMechanicListView.cs" />
     <Compile Include="INotificationListView.cs" />
     <Compile Include="IProfitLossView.cs" />
+    <Compile Include="IPurchaseReturnEditorView.cs" />
     <Compile Include="IPurchaseReturnListView.cs" />
+    <Compile Include="IPurchaseReturnTransactionListView.cs" />
     <Compile Include="IPurchasingApprovalView.cs" />
     <Compile Include="IPurchasingEditorView.cs" />
     <Compile Include="IPurchasingListView.cs" />

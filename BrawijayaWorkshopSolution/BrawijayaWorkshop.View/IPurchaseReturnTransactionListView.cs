@@ -5,13 +5,14 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
-    public interface IPurchaseReturnListView : IView
+    public interface IPurchaseReturnTransactionListView : IView
     {
         DateTime? DateFilterFrom { get; set; }
         DateTime? DateFilterTo { get; set; }
 
-        List<PurchasingViewModel> PurchasingListData { get; set; }
-
         PurchasingViewModel SelectedPurchasing { get; set; }
+        List<PurchaseReturnViewModel> PurchaseReturnListData { get; set; }
+
+        PurchaseReturnViewModel SelectedPurchaseReturn { get; set; }
     }
 }

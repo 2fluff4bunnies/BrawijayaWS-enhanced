@@ -10,8 +10,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
     {
         public int Id { get; set; }
 
-        public int Qty { get; set; }
-
         public int InvoiceDetailId { get; set; }
         public virtual InvoiceDetailViewModel InvoiceDetail { get; set; }
 

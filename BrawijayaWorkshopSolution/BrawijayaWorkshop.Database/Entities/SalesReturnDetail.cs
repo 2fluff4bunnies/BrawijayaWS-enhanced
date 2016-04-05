@@ -9,9 +9,6 @@ namespace BrawijayaWorkshop.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        public int Qty { get; set; }
-
         public int InvoiceDetailId { get; set; }
         public virtual InvoiceDetail InvoiceDetail { get; set; }
 

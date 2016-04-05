@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class PurchaseReturnListControl : BaseAppUserControl, IPurchaseReturnListView
     {
         private PurchaseReturnListPresenter _presenter;
-        private PurchaseReturnViewModel _selectedPurchaseReturn;
+        private PurchasingViewModel _selectedPurchasing;
 
         protected override string ModulName
         {
@@ -34,12 +34,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             InitializeComponent();
             _presenter = new PurchaseReturnListPresenter(this, model);
 
-            gvReturn.PopupMenuShowing += gvReturn_PopupMenuShowing;
-            gvReturn.FocusedRowChanged += gvReturn_FocusedRowChanged;
+            gvPurchasing.PopupMenuShowing += gvPurchasing_PopupMenuShowing;
+            gvPurchasing.FocusedRowChanged += gvPurchasing_FocusedRowChanged;
 
             // init editor control accessibility
-            btnNewReturn.Enabled = AllowInsert;
-            cmsEditData.Enabled = AllowEdit;
+            btnListReturn.Enabled = AllowInsert;
+            cmsListReturn.Enabled = AllowEdit;
 
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
@@ -51,12 +51,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
-        private void gvReturn_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gvPurchasing_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedPurchaseReturn = gvReturn.GetFocusedRow() as PurchaseReturnViewModel;
+            this.SelectedPurchasing = gvPurchasing.GetFocusedRow() as PurchasingViewModel;
         }
 
-        private void gvReturn_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        private void gvPurchasing_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             GridView view = (GridView)sender;
             GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
@@ -65,7 +65,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
 
-                this.SelectedPurchaseReturn = gvReturn.GetRow(view.FocusedRowHandle) as PurchaseReturnViewModel;
+                this.SelectedPurchasing = gvPurchasing.GetRow(view.FocusedRowHandle) as PurchasingViewModel;
             }
         }
 
@@ -93,35 +93,35 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<PurchaseReturnViewModel> PurchaseReturnListData
+        public List<PurchasingViewModel> PurchasingListData
         {
             get
             {
-                return gridReturn.DataSource as List<PurchaseReturnViewModel>;
+                return gridPurchasing.DataSource as List<PurchasingViewModel>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridReturn.DataSource = value; gvReturn.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gridPurchasing.DataSource = value; gvPurchasing.BestFitColumns(); }));
                 }
                 else
                 {
-                    gridReturn.DataSource = value;
-                    gvReturn.BestFitColumns();
+                    gridPurchasing.DataSource = value;
+                    gvPurchasing.BestFitColumns();
                 }
             }
         }
 
-        public PurchaseReturnViewModel SelectedPurchaseReturn
+        public PurchasingViewModel SelectedPurchasing
         {
             get
             {
-                return _selectedPurchaseReturn;
+                return _selectedPurchasing;
             }
             set
             {
-                _selectedPurchaseReturn = value;
+                _selectedPurchasing = value;
             }
         }
 
@@ -135,8 +135,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing PurchaseReturn data...");
-                _selectedPurchaseReturn = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur pembelian...", false);
+                _selectedPurchasing = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
@@ -145,26 +145,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnSearch.PerformClick();
-            }
-        }
-
-        private void btnReturn_Click(object sender, EventArgs e)
-        {
-            //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
-            //editor.ShowDialog(this);
-
-            btnSearch.PerformClick();
-        }
-
-        private void cmsEditData_Click(object sender, EventArgs e)
-        {
-            if (_selectedPurchaseReturn != null)
-            {
-                //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
-                //editor.SelectedPurchaseReturn = _selectedPurchaseReturn;
-                //editor.ShowDialog(this);
-
                 btnSearch.PerformClick();
             }
         }
@@ -189,12 +169,44 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            if (gvReturn.RowCount > 0)
+            if (gvPurchasing.RowCount > 0)
             {
-                SelectedPurchaseReturn = gvReturn.GetRow(0) as PurchaseReturnViewModel;
+                SelectedPurchasing = gvPurchasing.GetRow(0) as PurchasingViewModel;
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur pembelian selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);
+        }
+
+        private void btnListReturn_Click(object sender, EventArgs e)
+        {
+            PurchaseReturnTransactionListForm editor = Bootstrapper.Resolve<PurchaseReturnTransactionListForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsAddReturn_Click(object sender, EventArgs e)
+        {
+            if (_selectedPurchasing != null)
+            {
+                //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
+                //editor.SelectedPurchaseReturn = _selectedPurchaseReturn;
+                //editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void cmsListReturn_Click(object sender, EventArgs e)
+        {
+            if (_selectedPurchasing != null)
+            {
+                //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
+                //editor.SelectedPurchaseReturn = _selectedPurchaseReturn;
+                //editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
         }
 
     }

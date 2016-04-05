@@ -13,33 +13,31 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IPurchasingRepository _purchasingRepository;
-        private IPurchaseReturnRepository _purchaseReturnRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchaseReturnListModel(ITransactionRepository transactionRepository,
-            IPurchasingRepository purchasingRepository, IPurchaseReturnRepository purchaseReturnRepository,
+            IPurchasingRepository purchasingRepository, 
             IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
             _purchasingRepository = purchasingRepository;
-            _purchaseReturnRepository = purchaseReturnRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchaseReturnViewModel> SearchPurchaseReturnList(DateTime? dateFrom, DateTime? dateTo)
+        public List<PurchasingViewModel> SearchPurchasingList(DateTime? dateFrom, DateTime? dateTo)
         {
-            List<PurchaseReturn> result = null;
+            List<Purchasing> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = _purchaseReturnRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.Date).ToList();
             }
             else
             {
-                result = _purchaseReturnRepository.GetAll().OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetAll().OrderBy(c => c.Date).ToList();
             }
 
-            List<PurchaseReturnViewModel> mappedResult = new List<PurchaseReturnViewModel>();
+            List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();
             return Map(result, mappedResult);
         }
     }

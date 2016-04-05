@@ -38,9 +38,11 @@
             this.iGuestBook = new DevExpress.XtraNavBar.NavBarItem();
             this.iDebt = new DevExpress.XtraNavBar.NavBarItem();
             this.iCredit = new DevExpress.XtraNavBar.NavBarItem();
+            this.iInvoice = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
-            this.iInvoice = new DevExpress.XtraNavBar.NavBarItem();
+            this.iPurchaseReturn = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSalesReturn = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +60,9 @@
             this.iGuestBook,
             this.iDebt,
             this.iCredit,
-            this.iInvoice});
+            this.iInvoice,
+            this.iPurchaseReturn,
+            this.iSalesReturn});
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
             this.navbarTransactionData.Name = "navbarTransactionData";
             this.navbarTransactionData.OptionsNavPane.ExpandedWidth = 249;
@@ -78,7 +82,9 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iGuestBook),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iDebt),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCredit),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iInvoice)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iInvoice),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchaseReturn),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSalesReturn)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
             // 
             // iPurchasing
@@ -118,6 +124,12 @@
             this.iCredit.Name = "iCredit";
             this.iCredit.SmallImageIndex = 5;
             // 
+            // iInvoice
+            // 
+            this.iInvoice.Caption = "Invoice";
+            this.iInvoice.Name = "iInvoice";
+            this.iInvoice.SmallImageIndex = 5;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -133,11 +145,17 @@
             this.navBarItem1.Caption = "navBarItem1";
             this.navBarItem1.Name = "navBarItem1";
             // 
-            // iInvoice
+            // iPurchaseReturn
             // 
-            this.iInvoice.Caption = "Invoice";
-            this.iInvoice.Name = "iInvoice";
-            this.iInvoice.SmallImageIndex = 5;
+            this.iPurchaseReturn.Caption = "Retur Pembelian";
+            this.iPurchaseReturn.Name = "iPurchaseReturn";
+            this.iPurchaseReturn.SmallImageIndex = 2;
+            // 
+            // iSalesReturn
+            // 
+            this.iSalesReturn.Caption = "Retur Penjualan";
+            this.iSalesReturn.Name = "iSalesReturn";
+            this.iSalesReturn.SmallImageIndex = 2;
             // 
             // TransactionDataNavigationControl
             // 
@@ -165,5 +183,7 @@
         public DevExpress.XtraNavBar.NavBarItem iDebt;
         public DevExpress.XtraNavBar.NavBarItem iCredit;
         public DevExpress.XtraNavBar.NavBarItem iInvoice;
+        public DevExpress.XtraNavBar.NavBarItem iPurchaseReturn;
+        public DevExpress.XtraNavBar.NavBarItem iSalesReturn;
     }
 }

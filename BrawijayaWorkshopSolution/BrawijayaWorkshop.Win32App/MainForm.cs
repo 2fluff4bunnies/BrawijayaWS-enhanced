@@ -391,6 +391,8 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iDebt.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_DEBT);
             navTransactionData.iCredit.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_CREDIT);
             navTransactionData.iInvoice.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_INVOICE);
+            navTransactionData.iPurchaseReturn.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_PURCHASE_RETURN);
+            navTransactionData.iSalesReturn.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SALES_RETURN);
 
             ShowNavigationControl(navTransactionData);
             // init event navigation
@@ -401,6 +403,8 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iDebt.LinkClicked += iDebt_LinkClicked;
             navTransactionData.iCredit.LinkClicked += iCredit_LinkClicked;
             navTransactionData.iInvoice.LinkClicked += iInvoice_LinkClicked;
+            navTransactionData.iPurchaseReturn.LinkClicked += iPurchaseReturn_LinkClicked;
+            navTransactionData.iSalesReturn.LinkClicked += iSalesReturn_LinkClicked;
         }
 
         void iInvoice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -408,7 +412,16 @@ namespace BrawijayaWorkshop.Win32App
             InvoiceListControl listInvoice = Bootstrapper.Resolve<InvoiceListControl>();
             ShowUserControl(listInvoice);
         }
-
+        void iPurchaseReturn_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            PurchaseReturnListControl listPurchaseReturn = Bootstrapper.Resolve<PurchaseReturnListControl>();
+            ShowUserControl(listPurchaseReturn);
+        }
+        void iSalesReturn_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SalesReturnListControl listSalesReturn = Bootstrapper.Resolve<SalesReturnListControl>();
+            ShowUserControl(listSalesReturn);
+        }
         void iCredit_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             CreditListControl listCredit = Bootstrapper.Resolve<CreditListControl>();
