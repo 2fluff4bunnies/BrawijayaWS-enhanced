@@ -50,6 +50,7 @@
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\GuestBookViewModel.cs" />
+    <Compile Include="ViewModels\InternalInvoiceViewModel.cs" />
     <Compile Include="ViewModels\InvoiceDetailViewModel.cs" />
     <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\JournalMasterViewModel.cs" />
