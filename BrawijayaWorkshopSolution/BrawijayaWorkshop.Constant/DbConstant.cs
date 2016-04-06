@@ -47,6 +47,8 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_TRANSTBL_INVOICE = "REF_TRANSTBL_INVOICE";
         public const string REF_TRANSTBL_MANUAL = "REF_TRANSTBL_MANUAL";
         public const string REF_TRANSTBL_HPP = "REF_TRANSTBL_HPP";
+        public const string REF_TRANSTBL_PURCHASERETURN = "REF_TRANSTBL_PURCHASERETURN";
+        public const string REF_TRANSTBL_SALESRETURN = "REF_TRANSTBL_SALESRETURN";
 
         public const string REF_PURCHASE_PAYMENTMETHOD = "REF_PURCHASE_PAYMENTMETHOD";
         public const string REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS = "REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS";

@@ -817,6 +817,20 @@ namespace BrawijayaWorkshop.Database
                 Description = "Tabel Transaksi HPP",
                 Value = DbConstant.REF_TRANSTBL_HPP
             });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_PURCHASERETURN,
+                Name = "Purchase Return Table",
+                Description = "Tabel Transaksi Purchase Return",
+                Value = DbConstant.REF_TRANSTBL_PURCHASERETURN
+            });
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_SALESRETURN,
+                Name = "Sales Return Table",
+                Description = "Tabel Transaksi Sales Return",
+                Value = DbConstant.REF_TRANSTBL_SALESRETURN
+            });
             context.SaveChanges();
 
             // Purchasing Payment Method

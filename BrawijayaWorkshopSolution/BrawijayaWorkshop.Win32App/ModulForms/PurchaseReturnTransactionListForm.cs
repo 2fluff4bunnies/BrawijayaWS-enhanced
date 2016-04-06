@@ -39,8 +39,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             // init editor control accessibility
             cmsEditData.Enabled = AllowEdit;
-
-            txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
+            cmsDeleteData.Enabled = AllowDelete;
 
             this.Load += PurchaseReturnTransactionListForm_Load;
         }
@@ -152,25 +151,64 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            //PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
-            //editor.ShowDialog(this);
+            if (_selectedPurchaseReturn == null) return;
 
-            //btnSearch.PerformClick();
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus retur pembelian: '" + SelectedPurchaseReturn.PurchasingId + "'?") == DialogResult.Yes)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Deleting purchase return: " + SelectedPurchaseReturn.PurchasingId);
+                    _presenter.DeleteData();
+                    RefreshDataView();
+
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete purchase return: '" + SelectedPurchaseReturn.PurchasingId + "'", ex);
+                    this.ShowError("Proses hapus data retur pembelian: '" + SelectedPurchaseReturn.PurchasingId + "' gagal!");
+                }
+            }
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
+            if (_selectedPurchaseReturn != null)
+            {
+                PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
+                editor.SelectedPurchasing = SelectedPurchasing;
+                editor.SelectedPurchaseReturn = SelectedPurchaseReturn;
+                editor.ShowDialog(this);
+                RefreshDataView();
 
+            }
         }
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            try
+            {
+                _presenter.LoadPurchaseReturn();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadPurchaseReturn()", ex);
+                e.Result = ex;
+            }
         }
 
         private void bgwMain_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses memuat data gagal!");
+            }
 
+            if (gvReturn.RowCount > 0)
+            {
+                SelectedPurchaseReturn = gvReturn.GetRow(0) as PurchaseReturnViewModel;
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur pembelian selesai", true);
         }
 
     }

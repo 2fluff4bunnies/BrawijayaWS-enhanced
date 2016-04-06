@@ -34,7 +34,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public PurchasingViewModel SelectedPurchasing { get; set; }
         public PurchaseReturnViewModel SelectedPurchaseReturn { get; set; }
-        public List<PurchaseReturnDetailViewModel> ListPurchaseReturnDetail { get; set; }
 
         #region Field Editor
         public DateTime Date
@@ -89,19 +88,23 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         #endregion
         protected override void ExecuteSave()
         {
-            if (true)
+            if (ListReturn.Where(x=>x.ReturQty > x.ReturQtyLimit).Count() == 0)
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Invoice's changes");
-                   // _presenter.SaveChanges();
+                    MethodBase.GetCurrentMethod().Info("Save Purchase Return's changes");
+                    _presenter.SaveChanges();
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    //MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Invoice: '" + SelectedInvoice.Id + "'", ex);
-                    //this.ShowError("Proses simpan data Invoice: '" + SelectedInvoice.Id + "' gagal!");
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Purchase Return in Purchasing: '" + SelectedPurchasing.Id + "'", ex);
+                    this.ShowError("Proses simpan data Purchase Return in Purchasing: '" + SelectedPurchasing.Id + "' gagal!");
                 }
+            }
+            else
+            {
+                this.ShowError("Proses simpan data gagal! jumlah qty retur melebihi jumlah qty pada saat pembelian");
             }
         }
     }

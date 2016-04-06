@@ -14,6 +14,5 @@ namespace BrawijayaWorkshop.View
         string SupplierName { get; set; }
 
         List<ReturnViewModel> ListReturn { get; set; }
-        List<PurchaseReturnDetailViewModel> ListPurchaseReturnDetail { get; set; }
     }
 }

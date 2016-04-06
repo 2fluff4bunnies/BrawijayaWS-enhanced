@@ -51,32 +51,32 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchaseReturnDetailViewModel> RetrievePurchaseReturnDetail(int purchaseReturnID)
+        public List<PurchaseReturnDetail> RetrievePurchaseReturnDetail(int purchaseReturnID)
         {
             List<PurchaseReturnDetail> result = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
-            List<PurchaseReturnDetailViewModel> mappedResult = new List<PurchaseReturnDetailViewModel>();
-            Map(result, mappedResult);
-            return mappedResult;
+            return result;
         }
 
-        public List<ReturnViewModel> RetrieveReturnList(int purchaseReturnID)
+        public List<ReturnViewModel> RetrieveReturnList(int purchaseReturnID, int purchasingID)
         {
             List<ReturnViewModel> result = new List<ReturnViewModel>();
-            PurchaseReturn purchaseReturn = _purchaseReturnRepository.GetById(purchaseReturnID);
-            List<PurchasingDetail> listPurchasingDetail = _purchasingDetailRepository.GetMany(x => x.PurchasingId == purchaseReturn.PurchasingId).ToList();
-            List<PurchaseReturnDetailViewModel> listDetail = this.RetrievePurchaseReturnDetail(purchaseReturnID);
-
-            if(listDetail != null && listDetail.Count > 0)
+            List<PurchasingDetail> listPurchasingDetail = _purchasingDetailRepository.GetMany(x => x.PurchasingId == purchasingID).ToList();
+            
+            if(purchaseReturnID > 0)
             {
-                foreach (var itemDetail in listPurchasingDetail)
+                List<PurchaseReturnDetail> listDetail = this.RetrievePurchaseReturnDetail(purchaseReturnID);
+                if (listDetail != null && listDetail.Count > 0)
                 {
-                    result.Add(new ReturnViewModel
+                    foreach (var itemDetail in listPurchasingDetail)
                     {
-                        SparepartId = itemDetail.SparepartId,
-                        SparepartName = itemDetail.Sparepart.Name,
-                        ReturQty = listDetail.Where(x=>x.SparepartDetaill.SparepartId == itemDetail.SparepartId).Count(),
-                        ReturQtyLimit = itemDetail.Qty
-                    });
+                        result.Add(new ReturnViewModel
+                        {
+                            SparepartId = itemDetail.SparepartId,
+                            SparepartName = itemDetail.Sparepart.Name,
+                            ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
+                            ReturQtyLimit = itemDetail.Qty
+                        });
+                    }
                 }
             }
             else
@@ -95,7 +95,153 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        
+        public void InsertPurchaseReturn(int purchasingID, List<ReturnViewModel> listReturn, int userID)
+        {
+            DateTime serverTime = DateTime.Now;
+            PurchaseReturn purchaseReturn = new PurchaseReturn();
+            purchaseReturn.CreateDate = serverTime;
+            purchaseReturn.CreateUserId = userID;
+            purchaseReturn.ModifyDate = serverTime;
+            purchaseReturn.ModifyUserId = userID;
+            purchaseReturn.PurchasingId = purchasingID;
+            purchaseReturn.Date = serverTime;
+            purchaseReturn.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+            purchaseReturn = _purchaseReturnRepository.Add(purchaseReturn);
+            List<PurchaseReturnDetail> listReturnDetail = new List<PurchaseReturnDetail>();
+
+            decimal totalTransaction = 0;
+            foreach (var itemReturn in listReturn)
+	        {
+		        PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetMany(x=>x.SparepartId == itemReturn.SparepartId && x.PurchasingId == purchasingID).FirstOrDefault();
+                List<SparepartDetail> listSpDetail = _sparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id && x.Status == (int)DbConstant.SparepartDetailDataStatus.Active).OrderByDescending(x => x.CreateDate).Take(itemReturn.ReturQty).ToList();
+
+                foreach (var spDetail in listSpDetail)
+                {
+                    listReturnDetail.Add(new PurchaseReturnDetail
+                    {
+                        CreateDate = serverTime,
+                        CreateUserId = userID,
+                        ModifyDate = serverTime,
+                        ModifyUserId = userID,
+                        PurchaseReturn = purchaseReturn,
+                        PurchasingDetailId = purchasingDetail.Id,
+                        SparepartDetailId = spDetail.Id,
+                        Status = (int)DbConstant.DefaultDataStatus.Active
+                    });
+                    totalTransaction += spDetail.PurchasingDetail.Price;
+                }
+	        }
+
+            foreach (var itemReturnDetail in listReturnDetail)
+	        {
+                _purchaseReturnDetailRepository.Add(itemReturnDetail);
+	        }
+
+            Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASERETURN).FirstOrDefault();
+            Transaction transaction = new Transaction();
+            transaction.CreateDate = serverTime;
+            transaction.CreateUserId = userID;
+            transaction.ModifyDate = serverTime;
+            transaction.ModifyUserId = userID;
+            transaction.PrimaryKeyValue = transaction.Id;
+            transaction.ReferenceTableId = transactionReferenceTable.Id;
+            transaction.TotalPayment = totalTransaction.AsDouble();
+            transaction.TotalTransaction = totalTransaction.AsDouble();
+            transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+            transaction.Description = "Retur Pembelian";
+            transaction.TransactionDate = serverTime;
+            transaction = _transactionRepository.Add(transaction);
+
+            TransactionDetail transDebit = new TransactionDetail();
+            transDebit.Debit = totalTransaction;
+            transDebit.Parent = transaction;
+            transDebit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
+            _transactionDetailRepository.Add(transDebit);
+
+            TransactionDetail transCredit = new TransactionDetail();
+            transCredit.Credit = totalTransaction;
+            transCredit.Parent = transaction;
+            transCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.01").FirstOrDefault().Id;
+            _transactionDetailRepository.Add(transCredit);
+
+            _unitOfWork.SaveChanges();
+
+            PurchaseReturn newPurchaseReturn = _purchaseReturnRepository.GetMany(x => x.PurchasingId == purchasingID).OrderByDescending(x => x.Date).FirstOrDefault();
+            Transaction newTransaction = _transactionRepository.GetMany(x=>x.ReferenceTableId == transactionReferenceTable.Id 
+                && x.PrimaryKeyValue == 0 && x.Status == (int)DbConstant.DefaultDataStatus.Active).
+                OrderByDescending(x => x.TransactionDate).FirstOrDefault();
+            newTransaction.PrimaryKeyValue = newPurchaseReturn.Id;
+            _transactionRepository.Update(newTransaction);
+            _unitOfWork.SaveChanges();
+        }
+
+        public void UpdatePurchaseReturn(int purchasingID, int purchaseReturnID, List<ReturnViewModel> listReturn, int userID)
+        {
+            DateTime serverTime = DateTime.Now;
+            
+            List<PurchaseReturnDetail> listReturnDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
+            Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == purchaseReturnID).FirstOrDefault();
+            decimal totalTransaction = transaction.TotalTransaction.AsDecimal();
+            foreach (var itemReturn in listReturn)
+            {
+                int oldReturQty = listReturnDetail.Where(x => x.SparepartDetail.SparepartId == itemReturn.SparepartId).Count();
+                if(itemReturn.ReturQty > oldReturQty)
+                {
+                    int diffQty = itemReturn.ReturQty - oldReturQty;
+                    List<PurchaseReturnDetail> newReturnDetail = new List<PurchaseReturnDetail>();
+                    PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetMany(x => x.SparepartId == itemReturn.SparepartId && x.PurchasingId == purchasingID).FirstOrDefault();
+                    List<SparepartDetail> listSpDetail = _sparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id && x.Status == (int)DbConstant.SparepartDetailDataStatus.Active).OrderByDescending(x => x.CreateDate).Take(diffQty).ToList();
+
+                    foreach (var spDetail in listSpDetail)
+                    {
+                        newReturnDetail.Add(new PurchaseReturnDetail
+                        {
+                            CreateDate = serverTime,
+                            CreateUserId = userID,
+                            ModifyDate = serverTime,
+                            ModifyUserId = userID,
+                            PurchaseReturnId = purchaseReturnID,
+                            PurchasingDetailId = purchasingDetail.Id,
+                            SparepartDetailId = spDetail.Id,
+                            Status = (int)DbConstant.DefaultDataStatus.Active
+                        });
+                        totalTransaction += spDetail.PurchasingDetail.Price;
+                    }
+
+                    foreach (var itemNewReturnDetail in newReturnDetail)
+                    {
+                        _purchaseReturnDetailRepository.Add(itemNewReturnDetail);
+                    }
+                }
+                else if(itemReturn.ReturQty < oldReturQty)
+                {
+                    int diffQty = oldReturQty - itemReturn.ReturQty;
+                    PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetMany(x => x.SparepartId == itemReturn.SparepartId && x.PurchasingId == purchasingID).FirstOrDefault();
+
+                    List<PurchaseReturnDetail> listDeletedDetail = listReturnDetail.Where(x => x.PurchasingDetailId == purchasingDetail.Id).OrderByDescending(x => x.CreateDate).Take(diffQty).ToList();
+                    foreach (var itemDeleted in listDeletedDetail)
+                    {
+                        totalTransaction -= itemDeleted.PurchasingDetail.Price;
+                        _purchaseReturnDetailRepository.Delete(itemDeleted);
+                    }
+                }
+            }
+
+            transaction.TotalPayment = totalTransaction.AsDouble();
+            transaction.TotalTransaction = totalTransaction.AsDouble();
+            _transactionRepository.Update(transaction);
+
+            TransactionDetail transDebit = _transactionDetailRepository.GetMany(x=>x.ParentId == transaction.Id && x.Debit > 0).FirstOrDefault();
+            transDebit.Debit = totalTransaction;
+            _transactionDetailRepository.Update(transDebit);
+
+            TransactionDetail transCredit = _transactionDetailRepository.GetMany(x => x.ParentId == transaction.Id && x.Credit > 0).FirstOrDefault();
+            transCredit.Credit = totalTransaction;
+            _transactionDetailRepository.Update(transCredit);
+
+            _unitOfWork.SaveChanges();
+        }
 
     }
 }

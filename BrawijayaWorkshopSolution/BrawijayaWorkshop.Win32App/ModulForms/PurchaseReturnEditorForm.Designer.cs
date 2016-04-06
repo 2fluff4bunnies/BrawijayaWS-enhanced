@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnEditorForm));
             this.gcPurchaseReturnInfo = new DevExpress.XtraEditors.GroupControl();
             this.gridSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -105,9 +106,7 @@
             // 
             // colReturQty
             // 
-            this.colReturQty.Caption = "Tambahan Biaya (%)";
-            this.colReturQty.DisplayFormat.FormatString = "{0:#,#}";
-            this.colReturQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colReturQty.Caption = "Jumlah Retur";
             this.colReturQty.FieldName = "ReturQty";
             this.colReturQty.Name = "colReturQty";
             this.colReturQty.Visible = true;
@@ -146,9 +145,9 @@
             // 
             this.lblTransactionDate.Location = new System.Drawing.Point(12, 30);
             this.lblTransactionDate.Name = "lblTransactionDate";
-            this.lblTransactionDate.Size = new System.Drawing.Size(86, 13);
+            this.lblTransactionDate.Size = new System.Drawing.Size(68, 13);
             this.lblTransactionDate.TabIndex = 8;
-            this.lblTransactionDate.Text = "Tanggal Transaksi";
+            this.lblTransactionDate.Text = "Tanggal Retur";
             // 
             // PurchaseReturnEditorForm
             // 
@@ -156,6 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(577, 330);
             this.Controls.Add(this.gcPurchaseReturnInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PurchaseReturnEditorForm";
             this.Text = "Form Retur Pembelian";
             this.Load += new System.EventHandler(this.PurchaseReturnEditorForm_Load);
