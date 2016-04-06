@@ -620,6 +620,12 @@
     <Compile Include="NavigationControls\TransactionDataNavigationControl.Designer.cs">
       <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\InternalInvoicePrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\InternalInvoicePrintItem.Designer.cs">
+      <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\InvoicePrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -877,6 +883,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\TransactionDataNavigationControl.resx">
       <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\InternalInvoicePrintItem.resx">
+      <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\InvoicePrintItem.resx">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
