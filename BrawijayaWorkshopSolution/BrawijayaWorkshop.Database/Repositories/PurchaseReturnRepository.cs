@@ -3,9 +3,9 @@ using BrawijayaWorkshop.Infrastructure.Repository;
 
 namespace BrawijayaWorkshop.Database.Repositories
 {
-    public class PurchaseReturnRepositoryRepository : AppBaseRepository<PurchaseReturn>, IPurchaseReturnRepository
+    public class PurchaseReturnRepository : AppBaseRepository<PurchaseReturn>, IPurchaseReturnRepository
     {
-        public PurchaseReturnRepositoryRepository(IDatabaseFactory<BrawijayaWorkshopDbContext> databaseFactory)
+        public PurchaseReturnRepository(IDatabaseFactory<BrawijayaWorkshopDbContext> databaseFactory)
             : base(databaseFactory) { }
     }
 
