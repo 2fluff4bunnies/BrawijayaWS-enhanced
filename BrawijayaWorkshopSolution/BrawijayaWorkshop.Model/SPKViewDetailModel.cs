@@ -26,6 +26,7 @@ namespace BrawijayaWorkshop.Model
         private IUnitOfWork _unitOfWork;
         private ISPKScheduleRepository _SPKScheduleReposistory;
         private IMechanicRepository _mechanicRepository;
+        private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
         private ISettingRepository _settingRepository;
 
         public SPKViewDetailModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -39,6 +40,7 @@ namespace BrawijayaWorkshop.Model
             IVehicleWheelRepository vehicleWheelRepository,
             ISPKScheduleRepository SPKScheduleReposistory,
             IMechanicRepository mechanicRepository,
+            IWheelExchangeHistoryRepository wheelExchangeHistoryRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -56,6 +58,7 @@ namespace BrawijayaWorkshop.Model
             _usedGoodRepository = usedGoodrepository;
             _SPKScheduleReposistory = SPKScheduleReposistory;
             _mechanicRepository = mechanicRepository;
+            _wheelExchangeHistoryRepository = wheelExchangeHistoryRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -348,6 +351,18 @@ namespace BrawijayaWorkshop.Model
                 UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
                 foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;
                 _usedGoodRepository.Update(foundUsedGood);
+
+                //Replace Vehicle Wheel
+                foreach (var item in getCurrentVehicleWheel(spk.Id, spk.VehicleId))
+                {
+                    VehicleWheel vw = _vehicleWheelRepository.GetById(item.Id);
+
+                    vw.WheelDetailId = item.ReplaceWithWheelDetailId;
+                    vw.ModifyDate = serverTime;
+                    vw.ModifyUserId = userId;
+
+                    _vehicleWheelRepository.Update(vw);
+                }
             }
 
             _unitOfWork.SaveChanges();
@@ -365,14 +380,25 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
+        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId, int SPKId)
         {
             List<VehicleWheel> result = _vehicleWheelRepository.GetMany(
-                vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+                  vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
 
-            return Map(result, mappedResult);
+            Map(result, mappedResult);
+
+            foreach (var item in mappedResult)
+            {
+                WheelExchangeHistory wheel = _wheelExchangeHistoryRepository.GetMany(w => w.SPKId == SPKId && w.OriginalWheelId == item.WheelDetailId).FirstOrDefault();
+                item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
+                item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+            }
+
+            return mappedResult;
         }
+
+
     }
 }

@@ -67,7 +67,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gridVehicleWheel.Enabled = false;
             ckeIsReturnRequired.Enabled = false;
             lookUpSerialNumber.Enabled = false;
-          
+
             //collumn setting for lookup specialSparepart in grid
             LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
@@ -88,7 +88,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ResetSelecteVehicleWheel();
 
             LookUpEdit lookup = sender as LookUpEdit;
-             _presenter.SetSelectedWheelDetailToChange(lookup.EditValue.AsInteger());
+            _presenter.SetSelectedWheelDetailToChange(lookup.EditValue.AsInteger());
         }
 
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
@@ -113,17 +113,23 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 if (check.Checked)
                 {
-                    this.SelectedVehicleWheel.Price = this.SelectedVehicleWheel.WheelDetail.SparepartDetail.PurchasingDetail.Price;
+                    this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price;
                     gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
                     this.TotalSparepartPrice = this.TotalSparepartPrice + this.SelectedVehicleWheel.Price;
 
-                    SPKDetailSparepartDetailViewModel newDetail = new SPKDetailSparepartDetailViewModel
+                    this.SPKSparepartList.Add(new SPKDetailSparepartViewModel
+                    {
+                        Sparepart = this.SelectedWheelDetailToChange.SparepartDetail.Sparepart,
+                        SparepartId = this.SelectedWheelDetailToChange.SparepartDetail.SparepartId,
+                        TotalQuantity = 1,
+                        TotalPrice = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price,
+                    });
+
+                    this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
                     {
                         SparepartDetailId = this.SelectedWheelDetailToChange.SparepartDetail.Id,
-                        SparepartDetail = SelectedWheelDetailToChange.SparepartDetail
-                    };
-
-                    this.SPKSparepartDetailList.Add(newDetail);
+                        SparepartDetail = this.SelectedWheelDetailToChange.SparepartDetail
+                    });
                 }
             }
             check.Enabled = false;
@@ -432,7 +438,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtContractWorkFee.Text = value.ToString();
             }
         }
-
         #endregion
 
         #region EmailProperties
@@ -727,7 +732,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
 
-
             //SPK sales handler
             if (this.IsSPKSales)
             {
@@ -740,12 +744,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             bool result = false;
 
-            if (this.CategoryId == 20 && this.TotalSparepartPrice >= this.ServiceThreshold)
+            ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
+
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && this.TotalSparepartPrice >= this.ServiceThreshold)
             {
                 result = true;
             }
 
-            if (this.CategoryId == 21 && this.TotalSparepartPrice >= this.RepairThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR && this.TotalSparepartPrice >= this.RepairThreshold)
             {
                 result = true;
             }
@@ -837,6 +843,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (detailToRemove != null)
             {
                 this.SPKSparepartDetailList.Remove(detailToRemove);
+                SPKDetailSparepartViewModel sparepartToRemove = this.SPKSparepartList.Where(sp => sp.Id == detailToRemove.SparepartDetail.SparepartId).FirstOrDefault();
+
+                if (sparepartToRemove != null)
+                {
+                    this.SPKSparepartList.Remove(sparepartToRemove);
+                }
             }
         }
     }

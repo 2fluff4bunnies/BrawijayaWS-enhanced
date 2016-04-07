@@ -39,6 +39,7 @@
             this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,7 +83,6 @@
             this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -194,7 +194,15 @@
             this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
             this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
             this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
-            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Kendaraan";
+            // 
+            // colName
+            // 
+            this.colName.Caption = "Nama";
+            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
             // 
             // colWheelDetail
             // 
@@ -250,10 +258,10 @@
             this.ckeIsContractWork.TabIndex = 40;
             this.ckeIsContractWork.CheckedChanged += new System.EventHandler(this.ckeIsContractWork_CheckedChanged);
             // 
-            // txtContractPrice
+            // txtContractWorkFee
             // 
             this.txtContractWorkFee.Location = new System.Drawing.Point(96, 134);
-            this.txtContractWorkFee.Name = "txtContractPrice";
+            this.txtContractWorkFee.Name = "txtContractWorkFee";
             this.txtContractWorkFee.Properties.Mask.EditMask = "n0";
             this.txtContractWorkFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtContractWorkFee.Size = new System.Drawing.Size(161, 20);
@@ -607,14 +615,6 @@
             this.cmsVehicleWheelItemReset.Size = new System.Drawing.Size(129, 22);
             this.cmsVehicleWheelItemReset.Text = "Reset Data";
             this.cmsVehicleWheelItemReset.Click += new System.EventHandler(this.cmsVehicleWheelItemReset_Click);
-            // 
-            // colName
-            // 
-            this.colName.Caption = "Nama";
-            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 0;
             // 
             // SPKEditorForm
             // 

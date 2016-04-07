@@ -30,14 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKViewDetailForm));
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
-            this.ckeIsContractWork = new DevExpress.XtraEditors.CheckEdit();
             this.lblContractWorkFeeValue = new DevExpress.XtraEditors.LabelControl();
             this.lblContractWorkFee = new DevExpress.XtraEditors.LabelControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
             this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcSparepart = new DevExpress.XtraGrid.GridControl();
@@ -75,9 +73,11 @@
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.lblContractWorkValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
+            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
@@ -87,7 +87,8 @@
             // 
             // groupSPK
             // 
-            this.groupSPK.Controls.Add(this.ckeIsContractWork);
+            this.groupSPK.Controls.Add(this.lblContractWorkValue);
+            this.groupSPK.Controls.Add(this.lblContractWork);
             this.groupSPK.Controls.Add(this.lblContractWorkFeeValue);
             this.groupSPK.Controls.Add(this.lblContractWorkFee);
             this.groupSPK.Controls.Add(this.gridVehicleWheel);
@@ -129,15 +130,6 @@
             this.groupSPK.TabIndex = 1;
             this.groupSPK.Text = "Informasi SPK";
             // 
-            // ckeIsContractWork
-            // 
-            this.ckeIsContractWork.Location = new System.Drawing.Point(15, 121);
-            this.ckeIsContractWork.Name = "ckeIsContractWork";
-            this.ckeIsContractWork.Properties.Caption = "Borongan                        :";
-            this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.ckeIsContractWork.Size = new System.Drawing.Size(150, 19);
-            this.ckeIsContractWork.TabIndex = 64;
-            // 
             // lblContractWorkFeeValue
             // 
             this.lblContractWorkFeeValue.Location = new System.Drawing.Point(135, 142);
@@ -171,8 +163,8 @@
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colWheelDetail,
-            this.colPrice,
-            this.colName});
+            this.colWheelDetailReplace,
+            this.colPrice});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
             this.gvVehicleWheel.Name = "gvVehicleWheel";
             this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -183,11 +175,11 @@
             this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
             this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
             this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
-            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Kendaraan";
             // 
             // colWheelDetail
             // 
-            this.colWheelDetail.Caption = "Nomor Seri ";
+            this.colWheelDetail.Caption = "Nomor Seri  (Terpasang)";
             this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
@@ -202,14 +194,6 @@
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
             this.colPrice.VisibleIndex = 2;
-            // 
-            // colName
-            // 
-            this.colName.Caption = "Nama";
-            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 0;
             // 
             // lblTotalSparepartValue
             // 
@@ -554,6 +538,30 @@
             // 
             this.gridView1.Name = "gridView1";
             // 
+            // lblContractWorkValue
+            // 
+            this.lblContractWorkValue.Location = new System.Drawing.Point(135, 124);
+            this.lblContractWorkValue.Name = "lblContractWorkValue";
+            this.lblContractWorkValue.Size = new System.Drawing.Size(4, 13);
+            this.lblContractWorkValue.TabIndex = 65;
+            this.lblContractWorkValue.Text = ":";
+            // 
+            // lblContractWork
+            // 
+            this.lblContractWork.Location = new System.Drawing.Point(15, 124);
+            this.lblContractWork.Name = "lblContractWork";
+            this.lblContractWork.Size = new System.Drawing.Size(46, 13);
+            this.lblContractWork.TabIndex = 64;
+            this.lblContractWork.Text = "Borongan";
+            // 
+            // colWheelDetailReplace
+            // 
+            this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
+            this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailId";
+            this.colWheelDetailReplace.Name = "colWheelDetailReplace";
+            this.colWheelDetailReplace.Visible = true;
+            this.colWheelDetailReplace.VisibleIndex = 0;
+            // 
             // SPKViewDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -566,7 +574,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
@@ -620,9 +627,10 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
         private DevExpress.XtraGrid.Columns.GridColumn colPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
         private DevExpress.XtraEditors.LabelControl lblContractWorkFeeValue;
         private DevExpress.XtraEditors.LabelControl lblContractWorkFee;
-        private DevExpress.XtraEditors.CheckEdit ckeIsContractWork;
+        private DevExpress.XtraEditors.LabelControl lblContractWorkValue;
+        private DevExpress.XtraEditors.LabelControl lblContractWork;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
     }
 }

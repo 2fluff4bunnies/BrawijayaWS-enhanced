@@ -40,7 +40,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.ApprovalEmailBody = Resources.SPKApprovalEmailTemplate;
             this.ApprovalEmailFrom = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MAIL_FROM].Decrypt();
             this.ApprovalEmailTo = ConfigurationManager.AppSettings[ConfigurationConstant.APP_SETTING_MANAGER_MAIL].Decrypt();
-            ckeIsContractWork.Enabled = false;
             ApplyButtonSetting();
 
             #region Field Setting
@@ -50,14 +49,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lblCategoryValue.Text = _prefix + this.SelectedSPK.CategoryReference.Name;
             lblCreateDateValue.Text = _prefix + this.SelectedSPK.CreateDate.ToShortDateString();
             lblDueDateValue.Text = _prefix + this.SelectedSPK.DueDate.ToShortDateString();
-            ckeIsContractWork.Checked = this.SelectedSPK.isContractWork;
-            if (ckeIsContractWork.Checked)
+            lblContractWorkValue.Text = this.SelectedSPK.isContractWork ? "Borongan" : "Bukan Borongan";
+            if (this.SelectedSPK.isContractWork)
             {
-                lblContractWorkFeeValue.Text = this.SelectedSPK.ContractWorkFee.ToString("{0:n}");
+                lblContractWorkFeeValue.Text = _prefix + this.SelectedSPK.ContractWorkFee.ToString("{0:n}");
             }
             else
             {
-                lblContractWorkFeeValue.Text = "--";
+                lblContractWorkFee.Visible = false;
+                lblContractWorkFeeValue.Visible = false;
             }
 
             string statusApproval = "";
