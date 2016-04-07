@@ -49,6 +49,7 @@ namespace BrawijayaWorkshop.Win32App
             Bind<IBalanceJournalDetailRepository>().To<BalanceJournalDetailRepository>();
             Bind<IPurchaseReturnRepository>().To<PurchaseReturnRepository>();
             Bind<IPurchaseReturnDetailRepository>().To<PurchaseReturnDetailRepository>();
+            Bind<IWheelExchangeHistoryRepository>().To<WheelExchangeHistoryRepository>();
             // todo: add binding
         }
     }

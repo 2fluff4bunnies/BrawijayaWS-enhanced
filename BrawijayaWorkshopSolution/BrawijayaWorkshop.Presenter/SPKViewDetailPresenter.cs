@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Presenter
             //View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
             View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
             View.SPKSparepartDetailList = Model.GetSPKSparepartDetailList(View.SelectedSPK.Id);
+            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedSPK.VehicleId);
         }
 
         public void Print()
