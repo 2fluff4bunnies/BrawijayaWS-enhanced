@@ -116,7 +116,14 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadVehicleWheel()
         {
-            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId, View.SelectedSPK.Id);
+            if (View.SelectedSPK != null)
+            {
+                View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId, View.SelectedSPK.Id);
+            }
+            else
+            {
+                View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId, 0);
+            }
             View.WheelDetailList = Model.RetrieveReadyWheelDetails();
         }
 

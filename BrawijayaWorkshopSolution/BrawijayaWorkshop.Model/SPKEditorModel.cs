@@ -207,6 +207,13 @@ namespace BrawijayaWorkshop.Model
             spk.Status = (int)DbConstant.DefaultDataStatus.Active;
             spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
 
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
+
+            SPK entityChild = new SPK();
+            Map(spk, entityChild);
+
+            SPK insertedSPK = _SPKRepository.Add(entityChild);
+
             if (isSPKSales)
             {
                 spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
@@ -219,6 +226,8 @@ namespace BrawijayaWorkshop.Model
                 invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
                 invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
                 invc.TotalHasPaid = 0;
+                invc.SPK = insertedSPK;
+                invc.PaymentMethod = invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
 
                 invc.CreateDate = serverTime;
                 invc.ModifyDate = serverTime;
@@ -231,13 +240,6 @@ namespace BrawijayaWorkshop.Model
             {
                 spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
             }
-
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
-
-            SPK entityChild = new SPK();
-            Map(spk, entityChild);
-
-            SPK insertedSPK = _SPKRepository.Add(entityChild);
 
             foreach (var spkSparepart in spkSparepartList)
             {
@@ -338,6 +340,8 @@ namespace BrawijayaWorkshop.Model
                 weh.ModifyDate = serverTime;
                 weh.ModifyUserId = userId;
                 weh.CreateUserId = userId;
+
+                _wheelExchangeHistoryRepository.Add(weh);
             }
 
             _unitOfWork.SaveChanges();
@@ -508,6 +512,13 @@ namespace BrawijayaWorkshop.Model
                 sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
 
                 _sparepartDetailRepository.Update(sparepartDetail);
+            }
+
+            List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
+
+            foreach (var item in wehList)
+            {
+                _wheelExchangeHistoryRepository.Delete(item);
             }
 
             _unitOfWork.SaveChanges();

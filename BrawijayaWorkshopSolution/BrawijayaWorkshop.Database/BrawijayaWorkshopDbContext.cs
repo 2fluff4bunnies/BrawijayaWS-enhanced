@@ -50,6 +50,7 @@ namespace BrawijayaWorkshop.Database
         public DbSet<PurchaseReturnDetail> PurchaseReturnDetails { get; set; }
         public DbSet<SalesReturn> SalesReturns { get; set; }
         public DbSet<SalesReturnDetail> SalesReturnDetails { get; set; }
+        public DbSet<WheelExchangeHistory> WheelExchangeHistories { get; set; }
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
 
@@ -91,6 +92,7 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new PurchaseReturnDetailConfiguration());
             modelBuilder.Configurations.Add(new SalesReturnConfiguration());
             modelBuilder.Configurations.Add(new SalesReturnDetailConfiguration());
+            modelBuilder.Configurations.Add(new WheelExchangeHistoryConfiguration());
         }
     }
 }

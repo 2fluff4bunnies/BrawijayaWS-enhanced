@@ -49,7 +49,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lblCategoryValue.Text = _prefix + this.SelectedSPK.CategoryReference.Name;
             lblCreateDateValue.Text = _prefix + this.SelectedSPK.CreateDate.ToShortDateString();
             lblDueDateValue.Text = _prefix + this.SelectedSPK.DueDate.ToShortDateString();
-            lblContractWorkValue.Text = this.SelectedSPK.isContractWork ? "Borongan" : "Bukan Borongan";
+            lblContractWorkValue.Text = _prefix + (this.SelectedSPK.isContractWork ? "Borongan" : "Bukan Borongan");
             if (this.SelectedSPK.isContractWork)
             {
                 lblContractWorkFeeValue.Text = _prefix + this.SelectedSPK.ContractWorkFee.ToString("{0:n}");

@@ -30,11 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKViewDetailForm));
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
+            this.lblContractWorkValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
             this.lblContractWorkFeeValue = new DevExpress.XtraEditors.LabelControl();
             this.lblContractWorkFee = new DevExpress.XtraEditors.LabelControl();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
             this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
@@ -73,9 +76,6 @@
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.lblContractWorkValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
-            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
@@ -130,6 +130,22 @@
             this.groupSPK.TabIndex = 1;
             this.groupSPK.Text = "Informasi SPK";
             // 
+            // lblContractWorkValue
+            // 
+            this.lblContractWorkValue.Location = new System.Drawing.Point(135, 124);
+            this.lblContractWorkValue.Name = "lblContractWorkValue";
+            this.lblContractWorkValue.Size = new System.Drawing.Size(4, 13);
+            this.lblContractWorkValue.TabIndex = 65;
+            this.lblContractWorkValue.Text = ":";
+            // 
+            // lblContractWork
+            // 
+            this.lblContractWork.Location = new System.Drawing.Point(15, 124);
+            this.lblContractWork.Name = "lblContractWork";
+            this.lblContractWork.Size = new System.Drawing.Size(46, 13);
+            this.lblContractWork.TabIndex = 64;
+            this.lblContractWork.Text = "Borongan";
+            // 
             // lblContractWorkFeeValue
             // 
             this.lblContractWorkFeeValue.Location = new System.Drawing.Point(135, 142);
@@ -167,11 +183,10 @@
             this.colPrice});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
             this.gvVehicleWheel.Name = "gvVehicleWheel";
-            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvVehicleWheel.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gvVehicleWheel.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gvVehicleWheel.OptionsBehavior.Editable = false;
             this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
             this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
             this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
@@ -183,7 +198,15 @@
             this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
-            this.colWheelDetail.VisibleIndex = 1;
+            this.colWheelDetail.VisibleIndex = 0;
+            // 
+            // colWheelDetailReplace
+            // 
+            this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
+            this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailSerialNumber";
+            this.colWheelDetailReplace.Name = "colWheelDetailReplace";
+            this.colWheelDetailReplace.Visible = true;
+            this.colWheelDetailReplace.VisibleIndex = 1;
             // 
             // colPrice
             // 
@@ -537,30 +560,6 @@
             // gridView1
             // 
             this.gridView1.Name = "gridView1";
-            // 
-            // lblContractWorkValue
-            // 
-            this.lblContractWorkValue.Location = new System.Drawing.Point(135, 124);
-            this.lblContractWorkValue.Name = "lblContractWorkValue";
-            this.lblContractWorkValue.Size = new System.Drawing.Size(4, 13);
-            this.lblContractWorkValue.TabIndex = 65;
-            this.lblContractWorkValue.Text = ":";
-            // 
-            // lblContractWork
-            // 
-            this.lblContractWork.Location = new System.Drawing.Point(15, 124);
-            this.lblContractWork.Name = "lblContractWork";
-            this.lblContractWork.Size = new System.Drawing.Size(46, 13);
-            this.lblContractWork.TabIndex = 64;
-            this.lblContractWork.Text = "Borongan";
-            // 
-            // colWheelDetailReplace
-            // 
-            this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
-            this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailId";
-            this.colWheelDetailReplace.Name = "colWheelDetailReplace";
-            this.colWheelDetailReplace.Visible = true;
-            this.colWheelDetailReplace.VisibleIndex = 0;
             // 
             // SPKViewDetailForm
             // 
