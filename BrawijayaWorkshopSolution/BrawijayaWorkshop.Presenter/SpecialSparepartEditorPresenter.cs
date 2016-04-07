@@ -32,6 +32,7 @@ namespace BrawijayaWorkshop.Presenter
             }
 
             View.SelectedSpecialSparepart.SparepartId = View.SparepartId;
+            View.SelectedSpecialSparepart.ReferenceCategoryId = View.CategoryReferenceId;
 
             if (View.SelectedSpecialSparepart.Id > 0)
             {

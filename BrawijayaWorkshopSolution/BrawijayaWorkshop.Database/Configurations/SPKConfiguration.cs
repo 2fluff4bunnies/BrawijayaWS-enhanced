@@ -13,7 +13,7 @@ namespace BrawijayaWorkshop.Database.Configurations
             HasRequired(spk => spk.ModifyUser).WithMany().HasForeignKey(spk => spk.ModifyUserId).WillCascadeOnDelete(true);
 
             HasMany(spk => spk.ListSparepart).WithRequired().HasForeignKey(spk => spk.SPKId);
-            HasKey(r => r.Id).HasOptional(r => r.SPKParent).WithMany().HasForeignKey(r => r.SPKparentId).WillCascadeOnDelete(true);
+            HasKey(spk => spk.Id).HasOptional(spk => spk.SPKParent).WithMany().HasForeignKey(spk => spk.SPKparentId).WillCascadeOnDelete(true);
         }
     }
 }

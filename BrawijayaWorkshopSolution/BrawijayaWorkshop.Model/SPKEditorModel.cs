@@ -205,8 +205,17 @@ namespace BrawijayaWorkshop.Model
             spk.CreateUserId = userId;
 
             spk.Status = (int)DbConstant.DefaultDataStatus.Active;
-            spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
-
+            if (isNeedApproval)
+            {
+                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
+                spk.StatusOverLimit = 1;
+            }
+            else
+            {
+                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                spk.StatusOverLimit = 0;
+            }
+           
             spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
 
             SPK entityChild = new SPK();

@@ -109,6 +109,7 @@ namespace BrawijayaWorkshop.Model
                 Map(spk, entity);
 
                 _SPKRepository.Update(entity);
+                _unitOfWork.SaveChanges();
 
                 foreach (var item in spkSparepartList)
                 {
@@ -126,6 +127,8 @@ namespace BrawijayaWorkshop.Model
                         warningList.Add(viewModel);
                     }
                 }
+
+                _unitOfWork.SaveChanges();
 
                 foreach (var item in spkSparepartDetailList)
                 {
@@ -161,6 +164,8 @@ namespace BrawijayaWorkshop.Model
 
                 _SPKRepository.Update(entity);
 
+                _unitOfWork.SaveChanges();
+
                 if (hasParent)
                 {
                     spkParent.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
@@ -171,12 +176,13 @@ namespace BrawijayaWorkshop.Model
                     spkParent.ModifyUserId = userId;
 
                     _SPKRepository.Update(spkParent);
+
+                    _unitOfWork.SaveChanges();
                 }
-
-                _unitOfWork.SaveChanges();
-
                 result = true;
             }
+
+           
 
             return result;
         }

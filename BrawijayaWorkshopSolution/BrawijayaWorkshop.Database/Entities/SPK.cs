@@ -10,11 +10,9 @@ namespace BrawijayaWorkshop.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(100)]
         public string Code { get; set; }
 
-        [Required]
         public DateTime DueDate { get; set; }
 
         public decimal Subtotal { get; set; }
@@ -23,24 +21,18 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public decimal TotalMechanicFee { get; set; }
 
-        [Required]
         public int VehicleId { get; set; }
 
         public virtual Vehicle Vehicle { get; set; }
 
-        [Required]
         public int StatusApprovalId { get; set; }
 
-        [Required]
         public int StatusPrintId { get; set; }
 
-        [Required]
         public int StatusCompletedId { get; set; }
 
-        [Required]
         public int StatusOverLimit { get; set; }
 
-        [Required]
         public int CategoryReferenceId { get; set; }
 
         public string Description { get; set; }
