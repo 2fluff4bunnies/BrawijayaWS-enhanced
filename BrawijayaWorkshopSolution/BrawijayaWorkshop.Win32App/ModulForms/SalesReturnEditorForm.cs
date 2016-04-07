@@ -1,21 +1,111 @@
-﻿using System;
+﻿using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
+using BrawijayaWorkshop.Utils;
+using BrawijayaWorkshop.View;
+using DevExpress.XtraGrid.Views.Base;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Reflection;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
+using BrawijayaWorkshop.Constant;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class SalesReturnEditorForm : BaseEditorForm
+    public partial class SalesReturnEditorForm : BaseEditorForm, ISalesReturnEditorView
     {
-        public SalesReturnEditorForm()
+        private SalesReturnEditorPresenter _presenter;
+
+        public SalesReturnEditorForm(SalesReturnEditorModel model)
         {
             InitializeComponent();
+            _presenter = new SalesReturnEditorPresenter(this, model);
+
+            // set validation alignment
+
+            this.Load += SalesReturnEditorForm_Load;
+        }
+
+        private void SalesReturnEditorForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
+        }
+
+        public InvoiceViewModel SelectedInvoice { get; set; }
+        public SalesReturnViewModel SelectedSalesReturn { get; set; }
+
+        #region Field Editor
+        public DateTime Date
+        {
+            get
+            {
+                return Convert.ToDateTime(txtTransactionDate.Text);
+            }
+            set
+            {
+                txtTransactionDate.Text = value.ToString("dd-MM-yyyy");
+            }
+        }
+
+        public new string CustomerName
+        {
+            get
+            {
+                return txtCustomer.Text;
+            }
+            set
+            {
+                txtCustomer.Text = value;
+            }
+        }
+
+        public List<ReturnViewModel> ListReturn
+        {
+            get
+            {
+                return bsSparepart.DataSource as List<ReturnViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        bsSparepart.DataSource = value;
+                        gridSparepart.DataSource = bsSparepart;
+                        gvSparepart.BestFitColumns();
+                    }));
+                }
+                else
+                {
+                    bsSparepart.DataSource = value;
+                    gridSparepart.DataSource = bsSparepart;
+                    gvSparepart.BestFitColumns();
+                }
+            }
+        }
+        #endregion
+        protected override void ExecuteSave()
+        {
+            if (ListReturn.Where(x => x.ReturQty > x.ReturQtyLimit).Count() == 0)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save Sales Return's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Sales Return in Invoice: '" + SelectedInvoice.Id + "'", ex);
+                    this.ShowError("Proses simpan data Sales Return in Invoice: '" + SelectedInvoice.Id + "' gagal!");
+                }
+            }
+            else
+            {
+                this.ShowError("Proses simpan data gagal! jumlah qty retur melebihi jumlah qty pada saat penjualan");
+            }
         }
     }
 }

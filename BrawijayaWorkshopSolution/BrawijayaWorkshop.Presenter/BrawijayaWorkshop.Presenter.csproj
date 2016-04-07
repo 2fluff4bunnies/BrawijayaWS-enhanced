@@ -82,7 +82,9 @@
     <Compile Include="RoleAccessListPresenter.cs" />
     <Compile Include="RoleEditorPresenter.cs" />
     <Compile Include="RoleListPresenter.cs" />
+    <Compile Include="SalesReturnEditorPresenter.cs" />
     <Compile Include="SalesReturnListPresenter.cs" />
+    <Compile Include="SalesReturnTransactionListPresenter.cs" />
     <Compile Include="SparepartDetailListPresenter.cs" />
     <Compile Include="SparepartManualTransactionEditorPresenter.cs" />
     <Compile Include="SPKSaleListPresenter.cs" />

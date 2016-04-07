@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -17,6 +18,9 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private IReferenceRepository _referenceRepository;
+        private ITransactionRepository _transactionRepository;
+        private ITransactionDetailRepository _transactionDetailRepository;
+        private IJournalMasterRepository _journalMasterRepository;
         private IUnitOfWork _unitOfWork;
 
         public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository, 
@@ -25,6 +29,9 @@ namespace BrawijayaWorkshop.Model
             ISpecialSparepartRepository wheelRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository,
             IReferenceRepository referenceRepository,
+            ITransactionRepository transactionRepository,
+            ITransactionDetailRepository transactionDetailRepository,
+            IJournalMasterRepository journalMasterRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -34,6 +41,9 @@ namespace BrawijayaWorkshop.Model
             _specialSparepartRepository = wheelRepository;
             _wheelDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
+            _transactionRepository = transactionRepository;
+            _transactionDetailRepository = transactionDetailRepository;
+            _journalMasterRepository = journalMasterRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -51,7 +61,7 @@ namespace BrawijayaWorkshop.Model
             return Map(list, mappedResult);
         }
 
-        public void InsertSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction, int userId)
+        public void InsertSparepartManualTransaction(SparepartManualTransactionViewModel sparepartManualTransaction, decimal totalPrice, int userId)
         {
             DateTime serverTime = DateTime.Now;
             sparepartManualTransaction.CreateDate = serverTime;
@@ -66,9 +76,37 @@ namespace BrawijayaWorkshop.Model
                 SparepartManualTransaction entity = new SparepartManualTransaction();
                 Map(sparepartManualTransaction, entity);
                 SparepartManualTransaction manualTransaction = _sparepartManualTransactionRepository.Add(entity);
-                
+
+                Reference referenceTransaction = _referenceRepository.GetMany(x=>x.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
+                Transaction transaction = new Transaction();
+                transaction.CreateDate = serverTime;
+                transaction.CreateUserId = userId;
+                transaction.ModifyDate = serverTime;
+                transaction.ModifyUserId = userId;
+                transaction.Description = "Transaksi sparepart manual";
+                transaction.ReferenceTableId = referenceTransaction.Id;
+                transaction.PrimaryKeyValue = sparepartManualTransaction.Id;
+                transaction.TotalPayment = totalPrice.AsDouble();
+                transaction.TotalTransaction = totalPrice.AsDouble();
+                transaction.TransactionDate = serverTime;
+                transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+                transaction =_transactionRepository.Add(transaction);
+
+
                 if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
                 {
+                    TransactionDetail transDebit = new TransactionDetail();
+                    transDebit.Debit = totalPrice;
+                    transDebit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "1.01.04.01").FirstOrDefault().Id;
+                    transDebit.Parent = transaction;
+                    _transactionDetailRepository.Add(transDebit);
+
+                    TransactionDetail transCredit = new TransactionDetail();
+                    transCredit.Credit = totalPrice;
+                    transCredit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "9.9").FirstOrDefault().Id;
+                    transCredit.Parent = transaction;
+                    _transactionDetailRepository.Add(transCredit);
+
                     sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
 
                     SparepartDetail lastSPDetail = _sparepartDetailRepository.
@@ -122,6 +160,18 @@ namespace BrawijayaWorkshop.Model
                 }
                 else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
                 {
+                    TransactionDetail transCredit = new TransactionDetail();
+                    transCredit.Credit = totalPrice;
+                    transCredit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "1.01.04.01").FirstOrDefault().Id;
+                    transCredit.Parent = transaction;
+                    _transactionDetailRepository.Add(transCredit);
+
+                    TransactionDetail transDebit = new TransactionDetail();
+                    transDebit.Debit = totalPrice;
+                    transDebit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "9.9").FirstOrDefault().Id;
+                    transDebit.Parent = transaction;
+                    _transactionDetailRepository.Add(transDebit);
+
                     sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
 
                     List<SparepartDetail> spDetails = _sparepartDetailRepository.
@@ -133,6 +183,16 @@ namespace BrawijayaWorkshop.Model
                     }
                 }
                 _sparepartRepository.Update(sparepartUpdated);
+                _unitOfWork.SaveChanges();
+
+                SparepartManualTransaction newManualTrans = _sparepartManualTransactionRepository.GetMany(x => x.SparepartId == sparepartManualTransaction.SparepartId
+                    && x.CreateDate == serverTime).OrderByDescending(x => x.CreateDate).FirstOrDefault();
+                Transaction newTransaction = _transactionRepository.GetMany(x => x.ReferenceTableId == referenceTransaction.Id
+                    && x.PrimaryKeyValue == 0 && x.Status == (int)DbConstant.DefaultDataStatus.Active
+                    && x.CreateDate == serverTime).
+                    OrderByDescending(x => x.TransactionDate).FirstOrDefault();
+                newTransaction.PrimaryKeyValue = newManualTrans.Id;
+                _transactionRepository.Update(newTransaction);
                 _unitOfWork.SaveChanges();
             }
         }

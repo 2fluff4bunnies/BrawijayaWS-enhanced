@@ -13,33 +13,33 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IInvoiceRepository _invoiceRepository;
-        private ISalesReturnRepository _salesReturnRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnListModel(ITransactionRepository transactionRepository,
-            IInvoiceRepository invoiceRepository, ISalesReturnRepository salesReturnRepository,
+            IInvoiceRepository invoiceRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
             _invoiceRepository = invoiceRepository;
-            _salesReturnRepository = salesReturnRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<SalesReturnViewModel> SearchSalesReturnList(DateTime? dateFrom, DateTime? dateTo)
+        public List<InvoiceViewModel> SearchInvoiceList(DateTime? dateFrom, DateTime? dateTo)
         {
-            List<SalesReturn> result = null;
+            List<Invoice> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = _salesReturnRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.Date).ToList();
+                dateFrom = dateFrom.Value.Date;
+                dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
+                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.CreateDate).ToList();
             }
             else
             {
-                result = _salesReturnRepository.GetAll().OrderBy(c => c.Date).ToList();
+                result = _invoiceRepository.GetAll().OrderBy(c => c.CreateDate).ToList();
             }
 
-            List<SalesReturnViewModel> mappedResult = new List<SalesReturnViewModel>();
+            List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
             return Map(result, mappedResult);
         }
     }

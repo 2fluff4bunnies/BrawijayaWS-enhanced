@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class SalesReturnListControl : BaseAppUserControl, ISalesReturnListView
     {
         private SalesReturnListPresenter _presenter;
-        private SalesReturnViewModel _selectedSalesReturn;
+        private InvoiceViewModel _selectedInvoice;
 
         protected override string ModulName
         {
@@ -34,12 +34,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             InitializeComponent();
             _presenter = new SalesReturnListPresenter(this, model);
 
-            gvReturn.PopupMenuShowing += gvReturn_PopupMenuShowing;
-            gvReturn.FocusedRowChanged += gvReturn_FocusedRowChanged;
+            gvInvoice.PopupMenuShowing += gvInvoice_PopupMenuShowing;
+            gvInvoice.FocusedRowChanged += gvInvoice_FocusedRowChanged;
 
             // init editor control accessibility
-            btnNewReturn.Enabled = AllowInsert;
-            cmsEditData.Enabled = AllowEdit;
+            btnListReturn.Enabled = AllowInsert;
+            cmsListReturn.Enabled = AllowEdit;
 
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
@@ -51,12 +51,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnSearch.PerformClick();
         }
 
-        private void gvReturn_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gvInvoice_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSalesReturn = gvReturn.GetFocusedRow() as SalesReturnViewModel;
+            this.SelectedInvoice = gvInvoice.GetFocusedRow() as InvoiceViewModel;
         }
 
-        private void gvReturn_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        private void gvInvoice_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             GridView view = (GridView)sender;
             GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
@@ -65,7 +65,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
 
-                this.SelectedSalesReturn = gvReturn.GetRow(view.FocusedRowHandle) as SalesReturnViewModel;
+                this.SelectedInvoice = gvInvoice.GetRow(view.FocusedRowHandle) as InvoiceViewModel;
             }
         }
 
@@ -93,35 +93,35 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<SalesReturnViewModel> SalesReturnListData
+        public List<InvoiceViewModel> InvoiceListData
         {
             get
             {
-                return gridReturn.DataSource as List<SalesReturnViewModel>;
+                return gridInvoice.DataSource as List<InvoiceViewModel>;
             }
             set
             {
                 if (InvokeRequired)
                 {
-                    this.Invoke(new MethodInvoker(delegate { gridReturn.DataSource = value; gvReturn.BestFitColumns(); }));
+                    this.Invoke(new MethodInvoker(delegate { gridInvoice.DataSource = value; gvInvoice.BestFitColumns(); }));
                 }
                 else
                 {
-                    gridReturn.DataSource = value;
-                    gvReturn.BestFitColumns();
+                    gridInvoice.DataSource = value;
+                    gvInvoice.BestFitColumns();
                 }
             }
         }
 
-        public SalesReturnViewModel SelectedSalesReturn
+        public InvoiceViewModel SelectedInvoice
         {
             get
             {
-                return _selectedSalesReturn;
+                return _selectedInvoice;
             }
             set
             {
-                _selectedSalesReturn = value;
+                _selectedInvoice = value;
             }
         }
 
@@ -135,8 +135,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing SalesReturn data...");
-                _selectedSalesReturn = null;
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur penjualan...", false);
+                _selectedInvoice = null;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data penjualan...", false);
                 bgwMain.RunWorkerAsync();
             }
         }
@@ -145,26 +145,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnSearch.PerformClick();
-            }
-        }
-
-        private void btnNewSalesReturn_Click(object sender, EventArgs e)
-        {
-            //SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
-            //editor.ShowDialog(this);
-
-            btnSearch.PerformClick();
-        }
-
-        private void cmsEditData_Click(object sender, EventArgs e)
-        {
-            if (_selectedSalesReturn != null)
-            {
-                //SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
-                //editor.SelectedSalesReturn = _selectedSalesReturn;
-                //editor.ShowDialog(this);
-
                 btnSearch.PerformClick();
             }
         }
@@ -189,12 +169,44 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 this.ShowError("Proses memuat data gagal!");
             }
 
-            if (gvReturn.RowCount > 0)
+            if (gvInvoice.RowCount > 0)
             {
-                SelectedSalesReturn = gvReturn.GetRow(0) as SalesReturnViewModel;
+                SelectedInvoice = gvInvoice.GetRow(0) as InvoiceViewModel;
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur penjualan selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);
+        }
+
+        private void btnListReturn_Click(object sender, EventArgs e)
+        {
+            //SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
+            //editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsAddReturn_Click(object sender, EventArgs e)
+        {
+            if (_selectedInvoice != null)
+            {
+                //SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
+                //editor.SelectedInvoice = _selectedInvoice;
+                //editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void cmsListReturn_Click(object sender, EventArgs e)
+        {
+            if (_selectedInvoice != null)
+            {
+                //SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
+                //editor.SelectedInvoice = _selectedInvoice;
+                //editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
         }
 
     }

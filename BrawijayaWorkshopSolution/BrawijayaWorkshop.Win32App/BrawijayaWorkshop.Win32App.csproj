@@ -815,6 +815,9 @@
     <EmbeddedResource Include="ModulForms\RoleEditorForm.resx">
       <DependentUpon>RoleEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SalesReturnEditorForm.resx">
+      <DependentUpon>SalesReturnEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -81,7 +81,9 @@
     <Compile Include="IRoleAccessListView.cs" />
     <Compile Include="IRoleEditorView.cs" />
     <Compile Include="IRoleListView.cs" />
+    <Compile Include="ISalesReturnEditorView.cs" />
     <Compile Include="ISalesReturnListView.cs" />
+    <Compile Include="ISalesReturnTransactionListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISparepartManualTransactionEditorView.cs" />
     <Compile Include="ISPKSaleListView.cs" />

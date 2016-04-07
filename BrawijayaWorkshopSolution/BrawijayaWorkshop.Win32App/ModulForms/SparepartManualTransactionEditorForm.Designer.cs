@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartManualTransactionEditorForm));
-
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
             this.txtStok = new DevExpress.XtraEditors.TextEdit();
@@ -49,8 +48,8 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtQtyUpdate = new DevExpress.XtraEditors.TextEdit();
             this.lblQtyUpdaate = new DevExpress.XtraEditors.LabelControl();
-            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
-            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
@@ -172,6 +171,7 @@
             this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;
             this.txtItemPrice.Visible = false;
+            this.txtItemPrice.EditValueChanged += new System.EventHandler(this.txtItemPrice_EditValueChanged);
             // 
             // lblItemPrice
             // 
@@ -233,6 +233,7 @@
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
             this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule1);
+            this.txtQtyUpdate.EditValueChanged += new System.EventHandler(this.txtQtyUpdate_EditValueChanged);
             // 
             // lblQtyUpdaate
             // 

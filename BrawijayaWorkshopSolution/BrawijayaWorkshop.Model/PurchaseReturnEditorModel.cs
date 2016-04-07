@@ -130,7 +130,18 @@ namespace BrawijayaWorkshop.Model
                         Status = (int)DbConstant.DefaultDataStatus.Active
                     });
                     totalTransaction += spDetail.PurchasingDetail.Price;
+
+                    spDetail.ModifyDate = serverTime;
+                    spDetail.ModifyUserId = userID;
+                    spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
+                    _sparepartDetailRepository.Update(spDetail);
                 }
+
+                Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
+                sparepart.ModifyDate = serverTime;
+                sparepart.ModifyUserId = userID;
+                sparepart.StockQty -= itemReturn.ReturQty;
+                _sparepartRepository.Update(sparepart);
 	        }
 
             foreach (var itemReturnDetail in listReturnDetail)
@@ -167,9 +178,10 @@ namespace BrawijayaWorkshop.Model
 
             _unitOfWork.SaveChanges();
 
-            PurchaseReturn newPurchaseReturn = _purchaseReturnRepository.GetMany(x => x.PurchasingId == purchasingID).OrderByDescending(x => x.Date).FirstOrDefault();
+            PurchaseReturn newPurchaseReturn = _purchaseReturnRepository.GetMany(x => x.PurchasingId == purchasingID && x.CreateDate == serverTime).OrderByDescending(x => x.Date).FirstOrDefault();
             Transaction newTransaction = _transactionRepository.GetMany(x=>x.ReferenceTableId == transactionReferenceTable.Id 
-                && x.PrimaryKeyValue == 0 && x.Status == (int)DbConstant.DefaultDataStatus.Active).
+                && x.PrimaryKeyValue == 0 && x.Status == (int)DbConstant.DefaultDataStatus.Active 
+                && x.CreateDate == serverTime).
                 OrderByDescending(x => x.TransactionDate).FirstOrDefault();
             newTransaction.PrimaryKeyValue = newPurchaseReturn.Id;
             _transactionRepository.Update(newTransaction);
@@ -207,7 +219,18 @@ namespace BrawijayaWorkshop.Model
                             Status = (int)DbConstant.DefaultDataStatus.Active
                         });
                         totalTransaction += spDetail.PurchasingDetail.Price;
+
+                        spDetail.ModifyDate = serverTime;
+                        spDetail.ModifyUserId = userID;
+                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
+                        _sparepartDetailRepository.Update(spDetail);
                     }
+
+                    Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
+                    sparepart.ModifyDate = serverTime;
+                    sparepart.ModifyUserId = userID;
+                    sparepart.StockQty -= diffQty;
+                    _sparepartRepository.Update(sparepart);
 
                     foreach (var itemNewReturnDetail in newReturnDetail)
                     {
@@ -224,7 +247,19 @@ namespace BrawijayaWorkshop.Model
                     {
                         totalTransaction -= itemDeleted.PurchasingDetail.Price;
                         _purchaseReturnDetailRepository.Delete(itemDeleted);
+
+                        SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDeleted.SparepartDetailId);
+                        spDetail.ModifyDate = serverTime;
+                        spDetail.ModifyUserId = userID;
+                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+                        _sparepartDetailRepository.Update(spDetail);
                     }
+
+                    Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
+                    sparepart.ModifyDate = serverTime;
+                    sparepart.ModifyUserId = userID;
+                    sparepart.StockQty += diffQty;
+                    _sparepartRepository.Update(sparepart);
                 }
             }
 

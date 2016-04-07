@@ -104,7 +104,9 @@
     <Compile Include="RoleAccessListModel.cs" />
     <Compile Include="RoleEditorModel.cs" />
     <Compile Include="RoleListModel.cs" />
+    <Compile Include="SalesReturnEditorModel.cs" />
     <Compile Include="SalesReturnListModel.cs" />
+    <Compile Include="SalesReturnTransactionListModel.cs" />
     <Compile Include="SparepartDetailListModel.cs" />
     <Compile Include="SparepartManualTransactionEditorModel.cs" />
     <Compile Include="SPKSaleListModel.cs" />

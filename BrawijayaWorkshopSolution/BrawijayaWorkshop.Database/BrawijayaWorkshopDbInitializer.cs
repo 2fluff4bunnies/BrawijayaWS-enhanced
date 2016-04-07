@@ -831,7 +831,13 @@ namespace BrawijayaWorkshop.Database
                 Description = "Tabel Transaksi Sales Return",
                 Value = DbConstant.REF_TRANSTBL_SALESRETURN
             });
-            context.SaveChanges();
+            context.References.Add(new Reference
+            {
+                Code = DbConstant.REF_TRANSTBL_SPAREPARTMANUAL,
+                Name = "Sparepart Manual Table",
+                Description = "Tabel Transaksi Sparepart Manual",
+                Value = DbConstant.REF_TRANSTBL_SPAREPARTMANUAL
+            }); context.SaveChanges();
 
             // Purchasing Payment Method
             Reference purchasePaymentMethodRef = context.References.Add(new Reference

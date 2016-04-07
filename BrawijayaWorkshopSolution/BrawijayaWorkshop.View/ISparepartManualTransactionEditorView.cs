@@ -20,6 +20,8 @@ namespace BrawijayaWorkshop.View
         bool IsWheel { get; set; }
         decimal Price { get; set; }
 
+        decimal TotalPrice { get; set; }
+
         List<ReferenceViewModel> ListTransactionTypeReference { get; set; }
         SparepartViewModel Sparepart { get; set; }
     }

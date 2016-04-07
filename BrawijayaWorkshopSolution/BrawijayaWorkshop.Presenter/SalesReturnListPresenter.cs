@@ -11,7 +11,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadSalesReturn()
         {
-            View.SalesReturnListData = Model.SearchSalesReturnList(View.DateFilterFrom, View.DateFilterTo);
+            View.InvoiceListData = Model.SearchInvoiceList(View.DateFilterFrom, View.DateFilterTo);
         }
     }
 }

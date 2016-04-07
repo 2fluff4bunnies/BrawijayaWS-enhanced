@@ -3,9 +3,9 @@ using BrawijayaWorkshop.Infrastructure.Repository;
 
 namespace BrawijayaWorkshop.Database.Repositories
 {
-    public class SalesReturnRepositoryRepository : AppBaseRepository<SalesReturn>, ISalesReturnRepository
+    public class SalesReturnRepository : AppBaseRepository<SalesReturn>, ISalesReturnRepository
     {
-        public SalesReturnRepositoryRepository(IDatabaseFactory<BrawijayaWorkshopDbContext> databaseFactory)
+        public SalesReturnRepository(IDatabaseFactory<BrawijayaWorkshopDbContext> databaseFactory)
             : base(databaseFactory) { }
     }
 

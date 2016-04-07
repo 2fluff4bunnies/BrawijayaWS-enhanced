@@ -36,11 +36,11 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _purchaseReturnRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo).OrderByDescending(c => c.Date).ToList();
+                result = _purchaseReturnRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderByDescending(c => c.Date).ToList();
             }
             else
             {
-                result = _purchaseReturnRepository.GetAll().OrderByDescending(c => c.Date).ToList();
+                result = _purchaseReturnRepository.GetMany(c=>c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderByDescending(c => c.Date).ToList();
             }
 
             if(purchasingID > 0)

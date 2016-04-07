@@ -51,7 +51,7 @@ namespace BrawijayaWorkshop.Presenter
             }
             else
             {
-                Model.InsertSparepartManualTransaction(View.SelectedSparepartManualTransaction, LoginInformation.UserId);
+                Model.InsertSparepartManualTransaction(View.SelectedSparepartManualTransaction, View.TotalPrice, LoginInformation.UserId);
             }
         }
     }

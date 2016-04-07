@@ -107,6 +107,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public decimal TotalPrice
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(txtTotalPrice.Text) ? txtTotalPrice.Text.AsDecimal() : 0;
+            }
+            set
+            {
+                txtTotalPrice.Text = value.ToString();
+            }
+        }
+
         public string Remark
         {
             get
@@ -166,6 +178,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan data transaksi barang bekas: '" + SelectedSparepartManualTransaction.Sparepart.Name + "' gagal!");
                 }
             }
+        }
+
+        private void txtQtyUpdate_EditValueChanged(object sender, EventArgs e)
+        {
+            TotalPrice = Price * StockUpdate;
+        }
+
+        private void txtItemPrice_EditValueChanged(object sender, EventArgs e)
+        {
+            TotalPrice = Price * StockUpdate;
         }
     }
 }
