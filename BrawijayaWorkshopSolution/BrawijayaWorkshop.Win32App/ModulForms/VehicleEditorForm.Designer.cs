@@ -94,7 +94,7 @@
             this.lookUpCustomer.Properties.NullText = "-- Pilih Customer --";
             this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(257, 20);
-            this.lookUpCustomer.TabIndex = 0;
+            this.lookUpCustomer.TabIndex = 9;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Customer harus dipilih";
             this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule1);
@@ -107,7 +107,7 @@
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtBrand.Size = new System.Drawing.Size(257, 20);
-            this.txtBrand.TabIndex = 1;
+            this.txtBrand.TabIndex = 3;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "Merek harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtBrand, conditionValidationRule2);
@@ -123,7 +123,7 @@
             this.txtLicenseNumber.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
             this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtLicenseNumber.Size = new System.Drawing.Size(257, 20);
-            this.txtLicenseNumber.TabIndex = 4;
+            this.txtLicenseNumber.TabIndex = 1;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule3.ErrorText = "Nomor Polisi harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule3);
@@ -136,7 +136,7 @@
             this.txtType.Name = "txtType";
             this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtType.Size = new System.Drawing.Size(257, 20);
-            this.txtType.TabIndex = 2;
+            this.txtType.TabIndex = 5;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule4.ErrorText = "Tipe harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtType, conditionValidationRule4);
@@ -151,7 +151,7 @@
             this.txtYearOfPurchase.Properties.Mask.EditMask = "[12][0-9]{3}";
             this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtYearOfPurchase.Size = new System.Drawing.Size(257, 20);
-            this.txtYearOfPurchase.TabIndex = 3;
+            this.txtYearOfPurchase.TabIndex = 7;
             conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule5.ErrorText = "Tahun Pembelian harus diisi";
             this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule5);
@@ -163,7 +163,7 @@
             this.lblCustomer.Location = new System.Drawing.Point(12, 148);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
-            this.lblCustomer.TabIndex = 0;
+            this.lblCustomer.TabIndex = 8;
             this.lblCustomer.Text = "Customer";
             // 
             // lblBrand
@@ -227,7 +227,7 @@
             this.btnNewVehicleWheel.Location = new System.Drawing.Point(12, 212);
             this.btnNewVehicleWheel.Name = "btnNewVehicleWheel";
             this.btnNewVehicleWheel.Size = new System.Drawing.Size(100, 23);
-            this.btnNewVehicleWheel.TabIndex = 13;
+            this.btnNewVehicleWheel.TabIndex = 12;
             this.btnNewVehicleWheel.Text = "Tambah Ban";
             this.btnNewVehicleWheel.Click += new System.EventHandler(this.btnNewVehicleWheel_Click);
             // 
@@ -242,7 +242,7 @@
             this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.lookupWheelDetailGv});
             this.gridVehicleWheel.Size = new System.Drawing.Size(373, 140);
-            this.gridVehicleWheel.TabIndex = 12;
+            this.gridVehicleWheel.TabIndex = 13;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
             // 
@@ -278,9 +278,10 @@
             this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookupWheelDetailGv.DisplayMember = "SerialNumber";
+            this.lookupWheelDetailGv.HideSelection = false;
+            this.lookupWheelDetailGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
             this.lookupWheelDetailGv.NullText = "-- Pilih Ban --";
-            this.lookupWheelDetailGv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookupWheelDetailGv.ValueMember = "Id";
             // 
             // dtpExpirationDate
@@ -299,7 +300,7 @@
             this.dtpExpirationDate.Properties.HighlightTodayCell = DevExpress.Utils.DefaultBoolean.True;
             this.dtpExpirationDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dtpExpirationDate.Size = new System.Drawing.Size(257, 20);
-            this.dtpExpirationDate.TabIndex = 5;
+            this.dtpExpirationDate.TabIndex = 11;
             conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule6.ErrorText = "Tanggal Kadaluarsa harus diisi";
             this.FieldsValidator.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
@@ -311,7 +312,7 @@
             this.lblExpirationDate.Location = new System.Drawing.Point(12, 178);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
-            this.lblExpirationDate.TabIndex = 11;
+            this.lblExpirationDate.TabIndex = 10;
             this.lblExpirationDate.Text = "Tgl Kadaluarsa Nopol";
             // 
             // lblLicenseNumber
@@ -321,7 +322,7 @@
             this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(57, 13);
-            this.lblLicenseNumber.TabIndex = 9;
+            this.lblLicenseNumber.TabIndex = 0;
             this.lblLicenseNumber.Text = "Nomor Polisi";
             // 
             // FieldsValidator

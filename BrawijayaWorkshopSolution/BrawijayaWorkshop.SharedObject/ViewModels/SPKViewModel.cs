@@ -27,7 +27,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public ReferenceViewModel CategoryReference { get; set; }
 
-        public int? SPKparentId { get; set; }
+        public int? SPKParentId { get; set; }
 
         public SPKViewModel SPKParent { get; set; }
 

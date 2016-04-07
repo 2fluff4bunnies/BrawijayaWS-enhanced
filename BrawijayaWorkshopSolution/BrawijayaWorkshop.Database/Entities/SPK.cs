@@ -39,7 +39,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public virtual Reference CategoryReference { get; set; }
 
-        public int? SPKparentId { get; set; }
+        public int? SPKParentId { get; set; }
 
         public virtual SPK SPKParent { get; set; }
 

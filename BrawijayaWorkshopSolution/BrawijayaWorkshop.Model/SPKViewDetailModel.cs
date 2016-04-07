@@ -90,7 +90,7 @@ namespace BrawijayaWorkshop.Model
             warningList = new List<SparepartViewModel>();
 
             DateTime serverTime = DateTime.Now;
-            SPK spkParent = _SPKRepository.GetById(spk.SPKparentId);
+            SPK spkParent = _SPKRepository.GetById(spk.SPKParentId);
 
             if (spkParent != null)
             {
@@ -99,14 +99,17 @@ namespace BrawijayaWorkshop.Model
 
             if (isApproved)
             {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                //spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                //spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
 
-                spk.ModifyDate = serverTime;
-                spk.ModifyUserId = userId;
+                //spk.ModifyDate = serverTime;
+                //spk.ModifyUserId = userId;
 
                 SPK entity = _SPKRepository.GetById(spk.Id);
-                Map(spk, entity);
+                entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                entity.ModifyDate = serverTime;
+                entity.ModifyUserId = userId;
 
                 _SPKRepository.Update(entity);
                 _unitOfWork.SaveChanges();
@@ -162,6 +165,10 @@ namespace BrawijayaWorkshop.Model
                 SPK entity = _SPKRepository.GetById(spk.Id);
                 Map(spk, entity);
 
+                if (spk.SPKParent == null)
+                {
+                    entity.SPKParent = null;
+                }
                 _SPKRepository.Update(entity);
 
                 _unitOfWork.SaveChanges();
@@ -181,8 +188,6 @@ namespace BrawijayaWorkshop.Model
                 }
                 result = true;
             }
-
-           
 
             return result;
         }
