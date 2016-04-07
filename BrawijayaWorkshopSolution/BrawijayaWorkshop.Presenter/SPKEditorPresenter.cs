@@ -63,6 +63,8 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.DueDate = View.DueDate;
             View.SelectedSPK.TotalSparepartPrice = View.TotalSparepartPrice;
             View.SelectedSPK.Description = View.Description;
+            View.SelectedSPK.isContractWork = View.isContractWork;
+            View.SelectedSPK.ContractWorkFee = View.ContractWorkFee;
 
             View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKSparepartList, View.SPKSparepartDetailList, View.VehicleWheelList, LoginInformation.UserId, View.IsNeedApproval);
         }

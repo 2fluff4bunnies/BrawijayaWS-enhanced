@@ -52,7 +52,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lblContractWorkValue.Text = _prefix + (this.SelectedSPK.isContractWork ? "Borongan" : "Bukan Borongan");
             if (this.SelectedSPK.isContractWork)
             {
-                lblContractWorkFeeValue.Text = _prefix + this.SelectedSPK.ContractWorkFee.ToString("{0:n}");
+                lblContractWorkFeeValue.Text = _prefix + this.SelectedSPK.ContractWorkFee.ToString("n0");
             }
             else
             {

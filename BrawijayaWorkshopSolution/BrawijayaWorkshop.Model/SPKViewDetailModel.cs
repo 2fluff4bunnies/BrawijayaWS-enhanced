@@ -99,12 +99,7 @@ namespace BrawijayaWorkshop.Model
 
             if (isApproved)
             {
-                //spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                //spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
-
-                //spk.ModifyDate = serverTime;
-                //spk.ModifyUserId = userId;
-
+              
                 SPK entity = _SPKRepository.GetById(spk.Id);
                 entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
@@ -156,14 +151,12 @@ namespace BrawijayaWorkshop.Model
             }
             else
             {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Rejected;
-                spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-
-                spk.ModifyDate = serverTime;
-                spk.ModifyUserId = userId;
 
                 SPK entity = _SPKRepository.GetById(spk.Id);
-                Map(spk, entity);
+                entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                entity.ModifyDate = serverTime;
+                entity.ModifyUserId = userId;
 
                 if (spk.SPKParent == null)
                 {
@@ -213,12 +206,10 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
-            spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
+            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
 
             _SPKRepository.Update(entity);
 
