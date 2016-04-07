@@ -36,9 +36,10 @@
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
-            this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
+            this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,11 +83,11 @@
             this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
@@ -134,7 +135,7 @@
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupSPK.Controls.Add(this.lblTotalSparepartValue);
+            this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
             this.groupSPK.Controls.Add(this.gridVehicleWheel);
             this.groupSPK.Controls.Add(this.lblContractPrice);
             this.groupSPK.Controls.Add(this.ckeIsContractWork);
@@ -155,13 +156,16 @@
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
             // 
-            // lblTotalSparepartValue
+            // txtTotalSparepartPrice
             // 
-            this.lblTotalSparepartValue.Location = new System.Drawing.Point(1011, 390);
-            this.lblTotalSparepartValue.Name = "lblTotalSparepartValue";
-            this.lblTotalSparepartValue.Size = new System.Drawing.Size(8, 13);
-            this.lblTotalSparepartValue.TabIndex = 41;
-            this.lblTotalSparepartValue.Text = "--";
+            this.txtTotalSparepartPrice.Location = new System.Drawing.Point(1000, 387);
+            this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
+            this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
+            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtTotalSparepartPrice.Size = new System.Drawing.Size(134, 20);
+            this.txtTotalSparepartPrice.TabIndex = 41;
             // 
             // gridVehicleWheel
             // 
@@ -194,7 +198,15 @@
             this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
             this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
             this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
-            this.gvVehicleWheel.ViewCaption = "Daftar Ban Terpasang";
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Kendaraan";
+            // 
+            // colName
+            // 
+            this.colName.Caption = "Nama";
+            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
             // 
             // colWheelDetail
             // 
@@ -250,10 +262,10 @@
             this.ckeIsContractWork.TabIndex = 40;
             this.ckeIsContractWork.CheckedChanged += new System.EventHandler(this.ckeIsContractWork_CheckedChanged);
             // 
-            // txtContractPrice
+            // txtContractWorkFee
             // 
             this.txtContractWorkFee.Location = new System.Drawing.Point(96, 134);
-            this.txtContractWorkFee.Name = "txtContractPrice";
+            this.txtContractWorkFee.Name = "txtContractWorkFee";
             this.txtContractWorkFee.Properties.Mask.EditMask = "n0";
             this.txtContractWorkFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtContractWorkFee.Size = new System.Drawing.Size(161, 20);
@@ -566,9 +578,9 @@
             // 
             this.lblTotalSparepart.Location = new System.Drawing.Point(880, 390);
             this.lblTotalSparepart.Name = "lblTotalSparepart";
-            this.lblTotalSparepart.Size = new System.Drawing.Size(114, 13);
+            this.lblTotalSparepart.Size = new System.Drawing.Size(107, 13);
             this.lblTotalSparepart.TabIndex = 31;
-            this.lblTotalSparepart.Text = "Total Harga Sparepart :";
+            this.lblTotalSparepart.Text = "Total Harga Sparepart";
             // 
             // lblVehicle
             // 
@@ -608,14 +620,6 @@
             this.cmsVehicleWheelItemReset.Text = "Reset Data";
             this.cmsVehicleWheelItemReset.Click += new System.EventHandler(this.cmsVehicleWheelItemReset_Click);
             // 
-            // colName
-            // 
-            this.colName.Caption = "Nama";
-            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 0;
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,6 +635,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
@@ -709,7 +714,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
         private System.Windows.Forms.ContextMenuStrip cmsVehicleWheel;
         private System.Windows.Forms.ToolStripMenuItem cmsVehicleWheelItemReset;
-        private DevExpress.XtraEditors.LabelControl lblTotalSparepartValue;
         private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraEditors.TextEdit txtTotalSparepartPrice;
     }
 }

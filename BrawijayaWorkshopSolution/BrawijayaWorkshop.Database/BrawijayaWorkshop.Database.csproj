@@ -92,6 +92,7 @@
     <Compile Include="Configurations\VehicleWheelConfiguration.cs" />
     <Compile Include="Configurations\SpecialSparepartConfiguration.cs" />
     <Compile Include="Configurations\SpecialSparepartDetailConfiguration.cs" />
+    <Compile Include="Configurations\WheelExchangeHistoryConfiguration.cs" />
     <Compile Include="DatabaseConfigurationHelper.cs" />
     <Compile Include="Entities\ApplicationModul.cs" />
     <Compile Include="Entities\BaseModifierEntity.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Entities\VehicleWheel.cs" />
     <Compile Include="Entities\SpecialSparepart.cs" />
     <Compile Include="Entities\SpecialSparepartDetail.cs" />
+    <Compile Include="Entities\WheelExchangeHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AppBaseRepository.cs" />
     <Compile Include="Repositories\AppDatabaseFactory.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Repositories\VehicleWheelRepository.cs" />
     <Compile Include="Repositories\SpecialSparepartDetailRepository.cs" />
     <Compile Include="Repositories\SpecialSparepartRepository.cs" />
+    <Compile Include="Repositories\WheelExchangeHistoryRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

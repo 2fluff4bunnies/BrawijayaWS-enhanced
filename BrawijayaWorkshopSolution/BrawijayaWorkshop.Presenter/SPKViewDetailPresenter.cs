@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Presenter
             //View.SPKMechanicList = Model.GetSPKMechanicList(View.SelectedSPK.Id);
             View.SPKSparepartList = Model.GetSPKSparepartList(View.SelectedSPK.Id);
             View.SPKSparepartDetailList = Model.GetSPKSparepartDetailList(View.SelectedSPK.Id);
+            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedSPK.VehicleId, View.SelectedSPK.Id);
         }
 
         public void Print()
@@ -68,7 +69,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadVehicleWheel()
         {
-            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedSPK.VehicleId);
+            View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedSPK.VehicleId, View.SelectedSPK.Id);
         }
     }
 }

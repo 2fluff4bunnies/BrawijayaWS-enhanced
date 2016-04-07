@@ -26,6 +26,9 @@ namespace BrawijayaWorkshop.Model
         private IUnitOfWork _unitOfWork;
         private ISPKScheduleRepository _SPKScheduleReposistory;
         private IMechanicRepository _mechanicRepository;
+        private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
+        private ISpecialSparepartRepository _specialSparepartRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISettingRepository _settingRepository;
 
         public SPKViewDetailModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -39,6 +42,9 @@ namespace BrawijayaWorkshop.Model
             IVehicleWheelRepository vehicleWheelRepository,
             ISPKScheduleRepository SPKScheduleReposistory,
             IMechanicRepository mechanicRepository,
+            IWheelExchangeHistoryRepository wheelExchangeHistoryRepository,
+            ISpecialSparepartRepository specialSparepartRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -56,6 +62,9 @@ namespace BrawijayaWorkshop.Model
             _usedGoodRepository = usedGoodrepository;
             _SPKScheduleReposistory = SPKScheduleReposistory;
             _mechanicRepository = mechanicRepository;
+            _wheelExchangeHistoryRepository = wheelExchangeHistoryRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
+            _specialSparepartRepository = specialSparepartRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -81,7 +90,7 @@ namespace BrawijayaWorkshop.Model
             warningList = new List<SparepartViewModel>();
 
             DateTime serverTime = DateTime.Now;
-            SPK spkParent = _SPKRepository.GetById(spk.SPKparentId);
+            SPK spkParent = _SPKRepository.GetById(spk.SPKParentId);
 
             if (spkParent != null)
             {
@@ -90,16 +99,15 @@ namespace BrawijayaWorkshop.Model
 
             if (isApproved)
             {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
-
-                spk.ModifyDate = serverTime;
-                spk.ModifyUserId = userId;
-
+              
                 SPK entity = _SPKRepository.GetById(spk.Id);
-                Map(spk, entity);
+                entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                entity.ModifyDate = serverTime;
+                entity.ModifyUserId = userId;
 
                 _SPKRepository.Update(entity);
+                _unitOfWork.SaveChanges();
 
                 foreach (var item in spkSparepartList)
                 {
@@ -117,6 +125,8 @@ namespace BrawijayaWorkshop.Model
                         warningList.Add(viewModel);
                     }
                 }
+
+                _unitOfWork.SaveChanges();
 
                 foreach (var item in spkSparepartDetailList)
                 {
@@ -141,16 +151,20 @@ namespace BrawijayaWorkshop.Model
             }
             else
             {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Rejected;
-                spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-
-                spk.ModifyDate = serverTime;
-                spk.ModifyUserId = userId;
 
                 SPK entity = _SPKRepository.GetById(spk.Id);
-                Map(spk, entity);
+                entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                entity.ModifyDate = serverTime;
+                entity.ModifyUserId = userId;
 
+                if (spk.SPKParent == null)
+                {
+                    entity.SPKParent = null;
+                }
                 _SPKRepository.Update(entity);
+
+                _unitOfWork.SaveChanges();
 
                 if (hasParent)
                 {
@@ -162,10 +176,9 @@ namespace BrawijayaWorkshop.Model
                     spkParent.ModifyUserId = userId;
 
                     _SPKRepository.Update(spkParent);
+
+                    _unitOfWork.SaveChanges();
                 }
-
-                _unitOfWork.SaveChanges();
-
                 result = true;
             }
 
@@ -193,12 +206,10 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
-            spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
+            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
 
             _SPKRepository.Update(entity);
 
@@ -288,7 +299,9 @@ namespace BrawijayaWorkshop.Model
             invc.TotalPrice = spk.TotalSparepartPrice;
             invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
             invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+            invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
             invc.TotalHasPaid = 0;
+            invc.SPKId = spk.Id;
 
             if (spk.isContractWork)
             {
@@ -298,7 +311,8 @@ namespace BrawijayaWorkshop.Model
             {
                 decimal ServiceFee = 0;
 
-                int SPKWorkingDays = serverTime.Day - spk.CreateDate.Day;
+                TimeSpan SPKTimeSpan = serverTime - spk.CreateDate;
+                int SPKWorkingDays = Math.Ceiling(SPKTimeSpan.TotalDays).AsInteger();
 
                 for (int i = 0; i < SPKWorkingDays; i++)
                 {
@@ -333,7 +347,7 @@ namespace BrawijayaWorkshop.Model
                     InvoiceDetail invcDtl = new InvoiceDetail();
 
                     invcDtl.Invoice = insertedInvoice;
-                    invcDtl.SPKDetailSparepartDetail.Id = spkSpDtl.Id;
+                    invcDtl.SPKDetailSparepartDetail = spkSpDtl;
                     invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
                     invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
 
@@ -346,8 +360,31 @@ namespace BrawijayaWorkshop.Model
                 }
 
                 UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-                foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;
-                _usedGoodRepository.Update(foundUsedGood);
+                if (foundUsedGood != null)
+                {
+                    foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;
+                    _usedGoodRepository.Update(foundUsedGood);
+                }
+
+                //Replace Vehicle Wheel
+                foreach (var item in getCurrentVehicleWheel(spk.Id, spk.VehicleId).Where(w => w.ReplaceWithWheelDetailId > 0))
+                {
+                    VehicleWheel vw = _vehicleWheelRepository.GetById(item.Id);
+
+                    vw.WheelDetailId = item.ReplaceWithWheelDetailId;
+                    vw.ModifyDate = serverTime;
+                    vw.ModifyUserId = userId;
+
+                    _vehicleWheelRepository.Update(vw);
+                }
+
+                //Remove Wheel Exchange
+                List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
+
+                foreach (var item in wehList)
+                {
+                    _wheelExchangeHistoryRepository.Delete(item);
+                }
             }
 
             _unitOfWork.SaveChanges();
@@ -365,14 +402,29 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId)
+        public List<VehicleWheelViewModel> getCurrentVehicleWheel(int vehicleId, int SPKId)
         {
             List<VehicleWheel> result = _vehicleWheelRepository.GetMany(
-                vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+                  vw => vw.Vehicle.Id == vehicleId && vw.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
 
-            return Map(result, mappedResult);
+            Map(result, mappedResult);
+
+            foreach (var item in mappedResult)
+            {
+                WheelExchangeHistory wheel = _wheelExchangeHistoryRepository.GetMany(w => w.SPKId == SPKId && w.OriginalWheelId == item.WheelDetailId).FirstOrDefault();
+                if (wheel != null)
+                {
+                    item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
+                    item.ReplaceWithWheelDetailSerialNumber = wheel.ReplaceWheel.SerialNumber;
+                    item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                }
+            }
+
+            return mappedResult;
         }
+
+
     }
 }
