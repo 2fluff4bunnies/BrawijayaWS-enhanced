@@ -102,6 +102,7 @@ namespace BrawijayaWorkshop.Utils
             if(innerException != null)
             {
                 StringBuilder sb = new StringBuilder();
+                sb.AppendLine("==========================================================================");
                 sb.AppendLine("Original Error: " + innerException.Message);
                 sb.AppendLine("Source: " + innerException.Source);
                 sb.AppendLine("Stack Trace: " + innerException.StackTrace);
