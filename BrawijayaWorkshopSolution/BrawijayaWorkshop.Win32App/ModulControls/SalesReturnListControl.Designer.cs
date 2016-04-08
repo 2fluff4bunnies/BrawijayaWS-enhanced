@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -38,7 +37,7 @@
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.btnListReturn = new DevExpress.XtraEditors.SimpleButton();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.gridInvoice = new DevExpress.XtraGrid.GridControl();
@@ -217,7 +216,7 @@
             // colCustomerName
             // 
             this.colCustomerName.Caption = "Customer";
-            this.colCustomerName.FieldName = "SPK.Vehicle.Customer.CustomerName";
+            this.colCustomerName.FieldName = "SPK.Vehicle.Customer.CompanyName";
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.Visible = true;
             this.colCustomerName.VisibleIndex = 1;
@@ -225,6 +224,8 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;

@@ -67,28 +67,30 @@ namespace BrawijayaWorkshop.Model
                 List<SalesReturnDetail> listDetail = this.RetrieveSalesReturnDetail(salesReturnID);
                 if (listDetail != null && listDetail.Count > 0)
                 {
-                    foreach (var itemDetail in listInvoiceDetail)
+                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                    foreach (var sparepartID in sparepartIDs)
                     {
                         result.Add(new ReturnViewModel
                         {
-                            SparepartId = itemDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId,
-                            SparepartName = itemDetail.SPKDetailSparepartDetail.SparepartDetail.Sparepart.Name,
-                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Count(),
-                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Count()
+                            SparepartId = sparepartID,
+                            SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
                         });
                     }
                 }
             }
             else
             {
-                foreach (var itemDetail in listInvoiceDetail)
+                int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                foreach (var sparepartID in sparepartIDs)
                 {
                     result.Add(new ReturnViewModel
                     {
-                        SparepartId = itemDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId,
-                        SparepartName = itemDetail.SPKDetailSparepartDetail.SparepartDetail.Sparepart.Name,
-                        ReturQty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Count(),
-                        ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Count()
+                        SparepartId = sparepartID,
+                        SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                        ReturQty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                        ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
                     });
                 }
             }
@@ -254,7 +256,7 @@ namespace BrawijayaWorkshop.Model
                         SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDeleted.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
                         spDetail.ModifyDate = serverTime;
                         spDetail.ModifyUserId = userID;
-                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
+                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
                         _sparepartDetailRepository.Update(spDetail);
                     }
 

@@ -52,6 +52,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvReturn_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedPurchaseReturn = gvReturn.GetFocusedRow() as PurchaseReturnViewModel;
+            if (this.SelectedPurchasing == null)
+            {
+                this.SelectedPurchasing = this.SelectedPurchaseReturn.Purchasing;
+            }
         }
 
         private void gvReturn_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)

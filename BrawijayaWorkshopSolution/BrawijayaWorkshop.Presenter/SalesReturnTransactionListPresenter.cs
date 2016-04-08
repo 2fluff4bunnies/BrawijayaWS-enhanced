@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void DeleteData()
         {
-            if (View.SelectedSalesReturn == null)
+            if (View.SelectedSalesReturn != null)
             {
                 Model.DeleteSalesReturn(View.SelectedSalesReturn.Id, LoginInformation.UserId);
             }

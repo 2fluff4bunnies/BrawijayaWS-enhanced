@@ -52,6 +52,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvReturn_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedSalesReturn = gvReturn.GetFocusedRow() as SalesReturnViewModel;
+            if(this.SelectedInvoice == null)
+            {
+                this.SelectedInvoice = this.SelectedSalesReturn.Invoice;
+            }
         }
 
         private void gvReturn_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -151,22 +155,64 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (_selectedSalesReturn == null) return;
 
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus retur penjualan: '" + SelectedSalesReturn.InvoiceId + "'?") == DialogResult.Yes)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Deleting purchase return: " + SelectedSalesReturn.InvoiceId);
+                    _presenter.DeleteData();
+                    RefreshDataView();
+
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete sales return: '" + SelectedSalesReturn.InvoiceId + "'", ex);
+                    this.ShowError("Proses hapus data retur penjualan: '" + SelectedSalesReturn.InvoiceId + "' gagal!");
+                }
+            }
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
+            if (_selectedSalesReturn != null)
+            {
+                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
+                editor.SelectedInvoice = SelectedInvoice;
+                editor.SelectedSalesReturn = SelectedSalesReturn;
+                editor.ShowDialog(this);
+                RefreshDataView();
 
+            }
         }
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            try
+            {
+                _presenter.LoadSalesReturn();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadSalesReturn()", ex);
+                e.Result = ex;
+            }
         }
 
         private void bgwMain_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses memuat data gagal!");
+            }
 
+            if (gvReturn.RowCount > 0)
+            {
+                SelectedSalesReturn = gvReturn.GetRow(0) as SalesReturnViewModel;
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur penjualan selesai", true);
         }
 
     }

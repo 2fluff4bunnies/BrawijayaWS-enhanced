@@ -158,7 +158,6 @@
             this.lblTotalPrice.Size = new System.Drawing.Size(56, 13);
             this.lblTotalPrice.TabIndex = 23;
             this.lblTotalPrice.Text = "Total Harga";
-            this.lblTotalPrice.Visible = false;
             // 
             // txtItemPrice
             // 
@@ -177,7 +176,6 @@
             this.lblItemPrice.Size = new System.Drawing.Size(73, 13);
             this.lblItemPrice.TabIndex = 21;
             this.lblItemPrice.Text = "Harga per Item";
-            this.lblItemPrice.Visible = false;
             // 
             // txtRemark
             // 

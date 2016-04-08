@@ -38,9 +38,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvPurchasing.FocusedRowChanged += gvPurchasing_FocusedRowChanged;
 
             // init editor control accessibility
-            btnListReturn.Enabled = AllowInsert;
+            btnListReturn.Enabled = AllowEdit;
             cmsListReturn.Enabled = AllowEdit;
-
+            cmsAddReturn.Enabled = AllowInsert;
+            
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
             this.Load += PurchaseReturnListControl_Load;

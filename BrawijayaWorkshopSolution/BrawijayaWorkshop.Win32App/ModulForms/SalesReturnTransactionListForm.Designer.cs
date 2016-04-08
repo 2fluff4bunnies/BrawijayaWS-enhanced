@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnTransactionListForm));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -41,7 +40,7 @@
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
@@ -158,7 +157,7 @@
             this.gvReturn.OptionsView.EnableAppearanceEvenRow = true;
             this.gvReturn.OptionsView.ShowGroupPanel = false;
             this.gvReturn.OptionsView.ShowViewCaption = true;
-            this.gvReturn.ViewCaption = "Daftar Retur Pembelian";
+            this.gvReturn.ViewCaption = "Daftar Retur Penjualan";
             this.gvReturn.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvReturn_PopupMenuShowing);
             this.gvReturn.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvReturn_FocusedRowChanged);
             // 
@@ -173,7 +172,7 @@
             // colCustomerName
             // 
             this.colCustomerName.Caption = "Customer";
-            this.colCustomerName.FieldName = "Invoice.SPK.Vehicle.Customer.Companyname";
+            this.colCustomerName.FieldName = "Invoice.SPK.Vehicle.Customer.CompanyName";
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.Visible = true;
             this.colCustomerName.VisibleIndex = 1;
@@ -214,8 +213,9 @@
             this.ClientSize = new System.Drawing.Size(634, 261);
             this.Controls.Add(this.gridReturn);
             this.Controls.Add(this.gcFilter);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalesReturnTransactionListForm";
-            this.Text = "SalesReturnTransactionListForm";
+            this.Text = "Form Daftar Transaksi Retur Penjualan";
             this.Load += new System.EventHandler(this.SalesReturnTransactionListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);

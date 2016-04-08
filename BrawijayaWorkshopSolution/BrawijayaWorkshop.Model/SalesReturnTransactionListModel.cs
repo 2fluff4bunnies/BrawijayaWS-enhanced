@@ -15,17 +15,23 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceRepository _invoiceRepository;
         private ISalesReturnRepository _salesReturnRepository;
         private ISalesReturnDetailRepository _salesReturnDetailRepository;
+        private ISparepartRepository _sparepartRepository;
+        private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnTransactionListModel(ITransactionRepository transactionRepository,
             IInvoiceRepository invoiceRepository, ISalesReturnRepository salesReturnRepository,
-            ISalesReturnDetailRepository salesReturnDetailRepository, IUnitOfWork unitOfWork)
+            ISalesReturnDetailRepository salesReturnDetailRepository,
+            ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
             _invoiceRepository = invoiceRepository;
             _salesReturnRepository = salesReturnRepository;
             _salesReturnDetailRepository = salesReturnDetailRepository;
+            _sparepartRepository = sparepartRepository;
+            _sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -69,6 +75,14 @@ namespace BrawijayaWorkshop.Model
                 itemDetail.ModifyDate = serverTime;
                 itemDetail.ModifyUserId = userID;
                 _salesReturnDetailRepository.Update(itemDetail);
+
+                SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+                _sparepartDetailRepository.Update(spDetail);
+
+                Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
+                sparepart.StockQty += 1;
+                _sparepartRepository.Update(sparepart);
             }
 
             Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID).FirstOrDefault();

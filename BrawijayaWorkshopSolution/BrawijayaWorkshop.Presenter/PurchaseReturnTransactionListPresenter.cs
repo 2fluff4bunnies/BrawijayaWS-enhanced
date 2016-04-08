@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void DeleteData()
         {
-            if (View.SelectedPurchaseReturn == null)
+            if (View.SelectedPurchaseReturn != null)
             {
                 Model.DeletePurchaseReturn(View.SelectedPurchaseReturn.Id, LoginInformation.UserId);
             }

@@ -38,8 +38,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvInvoice.FocusedRowChanged += gvInvoice_FocusedRowChanged;
 
             // init editor control accessibility
-            btnListReturn.Enabled = AllowInsert;
+            btnListReturn.Enabled = AllowEdit;
             cmsListReturn.Enabled = AllowEdit;
+            cmsAddReturn.Enabled = AllowInsert;
 
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 

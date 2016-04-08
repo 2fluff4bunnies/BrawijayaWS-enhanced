@@ -195,6 +195,8 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
