@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartManualTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
@@ -48,8 +47,8 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtQtyUpdate = new DevExpress.XtraEditors.TextEdit();
             this.lblQtyUpdaate = new DevExpress.XtraEditors.LabelControl();
-            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
@@ -151,7 +150,6 @@
             this.txtTotalPrice.Properties.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(193, 20);
             this.txtTotalPrice.TabIndex = 24;
-            this.txtTotalPrice.Visible = false;
             // 
             // lblTotalPrice
             // 
@@ -170,7 +168,6 @@
             this.txtItemPrice.Name = "txtItemPrice";
             this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;
-            this.txtItemPrice.Visible = false;
             this.txtItemPrice.EditValueChanged += new System.EventHandler(this.txtItemPrice_EditValueChanged);
             // 
             // lblItemPrice

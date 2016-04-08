@@ -235,7 +235,7 @@ namespace BrawijayaWorkshop.Model
                     detailUangMukaBerkurangKarenaKas.Credit = purchasing.TotalHasPaid;
                     detailUangMukaBerkurangKarenaKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.05.01.01").FirstOrDefault().Id;
                     detailUangMukaBerkurangKarenaKas.Parent = transactionInserted;
-                    _transactionDetailRepository.Add(detailUangMukaBerkurangKarenaKas); 
+                    _transactionDetailRepository.Add(detailUangMukaBerkurangKarenaKas);
                     break;
 
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI:
@@ -256,7 +256,7 @@ namespace BrawijayaWorkshop.Model
                         else if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2)
                         {
                             detailBankKarenaUangMuka.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.03").FirstOrDefault().Id;
-                        } 
+                        }
                         detailBankKarenaUangMuka.Parent = transactionInserted;
                         _transactionDetailRepository.Add(detailBankKarenaUangMuka);
 
@@ -275,7 +275,7 @@ namespace BrawijayaWorkshop.Model
                         _transactionDetailRepository.Add(detailUangMukaBerkurangKarenaBank);
                         break;
                     }
-                    
+
                 case DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG:
                     TransactionDetail utang = new TransactionDetail();
                     utang.Credit = purchasing.TotalPrice - purchasing.TotalHasPaid;
@@ -285,10 +285,10 @@ namespace BrawijayaWorkshop.Model
                     break;
             }
 
-            if (purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI ||
-                purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1 ||
-                purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2 ||
-               purchasing.PaymentMethod.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS)
+            if (refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_EKONOMI ||
+                refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA1 ||
+               refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_BANK_BCA2 ||
+               refSelected.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UANGMUKA_KAS)
             {
                 if (purchasing.TotalPrice > purchasing.TotalHasPaid)
                 {
