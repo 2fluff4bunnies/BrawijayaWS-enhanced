@@ -179,8 +179,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnListReturn_Click(object sender, EventArgs e)
         {
-            //SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
-            //editor.ShowDialog(this);
+            SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
+            editor.ShowDialog(this);
 
             btnSearch.PerformClick();
         }
@@ -189,9 +189,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedInvoice != null)
             {
-                //SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
-                //editor.SelectedInvoice = _selectedInvoice;
-                //editor.ShowDialog(this);
+                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
+                editor.SelectedInvoice = _selectedInvoice;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }
@@ -201,9 +201,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedInvoice != null)
             {
-                //SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
-                //editor.SelectedInvoice = _selectedInvoice;
-                //editor.ShowDialog(this);
+                SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
+                editor.SelectedInvoice = _selectedInvoice;
+                editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
             }

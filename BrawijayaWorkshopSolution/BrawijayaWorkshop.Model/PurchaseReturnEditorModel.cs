@@ -155,7 +155,7 @@ namespace BrawijayaWorkshop.Model
             transaction.CreateUserId = userID;
             transaction.ModifyDate = serverTime;
             transaction.ModifyUserId = userID;
-            transaction.PrimaryKeyValue = transaction.Id;
+            transaction.PrimaryKeyValue = 0;
             transaction.ReferenceTableId = transactionReferenceTable.Id;
             transaction.TotalPayment = totalTransaction.AsDouble();
             transaction.TotalTransaction = totalTransaction.AsDouble();
@@ -178,13 +178,8 @@ namespace BrawijayaWorkshop.Model
 
             _unitOfWork.SaveChanges();
 
-            PurchaseReturn newPurchaseReturn = _purchaseReturnRepository.GetMany(x => x.PurchasingId == purchasingID && x.CreateDate == serverTime).OrderByDescending(x => x.Date).FirstOrDefault();
-            Transaction newTransaction = _transactionRepository.GetMany(x=>x.ReferenceTableId == transactionReferenceTable.Id 
-                && x.PrimaryKeyValue == 0 && x.Status == (int)DbConstant.DefaultDataStatus.Active 
-                && x.CreateDate == serverTime).
-                OrderByDescending(x => x.TransactionDate).FirstOrDefault();
-            newTransaction.PrimaryKeyValue = newPurchaseReturn.Id;
-            _transactionRepository.Update(newTransaction);
+            transaction.PrimaryKeyValue = purchaseReturn.Id;
+            _transactionRepository.Update(transaction);
             _unitOfWork.SaveChanges();
         }
 

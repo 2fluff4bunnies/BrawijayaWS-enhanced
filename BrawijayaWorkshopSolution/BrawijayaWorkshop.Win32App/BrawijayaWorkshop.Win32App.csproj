@@ -476,6 +476,12 @@
     <Compile Include="ModulForms\SalesReturnEditorForm.Designer.cs">
       <DependentUpon>SalesReturnEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SalesReturnTransactionListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SalesReturnTransactionListForm.Designer.cs">
+      <DependentUpon>SalesReturnTransactionListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\SparepartDetailListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -817,6 +823,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SalesReturnEditorForm.resx">
       <DependentUpon>SalesReturnEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SalesReturnTransactionListForm.resx">
+      <DependentUpon>SalesReturnTransactionListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SparepartDetailListForm.resx">
       <DependentUpon>SparepartDetailListForm.cs</DependentUpon>

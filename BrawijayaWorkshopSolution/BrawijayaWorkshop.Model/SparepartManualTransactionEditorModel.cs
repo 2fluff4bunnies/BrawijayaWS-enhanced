@@ -85,7 +85,7 @@ namespace BrawijayaWorkshop.Model
                 transaction.ModifyUserId = userId;
                 transaction.Description = "Transaksi sparepart manual";
                 transaction.ReferenceTableId = referenceTransaction.Id;
-                transaction.PrimaryKeyValue = sparepartManualTransaction.Id;
+                transaction.PrimaryKeyValue = 0;
                 transaction.TotalPayment = totalPrice.AsDouble();
                 transaction.TotalTransaction = totalPrice.AsDouble();
                 transaction.TransactionDate = serverTime;
@@ -185,14 +185,8 @@ namespace BrawijayaWorkshop.Model
                 _sparepartRepository.Update(sparepartUpdated);
                 _unitOfWork.SaveChanges();
 
-                SparepartManualTransaction newManualTrans = _sparepartManualTransactionRepository.GetMany(x => x.SparepartId == sparepartManualTransaction.SparepartId
-                    && x.CreateDate == serverTime).OrderByDescending(x => x.CreateDate).FirstOrDefault();
-                Transaction newTransaction = _transactionRepository.GetMany(x => x.ReferenceTableId == referenceTransaction.Id
-                    && x.PrimaryKeyValue == 0 && x.Status == (int)DbConstant.DefaultDataStatus.Active
-                    && x.CreateDate == serverTime).
-                    OrderByDescending(x => x.TransactionDate).FirstOrDefault();
-                newTransaction.PrimaryKeyValue = newManualTrans.Id;
-                _transactionRepository.Update(newTransaction);
+                transaction.PrimaryKeyValue = manualTransaction.Id;
+                _transactionRepository.Update(transaction);
                 _unitOfWork.SaveChanges();
             }
         }
