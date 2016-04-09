@@ -281,12 +281,10 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
-            spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
+            entity.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
 
             _SPKRepository.Update(entity);
 

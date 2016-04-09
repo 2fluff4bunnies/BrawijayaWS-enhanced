@@ -62,6 +62,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             RemovedWHeelDetailList = new List<SpecialSparepartDetailViewModel>();
 
             this.TotalSparepartPrice = 0;
+            this.ContractWorkFee = 0;
 
             txtContractWorkFee.Enabled = false;
             groupSparepart.Enabled = false;
