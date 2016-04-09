@@ -36,7 +36,7 @@ namespace BrawijayaWorkshop.Presenter
 
             View.SelectedSPKSchedule.MechanicId = View.MechanicId;
             View.SelectedSPKSchedule.SPKId = View.MechanicId;
-
+            View.SelectedSPKSchedule.SPKId = View.SPKId;
             if (View.SelectedSPKSchedule.Id > 0)
             {
                 Model.UpdateSPKSchedule(View.SelectedSPKSchedule, LoginInformation.UserId);

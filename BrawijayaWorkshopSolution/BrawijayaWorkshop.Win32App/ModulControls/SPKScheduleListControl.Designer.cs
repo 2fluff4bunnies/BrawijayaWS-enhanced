@@ -106,11 +106,11 @@
             this.lookUpSPKVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSPKVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
-            this.lookUpSPKVehicle.Properties.DisplayMember = "Description";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Vehicle.ActiveLicenseNumber", "ColLicenseNumber")});
+            this.lookUpSPKVehicle.Properties.DisplayMember = "Vehicle.ActiveSerialNumber";
             this.lookUpSPKVehicle.Properties.HideSelection = false;
             this.lookUpSPKVehicle.Properties.NullText = "-- Pilih Kendaraan --";
-            this.lookUpSPKVehicle.Properties.ValueMember = "Status";
+            this.lookUpSPKVehicle.Properties.ValueMember = "Id";
             this.lookUpSPKVehicle.Size = new System.Drawing.Size(141, 20);
             this.lookUpSPKVehicle.TabIndex = 6;
             // 
@@ -159,13 +159,13 @@
             this.lblMechanic.TabIndex = 0;
             this.lblMechanic.Text = "Mekanik";
             // 
-            // btnNewSPK
+            // btnNewSPKSchedule
             // 
-            this.btnNewSPKSchedule.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPK.Image")));
+            this.btnNewSPKSchedule.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPKSchedule.Image")));
             this.btnNewSPKSchedule.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewSPKSchedule.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewSPKSchedule.Location = new System.Drawing.Point(3, 97);
-            this.btnNewSPKSchedule.Name = "btnNewSPK";
+            this.btnNewSPKSchedule.Name = "btnNewSPKSchedule";
             this.btnNewSPKSchedule.Size = new System.Drawing.Size(176, 23);
             this.btnNewSPKSchedule.TabIndex = 18;
             this.btnNewSPKSchedule.Text = "Tambah Jadwal Harian SPK";

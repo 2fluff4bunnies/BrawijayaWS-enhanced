@@ -314,20 +314,22 @@ namespace BrawijayaWorkshop.Model
 
                 for (int i = 0; i < SPKWorkingDays; i++)
                 {
-                    List<SPKSchedule> involvedMechanic = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i).ToList();
+                    List<Mechanic> involvedMechanic = (from sched in _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.SPKId == spk.Id).ToList()
+                                                       select sched.Mechanic).ToList();
 
-                    foreach (SPKSchedule mechanic in involvedMechanic)
+                    foreach (Mechanic mechanic in involvedMechanic)
                     {
-                        int mechanicJobForToday = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
+                        int mechanicJobForToday = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id && sc.SPKId == spk.Id).Count();
 
-                        decimal mechanicFeeForToday = mechanic.Mechanic.BaseFee / mechanicJobForToday;
+                        decimal mechanicFeeForToday = mechanic.BaseFee / mechanicJobForToday;
 
                         ServiceFee = ServiceFee + mechanicFeeForToday;
                     }
                 }
 
-
-                invc.TotalPrice = spk.TotalSparepartPrice + ServiceFee + (ServiceFee * (0.1).AsDecimal());
+                invc.TotalService = ServiceFee;
+                invc.TotalServicePlusFee = ServiceFee + (ServiceFee * (0.1).AsDecimal());
+                invc.TotalPrice = spk.TotalSparepartPrice + invc.TotalServicePlusFee;
             }
 
             Invoice insertedInvoice = _invoiceRepository.Add(invc);
