@@ -30,9 +30,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public SPKScheduleListControl()
+        public SPKScheduleListControl(SPKScheduleListModel model)
         {
             InitializeComponent();
+
+            _presenter = new SPKScheduleListPresenter(this, model);
 
             btnNewSPKSchedule.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
@@ -168,12 +170,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnNewSPK_Click(object sender, EventArgs e)
         {
-            //load editor
+            SPKScheduleEditorForm editor = Bootstrapper.Resolve<SPKScheduleEditorForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
-            //load editor
+            SPKScheduleEditorForm editor = Bootstrapper.Resolve<SPKScheduleEditorForm>();
+            editor.SelectedSPKSchedule = this.SelectedSPKSchedule;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
         }
 
         private void cmsDeleteData_Click(object sender, EventArgs e)

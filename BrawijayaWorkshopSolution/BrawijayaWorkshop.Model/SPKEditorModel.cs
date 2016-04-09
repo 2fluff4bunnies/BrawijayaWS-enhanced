@@ -252,15 +252,23 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var spkSparepart in spkSparepartList)
             {
-                spkSparepart.CreateDate = serverTime;
-                spkSparepart.CreateUserId = userId;
-                spkSparepart.ModifyDate = serverTime;
-                spkSparepart.ModifyUserId = userId;
-                spkSparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
+                SPKDetailSparepart entitySPKDetailSparepart = new SPKDetailSparepart();
+                Sparepart sparepart = _sparepartRepository.GetById(spkSparepart.Sparepart.Id);
+
+                entitySPKDetailSparepart.SparepartId = spkSparepart.SparepartId;
+                entitySPKDetailSparepart.TotalPrice = spkSparepart.TotalPrice;
+                entitySPKDetailSparepart.TotalQuantity = spkSparepart.TotalQuantity;
+                entitySPKDetailSparepart.Sparepart = sparepart;
+                entitySPKDetailSparepart.SPK = insertedSPK;
+
+                entitySPKDetailSparepart.CreateDate = serverTime;
+                entitySPKDetailSparepart.CreateUserId = userId;
+                entitySPKDetailSparepart.ModifyDate = serverTime;
+                entitySPKDetailSparepart.ModifyUserId = userId;
+                entitySPKDetailSparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
 
                 if (!isNeedApproval)
                 {
-                    Sparepart sparepart = _sparepartRepository.GetById(spkSparepart.Sparepart.Id);
                     sparepart.StockQty = sparepart.StockQty - spkSparepart.TotalQuantity;
                     sparepart.ModifyDate = serverTime;
                     sparepart.ModifyUserId = userId;
@@ -268,26 +276,22 @@ namespace BrawijayaWorkshop.Model
                     _sparepartRepository.Update(sparepart);
                 }
 
-                SPKDetailSparepart entitySPKDetailSparepart = new SPKDetailSparepart();
-                Map(spkSparepart, entitySPKDetailSparepart);
-                entitySPKDetailSparepart.SPK = insertedSPK;
-
                 SPKDetailSparepart insertedSPkDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
 
                 var detailList = spkSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == spkSparepart.SparepartId);
 
                 foreach (var spkSparepartDetail in detailList)
                 {
-
-                    spkSparepartDetail.CreateDate = serverTime;
-                    spkSparepartDetail.CreateUserId = userId;
-                    spkSparepartDetail.ModifyDate = serverTime;
-                    spkSparepartDetail.ModifyUserId = userId;
-                    spkSparepartDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
-
                     SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
-                    Map(spkSparepartDetail, entityNewSparepartDetail);
+
+                    entityNewSparepartDetail.CreateDate = serverTime;
+                    entityNewSparepartDetail.CreateUserId = userId;
+                    entityNewSparepartDetail.ModifyDate = serverTime;
+                    entityNewSparepartDetail.ModifyUserId = userId;
+                    entityNewSparepartDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+
                     entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
+                    entityNewSparepartDetail.SparepartDetailId = spkSparepartDetail.SparepartDetailId;
 
                     SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
 
