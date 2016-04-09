@@ -101,7 +101,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if(View.TransactionDetailList.Count > 0)
             {
-                double totalTransaction = View.TransactionDetailList.Sum(td => td.Credit ?? 0 - td.Debit ?? 0).AsDouble();
+                double totalTransaction = View.TransactionDetailList.Sum(td => (td.Credit ?? 0) - (td.Debit ?? 0)).AsDouble();
                 int nonSelectedJournal = View.TransactionDetailList.Where(td => td.JournalId == 0).Count();
                 return totalTransaction == 0 && nonSelectedJournal == 0;
             }

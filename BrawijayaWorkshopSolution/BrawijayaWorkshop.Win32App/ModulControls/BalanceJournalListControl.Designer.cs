@@ -226,10 +226,10 @@
             this.colDebitMutation.Caption = "Debet";
             this.colDebitMutation.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colDebitMutation.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colDebitMutation.FieldName = "BalanceAfterReconciliationDebit";
+            this.colDebitMutation.FieldName = "BalanceAfterMutationDebit";
             this.colDebitMutation.Name = "colDebitMutation";
             this.colDebitMutation.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationDebit", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterMutationDebit", "{0:#,#;(#,#);0}")});
             this.colDebitMutation.Visible = true;
             this.colDebitMutation.VisibleIndex = 3;
             // 
@@ -238,10 +238,10 @@
             this.colCreditMutation.Caption = "Kredit";
             this.colCreditMutation.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colCreditMutation.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colCreditMutation.FieldName = "BalanceAfterReconciliationCredit";
+            this.colCreditMutation.FieldName = "BalanceAfterMutationCredit";
             this.colCreditMutation.Name = "colCreditMutation";
             this.colCreditMutation.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterReconciliationCredit", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BalanceAfterMutationCredit", "{0:#,#;(#,#);0}")});
             this.colCreditMutation.Visible = true;
             this.colCreditMutation.VisibleIndex = 4;
             // 

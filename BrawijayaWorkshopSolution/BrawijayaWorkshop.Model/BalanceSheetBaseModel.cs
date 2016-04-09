@@ -116,6 +116,8 @@ namespace BrawijayaWorkshop.Model
             DateTime prevMonth = firstDay.AddDays(-1);
 
             List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
+            List<JournalMasterViewModel> mappedListAllJournal = new List<JournalMasterViewModel>();
+            Map(listAllJournal, mappedListAllJournal);
 
             Reference catJournalService = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_SERVICE).FirstOrDefault();
             Reference catJournalCost = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_COST).FirstOrDefault();
@@ -124,13 +126,6 @@ namespace BrawijayaWorkshop.Model
             List<string> catJournalServiceCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalService.Id).Select(r => r.Value).ToList();
             List<string> catJournalCostCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalCost.Id).Select(r => r.Value).ToList();
             List<string> catJournalIncomeCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalIncome.Id).Select(r => r.Value).ToList();
-
-            List<JournalMaster> listProfitLossJournalParents = listAllJournal.Where(j =>
-                catJournalServiceCodeList.Contains(j.Code) ||
-                catJournalCostCodeList.Contains(j.Code) ||
-                catJournalIncomeCodeList.Contains(j.Code)).ToList();
-            List<JournalMasterViewModel> mappedListProfitLossJournalParents = new List<JournalMasterViewModel>();
-            Map(listProfitLossJournalParents, mappedListProfitLossJournalParents);
 
             // calculate neraca
             // ------------------------------------------------------------------------------
@@ -175,6 +170,8 @@ namespace BrawijayaWorkshop.Model
                 foreach (var item in tempListBalanceDetailViewModel)
                 {
                     BalanceJournalDetail entityDetail = lastJournalDetail.Where(i => i.JournalId == item.JournalId).FirstOrDefault();
+                    if (entityDetail == null) continue;
+
                     item.FirstDebit = entityDetail.LastDebit;
                     item.FirstCredit = entityDetail.LastCredit;
                 }
@@ -213,6 +210,10 @@ namespace BrawijayaWorkshop.Model
             }
 
             // 4. Hitung Saldo Akhir
+            decimal? incomeAmount = 0;
+            decimal? serviceAmount = 0;
+            decimal? costAmount = 0;
+            List<string> cachedCode = new List<string>();
             foreach (var item in tempListBalanceDetailViewModel)
             {
                 // update saldo awal (saldo akhir + mutasi)
@@ -231,21 +232,6 @@ namespace BrawijayaWorkshop.Model
                 {
                     item.BalanceAfterReconciliationDebit = 0;
                     item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
-                }
-
-                bool isProfitLoss = false;
-                foreach (var iJournalParent in mappedListProfitLossJournalParents)
-                {
-                    isProfitLoss = IsCurrentJournalValid(item.Journal, iJournalParent.Code);
-
-                    if (isProfitLoss) break;
-                }
-
-                JournalMaster currentJournal = listAllJournal.Where(cj => cj.Id == item.JournalId).FirstOrDefault();
-                if (isProfitLoss)
-                {
-                    item.ProfitLossDebit = (item.BalanceAfterReconciliationDebit ?? 0);
-                    item.ProfitLossCredit = (item.BalanceAfterReconciliationCredit ?? 0);
                 }
 
                 item.LastDebit = (item.FirstDebit ?? 0) + item.BalanceAfterReconciliationDebit;
@@ -270,6 +256,98 @@ namespace BrawijayaWorkshop.Model
                 newBalanceDetail.ParentId = newBalanceHeader.Id;
                 _balanceJournalDetailRepository.Add(newBalanceDetail);
             }
+
+            _unitOfWork.SaveChanges();
+
+            List<BalanceJournalDetailViewModel> mappedResult = RetrieveBalanceJournalDetailsByHeaderId(newBalanceHeader.Id);
+
+            foreach (var item in tempListBalanceDetailViewModel)
+            {
+                foreach (var journalIncomeCode in catJournalIncomeCodeList)
+                {
+                    List<int> cachedItems = new List<int>();
+                    foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                    {
+                        if (IsCurrentJournalValid(itemBalance.Journal, journalIncomeCode))
+                        {
+                            decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
+                            incomeAmount += currentAmount;
+
+                            cachedItems.Add(itemBalance.Id);
+                        }
+                    }
+
+                    foreach (var iCache in cachedItems)
+                    {
+                        BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                        int iCacheIndex = mappedResult.IndexOf(current);
+                        current.IsChecked = true;
+                        mappedResult[iCacheIndex] = current;
+                    }
+                }
+
+                foreach (var journalServiceCode in catJournalServiceCodeList)
+                {
+                    List<int> cachedItems = new List<int>();
+                    foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                    {
+                        if (IsCurrentJournalValid(itemBalance.Journal, journalServiceCode))
+                        {
+                            decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
+                            serviceAmount += currentAmount;
+
+                            cachedItems.Add(itemBalance.Id);
+                        }
+                    }
+
+                    foreach (var iCache in cachedItems)
+                    {
+                        BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                        int iCacheIndex = mappedResult.IndexOf(current);
+                        current.IsChecked = true;
+                        mappedResult[iCacheIndex] = current;
+                    }
+                }
+
+                foreach (var journalCostCode in catJournalCostCodeList)
+                {
+                    List<int> cachedItems = new List<int>();
+                    foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                    {
+                        if (IsCurrentJournalValid(itemBalance.Journal, journalCostCode))
+                        {
+                            decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
+                            costAmount += currentAmount;
+
+                            cachedItems.Add(itemBalance.Id);
+                        }
+                    }
+
+                    foreach (var iCache in cachedItems)
+                    {
+                        BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                        int iCacheIndex = mappedResult.IndexOf(current);
+                        current.IsChecked = true;
+                        mappedResult[iCacheIndex] = current;
+                    }
+                }
+            }
+
+            //profitloss
+            decimal? profitLossAmount = incomeAmount + serviceAmount + costAmount;
+            BalanceJournalDetail profitDetail = new BalanceJournalDetail();
+            profitDetail.ParentId = newBalanceHeader.Id;
+            JournalMasterViewModel profitLossCurrentMonthJournal = mappedListAllJournal.Where(j => j.Code == "2.03.05").FirstOrDefault();
+            profitDetail.JournalId = profitLossCurrentMonthJournal.Id;
+            if (profitLossAmount > 0)
+            {
+                profitDetail.LastDebit = profitLossAmount;
+            }
+            else
+            {
+                profitDetail.LastCredit = Math.Abs(profitLossAmount.Value);
+            }
+            _balanceJournalDetailRepository.Add(profitDetail);
             _unitOfWork.SaveChanges();
         }
 
