@@ -24,9 +24,9 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_MECHANIC = "M_MECHANIC";
         public const string MODUL_VEHICLE_DETAIL = "M_VEHICLE_DETAIL";
         public const string MODUL_SPK = "M_SPK";
-        public const string MODUL_SPK_DETAIL_MECHANIC = "M_SPK_DETAIL_MECHANIC";
-        public const string MODUL_SPK_DETAIL_SPAREPART = "M_SPK_DETAIL_SPAREPART";
-        public const string MODUL_SPK_DETAIL_SPAREPART_DETAIL = "M_SPK_DETAIL_SPAREPART_DETAIL";
+        public const string MODUL_SPK_SCHEDULE = "M_SPK_SCHEDULE";
+        public const string MODUL_SPK_SALES = "M_SPK_SALES";
+        public const string MODUL_GUESTBOOK = "M_SPK_GUESTBOOK";
         public const string MODUL_MANAGE_APP_USER = "M_MANAGE_APP_USER";
         public const string MODUL_USEDGOOD = "M_USEDGOOD";
         public const string MODUL_USEDGOOD_TRANSACTION = "M_USEDGOOD_TRANSACTION";

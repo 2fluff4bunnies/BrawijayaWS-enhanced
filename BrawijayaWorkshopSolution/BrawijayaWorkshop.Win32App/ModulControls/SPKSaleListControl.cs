@@ -19,6 +19,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     {
         private SPKSaleListPresenter _presenter;
 
+        protected override string ModulName
+        {
+            get
+            {
+                return DbConstant.MODUL_SPK_SALES;
+            }
+        }
+
         public SPKSaleListControl(SPKSaleListModel model)
         {
             InitializeComponent();

@@ -84,7 +84,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
-
         }
 
         #region Field Editor
@@ -389,7 +388,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtContractWorkFee.Text = value.ToString();
+                txtContractWorkFee.Text = value.ToString("n0");
             }
         }
         #endregion

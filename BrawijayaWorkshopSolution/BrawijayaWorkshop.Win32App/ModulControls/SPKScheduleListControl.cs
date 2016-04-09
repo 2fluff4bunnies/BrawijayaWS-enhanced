@@ -26,7 +26,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return DbConstant.MODUL_SPK;
+                return DbConstant.MODUL_SPK_SCHEDULE;
             }
         }
 

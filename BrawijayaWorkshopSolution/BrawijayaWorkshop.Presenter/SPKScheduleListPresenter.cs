@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.View;
+using System;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -13,6 +14,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.MechanicList = Model.LoadMechanic();
             View.SPKList = Model.LoadSPK();
+            View.CreatedDateFilter = DateTime.Now;
         }
 
         public void LoadSPKSchedule()
