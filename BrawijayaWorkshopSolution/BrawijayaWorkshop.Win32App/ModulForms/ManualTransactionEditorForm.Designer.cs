@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManualTransactionEditorForm));
             this.gcTransactionParent = new DevExpress.XtraEditors.GroupControl();
+            this.cbxIsReconciliation = new DevExpress.XtraEditors.CheckEdit();
             this.txtTransDesc = new DevExpress.XtraEditors.TextEdit();
             this.txtTransTotal = new DevExpress.XtraEditors.TextEdit();
             this.lblTransTotal = new DevExpress.XtraEditors.LabelControl();
@@ -47,9 +48,9 @@
             this.btnNewTransDetail = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbxIsReconciliation = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTransactionParent)).BeginInit();
             this.gcTransactionParent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsReconciliation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransTotal.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -60,7 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactionDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpJournalGv)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbxIsReconciliation.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcTransactionParent
@@ -79,6 +79,14 @@
             this.gcTransactionParent.Size = new System.Drawing.Size(722, 88);
             this.gcTransactionParent.TabIndex = 1;
             this.gcTransactionParent.Text = "Transaksi";
+            // 
+            // cbxIsReconciliation
+            // 
+            this.cbxIsReconciliation.Location = new System.Drawing.Point(397, 56);
+            this.cbxIsReconciliation.Name = "cbxIsReconciliation";
+            this.cbxIsReconciliation.Properties.Caption = "Jurnal Penyesuaian";
+            this.cbxIsReconciliation.Size = new System.Drawing.Size(134, 19);
+            this.cbxIsReconciliation.TabIndex = 7;
             // 
             // txtTransDesc
             // 
@@ -214,6 +222,8 @@
             // colDebit
             // 
             this.colDebit.Caption = "Debit";
+            this.colDebit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colDebit.FieldName = "Debit";
             this.colDebit.Name = "colDebit";
             this.colDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
@@ -224,6 +234,8 @@
             // colCredit
             // 
             this.colCredit.Caption = "Credit";
+            this.colCredit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCredit.FieldName = "Credit";
             this.colCredit.Name = "colCredit";
             this.colCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
@@ -258,14 +270,6 @@
             this.cmsDeleteData.Text = "Hapus Detail";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
-            // cbxIsReconciliation
-            // 
-            this.cbxIsReconciliation.Location = new System.Drawing.Point(397, 56);
-            this.cbxIsReconciliation.Name = "cbxIsReconciliation";
-            this.cbxIsReconciliation.Properties.Caption = "Jurnal Penyesuaian";
-            this.cbxIsReconciliation.Size = new System.Drawing.Size(134, 19);
-            this.cbxIsReconciliation.TabIndex = 7;
-            // 
             // ManualTransactionEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,6 +285,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcTransactionParent)).EndInit();
             this.gcTransactionParent.ResumeLayout(false);
             this.gcTransactionParent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxIsReconciliation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransDesc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransTotal.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
@@ -291,7 +296,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactionDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpJournalGv)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbxIsReconciliation.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
