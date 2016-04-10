@@ -215,9 +215,9 @@ namespace BrawijayaWorkshop.Model
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusOverLimit = 0;
             }
-           
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
 
+            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
+            spk.StatusCompletedId = isSPKSales ? (int)DbConstant.SPKCompletionStatus.Completed : (int)DbConstant.SPKCompletionStatus.InProgress;
             SPK entityChild = new SPK();
             Map(spk, entityChild);
 
@@ -225,8 +225,6 @@ namespace BrawijayaWorkshop.Model
 
             if (isSPKSales)
             {
-                spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
-
                 //insert invoice
 
                 Invoice invc = new Invoice();
@@ -245,10 +243,7 @@ namespace BrawijayaWorkshop.Model
 
                 insertedInvoice = _invoiceRepository.Add(invc);
             }
-            else
-            {
-                spk.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.InProgress;
-            }
+
 
             foreach (var spkSparepart in spkSparepartList)
             {

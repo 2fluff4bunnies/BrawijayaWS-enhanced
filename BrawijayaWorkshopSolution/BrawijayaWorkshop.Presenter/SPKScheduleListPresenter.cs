@@ -13,8 +13,20 @@ namespace BrawijayaWorkshop.Presenter
         public void InitData()
         {
             View.MechanicList = Model.LoadMechanic();
-            View.SPKList = Model.LoadSPK();
             View.CreatedDateFilter = DateTime.Now;
+
+            View.SPKVehicleList = new System.Collections.Generic.List<FilterSPKVechile>();
+            var spkList = Model.LoadSPK();
+            
+            foreach (var item in spkList)
+            {
+                View.SPKVehicleList.Add(new FilterSPKVechile
+                    {
+                       Id = item.Id,
+                       SPKCode = item.Code,
+                       ActiveLicenseNumber = item.Vehicle.ActiveLicenseNumber
+                    });
+            }
         }
 
         public void LoadSPKSchedule()

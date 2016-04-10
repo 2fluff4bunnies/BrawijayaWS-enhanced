@@ -70,7 +70,7 @@
             this.navbarTransactionData.Location = new System.Drawing.Point(0, 0);
             this.navbarTransactionData.Name = "navbarTransactionData";
             this.navbarTransactionData.OptionsNavPane.ExpandedWidth = 249;
-            this.navbarTransactionData.Size = new System.Drawing.Size(249, 296);
+            this.navbarTransactionData.Size = new System.Drawing.Size(249, 315);
             this.navbarTransactionData.SmallImages = this.imageCollection;
             this.navbarTransactionData.TabIndex = 0;
             this.navbarTransactionData.Text = "navBarControl1";
@@ -136,6 +136,18 @@
             this.iInvoice.Name = "iInvoice";
             this.iInvoice.SmallImageIndex = 5;
             // 
+            // iPurchaseReturn
+            // 
+            this.iPurchaseReturn.Caption = "Retur Pembelian";
+            this.iPurchaseReturn.Name = "iPurchaseReturn";
+            this.iPurchaseReturn.SmallImageIndex = 2;
+            // 
+            // iSalesReturn
+            // 
+            this.iSalesReturn.Caption = "Retur Penjualan";
+            this.iSalesReturn.Name = "iSalesReturn";
+            this.iSalesReturn.SmallImageIndex = 2;
+            // 
             // iSPKSales
             // 
             this.iSPKSales.Caption = "Penjualan Sparepart";
@@ -164,25 +176,13 @@
             this.navBarItem1.Caption = "navBarItem1";
             this.navBarItem1.Name = "navBarItem1";
             // 
-            // iPurchaseReturn
-            // 
-            this.iPurchaseReturn.Caption = "Retur Pembelian";
-            this.iPurchaseReturn.Name = "iPurchaseReturn";
-            this.iPurchaseReturn.SmallImageIndex = 2;
-            // 
-            // iSalesReturn
-            // 
-            this.iSalesReturn.Caption = "Retur Penjualan";
-            this.iSalesReturn.Name = "iSalesReturn";
-            this.iSalesReturn.SmallImageIndex = 2;
-            // 
             // TransactionDataNavigationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.navbarTransactionData);
             this.Name = "TransactionDataNavigationControl";
-            this.Size = new System.Drawing.Size(249, 296);
+            this.Size = new System.Drawing.Size(249, 315);
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).EndInit();
             this.ResumeLayout(false);

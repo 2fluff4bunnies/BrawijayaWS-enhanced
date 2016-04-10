@@ -23,17 +23,10 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKViewModel> SearchSPKSales(DateTime? dateFrom, DateTime? dateTo)
         {
-            List<SPK> result = null;
+            List<SPK> result = _spkRepository.GetMany(spk => spk.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE).OrderBy(c => c.CreateDate).ToList();
             if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = _spkRepository.GetMany(spk => spk.CreateDate >= dateFrom 
-                    && spk.CreateDate <= dateTo
-                    && spk.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE
-                    ).OrderBy(c => c.CreateDate).ToList();
-            }
-            else
-            {
-                result = _spkRepository.GetMany(spk => spk.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE).OrderBy(c => c.CreateDate).ToList();
+                result = result.Where(spk => spk.CreateDate.Date >= dateFrom && spk.CreateDate.Date <= dateTo).ToList();
             }
 
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();

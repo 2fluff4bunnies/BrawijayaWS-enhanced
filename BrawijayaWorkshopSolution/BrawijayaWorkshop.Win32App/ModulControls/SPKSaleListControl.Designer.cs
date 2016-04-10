@@ -33,11 +33,6 @@
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.colTotalPricePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colVehicleNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCreatedDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gvSPKSales = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gcSPKSales = new DevExpress.XtraGrid.GridControl();
             this.btnNewSale = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
@@ -45,22 +40,28 @@
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.gcSPKSales = new DevExpress.XtraGrid.GridControl();
+            this.gvSPKSales = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).BeginInit();
             this.SuspendLayout();
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(129, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
@@ -75,67 +76,6 @@
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
-            // 
-            // colTotalPricePurchasing
-            // 
-            this.colTotalPricePurchasing.Caption = "Total Harga";
-            this.colTotalPricePurchasing.DisplayFormat.FormatString = "#,#";
-            this.colTotalPricePurchasing.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colTotalPricePurchasing.FieldName = "Subtotal";
-            this.colTotalPricePurchasing.Name = "colTotalPricePurchasing";
-            this.colTotalPricePurchasing.Visible = true;
-            this.colTotalPricePurchasing.VisibleIndex = 2;
-            // 
-            // colVehicleNumber
-            // 
-            this.colVehicleNumber.Caption = "Supplier";
-            this.colVehicleNumber.FieldName = "Vehilce.ActiveLicenseNumber";
-            this.colVehicleNumber.Name = "colVehicleNumber";
-            this.colVehicleNumber.Visible = true;
-            this.colVehicleNumber.VisibleIndex = 1;
-            // 
-            // colCreatedDate
-            // 
-            this.colCreatedDate.Caption = "Tanggal";
-            this.colCreatedDate.FieldName = "CreatedDate";
-            this.colCreatedDate.Name = "colCreatedDate";
-            this.colCreatedDate.Visible = true;
-            this.colCreatedDate.VisibleIndex = 0;
-            // 
-            // gvSPKSales
-            // 
-            this.gvSPKSales.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colCreatedDate,
-            this.colVehicleNumber,
-            this.colTotalPricePurchasing});
-            this.gvSPKSales.GridControl = this.gcSPKSales;
-            this.gvSPKSales.Name = "gvSPKSales";
-            this.gvSPKSales.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvSPKSales.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvSPKSales.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvSPKSales.OptionsBehavior.Editable = false;
-            this.gvSPKSales.OptionsBehavior.ReadOnly = true;
-            this.gvSPKSales.OptionsCustomization.AllowColumnMoving = false;
-            this.gvSPKSales.OptionsCustomization.AllowFilter = false;
-            this.gvSPKSales.OptionsCustomization.AllowGroup = false;
-            this.gvSPKSales.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gvSPKSales.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvSPKSales.OptionsView.ShowGroupPanel = false;
-            this.gvSPKSales.OptionsView.ShowViewCaption = true;
-            this.gvSPKSales.ViewCaption = "Daftar Pembelian";
-            // 
-            // gcSPKSales
-            // 
-            this.gcSPKSales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSPKSales.Location = new System.Drawing.Point(3, 102);
-            this.gcSPKSales.MainView = this.gvSPKSales;
-            this.gcSPKSales.Name = "gcSPKSales";
-            this.gcSPKSales.Size = new System.Drawing.Size(632, 210);
-            this.gcSPKSales.TabIndex = 7;
-            this.gcSPKSales.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvSPKSales});
             // 
             // btnNewSale
             // 
@@ -220,6 +160,74 @@
             this.gcFilter.TabIndex = 5;
             this.gcFilter.Text = "Filter";
             // 
+            // gcSPKSales
+            // 
+            this.gcSPKSales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSPKSales.Location = new System.Drawing.Point(3, 102);
+            this.gcSPKSales.MainView = this.gvSPKSales;
+            this.gcSPKSales.Name = "gcSPKSales";
+            this.gcSPKSales.Size = new System.Drawing.Size(632, 210);
+            this.gcSPKSales.TabIndex = 7;
+            this.gcSPKSales.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvSPKSales});
+            // 
+            // gvSPKSales
+            // 
+            this.gvSPKSales.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colCode,
+            this.colLicenseNumber,
+            this.colTotalPrice,
+            this.colCreateDate});
+            this.gvSPKSales.GridControl = this.gcSPKSales;
+            this.gvSPKSales.Name = "gvSPKSales";
+            this.gvSPKSales.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSPKSales.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSPKSales.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvSPKSales.OptionsBehavior.Editable = false;
+            this.gvSPKSales.OptionsBehavior.ReadOnly = true;
+            this.gvSPKSales.OptionsCustomization.AllowColumnMoving = false;
+            this.gvSPKSales.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvSPKSales.OptionsMenu.EnableFooterMenu = false;
+            this.gvSPKSales.OptionsView.ShowDetailButtons = false;
+            this.gvSPKSales.OptionsView.ShowFooter = true;
+            this.gvSPKSales.OptionsView.ShowGroupPanel = false;
+            this.gvSPKSales.OptionsView.ShowViewCaption = true;
+            this.gvSPKSales.ViewCaption = "Daftar SPK";
+            // 
+            // colCode
+            // 
+            this.colCode.Caption = "Kode";
+            this.colCode.FieldName = "Code";
+            this.colCode.Name = "colCode";
+            this.colCode.Visible = true;
+            this.colCode.VisibleIndex = 0;
+            // 
+            // colLicenseNumber
+            // 
+            this.colLicenseNumber.Caption = "Nopol";
+            this.colLicenseNumber.FieldName = "Vehicle.ActiveLicenseNumber";
+            this.colLicenseNumber.Name = "colLicenseNumber";
+            this.colLicenseNumber.Visible = true;
+            this.colLicenseNumber.VisibleIndex = 1;
+            // 
+            // colTotalPrice
+            // 
+            this.colTotalPrice.Caption = "Total Harga Sparepart";
+            this.colTotalPrice.FieldName = "TotalSparepartPrice";
+            this.colTotalPrice.Name = "colTotalPrice";
+            this.colTotalPrice.Visible = true;
+            this.colTotalPrice.VisibleIndex = 2;
+            // 
+            // colCreateDate
+            // 
+            this.colCreateDate.Caption = "Tanggal Pembuatan";
+            this.colCreateDate.FieldName = "CreateDate";
+            this.colCreateDate.Name = "colCreateDate";
+            this.colCreateDate.Visible = true;
+            this.colCreateDate.VisibleIndex = 3;
+            // 
             // SPKSaleListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,8 +238,6 @@
             this.Name = "SPKSaleListControl";
             this.Size = new System.Drawing.Size(638, 315);
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -239,6 +245,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -248,11 +256,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.ComponentModel.BackgroundWorker bgwMain;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotalPricePurchasing;
-        private DevExpress.XtraGrid.Columns.GridColumn colVehicleNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colCreatedDate;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvSPKSales;
-        private DevExpress.XtraGrid.GridControl gcSPKSales;
         private DevExpress.XtraEditors.SimpleButton btnNewSale;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
@@ -260,6 +263,12 @@
         private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
         private DevExpress.XtraEditors.LabelControl lblFilterDate;
         private DevExpress.XtraEditors.GroupControl gcFilter;
+        private DevExpress.XtraGrid.GridControl gcSPKSales;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSPKSales;
+        private DevExpress.XtraGrid.Columns.GridColumn colCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colLicenseNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colCreateDate;
 
     }
 }

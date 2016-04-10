@@ -75,7 +75,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
             coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
-            coll.Add(new LookUpColumnInfo("SparepartDetail", 0, "Nama"));
             lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
             lookupWheelDetailGv.AutoSearchColumnIndex = 1;
@@ -690,7 +689,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.IsSPKSales)
             {
                 this.CategoryId = _presenter.SPKSalesCategoryReferenceId();
-                this.lookUpCategory.Enabled = false;
+                lookUpCategory.Enabled = false;
             }
         }
 
@@ -743,6 +742,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     lblValLastUsageDate.Text = this.LastUsageRecord.CreateDate.ToShortDateString();
                     lblValLastUsageQty.Text = this.LastUsageRecord.TotalQuantity.ToString();
+                }
+                else
+                {
+                    lblValLastUsageDate.Text = "--";
+                    lblValLastUsageQty.Text = "--";
                 }
             }
         }
@@ -840,7 +844,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
             GridView View = sender as GridView;
-            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId == 0 || this.SelectedVehicleWheel.Price > 0))
+            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId == 0 || this.SelectedVehicleWheel.Price > 0 || this.IsSPKSales))
             {
                 e.Cancel = true;
             }
@@ -856,6 +860,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
 
             if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber")
+            {
+                e.Cancel = true;
+            }
+
+            if (View.FocusedColumn.FieldName == "ReplaceWithWheelDetailId" && this.IsSPKSales)
             {
                 e.Cancel = true;
             }

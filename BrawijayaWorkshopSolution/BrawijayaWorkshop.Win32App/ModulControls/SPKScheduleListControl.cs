@@ -60,11 +60,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<SPKViewModel> SPKList
+        public List<FilterSPKVechile> SPKVehicleList
         {
             get
             {
-                return lookUpSPKVehicle.Properties.DataSource as List<SPKViewModel>;
+                return lookUpSPKVehicle.Properties.DataSource as List<FilterSPKVechile>;
             }
             set
             {

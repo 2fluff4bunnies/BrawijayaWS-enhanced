@@ -106,10 +106,11 @@
             this.lookUpSPKVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSPKVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Vehicle.ActiveLicenseNumber", "ColLicenseNumber")});
-            this.lookUpSPKVehicle.Properties.DisplayMember = "Vehicle.ActiveSerialNumber";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "ColLicenseNumber"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SPKCode", "colSPKCode")});
+            this.lookUpSPKVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
             this.lookUpSPKVehicle.Properties.HideSelection = false;
-            this.lookUpSPKVehicle.Properties.NullText = "-- Pilih Kendaraan --";
+            this.lookUpSPKVehicle.Properties.NullText = "-- Pilih SPK --";
             this.lookUpSPKVehicle.Properties.ValueMember = "Id";
             this.lookUpSPKVehicle.Size = new System.Drawing.Size(141, 20);
             this.lookUpSPKVehicle.TabIndex = 6;
@@ -118,9 +119,9 @@
             // 
             this.lblSPKVehicle.Location = new System.Drawing.Point(11, 58);
             this.lblSPKVehicle.Name = "lblSPKVehicle";
-            this.lblSPKVehicle.Size = new System.Drawing.Size(82, 13);
+            this.lblSPKVehicle.Size = new System.Drawing.Size(52, 13);
             this.lblSPKVehicle.TabIndex = 5;
-            this.lblSPKVehicle.Text = "Nopol Kendaraan";
+            this.lblSPKVehicle.Text = "Nomor SPK";
             // 
             // lookUpMechanic
             // 
