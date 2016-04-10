@@ -51,9 +51,10 @@ namespace BrawijayaWorkshop.Model
             guestBook.ModifyUserId = userId;
             guestBook.Status = (int)DbConstant.DefaultDataStatus.Active;
 
+
             GuestBook entity = new GuestBook();
             Map(guestBook, entity);
-
+            _vehicleRepository.AttachNavigation<Vehicle>(entity.Vehicle);
             _guestBookRepository.Add(entity);
 
             _unitOfWork.SaveChanges();
@@ -68,7 +69,7 @@ namespace BrawijayaWorkshop.Model
 
             GuestBook entity = new GuestBook();
             Map(guestBook, entity);
-
+            _vehicleRepository.AttachNavigation<Vehicle>(entity.Vehicle);
             _guestBookRepository.Update(entity);
 
             _unitOfWork.SaveChanges();

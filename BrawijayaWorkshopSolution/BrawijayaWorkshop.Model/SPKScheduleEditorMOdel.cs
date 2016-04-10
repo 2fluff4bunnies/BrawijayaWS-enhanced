@@ -70,7 +70,10 @@ namespace BrawijayaWorkshop.Model
             SPKSchedule.ModifyUserId = userId;
             SPKSchedule.Status = (int)DbConstant.DefaultDataStatus.Active;
             SPKSchedule entity = new SPKSchedule();
+
             Map(SPKSchedule, entity);
+            _SPKScheduleRepository.AttachNavigation<SPK>(entity.SPK);
+            _SPKScheduleRepository.AttachNavigation<Mechanic>(entity.Mechanic);
             _SPKScheduleRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -81,7 +84,10 @@ namespace BrawijayaWorkshop.Model
             SPKSchedule.ModifyDate = serverTime;
             SPKSchedule.ModifyUserId = userId;
             SPKSchedule entity = _SPKScheduleRepository.GetById(SPKSchedule.Id);
+
             Map(SPKSchedule, entity);
+            _SPKScheduleRepository.AttachNavigation<SPK>(entity.SPK);
+            _SPKScheduleRepository.AttachNavigation<Mechanic>(entity.Mechanic);
             _SPKScheduleRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
