@@ -49,6 +49,10 @@ namespace BrawijayaWorkshop.Model
             sparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
             Sparepart entity = new Sparepart();
             Map(sparepart, entity);
+            _sparepartRepository.AttachNavigation(entity.CreateUser);
+            _sparepartRepository.AttachNavigation(entity.ModifyUser);
+            _sparepartRepository.AttachNavigation(entity.CategoryReference);
+            _sparepartRepository.AttachNavigation(entity.UnitReference);
             _sparepartRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -60,6 +64,10 @@ namespace BrawijayaWorkshop.Model
             sparepart.ModifyUserId = userId;
             Sparepart entity = _sparepartRepository.GetById(sparepart.Id);
             Map(sparepart, entity);
+            _sparepartRepository.AttachNavigation(entity.CreateUser);
+            _sparepartRepository.AttachNavigation(entity.ModifyUser);
+            _sparepartRepository.AttachNavigation(entity.CategoryReference);
+            _sparepartRepository.AttachNavigation(entity.UnitReference);
             _sparepartRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

@@ -38,7 +38,7 @@ namespace BrawijayaWorkshop.Model
             List<Reference> listIncomeJournal = _referenceRepository.GetMany(r => r.ParentId == catIncomeJournal.Id).ToList();
 
             BalanceSheetViewModel headerService = new BalanceSheetViewModel();
-            headerService.GroupName = "Penjualan";
+            headerService.GroupName = "1. Penjualan";
 
             foreach (var item in listServiceJournal)
             {
@@ -71,7 +71,7 @@ namespace BrawijayaWorkshop.Model
             }
 
             BalanceSheetViewModel headerCost = new BalanceSheetViewModel();
-            headerCost.GroupName = "Biaya Umum & Administrasi";
+            headerCost.GroupName = "2. Biaya Umum & Administrasi";
 
             foreach (var item in listCostJournal)
             {
@@ -104,7 +104,7 @@ namespace BrawijayaWorkshop.Model
             }
 
             BalanceSheetViewModel headerIncome = new BalanceSheetViewModel();
-            headerIncome.GroupName = "Pendapatan";
+            headerIncome.GroupName = "3. Pendapatan";
 
             foreach (var item in listIncomeJournal)
             {

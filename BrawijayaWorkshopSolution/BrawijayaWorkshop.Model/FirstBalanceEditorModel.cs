@@ -60,6 +60,8 @@ namespace BrawijayaWorkshop.Model
             entity.Status = (int)DbConstant.DefaultDataStatus.Active;
             entity.CreateUserId = entity.ModifyUserId = userId;
             entity.CreateDate = entity.ModifyDate = DateTime.Now;
+            _balanceJournalRepository.AttachNavigation<User>(entity.CreateUser);
+            _balanceJournalRepository.AttachNavigation<User>(entity.ModifyUser);
             entity = _balanceJournalRepository.Add(entity);
             _unitOfWork.SaveChanges();
 
@@ -68,6 +70,8 @@ namespace BrawijayaWorkshop.Model
                 BalanceJournalDetail newDetailEntity = new BalanceJournalDetail();
                 Map(balanceDetail, newDetailEntity);
                 newDetailEntity.ParentId = entity.Id;
+                _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(newDetailEntity.Parent);
+                _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(newDetailEntity.Journal);
                 _balanceJournalDetailRepository.Add(newDetailEntity);
             }
             _unitOfWork.SaveChanges();
@@ -80,6 +84,8 @@ namespace BrawijayaWorkshop.Model
             Map(parent, entity);
             entity.ModifyUserId = userId;
             entity.ModifyDate = DateTime.Now;
+            _balanceJournalRepository.AttachNavigation<User>(entity.CreateUser);
+            _balanceJournalRepository.AttachNavigation<User>(entity.ModifyUser);
             _balanceJournalRepository.Update(entity);
             _unitOfWork.SaveChanges();
 
@@ -89,6 +95,8 @@ namespace BrawijayaWorkshop.Model
                 {
                     BalanceJournalDetail detailEntity = _balanceJournalDetailRepository.GetById(balanceDetail.Id);
                     Map(balanceDetail, detailEntity);
+                    _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(detailEntity.Parent);
+                    _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(detailEntity.Journal);
                     _balanceJournalDetailRepository.Update(detailEntity);
                 }
                 else
@@ -96,6 +104,8 @@ namespace BrawijayaWorkshop.Model
                     BalanceJournalDetail detailEntity = new BalanceJournalDetail();
                     Map(balanceDetail, detailEntity);
                     detailEntity.ParentId = entity.Id;
+                    _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(detailEntity.Parent);
+                    _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(detailEntity.Journal);
                     _balanceJournalDetailRepository.Add(detailEntity);
                 }
             }

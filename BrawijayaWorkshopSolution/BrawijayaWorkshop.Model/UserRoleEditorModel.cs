@@ -47,6 +47,8 @@ namespace BrawijayaWorkshop.Model
             {
                 UserRole entity = new UserRole();
                 Map(userRole, entity);
+                _userRoleRepository.AttachNavigation(entity.User);
+                _userRoleRepository.AttachNavigation(entity.Role);
                 _userRoleRepository.Add(entity);
                 _unitOfWork.SaveChanges();
             }

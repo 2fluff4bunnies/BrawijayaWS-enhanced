@@ -40,6 +40,10 @@ namespace BrawijayaWorkshop.Model
             entity.ModifyDate = DateTime.Now;
             entity.ModifyUserId = userId;
             entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            _transactionRepository.AttachNavigation<User>(entity.CreateUser);
+            _transactionRepository.AttachNavigation<User>(entity.ModifyUser);
+            _transactionRepository.AttachNavigation<Reference>(entity.PaymentMethod);
+            _transactionRepository.AttachNavigation<Reference>(entity.ReferenceTable);
             _transactionRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

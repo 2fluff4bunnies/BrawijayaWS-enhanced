@@ -25,6 +25,7 @@ namespace BrawijayaWorkshop.Model
         {
             Supplier entity = new Supplier();
             Map(supplier, entity);
+            _supplierRepository.AttachNavigation(entity.City);
             _supplierRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -40,6 +41,7 @@ namespace BrawijayaWorkshop.Model
         {
             Supplier entity = _supplierRepository.GetById(supplier.Id);
             Map(supplier, entity);
+            _supplierRepository.AttachNavigation(entity.City);
             _supplierRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

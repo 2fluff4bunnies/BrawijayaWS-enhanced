@@ -30,6 +30,7 @@ namespace BrawijayaWorkshop.Model
         {
             JournalMaster entity = new JournalMaster();
             Map(journal, entity);
+            _journalMasterRepository.AttachNavigation<JournalMaster>(entity.Parent);
             _journalMasterRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -38,6 +39,7 @@ namespace BrawijayaWorkshop.Model
         {
             JournalMaster entity = _journalMasterRepository.GetById(journal.Id);
             Map(journal, entity);
+            _journalMasterRepository.AttachNavigation<JournalMaster>(entity.Parent);
             _journalMasterRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
