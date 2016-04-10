@@ -5,6 +5,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
     public class PurchasingViewModel : BaseModifierWithStatusViewModel
     {
         public int Id { get; set; }
+        public string Code { get; set; }
         public DateTime Date { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal TotalHasPaid { get; set; }
