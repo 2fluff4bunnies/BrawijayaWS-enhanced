@@ -106,11 +106,12 @@
             this.lookUpSPKVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSPKVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
-            this.lookUpSPKVehicle.Properties.DisplayMember = "Description";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "ColLicenseNumber"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SPKCode", "colSPKCode")});
+            this.lookUpSPKVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
             this.lookUpSPKVehicle.Properties.HideSelection = false;
-            this.lookUpSPKVehicle.Properties.NullText = "-- Pilih Kendaraan --";
-            this.lookUpSPKVehicle.Properties.ValueMember = "Status";
+            this.lookUpSPKVehicle.Properties.NullText = "-- Pilih SPK --";
+            this.lookUpSPKVehicle.Properties.ValueMember = "Id";
             this.lookUpSPKVehicle.Size = new System.Drawing.Size(141, 20);
             this.lookUpSPKVehicle.TabIndex = 6;
             // 
@@ -118,9 +119,9 @@
             // 
             this.lblSPKVehicle.Location = new System.Drawing.Point(11, 58);
             this.lblSPKVehicle.Name = "lblSPKVehicle";
-            this.lblSPKVehicle.Size = new System.Drawing.Size(82, 13);
+            this.lblSPKVehicle.Size = new System.Drawing.Size(52, 13);
             this.lblSPKVehicle.TabIndex = 5;
-            this.lblSPKVehicle.Text = "Nopol Kendaraan";
+            this.lblSPKVehicle.Text = "Nomor SPK";
             // 
             // lookUpMechanic
             // 
@@ -159,13 +160,13 @@
             this.lblMechanic.TabIndex = 0;
             this.lblMechanic.Text = "Mekanik";
             // 
-            // btnNewSPK
+            // btnNewSPKSchedule
             // 
-            this.btnNewSPKSchedule.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPK.Image")));
+            this.btnNewSPKSchedule.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPKSchedule.Image")));
             this.btnNewSPKSchedule.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewSPKSchedule.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewSPKSchedule.Location = new System.Drawing.Point(3, 97);
-            this.btnNewSPKSchedule.Name = "btnNewSPK";
+            this.btnNewSPKSchedule.Name = "btnNewSPKSchedule";
             this.btnNewSPKSchedule.Size = new System.Drawing.Size(176, 23);
             this.btnNewSPKSchedule.TabIndex = 18;
             this.btnNewSPKSchedule.Text = "Tambah Jadwal Harian SPK";
@@ -226,7 +227,7 @@
             // ColCreatedDate
             // 
             this.ColCreatedDate.Caption = "Tanggal";
-            this.ColCreatedDate.FieldName = "CreatedDate";
+            this.ColCreatedDate.FieldName = "CreateDate.Date";
             this.ColCreatedDate.Name = "ColCreatedDate";
             this.ColCreatedDate.Visible = true;
             this.ColCreatedDate.VisibleIndex = 2;

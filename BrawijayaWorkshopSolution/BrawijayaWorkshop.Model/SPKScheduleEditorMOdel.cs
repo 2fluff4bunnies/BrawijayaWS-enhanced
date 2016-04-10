@@ -42,7 +42,9 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKViewModel> LoadSPK()
         {
-            List<SPK> result = _SPKRepository.GetMany(s => s.Status == (int)DbConstant.DefaultDataStatus.Active && !s.isContractWork).ToList();
+            List<SPK> result = _SPKRepository.GetMany(s => s.Status == (int)DbConstant.DefaultDataStatus.Active 
+                                                            && s.StatusCompletedId == (int) DbConstant.SPKCompletionStatus.InProgress
+                                                            &&!s.isContractWork).ToList();
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
 
             return Map(result, mappedResult);

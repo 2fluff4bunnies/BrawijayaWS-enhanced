@@ -10,7 +10,7 @@ namespace BrawijayaWorkshop.View
         SPKScheduleViewModel SelectedSPKSchedule { get; set; }
 
         int SPKId{ get; set; }
-        List<SPKViewModel> SPKList { get; set; }
+        List<FilterSPKVechile> SPKVehicleList { get; set; }
 
         int MechanicId { get; set; }
         List<MechanicViewModel> MechanicList { get; set; }
@@ -18,5 +18,12 @@ namespace BrawijayaWorkshop.View
         DateTime CreatedDateFilter { get; set; }
 
         List<SPKScheduleViewModel> SPKScheduleListData { get; set; }
+    }
+
+    public class FilterSPKVechile
+    {
+        public int Id { get; set; }
+        public string SPKCode { get; set; }
+        public string ActiveLicenseNumber { get; set; }
     }
 }

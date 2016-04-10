@@ -17,6 +17,7 @@ using System.Linq;
 using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraReports.UI;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using DevExpress.XtraEditors;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -42,7 +43,27 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldValidator.SetIconAlignment(lookUpMechanic, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldValidator.SetIconAlignment(lookUpSPK, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
+            lookUpSPK.EditValueChanged += lookUpSPK_EditValueChanged;
+
             this.Load += SPKScheduleEditorForm_Load;
+        }
+
+        void lookUpSPK_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookup = sender as LookUpEdit;
+            SPKViewModel selectedSPK = lookUpSPK.GetSelectedDataRow() as SPKViewModel;
+            if(selectedSPK != null)
+            {
+                lblSPKCategoryValue.Text = selectedSPK.CategoryReference.Name;
+                lblSPKDescriptionValue.Text = selectedSPK.Description;
+                lblSPKVehicleCustomerValue.Text = selectedSPK.Vehicle.Customer.CompanyName;
+            }
+            else
+            {
+                lblSPKCategoryValue.Text = "--";
+                lblSPKDescriptionValue.Text = "--";
+                lblSPKVehicleCustomerValue.Text = "--";
+            }  
         }
 
         void SPKScheduleEditorForm_Load(object sender, EventArgs e)
@@ -257,7 +278,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 memoDescription.Text = value;
             }
-        } 
+        }
         #endregion
 
         protected override void ExecuteSave()

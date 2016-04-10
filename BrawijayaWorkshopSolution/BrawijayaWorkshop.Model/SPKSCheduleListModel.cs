@@ -47,7 +47,8 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKScheduleViewModel> SearchSPKSchedule(int mechanicId, int SPKId, DateTime createDate)
         {
-            List<SPKSchedule> result = _SPKScheduleRepository.GetMany(sched => sched.CreateDate == createDate).ToList();
+            List<SPKSchedule> result = _SPKScheduleRepository.GetAll().ToList();
+            result = result.Where(sched => sched.CreateDate.Date == createDate.Date).ToList();
 
             if (mechanicId > 0)
             {

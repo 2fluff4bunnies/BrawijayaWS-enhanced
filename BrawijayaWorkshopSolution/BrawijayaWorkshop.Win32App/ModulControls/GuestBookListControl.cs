@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return DbConstant.MODUL_VEHICLE;
+                return DbConstant.MODUL_GUESTBOOK;
             }
         }
 

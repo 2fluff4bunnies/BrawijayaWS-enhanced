@@ -23,7 +23,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new InvoiceEditorPresenter(this, model);
 
             // set validation alignment
-            valPaymentMethod.SetIconAlignment(cbPaymentType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);;
+            valPaymentMethod.SetIconAlignment(cbPaymentType, System.Windows.Forms.ErrorIconAlignment.MiddleRight); ;
 
             this.Load += InvoiceEditorForm_Load;
         }
@@ -185,7 +185,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalService.Text.AsDecimal();
+                if (!string.IsNullOrEmpty(txtTotalService.Text))
+                {
+                    return txtTotalService.Text.AsDecimal();
+                }
+                else
+                {
+                    return 0;
+                }
             }
             set
             {
@@ -196,7 +203,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalServicePlusFee.Text.AsDecimal();
+                if (!string.IsNullOrEmpty(txtTotalServicePlusFee.Text))
+                {
+                    return txtTotalServicePlusFee.Text.AsDecimal();
+                }
+                else
+                {
+                    return 0;
+                }
             }
             set
             {
@@ -230,7 +244,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void txtMasterFee_EditValueChanged(object sender, EventArgs e)
         {
-            if(chkApplyToAll.Checked)
+            if (chkApplyToAll.Checked)
             {
                 foreach (var itemInvoice in ListInvoiceDetail)
                 {
@@ -245,7 +259,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void chkApplyToAll_EditValueChanged(object sender, EventArgs e)
         {
-            if(chkApplyToAll.Checked)
+            if (chkApplyToAll.Checked)
             {
                 List<InvoiceDetailViewModel> list = ListInvoiceDetail;
                 foreach (var itemInvoice in list)
@@ -273,7 +287,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
             }
-            ListInvoiceDetail = list; 
+            ListInvoiceDetail = list;
             TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
             TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
             TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;

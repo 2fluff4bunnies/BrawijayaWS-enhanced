@@ -75,7 +75,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
             coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
-            coll.Add(new LookUpColumnInfo("SparepartDetail", 0, "Nama"));
             lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
             lookupWheelDetailGv.AutoSearchColumnIndex = 1;
@@ -84,7 +83,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
-
         }
 
         #region Field Editor
@@ -389,7 +387,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtContractWorkFee.Text = value.ToString();
+                txtContractWorkFee.Text = value.ToString("n0");
             }
         }
         #endregion
@@ -405,46 +403,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         #region Methods
         protected override void ExecuteSave()
         {
-            if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0)// && SPKMechanicList.Count > 0)
+            if (!bgwSave.IsBusy)
             {
-                try
+                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0)// && SPKMechanicList.Count > 0)
                 {
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();
-                    _presenter.SaveChanges();
-                    if (this.IsNeedApproval)
-                    {
-                        _presenter.SendApproval();
-                    }
-                    else
-                    {
-                        SPKPrintItem report = new SPKPrintItem();
-                        List<SPKViewModel> _dataSource = new List<SPKViewModel>();
-                        _dataSource.Add(SelectedSPK);
-                        report.DataSource = _dataSource;
-                        report.FillDataSource();
-                        _presenter.Print();
-
-                        using (ReportPrintTool printTool = new ReportPrintTool(report))
-                        {
-                            // Invoke the Print dialog.
-                            printTool.PrintDialog();
-                        }
-                    }
-
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occored while trying to save SPK", ex);
-                    this.ShowError("Proses simpan SPK gagal!");
-                }
-            }
-            else
-            {
-                if (SPKSparepartList.Count == 0)// && SPKMechanicList.Count == 0)
-                {
-                    this.ShowError("Daftar sparepart dan mekanik kosong! masing-masing harus terisi, minimal 1");
+                    bgwSave.RunWorkerAsync();
                 }
                 else
                 {
@@ -691,7 +656,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.IsSPKSales)
             {
                 this.CategoryId = _presenter.SPKSalesCategoryReferenceId();
-                this.lookUpCategory.Enabled = false;
+                lookUpCategory.Enabled = false;
             }
         }
 
@@ -744,6 +709,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     lblValLastUsageDate.Text = this.LastUsageRecord.CreateDate.ToShortDateString();
                     lblValLastUsageQty.Text = this.LastUsageRecord.TotalQuantity.ToString();
+                }
+                else
+                {
+                    lblValLastUsageDate.Text = "--";
+                    lblValLastUsageQty.Text = "--";
                 }
             }
         }
@@ -841,7 +811,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
             GridView View = sender as GridView;
-            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId == 0 || this.SelectedVehicleWheel.Price > 0))
+            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId == 0 || this.SelectedVehicleWheel.Price > 0 || this.IsSPKSales))
             {
                 e.Cancel = true;
             }
@@ -857,6 +827,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
 
             if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber")
+            {
+                e.Cancel = true;
+            }
+
+            if (View.FocusedColumn.FieldName == "ReplaceWithWheelDetailId" && this.IsSPKSales)
             {
                 e.Cancel = true;
             }
@@ -900,5 +875,52 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #endregion
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+            try
+            {
+                _presenter.SaveChanges();
+                if (this.IsNeedApproval)
+                {
+                    _presenter.SendApproval();
+                }
+                else
+                {
+                    SPKPrintItem report = new SPKPrintItem();
+                    List<SPKViewModel> _dataSource = new List<SPKViewModel>();
+                    _dataSource.Add(SelectedSPK);
+                    report.DataSource = _dataSource;
+                    report.FillDataSource();
+                    _presenter.Print();
+
+                    using (ReportPrintTool printTool = new ReportPrintTool(report))
+                    {
+                        // Invoke the Print dialog.
+                        printTool.PrintDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save spk with vehicleID: '" + this.VehicleId + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses simpan data spk gagal!");
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data spk gagal", true);
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data spk selesai", true);
+                this.Close();
+            }
+        }
     }
 }

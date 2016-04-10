@@ -163,20 +163,20 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_SPK,
                 ModulDescription = "SPK Modul"
             });
-            ApplicationModul spkDetailMechanicMod = context.ApplicationModuls.Add(new ApplicationModul
+            ApplicationModul spkSchedule = context.ApplicationModuls.Add(new ApplicationModul
             {
-                ModulName = DbConstant.MODUL_SPK_DETAIL_MECHANIC,
-                ModulDescription = "SPK Detail Mechanic Modul"
+                ModulName = DbConstant.MODUL_SPK_SCHEDULE,
+                ModulDescription = "SPK Schedule Modul"
             });
-            ApplicationModul spkDetailSparepartMod = context.ApplicationModuls.Add(new ApplicationModul
+            ApplicationModul spkSales = context.ApplicationModuls.Add(new ApplicationModul
             {
-                ModulName = DbConstant.MODUL_SPK_DETAIL_SPAREPART,
-                ModulDescription = "SPK Detail Sparepart Modul"
+                ModulName = DbConstant.MODUL_SPK_SALES,
+                ModulDescription = "SPK Sales Modul"
             });
-            ApplicationModul spkDetailSparepartDetailMod = context.ApplicationModuls.Add(new ApplicationModul
+            ApplicationModul guestBook = context.ApplicationModuls.Add(new ApplicationModul
             {
-                ModulName = DbConstant.MODUL_SPK_DETAIL_SPAREPART_DETAIL,
-                ModulDescription = "SPK Detail Sparepart Detail Modul"
+                ModulName = DbConstant.MODUL_GUESTBOOK,
+                ModulDescription = "Guestbook Modul"
             });
             ApplicationModul manageAppUserMod = context.ApplicationModuls.Add(new ApplicationModul
             {
@@ -317,19 +317,19 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = spkDetailMechanicMod.Id,
+                ApplicationModulId = spkSchedule.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = spkDetailSparepartMod.Id,
+                ApplicationModulId = spkSales.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = spkDetailSparepartDetailMod.Id,
+                ApplicationModulId = guestBook.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });

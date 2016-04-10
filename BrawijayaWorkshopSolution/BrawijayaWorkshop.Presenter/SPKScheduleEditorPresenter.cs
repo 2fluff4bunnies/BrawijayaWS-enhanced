@@ -36,6 +36,8 @@ namespace BrawijayaWorkshop.Presenter
 
             View.SelectedSPKSchedule.MechanicId = View.MechanicId;
             View.SelectedSPKSchedule.SPKId = View.MechanicId;
+            View.SelectedSPKSchedule.SPKId = View.SPKId;
+            View.SelectedSPKSchedule.Description = View.Description;
 
             if (View.SelectedSPKSchedule.Id > 0)
             {
