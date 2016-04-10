@@ -27,6 +27,7 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
+        private ISPKScheduleRepository _SPKScheduleRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -40,6 +41,7 @@ namespace BrawijayaWorkshop.Model
             IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
             IWheelExchangeHistoryRepository WheelExchangeHistoryRepository,
+            ISPKScheduleRepository spkScheduleRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -57,6 +59,7 @@ namespace BrawijayaWorkshop.Model
             _vehicleWheelRepository = vehicleWheelRepository;
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
+            _SPKScheduleRepository = spkScheduleRepository;
             _wheelExchangeHistoryRepository = WheelExchangeHistoryRepository;
             _unitOfWork = unitOfWork;
         }
@@ -492,12 +495,11 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
-            spk.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
+            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
+
             _SPKRepository.Update(entity);
 
             foreach (var item in spkSparepartList)
@@ -525,6 +527,13 @@ namespace BrawijayaWorkshop.Model
             foreach (var item in wehList)
             {
                 _wheelExchangeHistoryRepository.Delete(item);
+            }
+
+            List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
+
+            foreach (SPKSchedule schedule in scheduleList)
+            {
+                _SPKScheduleRepository.Delete(schedule);
             }
 
             _unitOfWork.SaveChanges();

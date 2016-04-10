@@ -227,7 +227,7 @@
             // ColCreatedDate
             // 
             this.ColCreatedDate.Caption = "Tanggal";
-            this.ColCreatedDate.FieldName = "CreatedDate";
+            this.ColCreatedDate.FieldName = "CreateDate.Date";
             this.ColCreatedDate.Name = "ColCreatedDate";
             this.ColCreatedDate.Visible = true;
             this.ColCreatedDate.VisibleIndex = 2;

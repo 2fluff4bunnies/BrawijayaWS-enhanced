@@ -403,46 +403,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         #region Methods
         protected override void ExecuteSave()
         {
-            if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0)// && SPKMechanicList.Count > 0)
+            if (!bgwSave.IsBusy)
             {
-                try
+                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0)// && SPKMechanicList.Count > 0)
                 {
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();
-                    _presenter.SaveChanges();
-                    if (this.IsNeedApproval)
-                    {
-                        _presenter.SendApproval();
-                    }
-                    else
-                    {
-                        SPKPrintItem report = new SPKPrintItem();
-                        List<SPKViewModel> _dataSource = new List<SPKViewModel>();
-                        _dataSource.Add(SelectedSPK);
-                        report.DataSource = _dataSource;
-                        report.FillDataSource();
-                        _presenter.Print();
-
-                        using (ReportPrintTool printTool = new ReportPrintTool(report))
-                        {
-                            // Invoke the Print dialog.
-                            printTool.PrintDialog();
-                        }
-                    }
-
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occored while trying to save SPK", ex);
-                    this.ShowError("Proses simpan SPK gagal!");
-                }
-            }
-            else
-            {
-                if (SPKSparepartList.Count == 0)// && SPKMechanicList.Count == 0)
-                {
-                    this.ShowError("Daftar sparepart dan mekanik kosong! masing-masing harus terisi, minimal 1");
+                    bgwSave.RunWorkerAsync();
                 }
                 else
                 {
@@ -908,5 +875,52 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #endregion
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+            try
+            {
+                _presenter.SaveChanges();
+                if (this.IsNeedApproval)
+                {
+                    _presenter.SendApproval();
+                }
+                else
+                {
+                    SPKPrintItem report = new SPKPrintItem();
+                    List<SPKViewModel> _dataSource = new List<SPKViewModel>();
+                    _dataSource.Add(SelectedSPK);
+                    report.DataSource = _dataSource;
+                    report.FillDataSource();
+                    _presenter.Print();
+
+                    using (ReportPrintTool printTool = new ReportPrintTool(report))
+                    {
+                        // Invoke the Print dialog.
+                        printTool.PrintDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save spk with vehicleID: '" + this.VehicleId + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses simpan data spk gagal!");
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data spk gagal", true);
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data spk selesai", true);
+                this.Close();
+            }
+        }
     }
 }

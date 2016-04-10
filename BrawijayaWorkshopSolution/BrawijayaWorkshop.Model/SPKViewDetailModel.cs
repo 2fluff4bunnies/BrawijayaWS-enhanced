@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Model
         private IUsedGoodRepository _usedGoodRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private IUnitOfWork _unitOfWork;
-        private ISPKScheduleRepository _SPKScheduleReposistory;
+        private ISPKScheduleRepository _SPKScheduleRepository;
         private IMechanicRepository _mechanicRepository;
         private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
         private ISpecialSparepartRepository _specialSparepartRepository;
@@ -60,7 +60,7 @@ namespace BrawijayaWorkshop.Model
             _invoiceDetailRepository = invoiceDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
             _usedGoodRepository = usedGoodrepository;
-            _SPKScheduleReposistory = SPKScheduleReposistory;
+            _SPKScheduleRepository = SPKScheduleReposistory;
             _mechanicRepository = mechanicRepository;
             _wheelExchangeHistoryRepository = wheelExchangeHistoryRepository;
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
@@ -99,7 +99,7 @@ namespace BrawijayaWorkshop.Model
 
             if (isApproved)
             {
-              
+
                 SPK entity = _SPKRepository.GetById(spk.Id);
                 entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
@@ -233,6 +233,21 @@ namespace BrawijayaWorkshop.Model
                 _sparepartDetailRepository.Update(sparepartDetail);
             }
 
+            List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
+
+            foreach (SPKSchedule schedule in scheduleList)
+            {
+                _SPKScheduleRepository.Delete(schedule);
+            }
+
+
+            List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
+
+            foreach (var item in wehList)
+            {
+                _wheelExchangeHistoryRepository.Delete(item);
+            }
+
             _unitOfWork.SaveChanges();
 
         }
@@ -314,12 +329,12 @@ namespace BrawijayaWorkshop.Model
 
                 for (int i = 0; i < SPKWorkingDays; i++)
                 {
-                    List<Mechanic> involvedMechanic = (from sched in _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.SPKId == spk.Id).ToList()
+                    List<Mechanic> involvedMechanic = (from sched in _SPKScheduleRepository.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.SPKId == spk.Id).ToList()
                                                        select sched.Mechanic).ToList();
 
                     foreach (Mechanic mechanic in involvedMechanic)
                     {
-                        int mechanicJobForToday = _SPKScheduleReposistory.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id && sc.SPKId == spk.Id).Count();
+                        int mechanicJobForToday = _SPKScheduleRepository.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id && sc.SPKId == spk.Id).Count();
 
                         decimal mechanicFeeForToday = mechanic.BaseFee / mechanicJobForToday;
 
