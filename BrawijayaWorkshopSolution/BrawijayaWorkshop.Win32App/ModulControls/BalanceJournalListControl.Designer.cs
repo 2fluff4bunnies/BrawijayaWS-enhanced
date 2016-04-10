@@ -268,7 +268,7 @@
             // 
             this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(143, 75);
+            this.btnPrint.Location = new System.Drawing.Point(140, 75);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 29);
             this.btnPrint.TabIndex = 6;
