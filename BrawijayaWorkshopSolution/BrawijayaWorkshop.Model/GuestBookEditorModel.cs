@@ -69,7 +69,7 @@ namespace BrawijayaWorkshop.Model
 
             GuestBook entity = new GuestBook();
             Map(guestBook, entity);
-            _vehicleRepository.AttachNavigation<Vehicle>(entity.Vehicle);
+            _guestBookRepository.AttachNavigation<Vehicle>(entity.Vehicle);
             _guestBookRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
