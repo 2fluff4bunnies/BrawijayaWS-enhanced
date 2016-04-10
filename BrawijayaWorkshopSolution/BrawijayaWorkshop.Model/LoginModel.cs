@@ -4,6 +4,7 @@ using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace BrawijayaWorkshop.Model
 {

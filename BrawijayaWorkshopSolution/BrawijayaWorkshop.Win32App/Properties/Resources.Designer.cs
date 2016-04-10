@@ -221,6 +221,16 @@ namespace BrawijayaWorkshop.Win32App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap print_16x162 {
+            get {
+                object obj = ResourceManager.GetObject("print_16x162", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
         ///
         ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;

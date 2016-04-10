@@ -33,6 +33,7 @@ namespace BrawijayaWorkshop.Model
         {
             Customer entity = new Customer();
             Map(customer, entity);
+            _customerRepository.AttachNavigation<City>(entity.City);
             _customerRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -41,6 +42,7 @@ namespace BrawijayaWorkshop.Model
         {
             Customer entity = _customerRepository.GetById<int>(customer.Id);
             Map(customer, entity);
+            _customerRepository.AttachNavigation<City>(entity.City);
             _customerRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

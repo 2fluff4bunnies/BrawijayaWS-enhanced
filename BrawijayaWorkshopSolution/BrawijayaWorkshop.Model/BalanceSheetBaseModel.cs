@@ -3,7 +3,6 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
-using BrawijayaWorkshop.Utils;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
@@ -245,6 +244,8 @@ namespace BrawijayaWorkshop.Model
             newBalanceHeader.Status = (int)DbConstant.DefaultDataStatus.Active;
             newBalanceHeader.CreateDate = newBalanceHeader.ModifyDate = DateTime.Now;
             newBalanceHeader.CreateUserId = newBalanceHeader.ModifyUserId = userId;
+            _balanceJournalRepository.AttachNavigation<User>(newBalanceHeader.CreateUser);
+            _balanceJournalRepository.AttachNavigation<User>(newBalanceHeader.ModifyUser);
             newBalanceHeader = _balanceJournalRepository.Add(newBalanceHeader);
             _unitOfWork.SaveChanges();
 
@@ -254,6 +255,8 @@ namespace BrawijayaWorkshop.Model
                 BalanceJournalDetail newBalanceDetail = new BalanceJournalDetail();
                 Map(item, newBalanceDetail);
                 newBalanceDetail.ParentId = newBalanceHeader.Id;
+                _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(newBalanceDetail.Parent);
+                _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(newBalanceDetail.Journal);
                 _balanceJournalDetailRepository.Add(newBalanceDetail);
             }
 
@@ -347,6 +350,8 @@ namespace BrawijayaWorkshop.Model
             {
                 profitDetail.LastCredit = Math.Abs(profitLossAmount.Value);
             }
+            _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(profitDetail.Parent);
+            _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(profitDetail.Journal);
             _balanceJournalDetailRepository.Add(profitDetail);
             _unitOfWork.SaveChanges();
         }
@@ -357,6 +362,8 @@ namespace BrawijayaWorkshop.Model
             entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
             entity.ModifyDate = DateTime.Now;
             entity.ModifyUserId = userId;
+            _balanceJournalRepository.AttachNavigation<User>(entity.CreateUser);
+            _balanceJournalRepository.AttachNavigation<User>(entity.ModifyUser);
             _balanceJournalRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

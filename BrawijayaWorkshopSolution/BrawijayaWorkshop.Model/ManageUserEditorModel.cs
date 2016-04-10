@@ -42,6 +42,8 @@ namespace BrawijayaWorkshop.Model
             UserRole userRoleEntity = new UserRole();
             userRoleEntity.UserId = userEntity.Id;
             userRoleEntity.RoleId = userRole.RoleId;
+            _userRoleRepository.AttachNavigation<User>(userRoleEntity.User);
+            _userRoleRepository.AttachNavigation<Role>(userRoleEntity.Role);
             _userRoleRepository.Add(userRoleEntity);
 
             _unitOfWork.SaveChanges();
@@ -51,6 +53,8 @@ namespace BrawijayaWorkshop.Model
         {
             UserRole entity = _userRoleRepository.GetById(userRole.Id);
             entity.RoleId = userRole.Id;
+            _userRoleRepository.AttachNavigation<User>(entity.User);
+            _userRoleRepository.AttachNavigation<Role>(entity.Role);
             _userRoleRepository.Update(entity);
 
             _unitOfWork.SaveChanges();

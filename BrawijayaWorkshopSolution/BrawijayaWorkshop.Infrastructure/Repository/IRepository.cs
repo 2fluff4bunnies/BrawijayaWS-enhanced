@@ -11,6 +11,8 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
 
+        void AttachNavigation<N>(N navigation) where N : class, new();
+
         T Add(T entity);
         void Update(T entity);
         void Delete(T entity);

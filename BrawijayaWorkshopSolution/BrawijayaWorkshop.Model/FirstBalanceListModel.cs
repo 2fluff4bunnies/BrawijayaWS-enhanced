@@ -47,6 +47,8 @@ namespace BrawijayaWorkshop.Model
             entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
             entity.ModifyUserId = userId;
             entity.ModifyDate = DateTime.Now;
+            _balanceJournalRepository.AttachNavigation<User>(entity.CreateUser);
+            _balanceJournalRepository.AttachNavigation<User>(entity.ModifyUser);
             _balanceJournalRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

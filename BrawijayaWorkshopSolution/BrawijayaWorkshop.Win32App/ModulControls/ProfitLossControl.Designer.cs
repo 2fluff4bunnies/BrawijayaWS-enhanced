@@ -44,6 +44,7 @@
             this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.bgwRecalculate = new System.ComponentModel.BackgroundWorker();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -227,10 +228,22 @@
             this.bgwRecalculate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRecalculate_DoWork);
             this.bgwRecalculate.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwRecalculate_RunWorkerCompleted);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrint.Location = new System.Drawing.Point(140, 75);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 29);
+            this.btnPrint.TabIndex = 7;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // ProfitLossControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.gridActiva);
             this.Controls.Add(this.btnRecalculateBalanceJournal);
             this.Controls.Add(this.gcFilter);
@@ -265,5 +278,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckBox;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.ComponentModel.BackgroundWorker bgwRecalculate;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
     }
 }

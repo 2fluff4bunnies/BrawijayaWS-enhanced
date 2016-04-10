@@ -46,6 +46,7 @@ namespace BrawijayaWorkshop.Model
 
             Reference entity = new Reference();
             Map(children, entity);
+            _referenceRepository.AttachNavigation<Reference>(entity.Parent);
             _referenceRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -56,6 +57,7 @@ namespace BrawijayaWorkshop.Model
 
             Reference entity = _referenceRepository.GetById(children.Id);
             Map(children, entity);
+            _referenceRepository.AttachNavigation<Reference>(entity.Parent);
             _referenceRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

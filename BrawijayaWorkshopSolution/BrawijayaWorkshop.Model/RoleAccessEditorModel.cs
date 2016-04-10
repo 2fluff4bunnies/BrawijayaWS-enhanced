@@ -48,6 +48,8 @@ namespace BrawijayaWorkshop.Model
 
             RoleAccess entity = new RoleAccess();
             Map(roleAccess, entity);
+            _roleAccessRepository.AttachNavigation(entity.ApplicationModul);
+            _roleAccessRepository.AttachNavigation(entity.Role);
             _roleAccessRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -58,6 +60,8 @@ namespace BrawijayaWorkshop.Model
 
             RoleAccess entity = _roleAccessRepository.GetById(roleAccess.Id);
             Map(roleAccess, entity);
+            _roleAccessRepository.AttachNavigation(entity.ApplicationModul);
+            _roleAccessRepository.AttachNavigation(entity.Role);
             _roleAccessRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

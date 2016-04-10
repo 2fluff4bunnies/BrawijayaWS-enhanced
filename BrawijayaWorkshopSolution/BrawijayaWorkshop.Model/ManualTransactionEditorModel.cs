@@ -60,6 +60,10 @@ namespace BrawijayaWorkshop.Model
             parentEntity.ReferenceTableId = refTable.Id;
             parentEntity.PrimaryKeyValue = -1;
             parentEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
+            _transactionRepository.AttachNavigation<User>(parentEntity.CreateUser);
+            _transactionRepository.AttachNavigation<User>(parentEntity.ModifyUser);
+            _transactionRepository.AttachNavigation<Reference>(parentEntity.PaymentMethod);
+            _transactionRepository.AttachNavigation<Reference>(parentEntity.ReferenceTable);
             parentEntity = _transactionRepository.Add(parentEntity);
             _unitOfWork.SaveChanges();
 
@@ -74,6 +78,8 @@ namespace BrawijayaWorkshop.Model
                 TransactionDetail detailEntity = new TransactionDetail();
                 Map(detailTransaction, detailEntity);
                 detailEntity.ParentId = parentEntity.Id;
+                _transactionDetailRepository.AttachNavigation<Transaction>(detailEntity.Parent);
+                _transactionDetailRepository.AttachNavigation<JournalMaster>(detailEntity.Journal);
                 _transactionDetailRepository.Add(detailEntity);
             }
 
@@ -87,6 +93,10 @@ namespace BrawijayaWorkshop.Model
             Map(parentTransaction, parentEntity);
             parentEntity.ModifyUserId = userId;
             parentEntity.ModifyDate = DateTime.Now;
+            _transactionRepository.AttachNavigation<User>(parentEntity.CreateUser);
+            _transactionRepository.AttachNavigation<User>(parentEntity.ModifyUser);
+            _transactionRepository.AttachNavigation<Reference>(parentEntity.PaymentMethod);
+            _transactionRepository.AttachNavigation<Reference>(parentEntity.ReferenceTable);
             _transactionRepository.Update(parentEntity);
             _unitOfWork.SaveChanges();
 
@@ -96,6 +106,8 @@ namespace BrawijayaWorkshop.Model
                 {
                     TransactionDetail detailEntity = _transactionDetailRepository.GetById(detailTransaction.Id);
                     Map(detailTransaction, detailEntity);
+                    _transactionDetailRepository.AttachNavigation<Transaction>(detailEntity.Parent);
+                    _transactionDetailRepository.AttachNavigation<JournalMaster>(detailEntity.Journal);
                     _transactionDetailRepository.Update(detailEntity);
                 }
                 else
@@ -103,6 +115,8 @@ namespace BrawijayaWorkshop.Model
                     TransactionDetail detailEntity = new TransactionDetail();
                     Map(detailTransaction, detailEntity);
                     detailEntity.ParentId = parentEntity.Id;
+                    _transactionDetailRepository.AttachNavigation<Transaction>(detailEntity.Parent);
+                    _transactionDetailRepository.AttachNavigation<JournalMaster>(detailEntity.Journal);
                     _transactionDetailRepository.Add(detailEntity);
                 }
             }

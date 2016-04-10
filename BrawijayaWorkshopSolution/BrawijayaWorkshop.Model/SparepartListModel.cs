@@ -63,6 +63,11 @@ namespace BrawijayaWorkshop.Model
                 iDetails.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                 iDetails.ModifyDate = serverTime;
                 iDetails.ModifyUserId = userId;
+                _sparepartDetailRepository.AttachNavigation(iDetails.CreateUser);
+                _sparepartDetailRepository.AttachNavigation(iDetails.ModifyUser);
+                _sparepartDetailRepository.AttachNavigation(iDetails.PurchasingDetail);
+                _sparepartDetailRepository.AttachNavigation(iDetails.Sparepart);
+                _sparepartDetailRepository.AttachNavigation(iDetails.SparepartManualTransaction);
                 _sparepartDetailRepository.Update(iDetails);
             }
 
@@ -71,6 +76,10 @@ namespace BrawijayaWorkshop.Model
             sparepart.ModifyUserId = userId;
             Sparepart entity = _sparepartRepository.GetById(sparepart.Id);
             Map(sparepart, entity);
+            _sparepartRepository.AttachNavigation(entity.CreateUser);
+            _sparepartRepository.AttachNavigation(entity.ModifyUser);
+            _sparepartRepository.AttachNavigation(entity.CategoryReference);
+            _sparepartRepository.AttachNavigation(entity.UnitReference);
             _sparepartRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
