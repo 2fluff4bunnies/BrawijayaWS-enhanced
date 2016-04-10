@@ -194,7 +194,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             // Print.
-            gridActiva.Print();
+            gridActiva.PrintDialog();
         }
     }
 }

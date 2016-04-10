@@ -196,7 +196,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             // Print.
-            gridBalanceJournal.Print();
+            gridBalanceJournal.PrintDialog();
         }
     }
 }
