@@ -185,5 +185,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             btnSearch.PerformClick();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            // Check whether the GridControl can be printed.
+            if (!gridBalanceJournal.IsPrintingAvailable)
+            {
+                MessageBox.Show("Fungsi print tidak tersedia", "Error");
+                return;
+            }
+
+            // Print.
+            gridBalanceJournal.Print();
+        }
     }
 }

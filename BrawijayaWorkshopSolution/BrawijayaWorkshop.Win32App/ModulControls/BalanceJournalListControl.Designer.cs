@@ -47,6 +47,7 @@
             this.colCreditMutation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLastBalance = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -263,10 +264,22 @@
             this.repoCheckBox.Name = "repoCheckBox";
             this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrint.Location = new System.Drawing.Point(143, 75);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 29);
+            this.btnPrint.TabIndex = 6;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // BalanceJournalListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.gridBalanceJournal);
             this.Controls.Add(this.btnRecalculateBalanceJournal);
             this.Controls.Add(this.gcFilter);
@@ -304,5 +317,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDebitMutation;
         private DevExpress.XtraGrid.Columns.GridColumn colCreditMutation;
         private DevExpress.XtraGrid.Columns.GridColumn colLastBalance;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
     }
 }
