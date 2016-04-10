@@ -100,6 +100,22 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 throw ex;
             }
         }
+
+        public virtual void AttachNavigation<N>(N navigation) where N : class, new()
+        {
+            if (navigation == null) return;
+
+            try
+            {
+                IDbSet<N> navigationSet = DataContext.Set<N>();
+                navigationSet.Attach(navigation);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
         {
             try
