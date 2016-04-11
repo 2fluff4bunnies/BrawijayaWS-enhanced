@@ -104,257 +104,260 @@ namespace BrawijayaWorkshop.Model
 
         public void RecalculateBalanceJournal(int month, int year, int userId)
         {
-            
-            BalanceJournalViewModel prevCalculated = RetrieveBalanceJournalHeader(month, year);
-            if (prevCalculated != null)
+            // harus pake using, dibiarin aja gak usah try catch commit rollback, kata nya sih udah otomatis
+            using (var trans = _unitOfWork.BeginTransaction())
             {
-                DeleteBalanceJournal(prevCalculated.Id, userId);
-            }
-
-            DateTime firstDay = new DateTime(year, month, 1);
-            DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            DateTime prevMonth = firstDay.AddDays(-1);
-
-            List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
-            List<JournalMasterViewModel> mappedListAllJournal = new List<JournalMasterViewModel>();
-            Map(listAllJournal, mappedListAllJournal);
-
-            Reference catJournalService = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_SERVICE).FirstOrDefault();
-            Reference catJournalCost = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_COST).FirstOrDefault();
-            Reference catJournalIncome = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_INCOME).FirstOrDefault();
-
-            List<string> catJournalServiceCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalService.Id).Select(r => r.Value).ToList();
-            List<string> catJournalCostCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalCost.Id).Select(r => r.Value).ToList();
-            List<string> catJournalIncomeCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalIncome.Id).Select(r => r.Value).ToList();
-
-            // calculate neraca
-            // ------------------------------------------------------------------------------
-            // List semua akun jurnal dari tabel transaksi
-            List<TransactionDetail> listTransaction = _transactionDetailRepository.GetMany(t =>
-                t.Parent.TransactionDate >= firstDay && t.Parent.TransactionDate <= lastDay &&
-                t.Parent.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
-
-            var journalTransactionList = listTransaction.DistinctBy(t => t.JournalId).Select(t => t.JournalId);
-            List<BalanceJournalDetailViewModel> tempListBalanceDetailViewModel = new List<BalanceJournalDetailViewModel>();
-            foreach (var item in journalTransactionList)
-            {
-                BalanceJournalDetailViewModel detailViewModel = new BalanceJournalDetailViewModel();
-                detailViewModel.JournalId = item;
-                tempListBalanceDetailViewModel.Add(detailViewModel);
-            }
-            // end init semua akun
-
-            // 1. Ambil Saldo Awal dari Saldo Akhir Bulan Sebelumnya
-            BalanceJournal lastJournal = _balanceJournalRepository.GetMany(bj =>
-                bj.Month == prevMonth.Month && bj.Year == prevMonth.Year &&
-                bj.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-
-            if (lastJournal != null)
-            {
-                // check apakah semua jurnal di last journal ada di temp list
-                List<BalanceJournalDetail> lastJournalDetail = _balanceJournalDetailRepository.GetMany(bjd => bjd.ParentId == lastJournal.Id).ToList();
-                foreach (var item in lastJournalDetail)
+                BalanceJournalViewModel prevCalculated = RetrieveBalanceJournalHeader(month, year);
+                if (prevCalculated != null)
                 {
-                    if (tempListBalanceDetailViewModel.Where(temp => temp.JournalId == item.JournalId).Count() == 0)
+                    DeleteBalanceJournal(prevCalculated.Id, userId);
+                }
+
+                DateTime firstDay = new DateTime(year, month, 1);
+                DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+                DateTime prevMonth = firstDay.AddDays(-1);
+
+                List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
+                List<JournalMasterViewModel> mappedListAllJournal = new List<JournalMasterViewModel>();
+                Map(listAllJournal, mappedListAllJournal);
+
+                Reference catJournalService = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_SERVICE).FirstOrDefault();
+                Reference catJournalCost = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_COST).FirstOrDefault();
+                Reference catJournalIncome = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_CAT_JOURNAL_INCOME).FirstOrDefault();
+
+                List<string> catJournalServiceCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalService.Id).Select(r => r.Value).ToList();
+                List<string> catJournalCostCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalCost.Id).Select(r => r.Value).ToList();
+                List<string> catJournalIncomeCodeList = _referenceRepository.GetMany(r => r.ParentId == catJournalIncome.Id).Select(r => r.Value).ToList();
+
+                // calculate neraca
+                // ------------------------------------------------------------------------------
+                // List semua akun jurnal dari tabel transaksi
+                List<TransactionDetail> listTransaction = _transactionDetailRepository.GetMany(t =>
+                    t.Parent.TransactionDate >= firstDay && t.Parent.TransactionDate <= lastDay &&
+                    t.Parent.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+                var journalTransactionList = listTransaction.DistinctBy(t => t.JournalId).Select(t => t.JournalId);
+                List<BalanceJournalDetailViewModel> tempListBalanceDetailViewModel = new List<BalanceJournalDetailViewModel>();
+                foreach (var item in journalTransactionList)
+                {
+                    BalanceJournalDetailViewModel detailViewModel = new BalanceJournalDetailViewModel();
+                    detailViewModel.JournalId = item;
+                    tempListBalanceDetailViewModel.Add(detailViewModel);
+                }
+                // end init semua akun
+
+                // 1. Ambil Saldo Awal dari Saldo Akhir Bulan Sebelumnya
+                BalanceJournal lastJournal = _balanceJournalRepository.GetMany(bj =>
+                    bj.Month == prevMonth.Month && bj.Year == prevMonth.Year &&
+                    bj.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+
+                if (lastJournal != null)
+                {
+                    // check apakah semua jurnal di last journal ada di temp list
+                    List<BalanceJournalDetail> lastJournalDetail = _balanceJournalDetailRepository.GetMany(bjd => bjd.ParentId == lastJournal.Id).ToList();
+                    foreach (var item in lastJournalDetail)
                     {
-                        JournalMasterViewModel mappedJournal = new JournalMasterViewModel();
+                        if (tempListBalanceDetailViewModel.Where(temp => temp.JournalId == item.JournalId).Count() == 0)
+                        {
+                            JournalMasterViewModel mappedJournal = new JournalMasterViewModel();
+                            tempListBalanceDetailViewModel.Add(new BalanceJournalDetailViewModel
+                            {
+                                Journal = Map(item.Journal, mappedJournal),
+                                JournalId = item.JournalId
+                            });
+                        }
+                    }
+
+                    // update temp list untuk saldo awal
+                    foreach (var item in tempListBalanceDetailViewModel)
+                    {
+                        BalanceJournalDetail entityDetail = lastJournalDetail.Where(i => i.JournalId == item.JournalId).FirstOrDefault();
+                        if (entityDetail == null) continue;
+
+                        item.FirstDebit = entityDetail.LastDebit;
+                        item.FirstCredit = entityDetail.LastCredit;
+                    }
+                }
+
+                // 2. Ambil mutasi Debet Kredit dari transaksi bulan berjalan
+                foreach (var item in listTransaction)
+                {
+                    if (tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).Count() == 0)
+                    {
                         tempListBalanceDetailViewModel.Add(new BalanceJournalDetailViewModel
                         {
-                            Journal = Map(item.Journal, mappedJournal),
                             JournalId = item.JournalId
                         });
                     }
+
+                    BalanceJournalDetailViewModel currentViewModel = tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).FirstOrDefault();
+                    int currentIndex = tempListBalanceDetailViewModel.IndexOf(currentViewModel);
+                    currentViewModel.MutationDebit = (currentViewModel.MutationDebit ?? 0);
+                    currentViewModel.MutationCredit = (currentViewModel.MutationCredit ?? 0);
+                    currentViewModel.ReconciliationDebit = (currentViewModel.ReconciliationDebit ?? 0);
+                    currentViewModel.ReconciliationCredit = (currentViewModel.ReconciliationCredit ?? 0);
+
+                    if (!item.Parent.IsReconciliation)
+                    {
+                        currentViewModel.MutationCredit += (item.Credit ?? 0);
+                        currentViewModel.MutationDebit += (item.Debit ?? 0);
+                    }
+                    else
+                    {
+                        currentViewModel.ReconciliationDebit += (item.Debit ?? 0);
+                        currentViewModel.ReconciliationCredit += (item.Credit ?? 0);
+                    }
+
+                    tempListBalanceDetailViewModel[currentIndex] = currentViewModel;
                 }
 
-                // update temp list untuk saldo awal
+                // 4. Hitung Saldo Akhir
+                decimal? incomeAmount = 0;
+                decimal? serviceAmount = 0;
+                decimal? costAmount = 0;
+                List<string> cachedCode = new List<string>();
                 foreach (var item in tempListBalanceDetailViewModel)
                 {
-                    BalanceJournalDetail entityDetail = lastJournalDetail.Where(i => i.JournalId == item.JournalId).FirstOrDefault();
-                    if (entityDetail == null) continue;
+                    // update saldo awal (saldo akhir + mutasi)
+                    item.BalanceAfterMutationDebit = (item.MutationDebit ?? 0);
+                    item.BalanceAfterMutationCredit = (item.MutationCredit ?? 0);
 
-                    item.FirstDebit = entityDetail.LastDebit;
-                    item.FirstCredit = entityDetail.LastCredit;
-                }
-            }
-
-            // 2. Ambil mutasi Debet Kredit dari transaksi bulan berjalan
-            foreach (var item in listTransaction)
-            {
-                if (tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).Count() == 0)
-                {
-                    tempListBalanceDetailViewModel.Add(new BalanceJournalDetailViewModel
+                    decimal totalAfterReconciliation =
+                        ((item.BalanceAfterMutationDebit ?? 0) + (item.ReconciliationDebit ?? 0)) -
+                        ((item.BalanceAfterMutationCredit ?? 0) + (item.ReconciliationCredit ?? 0));
+                    if (totalAfterReconciliation > 0)
                     {
-                        JournalId = item.JournalId
-                    });
+                        item.BalanceAfterReconciliationDebit = totalAfterReconciliation;
+                        item.BalanceAfterReconciliationCredit = 0;
+                    }
+                    else
+                    {
+                        item.BalanceAfterReconciliationDebit = 0;
+                        item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
+                    }
+
+                    item.LastDebit = (item.FirstDebit ?? 0) + item.BalanceAfterReconciliationDebit;
+                    item.LastCredit = (item.FirstCredit ?? 0) + item.BalanceAfterReconciliationCredit;
                 }
 
-                BalanceJournalDetailViewModel currentViewModel = tempListBalanceDetailViewModel.Where(t => t.JournalId == item.JournalId).FirstOrDefault();
-                int currentIndex = tempListBalanceDetailViewModel.IndexOf(currentViewModel);
-                currentViewModel.MutationDebit = (currentViewModel.MutationDebit ?? 0);
-                currentViewModel.MutationCredit = (currentViewModel.MutationCredit ?? 0);
-                currentViewModel.ReconciliationDebit = (currentViewModel.ReconciliationDebit ?? 0);
-                currentViewModel.ReconciliationCredit = (currentViewModel.ReconciliationCredit ?? 0);
+                // 5. Insert Keb Balance Header & Balance Detail
+                BalanceJournal newBalanceHeader = new BalanceJournal();
+                newBalanceHeader.Month = month;
+                newBalanceHeader.Year = year;
+                newBalanceHeader.Status = (int)DbConstant.DefaultDataStatus.Active;
+                newBalanceHeader.CreateDate = newBalanceHeader.ModifyDate = DateTime.Now;
+                newBalanceHeader.CreateUserId = newBalanceHeader.ModifyUserId = userId;
+                _balanceJournalRepository.AttachNavigation<User>(newBalanceHeader.CreateUser);
+                _balanceJournalRepository.AttachNavigation<User>(newBalanceHeader.ModifyUser);
+                newBalanceHeader = _balanceJournalRepository.Add(newBalanceHeader);
+                _unitOfWork.SaveChanges();
 
-                if (!item.Parent.IsReconciliation)
+                foreach (var item in tempListBalanceDetailViewModel)
                 {
-                    currentViewModel.MutationCredit += (item.Credit ?? 0);
-                    currentViewModel.MutationDebit += (item.Debit ?? 0);
+                    item.Journal = null;
+                    BalanceJournalDetail newBalanceDetail = new BalanceJournalDetail();
+                    Map(item, newBalanceDetail);
+                    newBalanceDetail.ParentId = newBalanceHeader.Id;
+                    _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(newBalanceDetail.Parent);
+                    _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(newBalanceDetail.Journal);
+                    _balanceJournalDetailRepository.Add(newBalanceDetail);
+                }
+
+                _unitOfWork.SaveChanges();
+
+                List<BalanceJournalDetailViewModel> mappedResult = RetrieveBalanceJournalDetailsByHeaderId(newBalanceHeader.Id);
+
+                foreach (var item in tempListBalanceDetailViewModel)
+                {
+                    foreach (var journalIncomeCode in catJournalIncomeCodeList)
+                    {
+                        List<int> cachedItems = new List<int>();
+                        foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                        {
+                            if (IsCurrentJournalValid(itemBalance.Journal, journalIncomeCode))
+                            {
+                                decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
+                                incomeAmount += currentAmount;
+
+                                cachedItems.Add(itemBalance.Id);
+                            }
+                        }
+
+                        foreach (var iCache in cachedItems)
+                        {
+                            BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                            int iCacheIndex = mappedResult.IndexOf(current);
+                            current.IsChecked = true;
+                            mappedResult[iCacheIndex] = current;
+                        }
+                    }
+
+                    foreach (var journalServiceCode in catJournalServiceCodeList)
+                    {
+                        List<int> cachedItems = new List<int>();
+                        foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                        {
+                            if (IsCurrentJournalValid(itemBalance.Journal, journalServiceCode))
+                            {
+                                decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
+                                serviceAmount += currentAmount;
+
+                                cachedItems.Add(itemBalance.Id);
+                            }
+                        }
+
+                        foreach (var iCache in cachedItems)
+                        {
+                            BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                            int iCacheIndex = mappedResult.IndexOf(current);
+                            current.IsChecked = true;
+                            mappedResult[iCacheIndex] = current;
+                        }
+                    }
+
+                    foreach (var journalCostCode in catJournalCostCodeList)
+                    {
+                        List<int> cachedItems = new List<int>();
+                        foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
+                        {
+                            if (IsCurrentJournalValid(itemBalance.Journal, journalCostCode))
+                            {
+                                decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
+                                costAmount += currentAmount;
+
+                                cachedItems.Add(itemBalance.Id);
+                            }
+                        }
+
+                        foreach (var iCache in cachedItems)
+                        {
+                            BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
+                            int iCacheIndex = mappedResult.IndexOf(current);
+                            current.IsChecked = true;
+                            mappedResult[iCacheIndex] = current;
+                        }
+                    }
+                }
+
+                //profitloss
+                decimal? profitLossAmount = incomeAmount + serviceAmount + costAmount;
+                BalanceJournalDetail profitDetail = new BalanceJournalDetail();
+                profitDetail.ParentId = newBalanceHeader.Id;
+                JournalMasterViewModel profitLossCurrentMonthJournal = mappedListAllJournal.Where(j => j.Code == "2.03.05").FirstOrDefault();
+                profitDetail.JournalId = profitLossCurrentMonthJournal.Id;
+                if (profitLossAmount > 0)
+                {
+                    profitDetail.LastDebit = profitLossAmount;
                 }
                 else
                 {
-                    currentViewModel.ReconciliationDebit += (item.Debit ?? 0);
-                    currentViewModel.ReconciliationCredit += (item.Credit ?? 0);
+                    profitDetail.LastCredit = Math.Abs(profitLossAmount.Value);
                 }
-
-                tempListBalanceDetailViewModel[currentIndex] = currentViewModel;
+                _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(profitDetail.Parent);
+                _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(profitDetail.Journal);
+                _balanceJournalDetailRepository.Add(profitDetail);
+                _unitOfWork.SaveChanges();
             }
-
-            // 4. Hitung Saldo Akhir
-            decimal? incomeAmount = 0;
-            decimal? serviceAmount = 0;
-            decimal? costAmount = 0;
-            List<string> cachedCode = new List<string>();
-            foreach (var item in tempListBalanceDetailViewModel)
-            {
-                // update saldo awal (saldo akhir + mutasi)
-                item.BalanceAfterMutationDebit = (item.MutationDebit ?? 0);
-                item.BalanceAfterMutationCredit = (item.MutationCredit ?? 0);
-
-                decimal totalAfterReconciliation =
-                    ((item.BalanceAfterMutationDebit ?? 0) + (item.ReconciliationDebit ?? 0)) -
-                    ((item.BalanceAfterMutationCredit ?? 0) + (item.ReconciliationCredit ?? 0));
-                if (totalAfterReconciliation > 0)
-                {
-                    item.BalanceAfterReconciliationDebit = totalAfterReconciliation;
-                    item.BalanceAfterReconciliationCredit = 0;
-                }
-                else
-                {
-                    item.BalanceAfterReconciliationDebit = 0;
-                    item.BalanceAfterReconciliationCredit = Math.Abs(totalAfterReconciliation);
-                }
-
-                item.LastDebit = (item.FirstDebit ?? 0) + item.BalanceAfterReconciliationDebit;
-                item.LastCredit = (item.FirstCredit ?? 0) + item.BalanceAfterReconciliationCredit;
-            }
-
-            // 5. Insert Keb Balance Header & Balance Detail
-            BalanceJournal newBalanceHeader = new BalanceJournal();
-            newBalanceHeader.Month = month;
-            newBalanceHeader.Year = year;
-            newBalanceHeader.Status = (int)DbConstant.DefaultDataStatus.Active;
-            newBalanceHeader.CreateDate = newBalanceHeader.ModifyDate = DateTime.Now;
-            newBalanceHeader.CreateUserId = newBalanceHeader.ModifyUserId = userId;
-            _balanceJournalRepository.AttachNavigation<User>(newBalanceHeader.CreateUser);
-            _balanceJournalRepository.AttachNavigation<User>(newBalanceHeader.ModifyUser);
-            newBalanceHeader = _balanceJournalRepository.Add(newBalanceHeader);
-            _unitOfWork.SaveChanges();
-
-            foreach (var item in tempListBalanceDetailViewModel)
-            {
-                item.Journal = null;
-                BalanceJournalDetail newBalanceDetail = new BalanceJournalDetail();
-                Map(item, newBalanceDetail);
-                newBalanceDetail.ParentId = newBalanceHeader.Id;
-                _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(newBalanceDetail.Parent);
-                _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(newBalanceDetail.Journal);
-                _balanceJournalDetailRepository.Add(newBalanceDetail);
-            }
-
-            _unitOfWork.SaveChanges();
-
-            List<BalanceJournalDetailViewModel> mappedResult = RetrieveBalanceJournalDetailsByHeaderId(newBalanceHeader.Id);
-
-            foreach (var item in tempListBalanceDetailViewModel)
-            {
-                foreach (var journalIncomeCode in catJournalIncomeCodeList)
-                {
-                    List<int> cachedItems = new List<int>();
-                    foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
-                    {
-                        if (IsCurrentJournalValid(itemBalance.Journal, journalIncomeCode))
-                        {
-                            decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
-                            incomeAmount += currentAmount;
-
-                            cachedItems.Add(itemBalance.Id);
-                        }
-                    }
-
-                    foreach (var iCache in cachedItems)
-                    {
-                        BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
-                        int iCacheIndex = mappedResult.IndexOf(current);
-                        current.IsChecked = true;
-                        mappedResult[iCacheIndex] = current;
-                    }
-                }
-
-                foreach (var journalServiceCode in catJournalServiceCodeList)
-                {
-                    List<int> cachedItems = new List<int>();
-                    foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
-                    {
-                        if (IsCurrentJournalValid(itemBalance.Journal, journalServiceCode))
-                        {
-                            decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
-                            serviceAmount += currentAmount;
-
-                            cachedItems.Add(itemBalance.Id);
-                        }
-                    }
-
-                    foreach (var iCache in cachedItems)
-                    {
-                        BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
-                        int iCacheIndex = mappedResult.IndexOf(current);
-                        current.IsChecked = true;
-                        mappedResult[iCacheIndex] = current;
-                    }
-                }
-
-                foreach (var journalCostCode in catJournalCostCodeList)
-                {
-                    List<int> cachedItems = new List<int>();
-                    foreach (var itemBalance in mappedResult.Where(m => !m.IsChecked))
-                    {
-                        if (IsCurrentJournalValid(itemBalance.Journal, journalCostCode))
-                        {
-                            decimal currentAmount = (itemBalance.LastCredit ?? 0) - (itemBalance.LastDebit ?? 0);
-                            costAmount += currentAmount;
-
-                            cachedItems.Add(itemBalance.Id);
-                        }
-                    }
-
-                    foreach (var iCache in cachedItems)
-                    {
-                        BalanceJournalDetailViewModel current = mappedResult.Where(m => m.Id == iCache).FirstOrDefault();
-                        int iCacheIndex = mappedResult.IndexOf(current);
-                        current.IsChecked = true;
-                        mappedResult[iCacheIndex] = current;
-                    }
-                }
-            }
-
-            //profitloss
-            decimal? profitLossAmount = incomeAmount + serviceAmount + costAmount;
-            BalanceJournalDetail profitDetail = new BalanceJournalDetail();
-            profitDetail.ParentId = newBalanceHeader.Id;
-            JournalMasterViewModel profitLossCurrentMonthJournal = mappedListAllJournal.Where(j => j.Code == "2.03.05").FirstOrDefault();
-            profitDetail.JournalId = profitLossCurrentMonthJournal.Id;
-            if (profitLossAmount > 0)
-            {
-                profitDetail.LastDebit = profitLossAmount;
-            }
-            else
-            {
-                profitDetail.LastCredit = Math.Abs(profitLossAmount.Value);
-            }
-            _balanceJournalDetailRepository.AttachNavigation<BalanceJournal>(profitDetail.Parent);
-            _balanceJournalDetailRepository.AttachNavigation<JournalMaster>(profitDetail.Journal);
-            _balanceJournalDetailRepository.Add(profitDetail);
-            _unitOfWork.SaveChanges();
         }
 
         public void DeleteBalanceJournal(int headerId, int userId)
