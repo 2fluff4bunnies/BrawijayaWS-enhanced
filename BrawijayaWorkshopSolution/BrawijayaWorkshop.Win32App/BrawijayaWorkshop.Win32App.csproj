@@ -158,6 +158,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\BalanceHelperListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\BalanceHelperListControl.Designer.cs">
+      <DependentUpon>BalanceHelperListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\BalanceJournalListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -670,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\BalanceHelperListControl.resx">
+      <DependentUpon>BalanceHelperListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\BalanceJournalListControl.resx">
       <DependentUpon>BalanceJournalListControl.cs</DependentUpon>
