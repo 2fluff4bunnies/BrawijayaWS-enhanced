@@ -31,5 +31,10 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 throw ex;
             }
         }
+
+        public DbContextTransaction BeginTransaction()
+        {
+            return DbContext.Database.BeginTransaction();
+        }
     }
 }

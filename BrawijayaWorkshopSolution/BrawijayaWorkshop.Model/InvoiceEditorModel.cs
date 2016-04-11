@@ -66,30 +66,46 @@ namespace BrawijayaWorkshop.Model
             return mappedResult;
         }
 
-        public void UpdateInvoice(InvoiceViewModel invoice, List<InvoiceDetailViewModel> invoiceDetails, int userID)
+        public void UpdateInvoice(InvoiceViewModel invoice, List<InvoiceDetailViewModel> invoiceDetails, int userId)
         {
             DateTime serverTime = DateTime.Now;
 
             Invoice entity = _invoiceRepository.GetById<int>(invoice.Id);
-            entity.PaymentMethodId = invoice.PaymentMethodId;
-            entity.TotalHasPaid = invoice.TotalHasPaid;
-            entity.TotalPrice = invoice.TotalPrice;
-            entity.TotalService = invoice.TotalService;
-            entity.TotalServicePlusFee = invoice.TotalServicePlusFee;
+            //entity.PaymentMethodId = invoice.PaymentMethodId;
+            //entity.TotalHasPaid = invoice.TotalHasPaid;
+            //entity.TotalPrice = invoice.TotalPrice;
+            //entity.TotalService = invoice.TotalService;
+            //entity.TotalServicePlusFee = invoice.TotalServicePlusFee;
+            Map(invoice, entity);
             entity.ModifyDate = serverTime;
-            entity.ModifyUserId = userID;
+            entity.ModifyUserId = userId;
             entity.Status = (int)DbConstant.InvoiceStatus.NotPrinted;
+
+            _invoiceRepository.AttachNavigation(entity.CreateUser); // yang inherit ke base modifier harus ada ini, klo gak user e dobel2
+            _invoiceRepository.AttachNavigation(entity.ModifyUser); // yang inherit ke base modifier harus ada ini, klo gak user e dobel2
+            _invoiceRepository.AttachNavigation(entity.SPK);
+            _invoiceRepository.AttachNavigation(entity.PaymentMethod);
+
             _invoiceRepository.Update(entity);
+            _unitOfWork.SaveChanges();
 
             foreach (var invoiceDetail in invoiceDetails)
             {
                 InvoiceDetail entityDetail = _invoiceDetailRepository.GetById<int>(invoiceDetail.Id);
-                entityDetail.FeePctg = invoiceDetail.FeePctg;
-                entityDetail.SubTotalPrice = invoiceDetail.SubTotalPrice;
+                //entityDetail.FeePctg = invoiceDetail.FeePctg;
+                //entityDetail.SubTotalPrice = invoiceDetail.SubTotalPrice;
+                Map(invoiceDetail, entityDetail);
+
                 entityDetail.ModifyDate = serverTime;
-                entityDetail.ModifyUserId = userID;
+                entityDetail.ModifyUserId = userId;
+
+                _invoiceDetailRepository.AttachNavigation(entityDetail.CreateUser);
+                _invoiceDetailRepository.AttachNavigation(entityDetail.ModifyUser);
+                _invoiceDetailRepository.AttachNavigation(entityDetail.Invoice);
+                _invoiceDetailRepository.AttachNavigation(entityDetail.SPKDetailSparepartDetail);
                 _invoiceDetailRepository.Update(entityDetail);
             }
+            _unitOfWork.SaveChanges();
 
             Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == invoice.Id).OrderBy(x => x.CreateDate).FirstOrDefault();
             Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_INVOICE).FirstOrDefault();
@@ -98,25 +114,31 @@ namespace BrawijayaWorkshop.Model
             if (transaction != null)
             {
                 transaction.ModifyDate = serverTime;
-                transaction.ModifyUserId = userID;
+                transaction.ModifyUserId = userId;
                 transaction.TotalTransaction = invoice.TotalPrice.AsDouble();
                 transaction.TotalPayment = invoice.TotalHasPaid.AsDouble();
                 transaction.PaymentMethodId = invoice.PaymentMethodId;
+                _transactionRepository.AttachNavigation(transaction.CreateUser);
+                _transactionRepository.AttachNavigation(transaction.ModifyUser);
+                _transactionRepository.AttachNavigation(transaction.ReferenceTable);
+                _transactionRepository.AttachNavigation(transaction.PaymentMethod);
                 _transactionRepository.Update(transaction);
+                _unitOfWork.SaveChanges();
 
                 List<TransactionDetail> transactionDetails = _transactionDetailRepository.GetMany(x => x.ParentId == transaction.Id).ToList();
                 foreach (TransactionDetail transactionDetail in transactionDetails)
                 {
                     _transactionDetailRepository.Delete(transactionDetail);
                 }
+                _unitOfWork.SaveChanges();
             }
             else
             {
                 transaction = new Transaction();
                 transaction.CreateDate = serverTime;
-                transaction.CreateUserId = userID;
+                transaction.CreateUserId = userId;
                 transaction.ModifyDate = serverTime;
-                transaction.ModifyUserId = userID;
+                transaction.ModifyUserId = userId;
                 transaction.Description = "pembayaran invoice";
                 transaction.TotalTransaction = invoice.TotalPrice.AsDouble();
                 transaction.TotalPayment = invoice.TotalHasPaid.AsDouble();
@@ -125,7 +147,9 @@ namespace BrawijayaWorkshop.Model
                 transaction.TransactionDate = serverTime;
                 transaction.PaymentMethodId = invoice.PaymentMethodId;
                 transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+
                 transaction = _transactionRepository.Add(transaction);
+                _unitOfWork.SaveChanges();
             }
 
             switch (paymentMethod.Code)
