@@ -104,6 +104,7 @@ namespace BrawijayaWorkshop.Model
 
         public void RecalculateBalanceJournal(int month, int year, int userId)
         {
+            
             BalanceJournalViewModel prevCalculated = RetrieveBalanceJournalHeader(month, year);
             if (prevCalculated != null)
             {
