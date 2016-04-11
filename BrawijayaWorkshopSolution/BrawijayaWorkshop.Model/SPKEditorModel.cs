@@ -231,7 +231,8 @@ namespace BrawijayaWorkshop.Model
                 //insert invoice
 
                 Invoice invc = new Invoice();
-                invc.Code = "INV-" + spk.Code.Substring(4, spk.Code.Length);
+                //invc.Code = "INV-" + spk.Code.Substring(4, spk.Code.Length);
+                invc.Code = spk.Code.Replace("SPK", "INVC");
                 invc.TotalPrice = spk.TotalSparepartPrice;
                 invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
                 invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;

@@ -128,7 +128,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     btnApprove.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
                 }
-                else
+                if (this.IsApproval)
                 {
                     btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
@@ -161,6 +161,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 _isApproval = value;
             }
         }
+
+        public bool IsRequestPrintApproval { get; set; }
 
         public bool IsPrintApproval { get; set; }
 
@@ -229,7 +231,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 _presenter.PrintApproval(true);
             }
-            else
+            if(this.IsApproval)
             {
                  _presenter.Approve();
             }
@@ -239,7 +241,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-            if (this.IsPrintApproval)
+            if (this.IsRequestPrintApproval)
             {
                 _presenter.PrintApproval(false);
             }
