@@ -39,6 +39,7 @@
             this.iBalanceSheet = new DevExpress.XtraNavBar.NavBarItem();
             this.iProfitLoss = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iBalanceHelper = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarAccounting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +56,8 @@
             this.iJournalTransaction,
             this.iProfitLoss,
             this.iBalanceTotal,
-            this.iBalanceSheet});
+            this.iBalanceSheet,
+            this.iBalanceHelper});
             this.navbarAccounting.Location = new System.Drawing.Point(0, 0);
             this.navbarAccounting.Name = "navbarAccounting";
             this.navbarAccounting.OptionsNavPane.ExpandedWidth = 275;
@@ -74,7 +76,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournalTransaction),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceTotal),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceSheet),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iProfitLoss)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iProfitLoss),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iBalanceHelper)});
             this.navbarGroupAccounting.Name = "navbarGroupAccounting";
             // 
             // iFirstBalance
@@ -124,6 +127,13 @@
             this.imageCollection.Images.SetKeyName(5, "manual_trans_16x16.png");
             this.imageCollection.Images.SetKeyName(6, "hpp_16x16.png");
             this.imageCollection.Images.SetKeyName(7, "profitloss_16x16.png");
+            this.imageCollection.Images.SetKeyName(8, "balancehelper_16x16.png");
+            // 
+            // iBalanceHelper
+            // 
+            this.iBalanceHelper.Caption = "Buku Pembantu";
+            this.iBalanceHelper.Name = "iBalanceHelper";
+            this.iBalanceHelper.SmallImageIndex = 8;
             // 
             // AccountingNavigationControl
             // 
@@ -149,5 +159,6 @@
         public DevExpress.XtraNavBar.NavBarItem iProfitLoss;
         public DevExpress.XtraNavBar.NavBarItem iBalanceTotal;
         public DevExpress.XtraNavBar.NavBarItem iBalanceSheet;
+        public DevExpress.XtraNavBar.NavBarItem iBalanceHelper;
     }
 }

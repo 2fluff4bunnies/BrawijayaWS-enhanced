@@ -501,6 +501,7 @@ namespace BrawijayaWorkshop.Win32App
             navAccounting.iProfitLoss.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iBalanceTotal.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
             navAccounting.iBalanceSheet.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
+            navAccounting.iBalanceHelper.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_ACCOUNTING);
 
             ShowNavigationControl(navAccounting);
 
@@ -510,6 +511,13 @@ namespace BrawijayaWorkshop.Win32App
             navAccounting.iProfitLoss.LinkClicked += iProfitLoss_LinkClicked;
             navAccounting.iBalanceTotal.LinkClicked += iBalanceTotal_LinkClicked;
             navAccounting.iBalanceSheet.LinkClicked += iBalanceSheet_LinkClicked;
+            navAccounting.iBalanceHelper.LinkClicked += iBalanceHelper_LinkClicked;
+        }
+
+        private void iBalanceHelper_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            BalanceHelperListControl balanceHelper = Bootstrapper.Resolve<BalanceHelperListControl>();
+            ShowUserControl(balanceHelper);
         }
 
         private void iBalanceSheet_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
