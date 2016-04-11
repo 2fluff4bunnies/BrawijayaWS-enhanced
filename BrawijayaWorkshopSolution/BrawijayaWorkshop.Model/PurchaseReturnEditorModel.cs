@@ -107,7 +107,14 @@ namespace BrawijayaWorkshop.Model
             purchaseReturn.Date = serverTime;
             purchaseReturn.Status = (int)DbConstant.DefaultDataStatus.Active;
 
+            string code = "PRR" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+            //get total purchasing return created today
+            List<PurchaseReturn> todayPRR = _purchaseReturnRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+            code = code + (todayPRR.Count + 1);
+            purchaseReturn.Code = code;
+
             purchaseReturn = _purchaseReturnRepository.Add(purchaseReturn);
+
             List<PurchaseReturnDetail> listReturnDetail = new List<PurchaseReturnDetail>();
 
             decimal totalTransaction = 0;

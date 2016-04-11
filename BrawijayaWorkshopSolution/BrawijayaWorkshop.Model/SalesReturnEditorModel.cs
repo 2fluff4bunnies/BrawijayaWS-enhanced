@@ -109,6 +109,12 @@ namespace BrawijayaWorkshop.Model
             salesReturn.Date = serverTime;
             salesReturn.Status = (int)DbConstant.DefaultDataStatus.Active;
 
+            string code = "SLR" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+            //get total sales return created today
+            List<SalesReturn> todaySLR = _salesReturnRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+            code = code + (todaySLR.Count + 1);
+            salesReturn.Code = code;
+
             salesReturn = _salesReturnRepository.Add(salesReturn);
             List<SalesReturnDetail> listReturnDetail = new List<SalesReturnDetail>();
 

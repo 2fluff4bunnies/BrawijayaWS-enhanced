@@ -638,6 +638,12 @@
     <Compile Include="PrintItems\InvoicePrintItem.Designer.cs">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\SalesReturn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\SalesReturn.Designer.cs">
+      <DependentUpon>SalesReturn.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\SPKPrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -902,6 +908,9 @@
     <EmbeddedResource Include="PrintItems\InvoicePrintItem.resx">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\SalesReturn.resx">
+      <DependentUpon>SalesReturn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\SPKPrintItem.resx">
       <DependentUpon>SPKPrintItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -1006,7 +1015,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
-    <None Include="Resources\print_16x16.png" />
     <None Include="Resources\SPKApprovalEmailTemplate.txt" />
     <None Include="Images\approve 16x16.png" />
     <None Include="Images\print_16x16.png" />

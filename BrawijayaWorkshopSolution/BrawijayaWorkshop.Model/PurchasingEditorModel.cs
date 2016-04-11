@@ -73,8 +73,22 @@ namespace BrawijayaWorkshop.Model
             purchasing.Status = (int)DbConstant.PurchasingStatus.NotVerified;
             purchasing.PaymentMethodId = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG).FirstOrDefault().Id;
             purchasing.TotalHasPaid = 0;
+
+            string code = "PRC" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+            //get total purchasing created today
+            List<Purchasing> todayPCR = _purchasingRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+            code = code + (todayPCR.Count + 1);
+            purchasing.Code = code;
+
             Purchasing entity = new Purchasing();
             Map(purchasing, entity);
+            
+            _purchasingRepository.AttachNavigation(entity.CreateUser);
+            _purchasingRepository.AttachNavigation(entity.ModifyUser);
+            _purchasingRepository.AttachNavigation(entity.PaymentMethod);
+            _purchasingRepository.AttachNavigation(entity.Supplier);
+
+            
             Purchasing purchasingInserted = _purchasingRepository.Add(entity);
 
             foreach (var itemPurchasingDetail in purchasingDetails)

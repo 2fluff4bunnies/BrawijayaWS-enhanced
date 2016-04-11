@@ -10,6 +10,8 @@ namespace BrawijayaWorkshop.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        public string Code { get; set; }
         public int SPKId { get; set; }
         public virtual SPK SPK { get; set; }
 

@@ -9,6 +9,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
     public class SalesReturnViewModel : BaseModifierWithStatusViewModel
     {
         public int Id { get; set; }
+        public string Code { get; set; }
         public DateTime Date { get; set; }
 
         public int InvoiceId { get; set; }
