@@ -63,15 +63,13 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
-            vehicle.CreateDate = serverTime;
-            vehicle.CreateUserId = userId;
-            vehicle.ModifyDate = serverTime;
-            vehicle.ModifyUserId = userId;
-            vehicle.Status = (int)DbConstant.DefaultDataStatus.Active;
             Vehicle entity = new Vehicle();
             Map(vehicle, entity);
-          
+            entity.CreateDate = entity.ModifyDate = serverTime;
+            entity.CreateUserId = entity.ModifyUserId = userId;
+            entity.Status = (int)DbConstant.DefaultDataStatus.Active;
             var insertedVehicle = _vehicleRepository.Add(entity);
+            _unitOfWork.SaveChanges();
 
             VehicleDetail vehicleDetail = new VehicleDetail
             {
@@ -84,44 +82,45 @@ namespace BrawijayaWorkshop.Model
                 CreateUserId = userId,
                 Status = (int)DbConstant.LicenseNumberStatus.Active
             };
+            _vehicleDetailRepository.AttachNavigation(vehicleDetail.Vehicle);
+            _vehicleDetailRepository.Add(vehicleDetail);
+            _unitOfWork.SaveChanges();
 
             foreach (var vw in vehicleWheels)
             {
-                vw.CreateDate = serverTime;
-                vw.CreateUserId = userId;
-                vw.ModifyDate = serverTime;
-                vw.ModifyUserId = userId;
-                vw.Status = (int)DbConstant.DefaultDataStatus.Active;
                 VehicleWheel vwEntity = new VehicleWheel();
                 Map(vw, vwEntity);
-                vwEntity.Vehicle = insertedVehicle;
+                vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
+                vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
+                vwEntity.VehicleId = insertedVehicle.Id;
+                vwEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
 
-                _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
-                _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
+                _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
+                _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+
                 _vehicleWheelRepository.Add(vwEntity);
+                _unitOfWork.SaveChanges();
 
                 SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
                 wdEntity.ModifyDate = serverTime;
                 wdEntity.ModifyUserId = userId;
                 wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
 
-                _wheelDetailRepository.AttachNavigation<SpecialSparepart>(wdEntity.SpecialSparepart);
-                _wheelDetailRepository.AttachNavigation<SparepartDetail>(wdEntity.SparepartDetail);
+                _wheelDetailRepository.AttachNavigation(wdEntity.SpecialSparepart);
+                _wheelDetailRepository.AttachNavigation(wdEntity.SparepartDetail);
                 _wheelDetailRepository.Update(wdEntity);
+                _unitOfWork.SaveChanges();
 
                 SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
                 spdEntity.ModifyDate = serverTime;
                 spdEntity.ModifyUserId = userId;
                 spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutInstalled;
-
-                _sparepartDetailRepository.AttachNavigation<Sparepart>(spdEntity.Sparepart);
+                _sparepartDetailRepository.AttachNavigation(spdEntity.PurchasingDetail);
+                _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
+                _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
                 _sparepartDetailRepository.Update(spdEntity);
+                _unitOfWork.SaveChanges();
             }
-
-            _vehicleDetailRepository.AttachNavigation<Vehicle>(vehicleDetail.Vehicle);
-            _vehicleDetailRepository.Add(vehicleDetail);
-
-            _unitOfWork.SaveChanges();
         }
 
         public void UpdateVehicle(VehicleViewModel vehicle, List<VehicleWheelViewModel> vehicleWheels,
