@@ -27,6 +27,11 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         }
 
         #region Database Transactions
+        public virtual DbContextTransaction BeginTransaction()
+        {
+            return _dataContext.Database.BeginTransaction();
+        }
+
         public virtual T Add(T entity)
         {
             try
