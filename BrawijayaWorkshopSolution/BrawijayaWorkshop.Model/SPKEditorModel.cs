@@ -319,7 +319,16 @@ namespace BrawijayaWorkshop.Model
 
                         invcDtl.Invoice = insertedInvoice;
                         invcDtl.SPKDetailSparepartDetail = insertedSPKSpDtl;
-                        invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+
+                        if (insertedSPKSpDtl.SparepartDetail.PurchasingDetailId > 0)
+                        {
+                            invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+                        }
+                        else
+                        {
+                            invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.SparepartManualTransaction.Price.AsDouble();
+                        }
+
                         invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
                         invcDtl.FeePctg = 0;
 
@@ -378,7 +387,14 @@ namespace BrawijayaWorkshop.Model
                 {
                     WheelExchangeHistory wheel = _wheelExchangeHistoryRepository.GetMany(w => w.SPKId == SPKId && w.OriginalWheelId == item.WheelDetailId).FirstOrDefault();
                     item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
-                    item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                    if (wheel.ReplaceWheel.SparepartDetail.PurchasingDetailId > 0)
+                    {
+                        item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                    }
+                    else if (wheel.ReplaceWheel.SparepartDetail.SparepartManualTransactionId > 0)
+                    {
+                        item.Price = wheel.ReplaceWheel.SparepartDetail.SparepartManualTransaction.Price;
+                    }
                     item.IsUsedWheelRetrieved = true;
                 }
             }

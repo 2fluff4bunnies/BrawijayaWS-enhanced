@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKEditorForm));
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -163,8 +163,7 @@
             this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
             this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
             this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "#,#";
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "#,#;(#,#);0";
             this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
             this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTotalSparepartPrice.Size = new System.Drawing.Size(134, 20);
@@ -269,8 +268,7 @@
             // 
             this.txtContractWorkFee.Location = new System.Drawing.Point(96, 134);
             this.txtContractWorkFee.Name = "txtContractWorkFee";
-            this.txtContractWorkFee.Properties.DisplayFormat.FormatString = "n0";
-            this.txtContractWorkFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtContractWorkFee.Properties.DisplayFormat.FormatString = "#,#;(#,#);0";
             this.txtContractWorkFee.Properties.Mask.EditMask = "n0";
             this.txtContractWorkFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtContractWorkFee.Size = new System.Drawing.Size(161, 20);
@@ -532,9 +530,9 @@
             this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dtpDueDate.Size = new System.Drawing.Size(161, 20);
             this.dtpDueDate.TabIndex = 2;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Batas waktu pengerjaan harus diisi!";
-            this.valDueDate.SetValidationRule(this.dtpDueDate, conditionValidationRule4);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Batas waktu pengerjaan harus diisi!";
+            this.valDueDate.SetValidationRule(this.dtpDueDate, conditionValidationRule1);
             // 
             // LookUpVehicle
             // 
@@ -554,9 +552,9 @@
             this.LookUpVehicle.Properties.ValueMember = "Id";
             this.LookUpVehicle.Size = new System.Drawing.Size(161, 20);
             this.LookUpVehicle.TabIndex = 0;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Kendaraan harus dipilih!";
-            this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Kendaraan harus dipilih!";
+            this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule2);
             this.LookUpVehicle.EditValueChanged += new System.EventHandler(this.LookUpVehicle_EditValueChanged);
             // 
             // lookUpCategory
@@ -575,9 +573,9 @@
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(161, 20);
             this.lookUpCategory.TabIndex = 1;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Kategori harus dipilih!";
-            this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule2);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Kategori harus dipilih!";
+            this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule3);
             // 
             // lblTotalSparepart
             // 
