@@ -127,6 +127,8 @@
             // 
             // colActivaAmount
             // 
+            this.colActivaAmount.AppearanceHeader.Options.UseTextOptions = true;
+            this.colActivaAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colActivaAmount.Caption = "Jumlah";
             this.colActivaAmount.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colActivaAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -209,6 +211,8 @@
             // 
             // colPassivaAmount
             // 
+            this.colPassivaAmount.AppearanceHeader.Options.UseTextOptions = true;
+            this.colPassivaAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colPassivaAmount.Caption = "Jumlah";
             this.colPassivaAmount.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colPassivaAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;

@@ -191,9 +191,11 @@
             this.colMutationCredit,
             this.colBalance});
             this.gvBalanceHelper.GridControl = this.gridBalanceHelper;
+            this.gvBalanceHelper.GroupCount = 1;
             this.gvBalanceHelper.Name = "gvBalanceHelper";
             this.gvBalanceHelper.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvBalanceHelper.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvBalanceHelper.OptionsBehavior.AutoExpandAllGroups = true;
             this.gvBalanceHelper.OptionsBehavior.AutoPopulateColumns = false;
             this.gvBalanceHelper.OptionsBehavior.Editable = false;
             this.gvBalanceHelper.OptionsBehavior.ReadOnly = true;
@@ -204,6 +206,10 @@
             this.gvBalanceHelper.OptionsCustomization.AllowSort = false;
             this.gvBalanceHelper.OptionsView.ShowGroupPanel = false;
             this.gvBalanceHelper.OptionsView.ShowViewCaption = true;
+            this.gvBalanceHelper.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colJournalName, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colJournalCode, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colTransDate, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvBalanceHelper.ViewCaption = "-";
             // 
             // colTransDate
@@ -213,6 +219,7 @@
             this.colTransDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colTransDate.FieldName = "TransactionDate";
             this.colTransDate.Name = "colTransDate";
+            this.colTransDate.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.colTransDate.Visible = true;
             this.colTransDate.VisibleIndex = 0;
             // 
@@ -221,6 +228,7 @@
             this.colJournalCode.Caption = "Kode Akun";
             this.colJournalCode.FieldName = "JournalCode";
             this.colJournalCode.Name = "colJournalCode";
+            this.colJournalCode.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.colJournalCode.Visible = true;
             this.colJournalCode.VisibleIndex = 1;
             // 
@@ -234,33 +242,39 @@
             // 
             // colMutationDebit
             // 
+            this.colMutationDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colMutationDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colMutationDebit.Caption = "Debet";
             this.colMutationDebit.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colMutationDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colMutationDebit.FieldName = "MutationDebit";
             this.colMutationDebit.Name = "colMutationDebit";
             this.colMutationDebit.Visible = true;
-            this.colMutationDebit.VisibleIndex = 3;
+            this.colMutationDebit.VisibleIndex = 2;
             // 
             // colMutationCredit
             // 
+            this.colMutationCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colMutationCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colMutationCredit.Caption = "Kredit";
             this.colMutationCredit.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colMutationCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colMutationCredit.FieldName = "MutationCredit";
             this.colMutationCredit.Name = "colMutationCredit";
             this.colMutationCredit.Visible = true;
-            this.colMutationCredit.VisibleIndex = 4;
+            this.colMutationCredit.VisibleIndex = 3;
             // 
             // colBalance
             // 
+            this.colBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.colBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colBalance.Caption = "Saldo";
             this.colBalance.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colBalance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colBalance.FieldName = "Balance";
             this.colBalance.Name = "colBalance";
             this.colBalance.Visible = true;
-            this.colBalance.VisibleIndex = 5;
+            this.colBalance.VisibleIndex = 4;
             // 
             // bgwMain
             // 

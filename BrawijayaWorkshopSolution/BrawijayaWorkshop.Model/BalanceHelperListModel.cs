@@ -72,10 +72,11 @@ namespace BrawijayaWorkshop.Model
 
             List<TransactionDetail> listTransaction = _transactionDetailRepository.GetMany(t =>
                 t.Parent.TransactionDate >= firstDay && t.Parent.TransactionDate <= lastDay &&
-                t.JournalId == journalId &&
                 t.Parent.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<TransactionDetailViewModel> mappedListTransaction = new List<TransactionDetailViewModel>();
             Map(listTransaction, mappedListTransaction);
+
+            mappedListTransaction = mappedListTransaction.Where(mt => IsCurrentJournalValid(mt.Journal, mappedCurrentJournal.Code)).ToList();
 
             BalanceJournal lastJournal = _balanceJournalRepository.GetMany(bj =>
                 bj.Month == prevMonth.Month && bj.Year == prevMonth.Year &&
@@ -84,8 +85,11 @@ namespace BrawijayaWorkshop.Model
             if (lastJournal != null)
             {
                 List<BalanceJournalDetail> lastJournalDetail = _balanceJournalDetailRepository.GetMany(bjd =>
-                    bjd.ParentId == lastJournal.Id && bjd.JournalId == journalId).ToList();
-                foreach (var item in lastJournalDetail)
+                    bjd.ParentId == lastJournal.Id).ToList();
+                List<BalanceJournalDetailViewModel> mappedLastJournalDetail = new List<BalanceJournalDetailViewModel>();
+                Map(lastJournalDetail, mappedLastJournalDetail);
+                mappedLastJournalDetail = mappedLastJournalDetail.Where(jDet => IsCurrentJournalValid(jDet.Journal, mappedCurrentJournal.Code)).ToList();
+                foreach (var item in mappedLastJournalDetail)
                 {
                     BalanceHelperItemViewModel firstBalanceItem = new BalanceHelperItemViewModel();
                     firstBalanceItem.TransactionDate = prevMonth;
@@ -104,17 +108,26 @@ namespace BrawijayaWorkshop.Model
                     prevBalance = result[result.Count - 1].Balance;
                 }
 
-                if (IsCurrentJournalValid(transItem.Journal, mappedCurrentJournal.Code))
-                {
-                    BalanceHelperItemViewModel transBalanceItem = new BalanceHelperItemViewModel();
-                    transBalanceItem.TransactionDate = transItem.Parent.TransactionDate;
-                    transBalanceItem.JournalCode = transItem.Journal.Code;
-                    transBalanceItem.JournalName = transItem.Journal.Name;
-                    transBalanceItem.MutationDebit = (transItem.Debit ?? 0);
-                    transBalanceItem.MutationCredit = (transItem.Credit ?? 0);
-                    transBalanceItem.Balance = (transBalanceItem.MutationDebit - transBalanceItem.MutationCredit) + prevBalance;
-                    result.Add(transBalanceItem);
-                }
+                BalanceHelperItemViewModel transBalanceItem = new BalanceHelperItemViewModel();
+                transBalanceItem.TransactionDate = transItem.Parent.TransactionDate;
+                transBalanceItem.JournalCode = transItem.Journal.Code;
+                transBalanceItem.JournalName = transItem.Journal.Name;
+                transBalanceItem.MutationDebit = (transItem.Debit ?? 0);
+                transBalanceItem.MutationCredit = (transItem.Credit ?? 0);
+                transBalanceItem.Balance = (transBalanceItem.MutationDebit - transBalanceItem.MutationCredit) + prevBalance;
+                result.Add(transBalanceItem);
+
+                //if (IsCurrentJournalValid(transItem.Journal, mappedCurrentJournal.Code))
+                //{
+                //    BalanceHelperItemViewModel transBalanceItem = new BalanceHelperItemViewModel();
+                //    transBalanceItem.TransactionDate = transItem.Parent.TransactionDate;
+                //    transBalanceItem.JournalCode = transItem.Journal.Code;
+                //    transBalanceItem.JournalName = transItem.Journal.Name;
+                //    transBalanceItem.MutationDebit = (transItem.Debit ?? 0);
+                //    transBalanceItem.MutationCredit = (transItem.Credit ?? 0);
+                //    transBalanceItem.Balance = (transBalanceItem.MutationDebit - transBalanceItem.MutationCredit) + prevBalance;
+                //    result.Add(transBalanceItem);
+                //}
             }
 
             return result;

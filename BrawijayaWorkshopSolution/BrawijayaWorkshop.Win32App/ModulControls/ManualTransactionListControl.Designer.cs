@@ -195,8 +195,10 @@
             // 
             // colTransAmount
             // 
+            this.colTransAmount.AppearanceHeader.Options.UseTextOptions = true;
+            this.colTransAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colTransAmount.Caption = "Jumlah";
-            this.colTransAmount.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTransAmount.DisplayFormat.FormatString = "{0:#,#;0}";
             this.colTransAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTransAmount.FieldName = "TotalTransaction";
             this.colTransAmount.Name = "colTransAmount";

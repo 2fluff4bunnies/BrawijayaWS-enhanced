@@ -212,6 +212,8 @@
             // 
             // colFirstBalance
             // 
+            this.colFirstBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.colFirstBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colFirstBalance.Caption = "Saldo Awal";
             this.colFirstBalance.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colFirstBalance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -224,6 +226,8 @@
             // 
             // colDebitMutation
             // 
+            this.colDebitMutation.AppearanceHeader.Options.UseTextOptions = true;
+            this.colDebitMutation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colDebitMutation.Caption = "Debet";
             this.colDebitMutation.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colDebitMutation.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -236,6 +240,8 @@
             // 
             // colCreditMutation
             // 
+            this.colCreditMutation.AppearanceHeader.Options.UseTextOptions = true;
+            this.colCreditMutation.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colCreditMutation.Caption = "Kredit";
             this.colCreditMutation.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colCreditMutation.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -248,6 +254,8 @@
             // 
             // colLastBalance
             // 
+            this.colLastBalance.AppearanceHeader.Options.UseTextOptions = true;
+            this.colLastBalance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colLastBalance.Caption = "Saldo Akhir";
             this.colLastBalance.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colLastBalance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;

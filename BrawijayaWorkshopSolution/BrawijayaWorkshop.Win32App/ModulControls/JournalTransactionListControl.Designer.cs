@@ -179,8 +179,10 @@
             // 
             // colJournalDebit
             // 
+            this.colJournalDebit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colJournalDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colJournalDebit.Caption = "Debet";
-            this.colJournalDebit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colJournalDebit.DisplayFormat.FormatString = "{0:#,#;0}";
             this.colJournalDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colJournalDebit.FieldName = "Debit";
             this.colJournalDebit.Name = "colJournalDebit";
@@ -191,8 +193,10 @@
             // 
             // colJournalCredit
             // 
+            this.colJournalCredit.AppearanceHeader.Options.UseTextOptions = true;
+            this.colJournalCredit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colJournalCredit.Caption = "Kredit";
-            this.colJournalCredit.DisplayFormat.FormatString = "{0:#,#}";
+            this.colJournalCredit.DisplayFormat.FormatString = "{0:#,#;0}";
             this.colJournalCredit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colJournalCredit.FieldName = "Credit";
             this.colJournalCredit.Name = "colJournalCredit";
