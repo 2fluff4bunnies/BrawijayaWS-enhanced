@@ -363,7 +363,16 @@ namespace BrawijayaWorkshop.Model
 
                     invcDtl.Invoice = insertedInvoice;
                     invcDtl.SPKDetailSparepartDetail = spkSpDtl;
-                    invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+
+                    if (spkSpDtl.SparepartDetail.PurchasingDetailId > 0)
+                    {
+                        invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+                    }
+                    else if (spkSpDtl.SparepartDetail.SparepartManualTransactionId > 0)
+                    {
+                        invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.SparepartManualTransaction.Price.AsDouble();
+                    }
+
                     invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
 
                     invcDtl.CreateDate = serverTime;
@@ -433,7 +442,15 @@ namespace BrawijayaWorkshop.Model
                 {
                     item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
                     item.ReplaceWithWheelDetailSerialNumber = wheel.ReplaceWheel.SerialNumber;
-                    item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+
+                    if (wheel.ReplaceWheel.SparepartDetail.PurchasingDetailId > 0)
+                    {
+                        item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                    }
+                    else if (wheel.ReplaceWheel.SparepartDetail.SparepartManualTransactionId > 0)
+                    {
+                        item.Price = wheel.ReplaceWheel.SparepartDetail.SparepartManualTransaction.Price;
+                    }
                 }
             }
 

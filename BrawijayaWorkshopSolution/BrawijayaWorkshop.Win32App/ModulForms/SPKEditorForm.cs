@@ -443,7 +443,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     foreach (var item in SPKSparepartDetailList.Where(ssd => ssd.SparepartDetail.Sparepart.Id == SparepartToInsert.Id))
                     {
-                        totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                        if (item.SparepartDetail.PurchasingDetailId > 0)
+                        {
+                            totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                        }
+                        else if (item.SparepartDetail.SparepartManualTransactionId > 0)
+                        {
+                            totalPrice = totalPrice + item.SparepartDetail.SparepartManualTransaction.Price;
+                        }
                     }
 
                     SPKSparepartList.Add(new SPKDetailSparepartViewModel
@@ -776,7 +783,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     Sparepart = this.SelectedWheelDetailToChange.SparepartDetail.Sparepart,
                     SparepartId = this.SelectedWheelDetailToChange.SparepartDetail.SparepartId,
                     TotalQuantity = 1,
-                    TotalPrice = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price,
+                    TotalPrice = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetailId > 0 ? this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price : this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransaction.Price,
                 });
 
                 this.SPKSparepartDetailList.Remove(detailToRemove);
@@ -845,7 +852,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 if (check.Checked)
                 {
-                    this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price;
+                    if (this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetailId > 0)
+                    {
+                        this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price;
+                    }
+                    else if (this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransactionId > 0)
+                    {
+                        this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransaction.Price;
+                    }
+
                     gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
 
                     this.SPKSparepartList.Add(new SPKDetailSparepartViewModel
@@ -853,7 +868,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         Sparepart = this.SelectedWheelDetailToChange.SparepartDetail.Sparepart,
                         SparepartId = this.SelectedWheelDetailToChange.SparepartDetail.SparepartId,
                         TotalQuantity = 1,
-                        TotalPrice = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price,
+                        TotalPrice = this.SelectedVehicleWheel.Price
                     });
 
                     this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
