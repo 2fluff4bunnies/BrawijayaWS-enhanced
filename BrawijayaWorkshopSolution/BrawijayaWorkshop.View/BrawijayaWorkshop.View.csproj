@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBalanceBaseView.cs" />
+    <Compile Include="IBalanceHelperListView.cs" />
     <Compile Include="IBalanceJournalListView.cs" />
     <Compile Include="IBalanceSheetView.cs" />
     <Compile Include="ICreditPaymentListView.cs" />
