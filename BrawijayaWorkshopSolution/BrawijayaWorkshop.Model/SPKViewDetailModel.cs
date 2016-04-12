@@ -390,6 +390,12 @@ namespace BrawijayaWorkshop.Model
                     vw.ModifyUserId = userId;
 
                     _vehicleWheelRepository.Update(vw);
+
+
+                    UsedGood usedWHeel = _usedGoodRepository.GetMany(ug => ug.SparepartId == item.WheelDetail.SparepartDetail.SparepartId).FirstOrDefault();
+                    usedWHeel.Stock++;
+
+                    _usedGoodRepository.Update(usedWHeel);
                 }
 
                 //Remove Wheel Exchange

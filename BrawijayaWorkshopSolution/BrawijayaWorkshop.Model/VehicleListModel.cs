@@ -11,12 +11,18 @@ namespace BrawijayaWorkshop.Model
     public class VehicleListModel : AppBaseModel
     {
         private IVehicleRepository _vehicleRepository;
+        private IVehicleWheelRepository _vehicleWheelRepository;
+        private IUsedGoodRepository _usedGoodRepository;
         private IUnitOfWork _unitOfWork;
 
-        public VehicleListModel(IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
+        public VehicleListModel(IVehicleRepository vehicleRepository, 
+            IVehicleWheelRepository vehicleWheelRepository, IUsedGoodRepository usedGoodRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _vehicleRepository = vehicleRepository;
+            _vehicleWheelRepository = vehicleWheelRepository;
+            _usedGoodRepository = usedGoodRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -33,6 +39,14 @@ namespace BrawijayaWorkshop.Model
             Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
             entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
             _vehicleRepository.Update(entity);
+
+
+            foreach (var item in _vehicleWheelRepository.GetMany(vw => vw.VehicleId == vehicle.Id && vw.Status ==(int) DbConstant.DefaultDataStatus.Active))
+            {
+                UsedGood usedWHeel = _usedGoodRepository.GetMany(ug => ug.SparepartId == item.WheelDetail.SparepartDetail.SparepartId).FirstOrDefault();
+                usedWHeel.Stock++;
+            }
+
             _unitOfWork.SaveChanges();
         }
     }
