@@ -632,6 +632,18 @@
     <Compile Include="NavigationControls\TransactionDataNavigationControl.Designer.cs">
       <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\BalanceHelperPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\BalanceHelperPrintItem.Designer.cs">
+      <DependentUpon>BalanceHelperPrintItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintItems\BalanceJournalPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\BalanceJournalPrintItem.Designer.cs">
+      <DependentUpon>BalanceJournalPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\InternalInvoicePrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -643,6 +655,12 @@
     </Compile>
     <Compile Include="PrintItems\InvoicePrintItem.Designer.cs">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintItems\ProfitLossPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\ProfitLossPrintItem.Designer.cs">
+      <DependentUpon>ProfitLossPrintItem.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintItems\SalesReturn.cs">
       <SubType>Component</SubType>
@@ -910,6 +928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\TransactionDataNavigationControl.resx">
       <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\BalanceJournalPrintItem.resx">
+      <DependentUpon>BalanceJournalPrintItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\InternalInvoicePrintItem.resx">
       <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
