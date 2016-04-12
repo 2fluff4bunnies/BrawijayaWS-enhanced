@@ -385,10 +385,31 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
             editor.SelectedSPK = this.SelectedSPK;
+            editor.IsRequestPrintApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsSPKApproval_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsPrintApproval_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
             editor.IsPrintApproval = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
         }
+
     }
 }

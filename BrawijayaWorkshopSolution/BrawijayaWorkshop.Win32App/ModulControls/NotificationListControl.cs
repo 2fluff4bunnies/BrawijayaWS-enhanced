@@ -85,7 +85,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if(this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
                this.SelectedSPK.StatusPrintId == 0)
             {
-                editor.IsPrintApproval = true;
+                editor.IsRequestPrintApproval = true;
             }
             if (this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending)
             {

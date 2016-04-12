@@ -188,14 +188,10 @@ namespace BrawijayaWorkshop.Model
         public void PrintSPK(SPKViewModel spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
-
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
-
+            entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
             _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
@@ -255,14 +251,10 @@ namespace BrawijayaWorkshop.Model
         public void RequestPrintSPK(SPKViewModel spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
-
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
-
+            entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
             _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
@@ -271,21 +263,18 @@ namespace BrawijayaWorkshop.Model
         public void ApprovePrintSPK(SPKViewModel spk, int userId, bool isApproved)
         {
             DateTime serverTime = DateTime.Now;
-
+            SPK entity = _SPKRepository.GetById(spk.Id);
             if (isApproved)
             {
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
+                entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
             }
             else
             {
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+                entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
             }
 
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
-            SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
 
             _SPKRepository.Update(entity);
 
@@ -309,6 +298,7 @@ namespace BrawijayaWorkshop.Model
             invc.ModifyUserId = userId;
             invc.CreateUserId = userId;
 
+            invc.Code = spk.Code.Replace("SPK", "INVC");
             invc.TotalPrice = spk.TotalSparepartPrice;
             invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
             invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
@@ -347,14 +337,14 @@ namespace BrawijayaWorkshop.Model
                 invc.TotalPrice = spk.TotalSparepartPrice + invc.TotalServicePlusFee;
             }
 
+            _invoiceRepository.AttachNavigation<SPK>(invc.SPK);
+            _invoiceRepository.AttachNavigation<Reference>(invc.PaymentMethod);
             Invoice insertedInvoice = _invoiceRepository.Add(invc);
 
             List<SPKDetailSparepart> SPKSpList = _SPKDetailSparepartRepository.GetMany(sp => sp.SPKId == spk.Id).ToList();
 
             foreach (SPKDetailSparepart spkSp in SPKSpList)
             {
-
-
                 List<SPKDetailSparepartDetail> SPKSpDetailList = _SPKDetailSparepartDetailRepository.GetMany(spdt => spdt.SPKDetailSparepartId == spkSp.Id).ToList();
 
                 foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)

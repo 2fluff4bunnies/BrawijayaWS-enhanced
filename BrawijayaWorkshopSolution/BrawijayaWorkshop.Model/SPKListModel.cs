@@ -105,13 +105,11 @@ namespace BrawijayaWorkshop.Model
         public void PrintSPK(SPKViewModel spk, int userId)
         {
             DateTime serverTime = DateTime.Now;
-
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-
             SPK entity = _SPKRepository.GetById(spk.Id);
-            Map(spk, entity);
+            entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
+           
             _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();

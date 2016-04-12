@@ -128,13 +128,11 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
+            vehicle.ModifyDate = serverTime;
+            vehicle.ModifyUserId = userId;
             Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
             Map(vehicle, entity);
-            entity.ModifyDate = serverTime;
-            entity.ModifyUserId = userId;
-            _vehicleRepository.AttachNavigation(entity.Customer);
             _vehicleRepository.Update(entity);
-            _unitOfWork.SaveChanges();
 
             if (vehicleWheelExchanged.Count > 0)
             {
@@ -145,11 +143,10 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
 
-                    _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
-                    _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
+                    _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
                     _vehicleWheelRepository.Update(vwEntity);
                 }
-                _unitOfWork.SaveChanges();
             }
 
             foreach (var vw in vehicleWheels)
@@ -159,8 +156,8 @@ namespace BrawijayaWorkshop.Model
                 vwEntity.ModifyDate = serverTime;
                 vwEntity.ModifyUserId = userId;
 
-                _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
-                _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
+                _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
                 _vehicleWheelRepository.Update(vwEntity);
             }
 
@@ -171,12 +168,11 @@ namespace BrawijayaWorkshop.Model
         {
             DateTime serverTime = DateTime.Now;
 
+            vehicle.ModifyDate = serverTime;
+            vehicle.ModifyUserId = userId;
+            vehicle.Status = (int)DbConstant.DefaultDataStatus.Deleted;
             Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
             Map(vehicle, entity);
-            entity.ModifyDate = serverTime;
-            entity.ModifyUserId = userId;
-            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            _vehicleRepository.AttachNavigation(entity.Customer);
             _vehicleRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
