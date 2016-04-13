@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -21,7 +22,10 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKViewModel> SearchSPKPending()
         {
-            List<SPK> result = _spkRepository.GetMany(c => c.StatusApprovalId == 0 || c.StatusPrintId == 0).OrderByDescending(c => c.Id).ToList();
+            List<SPK> result = _spkRepository.GetMany(spk => 
+                (spk.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending || spk.StatusPrintId == (int) DbConstant.SPKPrintStatus.Pending) &&
+                spk.Status == (int)DbConstant.DefaultDataStatus.Active
+                ).OrderByDescending(c => c.Id).ToList();
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
             return Map(result, mappedResult);
         }
