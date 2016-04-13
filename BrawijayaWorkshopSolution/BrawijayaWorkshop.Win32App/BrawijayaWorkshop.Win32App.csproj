@@ -929,6 +929,9 @@
     <EmbeddedResource Include="NavigationControls\TransactionDataNavigationControl.resx">
       <DependentUpon>TransactionDataNavigationControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\BalanceHelperPrintItem.resx">
+      <DependentUpon>BalanceHelperPrintItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\BalanceJournalPrintItem.resx">
       <DependentUpon>BalanceJournalPrintItem.cs</DependentUpon>
     </EmbeddedResource>
