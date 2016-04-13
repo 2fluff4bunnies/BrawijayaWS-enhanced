@@ -126,14 +126,14 @@
             // 
             // TopMargin
             // 
-            this.TopMargin.HeightF = 37.5F;
+            this.TopMargin.HeightF = 2.083333F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 35.41667F;
+            this.BottomMargin.HeightF = 4.000092F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -440,7 +440,7 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourceBalanceViewModel});
             this.DataSource = this.dataSourceBalanceViewModel;
-            this.Margins = new System.Drawing.Printing.Margins(39, 38, 38, 35);
+            this.Margins = new System.Drawing.Printing.Margins(39, 38, 2, 4);
             this.Version = "15.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSourceBalanceViewModel)).EndInit();

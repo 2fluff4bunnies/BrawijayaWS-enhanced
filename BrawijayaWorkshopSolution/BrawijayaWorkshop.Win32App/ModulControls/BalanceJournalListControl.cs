@@ -4,8 +4,8 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
+using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -188,15 +188,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            // Check whether the GridControl can be printed.
-            if (!gridBalanceJournal.IsPrintingAvailable)
-            {
-                MessageBox.Show("Fungsi print tidak tersedia", "Error");
-                return;
-            }
+            BalanceJournalPrintItem report = new BalanceJournalPrintItem(SelectedYear, SelectedMonth);
+            report.DataSource = BalanceJournalDetailList;
+            report.FillDataSource();
 
-            // Print.
-            gridBalanceJournal.PrintDialog();
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
+            }
         }
     }
 }
