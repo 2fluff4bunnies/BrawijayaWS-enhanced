@@ -938,6 +938,9 @@
     <EmbeddedResource Include="PrintItems\InvoicePrintItem.resx">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\ProfitLossPrintItem.resx">
+      <DependentUpon>ProfitLossPrintItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\SalesReturn.resx">
       <DependentUpon>SalesReturn.cs</DependentUpon>
     </EmbeddedResource>

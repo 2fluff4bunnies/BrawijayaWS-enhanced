@@ -4,6 +4,8 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -186,15 +188,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            // Check whether the GridControl can be printed.
-            if (!gridActiva.IsPrintingAvailable)
-            {
-                MessageBox.Show("Fungsi print tidak tersedia", "Error");
-                return;
-            }
+            ProfitLossPrintItem report = new ProfitLossPrintItem(SelectedYear, SelectedMonth);
+            report.DataSource = ProfitLossList;
+            report.FillDataSource();
 
-            // Print.
-            gridActiva.PrintDialog();
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
+            }
         }
     }
 }
