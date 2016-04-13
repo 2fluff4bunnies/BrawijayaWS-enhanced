@@ -60,38 +60,80 @@ namespace BrawijayaWorkshop.Model
 
         public void DeletePurchaseReturn(int purchaseReturnID, int userID)
         {
-            DateTime serverTime = DateTime.Now;
-
-            PurchaseReturn purchaseReturn = _purchaseReturnRepository.GetById(purchaseReturnID);
-            purchaseReturn.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            purchaseReturn.ModifyDate = serverTime;
-            purchaseReturn.ModifyUserId = userID;
-            _purchaseReturnRepository.Update(purchaseReturn);
-
-            List<PurchaseReturnDetail> listDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
-            foreach (var itemDetail in listDetail)
+            using(var trans = _unitOfWork.BeginTransaction())
             {
-                itemDetail.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-                itemDetail.ModifyDate = serverTime;
-                itemDetail.ModifyUserId = userID;
-                _purchaseReturnDetailRepository.Update(itemDetail);
+                try
+                {
+                    DateTime serverTime = DateTime.Now;
 
-                SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.SparepartDetailId);
-                spDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
-                _sparepartDetailRepository.Update(spDetail);
+                    PurchaseReturn purchaseReturn = _purchaseReturnRepository.GetById(purchaseReturnID);
+                    purchaseReturn.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                    purchaseReturn.ModifyDate = serverTime;
+                    purchaseReturn.ModifyUserId = userID;
 
-                Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
-                sparepart.StockQty += 1;
-                _sparepartRepository.Update(sparepart);
+                    _purchaseReturnRepository.AttachNavigation(purchaseReturn.CreateUser);
+                    _purchaseReturnRepository.AttachNavigation(purchaseReturn.ModifyUser);
+                    _purchaseReturnRepository.AttachNavigation(purchaseReturn.Purchasing);
+                    _purchaseReturnRepository.Update(purchaseReturn);
+                    _unitOfWork.SaveChanges();
+
+                    List<PurchaseReturnDetail> listDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
+                    foreach (var itemDetail in listDetail)
+                    {
+                        itemDetail.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                        itemDetail.ModifyDate = serverTime;
+                        itemDetail.ModifyUserId = userID;
+
+                        _purchaseReturnDetailRepository.AttachNavigation(itemDetail.CreateUser);
+                        _purchaseReturnRepository.AttachNavigation(itemDetail.ModifyUser);
+                        _purchaseReturnRepository.AttachNavigation(itemDetail.PurchaseReturn);
+                        _purchaseReturnRepository.AttachNavigation(itemDetail.PurchasingDetail);
+                        _purchaseReturnRepository.AttachNavigation(itemDetail.SparepartDetail);
+                        _purchaseReturnDetailRepository.Update(itemDetail);
+
+                        SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.SparepartDetailId);
+                        spDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                        _sparepartDetailRepository.Update(spDetail);
+
+                        Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
+                        sparepart.StockQty += 1;
+
+                        _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                        _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                        _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                        _sparepartRepository.AttachNavigation(sparepart.UnitReference);
+                        _sparepartRepository.Update(sparepart);
+                    }
+
+                    _unitOfWork.SaveChanges();
+
+                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == purchaseReturnID).FirstOrDefault();
+                    transaction.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                    transaction.ModifyDate = serverTime;
+                    transaction.ModifyUserId = userID;
+
+                    _transactionRepository.AttachNavigation(transaction.CreateUser);
+                    _transactionRepository.AttachNavigation(transaction.ModifyUser);
+                    _transactionRepository.AttachNavigation(transaction.PaymentMethod);
+                    _transactionRepository.AttachNavigation(transaction.ReferenceTable);
+                    _transactionRepository.Update(transaction);
+
+                    _unitOfWork.SaveChanges();
+                    trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    throw;
+                }
             }
-
-            Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == purchaseReturnID).FirstOrDefault();
-            transaction.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            transaction.ModifyDate = serverTime;
-            transaction.ModifyUserId = userID;
-            _transactionRepository.Update(transaction);
-
-            _unitOfWork.SaveChanges();
+            
         }
     }
 }
