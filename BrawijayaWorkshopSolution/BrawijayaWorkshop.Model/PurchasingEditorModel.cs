@@ -64,105 +64,153 @@ namespace BrawijayaWorkshop.Model
 
         public void InsertPurchasing(PurchasingViewModel purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
         {
-            DateTime serverTime = DateTime.Now;
-
-            purchasing.CreateDate = serverTime;
-            purchasing.CreateUserId = userID;
-            purchasing.ModifyUserId = userID;
-            purchasing.ModifyDate = serverTime;
-            purchasing.Status = (int)DbConstant.PurchasingStatus.NotVerified;
-            purchasing.PaymentMethodId = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG).FirstOrDefault().Id;
-            purchasing.TotalHasPaid = 0;
-
-            string code = "PRC" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
-            //get total purchasing created today
-            List<Purchasing> todayPCR = _purchasingRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
-            code = code + (todayPCR.Count + 1);
-            purchasing.Code = code;
-
-            Purchasing entity = new Purchasing();
-            Map(purchasing, entity);
-            
-            _purchasingRepository.AttachNavigation(entity.CreateUser);
-            _purchasingRepository.AttachNavigation(entity.ModifyUser);
-            _purchasingRepository.AttachNavigation(entity.PaymentMethod);
-            _purchasingRepository.AttachNavigation(entity.Supplier);
-
-            
-            Purchasing purchasingInserted = _purchasingRepository.Add(entity);
-
-            foreach (var itemPurchasingDetail in purchasingDetails)
+            using (var trans = _unitOfWork.BeginTransaction())
             {
-                PurchasingDetail newPurchasingDetail = new PurchasingDetail();
-                newPurchasingDetail.CreateDate = serverTime;
-                newPurchasingDetail.CreateUserId = userID;
-                newPurchasingDetail.ModifyUserId = userID;
-                newPurchasingDetail.ModifyDate = serverTime;
-                newPurchasingDetail.Purchasing = purchasingInserted;
-                newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
-                newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
-                newPurchasingDetail.Price = itemPurchasingDetail.Price;
-                newPurchasingDetail.SerialNumber = itemPurchasingDetail.SerialNumber;
-                newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
-                PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
+                try
+                {
+                    DateTime serverTime = DateTime.Now;
 
+                    purchasing.CreateDate = serverTime;
+                    purchasing.CreateUserId = userID;
+                    purchasing.ModifyUserId = userID;
+                    purchasing.ModifyDate = serverTime;
+                    purchasing.Status = (int)DbConstant.PurchasingStatus.NotVerified;
+                    purchasing.PaymentMethodId = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_PURCHASE_PAYMENTMETHOD_UTANG).FirstOrDefault().Id;
+                    purchasing.TotalHasPaid = 0;
+
+                    string code = "PRC" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+                    //get total purchasing created today
+                    List<Purchasing> todayPCR = _purchasingRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+                    code = code + (todayPCR.Count + 1);
+                    purchasing.Code = code;
+
+                    Purchasing entity = new Purchasing();
+                    Map(purchasing, entity);
+
+                    _purchasingRepository.AttachNavigation(entity.CreateUser);
+                    _purchasingRepository.AttachNavigation(entity.ModifyUser);
+                    _purchasingRepository.AttachNavigation(entity.PaymentMethod);
+                    _purchasingRepository.AttachNavigation(entity.Supplier);
+                    Purchasing purchasingInserted = _purchasingRepository.Add(entity);
+                    _unitOfWork.SaveChanges();
+
+                    foreach (var itemPurchasingDetail in purchasingDetails)
+                    {
+                        PurchasingDetail newPurchasingDetail = new PurchasingDetail();
+                        newPurchasingDetail.CreateDate = serverTime;
+                        newPurchasingDetail.CreateUserId = userID;
+                        newPurchasingDetail.ModifyUserId = userID;
+                        newPurchasingDetail.ModifyDate = serverTime;
+                        newPurchasingDetail.PurchasingId = purchasingInserted.Id;
+                        newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
+                        newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
+                        newPurchasingDetail.Price = itemPurchasingDetail.Price;
+                        newPurchasingDetail.SerialNumber = itemPurchasingDetail.SerialNumber;
+                        newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
+
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.CreateUser);
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.ModifyUser);
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.Purchasing);
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.Sparepart);
+                        PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
+                    }
+                    _unitOfWork.SaveChanges();
+                    Recalculate(purchasingInserted);
+
+                    trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    throw;
+                }
+                
             }
-            _unitOfWork.SaveChanges();
-            Recalculate(purchasingInserted);
         }
 
         public void UpdatePurchasing(PurchasingViewModel purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
         {
-            DateTime serverTime = DateTime.Now;
-            purchasing.ModifyUserId = userID;
-            purchasing.ModifyDate = serverTime;
-            Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
-            Map(purchasing, entity);
-            _purchasingRepository.Update(entity);
-
-            List<PurchasingDetail> purchasingDetailsDB = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasing.Id).ToList();
-            //check for updated and deleted item
-            foreach (var itemPurchasingDetailDB in purchasingDetailsDB)
+            using(var trans = _unitOfWork.BeginTransaction())
             {
-                PurchasingDetailViewModel itemUpdated = purchasingDetails.Where(i => i.Id == itemPurchasingDetailDB.Id).FirstOrDefault();
-                if (itemUpdated != null)
+                try
                 {
-                    PurchasingDetail purchasingDetailUpdated = _purchasingDetailRepository.GetById(itemUpdated.Id);
-                    purchasingDetailUpdated.PurchasingId = itemUpdated.PurchasingId;
-                    purchasingDetailUpdated.SparepartId = itemUpdated.SparepartId;
-                    purchasingDetailUpdated.Qty = itemUpdated.Qty;
-                    purchasingDetailUpdated.Price = itemUpdated.Price;
-                    purchasingDetailUpdated.ModifyUserId = userID;
-                    purchasingDetailUpdated.ModifyDate = serverTime;
-                    _purchasingDetailRepository.Update(purchasingDetailUpdated);
+                    DateTime serverTime = DateTime.Now;
+                    purchasing.ModifyUserId = userID;
+                    purchasing.ModifyDate = serverTime;
+                    Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
+                    Map(purchasing, entity);
 
-                    purchasingDetails.Remove(itemUpdated);
+                    _purchasingRepository.AttachNavigation(entity.CreateUser);
+                    _purchasingRepository.AttachNavigation(entity.ModifyUser);
+                    _purchasingRepository.AttachNavigation(entity.PaymentMethod);
+                    _purchasingRepository.AttachNavigation(entity.Supplier);
+                    _purchasingRepository.Update(entity);
+                    _unitOfWork.SaveChanges();
+
+                    List<PurchasingDetail> purchasingDetailsDB = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasing.Id).ToList();
+                    //check for updated and deleted item
+                    foreach (var itemPurchasingDetailDB in purchasingDetailsDB)
+                    {
+                        PurchasingDetailViewModel itemUpdated = purchasingDetails.Where(i => i.Id == itemPurchasingDetailDB.Id).FirstOrDefault();
+                        if (itemUpdated != null)
+                        {
+                            PurchasingDetail purchasingDetailUpdated = _purchasingDetailRepository.GetById(itemUpdated.Id);
+                            purchasingDetailUpdated.PurchasingId = itemUpdated.PurchasingId;
+                            purchasingDetailUpdated.SparepartId = itemUpdated.SparepartId;
+                            purchasingDetailUpdated.Qty = itemUpdated.Qty;
+                            purchasingDetailUpdated.Price = itemUpdated.Price;
+                            purchasingDetailUpdated.ModifyUserId = userID;
+                            purchasingDetailUpdated.ModifyDate = serverTime;
+
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetailUpdated.CreateUser);
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetailUpdated.ModifyUser);
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetailUpdated.Purchasing);
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetailUpdated.Sparepart);
+                            _purchasingDetailRepository.Update(purchasingDetailUpdated);
+
+                            purchasingDetails.Remove(itemUpdated);
+                        }
+                        else
+                        {
+                            //delete
+                            _purchasingDetailRepository.Delete(_purchasingDetailRepository.GetById<int>(itemPurchasingDetailDB.Id));
+                        }
+                    }
+                    _unitOfWork.SaveChanges();
+
+                    //new item
+                    foreach (var itemPurchasingDetail in purchasingDetails)
+                    {
+                        PurchasingDetail newPurchasingDetail = new PurchasingDetail();
+                        newPurchasingDetail.PurchasingId = purchasing.Id;
+                        newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
+                        newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
+                        newPurchasingDetail.Price = itemPurchasingDetail.Price;
+                        newPurchasingDetail.CreateDate = serverTime;
+                        newPurchasingDetail.CreateUserId = userID;
+                        newPurchasingDetail.ModifyUserId = userID;
+                        newPurchasingDetail.ModifyDate = serverTime;
+                        newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
+
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.CreateUser);
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.ModifyUser);
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.Purchasing);
+                        _purchasingDetailRepository.AttachNavigation(newPurchasingDetail.Sparepart);
+                        _purchasingDetailRepository.Update(newPurchasingDetail);
+                        PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
+                    }
+                    _unitOfWork.SaveChanges();
+                    Recalculate(entity);
+
+                    trans.Commit();
                 }
-                else
+                catch (Exception)
                 {
-                    //delete
-                    _purchasingDetailRepository.Delete(_purchasingDetailRepository.GetById<int>(itemPurchasingDetailDB.Id));
+                    trans.Rollback();
+                    throw;
                 }
+                
             }
-
-            //new item
-            foreach (var itemPurchasingDetail in purchasingDetails)
-            {
-                PurchasingDetail newPurchasingDetail = new PurchasingDetail();
-                newPurchasingDetail.PurchasingId = purchasing.Id;
-                newPurchasingDetail.SparepartId = itemPurchasingDetail.SparepartId;
-                newPurchasingDetail.Qty = itemPurchasingDetail.Qty;
-                newPurchasingDetail.Price = itemPurchasingDetail.Price;
-                newPurchasingDetail.CreateDate = serverTime;
-                newPurchasingDetail.CreateUserId = userID;
-                newPurchasingDetail.ModifyUserId = userID;
-                newPurchasingDetail.ModifyDate = serverTime;
-                newPurchasingDetail.Status = (int)DbConstant.PurchasingStatus.NotVerified;
-                PurchasingDetail purchasingDetailInserted = _purchasingDetailRepository.Add(newPurchasingDetail);
-            }
-
-            _unitOfWork.SaveChanges();
-            Recalculate(entity);
         }
 
         public void Recalculate(Purchasing purchasing)

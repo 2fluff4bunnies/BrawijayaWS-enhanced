@@ -113,6 +113,9 @@ namespace BrawijayaWorkshop.Model
             code = code + (todayPRR.Count + 1);
             purchaseReturn.Code = code;
 
+            _purchaseReturnRepository.AttachNavigation(purchaseReturn.CreateUser);
+            _purchaseReturnRepository.AttachNavigation(purchaseReturn.ModifyUser);
+            _purchaseReturnRepository.AttachNavigation(purchaseReturn.Purchasing);
             purchaseReturn = _purchaseReturnRepository.Add(purchaseReturn);
 
             List<PurchaseReturnDetail> listReturnDetail = new List<PurchaseReturnDetail>();
@@ -141,6 +144,12 @@ namespace BrawijayaWorkshop.Model
                     spDetail.ModifyDate = serverTime;
                     spDetail.ModifyUserId = userID;
                     spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
+
+                    _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
                     _sparepartDetailRepository.Update(spDetail);
                 }
 
@@ -148,11 +157,21 @@ namespace BrawijayaWorkshop.Model
                 sparepart.ModifyDate = serverTime;
                 sparepart.ModifyUserId = userID;
                 sparepart.StockQty -= itemReturn.ReturQty;
+
+                _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                 _sparepartRepository.Update(sparepart);
 	        }
 
             foreach (var itemReturnDetail in listReturnDetail)
 	        {
+                _purchaseReturnDetailRepository.AttachNavigation(itemReturnDetail.CreateUser);
+                _purchaseReturnRepository.AttachNavigation(itemReturnDetail.ModifyUser);
+                _purchaseReturnRepository.AttachNavigation(itemReturnDetail.PurchaseReturn);
+                _purchaseReturnRepository.AttachNavigation(itemReturnDetail.PurchasingDetail);
+                _purchaseReturnRepository.AttachNavigation(itemReturnDetail.SparepartDetail);
                 _purchaseReturnDetailRepository.Add(itemReturnDetail);
 	        }
 
@@ -169,23 +188,39 @@ namespace BrawijayaWorkshop.Model
             transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
             transaction.Description = "Retur Pembelian";
             transaction.TransactionDate = serverTime;
+
+            _transactionRepository.AttachNavigation(transaction.CreateUser);
+            _transactionRepository.AttachNavigation(transaction.ModifyUser);
+            _transactionRepository.AttachNavigation(transaction.PaymentMethod);
+            _transactionRepository.AttachNavigation(transaction.ReferenceTable);
             transaction = _transactionRepository.Add(transaction);
 
             TransactionDetail transDebit = new TransactionDetail();
             transDebit.Debit = totalTransaction;
             transDebit.Parent = transaction;
             transDebit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
+
+            _transactionDetailRepository.AttachNavigation(transDebit.Journal);
+            _transactionDetailRepository.AttachNavigation(transDebit.Parent);
             _transactionDetailRepository.Add(transDebit);
 
             TransactionDetail transCredit = new TransactionDetail();
             transCredit.Credit = totalTransaction;
             transCredit.Parent = transaction;
             transCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.01").FirstOrDefault().Id;
+
+            _transactionDetailRepository.AttachNavigation(transCredit.Journal);
+            _transactionDetailRepository.AttachNavigation(transCredit.Parent);
             _transactionDetailRepository.Add(transCredit);
 
             _unitOfWork.SaveChanges();
 
             transaction.PrimaryKeyValue = purchaseReturn.Id;
+
+            _transactionRepository.AttachNavigation(transaction.CreateUser);
+            _transactionRepository.AttachNavigation(transaction.ModifyUser);
+            _transactionRepository.AttachNavigation(transaction.PaymentMethod);
+            _transactionRepository.AttachNavigation(transaction.ReferenceTable); 
             _transactionRepository.Update(transaction);
             _unitOfWork.SaveChanges();
         }
@@ -225,6 +260,12 @@ namespace BrawijayaWorkshop.Model
                         spDetail.ModifyDate = serverTime;
                         spDetail.ModifyUserId = userID;
                         spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
+
+                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
                         _sparepartDetailRepository.Update(spDetail);
                     }
 
@@ -232,10 +273,20 @@ namespace BrawijayaWorkshop.Model
                     sparepart.ModifyDate = serverTime;
                     sparepart.ModifyUserId = userID;
                     sparepart.StockQty -= diffQty;
+
+                    _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                    _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                    _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                    _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                     _sparepartRepository.Update(sparepart);
 
                     foreach (var itemNewReturnDetail in newReturnDetail)
                     {
+                        _purchaseReturnDetailRepository.AttachNavigation(itemNewReturnDetail.CreateUser);
+                        _purchaseReturnRepository.AttachNavigation(itemNewReturnDetail.ModifyUser);
+                        _purchaseReturnRepository.AttachNavigation(itemNewReturnDetail.PurchaseReturn);
+                        _purchaseReturnRepository.AttachNavigation(itemNewReturnDetail.PurchasingDetail);
+                        _purchaseReturnRepository.AttachNavigation(itemNewReturnDetail.SparepartDetail);
                         _purchaseReturnDetailRepository.Add(itemNewReturnDetail);
                     }
                 }
@@ -254,6 +305,12 @@ namespace BrawijayaWorkshop.Model
                         spDetail.ModifyDate = serverTime;
                         spDetail.ModifyUserId = userID;
                         spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+
+                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
                         _sparepartDetailRepository.Update(spDetail);
                     }
 
@@ -261,20 +318,36 @@ namespace BrawijayaWorkshop.Model
                     sparepart.ModifyDate = serverTime;
                     sparepart.ModifyUserId = userID;
                     sparepart.StockQty += diffQty;
+
+                    _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                    _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                    _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                    _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                     _sparepartRepository.Update(sparepart);
                 }
             }
 
             transaction.TotalPayment = totalTransaction.AsDouble();
             transaction.TotalTransaction = totalTransaction.AsDouble();
+
+            _transactionRepository.AttachNavigation(transaction.CreateUser);
+            _transactionRepository.AttachNavigation(transaction.ModifyUser);
+            _transactionRepository.AttachNavigation(transaction.PaymentMethod);
+            _transactionRepository.AttachNavigation(transaction.ReferenceTable);
             _transactionRepository.Update(transaction);
 
             TransactionDetail transDebit = _transactionDetailRepository.GetMany(x=>x.ParentId == transaction.Id && x.Debit > 0).FirstOrDefault();
             transDebit.Debit = totalTransaction;
+
+            _transactionDetailRepository.AttachNavigation(transDebit.Journal);
+            _transactionDetailRepository.AttachNavigation(transDebit.Parent);
             _transactionDetailRepository.Update(transDebit);
 
             TransactionDetail transCredit = _transactionDetailRepository.GetMany(x => x.ParentId == transaction.Id && x.Credit > 0).FirstOrDefault();
             transCredit.Credit = totalTransaction;
+
+            _transactionDetailRepository.AttachNavigation(transCredit.Journal);
+            _transactionDetailRepository.AttachNavigation(transCredit.Parent);
             _transactionDetailRepository.Update(transCredit);
 
             _unitOfWork.SaveChanges();
