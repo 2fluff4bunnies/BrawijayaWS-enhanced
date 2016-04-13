@@ -650,6 +650,12 @@
     <Compile Include="PrintItems\InternalInvoicePrintItem.Designer.cs">
       <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\SalesReturnPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\SalesReturnPrintItem.Designer.cs">
+      <DependentUpon>SalesReturnPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\InvoicePrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -661,12 +667,6 @@
     </Compile>
     <Compile Include="PrintItems\ProfitLossPrintItem.Designer.cs">
       <DependentUpon>ProfitLossPrintItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PrintItems\SalesReturn.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PrintItems\SalesReturn.Designer.cs">
-      <DependentUpon>SalesReturn.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintItems\SPKPrintItem.cs">
       <SubType>Component</SubType>
@@ -938,14 +938,14 @@
     <EmbeddedResource Include="PrintItems\InternalInvoicePrintItem.resx">
       <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\SalesReturnPrintItem.resx">
+      <DependentUpon>SalesReturnPrintItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\InvoicePrintItem.resx">
       <DependentUpon>InvoicePrintItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\ProfitLossPrintItem.resx">
       <DependentUpon>ProfitLossPrintItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PrintItems\SalesReturn.resx">
-      <DependentUpon>SalesReturn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\SPKPrintItem.resx">
       <DependentUpon>SPKPrintItem.cs</DependentUpon>

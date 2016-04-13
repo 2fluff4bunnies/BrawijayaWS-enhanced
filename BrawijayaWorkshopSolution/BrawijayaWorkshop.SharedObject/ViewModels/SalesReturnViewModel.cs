@@ -13,6 +13,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public DateTime Date { get; set; }
 
         public int InvoiceId { get; set; }
-        public virtual InvoiceViewModel Invoice { get; set; }
+        public InvoiceViewModel Invoice { get; set; }
+
+        public List<SalesReturnDetailViewModel> SalesReturnDetails { get; set; }
     }
 }
