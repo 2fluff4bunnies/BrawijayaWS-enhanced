@@ -1,6 +1,6 @@
 ﻿namespace BrawijayaWorkshop.Win32App.PrintItems
 {
-    partial class InvoicePrintItem
+    partial class SalesReturnPrintItem
     {
         /// <summary>
         /// Required designer variable.

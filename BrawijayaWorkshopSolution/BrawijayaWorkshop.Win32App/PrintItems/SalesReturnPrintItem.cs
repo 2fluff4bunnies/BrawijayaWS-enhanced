@@ -4,9 +4,9 @@ using System.Data;
 
 namespace BrawijayaWorkshop.Win32App.PrintItems
 {
-    public partial class InvoicePrintItem : DevExpress.XtraReports.UI.XtraReport
+    public partial class SalesReturnPrintItem : DevExpress.XtraReports.UI.XtraReport
     {
-        public InvoicePrintItem()
+        public SalesReturnPrintItem()
         {
             InitializeComponent();
 
