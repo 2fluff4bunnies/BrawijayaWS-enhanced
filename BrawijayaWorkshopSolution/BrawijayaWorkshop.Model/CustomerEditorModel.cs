@@ -31,11 +31,24 @@ namespace BrawijayaWorkshop.Model
 
         public void InsertCustomer(CustomerViewModel customer)
         {
-            Customer entity = new Customer();
-            Map(customer, entity);
-            _customerRepository.AttachNavigation<City>(entity.City);
-            _customerRepository.Add(entity);
-            _unitOfWork.SaveChanges();
+            using(var trans = _unitOfWork.BeginTransaction())
+            {
+                try
+                {
+                    Customer entity = new Customer();
+                    Map(customer, entity);
+                    _customerRepository.AttachNavigation<City>(entity.City);
+                    _customerRepository.Add(entity);
+                    _unitOfWork.SaveChanges();
+
+                    trans.Commit();
+                }
+                catch (System.Exception ex)
+                {
+                    trans.Rollback();
+                    throw ex;
+                }
+            }
         }
 
         public void UpdateCustomer(CustomerViewModel customer)
