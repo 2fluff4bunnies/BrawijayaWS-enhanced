@@ -17,13 +17,14 @@ namespace BrawijayaWorkshop.Model
         private IPurchaseReturnDetailRepository _purchaseReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchaseReturnTransactionListModel(ITransactionRepository transactionRepository,
             IPurchasingRepository purchasingRepository, IPurchaseReturnRepository purchaseReturnRepository,
             IPurchaseReturnDetailRepository purchaseReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
-            IUnitOfWork unitOfWork)
+            IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
@@ -32,6 +33,7 @@ namespace BrawijayaWorkshop.Model
             _purchaseReturnDetailRepository = purchaseReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -113,7 +115,8 @@ namespace BrawijayaWorkshop.Model
 
                     _unitOfWork.SaveChanges();
 
-                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == purchaseReturnID).FirstOrDefault();
+                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASERETURN).FirstOrDefault();
+                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == purchaseReturnID && x.ReferenceTableId == transactionReferenceTable.Id).FirstOrDefault();
                     transaction.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                     transaction.ModifyDate = serverTime;
                     transaction.ModifyUserId = userID;
