@@ -34,6 +34,7 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            this.lblTitle = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.marqueeProgressBarControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
@@ -90,11 +91,21 @@
             this.pictureEdit1.Size = new System.Drawing.Size(160, 48);
             this.pictureEdit1.TabIndex = 8;
             // 
+            // lblTitle
+            // 
+            this.lblTitle.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Italic);
+            this.lblTitle.Location = new System.Drawing.Point(19, 19);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(42, 24);
+            this.lblTitle.TabIndex = 10;
+            this.lblTitle.Text = "Title";
+            // 
             // StartupScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 320);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureEdit2);
             this.Controls.Add(this.pictureEdit1);
             this.Controls.Add(this.labelControl2);
@@ -117,5 +128,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
         private DevExpress.XtraEditors.PictureEdit pictureEdit2;
+        private DevExpress.XtraEditors.LabelControl lblTitle;
     }
 }

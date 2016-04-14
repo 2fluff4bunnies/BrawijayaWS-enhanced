@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraSplashScreen;
 using System;
+using System.Reflection;
 
 namespace BrawijayaWorkshop.Win32App
 {
@@ -8,6 +9,27 @@ namespace BrawijayaWorkshop.Win32App
         public StartupScreen()
         {
             InitializeComponent();
+
+            lblTitle.Parent = pictureEdit2;
+            lblTitle.Appearance.BackColor = System.Drawing.Color.Transparent;
+            lblTitle.Text = AssemblyTitle;
+        }
+
+        public string AssemblyTitle
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    if (titleAttribute.Title != "")
+                    {
+                        return titleAttribute.Title;
+                    }
+                }
+                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+            }
         }
 
         #region Overrides
