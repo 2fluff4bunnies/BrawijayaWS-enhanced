@@ -13,5 +13,10 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.InvoiceListData = Model.SearchInvoiceList(View.DateFilterFrom, View.DateFilterTo);
         }
+
+        public bool IsHasReturnActive()
+        {
+            return Model.IsHasReturnActive(View.SelectedInvoice.Id);
+        }
     }
 }

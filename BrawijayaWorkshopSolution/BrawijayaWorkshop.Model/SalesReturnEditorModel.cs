@@ -247,12 +247,14 @@ namespace BrawijayaWorkshop.Model
                 {
                     DateTime serverTime = DateTime.Now;
 
-                    List<SalesReturnDetail> listReturnDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
-                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID).FirstOrDefault();
+                    //List<SalesReturnDetail> listReturnDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
+                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
+                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID && x.ReferenceTableId == transactionReferenceTable.Id).FirstOrDefault();
                     decimal totalTransaction = transaction.TotalTransaction.AsDecimal();
                     foreach (var itemReturn in listReturn)
                     {
-                        int oldReturQty = listReturnDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId).Count();
+                        int oldReturQty = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID
+                            && x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId).Count();
                         if (itemReturn.ReturQty > oldReturQty)
                         {
                             int diffQty = itemReturn.ReturQty - oldReturQty;
@@ -316,7 +318,8 @@ namespace BrawijayaWorkshop.Model
                             int diffQty = oldReturQty - itemReturn.ReturQty;
                             InvoiceDetail InvoiceDetail = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId && x.InvoiceId == invoiceID).FirstOrDefault();
 
-                            List<SalesReturnDetail> listDeletedDetail = listReturnDetail.Where(x => x.InvoiceDetailId == InvoiceDetail.Id).OrderByDescending(x => x.CreateDate).Take(diffQty).ToList();
+                            List<SalesReturnDetail> listDeletedDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID
+                            && x.InvoiceDetailId == InvoiceDetail.Id).OrderByDescending(x => x.CreateDate).Take(diffQty).ToList();
                             foreach (var itemDeleted in listDeletedDetail)
                             {
                                 totalTransaction -= itemDeleted.InvoiceDetail.SubTotalPrice.AsDecimal();

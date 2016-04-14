@@ -17,13 +17,14 @@ namespace BrawijayaWorkshop.Model
         private ISalesReturnDetailRepository _salesReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnTransactionListModel(ITransactionRepository transactionRepository,
             IInvoiceRepository invoiceRepository, ISalesReturnRepository salesReturnRepository,
             ISalesReturnDetailRepository salesReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
-            IUnitOfWork unitOfWork)
+            IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
@@ -32,6 +33,7 @@ namespace BrawijayaWorkshop.Model
             _salesReturnDetailRepository = salesReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -60,7 +62,7 @@ namespace BrawijayaWorkshop.Model
 
         public void DeleteSalesReturn(int salesReturnID, int userID)
         {
-            using(var trans = _unitOfWork.BeginTransaction())
+            using (var trans = _unitOfWork.BeginTransaction())
             {
                 try
                 {
@@ -101,7 +103,7 @@ namespace BrawijayaWorkshop.Model
                         _sparepartDetailRepository.Update(spDetail);
 
                         Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
-                        sparepart.StockQty += 1;
+                        sparepart.StockQty -= 1;
 
                         _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                         _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
@@ -112,7 +114,8 @@ namespace BrawijayaWorkshop.Model
 
                     _unitOfWork.SaveChanges();
 
-                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID).FirstOrDefault();
+                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
+                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID && x.ReferenceTableId == transactionReferenceTable.Id).FirstOrDefault();
                     transaction.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                     transaction.ModifyDate = serverTime;
                     transaction.ModifyUserId = userID;
@@ -132,7 +135,7 @@ namespace BrawijayaWorkshop.Model
                     throw;
                 }
             }
-            
+
         }
     }
 }

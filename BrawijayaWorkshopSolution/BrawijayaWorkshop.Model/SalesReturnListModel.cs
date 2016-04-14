@@ -13,15 +13,18 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IInvoiceRepository _invoiceRepository;
+        private ISalesReturnRepository _salesReturnRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnListModel(ITransactionRepository transactionRepository,
             IInvoiceRepository invoiceRepository,
+            ISalesReturnRepository salesReturnRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
             _invoiceRepository = invoiceRepository;
+            _salesReturnRepository = salesReturnRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -41,6 +44,11 @@ namespace BrawijayaWorkshop.Model
 
             List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
             return Map(result, mappedResult);
+        }
+
+        public bool IsHasReturnActive(int invoiceID)
+        {
+            return _salesReturnRepository.GetMany(x => x.InvoiceId == invoiceID && x.Status == (int)DbConstant.DefaultDataStatus.Active).Count() > 0;
         }
     }
 }

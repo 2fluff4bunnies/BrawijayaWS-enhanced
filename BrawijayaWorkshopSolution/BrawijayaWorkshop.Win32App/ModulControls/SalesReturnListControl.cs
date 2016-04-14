@@ -55,6 +55,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvInvoice_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedInvoice = gvInvoice.GetFocusedRow() as InvoiceViewModel;
+            if (this.SelectedInvoice != null)
+            {
+                bool isHasReturnActive = false;
+                isHasReturnActive = _presenter.IsHasReturnActive();
+                if (!isHasReturnActive)
+                {
+                    cmsAddReturn.Visible = true;
+                }
+                else
+                {
+                    cmsAddReturn.Visible = false;
+                }
+            }
         }
 
         private void gvInvoice_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -67,6 +80,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 cmsEditor.Show(view.GridControl, e.Point);
 
                 this.SelectedInvoice = gvInvoice.GetRow(view.FocusedRowHandle) as InvoiceViewModel;
+                if (this.SelectedInvoice != null)
+                {
+                    bool isHasReturnActive = false;
+                    isHasReturnActive = _presenter.IsHasReturnActive();
+                    if (!isHasReturnActive)
+                    {
+                        cmsAddReturn.Visible = true;
+                    }
+                    else
+                    {
+                        cmsAddReturn.Visible = false;
+                    }
+                }
             }
         }
 
