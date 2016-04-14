@@ -6,6 +6,13 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int Id { get; set; }
         public int Qty { get; set; }
         public decimal Price { get; set; }
+        public decimal SubTotal
+        {
+            get
+            {
+                return (Qty * Price);
+            }
+        }
         public bool IsSpecialSparepart { get; set; }
         public string SerialNumber { get; set; }
 

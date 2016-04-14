@@ -40,6 +40,7 @@
             this.cbSparepartGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
             this.lblDate = new DevExpress.XtraEditors.LabelControl();
@@ -97,7 +98,7 @@
             this.gcPurchasingInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcPurchasingInfo.Location = new System.Drawing.Point(0, 0);
             this.gcPurchasingInfo.Name = "gcPurchasingInfo";
-            this.gcPurchasingInfo.Size = new System.Drawing.Size(578, 323);
+            this.gcPurchasingInfo.Size = new System.Drawing.Size(854, 347);
             this.gcPurchasingInfo.TabIndex = 1;
             this.gcPurchasingInfo.Text = "Informasi Pembelian";
             // 
@@ -121,7 +122,7 @@
             this.gridPurchasingDetail.Name = "gridPurchasingDetail";
             this.gridPurchasingDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbSparepartGv});
-            this.gridPurchasingDetail.Size = new System.Drawing.Size(568, 199);
+            this.gridPurchasingDetail.Size = new System.Drawing.Size(844, 217);
             this.gridPurchasingDetail.TabIndex = 4;
             this.gridPurchasingDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasingDetail});
@@ -132,6 +133,7 @@
             this.colSparepart,
             this.colQty,
             this.colPrice,
+            this.colSubTotal,
             this.colSerialNumber});
             this.gvPurchasingDetail.GridControl = this.gridPurchasingDetail;
             this.gvPurchasingDetail.Name = "gvPurchasingDetail";
@@ -141,6 +143,7 @@
             this.gvPurchasingDetail.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
             this.gvPurchasingDetail.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             this.gvPurchasingDetail.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvPurchasingDetail.OptionsView.ShowFooter = true;
             this.gvPurchasingDetail.OptionsView.ShowGroupPanel = false;
             this.gvPurchasingDetail.OptionsView.ShowViewCaption = true;
             this.gvPurchasingDetail.ViewCaption = "Daftar Sparepart";
@@ -188,13 +191,27 @@
             this.colPrice.Visible = true;
             this.colPrice.VisibleIndex = 2;
             // 
+            // colSubTotal
+            // 
+            this.colSubTotal.Caption = "Sub Total";
+            this.colSubTotal.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.colSubTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSubTotal.FieldName = "SubTotal";
+            this.colSubTotal.Name = "colSubTotal";
+            this.colSubTotal.OptionsColumn.AllowEdit = false;
+            this.colSubTotal.OptionsColumn.ReadOnly = true;
+            this.colSubTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SubTotal", "{0:#,#;(#,#);0}")});
+            this.colSubTotal.Visible = true;
+            this.colSubTotal.VisibleIndex = 3;
+            // 
             // colSerialNumber
             // 
             this.colSerialNumber.Caption = "Nomor Seri";
             this.colSerialNumber.FieldName = "SerialNumber";
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.Visible = true;
-            this.colSerialNumber.VisibleIndex = 3;
+            this.colSerialNumber.VisibleIndex = 4;
             // 
             // lblSupplier
             // 
@@ -298,7 +315,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 372);
+            this.ClientSize = new System.Drawing.Size(854, 396);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Name = "PurchasingEditorForm";
             this.Text = "Form Pembelian Barang";
@@ -346,5 +363,6 @@
         private System.Windows.Forms.BindingSource bsDetails;
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colSubTotal;
     }
 }
