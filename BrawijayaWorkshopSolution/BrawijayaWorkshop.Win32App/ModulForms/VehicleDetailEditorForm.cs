@@ -41,11 +41,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return dtpExpirationDate.Text.AsDateTime();
+                return dtpExpirationDate.EditValue.AsDateTime();
             }
             set
             {
-                dtpExpirationDate.Text = value.ToString();
+                dtpExpirationDate.EditValue = value;
             }
         }
 

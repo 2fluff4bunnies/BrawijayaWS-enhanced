@@ -225,14 +225,5 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             btnSearch.PerformClick();
         }
-
-        private void cmsViewVehicleWheel_Click(object sender, EventArgs e)
-        {
-            // VehicleWheelEditorForm editor = Bootstrapper.Resolve<VehicleWheelEditorForm>();
-            // editor.SelectedVehicle = this.SelectedVehicle;
-            // editor.ShowDialog(this);
-
-            btnSearch.PerformClick();
-        }
     }
 }
