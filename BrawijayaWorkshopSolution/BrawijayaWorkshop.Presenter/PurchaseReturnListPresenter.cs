@@ -13,5 +13,10 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.PurchasingListData = Model.SearchPurchasingList(View.DateFilterFrom, View.DateFilterTo);
         }
+
+        public bool IsHasReturnActive()
+        {
+            return Model.IsHasReturnActive(View.SelectedPurchasing.Id);
+        }
     }
 }

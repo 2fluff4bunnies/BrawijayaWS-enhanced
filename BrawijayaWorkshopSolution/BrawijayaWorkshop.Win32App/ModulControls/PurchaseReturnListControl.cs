@@ -55,6 +55,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvPurchasing_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedPurchasing = gvPurchasing.GetFocusedRow() as PurchasingViewModel;
+            if (this.SelectedPurchasing != null)
+            {
+                bool isHasReturnActive = false;
+                isHasReturnActive = _presenter.IsHasReturnActive();
+                if (!isHasReturnActive)
+                {
+                    cmsAddReturn.Visible = true;
+                }
+                else
+                {
+                    cmsAddReturn.Visible = false;
+                }
+            }
         }
 
         private void gvPurchasing_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -67,6 +80,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 cmsEditor.Show(view.GridControl, e.Point);
 
                 this.SelectedPurchasing = gvPurchasing.GetRow(view.FocusedRowHandle) as PurchasingViewModel;
+                if (this.SelectedPurchasing != null)
+                {
+                    bool isHasReturnActive = false;
+                    isHasReturnActive = _presenter.IsHasReturnActive();
+                    if (!isHasReturnActive)
+                    {
+                        cmsAddReturn.Visible = true;
+                    }
+                    else
+                    {
+                        cmsAddReturn.Visible = false;
+                    }
+                }
             }
         }
 
