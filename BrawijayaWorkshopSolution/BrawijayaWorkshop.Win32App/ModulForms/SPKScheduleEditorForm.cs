@@ -51,19 +51,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void lookUpSPK_EditValueChanged(object sender, EventArgs e)
         {
             LookUpEdit lookup = sender as LookUpEdit;
-            SPKViewModel selectedSPK = lookUpSPK.GetSelectedDataRow() as SPKViewModel;
-            if(selectedSPK != null)
+            SPKVehicleModel selectedSPK = lookUpSPK.GetSelectedDataRow() as SPKVehicleModel;
+
+            _presenter.SetSelectedSPK(selectedSPK.Id);
+
+            if (this.SelectedSPK != null)
             {
-                lblSPKCategoryValue.Text = selectedSPK.CategoryReference.Name;
-                lblSPKDescriptionValue.Text = selectedSPK.Description;
-                lblSPKVehicleCustomerValue.Text = selectedSPK.Vehicle.Customer.CompanyName;
+                lblSPKCategoryValue.Text = this.SelectedSPK.CategoryReference.Name;
+                lblSPKDescriptionValue.Text = this.SelectedSPK.Description;
+                lblSPKVehicleCustomerValue.Text = this.SelectedSPK.Vehicle.Customer.CompanyName;
             }
             else
             {
                 lblSPKCategoryValue.Text = "--";
                 lblSPKDescriptionValue.Text = "--";
                 lblSPKVehicleCustomerValue.Text = "--";
-            }  
+            }
         }
 
         void SPKScheduleEditorForm_Load(object sender, EventArgs e)
@@ -183,6 +186,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #region Properties
         public SPKScheduleViewModel SelectedSPKSchedule { get; set; }
+        public SPKViewModel SelectedSPK { get; set; }
 
         public string SPKVehicleCustomer
         {
@@ -232,11 +236,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SPKViewModel> SPKList
+        public List<SPKViewModel> SPKList { get; set; }
+
+        public List<SPKVehicleModel> SPKVehicleList
         {
             get
             {
-                return lookUpSPK.Properties.DataSource as List<SPKViewModel>;
+                return lookUpSPK.Properties.DataSource as List<SPKVehicleModel>;
             }
             set
             {

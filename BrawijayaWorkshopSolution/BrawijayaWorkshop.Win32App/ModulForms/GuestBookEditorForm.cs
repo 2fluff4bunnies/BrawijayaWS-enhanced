@@ -20,6 +20,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new GuestBookEditorPresenter(this, model);
 
             VehicleValidator.SetIconAlignment(lookUpVehicle, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            this.MaximizeBox = false;
             this.Load += GuestBookEditorForm_Load;
         }
 

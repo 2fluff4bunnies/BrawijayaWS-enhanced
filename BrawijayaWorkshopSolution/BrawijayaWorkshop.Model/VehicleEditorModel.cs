@@ -16,11 +16,13 @@ namespace BrawijayaWorkshop.Model
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private ISpecialSparepartDetailRepository _wheelDetailRepository;
+        private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository,
            IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
+            ISparepartRepository sparepartRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
             : base()
         {
@@ -30,6 +32,7 @@ namespace BrawijayaWorkshop.Model
             _vehicleWheelRepository = vehicleWheelRepository;
             _wheelDetailRepository = wheelDetailRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
+            _sparepartRepository = sparepartRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -119,6 +122,15 @@ namespace BrawijayaWorkshop.Model
                 _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
                 _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
                 _sparepartDetailRepository.Update(spdEntity);
+                _unitOfWork.SaveChanges();
+
+                Sparepart spEntity = _sparepartRepository.GetById(wdEntity.SparepartDetail.SparepartId);
+                spEntity.ModifyDate = serverTime;
+                spEntity.ModifyUserId = userId;
+                spEntity.StockQty = spEntity.StockQty - 1;
+                _sparepartRepository.AttachNavigation(spEntity.CategoryReference);
+                _sparepartRepository.AttachNavigation(spEntity.UnitReference);
+                _sparepartRepository.Update(spEntity);
                 _unitOfWork.SaveChanges();
             }
         }

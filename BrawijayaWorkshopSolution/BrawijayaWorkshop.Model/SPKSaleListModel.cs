@@ -12,12 +12,14 @@ namespace BrawijayaWorkshop.Model
     public class SPKSaleListModel : AppBaseModel
     {
         private ISPKRepository _spkRepository;
+        private IInvoiceRepository _invoiceRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SPKSaleListModel(ISPKRepository spkRepository, IUnitOfWork unitOfWork)
+        public SPKSaleListModel(ISPKRepository spkRepository, IInvoiceRepository invoiceRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _spkRepository = spkRepository;
+            _invoiceRepository = invoiceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -30,6 +32,15 @@ namespace BrawijayaWorkshop.Model
             }
 
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public InvoiceViewModel GetInvoiceBySPKId(int spkId)
+        {
+            Invoice result = _invoiceRepository.GetMany(i => i.SPKId == spkId).FirstOrDefault();
+
+            InvoiceViewModel mappedResult = new InvoiceViewModel();
+
             return Map(result, mappedResult);
         }
     }

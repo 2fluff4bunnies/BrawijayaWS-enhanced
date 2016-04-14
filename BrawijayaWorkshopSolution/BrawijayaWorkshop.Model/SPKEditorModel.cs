@@ -275,6 +275,16 @@ namespace BrawijayaWorkshop.Model
                     _sparepartRepository.Update(sparepart);
                 }
 
+                if (isSPKSales)
+                {
+                    UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSparepart.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                    if (foundUsedGood != null)
+                    {
+                        foundUsedGood.Stock = foundUsedGood.Stock + spkSparepartList.Count;
+                        _usedGoodRepository.Update(foundUsedGood);
+                    }
+                }
+
                 SPKDetailSparepart insertedSPkDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
 
                 var detailList = spkSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == spkSparepart.SparepartId);
@@ -606,6 +616,5 @@ namespace BrawijayaWorkshop.Model
         {
             return _referenceRepository.GetMany(r => r.Code == DbConstant.REF_SPK_CATEGORY_SALE).FirstOrDefault().Id;
         }
-
     }
 }

@@ -33,25 +33,25 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKScheduleEditorForm));
             this.gcVehicleInfo = new DevExpress.XtraEditors.GroupControl();
+            this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
             this.lookUpMechanic = new DevExpress.XtraEditors.LookUpEdit();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
             this.lookUpSPK = new DevExpress.XtraEditors.LookUpEdit();
             this.lblSPKDescriptionValue = new DevExpress.XtraEditors.LabelControl();
             this.lblSPKVehicleCustomerValue = new DevExpress.XtraEditors.LabelControl();
             this.lblSPKCategoryValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblSPKDescription = new DevExpress.XtraEditors.LabelControl();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
             this.lblSPKVehicleCustomer = new DevExpress.XtraEditors.LabelControl();
             this.lblSPKCategory = new DevExpress.XtraEditors.LabelControl();
             this.lblMechanic = new DevExpress.XtraEditors.LabelControl();
-            this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
             this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
-            this.lblSPKDescription = new DevExpress.XtraEditors.LabelControl();
             this.FieldValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
             this.gcVehicleInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSPK.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldValidator)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,14 +72,19 @@
             this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcVehicleInfo.Location = new System.Drawing.Point(0, 0);
             this.gcVehicleInfo.Name = "gcVehicleInfo";
-            this.gcVehicleInfo.Size = new System.Drawing.Size(570, 242);
+            this.gcVehicleInfo.Size = new System.Drawing.Size(636, 194);
             this.gcVehicleInfo.TabIndex = 3;
             this.gcVehicleInfo.Text = "Informasi Kendaraan";
             // 
+            // memoDescription
+            // 
+            this.memoDescription.Location = new System.Drawing.Point(143, 89);
+            this.memoDescription.Name = "memoDescription";
+            this.memoDescription.Size = new System.Drawing.Size(154, 82);
+            this.memoDescription.TabIndex = 23;
+            // 
             // lookUpMechanic
             // 
-            this.lookUpMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lookUpMechanic.Location = new System.Drawing.Point(143, 56);
             this.lookUpMechanic.Name = "lookUpMechanic";
             this.lookUpMechanic.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -102,8 +107,6 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDescription.Location = new System.Drawing.Point(12, 93);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(114, 13);
@@ -112,8 +115,6 @@
             // 
             // lookUpSPK
             // 
-            this.lookUpSPK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lookUpSPK.Location = new System.Drawing.Point(143, 25);
             this.lookUpSPK.Name = "lookUpSPK";
             this.lookUpSPK.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -122,8 +123,8 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSPK.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Vehicle.ActiveLicenseNumber", "Nopol"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Vehicle.Customer.CompanyName", "Customer")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Customer")});
             this.lookUpSPK.Properties.DisplayMember = "Code";
             this.lookUpSPK.Properties.HideSelection = false;
             this.lookUpSPK.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
@@ -138,8 +139,6 @@
             // 
             // lblSPKDescriptionValue
             // 
-            this.lblSPKDescriptionValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSPKDescriptionValue.Location = new System.Drawing.Point(457, 94);
             this.lblSPKDescriptionValue.Name = "lblSPKDescriptionValue";
             this.lblSPKDescriptionValue.Size = new System.Drawing.Size(8, 13);
@@ -148,8 +147,6 @@
             // 
             // lblSPKVehicleCustomerValue
             // 
-            this.lblSPKVehicleCustomerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSPKVehicleCustomerValue.Location = new System.Drawing.Point(457, 28);
             this.lblSPKVehicleCustomerValue.Name = "lblSPKVehicleCustomerValue";
             this.lblSPKVehicleCustomerValue.Size = new System.Drawing.Size(8, 13);
@@ -158,18 +155,22 @@
             // 
             // lblSPKCategoryValue
             // 
-            this.lblSPKCategoryValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSPKCategoryValue.Location = new System.Drawing.Point(457, 59);
             this.lblSPKCategoryValue.Name = "lblSPKCategoryValue";
             this.lblSPKCategoryValue.Size = new System.Drawing.Size(8, 13);
             this.lblSPKCategoryValue.TabIndex = 15;
             this.lblSPKCategoryValue.Text = "--";
             // 
+            // lblSPKDescription
+            // 
+            this.lblSPKDescription.Location = new System.Drawing.Point(341, 94);
+            this.lblSPKDescription.Name = "lblSPKDescription";
+            this.lblSPKDescription.Size = new System.Drawing.Size(77, 13);
+            this.lblSPKDescription.TabIndex = 11;
+            this.lblSPKDescription.Text = "Keterangan SPK";
+            // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(18, 13);
@@ -178,8 +179,6 @@
             // 
             // lblSPKVehicleCustomer
             // 
-            this.lblSPKVehicleCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSPKVehicleCustomer.Location = new System.Drawing.Point(341, 28);
             this.lblSPKVehicleCustomer.Name = "lblSPKVehicleCustomer";
             this.lblSPKVehicleCustomer.Size = new System.Drawing.Size(77, 13);
@@ -188,8 +187,6 @@
             // 
             // lblSPKCategory
             // 
-            this.lblSPKCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSPKCategory.Location = new System.Drawing.Point(341, 59);
             this.lblSPKCategory.Name = "lblSPKCategory";
             this.lblSPKCategory.Size = new System.Drawing.Size(40, 13);
@@ -198,41 +195,22 @@
             // 
             // lblMechanic
             // 
-            this.lblMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMechanic.Location = new System.Drawing.Point(12, 59);
             this.lblMechanic.Name = "lblMechanic";
             this.lblMechanic.Size = new System.Drawing.Size(38, 13);
             this.lblMechanic.TabIndex = 2;
             this.lblMechanic.Text = "Mekanik";
             // 
-            // memoDescription
-            // 
-            this.memoDescription.Location = new System.Drawing.Point(143, 89);
-            this.memoDescription.Name = "memoDescription";
-            this.memoDescription.Size = new System.Drawing.Size(154, 82);
-            this.memoDescription.TabIndex = 23;
-            // 
             // bgwFingerPrint
             // 
             this.bgwFingerPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerPrint_DoWork);
             this.bgwFingerPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerPrint_RunWorkerCompleted);
             // 
-            // lblSPKDescription
-            // 
-            this.lblSPKDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSPKDescription.Location = new System.Drawing.Point(341, 94);
-            this.lblSPKDescription.Name = "lblSPKDescription";
-            this.lblSPKDescription.Size = new System.Drawing.Size(77, 13);
-            this.lblSPKDescription.TabIndex = 11;
-            this.lblSPKDescription.Text = "Keterangan SPK";
-            // 
             // SPKScheduleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 242);
+            this.ClientSize = new System.Drawing.Size(636, 243);
             this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKScheduleEditorForm";
@@ -241,9 +219,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).EndInit();
             this.gcVehicleInfo.ResumeLayout(false);
             this.gcVehicleInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSPK.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldValidator)).EndInit();
             this.ResumeLayout(false);
 

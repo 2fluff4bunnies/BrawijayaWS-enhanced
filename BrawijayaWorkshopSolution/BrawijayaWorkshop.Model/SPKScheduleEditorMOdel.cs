@@ -91,5 +91,15 @@ namespace BrawijayaWorkshop.Model
             _SPKScheduleRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
+
+
+        public SPKViewModel GetSPKById(int spkId)
+        {
+            SPK result = _SPKRepository.GetById(spkId);
+
+            SPKViewModel mappedResult = new SPKViewModel();
+
+            return Map(result, mappedResult);
+        }
     }
 }

@@ -36,6 +36,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public bool IsSPKSales { get; set; }
 
+        public bool IsSaveComplete { get; set; }
+
         public SPKEditorForm(SPKEditorModel model)
         {
             InitializeComponent();
@@ -908,12 +910,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     _dataSource.Add(SelectedSPK);
                     report.DataSource = _dataSource;
                     report.FillDataSource();
-                    _presenter.Print();
-
-                    using (ReportPrintTool printTool = new ReportPrintTool(report))
+                    if (!this.IsSPKSales)
                     {
-                        // Invoke the Print dialog.
-                        printTool.PrintDialog();
+                        _presenter.Print();
+                        using (ReportPrintTool printTool = new ReportPrintTool(report))
+                        {
+                            // Invoke the Print dialog.
+                            printTool.PrintDialog();
+                        }
                     }
                 }
             }
@@ -934,6 +938,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             else
             {
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data spk selesai", true);
+                this.IsSaveComplete = true;
                 this.Close();
             }
         }

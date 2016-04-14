@@ -16,7 +16,7 @@ namespace BrawijayaWorkshop.Model
         private ISPKRepository _SPKRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SPKScheduleListModel(ISPKScheduleRepository SPKScheduleRepository, 
+        public SPKScheduleListModel(ISPKScheduleRepository SPKScheduleRepository,
             IMechanicRepository mechanicRepository,
             ISPKRepository SPKRepository,
             IUnitOfWork unitOfWork)
@@ -38,7 +38,12 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKViewModel> LoadSPK()
         {
-            List<SPK> result = _SPKRepository.GetMany(s => s.Status == (int)DbConstant.DefaultDataStatus.Active && !s.isContractWork).ToList();
+            List<SPK> result = _SPKRepository.GetMany(s =>
+                s.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                !s.isContractWork &&
+                s.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress &&
+                s.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
+                s.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
 
             return Map(result, mappedResult);
@@ -47,7 +52,11 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKScheduleViewModel> SearchSPKSchedule(int mechanicId, int SPKId, DateTime createDate)
         {
-            List<SPKSchedule> result = _SPKScheduleRepository.GetAll().ToList();
+            List<SPKSchedule> result = _SPKScheduleRepository.GetMany(sched =>
+                sched.SPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress &&
+                sched.SPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
+                sched.SPK.Status == (int)DbConstant.DefaultDataStatus.Active
+                ).ToList();
             result = result.Where(sched => sched.CreateDate.Date == createDate.Date).ToList();
 
             if (mechanicId > 0)

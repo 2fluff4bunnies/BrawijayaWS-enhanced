@@ -103,8 +103,6 @@
             // 
             // lookUpVehicle
             // 
-            this.lookUpVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lookUpVehicle.Location = new System.Drawing.Point(128, 25);
             this.lookUpVehicle.Name = "lookUpVehicle";
             this.lookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -128,8 +126,6 @@
             // 
             // lblExpirationDateValue
             // 
-            this.lblExpirationDateValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExpirationDateValue.Location = new System.Drawing.Point(128, 178);
             this.lblExpirationDateValue.Name = "lblExpirationDateValue";
             this.lblExpirationDateValue.Size = new System.Drawing.Size(8, 13);
@@ -138,8 +134,6 @@
             // 
             // lblCustomerValue
             // 
-            this.lblCustomerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomerValue.Location = new System.Drawing.Point(128, 148);
             this.lblCustomerValue.Name = "lblCustomerValue";
             this.lblCustomerValue.Size = new System.Drawing.Size(8, 13);
@@ -148,8 +142,6 @@
             // 
             // lblYearOfpurchaseValue
             // 
-            this.lblYearOfpurchaseValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblYearOfpurchaseValue.Location = new System.Drawing.Point(128, 119);
             this.lblYearOfpurchaseValue.Name = "lblYearOfpurchaseValue";
             this.lblYearOfpurchaseValue.Size = new System.Drawing.Size(8, 13);
@@ -158,8 +150,6 @@
             // 
             // lblTypeValue
             // 
-            this.lblTypeValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTypeValue.Location = new System.Drawing.Point(128, 89);
             this.lblTypeValue.Name = "lblTypeValue";
             this.lblTypeValue.Size = new System.Drawing.Size(8, 13);
@@ -168,8 +158,6 @@
             // 
             // lblBrandValue
             // 
-            this.lblBrandValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBrandValue.Location = new System.Drawing.Point(128, 59);
             this.lblBrandValue.Name = "lblBrandValue";
             this.lblBrandValue.Size = new System.Drawing.Size(8, 13);
@@ -230,8 +218,6 @@
             // 
             // lblExpirationDate
             // 
-            this.lblExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExpirationDate.Location = new System.Drawing.Point(12, 178);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
@@ -240,8 +226,6 @@
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(57, 13);
@@ -250,8 +234,6 @@
             // 
             // lblYearOfPurchase
             // 
-            this.lblYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblYearOfPurchase.Location = new System.Drawing.Point(12, 119);
             this.lblYearOfPurchase.Name = "lblYearOfPurchase";
             this.lblYearOfPurchase.Size = new System.Drawing.Size(81, 13);
@@ -260,8 +242,6 @@
             // 
             // lblType
             // 
-            this.lblType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblType.Location = new System.Drawing.Point(12, 89);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(20, 13);
@@ -270,8 +250,6 @@
             // 
             // lblBrand
             // 
-            this.lblBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBrand.Location = new System.Drawing.Point(12, 59);
             this.lblBrand.Name = "lblBrand";
             this.lblBrand.Size = new System.Drawing.Size(29, 13);
@@ -280,8 +258,6 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomer.Location = new System.Drawing.Point(12, 148);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);

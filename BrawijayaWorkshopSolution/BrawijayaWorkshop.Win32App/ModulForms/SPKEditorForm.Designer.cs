@@ -163,8 +163,9 @@
             this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
             this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
             this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "n0";
             this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "n0";
             this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTotalSparepartPrice.Size = new System.Drawing.Size(134, 20);
             this.txtTotalSparepartPrice.TabIndex = 41;
@@ -270,8 +271,9 @@
             this.txtContractWorkFee.Name = "txtContractWorkFee";
             this.txtContractWorkFee.Properties.Appearance.Options.UseTextOptions = true;
             this.txtContractWorkFee.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtContractWorkFee.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtContractWorkFee.Properties.DisplayFormat.FormatString = "n0";
             this.txtContractWorkFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtContractWorkFee.Properties.Mask.EditMask = "n0";
             this.txtContractWorkFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtContractWorkFee.Size = new System.Drawing.Size(161, 20);
             this.txtContractWorkFee.TabIndex = 35;

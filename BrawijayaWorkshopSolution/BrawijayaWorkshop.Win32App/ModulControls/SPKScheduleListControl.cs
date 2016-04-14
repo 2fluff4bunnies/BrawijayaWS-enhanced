@@ -42,7 +42,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             gvSPKSchedule.FocusedRowChanged += gvSPKSchedule_FocusedRowChanged;
             gvSPKSchedule.PopupMenuShowing += gvSPKSchedule_PopupMenuShowing;
+
             this.Load += SPKScheduleListControl_Load;
+
         }
 
         #region Properties

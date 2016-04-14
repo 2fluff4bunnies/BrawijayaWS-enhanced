@@ -13,5 +13,10 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.SPKListData = Model.SearchSPKSales(View.DateFilterFrom, View.DateFilterTo);
         }
+
+        public void loadSelectedInvoice()
+        {
+            View.SelectedInvoice= Model.GetInvoiceBySPKId(View.SelectedSPK.Id);
+        }
     }
 }

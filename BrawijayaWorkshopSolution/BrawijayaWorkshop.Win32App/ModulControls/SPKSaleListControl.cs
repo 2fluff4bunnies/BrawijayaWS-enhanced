@@ -36,8 +36,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvSPKSales.FocusedRowChanged += gvSPKSales_FocusedRowChanged;
 
             // init editor control accessibility
-            
-            cmsEditData.Enabled = AllowEdit;
+
+            cmsEditData.Visible = false;
 
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
@@ -90,6 +90,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         }
 
         public SPKViewModel SelectedSPK { get; set; }
+        public InvoiceViewModel SelectedInvoice { get; set; }
         #endregion
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
@@ -126,6 +127,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             editor.IsSPKSales = true;
             editor.ShowDialog(this);
 
+            if (editor.IsSaveComplete)
+            {
+                this.SelectedSPK = editor.SelectedSPK;
+                _presenter.loadSelectedInvoice();
+                InvoiceEditorForm editorInvoice = Bootstrapper.Resolve<InvoiceEditorForm>();
+                editorInvoice.SelectedInvoice = this.SelectedInvoice;
+                editorInvoice.ShowDialog(this);
+            }
             btnSearch.PerformClick();
         }
 
@@ -178,7 +187,5 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 bgwMain.RunWorkerAsync();
             }
         }
-
-
     }
 }

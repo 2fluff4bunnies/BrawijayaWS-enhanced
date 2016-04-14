@@ -15,6 +15,18 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.MechanicList = Model.LoadMechanic();
             View.SPKList = Model.LoadSPK();
+            View.SPKVehicleList = new List<SPKVehicleModel>();
+
+            foreach (var item in View.SPKList)
+            {
+                View.SPKVehicleList.Add(new SPKVehicleModel
+                { 
+                    Id  = item.Id,
+                    Code = item.Code,
+                    ActiveLicenseNumber = item.Vehicle.ActiveLicenseNumber,
+                    CompanyName = item.Vehicle.Customer.CompanyName
+                });
+            }
 
             if (View.SelectedSPKSchedule != null)
             {
@@ -52,6 +64,11 @@ namespace BrawijayaWorkshop.Presenter
         public void UpdateMechanicList(List<string> availableCodes)
         {
             View.MechanicList = View.MechanicList.Where(m => availableCodes.Contains(m.Code)).ToList();
+        }
+
+        public void SetSelectedSPK(int spkId)
+        {
+            View.SelectedSPK = Model.GetSPKById(spkId);
         }
     }
 }

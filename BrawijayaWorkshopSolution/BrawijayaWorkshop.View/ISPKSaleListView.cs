@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.View
         List<SPKViewModel> SPKListData { get; set; }
 
         SPKViewModel SelectedSPK { get; set; }
+
+        InvoiceViewModel SelectedInvoice { get; set; }
     }
 }
