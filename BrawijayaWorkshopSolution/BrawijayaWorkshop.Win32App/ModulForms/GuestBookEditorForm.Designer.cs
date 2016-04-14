@@ -301,7 +301,7 @@
             this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GuestBookEditorForm";
-            this.Text = "GuestBookEditorForm";
+            this.Text = "Buku Tamu";
             this.Controls.SetChildIndex(this.gcVehicleInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).EndInit();
             this.gcVehicleInfo.ResumeLayout(false);
