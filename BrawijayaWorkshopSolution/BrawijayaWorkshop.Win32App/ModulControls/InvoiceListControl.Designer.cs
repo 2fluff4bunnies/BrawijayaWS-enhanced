@@ -187,6 +187,10 @@
             this.gvInvoice.OptionsCustomization.AllowFilter = false;
             this.gvInvoice.OptionsCustomization.AllowGroup = false;
             this.gvInvoice.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvInvoice.OptionsDetail.AllowZoomDetail = false;
+            this.gvInvoice.OptionsDetail.EnableMasterViewMode = false;
+            this.gvInvoice.OptionsDetail.ShowDetailTabs = false;
+            this.gvInvoice.OptionsDetail.SmartDetailExpand = false;
             this.gvInvoice.OptionsView.EnableAppearanceEvenRow = true;
             this.gvInvoice.OptionsView.ShowGroupPanel = false;
             this.gvInvoice.OptionsView.ShowViewCaption = true;

@@ -42,11 +42,11 @@
             this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDebtPaid = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPaymentStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
-            this.colPaymentStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -161,6 +161,10 @@
             this.gvDebt.OptionsCustomization.AllowFilter = false;
             this.gvDebt.OptionsCustomization.AllowGroup = false;
             this.gvDebt.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvDebt.OptionsDetail.AllowZoomDetail = false;
+            this.gvDebt.OptionsDetail.EnableMasterViewMode = false;
+            this.gvDebt.OptionsDetail.ShowDetailTabs = false;
+            this.gvDebt.OptionsDetail.SmartDetailExpand = false;
             this.gvDebt.OptionsView.EnableAppearanceEvenRow = true;
             this.gvDebt.OptionsView.ShowGroupPanel = false;
             this.gvDebt.OptionsView.ShowViewCaption = true;
@@ -203,6 +207,14 @@
             this.colDebtPaid.Visible = true;
             this.colDebtPaid.VisibleIndex = 3;
             // 
+            // colPaymentStatus
+            // 
+            this.colPaymentStatus.Caption = "Status Bayar";
+            this.colPaymentStatus.FieldName = "PaymentStatus";
+            this.colPaymentStatus.Name = "colPaymentStatus";
+            this.colPaymentStatus.Visible = true;
+            this.colPaymentStatus.VisibleIndex = 4;
+            // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
@@ -231,14 +243,6 @@
             this.cmsListPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
-            // 
-            // colPaymentStatus
-            // 
-            this.colPaymentStatus.Caption = "Status Bayar";
-            this.colPaymentStatus.FieldName = "PaymentStatus";
-            this.colPaymentStatus.Name = "colPaymentStatus";
-            this.colPaymentStatus.Visible = true;
-            this.colPaymentStatus.VisibleIndex = 4;
             // 
             // DebtListControl
             // 

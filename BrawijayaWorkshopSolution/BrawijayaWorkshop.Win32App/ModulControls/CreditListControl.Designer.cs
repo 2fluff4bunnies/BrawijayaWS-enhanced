@@ -43,11 +43,11 @@
             this.colLicense = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreditAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
-            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -163,6 +163,10 @@
             this.gvCredit.OptionsCustomization.AllowFilter = false;
             this.gvCredit.OptionsCustomization.AllowGroup = false;
             this.gvCredit.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvCredit.OptionsDetail.AllowZoomDetail = false;
+            this.gvCredit.OptionsDetail.EnableMasterViewMode = false;
+            this.gvCredit.OptionsDetail.ShowDetailTabs = false;
+            this.gvCredit.OptionsDetail.SmartDetailExpand = false;
             this.gvCredit.OptionsView.EnableAppearanceEvenRow = true;
             this.gvCredit.OptionsView.ShowGroupPanel = false;
             this.gvCredit.OptionsView.ShowViewCaption = true;
@@ -215,6 +219,14 @@
             this.colCreditAmount.Visible = true;
             this.colCreditAmount.VisibleIndex = 4;
             // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "colStatus";
+            this.colStatus.FieldName = "PaymentStatusId";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 5;
+            // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
@@ -243,14 +255,6 @@
             this.cmsListPayment.Size = new System.Drawing.Size(204, 22);
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
-            // 
-            // colStatus
-            // 
-            this.colStatus.Caption = "colStatus";
-            this.colStatus.FieldName = "PaymentStatusId";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 5;
             // 
             // CreditListControl
             // 
