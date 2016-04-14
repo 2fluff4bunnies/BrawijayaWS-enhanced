@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -42,7 +43,7 @@
             this.colSupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListReturn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
@@ -169,6 +170,10 @@
             this.gvPurchasing.OptionsCustomization.AllowFilter = false;
             this.gvPurchasing.OptionsCustomization.AllowGroup = false;
             this.gvPurchasing.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvPurchasing.OptionsDetail.AllowZoomDetail = false;
+            this.gvPurchasing.OptionsDetail.EnableMasterViewMode = false;
+            this.gvPurchasing.OptionsDetail.ShowDetailTabs = false;
+            this.gvPurchasing.OptionsDetail.SmartDetailExpand = false;
             this.gvPurchasing.OptionsView.EnableAppearanceEvenRow = true;
             this.gvPurchasing.OptionsView.ShowGroupPanel = false;
             this.gvPurchasing.OptionsView.ShowViewCaption = true;
@@ -213,13 +218,13 @@
             this.cmsAddReturn,
             this.cmsListReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(184, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(183, 48);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(183, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(182, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
@@ -227,7 +232,7 @@
             // 
             this.cmsListReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
             this.cmsListReturn.Name = "cmsListReturn";
-            this.cmsListReturn.Size = new System.Drawing.Size(183, 22);
+            this.cmsListReturn.Size = new System.Drawing.Size(182, 22);
             this.cmsListReturn.Text = "Lihat Transaksi Retur";
             this.cmsListReturn.Click += new System.EventHandler(this.cmsListReturn_Click);
             // 

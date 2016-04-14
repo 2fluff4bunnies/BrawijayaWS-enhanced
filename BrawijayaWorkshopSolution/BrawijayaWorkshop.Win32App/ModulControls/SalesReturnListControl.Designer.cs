@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -37,7 +38,7 @@
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.btnListReturn = new DevExpress.XtraEditors.SimpleButton();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.gridInvoice = new DevExpress.XtraGrid.GridControl();
@@ -150,13 +151,13 @@
             this.cmsAddReturn,
             this.cmsListReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(184, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(183, 48);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(183, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(182, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
@@ -164,7 +165,7 @@
             // 
             this.cmsListReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
             this.cmsListReturn.Name = "cmsListReturn";
-            this.cmsListReturn.Size = new System.Drawing.Size(183, 22);
+            this.cmsListReturn.Size = new System.Drawing.Size(182, 22);
             this.cmsListReturn.Text = "Lihat Transaksi Retur";
             this.cmsListReturn.Click += new System.EventHandler(this.cmsListReturn_Click);
             // 
@@ -198,6 +199,10 @@
             this.gvInvoice.OptionsCustomization.AllowFilter = false;
             this.gvInvoice.OptionsCustomization.AllowGroup = false;
             this.gvInvoice.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvInvoice.OptionsDetail.AllowZoomDetail = false;
+            this.gvInvoice.OptionsDetail.EnableMasterViewMode = false;
+            this.gvInvoice.OptionsDetail.ShowDetailTabs = false;
+            this.gvInvoice.OptionsDetail.SmartDetailExpand = false;
             this.gvInvoice.OptionsView.EnableAppearanceEvenRow = true;
             this.gvInvoice.OptionsView.ShowGroupPanel = false;
             this.gvInvoice.OptionsView.ShowViewCaption = true;
