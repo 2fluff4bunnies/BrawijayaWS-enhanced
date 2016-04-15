@@ -217,18 +217,32 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         void ApplyCMSSetting()
         {
-            cmsEndorseData.Visible =( this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved ||
-                this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) &&
-                this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
-            cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
+            if (this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed)
+            {
+                cmsEndorseData.Visible = false;
+                cmsPrintData.Visible = false;
+                cmsRequestPrint.Visible = false;
+                cmsSetAsCompleted.Visible = false;
+                cmsSPKApproval.Visible = false;
+                cmsPrintApproval.Visible = false;
+                cmsAbort.Visible = false;
+                cmsEndorseData.Visible = false;
+            }
+            else
+            {
+                cmsEndorseData.Visible = (this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved ||
+                    this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) &&
+                    this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
+                cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
 
-            cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
-            cmsSetAsCompleted.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
-                this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed &&
-                this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
+                cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
+                cmsSetAsCompleted.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
+                    this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed &&
+                    this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
 
-            toolStripSeparator1.Visible = cmsEndorseData.Visible && cmsPrintData.Visible && cmsRequestPrint.Visible &&
-                cmsSetAsCompleted.Visible;
+                toolStripSeparator1.Visible = cmsEndorseData.Visible && cmsPrintData.Visible && cmsRequestPrint.Visible &&
+                    cmsSetAsCompleted.Visible;
+            }
         }
 
         void SPKListControl_Load(object sender, EventArgs e)

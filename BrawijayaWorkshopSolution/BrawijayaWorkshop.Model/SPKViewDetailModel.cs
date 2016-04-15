@@ -375,7 +375,7 @@ namespace BrawijayaWorkshop.Model
                     _invoiceDetailRepository.Add(invcDtl);
                 }
 
-                UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.SparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
                 if (foundUsedGood != null)
                 {
                     foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;

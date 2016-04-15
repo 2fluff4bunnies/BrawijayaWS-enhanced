@@ -98,6 +98,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public decimal RepairThreshold { get; set; }
         public decimal ServiceThreshold { get; set; }
         public bool IsNeedApproval { get; set; }
+        public bool IsUsedSparepartRequired { get; set; }
         public List<SpecialSparepartDetailViewModel> RemovedWHeelDetailList { get; set; }
 
         public decimal TotalSparepartPrice
@@ -266,7 +267,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public bool IsUsedSparepartRequired
+        public bool IsUsedSparepartRetrieved
         {
             get
             {
@@ -425,9 +426,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
+            
+            if (_presenter.IsUsedSparepartRequired() && !ckeIsReturnRequired.Checked)
+            {
+                this.ShowWarning("Pastikan barang bekas sudah diterima.");
+                return;
+            }
+
             if (SparepartToInsert == null || txtQty.Text == "0" || string.IsNullOrEmpty(txtQty.Text))
             {
-                this.ShowWarning("Sparepart atau Jumlah harus diisi");
+                this.ShowWarning("Sparepart atau Jumlah harus diisi.");
                 return;
             }
 
@@ -485,6 +493,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.lookUpSparepart.Text = string.Empty;
             this.SparepartQty = 0;
             this.SparepartName = string.Empty;
+            this.ckeIsReturnRequired.Enabled = false;
+            this.ckeIsReturnRequired.Checked = false;
+            lblValLastUsageDate.Text = "";
+            lblValLastUsageQty.Text = "";
         }
 
         public void CalculateTotalSparepart()
@@ -666,6 +678,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 this.CategoryId = _presenter.SPKSalesCategoryReferenceId();
                 lookUpCategory.Enabled = false;
+                ckeIsContractWork.Enabled = false;
             }
         }
 
@@ -709,8 +722,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
 
                 //check if used good
-                _presenter.CheckIsUsedSparepartRequired();
-                ckeIsReturnRequired.Enabled = this.IsUsedSparepartRequired;
+                ckeIsReturnRequired.Enabled = _presenter.IsUsedSparepartRequired();
+                ckeIsReturnRequired.Checked = false;
 
                 //get last usage info
                 _presenter.GetLastUsageRecord();

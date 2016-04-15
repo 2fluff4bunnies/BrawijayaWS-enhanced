@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleEditorForm));
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.txtBrand = new DevExpress.XtraEditors.TextEdit();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
@@ -58,6 +58,7 @@
             this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteWheelDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
@@ -95,9 +96,9 @@
             this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(257, 20);
             this.lookUpCustomer.TabIndex = 9;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Customer harus dipilih";
-            this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule1);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "Customer harus dipilih";
+            this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule6);
             // 
             // txtBrand
             // 
@@ -108,9 +109,9 @@
             this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtBrand.Size = new System.Drawing.Size(257, 20);
             this.txtBrand.TabIndex = 3;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Merek harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtBrand, conditionValidationRule2);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule7.ErrorText = "Merek harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtBrand, conditionValidationRule7);
             // 
             // txtLicenseNumber
             // 
@@ -124,9 +125,9 @@
             this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtLicenseNumber.Size = new System.Drawing.Size(257, 20);
             this.txtLicenseNumber.TabIndex = 1;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Nomor Polisi harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Nomor Polisi harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule1);
             // 
             // txtType
             // 
@@ -137,9 +138,9 @@
             this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtType.Size = new System.Drawing.Size(257, 20);
             this.txtType.TabIndex = 5;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Tipe harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtType, conditionValidationRule4);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Tipe harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtType, conditionValidationRule2);
             // 
             // txtYearOfPurchase
             // 
@@ -152,9 +153,9 @@
             this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtYearOfPurchase.Size = new System.Drawing.Size(257, 20);
             this.txtYearOfPurchase.TabIndex = 7;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "Tahun Pembelian harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule5);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Tahun Pembelian harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule3);
             // 
             // lblCustomer
             // 
@@ -303,9 +304,9 @@
             this.dtpExpirationDate.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.dtpExpirationDate.Size = new System.Drawing.Size(257, 20);
             this.dtpExpirationDate.TabIndex = 11;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Tanggal Kadaluarsa harus diisi";
-            this.FieldsValidator.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Tanggal Kadaluarsa harus diisi";
+            this.FieldsValidator.SetValidationRule(this.dtpExpirationDate, conditionValidationRule4);
             // 
             // lblExpirationDate
             // 
@@ -346,6 +347,11 @@
             this.deleteWheelDetailToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.deleteWheelDetailToolStripMenuItem.Text = "Hapus Ban";
             this.deleteWheelDetailToolStripMenuItem.Click += new System.EventHandler(this.deleteWheelDetailToolStripMenuItem_Click);
+            // 
+            // bgwSave
+            // 
+            this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
+            this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
             // VehicleEditorForm
             // 
@@ -401,5 +407,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem deleteWheelDetailToolStripMenuItem;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
+        private System.ComponentModel.BackgroundWorker bgwSave;
     }
 }

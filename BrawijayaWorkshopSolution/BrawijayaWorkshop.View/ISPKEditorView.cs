@@ -48,7 +48,7 @@ namespace BrawijayaWorkshop.View
         bool IsNeedApproval { get; set; }
         decimal TotalSparepartPrice { get; set; }
         string Description { get; set; }
-        bool IsUsedSparepartRequired { get; set; }
+        bool IsUsedSparepartRetrieved { get; set; }
 
         string SparepartLastUsageDate { get; set; }
         string SparepartLastUsageQty { get; set; }

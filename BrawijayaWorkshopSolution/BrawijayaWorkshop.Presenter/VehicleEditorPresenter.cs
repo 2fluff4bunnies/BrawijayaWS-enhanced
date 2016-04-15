@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.CustomerId = View.SelectedVehicle.CustomerId;
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
-                View.WheelDetailList = Model.RetrieveAllWheelDetails();
+                View.WheelDetailList = Model.RetrieveAllWheelDetails(View.SelectedVehicle.Id);
             }
             else
             {

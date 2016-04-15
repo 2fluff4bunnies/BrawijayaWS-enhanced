@@ -236,6 +236,34 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        //protected override void ExecuteSave()
+        //{
+        //    if (!bgwSave.IsBusy)
+        //    {
+        //        if (FieldsValidator.Validate() && VehicleWheelList.Count >= 4)
+        //        {
+        //            try
+        //            {
+        //                MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
+        //                bgwSave.RunWorkerAsync();
+        //                this.Close();
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
+        //                this.ShowError("Proses simpan data Kendaraan gagal!");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (VehicleWheelList.Count < 4)
+        //            {
+        //                this.ShowWarning("Ban yang terpasang pada kendaraan minimal 4!");
+        //            }
+        //        }
+        //    }         
+        //}
+
         protected override void ExecuteSave()
         {
             if (FieldsValidator.Validate() && VehicleWheelList.Count >= 4)
@@ -282,6 +310,33 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.WheelDetailList.Add(this.SelectedVehicleWheel.WheelDetail);
             }
             gvVehicleWheel.DeleteSelectedRows();
+        }
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            //try
+            //{
+            //    _presenter.SaveChanges();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save vehicle", ex);
+            //    e.Result = ex;
+            //}
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            //if (e.Result is Exception)
+            //{
+            //    this.ShowError("Proses simpan data kendaraan gagal!");
+            //    FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data kendaraan gagal", true);
+            //}
+            //else
+            //{
+            //    FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data kendaraan selesai", true);
+            //    this.Close();
+            //}
         }
     }
 }

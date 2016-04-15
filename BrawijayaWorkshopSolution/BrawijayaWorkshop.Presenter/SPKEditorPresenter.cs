@@ -30,6 +30,7 @@ namespace BrawijayaWorkshop.Presenter
                 {
                     Vehicle = View.ParentSPK.Vehicle,
                     CategoryReference = View.ParentSPK.CategoryReference,
+                    CategoryReferenceId = View.ParentSPK.CategoryReferenceId,
                     DueDate = View.ParentSPK.DueDate,
                     SPKParent = View.ParentSPK,
                     TotalSparepartPrice = View.ParentSPK.TotalSparepartPrice,
@@ -53,11 +54,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void SaveChanges()
         {
-            if (View.SelectedSPK == null)
-            {
-                View.SelectedSPK = new SPKViewModel();
-            }
-
+            View.SelectedSPK = new SPKViewModel();
             View.SelectedSPK.CategoryReferenceId = View.CategoryId;
             View.SelectedSPK.VehicleId = View.VehicleId;
             View.SelectedSPK.DueDate = View.DueDate;
@@ -66,7 +63,11 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.isContractWork = View.isContractWork;
             View.SelectedSPK.ContractWorkFee = View.ContractWorkFee;
 
-            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.ParentSPK, View.SPKSparepartList, View.SPKSparepartDetailList, View.VehicleWheelList, LoginInformation.UserId, View.IsNeedApproval);
+            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, View.VehicleWheelList, LoginInformation.UserId, View.IsNeedApproval);
+            if (View.ParentSPK != null)
+            {
+                Model.AbortParentSPK(View.ParentSPK, LoginInformation.UserId);
+            }
         }
 
         public void populateSparepartDetail()
@@ -107,9 +108,9 @@ namespace BrawijayaWorkshop.Presenter
             return Model.GetSparepartSpecial(View.SparepartId);
         }
 
-        public void CheckIsUsedSparepartRequired()
+        public bool IsUsedSparepartRequired()
         {
-            View.IsUsedSparepartRequired = Model.IsUsedSparepartRequired(View.SparepartId);
+            return Model.IsUsedSparepartRequired(View.SparepartId);
         }
 
         public void GetLastUsageRecord()

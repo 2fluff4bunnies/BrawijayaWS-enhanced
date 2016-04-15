@@ -80,21 +80,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SPKDetailSparepartViewModel> GetSPKSparepartList(int spkId)
-        {
-            List<SPKDetailSparepart> result = _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == spkId).ToList();
-            List<SPKDetailSparepartViewModel> mappedResult = new List<SPKDetailSparepartViewModel>();
-            return Map(result, mappedResult);
-        }
-
-        public List<SPKDetailSparepartDetailViewModel> GetSPKSparepartDetailList(int spkId)
-        {
-            List<SPKDetailSparepartDetail> result = _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == spkId).ToList();
-            List<SPKDetailSparepartDetailViewModel> mappedResult = new List<SPKDetailSparepartDetailViewModel>();
-
-            return Map(result, mappedResult);
-        }
-
+      
         public List<SPKDetailSparepartViewModel> GetEndorsedSPKSparepartList(int spkId)
         {
             List<SPKDetailSparepart> result = new List<SPKDetailSparepart>();
@@ -149,7 +135,7 @@ namespace BrawijayaWorkshop.Model
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
         }
 
-        public SPKViewModel InsertSPK(SPKViewModel spk, SPKViewModel parentSPK,
+        public SPKViewModel InsertSPK(SPKViewModel spk,
             List<SPKDetailSparepartViewModel> spkSparepartList,
             List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList,
             List<VehicleWheelViewModel> vehicleWheelList,
@@ -160,25 +146,6 @@ namespace BrawijayaWorkshop.Model
             Invoice insertedInvoice = new Invoice();
             Reference spkReference = _referenceRepository.GetById(spk.CategoryReferenceId);
             bool isSPKSales = spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE;
-
-            if (parentSPK != null)
-            {
-                // helluva method
-                AbortSPK(parentSPK, GetSPKSparepartList(parentSPK.Id), GetSPKSparepartDetailList(parentSPK.Id), userId);
-
-                parentSPK.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
-                parentSPK.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
-                parentSPK.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-
-                parentSPK.ModifyDate = serverTime;
-                parentSPK.ModifyUserId = userId;
-
-                SPK entity = _SPKRepository.GetById(parentSPK.Id);
-                Map(parentSPK, entity);
-
-                _SPKRepository.Update(entity);
-
-            }
 
             string code = "SPK-";
 
@@ -212,14 +179,15 @@ namespace BrawijayaWorkshop.Model
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
                 spk.StatusOverLimit = 1;
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
             }
             else
             {
                 spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 spk.StatusOverLimit = 0;
+                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
             }
 
-            spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
             spk.StatusCompletedId = isSPKSales ? (int)DbConstant.SPKCompletionStatus.Completed : (int)DbConstant.SPKCompletionStatus.InProgress;
             SPK entityChild = new SPK();
             Map(spk, entityChild);
@@ -351,12 +319,6 @@ namespace BrawijayaWorkshop.Model
                         _invoiceDetailRepository.Add(invcDtl);
                     }
                 }
-            }
-
-            if (!isNeedApproval)
-            {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
             }
 
             //Wheel Change Handler
@@ -518,55 +480,6 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public void AbortSPK(SPKViewModel spk, List<SPKDetailSparepartViewModel> spkSparepartList, List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList, int userId)
-        {
-            DateTime serverTime = DateTime.Now;
-
-            SPK entity = _SPKRepository.GetById(spk.Id);
-            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            entity.ModifyDate = serverTime;
-            entity.ModifyUserId = userId;
-
-            _SPKRepository.Update(entity);
-
-            foreach (var item in spkSparepartList)
-            {
-                Sparepart sparepart = _sparepartRepository.GetById(item.Sparepart.Id);
-                sparepart.StockQty = sparepart.StockQty + item.TotalQuantity;
-                sparepart.ModifyDate = serverTime;
-                sparepart.ModifyUserId = userId;
-
-                _sparepartRepository.Update(sparepart);
-            }
-
-            foreach (var item in spkSparepartDetailList)
-            {
-                SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
-                sparepartDetail.ModifyDate = serverTime;
-                sparepartDetail.ModifyUserId = userId;
-                sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-
-                _sparepartDetailRepository.Update(sparepartDetail);
-            }
-
-            List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
-
-            foreach (var item in wehList)
-            {
-                _wheelExchangeHistoryRepository.Delete(item);
-            }
-
-            List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
-
-            foreach (SPKSchedule schedule in scheduleList)
-            {
-                _SPKScheduleRepository.Delete(schedule);
-            }
-
-            _unitOfWork.SaveChanges();
-
-        }
-
         public SpecialSparepartViewModel GetSparepartSpecial(int sparepartId)
         {
             SpecialSparepart result = _specialSparepartRepository.GetMany(ss => ss.SparepartId == sparepartId && ss.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
@@ -615,6 +528,71 @@ namespace BrawijayaWorkshop.Model
         public int SPKSalesCategoryReferenceId()
         {
             return _referenceRepository.GetMany(r => r.Code == DbConstant.REF_SPK_CATEGORY_SALE).FirstOrDefault().Id;
+        }
+
+        public void AbortParentSPK(SPKViewModel spk, int userId)
+        {
+            #region Abort Endorsed SPK
+            DateTime serverTime = DateTime.Now;
+
+            SPK entity = _SPKRepository.GetById(spk.Id);
+            entity.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
+            entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
+            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
+
+            //_SPKRepository.AttachNavigation<Vehicle>(entity.Vehicle);
+            //_SPKRepository.AttachNavigation<User>(entity.ModifyUser);
+            //_SPKRepository.AttachNavigation<User>(entity.CreateUser);
+            //_SPKRepository.AttachNavigation<Reference>(entity.CategoryReference);
+            _SPKRepository.Update(entity);
+
+            foreach (var item in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
+            {
+                Sparepart sparepart = _sparepartRepository.GetById(item.Sparepart.Id);
+                sparepart.StockQty = sparepart.StockQty + item.TotalQuantity;
+                sparepart.ModifyDate = serverTime;
+                sparepart.ModifyUserId = userId;
+
+                //_sparepartRepository.AttachNavigation<User>(sparepart.ModifyUser);
+                //_sparepartRepository.AttachNavigation<User>(sparepart.CreateUser);
+                //_sparepartRepository.AttachNavigation<Reference>(sparepart.CategoryReference);
+                //_sparepartRepository.AttachNavigation<Reference>(sparepart.UnitReference);
+                _sparepartRepository.Update(sparepart);
+            }
+
+            foreach (var item in _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == entity.Id))
+            {
+                SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
+                sparepartDetail.ModifyDate = serverTime;
+                sparepartDetail.ModifyUserId = userId;
+                sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+
+                //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.ModifyUser);
+                //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.CreateUser);
+                //_sparepartDetailRepository.AttachNavigation<Sparepart>(sparepartDetail.Sparepart);
+                //_sparepartDetailRepository.AttachNavigation<PurchasingDetail>(sparepartDetail.PurchasingDetail);
+                //_sparepartDetailRepository.AttachNavigation<SparepartManualTransaction>(sparepartDetail.SparepartManualTransaction);
+                _sparepartDetailRepository.Update(sparepartDetail);
+            }
+
+            List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
+
+            foreach (var item in wehList)
+            {
+                _wheelExchangeHistoryRepository.Delete(item);
+            }
+
+            List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
+
+            foreach (SPKSchedule schedule in scheduleList)
+            {
+                _SPKScheduleRepository.Delete(schedule);
+            }
+
+            _unitOfWork.SaveChanges();
+            #endregion
         }
     }
 }

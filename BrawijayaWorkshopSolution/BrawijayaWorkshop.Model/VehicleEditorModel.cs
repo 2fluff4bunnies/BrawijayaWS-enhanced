@@ -43,11 +43,14 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails()
+        public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails(int vehicleId)
         {
+
+
             List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready 
                                                                             || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
                                                                             && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                                                                            && !getCurrentVehicleWheel(vehicleId).Any(vw => vw.WheelDetailId == wd.Id)
                                                                       ).ToList();
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);

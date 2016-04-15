@@ -63,9 +63,7 @@
             this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsRequestPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrintApproval = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsSetAsCompleted = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
@@ -370,12 +368,10 @@
             this.cmsPrintData,
             this.cmsRequestPrint,
             this.cmsPrintApproval,
-            this.toolStripSeparator3,
             this.cmsSetAsCompleted,
-            this.toolStripSeparator2,
             this.cmsAbort});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(172, 220);
+            this.cmsEditor.Size = new System.Drawing.Size(172, 208);
             // 
             // viewDetailToolStripMenuItem
             // 
@@ -430,11 +426,6 @@
             this.cmsPrintApproval.Text = "Persetujuan Print";
             this.cmsPrintApproval.Click += new System.EventHandler(this.cmsPrintApproval_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(168, 6);
-            // 
             // cmsSetAsCompleted
             // 
             this.cmsSetAsCompleted.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.completed_16x16;
@@ -442,11 +433,6 @@
             this.cmsSetAsCompleted.Size = new System.Drawing.Size(171, 22);
             this.cmsSetAsCompleted.Text = "Set SPK Selesai";
             this.cmsSetAsCompleted.Click += new System.EventHandler(this.cmsSetAsCompleted_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
             // 
             // cmsAbort
             // 
@@ -520,11 +506,9 @@
         private System.Windows.Forms.ToolStripMenuItem cmsRequestPrint;
         private System.Windows.Forms.ToolStripMenuItem cmsAbort;
         private System.Windows.Forms.ToolStripMenuItem cmsSetAsCompleted;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private DevExpress.XtraEditors.LabelControl lblCompletedStatus;
         private DevExpress.XtraEditors.LookUpEdit lookUpCompletedStatus;
         private System.Windows.Forms.ToolStripMenuItem cmsSPKApproval;
         private System.Windows.Forms.ToolStripMenuItem cmsPrintApproval;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
