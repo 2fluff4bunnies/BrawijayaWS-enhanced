@@ -38,6 +38,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void Print()
         {
+            Model.Print(View.SelectedInvoice.Id);
         }
     }
 }

@@ -65,5 +65,13 @@ namespace BrawijayaWorkshop.Model
             }
             return mappedResult;
         }
+
+        public void Print(int invoiceID)
+        {
+            Invoice invoice = _invoiceRepository.GetById(invoiceID);
+            invoice.Status = (int)DbConstant.InvoiceStatus.Printed;
+            _invoiceRepository.Update(invoice);
+            _unitOfWork.SaveChanges();
+        }
     }
 }

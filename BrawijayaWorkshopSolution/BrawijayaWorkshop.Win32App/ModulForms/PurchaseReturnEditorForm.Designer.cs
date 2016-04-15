@@ -31,23 +31,24 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnEditorForm));
             this.gcPurchaseReturnInfo = new DevExpress.XtraEditors.GroupControl();
+            this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
+            this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
+            this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
+            this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.gridSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colReturQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
-            this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
-            this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
-            this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchaseReturnInfo)).BeginInit();
             this.gcPurchaseReturnInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +65,38 @@
             this.gcPurchaseReturnInfo.Size = new System.Drawing.Size(577, 99);
             this.gcPurchaseReturnInfo.TabIndex = 1;
             this.gcPurchaseReturnInfo.Text = "Informasi Retur Pembelian";
+            // 
+            // txtSupplier
+            // 
+            this.txtSupplier.Location = new System.Drawing.Point(140, 65);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.Properties.ReadOnly = true;
+            this.txtSupplier.Size = new System.Drawing.Size(208, 20);
+            this.txtSupplier.TabIndex = 11;
+            // 
+            // lblSupplier
+            // 
+            this.lblSupplier.Location = new System.Drawing.Point(12, 68);
+            this.lblSupplier.Name = "lblSupplier";
+            this.lblSupplier.Size = new System.Drawing.Size(38, 13);
+            this.lblSupplier.TabIndex = 10;
+            this.lblSupplier.Text = "Supplier";
+            // 
+            // txtTransactionDate
+            // 
+            this.txtTransactionDate.Location = new System.Drawing.Point(140, 32);
+            this.txtTransactionDate.Name = "txtTransactionDate";
+            this.txtTransactionDate.Properties.ReadOnly = true;
+            this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
+            this.txtTransactionDate.TabIndex = 9;
+            // 
+            // lblTransactionDate
+            // 
+            this.lblTransactionDate.Location = new System.Drawing.Point(12, 35);
+            this.lblTransactionDate.Name = "lblTransactionDate";
+            this.lblTransactionDate.Size = new System.Drawing.Size(68, 13);
+            this.lblTransactionDate.TabIndex = 8;
+            this.lblTransactionDate.Text = "Tanggal Retur";
             // 
             // gridSparepart
             // 
@@ -118,37 +151,10 @@
             this.gridView1.GridControl = this.gridSparepart;
             this.gridView1.Name = "gridView1";
             // 
-            // txtSupplier
+            // bgwSave
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(140, 65);
-            this.txtSupplier.Name = "txtSupplier";
-            this.txtSupplier.Properties.ReadOnly = true;
-            this.txtSupplier.Size = new System.Drawing.Size(208, 20);
-            this.txtSupplier.TabIndex = 11;
-            // 
-            // lblSupplier
-            // 
-            this.lblSupplier.Location = new System.Drawing.Point(12, 68);
-            this.lblSupplier.Name = "lblSupplier";
-            this.lblSupplier.Size = new System.Drawing.Size(38, 13);
-            this.lblSupplier.TabIndex = 10;
-            this.lblSupplier.Text = "Supplier";
-            // 
-            // txtTransactionDate
-            // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(140, 32);
-            this.txtTransactionDate.Name = "txtTransactionDate";
-            this.txtTransactionDate.Properties.ReadOnly = true;
-            this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
-            this.txtTransactionDate.TabIndex = 9;
-            // 
-            // lblTransactionDate
-            // 
-            this.lblTransactionDate.Location = new System.Drawing.Point(12, 35);
-            this.lblTransactionDate.Name = "lblTransactionDate";
-            this.lblTransactionDate.Size = new System.Drawing.Size(68, 13);
-            this.lblTransactionDate.TabIndex = 8;
-            this.lblTransactionDate.Text = "Tanggal Retur";
+            this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
+            this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
             // PurchaseReturnEditorForm
             // 
@@ -166,11 +172,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchaseReturnInfo)).EndInit();
             this.gcPurchaseReturnInfo.ResumeLayout(false);
             this.gcPurchaseReturnInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).EndInit();
             this.ResumeLayout(false);
 
@@ -189,5 +195,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colReturQty;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.BindingSource bsSparepart;
+        private System.ComponentModel.BackgroundWorker bgwSave;
     }
 }

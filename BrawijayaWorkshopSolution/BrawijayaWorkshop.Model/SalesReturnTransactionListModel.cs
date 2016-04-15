@@ -13,6 +13,7 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IInvoiceRepository _invoiceRepository;
+        private IInvoiceDetailRepository _invoiceDetailRepository;
         private ISalesReturnRepository _salesReturnRepository;
         private ISalesReturnDetailRepository _salesReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
@@ -21,7 +22,7 @@ namespace BrawijayaWorkshop.Model
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnTransactionListModel(ITransactionRepository transactionRepository,
-            IInvoiceRepository invoiceRepository, ISalesReturnRepository salesReturnRepository,
+            IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ISalesReturnRepository salesReturnRepository,
             ISalesReturnDetailRepository salesReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
@@ -29,6 +30,7 @@ namespace BrawijayaWorkshop.Model
         {
             _transactionRepository = transactionRepository;
             _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
             _salesReturnRepository = salesReturnRepository;
             _salesReturnDetailRepository = salesReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
@@ -136,6 +138,38 @@ namespace BrawijayaWorkshop.Model
                 }
             }
 
+        }
+
+        public List<SalesReturnDetail> RetrieveSalesReturnDetail(int salesReturnID)
+        {
+            List<SalesReturnDetail> result = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
+            return result;
+        }
+
+        public List<ReturnViewModel> GetReturnListDetail(int salesReturnID, int invoiceID)
+        {
+            List<ReturnViewModel> result = new List<ReturnViewModel>();
+            List<InvoiceDetail> listInvoiceDetail = _invoiceDetailRepository.GetMany(x => x.InvoiceId == invoiceID).ToList();
+
+            if (salesReturnID > 0)
+            {
+                List<SalesReturnDetail> listDetail = this.RetrieveSalesReturnDetail(salesReturnID);
+                if (listDetail != null && listDetail.Count > 0)
+                {
+                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                    foreach (var sparepartID in sparepartIDs)
+                    {
+                        result.Add(new ReturnViewModel
+                        {
+                            SparepartId = sparepartID,
+                            SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
+                        });
+                    }
+                }
+            }
+            return result;
         }
     }
 }

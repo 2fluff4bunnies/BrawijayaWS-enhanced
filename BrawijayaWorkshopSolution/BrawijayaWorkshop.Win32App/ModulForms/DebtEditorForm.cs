@@ -149,5 +149,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public PurchasingViewModel SelectedPurchasing { get; set; }
 
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                ExecuteSave();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save debt: '" + SelectedDebt.Description + "'" + "at date :'" + SelectedDebt.CreateDate + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses penyimpanan data pembayaran gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data pembayaran selesai", true);
+                this.Close();
+            }
+        }
+
     }
 }

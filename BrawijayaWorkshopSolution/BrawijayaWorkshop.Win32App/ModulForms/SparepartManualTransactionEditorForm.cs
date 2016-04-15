@@ -202,5 +202,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             TotalPrice = Price * StockUpdate;
         }
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                ExecuteSave();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save manual sparepart: '" + SelectedSparepartManualTransaction.Id + "'" + "at date :'" + SelectedSparepartManualTransaction.CreateDate + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses penyimpanan data ubah stok sparepart gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data ubah stok selesai", true);
+                this.Close();
+            }
+        }
     }
 }
