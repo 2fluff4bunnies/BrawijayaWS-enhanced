@@ -28,18 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.TopMargin.Height = 100;
-            this.BottomMargin.Height = 100;
+            // 
+            // Detail
+            // 
+            this.Detail.HeightF = 100F;
+            this.Detail.Name = "Detail";
+            this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // TopMargin
+            // 
+            this.TopMargin.HeightF = 100F;
+            this.TopMargin.Name = "TopMargin";
+            this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // BottomMargin
+            // 
+            this.BottomMargin.HeightF = 100F;
+            this.BottomMargin.Name = "BottomMargin";
+            this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // PurchasingReturnPrintItem
+            // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
-			this.Detail,
-			this.TopMargin,
-			this.BottomMargin});
+            this.Detail,
+            this.TopMargin,
+            this.BottomMargin});
+            this.DisplayName = "Retur Pembelian";
+            this.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.Margins = new System.Drawing.Printing.Margins(38, 36, 100, 100);
+            this.PageHeight = 600;
+            this.PageWidth = 818;
+            this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.ShowPrintMarginsWarning = false;
+            this.Version = "15.1";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+
         }
 
         #endregion

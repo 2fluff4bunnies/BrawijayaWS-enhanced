@@ -338,7 +338,7 @@
             this.title.StylePriority.UseFont = false;
             this.title.StylePriority.UseTextAlignment = false;
             this.title.Text = "SPK";
-            this.title.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.title.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // PageHeader
             // 
@@ -643,6 +643,7 @@
             this.DesignerOptions.ShowDesignerHints = false;
             this.DesignerOptions.ShowExportWarnings = false;
             this.DesignerOptions.ShowPrintingWarnings = false;
+            this.DisplayName = "SPK";
             this.Margins = new System.Drawing.Printing.Margins(38, 32, 0, 0);
             this.PageHeight = 600;
             this.PageWidth = 818;

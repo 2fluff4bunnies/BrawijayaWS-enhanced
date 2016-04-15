@@ -109,14 +109,14 @@
             // 
             // TopMargin
             // 
-            this.TopMargin.HeightF = 24F;
+            this.TopMargin.HeightF = 1.083342F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 3.08342F;
+            this.BottomMargin.HeightF = 3F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -903,9 +903,10 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourceInvoiceViewModel});
             this.DataSource = this.dataSourceInvoiceViewModel;
-            this.Margins = new System.Drawing.Printing.Margins(38, 34, 24, 3);
+            this.DisplayName = "Invoice";
+            this.Margins = new System.Drawing.Printing.Margins(33, 29, 1, 3);
             this.PageHeight = 600;
-            this.PageWidth = 827;
+            this.PageWidth = 818;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.ShowPreviewMarginLines = false;
             this.ShowPrintMarginsWarning = false;

@@ -532,11 +532,13 @@
             this.ReportHeader,
             this.PageFooter,
             this.PageHeader});
+            this.DisplayName = "Pembelian";
             this.Font = new System.Drawing.Font("Tahoma", 8F);
             this.Margins = new System.Drawing.Printing.Margins(33, 36, 1, 8);
             this.PageHeight = 600;
             this.PageWidth = 818;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.ShowPrintMarginsWarning = false;
             this.Version = "15.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
