@@ -17,7 +17,7 @@ namespace BrawijayaWorkshop.View
         int TransactionTypeId { get; set; }
 
         string SerialNumber { get; set; }
-        bool IsWheel { get; set; }
+        bool IsSpecialSparepart { get; set; }
         decimal Price { get; set; }
 
         decimal TotalPrice { get; set; }

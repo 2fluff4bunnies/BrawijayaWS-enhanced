@@ -16,7 +16,7 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private ISpecialSparepartRepository _specialSparepartRepository;
-        private ISpecialSparepartDetailRepository _wheelDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
@@ -39,7 +39,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _specialSparepartRepository = wheelRepository;
-            _wheelDetailRepository = wheelDetailRepository;
+            _specialSparepartDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
@@ -168,12 +168,12 @@ namespace BrawijayaWorkshop.Model
                                         wDetail.ModifyDate = serverTime;
                                         wDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
 
-                                        _wheelDetailRepository.AttachNavigation(spDetail.CreateUser);
-                                        _wheelDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                                        _wheelDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                                        _wheelDetailRepository.AttachNavigation(spDetail.Sparepart);
-                                        _wheelDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                                        _wheelDetailRepository.Add(wDetail);
+                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                                        _specialSparepartDetailRepository.Add(wDetail);
                                     }
                                 }
 
@@ -268,6 +268,12 @@ namespace BrawijayaWorkshop.Model
             SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
 
             return specialSparepart != null;
+        }
+
+        public bool IsSerialNumberExist(string sn)
+        {
+            SpecialSparepartDetail ssd = _specialSparepartDetailRepository.GetMany(dtl => dtl.SerialNumber.ToLower() == sn.ToLower()).FirstOrDefault();
+            return ssd != null;
         }
     }
 }

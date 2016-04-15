@@ -7,7 +7,7 @@ using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class  SparepartManualTransactionEditorPresenter : BasePresenter<ISparepartManualTransactionEditorView, SparepartManualTransactionEditorModel>
+    public class SparepartManualTransactionEditorPresenter : BasePresenter<ISparepartManualTransactionEditorView, SparepartManualTransactionEditorModel>
     {
         public SparepartManualTransactionEditorPresenter(ISparepartManualTransactionEditorView view, SparepartManualTransactionEditorModel model)
             : base(view, model) { }
@@ -15,12 +15,12 @@ namespace BrawijayaWorkshop.Presenter
         public void InitFormData()
         {
             View.ListTransactionTypeReference = Model.RetrieveTransactionType();
-            if(View.Sparepart != null)
+            if (View.Sparepart != null)
             {
                 View.SparepartId = View.Sparepart.Id;
                 View.SparepartName = View.Sparepart.Name;
                 View.Stock = View.Sparepart.StockQty;
-                View.IsWheel = Model.IsThisWheel(View.SparepartId);
+                View.IsSpecialSparepart = Model.IsThisWheel(View.SparepartId);
             }
             if (View.SelectedSparepartManualTransaction != null)
             {
@@ -53,6 +53,11 @@ namespace BrawijayaWorkshop.Presenter
             {
                 Model.InsertSparepartManualTransaction(View.SelectedSparepartManualTransaction, View.TotalPrice, LoginInformation.UserId);
             }
+        }
+
+        public bool IsSerialNumberExist()
+        {
+            return Model.IsSerialNumberExist(View.SerialNumber);
         }
     }
 }
