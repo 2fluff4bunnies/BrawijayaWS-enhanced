@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnTransactionListForm));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -40,7 +41,7 @@
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
@@ -63,15 +64,15 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtDateFilterFrom);
             this.gcFilter.Controls.Add(this.lblFilterDate);
-            this.gcFilter.Location = new System.Drawing.Point(-4, 2);
+            this.gcFilter.Location = new System.Drawing.Point(1, 1);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(641, 67);
+            this.gcFilter.Size = new System.Drawing.Size(632, 67);
             this.gcFilter.TabIndex = 3;
             this.gcFilter.Text = "Filter";
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(284, 34);
+            this.labelControl1.Location = new System.Drawing.Point(252, 34);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(4, 13);
             this.labelControl1.TabIndex = 5;
@@ -80,7 +81,7 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(262, 31);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -96,7 +97,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(438, 28);
+            this.btnSearch.Location = new System.Drawing.Point(406, 29);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -106,7 +107,7 @@
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(140, 31);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(108, 31);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -130,10 +131,10 @@
             this.gridReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridReturn.Location = new System.Drawing.Point(-3, 86);
+            this.gridReturn.Location = new System.Drawing.Point(1, 74);
             this.gridReturn.MainView = this.gvReturn;
             this.gridReturn.Name = "gridReturn";
-            this.gridReturn.Size = new System.Drawing.Size(641, 179);
+            this.gridReturn.Size = new System.Drawing.Size(632, 184);
             this.gridReturn.TabIndex = 8;
             this.gridReturn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvReturn});

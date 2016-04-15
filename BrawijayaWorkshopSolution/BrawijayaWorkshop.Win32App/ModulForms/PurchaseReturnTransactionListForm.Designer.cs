@@ -64,9 +64,9 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtDateFilterFrom);
             this.gcFilter.Controls.Add(this.lblFilterDate);
-            this.gcFilter.Location = new System.Drawing.Point(-4, 2);
+            this.gcFilter.Location = new System.Drawing.Point(1, 2);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(641, 67);
+            this.gcFilter.Size = new System.Drawing.Size(609, 72);
             this.gcFilter.TabIndex = 2;
             this.gcFilter.Text = "Filter";
             // 
@@ -131,10 +131,10 @@
             this.gridReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridReturn.Location = new System.Drawing.Point(-4, 87);
+            this.gridReturn.Location = new System.Drawing.Point(1, 80);
             this.gridReturn.MainView = this.gvReturn;
             this.gridReturn.Name = "gridReturn";
-            this.gridReturn.Size = new System.Drawing.Size(641, 210);
+            this.gridReturn.Size = new System.Drawing.Size(609, 162);
             this.gridReturn.TabIndex = 7;
             this.gridReturn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvReturn});
@@ -195,7 +195,7 @@
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
@@ -203,7 +203,7 @@
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -211,7 +211,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 261);
+            this.ClientSize = new System.Drawing.Size(611, 247);
             this.Controls.Add(this.gridReturn);
             this.Controls.Add(this.gcFilter);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

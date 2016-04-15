@@ -53,26 +53,27 @@
             // 
             // gcPurchaseReturnInfo
             // 
-            this.gcPurchaseReturnInfo.Controls.Add(this.gridSparepart);
+            this.gcPurchaseReturnInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcPurchaseReturnInfo.Controls.Add(this.txtSupplier);
             this.gcPurchaseReturnInfo.Controls.Add(this.lblSupplier);
             this.gcPurchaseReturnInfo.Controls.Add(this.txtTransactionDate);
             this.gcPurchaseReturnInfo.Controls.Add(this.lblTransactionDate);
-            this.gcPurchaseReturnInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcPurchaseReturnInfo.Location = new System.Drawing.Point(0, 0);
             this.gcPurchaseReturnInfo.Name = "gcPurchaseReturnInfo";
-            this.gcPurchaseReturnInfo.Size = new System.Drawing.Size(577, 281);
+            this.gcPurchaseReturnInfo.Size = new System.Drawing.Size(577, 99);
             this.gcPurchaseReturnInfo.TabIndex = 1;
             this.gcPurchaseReturnInfo.Text = "Informasi Retur Pembelian";
             // 
             // gridSparepart
             // 
-            this.gridSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gridSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridSparepart.Location = new System.Drawing.Point(0, 102);
+            this.gridSparepart.Location = new System.Drawing.Point(0, 105);
             this.gridSparepart.MainView = this.gvSparepart;
             this.gridSparepart.Name = "gridSparepart";
-            this.gridSparepart.Size = new System.Drawing.Size(577, 179);
+            this.gridSparepart.Size = new System.Drawing.Size(577, 184);
             this.gridSparepart.TabIndex = 29;
             this.gridSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSparepart,
@@ -119,7 +120,7 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(140, 60);
+            this.txtSupplier.Location = new System.Drawing.Point(140, 65);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Properties.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(208, 20);
@@ -127,7 +128,7 @@
             // 
             // lblSupplier
             // 
-            this.lblSupplier.Location = new System.Drawing.Point(12, 63);
+            this.lblSupplier.Location = new System.Drawing.Point(12, 68);
             this.lblSupplier.Name = "lblSupplier";
             this.lblSupplier.Size = new System.Drawing.Size(38, 13);
             this.lblSupplier.TabIndex = 10;
@@ -135,7 +136,7 @@
             // 
             // txtTransactionDate
             // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(140, 27);
+            this.txtTransactionDate.Location = new System.Drawing.Point(140, 32);
             this.txtTransactionDate.Name = "txtTransactionDate";
             this.txtTransactionDate.Properties.ReadOnly = true;
             this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
@@ -143,7 +144,7 @@
             // 
             // lblTransactionDate
             // 
-            this.lblTransactionDate.Location = new System.Drawing.Point(12, 30);
+            this.lblTransactionDate.Location = new System.Drawing.Point(12, 35);
             this.lblTransactionDate.Name = "lblTransactionDate";
             this.lblTransactionDate.Size = new System.Drawing.Size(68, 13);
             this.lblTransactionDate.TabIndex = 8;
@@ -154,12 +155,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(577, 330);
+            this.Controls.Add(this.gridSparepart);
             this.Controls.Add(this.gcPurchaseReturnInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PurchaseReturnEditorForm";
             this.Text = "Form Retur Pembelian";
             this.Load += new System.EventHandler(this.PurchaseReturnEditorForm_Load);
             this.Controls.SetChildIndex(this.gcPurchaseReturnInfo, 0);
+            this.Controls.SetChildIndex(this.gridSparepart, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchaseReturnInfo)).EndInit();
             this.gcPurchaseReturnInfo.ResumeLayout(false);
             this.gcPurchaseReturnInfo.PerformLayout();
