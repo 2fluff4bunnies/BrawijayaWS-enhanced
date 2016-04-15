@@ -107,5 +107,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.ShowError("Proses simpan data gagal! jumlah qty retur melebihi jumlah qty pada saat pembelian");
             }
         }
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                ExecuteSave();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save purchase return: '" + SelectedPurchaseReturn.Code + "'" + "at date :'" + SelectedPurchaseReturn.CreateDate + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses penyimpanan data retur pembelian gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data retur pembelian selesai", true);
+                this.Close();
+            }
+        }
     }
 }

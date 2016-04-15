@@ -48,6 +48,7 @@
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.persetujuanPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lihatSelengkapnyaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -229,9 +230,10 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsEditData,
             this.persetujuanPembelianToolStripMenuItem,
-            this.lihatSelengkapnyaToolStripMenuItem});
+            this.lihatSelengkapnyaToolStripMenuItem,
+            this.cmsPrint});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(196, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(196, 114);
             // 
             // cmsEditData
             // 
@@ -256,6 +258,14 @@
             this.lihatSelengkapnyaToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.lihatSelengkapnyaToolStripMenuItem.Text = "Lihat Selengkapnya";
             this.lihatSelengkapnyaToolStripMenuItem.Click += new System.EventHandler(this.lihatSelengkapnyaToolStripMenuItem_Click);
+            // 
+            // cmsPrint
+            // 
+            this.cmsPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x161;
+            this.cmsPrint.Name = "cmsPrint";
+            this.cmsPrint.Size = new System.Drawing.Size(195, 22);
+            this.cmsPrint.Text = "Cetak";
+            this.cmsPrint.Click += new System.EventHandler(this.cmsPrint_Click);
             // 
             // PurchasingListControl
             // 
@@ -300,6 +310,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private System.Windows.Forms.ToolStripMenuItem persetujuanPembelianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lihatSelengkapnyaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmsPrint;
 
     }
 }

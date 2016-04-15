@@ -103,132 +103,7 @@ namespace BrawijayaWorkshop.Model
             {
                 try
                 {
-                    DateTime serverTime = DateTime.Now;
-                    SalesReturn salesReturn = new SalesReturn();
-                    salesReturn.CreateDate = serverTime;
-                    salesReturn.CreateUserId = userID;
-                    salesReturn.ModifyDate = serverTime;
-                    salesReturn.ModifyUserId = userID;
-                    salesReturn.InvoiceId = invoiceID;
-                    salesReturn.Date = serverTime;
-                    salesReturn.Status = (int)DbConstant.DefaultDataStatus.Active;
-
-                    string code = "SLR" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
-                    //get total sales return created today
-                    List<SalesReturn> todaySLR = _salesReturnRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
-                    code = code + (todaySLR.Count + 1);
-                    salesReturn.Code = code;
-
-                    _salesReturnRepository.AttachNavigation(salesReturn.CreateUser);
-                    _salesReturnRepository.AttachNavigation(salesReturn.ModifyUser);
-                    _salesReturnRepository.AttachNavigation(salesReturn.Invoice);
-                    salesReturn = _salesReturnRepository.Add(salesReturn);
-                    _unitOfWork.SaveChanges();
-
-                    List<SalesReturnDetail> listReturnDetail = new List<SalesReturnDetail>();
-
-                    decimal totalTransaction = 0;
-                    foreach (var itemReturn in listReturn)
-                    {
-                        List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId
-                            && x.InvoiceId == invoiceID
-                            && (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
-                            || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
-                            ).OrderByDescending(x => x.CreateDate)
-                            .Take(itemReturn.ReturQty).ToList();
-
-                        foreach (var invoiceDetail in invoiceDetails)
-                        {
-                            listReturnDetail.Add(new SalesReturnDetail
-                            {
-                                CreateDate = serverTime,
-                                CreateUserId = userID,
-                                ModifyDate = serverTime,
-                                ModifyUserId = userID,
-                                SalesReturnId = salesReturn.Id,
-                                InvoiceDetailId = invoiceDetail.Id,
-                                Status = (int)DbConstant.DefaultDataStatus.Active
-                            });
-                            totalTransaction += invoiceDetail.SubTotalPrice.AsDecimal();
-
-                            SparepartDetail spDetail = _sparepartDetailRepository.GetById(invoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                            spDetail.ModifyDate = serverTime;
-                            spDetail.ModifyUserId = userID;
-                            spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-
-                            _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                            _sparepartDetailRepository.Update(spDetail);
-                        }
-                        Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
-                        sparepart.ModifyDate = serverTime;
-                        sparepart.ModifyUserId = userID;
-                        sparepart.StockQty += itemReturn.ReturQty;
-
-                        _sparepartRepository.AttachNavigation(sparepart.CreateUser);
-                        _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
-                        _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
-                        _sparepartRepository.AttachNavigation(sparepart.UnitReference);
-                        _sparepartRepository.Update(sparepart);
-                    }
-
-                    _unitOfWork.SaveChanges();
-
-                    foreach (var itemReturnDetail in listReturnDetail)
-                    {
-                        _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.CreateUser);
-                        _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.ModifyUser);
-                        _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.SalesReturn);
-                        _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.InvoiceDetail);
-                        _salesReturnDetailRepository.Add(itemReturnDetail);
-                    }
-
-                    _unitOfWork.SaveChanges();
-
-                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
-                    Transaction transaction = new Transaction();
-                    transaction.CreateDate = serverTime;
-                    transaction.CreateUserId = userID;
-                    transaction.ModifyDate = serverTime;
-                    transaction.ModifyUserId = userID;
-                    transaction.PrimaryKeyValue = salesReturn.Id;
-                    transaction.ReferenceTableId = transactionReferenceTable.Id;
-                    transaction.TotalPayment = totalTransaction.AsDouble();
-                    transaction.TotalTransaction = totalTransaction.AsDouble();
-                    transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
-                    transaction.Description = "Retur Penjualan";
-                    transaction.TransactionDate = serverTime;
-
-                    _transactionRepository.AttachNavigation(transaction.CreateUser);
-                    _transactionRepository.AttachNavigation(transaction.ModifyUser);
-                    _transactionRepository.AttachNavigation(transaction.PaymentMethod);
-                    _transactionRepository.AttachNavigation(transaction.ReferenceTable);
-                    transaction = _transactionRepository.Add(transaction);
-
-                    _unitOfWork.SaveChanges();
-
-                    TransactionDetail transCredit = new TransactionDetail();
-                    transCredit.Debit = totalTransaction;
-                    transCredit.ParentId = transaction.Id;
-                    transCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.03.01.01").FirstOrDefault().Id;
-
-                    _transactionDetailRepository.AttachNavigation(transCredit.Journal);
-                    _transactionDetailRepository.AttachNavigation(transCredit.Parent);
-                    _transactionDetailRepository.Add(transCredit);
-
-                    TransactionDetail transDebit = new TransactionDetail();
-                    transDebit.Debit = totalTransaction;
-                    transDebit.ParentId = transaction.Id;
-                    transDebit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.01").FirstOrDefault().Id;
-
-                    _transactionDetailRepository.AttachNavigation(transCredit.Journal);
-                    _transactionDetailRepository.AttachNavigation(transCredit.Parent);
-                    _transactionDetailRepository.Add(transDebit);
-
-                    _unitOfWork.SaveChanges();
+                    InsertSalesReturnFunc(invoiceID, listReturn, userID);
                     trans.Commit();
                 }
                 catch (Exception)
@@ -240,6 +115,219 @@ namespace BrawijayaWorkshop.Model
         }
 
         public void UpdateSalesReturn(int invoiceID, int salesReturnID, List<ReturnViewModel> listReturn, int userID)
+        {
+            using (var trans = _unitOfWork.BeginTransaction())
+            {
+                try
+                {
+                    DeleteSalesReturnFunc(salesReturnID, userID);
+                    InsertSalesReturnFunc(invoiceID, listReturn, userID);
+                    trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public void InsertSalesReturnFunc(int invoiceID, List<ReturnViewModel> listReturn, int userID)
+        {
+            DateTime serverTime = DateTime.Now;
+            SalesReturn salesReturn = new SalesReturn();
+            salesReturn.CreateDate = serverTime;
+            salesReturn.CreateUserId = userID;
+            salesReturn.ModifyDate = serverTime;
+            salesReturn.ModifyUserId = userID;
+            salesReturn.InvoiceId = invoiceID;
+            salesReturn.Date = serverTime;
+            salesReturn.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+            string code = "SLR" + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+            //get total sales return created today
+            List<SalesReturn> todaySLR = _salesReturnRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+            code = code + (todaySLR.Count + 1);
+            salesReturn.Code = code;
+
+            _salesReturnRepository.AttachNavigation(salesReturn.CreateUser);
+            _salesReturnRepository.AttachNavigation(salesReturn.ModifyUser);
+            _salesReturnRepository.AttachNavigation(salesReturn.Invoice);
+            salesReturn = _salesReturnRepository.Add(salesReturn);
+            _unitOfWork.SaveChanges();
+
+            List<SalesReturnDetail> listReturnDetail = new List<SalesReturnDetail>();
+
+            decimal totalTransaction = 0;
+            foreach (var itemReturn in listReturn)
+            {
+                List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId
+                    && x.InvoiceId == invoiceID
+                    && (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
+                    || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
+                    ).OrderByDescending(x => x.CreateDate)
+                    .Take(itemReturn.ReturQty).ToList();
+
+                foreach (var invoiceDetail in invoiceDetails)
+                {
+                    listReturnDetail.Add(new SalesReturnDetail
+                    {
+                        CreateDate = serverTime,
+                        CreateUserId = userID,
+                        ModifyDate = serverTime,
+                        ModifyUserId = userID,
+                        SalesReturnId = salesReturn.Id,
+                        InvoiceDetailId = invoiceDetail.Id,
+                        Status = (int)DbConstant.DefaultDataStatus.Active
+                    });
+                    totalTransaction += invoiceDetail.SubTotalPrice.AsDecimal();
+
+                    SparepartDetail spDetail = _sparepartDetailRepository.GetById(invoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                    spDetail.ModifyDate = serverTime;
+                    spDetail.ModifyUserId = userID;
+                    spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+
+                    _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                    _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                    _sparepartDetailRepository.Update(spDetail);
+                }
+                Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
+                sparepart.ModifyDate = serverTime;
+                sparepart.ModifyUserId = userID;
+                sparepart.StockQty += itemReturn.ReturQty;
+
+                _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                _sparepartRepository.AttachNavigation(sparepart.UnitReference);
+                _sparepartRepository.Update(sparepart);
+            }
+
+            _unitOfWork.SaveChanges();
+
+            foreach (var itemReturnDetail in listReturnDetail)
+            {
+                _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.CreateUser);
+                _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.ModifyUser);
+                _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.SalesReturn);
+                _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.InvoiceDetail);
+                _salesReturnDetailRepository.Add(itemReturnDetail);
+            }
+
+            _unitOfWork.SaveChanges();
+
+            Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
+            Transaction transaction = new Transaction();
+            transaction.CreateDate = serverTime;
+            transaction.CreateUserId = userID;
+            transaction.ModifyDate = serverTime;
+            transaction.ModifyUserId = userID;
+            transaction.PrimaryKeyValue = salesReturn.Id;
+            transaction.ReferenceTableId = transactionReferenceTable.Id;
+            transaction.TotalPayment = totalTransaction.AsDouble();
+            transaction.TotalTransaction = totalTransaction.AsDouble();
+            transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
+            transaction.Description = "Retur Penjualan";
+            transaction.TransactionDate = serverTime;
+
+            _transactionRepository.AttachNavigation(transaction.CreateUser);
+            _transactionRepository.AttachNavigation(transaction.ModifyUser);
+            _transactionRepository.AttachNavigation(transaction.PaymentMethod);
+            _transactionRepository.AttachNavigation(transaction.ReferenceTable);
+            transaction = _transactionRepository.Add(transaction);
+
+            _unitOfWork.SaveChanges();
+
+            TransactionDetail transCredit = new TransactionDetail();
+            transCredit.Debit = totalTransaction;
+            transCredit.ParentId = transaction.Id;
+            transCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.03.01.01").FirstOrDefault().Id;
+
+            _transactionDetailRepository.AttachNavigation(transCredit.Journal);
+            _transactionDetailRepository.AttachNavigation(transCredit.Parent);
+            _transactionDetailRepository.Add(transCredit);
+
+            TransactionDetail transDebit = new TransactionDetail();
+            transDebit.Debit = totalTransaction;
+            transDebit.ParentId = transaction.Id;
+            transDebit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.01").FirstOrDefault().Id;
+
+            _transactionDetailRepository.AttachNavigation(transCredit.Journal);
+            _transactionDetailRepository.AttachNavigation(transCredit.Parent);
+            _transactionDetailRepository.Add(transDebit);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        public void DeleteSalesReturnFunc(int salesReturnID, int userID)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            SalesReturn salesReturn = _salesReturnRepository.GetById(salesReturnID);
+            salesReturn.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            salesReturn.ModifyDate = serverTime;
+            salesReturn.ModifyUserId = userID;
+
+            _salesReturnRepository.AttachNavigation(salesReturn.CreateUser);
+            _salesReturnRepository.AttachNavigation(salesReturn.ModifyUser);
+            _salesReturnRepository.AttachNavigation(salesReturn.Invoice);
+            _salesReturnRepository.Update(salesReturn);
+            _unitOfWork.SaveChanges();
+
+            List<SalesReturnDetail> listDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
+            foreach (var itemDetail in listDetail)
+            {
+                itemDetail.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                itemDetail.ModifyDate = serverTime;
+                itemDetail.ModifyUserId = userID;
+
+                _salesReturnDetailRepository.AttachNavigation(itemDetail.CreateUser);
+                _salesReturnDetailRepository.AttachNavigation(itemDetail.ModifyUser);
+                _salesReturnDetailRepository.AttachNavigation(itemDetail.SalesReturn);
+                _salesReturnDetailRepository.AttachNavigation(itemDetail.InvoiceDetail);
+                _salesReturnDetailRepository.Update(itemDetail);
+
+                SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+
+                _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                _sparepartDetailRepository.Update(spDetail);
+
+                Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
+                sparepart.StockQty -= 1;
+
+                _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                _sparepartRepository.AttachNavigation(sparepart.UnitReference);
+                _sparepartRepository.Update(sparepart);
+            }
+
+            _unitOfWork.SaveChanges();
+
+            Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
+            Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID && x.ReferenceTableId == transactionReferenceTable.Id).FirstOrDefault();
+            transaction.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+            transaction.ModifyDate = serverTime;
+            transaction.ModifyUserId = userID;
+
+            _transactionRepository.AttachNavigation(transaction.CreateUser);
+            _transactionRepository.AttachNavigation(transaction.ModifyUser);
+            _transactionRepository.AttachNavigation(transaction.PaymentMethod);
+            _transactionRepository.AttachNavigation(transaction.ReferenceTable);
+            _transactionRepository.Update(transaction);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        public void UpdateSalesReturnOldMthod(int invoiceID, int salesReturnID, List<ReturnViewModel> listReturn, int userID)
         {
             using(var trans = _unitOfWork.BeginTransaction())
             {

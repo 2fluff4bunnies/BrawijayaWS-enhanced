@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceEditorForm));
             this.gcInvoiceInfo = new DevExpress.XtraEditors.GroupControl();
             this.chkApplyToAll = new DevExpress.XtraEditors.CheckEdit();
@@ -63,6 +63,7 @@
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
             this.valPaymentMethod = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).BeginInit();
             this.gcInvoiceInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkApplyToAll.Properties)).BeginInit();
@@ -308,10 +309,10 @@
             this.cbPaymentType.Properties.ValueMember = "Id";
             this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
             this.cbPaymentType.TabIndex = 19;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Pilih salah satu pembayaran";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
-            this.valPaymentMethod.SetValidationRule(this.cbPaymentType, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Pilih salah satu pembayaran";
+            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
+            this.valPaymentMethod.SetValidationRule(this.cbPaymentType, conditionValidationRule2);
             this.cbPaymentType.EditValueChanged += new System.EventHandler(this.cbPaymentType_EditValueChanged);
             // 
             // lblPaymentType
@@ -385,6 +386,11 @@
             this.lblTransactionDate.TabIndex = 4;
             this.lblTransactionDate.Text = "Tanggal Transaksi";
             // 
+            // bgwSave
+            // 
+            this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
+            this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
+            // 
             // InvoiceEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,5 +458,6 @@
         private DevExpress.XtraEditors.CheckEdit chkApplyToAll;
         private System.Windows.Forms.BindingSource bsSparepart;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPaymentMethod;
+        private System.ComponentModel.BackgroundWorker bgwSave;
     }
 }

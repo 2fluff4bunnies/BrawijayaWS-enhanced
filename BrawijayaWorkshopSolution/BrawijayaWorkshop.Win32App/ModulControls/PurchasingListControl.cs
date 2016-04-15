@@ -5,9 +5,11 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,7 +43,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewPurchasing.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             persetujuanPembelianToolStripMenuItem.Enabled = AllowEdit;
-
+            cmsPrint.Enabled = AllowEdit;
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
             this.Load += PurchasingListControl_Load;
@@ -74,12 +76,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         cmsEditData.Visible = true;
                         persetujuanPembelianToolStripMenuItem.Visible = true;
                         lihatSelengkapnyaToolStripMenuItem.Visible = false;
+                        cmsPrint.Visible = false;
                     }
                     else
                     {
                         cmsEditData.Visible = false;
                         persetujuanPembelianToolStripMenuItem.Visible = false;
                         lihatSelengkapnyaToolStripMenuItem.Visible = true;
+                        cmsPrint.Visible = true;
                     }
                 }
             }
@@ -248,6 +252,21 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
+            }
+        }
+
+        private void cmsPrint_Click(object sender, EventArgs e)
+        {
+            PurchasingPrintItem report = new PurchasingPrintItem();
+            List<PurchasingViewModel> _dataSource = new List<PurchasingViewModel>();
+            _dataSource.Add(SelectedPurchasing);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
             }
         }
 

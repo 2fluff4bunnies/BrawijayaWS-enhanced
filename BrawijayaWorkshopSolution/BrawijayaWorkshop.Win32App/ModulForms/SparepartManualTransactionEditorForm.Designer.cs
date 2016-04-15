@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartManualTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
@@ -50,6 +50,7 @@
             this.lblQtyUpdaate = new DevExpress.XtraEditors.LabelControl();
             this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
@@ -226,9 +227,9 @@
             this.txtQtyUpdate.Name = "txtQtyUpdate";
             this.txtQtyUpdate.Size = new System.Drawing.Size(193, 20);
             this.txtQtyUpdate.TabIndex = 14;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
-            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Jumlah Update Harus Diisi";
+            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule2);
             this.txtQtyUpdate.EditValueChanged += new System.EventHandler(this.txtQtyUpdate_EditValueChanged);
             // 
             // lblQtyUpdaate
@@ -238,6 +239,11 @@
             this.lblQtyUpdaate.Size = new System.Drawing.Size(71, 13);
             this.lblQtyUpdaate.TabIndex = 13;
             this.lblQtyUpdaate.Text = "Jumlah Update";
+            // 
+            // bgwSave
+            // 
+            this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
+            this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
             // SparepartManualTransactionEditorForm
             // 
@@ -287,5 +293,6 @@
         private DevExpress.XtraEditors.TextEdit txtSparepartName;
         private DevExpress.XtraEditors.TextEdit txtSerialNumber;
         private DevExpress.XtraEditors.LabelControl lblSerialNumber;
+        private System.ComponentModel.BackgroundWorker bgwSave;
     }
 }

@@ -325,5 +325,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             }
         }
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                ExecuteSave();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save invoice: '" + SelectedInvoice.Code + "'" + "at date :'" + SelectedInvoice.CreateDate + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses penyimpanan data invoice gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data invoice selesai", true);
+                this.Close();
+            }
+        }
     }
 }
