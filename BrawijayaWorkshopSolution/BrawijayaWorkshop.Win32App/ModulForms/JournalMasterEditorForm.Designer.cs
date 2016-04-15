@@ -115,11 +115,11 @@
             this.lookupJournalParent.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
-            this.lookupJournalParent.Properties.DisplayMember = "Id";
+            this.lookupJournalParent.Properties.DisplayMember = "Code";
             this.lookupJournalParent.Properties.HideSelection = false;
             this.lookupJournalParent.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupJournalParent.Properties.NullText = "-- Induk Account --";
-            this.lookupJournalParent.Properties.ValueMember = "Code";
+            this.lookupJournalParent.Properties.ValueMember = "Id";
             this.lookupJournalParent.Size = new System.Drawing.Size(115, 20);
             this.lookupJournalParent.TabIndex = 3;
             // 

@@ -21,7 +21,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<JournalMasterViewModel> GetAllParentJournal()
         {
-            List<JournalMaster> result = _journalMasterRepository.GetMany(jm => jm.ParentId == null).OrderBy(jm => jm.Name).ToList();
+            List<JournalMaster> result = _journalMasterRepository.GetAll().OrderBy(jm => jm.Name).ToList();
             List<JournalMasterViewModel> mappedResult = new List<JournalMasterViewModel>();
             return Map(result, mappedResult);
         }

@@ -186,8 +186,9 @@ namespace BrawijayaWorkshop.Model
                         purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
                     }
                     Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
-                    Map(purchasing, entity);
-
+                    //Map(purchasing, entity);
+                    entity.PaymentStatus = purchasing.PaymentStatus;
+                    entity.Status = purchasing.Status;
                     _purchasingRepository.AttachNavigation(entity.CreateUser);
                     _purchasingRepository.AttachNavigation(entity.ModifyUser);
                     _purchasingRepository.AttachNavigation(entity.PaymentMethod);
