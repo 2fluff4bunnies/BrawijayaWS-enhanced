@@ -198,6 +198,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 printTool.PrintDialog();
             }
             _presenter.Print();
+            this.Close();
         }
     }
 }

@@ -14,7 +14,6 @@ using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -105,12 +104,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalSparepartPrice.Text.AsDecimal();
+                return txtTotalSparepartPrice.EditValue.AsDecimal();
             }
             set
             {
 
-                txtTotalSparepartPrice.Text = value.ToString();
+                txtTotalSparepartPrice.EditValue = value;
             }
         }
 
@@ -426,7 +425,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnAddSparepart_Click(object sender, EventArgs e)
         {
-            
+
             if (_presenter.IsUsedSparepartRequired() && !ckeIsReturnRequired.Checked)
             {
                 this.ShowWarning("Pastikan barang bekas sudah diterima.");
@@ -513,15 +512,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             gcSparepart.DataSource = SPKSparepartList;
             gvSparepart.BestFitColumns();
+            if (gvSparepart.RowCount > 0)
+            {
+                gvSparepart.FocusedRowHandle = 0;
+            }
         }
 
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
+            List<SPKDetailSparepartViewModel> listCurrent = SPKSparepartList;
             SPKDetailSparepartViewModel SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepartViewModel;
-            SPKSparepartList.Remove(SparepartToRemove);
+            listCurrent.Remove(SparepartToRemove);
+            SPKSparepartList = listCurrent;
 
             RefreshSparepartGrid();
+            CalculateTotalSparepart();
         }
 
         #region fingerprint

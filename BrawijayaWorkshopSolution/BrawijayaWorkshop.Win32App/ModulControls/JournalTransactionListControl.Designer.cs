@@ -42,6 +42,7 @@
             this.colJournalDebit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalCredit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.colTransactionDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -140,6 +141,7 @@
             // gvTransaction
             // 
             this.gvTransaction.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colTransactionDate,
             this.colJournalCode,
             this.colJournalName,
             this.colJournalDebit,
@@ -167,7 +169,7 @@
             this.colJournalCode.FieldName = "Journal.Code";
             this.colJournalCode.Name = "colJournalCode";
             this.colJournalCode.Visible = true;
-            this.colJournalCode.VisibleIndex = 0;
+            this.colJournalCode.VisibleIndex = 1;
             // 
             // colJournalName
             // 
@@ -175,7 +177,7 @@
             this.colJournalName.FieldName = "Journal.Name";
             this.colJournalName.Name = "colJournalName";
             this.colJournalName.Visible = true;
-            this.colJournalName.VisibleIndex = 1;
+            this.colJournalName.VisibleIndex = 2;
             // 
             // colJournalDebit
             // 
@@ -189,7 +191,7 @@
             this.colJournalDebit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Debit", "{0:#,#}")});
             this.colJournalDebit.Visible = true;
-            this.colJournalDebit.VisibleIndex = 2;
+            this.colJournalDebit.VisibleIndex = 3;
             // 
             // colJournalCredit
             // 
@@ -203,12 +205,22 @@
             this.colJournalCredit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Credit", "{0:#,#}")});
             this.colJournalCredit.Visible = true;
-            this.colJournalCredit.VisibleIndex = 3;
+            this.colJournalCredit.VisibleIndex = 4;
             // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // colTransactionDate
+            // 
+            this.colTransactionDate.Caption = "Tanggal";
+            this.colTransactionDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colTransactionDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.colTransactionDate.FieldName = "Parent.TransactionDate";
+            this.colTransactionDate.Name = "colTransactionDate";
+            this.colTransactionDate.Visible = true;
+            this.colTransactionDate.VisibleIndex = 0;
             // 
             // JournalTransactionListControl
             // 
@@ -244,5 +256,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colJournalDebit;
         private DevExpress.XtraGrid.Columns.GridColumn colJournalCredit;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraGrid.Columns.GridColumn colTransactionDate;
     }
 }

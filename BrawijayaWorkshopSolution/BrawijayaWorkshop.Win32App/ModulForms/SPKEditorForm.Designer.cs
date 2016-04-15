@@ -161,10 +161,13 @@
             // 
             this.txtTotalSparepartPrice.Location = new System.Drawing.Point(1000, 387);
             this.txtTotalSparepartPrice.Name = "txtTotalSparepartPrice";
+            this.txtTotalSparepartPrice.Properties.AllowFocused = false;
             this.txtTotalSparepartPrice.Properties.Appearance.Options.UseTextOptions = true;
             this.txtTotalSparepartPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.txtTotalSparepartPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtTotalSparepartPrice.Properties.Mask.EditMask = "d";
+            this.txtTotalSparepartPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTotalSparepartPrice.Size = new System.Drawing.Size(134, 20);
             this.txtTotalSparepartPrice.TabIndex = 14;
             // 
@@ -326,7 +329,7 @@
             this.lblLastUsedQty.Name = "lblLastUsedQty";
             this.lblLastUsedQty.Size = new System.Drawing.Size(136, 13);
             this.lblLastUsedQty.TabIndex = 10;
-            this.lblLastUsedQty.Text = "Jumlah penggantian terkahir";
+            this.lblLastUsedQty.Text = "Jumlah penggantian terakhir";
             // 
             // lblLastUsageDate
             // 
@@ -334,7 +337,7 @@
             this.lblLastUsageDate.Name = "lblLastUsageDate";
             this.lblLastUsageDate.Size = new System.Drawing.Size(141, 13);
             this.lblLastUsageDate.TabIndex = 8;
-            this.lblLastUsageDate.Text = "Tanggal penggantian terkahir";
+            this.lblLastUsageDate.Text = "Tanggal penggantian terakhir";
             // 
             // ckeIsReturnRequired
             // 
@@ -452,6 +455,7 @@
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvSparepart.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvSparepart.OptionsBehavior.AutoPopulateColumns = false;
             this.gvSparepart.OptionsBehavior.Editable = false;
             this.gvSparepart.OptionsBehavior.ReadOnly = true;
             this.gvSparepart.OptionsCustomization.AllowColumnMoving = false;
@@ -488,7 +492,7 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Harga";
-            this.colTotalPrice.DisplayFormat.FormatString = "#,#";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#;0}";
             this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";

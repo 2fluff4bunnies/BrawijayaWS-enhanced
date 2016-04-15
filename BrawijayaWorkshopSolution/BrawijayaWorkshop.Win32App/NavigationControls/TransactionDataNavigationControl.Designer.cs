@@ -81,16 +81,16 @@
             this.navbarGroupTransactionData.Expanded = true;
             this.navbarGroupTransactionData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchasing),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPK),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGoodTrans),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iGuestBook),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPK),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSchedule),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSales),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iInvoice),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iDebt),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCredit),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iInvoice),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iPurchaseReturn),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSalesReturn),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSales),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKSchedule)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGoodTrans)});
             this.navbarGroupTransactionData.Name = "navbarGroupTransactionData";
             // 
             // iPurchasing

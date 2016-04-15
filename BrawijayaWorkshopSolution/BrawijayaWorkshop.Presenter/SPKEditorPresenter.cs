@@ -72,6 +72,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void populateSparepartDetail()
         {
+            View.SPKSparepartDetailList = new List<SPKDetailSparepartDetailViewModel>();
             View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty));
         }
 
