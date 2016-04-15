@@ -242,7 +242,7 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork.SaveChanges();
 
             TransactionDetail transCredit = new TransactionDetail();
-            transCredit.Debit = totalTransaction;
+            transCredit.Credit = totalTransaction;
             transCredit.ParentId = transaction.Id;
             transCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.03.01.01").FirstOrDefault().Id;
 

@@ -21,6 +21,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
                 return ReturQty * PricePerItem;
             }
         }
+
+        public decimal SubTotalFee { get; set; }
         public int ReturQtyLimit { get; set; }
     }
 }

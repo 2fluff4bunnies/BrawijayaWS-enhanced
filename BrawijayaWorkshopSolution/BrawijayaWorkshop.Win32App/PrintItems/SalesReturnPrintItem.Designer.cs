@@ -705,6 +705,7 @@
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPageInfo1});
+            this.PageFooter.Expanded = false;
             this.PageFooter.HeightF = 23F;
             this.PageFooter.Name = "PageFooter";
             // 
@@ -725,6 +726,7 @@
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.DetailSparepart});
             this.DetailReport.DataSource = this.DataSourceSalesReturnViewModel;
+            this.DetailReport.Expanded = false;
             this.DetailReport.Level = 0;
             this.DetailReport.Name = "DetailReport";
             // 

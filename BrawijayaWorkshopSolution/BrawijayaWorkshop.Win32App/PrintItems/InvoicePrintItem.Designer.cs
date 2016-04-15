@@ -94,6 +94,7 @@
             this.xrLabel24 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.dataSourceInvoiceViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.calculatedField1 = new DevExpress.XtraReports.UI.CalculatedField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSourceInvoiceViewModel)).BeginInit();
@@ -254,7 +255,7 @@
             // lblServiceDate
             // 
             this.lblServiceDate.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.CreateDate", "dd/MM/yyyy")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.CreateDate", "{0:dd-MM-yyyy}")});
             this.lblServiceDate.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblServiceDate.LocationFloat = new DevExpress.Utils.PointFloat(655F, 0F);
             this.lblServiceDate.Name = "lblServiceDate";
@@ -267,6 +268,8 @@
             // 
             // lblInvoiceNumber
             // 
+            this.lblInvoiceNumber.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "Code")});
             this.lblInvoiceNumber.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblInvoiceNumber.LocationFloat = new DevExpress.Utils.PointFloat(63.54167F, 97.20834F);
             this.lblInvoiceNumber.Name = "lblInvoiceNumber";
@@ -323,12 +326,12 @@
             // 
             this.lblInvoiceDate.CanShrink = true;
             this.lblInvoiceDate.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "CreateDate")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "CreateDate", "{0:dd-MM-yyyy}")});
             this.lblInvoiceDate.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblInvoiceDate.LocationFloat = new DevExpress.Utils.PointFloat(95.83334F, 34.20834F);
             this.lblInvoiceDate.Name = "lblInvoiceDate";
             this.lblInvoiceDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblInvoiceDate.SizeF = new System.Drawing.SizeF(79.16666F, 23F);
+            this.lblInvoiceDate.SizeF = new System.Drawing.SizeF(98.95834F, 23F);
             this.lblInvoiceDate.StylePriority.UseFont = false;
             this.lblInvoiceDate.StylePriority.UsePadding = false;
             this.lblInvoiceDate.StylePriority.UseTextAlignment = false;
@@ -523,7 +526,7 @@
             // xrLabel15
             // 
             this.xrLabel15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.ListSparepart.TotalPriceAfterCommission")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "calculatedField1", "{0:#,#;(#,#);0}")});
             this.xrLabel15.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(624.7918F, 74.04166F);
             this.xrLabel15.Name = "xrLabel15";
@@ -533,7 +536,6 @@
             this.xrLabel15.StylePriority.UsePadding = false;
             this.xrLabel15.StylePriority.UseTextAlignment = false;
             xrSummary1.FormatString = "{0:#,#;(#,#);0}";
-            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrLabel15.Summary = xrSummary1;
             this.xrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
@@ -890,6 +892,11 @@
             this.dataSourceInvoiceViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.InvoiceViewModel);
             this.dataSourceInvoiceViewModel.Name = "dataSourceInvoiceViewModel";
             // 
+            // calculatedField1
+            // 
+            this.calculatedField1.Expression = "[TotalPrice] - [TotalServicePlusFee]";
+            this.calculatedField1.Name = "calculatedField1";
+            // 
             // InvoicePrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -901,6 +908,8 @@
             this.PageHeader,
             this.PageFooter,
             this.DetailReport});
+            this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
+            this.calculatedField1});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourceInvoiceViewModel});
             this.DataSource = this.dataSourceInvoiceViewModel;
@@ -986,5 +995,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
+        private DevExpress.XtraReports.UI.CalculatedField calculatedField1;
     }
 }

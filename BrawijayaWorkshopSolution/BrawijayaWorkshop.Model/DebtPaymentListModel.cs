@@ -14,22 +14,26 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IPurchasingRepository _purchasingRepository;
+        private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public DebtPaymentListModel(ITransactionRepository transactionRepository,
-            IPurchasingRepository purchasingRepository, IUnitOfWork unitOfWork)
+            IPurchasingRepository purchasingRepository, IReferenceRepository referenceRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
             _purchasingRepository = purchasingRepository;
+            _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
 
         public List<TransactionViewModel> SearchTransactionByTableRefPK(int referencePK)
         {
             List<Transaction> result = null;
-
-            result = _transactionRepository.GetMany(c => c.PrimaryKeyValue == referencePK && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
+            Reference reference = _referenceRepository.GetMany(x => x.Code == DbConstant.REF_TRANSTBL_PURCHASING).FirstOrDefault();
+            result = _transactionRepository.GetMany(c => c.PrimaryKeyValue == referencePK && c.ReferenceTableId == reference.Id
+                && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
 
             List<TransactionViewModel> mappedResult = new List<TransactionViewModel>();
             return Map(result, mappedResult);

@@ -40,12 +40,14 @@
             this.btnListReturn = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsListReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.gridInvoice = new DevExpress.XtraGrid.GridControl();
             this.gvInvoice = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cmsEditReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPrintReturn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -149,25 +151,19 @@
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsAddReturn,
-            this.cmsListReturn});
+            this.cmsEditReturn,
+            this.cmsDeleteReturn,
+            this.cmsPrintReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(183, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 114);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(182, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(152, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
-            // 
-            // cmsListReturn
-            // 
-            this.cmsListReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
-            this.cmsListReturn.Name = "cmsListReturn";
-            this.cmsListReturn.Size = new System.Drawing.Size(182, 22);
-            this.cmsListReturn.Text = "Lihat Transaksi Retur";
-            this.cmsListReturn.Click += new System.EventHandler(this.cmsListReturn_Click);
             // 
             // gridInvoice
             // 
@@ -236,6 +232,30 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 2;
             // 
+            // cmsEditReturn
+            // 
+            this.cmsEditReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditReturn.Name = "cmsEditReturn";
+            this.cmsEditReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditReturn.Text = "Ubah Retur";
+            this.cmsEditReturn.Click += new System.EventHandler(this.cmsEditReturn_Click);
+            // 
+            // cmsDeleteReturn
+            // 
+            this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteReturn.Name = "cmsDeleteReturn";
+            this.cmsDeleteReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteReturn.Text = "Hapus Retur";
+            this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
+            // 
+            // cmsPrintReturn
+            // 
+            this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsPrintReturn.Name = "cmsPrintReturn";
+            this.cmsPrintReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsPrintReturn.Text = "Cetak Retur";
+            this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
+            // 
             // SalesReturnListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,11 +292,13 @@
         private DevExpress.XtraEditors.SimpleButton btnListReturn;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsAddReturn;
-        private System.Windows.Forms.ToolStripMenuItem cmsListReturn;
         private DevExpress.XtraGrid.GridControl gridInvoice;
         private DevExpress.XtraGrid.Views.Grid.GridView gvInvoice;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
+        private System.Windows.Forms.ToolStripMenuItem cmsEditReturn;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteReturn;
+        private System.Windows.Forms.ToolStripMenuItem cmsPrintReturn;
     }
 }

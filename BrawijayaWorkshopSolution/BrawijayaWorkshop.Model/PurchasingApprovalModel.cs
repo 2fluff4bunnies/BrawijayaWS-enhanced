@@ -189,6 +189,8 @@ namespace BrawijayaWorkshop.Model
                     //Map(purchasing, entity);
                     entity.PaymentStatus = purchasing.PaymentStatus;
                     entity.Status = purchasing.Status;
+                    entity.TotalHasPaid = purchasing.TotalHasPaid;
+                    entity.TotalPrice = purchasing.TotalPrice;
                     _purchasingRepository.AttachNavigation(entity.CreateUser);
                     _purchasingRepository.AttachNavigation(entity.ModifyUser);
                     _purchasingRepository.AttachNavigation(entity.PaymentMethod);

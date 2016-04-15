@@ -14,14 +14,16 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IInvoiceRepository _invoiceRepository;
+        private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public CreditPaymentListModel(ITransactionRepository transactionRepository,
-            IInvoiceRepository invoiceRepository, IUnitOfWork unitOfWork)
+            IInvoiceRepository invoiceRepository, IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
             _invoiceRepository = invoiceRepository;
+            _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -29,6 +31,7 @@ namespace BrawijayaWorkshop.Model
         {
             List<Transaction> result = null;
 
+            Reference reference = _referenceRepository.GetMany(x => x.Code == DbConstant.REF_TRANSTBL_INVOICE).FirstOrDefault();
             result = _transactionRepository.GetMany(c => c.PrimaryKeyValue == referencePK && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
 
             List<TransactionViewModel> mappedResult = new List<TransactionViewModel>();

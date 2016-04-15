@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.View
         List<InvoiceViewModel> InvoiceListData { get; set; }
 
         InvoiceViewModel SelectedInvoice { get; set; }
+
+        SalesReturnViewModel SelectedSalesReturn { get; set; }
     }
 }

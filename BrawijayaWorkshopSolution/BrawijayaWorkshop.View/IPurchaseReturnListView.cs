@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.View
         List<PurchasingViewModel> PurchasingListData { get; set; }
 
         PurchasingViewModel SelectedPurchasing { get; set; }
+
+        PurchaseReturnViewModel SelectedPurchaseReturn { get; set; }
     }
 }

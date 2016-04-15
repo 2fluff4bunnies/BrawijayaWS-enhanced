@@ -165,7 +165,9 @@ namespace BrawijayaWorkshop.Model
                             SparepartName = itemDetail.Sparepart.Name,
                             ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
                             ReturQtyLimit = itemDetail.Qty,
-                            PricePerItem = itemDetail.Price
+                            PricePerItem = itemDetail.Price,
+                            SparepartCode = itemDetail.Sparepart.Code,
+                            UnitName = itemDetail.Sparepart.UnitReference.Name
                         });
                     }
                 }

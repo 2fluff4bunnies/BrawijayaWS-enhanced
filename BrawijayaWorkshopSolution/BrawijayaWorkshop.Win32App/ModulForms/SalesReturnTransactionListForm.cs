@@ -164,7 +164,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 try
                 {
-                    MethodBase.GetCurrentMethod().Info("Deleting purchase return: " + SelectedSalesReturn.InvoiceId);
+                    MethodBase.GetCurrentMethod().Info("Deleting sales return: " + SelectedSalesReturn.InvoiceId);
                     _presenter.DeleteData();
                     RefreshDataView();
 
@@ -220,18 +220,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsPrint_Click(object sender, EventArgs e)
         {
-            //SalesReturnPrintItem report = new SalesReturnPrintItem();
-            //List<PurchaseReturnViewModel> _dataSource = new List<PurchaseReturnViewModel>();
-            //SelectedSalesReturn.ReturnList = ListReturnDetail;
-            //_dataSource.Add(SelectedSalesReturn);
-            //report.DataSource = _dataSource;
-            //report.FillDataSource();
+            SalesReturnPrintItem2 report = new SalesReturnPrintItem2();
+            List<SalesReturnViewModel> _dataSource = new List<SalesReturnViewModel>();
+            SelectedSalesReturn.ReturnList = ListReturnDetail;
+            _dataSource.Add(SelectedSalesReturn);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
 
-            //using (ReportPrintTool printTool = new ReportPrintTool(report))
-            //{
-            //    // Invoke the Print dialog.
-            //    printTool.PrintDialog();
-            //}
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
+            }
         }
 
     }

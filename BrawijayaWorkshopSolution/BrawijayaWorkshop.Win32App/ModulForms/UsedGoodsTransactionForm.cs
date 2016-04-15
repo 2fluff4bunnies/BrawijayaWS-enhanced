@@ -13,7 +13,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class UsedGoodTransactionEditorForm : BaseEditorForm, IUsedGoodTransactionEditorView
     {
         private UsedGoodTransactionEditorPresenter _presenter;
-
+        private bool _isManualAdd = false;
         public UsedGoodTransactionEditorForm(UsedGoodTransactionEditorModel model)
         {
             InitializeComponent();
@@ -154,7 +154,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valMode.Validate() && valQty.Validate())
+            if (valMode.Validate() && valQty.Validate() && (_isManualAdd ||(!_isManualAdd && Stock > StockUpdate)))
             {
                 try
                 {
@@ -189,6 +189,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtItemPrice.Visible = false;
                 lblItemPrice.Visible = false;
                 this.ItemPrice = 0;
+            }
+            if (model.Code == DbConstant.REF_USEDGOOD_TRANSACTION_MANUAL_TYPE_PLUS)
+            {
+                _isManualAdd = true;
+            }
+            else
+            {
+                _isManualAdd = false;
             }
         }
 

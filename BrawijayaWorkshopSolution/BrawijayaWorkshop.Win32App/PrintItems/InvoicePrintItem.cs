@@ -17,7 +17,7 @@ namespace BrawijayaWorkshop.Win32App.PrintItems
 
         private void ReportFooter_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lblTotalInWords.Text = ((DataRowView)GetCurrentRow()).Row["TotalPrice"].AsDecimal().NumberToWordID();
+            //lblTotalInWords.Text = ((DataRowView)GetCurrentRow()).Row["TotalPrice"].AsDecimal().NumberToWordID();
         }
     }
 }

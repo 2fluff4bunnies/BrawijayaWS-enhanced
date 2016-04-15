@@ -178,7 +178,7 @@
             // colTransDate
             // 
             this.colTransDate.Caption = "Tgl Transaksi";
-            this.colTransDate.FieldName = "TransactionDate";
+            this.colTransDate.FieldName = "CreateDate";
             this.colTransDate.Name = "colTransDate";
             this.colTransDate.Visible = true;
             this.colTransDate.VisibleIndex = 0;
@@ -221,8 +221,8 @@
             // 
             // colStatus
             // 
-            this.colStatus.Caption = "colStatus";
-            this.colStatus.FieldName = "PaymentStatusId";
+            this.colStatus.Caption = "Status Bayar";
+            this.colStatus.FieldName = "PaymentStatus";
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
             this.colStatus.VisibleIndex = 5;

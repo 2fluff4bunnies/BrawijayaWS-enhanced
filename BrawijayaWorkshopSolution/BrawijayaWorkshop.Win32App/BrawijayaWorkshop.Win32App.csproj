@@ -680,6 +680,12 @@
     <Compile Include="PrintItems\ProfitLossPrintItem.Designer.cs">
       <DependentUpon>ProfitLossPrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\SalesReturnPrintItem2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\SalesReturnPrintItem2.Designer.cs">
+      <DependentUpon>SalesReturnPrintItem2.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\SPKPrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -964,6 +970,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\ProfitLossPrintItem.resx">
       <DependentUpon>ProfitLossPrintItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\SalesReturnPrintItem2.resx">
+      <DependentUpon>SalesReturnPrintItem2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\SPKPrintItem.resx">
       <DependentUpon>SPKPrintItem.cs</DependentUpon>

@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -164,7 +165,10 @@ namespace BrawijayaWorkshop.Model
                             SparepartId = sparepartID,
                             SparepartName = _sparepartRepository.GetById(sparepartID).Name,
                             ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
+                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                            SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
+                            UnitName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
+                            SubTotalFee = (listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice)).AsDecimal()
                         });
                     }
                 }

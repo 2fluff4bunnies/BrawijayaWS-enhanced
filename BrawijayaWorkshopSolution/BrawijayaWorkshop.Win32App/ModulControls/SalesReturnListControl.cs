@@ -5,9 +5,11 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,8 +41,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             // init editor control accessibility
             btnListReturn.Enabled = AllowEdit;
-            cmsListReturn.Enabled = AllowEdit;
             cmsAddReturn.Enabled = AllowInsert;
+            cmsEditReturn.Enabled = AllowEdit;
+            cmsDeleteReturn.Enabled = AllowEdit;
+            cmsPrintReturn.Enabled = AllowEdit;
 
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
@@ -62,10 +66,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 if (!isHasReturnActive)
                 {
                     cmsAddReturn.Visible = true;
+                    cmsEditReturn.Visible = false;
+                    cmsDeleteReturn.Visible = false;
+                    cmsPrintReturn.Visible = false;
                 }
                 else
                 {
                     cmsAddReturn.Visible = false;
+                    cmsEditReturn.Visible = true;
+                    cmsDeleteReturn.Visible = true;
+                    cmsPrintReturn.Visible = true;
+                    _presenter.GetSalesReturn();
+                    _presenter.GetReturnList();
                 }
             }
         }
@@ -87,10 +99,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     if (!isHasReturnActive)
                     {
                         cmsAddReturn.Visible = true;
+                        cmsEditReturn.Visible = false;
+                        cmsDeleteReturn.Visible = false;
+                        cmsPrintReturn.Visible = false;
                     }
                     else
                     {
                         cmsAddReturn.Visible = false;
+                        cmsEditReturn.Visible = true;
+                        cmsDeleteReturn.Visible = true;
+                        cmsPrintReturn.Visible = true;
+                        _presenter.GetSalesReturn();
+                        _presenter.GetReturnList();
                     }
                 }
             }
@@ -152,6 +172,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public SalesReturnViewModel SelectedSalesReturn { get; set; }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             RefreshDataView();
@@ -233,6 +254,56 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
+            }
+        }
+
+        private void cmsEditReturn_Click(object sender, EventArgs e)
+        {
+            if (SelectedSalesReturn != null)
+            {
+                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
+                editor.SelectedInvoice = SelectedInvoice;
+                editor.SelectedSalesReturn = SelectedSalesReturn;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+
+            }
+        }
+
+        private void cmsDeleteReturn_Click(object sender, EventArgs e)
+        {
+            if (SelectedSalesReturn == null) return;
+
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus retur penjualan: '" + SelectedSalesReturn.InvoiceId + "'?") == DialogResult.Yes)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Deleting sales return: " + SelectedSalesReturn.InvoiceId);
+                    _presenter.DeleteData();
+                    RefreshDataView();
+
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete sales return: '" + SelectedSalesReturn.InvoiceId + "'", ex);
+                    this.ShowError("Proses hapus data retur penjualan: '" + SelectedSalesReturn.InvoiceId + "' gagal!");
+                }
+            }
+        }
+
+        private void cmsPrintReturn_Click(object sender, EventArgs e)
+        {
+            SalesReturnPrintItem2 report = new SalesReturnPrintItem2();
+            List<SalesReturnViewModel> _dataSource = new List<SalesReturnViewModel>();
+            _dataSource.Add(SelectedSalesReturn);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
             }
         }
 

@@ -5,9 +5,11 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,9 +41,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             // init editor control accessibility
             btnListReturn.Enabled = AllowEdit;
-            cmsListReturn.Enabled = AllowEdit;
             cmsAddReturn.Enabled = AllowInsert;
-            
+            cmsEditReturn.Enabled = AllowEdit;
+            cmsDeleteReturn.Enabled = AllowEdit;
+            cmsPrintReturn.Enabled = AllowEdit;
+
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
             this.Load += PurchaseReturnListControl_Load;
@@ -62,10 +66,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 if (!isHasReturnActive)
                 {
                     cmsAddReturn.Visible = true;
+                    cmsEditReturn.Visible = false;
+                    cmsDeleteReturn.Visible = false;
+                    cmsPrintReturn.Visible = false;
                 }
                 else
                 {
                     cmsAddReturn.Visible = false;
+                    cmsEditReturn.Visible = true;
+                    cmsDeleteReturn.Visible = true;
+                    cmsPrintReturn.Visible = true;
+                    _presenter.GetPurchaseReturn();
+                    _presenter.GetReturnList();
                 }
             }
         }
@@ -87,10 +99,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     if (!isHasReturnActive)
                     {
                         cmsAddReturn.Visible = true;
+                        cmsEditReturn.Visible = false;
+                        cmsDeleteReturn.Visible = false;
+                        cmsPrintReturn.Visible = false;
                     }
                     else
                     {
                         cmsAddReturn.Visible = false;
+                        cmsEditReturn.Visible = true;
+                        cmsDeleteReturn.Visible = true;
+                        cmsPrintReturn.Visible = true;
+                        _presenter.GetPurchaseReturn();
+                        _presenter.GetReturnList();
                     }
                 }
             }
@@ -151,6 +171,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 _selectedPurchasing = value;
             }
         }
+
+        public PurchaseReturnViewModel SelectedPurchaseReturn { get; set; }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -224,15 +246,52 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void cmsListReturn_Click(object sender, EventArgs e)
+        private void cmdEditReturn_Click(object sender, EventArgs e)
         {
-            if (_selectedPurchasing != null)
+            if (SelectedPurchaseReturn != null)
             {
-                PurchaseReturnTransactionListForm editor = Bootstrapper.Resolve<PurchaseReturnTransactionListForm>();
-                editor.SelectedPurchasing = _selectedPurchasing;
+                PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
+                editor.SelectedPurchasing = SelectedPurchasing;
+                editor.SelectedPurchaseReturn = SelectedPurchaseReturn;
                 editor.ShowDialog(this);
 
                 btnSearch.PerformClick();
+            }
+        }
+
+        private void cmsDeleteReturn_Click(object sender, EventArgs e)
+        {
+            if (SelectedPurchaseReturn == null) return;
+
+            if (this.ShowConfirmation("Apakah anda yakin ingin menghapus retur pembelian: '" + SelectedPurchaseReturn.PurchasingId + "'?") == DialogResult.Yes)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Deleting purchase return: " + SelectedPurchaseReturn.PurchasingId);
+                    _presenter.DeleteData();
+                    RefreshDataView();
+
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete purchase return: '" + SelectedPurchaseReturn.PurchasingId + "'", ex);
+                    this.ShowError("Proses hapus data retur pembelian: '" + SelectedPurchaseReturn.PurchasingId + "' gagal!");
+                }
+            }
+        }
+
+        private void cmsPrintReturn_Click(object sender, EventArgs e)
+        {
+            PurchasingReturnPrintItem report = new PurchasingReturnPrintItem();
+            List<PurchaseReturnViewModel> _dataSource = new List<PurchaseReturnViewModel>();
+            _dataSource.Add(SelectedPurchaseReturn);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
             }
         }
 
