@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
@@ -15,5 +16,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int PaymentMethodId { get; set; }
         public ReferenceViewModel PaymentMethod { get; set; }
         public int PaymentStatus { get; set; }
+
+        public List<PurchasingDetailViewModel> PurchasingDetails { get; set; }
     }
 }

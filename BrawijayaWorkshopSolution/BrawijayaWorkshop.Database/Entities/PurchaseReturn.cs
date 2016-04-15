@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int PurchasingId { get; set; }
         public virtual Purchasing Purchasing { get; set; }
+
+        public virtual List<PurchaseReturnDetail> PurchasingReturnDetailList { get; set; }
     }
 }

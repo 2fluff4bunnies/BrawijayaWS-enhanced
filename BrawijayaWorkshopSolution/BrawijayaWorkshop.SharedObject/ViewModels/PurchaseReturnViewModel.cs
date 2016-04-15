@@ -13,6 +13,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public DateTime Date { get; set; }
 
         public int PurchasingId { get; set; }
-        public virtual PurchasingViewModel Purchasing { get; set; }
+        public PurchasingViewModel Purchasing { get; set; }
+
+        public List<PurchaseReturnDetailViewModel> PurchasingReturnDetailList { get; set; }
     }
 }

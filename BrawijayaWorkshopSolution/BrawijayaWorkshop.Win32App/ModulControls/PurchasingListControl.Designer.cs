@@ -173,6 +173,10 @@
             this.gvPurchasing.OptionsCustomization.AllowFilter = false;
             this.gvPurchasing.OptionsCustomization.AllowGroup = false;
             this.gvPurchasing.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvPurchasing.OptionsDetail.AllowZoomDetail = false;
+            this.gvPurchasing.OptionsDetail.EnableMasterViewMode = false;
+            this.gvPurchasing.OptionsDetail.ShowDetailTabs = false;
+            this.gvPurchasing.OptionsDetail.SmartDetailExpand = false;
             this.gvPurchasing.OptionsView.EnableAppearanceEvenRow = true;
             this.gvPurchasing.OptionsView.ShowGroupPanel = false;
             this.gvPurchasing.OptionsView.ShowViewCaption = true;

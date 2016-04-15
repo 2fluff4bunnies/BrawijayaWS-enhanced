@@ -104,7 +104,7 @@
             // 
             // TopMargin
             // 
-            this.TopMargin.HeightF = 24F;
+            this.TopMargin.HeightF = 0.04167557F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -516,6 +516,7 @@
             this.xrLabel15.StylePriority.UseFont = false;
             this.xrLabel15.StylePriority.UsePadding = false;
             this.xrLabel15.StylePriority.UseTextAlignment = false;
+            xrSummary1.FormatString = "{0:#,#;(#,#);0}";
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrLabel15.Summary = xrSummary1;
             this.xrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
@@ -601,7 +602,7 @@
             // lblTotalPayment
             // 
             this.lblTotalPayment.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalPrice")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalPrice", "{0:#,#;(#,#);0}")});
             this.lblTotalPayment.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblTotalPayment.LocationFloat = new DevExpress.Utils.PointFloat(597.7084F, 120.0417F);
             this.lblTotalPayment.Name = "lblTotalPayment";
@@ -742,7 +743,7 @@
             // 
             this.xrLabel28.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel28.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SalesReturnDetails.InvoiceDetail.SubTotalPrice")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SalesReturnDetails.InvoiceDetail.SubTotalPrice", "{0:#,#;(#,#);0}")});
             this.xrLabel28.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel28.LocationFloat = new DevExpress.Utils.PointFloat(597.7084F, 0F);
             this.xrLabel28.Name = "xrLabel28";
@@ -757,7 +758,7 @@
             // 
             this.xrLabel27.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel27.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SalesReturnDetails.InvoiceDetail.ItemPrice")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SalesReturnDetails.InvoiceDetail.ItemPrice", "{0:#,#;(#,#);0}")});
             this.xrLabel27.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(468.0596F, 0F);
             this.xrLabel27.Name = "xrLabel27";
@@ -836,7 +837,7 @@
             this.DataSourceSalesReturnViewModel});
             this.DataSource = this.DataSourceSalesReturnViewModel;
             this.DisplayName = "Retur Penjualan";
-            this.Margins = new System.Drawing.Printing.Margins(36, 35, 24, 3);
+            this.Margins = new System.Drawing.Printing.Margins(36, 35, 0, 3);
             this.PageHeight = 600;
             this.PageWidth = 818;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;

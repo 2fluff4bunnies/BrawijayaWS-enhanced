@@ -532,6 +532,7 @@
             this.xrLabel15.StylePriority.UseFont = false;
             this.xrLabel15.StylePriority.UsePadding = false;
             this.xrLabel15.StylePriority.UseTextAlignment = false;
+            xrSummary1.FormatString = "{0:#,#;(#,#);0}";
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrLabel15.Summary = xrSummary1;
             this.xrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
@@ -617,9 +618,9 @@
             // lblTotalPayment
             // 
             this.lblTotalPayment.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalPrice")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalPrice", "{0:#,#;(#,#);0}")});
             this.lblTotalPayment.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.lblTotalPayment.LocationFloat = new DevExpress.Utils.PointFloat(624.7918F, 120.0417F);
+            this.lblTotalPayment.LocationFloat = new DevExpress.Utils.PointFloat(625.7917F, 120.0417F);
             this.lblTotalPayment.Name = "lblTotalPayment";
             this.lblTotalPayment.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.lblTotalPayment.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
@@ -644,7 +645,7 @@
             // lblTotalAfterDiscount
             // 
             this.lblTotalAfterDiscount.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalServicePlusFee")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalServicePlusFee", "{0:#,#;(#,#);0}")});
             this.lblTotalAfterDiscount.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblTotalAfterDiscount.LocationFloat = new DevExpress.Utils.PointFloat(624.7918F, 97.04164F);
             this.lblTotalAfterDiscount.Name = "lblTotalAfterDiscount";
@@ -796,7 +797,7 @@
             // 
             this.xrLabel28.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel28.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.TotalSparepartPrice")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.TotalSparepartPrice", "{0:#,#;(#,#);0}")});
             this.xrLabel28.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel28.LocationFloat = new DevExpress.Utils.PointFloat(641.4583F, 0F);
             this.xrLabel28.Name = "xrLabel28";
@@ -811,7 +812,7 @@
             // 
             this.xrLabel27.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel27.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ListSparepart.TotalPriceAfterCommission")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ListSparepart.TotalPriceAfterCommission", "{0:#,#;(#,#);0}")});
             this.xrLabel27.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(517.0178F, 0F);
             this.xrLabel27.Name = "xrLabel27";
@@ -842,7 +843,7 @@
             // 
             this.xrLabel25.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel25.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.ListSparepart.TotalQuantity")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.ListSparepart.TotalQuantity", "{0:#,#;(#,#);0}")});
             this.xrLabel25.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(395.8333F, 0F);
             this.xrLabel25.Name = "xrLabel25";
