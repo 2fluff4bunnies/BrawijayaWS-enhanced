@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsedGoodsEditorForm));
             this.cbSparepart = new DevExpress.XtraEditors.LookUpEdit();
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
@@ -57,11 +57,11 @@
             this.cbSparepart.Properties.ValueMember = "Id";
             this.cbSparepart.Size = new System.Drawing.Size(208, 20);
             this.cbSparepart.TabIndex = 9;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule2.ErrorText = "Pilih salah satu sparepart";
-            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
-            conditionValidationRule2.Value1 = "--Pilih Sparepart--";
-            this.valSparepart.SetValidationRule(this.cbSparepart, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule1.ErrorText = "Pilih salah satu sparepart";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
+            conditionValidationRule1.Value1 = "--Pilih Sparepart--";
+            this.valSparepart.SetValidationRule(this.cbSparepart, conditionValidationRule1);
             // 
             // lblSparepart
             // 

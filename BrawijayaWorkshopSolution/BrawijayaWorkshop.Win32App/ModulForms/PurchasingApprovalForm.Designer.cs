@@ -33,9 +33,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasingApprovalForm));
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.lblDP = new DevExpress.XtraEditors.LabelControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnReject = new DevExpress.XtraEditors.SimpleButton();
-            this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
             this.txtTotalPrice = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.gridPurchasingDetail = new DevExpress.XtraGrid.GridControl();
@@ -50,14 +47,15 @@
             this.txtDate = new DevExpress.XtraEditors.TextEdit();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
             this.lblDate = new DevExpress.XtraEditors.LabelControl();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnReject = new DevExpress.XtraEditors.SimpleButton();
+            this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lihatSparepartDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.valPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).BeginInit();
             this.gcPurchasingInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchasingDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchasingDetail)).BeginInit();
@@ -65,6 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbPayment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valPayment)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +87,7 @@
             this.gcPurchasingInfo.Controls.Add(this.lblDate);
             this.gcPurchasingInfo.Location = new System.Drawing.Point(0, 0);
             this.gcPurchasingInfo.Name = "gcPurchasingInfo";
-            this.gcPurchasingInfo.Size = new System.Drawing.Size(645, 347);
+            this.gcPurchasingInfo.Size = new System.Drawing.Size(612, 339);
             this.gcPurchasingInfo.TabIndex = 0;
             this.gcPurchasingInfo.Text = "Informasi Pembelian";
             // 
@@ -100,43 +100,10 @@
             this.lblDP.Text = "Jumlah DP";
             this.lblDP.Visible = false;
             // 
-            // panelControl1
-            // 
-            this.panelControl1.Appearance.BackColor = System.Drawing.Color.Silver;
-            this.panelControl1.Appearance.Options.UseBackColor = true;
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.btnReject);
-            this.panelControl1.Controls.Add(this.btnApprove);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 345);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(645, 39);
-            this.panelControl1.TabIndex = 0;
-            // 
-            // btnReject
-            // 
-            this.btnReject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReject.Location = new System.Drawing.Point(559, 8);
-            this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(75, 23);
-            this.btnReject.TabIndex = 1;
-            this.btnReject.Text = "Tolak";
-            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
-            // 
-            // btnApprove
-            // 
-            this.btnApprove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApprove.Location = new System.Drawing.Point(468, 8);
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(75, 23);
-            this.btnApprove.TabIndex = 0;
-            this.btnApprove.Text = "Setuju";
-            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
-            // 
             // txtTotalPrice
             // 
             this.txtTotalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTotalPrice.Location = new System.Drawing.Point(155, 309);
+            this.txtTotalPrice.Location = new System.Drawing.Point(155, 301);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Properties.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(167, 20);
@@ -145,7 +112,7 @@
             // labelControl2
             // 
             this.labelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelControl2.Location = new System.Drawing.Point(12, 312);
+            this.labelControl2.Location = new System.Drawing.Point(12, 304);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(56, 13);
             this.labelControl2.TabIndex = 9;
@@ -159,7 +126,7 @@
             this.gridPurchasingDetail.Location = new System.Drawing.Point(3, 157);
             this.gridPurchasingDetail.MainView = this.gvPurchasingDetail;
             this.gridPurchasingDetail.Name = "gridPurchasingDetail";
-            this.gridPurchasingDetail.Size = new System.Drawing.Size(640, 138);
+            this.gridPurchasingDetail.Size = new System.Drawing.Size(607, 130);
             this.gridPurchasingDetail.TabIndex = 8;
             this.gridPurchasingDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasingDetail});
@@ -279,6 +246,39 @@
             this.lblDate.TabIndex = 0;
             this.lblDate.Text = "Tanggal Pembelian";
             // 
+            // panelControl1
+            // 
+            this.panelControl1.Appearance.BackColor = System.Drawing.Color.Silver;
+            this.panelControl1.Appearance.Options.UseBackColor = true;
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.btnReject);
+            this.panelControl1.Controls.Add(this.btnApprove);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl1.Location = new System.Drawing.Point(0, 337);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(612, 39);
+            this.panelControl1.TabIndex = 0;
+            // 
+            // btnReject
+            // 
+            this.btnReject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReject.Location = new System.Drawing.Point(526, 8);
+            this.btnReject.Name = "btnReject";
+            this.btnReject.Size = new System.Drawing.Size(75, 23);
+            this.btnReject.TabIndex = 1;
+            this.btnReject.Text = "Tolak";
+            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
+            // 
+            // btnApprove
+            // 
+            this.btnApprove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApprove.Location = new System.Drawing.Point(435, 8);
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(75, 23);
+            this.btnApprove.TabIndex = 0;
+            this.btnApprove.Text = "Setuju";
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
+            // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -307,7 +307,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 384);
+            this.ClientSize = new System.Drawing.Size(612, 376);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -318,8 +318,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).EndInit();
             this.gcPurchasingInfo.ResumeLayout(false);
             this.gcPurchasingInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchasingDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchasingDetail)).EndInit();
@@ -327,6 +325,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbPayment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
             this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.valPayment)).EndInit();
             this.ResumeLayout(false);

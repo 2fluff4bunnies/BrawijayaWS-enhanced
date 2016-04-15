@@ -78,14 +78,14 @@
             // 
             // memoDescription
             // 
-            this.memoDescription.Location = new System.Drawing.Point(143, 89);
+            this.memoDescription.Location = new System.Drawing.Point(143, 97);
             this.memoDescription.Name = "memoDescription";
             this.memoDescription.Size = new System.Drawing.Size(154, 82);
             this.memoDescription.TabIndex = 23;
             // 
             // lookUpMechanic
             // 
-            this.lookUpMechanic.Location = new System.Drawing.Point(143, 56);
+            this.lookUpMechanic.Location = new System.Drawing.Point(143, 64);
             this.lookUpMechanic.Name = "lookUpMechanic";
             this.lookUpMechanic.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpMechanic.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -107,7 +107,7 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(12, 93);
+            this.lblDescription.Location = new System.Drawing.Point(12, 99);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(114, 13);
             this.lblDescription.TabIndex = 20;
@@ -115,7 +115,7 @@
             // 
             // lookUpSPK
             // 
-            this.lookUpSPK.Location = new System.Drawing.Point(143, 25);
+            this.lookUpSPK.Location = new System.Drawing.Point(143, 32);
             this.lookUpSPK.Name = "lookUpSPK";
             this.lookUpSPK.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpSPK.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -139,7 +139,7 @@
             // 
             // lblSPKDescriptionValue
             // 
-            this.lblSPKDescriptionValue.Location = new System.Drawing.Point(457, 94);
+            this.lblSPKDescriptionValue.Location = new System.Drawing.Point(456, 99);
             this.lblSPKDescriptionValue.Name = "lblSPKDescriptionValue";
             this.lblSPKDescriptionValue.Size = new System.Drawing.Size(8, 13);
             this.lblSPKDescriptionValue.TabIndex = 18;
@@ -147,7 +147,7 @@
             // 
             // lblSPKVehicleCustomerValue
             // 
-            this.lblSPKVehicleCustomerValue.Location = new System.Drawing.Point(457, 28);
+            this.lblSPKVehicleCustomerValue.Location = new System.Drawing.Point(456, 35);
             this.lblSPKVehicleCustomerValue.Name = "lblSPKVehicleCustomerValue";
             this.lblSPKVehicleCustomerValue.Size = new System.Drawing.Size(8, 13);
             this.lblSPKVehicleCustomerValue.TabIndex = 16;
@@ -155,7 +155,7 @@
             // 
             // lblSPKCategoryValue
             // 
-            this.lblSPKCategoryValue.Location = new System.Drawing.Point(457, 59);
+            this.lblSPKCategoryValue.Location = new System.Drawing.Point(456, 67);
             this.lblSPKCategoryValue.Name = "lblSPKCategoryValue";
             this.lblSPKCategoryValue.Size = new System.Drawing.Size(8, 13);
             this.lblSPKCategoryValue.TabIndex = 15;
@@ -163,7 +163,7 @@
             // 
             // lblSPKDescription
             // 
-            this.lblSPKDescription.Location = new System.Drawing.Point(341, 94);
+            this.lblSPKDescription.Location = new System.Drawing.Point(341, 99);
             this.lblSPKDescription.Name = "lblSPKDescription";
             this.lblSPKDescription.Size = new System.Drawing.Size(77, 13);
             this.lblSPKDescription.TabIndex = 11;
@@ -171,7 +171,7 @@
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 35);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(18, 13);
             this.lblLicenseNumber.TabIndex = 9;
@@ -179,7 +179,7 @@
             // 
             // lblSPKVehicleCustomer
             // 
-            this.lblSPKVehicleCustomer.Location = new System.Drawing.Point(341, 28);
+            this.lblSPKVehicleCustomer.Location = new System.Drawing.Point(341, 35);
             this.lblSPKVehicleCustomer.Name = "lblSPKVehicleCustomer";
             this.lblSPKVehicleCustomer.Size = new System.Drawing.Size(77, 13);
             this.lblSPKVehicleCustomer.TabIndex = 6;
@@ -187,7 +187,7 @@
             // 
             // lblSPKCategory
             // 
-            this.lblSPKCategory.Location = new System.Drawing.Point(341, 59);
+            this.lblSPKCategory.Location = new System.Drawing.Point(341, 67);
             this.lblSPKCategory.Name = "lblSPKCategory";
             this.lblSPKCategory.Size = new System.Drawing.Size(40, 13);
             this.lblSPKCategory.TabIndex = 4;
@@ -195,7 +195,7 @@
             // 
             // lblMechanic
             // 
-            this.lblMechanic.Location = new System.Drawing.Point(12, 59);
+            this.lblMechanic.Location = new System.Drawing.Point(12, 67);
             this.lblMechanic.Name = "lblMechanic";
             this.lblMechanic.Size = new System.Drawing.Size(38, 13);
             this.lblMechanic.TabIndex = 2;

@@ -79,13 +79,13 @@
             this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcVehicleInfo.Location = new System.Drawing.Point(0, 0);
             this.gcVehicleInfo.Name = "gcVehicleInfo";
-            this.gcVehicleInfo.Size = new System.Drawing.Size(606, 387);
+            this.gcVehicleInfo.Size = new System.Drawing.Size(606, 412);
             this.gcVehicleInfo.TabIndex = 2;
             this.gcVehicleInfo.Text = "Informasi Kendaraan";
             // 
             // rtbDescription
             // 
-            this.rtbDescription.Location = new System.Drawing.Point(361, 25);
+            this.rtbDescription.Location = new System.Drawing.Point(361, 31);
             this.rtbDescription.Name = "rtbDescription";
             this.rtbDescription.Size = new System.Drawing.Size(233, 166);
             this.rtbDescription.TabIndex = 21;
@@ -95,7 +95,7 @@
             // 
             this.lblDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDescription.Location = new System.Drawing.Point(289, 28);
+            this.lblDescription.Location = new System.Drawing.Point(290, 34);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(56, 13);
             this.lblDescription.TabIndex = 20;
@@ -103,7 +103,7 @@
             // 
             // lookUpVehicle
             // 
-            this.lookUpVehicle.Location = new System.Drawing.Point(128, 25);
+            this.lookUpVehicle.Location = new System.Drawing.Point(128, 31);
             this.lookUpVehicle.Name = "lookUpVehicle";
             this.lookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -126,7 +126,7 @@
             // 
             // lblExpirationDateValue
             // 
-            this.lblExpirationDateValue.Location = new System.Drawing.Point(128, 178);
+            this.lblExpirationDateValue.Location = new System.Drawing.Point(128, 184);
             this.lblExpirationDateValue.Name = "lblExpirationDateValue";
             this.lblExpirationDateValue.Size = new System.Drawing.Size(8, 13);
             this.lblExpirationDateValue.TabIndex = 18;
@@ -134,7 +134,7 @@
             // 
             // lblCustomerValue
             // 
-            this.lblCustomerValue.Location = new System.Drawing.Point(128, 148);
+            this.lblCustomerValue.Location = new System.Drawing.Point(128, 154);
             this.lblCustomerValue.Name = "lblCustomerValue";
             this.lblCustomerValue.Size = new System.Drawing.Size(8, 13);
             this.lblCustomerValue.TabIndex = 17;
@@ -142,7 +142,7 @@
             // 
             // lblYearOfpurchaseValue
             // 
-            this.lblYearOfpurchaseValue.Location = new System.Drawing.Point(128, 119);
+            this.lblYearOfpurchaseValue.Location = new System.Drawing.Point(128, 124);
             this.lblYearOfpurchaseValue.Name = "lblYearOfpurchaseValue";
             this.lblYearOfpurchaseValue.Size = new System.Drawing.Size(8, 13);
             this.lblYearOfpurchaseValue.TabIndex = 16;
@@ -150,7 +150,7 @@
             // 
             // lblTypeValue
             // 
-            this.lblTypeValue.Location = new System.Drawing.Point(128, 89);
+            this.lblTypeValue.Location = new System.Drawing.Point(128, 94);
             this.lblTypeValue.Name = "lblTypeValue";
             this.lblTypeValue.Size = new System.Drawing.Size(8, 13);
             this.lblTypeValue.TabIndex = 15;
@@ -158,7 +158,7 @@
             // 
             // lblBrandValue
             // 
-            this.lblBrandValue.Location = new System.Drawing.Point(128, 59);
+            this.lblBrandValue.Location = new System.Drawing.Point(128, 64);
             this.lblBrandValue.Name = "lblBrandValue";
             this.lblBrandValue.Size = new System.Drawing.Size(8, 13);
             this.lblBrandValue.TabIndex = 14;
@@ -169,10 +169,10 @@
             this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 205);
+            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 203);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(575, 177);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(575, 204);
             this.gridVehicleWheel.TabIndex = 12;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -218,7 +218,7 @@
             // 
             // lblExpirationDate
             // 
-            this.lblExpirationDate.Location = new System.Drawing.Point(12, 178);
+            this.lblExpirationDate.Location = new System.Drawing.Point(12, 184);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
             this.lblExpirationDate.TabIndex = 11;
@@ -226,7 +226,7 @@
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 34);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(57, 13);
             this.lblLicenseNumber.TabIndex = 9;
@@ -234,7 +234,7 @@
             // 
             // lblYearOfPurchase
             // 
-            this.lblYearOfPurchase.Location = new System.Drawing.Point(12, 119);
+            this.lblYearOfPurchase.Location = new System.Drawing.Point(12, 124);
             this.lblYearOfPurchase.Name = "lblYearOfPurchase";
             this.lblYearOfPurchase.Size = new System.Drawing.Size(81, 13);
             this.lblYearOfPurchase.TabIndex = 6;
@@ -242,7 +242,7 @@
             // 
             // lblType
             // 
-            this.lblType.Location = new System.Drawing.Point(12, 89);
+            this.lblType.Location = new System.Drawing.Point(12, 94);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(20, 13);
             this.lblType.TabIndex = 4;
@@ -250,7 +250,7 @@
             // 
             // lblBrand
             // 
-            this.lblBrand.Location = new System.Drawing.Point(12, 59);
+            this.lblBrand.Location = new System.Drawing.Point(12, 64);
             this.lblBrand.Name = "lblBrand";
             this.lblBrand.Size = new System.Drawing.Size(29, 13);
             this.lblBrand.TabIndex = 2;
@@ -258,7 +258,7 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(12, 148);
+            this.lblCustomer.Location = new System.Drawing.Point(12, 154);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 0;
@@ -273,7 +273,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 436);
+            this.ClientSize = new System.Drawing.Size(606, 461);
             this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GuestBookEditorForm";

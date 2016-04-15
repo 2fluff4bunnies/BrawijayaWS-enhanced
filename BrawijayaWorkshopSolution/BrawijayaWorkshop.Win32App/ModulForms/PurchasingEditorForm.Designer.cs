@@ -73,7 +73,7 @@
             // txtDate
             // 
             this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(148, 27);
+            this.txtDate.Location = new System.Drawing.Point(146, 30);
             this.txtDate.Name = "txtDate";
             this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -215,7 +215,7 @@
             // 
             // lblSupplier
             // 
-            this.lblSupplier.Location = new System.Drawing.Point(19, 63);
+            this.lblSupplier.Location = new System.Drawing.Point(17, 66);
             this.lblSupplier.Name = "lblSupplier";
             this.lblSupplier.Size = new System.Drawing.Size(38, 13);
             this.lblSupplier.TabIndex = 3;
@@ -223,7 +223,7 @@
             // 
             // lblDate
             // 
-            this.lblDate.Location = new System.Drawing.Point(19, 30);
+            this.lblDate.Location = new System.Drawing.Point(17, 33);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(89, 13);
             this.lblDate.TabIndex = 1;
@@ -231,7 +231,7 @@
             // 
             // cbSupplier
             // 
-            this.cbSupplier.Location = new System.Drawing.Point(148, 60);
+            this.cbSupplier.Location = new System.Drawing.Point(146, 63);
             this.cbSupplier.Name = "cbSupplier";
             this.cbSupplier.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

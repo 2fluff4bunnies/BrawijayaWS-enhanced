@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsedGoodTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
@@ -60,7 +60,7 @@
             // 
             // lblSparepart
             // 
-            this.lblSparepart.Location = new System.Drawing.Point(13, 30);
+            this.lblSparepart.Location = new System.Drawing.Point(13, 35);
             this.lblSparepart.Name = "lblSparepart";
             this.lblSparepart.Size = new System.Drawing.Size(48, 13);
             this.lblSparepart.TabIndex = 9;
@@ -68,7 +68,7 @@
             // 
             // lblStok
             // 
-            this.lblStok.Location = new System.Drawing.Point(12, 63);
+            this.lblStok.Location = new System.Drawing.Point(13, 70);
             this.lblStok.Name = "lblStok";
             this.lblStok.Size = new System.Drawing.Size(57, 13);
             this.lblStok.TabIndex = 11;
@@ -78,10 +78,10 @@
             // 
             this.txtStok.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStok.Location = new System.Drawing.Point(130, 60);
+            this.txtStok.Location = new System.Drawing.Point(122, 67);
             this.txtStok.Name = "txtStok";
             this.txtStok.Properties.ReadOnly = true;
-            this.txtStok.Size = new System.Drawing.Size(104, 20);
+            this.txtStok.Size = new System.Drawing.Size(98, 20);
             this.txtStok.TabIndex = 12;
             // 
             // gcUsedGoodsManualEditor
@@ -101,13 +101,13 @@
             this.gcUsedGoodsManualEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcUsedGoodsManualEditor.Location = new System.Drawing.Point(0, 0);
             this.gcUsedGoodsManualEditor.Name = "gcUsedGoodsManualEditor";
-            this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(335, 280);
+            this.gcUsedGoodsManualEditor.Size = new System.Drawing.Size(329, 270);
             this.gcUsedGoodsManualEditor.TabIndex = 13;
             this.gcUsedGoodsManualEditor.Text = "Informasi Stok Barang Bekas";
             // 
             // cbUsedGood
             // 
-            this.cbUsedGood.Location = new System.Drawing.Point(130, 23);
+            this.cbUsedGood.Location = new System.Drawing.Point(122, 32);
             this.cbUsedGood.Name = "cbUsedGood";
             this.cbUsedGood.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.cbUsedGood.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -128,15 +128,15 @@
             // 
             this.txtItemPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItemPrice.Location = new System.Drawing.Point(130, 239);
+            this.txtItemPrice.Location = new System.Drawing.Point(122, 235);
             this.txtItemPrice.Name = "txtItemPrice";
-            this.txtItemPrice.Size = new System.Drawing.Size(145, 20);
+            this.txtItemPrice.Size = new System.Drawing.Size(139, 20);
             this.txtItemPrice.TabIndex = 22;
             this.txtItemPrice.Visible = false;
             // 
             // lblItemPrice
             // 
-            this.lblItemPrice.Location = new System.Drawing.Point(12, 242);
+            this.lblItemPrice.Location = new System.Drawing.Point(13, 238);
             this.lblItemPrice.Name = "lblItemPrice";
             this.lblItemPrice.Size = new System.Drawing.Size(73, 13);
             this.lblItemPrice.TabIndex = 21;
@@ -145,14 +145,14 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(130, 168);
+            this.txtRemark.Location = new System.Drawing.Point(122, 173);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(193, 51);
             this.txtRemark.TabIndex = 20;
             // 
             // lblRemark
             // 
-            this.lblRemark.Location = new System.Drawing.Point(12, 170);
+            this.lblRemark.Location = new System.Drawing.Point(13, 175);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(56, 13);
             this.lblRemark.TabIndex = 18;
@@ -160,7 +160,7 @@
             // 
             // cbMode
             // 
-            this.cbMode.Location = new System.Drawing.Point(130, 130);
+            this.cbMode.Location = new System.Drawing.Point(122, 137);
             this.cbMode.Name = "cbMode";
             this.cbMode.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.cbMode.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -178,7 +178,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(12, 133);
+            this.labelControl1.Location = new System.Drawing.Point(13, 140);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(72, 13);
             this.labelControl1.TabIndex = 16;
@@ -188,17 +188,17 @@
             // 
             this.txtQtyUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtQtyUpdate.Location = new System.Drawing.Point(130, 93);
+            this.txtQtyUpdate.Location = new System.Drawing.Point(122, 102);
             this.txtQtyUpdate.Name = "txtQtyUpdate";
-            this.txtQtyUpdate.Size = new System.Drawing.Size(104, 20);
+            this.txtQtyUpdate.Size = new System.Drawing.Size(98, 20);
             this.txtQtyUpdate.TabIndex = 14;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Jumlah Update Harus Diisi";
-            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
+            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule1);
             // 
             // lblQtyUpdaate
             // 
-            this.lblQtyUpdaate.Location = new System.Drawing.Point(12, 96);
+            this.lblQtyUpdaate.Location = new System.Drawing.Point(13, 105);
             this.lblQtyUpdaate.Name = "lblQtyUpdaate";
             this.lblQtyUpdaate.Size = new System.Drawing.Size(71, 13);
             this.lblQtyUpdaate.TabIndex = 13;
@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 329);
+            this.ClientSize = new System.Drawing.Size(329, 319);
             this.Controls.Add(this.gcUsedGoodsManualEditor);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UsedGoodTransactionEditorForm";

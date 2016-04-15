@@ -38,6 +38,14 @@
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.gcInvoiceInfo = new DevExpress.XtraEditors.GroupControl();
+            this.gridSparepart = new DevExpress.XtraGrid.GridControl();
+            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colSparepartDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPurchasePrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFeePctg = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFinalSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.txtTotalSparepart = new DevExpress.XtraEditors.TextEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.txtTotalSparepartPlusFee = new DevExpress.XtraEditors.TextEdit();
@@ -53,20 +61,15 @@
             this.txtTotalTransaction = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalTransaction = new DevExpress.XtraEditors.LabelControl();
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
-            this.gridSparepart = new DevExpress.XtraGrid.GridControl();
-            this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colSparepartDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPurchasePrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFeePctg = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFinalSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).BeginInit();
             this.pnlAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).BeginInit();
             this.gcInvoiceInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPlusFee.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalService.Properties)).BeginInit();
@@ -75,14 +78,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPayment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTransactionDate
             // 
-            this.lblTransactionDate.Location = new System.Drawing.Point(14, 33);
+            this.lblTransactionDate.Location = new System.Drawing.Point(16, 35);
             this.lblTransactionDate.Name = "lblTransactionDate";
             this.lblTransactionDate.Size = new System.Drawing.Size(86, 13);
             this.lblTransactionDate.TabIndex = 4;
@@ -98,7 +98,7 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(14, 63);
+            this.lblCustomer.Location = new System.Drawing.Point(16, 63);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 6;
@@ -119,15 +119,15 @@
             this.pnlAction.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlAction.Controls.Add(this.btnPrint);
             this.pnlAction.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlAction.Location = new System.Drawing.Point(2, 661);
+            this.pnlAction.Location = new System.Drawing.Point(2, 627);
             this.pnlAction.Name = "pnlAction";
-            this.pnlAction.Size = new System.Drawing.Size(751, 49);
+            this.pnlAction.Size = new System.Drawing.Size(802, 49);
             this.pnlAction.TabIndex = 11;
             // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Location = new System.Drawing.Point(666, 16);
+            this.btnPrint.Location = new System.Drawing.Point(717, 16);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 0;
@@ -168,132 +168,9 @@
             this.gcInvoiceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcInvoiceInfo.Location = new System.Drawing.Point(0, 0);
             this.gcInvoiceInfo.Name = "gcInvoiceInfo";
-            this.gcInvoiceInfo.Size = new System.Drawing.Size(755, 712);
+            this.gcInvoiceInfo.Size = new System.Drawing.Size(806, 678);
             this.gcInvoiceInfo.TabIndex = 2;
             this.gcInvoiceInfo.Text = "Informasi Invoice";
-            // 
-            // txtTotalSparepart
-            // 
-            this.txtTotalSparepart.Location = new System.Drawing.Point(153, 401);
-            this.txtTotalSparepart.Name = "txtTotalSparepart";
-            this.txtTotalSparepart.Properties.ReadOnly = true;
-            this.txtTotalSparepart.Size = new System.Drawing.Size(158, 20);
-            this.txtTotalSparepart.TabIndex = 41;
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Location = new System.Drawing.Point(16, 404);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(75, 13);
-            this.labelControl4.TabIndex = 40;
-            this.labelControl4.Text = "Total Sparepart";
-            // 
-            // txtTotalSparepartPlusFee
-            // 
-            this.txtTotalSparepartPlusFee.Location = new System.Drawing.Point(153, 427);
-            this.txtTotalSparepartPlusFee.Name = "txtTotalSparepartPlusFee";
-            this.txtTotalSparepartPlusFee.Properties.ReadOnly = true;
-            this.txtTotalSparepartPlusFee.Size = new System.Drawing.Size(158, 20);
-            this.txtTotalSparepartPlusFee.TabIndex = 39;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(16, 430);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(112, 13);
-            this.labelControl3.TabIndex = 38;
-            this.labelControl3.Text = "Total Sparepart (+Fee)";
-            // 
-            // txtTotalService
-            // 
-            this.txtTotalService.Location = new System.Drawing.Point(153, 453);
-            this.txtTotalService.Name = "txtTotalService";
-            this.txtTotalService.Properties.ReadOnly = true;
-            this.txtTotalService.Size = new System.Drawing.Size(158, 20);
-            this.txtTotalService.TabIndex = 37;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(16, 456);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(62, 13);
-            this.labelControl2.TabIndex = 36;
-            this.labelControl2.Text = "Total Service";
-            // 
-            // txtTotalServicePlusFee
-            // 
-            this.txtTotalServicePlusFee.Location = new System.Drawing.Point(153, 479);
-            this.txtTotalServicePlusFee.Name = "txtTotalServicePlusFee";
-            this.txtTotalServicePlusFee.Properties.ReadOnly = true;
-            this.txtTotalServicePlusFee.Size = new System.Drawing.Size(158, 20);
-            this.txtTotalServicePlusFee.TabIndex = 35;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(16, 482);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(99, 13);
-            this.labelControl1.TabIndex = 34;
-            this.labelControl1.Text = "Total Service (+Fee)";
-            // 
-            // cbPaymentType
-            // 
-            this.cbPaymentType.Location = new System.Drawing.Point(153, 587);
-            this.cbPaymentType.Name = "cbPaymentType";
-            this.cbPaymentType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbPaymentType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
-            this.cbPaymentType.Properties.DisplayMember = "Name";
-            this.cbPaymentType.Properties.HideSelection = false;
-            this.cbPaymentType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.cbPaymentType.Properties.NullText = "";
-            this.cbPaymentType.Properties.ReadOnly = true;
-            this.cbPaymentType.Properties.ValueMember = "Id";
-            this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
-            this.cbPaymentType.TabIndex = 33;
-            // 
-            // lblPaymentType
-            // 
-            this.lblPaymentType.Location = new System.Drawing.Point(16, 594);
-            this.lblPaymentType.Name = "lblPaymentType";
-            this.lblPaymentType.Size = new System.Drawing.Size(87, 13);
-            this.lblPaymentType.TabIndex = 32;
-            this.lblPaymentType.Text = "Jenis Pembayaran";
-            // 
-            // txtTotalPayment
-            // 
-            this.txtTotalPayment.Location = new System.Drawing.Point(153, 561);
-            this.txtTotalPayment.Name = "txtTotalPayment";
-            this.txtTotalPayment.Properties.ReadOnly = true;
-            this.txtTotalPayment.Size = new System.Drawing.Size(158, 20);
-            this.txtTotalPayment.TabIndex = 31;
-            // 
-            // lblTotalPayment
-            // 
-            this.lblTotalPayment.Location = new System.Drawing.Point(16, 568);
-            this.lblTotalPayment.Name = "lblTotalPayment";
-            this.lblTotalPayment.Size = new System.Drawing.Size(87, 13);
-            this.lblTotalPayment.TabIndex = 30;
-            this.lblTotalPayment.Text = "Total Pembayaran";
-            // 
-            // txtTotalTransaction
-            // 
-            this.txtTotalTransaction.Location = new System.Drawing.Point(153, 519);
-            this.txtTotalTransaction.Name = "txtTotalTransaction";
-            this.txtTotalTransaction.Properties.ReadOnly = true;
-            this.txtTotalTransaction.Size = new System.Drawing.Size(158, 20);
-            this.txtTotalTransaction.TabIndex = 29;
-            // 
-            // lblTotalTransaction
-            // 
-            this.lblTotalTransaction.Location = new System.Drawing.Point(16, 522);
-            this.lblTotalTransaction.Name = "lblTotalTransaction";
-            this.lblTotalTransaction.Size = new System.Drawing.Size(72, 13);
-            this.lblTotalTransaction.TabIndex = 28;
-            this.lblTotalTransaction.Text = "Total Transaksi";
             // 
             // gridSparepart
             // 
@@ -302,7 +179,7 @@
             this.gridSparepart.Location = new System.Drawing.Point(2, 101);
             this.gridSparepart.MainView = this.gvSparepart;
             this.gridSparepart.Name = "gridSparepart";
-            this.gridSparepart.Size = new System.Drawing.Size(753, 274);
+            this.gridSparepart.Size = new System.Drawing.Size(804, 274);
             this.gridSparepart.TabIndex = 42;
             this.gridSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSparepart,
@@ -384,11 +261,134 @@
             this.gridView1.GridControl = this.gridSparepart;
             this.gridView1.Name = "gridView1";
             // 
+            // txtTotalSparepart
+            // 
+            this.txtTotalSparepart.Location = new System.Drawing.Point(153, 401);
+            this.txtTotalSparepart.Name = "txtTotalSparepart";
+            this.txtTotalSparepart.Properties.ReadOnly = true;
+            this.txtTotalSparepart.Size = new System.Drawing.Size(158, 20);
+            this.txtTotalSparepart.TabIndex = 41;
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(16, 404);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(75, 13);
+            this.labelControl4.TabIndex = 40;
+            this.labelControl4.Text = "Total Sparepart";
+            // 
+            // txtTotalSparepartPlusFee
+            // 
+            this.txtTotalSparepartPlusFee.Location = new System.Drawing.Point(153, 427);
+            this.txtTotalSparepartPlusFee.Name = "txtTotalSparepartPlusFee";
+            this.txtTotalSparepartPlusFee.Properties.ReadOnly = true;
+            this.txtTotalSparepartPlusFee.Size = new System.Drawing.Size(158, 20);
+            this.txtTotalSparepartPlusFee.TabIndex = 39;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(16, 430);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(112, 13);
+            this.labelControl3.TabIndex = 38;
+            this.labelControl3.Text = "Total Sparepart (+Fee)";
+            // 
+            // txtTotalService
+            // 
+            this.txtTotalService.Location = new System.Drawing.Point(153, 453);
+            this.txtTotalService.Name = "txtTotalService";
+            this.txtTotalService.Properties.ReadOnly = true;
+            this.txtTotalService.Size = new System.Drawing.Size(158, 20);
+            this.txtTotalService.TabIndex = 37;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(16, 456);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(62, 13);
+            this.labelControl2.TabIndex = 36;
+            this.labelControl2.Text = "Total Service";
+            // 
+            // txtTotalServicePlusFee
+            // 
+            this.txtTotalServicePlusFee.Location = new System.Drawing.Point(153, 479);
+            this.txtTotalServicePlusFee.Name = "txtTotalServicePlusFee";
+            this.txtTotalServicePlusFee.Properties.ReadOnly = true;
+            this.txtTotalServicePlusFee.Size = new System.Drawing.Size(158, 20);
+            this.txtTotalServicePlusFee.TabIndex = 35;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(16, 482);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(99, 13);
+            this.labelControl1.TabIndex = 34;
+            this.labelControl1.Text = "Total Service (+Fee)";
+            // 
+            // cbPaymentType
+            // 
+            this.cbPaymentType.Location = new System.Drawing.Point(153, 585);
+            this.cbPaymentType.Name = "cbPaymentType";
+            this.cbPaymentType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbPaymentType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Kota"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.cbPaymentType.Properties.DisplayMember = "Name";
+            this.cbPaymentType.Properties.HideSelection = false;
+            this.cbPaymentType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.cbPaymentType.Properties.NullText = "";
+            this.cbPaymentType.Properties.ReadOnly = true;
+            this.cbPaymentType.Properties.ValueMember = "Id";
+            this.cbPaymentType.Size = new System.Drawing.Size(158, 20);
+            this.cbPaymentType.TabIndex = 33;
+            // 
+            // lblPaymentType
+            // 
+            this.lblPaymentType.Location = new System.Drawing.Point(16, 588);
+            this.lblPaymentType.Name = "lblPaymentType";
+            this.lblPaymentType.Size = new System.Drawing.Size(87, 13);
+            this.lblPaymentType.TabIndex = 32;
+            this.lblPaymentType.Text = "Jenis Pembayaran";
+            // 
+            // txtTotalPayment
+            // 
+            this.txtTotalPayment.Location = new System.Drawing.Point(153, 559);
+            this.txtTotalPayment.Name = "txtTotalPayment";
+            this.txtTotalPayment.Properties.ReadOnly = true;
+            this.txtTotalPayment.Size = new System.Drawing.Size(158, 20);
+            this.txtTotalPayment.TabIndex = 31;
+            // 
+            // lblTotalPayment
+            // 
+            this.lblTotalPayment.Location = new System.Drawing.Point(16, 562);
+            this.lblTotalPayment.Name = "lblTotalPayment";
+            this.lblTotalPayment.Size = new System.Drawing.Size(87, 13);
+            this.lblTotalPayment.TabIndex = 30;
+            this.lblTotalPayment.Text = "Total Pembayaran";
+            // 
+            // txtTotalTransaction
+            // 
+            this.txtTotalTransaction.Location = new System.Drawing.Point(153, 519);
+            this.txtTotalTransaction.Name = "txtTotalTransaction";
+            this.txtTotalTransaction.Properties.ReadOnly = true;
+            this.txtTotalTransaction.Size = new System.Drawing.Size(158, 20);
+            this.txtTotalTransaction.TabIndex = 29;
+            // 
+            // lblTotalTransaction
+            // 
+            this.lblTotalTransaction.Location = new System.Drawing.Point(16, 522);
+            this.lblTotalTransaction.Name = "lblTotalTransaction";
+            this.lblTotalTransaction.Size = new System.Drawing.Size(72, 13);
+            this.lblTotalTransaction.TabIndex = 28;
+            this.lblTotalTransaction.Text = "Total Transaksi";
+            // 
             // InvoiceDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 712);
+            this.ClientSize = new System.Drawing.Size(806, 678);
             this.Controls.Add(this.gcInvoiceInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InvoiceDetailForm";
@@ -401,6 +401,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).EndInit();
             this.gcInvoiceInfo.ResumeLayout(false);
             this.gcInvoiceInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPlusFee.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalService.Properties)).EndInit();
@@ -409,9 +412,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPayment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -77,7 +77,7 @@
             this.gcCreditPaymentListInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcCreditPaymentListInfo.Location = new System.Drawing.Point(0, 0);
             this.gcCreditPaymentListInfo.Name = "gcCreditPaymentListInfo";
-            this.gcCreditPaymentListInfo.Size = new System.Drawing.Size(538, 367);
+            this.gcCreditPaymentListInfo.Size = new System.Drawing.Size(664, 445);
             this.gcCreditPaymentListInfo.TabIndex = 1;
             this.gcCreditPaymentListInfo.Text = "Informasi Daftar Pembayaran";
             // 
@@ -86,10 +86,10 @@
             this.gridCreditPayment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridCreditPayment.Location = new System.Drawing.Point(0, 167);
+            this.gridCreditPayment.Location = new System.Drawing.Point(5, 167);
             this.gridCreditPayment.MainView = this.gvCreditPayment;
             this.gridCreditPayment.Name = "gridCreditPayment";
-            this.gridCreditPayment.Size = new System.Drawing.Size(538, 200);
+            this.gridCreditPayment.Size = new System.Drawing.Size(654, 273);
             this.gridCreditPayment.TabIndex = 22;
             this.gridCreditPayment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCreditPayment});
@@ -146,7 +146,7 @@
             // 
             // txtTotalNotPaid
             // 
-            this.txtTotalNotPaid.Location = new System.Drawing.Point(201, 130);
+            this.txtTotalNotPaid.Location = new System.Drawing.Point(141, 136);
             this.txtTotalNotPaid.Name = "txtTotalNotPaid";
             this.txtTotalNotPaid.Properties.ReadOnly = true;
             this.txtTotalNotPaid.Size = new System.Drawing.Size(157, 20);
@@ -154,7 +154,7 @@
             // 
             // lblTotalNotPaid
             // 
-            this.lblTotalNotPaid.Location = new System.Drawing.Point(13, 133);
+            this.lblTotalNotPaid.Location = new System.Drawing.Point(12, 139);
             this.lblTotalNotPaid.Name = "lblTotalNotPaid";
             this.lblTotalNotPaid.Size = new System.Drawing.Size(102, 13);
             this.lblTotalNotPaid.TabIndex = 20;
@@ -162,7 +162,7 @@
             // 
             // ttTotalPaid
             // 
-            this.ttTotalPaid.Location = new System.Drawing.Point(200, 101);
+            this.ttTotalPaid.Location = new System.Drawing.Point(141, 109);
             this.ttTotalPaid.Name = "ttTotalPaid";
             this.ttTotalPaid.Properties.ReadOnly = true;
             this.ttTotalPaid.Size = new System.Drawing.Size(157, 20);
@@ -170,7 +170,7 @@
             // 
             // lblTotalPaid
             // 
-            this.lblTotalPaid.Location = new System.Drawing.Point(12, 104);
+            this.lblTotalPaid.Location = new System.Drawing.Point(12, 112);
             this.lblTotalPaid.Name = "lblTotalPaid";
             this.lblTotalPaid.Size = new System.Drawing.Size(71, 13);
             this.lblTotalPaid.TabIndex = 18;
@@ -178,7 +178,7 @@
             // 
             // txtTotalTransaction
             // 
-            this.txtTotalTransaction.Location = new System.Drawing.Point(200, 75);
+            this.txtTotalTransaction.Location = new System.Drawing.Point(141, 82);
             this.txtTotalTransaction.Name = "txtTotalTransaction";
             this.txtTotalTransaction.Properties.ReadOnly = true;
             this.txtTotalTransaction.Size = new System.Drawing.Size(157, 20);
@@ -186,7 +186,7 @@
             // 
             // lblTotalTransaction
             // 
-            this.lblTotalTransaction.Location = new System.Drawing.Point(12, 78);
+            this.lblTotalTransaction.Location = new System.Drawing.Point(12, 85);
             this.lblTotalTransaction.Name = "lblTotalTransaction";
             this.lblTotalTransaction.Size = new System.Drawing.Size(72, 13);
             this.lblTotalTransaction.TabIndex = 16;
@@ -194,7 +194,7 @@
             // 
             // txtCustomer
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(200, 46);
+            this.txtCustomer.Location = new System.Drawing.Point(141, 55);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Properties.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(157, 20);
@@ -202,7 +202,7 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(12, 49);
+            this.lblCustomer.Location = new System.Drawing.Point(12, 58);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 14;
@@ -210,7 +210,7 @@
             // 
             // txtTransactionDate
             // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(200, 20);
+            this.txtTransactionDate.Location = new System.Drawing.Point(141, 28);
             this.txtTransactionDate.Name = "txtTransactionDate";
             this.txtTransactionDate.Properties.ReadOnly = true;
             this.txtTransactionDate.Size = new System.Drawing.Size(157, 20);
@@ -218,7 +218,7 @@
             // 
             // lblTransactionDate
             // 
-            this.lblTransactionDate.Location = new System.Drawing.Point(12, 23);
+            this.lblTransactionDate.Location = new System.Drawing.Point(12, 31);
             this.lblTransactionDate.Name = "lblTransactionDate";
             this.lblTransactionDate.Size = new System.Drawing.Size(86, 13);
             this.lblTransactionDate.TabIndex = 12;
@@ -252,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 367);
+            this.ClientSize = new System.Drawing.Size(664, 445);
             this.Controls.Add(this.gcCreditPaymentListInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreditPaymentListForm";

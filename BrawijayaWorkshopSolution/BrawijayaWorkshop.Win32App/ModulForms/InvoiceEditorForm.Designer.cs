@@ -110,13 +110,13 @@
             this.gcInvoiceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcInvoiceInfo.Location = new System.Drawing.Point(0, 0);
             this.gcInvoiceInfo.Name = "gcInvoiceInfo";
-            this.gcInvoiceInfo.Size = new System.Drawing.Size(755, 663);
+            this.gcInvoiceInfo.Size = new System.Drawing.Size(755, 655);
             this.gcInvoiceInfo.TabIndex = 1;
             this.gcInvoiceInfo.Text = "Informasi Invoice";
             // 
             // chkApplyToAll
             // 
-            this.chkApplyToAll.Location = new System.Drawing.Point(266, 100);
+            this.chkApplyToAll.Location = new System.Drawing.Point(248, 100);
             this.chkApplyToAll.Name = "chkApplyToAll";
             this.chkApplyToAll.Properties.Caption = "Diaplikasikan ke semua item?";
             this.chkApplyToAll.Size = new System.Drawing.Size(169, 19);
@@ -125,7 +125,7 @@
             // 
             // txtMasterFee
             // 
-            this.txtMasterFee.Location = new System.Drawing.Point(170, 100);
+            this.txtMasterFee.Location = new System.Drawing.Point(172, 100);
             this.txtMasterFee.Name = "txtMasterFee";
             this.txtMasterFee.Size = new System.Drawing.Size(61, 20);
             this.txtMasterFee.TabIndex = 30;
@@ -133,7 +133,7 @@
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(12, 104);
+            this.labelControl5.Location = new System.Drawing.Point(14, 103);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(152, 13);
             this.labelControl5.TabIndex = 29;
@@ -143,7 +143,7 @@
             // 
             this.gridSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridSparepart.Location = new System.Drawing.Point(9, 152);
+            this.gridSparepart.Location = new System.Drawing.Point(12, 135);
             this.gridSparepart.MainView = this.gvSparepart;
             this.gridSparepart.Name = "gridSparepart";
             this.gridSparepart.Size = new System.Drawing.Size(734, 274);
@@ -294,7 +294,7 @@
             // 
             // cbPaymentType
             // 
-            this.cbPaymentType.Location = new System.Drawing.Point(154, 618);
+            this.cbPaymentType.Location = new System.Drawing.Point(154, 615);
             this.cbPaymentType.Name = "cbPaymentType";
             this.cbPaymentType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -316,7 +316,7 @@
             // 
             // lblPaymentType
             // 
-            this.lblPaymentType.Location = new System.Drawing.Point(17, 625);
+            this.lblPaymentType.Location = new System.Drawing.Point(17, 618);
             this.lblPaymentType.Name = "lblPaymentType";
             this.lblPaymentType.Size = new System.Drawing.Size(87, 13);
             this.lblPaymentType.TabIndex = 18;
@@ -324,14 +324,14 @@
             // 
             // txtTotalPayment
             // 
-            this.txtTotalPayment.Location = new System.Drawing.Point(154, 592);
+            this.txtTotalPayment.Location = new System.Drawing.Point(154, 589);
             this.txtTotalPayment.Name = "txtTotalPayment";
             this.txtTotalPayment.Size = new System.Drawing.Size(158, 20);
             this.txtTotalPayment.TabIndex = 17;
             // 
             // lblTotalPayment
             // 
-            this.lblTotalPayment.Location = new System.Drawing.Point(17, 599);
+            this.lblTotalPayment.Location = new System.Drawing.Point(17, 592);
             this.lblTotalPayment.Name = "lblTotalPayment";
             this.lblTotalPayment.Size = new System.Drawing.Size(91, 13);
             this.lblTotalPayment.TabIndex = 16;
@@ -355,7 +355,7 @@
             // 
             // txtCustomer
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(170, 61);
+            this.txtCustomer.Location = new System.Drawing.Point(170, 65);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Properties.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(247, 20);
@@ -389,7 +389,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 712);
+            this.ClientSize = new System.Drawing.Size(755, 704);
             this.Controls.Add(this.gcInvoiceInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InvoiceEditorForm";

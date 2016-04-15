@@ -132,7 +132,7 @@
             // 
             // lblContractWorkValue
             // 
-            this.lblContractWorkValue.Location = new System.Drawing.Point(135, 124);
+            this.lblContractWorkValue.Location = new System.Drawing.Point(135, 121);
             this.lblContractWorkValue.Name = "lblContractWorkValue";
             this.lblContractWorkValue.Size = new System.Drawing.Size(4, 13);
             this.lblContractWorkValue.TabIndex = 65;
@@ -140,7 +140,7 @@
             // 
             // lblContractWork
             // 
-            this.lblContractWork.Location = new System.Drawing.Point(15, 124);
+            this.lblContractWork.Location = new System.Drawing.Point(15, 121);
             this.lblContractWork.Name = "lblContractWork";
             this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 64;
@@ -148,7 +148,7 @@
             // 
             // lblContractWorkFeeValue
             // 
-            this.lblContractWorkFeeValue.Location = new System.Drawing.Point(135, 142);
+            this.lblContractWorkFeeValue.Location = new System.Drawing.Point(135, 139);
             this.lblContractWorkFeeValue.Name = "lblContractWorkFeeValue";
             this.lblContractWorkFeeValue.Size = new System.Drawing.Size(4, 13);
             this.lblContractWorkFeeValue.TabIndex = 63;
@@ -156,7 +156,7 @@
             // 
             // lblContractWorkFee
             // 
-            this.lblContractWorkFee.Location = new System.Drawing.Point(15, 142);
+            this.lblContractWorkFee.Location = new System.Drawing.Point(15, 139);
             this.lblContractWorkFee.Name = "lblContractWorkFee";
             this.lblContractWorkFee.Size = new System.Drawing.Size(71, 13);
             this.lblContractWorkFee.TabIndex = 62;
@@ -220,7 +220,7 @@
             // 
             // lblTotalSparepartValue
             // 
-            this.lblTotalSparepartValue.Location = new System.Drawing.Point(135, 107);
+            this.lblTotalSparepartValue.Location = new System.Drawing.Point(135, 103);
             this.lblTotalSparepartValue.Name = "lblTotalSparepartValue";
             this.lblTotalSparepartValue.Size = new System.Drawing.Size(4, 13);
             this.lblTotalSparepartValue.TabIndex = 60;
@@ -228,7 +228,7 @@
             // 
             // lblTotalSparepart
             // 
-            this.lblTotalSparepart.Location = new System.Drawing.Point(15, 107);
+            this.lblTotalSparepart.Location = new System.Drawing.Point(15, 103);
             this.lblTotalSparepart.Name = "lblTotalSparepart";
             this.lblTotalSparepart.Size = new System.Drawing.Size(107, 13);
             this.lblTotalSparepart.TabIndex = 59;
@@ -303,7 +303,7 @@
             this.btnSetAsComplete.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSetAsComplete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSetAsComplete.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSetAsComplete.Location = new System.Drawing.Point(306, 429);
+            this.btnSetAsComplete.Location = new System.Drawing.Point(306, 425);
             this.btnSetAsComplete.Name = "btnSetAsComplete";
             this.btnSetAsComplete.Size = new System.Drawing.Size(91, 23);
             this.btnSetAsComplete.TabIndex = 40;
@@ -316,7 +316,7 @@
             this.btnRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnRequestPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnRequestPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnRequestPrint.Location = new System.Drawing.Point(519, 429);
+            this.btnRequestPrint.Location = new System.Drawing.Point(519, 425);
             this.btnRequestPrint.Name = "btnRequestPrint";
             this.btnRequestPrint.Size = new System.Drawing.Size(122, 23);
             this.btnRequestPrint.TabIndex = 38;
@@ -328,7 +328,7 @@
             this.btnAbort.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAbort.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnAbort.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAbort.Location = new System.Drawing.Point(306, 429);
+            this.btnAbort.Location = new System.Drawing.Point(306, 425);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(91, 23);
             this.btnAbort.TabIndex = 39;
@@ -337,7 +337,7 @@
             // 
             // lblDescriptionValue
             // 
-            this.lblDescriptionValue.Location = new System.Drawing.Point(391, 124);
+            this.lblDescriptionValue.Location = new System.Drawing.Point(391, 121);
             this.lblDescriptionValue.Name = "lblDescriptionValue";
             this.lblDescriptionValue.Size = new System.Drawing.Size(4, 13);
             this.lblDescriptionValue.TabIndex = 57;
@@ -348,7 +348,7 @@
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnCancel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnCancel.Location = new System.Drawing.Point(747, 429);
+            this.btnCancel.Location = new System.Drawing.Point(747, 425);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 23);
             this.btnCancel.TabIndex = 33;
@@ -357,7 +357,7 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(287, 123);
+            this.lblDescription.Location = new System.Drawing.Point(287, 121);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(42, 13);
             this.lblDescription.TabIndex = 56;
@@ -368,7 +368,7 @@
             this.btnReject.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnReject.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnReject.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnReject.Location = new System.Drawing.Point(412, 429);
+            this.btnReject.Location = new System.Drawing.Point(412, 425);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(91, 23);
             this.btnReject.TabIndex = 35;
@@ -377,7 +377,7 @@
             // 
             // lblStatusCompletedValue
             // 
-            this.lblStatusCompletedValue.Location = new System.Drawing.Point(391, 105);
+            this.lblStatusCompletedValue.Location = new System.Drawing.Point(391, 103);
             this.lblStatusCompletedValue.Name = "lblStatusCompletedValue";
             this.lblStatusCompletedValue.Size = new System.Drawing.Size(4, 13);
             this.lblStatusCompletedValue.TabIndex = 55;
@@ -389,7 +389,7 @@
             this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(534, 429);
+            this.btnPrint.Location = new System.Drawing.Point(534, 425);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(91, 23);
             this.btnPrint.TabIndex = 36;
@@ -398,7 +398,7 @@
             // 
             // lblStatusCompleted
             // 
-            this.lblStatusCompleted.Location = new System.Drawing.Point(287, 104);
+            this.lblStatusCompleted.Location = new System.Drawing.Point(287, 103);
             this.lblStatusCompleted.Name = "lblStatusCompleted";
             this.lblStatusCompleted.Size = new System.Drawing.Size(89, 13);
             this.lblStatusCompleted.TabIndex = 54;
@@ -410,7 +410,7 @@
             this.btnEndorse.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.btnEndorse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnEndorse.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnEndorse.Location = new System.Drawing.Point(649, 429);
+            this.btnEndorse.Location = new System.Drawing.Point(649, 425);
             this.btnEndorse.Name = "btnEndorse";
             this.btnEndorse.Size = new System.Drawing.Size(91, 23);
             this.btnEndorse.TabIndex = 37;
@@ -419,7 +419,7 @@
             // 
             // lblStatusPrintValue
             // 
-            this.lblStatusPrintValue.Location = new System.Drawing.Point(391, 86);
+            this.lblStatusPrintValue.Location = new System.Drawing.Point(391, 85);
             this.lblStatusPrintValue.Name = "lblStatusPrintValue";
             this.lblStatusPrintValue.Size = new System.Drawing.Size(4, 13);
             this.lblStatusPrintValue.TabIndex = 53;
@@ -430,7 +430,7 @@
             this.btnApprove.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnApprove.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnApprove.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnApprove.Location = new System.Drawing.Point(306, 429);
+            this.btnApprove.Location = new System.Drawing.Point(306, 425);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Size = new System.Drawing.Size(91, 23);
             this.btnApprove.TabIndex = 34;
@@ -455,7 +455,7 @@
             // 
             // lblStatusApproval
             // 
-            this.lblStatusApproval.Location = new System.Drawing.Point(287, 66);
+            this.lblStatusApproval.Location = new System.Drawing.Point(287, 67);
             this.lblStatusApproval.Name = "lblStatusApproval";
             this.lblStatusApproval.Size = new System.Drawing.Size(92, 13);
             this.lblStatusApproval.TabIndex = 50;
@@ -471,7 +471,7 @@
             // 
             // lblDueDateValue
             // 
-            this.lblDueDateValue.Location = new System.Drawing.Point(391, 48);
+            this.lblDueDateValue.Location = new System.Drawing.Point(391, 49);
             this.lblDueDateValue.Name = "lblDueDateValue";
             this.lblDueDateValue.Size = new System.Drawing.Size(4, 13);
             this.lblDueDateValue.TabIndex = 48;
@@ -479,7 +479,7 @@
             // 
             // lblCategoryValue
             // 
-            this.lblCategoryValue.Location = new System.Drawing.Point(135, 88);
+            this.lblCategoryValue.Location = new System.Drawing.Point(135, 85);
             this.lblCategoryValue.Name = "lblCategoryValue";
             this.lblCategoryValue.Size = new System.Drawing.Size(4, 13);
             this.lblCategoryValue.TabIndex = 47;
@@ -487,7 +487,7 @@
             // 
             // lblVehicleValue
             // 
-            this.lblVehicleValue.Location = new System.Drawing.Point(135, 69);
+            this.lblVehicleValue.Location = new System.Drawing.Point(135, 67);
             this.lblVehicleValue.Name = "lblVehicleValue";
             this.lblVehicleValue.Size = new System.Drawing.Size(4, 13);
             this.lblVehicleValue.TabIndex = 46;
@@ -495,7 +495,7 @@
             // 
             // lblCustomerValue
             // 
-            this.lblCustomerValue.Location = new System.Drawing.Point(135, 50);
+            this.lblCustomerValue.Location = new System.Drawing.Point(135, 49);
             this.lblCustomerValue.Name = "lblCustomerValue";
             this.lblCustomerValue.Size = new System.Drawing.Size(4, 13);
             this.lblCustomerValue.TabIndex = 45;
@@ -519,7 +519,7 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(15, 50);
+            this.lblCustomer.Location = new System.Drawing.Point(15, 49);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 37;
@@ -535,7 +535,7 @@
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(15, 88);
+            this.lblCategory.Location = new System.Drawing.Point(15, 85);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(65, 13);
             this.lblCategory.TabIndex = 13;
@@ -543,7 +543,7 @@
             // 
             // lblDueDate
             // 
-            this.lblDueDate.Location = new System.Drawing.Point(287, 48);
+            this.lblDueDate.Location = new System.Drawing.Point(287, 49);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(59, 13);
             this.lblDueDate.TabIndex = 12;
@@ -551,7 +551,7 @@
             // 
             // lblVehicle
             // 
-            this.lblVehicle.Location = new System.Drawing.Point(15, 69);
+            this.lblVehicle.Location = new System.Drawing.Point(15, 67);
             this.lblVehicle.Name = "lblVehicle";
             this.lblVehicle.Size = new System.Drawing.Size(52, 13);
             this.lblVehicle.TabIndex = 2;

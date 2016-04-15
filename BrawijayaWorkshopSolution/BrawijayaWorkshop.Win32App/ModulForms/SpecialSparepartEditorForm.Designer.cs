@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpecialSparepartEditorForm));
             this.gcSparepartInfo = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpSparepart = new DevExpress.XtraEditors.LookUpEdit();
             this.lblCodeValue = new DevExpress.XtraEditors.LabelControl();
             this.lblUnitValue = new DevExpress.XtraEditors.LabelControl();
@@ -41,12 +42,11 @@
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
             this.valSparepart = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.lookUpCategory = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepartInfo)).BeginInit();
             this.gcSparepartInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valSparepart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSparepartInfo
@@ -65,6 +65,27 @@
             this.gcSparepartInfo.Size = new System.Drawing.Size(316, 149);
             this.gcSparepartInfo.TabIndex = 2;
             this.gcSparepartInfo.Text = "Informasi Sparepart Spesial";
+            // 
+            // lookUpCategory
+            // 
+            this.lookUpCategory.Location = new System.Drawing.Point(113, 59);
+            this.lookUpCategory.Name = "lookUpCategory";
+            this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode")});
+            this.lookUpCategory.Properties.DisplayMember = "Name";
+            this.lookUpCategory.Properties.HideSelection = false;
+            this.lookUpCategory.Properties.NullText = "-- Pilih Kategori --";
+            this.lookUpCategory.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpCategory.Properties.ValueMember = "Id";
+            this.lookUpCategory.Size = new System.Drawing.Size(186, 20);
+            this.lookUpCategory.TabIndex = 13;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Sparepart harus dipilih!";
+            this.valSparepart.SetValidationRule(this.lookUpCategory, conditionValidationRule1);
             // 
             // lookUpSparepart
             // 
@@ -90,7 +111,7 @@
             // 
             // lblCodeValue
             // 
-            this.lblCodeValue.Location = new System.Drawing.Point(113, 95);
+            this.lblCodeValue.Location = new System.Drawing.Point(113, 92);
             this.lblCodeValue.Name = "lblCodeValue";
             this.lblCodeValue.Size = new System.Drawing.Size(8, 13);
             this.lblCodeValue.TabIndex = 11;
@@ -114,7 +135,7 @@
             // 
             // lblCode
             // 
-            this.lblCode.Location = new System.Drawing.Point(13, 95);
+            this.lblCode.Location = new System.Drawing.Point(13, 92);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(24, 13);
             this.lblCode.TabIndex = 6;
@@ -130,7 +151,7 @@
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(13, 65);
+            this.lblCategory.Location = new System.Drawing.Point(13, 62);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(40, 13);
             this.lblCategory.TabIndex = 2;
@@ -139,27 +160,6 @@
             // valSparepart
             // 
             this.valSparepart.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
-            // 
-            // lookUpCategory
-            // 
-            this.lookUpCategory.Location = new System.Drawing.Point(113, 62);
-            this.lookUpCategory.Name = "lookUpCategory";
-            this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode")});
-            this.lookUpCategory.Properties.DisplayMember = "Name";
-            this.lookUpCategory.Properties.HideSelection = false;
-            this.lookUpCategory.Properties.NullText = "-- Pilih Kategori --";
-            this.lookUpCategory.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.lookUpCategory.Properties.ValueMember = "Id";
-            this.lookUpCategory.Size = new System.Drawing.Size(186, 20);
-            this.lookUpCategory.TabIndex = 13;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Sparepart harus dipilih!";
-            this.valSparepart.SetValidationRule(this.lookUpCategory, conditionValidationRule1);
             // 
             // SpecialSparepartEditorForm
             // 
@@ -174,9 +174,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepartInfo)).EndInit();
             this.gcSparepartInfo.ResumeLayout(false);
             this.gcSparepartInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valSparepart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

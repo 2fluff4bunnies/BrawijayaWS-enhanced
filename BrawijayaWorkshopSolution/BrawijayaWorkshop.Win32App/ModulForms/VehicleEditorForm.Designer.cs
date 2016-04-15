@@ -79,7 +79,7 @@
             // 
             this.lookUpCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lookUpCustomer.Location = new System.Drawing.Point(128, 145);
+            this.lookUpCustomer.Location = new System.Drawing.Point(129, 151);
             this.lookUpCustomer.Name = "lookUpCustomer";
             this.lookUpCustomer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -103,7 +103,7 @@
             // 
             this.txtBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBrand.Location = new System.Drawing.Point(128, 56);
+            this.txtBrand.Location = new System.Drawing.Point(129, 61);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtBrand.Size = new System.Drawing.Size(257, 20);
@@ -116,7 +116,7 @@
             // 
             this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseNumber.Location = new System.Drawing.Point(128, 25);
+            this.txtLicenseNumber.Location = new System.Drawing.Point(129, 31);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtLicenseNumber.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -132,7 +132,7 @@
             // 
             this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtType.Location = new System.Drawing.Point(128, 86);
+            this.txtType.Location = new System.Drawing.Point(129, 91);
             this.txtType.Name = "txtType";
             this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtType.Size = new System.Drawing.Size(257, 20);
@@ -145,7 +145,7 @@
             // 
             this.txtYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtYearOfPurchase.Location = new System.Drawing.Point(128, 116);
+            this.txtYearOfPurchase.Location = new System.Drawing.Point(129, 121);
             this.txtYearOfPurchase.Name = "txtYearOfPurchase";
             this.txtYearOfPurchase.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtYearOfPurchase.Properties.Mask.EditMask = "[12][0-9]{3}";
@@ -160,7 +160,7 @@
             // 
             this.lblCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomer.Location = new System.Drawing.Point(12, 148);
+            this.lblCustomer.Location = new System.Drawing.Point(13, 154);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 8;
@@ -170,7 +170,7 @@
             // 
             this.lblBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBrand.Location = new System.Drawing.Point(12, 59);
+            this.lblBrand.Location = new System.Drawing.Point(13, 64);
             this.lblBrand.Name = "lblBrand";
             this.lblBrand.Size = new System.Drawing.Size(29, 13);
             this.lblBrand.TabIndex = 2;
@@ -180,7 +180,7 @@
             // 
             this.lblType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblType.Location = new System.Drawing.Point(12, 89);
+            this.lblType.Location = new System.Drawing.Point(13, 94);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(20, 13);
             this.lblType.TabIndex = 4;
@@ -190,7 +190,7 @@
             // 
             this.lblYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblYearOfPurchase.Location = new System.Drawing.Point(12, 119);
+            this.lblYearOfPurchase.Location = new System.Drawing.Point(13, 124);
             this.lblYearOfPurchase.Name = "lblYearOfPurchase";
             this.lblYearOfPurchase.Size = new System.Drawing.Size(81, 13);
             this.lblYearOfPurchase.TabIndex = 6;
@@ -289,7 +289,7 @@
             this.dtpExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpExpirationDate.EditValue = null;
-            this.dtpExpirationDate.Location = new System.Drawing.Point(128, 175);
+            this.dtpExpirationDate.Location = new System.Drawing.Point(129, 181);
             this.dtpExpirationDate.Name = "dtpExpirationDate";
             this.dtpExpirationDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dtpExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -311,7 +311,7 @@
             // 
             this.lblExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblExpirationDate.Location = new System.Drawing.Point(12, 178);
+            this.lblExpirationDate.Location = new System.Drawing.Point(13, 184);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
             this.lblExpirationDate.TabIndex = 10;
@@ -321,7 +321,7 @@
             // 
             this.lblLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 28);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(13, 34);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(57, 13);
             this.lblLicenseNumber.TabIndex = 0;

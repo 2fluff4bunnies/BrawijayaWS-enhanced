@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartManualTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
@@ -47,8 +48,8 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtQtyUpdate = new DevExpress.XtraEditors.TextEdit();
             this.lblQtyUpdaate = new DevExpress.XtraEditors.LabelControl();
-            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
-            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
@@ -65,7 +66,7 @@
             // 
             // lblSparepart
             // 
-            this.lblSparepart.Location = new System.Drawing.Point(13, 30);
+            this.lblSparepart.Location = new System.Drawing.Point(12, 32);
             this.lblSparepart.Name = "lblSparepart";
             this.lblSparepart.Size = new System.Drawing.Size(48, 13);
             this.lblSparepart.TabIndex = 9;
@@ -73,7 +74,7 @@
             // 
             // lblStok
             // 
-            this.lblStok.Location = new System.Drawing.Point(12, 63);
+            this.lblStok.Location = new System.Drawing.Point(12, 67);
             this.lblStok.Name = "lblStok";
             this.lblStok.Size = new System.Drawing.Size(57, 13);
             this.lblStok.TabIndex = 11;
@@ -83,7 +84,7 @@
             // 
             this.txtStok.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStok.Location = new System.Drawing.Point(130, 60);
+            this.txtStok.Location = new System.Drawing.Point(130, 64);
             this.txtStok.Name = "txtStok";
             this.txtStok.Properties.ReadOnly = true;
             this.txtStok.Size = new System.Drawing.Size(193, 20);
@@ -118,14 +119,14 @@
             // 
             this.txtSerialNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSerialNumber.Location = new System.Drawing.Point(130, 165);
+            this.txtSerialNumber.Location = new System.Drawing.Point(130, 169);
             this.txtSerialNumber.Name = "txtSerialNumber";
             this.txtSerialNumber.Size = new System.Drawing.Size(193, 20);
             this.txtSerialNumber.TabIndex = 27;
             // 
             // lblSerialNumber
             // 
-            this.lblSerialNumber.Location = new System.Drawing.Point(12, 168);
+            this.lblSerialNumber.Location = new System.Drawing.Point(12, 172);
             this.lblSerialNumber.Name = "lblSerialNumber";
             this.lblSerialNumber.Size = new System.Drawing.Size(81, 13);
             this.lblSerialNumber.TabIndex = 26;
@@ -135,7 +136,7 @@
             // 
             this.txtSparepartName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSparepartName.Location = new System.Drawing.Point(130, 27);
+            this.txtSparepartName.Location = new System.Drawing.Point(130, 29);
             this.txtSparepartName.Name = "txtSparepartName";
             this.txtSparepartName.Properties.ReadOnly = true;
             this.txtSparepartName.Size = new System.Drawing.Size(193, 20);
@@ -145,7 +146,7 @@
             // 
             this.txtTotalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalPrice.Location = new System.Drawing.Point(130, 309);
+            this.txtTotalPrice.Location = new System.Drawing.Point(130, 306);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Properties.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(193, 20);
@@ -153,7 +154,7 @@
             // 
             // lblTotalPrice
             // 
-            this.lblTotalPrice.Location = new System.Drawing.Point(12, 312);
+            this.lblTotalPrice.Location = new System.Drawing.Point(12, 309);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(56, 13);
             this.lblTotalPrice.TabIndex = 23;
@@ -163,7 +164,7 @@
             // 
             this.txtItemPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItemPrice.Location = new System.Drawing.Point(130, 271);
+            this.txtItemPrice.Location = new System.Drawing.Point(130, 273);
             this.txtItemPrice.Name = "txtItemPrice";
             this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;
@@ -171,7 +172,7 @@
             // 
             // lblItemPrice
             // 
-            this.lblItemPrice.Location = new System.Drawing.Point(12, 274);
+            this.lblItemPrice.Location = new System.Drawing.Point(12, 276);
             this.lblItemPrice.Name = "lblItemPrice";
             this.lblItemPrice.Size = new System.Drawing.Size(73, 13);
             this.lblItemPrice.TabIndex = 21;
@@ -179,14 +180,14 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(130, 203);
+            this.txtRemark.Location = new System.Drawing.Point(130, 205);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(193, 51);
             this.txtRemark.TabIndex = 20;
             // 
             // lblRemark
             // 
-            this.lblRemark.Location = new System.Drawing.Point(12, 205);
+            this.lblRemark.Location = new System.Drawing.Point(12, 207);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(56, 13);
             this.lblRemark.TabIndex = 18;
@@ -194,7 +195,7 @@
             // 
             // cbMode
             // 
-            this.cbMode.Location = new System.Drawing.Point(130, 130);
+            this.cbMode.Location = new System.Drawing.Point(130, 134);
             this.cbMode.Name = "cbMode";
             this.cbMode.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.cbMode.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -211,7 +212,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(12, 133);
+            this.labelControl1.Location = new System.Drawing.Point(12, 137);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(72, 13);
             this.labelControl1.TabIndex = 16;
@@ -221,7 +222,7 @@
             // 
             this.txtQtyUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtQtyUpdate.Location = new System.Drawing.Point(130, 93);
+            this.txtQtyUpdate.Location = new System.Drawing.Point(130, 99);
             this.txtQtyUpdate.Name = "txtQtyUpdate";
             this.txtQtyUpdate.Size = new System.Drawing.Size(193, 20);
             this.txtQtyUpdate.TabIndex = 14;
@@ -232,7 +233,7 @@
             // 
             // lblQtyUpdaate
             // 
-            this.lblQtyUpdaate.Location = new System.Drawing.Point(12, 96);
+            this.lblQtyUpdaate.Location = new System.Drawing.Point(12, 102);
             this.lblQtyUpdaate.Name = "lblQtyUpdaate";
             this.lblQtyUpdaate.Size = new System.Drawing.Size(71, 13);
             this.lblQtyUpdaate.TabIndex = 13;
