@@ -36,7 +36,10 @@ namespace BrawijayaWorkshop.Model
                 toBeExpired.ModifyDate = serverTime;
                 toBeExpired.ModifyUserId = userId;
                 toBeExpired.Status = (int)DbConstant.LicenseNumberStatus.Expired;
+
+                _vehicleDetailRepository.AttachNavigation<Vehicle>(toBeExpired.Vehicle);
                 _vehicleDetailRepository.Update(toBeExpired);
+                _unitOfWork.SaveChanges();
             }
 
             //insert new detail as active detail
@@ -46,8 +49,12 @@ namespace BrawijayaWorkshop.Model
             vehicleDetail.VehicleId = vehicle.Id;
             vehicleDetail.Status = (int)DbConstant.LicenseNumberStatus.Active;
             VehicleDetail entityDetail = new VehicleDetail();
+
             Map(vehicleDetail, entityDetail);
+
+            _vehicleDetailRepository.AttachNavigation<Vehicle>(entityDetail.Vehicle);
             _vehicleDetailRepository.Add(entityDetail);
+            _unitOfWork.SaveChanges();
 
             //update active license number in vehicle
             if (vehicle != null)
@@ -57,7 +64,10 @@ namespace BrawijayaWorkshop.Model
                 vehicle.ActiveLicenseNumber = vehicleDetail.LicenseNumber;
                 Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
                 Map(vehicle, entity);
+
+                _vehicleRepository.AttachNavigation<Customer>(entity.Customer);
                 _vehicleRepository.Update(entity);
+                _unitOfWork.SaveChanges();
             }
 
             _unitOfWork.SaveChanges();

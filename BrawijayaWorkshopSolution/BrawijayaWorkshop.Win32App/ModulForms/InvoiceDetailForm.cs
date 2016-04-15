@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Linq;
 using System.Windows.Forms;
 using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraReports.UI;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -180,6 +182,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 txtTotalServicePlusFee.Text = value.ToString("#,##");
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            InvoicePrintItem report = new InvoicePrintItem();
+            List<InvoiceViewModel> _dataSource = new List<InvoiceViewModel>();
+            _dataSource.Add(SelectedInvoice);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                printTool.PrintDialog();
+            }
+            _presenter.Print();
         }
     }
 }

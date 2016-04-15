@@ -191,5 +191,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.ItemPrice = 0;
             }
         }
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                ExecuteSave();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save used good transaction: '" + SelectedUsedGoodTransaction.Id + "'" + "at date :'" + SelectedUsedGoodTransaction.CreateDate + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses penyimpanan data transaksi barang bekas gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data transaksi barang bekas selesai", true);
+                this.Close();
+            }
+        }
     }
 }

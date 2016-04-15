@@ -31,5 +31,10 @@ namespace BrawijayaWorkshop.Presenter
             }
 
         }
+
+        public void GetReturnList()
+        {
+            View.ListReturnDetail = Model.GetReturnListDetail(View.SelectedPurchaseReturn.Id, View.SelectedPurchasing.Id);
+        }
     }
 }

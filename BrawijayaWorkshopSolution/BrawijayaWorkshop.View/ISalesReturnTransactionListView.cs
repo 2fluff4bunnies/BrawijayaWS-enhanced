@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
         List<SalesReturnViewModel> SalesReturnListData { get; set; }
 
         SalesReturnViewModel SelectedSalesReturn { get; set; }
+
+        List<ReturnViewModel> ListReturnDetail { get; set; }
     }
 }

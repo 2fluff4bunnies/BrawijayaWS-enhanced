@@ -5,9 +5,11 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,7 +42,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // init editor control accessibility
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
-
+            cmsPrint.Enabled = AllowEdit;
             this.Load += SalesReturnTransactionListForm_Load;
         }
 
@@ -117,6 +119,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         public InvoiceViewModel SelectedInvoice { get; set; }
 
+        public List<ReturnViewModel> ListReturnDetail { get; set; }
         public SalesReturnViewModel SelectedSalesReturn
         {
             get
@@ -213,6 +216,22 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur penjualan selesai", true);
+        }
+
+        private void cmsPrint_Click(object sender, EventArgs e)
+        {
+            //SalesReturnPrintItem report = new SalesReturnPrintItem();
+            //List<PurchaseReturnViewModel> _dataSource = new List<PurchaseReturnViewModel>();
+            //SelectedSalesReturn.ReturnList = ListReturnDetail;
+            //_dataSource.Add(SelectedSalesReturn);
+            //report.DataSource = _dataSource;
+            //report.FillDataSource();
+
+            //using (ReportPrintTool printTool = new ReportPrintTool(report))
+            //{
+            //    // Invoke the Print dialog.
+            //    printTool.PrintDialog();
+            //}
         }
 
     }

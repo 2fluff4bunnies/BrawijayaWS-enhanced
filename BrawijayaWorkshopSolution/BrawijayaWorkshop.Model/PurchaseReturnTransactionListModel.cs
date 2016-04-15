@@ -13,6 +13,7 @@ namespace BrawijayaWorkshop.Model
     {
         private ITransactionRepository _transactionRepository;
         private IPurchasingRepository _purchasingRepository;
+        private IPurchasingDetailRepository _purchasingDetailRepository;
         private IPurchaseReturnRepository _purchaseReturnRepository;
         private IPurchaseReturnDetailRepository _purchaseReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
@@ -21,7 +22,7 @@ namespace BrawijayaWorkshop.Model
         private IUnitOfWork _unitOfWork;
 
         public PurchaseReturnTransactionListModel(ITransactionRepository transactionRepository,
-            IPurchasingRepository purchasingRepository, IPurchaseReturnRepository purchaseReturnRepository,
+            IPurchasingRepository purchasingRepository, IPurchasingDetailRepository purchasingDetailRepository, IPurchaseReturnRepository purchaseReturnRepository,
             IPurchaseReturnDetailRepository purchaseReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
@@ -29,6 +30,7 @@ namespace BrawijayaWorkshop.Model
         {
             _transactionRepository = transactionRepository;
             _purchasingRepository = purchasingRepository;
+            _purchasingDetailRepository = purchasingDetailRepository;
             _purchaseReturnRepository = purchaseReturnRepository;
             _purchaseReturnDetailRepository = purchaseReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
@@ -137,6 +139,38 @@ namespace BrawijayaWorkshop.Model
                 }
             }
             
+        }
+
+        public List<PurchaseReturnDetail> RetrievePurchaseReturnDetail(int purchaseReturnID)
+        {
+            List<PurchaseReturnDetail> result = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
+            return result;
+        }
+
+        public List<ReturnViewModel> GetReturnListDetail(int purchaseReturnID, int purchasingID)
+        {
+            List<ReturnViewModel> result = new List<ReturnViewModel>();
+            List<PurchasingDetail> listPurchasingDetail = _purchasingDetailRepository.GetMany(x => x.PurchasingId == purchasingID).ToList();
+
+            if (purchaseReturnID > 0)
+            {
+                List<PurchaseReturnDetail> listDetail = this.RetrievePurchaseReturnDetail(purchaseReturnID);
+                if (listDetail != null && listDetail.Count > 0)
+                {
+                    foreach (var itemDetail in listPurchasingDetail)
+                    {
+                        result.Add(new ReturnViewModel
+                        {
+                            SparepartId = itemDetail.SparepartId,
+                            SparepartName = itemDetail.Sparepart.Name,
+                            ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
+                            ReturQtyLimit = itemDetail.Qty,
+                            PricePerItem = itemDetail.Price
+                        });
+                    }
+                }
+            }
+            return result;
         }
     }
 }

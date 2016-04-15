@@ -28,7 +28,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             _presenter.InitFormData();
 
-            if (this.IsWheel)
+            if (this.IsSpecialSparepart)
             {
                 txtSerialNumber.Enabled = true;
                 txtQtyUpdate.Text = "1";
@@ -157,7 +157,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtSerialNumber.Text = value;
             }
         }
-        public bool IsWheel { get; set; }
+        public bool IsSpecialSparepart { get; set; }
 
         #endregion
         public SparepartViewModel Sparepart { get; set; }
@@ -166,16 +166,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (valMode.Validate() && valQty.Validate())
             {
-                try
+                bool ok = true;
+                if (this.IsSpecialSparepart)
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Sparepart Transaction's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
+                    if (_presenter.IsSerialNumberExist())
+                    {
+                        ok = false;
+                        this.ShowWarning("Nomor seri "+this.SerialNumber+" sudah digunakan.");
+                    }
                 }
-                catch (Exception ex)
+
+                if (ok)
                 {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save SparepartManualTransaction: '" + SelectedSparepartManualTransaction.Sparepart.Name + "'", ex);
-                    this.ShowError("Proses simpan data transaksi barang bekas: '" + SelectedSparepartManualTransaction.Sparepart.Name + "' gagal!");
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save Sparepart Transaction's changes");
+                        _presenter.SaveChanges();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save SparepartManualTransaction: '" + SelectedSparepartManualTransaction.Sparepart.Name + "'", ex);
+                        this.ShowError("Proses simpan data transaksi barang bekas: '" + SelectedSparepartManualTransaction.Sparepart.Name + "' gagal!");
+                    }
                 }
             }
         }
@@ -188,6 +201,32 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void txtItemPrice_EditValueChanged(object sender, EventArgs e)
         {
             TotalPrice = Price * StockUpdate;
+        }
+
+        private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                ExecuteSave();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save manual sparepart: '" + SelectedSparepartManualTransaction.Id + "'" + "at date :'" + SelectedSparepartManualTransaction.CreateDate + "'", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses penyimpanan data ubah stok sparepart gagal!");
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data ubah stok selesai", true);
+                this.Close();
+            }
         }
     }
 }
