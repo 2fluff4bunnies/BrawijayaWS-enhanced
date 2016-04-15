@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public PurchasingViewModel Purchasing { get; set; }
 
         public List<PurchaseReturnDetailViewModel> PurchasingReturnDetailList { get; set; }
+
+        public List<ReturnViewModel> ReturnList { get; set; }
     }
 }
