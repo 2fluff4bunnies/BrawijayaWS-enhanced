@@ -215,6 +215,8 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Harga Sparepart";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#;0}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalSparepartPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
