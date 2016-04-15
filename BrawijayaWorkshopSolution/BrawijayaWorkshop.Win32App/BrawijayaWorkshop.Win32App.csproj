@@ -650,6 +650,18 @@
     <Compile Include="PrintItems\InternalInvoicePrintItem.Designer.cs">
       <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\PurchasingPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\PurchasingPrintItem.Designer.cs">
+      <DependentUpon>PurchasingPrintItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintItems\PurchasingReturnPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\PurchasingReturnPrintItem.Designer.cs">
+      <DependentUpon>PurchasingReturnPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\SalesReturnPrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
