@@ -111,8 +111,9 @@ namespace BrawijayaWorkshop.Model
                     }
                     _unitOfWork.SaveChanges();
 
-                    Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == invoice.Id).OrderBy(x => x.CreateDate).FirstOrDefault();
                     Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_INVOICE).FirstOrDefault();
+                    Transaction transaction = _transactionRepository.GetMany(x =>x.ReferenceTableId == transactionReferenceTable.Id &&
+                        x.PrimaryKeyValue == invoice.Id).OrderBy(x => x.CreateDate).FirstOrDefault();
                     Reference paymentMethod = _referenceRepository.GetById(invoice.PaymentMethodId);
                 
                     if (transaction != null)

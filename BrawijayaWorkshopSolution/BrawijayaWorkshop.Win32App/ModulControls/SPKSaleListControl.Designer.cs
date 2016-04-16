@@ -176,10 +176,10 @@
             // gvSPKSales
             // 
             this.gvSPKSales.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colCreateDate,
             this.colCode,
             this.colLicenseNumber,
-            this.colTotalPrice,
-            this.colCreateDate});
+            this.colTotalPrice});
             this.gvSPKSales.GridControl = this.gcSPKSales;
             this.gvSPKSales.Name = "gvSPKSales";
             this.gvSPKSales.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -202,7 +202,7 @@
             this.colCode.FieldName = "Code";
             this.colCode.Name = "colCode";
             this.colCode.Visible = true;
-            this.colCode.VisibleIndex = 0;
+            this.colCode.VisibleIndex = 1;
             // 
             // colLicenseNumber
             // 
@@ -210,23 +210,27 @@
             this.colLicenseNumber.FieldName = "Vehicle.ActiveLicenseNumber";
             this.colLicenseNumber.Name = "colLicenseNumber";
             this.colLicenseNumber.Visible = true;
-            this.colLicenseNumber.VisibleIndex = 1;
+            this.colLicenseNumber.VisibleIndex = 2;
             // 
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Harga Sparepart";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#;0}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalSparepartPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 2;
+            this.colTotalPrice.VisibleIndex = 3;
             // 
             // colCreateDate
             // 
             this.colCreateDate.Caption = "Tanggal Pembuatan";
+            this.colCreateDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colCreateDate.FieldName = "CreateDate";
             this.colCreateDate.Name = "colCreateDate";
             this.colCreateDate.Visible = true;
-            this.colCreateDate.VisibleIndex = 3;
+            this.colCreateDate.VisibleIndex = 0;
             // 
             // SPKSaleListControl
             // 
