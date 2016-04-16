@@ -522,7 +522,22 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
             List<SPKDetailSparepartViewModel> listCurrent = SPKSparepartList;
+
             SPKDetailSparepartViewModel SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepartViewModel;
+         
+
+            List<SPKDetailSparepartDetailViewModel> listCurrentDetail = new List<SPKDetailSparepartDetailViewModel>();
+
+            foreach (var item in this.SPKSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == SparepartToRemove.SparepartId))
+            {
+                listCurrentDetail.Add(item);
+            }
+
+            foreach (var item in listCurrentDetail)
+            {
+                this.SPKSparepartDetailList.Remove(item);
+            }
+            
             listCurrent.Remove(SparepartToRemove);
             SPKSparepartList = listCurrent;
 
@@ -642,7 +657,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void gvSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedSparepart = gvSparepart.GetFocusedRow() as SparepartViewModel;
+            this.SelectedSparepart = gvSparepart.GetRow(e.FocusedRowHandle) as SparepartViewModel;
         }
 
         void gvSparepart_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -960,6 +975,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.IsSaveComplete = true;
                 this.Close();
             }
+        }
+
+        private void lookUpCategory_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookup = sender as LookUpEdit;
+
+            ReferenceViewModel category = lookup.GetSelectedDataRow() as ReferenceViewModel;
+
+            if (category.Code == DbConstant.REF_SPK_CATEGORY_SALE)
+            {
+                this.IsSPKSales = true;
+            }
+
         }
     }
 }

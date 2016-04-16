@@ -245,7 +245,7 @@ namespace BrawijayaWorkshop.Model
 
                 if (isSPKSales)
                 {
-                    UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSparepart.Id && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                    UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSparepart.SparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
                     if (foundUsedGood != null)
                     {
                         foundUsedGood.Stock = foundUsedGood.Stock + spkSparepartList.Count;

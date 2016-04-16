@@ -582,6 +582,7 @@
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule3.ErrorText = "Kategori harus dipilih!";
             this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule3);
+            this.lookUpCategory.EditValueChanged += new System.EventHandler(this.lookUpCategory_EditValueChanged);
             // 
             // lblTotalSparepart
             // 
