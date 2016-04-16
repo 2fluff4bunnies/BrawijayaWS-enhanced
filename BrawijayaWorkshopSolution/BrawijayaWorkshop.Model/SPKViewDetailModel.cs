@@ -344,37 +344,10 @@ namespace BrawijayaWorkshop.Model
             Invoice insertedInvoice = _invoiceRepository.Add(invc);
 
             List<SPKDetailSparepart> SPKSpList = _SPKDetailSparepartRepository.GetMany(sp => sp.SPKId == spk.Id).ToList();
+            List<SPKDetailSparepartDetail> SPKSpDetailList = _SPKDetailSparepartDetailRepository.GetMany(spdt => spdt.SPKDetailSparepart.SPKId == spk.Id).ToList();
 
             foreach (SPKDetailSparepart spkSp in SPKSpList)
             {
-                List<SPKDetailSparepartDetail> SPKSpDetailList = _SPKDetailSparepartDetailRepository.GetMany(spdt => spdt.SPKDetailSparepartId == spkSp.Id).ToList();
-
-                foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)
-                {
-                    InvoiceDetail invcDtl = new InvoiceDetail();
-
-                    invcDtl.Invoice = insertedInvoice;
-                    invcDtl.SPKDetailSparepartDetail = spkSpDtl;
-
-                    if (spkSpDtl.SparepartDetail.PurchasingDetailId > 0)
-                    {
-                        invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
-                    }
-                    else if (spkSpDtl.SparepartDetail.SparepartManualTransactionId > 0)
-                    {
-                        invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.SparepartManualTransaction.Price.AsDouble();
-                    }
-
-                    invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
-
-                    invcDtl.CreateDate = serverTime;
-                    invcDtl.ModifyDate = serverTime;
-                    invcDtl.ModifyUserId = userId;
-                    invcDtl.CreateUserId = userId;
-
-                    _invoiceDetailRepository.Add(invcDtl);
-                }
-
                 UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.SparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
                 if (foundUsedGood != null)
                 {
@@ -407,6 +380,32 @@ namespace BrawijayaWorkshop.Model
                 {
                     _wheelExchangeHistoryRepository.Delete(item);
                 }
+            }
+
+            foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)
+            {
+                InvoiceDetail invcDtl = new InvoiceDetail();
+
+                invcDtl.Invoice = insertedInvoice;
+                invcDtl.SPKDetailSparepartDetail = spkSpDtl;
+
+                if (spkSpDtl.SparepartDetail.PurchasingDetailId > 0)
+                {
+                    invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+                }
+                else if (spkSpDtl.SparepartDetail.SparepartManualTransactionId > 0)
+                {
+                    invcDtl.SubTotalPrice = spkSpDtl.SparepartDetail.SparepartManualTransaction.Price.AsDouble();
+                }
+
+                invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                invcDtl.CreateDate = serverTime;
+                invcDtl.ModifyDate = serverTime;
+                invcDtl.ModifyUserId = userId;
+                invcDtl.CreateUserId = userId;
+
+                _invoiceDetailRepository.Add(invcDtl);
             }
 
             _unitOfWork.SaveChanges();
