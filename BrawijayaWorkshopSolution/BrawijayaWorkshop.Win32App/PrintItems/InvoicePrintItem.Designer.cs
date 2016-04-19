@@ -438,7 +438,7 @@
             // xrLabel15
             // 
             this.xrLabel15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "calculatedField1", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "calculatedField1", "Rp. {0:#,#;(#,#);0}")});
             this.xrLabel15.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(624.7918F, 74.04166F);
             this.xrLabel15.Name = "xrLabel15";
@@ -533,7 +533,7 @@
             // lblTotalPayment
             // 
             this.lblTotalPayment.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalPrice", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalPrice", "Rp. {0:#,#;(#,#);0}")});
             this.lblTotalPayment.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblTotalPayment.LocationFloat = new DevExpress.Utils.PointFloat(625.7917F, 120.0417F);
             this.lblTotalPayment.Name = "lblTotalPayment";
@@ -560,7 +560,7 @@
             // lblTotalAfterDiscount
             // 
             this.lblTotalAfterDiscount.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalServicePlusFee", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalServicePlusFee", "Rp. {0:#,#;(#,#);0}")});
             this.lblTotalAfterDiscount.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblTotalAfterDiscount.LocationFloat = new DevExpress.Utils.PointFloat(624.7918F, 97.04164F);
             this.lblTotalAfterDiscount.Name = "lblTotalAfterDiscount";
@@ -656,7 +656,7 @@
             // 
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.Text = "Harga";
+            this.xrTableCell5.Text = "Harga (Rp)";
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell5.Weight = 1.1182072443357367D;
             // 
@@ -664,7 +664,7 @@
             // 
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
-            this.xrTableCell6.Text = "Tunai";
+            this.xrTableCell6.Text = "Tunai (Rp)";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell6.Weight = 1.0202728550571354D;
             // 
