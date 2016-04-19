@@ -76,6 +76,7 @@
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.dataSourceSPKViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.DetailSparepartFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -194,8 +195,6 @@
             // lblSpkDate
             // 
             this.lblSpkDate.CanShrink = true;
-            this.lblSpkDate.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPKParent.CreateDate", "{0:dd MMM yyyy}")});
             this.lblSpkDate.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblSpkDate.LocationFloat = new DevExpress.Utils.PointFloat(108.7708F, 27.39584F);
             this.lblSpkDate.Name = "lblSpkDate";
@@ -428,7 +427,6 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable3,
             this.xrLabel18,
             this.xrLabel20});
             this.ReportFooter.HeightF = 108.4583F;
@@ -529,7 +527,8 @@
             // DetailReport
             // 
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
-            this.DetailSparepart});
+            this.DetailSparepart,
+            this.DetailSparepartFooter});
             this.DetailReport.DataMember = "ListSparepart";
             this.DetailReport.DataSource = this.dataSourceSPKViewModel;
             this.DetailReport.Level = 0;
@@ -626,6 +625,13 @@
             this.dataSourceSPKViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.SPKViewModel);
             this.dataSourceSPKViewModel.Name = "dataSourceSPKViewModel";
             // 
+            // DetailSparepartFooter
+            // 
+            this.DetailSparepartFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable3});
+            this.DetailSparepartFooter.HeightF = 3.125F;
+            this.DetailSparepartFooter.Name = "DetailSparepartFooter";
+            // 
             // SPKPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -707,5 +713,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
+        private DevExpress.XtraReports.UI.ReportFooterBand DetailSparepartFooter;
     }
 }

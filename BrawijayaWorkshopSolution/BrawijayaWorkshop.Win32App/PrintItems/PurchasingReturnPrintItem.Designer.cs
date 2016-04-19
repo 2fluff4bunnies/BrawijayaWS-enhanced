@@ -54,7 +54,6 @@
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -83,6 +82,7 @@
             this.dataSourcePurchReturnViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.ReturnDetail = new DevExpress.XtraReports.UI.DetailBand();
+            this.ReturnListFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -376,19 +376,11 @@
             this.xrPageInfo1.StylePriority.UseTextAlignment = false;
             this.xrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // ReportFooter
-            // 
-            this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable4,
-            this.xrTable3});
-            this.ReportFooter.HeightF = 28.01536F;
-            this.ReportFooter.Name = "ReportFooter";
-            // 
             // xrTable4
             // 
             this.xrTable4.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTable4.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 3.015359F);
+            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 3.015391F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Padding = new DevExpress.XtraPrinting.PaddingInfo(8, 5, 5, 5, 100F);
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -657,7 +649,8 @@
             // DetailReport
             // 
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
-            this.ReturnDetail});
+            this.ReturnDetail,
+            this.ReturnListFooter});
             this.DetailReport.DataMember = "ReturnList";
             this.DetailReport.DataSource = this.dataSourcePurchReturnViewModel;
             this.DetailReport.Level = 0;
@@ -670,6 +663,14 @@
             this.ReturnDetail.HeightF = 18.6553F;
             this.ReturnDetail.Name = "ReturnDetail";
             // 
+            // ReturnListFooter
+            // 
+            this.ReturnListFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable3,
+            this.xrTable4});
+            this.ReturnListFooter.HeightF = 28.01539F;
+            this.ReturnListFooter.Name = "ReturnListFooter";
+            // 
             // PurchasingReturnPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -678,7 +679,6 @@
             this.BottomMargin,
             this.ReportHeader,
             this.PageFooter,
-            this.ReportFooter,
             this.PageHeader,
             this.DetailReport});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
@@ -708,7 +708,6 @@
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
-        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         private DevExpress.XtraReports.UI.XRLabel lblInvoiceNumber;
@@ -756,5 +755,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private DevExpress.XtraReports.UI.DetailBand ReturnDetail;
+        private DevExpress.XtraReports.UI.ReportFooterBand ReturnListFooter;
     }
 }

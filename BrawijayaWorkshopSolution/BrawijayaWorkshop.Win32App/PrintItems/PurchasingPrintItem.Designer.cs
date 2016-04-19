@@ -72,7 +72,6 @@
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.dataSourcePurchaseViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -83,6 +82,7 @@
             this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.PurchasingDetail = new DevExpress.XtraReports.UI.DetailBand();
+            this.PurchasingDetailFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -380,7 +380,7 @@
             // 
             this.xrTable3.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTable3.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(2.384186E-05F, 0F);
+            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0.0001430511F, 0F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(8, 5, 5, 5, 100F);
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -553,19 +553,11 @@
             this.dataSourcePurchaseViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.PurchasingViewModel);
             this.dataSourcePurchaseViewModel.Name = "dataSourcePurchaseViewModel";
             // 
-            // ReportFooter
-            // 
-            this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable4,
-            this.xrTable3});
-            this.ReportFooter.HeightF = 29.16667F;
-            this.ReportFooter.Name = "ReportFooter";
-            // 
             // xrTable4
             // 
             this.xrTable4.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTable4.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0.0001430511F, 4.166667F);
+            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0.0002622604F, 4.166667F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Padding = new DevExpress.XtraPrinting.PaddingInfo(8, 5, 5, 5, 100F);
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -657,7 +649,8 @@
             // DetailReport
             // 
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
-            this.PurchasingDetail});
+            this.PurchasingDetail,
+            this.PurchasingDetailFooter});
             this.DetailReport.DataMember = "PurchasingDetails";
             this.DetailReport.DataSource = this.dataSourcePurchaseViewModel;
             this.DetailReport.Level = 0;
@@ -670,6 +663,14 @@
             this.PurchasingDetail.HeightF = 18.6553F;
             this.PurchasingDetail.Name = "PurchasingDetail";
             // 
+            // PurchasingDetailFooter
+            // 
+            this.PurchasingDetailFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable3,
+            this.xrTable4});
+            this.PurchasingDetailFooter.HeightF = 29.16667F;
+            this.PurchasingDetailFooter.Name = "PurchasingDetailFooter";
+            // 
             // PurchasingPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -679,7 +680,6 @@
             this.ReportHeader,
             this.PageFooter,
             this.PageHeader,
-            this.ReportFooter,
             this.DetailReport});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourcePurchaseViewModel});
@@ -745,7 +745,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource dataSourcePurchaseViewModel;
-        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRTable xrTable4;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell19;
@@ -756,5 +755,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private DevExpress.XtraReports.UI.DetailBand PurchasingDetail;
+        private DevExpress.XtraReports.UI.ReportFooterBand PurchasingDetailFooter;
     }
 }

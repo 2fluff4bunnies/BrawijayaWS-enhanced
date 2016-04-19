@@ -11,6 +11,7 @@ namespace BrawijayaWorkshop.Win32App.PrintItems
         public SPKPrintItem()
         {
             InitializeComponent();
+            lblSpkDate.Text = DateTime.Today.ToString("dd-MM-yyyy");
         }
 
     }
