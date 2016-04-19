@@ -5,51 +5,82 @@ namespace BrawijayaWorkshop.Utils
 {
     public static class ConvertExtensionUtils
     {
+        static string[] satuan = new string[10] { "Nol", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan" };
+        static string[] belasan = new string[10] { "Sepuluh", "Sebelas", "Dua Belas", "Tiga Belas", "Empat Belas", "Lima Belas", "Enam Belas", "Tujuh Belas", "Delapan Belas", "sembilan belas" };
+        static string[] puluhan = new string[10] { "", "", "Dua Puluh", "Tiga Puluh", "Empat Puluh", "Lima Puluh", "Enam Puluh", "Tujuh Puluh", "Delapan Puluh", "Sembilan Puluh" };
+        static string[] ribuan = new string[5] { "", "Ribu", "Juta", "Milyar", "Triliyun" };
+
         public static string NumberToWordID(this decimal sender)
         {
-            string strterbilang = string.Empty;
+            return GetWordsFromNumber(sender);
+        }
 
-            // membuat array untuk mengubah 1 - 11 menjadi terbilang
-            string[] a = { "", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas" };
+        private static string GetWordsFromNumber(decimal angka)
+        {
+            string strHasil = "";
+            Decimal frac = angka - Decimal.Truncate(angka);
 
-            if (sender < 12)
-            {
-                strterbilang = " " + a[sender.AsInteger()];
-            }
-            else if (sender < 20)
-            {
-                strterbilang = NumberToWordID(sender - 10) + " belas";
-            }
-            else if (sender < 100)
-            {
-                strterbilang = NumberToWordID(sender / 10) + " puluh" + NumberToWordID(sender % 10);
-            }
-            else if (sender < 200)
-            {
-                strterbilang = " seratus" + NumberToWordID(sender - 100);
-            }
-            else if (sender < 1000)
-            {
-                strterbilang = NumberToWordID(sender / 100) + " ratus" + NumberToWordID(sender % 100);
-            }
-            else if (sender < 2000)
-            {
-                strterbilang = " seribu" + NumberToWordID(sender - 1000);
-            }
-            else if (sender < 1000000)
-            {
-                strterbilang = NumberToWordID(sender / 1000) + " ribu" + NumberToWordID(sender % 1000);
-            }
-            else if (sender < 1000000000)
-            {
-                strterbilang = NumberToWordID(sender / 1000000) + " juta" + NumberToWordID(sender % 1000000);
-            }
+            if (Decimal.Compare(frac, 0.0m) != 0)
+                strHasil = GetWordsFromNumber(Decimal.Round(frac * 100)) + " Sen";
+            else
+                strHasil = "Rupiah";
+            int xDigit = 0;
+            int xPosisi = 0;
 
-            // menghilangkan multiple space
-            strterbilang = System.Text.RegularExpressions.Regex.Replace(strterbilang, @"^\s+|\s+$", " ");
+            string strTemp = Decimal.Truncate(angka).ToString();
+            for (int i = strTemp.Length; i > 0; i--)
+            {
+                string tmpx = "";
+                xDigit = Convert.ToInt32(strTemp.Substring(i - 1, 1));
+                xPosisi = (strTemp.Length - i) + 1;
+                switch (xPosisi % 3)
+                {
+                    case 1:
+                        bool allNull = false;
+                        if (i == 1)
+                            tmpx = satuan[xDigit] + " ";
+                        else if (strTemp.Substring(i - 2, 1) == "1")
+                            tmpx = belasan[xDigit] + " ";
+                        else if (xDigit > 0)
+                            tmpx = satuan[xDigit] + " ";
+                        else
+                        {
+                            allNull = true;
+                            if (i > 1)
+                                if (strTemp.Substring(i - 2, 1) != "0")
+                                    allNull = false;
+                            if (i > 2)
+                                if (strTemp.Substring(i - 3, 1) != "0")
+                                    allNull = false;
+                            tmpx = "";
+                        }
 
-            // mengembalikan hasil terbilang
-            return strterbilang;
+                        if ((!allNull) && (xPosisi > 1))
+                            if ((strTemp.Length == 4) && (strTemp.Substring(0, 1) == "1"))
+                                tmpx = "Se" + ribuan[(int)Decimal.Round(xPosisi / 3m)] + " ";
+                            else
+                                tmpx = tmpx + ribuan[(int)Decimal.Round(xPosisi / 3)] + " ";
+                        strHasil = tmpx + strHasil;
+                        break;
+                    case 2:
+                        if (xDigit > 0)
+                            strHasil = puluhan[xDigit] + " " + strHasil;
+                        break;
+                    case 0:
+                        if (xDigit > 0)
+                            if (xDigit == 1)
+                                strHasil = "Seratus " + strHasil;
+                            else
+                                strHasil = satuan[xDigit] + " Ratus " + strHasil;
+                        break;
+                }
+            }
+            strHasil = strHasil.Trim().ToLower();
+            if (strHasil.Length > 0)
+            {
+                strHasil = strHasil.Substring(0, 1).ToUpper() + strHasil.Substring(1, strHasil.Length - 1);
+            }
+            return strHasil;
         }
 
         public static byte[] StringToBytesArray(this string sender)
