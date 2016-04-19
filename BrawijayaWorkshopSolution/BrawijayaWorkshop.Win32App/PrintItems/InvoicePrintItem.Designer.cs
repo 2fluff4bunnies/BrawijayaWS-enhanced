@@ -694,7 +694,6 @@
             this.DetailSparepartFooter});
             this.DetailReport.DataMember = "SPK.ListSparepart";
             this.DetailReport.DataSource = this.dataSourceInvoiceViewModel;
-            this.DetailReport.Expanded = false;
             this.DetailReport.Level = 0;
             this.DetailReport.Name = "DetailReport";
             // 

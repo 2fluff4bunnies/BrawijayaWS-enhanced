@@ -410,6 +410,7 @@
             this.xrLabel18,
             this.lblTotalPayment,
             this.xrLabel17});
+            this.ReportFooter.Expanded = false;
             this.ReportFooter.HeightF = 143.0417F;
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.PrintAtBottom = true;
@@ -738,6 +739,7 @@
             this.xrLabel26,
             this.xrLabel24,
             this.xrLabel23});
+            this.DetailSparepart.Expanded = false;
             this.DetailSparepart.HeightF = 18.20832F;
             this.DetailSparepart.Name = "DetailSparepart";
             // 

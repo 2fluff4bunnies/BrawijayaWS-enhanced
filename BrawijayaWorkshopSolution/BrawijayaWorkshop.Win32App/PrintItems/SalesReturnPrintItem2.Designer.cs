@@ -81,6 +81,8 @@
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.dataSourceSalesReturnViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.ReturnDetail = new DevExpress.XtraReports.UI.DetailBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -90,9 +92,7 @@
             // 
             // Detail
             // 
-            this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable2});
-            this.Detail.HeightF = 18.6553F;
+            this.Detail.HeightF = 0F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -654,6 +654,22 @@
             this.dataSourceSalesReturnViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.SalesReturnViewModel);
             this.dataSourceSalesReturnViewModel.Name = "dataSourceSalesReturnViewModel";
             // 
+            // DetailReport
+            // 
+            this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+            this.ReturnDetail});
+            this.DetailReport.DataMember = "ReturnList";
+            this.DetailReport.DataSource = this.dataSourceSalesReturnViewModel;
+            this.DetailReport.Level = 0;
+            this.DetailReport.Name = "DetailReport";
+            // 
+            // ReturnDetail
+            // 
+            this.ReturnDetail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable2});
+            this.ReturnDetail.HeightF = 18.6553F;
+            this.ReturnDetail.Name = "ReturnDetail";
+            // 
             // SalesReturnPrintItem2
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -663,7 +679,8 @@
             this.ReportHeader,
             this.PageFooter,
             this.ReportFooter,
-            this.PageHeader});
+            this.PageHeader,
+            this.DetailReport});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourceSalesReturnViewModel});
             this.DataSource = this.dataSourceSalesReturnViewModel;
@@ -737,5 +754,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell22;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell23;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
+        private DevExpress.XtraReports.UI.DetailBand ReturnDetail;
     }
 }
