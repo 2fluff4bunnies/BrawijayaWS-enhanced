@@ -56,7 +56,7 @@
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.BalanceSheetGroupFooter = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -318,7 +318,7 @@
             this.xrTableCell5.StylePriority.UsePadding = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell5.Weight = 1D;
+            this.xrTableCell5.Weight = 1.0306666666666666D;
             // 
             // xrTableCell6
             // 
@@ -327,15 +327,15 @@
             this.xrTableCell6.StylePriority.UsePadding = false;
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell6.Weight = 1D;
+            this.xrTableCell6.Weight = 0.96933333333333338D;
             // 
-            // GroupFooter1
+            // BalanceSheetGroupFooter
             // 
-            this.GroupFooter1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.BalanceSheetGroupFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable4,
             this.xrTable3});
-            this.GroupFooter1.HeightF = 33.33333F;
-            this.GroupFooter1.Name = "GroupFooter1";
+            this.BalanceSheetGroupFooter.HeightF = 33.33333F;
+            this.BalanceSheetGroupFooter.Name = "BalanceSheetGroupFooter";
             // 
             // xrTable4
             // 
@@ -370,7 +370,7 @@
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.Text = "Sub Total";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell7.Weight = 1D;
+            this.xrTableCell7.Weight = 1.0306666666666666D;
             // 
             // xrTableCell8
             // 
@@ -386,7 +386,7 @@
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell8.Summary = xrSummary1;
             this.xrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell8.Weight = 1D;
+            this.xrTableCell8.Weight = 0.96933333333333338D;
             // 
             // ReportFooter
             // 
@@ -435,7 +435,7 @@
             this.ReportHeader,
             this.PageFooter,
             this.BalanceSheetGroupHeader,
-            this.GroupFooter1,
+            this.BalanceSheetGroupFooter,
             this.ReportFooter});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourceBalanceViewModel});
@@ -483,7 +483,7 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
-        private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter1;
+        private DevExpress.XtraReports.UI.GroupFooterBand BalanceSheetGroupFooter;
         private DevExpress.XtraReports.UI.XRTable xrTable4;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;

@@ -88,7 +88,12 @@
     <Compile Include="ViewModels\SpecialSparepartViewModel.cs" />
     <Compile Include="ViewModels\WheelExchangeHistoryViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BrawijayaWorkshop.Utils\BrawijayaWorkshop.Utils.csproj">
+      <Project>{49f696dc-cd3f-491e-a729-1b78cb550dda}</Project>
+      <Name>BrawijayaWorkshop.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
@@ -9,6 +10,13 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int SPKId { get; set; }
         public SPKViewModel SPK { get; set; }
         public decimal TotalPrice { get; set; }
+        public string TotalPriceStr
+        {
+            get
+            {
+                return TotalPrice.NumberToWordID();
+            }
+        }
         public decimal TotalHasPaid { get; set; }
         public decimal TotalService { get; set; }
         public decimal TotalServicePlusFee { get; set; }
