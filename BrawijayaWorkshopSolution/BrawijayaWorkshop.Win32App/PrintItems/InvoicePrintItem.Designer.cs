@@ -73,14 +73,12 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.DetailSparepart = new DevExpress.XtraReports.UI.DetailBand();
             this.xrLabel28 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel27 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel26 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel24 = new DevExpress.XtraReports.UI.XRLabel();
@@ -600,7 +598,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(8, 5, 5, 5, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(755.0001F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(630.5596F, 25F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UsePadding = false;
@@ -617,7 +615,6 @@
             this.xrTableCell2,
             this.xrTableCell3,
             this.xrTableCell4,
-            this.xrTableCell5,
             this.xrTableCell6});
             this.xrTableRow1.Name = "xrTableRow1";
             this.xrTableRow1.StylePriority.UseBorders = false;
@@ -651,14 +648,6 @@
             this.xrTableCell4.Text = "Satuan";
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell4.Weight = 0.64901672161111046D;
-            // 
-            // xrTableCell5
-            // 
-            this.xrTableCell5.Name = "xrTableCell5";
-            this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.Text = "Harga Satuan (Rp)";
-            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell5.Weight = 1.1182072443357367D;
             // 
             // xrTableCell6
             // 
@@ -701,7 +690,6 @@
             // 
             this.DetailSparepart.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel28,
-            this.xrLabel27,
             this.xrLabel26,
             this.xrLabel25,
             this.xrLabel24,
@@ -715,7 +703,7 @@
             this.xrLabel28.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "InvoiceDetails.SubTotalPrice", "{0:#,#;(#,#);0}")});
             this.xrLabel28.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel28.LocationFloat = new DevExpress.Utils.PointFloat(641.4583F, 0F);
+            this.xrLabel28.LocationFloat = new DevExpress.Utils.PointFloat(517.0179F, 0F);
             this.xrLabel28.Name = "xrLabel28";
             this.xrLabel28.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel28.SizeF = new System.Drawing.SizeF(113.5417F, 18.20832F);
@@ -723,21 +711,6 @@
             this.xrLabel28.StylePriority.UseFont = false;
             this.xrLabel28.StylePriority.UseTextAlignment = false;
             this.xrLabel28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel27
-            // 
-            this.xrLabel27.Borders = DevExpress.XtraPrinting.BorderSide.Right;
-            this.xrLabel27.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "InvoiceDetails.ItemPrice", "{0:#,#;(#,#);0}")});
-            this.xrLabel27.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(517.0178F, 0F);
-            this.xrLabel27.Name = "xrLabel27";
-            this.xrLabel27.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel27.SizeF = new System.Drawing.SizeF(124.4405F, 18.20832F);
-            this.xrLabel27.StylePriority.UseBorders = false;
-            this.xrLabel27.StylePriority.UseFont = false;
-            this.xrLabel27.StylePriority.UseTextAlignment = false;
-            this.xrLabel27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel26
             // 
@@ -970,7 +943,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRLabel lblTotalPayment;
         private DevExpress.XtraReports.UI.XRLabel xrLabel17;
@@ -991,7 +963,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel25;
         private DevExpress.XtraReports.UI.XRLabel xrLabel24;
         private DevExpress.XtraReports.UI.XRLabel xrLabel28;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel27;
         private DevExpress.XtraReports.UI.XRLabel xrLabel10;
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource dataSourceInvoiceViewModel;

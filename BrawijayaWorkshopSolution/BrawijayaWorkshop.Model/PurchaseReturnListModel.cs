@@ -166,16 +166,19 @@ namespace BrawijayaWorkshop.Model
                 {
                     foreach (var itemDetail in listPurchasingDetail)
                     {
-                        result.Add(new ReturnViewModel
+                        if (listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count() > 0)
                         {
-                            SparepartId = itemDetail.SparepartId,
-                            SparepartName = itemDetail.Sparepart.Name,
-                            ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
-                            ReturQtyLimit = itemDetail.Qty,
-                            PricePerItem = itemDetail.Price,
-                            SparepartCode = itemDetail.Sparepart.Code,
-                            UnitName = itemDetail.Sparepart.UnitReference.Name
-                        });
+                            result.Add(new ReturnViewModel
+                            {
+                                SparepartId = itemDetail.SparepartId,
+                                SparepartName = itemDetail.Sparepart.Name,
+                                ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
+                                ReturQtyLimit = itemDetail.Qty,
+                                PricePerItem = itemDetail.Price,
+                                SparepartCode = itemDetail.Sparepart.Code,
+                                UnitName = itemDetail.Sparepart.UnitReference.Name
+                            });
+                        }
                     }
                 }
             }

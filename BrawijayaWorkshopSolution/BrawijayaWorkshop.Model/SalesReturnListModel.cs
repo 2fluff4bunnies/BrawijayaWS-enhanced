@@ -174,16 +174,19 @@ namespace BrawijayaWorkshop.Model
                     int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
                     foreach (var sparepartID in sparepartIDs)
                     {
-                        result.Add(new ReturnViewModel
+                        if (listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count() > 0)
                         {
-                            SparepartId = sparepartID,
-                            SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                            SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
-                            UnitName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
-                            SubTotalFee = (listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x=>x.SubTotalPrice)).AsDecimal()
-                        });
+                            result.Add(new ReturnViewModel
+                            {
+                                SparepartId = sparepartID,
+                                SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                                ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                                ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                                SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
+                                UnitName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
+                                SubTotalFee = (listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice)).AsDecimal()
+                            });
+                        }
                     }
                 }
             }
