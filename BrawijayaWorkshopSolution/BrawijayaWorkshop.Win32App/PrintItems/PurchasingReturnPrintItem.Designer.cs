@@ -629,7 +629,7 @@
             // 
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.Text = "Harga (Rp)";
+            this.xrTableCell5.Text = "Harga Satuan (Rp)";
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell5.Weight = 1.2277736576050626D;
             // 
@@ -637,7 +637,7 @@
             // 
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
-            this.xrTableCell6.Text = "Tunai (Rp)";
+            this.xrTableCell6.Text = "Sub Total (Rp)";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell6.Weight = 1.202882897391558D;
             // 

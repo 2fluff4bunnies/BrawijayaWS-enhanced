@@ -656,7 +656,7 @@
             // 
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.Text = "Harga (Rp)";
+            this.xrTableCell5.Text = "Harga Satuan (Rp)";
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell5.Weight = 1.1182072443357367D;
             // 
@@ -664,7 +664,7 @@
             // 
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
-            this.xrTableCell6.Text = "Tunai (Rp)";
+            this.xrTableCell6.Text = "Sub Total (Rp)";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell6.Weight = 1.0202728550571354D;
             // 
@@ -713,7 +713,7 @@
             // 
             this.xrLabel28.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel28.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.TotalSparepartPrice", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "InvoiceDetails.SubTotalPrice", "{0:#,#;(#,#);0}")});
             this.xrLabel28.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel28.LocationFloat = new DevExpress.Utils.PointFloat(641.4583F, 0F);
             this.xrLabel28.Name = "xrLabel28";
@@ -728,7 +728,7 @@
             // 
             this.xrLabel27.Borders = DevExpress.XtraPrinting.BorderSide.Right;
             this.xrLabel27.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ListSparepart.TotalPriceAfterCommission", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "InvoiceDetails.ItemPrice", "{0:#,#;(#,#);0}")});
             this.xrLabel27.Font = new System.Drawing.Font("Tahoma", 8F);
             this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(517.0178F, 0F);
             this.xrLabel27.Name = "xrLabel27";
@@ -737,7 +737,6 @@
             this.xrLabel27.StylePriority.UseBorders = false;
             this.xrLabel27.StylePriority.UseFont = false;
             this.xrLabel27.StylePriority.UseTextAlignment = false;
-            this.xrLabel27.Text = "xrLabel27";
             this.xrLabel27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel26
