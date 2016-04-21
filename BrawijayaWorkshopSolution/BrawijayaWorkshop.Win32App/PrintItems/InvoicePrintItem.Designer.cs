@@ -776,7 +776,7 @@
             // 
             this.DetailSparepartFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable2});
-            this.DetailSparepartFooter.HeightF = 14.58333F;
+            this.DetailSparepartFooter.HeightF = 4.166667F;
             this.DetailSparepartFooter.Name = "DetailSparepartFooter";
             // 
             // xrTable2
@@ -788,7 +788,7 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(8, 5, 5, 5, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(641.4583F, 4.166667F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(630.5596F, 4.166667F);
             this.xrTable2.StylePriority.UseBorders = false;
             this.xrTable2.StylePriority.UseFont = false;
             this.xrTable2.StylePriority.UsePadding = false;
@@ -854,7 +854,7 @@
             this.xrTableCell11.StylePriority.UseBorders = false;
             this.xrTableCell11.StylePriority.UseTextAlignment = false;
             this.xrTableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell11.Weight = 1.1182072443357367D;
+            this.xrTableCell11.Weight = 1.02027300563949D;
             // 
             // dataSourceInvoiceViewModel
             // 
