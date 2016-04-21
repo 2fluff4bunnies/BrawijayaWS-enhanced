@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasingListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
+            this.cbStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -51,6 +53,7 @@
             this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -64,6 +67,8 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.lblStatus);
+            this.gcFilter.Controls.Add(this.cbStatus);
             this.gcFilter.Controls.Add(this.labelControl1);
             this.gcFilter.Controls.Add(this.txtDateFilterTo);
             this.gcFilter.Controls.Add(this.btnSearch);
@@ -71,13 +76,35 @@
             this.gcFilter.Controls.Add(this.lblFilterDate);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(632, 64);
+            this.gcFilter.Size = new System.Drawing.Size(718, 64);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.Location = new System.Drawing.Point(446, 34);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(31, 13);
+            this.lblStatus.TabIndex = 13;
+            this.lblStatus.Text = "Status";
+            // 
+            // cbStatus
+            // 
+            this.cbStatus.Location = new System.Drawing.Point(483, 31);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Metode")});
+            this.cbStatus.Properties.DisplayMember = "Description";
+            this.cbStatus.Properties.NullText = "";
+            this.cbStatus.Properties.ValueMember = "Status";
+            this.cbStatus.Size = new System.Drawing.Size(152, 20);
+            this.cbStatus.TabIndex = 12;
+            // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(284, 34);
+            this.labelControl1.Location = new System.Drawing.Point(259, 34);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(4, 13);
             this.labelControl1.TabIndex = 5;
@@ -86,7 +113,7 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(269, 31);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -102,7 +129,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(438, 28);
+            this.btnSearch.Location = new System.Drawing.Point(645, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -112,7 +139,7 @@
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(140, 31);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(115, 31);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -151,7 +178,7 @@
             this.gridPurchasing.Location = new System.Drawing.Point(3, 102);
             this.gridPurchasing.MainView = this.gvPurchasing;
             this.gridPurchasing.Name = "gridPurchasing";
-            this.gridPurchasing.Size = new System.Drawing.Size(632, 210);
+            this.gridPurchasing.Size = new System.Drawing.Size(718, 210);
             this.gridPurchasing.TabIndex = 4;
             this.gridPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasing});
@@ -233,7 +260,7 @@
             this.lihatSelengkapnyaToolStripMenuItem,
             this.cmsPrint});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(196, 114);
+            this.cmsEditor.Size = new System.Drawing.Size(196, 92);
             // 
             // cmsEditData
             // 
@@ -275,10 +302,11 @@
             this.Controls.Add(this.btnNewPurchasing);
             this.Controls.Add(this.gcFilter);
             this.Name = "PurchasingListControl";
-            this.Size = new System.Drawing.Size(638, 315);
+            this.Size = new System.Drawing.Size(724, 315);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -311,6 +339,8 @@
         private System.Windows.Forms.ToolStripMenuItem persetujuanPembelianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lihatSelengkapnyaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cmsPrint;
+        private DevExpress.XtraEditors.LabelControl lblStatus;
+        private DevExpress.XtraEditors.LookUpEdit cbStatus;
 
     }
 }

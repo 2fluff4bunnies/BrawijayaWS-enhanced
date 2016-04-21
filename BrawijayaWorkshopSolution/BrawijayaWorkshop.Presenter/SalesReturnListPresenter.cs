@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -10,9 +11,17 @@ namespace BrawijayaWorkshop.Presenter
         public SalesReturnListPresenter(ISalesReturnListView view, SalesReturnListModel model)
             : base(view, model) { }
 
+        public void InitData()
+        {
+            View.CustomerFilterList = Model.GetCustomerFilterList();
+            View.DateFilterFrom = DateTime.Now;
+            View.DateFilterTo = DateTime.Now;
+            View.CustomerFilter = 0;
+        }
+
         public void LoadSalesReturn()
         {
-            View.InvoiceListData = Model.SearchInvoiceList(View.DateFilterFrom, View.DateFilterTo);
+            View.InvoiceListData = Model.SearchInvoiceList(View.DateFilterFrom, View.DateFilterTo, View.CustomerFilter);
         }
 
         public bool IsHasReturnActive()

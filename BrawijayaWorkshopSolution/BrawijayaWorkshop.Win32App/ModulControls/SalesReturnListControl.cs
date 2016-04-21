@@ -53,6 +53,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void SalesReturnListControl_Load(object sender, EventArgs e)
         {
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 
@@ -113,6 +114,30 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         _presenter.GetReturnList();
                     }
                 }
+            }
+        }
+
+        public int CustomerFilter
+        {
+            get
+            {
+                return cbCustomerFilter.EditValue.AsInteger();
+            }
+            set
+            {
+                cbCustomerFilter.EditValue = value;
+            }
+        }
+
+        public List<CustomerViewModel> CustomerFilterList
+        {
+            get
+            {
+                return cbCustomerFilter.Properties.DataSource as List<CustomerViewModel>;
+            }
+            set
+            {
+                cbCustomerFilter.Properties.DataSource = value;
             }
         }
 

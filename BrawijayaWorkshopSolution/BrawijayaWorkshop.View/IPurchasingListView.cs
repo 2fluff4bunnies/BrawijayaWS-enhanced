@@ -9,9 +9,16 @@ namespace BrawijayaWorkshop.View
     {
         DateTime? DateFilterFrom { get; set; }
         DateTime? DateFilterTo { get; set; }
-
+        int PurchasingStatusFilter { get; set; }
         List<PurchasingViewModel> PurchasingListData { get; set; }
 
         PurchasingViewModel SelectedPurchasing { get; set; }
+        List<PurchasingStatusItem> PurchasingStatusList { get; set; }
+    }
+
+    public class PurchasingStatusItem
+    {
+        public int Status { get; set; }
+        public string Description { get; set; }
     }
 }

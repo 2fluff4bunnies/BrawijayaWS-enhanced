@@ -40,14 +40,16 @@
             this.btnListReturn = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEditReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDeleteReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPrintReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.gridInvoice = new DevExpress.XtraGrid.GridControl();
             this.gvInvoice = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.cmsEditReturn = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDeleteReturn = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsPrintReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblCustomerFilter = new DevExpress.XtraEditors.LabelControl();
+            this.cbCustomerFilter = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -57,12 +59,15 @@
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.lblCustomerFilter);
+            this.gcFilter.Controls.Add(this.cbCustomerFilter);
             this.gcFilter.Controls.Add(this.labelControl1);
             this.gcFilter.Controls.Add(this.txtDateFilterTo);
             this.gcFilter.Controls.Add(this.btnSearch);
@@ -76,7 +81,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(284, 34);
+            this.labelControl1.Location = new System.Drawing.Point(237, 34);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(4, 13);
             this.labelControl1.TabIndex = 5;
@@ -85,7 +90,7 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(247, 31);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -93,7 +98,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterTo.Properties.HideSelection = false;
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
+            this.txtDateFilterTo.Size = new System.Drawing.Size(122, 20);
             this.txtDateFilterTo.TabIndex = 4;
             // 
             // btnSearch
@@ -101,7 +106,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(438, 28);
+            this.btnSearch.Location = new System.Drawing.Point(573, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -111,7 +116,7 @@
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(140, 31);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(109, 31);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -119,7 +124,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterFrom.Properties.HideSelection = false;
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterFrom.Size = new System.Drawing.Size(138, 20);
+            this.txtDateFilterFrom.Size = new System.Drawing.Size(122, 20);
             this.txtDateFilterFrom.TabIndex = 2;
             // 
             // lblFilterDate
@@ -155,15 +160,39 @@
             this.cmsDeleteReturn,
             this.cmsPrintReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 114);
+            this.cmsEditor.Size = new System.Drawing.Size(150, 92);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(149, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
+            // 
+            // cmsEditReturn
+            // 
+            this.cmsEditReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEditReturn.Name = "cmsEditReturn";
+            this.cmsEditReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsEditReturn.Text = "Ubah Retur";
+            this.cmsEditReturn.Click += new System.EventHandler(this.cmsEditReturn_Click);
+            // 
+            // cmsDeleteReturn
+            // 
+            this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteReturn.Name = "cmsDeleteReturn";
+            this.cmsDeleteReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsDeleteReturn.Text = "Hapus Retur";
+            this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
+            // 
+            // cmsPrintReturn
+            // 
+            this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsPrintReturn.Name = "cmsPrintReturn";
+            this.cmsPrintReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsPrintReturn.Text = "Cetak Retur";
+            this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
             // 
             // gridInvoice
             // 
@@ -232,29 +261,27 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 2;
             // 
-            // cmsEditReturn
+            // lblCustomerFilter
             // 
-            this.cmsEditReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsEditReturn.Name = "cmsEditReturn";
-            this.cmsEditReturn.Size = new System.Drawing.Size(152, 22);
-            this.cmsEditReturn.Text = "Ubah Retur";
-            this.cmsEditReturn.Click += new System.EventHandler(this.cmsEditReturn_Click);
+            this.lblCustomerFilter.Location = new System.Drawing.Point(381, 34);
+            this.lblCustomerFilter.Name = "lblCustomerFilter";
+            this.lblCustomerFilter.Size = new System.Drawing.Size(46, 13);
+            this.lblCustomerFilter.TabIndex = 17;
+            this.lblCustomerFilter.Text = "Customer";
             // 
-            // cmsDeleteReturn
+            // cbCustomerFilter
             // 
-            this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
-            this.cmsDeleteReturn.Name = "cmsDeleteReturn";
-            this.cmsDeleteReturn.Size = new System.Drawing.Size(152, 22);
-            this.cmsDeleteReturn.Text = "Hapus Retur";
-            this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
-            // 
-            // cmsPrintReturn
-            // 
-            this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
-            this.cmsPrintReturn.Name = "cmsPrintReturn";
-            this.cmsPrintReturn.Size = new System.Drawing.Size(152, 22);
-            this.cmsPrintReturn.Text = "Cetak Retur";
-            this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
+            this.cbCustomerFilter.Location = new System.Drawing.Point(434, 31);
+            this.cbCustomerFilter.Name = "cbCustomerFilter";
+            this.cbCustomerFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbCustomerFilter.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Supplier")});
+            this.cbCustomerFilter.Properties.DisplayMember = "CompanyName";
+            this.cbCustomerFilter.Properties.NullText = "Semua";
+            this.cbCustomerFilter.Properties.ValueMember = "Id";
+            this.cbCustomerFilter.Size = new System.Drawing.Size(135, 20);
+            this.cbCustomerFilter.TabIndex = 16;
             // 
             // SalesReturnListControl
             // 
@@ -276,6 +303,7 @@
             this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -300,5 +328,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditReturn;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteReturn;
         private System.Windows.Forms.ToolStripMenuItem cmsPrintReturn;
+        private DevExpress.XtraEditors.LabelControl lblCustomerFilter;
+        private DevExpress.XtraEditors.LookUpEdit cbCustomerFilter;
     }
 }

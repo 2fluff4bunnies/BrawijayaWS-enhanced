@@ -38,9 +38,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvInvoice.FocusedRowChanged += gvInvoice_FocusedRowChanged;
 
             // init editor control accessibility
-            cmsAddData.Enabled = true;//tAllowInsert;
-            cmsEditData.Enabled = true;//AllowEdit;
-            cmsPrint.Enabled = true;//AllowEdit;
+            cmsAddData.Enabled = AllowInsert;
+            cmsEditData.Enabled = AllowEdit;
+            cmsPrint.Enabled = AllowEdit;
 
             this.Load += InvoiceListControl_Load;
         }

@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -10,9 +11,17 @@ namespace BrawijayaWorkshop.Presenter
         public PurchaseReturnListPresenter(IPurchaseReturnListView view, PurchaseReturnListModel model)
             : base(view, model) { }
 
+        public void InitData()
+        {
+            View.SupplierFilterList = Model.GetSupplierFilterList();
+            View.DateFilterFrom = DateTime.Now;
+            View.DateFilterTo = DateTime.Now;
+            View.SupplierFilter = 0;
+        }
+
         public void LoadPurchaseReturn()
         {
-            View.PurchasingListData = Model.SearchPurchasingList(View.DateFilterFrom, View.DateFilterTo);
+            View.PurchasingListData = Model.SearchPurchasingList(View.DateFilterFrom, View.DateFilterTo, View.SupplierFilter);
         }
 
         public bool IsHasReturnActive()

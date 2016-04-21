@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -20,18 +21,23 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchasingViewModel> SearchPurchasing(DateTime? dateFrom, DateTime? dateTo)
+        public List<PurchasingViewModel> SearchPurchasing(DateTime? dateFrom, DateTime? dateTo, DbConstant.PurchasingStatus purchasingStatus)
         {
             List<Purchasing> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
+                dateFrom = dateFrom.Value.Date;
+                dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
                 result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo).OrderBy(c => c.Date).ToList();
             }
             else
             {
                 result = _purchasingRepository.GetAll().OrderBy(c => c.Date).ToList();
             }
-
+            if ((int)purchasingStatus != 9)
+            {
+                result = result.Where(p => p.Status == (int)purchasingStatus).ToList();
+            } 
             List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();
             return Map(result, mappedResult);
         }

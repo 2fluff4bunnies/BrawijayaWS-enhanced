@@ -51,6 +51,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void PurchasingListControl_Load(object sender, EventArgs e)
         {
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 
@@ -86,6 +87,30 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         cmsPrint.Visible = true;
                     }
                 }
+            }
+        }
+
+        public int PurchasingStatusFilter
+        {
+            get
+            {
+                return cbStatus.EditValue.AsInteger();
+            }
+            set
+            {
+                cbStatus.EditValue = value;
+            }
+        }
+
+        public List<PurchasingStatusItem> PurchasingStatusList
+        {
+            get
+            {
+                return cbStatus.Properties.DataSource as List<PurchasingStatusItem>;
+            }
+            set
+            {
+                cbStatus.Properties.DataSource = value;
             }
         }
 

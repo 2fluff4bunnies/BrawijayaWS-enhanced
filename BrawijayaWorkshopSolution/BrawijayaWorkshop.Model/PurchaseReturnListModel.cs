@@ -19,13 +19,15 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
+        private ISupplierRepository _supplierRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchaseReturnListModel(ITransactionRepository transactionRepository,
             IPurchasingRepository purchasingRepository, IPurchasingDetailRepository purchasingDetailRepository, IPurchaseReturnRepository purchaseReturnRepository,
             IPurchaseReturnDetailRepository purchaseReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
-            IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
+            IReferenceRepository referenceRepository, 
+            ISupplierRepository supplierRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
@@ -36,10 +38,11 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
+            _supplierRepository = supplierRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchasingViewModel> SearchPurchasingList(DateTime? dateFrom, DateTime? dateTo)
+        public List<PurchasingViewModel> SearchPurchasingList(DateTime? dateFrom, DateTime? dateTo, int supplierID)
         {
             List<Purchasing> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
@@ -53,7 +56,21 @@ namespace BrawijayaWorkshop.Model
                 result = _purchasingRepository.GetAll().OrderBy(c => c.Date).ToList();
             }
 
+            if (supplierID != 0)
+            {
+                result = result.Where(p => p.SupplierId == supplierID).ToList();
+            } 
+
             List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<SupplierViewModel> GetSupplierFilterList()
+        {
+            List<Supplier> result = null;
+            result = _supplierRepository.GetAll().ToList();
+
+            List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
             return Map(result, mappedResult);
         }
 

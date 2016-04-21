@@ -20,13 +20,15 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
+        private ICustomerRepository _customerRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnListModel(ITransactionRepository transactionRepository,
             IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ISalesReturnRepository salesReturnRepository,
             ISalesReturnDetailRepository salesReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
-            IReferenceRepository referenceRepository, IUnitOfWork unitOfWork)
+            IReferenceRepository referenceRepository,
+            ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
@@ -37,10 +39,20 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
+            _customerRepository = customerRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<InvoiceViewModel> SearchInvoiceList(DateTime? dateFrom, DateTime? dateTo)
+        public List<CustomerViewModel> GetCustomerFilterList()
+        {
+            List<Customer> result = null;
+            result = _customerRepository.GetAll().ToList();
+
+            List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<InvoiceViewModel> SearchInvoiceList(DateTime? dateFrom, DateTime? dateTo, int customerID)
         {
             List<Invoice> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
@@ -53,6 +65,10 @@ namespace BrawijayaWorkshop.Model
             {
                 result = _invoiceRepository.GetAll().OrderBy(c => c.CreateDate).ToList();
             }
+            if (customerID != 0)
+            {
+                result = result.Where(p => p.SPK.Vehicle.CustomerId == customerID).ToList();
+            } 
 
             List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
             return Map(result, mappedResult);
@@ -158,7 +174,7 @@ namespace BrawijayaWorkshop.Model
         {
             List<SalesReturnDetail> result = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
             List<SalesReturnDetailViewModel> mappedResult = new List<SalesReturnDetailViewModel>();
-            return Map(result,mappedResult);
+            return Map(result, mappedResult);
         }
 
         public List<ReturnViewModel> GetReturnListDetail(int salesReturnID, int invoiceID)

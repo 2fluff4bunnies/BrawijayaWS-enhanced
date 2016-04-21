@@ -53,6 +53,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void PurchaseReturnListControl_Load(object sender, EventArgs e)
         {
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 
@@ -116,6 +117,29 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public int SupplierFilter
+        {
+            get
+            {
+                return cbSupplierFilter.EditValue.AsInteger();
+            }
+            set
+            {
+                cbSupplierFilter.EditValue = value;
+            }
+        }
+
+        public List<SupplierViewModel> SupplierFilterList
+        {
+            get
+            {
+                return cbSupplierFilter.Properties.DataSource as List<SupplierViewModel>;
+            }
+            set
+            {
+                cbSupplierFilter.Properties.DataSource = value;
+            }
+        }
         public DateTime? DateFilterFrom
         {
             get
