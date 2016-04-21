@@ -25,5 +25,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int PaymentStatus { get; set; }
 
         public List<InvoiceDetailViewModel> InvoiceDetails { get; set; }
+
+        public List<InvoiceSparepartViewModel> ListInvoiceSparepart { get; set; }
     }
 }

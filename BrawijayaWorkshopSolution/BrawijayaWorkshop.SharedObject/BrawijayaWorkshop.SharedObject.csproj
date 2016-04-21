@@ -53,6 +53,7 @@
     <Compile Include="ViewModels\GuestBookViewModel.cs" />
     <Compile Include="ViewModels\InternalInvoiceViewModel.cs" />
     <Compile Include="ViewModels\InvoiceDetailViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceSparepartViewModel.cs" />
     <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\JournalMasterViewModel.cs" />
     <Compile Include="ViewModels\MechanicViewModel.cs" />

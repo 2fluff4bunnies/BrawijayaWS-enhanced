@@ -136,7 +136,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
-
         public decimal TotalSparepart
         {
             get

@@ -33,6 +33,7 @@ namespace BrawijayaWorkshop.Presenter
                 {
                     View.PaymentMethodId = View.SelectedInvoice.PaymentMethodId;
                 }
+                View.SelectedInvoice.ListInvoiceSparepart = Model.GetInvoiceSparepartList(View.SelectedInvoice.Id);
             }
         }
 
