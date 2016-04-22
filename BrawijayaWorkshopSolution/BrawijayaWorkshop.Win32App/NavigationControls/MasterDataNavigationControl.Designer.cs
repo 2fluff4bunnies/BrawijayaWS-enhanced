@@ -47,6 +47,8 @@
             this.iSpecialSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iBrand = new DevExpress.XtraNavBar.NavBarItem();
+            this.iType = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +73,9 @@
             this.iManageUserRole,
             this.iSpecialSparepart,
             this.iUsedGood,
-            this.iJournalCategory});
+            this.iJournalCategory,
+            this.iBrand,
+            this.iType});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -98,7 +102,9 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSpecialSparepart),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGood)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGood),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iBrand),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iType)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
             // 
             // iManageRole
@@ -203,6 +209,16 @@
             this.imageCollection.Images.SetKeyName(12, "barcode_16x16.png");
             this.imageCollection.Images.SetKeyName(13, "category_16x16.png");
             // 
+            // iBrand
+            // 
+            this.iBrand.Caption = "Brand";
+            this.iBrand.Name = "iBrand";
+            // 
+            // iType
+            // 
+            this.iType.Caption = "Tipe";
+            this.iType.Name = "iType";
+            // 
             // MasterDataNavigationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,5 +251,7 @@
         public DevExpress.XtraNavBar.NavBarItem iSpecialSparepart;
         public DevExpress.XtraNavBar.NavBarItem iUsedGood;
         public DevExpress.XtraNavBar.NavBarItem iJournalCategory;
+        public DevExpress.XtraNavBar.NavBarItem iBrand;
+        public DevExpress.XtraNavBar.NavBarItem iType;
     }
 }

@@ -21,6 +21,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Type> Types { get; set; }
         public DbSet<Reference> References { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
         public DbSet<Sparepart> Spareparts { get; set; }

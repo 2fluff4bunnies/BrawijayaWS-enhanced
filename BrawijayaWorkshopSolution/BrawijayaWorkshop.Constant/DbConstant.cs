@@ -12,6 +12,8 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_USERCONTROL = "M_USERCONTROL";
         public const string MODUL_DBCONFIG = "M_DBCONFIG";
 
+        public const string MODUL_BRAND = "M_BRAND";
+        public const string MODUL_TYPE = "M_TYPE";
         public const string MODUL_CUSTOMER = "M_CUSTOMER";
         public const string MODUL_JOURNAL = "M_JOURNAL";
         public const string MODUL_VEHICLE = "M_VEHICLE";

@@ -43,6 +43,8 @@
     <Compile Include="IBalanceHelperListView.cs" />
     <Compile Include="IBalanceJournalListView.cs" />
     <Compile Include="IBalanceSheetView.cs" />
+    <Compile Include="IBrandEditorView.cs" />
+    <Compile Include="IBrandListView.cs" />
     <Compile Include="ICreditPaymentListView.cs" />
     <Compile Include="IConfigEditorView.cs" />
     <Compile Include="ICreditEditorView.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="ISPKListView.cs" />
     <Compile Include="ISupplierEditorView.cs" />
     <Compile Include="ISupplierListView.cs" />
+    <Compile Include="ITypeEditorView.cs" />
+    <Compile Include="ITypeListView.cs" />
     <Compile Include="IUsedGoodEditorView.cs" />
     <Compile Include="IUsedGoodListView.cs" />
     <Compile Include="IUsedGoodTransactionEditorView.cs" />

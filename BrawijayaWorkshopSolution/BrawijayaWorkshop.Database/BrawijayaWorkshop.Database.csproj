@@ -98,6 +98,7 @@
     <Compile Include="Entities\BaseModifierEntity.cs" />
     <Compile Include="Entities\BaseModifierWithStatus.cs" />
     <Compile Include="Entities\BaseStatusEntity.cs" />
+    <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\GuestBook.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TransactionDetail.cs" />
+    <Compile Include="Entities\Type.cs" />
     <Compile Include="Entities\UsedGood.cs" />
     <Compile Include="Entities\UsedGoodTransaction.cs" />
     <Compile Include="Entities\User.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Repositories\AppUnitOfWork.cs" />
     <Compile Include="Repositories\BalanceJournalDetailRepository.cs" />
     <Compile Include="Repositories\BalanceJournalRepository.cs" />
+    <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\GuestBookRepostory.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\TransactionDetailRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
+    <Compile Include="Repositories\TypeRepository.cs" />
     <Compile Include="Repositories\UsedGoodRepository.cs" />
     <Compile Include="Repositories\UsedGoodTransactionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

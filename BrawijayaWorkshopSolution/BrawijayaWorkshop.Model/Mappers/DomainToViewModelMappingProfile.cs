@@ -47,6 +47,8 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<PurchaseReturnDetail, PurchaseReturnDetailViewModel>();
             Mapper.CreateMap<SalesReturn, SalesReturnViewModel>();
             Mapper.CreateMap<SalesReturnDetail, SalesReturnDetailViewModel>();
+            Mapper.CreateMap<Brand, BrandViewModel>();
+            Mapper.CreateMap<Type, TypeViewModel>();
         }
     }
 }

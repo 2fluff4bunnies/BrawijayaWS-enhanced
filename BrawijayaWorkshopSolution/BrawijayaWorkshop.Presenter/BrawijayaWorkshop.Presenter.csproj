@@ -42,6 +42,8 @@
     <Compile Include="BalanceHelperListPresenter.cs" />
     <Compile Include="BalanceJournalListPresenter.cs" />
     <Compile Include="BalanceSheetPresenter.cs" />
+    <Compile Include="BrandEditorPresenter.cs" />
+    <Compile Include="BrandListPresenter.cs" />
     <Compile Include="ConfigEditorPresenter.cs" />
     <Compile Include="CreditEditorPresenter.cs" />
     <Compile Include="CreditListPresenter.cs" />
@@ -98,6 +100,8 @@
     <Compile Include="SPKListPresenter.cs" />
     <Compile Include="SupplierEditorPresenter.cs" />
     <Compile Include="SupplierListPresenter.cs" />
+    <Compile Include="TypeEditorPresenter.cs" />
+    <Compile Include="TypeListPresenter.cs" />
     <Compile Include="UsedGoodEditorPresenter.cs" />
     <Compile Include="UsedGoodListPresenter.cs" />
     <Compile Include="UsedGoodTransactionEditorPresenter.cs" />

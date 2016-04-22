@@ -52,6 +52,8 @@ namespace BrawijayaWorkshop.Win32App
             Bind<ISalesReturnRepository>().To<SalesReturnRepository>();
             Bind<ISalesReturnDetailRepository>().To<SalesReturnDetailRepository>();
 			Bind<IWheelExchangeHistoryRepository>().To<WheelExchangeHistoryRepository>();
+            Bind<IBrandRepository>().To<BrandRepository>();
+            Bind<ITypeRepository>().To<TypeRepository>();
             // todo: add binding
         }
     }

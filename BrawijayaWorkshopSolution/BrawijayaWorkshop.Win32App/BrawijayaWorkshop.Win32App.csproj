@@ -176,6 +176,12 @@
     <Compile Include="ModulControls\BalanceSheetControl.Designer.cs">
       <DependentUpon>BalanceSheetControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\BrandListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\BrandListControl.Designer.cs">
+      <DependentUpon>BrandListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\CreditListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -320,6 +326,12 @@
     <Compile Include="ModulControls\SparepartListControl.Designer.cs">
       <DependentUpon>SparepartListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\TypeListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\TypeListControl.Designer.cs">
+      <DependentUpon>TypeListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\UsedGoodsListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -355,6 +367,12 @@
     </Compile>
     <Compile Include="ModulControls\SpecialSparepartListControl.Designer.cs">
       <DependentUpon>SpecialSparepartListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\BrandEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\BrandEditorForm.Designer.cs">
+      <DependentUpon>BrandEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\ConfigEditorForm.cs">
       <SubType>Form</SubType>
@@ -529,6 +547,12 @@
     </Compile>
     <Compile Include="ModulForms\SPKViewDetailForm.Designer.cs">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\TypeEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\TypeEditorForm.Designer.cs">
+      <DependentUpon>TypeEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\UsedGoodsEditorForm.cs">
       <SubType>Form</SubType>
@@ -722,6 +746,9 @@
     <EmbeddedResource Include="ModulControls\BalanceSheetControl.resx">
       <DependentUpon>BalanceSheetControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\BrandListControl.resx">
+      <DependentUpon>BrandListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\CreditListControl.resx">
       <DependentUpon>CreditListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -794,6 +821,9 @@
     <EmbeddedResource Include="ModulControls\SupplierListControl.resx">
       <DependentUpon>SupplierListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\TypeListControl.resx">
+      <DependentUpon>TypeListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\UsedGoodsListControl.resx">
       <DependentUpon>UsedGoodsListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -811,6 +841,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SpecialSparepartListControl.resx">
       <DependentUpon>SpecialSparepartListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\BrandEditorForm.resx">
+      <DependentUpon>BrandEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\ConfigEditorForm.resx">
       <DependentUpon>ConfigEditorForm.cs</DependentUpon>
@@ -895,6 +928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\TypeEditorForm.resx">
+      <DependentUpon>TypeEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\UsedGoodsEditorForm.resx">
       <DependentUpon>UsedGoodsEditorForm.cs</DependentUpon>

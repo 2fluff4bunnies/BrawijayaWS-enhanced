@@ -144,6 +144,16 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_MECHANIC,
                 ModulDescription = "Mechanic Modul"
             });
+            ApplicationModul brandMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_BRAND,
+                ModulDescription = "Brand Modul"
+            });
+            ApplicationModul typeMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_TYPE,
+                ModulDescription = "Type Modul"
+            });
             ApplicationModul purchasingMod = context.ApplicationModuls.Add(new ApplicationModul
             {
                 ModulName = DbConstant.MODUL_PURCHASING,
@@ -387,7 +397,18 @@ namespace BrawijayaWorkshop.Database
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
-
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = brandMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = typeMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // admin
             context.RoleAccesses.Add(new RoleAccess

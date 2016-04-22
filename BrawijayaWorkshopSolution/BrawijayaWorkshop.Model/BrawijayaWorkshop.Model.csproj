@@ -61,6 +61,8 @@
     <Compile Include="BalanceJournalListModel.cs" />
     <Compile Include="BalanceSheetBaseModel.cs" />
     <Compile Include="BalanceSheetModel.cs" />
+    <Compile Include="BrandEditorModel.cs" />
+    <Compile Include="BrandListModel.cs" />
     <Compile Include="ConfigEditorModel.cs" />
     <Compile Include="CreditEditorModel.cs" />
     <Compile Include="CreditListModel.cs" />
@@ -119,6 +121,8 @@
     <Compile Include="SPKListModel.cs" />
     <Compile Include="SupplierEditorModel.cs" />
     <Compile Include="SupplierListModel.cs" />
+    <Compile Include="TypeEditorModel.cs" />
+    <Compile Include="TypeListModel.cs" />
     <Compile Include="UsedGoodEditorModel.cs" />
     <Compile Include="UsedGoodListModel.cs" />
     <Compile Include="UsedGoodTransactionEditorModel.cs" />

@@ -265,6 +265,8 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iUserList.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_MANAGE_APP_USER);
             navMasterData.iSpecialSparepart.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPAREPART);
             navMasterData.iUsedGood.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD);
+            navMasterData.iBrand.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_BRAND);
+            navMasterData.iType.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_TYPE);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -282,6 +284,20 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iUserList.LinkClicked += iUserList_LinkClicked;
             navMasterData.iSpecialSparepart.LinkClicked += iSpecialSparepart_LinkClicked;
             navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
+            navMasterData.iBrand.LinkClicked += iBrand_LinkClicked;
+            navMasterData.iType.LinkClicked += iType_LinkClicked;
+        }
+
+        private void iBrand_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            BrandListControl brandListControl = Bootstrapper.Resolve<BrandListControl>();
+            ShowUserControl(brandListControl);
+        }
+
+        private void iType_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            TypeListControl typeListControl = Bootstrapper.Resolve<TypeListControl>();
+            ShowUserControl(typeListControl);
         }
 
         private void iJournalCategory_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
