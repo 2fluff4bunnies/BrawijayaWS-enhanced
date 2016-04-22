@@ -239,7 +239,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     {
                         if(txtDP.Visible == true)
                         {
-                            if(TotalHasPaid > 0)
+                            if(TotalHasPaid > 0 && TotalHasPaid <= TotalPrice)
                             {
                                 isValid = true;
                             }

@@ -140,20 +140,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valPaymentMethod.Validate() && this.TotalPayment <= this.TotalTransaction)
+            if (this.TotalPayment <= this.TotalTransaction)
             {
-                try
+                if (valPaymentMethod.Validate())
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Invoice's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Invoice: '" + SelectedInvoice.Id + "'", ex);
-                    this.ShowError("Proses simpan data Invoice: '" + SelectedInvoice.Id + "' gagal!");
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save Invoice's changes");
+                        _presenter.SaveChanges();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Invoice: '" + SelectedInvoice.Id + "'", ex);
+                        this.ShowError("Proses simpan data Invoice: '" + SelectedInvoice.Id + "' gagal!");
+                    }
                 }
             }
+            else
+            {
+                this.ShowError("Jumlah pembayaran melebihi jumlah total harga");
+            }
+            
         }
 
 

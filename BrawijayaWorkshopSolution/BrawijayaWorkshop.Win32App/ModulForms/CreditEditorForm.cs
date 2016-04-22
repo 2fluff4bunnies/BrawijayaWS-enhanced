@@ -131,20 +131,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valPaymentMethod.Validate() && valTotalPayment.Validate())
+            if(this.TotalPayment <= this.TotalNotPaid)
             {
-                try
+                if (valPaymentMethod.Validate() && valTotalPayment.Validate())
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Credit's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Credit: '" + SelectedCredit.Id + "'", ex);
-                    this.ShowError("Proses simpan data Credit: '" + SelectedCredit.Id + "' gagal!");
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save Credit's changes");
+                        _presenter.SaveChanges();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Credit: '" + SelectedCredit.Id + "'", ex);
+                        this.ShowError("Proses simpan data Credit: '" + SelectedCredit.Id + "' gagal!");
+                    }
                 }
             }
+            else
+            {
+                this.ShowError("Jumlah pembayaran melebihi jumlah total piutang");
+            }
+            
         }
 
         public InvoiceViewModel SelectedInvoice { get; set; }

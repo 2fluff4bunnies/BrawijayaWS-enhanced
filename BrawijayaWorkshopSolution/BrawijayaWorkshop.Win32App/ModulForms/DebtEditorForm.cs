@@ -131,20 +131,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valPaymentMethod.Validate() && valTotalPayment.Validate())
+            if (this.TotalPayment <= this.TotalNotPaid)
             {
-                try
+                if (valPaymentMethod.Validate() && valTotalPayment.Validate())
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Debt's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Debt: '" + SelectedDebt.Id + "'", ex);
-                    this.ShowError("Proses simpan data Debt: '" + SelectedDebt.Id + "' gagal!");
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save Debt's changes");
+                        _presenter.SaveChanges();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Debt: '" + SelectedDebt.Id + "'", ex);
+                        this.ShowError("Proses simpan data Debt: '" + SelectedDebt.Id + "' gagal!");
+                    }
                 }
             }
+            else
+            {
+                this.ShowError("Jumlah pembayaran melebihi jumlah total utang");
+            }
+            
         }
 
         public PurchasingViewModel SelectedPurchasing { get; set; }
