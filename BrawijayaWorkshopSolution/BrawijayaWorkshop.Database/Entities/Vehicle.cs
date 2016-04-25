@@ -28,5 +28,6 @@ namespace BrawijayaWorkshop.Database.Entities
         public virtual Customer Customer { get; set; }
 
         public int Kilometers { get; set; }
+        public string Code { get; set; }
     }
 }

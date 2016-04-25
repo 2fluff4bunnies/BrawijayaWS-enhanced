@@ -29,7 +29,7 @@ namespace BrawijayaWorkshop.Model
         }
 
         public List<SPKViewModel> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, 
-            DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus)
+            DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus, int isContractWork)
         {
             List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
@@ -70,6 +70,16 @@ namespace BrawijayaWorkshop.Model
             if (category > 0)
             {
                 result = result.Where(spk => spk.CategoryReferenceId == category).ToList();
+            }
+
+            if (isContractWork == 0)
+            {
+                result = result.Where(spk => spk.isContractWork == false).ToList();
+            }
+
+            if (isContractWork == 1)
+            {
+                result = result.Where(spk => spk.isContractWork == true).ToList();
             }
 
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();

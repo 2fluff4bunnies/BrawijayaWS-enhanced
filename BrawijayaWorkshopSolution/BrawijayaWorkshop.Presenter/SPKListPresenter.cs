@@ -17,11 +17,13 @@ namespace BrawijayaWorkshop.Presenter
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.ApprovalStatusDropdownList = GetApprovalStatusDropdownList();
             View.PrintStatusDropdownList = GetPrintStatusDropdownList();
+            View.CompletedStatusDropdownList = GetCompletedStatusDropdownList();
+            View.ContractWorkStatusDropdownList = GetContractWorkStatusDropdownList();
         }
 
         public void LoadSPK()
         {
-            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter, (DbConstant.SPKCompletionStatus)View.CompletedStatusFilter);
+            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter, (DbConstant.SPKCompletionStatus)View.CompletedStatusFilter, View.ContractWorkStatusFilter);
         }
 
         public void PrintSPK()
@@ -117,6 +119,31 @@ namespace BrawijayaWorkshop.Presenter
             {
                 Status = 9,
                 Description = "Semua Status"
+            });
+
+            return result;
+        }
+
+        public List<SPKStatusItem> GetContractWorkStatusDropdownList()
+        {
+            List<SPKStatusItem> result = new List<SPKStatusItem>();
+
+            result.Add(new SPKStatusItem
+            {
+                Status = -1,
+                Description = "Semua"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = 1,
+                Description = "Borongan"
+            });
+
+            result.Add(new SPKStatusItem
+            {
+                Status = 0,
+                Description = "Bukan Borongan"
             });
 
             return result;

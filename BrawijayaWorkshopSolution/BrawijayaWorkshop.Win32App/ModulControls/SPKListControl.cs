@@ -116,6 +116,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public int ContractWorkStatusFilter
+        {
+            get
+            {
+                return lookUpContractWorkStatus.EditValue.AsInteger();
+            }
+            set
+            {
+                lookUpContractWorkStatus.EditValue = value;
+            }
+        }
+
         public string LicenseNumberFilter
         {
             get
@@ -194,7 +206,20 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 lookUpCompletedStatus.Properties.DataSource = value;
             }
-        }        
+        }
+
+        public List<SPKStatusItem> ContractWorkStatusDropdownList
+        {
+            get
+            {
+                return lookUpContractWorkStatus.Properties.DataSource as List<SPKStatusItem>;
+            }
+            set
+            {
+                lookUpContractWorkStatus.Properties.DataSource = value;
+            }
+        }
+      
         #endregion
 
         void gvSPK_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

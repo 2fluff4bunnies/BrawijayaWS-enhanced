@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpContractWorkStatus = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
             this.lblCompletedStatus = new DevExpress.XtraEditors.LabelControl();
             this.lookUpCompletedStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.lblPrintStatus = new DevExpress.XtraEditors.LabelControl();
@@ -68,6 +70,7 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCompletedStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
@@ -83,6 +86,8 @@
             // 
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFilter.Controls.Add(this.lookUpContractWorkStatus);
+            this.groupFilter.Controls.Add(this.lblContractWork);
             this.groupFilter.Controls.Add(this.lblCompletedStatus);
             this.groupFilter.Controls.Add(this.lookUpCompletedStatus);
             this.groupFilter.Controls.Add(this.lblPrintStatus);
@@ -98,9 +103,33 @@
             this.groupFilter.Controls.Add(this.lblCategory);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(938, 88);
+            this.groupFilter.Size = new System.Drawing.Size(837, 151);
             this.groupFilter.TabIndex = 1;
             this.groupFilter.Text = "Filter";
+            // 
+            // lookUpContractWorkStatus
+            // 
+            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(117, 94);
+            this.lookUpContractWorkStatus.Name = "lookUpContractWorkStatus";
+            this.lookUpContractWorkStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpContractWorkStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpContractWorkStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
+            this.lookUpContractWorkStatus.Properties.DisplayMember = "Description";
+            this.lookUpContractWorkStatus.Properties.HideSelection = false;
+            this.lookUpContractWorkStatus.Properties.NullText = "";
+            this.lookUpContractWorkStatus.Properties.ValueMember = "Status";
+            this.lookUpContractWorkStatus.Size = new System.Drawing.Size(141, 20);
+            this.lookUpContractWorkStatus.TabIndex = 18;
+            // 
+            // lblContractWork
+            // 
+            this.lblContractWork.Location = new System.Drawing.Point(17, 97);
+            this.lblContractWork.Name = "lblContractWork";
+            this.lblContractWork.Size = new System.Drawing.Size(92, 13);
+            this.lblContractWork.TabIndex = 17;
+            this.lblContractWork.Text = "Status Persetujuan";
             // 
             // lblCompletedStatus
             // 
@@ -226,9 +255,9 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(833, 26);
+            this.btnSearch.Location = new System.Drawing.Point(669, 121);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(80, 55);
+            this.btnSearch.Size = new System.Drawing.Size(141, 24);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -246,7 +275,7 @@
             this.btnNewSPK.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPK.Image")));
             this.btnNewSPK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewSPK.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewSPK.Location = new System.Drawing.Point(3, 97);
+            this.btnNewSPK.Location = new System.Drawing.Point(3, 160);
             this.btnNewSPK.Name = "btnNewSPK";
             this.btnNewSPK.Size = new System.Drawing.Size(103, 23);
             this.btnNewSPK.TabIndex = 4;
@@ -258,10 +287,10 @@
             this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSPK.Location = new System.Drawing.Point(3, 126);
+            this.gcSPK.Location = new System.Drawing.Point(3, 189);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(938, 232);
+            this.gcSPK.Size = new System.Drawing.Size(837, 240);
             this.gcSPK.TabIndex = 5;
             this.gcSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPK});
@@ -371,7 +400,7 @@
             this.cmsSetAsCompleted,
             this.cmsAbort});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(172, 208);
+            this.cmsEditor.Size = new System.Drawing.Size(172, 186);
             // 
             // viewDetailToolStripMenuItem
             // 
@@ -455,10 +484,11 @@
             this.Controls.Add(this.btnNewSPK);
             this.Controls.Add(this.groupFilter);
             this.Name = "SPKListControl";
-            this.Size = new System.Drawing.Size(944, 361);
+            this.Size = new System.Drawing.Size(843, 444);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCompletedStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
@@ -510,5 +540,7 @@
         private DevExpress.XtraEditors.LookUpEdit lookUpCompletedStatus;
         private System.Windows.Forms.ToolStripMenuItem cmsSPKApproval;
         private System.Windows.Forms.ToolStripMenuItem cmsPrintApproval;
+        private DevExpress.XtraEditors.LookUpEdit lookUpContractWorkStatus;
+        private DevExpress.XtraEditors.LabelControl lblContractWork;
     }
 }

@@ -18,6 +18,8 @@ namespace BrawijayaWorkshop.View
 
         int CompletedStatusFilter { get; set; }
 
+        int ContractWorkStatusFilter { get; set; }
+
         List<ReferenceViewModel> CategoryDropdownList { get; set; }
 
         List<SPKViewModel> SPKListData { get; set; }
@@ -29,6 +31,8 @@ namespace BrawijayaWorkshop.View
         List<SPKStatusItem> PrintStatusDropdownList { get; set; }
 
         List<SPKStatusItem> CompletedStatusDropdownList { get; set; }
+
+        List<SPKStatusItem> ContractWorkStatusDropdownList { get; set; }
     }
 
     public class SPKStatusItem
