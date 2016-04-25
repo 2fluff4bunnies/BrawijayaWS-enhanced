@@ -9,5 +9,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int WheelId { get; set; }
         public SpecialSparepartViewModel SpecialSparepart { get; set; }
         public string SerialNumber { get; set; }
+        public int Kilometers { get; set; }
     }
 }

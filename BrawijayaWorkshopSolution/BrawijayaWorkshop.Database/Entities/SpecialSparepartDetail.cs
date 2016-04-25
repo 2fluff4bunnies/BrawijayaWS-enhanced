@@ -20,5 +20,7 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         [MaxLength(100)]
         public string SerialNumber { get; set; }
+
+        public int Kilometers { get; set; }
     }
 }

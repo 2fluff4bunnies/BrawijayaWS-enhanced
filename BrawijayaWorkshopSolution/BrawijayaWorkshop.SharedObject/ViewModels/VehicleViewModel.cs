@@ -10,5 +10,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int YearOfPurchase { get; set; }
         public int CustomerId { get; set; }
         public CustomerViewModel Customer { get; set; }
+        public int Kilometers { get; set; }
     }
 }

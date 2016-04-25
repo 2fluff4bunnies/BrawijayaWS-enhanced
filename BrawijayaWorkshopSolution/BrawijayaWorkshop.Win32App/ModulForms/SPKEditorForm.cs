@@ -407,18 +407,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwSave.IsBusy)
             {
-                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && SPKSparepartList.Count > 0)// && SPKMechanicList.Count > 0)
+                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate())
                 {
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();
                     bgwSave.RunWorkerAsync();
-                }
-                else
-                {
-                    if (SPKSparepartList.Count == 0)
-                    {
-                        this.ShowError("Daftar sparepart kosong! Harus ada sparepart yang digunakan, minimal 1");
-                    }
                 }
             }
         }

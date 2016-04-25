@@ -22,8 +22,12 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int StatusCompletedId { get; set; }
         public int StatusOverLimit { get; set; }
         public int CategoryReferenceId { get; set; }
-
         public string Description { get; set; }
+        public bool isContractWork { get; set; }
+        public decimal ContractWorkFee { get; set; }
+        public string Contractor { get; set; }
+
+        public int Kilometers { get; set; }
 
         public ReferenceViewModel CategoryReference { get; set; }
 
@@ -32,10 +36,5 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SPKViewModel SPKParent { get; set; }
 
         public List<SPKDetailSparepartViewModel> ListSparepart { get; set; }
-
-        public bool isContractWork { get; set; }
-
-        public decimal ContractWorkFee { get; set; }
-
     }
 }

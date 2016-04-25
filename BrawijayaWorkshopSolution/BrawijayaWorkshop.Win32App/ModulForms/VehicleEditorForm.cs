@@ -266,7 +266,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (FieldsValidator.Validate() && VehicleWheelList.Count >= 4)
+            if (FieldsValidator.Validate())
             {
                 try
                 {
@@ -278,13 +278,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
                     this.ShowError("Proses simpan data Kendaraan gagal!");
-                }
-            }
-            else
-            {
-                if (VehicleWheelList.Count < 4)
-                {
-                    this.ShowWarning("Ban yang terpasang pada kendaraan minimal 4!");
                 }
             }
         }

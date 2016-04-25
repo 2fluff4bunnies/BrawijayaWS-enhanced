@@ -49,5 +49,9 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public decimal ContractWorkFee { get; set; }
 
+        public string Contractor { get; set; }
+
+        public int Kilometers { get; set; }
+
     }
 }

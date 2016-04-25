@@ -26,5 +26,7 @@ namespace BrawijayaWorkshop.Database.Entities
         [Required]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
+
+        public int Kilometers { get; set; }
     }
 }

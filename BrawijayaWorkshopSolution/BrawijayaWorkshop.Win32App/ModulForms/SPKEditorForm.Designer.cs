@@ -84,6 +84,8 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.txtContractor = new DevExpress.XtraEditors.TextEdit();
+            this.lblContractor = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -112,6 +114,7 @@
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -136,6 +139,8 @@
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSPK.Controls.Add(this.lblContractor);
+            this.groupSPK.Controls.Add(this.txtContractor);
             this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
             this.groupSPK.Controls.Add(this.gridVehicleWheel);
             this.groupSPK.Controls.Add(this.lblContractPrice);
@@ -258,7 +263,7 @@
             // 
             // ckeIsContractWork
             // 
-            this.ckeIsContractWork.Location = new System.Drawing.Point(15, 105);
+            this.ckeIsContractWork.Location = new System.Drawing.Point(13, 80);
             this.ckeIsContractWork.Name = "ckeIsContractWork";
             this.ckeIsContractWork.Properties.Caption = "Borongan";
             this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -281,9 +286,9 @@
             // 
             // memoDescription
             // 
-            this.memoDescription.Location = new System.Drawing.Point(361, 31);
+            this.memoDescription.Location = new System.Drawing.Point(395, 68);
             this.memoDescription.Name = "memoDescription";
-            this.memoDescription.Size = new System.Drawing.Size(210, 121);
+            this.memoDescription.Size = new System.Drawing.Size(176, 84);
             this.memoDescription.TabIndex = 10;
             // 
             // groupSparepart
@@ -501,7 +506,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(292, 33);
+            this.labelControl2.Location = new System.Drawing.Point(307, 70);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(63, 13);
             this.labelControl2.TabIndex = 9;
@@ -517,7 +522,7 @@
             // 
             // lblDueDate
             // 
-            this.lblDueDate.Location = new System.Drawing.Point(15, 81);
+            this.lblDueDate.Location = new System.Drawing.Point(307, 33);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(62, 13);
             this.lblDueDate.TabIndex = 4;
@@ -526,7 +531,7 @@
             // dtpDueDate
             // 
             this.dtpDueDate.EditValue = null;
-            this.dtpDueDate.Location = new System.Drawing.Point(96, 78);
+            this.dtpDueDate.Location = new System.Drawing.Point(395, 30);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dtpDueDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -534,7 +539,7 @@
             this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dtpDueDate.Size = new System.Drawing.Size(161, 20);
+            this.dtpDueDate.Size = new System.Drawing.Size(176, 20);
             this.dtpDueDate.TabIndex = 5;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Batas waktu pengerjaan harus diisi!";
@@ -635,6 +640,24 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // txtContractor
+            // 
+            this.txtContractor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContractor.Location = new System.Drawing.Point(96, 105);
+            this.txtContractor.Name = "txtContractor";
+            this.txtContractor.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtContractor.Size = new System.Drawing.Size(161, 20);
+            this.txtContractor.TabIndex = 15;
+            // 
+            // lblContractor
+            // 
+            this.lblContractor.Location = new System.Drawing.Point(15, 108);
+            this.lblContractor.Name = "lblContractor";
+            this.lblContractor.Size = new System.Drawing.Size(77, 13);
+            this.lblContractor.TabIndex = 16;
+            this.lblContractor.Text = "Ketua Borongan";
+            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,6 +698,7 @@
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -732,5 +756,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colName;
         private DevExpress.XtraEditors.TextEdit txtTotalSparepartPrice;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraEditors.LabelControl lblContractor;
+        private DevExpress.XtraEditors.TextEdit txtContractor;
     }
 }
