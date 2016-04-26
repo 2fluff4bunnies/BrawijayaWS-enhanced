@@ -30,7 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            this.colValidationStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
             this.btnAddSparepart = new DevExpress.XtraEditors.SimpleButton();
@@ -69,6 +72,12 @@
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsDetails)).BeginInit();
             this.SuspendLayout();
+            // 
+            // colValidationStatus
+            // 
+            this.colValidationStatus.Caption = "IsValid";
+            this.colValidationStatus.FieldName = "ValidationStatus";
+            this.colValidationStatus.Name = "colValidationStatus";
             // 
             // txtDate
             // 
@@ -134,7 +143,16 @@
             this.colQty,
             this.colPrice,
             this.colSubTotal,
-            this.colSerialNumber});
+            this.colSerialNumber,
+            this.colValidationStatus});
+            gridFormatRule1.ApplyToRow = true;
+            gridFormatRule1.Column = this.colValidationStatus;
+            gridFormatRule1.Name = "ValidationStatus";
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.PredefinedName = "Red Fill, Red Text";
+            formatConditionRuleValue1.Value1 = "-1";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            this.gvPurchasingDetail.FormatRules.Add(gridFormatRule1);
             this.gvPurchasingDetail.GridControl = this.gridPurchasingDetail;
             this.gvPurchasingDetail.Name = "gvPurchasingDetail";
             this.gvPurchasingDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -142,6 +160,9 @@
             this.gvPurchasingDetail.OptionsBehavior.AutoPopulateColumns = false;
             this.gvPurchasingDetail.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
             this.gvPurchasingDetail.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gvPurchasingDetail.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gvPurchasingDetail.OptionsSelection.EnableAppearanceFocusedRow = false;
+            this.gvPurchasingDetail.OptionsSelection.EnableAppearanceHideSelection = false;
             this.gvPurchasingDetail.OptionsView.EnableAppearanceEvenRow = true;
             this.gvPurchasingDetail.OptionsView.ShowFooter = true;
             this.gvPurchasingDetail.OptionsView.ShowGroupPanel = false;
@@ -364,5 +385,6 @@
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colSubTotal;
+        private DevExpress.XtraGrid.Columns.GridColumn colValidationStatus;
     }
 }

@@ -195,6 +195,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     duplicatedSerialNumber.Remove(itemNull);
                 }
 
+                for (int i = 0; i < ListPurchasingDetail.Count; i++)
+                {
+                    if (string.IsNullOrEmpty(ListPurchasingDetail[i].SerialNumber)) continue;
+
+                    ListPurchasingDetail[i].ValidationStatus =
+                        duplicatedSerialNumber.Contains(ListPurchasingDetail[i].SerialNumber) ? -1 : 1;
+
+                    ListPurchasingDetail[i] = ListPurchasingDetail[i];
+                }
+
                 bool isValid = false;
                 if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
                 {
@@ -202,20 +212,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     rowGvPurchasingDetailNotValid = ListPurchasingDetail.Where(i => i.SparepartId == 0 || i.Qty == 0 || i.Price == 0).Count();
                     if (valSupplier.Validate() && valDate.Validate() && rowGvPurchasingDetailNotValid == 0)
                     {
+                        for (int i = 0; i < ListPurchasingDetail.Count; i++)
+                        {
+                            if (ListPurchasingDetail[i].IsSpecialSparepart && string.IsNullOrEmpty(ListPurchasingDetail[i].SerialNumber))
+                            {
+                                ListPurchasingDetail[i].ValidationStatus = -1;
+                                ListPurchasingDetail[i] = ListPurchasingDetail[i];
+                                missingSerialNumber.Add(ListPurchasingDetail[i]);
+                            }
+                        }
+
                         foreach (var item in this.ListPurchasingDetail)
                         {
                             if (item.IsSpecialSparepart && string.IsNullOrEmpty(item.SerialNumber))
                             {
                                 missingSerialNumber.Add(item);
                             }
-
-
                         }
                         if (missingSerialNumber.Count == 0 && duplicatedSerialNumber.Count == 0)
                         {
                             isValid = true;
                         }
                     }
+                    gridPurchasingDetail.RefreshDataSource();
                 }
 
                 if (isValid)
