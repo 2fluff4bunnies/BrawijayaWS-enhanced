@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrandEditorForm));
             this.gcBrandInfo = new DevExpress.XtraEditors.GroupControl();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
@@ -109,6 +110,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 174);
             this.Controls.Add(this.gcBrandInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BrandEditorForm";
             this.Text = "Brand Editor";
             this.Controls.SetChildIndex(this.gcBrandInfo, 0);

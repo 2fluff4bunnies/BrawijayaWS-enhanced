@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TypeEditorForm));
             this.gcTypeInfo = new DevExpress.XtraEditors.GroupControl();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
@@ -109,6 +110,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 185);
             this.Controls.Add(this.gcTypeInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TypeEditorForm";
             this.Text = "Tipe Editor";
             this.Controls.SetChildIndex(this.gcTypeInfo, 0);

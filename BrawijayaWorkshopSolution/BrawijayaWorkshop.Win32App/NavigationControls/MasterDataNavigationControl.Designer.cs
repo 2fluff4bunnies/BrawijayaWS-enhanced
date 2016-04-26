@@ -46,9 +46,9 @@
             this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
             this.iSpecialSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iBrand = new DevExpress.XtraNavBar.NavBarItem();
             this.iType = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -100,11 +100,11 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iBrand),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iType),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicle),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSpecialSparepart),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGood),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iBrand),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iType)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iUsedGood)});
             this.navbarGroupMasterData.Name = "navbarGroupMasterData";
             // 
             // iManageRole
@@ -191,6 +191,18 @@
             this.iUsedGood.Name = "iUsedGood";
             this.iUsedGood.SmallImageIndex = 11;
             // 
+            // iBrand
+            // 
+            this.iBrand.Caption = "Brand";
+            this.iBrand.Name = "iBrand";
+            this.iBrand.SmallImageIndex = 14;
+            // 
+            // iType
+            // 
+            this.iType.Caption = "Tipe";
+            this.iType.Name = "iType";
+            this.iType.SmallImageIndex = 15;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -208,16 +220,8 @@
             this.imageCollection.Images.SetKeyName(11, "usedgood_16x16.png");
             this.imageCollection.Images.SetKeyName(12, "barcode_16x16.png");
             this.imageCollection.Images.SetKeyName(13, "category_16x16.png");
-            // 
-            // iBrand
-            // 
-            this.iBrand.Caption = "Brand";
-            this.iBrand.Name = "iBrand";
-            // 
-            // iType
-            // 
-            this.iType.Caption = "Tipe";
-            this.iType.Name = "iType";
+            this.imageCollection.Images.SetKeyName(14, "brand-icon_16x16.png");
+            this.imageCollection.Images.SetKeyName(15, "type_16x16.png");
             // 
             // MasterDataNavigationControl
             // 
