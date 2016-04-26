@@ -5,12 +5,15 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -282,6 +285,25 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     case 1: e.DisplayText = "Belum Dicetak"; break;
                     case 2: e.DisplayText = "Telah Dicetak"; break;
                 }
+            }
+        }
+
+        private void btnPrintAll_Click(object sender, EventArgs e)
+        {
+            if(this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
+            {
+                InvoicePrintItem report = new InvoicePrintItem();
+                List<InvoiceViewModel> _dataSource = new List<InvoiceViewModel>();
+                _dataSource = InvoiceListData.Where(i => i.Status == (int)DbConstant.InvoiceStatus.NotPrinted).ToList();
+                report.DataSource = _dataSource;
+                report.FillDataSource();
+
+                using (ReportPrintTool printTool = new ReportPrintTool(report))
+                {
+                    // Invoke the Print dialog.
+                    printTool.PrintDialog();
+                }
+                _presenter.PrintAll();
             }
         }
     }

@@ -4,6 +4,7 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -23,6 +24,12 @@ namespace BrawijayaWorkshop.Presenter
         public void LoadInvoiceList()
         {
             View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter);
+        }
+
+        public void PrintAll()
+        {
+            Model.Print(View.InvoiceListData.Where(i => i.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
+                .Select(i => i.Id).ToArray());
         }
 
         public List<InvoiceStatusItem> GetInvoiceStatusDropdownList()

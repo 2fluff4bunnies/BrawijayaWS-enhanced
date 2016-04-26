@@ -49,6 +49,7 @@
             this.cmsAddData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPrintAll = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).BeginInit();
@@ -161,10 +162,10 @@
             this.gridInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridInvoice.Location = new System.Drawing.Point(0, 102);
+            this.gridInvoice.Location = new System.Drawing.Point(0, 99);
             this.gridInvoice.MainView = this.gvInvoice;
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(636, 203);
+            this.gridInvoice.Size = new System.Drawing.Size(636, 206);
             this.gridInvoice.TabIndex = 6;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -267,10 +268,23 @@
             this.cmsPrint.Text = "Cetak Invoice";
             this.cmsPrint.Click += new System.EventHandler(this.cmsPrint_Click);
             // 
+            // btnPrintAll
+            // 
+            this.btnPrintAll.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnPrintAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnPrintAll.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrintAll.Location = new System.Drawing.Point(3, 70);
+            this.btnPrintAll.Name = "btnPrintAll";
+            this.btnPrintAll.Size = new System.Drawing.Size(97, 23);
+            this.btnPrintAll.TabIndex = 7;
+            this.btnPrintAll.Text = "Print Semua";
+            this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
+            // 
             // InvoiceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPrintAll);
             this.Controls.Add(this.gridInvoice);
             this.Controls.Add(this.gcFilter);
             this.Name = "InvoiceListControl";
@@ -312,6 +326,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsPrint;
         private DevExpress.XtraGrid.Columns.GridColumn colVehicle;
+        private DevExpress.XtraEditors.SimpleButton btnPrintAll;
 
     }
 }

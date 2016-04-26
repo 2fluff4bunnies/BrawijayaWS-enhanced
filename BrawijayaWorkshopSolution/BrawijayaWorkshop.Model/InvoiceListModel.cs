@@ -21,6 +21,17 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
+        public void Print(int[] invoiceIDs)
+        {
+            foreach (var id in invoiceIDs)
+            {
+                Invoice invoice = _invoiceRepository.GetById(id);
+                invoice.Status = (int)DbConstant.InvoiceStatus.Printed;
+                _invoiceRepository.Update(invoice);
+            }
+            _unitOfWork.SaveChanges();
+        }
+
         public List<InvoiceViewModel> SearchInvoice(DateTime? dateFrom, DateTime? dateTo, DbConstant.InvoiceStatus invoiceStatus)
         {
             List<Invoice> result = null;
