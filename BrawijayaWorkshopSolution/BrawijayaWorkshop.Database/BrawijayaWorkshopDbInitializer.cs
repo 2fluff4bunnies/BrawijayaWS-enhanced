@@ -1222,6 +1222,10 @@ namespace BrawijayaWorkshop.Database
             context.SaveChanges();
             
             // todo: insert initial data here
+
+            //context.Database.ExecuteSqlCommand("CREATE VIEW VW_GUESTBOOK");
+            //context.Database.ExecuteSqlCommand("CREATE VIEW VW_SERVICESTATUS");
+            //context.Database.ExecuteSqlCommand("CREATE PROCEDURE SP_UPDATEWHEELKILOMETERS");
         }
     }
 }
