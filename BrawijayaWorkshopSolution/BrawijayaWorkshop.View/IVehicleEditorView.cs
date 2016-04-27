@@ -11,6 +11,8 @@ namespace BrawijayaWorkshop.View
 
         VehicleWheelViewModel SelectedVehicleWheel { get; set; }
 
+        string Code { get; set; }
+
         string Brand { get; set; }
 
         string Type { get; set; }

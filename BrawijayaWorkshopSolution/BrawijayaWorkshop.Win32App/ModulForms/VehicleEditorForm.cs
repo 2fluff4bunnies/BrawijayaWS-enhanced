@@ -72,6 +72,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #region Field Editor
         public VehicleViewModel SelectedVehicle { get; set; }
+
+        public string Code
+        {
+            get
+            {
+                return txtCode.Text;
+            }
+            set
+            {
+                txtCode.Text = value;
+            }
+        }
+
         public string Type
         {
             get

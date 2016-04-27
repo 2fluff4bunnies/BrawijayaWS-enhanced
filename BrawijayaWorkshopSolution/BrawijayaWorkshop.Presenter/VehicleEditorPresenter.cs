@@ -18,6 +18,7 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedVehicle != null)
             {
+                View.Code = View.SelectedVehicle.Code;
                 View.ActiveLicenseNumber = View.SelectedVehicle.ActiveLicenseNumber;
                 View.Brand = View.SelectedVehicle.Brand;
                 View.Type = View.SelectedVehicle.Type;
@@ -46,7 +47,7 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.SelectedVehicle = new VehicleViewModel();
             }
-
+            View.SelectedVehicle.Code = View.Code;
             View.SelectedVehicle.Brand = View.Brand;
             View.SelectedVehicle.Type = View.Type;
             View.SelectedVehicle.CustomerId = View.CustomerId;
