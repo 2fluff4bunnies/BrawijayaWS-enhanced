@@ -320,7 +320,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (FieldsValidator.Validate())
+            if (FieldsValidator.Validate() && _presenter.IsCodeValidated())
             {
                 try
                 {

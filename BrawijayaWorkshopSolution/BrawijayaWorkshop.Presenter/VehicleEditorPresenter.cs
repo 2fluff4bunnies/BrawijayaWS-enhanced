@@ -78,5 +78,10 @@ namespace BrawijayaWorkshop.Presenter
             return Model.GetCurrentWheelDetailId(wheelDetailId);
         }
 
+
+        public bool IsCodeValidated()
+        {
+            return Model.IsCodeExist(View.Code);
+        }
     }
 }

@@ -230,7 +230,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<TypeViewModel> GetTypeList()
         {
-            List<BrawijayaWorkshop.Database.Entities.Type> result = _typeRepository.GetMany(t => t.Status ==  (int) DbConstant.DefaultDataStatus.Active).ToList();
+            List<BrawijayaWorkshop.Database.Entities.Type> result = _typeRepository.GetMany(t => t.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             List<TypeViewModel> mappedResult = new List<TypeViewModel>();
 
@@ -239,11 +239,21 @@ namespace BrawijayaWorkshop.Model
 
         public List<BrandViewModel> GetBrandList()
         {
-            List<Brand> result = _brandRepository.GetMany(b => b.Status ==  (int) DbConstant.DefaultDataStatus.Active).ToList();
+            List<Brand> result = _brandRepository.GetMany(b => b.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             List<BrandViewModel> mappedResult = new List<BrandViewModel>();
 
             return Map(result, mappedResult);
+        }
+
+        public bool IsCodeExist(string code)
+        {
+            Vehicle result = _vehicleRepository.GetMany(v =>
+                v.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                v.Code.ToLower() == code.ToLower()
+                ).FirstOrDefault();
+
+            return result != null;
         }
     }
 }
