@@ -38,15 +38,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleEditorForm));
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtBrand = new DevExpress.XtraEditors.TextEdit();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
-            this.txtType = new DevExpress.XtraEditors.TextEdit();
             this.txtYearOfPurchase = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.lblBrand = new DevExpress.XtraEditors.LabelControl();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblYearOfPurchase = new DevExpress.XtraEditors.LabelControl();
             this.gcVehicleInfo = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpType = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpBrand = new DevExpress.XtraEditors.LookUpEdit();
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
             this.lblCode = new DevExpress.XtraEditors.LabelControl();
             this.btnNewVehicleWheel = new DevExpress.XtraEditors.SimpleButton();
@@ -63,12 +63,12 @@
             this.deleteWheelDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
             this.gcVehicleInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
@@ -104,19 +104,6 @@
             conditionValidationRule1.ErrorText = "Customer harus dipilih";
             this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule1);
             // 
-            // txtBrand
-            // 
-            this.txtBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBrand.Location = new System.Drawing.Point(129, 91);
-            this.txtBrand.Name = "txtBrand";
-            this.txtBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtBrand.Size = new System.Drawing.Size(257, 20);
-            this.txtBrand.TabIndex = 3;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Merek harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtBrand, conditionValidationRule2);
-            // 
             // txtLicenseNumber
             // 
             this.txtLicenseNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -129,22 +116,9 @@
             this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtLicenseNumber.Size = new System.Drawing.Size(257, 20);
             this.txtLicenseNumber.TabIndex = 1;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Nomor Polisi harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule3);
-            // 
-            // txtType
-            // 
-            this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtType.Location = new System.Drawing.Point(129, 121);
-            this.txtType.Name = "txtType";
-            this.txtType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtType.Size = new System.Drawing.Size(257, 20);
-            this.txtType.TabIndex = 5;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Tipe harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtType, conditionValidationRule4);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Nomor Polisi harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule2);
             // 
             // txtYearOfPurchase
             // 
@@ -157,9 +131,9 @@
             this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtYearOfPurchase.Size = new System.Drawing.Size(257, 20);
             this.txtYearOfPurchase.TabIndex = 7;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "Tahun Pembelian harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule5);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Tahun Pembelian harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule3);
             // 
             // lblCustomer
             // 
@@ -203,6 +177,8 @@
             // 
             // gcVehicleInfo
             // 
+            this.gcVehicleInfo.Controls.Add(this.lookUpType);
+            this.gcVehicleInfo.Controls.Add(this.lookUpBrand);
             this.gcVehicleInfo.Controls.Add(this.txtCode);
             this.gcVehicleInfo.Controls.Add(this.lblCode);
             this.gcVehicleInfo.Controls.Add(this.btnNewVehicleWheel);
@@ -214,9 +190,7 @@
             this.gcVehicleInfo.Controls.Add(this.lblLicenseNumber);
             this.gcVehicleInfo.Controls.Add(this.lookUpCustomer);
             this.gcVehicleInfo.Controls.Add(this.lblYearOfPurchase);
-            this.gcVehicleInfo.Controls.Add(this.txtType);
             this.gcVehicleInfo.Controls.Add(this.lblType);
-            this.gcVehicleInfo.Controls.Add(this.txtBrand);
             this.gcVehicleInfo.Controls.Add(this.lblBrand);
             this.gcVehicleInfo.Controls.Add(this.lblCustomer);
             this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -225,6 +199,52 @@
             this.gcVehicleInfo.Size = new System.Drawing.Size(404, 447);
             this.gcVehicleInfo.TabIndex = 1;
             this.gcVehicleInfo.Text = "Informasi Kendaraan";
+            // 
+            // lookUpType
+            // 
+            this.lookUpType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lookUpType.Location = new System.Drawing.Point(129, 121);
+            this.lookUpType.Name = "lookUpType";
+            this.lookUpType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.lookUpType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.lookUpType.Properties.DisplayMember = "Name";
+            this.lookUpType.Properties.HideSelection = false;
+            this.lookUpType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpType.Properties.NullText = "-- Pilih Tipe --";
+            this.lookUpType.Properties.ValueMember = "Id";
+            this.lookUpType.Size = new System.Drawing.Size(257, 20);
+            this.lookUpType.TabIndex = 17;
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Tipe harus dipilih";
+            this.FieldsValidator.SetValidationRule(this.lookUpType, conditionValidationRule4);
+            // 
+            // lookUpBrand
+            // 
+            this.lookUpBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lookUpBrand.Location = new System.Drawing.Point(129, 91);
+            this.lookUpBrand.Name = "lookUpBrand";
+            this.lookUpBrand.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.lookUpBrand.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpBrand.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpBrand.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.lookUpBrand.Properties.DisplayMember = "Name";
+            this.lookUpBrand.Properties.HideSelection = false;
+            this.lookUpBrand.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpBrand.Properties.NullText = "-- Pilih Merek --";
+            this.lookUpBrand.Properties.ValueMember = "Id";
+            this.lookUpBrand.Size = new System.Drawing.Size(257, 20);
+            this.lookUpBrand.TabIndex = 16;
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "Merek harus dipilih";
+            this.FieldsValidator.SetValidationRule(this.lookUpBrand, conditionValidationRule5);
             // 
             // txtCode
             // 
@@ -396,13 +416,13 @@
             this.Text = "Vehicle Editor";
             this.Controls.SetChildIndex(this.gcVehicleInfo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).EndInit();
             this.gcVehicleInfo.ResumeLayout(false);
             this.gcVehicleInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpBrand.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
@@ -420,9 +440,7 @@
 
         private DevExpress.XtraEditors.LabelControl lblCustomer;
         private DevExpress.XtraEditors.LabelControl lblBrand;
-        private DevExpress.XtraEditors.TextEdit txtBrand;
         private DevExpress.XtraEditors.LabelControl lblType;
-        private DevExpress.XtraEditors.TextEdit txtType;
         private DevExpress.XtraEditors.LabelControl lblYearOfPurchase;
         private DevExpress.XtraEditors.LookUpEdit lookUpCustomer;
         private DevExpress.XtraEditors.GroupControl gcVehicleInfo;
@@ -443,5 +461,7 @@
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraEditors.TextEdit txtCode;
         private DevExpress.XtraEditors.LabelControl lblCode;
+        private DevExpress.XtraEditors.LookUpEdit lookUpType;
+        private DevExpress.XtraEditors.LookUpEdit lookUpBrand;
     }
 }

@@ -25,8 +25,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             // set validation alignment
             FieldsValidator.SetIconAlignment(lookUpCustomer, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            FieldsValidator.SetIconAlignment(txtBrand, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            FieldsValidator.SetIconAlignment(txtType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(lookUpBrand, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(lookUpType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(txtYearOfPurchase, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
@@ -85,27 +85,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public string Type
+        public int BrandId
         {
             get
             {
-                return txtType.Text;
+                BrandViewModel selected = lookUpBrand.GetSelectedDataRow() as BrandViewModel;
+                if (selected == null) return 0;
+                return selected.Id;
             }
             set
             {
-                txtType.Text = value;
+                lookUpBrand.EditValue = value;
             }
         }
 
-        public string Brand
+        public int TypeId
         {
             get
             {
-                return txtBrand.Text;
+                TypeViewModel selected = lookUpType.GetSelectedDataRow() as TypeViewModel;
+                if (selected == null) return 0;
+                return selected.Id;
             }
             set
             {
-                txtBrand.Text = value;
+                lookUpType.EditValue = value;
             }
         }
 
@@ -159,6 +163,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public List<BrandViewModel> BrandList
+        {
+            get
+            {
+                return lookUpBrand.Properties.DataSource as List<BrandViewModel>;
+            }
+            set
+            {
+                lookUpBrand.Properties.DataSource = value;
+            }
+        }
+        public List<TypeViewModel> TypeList
+        {
+            get
+            {
+                return lookUpType.Properties.DataSource as List<TypeViewModel>;
+            }
+            set
+            {
+                lookUpType.Properties.DataSource = value;
+            }
+        }
         public List<CustomerViewModel> CustomerList
         {
             get

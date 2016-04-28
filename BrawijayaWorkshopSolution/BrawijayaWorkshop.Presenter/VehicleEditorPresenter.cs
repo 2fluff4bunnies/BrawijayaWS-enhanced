@@ -15,13 +15,15 @@ namespace BrawijayaWorkshop.Presenter
         public void InitFormData()
         {
             View.CustomerList = Model.GetCustomersList();
+            View.BrandList = Model.GetBrandList();
+            View.TypeList = Model.GetTypeList();
 
             if (View.SelectedVehicle != null)
             {
                 View.Code = View.SelectedVehicle.Code;
                 View.ActiveLicenseNumber = View.SelectedVehicle.ActiveLicenseNumber;
-                View.Brand = View.SelectedVehicle.Brand;
-                View.Type = View.SelectedVehicle.Type;
+                View.BrandId = View.SelectedVehicle.BrandId;
+                View.TypeId = View.SelectedVehicle.TypeId;
                 View.CustomerId = View.SelectedVehicle.CustomerId;
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
@@ -48,8 +50,8 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedVehicle = new VehicleViewModel();
             }
             View.SelectedVehicle.Code = View.Code;
-            View.SelectedVehicle.Brand = View.Brand;
-            View.SelectedVehicle.Type = View.Type;
+            View.SelectedVehicle.BrandId = View.BrandId;
+            View.SelectedVehicle.TypeId = View.TypeId;
             View.SelectedVehicle.CustomerId = View.CustomerId;
             View.SelectedVehicle.ActiveLicenseNumber = View.ActiveLicenseNumber;
             View.SelectedVehicle.YearOfPurchase = View.YearOfPurchase;
