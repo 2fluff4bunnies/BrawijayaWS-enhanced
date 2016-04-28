@@ -29,9 +29,6 @@ namespace BrawijayaWorkshop.View
 
         List<CustomerViewModel> CustomerList { get; set; }
         List<BrandViewModel> BrandList { get; set; }
-        List<TypeViewModel> TypeList { get; set; }
-
-        List<BrandViewModel> BrandList { get; set; }
 
         List<TypeViewModel> TypeList { get; set; }
 
