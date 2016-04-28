@@ -1145,6 +1145,14 @@ namespace BrawijayaWorkshop.Database
             // Used Good Transaction Type Children
             context.References.Add(new Reference
             {
+                Code = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SPK,
+                Name = "Tipe Barang Bekas Masuk Melalui SPK",
+                Description = "Tipe Barang Bekas Masuk Melalui SPK",
+                Value = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SPK,
+                ParentId = usedGoodTransactionRef.Id
+            });
+            context.References.Add(new Reference
+            {
                 Code = DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_RECYCLE,
                 Name = "Tipe Recycle Barang Bekas",
                 Description = "Tipe Recycle Barang Bekas",

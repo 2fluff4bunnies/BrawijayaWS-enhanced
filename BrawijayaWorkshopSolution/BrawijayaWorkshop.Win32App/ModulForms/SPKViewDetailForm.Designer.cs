@@ -126,7 +126,7 @@
             this.groupSPK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupSPK.Location = new System.Drawing.Point(0, 0);
             this.groupSPK.Name = "groupSPK";
-            this.groupSPK.Size = new System.Drawing.Size(1146, 457);
+            this.groupSPK.Size = new System.Drawing.Size(1075, 484);
             this.groupSPK.TabIndex = 1;
             this.groupSPK.Text = "Informasi SPK";
             // 
@@ -164,13 +164,12 @@
             // 
             // gridVehicleWheel
             // 
-            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.gridVehicleWheel.Location = new System.Drawing.Point(12, 174);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(556, 242);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(533, 269);
             this.gridVehicleWheel.TabIndex = 61;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -236,10 +235,13 @@
             // 
             // gcSparepart
             // 
-            this.gcSparepart.Location = new System.Drawing.Point(600, 23);
+            this.gcSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSparepart.Location = new System.Drawing.Point(553, 23);
             this.gcSparepart.MainView = this.gvSparepart;
             this.gcSparepart.Name = "gcSparepart";
-            this.gcSparepart.Size = new System.Drawing.Size(534, 393);
+            this.gcSparepart.Size = new System.Drawing.Size(517, 420);
             this.gcSparepart.TabIndex = 58;
             this.gcSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSparepart});
@@ -300,10 +302,10 @@
             // 
             // btnSetAsComplete
             // 
-            this.btnSetAsComplete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSetAsComplete.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSetAsComplete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSetAsComplete.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSetAsComplete.Location = new System.Drawing.Point(306, 425);
+            this.btnSetAsComplete.Location = new System.Drawing.Point(270, 452);
             this.btnSetAsComplete.Name = "btnSetAsComplete";
             this.btnSetAsComplete.Size = new System.Drawing.Size(91, 23);
             this.btnSetAsComplete.TabIndex = 40;
@@ -312,11 +314,11 @@
             // 
             // btnRequestPrint
             // 
-            this.btnRequestPrint.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRequestPrint.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnRequestPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnRequestPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnRequestPrint.Location = new System.Drawing.Point(519, 425);
+            this.btnRequestPrint.Location = new System.Drawing.Point(483, 452);
             this.btnRequestPrint.Name = "btnRequestPrint";
             this.btnRequestPrint.Size = new System.Drawing.Size(122, 23);
             this.btnRequestPrint.TabIndex = 38;
@@ -325,10 +327,10 @@
             // 
             // btnAbort
             // 
-            this.btnAbort.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAbort.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnAbort.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnAbort.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAbort.Location = new System.Drawing.Point(306, 425);
+            this.btnAbort.Location = new System.Drawing.Point(270, 452);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(91, 23);
             this.btnAbort.TabIndex = 39;
@@ -345,10 +347,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnCancel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnCancel.Location = new System.Drawing.Point(747, 425);
+            this.btnCancel.Location = new System.Drawing.Point(711, 452);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 23);
             this.btnCancel.TabIndex = 33;
@@ -365,10 +367,10 @@
             // 
             // btnReject
             // 
-            this.btnReject.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnReject.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnReject.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnReject.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnReject.Location = new System.Drawing.Point(412, 425);
+            this.btnReject.Location = new System.Drawing.Point(376, 452);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(91, 23);
             this.btnReject.TabIndex = 35;
@@ -385,11 +387,11 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnPrint.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(534, 425);
+            this.btnPrint.Location = new System.Drawing.Point(498, 452);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(91, 23);
             this.btnPrint.TabIndex = 36;
@@ -406,11 +408,11 @@
             // 
             // btnEndorse
             // 
-            this.btnEndorse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEndorse.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEndorse.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.btnEndorse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnEndorse.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnEndorse.Location = new System.Drawing.Point(649, 425);
+            this.btnEndorse.Location = new System.Drawing.Point(613, 452);
             this.btnEndorse.Name = "btnEndorse";
             this.btnEndorse.Size = new System.Drawing.Size(91, 23);
             this.btnEndorse.TabIndex = 37;
@@ -427,10 +429,10 @@
             // 
             // btnApprove
             // 
-            this.btnApprove.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnApprove.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnApprove.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnApprove.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnApprove.Location = new System.Drawing.Point(306, 425);
+            this.btnApprove.Location = new System.Drawing.Point(270, 452);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Size = new System.Drawing.Size(91, 23);
             this.btnApprove.TabIndex = 34;
@@ -565,7 +567,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 457);
+            this.ClientSize = new System.Drawing.Size(1075, 484);
             this.Controls.Add(this.groupSPK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKViewDetailForm";

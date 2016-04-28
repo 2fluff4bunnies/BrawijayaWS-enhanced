@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private IUsedGoodRepository _usedGoodRepository;
+        private IUsedGoodTransactionRepository _usedGoodTransactionRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private IUnitOfWork _unitOfWork;
         private ISPKScheduleRepository _SPKScheduleRepository;
@@ -39,6 +40,7 @@ namespace BrawijayaWorkshop.Model
             IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
             IUsedGoodRepository usedGoodrepository,
+            IUsedGoodTransactionRepository usedGoodTransactionRepository,
             IVehicleWheelRepository vehicleWheelRepository,
             ISPKScheduleRepository SPKScheduleReposistory,
             IMechanicRepository mechanicRepository,
@@ -60,6 +62,7 @@ namespace BrawijayaWorkshop.Model
             _invoiceDetailRepository = invoiceDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
             _usedGoodRepository = usedGoodrepository;
+            _usedGoodTransactionRepository = usedGoodTransactionRepository;
             _SPKScheduleRepository = SPKScheduleReposistory;
             _mechanicRepository = mechanicRepository;
             _wheelExchangeHistoryRepository = wheelExchangeHistoryRepository;
@@ -351,8 +354,23 @@ namespace BrawijayaWorkshop.Model
                 UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSp.SparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
                 if (foundUsedGood != null)
                 {
-                    foundUsedGood.Stock = foundUsedGood.Stock + SPKSpDetailList.Count;
+                    int usedGoodQty = SPKSpDetailList.Where(sp => sp.SparepartDetail.SparepartId == foundUsedGood.SparepartId).ToList().Count;
+                    foundUsedGood.Stock = foundUsedGood.Stock + usedGoodQty;
                     _usedGoodRepository.Update(foundUsedGood);
+                    _unitOfWork.SaveChanges();
+
+                    UsedGoodTransaction usedGoodTrans = new UsedGoodTransaction();
+                    usedGoodTrans.CreateDate = usedGoodTrans.ModifyDate = serverTime;
+                    usedGoodTrans.CreateUserId = usedGoodTrans.ModifyUserId = userId;
+                    usedGoodTrans.UsedGoodId = foundUsedGood.Id;
+                    usedGoodTrans.TransactionDate = spk.CreateDate;
+                    usedGoodTrans.Qty = usedGoodQty;
+                    usedGoodTrans.ItemPrice = 0;
+                    usedGoodTrans.TotalPrice = 0;
+                    usedGoodTrans.TypeReferenceId = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_USEDGOOD_TRANSACTION_TYPE_SPK).FirstOrDefault().Id;
+                    usedGoodTrans.Remark = string.Format("SPK Code: {0}", spk.Code);
+                    _usedGoodTransactionRepository.Add(usedGoodTrans);
+                    _unitOfWork.SaveChanges();
                 }
 
                 //Replace Vehicle Wheel
@@ -366,12 +384,12 @@ namespace BrawijayaWorkshop.Model
 
                     _vehicleWheelRepository.Update(vw);
 
-
                     UsedGood usedWHeel = _usedGoodRepository.GetMany(ug => ug.SparepartId == item.WheelDetail.SparepartDetail.SparepartId).FirstOrDefault();
                     usedWHeel.Stock++;
 
                     _usedGoodRepository.Update(usedWHeel);
                 }
+                _unitOfWork.SaveChanges();
 
                 //Remove Wheel Exchange
                 List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
@@ -380,6 +398,7 @@ namespace BrawijayaWorkshop.Model
                 {
                     _wheelExchangeHistoryRepository.Delete(item);
                 }
+                _unitOfWork.SaveChanges();
             }
 
             foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)

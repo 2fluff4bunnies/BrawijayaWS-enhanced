@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.Load += SPKViewDetailForm_Load;
         }
 
-        void SPKViewDetailForm_Load(object sender, EventArgs e)
+        private void SPKViewDetailForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
 
@@ -113,8 +113,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             #endregion
         }
 
-
-        void ApplyButtonSetting()
+        private void ApplyButtonSetting()
         {
             btnSetAsComplete.Visible = btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
             btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
@@ -280,6 +279,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.RequestPrint();
             this.Close();
         }
+
         private void btnAbort_Click(object sender, EventArgs e)
         {
             if (this.ShowConfirmation("SPK yang dibatalkan tidak dapat digunakan kembali, anda yakin ingin melanjutkan ?") == DialogResult.Yes)
