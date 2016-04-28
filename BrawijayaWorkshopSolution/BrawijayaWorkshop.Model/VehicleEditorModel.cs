@@ -12,6 +12,8 @@ namespace BrawijayaWorkshop.Model
     public class VehicleEditorModel : AppBaseModel
     {
         private ICustomerRepository _customerRepository;
+        private IBrandRepository _brandRepository;
+        private ITypeRepository _typeRepository;
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
@@ -31,6 +33,8 @@ namespace BrawijayaWorkshop.Model
             : base()
         {
             _customerRepository = customerRepository;
+            _brandRepository = brandRepository;
+            _typeRepository = typeRepository;
             _vehicleRepository = vehicleRepository;
             _vehicleDetailRepository = vehicleDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
@@ -47,6 +51,20 @@ namespace BrawijayaWorkshop.Model
         {
             List<Customer> result = _customerRepository.GetAll().ToList();
             List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<BrandViewModel> GetBrandList()
+        {
+            List<Brand> result = _brandRepository.GetMany(x=>x.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<BrandViewModel> mappedResult = new List<BrandViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<TypeViewModel> GetTypeList()
+        {
+            List<BrawijayaWorkshop.Database.Entities.Type> result = _typeRepository.GetMany(x => x.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<TypeViewModel> mappedResult = new List<TypeViewModel>();
             return Map(result, mappedResult);
         }
 

@@ -84,7 +84,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtCode.Text = value;
             }
         }
-
         public int TypeId
         {
             get
@@ -162,7 +161,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 dtpExpirationDate.EditValue = value;
             }
         }
-
 
         public int Kilometers
         {

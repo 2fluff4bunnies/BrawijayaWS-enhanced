@@ -494,5 +494,7 @@
         private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.TextEdit txtKilometer;
         private DevExpress.XtraEditors.LabelControl lblKilometer;
+        private DevExpress.XtraEditors.LabelControl lblKilometer;
+        private DevExpress.XtraEditors.LabelControl lblKilometer;
     }
 }
