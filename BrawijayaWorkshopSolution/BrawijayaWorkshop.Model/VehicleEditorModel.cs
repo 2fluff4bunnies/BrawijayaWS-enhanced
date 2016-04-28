@@ -18,12 +18,16 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private ITypeRepository _typeRepository;
+        private IBrandRepository _brandRepository;
         private IUnitOfWork _unitOfWork;
 
         public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository,
-           IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
-            ISparepartRepository sparepartRepository,
-            ISpecialSparepartDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
+            ISparepartRepository sparepartRepository, ITypeRepository typeRepository,
+            ISpecialSparepartDetailRepository wheelDetailRepository, IBrandRepository brandRepository,
+            ISparepartDetailRepository sparepartDetailRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _customerRepository = customerRepository;
@@ -33,6 +37,9 @@ namespace BrawijayaWorkshop.Model
             _wheelDetailRepository = wheelDetailRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
+            _typeRepository = typeRepository;
+            _brandRepository = brandRepository;
+
             _unitOfWork = unitOfWork;
         }
 
@@ -47,7 +54,7 @@ namespace BrawijayaWorkshop.Model
         {
 
 
-            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready 
+            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
                                                                             || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
                                                                             && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
                                                                             && !getCurrentVehicleWheel(vehicleId).Any(vw => vw.WheelDetailId == wd.Id)
@@ -219,6 +226,24 @@ namespace BrawijayaWorkshop.Model
             VehicleWheel result = _vehicleWheelRepository.GetById(vehicleWheelId);
 
             return result.WheelDetailId;
+        }
+
+        public List<TypeViewModel> GetTypeList()
+        {
+            List<BrawijayaWorkshop.Database.Entities.Type> result = _typeRepository.GetMany(t => t.Status ==  (int) DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<TypeViewModel> mappedResult = new List<TypeViewModel>();
+
+            return Map(result, mappedResult);
+        }
+
+        public List<BrandViewModel> GetBrandList()
+        {
+            List<Brand> result = _brandRepository.GetMany(b => b.Status ==  (int) DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<BrandViewModel> mappedResult = new List<BrandViewModel>();
+
+            return Map(result, mappedResult);
         }
     }
 }

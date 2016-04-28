@@ -336,6 +336,11 @@ namespace BrawijayaWorkshop.Model
                 _wheelExchangeHistoryRepository.Add(weh);
             }
 
+            // Update Vehicle Kilometers
+            Vehicle vehicle = _vehicleRepository.GetById(spk.VehicleId);
+            vehicle.Kilometers = spk.Kilometers;
+            _vehicleRepository.Update(vehicle);
+
             _unitOfWork.SaveChanges();
 
             SPKViewModel mappedResult = new SPKViewModel();

@@ -36,7 +36,9 @@ namespace BrawijayaWorkshop.Presenter
                     TotalSparepartPrice = View.ParentSPK.TotalSparepartPrice,
                     Description = View.Description,
                     isContractWork = View.ParentSPK.isContractWork,
-                    ContractWorkFee = View.ParentSPK.ContractWorkFee
+                    ContractWorkFee = View.ParentSPK.ContractWorkFee,
+                    Contractor = View.ParentSPK.Contractor,
+                    Kilometers = View.ParentSPK.Kilometers
                 };
 
                 View.CategoryId = View.SelectedSPK.CategoryReference.Id;
@@ -46,8 +48,12 @@ namespace BrawijayaWorkshop.Presenter
                 View.Description = View.SelectedSPK.Description;
                 View.isContractWork = View.SelectedSPK.isContractWork;
                 View.ContractWorkFee = View.SelectedSPK.ContractWorkFee;
+                View.Contractor = View.SelectedSPK.Contractor;
+                View.Kilometers = View.SelectedSPK.Kilometers;
+
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.SelectedSPK.Id);
+
                 LoadVehicleWheel();
             }
         }
@@ -62,6 +68,8 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.Description = View.Description;
             View.SelectedSPK.isContractWork = View.isContractWork;
             View.SelectedSPK.ContractWorkFee = View.ContractWorkFee;
+            View.SelectedSPK.Contractor = View.Contractor;
+            View.SelectedSPK.Kilometers = View.Kilometers;
 
             View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, View.VehicleWheelList, LoginInformation.UserId, View.IsNeedApproval);
             if (View.ParentSPK != null)

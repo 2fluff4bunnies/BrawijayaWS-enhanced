@@ -45,8 +45,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadDataVehicle()
         {
-            View.Brand = View.SelectedVehicle.Brand;
-            View.Type = View.SelectedVehicle.Type;
+            View.Brand = View.SelectedVehicle.Brand.Name;
+            View.Type = View.SelectedVehicle.Type.Name;
             View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase.ToString();
             View.Customer = View.SelectedVehicle.Customer.CompanyName;
             View.ExpirationDate = Model.GetLicenseNumberExpirationDate(View.SelectedVehicle.ActiveLicenseNumber).ToShortDateString();

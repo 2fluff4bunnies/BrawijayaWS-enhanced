@@ -10,14 +10,6 @@ namespace BrawijayaWorkshop.Database.Entities
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(20)]
-        public string Brand { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string Type { get; set; }
-
-        [Required]
         public string ActiveLicenseNumber { get; set; }
 
         [Required]
@@ -29,5 +21,11 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int Kilometers { get; set; }
         public string Code { get; set; }
+
+        public int TypeId { get; set; }
+        public virtual BrawijayaWorkshop.Database.Entities.Type Type { get; set; }
+
+        public int BrandId { get; set; }
+        public virtual Brand Brand { get; set; }
     }
 }

@@ -36,6 +36,10 @@
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
+            this.txtKilometer = new DevExpress.XtraEditors.TextEdit();
+            this.lblKilometer = new DevExpress.XtraEditors.LabelControl();
+            this.lblContractor = new DevExpress.XtraEditors.LabelControl();
+            this.txtContractor = new DevExpress.XtraEditors.TextEdit();
             this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -84,12 +88,12 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
-            this.txtContractor = new DevExpress.XtraEditors.TextEdit();
-            this.lblContractor = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKilometer.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
@@ -114,7 +118,6 @@
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -139,6 +142,8 @@
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSPK.Controls.Add(this.txtKilometer);
+            this.groupSPK.Controls.Add(this.lblKilometer);
             this.groupSPK.Controls.Add(this.lblContractor);
             this.groupSPK.Controls.Add(this.txtContractor);
             this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
@@ -161,6 +166,49 @@
             this.groupSPK.Size = new System.Drawing.Size(1156, 417);
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
+            // 
+            // txtKilometer
+            // 
+            this.txtKilometer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKilometer.Location = new System.Drawing.Point(96, 105);
+            this.txtKilometer.Name = "txtKilometer";
+            this.txtKilometer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtKilometer.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtKilometer.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtKilometer.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtKilometer.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
+            this.txtKilometer.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTime;
+            this.txtKilometer.Size = new System.Drawing.Size(161, 20);
+            this.txtKilometer.TabIndex = 3;
+            // 
+            // lblKilometer
+            // 
+            this.lblKilometer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblKilometer.Location = new System.Drawing.Point(15, 108);
+            this.lblKilometer.Name = "lblKilometer";
+            this.lblKilometer.Size = new System.Drawing.Size(44, 13);
+            this.lblKilometer.TabIndex = 18;
+            this.lblKilometer.Text = "Kilometer";
+            // 
+            // lblContractor
+            // 
+            this.lblContractor.Location = new System.Drawing.Point(309, 55);
+            this.lblContractor.Name = "lblContractor";
+            this.lblContractor.Size = new System.Drawing.Size(77, 13);
+            this.lblContractor.TabIndex = 16;
+            this.lblContractor.Text = "Ketua Borongan";
+            // 
+            // txtContractor
+            // 
+            this.txtContractor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContractor.Location = new System.Drawing.Point(410, 52);
+            this.txtContractor.Name = "txtContractor";
+            this.txtContractor.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txtContractor.Size = new System.Drawing.Size(161, 20);
+            this.txtContractor.TabIndex = 5;
             // 
             // txtTotalSparepartPrice
             // 
@@ -255,7 +303,7 @@
             // 
             // lblContractPrice
             // 
-            this.lblContractPrice.Location = new System.Drawing.Point(15, 135);
+            this.lblContractPrice.Location = new System.Drawing.Point(309, 82);
             this.lblContractPrice.Name = "lblContractPrice";
             this.lblContractPrice.Size = new System.Drawing.Size(71, 13);
             this.lblContractPrice.TabIndex = 7;
@@ -263,17 +311,17 @@
             // 
             // ckeIsContractWork
             // 
-            this.ckeIsContractWork.Location = new System.Drawing.Point(13, 80);
+            this.ckeIsContractWork.Location = new System.Drawing.Point(307, 27);
             this.ckeIsContractWork.Name = "ckeIsContractWork";
             this.ckeIsContractWork.Properties.Caption = "Borongan";
             this.ckeIsContractWork.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.ckeIsContractWork.Size = new System.Drawing.Size(101, 19);
-            this.ckeIsContractWork.TabIndex = 6;
+            this.ckeIsContractWork.Size = new System.Drawing.Size(119, 19);
+            this.ckeIsContractWork.TabIndex = 4;
             this.ckeIsContractWork.CheckedChanged += new System.EventHandler(this.ckeIsContractWork_CheckedChanged);
             // 
             // txtContractWorkFee
             // 
-            this.txtContractWorkFee.Location = new System.Drawing.Point(96, 132);
+            this.txtContractWorkFee.Location = new System.Drawing.Point(410, 79);
             this.txtContractWorkFee.Name = "txtContractWorkFee";
             this.txtContractWorkFee.Properties.Appearance.Options.UseTextOptions = true;
             this.txtContractWorkFee.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -282,14 +330,14 @@
             this.txtContractWorkFee.Properties.Mask.EditMask = "d";
             this.txtContractWorkFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtContractWorkFee.Size = new System.Drawing.Size(161, 20);
-            this.txtContractWorkFee.TabIndex = 8;
+            this.txtContractWorkFee.TabIndex = 6;
             // 
             // memoDescription
             // 
-            this.memoDescription.Location = new System.Drawing.Point(395, 68);
+            this.memoDescription.Location = new System.Drawing.Point(410, 106);
             this.memoDescription.Name = "memoDescription";
-            this.memoDescription.Size = new System.Drawing.Size(176, 84);
-            this.memoDescription.TabIndex = 10;
+            this.memoDescription.Size = new System.Drawing.Size(161, 50);
+            this.memoDescription.TabIndex = 7;
             // 
             // groupSparepart
             // 
@@ -351,7 +399,7 @@
             this.ckeIsReturnRequired.Properties.Caption = "BS Diterima";
             this.ckeIsReturnRequired.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.ckeIsReturnRequired.Size = new System.Drawing.Size(175, 19);
-            this.ckeIsReturnRequired.TabIndex = 7;
+            this.ckeIsReturnRequired.TabIndex = 4;
             // 
             // labelControl1
             // 
@@ -378,7 +426,7 @@
             this.lookUpSerialNumber.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpSerialNumber.Properties.ValueMember = "Id";
             this.lookUpSerialNumber.Size = new System.Drawing.Size(161, 20);
-            this.lookUpSerialNumber.TabIndex = 5;
+            this.lookUpSerialNumber.TabIndex = 2;
             // 
             // lookUpSparepart
             // 
@@ -397,7 +445,7 @@
             this.lookUpSparepart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpSparepart.Properties.ValueMember = "Id";
             this.lookUpSparepart.Size = new System.Drawing.Size(161, 20);
-            this.lookUpSparepart.TabIndex = 1;
+            this.lookUpSparepart.TabIndex = 0;
             this.lookUpSparepart.EditValueChanged += new System.EventHandler(this.lookUpSparepart_EditValueChanged);
             // 
             // btnAddSparepart
@@ -427,7 +475,7 @@
             this.txtQty.Properties.Mask.EditMask = "n0";
             this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtQty.Size = new System.Drawing.Size(161, 20);
-            this.txtQty.TabIndex = 3;
+            this.txtQty.TabIndex = 1;
             // 
             // lblQty
             // 
@@ -506,7 +554,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(307, 70);
+            this.labelControl2.Location = new System.Drawing.Point(309, 108);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(63, 13);
             this.labelControl2.TabIndex = 9;
@@ -514,7 +562,7 @@
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(15, 57);
+            this.lblCategory.Location = new System.Drawing.Point(15, 31);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(65, 13);
             this.lblCategory.TabIndex = 2;
@@ -522,7 +570,7 @@
             // 
             // lblDueDate
             // 
-            this.lblDueDate.Location = new System.Drawing.Point(307, 33);
+            this.lblDueDate.Location = new System.Drawing.Point(15, 82);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(62, 13);
             this.lblDueDate.TabIndex = 4;
@@ -531,7 +579,7 @@
             // dtpDueDate
             // 
             this.dtpDueDate.EditValue = null;
-            this.dtpDueDate.Location = new System.Drawing.Point(395, 30);
+            this.dtpDueDate.Location = new System.Drawing.Point(96, 79);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dtpDueDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -539,15 +587,15 @@
             this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dtpDueDate.Size = new System.Drawing.Size(176, 20);
-            this.dtpDueDate.TabIndex = 5;
+            this.dtpDueDate.Size = new System.Drawing.Size(161, 20);
+            this.dtpDueDate.TabIndex = 2;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Batas waktu pengerjaan harus diisi!";
             this.valDueDate.SetValidationRule(this.dtpDueDate, conditionValidationRule1);
             // 
             // LookUpVehicle
             // 
-            this.LookUpVehicle.Location = new System.Drawing.Point(96, 30);
+            this.LookUpVehicle.Location = new System.Drawing.Point(96, 53);
             this.LookUpVehicle.Name = "LookUpVehicle";
             this.LookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.LookUpVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -570,7 +618,7 @@
             // 
             // lookUpCategory
             // 
-            this.lookUpCategory.Location = new System.Drawing.Point(96, 54);
+            this.lookUpCategory.Location = new System.Drawing.Point(96, 27);
             this.lookUpCategory.Name = "lookUpCategory";
             this.lookUpCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -583,7 +631,7 @@
             this.lookUpCategory.Properties.NullText = "-- Pilih Layanan --";
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(161, 20);
-            this.lookUpCategory.TabIndex = 3;
+            this.lookUpCategory.TabIndex = 0;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule3.ErrorText = "Kategori harus dipilih!";
             this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule3);
@@ -599,7 +647,7 @@
             // 
             // lblVehicle
             // 
-            this.lblVehicle.Location = new System.Drawing.Point(15, 33);
+            this.lblVehicle.Location = new System.Drawing.Point(15, 56);
             this.lblVehicle.Name = "lblVehicle";
             this.lblVehicle.Size = new System.Drawing.Size(52, 13);
             this.lblVehicle.TabIndex = 0;
@@ -640,24 +688,6 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // txtContractor
-            // 
-            this.txtContractor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContractor.Location = new System.Drawing.Point(96, 105);
-            this.txtContractor.Name = "txtContractor";
-            this.txtContractor.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txtContractor.Size = new System.Drawing.Size(161, 20);
-            this.txtContractor.TabIndex = 15;
-            // 
-            // lblContractor
-            // 
-            this.lblContractor.Location = new System.Drawing.Point(15, 108);
-            this.lblContractor.Name = "lblContractor";
-            this.lblContractor.Size = new System.Drawing.Size(77, 13);
-            this.lblContractor.TabIndex = 16;
-            this.lblContractor.Text = "Ketua Borongan";
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -673,6 +703,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).EndInit();
             this.groupSPK.ResumeLayout(false);
             this.groupSPK.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKilometer.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
@@ -698,7 +730,6 @@
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -758,5 +789,7 @@
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraEditors.LabelControl lblContractor;
         private DevExpress.XtraEditors.TextEdit txtContractor;
+        private DevExpress.XtraEditors.TextEdit txtKilometer;
+        private DevExpress.XtraEditors.LabelControl lblKilometer;
     }
 }

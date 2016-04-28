@@ -23,8 +23,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class SPKEditorForm : BaseEditorForm, ISPKEditorView
     {
         private DateTime _today;
-        private List<string> _availableMechanic;
-        public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
+        //private List<string> _availableMechanic;
+        //public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
         //private bool _isFingerprintConnected = false;
 
         private SPKEditorPresenter _presenter;
@@ -41,7 +41,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             InitializeComponent();
             _presenter = new SPKEditorPresenter(this, model);
-            _availableMechanic = new List<string>();
+            //_availableMechanic = new List<string>();
             _today = DateTime.Today;
 
             dtpDueDate.EditValue = _today;
@@ -390,6 +390,30 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtContractWorkFee.Text = value.ToString("n0");
+            }
+        }
+
+        public string  Contractor
+        {
+            get
+            {
+                return txtContractor.EditValue.ToString();
+            }
+            set
+            {
+                txtContractor.EditValue = value;
+            }
+        }
+
+        public int Kilometers
+        {
+            get
+            {
+                return txtKilometer.EditValue.AsInteger();
+            }
+            set
+            {
+                txtKilometer.EditValue = value.ToString();
             }
         }
         #endregion

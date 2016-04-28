@@ -127,9 +127,9 @@
             // 
             this.lblContractWork.Location = new System.Drawing.Point(17, 97);
             this.lblContractWork.Name = "lblContractWork";
-            this.lblContractWork.Size = new System.Drawing.Size(92, 13);
+            this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 17;
-            this.lblContractWork.Text = "Status Persetujuan";
+            this.lblContractWork.Text = "Borongan";
             // 
             // lblCompletedStatus
             // 
@@ -188,7 +188,7 @@
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(21, 62);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(17, 62);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(76, 13);
             this.lblLicenseNumber.TabIndex = 7;
@@ -244,7 +244,7 @@
             // 
             // lblCode
             // 
-            this.lblCode.Location = new System.Drawing.Point(21, 30);
+            this.lblCode.Location = new System.Drawing.Point(17, 30);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(45, 13);
             this.lblCode.TabIndex = 2;

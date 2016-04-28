@@ -13,9 +13,9 @@ namespace BrawijayaWorkshop.View
 
         string Code { get; set; }
 
-        string Brand { get; set; }
+        int BrandId { get; set; }
 
-        string Type { get; set; }
+        int TypeId { get; set; }
 
         int YearOfPurchase { get; set; }
 
@@ -23,9 +23,15 @@ namespace BrawijayaWorkshop.View
 
         DateTime ExpirationDate { get; set; }
 
+        int Kilometers { get; set; }
+
         int CustomerId { get; set; }
 
         List<CustomerViewModel> CustomerList { get; set; }
+
+        List<BrandViewModel> BrandList { get; set; }
+
+        List<TypeViewModel> TypeList { get; set; }
 
         List<VehicleWheelViewModel> VehicleWheelList { get; set; }
 

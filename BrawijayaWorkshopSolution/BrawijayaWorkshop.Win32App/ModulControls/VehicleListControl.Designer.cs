@@ -131,7 +131,7 @@
             this.cmsUpdateLicenseNumber,
             this.cmsViewHistoryLicenseNumber});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(181, 120);
+            this.cmsEditor.Size = new System.Drawing.Size(181, 98);
             // 
             // cmsEditData
             // 
@@ -223,7 +223,7 @@
             // colBrand
             // 
             this.colBrand.Caption = "Merek";
-            this.colBrand.FieldName = "Brand";
+            this.colBrand.FieldName = "Brand.Name";
             this.colBrand.Name = "colBrand";
             this.colBrand.Visible = true;
             this.colBrand.VisibleIndex = 2;
@@ -231,7 +231,7 @@
             // colType
             // 
             this.colType.Caption = "Tipe";
-            this.colType.FieldName = "Type";
+            this.colType.FieldName = "Type.Name";
             this.colType.Name = "colType";
             this.colType.Visible = true;
             this.colType.VisibleIndex = 3;
