@@ -66,6 +66,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.ContractWorkFee = 0;
 
             txtContractWorkFee.Enabled = false;
+            txtContractor.Enabled = false;
             groupSparepart.Enabled = false;
             gridVehicleWheel.Enabled = false;
             ckeIsReturnRequired.Enabled = false;
@@ -385,11 +386,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtContractWorkFee.Text.AsDecimal();
+                return txtContractWorkFee.EditValue.AsDecimal();
             }
             set
             {
-                txtContractWorkFee.Text = value.ToString("n0");
+                txtContractWorkFee.EditValue = value.ToString("n0");
             }
         }
 
@@ -801,10 +802,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (currenValue)
             {
                 txtContractWorkFee.Enabled = true;
+                txtContractor.Enabled = true;
             }
             else
             {
                 txtContractWorkFee.Enabled = false;
+                txtContractor.Enabled = false;
             }
 
         }

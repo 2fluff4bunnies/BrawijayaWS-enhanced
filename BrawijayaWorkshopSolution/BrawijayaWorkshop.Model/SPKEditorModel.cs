@@ -80,7 +80,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-      
+
         public List<SPKDetailSparepartViewModel> GetEndorsedSPKSparepartList(int spkId)
         {
             List<SPKDetailSparepart> result = new List<SPKDetailSparepart>();
@@ -334,11 +334,22 @@ namespace BrawijayaWorkshop.Model
                 weh.CreateUserId = userId;
 
                 _wheelExchangeHistoryRepository.Add(weh);
+
+                SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
+                wheel.Kilometers = spk.Kilometers;
+                wheel.ModifyDate = serverTime;
+                wheel.ModifyUserId = userId;
+
+                _specialSparepartDetailRepository.Update(wheel);
             }
 
             // Update Vehicle Kilometers
             Vehicle vehicle = _vehicleRepository.GetById(spk.VehicleId);
+
             vehicle.Kilometers = spk.Kilometers;
+            vehicle.ModifyDate = serverTime;
+            vehicle.ModifyUserId = userId;
+
             _vehicleRepository.Update(vehicle);
 
             _unitOfWork.SaveChanges();

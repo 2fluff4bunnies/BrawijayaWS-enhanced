@@ -42,6 +42,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             this.CategoryFilter = 0;
             this.PrintStatusFilter = 9;
             this.CompletedStatusFilter = 9;
+            this.ContractWorkStatusFilter = -1;
         }
 
         protected override string ModulName
@@ -255,6 +256,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             else
             {
+                cmsSPKApproval.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+
+                cmsPrintApproval.Visible = (this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending &&
+                    this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved);
+
                 cmsEndorseData.Visible = (this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved ||
                     this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) &&
                     this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;

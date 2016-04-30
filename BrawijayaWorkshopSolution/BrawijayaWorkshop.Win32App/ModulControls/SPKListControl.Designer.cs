@@ -103,13 +103,13 @@
             this.groupFilter.Controls.Add(this.lblCategory);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(837, 151);
+            this.groupFilter.Size = new System.Drawing.Size(1085, 121);
             this.groupFilter.TabIndex = 1;
             this.groupFilter.Text = "Filter";
             // 
             // lookUpContractWorkStatus
             // 
-            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(117, 94);
+            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(939, 27);
             this.lookUpContractWorkStatus.Name = "lookUpContractWorkStatus";
             this.lookUpContractWorkStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpContractWorkStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -125,7 +125,7 @@
             // 
             // lblContractWork
             // 
-            this.lblContractWork.Location = new System.Drawing.Point(17, 97);
+            this.lblContractWork.Location = new System.Drawing.Point(839, 30);
             this.lblContractWork.Name = "lblContractWork";
             this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 17;
@@ -252,10 +252,11 @@
             // 
             // btnSearch
             // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(669, 121);
+            this.btnSearch.Location = new System.Drawing.Point(939, 92);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(141, 24);
             this.btnSearch.TabIndex = 4;
@@ -275,7 +276,7 @@
             this.btnNewSPK.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPK.Image")));
             this.btnNewSPK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewSPK.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewSPK.Location = new System.Drawing.Point(3, 160);
+            this.btnNewSPK.Location = new System.Drawing.Point(3, 130);
             this.btnNewSPK.Name = "btnNewSPK";
             this.btnNewSPK.Size = new System.Drawing.Size(103, 23);
             this.btnNewSPK.TabIndex = 4;
@@ -287,10 +288,10 @@
             this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSPK.Location = new System.Drawing.Point(3, 189);
+            this.gcSPK.Location = new System.Drawing.Point(3, 159);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(837, 240);
+            this.gcSPK.Size = new System.Drawing.Size(1085, 270);
             this.gcSPK.TabIndex = 5;
             this.gcSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPK});
@@ -449,7 +450,7 @@
             // 
             // cmsPrintApproval
             // 
-            this.cmsPrintApproval.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsPrintApproval.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.approve_16x16;
             this.cmsPrintApproval.Name = "cmsPrintApproval";
             this.cmsPrintApproval.Size = new System.Drawing.Size(171, 22);
             this.cmsPrintApproval.Text = "Persetujuan Print";
@@ -484,7 +485,7 @@
             this.Controls.Add(this.btnNewSPK);
             this.Controls.Add(this.groupFilter);
             this.Name = "SPKListControl";
-            this.Size = new System.Drawing.Size(843, 444);
+            this.Size = new System.Drawing.Size(1091, 444);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();

@@ -169,16 +169,12 @@
             // 
             // txtKilometer
             // 
-            this.txtKilometer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKilometer.Location = new System.Drawing.Point(96, 105);
             this.txtKilometer.Name = "txtKilometer";
             this.txtKilometer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtKilometer.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtKilometer.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.txtKilometer.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtKilometer.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
-            this.txtKilometer.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTime;
             this.txtKilometer.Size = new System.Drawing.Size(161, 20);
             this.txtKilometer.TabIndex = 3;
             // 
@@ -603,8 +599,8 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.LookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Brand", "Merek"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Tipe")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Kilometers", "Kilometer")});
             this.LookUpVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
             this.LookUpVehicle.Properties.HideSelection = false;
             this.LookUpVehicle.Properties.NullText = "-- Pilih Kendaraan --";
