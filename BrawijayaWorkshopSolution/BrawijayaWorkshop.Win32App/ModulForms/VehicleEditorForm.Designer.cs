@@ -223,8 +223,7 @@
             this.lookUpBrand.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpBrand.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Customer"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
             this.lookUpBrand.Properties.DisplayMember = "Name";
             this.lookUpBrand.Properties.HideSelection = false;
             this.lookUpBrand.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
@@ -247,8 +246,7 @@
             this.lookUpType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode Customer"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
             this.lookUpType.Properties.DisplayMember = "Name";
             this.lookUpType.Properties.HideSelection = false;
             this.lookUpType.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
