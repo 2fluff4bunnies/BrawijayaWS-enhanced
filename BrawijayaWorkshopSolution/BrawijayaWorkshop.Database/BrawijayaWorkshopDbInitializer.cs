@@ -1231,8 +1231,18 @@ namespace BrawijayaWorkshop.Database
             
             // todo: insert initial data here
 
-            //context.Database.ExecuteSqlCommand("CREATE VIEW VW_GUESTBOOK");
-            //context.Database.ExecuteSqlCommand("CREATE VIEW VW_SERVICESTATUS");
+            context.Database.ExecuteSqlCommand(@"CREATE OR REPLACE VIEW `vw_guestbook` AS
+                                                 SELECT
+                                                 b.Code `Kode`, b.ActiveLicenseNumber `Nopol`, a.Description `Keterangan`
+                                                 FROM guestbooks a, vehicles b, spks c
+                                                 WHERE a.vehicleId = b.Id AND b.Id = c.VehicleId
+                                                 AND c.StatusCompletedId = 0;");
+            context.Database.ExecuteSqlCommand(@"CREATE OR REPLACE VIEW `vw_servicestatus` AS
+                                                 SELECT
+                                                 b.Code `Kode`, b.ActiveLicenseNumber `Nopol`, c.CreateDate `Tgl. Masuk`,
+                                                 c.DueDate `Perkiraan Selesai`, 'In Progress' `Status`
+                                                 FROM vehicles b, spks c
+                                                 WHERE b.Id = c.VehicleId AND c.StatusCompletedId = 0;");
             //context.Database.ExecuteSqlCommand("CREATE PROCEDURE SP_UPDATEWHEELKILOMETERS");
         }
     }
