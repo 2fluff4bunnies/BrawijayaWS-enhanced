@@ -102,6 +102,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public decimal OldTotalPayment { get; set; }
+        public decimal OldTotalPaid { get; set; }
+        public decimal OldTotalNotPaid { get; set; }
+
         public int PaymentMethodId
         {
             get
@@ -181,6 +185,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data pembayaran selesai", true);
                 this.Close();
             }
+        }
+
+        private void txtTotalPayment_EditValueChanged(object sender, EventArgs e)
+        {
+            TotalPaid = OldTotalPaid - OldTotalPayment + TotalPayment;
+            TotalNotPaid = OldTotalNotPaid + OldTotalPayment - TotalPayment;
         }
 
     }

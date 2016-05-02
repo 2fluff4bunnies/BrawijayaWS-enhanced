@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebtEditorForm));
             this.gcDebtInfo = new DevExpress.XtraEditors.GroupControl();
             this.cbPaymentType = new DevExpress.XtraEditors.LookUpEdit();
@@ -102,9 +102,9 @@
             this.cbPaymentType.Properties.ValueMember = "Id";
             this.cbPaymentType.Size = new System.Drawing.Size(157, 20);
             this.cbPaymentType.TabIndex = 15;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Pilih salah satu jenis pembayaran";
-            this.valTotalPayment.SetValidationRule(this.cbPaymentType, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Pilih salah satu jenis pembayaran";
+            this.valTotalPayment.SetValidationRule(this.cbPaymentType, conditionValidationRule1);
             // 
             // lblPaymentType
             // 
@@ -120,9 +120,10 @@
             this.txtTotalPayment.Name = "txtTotalPayment";
             this.txtTotalPayment.Size = new System.Drawing.Size(157, 20);
             this.txtTotalPayment.TabIndex = 13;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Isi total akan dibayar";
-            this.valTotalPayment.SetValidationRule(this.txtTotalPayment, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Isi total akan dibayar";
+            this.valTotalPayment.SetValidationRule(this.txtTotalPayment, conditionValidationRule2);
+            this.txtTotalPayment.EditValueChanged += new System.EventHandler(this.txtTotalPayment_EditValueChanged);
             // 
             // lblTotalPayment
             // 

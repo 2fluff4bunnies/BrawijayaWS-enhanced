@@ -23,6 +23,10 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedInvoice = Model.GetSelectedInvoiceByTransaction(View.SelectedCredit.PrimaryKeyValue);
                 if (View.SelectedInvoice != null)
                 {
+                    View.OldTotalPayment = View.SelectedCredit.TotalPayment.AsDecimal();
+                    View.OldTotalPaid = View.SelectedInvoice.TotalHasPaid;
+                    View.OldTotalNotPaid = View.SelectedInvoice.TotalPrice - View.SelectedInvoice.TotalHasPaid;
+
                     View.Date = View.SelectedInvoice.CreateDate;
                     View.TotalTransaction = View.SelectedInvoice.TotalPrice;
                     View.TotalPaid = View.SelectedInvoice.TotalHasPaid;
@@ -34,6 +38,9 @@ namespace BrawijayaWorkshop.Presenter
             }
             else
             {
+                View.OldTotalPaid = View.SelectedInvoice.TotalHasPaid;
+                View.OldTotalNotPaid = View.SelectedInvoice.TotalPrice - View.SelectedInvoice.TotalHasPaid;
+
                 View.Date = View.SelectedInvoice.CreateDate;
                 View.TotalTransaction = View.SelectedInvoice.TotalPrice;
                 View.TotalPaid = View.SelectedInvoice.TotalHasPaid;

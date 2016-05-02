@@ -23,6 +23,10 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedPurchasing = Model.GetSelectedPurchasingByTransaction(View.SelectedDebt.PrimaryKeyValue);
                 if (View.SelectedPurchasing != null)
                 {
+                    View.OldTotalPayment = View.SelectedDebt.TotalPayment.AsDecimal();
+                    View.OldTotalPaid = View.SelectedPurchasing.TotalHasPaid;
+                    View.OldTotalNotPaid = View.SelectedPurchasing.TotalPrice - View.SelectedPurchasing.TotalHasPaid;
+
                     View.Date = View.SelectedPurchasing.Date;
                     View.TotalTransaction = View.SelectedPurchasing.TotalPrice;
                     View.TotalPaid = View.SelectedPurchasing.TotalHasPaid;
@@ -34,6 +38,9 @@ namespace BrawijayaWorkshop.Presenter
             }
             else
             {
+                View.OldTotalPaid = View.SelectedPurchasing.TotalHasPaid;
+                View.OldTotalNotPaid = View.SelectedPurchasing.TotalPrice - View.SelectedPurchasing.TotalHasPaid;
+
                 View.Date = View.SelectedPurchasing.Date;
                 View.TotalTransaction = View.SelectedPurchasing.TotalPrice;
                 View.TotalPaid = View.SelectedPurchasing.TotalHasPaid;

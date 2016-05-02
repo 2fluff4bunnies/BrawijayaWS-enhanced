@@ -31,6 +31,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void InvoiceEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            if(isContractWork)
+            {
+                txtFeeService20.Visible = true;
+                lblFeeService20.Visible = true;
+            }
+            else
+            {
+                txtFeeService20.Visible = false;
+                lblFeeService20.Visible = false;
+            }
         }
 
         public TransactionViewModel SelectedTransaction { get; set; }
@@ -189,6 +199,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public decimal TotalFeeSparepart
+        {
+            get
+            {
+                return txtFeeSparepart.Text.AsDecimal();
+            }
+            set
+            {
+                txtFeeSparepart.Text = value.ToString("#,##");
+            }
+        }
+
         public decimal TotalService
         {
             get
@@ -226,6 +248,30 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public decimal TotalFeeService10
+        {
+            get
+            {
+                return txtFeeService10.Text.AsDecimal();
+            }
+            set
+            {
+                txtFeeService10.Text = value.ToString("#,##");
+            }
+        }
+
+        public decimal TotalFeeService20
+        {
+            get
+            {
+                return txtFeeService20.Text.AsDecimal();
+            }
+            set
+            {
+                txtFeeService20.Text = value.ToString("#,##");
+            }
+        }
+
         public bool IsApplyToAll
         {
             get
@@ -237,6 +283,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 chkApplyToAll.Checked = value;
             }
         }
+
+        public bool isContractWork { get; set; }
 
         public double MasterFee
         {
@@ -261,6 +309,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
                 TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
             }
         }
@@ -278,6 +327,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 ListInvoiceDetail = list;
                 TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
             }
         }
@@ -298,6 +348,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ListInvoiceDetail = list;
             TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
             TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+            TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
             TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
         }
 

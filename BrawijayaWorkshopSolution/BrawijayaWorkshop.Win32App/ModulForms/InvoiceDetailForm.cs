@@ -30,6 +30,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void InvoiceDetailForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            if (isContractWork)
+            {
+                txtFeeService20.Visible = true;
+                lblFeeService20.Visible = true;
+            }
+            else
+            {
+                txtFeeService20.Visible = false;
+                lblFeeService20.Visible = false;
+            }
         }
 
         public TransactionViewModel SelectedTransaction { get; set; }
@@ -160,6 +170,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public decimal TotalFeeSparepart
+        {
+            get
+            {
+                return txtFeeSparepart.Text.AsDecimal();
+            }
+            set
+            {
+                txtFeeSparepart.Text = value.ToString("#,##");
+            }
+        }
+
         public decimal TotalService
         {
             get
@@ -182,6 +204,32 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtTotalServicePlusFee.Text = value.ToString("#,##");
             }
         }
+
+        public decimal TotalFeeService10
+        {
+            get
+            {
+                return txtFeeService10.Text.AsDecimal();
+            }
+            set
+            {
+                txtFeeService10.Text = value.ToString("#,##");
+            }
+        }
+
+        public decimal TotalFeeService20
+        {
+            get
+            {
+                return txtFeeService20.Text.AsDecimal();
+            }
+            set
+            {
+                txtFeeService20.Text = value.ToString("#,##");
+            }
+        }
+
+        public bool isContractWork { get; set; }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {

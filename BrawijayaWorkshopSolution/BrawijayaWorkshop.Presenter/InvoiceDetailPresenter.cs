@@ -24,11 +24,15 @@ namespace BrawijayaWorkshop.Presenter
                 View.Date = View.SelectedInvoice.CreateDate;
                 View.TotalService = View.SelectedInvoice.TotalService;
                 View.TotalServicePlusFee = View.SelectedInvoice.TotalServicePlusFee;
+                View.TotalFeeService10 = (0.1 * View.TotalService.AsDouble()).AsDecimal();
+                View.TotalFeeService20 = (0.2 * View.TotalService.AsDouble()).AsDecimal();
                 View.TotalTransaction = View.SelectedInvoice.TotalPrice;
                 View.CustomerName = View.SelectedInvoice.SPK.Vehicle.Customer.CompanyName;
                 View.TotalSparepart = View.ListInvoiceDetail.Sum(x => x.ItemPrice);
                 View.TotalSparepartPlusFee = View.ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                View.TotalFeeSparepart = View.TotalSparepartPlusFee - View.TotalSparepart;
                 View.TotalPayment = View.SelectedInvoice.TotalHasPaid;
+                View.isContractWork = View.SelectedInvoice.SPK.isContractWork;
                 if (View.SelectedInvoice.Status != (int)DbConstant.InvoiceStatus.FeeNotFixed)
                 {
                     View.PaymentMethodId = View.SelectedInvoice.PaymentMethodId;

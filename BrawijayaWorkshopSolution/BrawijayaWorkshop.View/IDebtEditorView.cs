@@ -21,5 +21,10 @@ namespace BrawijayaWorkshop.View
         int PaymentMethodId { get; set; }
 
         List<ReferenceViewModel> ListPaymentMethod { get; set; }
+
+        decimal OldTotalPayment { get; set; }
+        decimal OldTotalPaid { get; set; }
+        decimal OldTotalNotPaid { get; set; }
+        
     }
 }
