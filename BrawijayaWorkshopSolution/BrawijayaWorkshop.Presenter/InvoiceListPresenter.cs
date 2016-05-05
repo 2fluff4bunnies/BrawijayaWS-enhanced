@@ -64,18 +64,28 @@ namespace BrawijayaWorkshop.Presenter
                 listDetails.AddRange(Model.GetInvoiceDetailsByParentId(item.Id));
             }
 
-            //var exportInvoices =
-            //    from inv in listDetails
-            //    select new { InvoiceCode = inv.Invoice.Code, inv.Invoice.CreateDate,
-            //        inv.Invoice.SPK.Vehicle.Customer.CompanyName,
-            //        VehicleCode = inv.Invoice.SPK.Vehicle.Code,
-            //        inv.Invoice.SPK.Vehicle.ActiveLicenseNumber,
-            //        GrandTotal = inv.Invoice.TotalPrice,
-            //        inv.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name,
-            //        inv.SPKDetailSparepartDetail.SPKDetailSparepart.
-            //        inv.SubTotalPrice};
+            var exportInvoices =
+                from inv in listDetails
+                group inv by
+                new { InvoiceCode = inv.Invoice.Code, inv.Invoice.CreateDate, 
+                    inv.Invoice.SPK.Vehicle.Customer.CompanyName,
+                    VehicleCode = inv.Invoice.SPK.Vehicle.Code,
+                    inv.Invoice.SPK.Vehicle.ActiveLicenseNumber,
+                    inv.Invoice.TotalPrice
+                } into g
+                select new
+                {
+                    g.Key.InvoiceCode,
+                    g.Key.CreateDate,
+                    g.Key.VehicleCode,
+                    VehicleLicenseNumber = g.Key.ActiveLicenseNumber,
+                    GrandTotalInvoice = g.Key.TotalPrice,
+                    Sparepart = g.First().SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name,
+                    Quantity = g.Count(),
+                    SubTotal = g.Sum(inv => inv.SubTotalPrice)
+                };
 
-            //cc.Write(exportInvoices, View.ExportFileName, outputFileDescription);
+            cc.Write(exportInvoices, View.ExportFileName, outputFileDescription);
         }
 
         public void PrintAll()
