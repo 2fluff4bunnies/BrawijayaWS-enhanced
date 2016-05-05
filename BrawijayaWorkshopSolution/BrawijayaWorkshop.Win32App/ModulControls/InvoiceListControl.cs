@@ -52,6 +52,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             _presenter.InitData();
             btnSearch.PerformClick();
+            EnableExport();
         }
 
         private void gvInvoice_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -205,7 +206,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return cbPaymentStatus.SelectedText;
+                string result = "Semua";
+                if (cbPaymentStatus.EditValue != null)
+                {
+                    result = cbPaymentStatus.EditValue.ToString();
+                }
+                return result;
             }
         }
 
@@ -351,7 +357,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void exportDialog_FileOk(object sender, CancelEventArgs e)
         {
             ExportFileName = exportDialog.FileName;
-            
+
             MethodBase.GetCurrentMethod().Info("Exporting Invoice data...");
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Invoice...", false);
             bgwExport.RunWorkerAsync();
@@ -359,14 +365,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            btnExportToCSV.Enabled = lookUpCustomer.EditValue.AsInteger() > 0;
-            btnExportToCSV.Enabled = cbPaymentStatus.SelectedText == "Belum Lunas";
+            EnableExport();
         }
 
         private void cbPaymentStatus_EditValueChanged(object sender, EventArgs e)
         {
-            btnExportToCSV.Enabled = lookUpCustomer.EditValue.AsInteger() > 0;
-            btnExportToCSV.Enabled = cbPaymentStatus.SelectedText == "Belum Lunas";
+            EnableExport();
+        }
+
+        private void EnableExport()
+        {
+            btnExportToCSV.Enabled = SelectedCustomerId > 0 && InvoiceStatusPayment == "Belum Lunas";
         }
 
         private void bgwExport_DoWork(object sender, DoWorkEventArgs e)
