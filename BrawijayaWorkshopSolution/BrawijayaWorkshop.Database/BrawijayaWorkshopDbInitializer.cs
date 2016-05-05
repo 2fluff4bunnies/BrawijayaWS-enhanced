@@ -1243,7 +1243,15 @@ namespace BrawijayaWorkshop.Database
                                                  c.DueDate `Perkiraan Selesai`, 'In Progress' `Status`
                                                  FROM vehicles b, spks c
                                                  WHERE b.Id = c.VehicleId AND c.StatusCompletedId = 0;");
-            //context.Database.ExecuteSqlCommand("CREATE PROCEDURE SP_UPDATEWHEELKILOMETERS");
+            context.Database.ExecuteSqlCommand(@"CREATE PROCEDURE `sp_updatevehicle_km`(
+	                                                 IN p_code LONGTEXT,
+                                                     IN p_km INT
+                                                 )
+                                                 BEGIN
+	                                                 UPDATE vehicle
+                                                     SET kilometers = p_km
+                                                     WHERE `code`=p_code;
+                                                 END");
         }
     }
 }

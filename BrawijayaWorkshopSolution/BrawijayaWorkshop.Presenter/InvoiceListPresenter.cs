@@ -71,16 +71,17 @@ namespace BrawijayaWorkshop.Presenter
                     inv.Invoice.SPK.Vehicle.Customer.CompanyName,
                     VehicleCode = inv.Invoice.SPK.Vehicle.Code,
                     inv.Invoice.SPK.Vehicle.ActiveLicenseNumber,
-                    inv.Invoice.TotalPrice
+                    inv.Invoice.TotalPrice,
+                    Sparepart = inv.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name
                 } into g
                 select new
                 {
                     g.Key.InvoiceCode,
-                    g.Key.CreateDate,
+                    InvoiceDate = g.Key.CreateDate.ToString("yyyyMMdd"),
                     g.Key.VehicleCode,
                     VehicleLicenseNumber = g.Key.ActiveLicenseNumber,
                     GrandTotalInvoice = g.Key.TotalPrice,
-                    Sparepart = g.First().SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name,
+                    Sparepart = g.Key.Sparepart,
                     Quantity = g.Count(),
                     SubTotal = g.Sum(inv => inv.SubTotalPrice)
                 };
