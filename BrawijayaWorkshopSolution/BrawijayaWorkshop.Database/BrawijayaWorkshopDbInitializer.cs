@@ -1228,8 +1228,6 @@ namespace BrawijayaWorkshop.Database
                 Value = "5000000"
             });
             context.SaveChanges();
-            
-            // todo: insert initial data here
 
             context.Database.ExecuteSqlCommand(@"CREATE OR REPLACE VIEW `vw_guestbook` AS
                                                  SELECT
@@ -1251,6 +1249,15 @@ namespace BrawijayaWorkshop.Database
 	                                                 UPDATE vehicle
                                                      SET kilometers = p_km
                                                      WHERE `code`=p_code;
+                                                 END");
+            context.Database.ExecuteSqlCommand(@"CREATE PROCEDURE `sp_updatevehicle_wheel_km` (
+	                                                 IN p_serialnumber VARCHAR(100),
+                                                     IN p_km INT
+                                                 )
+                                                 BEGIN
+	                                                 UPDATE specialsparepartdetails
+                                                     SET kilometers = p_km
+                                                     WHERE serialnumber = p_serialnumber;
                                                  END");
         }
     }
