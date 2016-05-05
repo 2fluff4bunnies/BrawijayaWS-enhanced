@@ -13,11 +13,19 @@ namespace BrawijayaWorkshop.View
 
         int InvoiceStatusFilter { get; set; }
 
+        int SelectedCustomerId { get; }
+
+        string InvoiceStatusPayment { get; }
+
+        string ExportFileName { get; set; }
+
         List<InvoiceViewModel> InvoiceListData { get; set; }
 
         InvoiceViewModel SelectedInvoice { get; set; }
 
         List<InvoiceStatusItem> InvoiceStatusList { get; set; }
+
+        List<CustomerViewModel> CustomerListOption { get; set; }
     }
 
     public class InvoiceStatusItem

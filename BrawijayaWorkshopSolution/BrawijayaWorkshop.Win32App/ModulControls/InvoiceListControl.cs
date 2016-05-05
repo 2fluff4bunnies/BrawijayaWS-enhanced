@@ -57,15 +57,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvInvoice_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedInvoice = gvInvoice.GetFocusedRow() as InvoiceViewModel;
-            if(this.SelectedInvoice != null)
+            if (this.SelectedInvoice != null)
             {
-                if(this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.FeeNotFixed)
+                if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.FeeNotFixed)
                 {
                     cmsAddData.Visible = true;
                     cmsEditData.Visible = false;
                     cmsPrint.Visible = false;
                 }
-                else if(this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
+                else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
                 {
                     cmsAddData.Visible = false;
                     cmsEditData.Visible = true;
@@ -193,6 +193,36 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public int SelectedCustomerId
+        {
+            get
+            {
+                return lookUpCustomer.EditValue.AsInteger();
+            }
+        }
+
+        public string InvoiceStatusPayment
+        {
+            get
+            {
+                return cbPaymentStatus.SelectedText;
+            }
+        }
+
+        public List<CustomerViewModel> CustomerListOption
+        {
+            get
+            {
+                return lookUpCustomer.Properties.DataSource as List<CustomerViewModel>;
+            }
+            set
+            {
+                lookUpCustomer.Properties.DataSource = value;
+            }
+        }
+
+        public string ExportFileName { get; set; }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             RefreshDataView();
@@ -290,7 +320,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
-            if(this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
+            if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
             {
                 InvoicePrintItem report = new InvoicePrintItem();
                 List<InvoiceViewModel> _dataSource = new List<InvoiceViewModel>();
@@ -305,6 +335,61 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 }
                 _presenter.PrintAll();
             }
+        }
+
+        private void btnExportToCSV_Click(object sender, EventArgs e)
+        {
+            if (!bgwExport.IsBusy && !bgwMain.IsBusy)
+            {
+                ExportFileName = string.Empty;
+                btnSearch.PerformClick();
+                exportDialog.FileName = "Invoice_" + SelectedCustomerId + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".csv";
+                exportDialog.ShowDialog(this);
+            }
+        }
+
+        private void exportDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            ExportFileName = exportDialog.FileName;
+            
+            MethodBase.GetCurrentMethod().Info("Exporting Invoice data...");
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Invoice...", false);
+            bgwExport.RunWorkerAsync();
+        }
+
+        private void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            btnExportToCSV.Enabled = lookUpCustomer.EditValue.AsInteger() > 0;
+            btnExportToCSV.Enabled = cbPaymentStatus.SelectedText == "Belum Lunas";
+        }
+
+        private void cbPaymentStatus_EditValueChanged(object sender, EventArgs e)
+        {
+            btnExportToCSV.Enabled = lookUpCustomer.EditValue.AsInteger() > 0;
+            btnExportToCSV.Enabled = cbPaymentStatus.SelectedText == "Belum Lunas";
+        }
+
+        private void bgwExport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.ExportToCSV();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to export Invoice", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses export invoice gagal!");
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Export invoice selesai", true);
         }
     }
 }

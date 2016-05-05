@@ -12,13 +12,25 @@ namespace BrawijayaWorkshop.Model
     public class InvoiceListModel : AppBaseModel
     {
         private IInvoiceRepository _invoiceRepository;
+        private IInvoiceDetailRepository _invoiceDetailRepository;
+        private ICustomerRepository _customerRepository;
         private IUnitOfWork _unitOfWork;
 
-        public InvoiceListModel(IInvoiceRepository invoiceRepository, IUnitOfWork unitOfWork)
+        public InvoiceListModel(IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,
+            ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
+            _customerRepository = customerRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public List<CustomerViewModel> GetAllCustomer()
+        {
+            List<Customer> result = _customerRepository.GetAll().ToList();
+            List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            return Map(result, mappedResult);
         }
 
         public void Print(int[] invoiceIDs)
@@ -32,10 +44,11 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork.SaveChanges();
         }
 
-        public List<InvoiceViewModel> SearchInvoice(DateTime? dateFrom, DateTime? dateTo, DbConstant.InvoiceStatus invoiceStatus)
+        public List<InvoiceViewModel> SearchInvoice(DateTime? dateFrom, DateTime? dateTo,
+            DbConstant.InvoiceStatus invoiceStatus, int customerId, int paymentStatus)
         {
             List<Invoice> result = null;
-            
+
             if (dateFrom.HasValue && dateTo.HasValue)
             {
                 dateFrom = dateFrom.Value.Date;
@@ -50,9 +63,28 @@ namespace BrawijayaWorkshop.Model
             if ((int)invoiceStatus != 9)
             {
                 result = result.Where(spk => spk.Status == (int)invoiceStatus).ToList();
-            } 
+            }
+
+            if(customerId > 0)
+            {
+                result = result.Where(inv => inv.SPK.Vehicle.CustomerId == customerId).ToList();
+            }
+
+            if(paymentStatus > -1)
+            {
+                result = result.Where(inv => inv.PaymentStatus == paymentStatus).ToList();
+            }
 
             List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<InvoiceDetailViewModel> GetInvoiceDetailsByParentId(int invoiceId)
+        {
+            List<InvoiceDetail> result = _invoiceDetailRepository.GetMany(invd =>
+                invd.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                invd.InvoiceId == invoiceId).ToList();
+            List<InvoiceDetailViewModel> mappedResult = new List<InvoiceDetailViewModel>();
             return Map(result, mappedResult);
         }
     }

@@ -1,10 +1,12 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LINQtoCSV;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -19,11 +21,61 @@ namespace BrawijayaWorkshop.Presenter
             View.DateFromFilter = DateTime.Now;
             View.DateToFilter = DateTime.Now;
             View.InvoiceStatusFilter = 9;
+            List<CustomerViewModel> listCustomer = Model.GetAllCustomer();
+            listCustomer.Insert(0, new CustomerViewModel
+            {
+                Id = 0,
+                CompanyName = "Semua",
+                Address = "Semua"
+            });
+            View.CustomerListOption = listCustomer;
         }
 
         public void LoadInvoiceList()
         {
-            View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter);
+            int paymentStatus = -1;
+            if(string.Compare(View.InvoiceStatusPayment, "Belum Lunas", true) == 0)
+            {
+                paymentStatus = 0;
+            }
+            if (string.Compare(View.InvoiceStatusPayment, "Lunas", true) == 0)
+            {
+                paymentStatus = 1;
+            }
+
+            View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter, View.SelectedCustomerId, paymentStatus);
+        }
+
+        public void ExportToCSV()
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                QuoteAllFields = true,
+                SeparatorChar = ';', // tab delimited
+                FirstLineHasColumnNames = true,
+                FileCultureName = "en-US"
+            };
+
+            // prepare invoices
+            List<InvoiceDetailViewModel> listDetails = new List<InvoiceDetailViewModel>();
+            foreach (var item in View.InvoiceListData)
+            {
+                listDetails.AddRange(Model.GetInvoiceDetailsByParentId(item.Id));
+            }
+
+            //var exportInvoices =
+            //    from inv in listDetails
+            //    select new { InvoiceCode = inv.Invoice.Code, inv.Invoice.CreateDate,
+            //        inv.Invoice.SPK.Vehicle.Customer.CompanyName,
+            //        VehicleCode = inv.Invoice.SPK.Vehicle.Code,
+            //        inv.Invoice.SPK.Vehicle.ActiveLicenseNumber,
+            //        GrandTotal = inv.Invoice.TotalPrice,
+            //        inv.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name,
+            //        inv.SPKDetailSparepartDetail.SPKDetailSparepart.
+            //        inv.SubTotalPrice};
+
+            //cc.Write(exportInvoices, View.ExportFileName, outputFileDescription);
         }
 
         public void PrintAll()

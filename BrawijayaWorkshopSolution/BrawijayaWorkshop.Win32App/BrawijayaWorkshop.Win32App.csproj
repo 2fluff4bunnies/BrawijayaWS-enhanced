@@ -1114,6 +1114,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\export3_16x16.png" />
+    <None Include="Resources\export2_16x16.png" />
+    <None Include="Resources\export_16x16.png" />
     <None Include="Resources\SPKApprovalEmailTemplate.txt" />
     <None Include="Images\approve 16x16.png" />
     <None Include="Images\print_16x16.png" />
