@@ -85,6 +85,15 @@ namespace BrawijayaWorkshop.Model
                     entity.ModifyUserId = userId;
                     entity.Status = (int)DbConstant.InvoiceStatus.NotPrinted;
 
+                    if (entity.TotalHasPaid == entity.TotalPrice)
+                    {
+                        entity.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+                    }
+                    else
+                    {
+                        entity.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+                    }
+
                     _invoiceRepository.AttachNavigation(entity.CreateUser); // yang inherit ke base modifier harus ada ini, klo gak user e dobel2
                     _invoiceRepository.AttachNavigation(entity.ModifyUser); // yang inherit ke base modifier harus ada ini, klo gak user e dobel2
                     _invoiceRepository.AttachNavigation(entity.SPK);
