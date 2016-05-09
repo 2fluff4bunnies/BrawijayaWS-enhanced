@@ -88,7 +88,10 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDate.Properties.HideSelection = false;
+            this.txtDate.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDate.Size = new System.Drawing.Size(159, 20);
             this.txtDate.TabIndex = 0;

@@ -232,6 +232,8 @@
             // ColCreatedDate
             // 
             this.ColCreatedDate.Caption = "Tanggal";
+            this.ColCreatedDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.ColCreatedDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.ColCreatedDate.FieldName = "CreateDate.Date";
             this.ColCreatedDate.Name = "ColCreatedDate";
             this.ColCreatedDate.Visible = true;

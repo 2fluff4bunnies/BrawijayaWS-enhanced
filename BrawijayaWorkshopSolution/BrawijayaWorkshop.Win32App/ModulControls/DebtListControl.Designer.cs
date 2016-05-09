@@ -184,6 +184,8 @@
             // colTransDate
             // 
             this.colTransDate.Caption = "Tgl Transaksi";
+            this.colTransDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colTransDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colTransDate.FieldName = "Date";
             this.colTransDate.Name = "colTransDate";
             this.colTransDate.Visible = true;

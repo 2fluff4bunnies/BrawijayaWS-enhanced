@@ -270,6 +270,8 @@
             // colDate
             // 
             this.colDate.Caption = "Tanggal";
+            this.colDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colDate.FieldName = "CreateDate";
             this.colDate.Name = "colDate";
             this.colDate.Visible = true;

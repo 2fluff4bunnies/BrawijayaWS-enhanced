@@ -108,6 +108,8 @@
             // colCreateDate
             // 
             this.colCreateDate.Caption = "Tanggal Pembuatan";
+            this.colCreateDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colCreateDate.FieldName = "CreateDate";
             this.colCreateDate.Name = "colCreateDate";
             this.colCreateDate.Visible = true;
@@ -116,6 +118,8 @@
             // colDueDate
             // 
             this.colDueDate.Caption = "Batas Waktu";
+            this.colDueDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colDueDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colDueDate.FieldName = "DueDate";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Visible = true;

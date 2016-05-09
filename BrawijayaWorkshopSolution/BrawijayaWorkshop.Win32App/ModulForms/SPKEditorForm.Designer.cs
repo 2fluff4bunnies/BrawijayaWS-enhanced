@@ -582,6 +582,9 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpDueDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.dtpDueDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dtpDueDate.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dtpDueDate.Size = new System.Drawing.Size(161, 20);
             this.dtpDueDate.TabIndex = 2;

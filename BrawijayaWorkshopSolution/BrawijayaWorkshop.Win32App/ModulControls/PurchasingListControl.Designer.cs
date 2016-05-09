@@ -226,6 +226,8 @@
             // colDatePurchasing
             // 
             this.colDatePurchasing.Caption = "Tanggal";
+            this.colDatePurchasing.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colDatePurchasing.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colDatePurchasing.FieldName = "Date";
             this.colDatePurchasing.Name = "colDatePurchasing";
             this.colDatePurchasing.Visible = true;
