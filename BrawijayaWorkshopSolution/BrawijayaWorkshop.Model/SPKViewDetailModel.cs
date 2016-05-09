@@ -312,7 +312,7 @@ namespace BrawijayaWorkshop.Model
             if (spk.isContractWork)
             {
                 invc.TotalService = spk.ContractWorkFee;
-                invc.TotalServicePlusFee = spk.ContractWorkFee + (spk.ContractWorkFee * (0.2).AsDecimal());
+                invc.TotalServicePlusFee = spk.ContractWorkFee + (spk.ContractWorkFee * (0.3).AsDecimal());
                 invc.TotalPrice = spk.TotalSparepartPrice + invc.TotalServicePlusFee;
             }
             else
