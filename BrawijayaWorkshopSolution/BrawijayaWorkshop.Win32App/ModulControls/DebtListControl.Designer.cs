@@ -78,7 +78,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(457, 28);
+            this.btnSearch.Location = new System.Drawing.Point(425, 29);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 6;
@@ -87,7 +87,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(284, 34);
+            this.labelControl1.Location = new System.Drawing.Point(271, 34);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(4, 13);
             this.labelControl1.TabIndex = 5;
@@ -96,13 +96,18 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(281, 31);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
             this.txtDateFilterTo.TabIndex = 4;
@@ -110,13 +115,18 @@
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(140, 31);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(127, 31);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterFrom.Size = new System.Drawing.Size(138, 20);
             this.txtDateFilterFrom.TabIndex = 2;
@@ -134,10 +144,10 @@
             this.gridDebt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridDebt.Location = new System.Drawing.Point(0, 99);
+            this.gridDebt.Location = new System.Drawing.Point(0, 70);
             this.gridDebt.MainView = this.gvDebt;
             this.gridDebt.Name = "gridDebt";
-            this.gridDebt.Size = new System.Drawing.Size(636, 213);
+            this.gridDebt.Size = new System.Drawing.Size(636, 242);
             this.gridDebt.TabIndex = 5;
             this.gridDebt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDebt});

@@ -74,25 +74,30 @@
             this.groupFilter.Controls.Add(this.lblMechanic);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(752, 88);
+            this.groupFilter.Size = new System.Drawing.Size(752, 96);
             this.groupFilter.TabIndex = 2;
             this.groupFilter.Text = "Filter";
             // 
             // dteCreatedDate
             // 
             this.dteCreatedDate.EditValue = null;
-            this.dteCreatedDate.Location = new System.Drawing.Point(332, 23);
+            this.dteCreatedDate.Location = new System.Drawing.Point(316, 30);
             this.dteCreatedDate.Name = "dteCreatedDate";
             this.dteCreatedDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteCreatedDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dteCreatedDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.dteCreatedDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dteCreatedDate.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.dteCreatedDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dteCreatedDate.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.dteCreatedDate.Size = new System.Drawing.Size(141, 20);
             this.dteCreatedDate.TabIndex = 17;
             // 
             // lblCreatedDate
             // 
-            this.lblCreatedDate.Location = new System.Drawing.Point(274, 26);
+            this.lblCreatedDate.Location = new System.Drawing.Point(262, 33);
             this.lblCreatedDate.Name = "lblCreatedDate";
             this.lblCreatedDate.Size = new System.Drawing.Size(38, 13);
             this.lblCreatedDate.TabIndex = 16;
@@ -100,7 +105,7 @@
             // 
             // lookUpSPKVehicle
             // 
-            this.lookUpSPKVehicle.Location = new System.Drawing.Point(111, 55);
+            this.lookUpSPKVehicle.Location = new System.Drawing.Point(80, 62);
             this.lookUpSPKVehicle.Name = "lookUpSPKVehicle";
             this.lookUpSPKVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpSPKVehicle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -117,7 +122,7 @@
             // 
             // lblSPKVehicle
             // 
-            this.lblSPKVehicle.Location = new System.Drawing.Point(11, 58);
+            this.lblSPKVehicle.Location = new System.Drawing.Point(13, 65);
             this.lblSPKVehicle.Name = "lblSPKVehicle";
             this.lblSPKVehicle.Size = new System.Drawing.Size(52, 13);
             this.lblSPKVehicle.TabIndex = 5;
@@ -125,7 +130,7 @@
             // 
             // lookUpMechanic
             // 
-            this.lookUpMechanic.Location = new System.Drawing.Point(111, 23);
+            this.lookUpMechanic.Location = new System.Drawing.Point(80, 30);
             this.lookUpMechanic.Name = "lookUpMechanic";
             this.lookUpMechanic.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpMechanic.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -145,16 +150,16 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(489, 23);
+            this.btnSearch.Location = new System.Drawing.Point(472, 29);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(80, 55);
+            this.btnSearch.Size = new System.Drawing.Size(80, 53);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblMechanic
             // 
-            this.lblMechanic.Location = new System.Drawing.Point(11, 26);
+            this.lblMechanic.Location = new System.Drawing.Point(13, 33);
             this.lblMechanic.Name = "lblMechanic";
             this.lblMechanic.Size = new System.Drawing.Size(38, 13);
             this.lblMechanic.TabIndex = 0;
@@ -165,7 +170,7 @@
             this.btnNewSPKSchedule.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPKSchedule.Image")));
             this.btnNewSPKSchedule.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewSPKSchedule.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewSPKSchedule.Location = new System.Drawing.Point(3, 97);
+            this.btnNewSPKSchedule.Location = new System.Drawing.Point(3, 105);
             this.btnNewSPKSchedule.Name = "btnNewSPKSchedule";
             this.btnNewSPKSchedule.Size = new System.Drawing.Size(176, 23);
             this.btnNewSPKSchedule.TabIndex = 18;
@@ -177,10 +182,10 @@
             this.gcSPKSchedule.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSPKSchedule.Location = new System.Drawing.Point(3, 126);
+            this.gcSPKSchedule.Location = new System.Drawing.Point(3, 134);
             this.gcSPKSchedule.MainView = this.gvSPKSchedule;
             this.gcSPKSchedule.Name = "gcSPKSchedule";
-            this.gcSPKSchedule.Size = new System.Drawing.Size(752, 224);
+            this.gcSPKSchedule.Size = new System.Drawing.Size(752, 223);
             this.gcSPKSchedule.TabIndex = 19;
             this.gcSPKSchedule.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPKSchedule});

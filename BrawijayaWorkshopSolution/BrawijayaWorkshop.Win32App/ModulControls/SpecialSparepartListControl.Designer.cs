@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpecialSparepartListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -40,7 +41,7 @@
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartStock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnNewSpecialSparepart = new DevExpress.XtraEditors.SimpleButton();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +64,7 @@
             this.groupFilter.Controls.Add(this.lblName);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(826, 63);
+            this.groupFilter.Size = new System.Drawing.Size(825, 63);
             this.groupFilter.TabIndex = 1;
             this.groupFilter.Text = "Filter";
             // 
@@ -161,13 +162,13 @@
             this.colSparepartStock.Visible = true;
             this.colSparepartStock.VisibleIndex = 3;
             // 
-            // btnNewWheel
+            // btnNewSpecialSparepart
             // 
-            this.btnNewSpecialSparepart.Image = ((System.Drawing.Image)(resources.GetObject("btnNewWheel.Image")));
+            this.btnNewSpecialSparepart.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSpecialSparepart.Image")));
             this.btnNewSpecialSparepart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewSpecialSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewSpecialSparepart.Location = new System.Drawing.Point(3, 72);
-            this.btnNewSpecialSparepart.Name = "btnNewWheel";
+            this.btnNewSpecialSparepart.Name = "btnNewSpecialSparepart";
             this.btnNewSpecialSparepart.Size = new System.Drawing.Size(105, 23);
             this.btnNewSpecialSparepart.TabIndex = 6;
             this.btnNewSpecialSparepart.Text = "Buat Ban Baru";
@@ -217,14 +218,14 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // WheelListControl
+            // SpecialSparepartListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnNewSpecialSparepart);
             this.Controls.Add(this.gcSpecialSparepart);
             this.Controls.Add(this.groupFilter);
-            this.Name = "WheelListControl";
+            this.Name = "SpecialSparepartListControl";
             this.Size = new System.Drawing.Size(831, 441);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);

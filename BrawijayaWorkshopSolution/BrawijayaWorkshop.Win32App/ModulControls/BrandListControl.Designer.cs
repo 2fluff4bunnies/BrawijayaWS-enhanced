@@ -81,9 +81,9 @@
             // 
             this.txtFilterName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilterName.Location = new System.Drawing.Point(128, 30);
+            this.txtFilterName.Location = new System.Drawing.Point(63, 30);
             this.txtFilterName.Name = "txtFilterName";
-            this.txtFilterName.Size = new System.Drawing.Size(374, 20);
+            this.txtFilterName.Size = new System.Drawing.Size(439, 20);
             this.txtFilterName.TabIndex = 1;
             // 
             // lblFilterName

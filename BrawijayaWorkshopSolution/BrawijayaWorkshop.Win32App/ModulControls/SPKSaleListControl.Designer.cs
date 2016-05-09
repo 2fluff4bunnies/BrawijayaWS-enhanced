@@ -42,10 +42,10 @@
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
             this.gcSPKSales = new DevExpress.XtraGrid.GridControl();
             this.gvSPKSales = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
@@ -91,7 +91,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(284, 34);
+            this.labelControl1.Location = new System.Drawing.Point(278, 34);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(4, 13);
             this.labelControl1.TabIndex = 5;
@@ -100,13 +100,18 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(294, 31);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(288, 31);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
             this.txtDateFilterTo.TabIndex = 4;
@@ -116,7 +121,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(438, 28);
+            this.btnSearch.Location = new System.Drawing.Point(432, 29);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -126,13 +131,18 @@
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(140, 31);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(134, 31);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterFrom.Size = new System.Drawing.Size(138, 20);
             this.txtDateFilterFrom.TabIndex = 2;
@@ -196,6 +206,16 @@
             this.gvSPKSales.OptionsView.ShowViewCaption = true;
             this.gvSPKSales.ViewCaption = "Daftar SPK";
             // 
+            // colCreateDate
+            // 
+            this.colCreateDate.Caption = "Tanggal Pembuatan";
+            this.colCreateDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.colCreateDate.FieldName = "CreateDate";
+            this.colCreateDate.Name = "colCreateDate";
+            this.colCreateDate.Visible = true;
+            this.colCreateDate.VisibleIndex = 0;
+            // 
             // colCode
             // 
             this.colCode.Caption = "Kode";
@@ -221,16 +241,6 @@
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 3;
-            // 
-            // colCreateDate
-            // 
-            this.colCreateDate.Caption = "Tanggal Pembuatan";
-            this.colCreateDate.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.colCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.colCreateDate.FieldName = "CreateDate";
-            this.colCreateDate.Name = "colCreateDate";
-            this.colCreateDate.Visible = true;
-            this.colCreateDate.VisibleIndex = 0;
             // 
             // SPKSaleListControl
             // 

@@ -59,7 +59,7 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtFilterSparepartName);
             this.gcFilter.Controls.Add(this.lblFilterCompanyName);
-            this.gcFilter.Location = new System.Drawing.Point(0, 0);
+            this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
             this.gcFilter.Size = new System.Drawing.Size(575, 62);
             this.gcFilter.TabIndex = 1;
@@ -71,7 +71,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(511, 26);
+            this.btnSearch.Location = new System.Drawing.Point(511, 27);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -100,7 +100,7 @@
             this.gridUsedGoodTrans.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridUsedGoodTrans.Location = new System.Drawing.Point(3, 97);
+            this.gridUsedGoodTrans.Location = new System.Drawing.Point(3, 100);
             this.gridUsedGoodTrans.MainView = this.gvUsedGoodTrans;
             this.gridUsedGoodTrans.Name = "gridUsedGoodTrans";
             this.gridUsedGoodTrans.Size = new System.Drawing.Size(575, 224);
@@ -168,7 +168,7 @@
             this.btnNewUsedGoodTrans.Image = ((System.Drawing.Image)(resources.GetObject("btnNewUsedGoodTrans.Image")));
             this.btnNewUsedGoodTrans.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewUsedGoodTrans.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewUsedGoodTrans.Location = new System.Drawing.Point(3, 68);
+            this.btnNewUsedGoodTrans.Location = new System.Drawing.Point(3, 71);
             this.btnNewUsedGoodTrans.Name = "btnNewUsedGoodTrans";
             this.btnNewUsedGoodTrans.Size = new System.Drawing.Size(219, 23);
             this.btnNewUsedGoodTrans.TabIndex = 5;
@@ -185,13 +185,13 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsEditData});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(122, 26);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(121, 22);
             this.cmsEditData.Text = "Edit Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 

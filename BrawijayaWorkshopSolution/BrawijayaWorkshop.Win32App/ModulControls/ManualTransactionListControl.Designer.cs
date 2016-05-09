@@ -87,15 +87,18 @@
             // deTo
             // 
             this.deTo.EditValue = null;
-            this.deTo.Location = new System.Drawing.Point(261, 30);
+            this.deTo.Location = new System.Drawing.Point(250, 30);
             this.deTo.Name = "deTo";
             this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTo.Properties.DisplayFormat.FormatString = "dd MMM yyyy";
+            this.deTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
             this.deTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.deTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.deTo.Properties.HideSelection = false;
+            this.deTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.deTo.Properties.NullDate = "";
             this.deTo.Properties.NullText = "-- Pilih Tanggal --";
             this.deTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -106,9 +109,9 @@
             // 
             this.lblDateFilterTo.Location = new System.Drawing.Point(240, 33);
             this.lblDateFilterTo.Name = "lblDateFilterTo";
-            this.lblDateFilterTo.Size = new System.Drawing.Size(15, 13);
+            this.lblDateFilterTo.Size = new System.Drawing.Size(4, 13);
             this.lblDateFilterTo.TabIndex = 2;
-            this.lblDateFilterTo.Text = "s/d";
+            this.lblDateFilterTo.Text = "-";
             // 
             // deFrom
             // 
@@ -119,9 +122,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy";
+            this.deFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
             this.deFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.deFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.deFrom.Properties.HideSelection = false;
+            this.deFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.deFrom.Properties.NullDate = "";
             this.deFrom.Properties.NullText = "-- Pilih Tanggal --";
             this.deFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;

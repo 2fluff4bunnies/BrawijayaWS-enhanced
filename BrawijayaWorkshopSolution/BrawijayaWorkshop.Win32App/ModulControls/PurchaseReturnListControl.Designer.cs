@@ -73,9 +73,9 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtDateFilterFrom);
             this.gcFilter.Controls.Add(this.lblFilterDate);
-            this.gcFilter.Location = new System.Drawing.Point(0, 0);
+            this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(748, 67);
+            this.gcFilter.Size = new System.Drawing.Size(742, 67);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
@@ -118,7 +118,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterTo.Size = new System.Drawing.Size(116, 20);
             this.txtDateFilterTo.TabIndex = 4;
@@ -128,7 +133,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(664, 28);
+            this.btnSearch.Location = new System.Drawing.Point(664, 29);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -144,7 +149,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterFrom.Size = new System.Drawing.Size(116, 20);
             this.txtDateFilterFrom.TabIndex = 2;
@@ -162,7 +172,7 @@
             this.btnListReturn.Image = ((System.Drawing.Image)(resources.GetObject("btnListReturn.Image")));
             this.btnListReturn.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnListReturn.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnListReturn.Location = new System.Drawing.Point(3, 73);
+            this.btnListReturn.Location = new System.Drawing.Point(3, 76);
             this.btnListReturn.Name = "btnListReturn";
             this.btnListReturn.Size = new System.Drawing.Size(175, 23);
             this.btnListReturn.TabIndex = 5;
@@ -177,7 +187,7 @@
             this.gridPurchasing.Location = new System.Drawing.Point(3, 105);
             this.gridPurchasing.MainView = this.gvPurchasing;
             this.gridPurchasing.Name = "gridPurchasing";
-            this.gridPurchasing.Size = new System.Drawing.Size(742, 210);
+            this.gridPurchasing.Size = new System.Drawing.Size(742, 207);
             this.gridPurchasing.TabIndex = 6;
             this.gridPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasing});
@@ -249,13 +259,13 @@
             this.cmsDeleteReturn,
             this.cmsPrintReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(150, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(149, 92);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
@@ -263,7 +273,7 @@
             // 
             this.cmsEditReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditReturn.Name = "cmsEditReturn";
-            this.cmsEditReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsEditReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsEditReturn.Text = "Ubah Retur";
             this.cmsEditReturn.Click += new System.EventHandler(this.cmdEditReturn_Click);
             // 
@@ -271,7 +281,7 @@
             // 
             this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteReturn.Name = "cmsDeleteReturn";
-            this.cmsDeleteReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsDeleteReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsDeleteReturn.Text = "Delete Retur";
             this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
             // 
@@ -279,7 +289,7 @@
             // 
             this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrintReturn.Name = "cmsPrintReturn";
-            this.cmsPrintReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsPrintReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsPrintReturn.Text = "Cetak Retur";
             this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
             // 

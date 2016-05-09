@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.lblCustomerFilter = new DevExpress.XtraEditors.LabelControl();
+            this.cbCustomerFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -48,10 +50,9 @@
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lblCustomerFilter = new DevExpress.XtraEditors.LabelControl();
-            this.cbCustomerFilter = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -59,7 +60,6 @@
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
@@ -73,11 +73,33 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtDateFilterFrom);
             this.gcFilter.Controls.Add(this.lblFilterDate);
-            this.gcFilter.Location = new System.Drawing.Point(0, 0);
+            this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(638, 64);
+            this.gcFilter.Size = new System.Drawing.Size(667, 64);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
+            // 
+            // lblCustomerFilter
+            // 
+            this.lblCustomerFilter.Location = new System.Drawing.Point(403, 34);
+            this.lblCustomerFilter.Name = "lblCustomerFilter";
+            this.lblCustomerFilter.Size = new System.Drawing.Size(46, 13);
+            this.lblCustomerFilter.TabIndex = 17;
+            this.lblCustomerFilter.Text = "Customer";
+            // 
+            // cbCustomerFilter
+            // 
+            this.cbCustomerFilter.Location = new System.Drawing.Point(456, 31);
+            this.cbCustomerFilter.Name = "cbCustomerFilter";
+            this.cbCustomerFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbCustomerFilter.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Supplier")});
+            this.cbCustomerFilter.Properties.DisplayMember = "CompanyName";
+            this.cbCustomerFilter.Properties.NullText = "Semua";
+            this.cbCustomerFilter.Properties.ValueMember = "Id";
+            this.cbCustomerFilter.Size = new System.Drawing.Size(135, 20);
+            this.cbCustomerFilter.TabIndex = 16;
             // 
             // labelControl1
             // 
@@ -96,7 +118,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterTo.Size = new System.Drawing.Size(122, 20);
             this.txtDateFilterTo.TabIndex = 4;
@@ -106,7 +133,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(573, 28);
+            this.btnSearch.Location = new System.Drawing.Point(598, 29);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 3;
@@ -122,7 +149,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterFrom.Size = new System.Drawing.Size(122, 20);
             this.txtDateFilterFrom.TabIndex = 2;
@@ -145,7 +177,7 @@
             this.btnListReturn.Image = ((System.Drawing.Image)(resources.GetObject("btnListReturn.Image")));
             this.btnListReturn.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnListReturn.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnListReturn.Location = new System.Drawing.Point(3, 70);
+            this.btnListReturn.Location = new System.Drawing.Point(3, 73);
             this.btnListReturn.Name = "btnListReturn";
             this.btnListReturn.Size = new System.Drawing.Size(175, 23);
             this.btnListReturn.TabIndex = 6;
@@ -160,13 +192,13 @@
             this.cmsDeleteReturn,
             this.cmsPrintReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(150, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(149, 92);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
@@ -174,7 +206,7 @@
             // 
             this.cmsEditReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditReturn.Name = "cmsEditReturn";
-            this.cmsEditReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsEditReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsEditReturn.Text = "Ubah Retur";
             this.cmsEditReturn.Click += new System.EventHandler(this.cmsEditReturn_Click);
             // 
@@ -182,7 +214,7 @@
             // 
             this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteReturn.Name = "cmsDeleteReturn";
-            this.cmsDeleteReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsDeleteReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsDeleteReturn.Text = "Hapus Retur";
             this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
             // 
@@ -190,7 +222,7 @@
             // 
             this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrintReturn.Name = "cmsPrintReturn";
-            this.cmsPrintReturn.Size = new System.Drawing.Size(149, 22);
+            this.cmsPrintReturn.Size = new System.Drawing.Size(148, 22);
             this.cmsPrintReturn.Text = "Cetak Retur";
             this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
             // 
@@ -202,7 +234,7 @@
             this.gridInvoice.Location = new System.Drawing.Point(3, 102);
             this.gridInvoice.MainView = this.gvInvoice;
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(632, 210);
+            this.gridInvoice.Size = new System.Drawing.Size(667, 210);
             this.gridInvoice.TabIndex = 8;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -261,28 +293,6 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 2;
             // 
-            // lblCustomerFilter
-            // 
-            this.lblCustomerFilter.Location = new System.Drawing.Point(381, 34);
-            this.lblCustomerFilter.Name = "lblCustomerFilter";
-            this.lblCustomerFilter.Size = new System.Drawing.Size(46, 13);
-            this.lblCustomerFilter.TabIndex = 17;
-            this.lblCustomerFilter.Text = "Customer";
-            // 
-            // cbCustomerFilter
-            // 
-            this.cbCustomerFilter.Location = new System.Drawing.Point(434, 31);
-            this.cbCustomerFilter.Name = "cbCustomerFilter";
-            this.cbCustomerFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbCustomerFilter.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Supplier")});
-            this.cbCustomerFilter.Properties.DisplayMember = "CompanyName";
-            this.cbCustomerFilter.Properties.NullText = "Semua";
-            this.cbCustomerFilter.Properties.ValueMember = "Id";
-            this.cbCustomerFilter.Size = new System.Drawing.Size(135, 20);
-            this.cbCustomerFilter.TabIndex = 16;
-            // 
             // SalesReturnListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,11 +301,12 @@
             this.Controls.Add(this.btnListReturn);
             this.Controls.Add(this.gcFilter);
             this.Name = "SalesReturnListControl";
-            this.Size = new System.Drawing.Size(638, 315);
+            this.Size = new System.Drawing.Size(673, 315);
             this.Load += new System.EventHandler(this.SalesReturnListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -303,7 +314,6 @@
             this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
