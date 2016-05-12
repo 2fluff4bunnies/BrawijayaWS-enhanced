@@ -44,11 +44,13 @@
             this.gvSPK = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcSPK = new DevExpress.XtraGrid.GridControl();
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.lookUpContractWorkStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
             this.lblLicenseNumber = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpApprovalStatus = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.lblApprovalStatus = new DevExpress.XtraEditors.LabelControl();
             this.lookUpCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
@@ -58,8 +60,6 @@
             this.btnNewSPK = new DevExpress.XtraEditors.SimpleButton();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
-            this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
@@ -67,7 +67,7 @@
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpApprovalStatus.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -158,6 +158,11 @@
             this.colCreateDate.Visible = true;
             this.colCreateDate.VisibleIndex = 1;
             // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
             // gvSPK
             // 
             this.gvSPK.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -202,15 +207,15 @@
             // 
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupFilter.Controls.Add(this.labelControl2);
             this.groupFilter.Controls.Add(this.txtDateFilterTo);
             this.groupFilter.Controls.Add(this.txtDateFilterFrom);
+            this.groupFilter.Controls.Add(this.labelControl2);
             this.groupFilter.Controls.Add(this.lblFilterDate);
             this.groupFilter.Controls.Add(this.lookUpContractWorkStatus);
             this.groupFilter.Controls.Add(this.lblContractWork);
             this.groupFilter.Controls.Add(this.txtLicenseNumber);
             this.groupFilter.Controls.Add(this.lblLicenseNumber);
-            this.groupFilter.Controls.Add(this.lookUpApprovalStatus);
+            this.groupFilter.Controls.Add(this.lookUpCustomer);
             this.groupFilter.Controls.Add(this.lblApprovalStatus);
             this.groupFilter.Controls.Add(this.lookUpCategory);
             this.groupFilter.Controls.Add(this.txtCode);
@@ -222,6 +227,22 @@
             this.groupFilter.Size = new System.Drawing.Size(1085, 128);
             this.groupFilter.TabIndex = 3;
             this.groupFilter.Text = "Filter";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(265, 98);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(15, 13);
+            this.labelControl2.TabIndex = 19;
+            this.labelControl2.Text = "s/d";
+            // 
+            // lblFilterDate
+            // 
+            this.lblFilterDate.Location = new System.Drawing.Point(12, 98);
+            this.lblFilterDate.Name = "lblFilterDate";
+            this.lblFilterDate.Size = new System.Drawing.Size(70, 13);
+            this.lblFilterDate.TabIndex = 15;
+            this.lblFilterDate.Text = "Tanggal Servis";
             // 
             // lookUpContractWorkStatus
             // 
@@ -241,7 +262,7 @@
             // 
             // lblContractWork
             // 
-            this.lblContractWork.Location = new System.Drawing.Point(288, 65);
+            this.lblContractWork.Location = new System.Drawing.Point(290, 65);
             this.lblContractWork.Name = "lblContractWork";
             this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 12;
@@ -262,21 +283,21 @@
             this.lblLicenseNumber.TabIndex = 2;
             this.lblLicenseNumber.Text = "Nopol Kendaran";
             // 
-            // lookUpApprovalStatus
+            // lookUpCustomer
             // 
-            this.lookUpApprovalStatus.Location = new System.Drawing.Point(606, 30);
-            this.lookUpApprovalStatus.Name = "lookUpApprovalStatus";
-            this.lookUpApprovalStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpApprovalStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lookUpCustomer.Location = new System.Drawing.Point(606, 30);
+            this.lookUpCustomer.Name = "lookUpCustomer";
+            this.lookUpCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpApprovalStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            this.lookUpCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
-            this.lookUpApprovalStatus.Properties.DisplayMember = "Description";
-            this.lookUpApprovalStatus.Properties.HideSelection = false;
-            this.lookUpApprovalStatus.Properties.NullText = "-- Status --";
-            this.lookUpApprovalStatus.Properties.ValueMember = "Status";
-            this.lookUpApprovalStatus.Size = new System.Drawing.Size(141, 20);
-            this.lookUpApprovalStatus.TabIndex = 7;
+            this.lookUpCustomer.Properties.DisplayMember = "Description";
+            this.lookUpCustomer.Properties.HideSelection = false;
+            this.lookUpCustomer.Properties.NullText = "-- Customer --";
+            this.lookUpCustomer.Properties.ValueMember = "Status";
+            this.lookUpCustomer.Size = new System.Drawing.Size(141, 20);
+            this.lookUpCustomer.TabIndex = 7;
             // 
             // lblApprovalStatus
             // 
@@ -329,6 +350,7 @@
             this.btnSearch.Size = new System.Drawing.Size(107, 86);
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblCategory
             // 
@@ -352,7 +374,7 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(281, 95);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(290, 95);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -365,8 +387,8 @@
             this.txtDateFilterTo.Properties.HideSelection = false;
             this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterTo.Size = new System.Drawing.Size(141, 20);
-            this.txtDateFilterTo.TabIndex = 17;
+            this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
+            this.txtDateFilterTo.TabIndex = 21;
             // 
             // txtDateFilterFrom
             // 
@@ -385,23 +407,7 @@
             this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtDateFilterFrom.Size = new System.Drawing.Size(141, 20);
-            this.txtDateFilterFrom.TabIndex = 16;
-            // 
-            // lblFilterDate
-            // 
-            this.lblFilterDate.Location = new System.Drawing.Point(12, 98);
-            this.lblFilterDate.Name = "lblFilterDate";
-            this.lblFilterDate.Size = new System.Drawing.Size(70, 13);
-            this.lblFilterDate.TabIndex = 15;
-            this.lblFilterDate.Text = "Tanggal Servis";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(260, 98);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(15, 13);
-            this.labelControl2.TabIndex = 19;
-            this.labelControl2.Text = "s/d";
+            this.txtDateFilterFrom.TabIndex = 20;
             // 
             // SPKHistoryListControl
             // 
@@ -420,7 +426,7 @@
             this.groupFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpApprovalStatus.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
@@ -451,7 +457,7 @@
         private DevExpress.XtraEditors.LabelControl lblContractWork;
         private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.LabelControl lblLicenseNumber;
-        private DevExpress.XtraEditors.LookUpEdit lookUpApprovalStatus;
+        private DevExpress.XtraEditors.LookUpEdit lookUpCustomer;
         private DevExpress.XtraEditors.LabelControl lblApprovalStatus;
         private DevExpress.XtraEditors.LookUpEdit lookUpCategory;
         private DevExpress.XtraEditors.TextEdit txtCode;
@@ -460,8 +466,8 @@
         private DevExpress.XtraEditors.LabelControl lblCategory;
         private DevExpress.XtraEditors.SimpleButton btnNewSPK;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl lblFilterDate;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
         private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
-        private DevExpress.XtraEditors.LabelControl lblFilterDate;
     }
 }

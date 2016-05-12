@@ -9,43 +9,35 @@ using System.Linq;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class SPKListModel : AppBaseModel
+    public class SPKHistoryListModel : AppBaseModel
     {
         private ISPKRepository _SPKRepository;
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
+        private ICustomerRepository _customerRepository;
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SPKListModel(ISPKRepository SPKRepository, IReferenceRepository referenceRepository,
+        public SPKHistoryListModel(ISPKRepository SPKRepository, IReferenceRepository referenceRepository, ICustomerRepository customerRepository,
             IVehicleRepository vehicleRepository, IVehicleDetailRepository vehicleDetailRepository, IUnitOfWork unitOfWork)
-            :base()
+            : base()
         {
             _SPKRepository = SPKRepository;
             _vehicleRepository = vehicleRepository;
             _vehicleDetailRepository = vehicleDetailRepository;
             _referenceRepository = referenceRepository;
+            _customerRepository = customerRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<SPKViewModel> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, 
-            DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus, int isContractWork)
+        public List<SPKViewModel> SearchSPK(string LicenseNumber, string code, int category, DateTime? dateFrom, DateTime? dateTo,
+            int isContractWork, int customer)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.StatusCompletedId== (int) DbConstant.SPKCompletionStatus.Completed).ToList();
 
-            if ((int)completedStatus != 9)
+            if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = result.Where(spk => spk.StatusCompletedId == (int)completedStatus).ToList();
-            }
-
-            if ((int)printStatus != 9)
-            {
-                result = result.Where(spk => spk.StatusPrintId == (int)printStatus).ToList();
-            }
-
-            if ((int)approvalStatus != 9)
-            {
-                result = result.Where(spk => spk.StatusApprovalId == (int)approvalStatus).ToList();
+                result = result.Where(spk => spk.CreateDate.Date >= dateFrom && spk.CreateDate.Date <= dateTo).ToList();
             }
 
             if (!string.IsNullOrEmpty(LicenseNumber))
@@ -56,6 +48,11 @@ namespace BrawijayaWorkshop.Model
                 {
                     result = result.Where(spk => spk.VehicleId == vehicleDetail.VehicleId).ToList();
                 }
+            }
+
+            if (customer > 0)
+            {
+                result = result.Where(spk => spk.Vehicle.CustomerId == customer).ToList();
             }
 
             if (!string.IsNullOrEmpty(code))
@@ -79,9 +76,6 @@ namespace BrawijayaWorkshop.Model
             }
 
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
-
-            if (result == null)
-                result = new List<SPK>();
 
             return Map(result, mappedResult);
         }
@@ -111,17 +105,11 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public void PrintSPK(SPKViewModel spk, int userId)
+        public List<CustomerViewModel> GetSPKCustomerList()
         {
-            DateTime serverTime = DateTime.Now;
-            SPK entity = _SPKRepository.GetById(spk.Id);
-            entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
-            entity.ModifyDate = serverTime;
-            entity.ModifyUserId = userId;
-           
-            _SPKRepository.Update(entity);
-
-            _unitOfWork.SaveChanges();
+            List<Customer> result = _customerRepository.GetMany(c => c.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            return Map(result, mappedResult);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrawijayaWorkshop.Database.Entities
 {
-    public class Customer
+    public class Customer : BaseModifierWithStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
