@@ -197,6 +197,7 @@ namespace BrawijayaWorkshop.Constant
         {
             NotVerified = 0,
             Active = 1,
+            Deleted = -1
         }
 
         public enum PaymentStatus

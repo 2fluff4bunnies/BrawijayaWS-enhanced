@@ -28,11 +28,11 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status != (int) DbConstant.PurchasingStatus.Deleted).OrderBy(c => c.Date).ToList();
             }
             else
             {
-                result = _purchasingRepository.GetAll().OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Status != (int)DbConstant.PurchasingStatus.Deleted).OrderBy(c => c.Date).ToList();
             }
             if ((int)purchasingStatus != 9)
             {

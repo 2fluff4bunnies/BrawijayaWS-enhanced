@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.Unit = View.SelectedSpecialSparepart.Sparepart.UnitReference.Name;
                 View.Code = View.SelectedSpecialSparepart.Sparepart.Code;
                 View.SparepartId = View.SelectedSpecialSparepart.SparepartId;
+                View.CategoryReferenceId = View.SelectedSpecialSparepart.ReferenceCategoryId;
             }
         }
 

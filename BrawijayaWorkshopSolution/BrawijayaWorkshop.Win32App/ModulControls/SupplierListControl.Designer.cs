@@ -44,6 +44,7 @@
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.colCity = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterSupplierName.Properties)).BeginInit();
@@ -114,7 +115,8 @@
             this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSupplierSupplier,
             this.colAddressSupplier,
-            this.colPhoneSupplier});
+            this.colPhoneSupplier,
+            this.colCity});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -195,6 +197,14 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // colCity
+            // 
+            this.colCity.Caption = "Kota";
+            this.colCity.FieldName = "City.Name";
+            this.colCity.Name = "colCity";
+            this.colCity.Visible = true;
+            this.colCity.VisibleIndex = 3;
+            // 
             // SupplierListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,5 +242,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraGrid.Columns.GridColumn colSupplierSupplier;
+        private DevExpress.XtraGrid.Columns.GridColumn colCity;
     }
 }

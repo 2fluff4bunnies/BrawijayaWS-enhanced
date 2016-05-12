@@ -19,6 +19,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.SupplierName = View.SelectedSupplier.Name;
                 View.Address = View.SelectedSupplier.Address;
                 View.PhoneNumber = View.SelectedSupplier.PhoneNumber;
+                View.CityId = View.SelectedSupplier.CityId;
             }
         }
 

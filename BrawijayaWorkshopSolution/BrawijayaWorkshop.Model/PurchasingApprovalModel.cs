@@ -162,8 +162,9 @@ namespace BrawijayaWorkshop.Model
                         _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
                         _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                         _sparepartRepository.Update(sparepart);
+
+                        _unitOfWork.SaveChanges();
                     }
-                    _unitOfWork.SaveChanges();
 
                     Reference refSelected = _referenceRepository.GetById(purchasing.PaymentMethodId);
                     purchasing.Status = (int)DbConstant.PurchasingStatus.Active;
