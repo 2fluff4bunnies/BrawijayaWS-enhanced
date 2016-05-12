@@ -542,6 +542,12 @@
     <Compile Include="ModulForms\SPKEditorForm.Designer.cs">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SPKHistoryDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKHistoryDetailForm.Designer.cs">
+      <DependentUpon>SPKHistoryDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\SPKScheduleEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -94,6 +94,7 @@
     <Compile Include="SalesReturnTransactionListPresenter.cs" />
     <Compile Include="SparepartDetailListPresenter.cs" />
     <Compile Include="SparepartManualTransactionEditorPresenter.cs" />
+    <Compile Include="SPKHistoryDetailPresenter.cs" />
     <Compile Include="SPKHistoryListPresenter.cs" />
     <Compile Include="SPKSaleListPresenter.cs" />
     <Compile Include="SPKScheduleEditorPresenter.cs" />
