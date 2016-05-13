@@ -71,7 +71,14 @@ namespace BrawijayaWorkshop.Model
             } 
 
             List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
-            return Map(result, mappedResult);
+            Map(result, mappedResult);
+
+            foreach (var itemMapped in mappedResult)
+            {
+                itemMapped.IsHasReturn = IsHasReturnActive(itemMapped.Id);
+            }
+
+            return mappedResult;
         }
 
         public bool IsHasReturnActive(int invoiceID)

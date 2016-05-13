@@ -27,5 +27,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public List<InvoiceDetailViewModel> InvoiceDetails { get; set; }
 
         public List<InvoiceSparepartViewModel> ListInvoiceSparepart { get; set; }
+
+        public bool IsHasReturn { get; set; }
     }
 }

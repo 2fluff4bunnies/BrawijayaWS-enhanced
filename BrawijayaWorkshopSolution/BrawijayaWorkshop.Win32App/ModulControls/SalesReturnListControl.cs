@@ -63,7 +63,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (this.SelectedInvoice != null)
             {
                 bool isHasReturnActive = false;
-                isHasReturnActive = _presenter.IsHasReturnActive();
+                isHasReturnActive = SelectedInvoice.IsHasReturn;
                 if (!isHasReturnActive)
                 {
                     cmsAddReturn.Visible = true;
@@ -96,7 +96,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 if (this.SelectedInvoice != null)
                 {
                     bool isHasReturnActive = false;
-                    isHasReturnActive = _presenter.IsHasReturnActive();
+                    isHasReturnActive = SelectedInvoice.IsHasReturn;
                     if (!isHasReturnActive)
                     {
                         cmsAddReturn.Visible = true;

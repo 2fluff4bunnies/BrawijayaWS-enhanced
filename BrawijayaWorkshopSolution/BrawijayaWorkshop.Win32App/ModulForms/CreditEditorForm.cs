@@ -58,7 +58,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalTransaction.Text.AsDecimal();
+                return string.IsNullOrEmpty(txtTotalTransaction.Text) ? 0 : txtTotalTransaction.Text.AsDecimal();
             }
             set
             {
@@ -70,7 +70,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalPaid.Text.AsDecimal();
+                return string.IsNullOrEmpty(txtTotalPaid.Text) ? 0 : txtTotalPaid.Text.AsDecimal();
             }
             set
             {
@@ -82,7 +82,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalNotPaid.Text.AsDecimal();
+                return string.IsNullOrEmpty(txtTotalNotPaid.Text) ? 0 : txtTotalNotPaid.Text.AsDecimal();
             }
             set
             {
@@ -94,7 +94,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalPayment.Text.AsDecimal();
+                return string.IsNullOrEmpty(txtTotalPayment.Text) ? 0 : txtTotalPayment.Text.AsDecimal();
             }
             set
             {
@@ -135,7 +135,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if(this.TotalPayment <= this.TotalNotPaid)
+            if (this.TotalNotPaid >= 0)
             {
                 if (valPaymentMethod.Validate() && valTotalPayment.Validate())
                 {
