@@ -34,11 +34,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return Convert.ToDateTime(txtDate.Text);
+                return deTransDate.EditValue.AsDateTime();
             }
             set
             {
-                txtDate.Text = value.ToString("dd-MM-yyyy");
+                deTransDate.EditValue = value;
             }
         }
 

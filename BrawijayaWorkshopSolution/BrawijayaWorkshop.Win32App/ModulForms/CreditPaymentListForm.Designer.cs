@@ -44,11 +44,11 @@
             this.lblTotalTransaction = new DevExpress.XtraEditors.LabelControl();
             this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
-            this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCreditPaymentListInfo)).BeginInit();
             this.gcCreditPaymentListInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCreditPayment)).BeginInit();
@@ -57,12 +57,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.ttTotalPaid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcCreditPaymentListInfo
             // 
+            this.gcCreditPaymentListInfo.Controls.Add(this.deTransDate);
             this.gcCreditPaymentListInfo.Controls.Add(this.gridCreditPayment);
             this.gcCreditPaymentListInfo.Controls.Add(this.txtTotalNotPaid);
             this.gcCreditPaymentListInfo.Controls.Add(this.lblTotalNotPaid);
@@ -72,7 +74,6 @@
             this.gcCreditPaymentListInfo.Controls.Add(this.lblTotalTransaction);
             this.gcCreditPaymentListInfo.Controls.Add(this.txtCustomer);
             this.gcCreditPaymentListInfo.Controls.Add(this.lblCustomer);
-            this.gcCreditPaymentListInfo.Controls.Add(this.txtTransactionDate);
             this.gcCreditPaymentListInfo.Controls.Add(this.lblTransactionDate);
             this.gcCreditPaymentListInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcCreditPaymentListInfo.Location = new System.Drawing.Point(0, 0);
@@ -121,6 +122,8 @@
             // colPaymentDate
             // 
             this.colPaymentDate.Caption = "Tanggal Pmbayaran";
+            this.colPaymentDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colPaymentDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colPaymentDate.FieldName = "TransactionDate";
             this.colPaymentDate.Name = "colPaymentDate";
             this.colPaymentDate.Visible = true;
@@ -208,14 +211,6 @@
             this.lblCustomer.TabIndex = 14;
             this.lblCustomer.Text = "Customer";
             // 
-            // txtTransactionDate
-            // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(141, 28);
-            this.txtTransactionDate.Name = "txtTransactionDate";
-            this.txtTransactionDate.Properties.ReadOnly = true;
-            this.txtTransactionDate.Size = new System.Drawing.Size(157, 20);
-            this.txtTransactionDate.TabIndex = 13;
-            // 
             // lblTransactionDate
             // 
             this.lblTransactionDate.Location = new System.Drawing.Point(12, 31);
@@ -248,6 +243,24 @@
             this.cmsDelete.Text = "Hapus Data";
             this.cmsDelete.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
+            // deTransDate
+            // 
+            this.deTransDate.EditValue = null;
+            this.deTransDate.Location = new System.Drawing.Point(141, 28);
+            this.deTransDate.Name = "deTransDate";
+            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTransDate.Properties.HideSelection = false;
+            this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.deTransDate.Properties.ReadOnly = true;
+            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deTransDate.Size = new System.Drawing.Size(157, 20);
+            this.deTransDate.TabIndex = 23;
+            // 
             // CreditPaymentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,8 +280,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ttTotalPaid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -286,7 +300,6 @@
         private DevExpress.XtraEditors.LabelControl lblTotalTransaction;
         private DevExpress.XtraEditors.TextEdit txtCustomer;
         private DevExpress.XtraEditors.LabelControl lblCustomer;
-        private DevExpress.XtraEditors.TextEdit txtTransactionDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentDate;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPayment;
@@ -294,6 +307,7 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsEdit;
         private System.Windows.Forms.ToolStripMenuItem cmsDelete;
+        private DevExpress.XtraEditors.DateEdit deTransDate;
 
     }
 }

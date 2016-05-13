@@ -44,11 +44,11 @@
             this.lblTotalTransaction = new DevExpress.XtraEditors.LabelControl();
             this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
-            this.txtDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.valTotalPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valPaymentMethod = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCreditInfo)).BeginInit();
             this.gcCreditInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentType.Properties)).BeginInit();
@@ -57,13 +57,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPaid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valTotalPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcCreditInfo
             // 
+            this.gcCreditInfo.Controls.Add(this.deTransDate);
             this.gcCreditInfo.Controls.Add(this.cbPaymentType);
             this.gcCreditInfo.Controls.Add(this.lblPaymentType);
             this.gcCreditInfo.Controls.Add(this.txtTotalPayment);
@@ -76,7 +78,6 @@
             this.gcCreditInfo.Controls.Add(this.lblTotalTransaction);
             this.gcCreditInfo.Controls.Add(this.txtCustomer);
             this.gcCreditInfo.Controls.Add(this.lblCustomer);
-            this.gcCreditInfo.Controls.Add(this.txtDate);
             this.gcCreditInfo.Controls.Add(this.lblTransactionDate);
             this.gcCreditInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcCreditInfo.Location = new System.Drawing.Point(0, 0);
@@ -196,14 +197,6 @@
             this.lblCustomer.TabIndex = 4;
             this.lblCustomer.Text = "Customer";
             // 
-            // txtDate
-            // 
-            this.txtDate.Location = new System.Drawing.Point(149, 32);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.ReadOnly = true;
-            this.txtDate.Size = new System.Drawing.Size(157, 20);
-            this.txtDate.TabIndex = 3;
-            // 
             // lblTransactionDate
             // 
             this.lblTransactionDate.Location = new System.Drawing.Point(14, 35);
@@ -216,6 +209,24 @@
             // 
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
+            // 
+            // deTransDate
+            // 
+            this.deTransDate.EditValue = null;
+            this.deTransDate.Location = new System.Drawing.Point(149, 32);
+            this.deTransDate.Name = "deTransDate";
+            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTransDate.Properties.HideSelection = false;
+            this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.deTransDate.Properties.ReadOnly = true;
+            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deTransDate.Size = new System.Drawing.Size(157, 20);
+            this.deTransDate.TabIndex = 16;
             // 
             // CreditEditorForm
             // 
@@ -236,9 +247,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPaid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valTotalPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -246,7 +258,6 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl gcCreditInfo;
-        private DevExpress.XtraEditors.TextEdit txtDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
         private DevExpress.XtraEditors.LabelControl lblPaymentType;
         private DevExpress.XtraEditors.TextEdit txtTotalPayment;
@@ -263,5 +274,6 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valTotalPayment;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valPaymentMethod;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraEditors.DateEdit deTransDate;
     }
 }

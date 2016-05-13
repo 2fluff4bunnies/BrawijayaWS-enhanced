@@ -9,10 +9,9 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
@@ -103,11 +102,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return txtTransactionDate.Text.AsDateTime();
+                return deTransDate.EditValue.AsDateTime();
             }
             set
             {
-                txtTransactionDate.Text = value.ToString("dd/MM/yyyy");
+                deTransDate.EditValue = value;
             }
         }
 
