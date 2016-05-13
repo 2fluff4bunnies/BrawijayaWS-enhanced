@@ -14,12 +14,39 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             string accFile = "Account Jurnal.xlsx";
             string invFile = "Inv.xlsx";
             string citFile = "City.xlsx";
+            string balJournal = "BalanceJournal.xlsx";
+
             try
             {
                 // todo: read excel inventory and acc and insert into temporary table
                 DataTable resultInv = DataExportImportUtils.CreateDataTableFromExcel(dirPath + invFile, true);
                 DataTable resultAcc = DataExportImportUtils.CreateDataTableFromExcel(dirPath + accFile, true);
                 DataTable resultCit = DataExportImportUtils.CreateDataTableFromExcel(dirPath + citFile, true);
+                DataTable resultCatJournal = DataExportImportUtils.CreateDataTableFromExcel(dirPath + balJournal, true);
+
+                try
+                {
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"CREATE TABLE `temp_catjournal` (
+                                          `Code` varchar(100) DEFAULT NULL,
+                                          `Name` varchar(100) DEFAULT NULL,
+                                          `Description` varchar(100) DEFAULT NULL,
+                                          `Value` varchar(100) DEFAULT NULL,
+                                          `Parent` varchar(100) DEFAULT NULL
+                                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex != null) { }
+                    // do nothing
+                }
 
                 try
                 {
@@ -94,6 +121,52 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     // do nothing
                 }
 
+                if (resultCatJournal != null)
+                {
+                    resultCatJournal.ExportDataTableToCsv(dirPath + "catjournal.csv");
+
+                    // insert into database
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        conn.Open();
+
+                        MySqlBulkLoader loader = new MySqlBulkLoader(conn);
+                        loader.TableName = "temp_catjournal";
+                        loader.FieldTerminator = "\t";
+                        loader.LineTerminator = "\n";
+                        loader.FileName = dirPath + "catjournal.csv";
+                        loader.NumberOfLinesToSkip = 1;
+                        int inserted = loader.Load();
+                        Console.WriteLine("Total rows: " + inserted);
+
+                        conn.Close();
+                    }
+
+                    // insert into database main ref
+                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    {
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = @"INSERT INTO `references` (`Code`, `Name`, `Description`, `Value`, `ParentId`)
+                                            SELECT REPLACE(REPLACE(`code`, '\r', ''), '\n', ''), `Name`, `Description`, `Value`,
+                                            (SELECT `Id` FROM `references` WHERE `Code`=REPLACE(REPLACE(`parent`, '\r', ''), '\n', ''))
+                                            FROM temp_catjournal";
+                        cmd.CommandType = CommandType.Text;
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Clone();
+                    }
+//                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+//                    {
+//                        MySqlCommand cmd = conn.CreateCommand();
+//                        cmd.CommandText = @"UPDATE `references` a
+//                                            SET a.ParentId = (SELECT z.Id FROM (SELECT x.*, y.Code `Kode` FROM `references` x, temp_catjournal y WHERE x.Code=y.Parent) z WHERE z.Kode=a.Code)";
+//                        cmd.CommandType = CommandType.Text;
+//                        conn.Open();
+//                        cmd.ExecuteNonQuery();
+//                        conn.Clone();
+//                    }
+                }
+
                 if (resultCit != null)
                 {
                     resultCit.ExportDataTableToCsv(dirPath + "city.csv");
@@ -127,22 +200,6 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         cmd.ExecuteNonQuery();
                         conn.Clone();
                     }
-                    
-                    //using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
-                    //{
-                    //    conn.Open();
-
-                    //    MySqlBulkLoader loader = new MySqlBulkLoader(conn);
-                    //    loader.TableName = "cities";
-                    //    loader.FieldTerminator = "\t";
-                    //    loader.LineTerminator = "\n";
-                    //    loader.FileName = dirPath + "city.csv";
-                    //    loader.NumberOfLinesToSkip = 1;
-                    //    int inserted = loader.Load();
-                    //    Console.WriteLine("Total rows: " + inserted);
-
-                    //    conn.Close();
-                    //}
                 }
 
                 if (resultInv != null)
@@ -275,36 +332,46 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         cmd.ExecuteNonQuery();
                         conn.Clone();
                     }
+                }
 
-                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
-                    {
-                        MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = @"DROP TABLE temp_cit";
-                        cmd.CommandType = CommandType.Text;
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Clone();
-                    }
+                using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                {
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"DROP TABLE temp_catjournal";
+                    cmd.CommandType = CommandType.Text;
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Clone();
+                }
 
-                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
-                    {
-                        MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = @"DROP TABLE temp_inv";
-                        cmd.CommandType = CommandType.Text;
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Clone();
-                    }
+                using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                {
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"DROP TABLE temp_cit";
+                    cmd.CommandType = CommandType.Text;
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Clone();
+                }
 
-                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
-                    {
-                        MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = @"DROP TABLE temp_acc";
-                        cmd.CommandType = CommandType.Text;
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Clone();
-                    }
+                using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                {
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"DROP TABLE temp_inv";
+                    cmd.CommandType = CommandType.Text;
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Clone();
+                }
+
+                using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                {
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"DROP TABLE temp_acc";
+                    cmd.CommandType = CommandType.Text;
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Clone();
                 }
             }
             catch (Exception ex)
