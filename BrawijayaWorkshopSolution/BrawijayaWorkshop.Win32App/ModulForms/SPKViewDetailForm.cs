@@ -117,7 +117,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             btnSetAsComplete.Visible = btnAbort.Visible = btnApprove.Visible = btnReject.Visible = false;
             btnPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
-            btnRequestPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
+            btnRequestPrint.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed  && SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress ;
             btnEndorse.Visible = (SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved || SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) && SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
 
             if (LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)

@@ -220,7 +220,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 lookUpContractWorkStatus.Properties.DataSource = value;
             }
         }
-      
+
         #endregion
 
         void gvSPK_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -355,7 +355,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             _dataSource.Add(SelectedSPK);
             report.DataSource = _dataSource;
             report.FillDataSource();
-            
+
             using (ReportPrintTool printTool = new ReportPrintTool(report))
             {
                 // Invoke the Print dialog.
