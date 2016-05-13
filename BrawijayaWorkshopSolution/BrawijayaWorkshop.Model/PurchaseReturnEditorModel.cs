@@ -74,7 +74,8 @@ namespace BrawijayaWorkshop.Model
                             SparepartId = itemDetail.SparepartId,
                             SparepartName = itemDetail.Sparepart.Name,
                             ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
-                            ReturQtyLimit = itemDetail.Qty
+                            ReturQtyLimit = itemDetail.Qty,
+                            SerialNumber = itemDetail.SerialNumber
                         });
                     }
                 }
@@ -90,7 +91,8 @@ namespace BrawijayaWorkshop.Model
                         SparepartId = itemDetail.SparepartId,
                         SparepartName = itemDetail.Sparepart.Name,
                         ReturQty = listSparepartDetail != null ? listSparepartDetail.Count > 0 ? listSparepartDetail.Count : 0 : 0,
-                        ReturQtyLimit = listSparepartDetail != null ? listSparepartDetail.Count > 0 ? listSparepartDetail.Count : 0 : 0
+                        ReturQtyLimit = listSparepartDetail != null ? listSparepartDetail.Count > 0 ? listSparepartDetail.Count : 0 : 0,
+                        SerialNumber = itemDetail.SerialNumber
                     });
                 }
             }

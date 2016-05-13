@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnPrintItem));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -88,6 +89,7 @@
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.DetailSparepartFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.DataSourceSalesReturnViewModel = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSourceSalesReturnViewModel)).BeginInit();
@@ -118,6 +120,7 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrPictureBox1,
             this.xrLabel13,
             this.xrLabel14,
             this.lblKilometres,
@@ -800,6 +803,14 @@
             this.DataSourceSalesReturnViewModel.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.SalesReturnViewModel);
             this.DataSourceSalesReturnViewModel.Name = "DataSourceSalesReturnViewModel";
             // 
+            // xrPictureBox1
+            // 
+            this.xrPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox1.Image")));
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(437.7917F, 0F);
+            this.xrPictureBox1.Name = "xrPictureBox1";
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(77.21F, 76.04F);
+            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            // 
             // SalesReturnPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -890,5 +901,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource DataSourceSalesReturnViewModel;
         private DevExpress.XtraReports.UI.ReportFooterBand DetailSparepartFooter;
+        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
     }
 }

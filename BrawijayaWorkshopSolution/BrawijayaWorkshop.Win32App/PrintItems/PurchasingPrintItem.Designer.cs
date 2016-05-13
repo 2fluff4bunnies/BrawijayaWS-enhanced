@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasingPrintItem));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -83,6 +84,7 @@
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.PurchasingDetail = new DevExpress.XtraReports.UI.DetailBand();
             this.PurchasingDetailFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -208,6 +210,7 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrPictureBox1,
             this.xrLabel2,
             this.xrLabel3,
             this.xrLabel4,
@@ -673,6 +676,14 @@
             this.PurchasingDetailFooter.HeightF = 29.16667F;
             this.PurchasingDetailFooter.Name = "PurchasingDetailFooter";
             // 
+            // xrPictureBox1
+            // 
+            this.xrPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox1.Image")));
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(671.7902F, 0F);
+            this.xrPictureBox1.Name = "xrPictureBox1";
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(77.21F, 76.04F);
+            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            // 
             // PurchasingPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -758,5 +769,6 @@
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private DevExpress.XtraReports.UI.DetailBand PurchasingDetail;
         private DevExpress.XtraReports.UI.ReportFooterBand PurchasingDetailFooter;
+        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
     }
 }

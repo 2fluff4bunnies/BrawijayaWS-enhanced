@@ -43,7 +43,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<SupplierViewModel> RetrieveSupplier()
         {
-            List<Supplier> result = _supplierRepository.GetAll().ToList();
+            List<Supplier> result = _supplierRepository.GetMany(c=>c.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
             return Map(result, mappedResult);
         }
@@ -59,7 +59,14 @@ namespace BrawijayaWorkshop.Model
         {
             List<PurchasingDetail> result = _purchasingDetailRepository.GetMany(c => c.PurchasingId == purchasingID).ToList();
             List<PurchasingDetailViewModel> mappedResult = new List<PurchasingDetailViewModel>();
-            return Map(result, mappedResult);
+            Map(result, mappedResult);
+
+            foreach (var itemMapped in mappedResult)
+            {
+                itemMapped.IsSpecialSparepart = IsSparepartWheel(itemMapped.SparepartId);
+            }
+
+            return mappedResult;
         }
 
         public void InsertPurchasing(PurchasingViewModel purchasing, List<PurchasingDetailViewModel> purchasingDetails, int userID)
@@ -86,14 +93,19 @@ namespace BrawijayaWorkshop.Model
             {
                 try
                 {
+                    List<PurchasingDetail> listPurchasingDetail = _purchasingDetailRepository
+                .GetMany(c => c.PurchasingId == purchasing.Id).ToList();
+                    foreach (var purchasingDetail in listPurchasingDetail)
+                    {
+                        purchasingDetail.Status = (int)DbConstant.PurchasingStatus.Deleted;
+                        purchasingDetail.ModifyUserId = userID;
+                        purchasingDetail.ModifyDate = DateTime.Now;
+                        _purchasingDetailRepository.Update(purchasingDetail);
+                    }
                     Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
                     entity.Status = (int)DbConstant.PurchasingStatus.Deleted;
-                    entity.ModifyDate = DateTime.Now;
                     entity.ModifyUserId = userID;
-                    _purchasingRepository.AttachNavigation(entity.CreateUser);
-                    _purchasingRepository.AttachNavigation(entity.ModifyUser);
-                    _purchasingRepository.AttachNavigation(entity.PaymentMethod);
-                    _purchasingRepository.AttachNavigation(entity.Supplier);
+                    entity.ModifyDate = DateTime.Now;
                     _purchasingRepository.Update(entity);
                     _unitOfWork.SaveChanges();
 

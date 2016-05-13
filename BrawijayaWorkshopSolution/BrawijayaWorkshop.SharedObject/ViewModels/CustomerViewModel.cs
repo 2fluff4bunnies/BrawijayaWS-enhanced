@@ -1,7 +1,6 @@
-﻿
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
-    public class CustomerViewModel
+    public class CustomerViewModel : BaseModifierWithStatusViewModel
     {
         public int Id { get; set; }
 

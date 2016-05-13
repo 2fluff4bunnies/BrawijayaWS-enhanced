@@ -42,6 +42,7 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.colSerialNo = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchaseReturnInfo)).BeginInit();
             this.gcPurchaseReturnInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
@@ -116,7 +117,8 @@
             // 
             this.gvSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSparepartName,
-            this.colReturQty});
+            this.colReturQty,
+            this.colSerialNo});
             this.gvSparepart.GridControl = this.gridSparepart;
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -155,6 +157,14 @@
             // 
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
+            // 
+            // colSerialNo
+            // 
+            this.colSerialNo.Caption = "Serial Number";
+            this.colSerialNo.FieldName = "SerialNumber";
+            this.colSerialNo.Name = "colSerialNo";
+            this.colSerialNo.Visible = true;
+            this.colSerialNo.VisibleIndex = 2;
             // 
             // PurchaseReturnEditorForm
             // 
@@ -196,5 +206,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.BindingSource bsSparepart;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraGrid.Columns.GridColumn colSerialNo;
     }
 }

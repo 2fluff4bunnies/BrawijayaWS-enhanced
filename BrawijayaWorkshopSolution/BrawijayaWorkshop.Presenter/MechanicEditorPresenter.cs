@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
@@ -42,11 +43,11 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedMechanic.Id > 0)
             {
-                Model.UpdateMechanic(View.SelectedMechanic);
+                Model.UpdateMechanic(View.SelectedMechanic, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertMechanic(View.SelectedMechanic);
+                Model.InsertMechanic(View.SelectedMechanic, LoginInformation.UserId);
             }
         }
     }
