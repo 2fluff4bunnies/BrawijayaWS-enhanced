@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
@@ -37,18 +38,23 @@ namespace BrawijayaWorkshop.Model
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_FINGERPRINT_PORT).FirstOrDefault().Value;
         }
 
-        public void InsertMechanic(MechanicViewModel mechanic)
+        public void InsertMechanic(MechanicViewModel mechanic, int userId)
         {
             Mechanic entity = new Mechanic();
             Map(mechanic, entity);
+            entity.CreateUserId = entity.ModifyUserId = userId;
+            entity.CreateDate = entity.ModifyDate = DateTime.Now;
+            entity.Status = (int)DbConstant.DefaultDataStatus.Active;
             _mechanicRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateMechanic(MechanicViewModel mechanic)
+        public void UpdateMechanic(MechanicViewModel mechanic, int userId)
         {
             Mechanic entity = _mechanicRepository.GetById(mechanic.Id);
             Map(mechanic, entity);
+            entity.ModifyDate = DateTime.Now;
+            entity.ModifyUserId = userId;
             _mechanicRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

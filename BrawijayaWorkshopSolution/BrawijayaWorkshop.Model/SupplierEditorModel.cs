@@ -1,7 +1,9 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,11 +23,14 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public void InsertSupplier(SupplierViewModel supplier)
+        public void InsertSupplier(SupplierViewModel supplier, int userId)
         {
             Supplier entity = new Supplier();
             Map(supplier, entity);
             _supplierRepository.AttachNavigation(entity.City);
+            entity.CreateUserId = entity.ModifyUserId = userId;
+            entity.CreateDate = entity.ModifyDate = DateTime.Now;
+            entity.Status = (int)DbConstant.DefaultDataStatus.Active;
             _supplierRepository.Add(entity);
             _unitOfWork.SaveChanges();
         }
@@ -37,11 +42,13 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public void UpdateSupplier(SupplierViewModel supplier)
+        public void UpdateSupplier(SupplierViewModel supplier, int userId)
         {
             Supplier entity = _supplierRepository.GetById(supplier.Id);
             Map(supplier, entity);
             _supplierRepository.AttachNavigation(entity.City);
+            entity.ModifyDate = DateTime.Now;
+            entity.ModifyUserId = userId;
             _supplierRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

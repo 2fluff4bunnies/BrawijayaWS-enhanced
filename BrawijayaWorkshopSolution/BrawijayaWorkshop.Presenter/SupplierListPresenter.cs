@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -16,7 +17,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void DeleteSupplier()
         {
-            Model.DeleteSupplier(View.SelectedSupplier);
+            Model.DeleteSupplier(View.SelectedSupplier, LoginInformation.UserId);
         }
     }
 }
