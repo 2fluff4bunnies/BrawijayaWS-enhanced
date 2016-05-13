@@ -18,5 +18,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int PaymentStatus { get; set; }
 
         public List<PurchasingDetailViewModel> PurchasingDetails { get; set; }
+
+        public bool IsHasReturn { get; set; }
     }
 }

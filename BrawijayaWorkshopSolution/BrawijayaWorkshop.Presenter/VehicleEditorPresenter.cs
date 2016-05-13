@@ -81,7 +81,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public bool IsCodeValidated()
         {
-            return !Model.IsCodeExist(View.Code);
+            return !Model.IsCodeExist(View.Code, View.SelectedVehicle);
         }
     }
 }

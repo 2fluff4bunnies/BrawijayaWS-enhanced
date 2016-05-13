@@ -211,7 +211,7 @@
             this.gvSPKSchedule.OptionsView.ShowFooter = true;
             this.gvSPKSchedule.OptionsView.ShowGroupPanel = false;
             this.gvSPKSchedule.OptionsView.ShowViewCaption = true;
-            this.gvSPKSchedule.ViewCaption = "Daftar Kendaraan";
+            this.gvSPKSchedule.ViewCaption = "Daftar Mekanik";
             // 
             // colMechanic
             // 

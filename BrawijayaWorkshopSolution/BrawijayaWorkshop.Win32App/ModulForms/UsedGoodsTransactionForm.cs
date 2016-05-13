@@ -168,6 +168,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan data transaksi barang bekas: '" + SelectedUsedGoodTransaction.UsedGood.Sparepart.Name + "' gagal!");
                 }
             }
+            else
+            {
+                this.ShowError("Terdapat data kosong atau jumlah update yang tidak sesuai");
+            }
         }
 
         private void cbUsedGood_EditValueChanged(object sender, EventArgs e)

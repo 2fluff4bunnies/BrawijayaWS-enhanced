@@ -88,7 +88,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         #endregion
         protected override void ExecuteSave()
         {
-            if (ListReturn.Where(x=>x.ReturQty > x.ReturQtyLimit).Count() == 0)
+            if (ListReturn.Where(x => x.ReturQty > x.ReturQtyLimit).Count() == 0 && ListReturn.Where(x => x.ReturQty == 0).Count() == 0)
             {
                 try
                 {

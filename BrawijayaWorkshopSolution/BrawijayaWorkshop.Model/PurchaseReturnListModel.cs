@@ -62,7 +62,14 @@ namespace BrawijayaWorkshop.Model
             } 
 
             List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();
-            return Map(result, mappedResult);
+            Map(result, mappedResult);
+
+            foreach (var itemMapped in mappedResult)
+            {
+                itemMapped.IsHasReturn = IsHasReturnActive(itemMapped.Id);
+            }
+
+            return mappedResult;
         }
 
         public List<SupplierViewModel> GetSupplierFilterList()

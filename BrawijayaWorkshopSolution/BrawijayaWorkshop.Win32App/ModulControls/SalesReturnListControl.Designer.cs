@@ -50,6 +50,7 @@
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHasReturn = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbCustomerFilter.Properties)).BeginInit();
@@ -192,13 +193,13 @@
             this.cmsDeleteReturn,
             this.cmsPrintReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(149, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(150, 92);
             // 
             // cmsAddReturn
             // 
             this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(148, 22);
+            this.cmsAddReturn.Size = new System.Drawing.Size(149, 22);
             this.cmsAddReturn.Text = "Tambah Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
@@ -206,7 +207,7 @@
             // 
             this.cmsEditReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditReturn.Name = "cmsEditReturn";
-            this.cmsEditReturn.Size = new System.Drawing.Size(148, 22);
+            this.cmsEditReturn.Size = new System.Drawing.Size(149, 22);
             this.cmsEditReturn.Text = "Ubah Retur";
             this.cmsEditReturn.Click += new System.EventHandler(this.cmsEditReturn_Click);
             // 
@@ -214,7 +215,7 @@
             // 
             this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteReturn.Name = "cmsDeleteReturn";
-            this.cmsDeleteReturn.Size = new System.Drawing.Size(148, 22);
+            this.cmsDeleteReturn.Size = new System.Drawing.Size(149, 22);
             this.cmsDeleteReturn.Text = "Hapus Retur";
             this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
             // 
@@ -222,7 +223,7 @@
             // 
             this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrintReturn.Name = "cmsPrintReturn";
-            this.cmsPrintReturn.Size = new System.Drawing.Size(148, 22);
+            this.cmsPrintReturn.Size = new System.Drawing.Size(149, 22);
             this.cmsPrintReturn.Text = "Cetak Retur";
             this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
             // 
@@ -244,7 +245,8 @@
             this.gvInvoice.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colDate,
             this.colCustomerName,
-            this.colTotalPrice});
+            this.colTotalPrice,
+            this.colHasReturn});
             this.gvInvoice.GridControl = this.gridInvoice;
             this.gvInvoice.Name = "gvInvoice";
             this.gvInvoice.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -295,6 +297,14 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 2;
             // 
+            // colHasReturn
+            // 
+            this.colHasReturn.Caption = "Ada Retur";
+            this.colHasReturn.FieldName = "IsHasReturn";
+            this.colHasReturn.Name = "colHasReturn";
+            this.colHasReturn.Visible = true;
+            this.colHasReturn.VisibleIndex = 3;
+            // 
             // SalesReturnListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,5 +352,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsPrintReturn;
         private DevExpress.XtraEditors.LabelControl lblCustomerFilter;
         private DevExpress.XtraEditors.LookUpEdit cbCustomerFilter;
+        private DevExpress.XtraGrid.Columns.GridColumn colHasReturn;
     }
 }

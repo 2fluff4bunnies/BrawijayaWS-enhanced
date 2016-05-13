@@ -498,9 +498,18 @@ namespace BrawijayaWorkshop.Win32App
 
             // show navigation list
             ReportingDataNavigationControl navReporting = new ReportingDataNavigationControl();
+            navReporting.iSPKHistory.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
+
             ShowNavigationControl(navReporting);
             // init event navigation
             //navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
+            navReporting.iSPKHistory.LinkClicked += iSPKHistory_LinkClicked;
+        }
+
+        void iSPKHistory_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SPKHistoryListControl SPKHistory = Bootstrapper.Resolve<SPKHistoryListControl>();
+            ShowUserControl(SPKHistory);
         }
 
         private void iAccounting_ItemClick(object sender, ItemClickEventArgs e)

@@ -404,13 +404,13 @@ namespace BrawijayaWorkshop.Model
                 .GetMany(c => c.PurchasingId == purchasing.Id).ToList();
                     foreach (var purchasingDetail in listPurchasingDetail)
                     {
-                        purchasingDetail.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                        purchasingDetail.Status = (int)DbConstant.PurchasingStatus.Deleted;
                         purchasingDetail.ModifyUserId = userID;
                         purchasingDetail.ModifyDate = DateTime.Now;
                         _purchasingDetailRepository.Update(purchasingDetail);
                     }
                     Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
-                    entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                    entity.Status = (int)DbConstant.PurchasingStatus.Deleted;
                     entity.ModifyUserId = userID;
                     entity.ModifyDate = DateTime.Now;
                     _purchasingRepository.Update(entity);

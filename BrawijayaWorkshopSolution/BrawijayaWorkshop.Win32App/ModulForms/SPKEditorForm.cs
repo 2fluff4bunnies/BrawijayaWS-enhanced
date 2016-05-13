@@ -163,11 +163,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return dtpDueDate.Text.AsDateTime();
+                return dtpDueDate.EditValue.AsDateTime();
             }
             set
             {
-                dtpDueDate.Text = value.ToString();
+                dtpDueDate.EditValue = value.ToString();
             }
         }
 
@@ -390,7 +390,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                txtContractWorkFee.EditValue = value.ToString("n0");
+                txtContractWorkFee.EditValue = value.ToString();
             }
         }
 
