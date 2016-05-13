@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReturnEditorForm));
             this.gcSalesReturnInfo = new DevExpress.XtraEditors.GroupControl();
             this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
-            this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.gridSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colReturQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
+            this.bsSparepart = new System.Windows.Forms.BindingSource();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSalesReturnInfo)).BeginInit();
             this.gcSalesReturnInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSalesReturnInfo
             // 
             this.gcSalesReturnInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSalesReturnInfo.Controls.Add(this.deTransDate);
             this.gcSalesReturnInfo.Controls.Add(this.txtCustomer);
             this.gcSalesReturnInfo.Controls.Add(this.lblSupplier);
-            this.gcSalesReturnInfo.Controls.Add(this.txtTransactionDate);
             this.gcSalesReturnInfo.Controls.Add(this.lblTransactionDate);
             this.gcSalesReturnInfo.Location = new System.Drawing.Point(0, 0);
             this.gcSalesReturnInfo.Name = "gcSalesReturnInfo";
@@ -68,7 +68,7 @@
             // 
             // txtCustomer
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(140, 65);
+            this.txtCustomer.Location = new System.Drawing.Point(113, 65);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Properties.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(208, 20);
@@ -81,14 +81,6 @@
             this.lblSupplier.Size = new System.Drawing.Size(46, 13);
             this.lblSupplier.TabIndex = 10;
             this.lblSupplier.Text = "Customer";
-            // 
-            // txtTransactionDate
-            // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(140, 32);
-            this.txtTransactionDate.Name = "txtTransactionDate";
-            this.txtTransactionDate.Properties.ReadOnly = true;
-            this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
-            this.txtTransactionDate.TabIndex = 9;
             // 
             // lblTransactionDate
             // 
@@ -156,6 +148,23 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // deTransDate
+            // 
+            this.deTransDate.EditValue = null;
+            this.deTransDate.Location = new System.Drawing.Point(113, 32);
+            this.deTransDate.Name = "deTransDate";
+            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTransDate.Properties.HideSelection = false;
+            this.deTransDate.Properties.ReadOnly = true;
+            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deTransDate.Size = new System.Drawing.Size(131, 20);
+            this.deTransDate.TabIndex = 13;
+            // 
             // SalesReturnEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,11 +181,12 @@
             this.gcSalesReturnInfo.ResumeLayout(false);
             this.gcSalesReturnInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -191,10 +201,10 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.TextEdit txtCustomer;
         private DevExpress.XtraEditors.LabelControl lblSupplier;
-        private DevExpress.XtraEditors.TextEdit txtTransactionDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
         private System.Windows.Forms.BindingSource bsSparepart;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraEditors.DateEdit deTransDate;
 
     }
 }

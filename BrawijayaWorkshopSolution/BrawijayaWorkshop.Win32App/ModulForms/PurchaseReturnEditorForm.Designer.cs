@@ -28,38 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnEditorForm));
             this.gcPurchaseReturnInfo = new DevExpress.XtraEditors.GroupControl();
             this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
             this.lblSupplier = new DevExpress.XtraEditors.LabelControl();
-            this.txtTransactionDate = new DevExpress.XtraEditors.TextEdit();
             this.lblTransactionDate = new DevExpress.XtraEditors.LabelControl();
             this.gridSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colReturQty = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
-            this.bgwSave = new System.ComponentModel.BackgroundWorker();
             this.colSerialNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bsSparepart = new System.Windows.Forms.BindingSource();
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchaseReturnInfo)).BeginInit();
             this.gcPurchaseReturnInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcPurchaseReturnInfo
             // 
             this.gcPurchaseReturnInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcPurchaseReturnInfo.Controls.Add(this.deTransDate);
             this.gcPurchaseReturnInfo.Controls.Add(this.txtSupplier);
             this.gcPurchaseReturnInfo.Controls.Add(this.lblSupplier);
-            this.gcPurchaseReturnInfo.Controls.Add(this.txtTransactionDate);
             this.gcPurchaseReturnInfo.Controls.Add(this.lblTransactionDate);
             this.gcPurchaseReturnInfo.Location = new System.Drawing.Point(0, 0);
             this.gcPurchaseReturnInfo.Name = "gcPurchaseReturnInfo";
@@ -69,7 +69,7 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(140, 65);
+            this.txtSupplier.Location = new System.Drawing.Point(120, 65);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Properties.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(208, 20);
@@ -82,14 +82,6 @@
             this.lblSupplier.Size = new System.Drawing.Size(38, 13);
             this.lblSupplier.TabIndex = 10;
             this.lblSupplier.Text = "Supplier";
-            // 
-            // txtTransactionDate
-            // 
-            this.txtTransactionDate.Location = new System.Drawing.Point(140, 32);
-            this.txtTransactionDate.Name = "txtTransactionDate";
-            this.txtTransactionDate.Properties.ReadOnly = true;
-            this.txtTransactionDate.Size = new System.Drawing.Size(115, 20);
-            this.txtTransactionDate.TabIndex = 9;
             // 
             // lblTransactionDate
             // 
@@ -148,6 +140,14 @@
             this.colReturQty.Visible = true;
             this.colReturQty.VisibleIndex = 1;
             // 
+            // colSerialNo
+            // 
+            this.colSerialNo.Caption = "Serial Number";
+            this.colSerialNo.FieldName = "SerialNumber";
+            this.colSerialNo.Name = "colSerialNo";
+            this.colSerialNo.Visible = true;
+            this.colSerialNo.VisibleIndex = 2;
+            // 
             // gridView1
             // 
             this.gridView1.GridControl = this.gridSparepart;
@@ -158,13 +158,22 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // colSerialNo
+            // deTransDate
             // 
-            this.colSerialNo.Caption = "Serial Number";
-            this.colSerialNo.FieldName = "SerialNumber";
-            this.colSerialNo.Name = "colSerialNo";
-            this.colSerialNo.Visible = true;
-            this.colSerialNo.VisibleIndex = 2;
+            this.deTransDate.EditValue = null;
+            this.deTransDate.Location = new System.Drawing.Point(120, 32);
+            this.deTransDate.Name = "deTransDate";
+            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTransDate.Properties.HideSelection = false;
+            this.deTransDate.Properties.ReadOnly = true;
+            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deTransDate.Size = new System.Drawing.Size(131, 20);
+            this.deTransDate.TabIndex = 12;
             // 
             // PurchaseReturnEditorForm
             // 
@@ -183,11 +192,12 @@
             this.gcPurchaseReturnInfo.ResumeLayout(false);
             this.gcPurchaseReturnInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTransactionDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -197,7 +207,6 @@
         private DevExpress.XtraEditors.GroupControl gcPurchaseReturnInfo;
         private DevExpress.XtraEditors.TextEdit txtSupplier;
         private DevExpress.XtraEditors.LabelControl lblSupplier;
-        private DevExpress.XtraEditors.TextEdit txtTransactionDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
         private DevExpress.XtraGrid.GridControl gridSparepart;
         private DevExpress.XtraGrid.Views.Grid.GridView gvSparepart;
@@ -207,5 +216,6 @@
         private System.Windows.Forms.BindingSource bsSparepart;
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNo;
+        private DevExpress.XtraEditors.DateEdit deTransDate;
     }
 }

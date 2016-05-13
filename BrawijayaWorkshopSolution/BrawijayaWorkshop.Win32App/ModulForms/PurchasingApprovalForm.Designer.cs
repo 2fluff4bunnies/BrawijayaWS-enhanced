@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasingApprovalForm));
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
@@ -50,9 +49,9 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnReject = new DevExpress.XtraEditors.SimpleButton();
             this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
             this.lihatSparepartDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.valPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.valPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).BeginInit();
             this.gcPurchasingInfo.SuspendLayout();
