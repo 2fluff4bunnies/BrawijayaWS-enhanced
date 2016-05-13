@@ -43,7 +43,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<SupplierViewModel> RetrieveSupplier()
         {
-            List<Supplier> result = _supplierRepository.GetAll().ToList();
+            List<Supplier> result = _supplierRepository.GetMany(c=>c.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
             return Map(result, mappedResult);
         }

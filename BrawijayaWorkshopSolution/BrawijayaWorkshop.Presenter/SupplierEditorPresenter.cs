@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
@@ -36,11 +37,11 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSupplier.CityId = View.CityId;
             if (View.SelectedSupplier.Id > 0)
             {
-                Model.UpdateSupplier(View.SelectedSupplier);
+                Model.UpdateSupplier(View.SelectedSupplier, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertSupplier(View.SelectedSupplier);
+                Model.InsertSupplier(View.SelectedSupplier, LoginInformation.UserId);
             }
         }
     }

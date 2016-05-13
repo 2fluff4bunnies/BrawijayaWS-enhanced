@@ -34,7 +34,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void Reject()
         {
-            Model.Reject(View.SelectedPurchasing);
+            Model.Reject(View.SelectedPurchasing, LoginInformation.UserId);
         }
     }
 }

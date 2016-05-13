@@ -1,7 +1,7 @@
 ﻿
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
-    public class SupplierViewModel
+    public class SupplierViewModel : BaseStatusEntityViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,7 +1,7 @@
 ﻿
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
-    public class MechanicViewModel : BaseStatusEntityViewModel
+    public class MechanicViewModel : BaseModifierWithStatusViewModel
     {
         public int Id { get; set; }
         public string Code { get; set; }

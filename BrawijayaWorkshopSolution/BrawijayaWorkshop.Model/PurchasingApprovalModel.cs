@@ -394,7 +394,7 @@ namespace BrawijayaWorkshop.Model
             }
         }
 
-        public void Reject(PurchasingViewModel purchasing)
+        public void Reject(PurchasingViewModel purchasing, int userID)
         {
             using (var trans = _unitOfWork.BeginTransaction())
             {
@@ -404,17 +404,16 @@ namespace BrawijayaWorkshop.Model
                 .GetMany(c => c.PurchasingId == purchasing.Id).ToList();
                     foreach (var purchasingDetail in listPurchasingDetail)
                     {
-                        List<SparepartDetail> listSparepartDetail = _sparepartDetailRepository
-                            .GetMany(c => c.PurchasingDetailId == purchasingDetail.Id).ToList();
-                        foreach (var sparepartDetail in listSparepartDetail)
-                        {
-                            _sparepartDetailRepository.Delete(sparepartDetail);
-
-                        }
-                        _purchasingDetailRepository.Delete(purchasingDetail);
+                        purchasingDetail.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                        purchasingDetail.ModifyUserId = userID;
+                        purchasingDetail.ModifyDate = DateTime.Now;
+                        _purchasingDetailRepository.Update(purchasingDetail);
                     }
                     Purchasing entity = _purchasingRepository.GetById(purchasing.Id);
-                    _purchasingRepository.Delete(entity);
+                    entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                    entity.ModifyUserId = userID;
+                    entity.ModifyDate = DateTime.Now;
+                    _purchasingRepository.Update(entity);
                     _unitOfWork.SaveChanges();
                     trans.Commit();
                 }

@@ -1,4 +1,3 @@
-﻿
 namespace BrawijayaWorkshop.SharedObject.ViewModels
 {
     public class CustomerViewModel : BaseModifierWithStatusViewModel

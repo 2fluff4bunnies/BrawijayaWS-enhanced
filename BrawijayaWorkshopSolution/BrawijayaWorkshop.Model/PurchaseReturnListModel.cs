@@ -49,11 +49,11 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status != (int)DbConstant.PurchasingStatus.Deleted).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status == (int)DbConstant.PurchasingStatus.Active).OrderBy(c => c.Date).ToList();
             }
             else
             {
-                result = _purchasingRepository.GetMany(c => c.Status != (int)DbConstant.PurchasingStatus.Deleted).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Status == (int)DbConstant.PurchasingStatus.Active).OrderBy(c => c.Date).ToList();
             }
 
             if (supplierID != 0)
@@ -68,7 +68,7 @@ namespace BrawijayaWorkshop.Model
         public List<SupplierViewModel> GetSupplierFilterList()
         {
             List<Supplier> result = null;
-            result = _supplierRepository.GetAll().ToList();
+            result = _supplierRepository.GetMany(c => c.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
             return Map(result, mappedResult);

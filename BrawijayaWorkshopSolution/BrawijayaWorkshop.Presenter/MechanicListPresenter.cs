@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -18,7 +19,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void DeleteMechanic()
         {
-            Model.DeleteMechanic(View.SelectedMechanic);
+            Model.DeleteMechanic(View.SelectedMechanic, LoginInformation.UserId);
         }
     }
 }
