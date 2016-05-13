@@ -29,7 +29,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(lookUpType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(txtYearOfPurchase, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            FieldsValidator.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            ValidateExpireDate.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+
 
             this.Load += VehicleEditorForm_Load;
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
@@ -275,7 +276,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (SelectedVehicle != null)
             {
-                dtpExpirationDate.Enabled = false;
+                lblExpirationDate.Visible = false;
+                dtpExpirationDate.Visible = false;
                 txtLicenseNumber.Enabled = false;
             }
             else
@@ -319,17 +321,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (FieldsValidator.Validate() && _presenter.IsCodeValidated())
             {
-                try
-                {
-                    MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
-                    this.ShowError("Proses simpan data Kendaraan gagal!");
-                }
+               
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
+                        _presenter.SaveChanges();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
+                        this.ShowError("Proses simpan data Kendaraan gagal!");
+                    }
             }
         }
 

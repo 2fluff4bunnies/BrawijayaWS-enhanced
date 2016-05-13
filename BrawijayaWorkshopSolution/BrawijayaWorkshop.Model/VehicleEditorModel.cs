@@ -169,14 +169,17 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var vw in vehicleWheels)
             {
-                VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vw.Id);
-                vwEntity.WheelDetailId = vw.WheelDetailId;
-                vwEntity.ModifyDate = serverTime;
-                vwEntity.ModifyUserId = userId;
+                if (vw.Id > 0)
+                {
+                    VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vw.Id);
+                    vwEntity.WheelDetailId = vw.WheelDetailId;
+                    vwEntity.ModifyDate = serverTime;
+                    vwEntity.ModifyUserId = userId;
 
-                _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
-                _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
-                _vehicleWheelRepository.Update(vwEntity);
+                    _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
+                    _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.Update(vwEntity);
+                }
             }
 
             _unitOfWork.SaveChanges();
@@ -242,12 +245,25 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public bool IsCodeExist(string code)
+        public bool IsCodeExist(string code, VehicleViewModel selectedVehicle)
         {
-            Vehicle result = _vehicleRepository.GetMany(v =>
-                v.Status == (int)DbConstant.DefaultDataStatus.Active &&
-                v.Code.ToLower() == code.ToLower()
-                ).FirstOrDefault();
+            Vehicle result = new Vehicle();
+
+            if (selectedVehicle != null)
+            {
+                 result = _vehicleRepository.GetMany(v =>
+                    v.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                    v.Code.ToLower() == code.ToLower() &&
+                    v.Id != selectedVehicle.Id
+                    ).FirstOrDefault();
+            }
+            else
+            {
+                 result = _vehicleRepository.GetMany(v =>
+                    v.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                    v.Code.ToLower() == code.ToLower()
+                    ).FirstOrDefault();
+            }
 
             return result != null;
         }

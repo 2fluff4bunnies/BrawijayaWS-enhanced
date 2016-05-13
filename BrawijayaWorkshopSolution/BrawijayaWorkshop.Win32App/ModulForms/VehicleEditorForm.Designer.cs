@@ -64,6 +64,7 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteWheelDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.ValidateExpireDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
@@ -81,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ValidateExpireDate)).BeginInit();
             this.SuspendLayout();
             // 
             // lookUpCustomer
@@ -156,7 +158,7 @@
             // 
             this.lblYearOfPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblYearOfPurchase.Location = new System.Drawing.Point(12, 194);
+            this.lblYearOfPurchase.Location = new System.Drawing.Point(14, 194);
             this.lblYearOfPurchase.Name = "lblYearOfPurchase";
             this.lblYearOfPurchase.Size = new System.Drawing.Size(81, 13);
             this.lblYearOfPurchase.TabIndex = 6;
@@ -193,7 +195,7 @@
             // 
             this.txtKilometer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtKilometer.Location = new System.Drawing.Point(129, 259);
+            this.txtKilometer.Location = new System.Drawing.Point(129, 226);
             this.txtKilometer.Name = "txtKilometer";
             this.txtKilometer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtKilometer.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -206,7 +208,7 @@
             // 
             this.lblKilometer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblKilometer.Location = new System.Drawing.Point(15, 262);
+            this.lblKilometer.Location = new System.Drawing.Point(14, 229);
             this.lblKilometer.Name = "lblKilometer";
             this.lblKilometer.Size = new System.Drawing.Size(44, 13);
             this.lblKilometer.TabIndex = 16;
@@ -352,7 +354,7 @@
             this.dtpExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpExpirationDate.EditValue = null;
-            this.dtpExpirationDate.Location = new System.Drawing.Point(129, 223);
+            this.dtpExpirationDate.Location = new System.Drawing.Point(129, 256);
             this.dtpExpirationDate.Name = "dtpExpirationDate";
             this.dtpExpirationDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dtpExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -367,14 +369,14 @@
             this.dtpExpirationDate.Size = new System.Drawing.Size(255, 20);
             this.dtpExpirationDate.TabIndex = 6;
             conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Tanggal Kadaluarsa harus diisi";
-            this.FieldsValidator.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
+            conditionValidationRule6.ErrorText = "Tanggal kadaluarsa nopol harus diisi!";
+            this.ValidateExpireDate.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
             // 
             // lblExpirationDate
             // 
             this.lblExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblExpirationDate.Location = new System.Drawing.Point(13, 226);
+            this.lblExpirationDate.Location = new System.Drawing.Point(14, 259);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(100, 13);
             this.lblExpirationDate.TabIndex = 10;
@@ -431,6 +433,11 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // ValidateExpireDate
+            // 
+            this.ValidateExpireDate.ValidateHiddenControls = false;
+            this.ValidateExpireDate.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,6 +466,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.FieldsValidator)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ValidateExpireDate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -492,5 +500,6 @@
         private DevExpress.XtraEditors.TextEdit txtLicenseNumber;
         private DevExpress.XtraEditors.TextEdit txtKilometer;
         private DevExpress.XtraEditors.LabelControl lblKilometer;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider ValidateExpireDate;
     }
 }
