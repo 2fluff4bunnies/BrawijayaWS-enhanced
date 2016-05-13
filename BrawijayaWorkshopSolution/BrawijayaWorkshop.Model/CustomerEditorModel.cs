@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Database.Entities;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
@@ -41,6 +42,7 @@ namespace BrawijayaWorkshop.Model
                     _customerRepository.AttachNavigation<City>(entity.City);
                     entity.CreateUserId = entity.ModifyUserId = userId;
                     entity.CreateDate = entity.ModifyDate = DateTime.Now;
+                    entity.Status = (int)DbConstant.DefaultDataStatus.Active;
                     _customerRepository.Add(entity);
                     _unitOfWork.SaveChanges();
 

@@ -52,15 +52,20 @@ namespace BrawijayaWorkshop.Model
 
         public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails(int vehicleId)
         {
+            var currentVehicleWHeel = getCurrentVehicleWheel(vehicleId);
+            if (currentVehicleWHeel != null && currentVehicleWHeel.Count > 0)
+            {
 
-
-            List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
-                                                                            || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
-                                                                            && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
-                                                                            && !getCurrentVehicleWheel(vehicleId).Any(vw => vw.WheelDetailId == wd.Id)
-                                                                      ).ToList();
-            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
-            return Map(result, mappedResult);
+                List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
+                                                                                || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
+                                                                                && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                                                                                && !currentVehicleWHeel.Any(vw => vw.WheelDetailId == wd.Id)
+                                                                          ).ToList();
+                List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
+                return Map(result, mappedResult);
+            }
+            else
+                return new List<SpecialSparepartDetailViewModel>();
         }
 
         public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails()
@@ -82,11 +87,10 @@ namespace BrawijayaWorkshop.Model
             entity.CreateUserId = entity.ModifyUserId = userId;
             entity.Status = (int)DbConstant.DefaultDataStatus.Active;
             var insertedVehicle = _vehicleRepository.Add(entity);
-            _unitOfWork.SaveChanges();
 
             VehicleDetail vehicleDetail = new VehicleDetail
             {
-                VehicleId = insertedVehicle.Id,
+                Vehicle = insertedVehicle,
                 LicenseNumber = insertedVehicle.ActiveLicenseNumber,
                 ExpirationDate = expirationDate,
                 CreateDate = serverTime,
@@ -95,54 +99,46 @@ namespace BrawijayaWorkshop.Model
                 CreateUserId = userId,
                 Status = (int)DbConstant.LicenseNumberStatus.Active
             };
-            _vehicleDetailRepository.AttachNavigation(vehicleDetail.Vehicle);
+          
             _vehicleDetailRepository.Add(vehicleDetail);
-            _unitOfWork.SaveChanges();
 
             foreach (var vw in vehicleWheels)
             {
-                VehicleWheel vwEntity = new VehicleWheel();
-                Map(vw, vwEntity);
-                vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
-                vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
-                vwEntity.VehicleId = insertedVehicle.Id;
-                vwEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
+                if (vw.WheelDetailId > 0)
+                {
+                    VehicleWheel vwEntity = new VehicleWheel();
+                    Map(vw, vwEntity);
+                    vwEntity.Vehicle = insertedVehicle;
+                    vwEntity.WheelDetailId = vw.WheelDetailId;
+                    vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
+                    vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
+                    vwEntity.VehicleId = insertedVehicle.Id;
+                    vwEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
 
-                _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
-                _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.Add(vwEntity);
 
-                _vehicleWheelRepository.Add(vwEntity);
-                _unitOfWork.SaveChanges();
+                    SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
+                    wdEntity.ModifyDate = serverTime;
+                    wdEntity.ModifyUserId = userId;
+                    wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
 
-                SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
-                wdEntity.ModifyDate = serverTime;
-                wdEntity.ModifyUserId = userId;
-                wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
+                    _wheelDetailRepository.Update(wdEntity);
 
-                _wheelDetailRepository.AttachNavigation(wdEntity.SpecialSparepart);
-                _wheelDetailRepository.AttachNavigation(wdEntity.SparepartDetail);
-                _wheelDetailRepository.Update(wdEntity);
-                _unitOfWork.SaveChanges();
+                    SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
+                    spdEntity.ModifyDate = serverTime;
+                    spdEntity.ModifyUserId = userId;
+                    spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutInstalled;
 
-                SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
-                spdEntity.ModifyDate = serverTime;
-                spdEntity.ModifyUserId = userId;
-                spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutInstalled;
-                _sparepartDetailRepository.AttachNavigation(spdEntity.PurchasingDetail);
-                _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
-                _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
-                _sparepartDetailRepository.Update(spdEntity);
-                _unitOfWork.SaveChanges();
+                    _sparepartDetailRepository.Update(spdEntity);
 
-                Sparepart spEntity = _sparepartRepository.GetById(wdEntity.SparepartDetail.SparepartId);
-                spEntity.ModifyDate = serverTime;
-                spEntity.ModifyUserId = userId;
-                spEntity.StockQty = spEntity.StockQty - 1;
-                _sparepartRepository.AttachNavigation(spEntity.CategoryReference);
-                _sparepartRepository.AttachNavigation(spEntity.UnitReference);
-                _sparepartRepository.Update(spEntity);
-                _unitOfWork.SaveChanges();
+                    Sparepart spEntity = _sparepartRepository.GetById(wdEntity.SparepartDetail.SparepartId);
+                    spEntity.ModifyDate = serverTime;
+                    spEntity.ModifyUserId = userId;
+                    spEntity.StockQty = spEntity.StockQty - 1;
+                }
             }
+
+            _unitOfWork.SaveChanges();
         }
 
         public void UpdateVehicle(VehicleViewModel vehicle, List<VehicleWheelViewModel> vehicleWheels,

@@ -52,7 +52,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return lookUpCategory.EditValue.AsInteger();
+                if (lookUpCategory.EditValue != null)
+                {
+                    return lookUpCategory.EditValue.AsInteger();
+                }
+                else
+                {
+                    return -1;
+                }
             }
             set
             {
@@ -64,7 +71,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return txtLicenseNumber.EditValue.ToString();
+                if (txtLicenseNumber.EditValue != null)
+                {
+                    return txtLicenseNumber.EditValue.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
             set
             {
@@ -76,7 +90,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return lookUpContractWorkStatus.EditValue.AsInteger();
+                if (lookUpContractWorkStatus.EditValue != null)
+                {
+                    return lookUpContractWorkStatus.EditValue.AsInteger();
+                }
+                else
+                {
+                    return -1;
+                }
             }
             set
             {
@@ -88,7 +109,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return lookUpCustomer.EditValue.AsInteger();
+                if (lookUpCustomer.EditValue != null)
+                {
+                    return lookUpCustomer.EditValue.AsInteger();
+                }
+                else
+                {
+                    return -1;
+                }
             }
             set
             {
@@ -124,7 +152,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return txtCode.EditValue.ToString();
+                if (txtCode.EditValue != null)
+                {
+                    return txtCode.EditValue.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
             set
             {
@@ -259,7 +294,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             SPKHistoryDetailForm editor = Bootstrapper.Resolve<SPKHistoryDetailForm>();
             //editor.SelectedSPK = this.SelectedSPK;
-          
+
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();

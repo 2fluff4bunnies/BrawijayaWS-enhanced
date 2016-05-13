@@ -275,8 +275,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (SelectedVehicle != null)
             {
-                lblExpirationDate.Visible = false;
-                dtpExpirationDate.Visible = false;
+                dtpExpirationDate.Enabled = false;
                 txtLicenseNumber.Enabled = false;
             }
             else

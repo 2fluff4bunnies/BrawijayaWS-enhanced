@@ -102,7 +102,6 @@ namespace BrawijayaWorkshop.Model
 
             if (isApproved)
             {
-
                 SPK entity = _SPKRepository.GetById(spk.Id);
                 entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
                 entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Ready;
@@ -472,7 +471,5 @@ namespace BrawijayaWorkshop.Model
 
             return mappedResult;
         }
-
-
     }
 }

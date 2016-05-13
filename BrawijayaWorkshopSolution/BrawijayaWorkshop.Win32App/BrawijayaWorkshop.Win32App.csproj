@@ -938,6 +938,9 @@
     <EmbeddedResource Include="ModulForms\SPKEditorForm.resx">
       <DependentUpon>SPKEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKHistoryDetailForm.resx">
+      <DependentUpon>SPKHistoryDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKScheduleEditorForm.resx">
       <DependentUpon>SPKScheduleEditorForm.cs</DependentUpon>
     </EmbeddedResource>

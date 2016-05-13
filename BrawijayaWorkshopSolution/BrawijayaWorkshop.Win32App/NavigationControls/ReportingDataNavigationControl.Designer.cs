@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportingDataNavigationControl));
             this.navbarReportingData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupReportingData = new DevExpress.XtraNavBar.NavBarGroup();
-            this.iHistoryKendaraan = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSPKHistory = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarReportingData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
@@ -45,7 +45,7 @@
             this.navbarReportingData.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navbarGroupReportingData});
             this.navbarReportingData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
-            this.iHistoryKendaraan});
+            this.iSPKHistory});
             this.navbarReportingData.Location = new System.Drawing.Point(0, 0);
             this.navbarReportingData.Name = "navbarReportingData";
             this.navbarReportingData.OptionsNavPane.ExpandedWidth = 195;
@@ -59,15 +59,15 @@
             this.navbarGroupReportingData.Caption = "Reporting";
             this.navbarGroupReportingData.Expanded = true;
             this.navbarGroupReportingData.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iHistoryKendaraan)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKHistory)});
             this.navbarGroupReportingData.Name = "navbarGroupReportingData";
             // 
-            // iHistoryKendaraan
+            // iSPKHistory
             // 
-            this.iHistoryKendaraan.Caption = "Report History Kendaraan";
-            this.iHistoryKendaraan.LargeImageIndex = 0;
-            this.iHistoryKendaraan.Name = "iHistoryKendaraan";
-            this.iHistoryKendaraan.SmallImageIndex = 0;
+            this.iSPKHistory.Caption = "Report History Kendaraan";
+            this.iSPKHistory.LargeImageIndex = 0;
+            this.iSPKHistory.Name = "iSPKHistory";
+            this.iSPKHistory.SmallImageIndex = 0;
             // 
             // imageCollection
             // 
@@ -91,7 +91,7 @@
 
         private DevExpress.XtraNavBar.NavBarControl navbarReportingData;
         private DevExpress.XtraNavBar.NavBarGroup navbarGroupReportingData;
-        private DevExpress.XtraNavBar.NavBarItem iHistoryKendaraan;
+        public DevExpress.XtraNavBar.NavBarItem iSPKHistory;
         private DevExpress.Utils.ImageCollection imageCollection;
     }
 }
