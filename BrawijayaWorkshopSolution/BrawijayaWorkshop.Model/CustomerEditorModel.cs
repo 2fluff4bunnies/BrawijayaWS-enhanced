@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public void InsertCustomer(CustomerViewModel customer)
+        public void InsertCustomer(CustomerViewModel customer, int userId)
         {
             using(var trans = _unitOfWork.BeginTransaction())
             {
@@ -38,6 +39,8 @@ namespace BrawijayaWorkshop.Model
                     Customer entity = new Customer();
                     Map(customer, entity);
                     _customerRepository.AttachNavigation<City>(entity.City);
+                    entity.CreateUserId = entity.ModifyUserId = userId;
+                    entity.CreateDate = entity.ModifyDate = DateTime.Now;
                     _customerRepository.Add(entity);
                     _unitOfWork.SaveChanges();
 
@@ -51,11 +54,13 @@ namespace BrawijayaWorkshop.Model
             }
         }
 
-        public void UpdateCustomer(CustomerViewModel customer)
+        public void UpdateCustomer(CustomerViewModel customer, int userId)
         {
             Customer entity = _customerRepository.GetById<int>(customer.Id);
             Map(customer, entity);
             _customerRepository.AttachNavigation<City>(entity.City);
+            entity.ModifyDate = DateTime.Now;
+            entity.ModifyUserId = userId;
             _customerRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }

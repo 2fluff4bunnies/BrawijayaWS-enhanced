@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
@@ -42,11 +43,11 @@ namespace BrawijayaWorkshop.Presenter
 
             if(View.SelectedCustomer.Id > 0)
             {
-                Model.UpdateCustomer(View.SelectedCustomer);
+                Model.UpdateCustomer(View.SelectedCustomer, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertCustomer(View.SelectedCustomer);
+                Model.InsertCustomer(View.SelectedCustomer, LoginInformation.UserId);
             }
         }
     }

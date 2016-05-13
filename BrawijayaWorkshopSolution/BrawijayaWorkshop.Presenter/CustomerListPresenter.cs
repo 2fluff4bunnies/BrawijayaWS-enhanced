@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -16,7 +17,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void DeleteCustomer()
         {
-            Model.DeleteCustomer(View.SelectedCustomer);
+            Model.DeleteCustomer(View.SelectedCustomer, LoginInformation.UserId);
         }
     }
 }
