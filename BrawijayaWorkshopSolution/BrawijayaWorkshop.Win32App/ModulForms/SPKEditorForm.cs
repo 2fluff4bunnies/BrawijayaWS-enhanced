@@ -167,7 +167,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
             set
             {
-                dtpDueDate.EditValue = value.ToString();
+                dtpDueDate.EditValue = value;
             }
         }
 

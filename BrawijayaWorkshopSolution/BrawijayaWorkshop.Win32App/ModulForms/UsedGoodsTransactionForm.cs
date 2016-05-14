@@ -154,7 +154,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valMode.Validate() && valQty.Validate() && (_isManualAdd ||(!_isManualAdd && Stock > StockUpdate)))
+            if (valMode.Validate() && valQty.Validate() && (_isManualAdd ||(!_isManualAdd && Stock >= StockUpdate)))
             {
                 try
                 {
