@@ -136,6 +136,8 @@
     <Compile Include="VehicleDetailListModel.cs" />
     <Compile Include="VehicleDetailEditorModel.cs" />
     <Compile Include="VehicleEditorModel.cs" />
+    <Compile Include="VehicleGroupEditorModel.cs" />
+    <Compile Include="VehicleGroupListModel.cs" />
     <Compile Include="VehicleListModel.cs" />
     <Compile Include="SparepartEditorModel.cs" />
     <Compile Include="SparepartListModel.cs" />
