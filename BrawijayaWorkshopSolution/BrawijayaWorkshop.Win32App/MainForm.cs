@@ -267,6 +267,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iUsedGood.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_USEDGOOD);
             navMasterData.iBrand.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_BRAND);
             navMasterData.iType.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_TYPE);
+            navMasterData.iVehicleGroup.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_VEHICLEGROUP);
 
             ShowNavigationControl(navMasterData);
             // init event navigation
@@ -286,6 +287,13 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iUsedGood.LinkClicked += iUsedGood_LinkClicked;
             navMasterData.iBrand.LinkClicked += iBrand_LinkClicked;
             navMasterData.iType.LinkClicked += iType_LinkClicked;
+            navMasterData.iVehicleGroup.LinkClicked += iVehicleGroup_LinkClicked;
+        }
+
+        private void iVehicleGroup_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            VehicleGroupListControl vehicleListontrol = Bootstrapper.Resolve<VehicleGroupListControl>();
+            ShowUserControl(vehicleListontrol);
         }
 
         private void iBrand_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

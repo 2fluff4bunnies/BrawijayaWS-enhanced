@@ -17,29 +17,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
             _presenter = new VehicleGroupEditorPresenter(this, model);
 
+            valCustomer.SetIconAlignment(lookupCustomer, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valName.SetIconAlignment(txtGroupName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+
+            this.Load += VehicleGroupEditorForm_Load;
         }
 
-        public VehicleGroupViewModel SelectedGroup
+        private void VehicleGroupEditorForm_Load(object sender, EventArgs e)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            _presenter.InitFormData();
         }
+
+        public VehicleGroupViewModel SelectedGroup { get; set; }
 
         public List<CustomerViewModel> ListCustomer
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupCustomer.Properties.DataSource as List<CustomerViewModel>;
             }
             set
             {
-                throw new NotImplementedException();
+                lookupCustomer.Properties.DataSource = value;
             }
         }
 
@@ -47,11 +46,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupCustomer.EditValue.AsInteger();
             }
             set
             {
-                throw new NotImplementedException();
+                lookupCustomer.EditValue = value;
             }
         }
 
@@ -59,11 +58,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                throw new NotImplementedException();
+                return txtGroupName.Text;
             }
             set
             {
-                throw new NotImplementedException();
+                txtGroupName.Text = value;
+            }
+        }
+
+        protected override void ExecuteSave()
+        {
+            if (valCustomer.Validate() && valName.Validate())
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save Vehicle Group's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle Gruop: '" + SelectedGroup.Name + "'", ex);
+                    this.ShowError("Proses simpan data customer: '" + SelectedGroup.Name + "' gagal!");
+                }
             }
         }
     }

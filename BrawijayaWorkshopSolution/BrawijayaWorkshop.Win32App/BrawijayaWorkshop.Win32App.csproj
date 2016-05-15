@@ -863,6 +863,9 @@
     <EmbeddedResource Include="ModulControls\UserRoleListControl.resx">
       <DependentUpon>UserRoleListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\VehicleGroupListControl.resx">
+      <DependentUpon>VehicleGroupListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\VehicleListControl.resx">
       <DependentUpon>VehicleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1000,6 +1003,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SpecialSparepartEditorForm.resx">
       <DependentUpon>SpecialSparepartEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\VehicleGroupEditorForm.resx">
+      <DependentUpon>VehicleGroupEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\AccountingNavigationControl.resx">
       <DependentUpon>AccountingNavigationControl.cs</DependentUpon>

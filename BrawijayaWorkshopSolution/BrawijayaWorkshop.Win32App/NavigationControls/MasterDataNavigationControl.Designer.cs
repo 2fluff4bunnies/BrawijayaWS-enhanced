@@ -43,12 +43,13 @@
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
+            this.iBrand = new DevExpress.XtraNavBar.NavBarItem();
+            this.iType = new DevExpress.XtraNavBar.NavBarItem();
             this.iVehicle = new DevExpress.XtraNavBar.NavBarItem();
             this.iSpecialSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
-            this.iBrand = new DevExpress.XtraNavBar.NavBarItem();
-            this.iType = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iVehicleGroup = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +76,8 @@
             this.iUsedGood,
             this.iJournalCategory,
             this.iBrand,
-            this.iType});
+            this.iType,
+            this.iVehicleGroup});
             this.navbarMasterData.Location = new System.Drawing.Point(0, 0);
             this.navbarMasterData.Name = "navbarMasterData";
             this.navbarMasterData.OptionsNavPane.ExpandedWidth = 254;
@@ -97,6 +99,7 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournal),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iJournalCategory),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iCustomer),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iVehicleGroup),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSupplier),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSparepart),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMechanic),
@@ -173,6 +176,18 @@
             this.iMechanic.Name = "iMechanic";
             this.iMechanic.SmallImageIndex = 4;
             // 
+            // iBrand
+            // 
+            this.iBrand.Caption = "Brand";
+            this.iBrand.Name = "iBrand";
+            this.iBrand.SmallImageIndex = 14;
+            // 
+            // iType
+            // 
+            this.iType.Caption = "Tipe";
+            this.iType.Name = "iType";
+            this.iType.SmallImageIndex = 15;
+            // 
             // iVehicle
             // 
             this.iVehicle.Caption = "Kendaraan";
@@ -190,18 +205,6 @@
             this.iUsedGood.Caption = "Barang Bekas";
             this.iUsedGood.Name = "iUsedGood";
             this.iUsedGood.SmallImageIndex = 11;
-            // 
-            // iBrand
-            // 
-            this.iBrand.Caption = "Brand";
-            this.iBrand.Name = "iBrand";
-            this.iBrand.SmallImageIndex = 14;
-            // 
-            // iType
-            // 
-            this.iType.Caption = "Tipe";
-            this.iType.Name = "iType";
-            this.iType.SmallImageIndex = 15;
             // 
             // imageCollection
             // 
@@ -222,6 +225,13 @@
             this.imageCollection.Images.SetKeyName(13, "category_16x16.png");
             this.imageCollection.Images.SetKeyName(14, "brand-icon_16x16.png");
             this.imageCollection.Images.SetKeyName(15, "type_16x16.png");
+            this.imageCollection.Images.SetKeyName(16, "group_16x16.png");
+            // 
+            // iVehicleGroup
+            // 
+            this.iVehicleGroup.Caption = "Kelompok";
+            this.iVehicleGroup.Name = "iVehicleGroup";
+            this.iVehicleGroup.SmallImageIndex = 16;
             // 
             // MasterDataNavigationControl
             // 
@@ -257,5 +267,6 @@
         public DevExpress.XtraNavBar.NavBarItem iJournalCategory;
         public DevExpress.XtraNavBar.NavBarItem iBrand;
         public DevExpress.XtraNavBar.NavBarItem iType;
+        public DevExpress.XtraNavBar.NavBarItem iVehicleGroup;
     }
 }
