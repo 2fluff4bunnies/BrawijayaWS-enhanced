@@ -24,6 +24,13 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
+        public List<CustomerViewModel> RetrieveAllCustomer()
+        {
+            List<Customer> result = _customerRepository.GetAll().ToList();
+            List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            return Map(result, mappedResult);
+        }
+
         public void InsertNewGroup(VehicleGroupViewModel vehicleGroup, int userId)
         {
             using (var trans = _unitOfWork.BeginTransaction())
