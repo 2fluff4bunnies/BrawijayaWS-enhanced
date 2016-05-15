@@ -27,7 +27,11 @@ namespace BrawijayaWorkshop.View
 
         int CustomerId { get; set; }
 
+        int GroupId { get; set; }
+
         List<CustomerViewModel> CustomerList { get; set; }
+        List<VehicleGroupViewModel> GroupList { get; set; }
+
         List<BrandViewModel> BrandList { get; set; }
 
         List<TypeViewModel> TypeList { get; set; }

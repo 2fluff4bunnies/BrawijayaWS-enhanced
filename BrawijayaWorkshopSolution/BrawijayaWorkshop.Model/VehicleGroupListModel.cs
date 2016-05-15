@@ -25,7 +25,7 @@ namespace BrawijayaWorkshop.Model
 
         public List<CustomerViewModel> RetrieveAllCustomer()
         {
-            List<Customer> result = _customerRepository.GetAll().ToList();
+            List<Customer> result = _customerRepository.GetMany(c => c.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
             return Map(result, mappedResult);
         }

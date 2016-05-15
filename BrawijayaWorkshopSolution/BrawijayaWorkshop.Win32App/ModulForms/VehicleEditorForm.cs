@@ -31,8 +31,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             ValidateExpireDate.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
-
             this.Load += VehicleEditorForm_Load;
+
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
             gvVehicleWheel.PopupMenuShowing += gvVehicleWheel_PopupMenuShowing;
             gvVehicleWheel.FocusedRowChanged += gvVehicleWheel_FocusedRowChanged;
@@ -45,9 +45,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
             lookupWheelDetailGv.AutoSearchColumnIndex = 1;
+
+            lookUpCustomer.EditValueChanged += lookUpCustomer_EditValueChanged;
         }
 
-        void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
+        public void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            if(this.CustomerId > 0)
+            {
+                _presenter.PopulateVehicleGroup();
+            }
+        }
+
+        private void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
         {
             if (this.SelectedVehicle != null)
             {
@@ -127,6 +137,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public int GroupId
+        {
+            get
+            {
+                return lookupGroup.EditValue.AsInteger();
+            }
+            set
+            {
+                lookupGroup.EditValue = value;
+            }
+        }
+
         public int YearOfPurchase
         {
             get
@@ -184,6 +206,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 lookUpCustomer.Properties.DataSource = value;
+            }
+        }
+
+        public List<VehicleGroupViewModel> GroupList
+        {
+            get
+            {
+                return lookupGroup.Properties.DataSource as List<VehicleGroupViewModel>;
+            }
+            set
+            {
+                lookupGroup.Properties.DataSource = value;
             }
         }
 
@@ -254,12 +288,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public VehicleWheelViewModel SelectedVehicleWheel { get; set; }
         #endregion
 
-        void gvVehicleWheel_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gvVehicleWheel_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedVehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
         }
 
-        void gvVehicleWheel_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        private void gvVehicleWheel_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             GridView view = (GridView)sender;
             GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
@@ -319,20 +353,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (FieldsValidator.Validate() && _presenter.IsCodeValidated())
+            if (FieldsValidator.Validate() && valGroupName.Validate() && _presenter.IsCodeValidated())
             {
-               
-                    try
-                    {
-                        MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
-                        _presenter.SaveChanges();
-                        this.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
-                        this.ShowError("Proses simpan data Kendaraan gagal!");
-                    }
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
+                    _presenter.SaveChanges();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
+                    this.ShowError("Proses simpan data Kendaraan gagal!");
+                }
             }
         }
 

@@ -12,6 +12,7 @@ namespace BrawijayaWorkshop.Model
     public class VehicleEditorModel : AppBaseModel
     {
         private ICustomerRepository _customerRepository;
+        private IVehicleGroupRepository _vehicleGroupRepository;
         private IVehicleRepository _vehicleRepository;
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
@@ -22,7 +23,8 @@ namespace BrawijayaWorkshop.Model
         private IBrandRepository _brandRepository;
         private IUnitOfWork _unitOfWork;
 
-        public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository,
+        public VehicleEditorModel(ICustomerRepository customerRepository, IVehicleGroupRepository vehicleGroupRepository,
+            IVehicleRepository vehicleRepository,
             IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
             ISparepartRepository sparepartRepository, ITypeRepository typeRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository, IBrandRepository brandRepository,
@@ -31,6 +33,7 @@ namespace BrawijayaWorkshop.Model
             : base()
         {
             _customerRepository = customerRepository;
+            _vehicleGroupRepository = vehicleGroupRepository;
             _vehicleRepository = vehicleRepository;
             _vehicleDetailRepository = vehicleDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
@@ -47,6 +50,14 @@ namespace BrawijayaWorkshop.Model
         {
             List<Customer> result = _customerRepository.GetMany(c => c.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<VehicleGroupViewModel> GetVehicleGroupByCustomer(int customerId)
+        {
+            List<VehicleGroup> result = _vehicleGroupRepository.GetMany(vg => vg.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                vg.CustomerId == customerId).ToList();
+            List<VehicleGroupViewModel> mappedResult = new List<VehicleGroupViewModel>();
             return Map(result, mappedResult);
         }
 

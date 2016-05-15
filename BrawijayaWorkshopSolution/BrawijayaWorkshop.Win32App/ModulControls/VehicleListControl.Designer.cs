@@ -49,6 +49,7 @@
             this.colBrand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colYearOfPurchase = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colVehicleGroup = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
@@ -66,7 +67,7 @@
             this.gcFilter.Controls.Add(this.lblFilterCompanyName);
             this.gcFilter.Location = new System.Drawing.Point(3, 4);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(584, 62);
+            this.gcFilter.Size = new System.Drawing.Size(877, 62);
             this.gcFilter.TabIndex = 6;
             this.gcFilter.Text = "Filter";
             // 
@@ -76,7 +77,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(517, 28);
+            this.btnSearch.Location = new System.Drawing.Point(810, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 2;
@@ -91,7 +92,7 @@
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Properties.Mask.EditMask = "[a-zA-Z0-9\\-_]{0,40}";
             this.txtFilter.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtFilter.Size = new System.Drawing.Size(411, 20);
+            this.txtFilter.Size = new System.Drawing.Size(704, 20);
             this.txtFilter.TabIndex = 1;
             // 
             // lblFilterCompanyName
@@ -175,7 +176,7 @@
             this.gcVehicle.Location = new System.Drawing.Point(3, 102);
             this.gcVehicle.MainView = this.gvVehicle;
             this.gcVehicle.Name = "gcVehicle";
-            this.gcVehicle.Size = new System.Drawing.Size(584, 224);
+            this.gcVehicle.Size = new System.Drawing.Size(877, 317);
             this.gcVehicle.TabIndex = 9;
             this.gcVehicle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicle});
@@ -183,8 +184,9 @@
             // gvVehicle
             // 
             this.gvVehicle.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colCustomer,
             this.colActiveLicenseNumber,
+            this.colCustomer,
+            this.colVehicleGroup,
             this.colBrand,
             this.colType,
             this.colYearOfPurchase});
@@ -226,7 +228,7 @@
             this.colBrand.FieldName = "Brand.Name";
             this.colBrand.Name = "colBrand";
             this.colBrand.Visible = true;
-            this.colBrand.VisibleIndex = 2;
+            this.colBrand.VisibleIndex = 3;
             // 
             // colType
             // 
@@ -234,7 +236,7 @@
             this.colType.FieldName = "Type.Name";
             this.colType.Name = "colType";
             this.colType.Visible = true;
-            this.colType.VisibleIndex = 3;
+            this.colType.VisibleIndex = 4;
             // 
             // colYearOfPurchase
             // 
@@ -242,7 +244,14 @@
             this.colYearOfPurchase.FieldName = "YearOfPurchase";
             this.colYearOfPurchase.Name = "colYearOfPurchase";
             this.colYearOfPurchase.Visible = true;
-            this.colYearOfPurchase.VisibleIndex = 4;
+            this.colYearOfPurchase.VisibleIndex = 5;
+            // 
+            // colVehicleGroup
+            // 
+            this.colVehicleGroup.Caption = "Kelompok";
+            this.colVehicleGroup.Name = "colVehicleGroup";
+            this.colVehicleGroup.Visible = true;
+            this.colVehicleGroup.VisibleIndex = 2;
             // 
             // VehicleListControl
             // 
@@ -252,7 +261,7 @@
             this.Controls.Add(this.gcFilter);
             this.Controls.Add(this.btnNewVehicle);
             this.Name = "VehicleListControl";
-            this.Size = new System.Drawing.Size(590, 329);
+            this.Size = new System.Drawing.Size(883, 422);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -285,5 +294,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsUpdateLicenseNumber;
         private System.Windows.Forms.ToolStripMenuItem cmsViewHistoryLicenseNumber;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private DevExpress.XtraGrid.Columns.GridColumn colVehicleGroup;
     }
 }

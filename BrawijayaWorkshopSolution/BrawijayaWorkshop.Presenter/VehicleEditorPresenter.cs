@@ -11,6 +11,10 @@ namespace BrawijayaWorkshop.Presenter
         public VehicleEditorPresenter(IVehicleEditorView view, VehicleEditorModel model)
             : base(view, model) { }
 
+        public void PopulateVehicleGroup()
+        {
+            View.GroupList = Model.GetVehicleGroupByCustomer(View.CustomerId);
+        }
 
         public void InitFormData()
         {
@@ -25,6 +29,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.BrandId = View.SelectedVehicle.BrandId;
                 View.TypeId = View.SelectedVehicle.TypeId;
                 View.CustomerId = View.SelectedVehicle.CustomerId;
+                View.GroupId = View.SelectedVehicle.VehicleGroupId;
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.Kilometers = View.SelectedVehicle.Kilometers;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
@@ -54,6 +59,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedVehicle.BrandId = View.BrandId;
             View.SelectedVehicle.TypeId = View.TypeId;
             View.SelectedVehicle.CustomerId = View.CustomerId;
+            View.SelectedVehicle.VehicleGroupId = View.GroupId;
             View.SelectedVehicle.ActiveLicenseNumber = View.ActiveLicenseNumber;
             View.SelectedVehicle.YearOfPurchase = View.YearOfPurchase;
             View.SelectedVehicle.Kilometers = View.Kilometers;
@@ -77,7 +83,6 @@ namespace BrawijayaWorkshop.Presenter
         {
             return Model.GetCurrentWheelDetailId(wheelDetailId);
         }
-
 
         public bool IsCodeValidated()
         {

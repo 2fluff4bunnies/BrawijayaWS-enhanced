@@ -19,6 +19,10 @@ namespace BrawijayaWorkshop.Database.Entities
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
+        [Required]
+        public int VehicleGroupId { get; set; }
+        public virtual VehicleGroup VehicleGroup { get; set; }
+
         public int Kilometers { get; set; }
         public string Code { get; set; }
 
