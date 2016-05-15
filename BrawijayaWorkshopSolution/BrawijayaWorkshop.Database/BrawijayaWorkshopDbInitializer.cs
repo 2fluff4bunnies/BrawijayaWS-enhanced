@@ -233,12 +233,23 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_SALES_RETURN,
                 ModulDescription = "Modul Transaksi Retur Penjualan"
             });
+            ApplicationModul vehicleGroupMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_VEHICLEGROUP,
+                ModulDescription = "Modul Vehicle Group"
+            });
             context.SaveChanges();
 
             // superadmin
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = accMod.Id,
+                RoleId = superAdminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleGroupMod.Id,
                 RoleId = superAdminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -413,6 +424,12 @@ namespace BrawijayaWorkshop.Database
             // admin
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = vehicleGroupMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = customerMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
@@ -491,6 +508,12 @@ namespace BrawijayaWorkshop.Database
             });
 
             // manager
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleGroupMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = approvalMod.Id,

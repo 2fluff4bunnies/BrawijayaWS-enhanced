@@ -16,6 +16,7 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_TYPE = "M_TYPE";
         public const string MODUL_CUSTOMER = "M_CUSTOMER";
         public const string MODUL_JOURNAL = "M_JOURNAL";
+        public const string MODUL_VEHICLEGROUP = "MODUL_VEHICLEGROUP";
         public const string MODUL_VEHICLE = "M_VEHICLE";
         public const string MODUL_SPAREPART = "M_SPAREPART";
         public const string MODUL_SPAREPART_DETAIL = "M_SPAREPART_DETAIL";

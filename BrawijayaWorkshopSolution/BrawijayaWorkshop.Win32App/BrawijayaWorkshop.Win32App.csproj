@@ -362,6 +362,12 @@
     <Compile Include="ModulControls\UserRoleListControl.Designer.cs">
       <DependentUpon>UserRoleListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\VehicleGroupListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\VehicleGroupListControl.Designer.cs">
+      <DependentUpon>VehicleGroupListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\VehicleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -643,6 +649,12 @@
     </Compile>
     <Compile Include="ModulForms\SpecialSparepartEditorForm.Designer.cs">
       <DependentUpon>SpecialSparepartEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\VehicleGroupEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\VehicleGroupEditorForm.Designer.cs">
+      <DependentUpon>VehicleGroupEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NavigationControls\AccountingNavigationControl.cs">
       <SubType>UserControl</SubType>
