@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\VehicleDetailViewModel.cs" />
+    <Compile Include="ViewModels\VehicleGroupViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\VehicleWheelViewModel.cs" />
     <Compile Include="ViewModels\SpecialSparepartDetailViewModel.cs" />

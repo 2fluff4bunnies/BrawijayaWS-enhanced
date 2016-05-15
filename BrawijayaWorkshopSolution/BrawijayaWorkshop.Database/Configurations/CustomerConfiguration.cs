@@ -8,6 +8,8 @@ namespace BrawijayaWorkshop.Database.Configurations
         public CustomerConfiguration()
         {
             HasRequired(c => c.City).WithMany().HasForeignKey(c => c.CityId).WillCascadeOnDelete(true);
+            HasRequired(c => c.CreateUser).WithMany().HasForeignKey(c => c.CreateUserId).WillCascadeOnDelete(true);
+            HasRequired(c => c.ModifyUser).WithMany().HasForeignKey(c => c.ModifyUserId).WillCascadeOnDelete(true);
         }
     }
 }

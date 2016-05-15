@@ -36,6 +36,7 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<UsedGoodTransaction, UsedGoodTransactionViewModel>();
             Mapper.CreateMap<User, UserViewModel>();
             Mapper.CreateMap<UserRole, UserRoleViewModel>();
+            Mapper.CreateMap<VehicleGroup, VehicleGroupViewModel>();
             Mapper.CreateMap<Vehicle, VehicleViewModel>();
             Mapper.CreateMap<VehicleDetail, VehicleDetailViewModel>();
             Mapper.CreateMap<VehicleWheel, VehicleWheelViewModel>();

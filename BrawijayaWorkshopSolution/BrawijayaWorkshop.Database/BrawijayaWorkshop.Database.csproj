@@ -89,6 +89,7 @@
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
     <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
+    <Compile Include="Configurations\VehicleGroupConfiguration.cs" />
     <Compile Include="Configurations\VehicleWheelConfiguration.cs" />
     <Compile Include="Configurations\SpecialSparepartConfiguration.cs" />
     <Compile Include="Configurations\SpecialSparepartDetailConfiguration.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleDetail.cs" />
+    <Compile Include="Entities\VehicleGroup.cs" />
     <Compile Include="Entities\VehicleWheel.cs" />
     <Compile Include="Entities\SpecialSparepart.cs" />
     <Compile Include="Entities\SpecialSparepartDetail.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\VehicleDetailRepository.cs" />
+    <Compile Include="Repositories\VehicleGroupRepository.cs" />
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="Repositories\VehicleWheelRepository.cs" />
     <Compile Include="Repositories\SpecialSparepartDetailRepository.cs" />
