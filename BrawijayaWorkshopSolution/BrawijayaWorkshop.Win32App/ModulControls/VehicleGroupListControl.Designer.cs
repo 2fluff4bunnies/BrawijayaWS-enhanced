@@ -36,15 +36,15 @@
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNewVehicleGroup = new DevExpress.XtraEditors.SimpleButton();
             this.gvVehicleGroup = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGroupName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridVehicleGroup = new DevExpress.XtraGrid.GridControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilterGroupName = new DevExpress.XtraEditors.TextEdit();
             this.lblFilterGroupName = new DevExpress.XtraEditors.LabelControl();
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
-            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colGroupName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lblCustomerFilter = new DevExpress.XtraEditors.LabelControl();
             this.lookupCustomer = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblCustomerFilter = new DevExpress.XtraEditors.LabelControl();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleGroup)).BeginInit();
@@ -85,12 +85,12 @@
             // 
             // btnNewVehicleGroup
             // 
-            this.btnNewVehicleGroup.Image = ((System.Drawing.Image)(resources.GetObject("btnNewVehicleGroup.Image")));
+            this.btnNewVehicleGroup.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
             this.btnNewVehicleGroup.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnNewVehicleGroup.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewVehicleGroup.Location = new System.Drawing.Point(3, 71);
             this.btnNewVehicleGroup.Name = "btnNewVehicleGroup";
-            this.btnNewVehicleGroup.Size = new System.Drawing.Size(144, 23);
+            this.btnNewVehicleGroup.Size = new System.Drawing.Size(139, 23);
             this.btnNewVehicleGroup.TabIndex = 1;
             this.btnNewVehicleGroup.Text = "Buat Kelompok Baru";
             this.btnNewVehicleGroup.Click += new System.EventHandler(this.btnNewVehicleGroup_Click);
@@ -116,6 +116,22 @@
             this.gvVehicleGroup.OptionsView.ShowViewCaption = true;
             this.gvVehicleGroup.ViewCaption = "Daftar Kelompok";
             // 
+            // colCustomerName
+            // 
+            this.colCustomerName.Caption = "Nama Perusahaan";
+            this.colCustomerName.FieldName = "Customer.CompanyName";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.Visible = true;
+            this.colCustomerName.VisibleIndex = 0;
+            // 
+            // colGroupName
+            // 
+            this.colGroupName.Caption = "Nama Kelompok";
+            this.colGroupName.FieldName = "Name";
+            this.colGroupName.Name = "colGroupName";
+            this.colGroupName.Visible = true;
+            this.colGroupName.VisibleIndex = 1;
+            // 
             // gridVehicleGroup
             // 
             this.gridVehicleGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -124,7 +140,7 @@
             this.gridVehicleGroup.Location = new System.Drawing.Point(3, 100);
             this.gridVehicleGroup.MainView = this.gvVehicleGroup;
             this.gridVehicleGroup.Name = "gridVehicleGroup";
-            this.gridVehicleGroup.Size = new System.Drawing.Size(812, 279);
+            this.gridVehicleGroup.Size = new System.Drawing.Size(726, 216);
             this.gridVehicleGroup.TabIndex = 2;
             this.gridVehicleGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleGroup});
@@ -135,7 +151,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(745, 28);
+            this.btnSearch.Location = new System.Drawing.Point(659, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 4;
@@ -148,7 +164,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterGroupName.Location = new System.Drawing.Point(456, 30);
             this.txtFilterGroupName.Name = "txtFilterGroupName";
-            this.txtFilterGroupName.Size = new System.Drawing.Size(283, 20);
+            this.txtFilterGroupName.Size = new System.Drawing.Size(197, 20);
             this.txtFilterGroupName.TabIndex = 3;
             this.txtFilterGroupName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterGroupName_KeyDown);
             // 
@@ -171,33 +187,9 @@
             this.gcFilter.Controls.Add(this.lblFilterGroupName);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(812, 62);
+            this.gcFilter.Size = new System.Drawing.Size(726, 62);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
-            // 
-            // colCustomerName
-            // 
-            this.colCustomerName.Caption = "Nama Perusahaan";
-            this.colCustomerName.FieldName = "Customer.CompanyName";
-            this.colCustomerName.Name = "colCustomerName";
-            this.colCustomerName.Visible = true;
-            this.colCustomerName.VisibleIndex = 0;
-            // 
-            // colGroupName
-            // 
-            this.colGroupName.Caption = "Nama Kelompok";
-            this.colGroupName.FieldName = "Name";
-            this.colGroupName.Name = "colGroupName";
-            this.colGroupName.Visible = true;
-            this.colGroupName.VisibleIndex = 1;
-            // 
-            // lblCustomerFilter
-            // 
-            this.lblCustomerFilter.Location = new System.Drawing.Point(14, 34);
-            this.lblCustomerFilter.Name = "lblCustomerFilter";
-            this.lblCustomerFilter.Size = new System.Drawing.Size(46, 13);
-            this.lblCustomerFilter.TabIndex = 0;
-            this.lblCustomerFilter.Text = "Customer";
             // 
             // lookupCustomer
             // 
@@ -217,6 +209,14 @@
             this.lookupCustomer.Size = new System.Drawing.Size(276, 20);
             this.lookupCustomer.TabIndex = 1;
             // 
+            // lblCustomerFilter
+            // 
+            this.lblCustomerFilter.Location = new System.Drawing.Point(14, 34);
+            this.lblCustomerFilter.Name = "lblCustomerFilter";
+            this.lblCustomerFilter.Size = new System.Drawing.Size(46, 13);
+            this.lblCustomerFilter.TabIndex = 0;
+            this.lblCustomerFilter.Text = "Customer";
+            // 
             // VehicleGroupListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,7 +225,7 @@
             this.Controls.Add(this.gridVehicleGroup);
             this.Controls.Add(this.gcFilter);
             this.Name = "VehicleGroupListControl";
-            this.Size = new System.Drawing.Size(818, 382);
+            this.Size = new System.Drawing.Size(732, 319);
             this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleGroup)).EndInit();
