@@ -94,6 +94,8 @@
             // 
             this.txtBaseFee.Location = new System.Drawing.Point(128, 196);
             this.txtBaseFee.Name = "txtBaseFee";
+            this.txtBaseFee.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtBaseFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtBaseFee.Properties.Mask.EditMask = "n0";
             this.txtBaseFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtBaseFee.Size = new System.Drawing.Size(162, 20);
