@@ -80,6 +80,7 @@
     <Compile Include="IPurchasingApprovalView.cs" />
     <Compile Include="IPurchasingEditorView.cs" />
     <Compile Include="IPurchasingListView.cs" />
+    <Compile Include="IRecapInvoiceBySPKView.cs" />
     <Compile Include="IRoleAccessEditorView.cs" />
     <Compile Include="IRoleAccessListView.cs" />
     <Compile Include="IRoleEditorView.cs" />

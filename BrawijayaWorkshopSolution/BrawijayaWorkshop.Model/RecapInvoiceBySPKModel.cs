@@ -22,10 +22,14 @@ namespace BrawijayaWorkshop.Model
             _invoiceDetailRepository = invoiceDetailRepository;
         }
 
-        public List<InvoiceViewModel> RetrieveRecap(DateTime dateFrom, DateTime dateTo,
-            int customerId, int spkCategoryId, int vehicleGroupId)
+        public List<InvoiceViewModel> RetrieveRecap(DateTime dateFrom, DateTime dateTo, int vehicleId)
         {
-            throw new NotImplementedException();
+            List<Invoice> result = _invoiceRepository.GetMany(i => i.CreateDate >= dateFrom && i.CreateDate <= dateTo &&
+                i.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                i.PaymentStatus != (int)DbConstant.PaymentStatus.Settled &&
+                i.SPK.VehicleId == vehicleId).OrderBy(i => i.CreateDate).ToList();
+            List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
+            return Map(result, mappedResult);
         }
     }
 }
