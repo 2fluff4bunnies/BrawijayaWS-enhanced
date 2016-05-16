@@ -31,14 +31,13 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleEditorForm));
-            DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule8 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.txtYearOfPurchase = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
@@ -46,6 +45,8 @@
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblYearOfPurchase = new DevExpress.XtraEditors.LabelControl();
             this.gcVehicleInfo = new DevExpress.XtraEditors.GroupControl();
+            this.lookupGroup = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblVehicleGroup = new DevExpress.XtraEditors.LabelControl();
             this.txtKilometer = new DevExpress.XtraEditors.TextEdit();
             this.lblKilometer = new DevExpress.XtraEditors.LabelControl();
             this.lookUpBrand = new DevExpress.XtraEditors.LookUpEdit();
@@ -56,6 +57,7 @@
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
@@ -66,21 +68,19 @@
             this.deleteWheelDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             this.ValidateExpireDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.lblVehicleGroup = new DevExpress.XtraEditors.LabelControl();
-            this.lookupGroup = new DevExpress.XtraEditors.LookUpEdit();
             this.valGroupName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
             this.gcVehicleInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKilometer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpBrand.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(repositoryItemLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).BeginInit();
@@ -88,9 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ValidateExpireDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookupGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valGroupName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             this.SuspendLayout();
             // 
             // lookUpCustomer
@@ -200,6 +198,35 @@
             this.gcVehicleInfo.Size = new System.Drawing.Size(404, 512);
             this.gcVehicleInfo.TabIndex = 0;
             this.gcVehicleInfo.Text = "Informasi Kendaraan";
+            // 
+            // lookupGroup
+            // 
+            this.lookupGroup.Location = new System.Drawing.Point(126, 66);
+            this.lookupGroup.Name = "lookupGroup";
+            this.lookupGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookupGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama Kelompok")});
+            this.lookupGroup.Properties.DisplayMember = "Name";
+            this.lookupGroup.Properties.HideSelection = false;
+            this.lookupGroup.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookupGroup.Properties.NullText = "-- Pilih Kelompok --";
+            this.lookupGroup.Properties.ValueMember = "Id";
+            this.lookupGroup.Size = new System.Drawing.Size(256, 20);
+            this.lookupGroup.TabIndex = 3;
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule3.ErrorText = "Pilih Kelompok";
+            conditionValidationRule3.Value1 = "-- Pilih Kelompok --";
+            this.valGroupName.SetValidationRule(this.lookupGroup, conditionValidationRule3);
+            // 
+            // lblVehicleGroup
+            // 
+            this.lblVehicleGroup.Location = new System.Drawing.Point(14, 69);
+            this.lblVehicleGroup.Name = "lblVehicleGroup";
+            this.lblVehicleGroup.Size = new System.Drawing.Size(45, 13);
+            this.lblVehicleGroup.TabIndex = 2;
+            this.lblVehicleGroup.Text = "Kelompok";
             // 
             // txtKilometer
             // 
@@ -340,21 +367,21 @@
             // colWheelDetail
             // 
             this.colWheelDetail.Caption = "Nomor Seri Ban";
-            repositoryItemLookUpEdit1.AutoHeight = false;
-            repositoryItemLookUpEdit1.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
-            repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            repositoryItemLookUpEdit1.DisplayMember = "SerialNumber";
-            repositoryItemLookUpEdit1.HideSelection = false;
-            repositoryItemLookUpEdit1.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            repositoryItemLookUpEdit1.Name = "lookupWheelDetailGv";
-            repositoryItemLookUpEdit1.NullText = "-- Pilih Ban --";
-            repositoryItemLookUpEdit1.ValueMember = "Id";
-            this.colWheelDetail.ColumnEdit = repositoryItemLookUpEdit1;
+            this.colWheelDetail.ColumnEdit = this.lookupWheelDetailGv;
             this.colWheelDetail.FieldName = "WheelDetailId";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
             this.colWheelDetail.VisibleIndex = 0;
+            // 
+            // lookupWheelDetailGv
+            // 
+            this.lookupWheelDetailGv.AutoHeight = false;
+            this.lookupWheelDetailGv.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupWheelDetailGv.HideSelection = false;
+            this.lookupWheelDetailGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
             // 
             // dtpExpirationDate
             // 
@@ -445,45 +472,6 @@
             this.ValidateExpireDate.ValidateHiddenControls = false;
             this.ValidateExpireDate.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // lblVehicleGroup
-            // 
-            this.lblVehicleGroup.Location = new System.Drawing.Point(14, 69);
-            this.lblVehicleGroup.Name = "lblVehicleGroup";
-            this.lblVehicleGroup.Size = new System.Drawing.Size(45, 13);
-            this.lblVehicleGroup.TabIndex = 2;
-            this.lblVehicleGroup.Text = "Kelompok";
-            // 
-            // lookupGroup
-            // 
-            this.lookupGroup.Location = new System.Drawing.Point(126, 66);
-            this.lookupGroup.Name = "lookupGroup";
-            this.lookupGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookupGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookupGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama Kelompok")});
-            this.lookupGroup.Properties.DisplayMember = "Name";
-            this.lookupGroup.Properties.HideSelection = false;
-            this.lookupGroup.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lookupGroup.Properties.NullText = "-- Pilih Kelompok --";
-            this.lookupGroup.Properties.ValueMember = "Id";
-            this.lookupGroup.Size = new System.Drawing.Size(256, 20);
-            this.lookupGroup.TabIndex = 3;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule3.ErrorText = "Pilih Kelompok";
-            conditionValidationRule3.Value1 = "-- Pilih Kelompok --";
-            this.valGroupName.SetValidationRule(this.lookupGroup, conditionValidationRule3);
-            // 
-            // lookupWheelDetailGv
-            // 
-            this.lookupWheelDetailGv.AutoHeight = false;
-            this.lookupWheelDetailGv.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookupWheelDetailGv.HideSelection = false;
-            this.lookupWheelDetailGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
-            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,13 +487,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).EndInit();
             this.gcVehicleInfo.ResumeLayout(false);
             this.gcVehicleInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKilometer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpBrand.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(repositoryItemLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpExpirationDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumber.Properties)).EndInit();
@@ -513,9 +502,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ValidateExpireDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookupGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valGroupName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).EndInit();
             this.ResumeLayout(false);
 
         }
