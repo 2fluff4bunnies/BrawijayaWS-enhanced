@@ -11,10 +11,21 @@ namespace BrawijayaWorkshop.Model
 {
     public class RecapInvoiceBySPKModel : AppBaseModel
     {
-        public RecapInvoiceBySPKModel()
+        private IInvoiceRepository _invoiceRepository;
+        private IInvoiceDetailRepository _invoiceDetailRepository;
+
+        public RecapInvoiceBySPKModel(IInvoiceRepository invoiceRepository,
+            IInvoiceDetailRepository invoiceDetailRepository)
             : base()
         {
+            _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
+        }
 
+        public List<InvoiceViewModel> RetrieveRecap(DateTime dateFrom, DateTime dateTo,
+            int customerId, int spkCategoryId, int vehicleGroupId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
