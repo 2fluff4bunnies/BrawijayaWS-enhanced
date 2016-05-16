@@ -27,6 +27,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             valMechanicName.SetIconAlignment(txtMechanicName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valAddress.SetIconAlignment(txtAddress, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valPhone.SetIconAlignment(txtPhoneNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valBaseFee.SetIconAlignment(txtBaseFee, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += MechanicEditorForm_Load;
         }
@@ -67,6 +68,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         #region Field Editor
 
+        public decimal BaseFee
+        {
+            get
+            {
+                return txtBaseFee.EditValue.AsDecimal();
+            }
+            set
+            {
+                txtBaseFee.EditValue = value;
+            }
+        }
         public string Code
         {
             get
@@ -121,7 +133,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (bgwSave.IsBusy) return;
 
-            if (valCode.Validate() && valMechanicName.Validate() && valAddress.Validate() && valPhone.Validate())
+            if (valCode.Validate() && valMechanicName.Validate() && valAddress.Validate() && valPhone.Validate() && valBaseFee.Validate())
             {
                 Cursor = Cursors.WaitCursor;
                 bgwSave.RunWorkerAsync();

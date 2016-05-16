@@ -14,5 +14,6 @@ namespace BrawijayaWorkshop.View
         string MechanicName { get; set; }
         string Address { get; set; }
         string PhoneNumber { get; set; }
+        decimal BaseFee { get; set; }
     }
 }

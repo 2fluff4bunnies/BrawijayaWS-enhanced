@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.MechanicName = View.SelectedMechanic.Name;
                 View.Address = View.SelectedMechanic.Address;
                 View.PhoneNumber = View.SelectedMechanic.PhoneNumber;
+                View.BaseFee = View.SelectedMechanic.BaseFee;
             }
             else
             {
@@ -40,7 +41,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedMechanic.Name = View.MechanicName;
             View.SelectedMechanic.Address = View.Address;
             View.SelectedMechanic.PhoneNumber = View.PhoneNumber;
-
+            View.SelectedMechanic.BaseFee = View.BaseFee;
             if (View.SelectedMechanic.Id > 0)
             {
                 Model.UpdateMechanic(View.SelectedMechanic, LoginInformation.UserId);

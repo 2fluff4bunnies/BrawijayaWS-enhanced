@@ -34,8 +34,12 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MechanicEditorForm));
             this.gcMechanicInfo = new DevExpress.XtraEditors.GroupControl();
+            this.txtBaseFee = new DevExpress.XtraEditors.TextEdit();
+            this.lblBaseFee = new DevExpress.XtraEditors.LabelControl();
             this.btnEnroll = new DevExpress.XtraEditors.SimpleButton();
             this.lblMechanicCode = new DevExpress.XtraEditors.LabelControl();
             this.txtCode = new DevExpress.XtraEditors.TextEdit();
@@ -51,8 +55,10 @@
             this.valCode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwFingerprintConnection = new System.ComponentModel.BackgroundWorker();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.valBaseFee = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanicInfo)).BeginInit();
             this.gcMechanicInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBaseFee.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPhoneNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
@@ -61,10 +67,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.valAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPhone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valBaseFee)).BeginInit();
             this.SuspendLayout();
             // 
             // gcMechanicInfo
             // 
+            this.gcMechanicInfo.Controls.Add(this.txtBaseFee);
+            this.gcMechanicInfo.Controls.Add(this.lblBaseFee);
             this.gcMechanicInfo.Controls.Add(this.btnEnroll);
             this.gcMechanicInfo.Controls.Add(this.lblMechanicCode);
             this.gcMechanicInfo.Controls.Add(this.txtCode);
@@ -77,9 +86,32 @@
             this.gcMechanicInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcMechanicInfo.Location = new System.Drawing.Point(0, 0);
             this.gcMechanicInfo.Name = "gcMechanicInfo";
-            this.gcMechanicInfo.Size = new System.Drawing.Size(385, 202);
+            this.gcMechanicInfo.Size = new System.Drawing.Size(385, 235);
             this.gcMechanicInfo.TabIndex = 1;
             this.gcMechanicInfo.Text = "Informasi Mechanic";
+            // 
+            // txtBaseFee
+            // 
+            this.txtBaseFee.Location = new System.Drawing.Point(128, 196);
+            this.txtBaseFee.Name = "txtBaseFee";
+            this.txtBaseFee.Properties.Mask.EditMask = "n0";
+            this.txtBaseFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtBaseFee.Size = new System.Drawing.Size(162, 20);
+            this.txtBaseFee.TabIndex = 16;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtBaseFee, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Ongkos harus diisi";
+            this.valBaseFee.SetValidationRule(this.txtBaseFee, conditionValidationRule2);
+            // 
+            // lblBaseFee
+            // 
+            this.lblBaseFee.Location = new System.Drawing.Point(12, 199);
+            this.lblBaseFee.Name = "lblBaseFee";
+            this.lblBaseFee.Size = new System.Drawing.Size(36, 13);
+            this.lblBaseFee.TabIndex = 15;
+            this.lblBaseFee.Text = "Ongkos";
             // 
             // btnEnroll
             // 
@@ -107,12 +139,12 @@
             this.txtCode.Properties.Mask.SaveLiteral = false;
             this.txtCode.Size = new System.Drawing.Size(162, 20);
             this.txtCode.TabIndex = 12;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Code harus diisi!";
-            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule1);
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule2);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Code harus diisi!";
+            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule3);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule4);
             // 
             // txtPhoneNumber
             // 
@@ -122,9 +154,9 @@
             this.txtPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPhoneNumber.Size = new System.Drawing.Size(162, 20);
             this.txtPhoneNumber.TabIndex = 11;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule3);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule5);
             // 
             // lblPhoneNumber
             // 
@@ -140,9 +172,9 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(247, 20);
             this.txtAddress.TabIndex = 5;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Alamat harus diisi!";
-            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule4);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "Alamat harus diisi!";
+            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule6);
             // 
             // lblAddress
             // 
@@ -158,9 +190,9 @@
             this.txtMechanicName.Name = "txtMechanicName";
             this.txtMechanicName.Size = new System.Drawing.Size(247, 20);
             this.txtMechanicName.TabIndex = 3;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "Nama Mechanic harus diisi!";
-            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule5);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule7.ErrorText = "Nama Mechanic harus diisi!";
+            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule7);
             // 
             // lblMechanicName
             // 
@@ -196,11 +228,15 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // valBaseFee
+            // 
+            this.valBaseFee.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
+            // 
             // MechanicEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 251);
+            this.ClientSize = new System.Drawing.Size(385, 284);
             this.Controls.Add(this.gcMechanicInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MechanicEditorForm";
@@ -209,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcMechanicInfo)).EndInit();
             this.gcMechanicInfo.ResumeLayout(false);
             this.gcMechanicInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBaseFee.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPhoneNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).EndInit();
@@ -217,6 +254,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPhone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valBaseFee)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -240,5 +278,8 @@
         private DevExpress.XtraEditors.SimpleButton btnEnroll;
         private System.ComponentModel.BackgroundWorker bgwFingerprintConnection;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraEditors.TextEdit txtBaseFee;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valBaseFee;
+        private DevExpress.XtraEditors.LabelControl lblBaseFee;
     }
 }
