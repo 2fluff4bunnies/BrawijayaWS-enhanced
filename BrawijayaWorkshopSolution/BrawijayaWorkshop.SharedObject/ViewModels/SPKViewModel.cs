@@ -36,5 +36,9 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SPKViewModel SPKParent { get; set; }
 
         public List<SPKDetailSparepartViewModel> ListSparepart { get; set; }
+
+        public int VehicleGroupId { get; set; }
+
+        public VehicleGroupViewModel VehicleGroup { get; set; }
     }
 }

@@ -53,5 +53,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int Kilometers { get; set; }
 
+        public int VehicleGroupId { get; set; }
+
+        public virtual VehicleGroup VehicleGroup { get; set; }
     }
 }
