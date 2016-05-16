@@ -103,6 +103,9 @@
     <Compile Include="PurchasingApprovalModel.cs" />
     <Compile Include="PurchasingEditorModel.cs" />
     <Compile Include="PurchasingListModel.cs" />
+    <Compile Include="RecapInvoiceByCustomerModel.cs" />
+    <Compile Include="RecapInvoiceBySPKModel.cs" />
+    <Compile Include="RecapInvoiceByVehicleGroupModel.cs" />
     <Compile Include="RoleAccessEditorModel.cs" />
     <Compile Include="RoleAccessListModel.cs" />
     <Compile Include="RoleEditorModel.cs" />
