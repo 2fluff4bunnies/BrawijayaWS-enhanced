@@ -10,8 +10,8 @@ namespace BrawijayaWorkshop.View
         DateTime DateFrom { get; set; }
         DateTime DateTo { get; set; }
 
-        int SelectedVehicle { get; set; }
-        List<VehicleViewModel> ListVehicles { get; set; }
+        int SelectedCustomer { get; set; }
+        List<CustomerViewModel> ListCustomer { get; set; }
 
         List<InvoiceViewModel> ListInvoices { get; set; }
     }

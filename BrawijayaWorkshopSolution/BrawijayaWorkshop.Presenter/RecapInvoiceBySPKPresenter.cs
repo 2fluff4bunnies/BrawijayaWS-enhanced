@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BrawijayaWorkshop.Infrastructure.MVP;
+using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    class RecapInvoiceBySPKPresenter
+    public class RecapInvoiceBySPKPresenter : BasePresenter<IRecapInvoiceBySPKView, RecapInvoiceBySPKModel>
     {
+        public RecapInvoiceBySPKPresenter(IRecapInvoiceBySPKView view, RecapInvoiceBySPKModel model)
+            : base(view, model) { }
+
+        public void InitFormData()
+        {
+            View.ListCustomer = Model.RetrieveCustomers();
+        }
+
+        public void LoadData()
+        {
+            View.ListInvoices = Model.RetrieveRecap(View.DateFrom, View.DateTo, View.SelectedCustomer);
+        }
     }
 }

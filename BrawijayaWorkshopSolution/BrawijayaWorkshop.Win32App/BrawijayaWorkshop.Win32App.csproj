@@ -278,6 +278,12 @@
     <Compile Include="ModulControls\PurchasingListControl.Designer.cs">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\RecapInvoiceBySPKListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\RecapInvoiceBySPKListControl.Designer.cs">
+      <DependentUpon>RecapInvoiceBySPKListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\RoleAccessListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
