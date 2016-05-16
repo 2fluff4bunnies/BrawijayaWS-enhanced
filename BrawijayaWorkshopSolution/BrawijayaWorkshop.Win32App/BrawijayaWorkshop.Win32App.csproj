@@ -827,6 +827,9 @@
     <EmbeddedResource Include="ModulControls\PurchasingListControl.resx">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\RecapInvoiceBySPKListControl.resx">
+      <DependentUpon>RecapInvoiceBySPKListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RoleAccessListControl.resx">
       <DependentUpon>RoleAccessListControl.cs</DependentUpon>
     </EmbeddedResource>
