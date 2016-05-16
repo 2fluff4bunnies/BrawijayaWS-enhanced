@@ -2,6 +2,7 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,6 +37,11 @@ namespace BrawijayaWorkshop.Presenter
                 View.SPKDescription = View.SelectedSPKSchedule.SPK.Description;
                 View.SPKCategory = View.SelectedSPKSchedule.SPK.CategoryReference.Name;
                 View.SPKVehicleCustomer = View.SelectedSPKSchedule.SPK.Vehicle.ActiveLicenseNumber + "/" + View.SelectedSPKSchedule.SPK.Vehicle.Customer.CompanyName;
+                View.Date = View.SelectedSPKSchedule.Date;
+            }
+            else
+            {
+                View.Date = DateTime.Now;
             }
         }
 
@@ -50,6 +56,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPKSchedule.SPKId = View.MechanicId;
             View.SelectedSPKSchedule.SPKId = View.SPKId;
             View.SelectedSPKSchedule.Description = View.Description;
+            View.SelectedSPKSchedule.Date = View.Date;
 
             if (View.SelectedSPKSchedule.Id > 0)
             {

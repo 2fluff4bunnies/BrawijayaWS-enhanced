@@ -47,16 +47,22 @@
             this.lblMechanic = new DevExpress.XtraEditors.LabelControl();
             this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
             this.FieldValidator = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.dtpDate = new DevExpress.XtraEditors.DateEdit();
+            this.lblDate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
             this.gcVehicleInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSPK.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldValidator)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcVehicleInfo
             // 
+            this.gcVehicleInfo.Controls.Add(this.lblDate);
+            this.gcVehicleInfo.Controls.Add(this.dtpDate);
             this.gcVehicleInfo.Controls.Add(this.memoDescription);
             this.gcVehicleInfo.Controls.Add(this.lookUpMechanic);
             this.gcVehicleInfo.Controls.Add(this.lblDescription);
@@ -72,13 +78,13 @@
             this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcVehicleInfo.Location = new System.Drawing.Point(0, 0);
             this.gcVehicleInfo.Name = "gcVehicleInfo";
-            this.gcVehicleInfo.Size = new System.Drawing.Size(636, 194);
+            this.gcVehicleInfo.Size = new System.Drawing.Size(636, 226);
             this.gcVehicleInfo.TabIndex = 3;
             this.gcVehicleInfo.Text = "Informasi Kendaraan";
             // 
             // memoDescription
             // 
-            this.memoDescription.Location = new System.Drawing.Point(143, 97);
+            this.memoDescription.Location = new System.Drawing.Point(143, 128);
             this.memoDescription.Name = "memoDescription";
             this.memoDescription.Size = new System.Drawing.Size(154, 82);
             this.memoDescription.TabIndex = 23;
@@ -107,7 +113,7 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(12, 99);
+            this.lblDescription.Location = new System.Drawing.Point(12, 130);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(114, 13);
             this.lblDescription.TabIndex = 20;
@@ -206,11 +212,36 @@
             this.bgwFingerPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerPrint_DoWork);
             this.bgwFingerPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerPrint_RunWorkerCompleted);
             // 
+            // dtpDate
+            // 
+            this.dtpDate.EditValue = null;
+            this.dtpDate.Location = new System.Drawing.Point(143, 96);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dtpDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.dtpDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dtpDate.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.dtpDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dtpDate.Size = new System.Drawing.Size(154, 20);
+            this.dtpDate.TabIndex = 24;
+            // 
+            // lblDate
+            // 
+            this.lblDate.Location = new System.Drawing.Point(12, 99);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(66, 13);
+            this.lblDate.TabIndex = 25;
+            this.lblDate.Text = "Tanggal Kerja";
+            // 
             // SPKScheduleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 243);
+            this.ClientSize = new System.Drawing.Size(636, 275);
             this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKScheduleEditorForm";
@@ -223,6 +254,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpMechanic.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpSPK.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FieldValidator)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -244,5 +277,7 @@
         private System.ComponentModel.BackgroundWorker bgwFingerPrint;
         private DevExpress.XtraEditors.LabelControl lblSPKDescription;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider FieldValidator;
+        private DevExpress.XtraEditors.LabelControl lblDate;
+        private DevExpress.XtraEditors.DateEdit dtpDate;
     }
 }

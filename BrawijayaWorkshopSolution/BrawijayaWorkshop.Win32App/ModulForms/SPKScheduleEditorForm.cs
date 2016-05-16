@@ -285,6 +285,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 memoDescription.Text = value;
             }
         }
+
+        public DateTime Date
+        {
+            get
+            {
+                return dtpDate.EditValue.AsDateTime();
+            }
+            set
+            {
+                dtpDate.EditValue = value;
+            }
+        }
         #endregion
 
         protected override void ExecuteSave()

@@ -12,7 +12,7 @@ namespace BrawijayaWorkshop.View
         string SPKVehicleCustomer{ get; set; }
         string SPKCategory { get; set; }
         string SPKDescription { get; set; }
-
+        DateTime Date { get; set;}
         int SPKId { get; set; }
         List<SPKViewModel> SPKList { get; set; }
         List<SPKVehicleModel> SPKVehicleList { get; set; }
