@@ -716,6 +716,24 @@
     <Compile Include="PrintItems\PurchasingReturnPrintItem.Designer.cs">
       <DependentUpon>PurchasingReturnPrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\RecapInvoiceByCustomerPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\RecapInvoiceByCustomerPrintItem.Designer.cs">
+      <DependentUpon>RecapInvoiceByCustomerPrintItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintItems\RecapInvoiceBySPKPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\RecapInvoiceBySPKPrintItem.Designer.cs">
+      <DependentUpon>RecapInvoiceBySPKPrintItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintItems\RecapInvoiceByVehicleGroupPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\RecapInvoiceByVehicleGroupPrintItem.Designer.cs">
+      <DependentUpon>RecapInvoiceByVehicleGroupPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\SalesReturnPrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
