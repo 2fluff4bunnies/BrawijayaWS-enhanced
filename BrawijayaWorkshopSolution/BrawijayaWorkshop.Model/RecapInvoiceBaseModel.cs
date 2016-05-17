@@ -90,7 +90,7 @@ namespace BrawijayaWorkshop.Model
         }
 
         public List<RecapInvoiceItemViewModel> RetrieveRecap(DateTime dateFrom, DateTime dateTo, int categoryId,
-            int customerId, int vehicleGroupId, int vehicleId)
+            int customerId, int vehicleGroupId = 0, int vehicleId = 0)
         {
             List<Invoice> result = _invoiceRepository.GetMany(i => i.CreateDate >= dateFrom && i.CreateDate <= dateTo &&
                 i.Status == (int)DbConstant.DefaultDataStatus.Active &&

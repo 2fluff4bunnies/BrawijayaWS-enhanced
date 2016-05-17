@@ -19,9 +19,6 @@ namespace BrawijayaWorkshop.View
         int SelectedVehicleGroup { get; set; }
         List<VehicleGroupViewModel> ListVehicleGroup { get; set; }
 
-        int SelectedVehicle { get; set; }
-        List<VehicleViewModel> ListVehicle { get; set; }
-
         List<RecapInvoiceItemViewModel> ListInvoices { get; set; }
     }
 }

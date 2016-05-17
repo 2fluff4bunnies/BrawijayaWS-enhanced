@@ -20,13 +20,12 @@ namespace BrawijayaWorkshop.Presenter
         public void OnCustomerSelected()
         {
             View.ListVehicleGroup = Model.RetrieveVehicleGroupsByCustomerId(View.SelectedCustomer);
-            View.ListVehicle = Model.RetrieveVehiclesByCustomerId(View.SelectedCustomer);
         }
 
         public void LoadData()
         {
             View.ListInvoices = Model.RetrieveRecap(View.DateFrom, View.DateTo,
-                View.SelectedCategory, View.SelectedCustomer, View.SelectedVehicleGroup, View.SelectedVehicle);
+                View.SelectedCategory, View.SelectedCustomer, View.SelectedVehicleGroup);
         }
     }
 }

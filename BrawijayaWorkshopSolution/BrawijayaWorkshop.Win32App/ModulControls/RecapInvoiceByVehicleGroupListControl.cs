@@ -11,18 +11,16 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    public partial class RecapInvoiceBySPKListControl : BaseAppUserControl, IRecapInvoiceBySPKView
+    public partial class RecapInvoiceByVehicleGroupListControl : BaseAppUserControl, IRecapInvoiceByVehicleGroupView
     {
-        private RecapInvoiceBySPKPresenter _presenter;
-
-        public RecapInvoiceBySPKListControl(RecapInvoiceBySPKModel model)
+        private RecapInvoiceByVehicleGroupPresenter _presenter;
+        public RecapInvoiceByVehicleGroupListControl(RecapInvoiceByVehicleGroupModel model)
         {
             InitializeComponent();
-
-            _presenter = new RecapInvoiceBySPKPresenter(this, model);
+            _presenter = new RecapInvoiceByVehicleGroupPresenter(this, model);
             lookupCustomer.EditValueChanged += lookupCustomer_EditValueChanged;
 
-            this.Load += RecapInvoiceBySPKListControl_Load;
+            this.Load += RecapInvoiceByVehicleGroupListControl_Load;
         }
 
         private void lookupCustomer_EditValueChanged(object sender, EventArgs e)
@@ -30,7 +28,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             _presenter.OnCustomerSelected();
         }
 
-        private void RecapInvoiceBySPKListControl_Load(object sender, EventArgs e)
+        private void RecapInvoiceByVehicleGroupListControl_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
         }
@@ -128,30 +126,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             set
             {
                 lookupVehicleGroup.Properties.DataSource = value;
-            }
-        }
-
-        public int SelectedVehicle
-        {
-            get
-            {
-                return lookupLicenseNumber.EditValue.AsInteger();
-            }
-            set
-            {
-                lookupLicenseNumber.EditValue = value;
-            }
-        }
-
-        public List<VehicleViewModel> ListVehicle
-        {
-            get
-            {
-                return lookupLicenseNumber.Properties.DataSource as List<VehicleViewModel>;
-            }
-            set
-            {
-                lookupLicenseNumber.Properties.DataSource = value;
             }
         }
 

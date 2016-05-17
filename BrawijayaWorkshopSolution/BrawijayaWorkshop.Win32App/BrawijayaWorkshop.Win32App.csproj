@@ -278,11 +278,23 @@
     <Compile Include="ModulControls\PurchasingListControl.Designer.cs">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\RecapInvoiceByCustomerListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\RecapInvoiceByCustomerListControl.Designer.cs">
+      <DependentUpon>RecapInvoiceByCustomerListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\RecapInvoiceBySPKListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ModulControls\RecapInvoiceBySPKListControl.Designer.cs">
       <DependentUpon>RecapInvoiceBySPKListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulControls\RecapInvoiceByVehicleGroupListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\RecapInvoiceByVehicleGroupListControl.Designer.cs">
+      <DependentUpon>RecapInvoiceByVehicleGroupListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulControls\RoleAccessListControl.cs">
       <SubType>UserControl</SubType>
@@ -845,8 +857,14 @@
     <EmbeddedResource Include="ModulControls\PurchasingListControl.resx">
       <DependentUpon>PurchasingListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\RecapInvoiceByCustomerListControl.resx">
+      <DependentUpon>RecapInvoiceByCustomerListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RecapInvoiceBySPKListControl.resx">
       <DependentUpon>RecapInvoiceBySPKListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\RecapInvoiceByVehicleGroupListControl.resx">
+      <DependentUpon>RecapInvoiceByVehicleGroupListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RoleAccessListControl.resx">
       <DependentUpon>RoleAccessListControl.cs</DependentUpon>

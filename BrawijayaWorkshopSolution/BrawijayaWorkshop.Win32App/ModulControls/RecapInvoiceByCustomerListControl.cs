@@ -11,26 +11,19 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulControls
 {
-    public partial class RecapInvoiceBySPKListControl : BaseAppUserControl, IRecapInvoiceBySPKView
+    public partial class RecapInvoiceByCustomerListControl : BaseAppUserControl, IRecapInvoiceByCustomerView
     {
-        private RecapInvoiceBySPKPresenter _presenter;
+        private RecapInvoiceByCustomerPresenter _presenter;
 
-        public RecapInvoiceBySPKListControl(RecapInvoiceBySPKModel model)
+        public RecapInvoiceByCustomerListControl(RecapInvoiceByCustomerModel model)
         {
             InitializeComponent();
+            _presenter = new RecapInvoiceByCustomerPresenter(this, model);
 
-            _presenter = new RecapInvoiceBySPKPresenter(this, model);
-            lookupCustomer.EditValueChanged += lookupCustomer_EditValueChanged;
-
-            this.Load += RecapInvoiceBySPKListControl_Load;
+            this.Load += RecapInvoiceByCustomerListControl_Load;
         }
 
-        private void lookupCustomer_EditValueChanged(object sender, EventArgs e)
-        {
-            _presenter.OnCustomerSelected();
-        }
-
-        private void RecapInvoiceBySPKListControl_Load(object sender, EventArgs e)
+        private void RecapInvoiceByCustomerListControl_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
         }
@@ -104,54 +97,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             set
             {
                 lookupCategory.Properties.DataSource = value;
-            }
-        }
-
-        public int SelectedVehicleGroup
-        {
-            get
-            {
-                return lookupVehicleGroup.EditValue.AsInteger();
-            }
-            set
-            {
-                lookupVehicleGroup.EditValue = value;
-            }
-        }
-
-        public List<VehicleGroupViewModel> ListVehicleGroup
-        {
-            get
-            {
-                return lookupVehicleGroup.Properties.DataSource as List<VehicleGroupViewModel>;
-            }
-            set
-            {
-                lookupVehicleGroup.Properties.DataSource = value;
-            }
-        }
-
-        public int SelectedVehicle
-        {
-            get
-            {
-                return lookupLicenseNumber.EditValue.AsInteger();
-            }
-            set
-            {
-                lookupLicenseNumber.EditValue = value;
-            }
-        }
-
-        public List<VehicleViewModel> ListVehicle
-        {
-            get
-            {
-                return lookupLicenseNumber.Properties.DataSource as List<VehicleViewModel>;
-            }
-            set
-            {
-                lookupLicenseNumber.Properties.DataSource = value;
             }
         }
 
