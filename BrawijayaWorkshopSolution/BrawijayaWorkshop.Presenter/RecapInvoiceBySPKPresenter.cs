@@ -12,12 +12,21 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.DateFrom = View.DateTo = System.DateTime.Today;
+            View.ListCategory = Model.RetrieveCategories();
             View.ListCustomer = Model.RetrieveCustomers();
+        }
+
+        public void OnCustomerSelected()
+        {
+            View.ListVehicleGroup = Model.RetrieveVehicleGroupsByCustomerId(View.SelectedCustomer);
+            View.ListVehicle = Model.RetrieveVehiclesByCustomerId(View.SelectedCustomer);
         }
 
         public void LoadData()
         {
-            View.ListInvoices = Model.RetrieveRecap(View.DateFrom, View.DateTo, View.SelectedCustomer);
+            View.ListInvoices = Model.RetrieveRecap(View.DateFrom, View.DateTo,
+                View.SelectedCategory, View.SelectedCustomer, View.SelectedVehicleGroup, View.SelectedVehicle);
         }
     }
 }

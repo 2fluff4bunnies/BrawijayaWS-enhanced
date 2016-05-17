@@ -17,20 +17,37 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 {
     public partial class RecapInvoiceBySPKListControl : BaseAppUserControl, IRecapInvoiceBySPKView
     {
-        public RecapInvoiceBySPKListControl()
+        private RecapInvoiceBySPKPresenter _presenter;
+
+        public RecapInvoiceBySPKListControl(RecapInvoiceBySPKModel model)
         {
             InitializeComponent();
+
+            _presenter = new RecapInvoiceBySPKPresenter(this, model);
+            lookupCustomer.EditValueChanged += lookupCustomer_EditValueChanged;
+
+            this.Load += RecapInvoiceBySPKListControl_Load;
+        }
+
+        private void lookupCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            _presenter.OnCustomerSelected();
+        }
+
+        private void RecapInvoiceBySPKListControl_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
         }
 
         public DateTime DateFrom
         {
             get
             {
-                throw new NotImplementedException();
+                return dePeriodFrom.EditValue.AsDateTime();
             }
             set
             {
-                throw new NotImplementedException();
+                dePeriodFrom.EditValue = value;
             }
         }
 
@@ -38,11 +55,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                throw new NotImplementedException();
+                return dePeriodeTo.EditValue.AsDateTime();
             }
             set
             {
-                throw new NotImplementedException();
+                dePeriodeTo.EditValue = value;
             }
         }
 
@@ -50,11 +67,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupCustomer.EditValue.AsInteger();
             }
             set
             {
-                throw new NotImplementedException();
+                lookupCustomer.EditValue = value;
             }
         }
 
@@ -62,24 +79,154 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupCustomer.Properties.DataSource as List<CustomerViewModel>;
             }
             set
             {
-                throw new NotImplementedException();
+                lookupCustomer.Properties.DataSource = value;
             }
         }
 
-        public List<InvoiceViewModel> ListInvoices
+        public int SelectedCategory
         {
             get
             {
-                throw new NotImplementedException();
+                return lookupCategory.EditValue.AsInteger();
             }
             set
             {
-                throw new NotImplementedException();
+                lookupCategory.EditValue = value;
             }
+        }
+
+        public List<ReferenceViewModel> ListCategory
+        {
+            get
+            {
+                return lookupCategory.Properties.DataSource as List<ReferenceViewModel>;
+            }
+            set
+            {
+                lookupCategory.Properties.DataSource = value;
+            }
+        }
+
+        public int SelectedVehicleGroup
+        {
+            get
+            {
+                return lookupVehicleGroup.EditValue.AsInteger();
+            }
+            set
+            {
+                lookupVehicleGroup.EditValue = value;
+            }
+        }
+
+        public List<VehicleGroupViewModel> ListVehicleGroup
+        {
+            get
+            {
+                return lookupVehicleGroup.Properties.DataSource as List<VehicleGroupViewModel>;
+            }
+            set
+            {
+                lookupVehicleGroup.Properties.DataSource = value;
+            }
+        }
+
+        public int SelectedVehicle
+        {
+            get
+            {
+                return lookupLicenseNumber.EditValue.AsInteger();
+            }
+            set
+            {
+                lookupLicenseNumber.EditValue = value;
+            }
+        }
+
+        public List<VehicleViewModel> ListVehicle
+        {
+            get
+            {
+                return lookupLicenseNumber.Properties.DataSource as List<VehicleViewModel>;
+            }
+            set
+            {
+                lookupLicenseNumber.Properties.DataSource = value;
+            }
+        }
+
+        public List<RecapInvoiceItemViewModel> ListInvoices
+        {
+            get
+            {
+                return gridRecapInvoice.DataSource as List<RecapInvoiceItemViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridRecapInvoice.DataSource = value; gvRecapInvoice.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridRecapInvoice.DataSource = value;
+                    gvRecapInvoice.BestFitColumns();
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (SelectedCategory > 0 && SelectedCustomer > 0)
+            {
+                RefreshDataView();
+            }
+            else
+            {
+                this.ShowWarning("Pilih salah satu Kategori dan Customer");
+            }
+        }
+
+        public override void RefreshDataView()
+        {
+            if (!bgwMain.IsBusy)
+            {
+                MethodBase.GetCurrentMethod().Info("Fecthing invoice data...");
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data invoice...", false);
+                bgwMain.RunWorkerAsync();
+            }
+        }
+
+        private void btnPrintAll_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.LoadData();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.LoadData()", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwMain_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses memuat data gagal!");
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data invoice selesai", true);
         }
     }
 }

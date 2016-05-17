@@ -12,6 +12,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public string SparepartName { get; set; }
         public int Qty { get; set; }
         public string UnitCategoryName { get; set; }
+        public double NominalFee { get; set; }
         public double SubTotalPrice { get; set; }
     }
 }
