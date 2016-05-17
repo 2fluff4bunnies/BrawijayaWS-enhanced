@@ -297,7 +297,7 @@
             this.colSubTotal.FieldName = "SubTotalWithFee";
             this.colSubTotal.Name = "colSubTotal";
             this.colSubTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SubTotalWithFee", "SUM={0:#,#;(#,#);0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SubTotalWithFee", "{0:#,#;(#,#);0}")});
             this.colSubTotal.Visible = true;
             this.colSubTotal.VisibleIndex = 4;
             // 
