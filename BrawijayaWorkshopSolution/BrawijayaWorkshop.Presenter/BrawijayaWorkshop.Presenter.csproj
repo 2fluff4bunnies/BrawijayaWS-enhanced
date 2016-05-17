@@ -85,7 +85,9 @@
     <Compile Include="PurchasingApprovalPresenter.cs" />
     <Compile Include="PurchasingEditorPresenter.cs" />
     <Compile Include="PurchasingListPresenter.cs" />
+    <Compile Include="RecapInvoiceByCustomerPresenter.cs" />
     <Compile Include="RecapInvoiceBySPKPresenter.cs" />
+    <Compile Include="RecapInvoiceByVehicleGroupPresenter.cs" />
     <Compile Include="RoleAccessEditorPresenter.cs" />
     <Compile Include="RoleAccessListPresenter.cs" />
     <Compile Include="RoleEditorPresenter.cs" />
