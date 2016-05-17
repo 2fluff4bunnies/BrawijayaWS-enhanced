@@ -7,8 +7,6 @@ namespace BrawijayaWorkshop.Win32App.PrintItems
         public InvoicePrintItem()
         {
             InitializeComponent();
-
-            lblInvoiceDate.Text = DateTime.Today.ToString("dd/MM/yyyy");
         }
     }
 }

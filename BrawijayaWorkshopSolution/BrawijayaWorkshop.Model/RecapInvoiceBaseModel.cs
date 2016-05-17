@@ -80,7 +80,7 @@ namespace BrawijayaWorkshop.Model
                 {
                     SparepartName = _sparepartRepository.GetById(sparepartID).Name,
                     Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                    NominalFee = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => (100 / x.FeePctg) * x.SubTotalPrice),
+                    NominalFee = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => (100 / (100 + x.FeePctg)) * x.SubTotalPrice),
                     SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
                     SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                     UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
@@ -123,8 +123,8 @@ namespace BrawijayaWorkshop.Model
 
                 if (item.TotalService > 0)
                 {
-                    decimal origin = (0.03M / 0.01M * item.TotalServicePlusFee);
-                    decimal nominalFee = (0.01M * origin);
+                    decimal origin = (100 / 130) * item.TotalServicePlusFee;
+                    decimal nominalFee = (10/100) * origin;
                     mappedResult.Add(new RecapInvoiceItemViewModel
                     {
                         Invoice = item,
