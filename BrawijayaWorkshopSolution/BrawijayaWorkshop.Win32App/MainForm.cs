@@ -290,6 +290,7 @@ namespace BrawijayaWorkshop.Win32App
             navMasterData.iVehicleGroup.LinkClicked += iVehicleGroup_LinkClicked;
         }
 
+        #region Master Data Navigation
         private void iVehicleGroup_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             VehicleGroupListControl vehicleListontrol = Bootstrapper.Resolve<VehicleGroupListControl>();
@@ -391,6 +392,7 @@ namespace BrawijayaWorkshop.Win32App
             UsedGoodsListControl usedGoodListtControl = Bootstrapper.Resolve<UsedGoodsListControl>();
             ShowUserControl(usedGoodListtControl);
         }
+        #endregion
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
@@ -435,46 +437,50 @@ namespace BrawijayaWorkshop.Win32App
             navTransactionData.iSPKSchedule.LinkClicked += iSPKSchedule_LinkClicked;
         }
 
-        void iSPKSchedule_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        #region Transaction Navigation
+        private void iSPKSchedule_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             SPKScheduleListControl listSPKSchedule = Bootstrapper.Resolve<SPKScheduleListControl>();
             ShowUserControl(listSPKSchedule);
         }
 
-        void iSPKSales_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iSPKSales_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             SPKSaleListControl listSPKSales = Bootstrapper.Resolve<SPKSaleListControl>();
             ShowUserControl(listSPKSales);
         }
 
-        void iInvoice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iInvoice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             InvoiceListControl listInvoice = Bootstrapper.Resolve<InvoiceListControl>();
             ShowUserControl(listInvoice);
         }
-        void iPurchaseReturn_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+
+        private void iPurchaseReturn_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             PurchaseReturnListControl listPurchaseReturn = Bootstrapper.Resolve<PurchaseReturnListControl>();
             ShowUserControl(listPurchaseReturn);
         }
-        void iSalesReturn_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+
+        private void iSalesReturn_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             SalesReturnListControl listSalesReturn = Bootstrapper.Resolve<SalesReturnListControl>();
             ShowUserControl(listSalesReturn);
         }
-        void iCredit_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+
+        private void iCredit_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             CreditListControl listCredit = Bootstrapper.Resolve<CreditListControl>();
             ShowUserControl(listCredit);
         }
 
-        void iDebt_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iDebt_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             DebtListControl listDebt = Bootstrapper.Resolve<DebtListControl>();
             ShowUserControl(listDebt);
         }
 
-        void iGuestBook_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void iGuestBook_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             GuestBookListControl listGuestBook = Bootstrapper.Resolve<GuestBookListControl>();
             ShowUserControl(listGuestBook);
@@ -491,11 +497,13 @@ namespace BrawijayaWorkshop.Win32App
             SPKListControl listSPK = Bootstrapper.Resolve<SPKListControl>();
             ShowUserControl(listSPK);
         }
+
         private void iUsedGoodTrans_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             UsedGoodsTransactionListControl listUsedGoodsTrans = Bootstrapper.Resolve<UsedGoodsTransactionListControl>();
             ShowUserControl(listUsedGoodsTrans);
         }
+        #endregion
 
         private void iReporting_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -507,18 +515,44 @@ namespace BrawijayaWorkshop.Win32App
             // show navigation list
             ReportingDataNavigationControl navReporting = new ReportingDataNavigationControl();
             navReporting.iSPKHistory.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_SPK);
+            navReporting.iRecapInvoiceBySPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
+            navReporting.iRecapInvoiceByVehicleGroup.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
+            navReporting.iRecapInvoiceByCustomer.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
 
             ShowNavigationControl(navReporting);
             // init event navigation
             //navTransactionData.iPurchasing.LinkClicked += iPurchasing_LinkClicked;
             navReporting.iSPKHistory.LinkClicked += iSPKHistory_LinkClicked;
+            navReporting.iRecapInvoiceBySPK.LinkClicked += iRecapInvoiceBySPK_LinkClicked;
+            navReporting.iRecapInvoiceByVehicleGroup.LinkClicked += iRecapInvoiceByVehicleGroup_LinkClicked;
+            navReporting.iRecapInvoiceByCustomer.LinkClicked += iRecapInvoiceByCustomer_LinkClicked;
         }
 
-        void iSPKHistory_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        #region Reporting Navigation
+        private void iRecapInvoiceByCustomer_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            RecapInvoiceByCustomerListControl recap = Bootstrapper.Resolve<RecapInvoiceByCustomerListControl>();
+            ShowUserControl(recap);
+        }
+
+        private void iRecapInvoiceByVehicleGroup_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            RecapInvoiceByVehicleGroupListControl recap = Bootstrapper.Resolve<RecapInvoiceByVehicleGroupListControl>();
+            ShowUserControl(recap);
+        }
+
+        private void iRecapInvoiceBySPK_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            RecapInvoiceBySPKListControl recap = Bootstrapper.Resolve<RecapInvoiceBySPKListControl>();
+            ShowUserControl(recap);
+        }
+
+        private void iSPKHistory_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             SPKHistoryListControl SPKHistory = Bootstrapper.Resolve<SPKHistoryListControl>();
             ShowUserControl(SPKHistory);
         }
+        #endregion
 
         private void iAccounting_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -547,6 +581,7 @@ namespace BrawijayaWorkshop.Win32App
             navAccounting.iBalanceHelper.LinkClicked += iBalanceHelper_LinkClicked;
         }
 
+        #region Accounting Navigation
         private void iBalanceHelper_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             BalanceHelperListControl balanceHelper = Bootstrapper.Resolve<BalanceHelperListControl>();
@@ -588,5 +623,6 @@ namespace BrawijayaWorkshop.Win32App
             ManualTransactionListControl listManualTrans = Bootstrapper.Resolve<ManualTransactionListControl>();
             ShowUserControl(listManualTrans);
         }
+        #endregion
     }
 }
