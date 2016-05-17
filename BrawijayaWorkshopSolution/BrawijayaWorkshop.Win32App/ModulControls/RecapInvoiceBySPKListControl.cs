@@ -3,9 +3,11 @@ using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -177,13 +179,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (SelectedCategory > 0 && SelectedCustomer > 0)
+            if (SelectedCategory > 0 && SelectedCustomer > 0 && SelectedVehicleGroup > 0)
             {
                 RefreshDataView();
             }
             else
             {
-                this.ShowWarning("Pilih salah satu Kategori dan Customer");
+                this.ShowWarning("Pilih salah satu Kategori, Customer, serta Kelompok");
             }
         }
 
@@ -199,7 +201,81 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
+            if (ListInvoices.Count == 0)
+            {
+                this.ShowInformation("Data Invoice tidak ada");
+                return;
+            }
 
+            ReferenceViewModel category = lookupCategory.GetSelectedDataRow() as ReferenceViewModel;
+            VehicleGroupViewModel vehicleGroup = lookupVehicleGroup.GetSelectedDataRow() as VehicleGroupViewModel;
+
+            RecapInvoiceBySPKPrintItem report = new RecapInvoiceBySPKPrintItem(category.Name, DateFrom, DateTo);
+
+            List<RecapInvoiceBySPKItemViewModel> reportDataSource = new List<RecapInvoiceBySPKItemViewModel>();
+
+            foreach (var item in this.ListInvoices)
+            {
+                if (item.ItemName == "Gaji Tukang Harian")
+                {
+                    if (reportDataSource.Where(ds => ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
+                    ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber).Count() > 0)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else if (item.ItemName == "Gaji Tukang Borongan")
+                {
+                    if (reportDataSource.Where(ds => ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
+                    ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber).Count() > 0)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    RecapInvoiceBySPKItemViewModel itemSparepart = reportDataSource.Where(ds =>
+                        ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
+                        ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber &&
+                        ds.Description == "ONDERDIL").FirstOrDefault();
+                    if (itemSparepart != null)
+                    {
+                        int currentIndex = reportDataSource.IndexOf(itemSparepart);
+                        itemSparepart.Nominal += item.SubTotalWithFee;
+                        reportDataSource[currentIndex] = itemSparepart;
+                    }
+                    else
+                    {
+                        itemSparepart = new RecapInvoiceBySPKItemViewModel();
+                        itemSparepart.Category = category.Name;
+                        itemSparepart.VehicleGroup = vehicleGroup.Name;
+                        itemSparepart.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
+                        itemSparepart.Description = "ONDERDIL";
+                        itemSparepart.Nominal = item.SubTotalWithFee;
+                        reportDataSource.Add(itemSparepart);
+                    }
+                }
+            }
+
+            //InvoicePrintItem report = new InvoicePrintItem();
+            //List<InvoiceViewModel> _dataSource = new List<InvoiceViewModel>();
+            //_dataSource.Add(SelectedInvoice);
+            //report.DataSource = _dataSource;
+            //report.FillDataSource();
+
+            //using (ReportPrintTool printTool = new ReportPrintTool(report))
+            //{
+            //    // Invoke the Print dialog.
+            //    printTool.PrintDialog();
+            //}
         }
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
