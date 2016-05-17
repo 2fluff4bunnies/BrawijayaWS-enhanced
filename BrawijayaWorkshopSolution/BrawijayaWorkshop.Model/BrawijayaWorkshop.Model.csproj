@@ -103,6 +103,7 @@
     <Compile Include="PurchasingApprovalModel.cs" />
     <Compile Include="PurchasingEditorModel.cs" />
     <Compile Include="PurchasingListModel.cs" />
+    <Compile Include="RecapInvoiceBaseModel.cs" />
     <Compile Include="RecapInvoiceByCustomerModel.cs" />
     <Compile Include="RecapInvoiceBySPKModel.cs" />
     <Compile Include="RecapInvoiceByVehicleGroupModel.cs" />

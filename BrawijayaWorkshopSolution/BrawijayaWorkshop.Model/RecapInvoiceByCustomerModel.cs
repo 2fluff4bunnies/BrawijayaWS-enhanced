@@ -1,20 +1,18 @@
-﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Database.Repositories;
-using BrawijayaWorkshop.Infrastructure.Repository;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BrawijayaWorkshop.Database.Repositories;
 
 namespace BrawijayaWorkshop.Model
 {
-    public class RecapInvoiceByCustomerModel : AppBaseModel
+    public class RecapInvoiceByCustomerModel : RecapInvoiceBaseModel
     {
-        public RecapInvoiceByCustomerModel()
-            :base()
-        {
-
-        }
+        public RecapInvoiceByCustomerModel(IInvoiceRepository invoiceRepository,
+            IInvoiceDetailRepository invoiceDetailRepository,
+            ICustomerRepository customerRepository,
+            IReferenceRepository referenceRepository,
+            ISparepartRepository sparepartRepository,
+            IVehicleGroupRepository vehicleGroupRepository,
+            IVehicleRepository vehicleRepository)
+            : base(invoiceRepository, invoiceDetailRepository, customerRepository,
+            referenceRepository, sparepartRepository, vehicleGroupRepository,
+            vehicleRepository) { }
     }
 }
