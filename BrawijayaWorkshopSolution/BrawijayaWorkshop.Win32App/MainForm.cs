@@ -518,6 +518,7 @@ namespace BrawijayaWorkshop.Win32App
             navReporting.iRecapInvoiceBySPK.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
             navReporting.iRecapInvoiceByVehicleGroup.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
             navReporting.iRecapInvoiceByCustomer.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
+            navReporting.iHistorySparepart.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_HISTORY_SPAREPART);
 
             ShowNavigationControl(navReporting);
             // init event navigation
@@ -526,6 +527,7 @@ namespace BrawijayaWorkshop.Win32App
             navReporting.iRecapInvoiceBySPK.LinkClicked += iRecapInvoiceBySPK_LinkClicked;
             navReporting.iRecapInvoiceByVehicleGroup.LinkClicked += iRecapInvoiceByVehicleGroup_LinkClicked;
             navReporting.iRecapInvoiceByCustomer.LinkClicked += iRecapInvoiceByCustomer_LinkClicked;
+            navReporting.iHistorySparepart.LinkClicked += iHistorySparepart_LinkClicked;
         }
 
         #region Reporting Navigation
@@ -551,6 +553,11 @@ namespace BrawijayaWorkshop.Win32App
         {
             SPKHistoryListControl SPKHistory = Bootstrapper.Resolve<SPKHistoryListControl>();
             ShowUserControl(SPKHistory);
+        }
+        private void iHistorySparepart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            HistorySparepartListControl historySparepart = Bootstrapper.Resolve<HistorySparepartListControl>();
+            ShowUserControl(historySparepart);
         }
         #endregion
 

@@ -212,6 +212,12 @@
     <Compile Include="ModulControls\GuestBookListControl.Designer.cs">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\HistorySparepartListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\HistorySparepartListControl.Designer.cs">
+      <DependentUpon>HistorySparepartListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\InvoiceListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -823,6 +829,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\GuestBookListControl.resx">
       <DependentUpon>GuestBookListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\HistorySparepartListControl.resx">
+      <DependentUpon>HistorySparepartListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\InvoiceListControl.resx">
       <DependentUpon>InvoiceListControl.cs</DependentUpon>

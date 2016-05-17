@@ -40,6 +40,7 @@ namespace BrawijayaWorkshop.Constant
         public const string MODUL_SALES_RETURN = "M_SALES_RETURN";
 
         public const string MODUL_RECAP_INVOICE = "MODUL_RECAP_INVOICE";
+        public const string MODUL_HISTORY_SPAREPART = "MODUL_HISTORY_SPAREPART";
 
         public const string MODUL_ACCOUNTING = "M_ACCOUNTING";
 
