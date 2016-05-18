@@ -66,7 +66,7 @@
             this.lblReportTitle,
             this.lblPeriode,
             this.xrPictureBox1});
-            this.RecapInvoiceGroupHeader.HeightF = 100F;
+            this.RecapInvoiceGroupHeader.HeightF = 109.375F;
             this.RecapInvoiceGroupHeader.Name = "RecapInvoiceGroupHeader";
             // 
             // lblReportTitle
