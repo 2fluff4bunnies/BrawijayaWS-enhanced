@@ -4,6 +4,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -210,34 +211,32 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             ReferenceViewModel category = lookupCategory.GetSelectedDataRow() as ReferenceViewModel;
             VehicleGroupViewModel vehicleGroup = lookupVehicleGroup.GetSelectedDataRow() as VehicleGroupViewModel;
 
-            RecapInvoiceBySPKPrintItem report = new RecapInvoiceBySPKPrintItem(category.Name, DateFrom, DateTo);
-
             List<RecapInvoiceBySPKItemViewModel> reportDataSource = new List<RecapInvoiceBySPKItemViewModel>();
-
             foreach (var item in this.ListInvoices)
             {
-                if (item.ItemName == "Gaji Tukang Harian")
+                if (item.ItemName == "Gaji Tukang Harian" || item.ItemName == "Gaji Tukang Borongan")
                 {
-                    if (reportDataSource.Where(ds => ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
-                    ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber).Count() > 0)
+                    RecapInvoiceBySPKItemViewModel itemWorker = reportDataSource.Where(ds =>
+                        ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
+                        ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber &&
+                        (ds.Description == "ONGKOS TUKANG HARIAN" ||
+                        ds.Description == "ONGKOS TUKANG BORONGAN")).FirstOrDefault();
+                    if (itemWorker != null)
                     {
-
+                        int currentIndex = reportDataSource.IndexOf(itemWorker);
+                        itemWorker.Nominal += item.SubTotalWithoutFee;
+                        reportDataSource[currentIndex] = itemWorker;
                     }
                     else
                     {
-
-                    }
-                }
-                else if (item.ItemName == "Gaji Tukang Borongan")
-                {
-                    if (reportDataSource.Where(ds => ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
-                    ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber).Count() > 0)
-                    {
-
-                    }
-                    else
-                    {
-
+                        itemWorker = new RecapInvoiceBySPKItemViewModel();
+                        itemWorker.Category = category.Name;
+                        itemWorker.VehicleGroup = vehicleGroup.Name;
+                        itemWorker.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
+                        itemWorker.Description = item.ItemName == "Gaji Tukang Harian" ?
+                            "ONGKOS TUKANG HARIAN" : "ONGKOS TUKANG BORONGAN";
+                        itemWorker.Nominal = item.SubTotalWithoutFee;
+                        reportDataSource.Add(itemWorker);
                     }
                 }
                 else
@@ -265,17 +264,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 }
             }
 
-            //InvoicePrintItem report = new InvoicePrintItem();
-            //List<InvoiceViewModel> _dataSource = new List<InvoiceViewModel>();
-            //_dataSource.Add(SelectedInvoice);
-            //report.DataSource = _dataSource;
-            //report.FillDataSource();
+            RecapInvoiceBySPKPrintItem report = new RecapInvoiceBySPKPrintItem(category.Name, DateFrom, DateTo);
+            report.DataSource = reportDataSource;
+            report.FillDataSource();
 
-            //using (ReportPrintTool printTool = new ReportPrintTool(report))
-            //{
-            //    // Invoke the Print dialog.
-            //    printTool.PrintDialog();
-            //}
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                printTool.PrintDialog();
+            }
         }
 
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
