@@ -38,8 +38,8 @@
             this.iBalanceTotal = new DevExpress.XtraNavBar.NavBarItem();
             this.iBalanceSheet = new DevExpress.XtraNavBar.NavBarItem();
             this.iProfitLoss = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iBalanceHelper = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarAccounting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +48,7 @@
             // 
             this.navbarAccounting.ActiveGroup = this.navbarGroupAccounting;
             this.navbarAccounting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navbarAccounting.DragDropFlags = DevExpress.XtraNavBar.NavBarDragDrop.None;
             this.navbarAccounting.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navbarGroupAccounting});
             this.navbarAccounting.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
@@ -116,6 +117,12 @@
             this.iProfitLoss.Name = "iProfitLoss";
             this.iProfitLoss.SmallImageIndex = 7;
             // 
+            // iBalanceHelper
+            // 
+            this.iBalanceHelper.Caption = "Buku Pembantu";
+            this.iBalanceHelper.Name = "iBalanceHelper";
+            this.iBalanceHelper.SmallImageIndex = 8;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -128,12 +135,6 @@
             this.imageCollection.Images.SetKeyName(6, "hpp_16x16.png");
             this.imageCollection.Images.SetKeyName(7, "profitloss_16x16.png");
             this.imageCollection.Images.SetKeyName(8, "balancehelper_16x16.png");
-            // 
-            // iBalanceHelper
-            // 
-            this.iBalanceHelper.Caption = "Buku Pembantu";
-            this.iBalanceHelper.Name = "iBalanceHelper";
-            this.iBalanceHelper.SmallImageIndex = 8;
             // 
             // AccountingNavigationControl
             // 

@@ -36,8 +36,8 @@
             this.iRecapInvoiceBySPK = new DevExpress.XtraNavBar.NavBarItem();
             this.iRecapInvoiceByVehicleGroup = new DevExpress.XtraNavBar.NavBarItem();
             this.iRecapInvoiceByCustomer = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iHistorySparepart = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarReportingData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +46,7 @@
             // 
             this.navbarReportingData.ActiveGroup = this.navbarGroupReportingData;
             this.navbarReportingData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navbarReportingData.DragDropFlags = DevExpress.XtraNavBar.NavBarDragDrop.None;
             this.navbarReportingData.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navbarGroupReportingData});
             this.navbarReportingData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
@@ -99,6 +100,12 @@
             this.iRecapInvoiceByCustomer.Name = "iRecapInvoiceByCustomer";
             this.iRecapInvoiceByCustomer.SmallImageIndex = 3;
             // 
+            // iHistorySparepart
+            // 
+            this.iHistorySparepart.Caption = "History Sparepart";
+            this.iHistorySparepart.Name = "iHistorySparepart";
+            this.iHistorySparepart.SmallImageIndex = 0;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -106,12 +113,6 @@
             this.imageCollection.Images.SetKeyName(1, "invoice1_16x16.png");
             this.imageCollection.Images.SetKeyName(2, "invoice2_16x16.png");
             this.imageCollection.Images.SetKeyName(3, "invoice3_16x16.png");
-            // 
-            // iHistorySparepart
-            // 
-            this.iHistorySparepart.Caption = "History Sparepart";
-            this.iHistorySparepart.Name = "iHistorySparepart";
-            this.iHistorySparepart.SmallImageIndex = 0;
             // 
             // ReportingDataNavigationControl
             // 

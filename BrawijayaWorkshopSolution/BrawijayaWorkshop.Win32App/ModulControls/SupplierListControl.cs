@@ -194,7 +194,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 this.ShowError("Proses memuat data gagal!");
             }
-            if(SupplierListData.Count > 0)
+            if (SupplierListData != null && SupplierListData.Count > 0)
             {
                 gvSupplier.FocusedRowHandle = 0;
                 _selectedSupplier = gvSupplier.GetRow(0) as SupplierViewModel;

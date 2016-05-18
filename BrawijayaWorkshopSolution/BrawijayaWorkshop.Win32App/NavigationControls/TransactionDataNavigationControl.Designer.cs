@@ -33,16 +33,16 @@
             this.navbarTransactionData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupTransactionData = new DevExpress.XtraNavBar.NavBarGroup();
             this.iPurchasing = new DevExpress.XtraNavBar.NavBarItem();
-            this.iSPK = new DevExpress.XtraNavBar.NavBarItem();
-            this.iUsedGoodTrans = new DevExpress.XtraNavBar.NavBarItem();
             this.iGuestBook = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSPK = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSPKSchedule = new DevExpress.XtraNavBar.NavBarItem();
+            this.iSPKSales = new DevExpress.XtraNavBar.NavBarItem();
+            this.iInvoice = new DevExpress.XtraNavBar.NavBarItem();
             this.iDebt = new DevExpress.XtraNavBar.NavBarItem();
             this.iCredit = new DevExpress.XtraNavBar.NavBarItem();
-            this.iInvoice = new DevExpress.XtraNavBar.NavBarItem();
             this.iPurchaseReturn = new DevExpress.XtraNavBar.NavBarItem();
             this.iSalesReturn = new DevExpress.XtraNavBar.NavBarItem();
-            this.iSPKSales = new DevExpress.XtraNavBar.NavBarItem();
-            this.iSPKSchedule = new DevExpress.XtraNavBar.NavBarItem();
+            this.iUsedGoodTrans = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarTransactionData)).BeginInit();
@@ -53,6 +53,7 @@
             // 
             this.navbarTransactionData.ActiveGroup = this.navbarGroupTransactionData;
             this.navbarTransactionData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navbarTransactionData.DragDropFlags = DevExpress.XtraNavBar.NavBarDragDrop.None;
             this.navbarTransactionData.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navbarGroupTransactionData});
             this.navbarTransactionData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
@@ -99,6 +100,12 @@
             this.iPurchasing.Name = "iPurchasing";
             this.iPurchasing.SmallImageIndex = 0;
             // 
+            // iGuestBook
+            // 
+            this.iGuestBook.Caption = "Daftar Kendaraan Masuk";
+            this.iGuestBook.Name = "iGuestBook";
+            this.iGuestBook.SmallImageIndex = 4;
+            // 
             // iSPK
             // 
             this.iSPK.Caption = "SPK";
@@ -106,17 +113,23 @@
             this.iSPK.Name = "iSPK";
             this.iSPK.SmallImageIndex = 1;
             // 
-            // iUsedGoodTrans
+            // iSPKSchedule
             // 
-            this.iUsedGoodTrans.Caption = "Barang Bekas";
-            this.iUsedGoodTrans.Name = "iUsedGoodTrans";
-            this.iUsedGoodTrans.SmallImageIndex = 2;
+            this.iSPKSchedule.Caption = "Update Harian SPK";
+            this.iSPKSchedule.Name = "iSPKSchedule";
+            this.iSPKSchedule.SmallImageIndex = 1;
             // 
-            // iGuestBook
+            // iSPKSales
             // 
-            this.iGuestBook.Caption = "Daftar Kendaraan Masuk";
-            this.iGuestBook.Name = "iGuestBook";
-            this.iGuestBook.SmallImageIndex = 4;
+            this.iSPKSales.Caption = "Penjualan Sparepart";
+            this.iSPKSales.Name = "iSPKSales";
+            this.iSPKSales.SmallImageIndex = 6;
+            // 
+            // iInvoice
+            // 
+            this.iInvoice.Caption = "Invoice";
+            this.iInvoice.Name = "iInvoice";
+            this.iInvoice.SmallImageIndex = 5;
             // 
             // iDebt
             // 
@@ -130,12 +143,6 @@
             this.iCredit.Name = "iCredit";
             this.iCredit.SmallImageIndex = 5;
             // 
-            // iInvoice
-            // 
-            this.iInvoice.Caption = "Invoice";
-            this.iInvoice.Name = "iInvoice";
-            this.iInvoice.SmallImageIndex = 5;
-            // 
             // iPurchaseReturn
             // 
             this.iPurchaseReturn.Caption = "Retur Pembelian";
@@ -148,17 +155,11 @@
             this.iSalesReturn.Name = "iSalesReturn";
             this.iSalesReturn.SmallImageIndex = 2;
             // 
-            // iSPKSales
+            // iUsedGoodTrans
             // 
-            this.iSPKSales.Caption = "Penjualan Sparepart";
-            this.iSPKSales.Name = "iSPKSales";
-            this.iSPKSales.SmallImageIndex = 6;
-            // 
-            // iSPKSchedule
-            // 
-            this.iSPKSchedule.Caption = "Update Harian SPK";
-            this.iSPKSchedule.Name = "iSPKSchedule";
-            this.iSPKSchedule.SmallImageIndex = 1;
+            this.iUsedGoodTrans.Caption = "Barang Bekas";
+            this.iUsedGoodTrans.Name = "iUsedGoodTrans";
+            this.iUsedGoodTrans.SmallImageIndex = 2;
             // 
             // imageCollection
             // 

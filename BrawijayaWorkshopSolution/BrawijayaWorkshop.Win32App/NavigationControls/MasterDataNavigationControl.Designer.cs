@@ -40,6 +40,7 @@
             this.iJournal = new DevExpress.XtraNavBar.NavBarItem();
             this.iJournalCategory = new DevExpress.XtraNavBar.NavBarItem();
             this.iCustomer = new DevExpress.XtraNavBar.NavBarItem();
+            this.iVehicleGroup = new DevExpress.XtraNavBar.NavBarItem();
             this.iSupplier = new DevExpress.XtraNavBar.NavBarItem();
             this.iSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iMechanic = new DevExpress.XtraNavBar.NavBarItem();
@@ -49,7 +50,6 @@
             this.iSpecialSparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.iUsedGood = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
-            this.iVehicleGroup = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarMasterData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,7 @@
             // 
             this.navbarMasterData.ActiveGroup = this.navbarGroupMasterData;
             this.navbarMasterData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navbarMasterData.DragDropFlags = DevExpress.XtraNavBar.NavBarDragDrop.None;
             this.navbarMasterData.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navbarGroupMasterData});
             this.navbarMasterData.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
@@ -158,6 +159,12 @@
             this.iCustomer.Name = "iCustomer";
             this.iCustomer.SmallImageIndex = 1;
             // 
+            // iVehicleGroup
+            // 
+            this.iVehicleGroup.Caption = "Kelompok";
+            this.iVehicleGroup.Name = "iVehicleGroup";
+            this.iVehicleGroup.SmallImageIndex = 16;
+            // 
             // iSupplier
             // 
             this.iSupplier.Caption = "Supplier";
@@ -226,12 +233,6 @@
             this.imageCollection.Images.SetKeyName(14, "brand-icon_16x16.png");
             this.imageCollection.Images.SetKeyName(15, "type_16x16.png");
             this.imageCollection.Images.SetKeyName(16, "group_16x16.png");
-            // 
-            // iVehicleGroup
-            // 
-            this.iVehicleGroup.Caption = "Kelompok";
-            this.iVehicleGroup.Name = "iVehicleGroup";
-            this.iVehicleGroup.SmallImageIndex = 16;
             // 
             // MasterDataNavigationControl
             // 
