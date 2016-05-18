@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Presenter
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
             View.SparepartLookupList = Model.LoadSparepart();
+            View.SparepartWheelLookupList = Model.LoadWheelSParepart();
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
 
@@ -146,7 +147,11 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId, 0);
             }
-            View.WheelDetailList = Model.RetrieveReadyWheelDetails();
+        }
+
+        public void LoadWheelDetail(int sparepartId)
+        {
+            View.WheelDetailList = Model.RetrieveReadyWheelDetails(sparepartId);
         }
 
         public VehicleWheelViewModel ResetSelectedWheel(int VehicleWheelId)
@@ -161,9 +166,14 @@ namespace BrawijayaWorkshop.Presenter
 
         public decimal GetAllPurchaseByVehicleToday()
         {
-            //return Model.AllPurchaseByVehicle(View.VehicleId, View.ParentSPK != null ? View.ParentSPK.Id : 0);
-            return Model.AllPurchaseByVehicle(View.VehicleId, 0);
+            if (View.ParentSPK != null)
+            {
+                return Model.AllPurchaseByVehicle(View.VehicleId, View.ParentSPK.Id);
+            }
+            else
+            {
+                return Model.AllPurchaseByVehicle(View.VehicleId, 0);
+            }
         }
-
     }
 }

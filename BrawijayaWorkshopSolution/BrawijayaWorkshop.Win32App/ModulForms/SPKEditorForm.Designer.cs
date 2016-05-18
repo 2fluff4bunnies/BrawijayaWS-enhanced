@@ -52,6 +52,7 @@
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -88,6 +89,8 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.lookUpSparepartWheelGv = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -118,6 +121,8 @@
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -329,6 +334,8 @@
             this.gridVehicleWheel.Location = new System.Drawing.Point(9, 138);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
+            this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.lookUpSparepartWheelGv});
             this.gridVehicleWheel.Size = new System.Drawing.Size(581, 226);
             this.gridVehicleWheel.TabIndex = 11;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -339,6 +346,7 @@
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colName,
             this.colWheelDetail,
+            this.colSparepart,
             this.colWheelDetailReplace,
             this.colIsUsedGoodReceived,
             this.colPrice});
@@ -377,7 +385,15 @@
             this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailId";
             this.colWheelDetailReplace.Name = "colWheelDetailReplace";
             this.colWheelDetailReplace.Visible = true;
-            this.colWheelDetailReplace.VisibleIndex = 2;
+            this.colWheelDetailReplace.VisibleIndex = 3;
+            // 
+            // colSparepart
+            // 
+            this.colSparepart.Caption = "Jenis Ban";
+            this.colSparepart.ColumnEdit = this.lookUpSparepartWheelGv;
+            this.colSparepart.Name = "colSparepart";
+            this.colSparepart.Visible = true;
+            this.colSparepart.VisibleIndex = 2;
             // 
             // colIsUsedGoodReceived
             // 
@@ -386,7 +402,7 @@
             this.colIsUsedGoodReceived.FieldName = "IsUsedWheelRetrieved";
             this.colIsUsedGoodReceived.Name = "colIsUsedGoodReceived";
             this.colIsUsedGoodReceived.Visible = true;
-            this.colIsUsedGoodReceived.VisibleIndex = 3;
+            this.colIsUsedGoodReceived.VisibleIndex = 4;
             // 
             // colPrice
             // 
@@ -396,7 +412,7 @@
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 4;
+            this.colPrice.VisibleIndex = 5;
             // 
             // labelControl2
             // 
@@ -696,6 +712,24 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // lookUpSparepartWheelGv
+            // 
+            this.lookUpSparepartWheelGv.AutoHeight = false;
+            this.lookUpSparepartWheelGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpSparepartWheelGv.DisplayMember = "Name";
+            this.lookUpSparepartWheelGv.Name = "lookUpSparepartWheelGv";
+            this.lookUpSparepartWheelGv.NullText = "-- Pilih Ban --";
+            this.lookUpSparepartWheelGv.ValueMember = "Id";
+            this.lookUpSparepartWheelGv.View = this.repositoryItemGridLookUpEdit1View;
+            // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -737,6 +771,8 @@
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -798,5 +834,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepart;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit lookUpSparepartWheelGv;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
     }
 }

@@ -85,6 +85,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
+            lookUpSparepartWheelGv.EditValueChanged += lookUpSparepartWheelGv_EditValueChanged;
         }
 
         #region Field Editor
@@ -374,6 +375,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public List<SparepartViewModel> SparepartWheelLookupList
+        {
+            get
+            {
+                return lookUpSparepartWheelGv.DataSource as List<SparepartViewModel>;
+            }
+            set
+            {
+                lookUpSparepartWheelGv.DataSource = value;
+            }
+        }
+
+        public SparepartViewModel SelectedSparepartWheel { get; set; }
+
         public VehicleWheelViewModel SelectedVehicleWheel { get; set; }
 
         public SpecialSparepartDetailViewModel SelectedWheelDetailToChange { get; set; }
@@ -544,6 +559,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        void lookUpSparepartWheelGv_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookup = sender as LookUpEdit;
+            this.SelectedSparepartWheel = lookup.GetSelectedDataRow() as SparepartViewModel;
+
+            _presenter.LoadWheelDetail(this.SelectedSparepartWheel.Id);
+        }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
         {
@@ -735,7 +757,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && (this.TotalSparepartPrice + + _presenter.GetAllPurchaseByVehicleToday()) >= this.ServiceThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && (this.TotalSparepartPrice + +_presenter.GetAllPurchaseByVehicleToday()) >= this.ServiceThreshold)
             {
                 result = true;
             }
@@ -838,6 +860,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.SelectedVehicleWheel.Price = 0;
             gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
             gvVehicleWheel.SetFocusedRowCellValue("IsUsedWheelRetrieved", this.SelectedVehicleWheel.IsUsedWheelRetrieved);
+            gvVehicleWheel.SetFocusedRowCellValue("Sparepart", null);
 
             SPKDetailSparepartDetailViewModel detailToRemove = this.SPKSparepartDetailList.Where(d => d.SparepartDetail.SparepartId == this.SelectedWheelDetailToChange.SparepartDetail.SparepartId).FirstOrDefault();
             if (detailToRemove != null)

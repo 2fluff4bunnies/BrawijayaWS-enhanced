@@ -53,5 +53,10 @@ namespace BrawijayaWorkshop.Presenter
         {
             return Model.IsSparepartWheel(sparepartId);
         }
+
+        public bool ValidateSerialNumber(string serialNumber)
+        {
+            return !Model.IsSerialNumberExist(serialNumber);
+        }
     }
 }
