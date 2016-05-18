@@ -126,6 +126,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public VehicleViewModel SelectedVehicle
+        {
+            get
+            {
+                return LookUpVehicle.GetSelectedDataRow() as VehicleViewModel;
+            }
+        }
+
         public List<ReferenceViewModel> CategoryDropdownList
         {
             get

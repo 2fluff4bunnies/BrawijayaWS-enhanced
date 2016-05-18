@@ -3,10 +3,11 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using BrawijayaWorkshop.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -614,10 +615,11 @@ namespace BrawijayaWorkshop.Model
         {
             decimal result = 0;
 
+            DateTime startTime = DateTime.Today;
+
             var AllSparepartPurchased = _SPKDetailSparepartRepository.GetMany(sp =>
-                                            sp.CreateDate.Date == DateTime.Now.Date &&
-                                            sp.SPK.VehicleId == vehicleId &&
-                                            sp.SPK.Id != spkParentId);
+                DbFunctions.TruncateTime(sp.CreateDate) == DbFunctions.TruncateTime(DateTime.Today) &&
+                sp.SPK.VehicleId == vehicleId && sp.SPK.Id != spkParentId);
 
             foreach (var item in AllSparepartPurchased)
             {

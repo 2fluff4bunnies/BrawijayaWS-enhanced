@@ -13,12 +13,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public decimal NominalFee { get; set; }
 
         public decimal SubTotalWithFee { get; set; }
-        public decimal SubTotalWithoutFee
-        {
-            get
-            {
-                return SubTotalWithFee - NominalFee;
-            }
-        }
+
+        public decimal SubTotalWithoutFee { get; set; }
     }
 }

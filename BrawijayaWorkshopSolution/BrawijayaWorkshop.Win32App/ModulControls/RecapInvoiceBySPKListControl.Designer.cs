@@ -52,7 +52,8 @@
             this.colInvoiceDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPriceWithoutFee = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWithoutFee = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colServiceTenPersen = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
@@ -88,13 +89,13 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(959, 99);
+            this.gcFilter.Size = new System.Drawing.Size(959, 137);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
             // lookupVehicleGroup
             // 
-            this.lookupVehicleGroup.Location = new System.Drawing.Point(72, 65);
+            this.lookupVehicleGroup.Location = new System.Drawing.Point(72, 102);
             this.lookupVehicleGroup.Name = "lookupVehicleGroup";
             this.lookupVehicleGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupVehicleGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -111,7 +112,7 @@
             // 
             // lblVehicleGroup
             // 
-            this.lblVehicleGroup.Location = new System.Drawing.Point(12, 68);
+            this.lblVehicleGroup.Location = new System.Drawing.Point(12, 105);
             this.lblVehicleGroup.Name = "lblVehicleGroup";
             this.lblVehicleGroup.Size = new System.Drawing.Size(49, 13);
             this.lblVehicleGroup.TabIndex = 13;
@@ -119,20 +120,25 @@
             // 
             // lookupLicenseNumber
             // 
-            this.lookupLicenseNumber.Location = new System.Drawing.Point(439, 65);
+            this.lookupLicenseNumber.Location = new System.Drawing.Point(318, 102);
             this.lookupLicenseNumber.Name = "lookupLicenseNumber";
             this.lookupLicenseNumber.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupLicenseNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupLicenseNumber.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol")});
+            this.lookupLicenseNumber.Properties.DisplayMember = "ActiveLicenseNumber";
             this.lookupLicenseNumber.Properties.HideSelection = false;
             this.lookupLicenseNumber.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupLicenseNumber.Properties.NullText = "-- Pilih Nopol --";
-            this.lookupLicenseNumber.Size = new System.Drawing.Size(162, 20);
+            this.lookupLicenseNumber.Properties.ValueMember = "Id";
+            this.lookupLicenseNumber.Size = new System.Drawing.Size(177, 20);
             this.lookupLicenseNumber.TabIndex = 12;
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(389, 68);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(262, 105);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(31, 13);
             this.lblLicenseNumber.TabIndex = 11;
@@ -140,7 +146,7 @@
             // 
             // lookupCustomer
             // 
-            this.lookupCustomer.Location = new System.Drawing.Point(685, 33);
+            this.lookupCustomer.Location = new System.Drawing.Point(318, 67);
             this.lookupCustomer.Name = "lookupCustomer";
             this.lookupCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -159,7 +165,7 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(629, 36);
+            this.lblCustomer.Location = new System.Drawing.Point(262, 70);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(50, 13);
             this.lblCustomer.TabIndex = 9;
@@ -167,7 +173,7 @@
             // 
             // lookupCategory
             // 
-            this.lookupCategory.Location = new System.Drawing.Point(439, 33);
+            this.lookupCategory.Location = new System.Drawing.Point(72, 67);
             this.lookupCategory.Name = "lookupCategory";
             this.lookupCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -185,7 +191,7 @@
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(389, 35);
+            this.lblCategory.Location = new System.Drawing.Point(12, 70);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(44, 13);
             this.lblCategory.TabIndex = 7;
@@ -244,9 +250,9 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(880, 32);
+            this.btnSearch.Location = new System.Drawing.Point(517, 30);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(64, 53);
+            this.btnSearch.Size = new System.Drawing.Size(99, 92);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -256,7 +262,7 @@
             this.btnPrintAll.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrintAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnPrintAll.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrintAll.Location = new System.Drawing.Point(3, 108);
+            this.btnPrintAll.Location = new System.Drawing.Point(3, 146);
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(107, 23);
             this.btnPrintAll.TabIndex = 2;
@@ -268,10 +274,10 @@
             this.gridRecapInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridRecapInvoice.Location = new System.Drawing.Point(3, 137);
+            this.gridRecapInvoice.Location = new System.Drawing.Point(3, 175);
             this.gridRecapInvoice.MainView = this.gvRecapInvoice;
             this.gridRecapInvoice.Name = "gridRecapInvoice";
-            this.gridRecapInvoice.Size = new System.Drawing.Size(959, 284);
+            this.gridRecapInvoice.Size = new System.Drawing.Size(959, 246);
             this.gridRecapInvoice.TabIndex = 3;
             this.gridRecapInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRecapInvoice});
@@ -285,7 +291,8 @@
             this.colInvoiceDate,
             this.colSparepartName,
             this.colSparepartQuantity,
-            this.colPriceWithoutFee,
+            this.colWithoutFee,
+            this.colServiceTenPersen,
             this.colSubTotal});
             this.gvRecapInvoice.GridControl = this.gridRecapInvoice;
             this.gvRecapInvoice.GroupCount = 3;
@@ -354,19 +361,30 @@
             this.colSparepartQuantity.Caption = "Jumlah";
             this.colSparepartQuantity.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colSparepartQuantity.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSparepartQuantity.FieldName = "Quantity";
             this.colSparepartQuantity.Name = "colSparepartQuantity";
             this.colSparepartQuantity.Visible = true;
             this.colSparepartQuantity.VisibleIndex = 2;
             // 
-            // colPriceWithoutFee
+            // colWithoutFee
             // 
-            this.colPriceWithoutFee.Caption = "Harga";
-            this.colPriceWithoutFee.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
-            this.colPriceWithoutFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPriceWithoutFee.FieldName = "SubTotalWithoutFee";
-            this.colPriceWithoutFee.Name = "colPriceWithoutFee";
-            this.colPriceWithoutFee.Visible = true;
-            this.colPriceWithoutFee.VisibleIndex = 3;
+            this.colWithoutFee.Caption = "Tagihan";
+            this.colWithoutFee.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.colWithoutFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colWithoutFee.FieldName = "SubTotalWithoutFee";
+            this.colWithoutFee.Name = "colWithoutFee";
+            this.colWithoutFee.Visible = true;
+            this.colWithoutFee.VisibleIndex = 3;
+            // 
+            // colServiceTenPersen
+            // 
+            this.colServiceTenPersen.Caption = "Jasa 10%";
+            this.colServiceTenPersen.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.colServiceTenPersen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colServiceTenPersen.FieldName = "NominalFee";
+            this.colServiceTenPersen.Name = "colServiceTenPersen";
+            this.colServiceTenPersen.Visible = true;
+            this.colServiceTenPersen.VisibleIndex = 4;
             // 
             // colSubTotal
             // 
@@ -378,7 +396,7 @@
             this.colSubTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SubTotalWithFee", "{0:#,#;(#,#);0}")});
             this.colSubTotal.Visible = true;
-            this.colSubTotal.VisibleIndex = 4;
+            this.colSubTotal.VisibleIndex = 5;
             // 
             // bgwMain
             // 
@@ -436,8 +454,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colInvoiceDate;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartQuantity;
-        private DevExpress.XtraGrid.Columns.GridColumn colPriceWithoutFee;
         private DevExpress.XtraGrid.Columns.GridColumn colSubTotal;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraGrid.Columns.GridColumn colServiceTenPersen;
+        private DevExpress.XtraGrid.Columns.GridColumn colWithoutFee;
     }
 }

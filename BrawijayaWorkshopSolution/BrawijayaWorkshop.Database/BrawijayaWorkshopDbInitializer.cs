@@ -1286,6 +1286,11 @@ namespace BrawijayaWorkshop.Database
             });
             context.SaveChanges();
 
+            context.Database.ExecuteSqlCommand(@"SET GLOBAL log_bin_trust_function_creators = 1;
+                                                 CREATE FUNCTION `TruncateTime`(dateValue DATETIME) RETURNS DATE
+                                                 BEGIN
+                                                 RETURN DATE(dateValue);
+                                                 END");
             context.Database.ExecuteSqlCommand(@"CREATE OR REPLACE VIEW `vw_guestbook` AS
                                                  SELECT
                                                  b.Code `Kode`, b.ActiveLicenseNumber `Nopol`, a.Description `Keterangan`

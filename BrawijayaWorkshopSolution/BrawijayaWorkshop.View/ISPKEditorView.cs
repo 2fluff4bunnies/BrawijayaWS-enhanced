@@ -18,6 +18,8 @@ namespace BrawijayaWorkshop.View
         SPKViewModel ParentSPK { get; set; }
 
         List<VehicleViewModel> VehicleDropdownList { get; set; }
+        VehicleViewModel SelectedVehicle { get; }
+
         List<ReferenceViewModel> CategoryDropdownList { get; set; }
 
         List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }

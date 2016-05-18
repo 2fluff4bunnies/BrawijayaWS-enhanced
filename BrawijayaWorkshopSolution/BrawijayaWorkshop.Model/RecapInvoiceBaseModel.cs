@@ -5,6 +5,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
@@ -80,7 +81,7 @@ namespace BrawijayaWorkshop.Model
                 {
                     SparepartName = _sparepartRepository.GetById(sparepartID).Name,
                     Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                    NominalFee = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => (100 / (100 + x.FeePctg)) * x.SubTotalPrice),
+                    NominalFee = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.FeePctg > 0 ? (100 / (100 + x.FeePctg)) * x.SubTotalPrice : 0),
                     SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
                     SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                     UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
@@ -92,12 +93,21 @@ namespace BrawijayaWorkshop.Model
         public List<RecapInvoiceItemViewModel> RetrieveRecap(DateTime dateFrom, DateTime dateTo, int categoryId,
             int customerId, int vehicleGroupId = 0, int vehicleId = 0)
         {
-            List<Invoice> result = _invoiceRepository.GetMany(i => i.CreateDate >= dateFrom && i.CreateDate <= dateTo &&
+            List<Invoice> result = _invoiceRepository.GetMany(i =>
+                DbFunctions.TruncateTime(i.CreateDate) >= DbFunctions.TruncateTime(dateFrom) &&
+                DbFunctions.TruncateTime(i.CreateDate) <= DbFunctions.TruncateTime(dateTo) &&
                 i.Status == (int)DbConstant.DefaultDataStatus.Active &&
                 i.PaymentStatus != (int)DbConstant.PaymentStatus.Settled &&
-                i.SPK.CategoryReferenceId == categoryId && i.SPK.Vehicle.CustomerId == customerId &&
-                vehicleGroupId > 0 ? i.SPK.VehicleGroupId == vehicleGroupId : true &&
-                vehicleId > 0 ? i.SPK.VehicleId == vehicleId : true).OrderBy(i => i.CreateDate).ToList();
+                i.SPK.CategoryReferenceId == categoryId && i.SPK.Vehicle.CustomerId == customerId).ToList();
+            if(vehicleGroupId > 0)
+            {
+                result = result.Where(i => i.SPK.VehicleGroupId == vehicleGroupId).ToList();
+            }
+            if(vehicleId > 0)
+            {
+                result = result.Where(i => i.SPK.VehicleId == vehicleId).ToList();
+            }
+            result = result.OrderBy(i => i.CreateDate).ToList();
 
             List<InvoiceViewModel> mappedInvoice = new List<InvoiceViewModel>();
             Map(result, mappedInvoice);
@@ -109,6 +119,8 @@ namespace BrawijayaWorkshop.Model
                 List<InvoiceSparepartViewModel> listSparepart = GetInvoiceSparepartList(item.Id);
                 foreach (var sparepart in listSparepart)
                 {
+                    decimal nominalWithoutFee = sparepart.SubTotalPrice.AsDecimal() + sparepart.NominalFee.AsDecimal();
+                    decimal fee = nominalWithoutFee * 0.1M;
                     mappedResult.Add(new RecapInvoiceItemViewModel
                     {
                         Invoice = item,
@@ -116,15 +128,28 @@ namespace BrawijayaWorkshop.Model
                         VehicleGroup = item.SPK.VehicleGroup,
                         ItemName = sparepart.SparepartName,
                         Quantity = sparepart.Qty,
-                        NominalFee = sparepart.NominalFee.AsDecimal(),
-                        SubTotalWithFee = sparepart.SubTotalPrice.AsDecimal()
+                        NominalFee = fee,
+                        SubTotalWithFee = nominalWithoutFee + fee,
+                        SubTotalWithoutFee = nominalWithoutFee
                     });
                 }
 
                 if (item.TotalService > 0)
                 {
-                    decimal origin = (100 / 130) * item.TotalServicePlusFee;
-                    decimal nominalFee = (10/100) * origin;
+                    decimal fee = 0;
+                    decimal nominalWithoutFee = 0;
+
+                    if (item.SPK.isContractWork)
+                    {
+                        nominalWithoutFee = item.TotalService + (item.TotalService * 0.2M);
+                        fee = nominalWithoutFee * 0.1M;
+                    }
+                    else
+                    {
+                        nominalWithoutFee = item.TotalService;
+                        fee = nominalWithoutFee * 0.1M;
+                    }
+
                     mappedResult.Add(new RecapInvoiceItemViewModel
                     {
                         Invoice = item,
@@ -132,8 +157,9 @@ namespace BrawijayaWorkshop.Model
                         VehicleGroup = item.SPK.VehicleGroup,
                         ItemName = item.SPK.isContractWork ? "Gaji Tukang Borongan" : "Gaji Tukang Harian",
                         Quantity = 1,
-                        NominalFee = nominalFee,
-                        SubTotalWithFee = item.TotalServicePlusFee
+                        NominalFee = fee,
+                        SubTotalWithFee = nominalWithoutFee + fee,
+                        SubTotalWithoutFee = nominalWithoutFee
                     });
                 }
             }

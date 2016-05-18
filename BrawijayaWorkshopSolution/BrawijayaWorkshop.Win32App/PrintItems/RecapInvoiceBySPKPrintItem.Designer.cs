@@ -497,13 +497,13 @@
             // 
             // GrandTotal
             // 
-            this.GrandTotal.Expression = "Sum([Nominal]) + [ServiceFee] + [CommisionNominal]";
+            this.GrandTotal.Expression = "Sum([Nominal]) + Sum([CommisionNominal]) + [ServiceFee]";
             this.GrandTotal.FieldType = DevExpress.XtraReports.UI.FieldType.Decimal;
             this.GrandTotal.Name = "GrandTotal";
             // 
             // ServiceFee
             // 
-            this.ServiceFee.Expression = "Sum([Nominal]) * 0.1";
+            this.ServiceFee.Expression = "Sum([Nominal] + [CommisionNominal]) * 0.1";
             this.ServiceFee.FieldType = DevExpress.XtraReports.UI.FieldType.Decimal;
             this.ServiceFee.Name = "ServiceFee";
             // 

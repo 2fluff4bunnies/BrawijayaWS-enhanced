@@ -67,7 +67,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.TotalSparepartPrice = View.TotalSparepartPrice;
             View.SelectedSPK.Description = View.Description;
             View.SelectedSPK.Kilometers = View.Kilometers;
-            View.SelectedSPK.VehicleGroupId = View.SelectedSPK.Vehicle.VehicleGroupId;
+            View.SelectedSPK.VehicleGroupId = View.SelectedVehicle.VehicleGroupId;
 
             if (View.isContractWork)
             {

@@ -224,7 +224,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     if (itemWorker != null)
                     {
                         int currentIndex = reportDataSource.IndexOf(itemWorker);
-                        itemWorker.Nominal += item.SubTotalWithoutFee;
+                        if (item.ItemName == "Gaji Tukang Borongan")
+                        {
+                            itemWorker.CommisionNominal = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
+                            itemWorker.Nominal = item.SubTotalWithoutFee - itemWorker.CommisionNominal;
+                        }
+                        else
+                        {
+                            itemWorker.Nominal = item.SubTotalWithoutFee;
+                        }
                         reportDataSource[currentIndex] = itemWorker;
                     }
                     else
@@ -235,7 +243,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         itemWorker.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
                         itemWorker.Description = item.ItemName == "Gaji Tukang Harian" ?
                             "ONGKOS TUKANG HARIAN" : "ONGKOS TUKANG BORONGAN";
-                        itemWorker.Nominal = item.SubTotalWithoutFee;
+                        if (item.ItemName == "Gaji Tukang Borongan")
+                        {
+                            itemWorker.CommisionNominal = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
+                            itemWorker.Nominal = item.SubTotalWithoutFee - itemWorker.CommisionNominal;
+                        }
+                        else
+                        {
+                            itemWorker.Nominal = item.SubTotalWithoutFee;
+                        }
                         reportDataSource.Add(itemWorker);
                     }
                 }
@@ -248,7 +264,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     if (itemSparepart != null)
                     {
                         int currentIndex = reportDataSource.IndexOf(itemSparepart);
-                        itemSparepart.Nominal += item.SubTotalWithFee;
+                        itemSparepart.Nominal += item.SubTotalWithoutFee;
                         reportDataSource[currentIndex] = itemSparepart;
                     }
                     else
@@ -258,7 +274,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         itemSparepart.VehicleGroup = vehicleGroup.Name;
                         itemSparepart.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
                         itemSparepart.Description = "ONDERDIL";
-                        itemSparepart.Nominal = item.SubTotalWithFee;
+                        itemSparepart.Nominal = item.SubTotalWithoutFee;
                         reportDataSource.Add(itemSparepart);
                     }
                 }
