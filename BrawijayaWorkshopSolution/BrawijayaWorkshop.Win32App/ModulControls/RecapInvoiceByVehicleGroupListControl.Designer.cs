@@ -76,7 +76,7 @@
             // 
             // lookupVehicleGroup
             // 
-            this.lookupVehicleGroup.Location = new System.Drawing.Point(72, 65);
+            this.lookupVehicleGroup.Location = new System.Drawing.Point(68, 96);
             this.lookupVehicleGroup.Name = "lookupVehicleGroup";
             this.lookupVehicleGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupVehicleGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -93,7 +93,7 @@
             // 
             // lblVehicleGroup
             // 
-            this.lblVehicleGroup.Location = new System.Drawing.Point(12, 68);
+            this.lblVehicleGroup.Location = new System.Drawing.Point(12, 99);
             this.lblVehicleGroup.Name = "lblVehicleGroup";
             this.lblVehicleGroup.Size = new System.Drawing.Size(49, 13);
             this.lblVehicleGroup.TabIndex = 13;
@@ -101,7 +101,7 @@
             // 
             // lookupCustomer
             // 
-            this.lookupCustomer.Location = new System.Drawing.Point(685, 33);
+            this.lookupCustomer.Location = new System.Drawing.Point(315, 64);
             this.lookupCustomer.Name = "lookupCustomer";
             this.lookupCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -120,7 +120,7 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Location = new System.Drawing.Point(629, 36);
+            this.lblCustomer.Location = new System.Drawing.Point(255, 66);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(50, 13);
             this.lblCustomer.TabIndex = 9;
@@ -128,7 +128,7 @@
             // 
             // lookupCategory
             // 
-            this.lookupCategory.Location = new System.Drawing.Point(439, 33);
+            this.lookupCategory.Location = new System.Drawing.Point(68, 63);
             this.lookupCategory.Name = "lookupCategory";
             this.lookupCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -184,7 +184,7 @@
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(389, 35);
+            this.lblCategory.Location = new System.Drawing.Point(12, 67);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(44, 13);
             this.lblCategory.TabIndex = 7;
@@ -193,7 +193,7 @@
             // dePeriodeTo
             // 
             this.dePeriodeTo.EditValue = null;
-            this.dePeriodeTo.Location = new System.Drawing.Point(229, 32);
+            this.dePeriodeTo.Location = new System.Drawing.Point(225, 32);
             this.dePeriodeTo.Name = "dePeriodeTo";
             this.dePeriodeTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -208,7 +208,7 @@
             // 
             // lblPeriodTo
             // 
-            this.lblPeriodTo.Location = new System.Drawing.Point(208, 36);
+            this.lblPeriodTo.Location = new System.Drawing.Point(204, 36);
             this.lblPeriodTo.Name = "lblPeriodTo";
             this.lblPeriodTo.Size = new System.Drawing.Size(15, 13);
             this.lblPeriodTo.TabIndex = 5;
@@ -225,7 +225,7 @@
             // dePeriodFrom
             // 
             this.dePeriodFrom.EditValue = null;
-            this.dePeriodFrom.Location = new System.Drawing.Point(72, 32);
+            this.dePeriodFrom.Location = new System.Drawing.Point(68, 32);
             this.dePeriodFrom.Name = "dePeriodFrom";
             this.dePeriodFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -306,10 +306,10 @@
             this.gridRecapInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridRecapInvoice.Location = new System.Drawing.Point(3, 137);
+            this.gridRecapInvoice.Location = new System.Drawing.Point(3, 164);
             this.gridRecapInvoice.MainView = this.gvRecapInvoice;
             this.gridRecapInvoice.Name = "gridRecapInvoice";
-            this.gridRecapInvoice.Size = new System.Drawing.Size(960, 237);
+            this.gridRecapInvoice.Size = new System.Drawing.Size(960, 210);
             this.gridRecapInvoice.TabIndex = 6;
             this.gridRecapInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRecapInvoice});
@@ -319,7 +319,7 @@
             this.btnPrintAll.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrintAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnPrintAll.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrintAll.Location = new System.Drawing.Point(3, 108);
+            this.btnPrintAll.Location = new System.Drawing.Point(3, 135);
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(107, 23);
             this.btnPrintAll.TabIndex = 5;
@@ -331,9 +331,9 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(880, 32);
+            this.btnSearch.Location = new System.Drawing.Point(513, 30);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(64, 53);
+            this.btnSearch.Size = new System.Drawing.Size(103, 85);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -355,7 +355,7 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(960, 99);
+            this.gcFilter.Size = new System.Drawing.Size(960, 126);
             this.gcFilter.TabIndex = 4;
             this.gcFilter.Text = "Filter";
             // 

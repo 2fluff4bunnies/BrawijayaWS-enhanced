@@ -226,12 +226,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         int currentIndex = reportDataSource.IndexOf(itemWorker);
                         if (item.ItemName == "Gaji Tukang Borongan")
                         {
-                            itemWorker.CommisionNominal = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
-                            itemWorker.Nominal = item.SubTotalWithoutFee - itemWorker.CommisionNominal;
+                            decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
+                            itemWorker.CommisionNominal = commission;
+                            itemWorker.Nominal += (item.SubTotalWithoutFee - commission);
+                            itemWorker.Total += item.SubTotalWithFee;
+                            itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
                         }
                         else
                         {
-                            itemWorker.Nominal = item.SubTotalWithoutFee;
+                            itemWorker.Nominal += item.SubTotalWithoutFee;
+                            itemWorker.Total += item.SubTotalWithFee;
+                            itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
                         }
                         reportDataSource[currentIndex] = itemWorker;
                     }
@@ -245,12 +250,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                             "ONGKOS TUKANG HARIAN" : "ONGKOS TUKANG BORONGAN";
                         if (item.ItemName == "Gaji Tukang Borongan")
                         {
-                            itemWorker.CommisionNominal = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
-                            itemWorker.Nominal = item.SubTotalWithoutFee - itemWorker.CommisionNominal;
+                            decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
+                            itemWorker.CommisionNominal = commission;
+                            itemWorker.Nominal = item.SubTotalWithoutFee - commission;
+                            itemWorker.Total = item.SubTotalWithFee;
+                            itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
                         }
                         else
                         {
                             itemWorker.Nominal = item.SubTotalWithoutFee;
+                            itemWorker.Total = item.SubTotalWithFee;
+                            itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
                         }
                         reportDataSource.Add(itemWorker);
                     }
@@ -265,6 +275,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     {
                         int currentIndex = reportDataSource.IndexOf(itemSparepart);
                         itemSparepart.Nominal += item.SubTotalWithoutFee;
+                        itemSparepart.Total += item.SubTotalWithFee;
+                        itemSparepart.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
                         reportDataSource[currentIndex] = itemSparepart;
                     }
                     else
@@ -275,6 +287,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         itemSparepart.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
                         itemSparepart.Description = "ONDERDIL";
                         itemSparepart.Nominal = item.SubTotalWithoutFee;
+                        itemSparepart.Total = item.SubTotalWithFee;
+                        itemSparepart.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
                         reportDataSource.Add(itemSparepart);
                     }
                 }

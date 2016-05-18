@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecapInvoiceBySPKPrintItem));
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary3 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary4 = new DevExpress.XtraReports.UI.XRSummary();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -73,8 +75,6 @@
             this.xrTableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
             this.dataSourceRecapInvoice = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.GrandTotal = new DevExpress.XtraReports.UI.CalculatedField();
-            this.ServiceFee = new DevExpress.XtraReports.UI.CalculatedField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -453,11 +453,14 @@
             // xrTableCell12
             // 
             this.xrTableCell12.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ServiceFee", "Rp {0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "Fee")});
             this.xrTableCell12.Font = new System.Drawing.Font("Tahoma", 10F);
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseFont = false;
             this.xrTableCell12.StylePriority.UseTextAlignment = false;
+            xrSummary3.FormatString = "Rp {0:#,#;(#,#);0}";
+            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell12.Summary = xrSummary3;
             this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell12.Weight = 1.2102119842705765D;
             // 
@@ -482,11 +485,14 @@
             // xrTableCell14
             // 
             this.xrTableCell14.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GrandTotal", "Rp {0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "Total")});
             this.xrTableCell14.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
+            xrSummary4.FormatString = "Rp {0:#,#;(#,#);0}";
+            xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell14.Summary = xrSummary4;
             this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell14.Weight = 1.2102119842705765D;
             // 
@@ -494,18 +500,6 @@
             // 
             this.dataSourceRecapInvoice.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.RecapInvoiceBySPKItemViewModel);
             this.dataSourceRecapInvoice.Name = "dataSourceRecapInvoice";
-            // 
-            // GrandTotal
-            // 
-            this.GrandTotal.Expression = "Sum([Nominal]) + Sum([CommisionNominal]) + [ServiceFee]";
-            this.GrandTotal.FieldType = DevExpress.XtraReports.UI.FieldType.Decimal;
-            this.GrandTotal.Name = "GrandTotal";
-            // 
-            // ServiceFee
-            // 
-            this.ServiceFee.Expression = "Sum([Nominal] + [CommisionNominal]) * 0.1";
-            this.ServiceFee.FieldType = DevExpress.XtraReports.UI.FieldType.Decimal;
-            this.ServiceFee.Name = "ServiceFee";
             // 
             // RecapInvoiceBySPKPrintItem
             // 
@@ -515,9 +509,6 @@
             this.BottomMargin,
             this.RecapInvoiceGroupHeader,
             this.RecapInvoiceGroupFooter});
-            this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
-            this.GrandTotal,
-            this.ServiceFee});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dataSourceRecapInvoice});
             this.DataSource = this.dataSourceRecapInvoice;
@@ -579,7 +570,5 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel5;
         private DevExpress.XtraReports.UI.XRLabel xrLabel7;
         private DevExpress.XtraReports.UI.XRLabel xrLabel6;
-        private DevExpress.XtraReports.UI.CalculatedField GrandTotal;
-        private DevExpress.XtraReports.UI.CalculatedField ServiceFee;
     }
 }

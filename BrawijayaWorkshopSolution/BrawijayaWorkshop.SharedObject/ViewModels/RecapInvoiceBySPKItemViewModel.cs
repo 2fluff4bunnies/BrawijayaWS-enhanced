@@ -9,5 +9,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public decimal CommisionNominal { get; set; }
         public string Description { get; set; }
         public decimal Nominal { get; set; }
+        public decimal Fee { get; set; }
+        public decimal Total { get; set; }
     }
 }

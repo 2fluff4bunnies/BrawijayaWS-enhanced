@@ -8,9 +8,12 @@ namespace BrawijayaWorkshop.Win32App.PrintItems
 {
     public partial class RecapInvoiceByVehicleGroupPrintItem : DevExpress.XtraReports.UI.XtraReport
     {
-        public RecapInvoiceByVehicleGroupPrintItem()
+        public RecapInvoiceByVehicleGroupPrintItem(string category, DateTime from, DateTime to)
         {
             InitializeComponent();
+
+            lblReportTitle.Text = string.Format("Rekapan Tagihan {0} Bengkel", category);
+            lblPeriode.Text = string.Format("Periode: {0} s/d {1}", from.ToString("dd MMMM yyyy"), to.ToString("dd MMMM yyyy"));
         }
 
     }

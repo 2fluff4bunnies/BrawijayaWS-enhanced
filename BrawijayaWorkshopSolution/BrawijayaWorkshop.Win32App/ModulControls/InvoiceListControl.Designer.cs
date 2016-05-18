@@ -57,6 +57,7 @@
             this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
@@ -251,6 +252,7 @@
             this.colTransDate,
             this.colCustomer,
             this.colVehicle,
+            this.colTotalPrice,
             this.colStatus});
             this.gvInvoice.GridControl = this.gridInvoice;
             this.gvInvoice.Name = "gvInvoice";
@@ -305,7 +307,7 @@
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 3;
+            this.colStatus.VisibleIndex = 4;
             // 
             // bgwMain
             // 
@@ -381,6 +383,16 @@
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
+            // colTotalPrice
+            // 
+            this.colTotalPrice.Caption = "Total Tagihan";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colTotalPrice.FieldName = "TotalPrice";
+            this.colTotalPrice.Name = "colTotalPrice";
+            this.colTotalPrice.Visible = true;
+            this.colTotalPrice.VisibleIndex = 3;
+            // 
             // InvoiceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -438,6 +450,7 @@
         private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
 
     }
 }
