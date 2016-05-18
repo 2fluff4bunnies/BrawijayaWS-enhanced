@@ -202,105 +202,114 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
-            if (ListInvoices.Count == 0)
+            if (ListInvoices == null || ListInvoices.Count == 0)
             {
                 this.ShowInformation("Data Invoice tidak ada");
                 return;
             }
 
-            ReferenceViewModel category = lookupCategory.GetSelectedDataRow() as ReferenceViewModel;
-            VehicleGroupViewModel vehicleGroup = lookupVehicleGroup.GetSelectedDataRow() as VehicleGroupViewModel;
-
-            List<RecapInvoiceBySPKItemViewModel> reportDataSource = new List<RecapInvoiceBySPKItemViewModel>();
-            foreach (var item in this.ListInvoices)
+            try
             {
-                if (item.ItemName == "Gaji Tukang Harian" || item.ItemName == "Gaji Tukang Borongan")
+                ReferenceViewModel category = lookupCategory.GetSelectedDataRow() as ReferenceViewModel;
+                VehicleGroupViewModel vehicleGroup = lookupVehicleGroup.GetSelectedDataRow() as VehicleGroupViewModel;
+
+                List<RecapInvoiceBySPKItemViewModel> reportDataSource = new List<RecapInvoiceBySPKItemViewModel>();
+                foreach (var item in this.ListInvoices)
                 {
-                    RecapInvoiceBySPKItemViewModel itemWorker = reportDataSource.Where(ds =>
-                        ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
-                        ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber &&
-                        (ds.Description == "ONGKOS TUKANG HARIAN" ||
-                        ds.Description == "ONGKOS TUKANG BORONGAN")).FirstOrDefault();
-                    if (itemWorker != null)
+                    if (item.ItemName == "Gaji Tukang Harian" || item.ItemName == "Gaji Tukang Borongan")
                     {
-                        int currentIndex = reportDataSource.IndexOf(itemWorker);
-                        if (item.ItemName == "Gaji Tukang Borongan")
+                        RecapInvoiceBySPKItemViewModel itemWorker = reportDataSource.Where(ds =>
+                            ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
+                            ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber &&
+                            (ds.Description == "ONGKOS TUKANG HARIAN" ||
+                            ds.Description == "ONGKOS TUKANG BORONGAN")).FirstOrDefault();
+                        if (itemWorker != null)
                         {
-                            decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
-                            itemWorker.CommisionNominal = commission;
-                            itemWorker.Nominal += (item.SubTotalWithoutFee - commission);
-                            itemWorker.Total += item.SubTotalWithFee;
-                            itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            int currentIndex = reportDataSource.IndexOf(itemWorker);
+                            if (item.ItemName == "Gaji Tukang Borongan")
+                            {
+                                decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
+                                itemWorker.CommisionNominal = commission;
+                                itemWorker.Nominal += (item.SubTotalWithoutFee - commission);
+                                itemWorker.Total += item.SubTotalWithFee;
+                                itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            }
+                            else
+                            {
+                                itemWorker.Nominal += item.SubTotalWithoutFee;
+                                itemWorker.Total += item.SubTotalWithFee;
+                                itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            }
+                            reportDataSource[currentIndex] = itemWorker;
                         }
                         else
                         {
-                            itemWorker.Nominal += item.SubTotalWithoutFee;
-                            itemWorker.Total += item.SubTotalWithFee;
-                            itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            itemWorker = new RecapInvoiceBySPKItemViewModel();
+                            itemWorker.Category = category.Name;
+                            itemWorker.VehicleGroup = vehicleGroup.Name;
+                            itemWorker.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
+                            itemWorker.Description = item.ItemName == "Gaji Tukang Harian" ?
+                                "ONGKOS TUKANG HARIAN" : "ONGKOS TUKANG BORONGAN";
+                            if (item.ItemName == "Gaji Tukang Borongan")
+                            {
+                                decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
+                                itemWorker.CommisionNominal = commission;
+                                itemWorker.Nominal = item.SubTotalWithoutFee - commission;
+                                itemWorker.Total = item.SubTotalWithFee;
+                                itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            }
+                            else
+                            {
+                                itemWorker.Nominal = item.SubTotalWithoutFee;
+                                itemWorker.Total = item.SubTotalWithFee;
+                                itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            }
+                            reportDataSource.Add(itemWorker);
                         }
-                        reportDataSource[currentIndex] = itemWorker;
                     }
                     else
                     {
-                        itemWorker = new RecapInvoiceBySPKItemViewModel();
-                        itemWorker.Category = category.Name;
-                        itemWorker.VehicleGroup = vehicleGroup.Name;
-                        itemWorker.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
-                        itemWorker.Description = item.ItemName == "Gaji Tukang Harian" ?
-                            "ONGKOS TUKANG HARIAN" : "ONGKOS TUKANG BORONGAN";
-                        if (item.ItemName == "Gaji Tukang Borongan")
+                        RecapInvoiceBySPKItemViewModel itemSparepart = reportDataSource.Where(ds =>
+                            ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
+                            ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber &&
+                            ds.Description == "ONDERDIL").FirstOrDefault();
+                        if (itemSparepart != null)
                         {
-                            decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
-                            itemWorker.CommisionNominal = commission;
-                            itemWorker.Nominal = item.SubTotalWithoutFee - commission;
-                            itemWorker.Total = item.SubTotalWithFee;
-                            itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            int currentIndex = reportDataSource.IndexOf(itemSparepart);
+                            itemSparepart.Nominal += item.SubTotalWithoutFee;
+                            itemSparepart.Total += item.SubTotalWithFee;
+                            itemSparepart.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            reportDataSource[currentIndex] = itemSparepart;
                         }
                         else
                         {
-                            itemWorker.Nominal = item.SubTotalWithoutFee;
-                            itemWorker.Total = item.SubTotalWithFee;
-                            itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            itemSparepart = new RecapInvoiceBySPKItemViewModel();
+                            itemSparepart.Category = category.Name;
+                            itemSparepart.VehicleGroup = vehicleGroup.Name;
+                            itemSparepart.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
+                            itemSparepart.Description = "ONDERDIL";
+                            itemSparepart.Nominal = item.SubTotalWithoutFee;
+                            itemSparepart.Total = item.SubTotalWithFee;
+                            itemSparepart.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            reportDataSource.Add(itemSparepart);
                         }
-                        reportDataSource.Add(itemWorker);
                     }
                 }
-                else
+
+                string customer = (lookupCustomer.GetSelectedDataRow() as CustomerViewModel).CompanyName;
+                RecapInvoiceBySPKPrintItem report = new RecapInvoiceBySPKPrintItem(customer, category.Name, DateFrom, DateTo);
+                report.DataSource = reportDataSource;
+                report.FillDataSource();
+
+                using (ReportPrintTool printTool = new ReportPrintTool(report))
                 {
-                    RecapInvoiceBySPKItemViewModel itemSparepart = reportDataSource.Where(ds =>
-                        ds.Category == category.Name && ds.VehicleGroup == vehicleGroup.Name &&
-                        ds.LicenseNumber == item.Invoice.SPK.Vehicle.ActiveLicenseNumber &&
-                        ds.Description == "ONDERDIL").FirstOrDefault();
-                    if (itemSparepart != null)
-                    {
-                        int currentIndex = reportDataSource.IndexOf(itemSparepart);
-                        itemSparepart.Nominal += item.SubTotalWithoutFee;
-                        itemSparepart.Total += item.SubTotalWithFee;
-                        itemSparepart.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
-                        reportDataSource[currentIndex] = itemSparepart;
-                    }
-                    else
-                    {
-                        itemSparepart = new RecapInvoiceBySPKItemViewModel();
-                        itemSparepart.Category = category.Name;
-                        itemSparepart.VehicleGroup = vehicleGroup.Name;
-                        itemSparepart.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
-                        itemSparepart.Description = "ONDERDIL";
-                        itemSparepart.Nominal = item.SubTotalWithoutFee;
-                        itemSparepart.Total = item.SubTotalWithFee;
-                        itemSparepart.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
-                        reportDataSource.Add(itemSparepart);
-                    }
+                    printTool.PrintDialog();
                 }
             }
-
-            RecapInvoiceBySPKPrintItem report = new RecapInvoiceBySPKPrintItem(category.Name, DateFrom, DateTo);
-            report.DataSource = reportDataSource;
-            report.FillDataSource();
-
-            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            catch (Exception ex)
             {
-                printTool.PrintDialog();
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to print invoice", ex);
+                this.ShowError("Print Invoice Gagal! Hubungi Developer.");
             }
         }
 

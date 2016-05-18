@@ -44,12 +44,12 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.gcVehicle = new DevExpress.XtraGrid.GridControl();
             this.gvVehicle = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colActiveLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colVehicleGroup = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colBrand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colYearOfPurchase = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colVehicleGroup = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
@@ -206,6 +206,14 @@
             this.gvVehicle.OptionsView.ShowViewCaption = true;
             this.gvVehicle.ViewCaption = "Daftar Kendaraan";
             // 
+            // colActiveLicenseNumber
+            // 
+            this.colActiveLicenseNumber.Caption = "Nopol";
+            this.colActiveLicenseNumber.FieldName = "ActiveLicenseNumber";
+            this.colActiveLicenseNumber.Name = "colActiveLicenseNumber";
+            this.colActiveLicenseNumber.Visible = true;
+            this.colActiveLicenseNumber.VisibleIndex = 0;
+            // 
             // colCustomer
             // 
             this.colCustomer.Caption = "Customer";
@@ -214,13 +222,13 @@
             this.colCustomer.Visible = true;
             this.colCustomer.VisibleIndex = 1;
             // 
-            // colActiveLicenseNumber
+            // colVehicleGroup
             // 
-            this.colActiveLicenseNumber.Caption = "Nopol";
-            this.colActiveLicenseNumber.FieldName = "ActiveLicenseNumber";
-            this.colActiveLicenseNumber.Name = "colActiveLicenseNumber";
-            this.colActiveLicenseNumber.Visible = true;
-            this.colActiveLicenseNumber.VisibleIndex = 0;
+            this.colVehicleGroup.Caption = "Kelompok";
+            this.colVehicleGroup.FieldName = "VehicleGroup.Name";
+            this.colVehicleGroup.Name = "colVehicleGroup";
+            this.colVehicleGroup.Visible = true;
+            this.colVehicleGroup.VisibleIndex = 2;
             // 
             // colBrand
             // 
@@ -245,13 +253,6 @@
             this.colYearOfPurchase.Name = "colYearOfPurchase";
             this.colYearOfPurchase.Visible = true;
             this.colYearOfPurchase.VisibleIndex = 5;
-            // 
-            // colVehicleGroup
-            // 
-            this.colVehicleGroup.Caption = "Kelompok";
-            this.colVehicleGroup.Name = "colVehicleGroup";
-            this.colVehicleGroup.Visible = true;
-            this.colVehicleGroup.VisibleIndex = 2;
             // 
             // VehicleListControl
             // 
