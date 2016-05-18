@@ -161,7 +161,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public decimal GetAllPurchaseByVehicleToday()
         {
-            return Model.AllPurchaseByVehicle(View.SelectedSPK.VehicleId, View.ParentSPK != null ? View.ParentSPK.Id : 0);
+            //return Model.AllPurchaseByVehicle(View.VehicleId, View.ParentSPK != null ? View.ParentSPK.Id : 0);
+            return Model.AllPurchaseByVehicle(View.VehicleId, 0);
         }
 
     }

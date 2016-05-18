@@ -67,7 +67,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             txtContractWorkFee.Enabled = false;
             txtContractor.Enabled = false;
-            groupSparepart.Enabled = false;
+            splitContainerMain.Panel2.Enabled = false;
             gridVehicleWheel.Enabled = false;
             ckeIsReturnRequired.Enabled = false;
             lookUpSerialNumber.Enabled = false;
@@ -784,12 +784,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.LoadVehicleWheel();
             if (this.VehicleId > 0)
             {
-                groupSparepart.Enabled = true;
+                splitContainerMain.Panel2.Enabled = true;
                 gridVehicleWheel.Enabled = true;
             }
             else
             {
-                groupSparepart.Enabled = false;
+                splitContainerMain.Panel2.Enabled = false;
                 gridVehicleWheel.Enabled = false;
             }
         }
