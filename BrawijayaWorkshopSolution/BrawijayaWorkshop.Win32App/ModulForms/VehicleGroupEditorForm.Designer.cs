@@ -85,9 +85,15 @@
             this.lookupCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama Perusahaan"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Address", "Alamat")});
+            this.lookupCustomer.Properties.DisplayMember = "CompanyName";
             this.lookupCustomer.Properties.HideSelection = false;
             this.lookupCustomer.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupCustomer.Properties.NullText = "-- Pilih Customer --";
+            this.lookupCustomer.Properties.ValueMember = "Id";
             this.lookupCustomer.Size = new System.Drawing.Size(265, 20);
             this.lookupCustomer.TabIndex = 1;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
