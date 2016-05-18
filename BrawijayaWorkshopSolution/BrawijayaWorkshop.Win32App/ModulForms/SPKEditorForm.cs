@@ -394,7 +394,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public string  Contractor
+        public string Contractor
         {
             get
             {
@@ -542,7 +542,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             List<SPKDetailSparepartViewModel> listCurrent = SPKSparepartList;
 
             SPKDetailSparepartViewModel SparepartToRemove = gvSparepart.GetFocusedRow() as SPKDetailSparepartViewModel;
-         
+
 
             List<SPKDetailSparepartDetailViewModel> listCurrentDetail = new List<SPKDetailSparepartDetailViewModel>();
 
@@ -555,7 +555,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 this.SPKSparepartDetailList.Remove(item);
             }
-            
+
             listCurrent.Remove(SparepartToRemove);
             SPKSparepartList = listCurrent;
 
@@ -727,12 +727,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && this.TotalSparepartPrice >= this.ServiceThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && (this.TotalSparepartPrice + + _presenter.GetAllPurchaseByVehicleToday()) >= this.ServiceThreshold)
             {
                 result = true;
             }
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR && this.TotalSparepartPrice >= this.RepairThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR && (this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) >= this.RepairThreshold)
             {
                 result = true;
             }

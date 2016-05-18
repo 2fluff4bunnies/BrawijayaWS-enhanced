@@ -35,7 +35,6 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MechanicEditorForm));
             this.gcMechanicInfo = new DevExpress.XtraEditors.GroupControl();
             this.txtBaseFee = new DevExpress.XtraEditors.TextEdit();
@@ -101,11 +100,8 @@
             this.txtBaseFee.Size = new System.Drawing.Size(162, 20);
             this.txtBaseFee.TabIndex = 16;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtBaseFee, conditionValidationRule1);
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Ongkos harus diisi";
-            this.valBaseFee.SetValidationRule(this.txtBaseFee, conditionValidationRule2);
+            conditionValidationRule1.ErrorText = "Ongkos harus diisi";
+            this.valBaseFee.SetValidationRule(this.txtBaseFee, conditionValidationRule1);
             // 
             // lblBaseFee
             // 
@@ -141,12 +137,12 @@
             this.txtCode.Properties.Mask.SaveLiteral = false;
             this.txtCode.Size = new System.Drawing.Size(162, 20);
             this.txtCode.TabIndex = 12;
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Code harus diisi!";
+            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule2);
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Code harus diisi!";
-            this.valCode.SetValidationRule(this.txtCode, conditionValidationRule3);
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule4);
+            conditionValidationRule3.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtCode, conditionValidationRule3);
             // 
             // txtPhoneNumber
             // 
@@ -156,9 +152,9 @@
             this.txtPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPhoneNumber.Size = new System.Drawing.Size(162, 20);
             this.txtPhoneNumber.TabIndex = 11;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "No. Telp. harus diisi!";
-            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule5);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "No. Telp. harus diisi!";
+            this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule4);
             // 
             // lblPhoneNumber
             // 
@@ -174,9 +170,9 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(247, 20);
             this.txtAddress.TabIndex = 5;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Alamat harus diisi!";
-            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule6);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "Alamat harus diisi!";
+            this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule5);
             // 
             // lblAddress
             // 
@@ -192,9 +188,9 @@
             this.txtMechanicName.Name = "txtMechanicName";
             this.txtMechanicName.Size = new System.Drawing.Size(247, 20);
             this.txtMechanicName.TabIndex = 3;
-            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule7.ErrorText = "Nama Mechanic harus diisi!";
-            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule7);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "Nama Mechanic harus diisi!";
+            this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule6);
             // 
             // lblMechanicName
             // 

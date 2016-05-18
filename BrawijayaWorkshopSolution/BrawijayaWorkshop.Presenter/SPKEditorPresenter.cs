@@ -67,6 +67,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.TotalSparepartPrice = View.TotalSparepartPrice;
             View.SelectedSPK.Description = View.Description;
             View.SelectedSPK.Kilometers = View.Kilometers;
+            View.SelectedSPK.VehicleGroupId = View.SelectedSPK.Vehicle.VehicleGroupId;
 
             if (View.isContractWork)
             {
@@ -156,6 +157,11 @@ namespace BrawijayaWorkshop.Presenter
         public int SPKSalesCategoryReferenceId()
         {
             return Model.SPKSalesCategoryReferenceId();
+        }
+
+        public decimal GetAllPurchaseByVehicleToday()
+        {
+            return Model.AllPurchaseByVehicle(View.SelectedSPK.VehicleId, View.ParentSPK != null ? View.ParentSPK.Id : 0);
         }
 
     }

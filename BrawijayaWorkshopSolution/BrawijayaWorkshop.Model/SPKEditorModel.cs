@@ -609,5 +609,22 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork.SaveChanges();
             #endregion
         }
+
+        public decimal AllPurchaseByVehicle(int vehicleId, int spkParentId)
+        {
+            decimal result = 0;
+
+            var AllSparepartPurchased = _SPKDetailSparepartRepository.GetMany(sp =>
+                                            sp.CreateDate.Date == DateTime.Now.Date &&
+                                            sp.SPK.VehicleId == vehicleId &&
+                                            sp.SPK.Id != spkParentId);
+
+            foreach (var item in AllSparepartPurchased)
+            {
+                result += item.TotalPrice;
+            }
+
+            return result;
+        }
     }
 }

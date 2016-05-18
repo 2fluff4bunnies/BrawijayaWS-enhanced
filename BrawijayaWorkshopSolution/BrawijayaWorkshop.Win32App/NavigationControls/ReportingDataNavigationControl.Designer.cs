@@ -33,10 +33,11 @@
             this.navbarReportingData = new DevExpress.XtraNavBar.NavBarControl();
             this.navbarGroupReportingData = new DevExpress.XtraNavBar.NavBarGroup();
             this.iSPKHistory = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iRecapInvoiceBySPK = new DevExpress.XtraNavBar.NavBarItem();
             this.iRecapInvoiceByVehicleGroup = new DevExpress.XtraNavBar.NavBarItem();
             this.iRecapInvoiceByCustomer = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iHistorySparepart = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarReportingData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,8 @@
             this.iSPKHistory,
             this.iRecapInvoiceBySPK,
             this.iRecapInvoiceByVehicleGroup,
-            this.iRecapInvoiceByCustomer});
+            this.iRecapInvoiceByCustomer,
+            this.iHistorySparepart});
             this.navbarReportingData.Location = new System.Drawing.Point(0, 0);
             this.navbarReportingData.Name = "navbarReportingData";
             this.navbarReportingData.OptionsNavPane.ExpandedWidth = 195;
@@ -68,7 +70,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iSPKHistory),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceBySPK),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByVehicleGroup),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByCustomer)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByCustomer),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iHistorySparepart)});
             this.navbarGroupReportingData.Name = "navbarGroupReportingData";
             // 
             // iSPKHistory
@@ -77,14 +80,6 @@
             this.iSPKHistory.LargeImageIndex = 0;
             this.iSPKHistory.Name = "iSPKHistory";
             this.iSPKHistory.SmallImageIndex = 0;
-            // 
-            // imageCollection
-            // 
-            this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
-            this.imageCollection.Images.SetKeyName(0, "reporting 16x16.png");
-            this.imageCollection.Images.SetKeyName(1, "invoice1_16x16.png");
-            this.imageCollection.Images.SetKeyName(2, "invoice2_16x16.png");
-            this.imageCollection.Images.SetKeyName(3, "invoice3_16x16.png");
             // 
             // iRecapInvoiceBySPK
             // 
@@ -103,6 +98,20 @@
             this.iRecapInvoiceByCustomer.Caption = "Rekap Tagihan Customer";
             this.iRecapInvoiceByCustomer.Name = "iRecapInvoiceByCustomer";
             this.iRecapInvoiceByCustomer.SmallImageIndex = 3;
+            // 
+            // imageCollection
+            // 
+            this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
+            this.imageCollection.Images.SetKeyName(0, "reporting 16x16.png");
+            this.imageCollection.Images.SetKeyName(1, "invoice1_16x16.png");
+            this.imageCollection.Images.SetKeyName(2, "invoice2_16x16.png");
+            this.imageCollection.Images.SetKeyName(3, "invoice3_16x16.png");
+            // 
+            // iHistorySparepart
+            // 
+            this.iHistorySparepart.Caption = "History Sparepart";
+            this.iHistorySparepart.Name = "iHistorySparepart";
+            this.iHistorySparepart.SmallImageIndex = 0;
             // 
             // ReportingDataNavigationControl
             // 
@@ -126,5 +135,6 @@
         public DevExpress.XtraNavBar.NavBarItem iRecapInvoiceBySPK;
         public DevExpress.XtraNavBar.NavBarItem iRecapInvoiceByVehicleGroup;
         public DevExpress.XtraNavBar.NavBarItem iRecapInvoiceByCustomer;
+        public DevExpress.XtraNavBar.NavBarItem iHistorySparepart;
     }
 }
