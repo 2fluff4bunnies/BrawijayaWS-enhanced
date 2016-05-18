@@ -6,11 +6,15 @@ namespace BrawijayaWorkshop.Model.Mappers
     {
         public static void Configure()
         {
-            Mapper.Initialize(mapper =>
+            try
             {
-                mapper.AddProfile<ViewModelToDomainMappingProfile>();
-                mapper.AddProfile<DomainToViewModelMappingProfile>();
-            });
+                Mapper.Initialize(mapper =>
+                {
+                    mapper.AddProfile<ViewModelToDomainMappingProfile>();
+                    mapper.AddProfile<DomainToViewModelMappingProfile>();
+                });
+            }
+            catch { }
         }
     }
 }

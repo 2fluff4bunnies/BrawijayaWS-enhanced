@@ -20,6 +20,7 @@ namespace BrawijayaWorkshop.Win32App
     public partial class MainForm : RibbonForm
     {
         private bool initStartUpResult = false;
+        private bool isBusy = false;
 
         public MainForm()
         {
@@ -89,6 +90,8 @@ namespace BrawijayaWorkshop.Win32App
 
         private void ShowUserControl(XtraUserControl userControl)
         {
+            if (isBusy) return;
+
             ClearUserControl();
             userControl.Dock = DockStyle.Fill;
             splitContainerControl.Panel2.Controls.Add(userControl);
@@ -221,7 +224,41 @@ namespace BrawijayaWorkshop.Win32App
             biStatusProgress.Visibility = BarItemVisibility.Never;
             if (!isComplete)
             {
+                isBusy = true;
                 biStatusProgress.Visibility = BarItemVisibility.Always;
+            }
+            else
+            {
+                isBusy = false;
+            }
+            ChangeStateLeftPanel(isComplete);
+        }
+
+        public void ChangeStateLeftPanel(bool isEnable)
+        {
+            if (splitContainerControl.Panel1.Controls != null &&
+                splitContainerControl.Panel1.Controls.Count > 0)
+            {
+                foreach (Control item in splitContainerControl.Panel1.Controls)
+                {
+                    item.Enabled = isEnable;
+                    if (item.Controls != null && item.Controls.Count > 0)
+                    {
+                        ChangeChildrenState(item.Controls, isEnable);
+                    }
+                }
+            }
+        }
+
+        private void ChangeChildrenState(Control.ControlCollection children, bool isEnable)
+        {
+            foreach (Control item in children)
+            {
+                item.Enabled = isEnable;
+                if (item.Controls != null && item.Controls.Count > 0)
+                {
+                    ChangeChildrenState(item.Controls, isEnable);
+                }
             }
         }
 
