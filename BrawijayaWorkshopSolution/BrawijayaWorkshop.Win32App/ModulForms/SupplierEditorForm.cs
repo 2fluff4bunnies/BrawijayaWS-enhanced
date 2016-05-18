@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             valSupplierName.SetIconAlignment(txtSupplierName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valAddress.SetIconAlignment(txtAddress, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             valPhone.SetIconAlignment(txtPhoneNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valCity.SetIconAlignment(cbCity, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += SupplierEditorForm_Load;
         }
@@ -100,7 +101,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valSupplierName.Validate() && valAddress.Validate() && valPhone.Validate())
+            if (valSupplierName.Validate() && valAddress.Validate() && valPhone.Validate() && valCity.Validate())
             {
                 try
                 {
