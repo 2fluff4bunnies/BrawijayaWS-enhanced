@@ -32,12 +32,13 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceEditorForm));
             this.gcInvoiceInfo = new DevExpress.XtraEditors.GroupControl();
+            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             this.txtFeeSparepart = new DevExpress.XtraEditors.TextEdit();
             this.lblFeeSparepart = new DevExpress.XtraEditors.LabelControl();
-            this.txtFeeService20 = new DevExpress.XtraEditors.TextEdit();
-            this.lblFeeService20 = new DevExpress.XtraEditors.LabelControl();
-            this.txtFeeService10 = new DevExpress.XtraEditors.TextEdit();
-            this.lblServiceFee10 = new DevExpress.XtraEditors.LabelControl();
+            this.txtValueAdded = new DevExpress.XtraEditors.TextEdit();
+            this.lblValueAdded = new DevExpress.XtraEditors.LabelControl();
+            this.txtFeeService = new DevExpress.XtraEditors.TextEdit();
+            this.lblServiceFee = new DevExpress.XtraEditors.LabelControl();
             this.chkApplyToAll = new DevExpress.XtraEditors.CheckEdit();
             this.txtMasterFee = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
@@ -69,12 +70,13 @@
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
             this.valPaymentMethod = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
-            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).BeginInit();
             this.gcInvoiceInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFeeSparepart.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFeeService20.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFeeService10.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtValueAdded.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFeeService.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkApplyToAll.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMasterFee.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).BeginInit();
@@ -90,8 +92,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcInvoiceInfo
@@ -99,10 +99,10 @@
             this.gcInvoiceInfo.Controls.Add(this.deTransDate);
             this.gcInvoiceInfo.Controls.Add(this.txtFeeSparepart);
             this.gcInvoiceInfo.Controls.Add(this.lblFeeSparepart);
-            this.gcInvoiceInfo.Controls.Add(this.txtFeeService20);
-            this.gcInvoiceInfo.Controls.Add(this.lblFeeService20);
-            this.gcInvoiceInfo.Controls.Add(this.txtFeeService10);
-            this.gcInvoiceInfo.Controls.Add(this.lblServiceFee10);
+            this.gcInvoiceInfo.Controls.Add(this.txtValueAdded);
+            this.gcInvoiceInfo.Controls.Add(this.lblValueAdded);
+            this.gcInvoiceInfo.Controls.Add(this.txtFeeService);
+            this.gcInvoiceInfo.Controls.Add(this.lblServiceFee);
             this.gcInvoiceInfo.Controls.Add(this.chkApplyToAll);
             this.gcInvoiceInfo.Controls.Add(this.txtMasterFee);
             this.gcInvoiceInfo.Controls.Add(this.labelControl5);
@@ -127,14 +127,34 @@
             this.gcInvoiceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcInvoiceInfo.Location = new System.Drawing.Point(0, 0);
             this.gcInvoiceInfo.Name = "gcInvoiceInfo";
-            this.gcInvoiceInfo.Size = new System.Drawing.Size(755, 563);
+            this.gcInvoiceInfo.Size = new System.Drawing.Size(755, 597);
             this.gcInvoiceInfo.TabIndex = 1;
             this.gcInvoiceInfo.Text = "Informasi Invoice";
             // 
+            // deTransDate
+            // 
+            this.deTransDate.EditValue = null;
+            this.deTransDate.Location = new System.Drawing.Point(172, 30);
+            this.deTransDate.Name = "deTransDate";
+            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTransDate.Properties.HideSelection = false;
+            this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.deTransDate.Properties.ReadOnly = true;
+            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deTransDate.Size = new System.Drawing.Size(171, 20);
+            this.deTransDate.TabIndex = 38;
+            // 
             // txtFeeSparepart
             // 
-            this.txtFeeSparepart.Location = new System.Drawing.Point(154, 316);
+            this.txtFeeSparepart.Location = new System.Drawing.Point(219, 316);
             this.txtFeeSparepart.Name = "txtFeeSparepart";
+            this.txtFeeSparepart.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtFeeSparepart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtFeeSparepart.Properties.ReadOnly = true;
             this.txtFeeSparepart.Size = new System.Drawing.Size(158, 20);
             this.txtFeeSparepart.TabIndex = 37;
@@ -147,37 +167,41 @@
             this.lblFeeSparepart.TabIndex = 36;
             this.lblFeeSparepart.Text = "Total Fee Sparepart";
             // 
-            // txtFeeService20
+            // txtValueAdded
             // 
-            this.txtFeeService20.Location = new System.Drawing.Point(492, 410);
-            this.txtFeeService20.Name = "txtFeeService20";
-            this.txtFeeService20.Properties.ReadOnly = true;
-            this.txtFeeService20.Size = new System.Drawing.Size(158, 20);
-            this.txtFeeService20.TabIndex = 35;
+            this.txtValueAdded.Location = new System.Drawing.Point(219, 473);
+            this.txtValueAdded.Name = "txtValueAdded";
+            this.txtValueAdded.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtValueAdded.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtValueAdded.Properties.ReadOnly = true;
+            this.txtValueAdded.Size = new System.Drawing.Size(158, 20);
+            this.txtValueAdded.TabIndex = 35;
             // 
-            // lblFeeService20
+            // lblValueAdded
             // 
-            this.lblFeeService20.Location = new System.Drawing.Point(355, 413);
-            this.lblFeeService20.Name = "lblFeeService20";
-            this.lblFeeService20.Size = new System.Drawing.Size(120, 13);
-            this.lblFeeService20.TabIndex = 34;
-            this.lblFeeService20.Text = "Total Fee Service  (20%)";
+            this.lblValueAdded.Location = new System.Drawing.Point(17, 476);
+            this.lblValueAdded.Name = "lblValueAdded";
+            this.lblValueAdded.Size = new System.Drawing.Size(147, 13);
+            this.lblValueAdded.TabIndex = 34;
+            this.lblValueAdded.Text = "Total Pertambahan Nilai (10%)";
             // 
-            // txtFeeService10
+            // txtFeeService
             // 
-            this.txtFeeService10.Location = new System.Drawing.Point(154, 410);
-            this.txtFeeService10.Name = "txtFeeService10";
-            this.txtFeeService10.Properties.ReadOnly = true;
-            this.txtFeeService10.Size = new System.Drawing.Size(158, 20);
-            this.txtFeeService10.TabIndex = 33;
+            this.txtFeeService.Location = new System.Drawing.Point(219, 410);
+            this.txtFeeService.Name = "txtFeeService";
+            this.txtFeeService.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtFeeService.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtFeeService.Properties.ReadOnly = true;
+            this.txtFeeService.Size = new System.Drawing.Size(158, 20);
+            this.txtFeeService.TabIndex = 33;
             // 
-            // lblServiceFee10
+            // lblServiceFee
             // 
-            this.lblServiceFee10.Location = new System.Drawing.Point(17, 413);
-            this.lblServiceFee10.Name = "lblServiceFee10";
-            this.lblServiceFee10.Size = new System.Drawing.Size(120, 13);
-            this.lblServiceFee10.TabIndex = 32;
-            this.lblServiceFee10.Text = "Total Fee Service  (10%)";
+            this.lblServiceFee.Location = new System.Drawing.Point(17, 413);
+            this.lblServiceFee.Name = "lblServiceFee";
+            this.lblServiceFee.Size = new System.Drawing.Size(83, 13);
+            this.lblServiceFee.TabIndex = 32;
+            this.lblServiceFee.Text = "Total Fee Service";
             // 
             // chkApplyToAll
             // 
@@ -192,6 +216,8 @@
             // 
             this.txtMasterFee.Location = new System.Drawing.Point(172, 100);
             this.txtMasterFee.Name = "txtMasterFee";
+            this.txtMasterFee.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtMasterFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtMasterFee.Size = new System.Drawing.Size(61, 20);
             this.txtMasterFee.TabIndex = 30;
             this.txtMasterFee.EditValueChanged += new System.EventHandler(this.txtMasterFee_EditValueChanged);
@@ -295,8 +321,10 @@
             // 
             // txtTotalSparepart
             // 
-            this.txtTotalSparepart.Location = new System.Drawing.Point(154, 290);
+            this.txtTotalSparepart.Location = new System.Drawing.Point(219, 290);
             this.txtTotalSparepart.Name = "txtTotalSparepart";
+            this.txtTotalSparepart.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalSparepart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalSparepart.Properties.ReadOnly = true;
             this.txtTotalSparepart.Size = new System.Drawing.Size(158, 20);
             this.txtTotalSparepart.TabIndex = 27;
@@ -311,8 +339,10 @@
             // 
             // txtTotalSparepartPlusFee
             // 
-            this.txtTotalSparepartPlusFee.Location = new System.Drawing.Point(154, 343);
+            this.txtTotalSparepartPlusFee.Location = new System.Drawing.Point(219, 343);
             this.txtTotalSparepartPlusFee.Name = "txtTotalSparepartPlusFee";
+            this.txtTotalSparepartPlusFee.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalSparepartPlusFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalSparepartPlusFee.Properties.ReadOnly = true;
             this.txtTotalSparepartPlusFee.Size = new System.Drawing.Size(158, 20);
             this.txtTotalSparepartPlusFee.TabIndex = 25;
@@ -327,8 +357,10 @@
             // 
             // txtTotalService
             // 
-            this.txtTotalService.Location = new System.Drawing.Point(154, 383);
+            this.txtTotalService.Location = new System.Drawing.Point(219, 383);
             this.txtTotalService.Name = "txtTotalService";
+            this.txtTotalService.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalService.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalService.Properties.ReadOnly = true;
             this.txtTotalService.Size = new System.Drawing.Size(158, 20);
             this.txtTotalService.TabIndex = 23;
@@ -343,8 +375,10 @@
             // 
             // txtTotalServicePlusFee
             // 
-            this.txtTotalServicePlusFee.Location = new System.Drawing.Point(154, 436);
+            this.txtTotalServicePlusFee.Location = new System.Drawing.Point(219, 436);
             this.txtTotalServicePlusFee.Name = "txtTotalServicePlusFee";
+            this.txtTotalServicePlusFee.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalServicePlusFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalServicePlusFee.Properties.ReadOnly = true;
             this.txtTotalServicePlusFee.Size = new System.Drawing.Size(158, 20);
             this.txtTotalServicePlusFee.TabIndex = 21;
@@ -359,7 +393,7 @@
             // 
             // cbPaymentType
             // 
-            this.cbPaymentType.Location = new System.Drawing.Point(154, 501);
+            this.cbPaymentType.Location = new System.Drawing.Point(219, 524);
             this.cbPaymentType.Name = "cbPaymentType";
             this.cbPaymentType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.cbPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -381,7 +415,7 @@
             // 
             // lblPaymentType
             // 
-            this.lblPaymentType.Location = new System.Drawing.Point(17, 504);
+            this.lblPaymentType.Location = new System.Drawing.Point(17, 527);
             this.lblPaymentType.Name = "lblPaymentType";
             this.lblPaymentType.Size = new System.Drawing.Size(87, 13);
             this.lblPaymentType.TabIndex = 18;
@@ -389,14 +423,16 @@
             // 
             // txtTotalPayment
             // 
-            this.txtTotalPayment.Location = new System.Drawing.Point(154, 527);
+            this.txtTotalPayment.Location = new System.Drawing.Point(219, 550);
             this.txtTotalPayment.Name = "txtTotalPayment";
+            this.txtTotalPayment.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalPayment.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalPayment.Size = new System.Drawing.Size(158, 20);
             this.txtTotalPayment.TabIndex = 17;
             // 
             // lblTotalPayment
             // 
-            this.lblTotalPayment.Location = new System.Drawing.Point(17, 530);
+            this.lblTotalPayment.Location = new System.Drawing.Point(17, 553);
             this.lblTotalPayment.Name = "lblTotalPayment";
             this.lblTotalPayment.Size = new System.Drawing.Size(91, 13);
             this.lblTotalPayment.TabIndex = 16;
@@ -404,15 +440,17 @@
             // 
             // txtTotalTransaction
             // 
-            this.txtTotalTransaction.Location = new System.Drawing.Point(154, 476);
+            this.txtTotalTransaction.Location = new System.Drawing.Point(219, 499);
             this.txtTotalTransaction.Name = "txtTotalTransaction";
+            this.txtTotalTransaction.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtTotalTransaction.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalTransaction.Properties.ReadOnly = true;
             this.txtTotalTransaction.Size = new System.Drawing.Size(158, 20);
             this.txtTotalTransaction.TabIndex = 10;
             // 
             // lblTotalTransaction
             // 
-            this.lblTotalTransaction.Location = new System.Drawing.Point(17, 479);
+            this.lblTotalTransaction.Location = new System.Drawing.Point(17, 502);
             this.lblTotalTransaction.Name = "lblTotalTransaction";
             this.lblTotalTransaction.Size = new System.Drawing.Size(72, 13);
             this.lblTotalTransaction.TabIndex = 9;
@@ -447,29 +485,11 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // deTransDate
-            // 
-            this.deTransDate.EditValue = null;
-            this.deTransDate.Location = new System.Drawing.Point(172, 30);
-            this.deTransDate.Name = "deTransDate";
-            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.deTransDate.Properties.HideSelection = false;
-            this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.deTransDate.Properties.ReadOnly = true;
-            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.deTransDate.Size = new System.Drawing.Size(171, 20);
-            this.deTransDate.TabIndex = 38;
-            // 
             // InvoiceEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 612);
+            this.ClientSize = new System.Drawing.Size(755, 646);
             this.Controls.Add(this.gcInvoiceInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InvoiceEditorForm";
@@ -478,9 +498,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).EndInit();
             this.gcInvoiceInfo.ResumeLayout(false);
             this.gcInvoiceInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFeeSparepart.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFeeService20.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFeeService10.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtValueAdded.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFeeService.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkApplyToAll.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMasterFee.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSparepart)).EndInit();
@@ -496,8 +518,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -538,10 +558,10 @@
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraEditors.TextEdit txtFeeSparepart;
         private DevExpress.XtraEditors.LabelControl lblFeeSparepart;
-        private DevExpress.XtraEditors.TextEdit txtFeeService20;
-        private DevExpress.XtraEditors.LabelControl lblFeeService20;
-        private DevExpress.XtraEditors.TextEdit txtFeeService10;
-        private DevExpress.XtraEditors.LabelControl lblServiceFee10;
+        private DevExpress.XtraEditors.TextEdit txtValueAdded;
+        private DevExpress.XtraEditors.LabelControl lblValueAdded;
+        private DevExpress.XtraEditors.TextEdit txtFeeService;
+        private DevExpress.XtraEditors.LabelControl lblServiceFee;
         private DevExpress.XtraEditors.DateEdit deTransDate;
     }
 }

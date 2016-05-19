@@ -301,7 +301,11 @@ namespace BrawijayaWorkshop.Model
             invc.CreateUserId = userId;
 
             invc.Code = spk.Code.Replace("SPK", "INVC");
-            invc.TotalPrice = spk.TotalSparepartPrice;
+
+            invc.TotalSparepart = spk.TotalSparepartPrice;
+            invc.TotalFeeSparepart = 0;
+            invc.TotalSparepartPlusFee = invc.TotalSparepart + invc.TotalFeeSparepart;
+            
             invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
             invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
             invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
@@ -311,8 +315,7 @@ namespace BrawijayaWorkshop.Model
             if (spk.isContractWork)
             {
                 invc.TotalService = spk.ContractWorkFee;
-                invc.TotalServicePlusFee = spk.ContractWorkFee + (spk.ContractWorkFee * (0.3).AsDecimal());
-                invc.TotalPrice = spk.TotalSparepartPrice + invc.TotalServicePlusFee;
+                invc.TotalFeeService = (spk.ContractWorkFee * (0.2).AsDecimal());
             }
             else
             {
@@ -337,9 +340,12 @@ namespace BrawijayaWorkshop.Model
                 }
 
                 invc.TotalService = ServiceFee;
-                invc.TotalServicePlusFee = ServiceFee + (ServiceFee * (0.1).AsDecimal());
-                invc.TotalPrice = spk.TotalSparepartPrice + invc.TotalServicePlusFee;
+                invc.TotalFeeService = 0;
             }
+            invc.TotalServicePlusFee = invc.TotalService + invc.TotalFeeService;
+            invc.TotalSparepartAndService = invc.TotalSparepartPlusFee + invc.TotalServicePlusFee;
+            invc.TotalValueAdded = 10 / 100 * invc.TotalSparepartAndService;
+            invc.TotalPrice = invc.TotalValueAdded + invc.TotalSparepartAndService;
 
             _invoiceRepository.AttachNavigation<SPK>(invc.SPK);
             _invoiceRepository.AttachNavigation<Reference>(invc.PaymentMethod);

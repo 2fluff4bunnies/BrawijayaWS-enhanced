@@ -201,7 +201,15 @@ namespace BrawijayaWorkshop.Model
 
                 Invoice invc = new Invoice();
                 invc.Code = spk.Code.Replace("SPK", "INVC");
-                invc.TotalPrice = spk.TotalSparepartPrice;
+                invc.TotalSparepart = spk.TotalSparepartPrice;
+                invc.TotalFeeSparepart = 0;
+                invc.TotalSparepartPlusFee = invc.TotalSparepart + invc.TotalFeeSparepart;
+                invc.TotalService = 0;
+                invc.TotalFeeService = 0;
+                invc.TotalServicePlusFee = invc.TotalService + invc.TotalFeeService;
+                invc.TotalSparepartAndService = invc.TotalSparepartPlusFee + invc.TotalServicePlusFee;
+                invc.TotalValueAdded = (invc.TotalSparepartAndService * (0.1).AsDecimal());
+                invc.TotalPrice = invc.TotalValueAdded + invc.TotalSparepartAndService;
                 invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
                 invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
                 invc.TotalHasPaid = 0;

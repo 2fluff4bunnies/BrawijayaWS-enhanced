@@ -78,8 +78,16 @@ namespace BrawijayaWorkshop.Model
                     entity.PaymentMethodId = invoice.PaymentMethodId;
                     entity.TotalHasPaid = invoice.TotalHasPaid;
                     entity.TotalPrice = invoice.TotalPrice;
+
                     entity.TotalService = invoice.TotalService;
+                    entity.TotalFeeService = invoice.TotalFeeService;                    
                     entity.TotalServicePlusFee = invoice.TotalServicePlusFee;
+                    entity.TotalSparepart = invoice.TotalSparepart;
+                    entity.TotalFeeSparepart = invoice.TotalFeeSparepart;
+                    entity.TotalSparepartPlusFee = invoice.TotalSparepartPlusFee;
+                    entity.TotalSparepartAndService = invoice.TotalSparepartAndService;
+                    entity.TotalValueAdded = invoice.TotalValueAdded;
+
                     //Map(invoice, entity);
                     entity.ModifyDate = serverTime;
                     entity.ModifyUserId = userId;
@@ -323,7 +331,7 @@ namespace BrawijayaWorkshop.Model
 
                     // Sales Kredit --> Karena berkurang
                     TransactionDetail sales = new TransactionDetail();
-                    sales.Credit = invoice.TotalPrice - invoice.TotalServicePlusFee;
+                    sales.Credit = invoice.TotalSparepartAndService;
                     sales.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.01.01").FirstOrDefault().Id;
                     sales.ParentId = transaction.Id;
             
@@ -333,7 +341,7 @@ namespace BrawijayaWorkshop.Model
 
                     // Service Income Kredit --> Karena berkurang
                     TransactionDetail serviceIncome = new TransactionDetail();
-                    serviceIncome.Credit = invoice.TotalServicePlusFee;
+                    serviceIncome.Credit = invoice.TotalValueAdded + invoice.TotalFeeSparepart;
                     serviceIncome.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.01.04").FirstOrDefault().Id;
                     serviceIncome.ParentId = transaction.Id;
             
@@ -341,19 +349,44 @@ namespace BrawijayaWorkshop.Model
                     _transactionDetailRepository.AttachNavigation(serviceIncome.Parent);
                     _transactionDetailRepository.Add(serviceIncome);
 
-                    // HPP Debit --> Karena bertambah
-                    TransactionDetail hpp = new TransactionDetail();
-                    hpp.Debit = invoice.TotalPrice - invoice.TotalServicePlusFee;
-                    hpp.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.01").FirstOrDefault().Id;
-                    hpp.ParentId = transaction.Id;
-            
-                    _transactionDetailRepository.AttachNavigation(hpp.Journal);
-                    _transactionDetailRepository.AttachNavigation(hpp.Parent);
-                    _transactionDetailRepository.Add(hpp);
+                    // HPP Sparepart Debit --> Karena bertambah
+                    TransactionDetail hppSparepart = new TransactionDetail();
+                    hppSparepart.Debit = invoice.TotalPrice - invoice.TotalServicePlusFee;
+                    hppSparepart.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.01").FirstOrDefault().Id;
+                    hppSparepart.ParentId = transaction.Id;
+
+                    _transactionDetailRepository.AttachNavigation(hppSparepart.Journal);
+                    _transactionDetailRepository.AttachNavigation(hppSparepart.Parent);
+                    _transactionDetailRepository.Add(hppSparepart);
+
+                    if(entity.SPK.isContractWork)
+                    {
+                        // HPP Tukang Harian Debit --> Karena bertambah
+                        TransactionDetail hppTukang = new TransactionDetail();
+                        hppTukang.Debit = invoice.TotalServicePlusFee;
+                        hppTukang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.01").FirstOrDefault().Id;
+                        hppTukang.ParentId = transaction.Id;
+
+                        _transactionDetailRepository.AttachNavigation(hppTukang.Journal);
+                        _transactionDetailRepository.AttachNavigation(hppTukang.Parent);
+                        _transactionDetailRepository.Add(hppTukang);
+                    }
+                    else
+                    {
+                        // HPP Tukang Borongan Debit --> Karena bertambah
+                        TransactionDetail hppTukang = new TransactionDetail();
+                        hppTukang.Debit = invoice.TotalServicePlusFee;
+                        hppTukang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.01").FirstOrDefault().Id;
+                        hppTukang.ParentId = transaction.Id;
+
+                        _transactionDetailRepository.AttachNavigation(hppTukang.Journal);
+                        _transactionDetailRepository.AttachNavigation(hppTukang.Parent);
+                        _transactionDetailRepository.Add(hppTukang);
+                    }
 
                     // Sparepart Kredit --> Karena berkurang
                     TransactionDetail detailSparepart = new TransactionDetail();
-                    detailSparepart.Credit = invoice.TotalPrice - invoice.TotalServicePlusFee;
+                    detailSparepart.Credit = invoice.TotalSparepart;
                     detailSparepart.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.01").FirstOrDefault().Id;
                     detailSparepart.ParentId = transaction.Id;
             

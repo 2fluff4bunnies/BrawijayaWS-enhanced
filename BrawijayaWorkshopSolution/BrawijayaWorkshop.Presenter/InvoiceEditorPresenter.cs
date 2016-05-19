@@ -22,15 +22,18 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.ListInvoiceDetail = Model.RetrieveInvoiceDetail(View.SelectedInvoice.Id);
                 View.Date = View.SelectedInvoice.CreateDate;
+
                 View.TotalService = View.SelectedInvoice.TotalService;
                 View.TotalServicePlusFee = View.SelectedInvoice.TotalServicePlusFee;
-                View.TotalFeeService10 = (0.1 *  View.TotalService.AsDouble()).AsDecimal();
-                View.TotalFeeService20 = (0.2 * View.TotalService.AsDouble()).AsDecimal();
+                View.TotalFeeService = View.SelectedInvoice.TotalFeeService;
+                View.TotalSparepart = View.SelectedInvoice.TotalSparepart;
+                View.TotalSparepartPlusFee = View.SelectedInvoice.TotalSparepartPlusFee;
+                View.TotalFeeSparepart = View.SelectedInvoice.TotalFeeSparepart;
+                View.TotalSparepartAndService = View.SelectedInvoice.TotalSparepartAndService;
+                View.TotalValueAdded = View.SelectedInvoice.TotalValueAdded;
                 View.TotalTransaction = View.SelectedInvoice.TotalPrice;
+
                 View.CustomerName = View.SelectedInvoice.SPK.Vehicle.Customer.CompanyName;
-                View.TotalSparepart = View.ListInvoiceDetail.Sum(x => x.ItemPrice);
-                View.TotalSparepartPlusFee = View.ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
-                View.TotalFeeSparepart = View.TotalSparepartPlusFee - View.TotalSparepart;
                 View.TotalPayment = View.SelectedInvoice.TotalHasPaid;
                 View.isContractWork = View.SelectedInvoice.SPK.isContractWork;
                 if (View.SelectedInvoice.Status != (int)DbConstant.InvoiceStatus.FeeNotFixed)
@@ -49,8 +52,15 @@ namespace BrawijayaWorkshop.Presenter
 
             View.SelectedInvoice.PaymentMethodId = View.PaymentMethodId;
             View.SelectedInvoice.TotalHasPaid = View.TotalPayment;
+
             View.SelectedInvoice.TotalService = View.TotalService;
             View.SelectedInvoice.TotalServicePlusFee = View.TotalServicePlusFee;
+            View.SelectedInvoice.TotalFeeService = View.TotalFeeService;
+            View.SelectedInvoice.TotalSparepart = View.TotalSparepart;
+            View.SelectedInvoice.TotalSparepartPlusFee = View.TotalSparepartPlusFee;
+            View.SelectedInvoice.TotalFeeSparepart = View.TotalFeeSparepart;
+            View.SelectedInvoice.TotalSparepartAndService = View.TotalSparepartAndService;
+            View.SelectedInvoice.TotalValueAdded = View.TotalValueAdded;
             View.SelectedInvoice.TotalPrice = View.TotalTransaction;
 
             if (View.SelectedInvoice.Id > 0)

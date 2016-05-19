@@ -22,8 +22,14 @@ namespace BrawijayaWorkshop.Database.Entities
         public decimal TotalHasPaid { get; set; }
 
         public decimal TotalService { get; set; }
+        public decimal TotalFeeService { get; set; }
         public decimal TotalServicePlusFee { get; set; }
-
+        public decimal TotalSparepart { get; set; }
+        public decimal TotalFeeSparepart { get; set; }
+        public decimal TotalSparepartPlusFee { get; set; }
+        public decimal TotalValueAdded { get; set; }
+        public decimal TotalSparepartAndService { get; set; }
+        
         public int PaymentMethodId { get; set; }
         public virtual Reference PaymentMethod { get; set; }
         public int PaymentStatus { get; set; }
