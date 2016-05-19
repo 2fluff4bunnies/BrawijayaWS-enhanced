@@ -201,7 +201,15 @@ namespace BrawijayaWorkshop.Model
 
                 Invoice invc = new Invoice();
                 invc.Code = spk.Code.Replace("SPK", "INVC");
-                invc.TotalPrice = spk.TotalSparepartPrice;
+                invc.TotalSparepart = spk.TotalSparepartPrice;
+                invc.TotalFeeSparepart = 0;
+                invc.TotalSparepartPlusFee = invc.TotalSparepart + invc.TotalFeeSparepart;
+                invc.TotalService = 0;
+                invc.TotalFeeService = 0;
+                invc.TotalServicePlusFee = invc.TotalService + invc.TotalFeeService;
+                invc.TotalSparepartAndService = invc.TotalSparepartPlusFee + invc.TotalServicePlusFee;
+                invc.TotalValueAdded = (invc.TotalSparepartAndService * (0.1).AsDecimal());
+                invc.TotalPrice = invc.TotalValueAdded + invc.TotalSparepartAndService;
                 invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
                 invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
                 invc.TotalHasPaid = 0;
@@ -391,7 +399,7 @@ namespace BrawijayaWorkshop.Model
             return mappedResult;
         }
 
-        public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails()
+        public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails(int sparepartId)
         {
             List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready
                                                                                        && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL).ToList();
@@ -627,6 +635,20 @@ namespace BrawijayaWorkshop.Model
             }
 
             return result;
+        }
+
+        public List<SparepartViewModel> LoadWheelSParepart()
+        {
+            List<SpecialSparepartViewModel> wheelList = LoadWheel();
+            List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+
+            List<Sparepart> getSpInWheel = (from sp in result
+                                            join wh in wheelList on sp.Id equals wh.SparepartId
+                                            select sp).ToList(); // return sparepart object which in list
+
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+
+            return Map(getSpInWheel, mappedResult);
         }
     }
 }

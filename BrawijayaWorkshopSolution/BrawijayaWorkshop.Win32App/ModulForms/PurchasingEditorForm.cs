@@ -31,8 +31,23 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             gvPurchasingDetail.FocusedRowChanged += gvPurchasingDetail_FocusedRowChanged;
             cbSparepartGv.EditValueChanged += cbSparepartGv_EditValueChanged;
             gvPurchasingDetail.ShowingEditor += gvPurchasingDetail_ShowingEditor;
+            gvPurchasingDetail.FocusedRowObjectChanged += gvPurchasingDetail_FocusedRowObjectChanged;
 
             this.Load += PurchasingEditorForm_Load;
+        }
+
+        void gvPurchasingDetail_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            GridView View = sender as GridView;
+            if (View.FocusedColumn.FieldName == "SerialNumber" && !this.SelectedPurchasingDetail.IsSpecialSparepart)
+            {
+                string serialNumber = View.GetFocusedRowCellValue(View.FocusedColumn.FieldName).ToString();
+
+                if (!_presenter.ValidateSerialNumber(serialNumber))
+                {
+                    this.ShowWarning("Nomor seri " + serialNumber + " sudah digunakan.");
+                }
+            }
         }
 
         void gvPurchasingDetail_ShowingEditor(object sender, CancelEventArgs e)

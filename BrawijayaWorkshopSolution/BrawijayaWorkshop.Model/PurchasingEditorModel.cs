@@ -18,7 +18,7 @@ namespace BrawijayaWorkshop.Model
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ISpecialSparepartRepository _specialSparepartRepository;
-        private ISpecialSparepartDetailRepository _wheelDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingEditorModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
@@ -36,7 +36,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _specialSparepartRepository = wheelRepository;
-            _wheelDetailRepository = wheelDetailRepository;
+            _specialSparepartDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
@@ -219,6 +219,27 @@ namespace BrawijayaWorkshop.Model
             SpecialSparepart wheelSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
 
             return wheelSparepart != null;
+        }
+
+        public bool IsSerialNumberExist(string sn)
+        {
+            SpecialSparepartDetail ssd = _specialSparepartDetailRepository.GetMany(dtl => dtl.SerialNumber.ToLower() == sn.ToLower()).FirstOrDefault();
+
+            if (ssd != null)
+            {
+                if (ssd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

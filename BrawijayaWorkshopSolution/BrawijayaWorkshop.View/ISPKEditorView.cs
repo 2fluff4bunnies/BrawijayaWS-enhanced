@@ -25,6 +25,7 @@ namespace BrawijayaWorkshop.View
         List<SPKDetailSparepartViewModel> SPKSparepartList { get; set; }
         List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
         List<SparepartViewModel> SparepartLookupList { get; set; }
+        List<SparepartViewModel> SparepartWheelLookupList { get; set; }
         SparepartViewModel SparepartToInsert { get; }
         SparepartViewModel SelectedSparepart { get; set; }
         SPKDetailSparepartViewModel LastUsageRecord { get; set; }
@@ -33,6 +34,7 @@ namespace BrawijayaWorkshop.View
         List<VehicleWheelViewModel> VehicleWheelList { get; set; }
         VehicleWheelViewModel SelectedVehicleWheel { get; set; }
         SpecialSparepartDetailViewModel SelectedWheelDetailToChange { get; set; }
+        SparepartViewModel SelectedSparepartWheel { get; set; }
 
         int SSDetailId { get; set; }
         string Code { get; set; }

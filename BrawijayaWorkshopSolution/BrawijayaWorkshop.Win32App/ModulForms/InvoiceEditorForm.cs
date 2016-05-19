@@ -33,13 +33,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter.InitFormData();
             if(isContractWork)
             {
-                txtFeeService20.Visible = true;
-                lblFeeService20.Visible = true;
+                txtValueAdded.Visible = true;
+                lblValueAdded.Visible = true;
             }
             else
             {
-                txtFeeService20.Visible = false;
-                lblFeeService20.Visible = false;
+                txtValueAdded.Visible = false;
+                lblValueAdded.Visible = false;
             }
         }
 
@@ -70,31 +70,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtCustomer.Text = value;
             }
         }
-
-        public decimal TotalTransaction
-        {
-            get
-            {
-                return txtTotalTransaction.Text.AsDecimal();
-            }
-            set
-            {
-                txtTotalTransaction.Text = value.ToString("#,##");
-            }
-        }
-
-        public decimal TotalPayment
-        {
-            get
-            {
-                return string.IsNullOrEmpty(txtTotalPayment.Text) ? 0 : txtTotalPayment.Text.AsDecimal();
-            }
-            set
-            {
-                txtTotalPayment.Text = value.ToString("#,##");
-            }
-        }
-
         public int PaymentMethodId
         {
             get
@@ -174,16 +149,39 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             
         }
 
+        public decimal TotalTransaction
+        {
+            get
+            {
+                return txtTotalTransaction.EditValue.AsDecimal();
+            }
+            set
+            {
+                txtTotalTransaction.EditValue = value;
+            }
+        }
+
+        public decimal TotalPayment
+        {
+            get
+            {
+                return txtTotalPayment.EditValue.AsDecimal();
+            }
+            set
+            {
+                txtTotalPayment.EditValue = value;
+            }
+        }
 
         public decimal TotalSparepart
         {
             get
             {
-                return txtTotalSparepart.Text.AsDecimal();
+                return txtTotalSparepart.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalSparepart.Text = value.ToString("#,##");
+                txtTotalSparepart.EditValue = value;
             }
         }
 
@@ -191,11 +189,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtTotalSparepartPlusFee.Text.AsDecimal();
+                return txtTotalSparepartPlusFee.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalSparepartPlusFee.Text = value.ToString("#,##");
+                txtTotalSparepartPlusFee.EditValue = value;
             }
         }
 
@@ -203,11 +201,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtFeeSparepart.Text.AsDecimal();
+                return txtFeeSparepart.EditValue.AsDecimal();
             }
             set
             {
-                txtFeeSparepart.Text = value.ToString("#,##");
+                txtFeeSparepart.EditValue = value;
             }
         }
 
@@ -215,62 +213,49 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                if (!string.IsNullOrEmpty(txtTotalService.Text))
-                {
-                    return txtTotalService.Text.AsDecimal();
-                }
-                else
-                {
-                    return 0;
-                }
+                return txtTotalService.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalService.Text = value.ToString("#,##");
+                txtTotalService.EditValue = value;
             }
         }
         public decimal TotalServicePlusFee
         {
             get
             {
-                if (!string.IsNullOrEmpty(txtTotalServicePlusFee.Text))
-                {
-                    return txtTotalServicePlusFee.Text.AsDecimal();
-                }
-                else
-                {
-                    return 0;
-                }
+                return txtTotalServicePlusFee.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalServicePlusFee.Text = value.ToString("#,##");
+                txtTotalServicePlusFee.EditValue = value;
             }
         }
 
-        public decimal TotalFeeService10
+        public decimal TotalFeeService
         {
             get
             {
-                return txtFeeService10.Text.AsDecimal();
+                return txtFeeService.EditValue.AsDecimal();
             }
             set
             {
-                txtFeeService10.Text = value.ToString("#,##");
+                txtFeeService.EditValue = value;
             }
         }
 
-        public decimal TotalFeeService20
+        public decimal TotalValueAdded
         {
             get
             {
-                return txtFeeService20.Text.AsDecimal();
+                return txtValueAdded.EditValue.AsDecimal();
             }
             set
             {
-                txtFeeService20.Text = value.ToString("#,##");
+                txtValueAdded.EditValue = value;
             }
         }
+        public decimal TotalSparepartAndService { get; set; }
 
         public bool IsApplyToAll
         {
@@ -290,11 +275,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return !string.IsNullOrEmpty(txtMasterFee.Text) ? txtMasterFee.Text.AsDouble() : 0;
+                return txtMasterFee.EditValue.AsDouble();
             }
             set
             {
-                txtMasterFee.Text = value.ToString();
+                txtMasterFee.EditValue = value;
             }
         }
 
