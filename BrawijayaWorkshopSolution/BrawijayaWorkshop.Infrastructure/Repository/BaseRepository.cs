@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace BrawijayaWorkshop.Infrastructure.Repository
 {
@@ -17,6 +18,26 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             DatabaseFactory = databaseFactory;
             _dbset = DataContext.Set<T>();
+            PropertyInfo[] properties = typeof(T).GetProperties()
+                .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
+            foreach (var item in properties)
+            {
+                _dbset.Include(item.Name);
+                IncludeRecursive(item.PropertyType, item.Name);
+            }
+        }
+
+        private void IncludeRecursive(Type childrenType, string prevParentName)
+        {
+            PropertyInfo[] properties = childrenType.GetProperties()
+                .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
+            foreach (var item in properties)
+            {
+                if (prevParentName.Contains(item.Name)) continue;
+                string includePath = prevParentName + "." + item.Name;
+                _dbset.Include(includePath);
+                IncludeRecursive(item.PropertyType, includePath);
+            }
         }
 
         public IDatabaseFactory<U> DatabaseFactory { get; private set; }
