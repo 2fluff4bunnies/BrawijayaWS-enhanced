@@ -464,12 +464,6 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = journalMod.Id,
-                RoleId = adminRole.Id,
-                AccessCode = (int)DbConstant.AccessTypeEnum.All
-            });
-            context.RoleAccesses.Add(new RoleAccess
-            {
                 ApplicationModulId = supplierMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
@@ -488,7 +482,19 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = vehicleDetailMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = sparepartMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartDetailMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -506,6 +512,30 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = spkMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkSchedule.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkSales.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = guestBook.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = usedGoodMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
@@ -518,13 +548,31 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = debtMod.Id,
+                ApplicationModulId = purchaseReturnMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.RoleAccesses.Add(new RoleAccess
             {
-                ApplicationModulId = creditMod.Id,
+                ApplicationModulId = salesReturnMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = brandMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = typeMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = historySparepartMod.Id,
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -544,13 +592,115 @@ namespace BrawijayaWorkshop.Database
             });
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = accMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = vehicleGroupMod.Id,
                 RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = userControlMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = dbConfigMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = customerMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = journalMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = supplierMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = mechanicMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleDetailMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartDetailMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = serviceMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = approvalMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = purchasingMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkSchedule.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkSales.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = guestBook.Id,
                 RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
@@ -578,11 +728,221 @@ namespace BrawijayaWorkshop.Database
                 RoleId = managerRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = debtMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = creditMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = invoiceMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = purchaseReturnMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = salesReturnMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = brandMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = typeMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = historySparepartMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // finance
             context.RoleAccesses.Add(new RoleAccess
             {
+                ApplicationModulId = recapInvoiceMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleGroupMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = customerMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = journalMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = supplierMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = mechanicMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = vehicleDetailMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = sparepartDetailMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = serviceMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = approvalMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = purchasingMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkSchedule.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = spkSales.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = guestBook.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
                 ApplicationModulId = accountingMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = usedGoodTransMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = debtMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = creditMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = invoiceMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = purchaseReturnMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = salesReturnMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = brandMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = typeMod.Id,
+                RoleId = financeRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = historySparepartMod.Id,
                 RoleId = financeRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
