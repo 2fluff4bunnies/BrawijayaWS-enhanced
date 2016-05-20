@@ -21,7 +21,7 @@ namespace BrawijayaWorkshop.Presenter
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.VehicleDropdownList = Model.GetSPKVehicleList();
             View.SparepartLookupList = Model.LoadSparepart();
-            View.SparepartWheelLookupList = Model.LoadWheelSParepart();
+            View.SparepartWheelLookupList = Model.LoadSparepartWheel();
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
 

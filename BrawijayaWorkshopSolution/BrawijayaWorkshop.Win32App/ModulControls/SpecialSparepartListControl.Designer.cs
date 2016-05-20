@@ -73,7 +73,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(445, 28);
+            this.btnSearch.Location = new System.Drawing.Point(456, 30);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 4;
@@ -82,7 +82,7 @@
             // 
             // txtFilter
             // 
-            this.txtFilter.Location = new System.Drawing.Point(82, 31);
+            this.txtFilter.Location = new System.Drawing.Point(100, 31);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(345, 20);
             this.txtFilter.TabIndex = 3;
@@ -92,9 +92,9 @@
             // 
             this.lblName.Location = new System.Drawing.Point(10, 34);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(48, 13);
+            this.lblName.Size = new System.Drawing.Size(78, 13);
             this.lblName.TabIndex = 2;
-            this.lblName.Text = "Nama Ban";
+            this.lblName.Text = "Nama Sparepart";
             // 
             // gcSpecialSparepart
             // 

@@ -51,8 +51,9 @@
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lookUpSparepartWheelGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -80,6 +81,7 @@
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtTotalSparepartPrice = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.valVehicle = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valCategory = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valDueDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
@@ -89,8 +91,6 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
-            this.lookUpSparepartWheelGv = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
-            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -105,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContractWorkFee.Properties)).BeginInit();
@@ -115,14 +116,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).BeginInit();
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -378,6 +378,25 @@
             this.colWheelDetail.Visible = true;
             this.colWheelDetail.VisibleIndex = 1;
             // 
+            // colSparepart
+            // 
+            this.colSparepart.Caption = "Jenis Ban";
+            this.colSparepart.ColumnEdit = this.lookUpSparepartWheelGv;
+            this.colSparepart.FieldName = "SparepartId";
+            this.colSparepart.Name = "colSparepart";
+            this.colSparepart.Visible = true;
+            this.colSparepart.VisibleIndex = 2;
+            // 
+            // lookUpSparepartWheelGv
+            // 
+            this.lookUpSparepartWheelGv.AutoHeight = false;
+            this.lookUpSparepartWheelGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpSparepartWheelGv.DisplayMember = "Name";
+            this.lookUpSparepartWheelGv.Name = "lookUpSparepartWheelGv";
+            this.lookUpSparepartWheelGv.NullText = "-- Pilih Jenis Ban --";
+            this.lookUpSparepartWheelGv.ValueMember = "Id";
+            // 
             // colWheelDetailReplace
             // 
             this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
@@ -386,14 +405,6 @@
             this.colWheelDetailReplace.Name = "colWheelDetailReplace";
             this.colWheelDetailReplace.Visible = true;
             this.colWheelDetailReplace.VisibleIndex = 3;
-            // 
-            // colSparepart
-            // 
-            this.colSparepart.Caption = "Jenis Ban";
-            this.colSparepart.ColumnEdit = this.lookUpSparepartWheelGv;
-            this.colSparepart.Name = "colSparepart";
-            this.colSparepart.Visible = true;
-            this.colSparepart.VisibleIndex = 2;
             // 
             // colIsUsedGoodReceived
             // 
@@ -518,9 +529,8 @@
             this.lookUpSerialNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpSerialNumber.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StockQty", "Stok")});
-            this.lookUpSerialNumber.Properties.DisplayMember = "Name";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SerialNumber", "Nomor Seri")});
+            this.lookUpSerialNumber.Properties.DisplayMember = "SerialNumber";
             this.lookUpSerialNumber.Properties.HideSelection = false;
             this.lookUpSerialNumber.Properties.NullText = "";
             this.lookUpSerialNumber.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
@@ -677,6 +687,13 @@
             this.lblTotalSparepart.TabIndex = 13;
             this.lblTotalSparepart.Text = "Total Harga Sparepart";
             // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // cmsSparepartEditor
             // 
             this.cmsSparepartEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -712,24 +729,6 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // lookUpSparepartWheelGv
-            // 
-            this.lookUpSparepartWheelGv.AutoHeight = false;
-            this.lookUpSparepartWheelGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpSparepartWheelGv.DisplayMember = "Name";
-            this.lookUpSparepartWheelGv.Name = "lookUpSparepartWheelGv";
-            this.lookUpSparepartWheelGv.NullText = "-- Pilih Ban --";
-            this.lookUpSparepartWheelGv.ValueMember = "Id";
-            this.lookUpSparepartWheelGv.View = this.repositoryItemGridLookUpEdit1View;
-            // 
-            // repositoryItemGridLookUpEdit1View
-            // 
-            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
-            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -755,6 +754,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContractWorkFee.Properties)).EndInit();
@@ -765,14 +765,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalSparepartPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valVehicle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valDueDate)).EndInit();
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -835,7 +834,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepart;
-        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit lookUpSparepartWheelGv;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpSparepartWheelGv;
     }
 }
