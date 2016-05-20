@@ -37,8 +37,7 @@
             this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
             this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWheelSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblTotalSparepartValue = new DevExpress.XtraEditors.LabelControl();
             this.lblTotalSparepart = new DevExpress.XtraEditors.LabelControl();
             this.gcSparepart = new DevExpress.XtraGrid.GridControl();
@@ -124,12 +123,11 @@
             // 
             // gridVehicleWheel
             // 
-            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(15, 177);
+            this.gridVehicleWheel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.gridVehicleWheel.Location = new System.Drawing.Point(549, 23);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(511, 186);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(164, 136);
             this.gridVehicleWheel.TabIndex = 61;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -138,8 +136,7 @@
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colWheelDetail,
-            this.colWheelDetailReplace,
-            this.colPrice});
+            this.colWheelSparepartName});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
             this.gvVehicleWheel.Name = "gvVehicleWheel";
             this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -153,29 +150,19 @@
             // 
             // colWheelDetail
             // 
-            this.colWheelDetail.Caption = "Nomor Seri  (Terpasang)";
+            this.colWheelDetail.Caption = "Nomor Seri ";
             this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
             this.colWheelDetail.Name = "colWheelDetail";
             this.colWheelDetail.Visible = true;
             this.colWheelDetail.VisibleIndex = 0;
             // 
-            // colWheelDetailReplace
+            // colWheelSparepartName
             // 
-            this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
-            this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailSerialNumber";
-            this.colWheelDetailReplace.Name = "colWheelDetailReplace";
-            this.colWheelDetailReplace.Visible = true;
-            this.colWheelDetailReplace.VisibleIndex = 1;
-            // 
-            // colPrice
-            // 
-            this.colPrice.Caption = "Harga";
-            this.colPrice.DisplayFormat.FormatString = "#,#";
-            this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPrice.FieldName = "Price";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 2;
+            this.colWheelSparepartName.Caption = "Jenis Ban";
+            this.colWheelSparepartName.FieldName = "SpecialSparepartDetail.SparepartDetail.Sparepart.Name";
+            this.colWheelSparepartName.Name = "colWheelSparepartName";
+            this.colWheelSparepartName.Visible = true;
+            this.colWheelSparepartName.VisibleIndex = 1;
             // 
             // lblTotalSparepartValue
             // 
@@ -195,11 +182,12 @@
             // 
             // gcSparepart
             // 
-            this.gcSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSparepart.Location = new System.Drawing.Point(551, 177);
+            this.gcSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcSparepart.Location = new System.Drawing.Point(16, 371);
             this.gcSparepart.MainView = this.gvSparepart;
             this.gcSparepart.Name = "gcSparepart";
-            this.gcSparepart.Size = new System.Drawing.Size(512, 186);
+            this.gcSparepart.Size = new System.Drawing.Size(697, 239);
             this.gcSparepart.TabIndex = 58;
             this.gcSparepart.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSparepart});
@@ -234,7 +222,7 @@
             // 
             // colSparepartCode
             // 
-            this.colSparepartCode.Caption = "Kode";
+            this.colSparepartCode.Caption = "Kode Sparepart";
             this.colSparepartCode.FieldName = "Sparepart.Code";
             this.colSparepartCode.Name = "colSparepartCode";
             this.colSparepartCode.Visible = true;
@@ -271,7 +259,7 @@
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnCancel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnCancel.Location = new System.Drawing.Point(969, 378);
+            this.btnCancel.Location = new System.Drawing.Point(619, 626);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 23);
             this.btnCancel.TabIndex = 33;
@@ -321,17 +309,17 @@
             this.groupSPK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupSPK.Location = new System.Drawing.Point(0, 0);
             this.groupSPK.Name = "groupSPK";
-            this.groupSPK.Size = new System.Drawing.Size(1075, 406);
+            this.groupSPK.Size = new System.Drawing.Size(726, 661);
             this.groupSPK.TabIndex = 2;
             this.groupSPK.Text = "Informasi SPK";
             // 
             // gcInvolvedMechanic
             // 
-            this.gcInvolvedMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcInvolvedMechanic.Location = new System.Drawing.Point(551, 23);
+            this.gcInvolvedMechanic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcInvolvedMechanic.Location = new System.Drawing.Point(16, 185);
             this.gcInvolvedMechanic.MainView = this.gvInvolvedMechanic;
             this.gcInvolvedMechanic.Name = "gcInvolvedMechanic";
-            this.gcInvolvedMechanic.Size = new System.Drawing.Size(512, 145);
+            this.gcInvolvedMechanic.Size = new System.Drawing.Size(697, 166);
             this.gcInvolvedMechanic.TabIndex = 66;
             this.gcInvolvedMechanic.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvolvedMechanic});
@@ -540,7 +528,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 406);
+            this.ClientSize = new System.Drawing.Size(726, 661);
             this.Controls.Add(this.groupSPK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SPKHistoryDetailForm";
@@ -569,8 +557,6 @@
         private DevExpress.XtraGrid.GridControl gridVehicleWheel;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
-        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
         private DevExpress.XtraEditors.LabelControl lblTotalSparepartValue;
         private DevExpress.XtraEditors.LabelControl lblTotalSparepart;
         private DevExpress.XtraGrid.GridControl gcSparepart;
@@ -607,5 +593,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSPKVehicle;
         private DevExpress.XtraGrid.Columns.GridColumn ColCreatedDate;
         private DevExpress.XtraGrid.Columns.GridColumn colDescription;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelSparepartName;
     }
 }

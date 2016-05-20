@@ -305,7 +305,7 @@ namespace BrawijayaWorkshop.Model
             invc.TotalSparepart = spk.TotalSparepartPrice;
             invc.TotalFeeSparepart = 0;
             invc.TotalSparepartPlusFee = invc.TotalSparepart + invc.TotalFeeSparepart;
-            
+
             invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
             invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
             invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
@@ -390,9 +390,12 @@ namespace BrawijayaWorkshop.Model
                     _vehicleWheelRepository.Update(vw);
 
                     UsedGood usedWHeel = _usedGoodRepository.GetMany(ug => ug.SparepartId == item.WheelDetail.SparepartDetail.SparepartId).FirstOrDefault();
-                    usedWHeel.Stock++;
+                    if (usedWHeel != null)
+                    {
+                        usedWHeel.Stock++;
 
-                    _usedGoodRepository.Update(usedWHeel);
+                        _usedGoodRepository.Update(usedWHeel);
+                    }
                 }
                 _unitOfWork.SaveChanges();
 

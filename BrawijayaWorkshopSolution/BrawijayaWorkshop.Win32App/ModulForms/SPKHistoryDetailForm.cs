@@ -20,9 +20,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private SPKHistoryDetailPresenter _presenter;
         private string _prefix = ": ";
 
-        public SPKHistoryDetailForm()
+        public SPKHistoryDetailForm(SPKHistoryDetailModel model)
         {
             InitializeComponent();
+            _presenter = new SPKHistoryDetailPresenter(this, model);
+
+            this.Load += SPKHistoryDetailForm_Load;
+           
+        }
+
+        void SPKHistoryDetailForm_Load(object sender, EventArgs e)
+        {
+            _presenter.InitFormData();
 
             #region Field Setting
             lblCodeValue.Text = _prefix + this.SelectedSPK.Code;

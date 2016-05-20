@@ -293,8 +293,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SPKHistoryDetailForm editor = Bootstrapper.Resolve<SPKHistoryDetailForm>();
-            //editor.SelectedSPK = this.SelectedSPK;
-
+            editor.SelectedSPK = this.SelectedSPK;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();
