@@ -137,6 +137,8 @@
             // 
             this.txtTotalPayment.Location = new System.Drawing.Point(158, 188);
             this.txtTotalPayment.Name = "txtTotalPayment";
+            this.txtTotalPayment.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalPayment.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalPayment.Size = new System.Drawing.Size(157, 20);
             this.txtTotalPayment.TabIndex = 13;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -156,6 +158,8 @@
             // 
             this.txtTotalNotPaid.Location = new System.Drawing.Point(158, 141);
             this.txtTotalNotPaid.Name = "txtTotalNotPaid";
+            this.txtTotalNotPaid.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalNotPaid.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalNotPaid.Properties.ReadOnly = true;
             this.txtTotalNotPaid.Size = new System.Drawing.Size(157, 20);
             this.txtTotalNotPaid.TabIndex = 11;
@@ -172,6 +176,8 @@
             // 
             this.txtTotalPaid.Location = new System.Drawing.Point(158, 114);
             this.txtTotalPaid.Name = "txtTotalPaid";
+            this.txtTotalPaid.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalPaid.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalPaid.Properties.ReadOnly = true;
             this.txtTotalPaid.Size = new System.Drawing.Size(157, 20);
             this.txtTotalPaid.TabIndex = 9;
@@ -188,6 +194,8 @@
             // 
             this.txtTotalTransaction.Location = new System.Drawing.Point(158, 87);
             this.txtTotalTransaction.Name = "txtTotalTransaction";
+            this.txtTotalTransaction.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalTransaction.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalTransaction.Properties.ReadOnly = true;
             this.txtTotalTransaction.Size = new System.Drawing.Size(157, 20);
             this.txtTotalTransaction.TabIndex = 7;

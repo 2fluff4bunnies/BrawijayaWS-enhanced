@@ -359,29 +359,32 @@ namespace BrawijayaWorkshop.Model
                     _transactionDetailRepository.AttachNavigation(hppSparepart.Parent);
                     _transactionDetailRepository.Add(hppSparepart);
 
-                    if(entity.SPK.isContractWork)
+                    if(invoice.TotalServicePlusFee > 0)
                     {
-                        // HPP Tukang Harian Debit --> Karena bertambah
-                        TransactionDetail hppTukang = new TransactionDetail();
-                        hppTukang.Debit = invoice.TotalServicePlusFee;
-                        hppTukang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.05").FirstOrDefault().Id;
-                        hppTukang.ParentId = transaction.Id;
+                        if (entity.SPK.isContractWork)
+                        {
+                            // HPP Tukang Harian Debit --> Karena bertambah
+                            TransactionDetail hppTukang = new TransactionDetail();
+                            hppTukang.Debit = invoice.TotalServicePlusFee;
+                            hppTukang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.05").FirstOrDefault().Id;
+                            hppTukang.ParentId = transaction.Id;
 
-                        _transactionDetailRepository.AttachNavigation(hppTukang.Journal);
-                        _transactionDetailRepository.AttachNavigation(hppTukang.Parent);
-                        _transactionDetailRepository.Add(hppTukang);
-                    }
-                    else
-                    {
-                        // HPP Tukang Borongan Debit --> Karena bertambah
-                        TransactionDetail hppTukang = new TransactionDetail();
-                        hppTukang.Debit = invoice.TotalServicePlusFee;
-                        hppTukang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.04").FirstOrDefault().Id;
-                        hppTukang.ParentId = transaction.Id;
+                            _transactionDetailRepository.AttachNavigation(hppTukang.Journal);
+                            _transactionDetailRepository.AttachNavigation(hppTukang.Parent);
+                            _transactionDetailRepository.Add(hppTukang);
+                        }
+                        else
+                        {
+                            // HPP Tukang Borongan Debit --> Karena bertambah
+                            TransactionDetail hppTukang = new TransactionDetail();
+                            hppTukang.Debit = invoice.TotalServicePlusFee;
+                            hppTukang.JournalId = _journalMasterRepository.GetMany(j => j.Code == "3.04.04").FirstOrDefault().Id;
+                            hppTukang.ParentId = transaction.Id;
 
-                        _transactionDetailRepository.AttachNavigation(hppTukang.Journal);
-                        _transactionDetailRepository.AttachNavigation(hppTukang.Parent);
-                        _transactionDetailRepository.Add(hppTukang);
+                            _transactionDetailRepository.AttachNavigation(hppTukang.Journal);
+                            _transactionDetailRepository.AttachNavigation(hppTukang.Parent);
+                            _transactionDetailRepository.Add(hppTukang);
+                        }
                     }
 
                     // Sparepart Kredit --> Karena berkurang
@@ -394,15 +397,19 @@ namespace BrawijayaWorkshop.Model
                     _transactionDetailRepository.AttachNavigation(detailSparepart.Parent);
                     _transactionDetailRepository.Add(detailSparepart);
 
-                    // SDM Kredit --> Karena berkurang
-                    TransactionDetail detailSDM = new TransactionDetail();
-                    detailSDM.Credit = invoice.TotalServicePlusFee;
-                    detailSDM.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.04").FirstOrDefault().Id;
-                    detailSDM.ParentId = transaction.Id;
 
-                    _transactionDetailRepository.AttachNavigation(detailSDM.Journal);
-                    _transactionDetailRepository.AttachNavigation(detailSDM.Parent);
-                    _transactionDetailRepository.Add(detailSDM);
+                    if (invoice.TotalServicePlusFee > 0)
+                    {
+                        // SDM Kredit --> Karena berkurang
+                        TransactionDetail detailSDM = new TransactionDetail();
+                        detailSDM.Credit = invoice.TotalServicePlusFee;
+                        detailSDM.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.04.04").FirstOrDefault().Id;
+                        detailSDM.ParentId = transaction.Id;
+
+                        _transactionDetailRepository.AttachNavigation(detailSDM.Journal);
+                        _transactionDetailRepository.AttachNavigation(detailSDM.Parent);
+                        _transactionDetailRepository.Add(detailSDM);
+                    }
 
                     _unitOfWork.SaveChanges();
 

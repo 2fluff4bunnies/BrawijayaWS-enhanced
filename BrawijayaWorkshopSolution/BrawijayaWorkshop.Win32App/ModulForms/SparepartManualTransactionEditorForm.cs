@@ -99,11 +99,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return !string.IsNullOrEmpty(txtItemPrice.Text) ? txtItemPrice.Text.AsDecimal() : 0;
+                return txtItemPrice.EditValue.AsDecimal();
             }
             set
             {
-                txtItemPrice.Text = value.ToString();
+                txtItemPrice.EditValue = value;
             }
         }
 
@@ -111,11 +111,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return !string.IsNullOrEmpty(txtTotalPrice.Text) ? txtTotalPrice.Text.AsDecimal() : 0;
+                return txtTotalPrice.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalPrice.Text = value.ToString();
+                txtTotalPrice.EditValue = value;
             }
         }
 

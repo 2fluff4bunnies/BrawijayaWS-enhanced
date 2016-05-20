@@ -1,11 +1,15 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.View
 {
     public interface ISPKListView : IView
     {
+        DateTime DateFrom { get; set; }
+        DateTime DateTo { get; set; }
+
         int ApprovalStatusFilter { get; set; }
 
         int PrintStatusFilter { get; set; }

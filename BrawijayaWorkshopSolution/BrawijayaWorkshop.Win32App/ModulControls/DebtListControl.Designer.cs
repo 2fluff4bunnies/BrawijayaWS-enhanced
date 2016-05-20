@@ -202,7 +202,7 @@
             // colTotalPrice
             // 
             this.colTotalPrice.Caption = "Total Transaksi";
-            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPrice.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
             this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
@@ -212,7 +212,7 @@
             // colDebtPaid
             // 
             this.colDebtPaid.Caption = "Total Terbayar";
-            this.colDebtPaid.DisplayFormat.FormatString = "{0:#,#}";
+            this.colDebtPaid.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
             this.colDebtPaid.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colDebtPaid.FieldName = "TotalHasPaid";
             this.colDebtPaid.Name = "colDebtPaid";

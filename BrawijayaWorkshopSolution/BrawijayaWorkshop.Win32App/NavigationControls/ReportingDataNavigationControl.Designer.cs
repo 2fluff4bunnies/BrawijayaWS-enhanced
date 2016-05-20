@@ -77,7 +77,7 @@
             // 
             // iSPKHistory
             // 
-            this.iSPKHistory.Caption = "Report History Kendaraan";
+            this.iSPKHistory.Caption = "Report History Pelayanan";
             this.iSPKHistory.LargeImageIndex = 0;
             this.iSPKHistory.Name = "iSPKHistory";
             this.iSPKHistory.SmallImageIndex = 0;

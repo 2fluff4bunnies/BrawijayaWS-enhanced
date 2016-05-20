@@ -167,6 +167,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtItemPrice.Location = new System.Drawing.Point(130, 273);
             this.txtItemPrice.Name = "txtItemPrice";
+            this.txtItemPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtItemPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;
             this.txtItemPrice.EditValueChanged += new System.EventHandler(this.txtItemPrice_EditValueChanged);

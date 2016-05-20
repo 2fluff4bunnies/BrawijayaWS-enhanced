@@ -57,6 +57,30 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         public SPKViewModel SelectedSPK { get; set; }
 
+        public DateTime DateFrom
+        {
+            get
+            {
+                return txtDateFilterFrom.EditValue.AsDateTime();
+            }
+            set
+            {
+                txtDateFilterFrom.EditValue = value;
+            }
+        }
+
+        public DateTime DateTo
+        {
+            get
+            {
+                return txtDateFilterTo.EditValue.AsDateTime();
+            }
+            set
+            {
+                txtDateFilterTo.EditValue = value;
+            }
+        }
+
         public int ApprovalStatusFilter
         {
             get

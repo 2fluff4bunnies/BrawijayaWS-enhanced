@@ -5,7 +5,9 @@ using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -24,7 +26,7 @@ namespace BrawijayaWorkshop.Model
         public List<CustomerViewModel> SearchCustomer(string companyName)
         {
             List<Customer> result = _customerRepository.GetMany(c => c.CompanyName.Contains(companyName) &&
-                c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CompanyName).ToList();
+                c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CompanyName).AsQueryable().Include(c => c.City).ToList();
             List<CustomerViewModel> mappedResult = new List<CustomerViewModel>();
             return Map(result, mappedResult);
         }
