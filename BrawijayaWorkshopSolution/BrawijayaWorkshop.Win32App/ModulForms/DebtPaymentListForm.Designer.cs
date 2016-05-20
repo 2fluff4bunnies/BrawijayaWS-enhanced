@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebtPaymentListForm));
             this.gcDebtPaymentListInfo = new DevExpress.XtraEditors.GroupControl();
+            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             this.gridDebtPayment = new DevExpress.XtraGrid.GridControl();
             this.gvDebtPayment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,9 +49,10 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.deTransDate = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtPaymentListInfo)).BeginInit();
             this.gcDebtPaymentListInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDebtPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDebtPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalNotPaid.Properties)).BeginInit();
@@ -58,8 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcDebtPaymentListInfo
@@ -81,6 +81,24 @@
             this.gcDebtPaymentListInfo.Size = new System.Drawing.Size(538, 406);
             this.gcDebtPaymentListInfo.TabIndex = 1;
             this.gcDebtPaymentListInfo.Text = "Informasi Daftar Pembayaran";
+            // 
+            // deTransDate
+            // 
+            this.deTransDate.EditValue = null;
+            this.deTransDate.Location = new System.Drawing.Point(148, 28);
+            this.deTransDate.Name = "deTransDate";
+            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.deTransDate.Properties.HideSelection = false;
+            this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.deTransDate.Properties.ReadOnly = true;
+            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.deTransDate.Size = new System.Drawing.Size(157, 20);
+            this.deTransDate.TabIndex = 23;
             // 
             // gridDebtPayment
             // 
@@ -130,7 +148,7 @@
             // colTotalPayment
             // 
             this.colTotalPayment.Caption = "Jumlah Pembayaran";
-            this.colTotalPayment.DisplayFormat.FormatString = "{0:#,#}";
+            this.colTotalPayment.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
             this.colTotalPayment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPayment.FieldName = "TotalPayment";
             this.colTotalPayment.Name = "colTotalPayment";
@@ -149,6 +167,8 @@
             // 
             this.txtTotalNotPaid.Location = new System.Drawing.Point(148, 136);
             this.txtTotalNotPaid.Name = "txtTotalNotPaid";
+            this.txtTotalNotPaid.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalNotPaid.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalNotPaid.Properties.ReadOnly = true;
             this.txtTotalNotPaid.Size = new System.Drawing.Size(157, 20);
             this.txtTotalNotPaid.TabIndex = 21;
@@ -165,6 +185,8 @@
             // 
             this.ttTotalPaid.Location = new System.Drawing.Point(148, 109);
             this.ttTotalPaid.Name = "ttTotalPaid";
+            this.ttTotalPaid.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.ttTotalPaid.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.ttTotalPaid.Properties.ReadOnly = true;
             this.ttTotalPaid.Size = new System.Drawing.Size(157, 20);
             this.ttTotalPaid.TabIndex = 19;
@@ -181,6 +203,8 @@
             // 
             this.txtTotalTransaction.Location = new System.Drawing.Point(148, 82);
             this.txtTotalTransaction.Name = "txtTotalTransaction";
+            this.txtTotalTransaction.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalTransaction.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalTransaction.Properties.ReadOnly = true;
             this.txtTotalTransaction.Size = new System.Drawing.Size(157, 20);
             this.txtTotalTransaction.TabIndex = 17;
@@ -241,24 +265,6 @@
             this.cmsDelete.Text = "Hapus Data";
             this.cmsDelete.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
-            // deTransDate
-            // 
-            this.deTransDate.EditValue = null;
-            this.deTransDate.Location = new System.Drawing.Point(148, 28);
-            this.deTransDate.Name = "deTransDate";
-            this.deTransDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTransDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTransDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.deTransDate.Properties.HideSelection = false;
-            this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.deTransDate.Properties.ReadOnly = true;
-            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.deTransDate.Size = new System.Drawing.Size(157, 20);
-            this.deTransDate.TabIndex = 23;
-            // 
             // DebtPaymentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +278,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcDebtPaymentListInfo)).EndInit();
             this.gcDebtPaymentListInfo.ResumeLayout(false);
             this.gcDebtPaymentListInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDebtPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDebtPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalNotPaid.Properties)).EndInit();
@@ -279,8 +287,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalTransaction.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

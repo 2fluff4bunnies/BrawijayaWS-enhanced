@@ -38,8 +38,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void HistorySparepartListControl_Load(object sender, EventArgs e)
         {
-            DateFromFilter = DateTime.Now;
-            DateToFilter = DateTime.Now;
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 
@@ -107,11 +106,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return lookupSparepart.EditValue.AsInteger();
+                return lookupVehicleNo.EditValue.AsInteger();
             }
             set
             {
-                lookupSparepart.EditValue = value;
+                lookupVehicleNo.EditValue = value;
             }
         }
 

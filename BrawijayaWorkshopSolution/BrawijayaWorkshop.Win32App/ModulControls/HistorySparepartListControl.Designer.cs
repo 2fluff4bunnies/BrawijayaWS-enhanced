@@ -146,6 +146,7 @@
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "cari";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lookupSparepart
             // 
@@ -251,7 +252,7 @@
             // colLicenseNumber
             // 
             this.colLicenseNumber.Caption = "Nopol";
-            this.colLicenseNumber.FieldName = "Vehicle.ActiveLicenseNumber";
+            this.colLicenseNumber.FieldName = "SPK.Vehicle.ActiveLicenseNumber";
             this.colLicenseNumber.Name = "colLicenseNumber";
             this.colLicenseNumber.Visible = true;
             this.colLicenseNumber.VisibleIndex = 1;
@@ -322,6 +323,11 @@
             this.repoCheckBox.Name = "repoCheckBox";
             this.repoCheckBox.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
             // HistorySparepartListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,6 +336,7 @@
             this.Controls.Add(this.gcFilter);
             this.Name = "HistorySparepartListControl";
             this.Size = new System.Drawing.Size(883, 375);
+            this.Load += new System.EventHandler(this.HistorySparepartListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsedGoodTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
@@ -131,6 +131,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtItemPrice.Location = new System.Drawing.Point(122, 235);
             this.txtItemPrice.Name = "txtItemPrice";
+            this.txtItemPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtItemPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtItemPrice.Size = new System.Drawing.Size(139, 20);
             this.txtItemPrice.TabIndex = 22;
             this.txtItemPrice.Visible = false;
@@ -193,9 +195,9 @@
             this.txtQtyUpdate.Name = "txtQtyUpdate";
             this.txtQtyUpdate.Size = new System.Drawing.Size(98, 20);
             this.txtQtyUpdate.TabIndex = 14;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Jumlah Update Harus Diisi";
-            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
+            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule1);
             // 
             // lblQtyUpdaate
             // 

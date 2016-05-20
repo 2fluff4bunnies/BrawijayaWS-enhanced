@@ -58,11 +58,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return string.IsNullOrEmpty(txtTotalTransaction.Text) ? 0 : txtTotalTransaction.Text.AsDecimal();
+                return txtTotalTransaction.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalTransaction.Text = value.ToString("#,#");
+                txtTotalTransaction.EditValue = value;
             }
         }
 
@@ -70,11 +70,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return string.IsNullOrEmpty(txtTotalPaid.Text) ? 0 : txtTotalPaid.Text.AsDecimal();
+                return txtTotalPaid.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalPaid.Text = value.ToString("#,#");
+                txtTotalPaid.EditValue = value;
             }
         }
 
@@ -82,11 +82,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return string.IsNullOrEmpty(txtTotalNotPaid.Text) ? 0 : txtTotalNotPaid.Text.AsDecimal();
+                return txtTotalNotPaid.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalNotPaid.Text = value.ToString("#,#");
+                txtTotalNotPaid.EditValue = value;
             }
         }
 
@@ -94,11 +94,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return string.IsNullOrEmpty(txtTotalPayment.Text) ? 0 : txtTotalPayment.Text.AsDecimal();
+                return txtTotalPayment.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalPayment.Text = value.ToString("#,#");
+                txtTotalPayment.EditValue = value;
             }
         }
 

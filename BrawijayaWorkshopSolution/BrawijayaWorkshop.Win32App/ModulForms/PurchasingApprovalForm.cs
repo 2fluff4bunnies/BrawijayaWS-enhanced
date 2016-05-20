@@ -108,11 +108,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return Convert.ToDecimal(txtTotalPrice.EditValue);
+                return txtTotalPrice.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalPrice.EditValue = value.ToString("#,#");
+                txtTotalPrice.EditValue = value;
             }
         }
 
@@ -146,7 +146,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return txtDP.EditValue == null ? 0 : Convert.ToDecimal(txtDP.EditValue);
+                return txtDP.EditValue.AsDecimal();
             }
             set
             {
