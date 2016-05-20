@@ -68,6 +68,10 @@
             this.cmsSetAsCompleted = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
+            this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).BeginInit();
@@ -80,12 +84,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFilter
             // 
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFilter.Controls.Add(this.txtDateFilterTo);
+            this.groupFilter.Controls.Add(this.labelControl1);
+            this.groupFilter.Controls.Add(this.txtDateFilterFrom);
+            this.groupFilter.Controls.Add(this.lblFilterDate);
             this.groupFilter.Controls.Add(this.lookUpContractWorkStatus);
             this.groupFilter.Controls.Add(this.lblContractWork);
             this.groupFilter.Controls.Add(this.lblCompletedStatus);
@@ -109,7 +121,7 @@
             // 
             // lookUpContractWorkStatus
             // 
-            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(94, 95);
+            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(730, 64);
             this.lookUpContractWorkStatus.Name = "lookUpContractWorkStatus";
             this.lookUpContractWorkStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpContractWorkStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -125,7 +137,7 @@
             // 
             // lblContractWork
             // 
-            this.lblContractWork.Location = new System.Drawing.Point(12, 98);
+            this.lblContractWork.Location = new System.Drawing.Point(672, 67);
             this.lblContractWork.Name = "lblContractWork";
             this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 12;
@@ -133,15 +145,15 @@
             // 
             // lblCompletedStatus
             // 
-            this.lblCompletedStatus.Location = new System.Drawing.Point(543, 65);
+            this.lblCompletedStatus.Location = new System.Drawing.Point(393, 98);
             this.lblCompletedStatus.Name = "lblCompletedStatus";
             this.lblCompletedStatus.Size = new System.Drawing.Size(89, 13);
-            this.lblCompletedStatus.TabIndex = 10;
+            this.lblCompletedStatus.TabIndex = 16;
             this.lblCompletedStatus.Text = "Status Pengerjaan";
             // 
             // lookUpCompletedStatus
             // 
-            this.lookUpCompletedStatus.Location = new System.Drawing.Point(638, 62);
+            this.lookUpCompletedStatus.Location = new System.Drawing.Point(488, 95);
             this.lookUpCompletedStatus.Name = "lookUpCompletedStatus";
             this.lookUpCompletedStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpCompletedStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -153,19 +165,19 @@
             this.lookUpCompletedStatus.Properties.NullText = "-- Status --";
             this.lookUpCompletedStatus.Properties.ValueMember = "Status";
             this.lookUpCompletedStatus.Size = new System.Drawing.Size(141, 20);
-            this.lookUpCompletedStatus.TabIndex = 11;
+            this.lookUpCompletedStatus.TabIndex = 17;
             // 
             // lblPrintStatus
             // 
-            this.lblPrintStatus.Location = new System.Drawing.Point(543, 33);
+            this.lblPrintStatus.Location = new System.Drawing.Point(393, 67);
             this.lblPrintStatus.Name = "lblPrintStatus";
             this.lblPrintStatus.Size = new System.Drawing.Size(56, 13);
-            this.lblPrintStatus.TabIndex = 8;
+            this.lblPrintStatus.TabIndex = 10;
             this.lblPrintStatus.Text = "Status Print";
             // 
             // lookUpPrintStatus
             // 
-            this.lookUpPrintStatus.Location = new System.Drawing.Point(638, 30);
+            this.lookUpPrintStatus.Location = new System.Drawing.Point(488, 64);
             this.lookUpPrintStatus.Name = "lookUpPrintStatus";
             this.lookUpPrintStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpPrintStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -177,26 +189,26 @@
             this.lookUpPrintStatus.Properties.NullText = "-- Status --";
             this.lookUpPrintStatus.Properties.ValueMember = "Status";
             this.lookUpPrintStatus.Size = new System.Drawing.Size(141, 20);
-            this.lookUpPrintStatus.TabIndex = 9;
+            this.lookUpPrintStatus.TabIndex = 11;
             // 
             // txtLicenseNumber
             // 
-            this.txtLicenseNumber.Location = new System.Drawing.Point(94, 62);
+            this.txtLicenseNumber.Location = new System.Drawing.Point(110, 64);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Size = new System.Drawing.Size(141, 20);
-            this.txtLicenseNumber.TabIndex = 3;
+            this.txtLicenseNumber.TabIndex = 9;
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 65);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 67);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(76, 13);
-            this.lblLicenseNumber.TabIndex = 2;
+            this.lblLicenseNumber.TabIndex = 8;
             this.lblLicenseNumber.Text = "Nopol Kendaran";
             // 
             // lookUpApprovalStatus
             // 
-            this.lookUpApprovalStatus.Location = new System.Drawing.Point(367, 62);
+            this.lookUpApprovalStatus.Location = new System.Drawing.Point(110, 95);
             this.lookUpApprovalStatus.Name = "lookUpApprovalStatus";
             this.lookUpApprovalStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpApprovalStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -208,19 +220,19 @@
             this.lookUpApprovalStatus.Properties.NullText = "-- Status --";
             this.lookUpApprovalStatus.Properties.ValueMember = "Status";
             this.lookUpApprovalStatus.Size = new System.Drawing.Size(141, 20);
-            this.lookUpApprovalStatus.TabIndex = 7;
+            this.lookUpApprovalStatus.TabIndex = 15;
             // 
             // lblApprovalStatus
             // 
-            this.lblApprovalStatus.Location = new System.Drawing.Point(269, 65);
+            this.lblApprovalStatus.Location = new System.Drawing.Point(12, 98);
             this.lblApprovalStatus.Name = "lblApprovalStatus";
             this.lblApprovalStatus.Size = new System.Drawing.Size(92, 13);
-            this.lblApprovalStatus.TabIndex = 6;
+            this.lblApprovalStatus.TabIndex = 14;
             this.lblApprovalStatus.Text = "Status Persetujuan";
             // 
             // lookUpCategory
             // 
-            this.lookUpCategory.Location = new System.Drawing.Point(367, 30);
+            this.lookUpCategory.Location = new System.Drawing.Point(730, 30);
             this.lookUpCategory.Name = "lookUpCategory";
             this.lookUpCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -233,21 +245,21 @@
             this.lookUpCategory.Properties.NullText = "-- Kategori --";
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(141, 20);
-            this.lookUpCategory.TabIndex = 5;
+            this.lookUpCategory.TabIndex = 7;
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(94, 30);
+            this.txtCode.Location = new System.Drawing.Point(488, 30);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(141, 20);
-            this.txtCode.TabIndex = 1;
+            this.txtCode.TabIndex = 5;
             // 
             // lblCode
             // 
-            this.lblCode.Location = new System.Drawing.Point(12, 33);
+            this.lblCode.Location = new System.Drawing.Point(393, 33);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(45, 13);
-            this.lblCode.TabIndex = 0;
+            this.lblCode.TabIndex = 4;
             this.lblCode.Text = "Kode SPK";
             // 
             // btnSearch
@@ -255,19 +267,19 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(806, 29);
+            this.btnSearch.Location = new System.Drawing.Point(891, 29);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(107, 86);
-            this.btnSearch.TabIndex = 14;
+            this.btnSearch.TabIndex = 18;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(269, 33);
+            this.lblCategory.Location = new System.Drawing.Point(672, 33);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(40, 13);
-            this.lblCategory.TabIndex = 4;
+            this.lblCategory.TabIndex = 6;
             this.lblCategory.Text = "Kategori";
             // 
             // btnNewSPK
@@ -480,6 +492,60 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // txtDateFilterTo
+            // 
+            this.txtDateFilterTo.EditValue = null;
+            this.txtDateFilterTo.Location = new System.Drawing.Point(245, 30);
+            this.txtDateFilterTo.Name = "txtDateFilterTo";
+            this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txtDateFilterTo.Size = new System.Drawing.Size(119, 20);
+            this.txtDateFilterTo.TabIndex = 3;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(235, 33);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(4, 13);
+            this.labelControl1.TabIndex = 2;
+            this.labelControl1.Text = "-";
+            // 
+            // txtDateFilterFrom
+            // 
+            this.txtDateFilterFrom.EditValue = null;
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(110, 30);
+            this.txtDateFilterFrom.Name = "txtDateFilterFrom";
+            this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txtDateFilterFrom.Size = new System.Drawing.Size(119, 20);
+            this.txtDateFilterFrom.TabIndex = 1;
+            // 
+            // lblFilterDate
+            // 
+            this.lblFilterDate.Location = new System.Drawing.Point(12, 33);
+            this.lblFilterDate.Name = "lblFilterDate";
+            this.lblFilterDate.Size = new System.Drawing.Size(63, 13);
+            this.lblFilterDate.TabIndex = 0;
+            this.lblFilterDate.Text = "Tanggal SPK:";
+            // 
             // SPKListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -502,6 +568,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -546,5 +616,9 @@
         private System.Windows.Forms.ToolStripMenuItem cmsPrintApproval;
         private DevExpress.XtraEditors.LookUpEdit lookUpContractWorkStatus;
         private DevExpress.XtraEditors.LabelControl lblContractWork;
+        private DevExpress.XtraEditors.DateEdit txtDateFilterTo;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
+        private DevExpress.XtraEditors.LabelControl lblFilterDate;
     }
 }

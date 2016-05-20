@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
@@ -14,6 +15,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitData()
         {
+            View.DateFrom = View.DateTo = DateTime.Today;
             View.CategoryDropdownList = Model.GetSPKCategoryList();
             View.ApprovalStatusDropdownList = GetApprovalStatusDropdownList();
             View.PrintStatusDropdownList = GetPrintStatusDropdownList();
@@ -23,7 +25,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadSPK()
         {
-            View.SPKListData = Model.SearchSPK(View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter, (DbConstant.SPKCompletionStatus)View.CompletedStatusFilter, View.ContractWorkStatusFilter);
+            View.SPKListData = Model.SearchSPK(View.DateFrom, View.DateTo, View.LicenseNumberFilter, View.CodeFilter, View.CategoryFilter, (DbConstant.ApprovalStatus)View.ApprovalStatusFilter, (DbConstant.SPKPrintStatus)View.PrintStatusFilter, (DbConstant.SPKCompletionStatus)View.CompletedStatusFilter, View.ContractWorkStatusFilter);
         }
 
         public void PrintSPK()

@@ -5,6 +5,7 @@ using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
@@ -19,7 +20,7 @@ namespace BrawijayaWorkshop.Model
 
         public SPKListModel(ISPKRepository SPKRepository, IReferenceRepository referenceRepository,
             IVehicleRepository vehicleRepository, IVehicleDetailRepository vehicleDetailRepository, IUnitOfWork unitOfWork)
-            :base()
+            : base()
         {
             _SPKRepository = SPKRepository;
             _vehicleRepository = vehicleRepository;
@@ -28,10 +29,13 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SPKViewModel> SearchSPK(string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus, 
+        public List<SPKViewModel> SearchSPK(DateTime from, DateTime to, string LicenseNumber, string code, int category, DbConstant.ApprovalStatus approvalStatus,
             DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus, int isContractWork)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk =>
+                DbFunctions.TruncateTime(spk.CreateDate) >= DbFunctions.TruncateTime(from) &&
+                DbFunctions.TruncateTime(spk.CreateDate) <= DbFunctions.TruncateTime(to) &&
+                spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             if ((int)completedStatus != 9)
             {
@@ -118,7 +122,7 @@ namespace BrawijayaWorkshop.Model
             entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
             entity.ModifyDate = serverTime;
             entity.ModifyUserId = userId;
-           
+
             _SPKRepository.Update(entity);
 
             _unitOfWork.SaveChanges();
