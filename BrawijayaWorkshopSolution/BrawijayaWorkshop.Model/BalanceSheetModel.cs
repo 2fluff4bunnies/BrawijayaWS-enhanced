@@ -58,7 +58,7 @@ namespace BrawijayaWorkshop.Model
                         if (base.IsCurrentJournalValid(itemBalance.Journal, item.Value))
                         {
                             decimal currentAmount = (itemBalance.LastDebit ?? 0) - (itemBalance.LastCredit ?? 0);
-                            detail.Amount += Math.Abs(currentAmount);
+                            detail.Amount += currentAmount;
 
                             cachedItems.Add(itemBalance.Id);
                         }
@@ -91,7 +91,7 @@ namespace BrawijayaWorkshop.Model
                         if (base.IsCurrentJournalValid(itemBalance.Journal, item.Value))
                         {
                             decimal currentAmount = (itemBalance.LastDebit ?? 0) - (itemBalance.LastCredit ?? 0);
-                            detail.Amount += Math.Abs(currentAmount);
+                            detail.Amount += currentAmount;
 
                             cachedItems.Add(itemBalance.Id);
                         }
