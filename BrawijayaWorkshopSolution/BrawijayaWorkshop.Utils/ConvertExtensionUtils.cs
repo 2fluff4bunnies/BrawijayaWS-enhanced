@@ -105,6 +105,11 @@ namespace BrawijayaWorkshop.Utils
             }
             catch (Exception ex)
             {
+                if (string.IsNullOrEmpty(sender.ToString()))
+                {
+                    return false;
+                }
+
                 throw new ConvertExtentionUtilsException("An error occured while trying to convert: " + sender +
                     " into Boolean", ex);
             }
@@ -136,6 +141,11 @@ namespace BrawijayaWorkshop.Utils
             }
             catch (Exception ex)
             {
+                if (string.IsNullOrEmpty(sender.ToString()))
+                {
+                    return 0;
+                }
+
                 throw new ConvertExtentionUtilsException("An error occured while trying to convert: " + sender +
                     " into Integer", ex);
             }
@@ -149,6 +159,11 @@ namespace BrawijayaWorkshop.Utils
             }
             catch (Exception ex)
             {
+                if(string.IsNullOrEmpty(sender.ToString()))
+                {
+                    return 0;
+                }
+
                 throw new ConvertExtentionUtilsException("An error occured while trying to convert: " + sender +
                     " into Double", ex);
             }
@@ -162,9 +177,13 @@ namespace BrawijayaWorkshop.Utils
             }
             catch (Exception ex)
             {
+                if(string.IsNullOrEmpty(sender.ToString()))
+                {
+                    return 0M;
+                }
+
                 throw new ConvertExtentionUtilsException("An error occured while trying to convert: " + sender +
                    " into Decimal", ex);
-                throw;
             }
         }
     }
