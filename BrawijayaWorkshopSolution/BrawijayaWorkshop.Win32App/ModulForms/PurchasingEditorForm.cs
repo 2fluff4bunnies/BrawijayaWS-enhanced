@@ -41,11 +41,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             GridView View = sender as GridView;
             if (View.FocusedColumn.FieldName == "SerialNumber" && !this.SelectedPurchasingDetail.IsSpecialSparepart)
             {
-                string serialNumber = View.GetFocusedRowCellValue(View.FocusedColumn.FieldName).ToString();
-
-                if (!_presenter.ValidateSerialNumber(serialNumber))
+                object fieldSerialNumber = View.GetFocusedRowCellValue(View.FocusedColumn.FieldName);
+                if (fieldSerialNumber != null)
                 {
-                    this.ShowWarning("Nomor seri " + serialNumber + " sudah digunakan.");
+                    string serialNumber = fieldSerialNumber.ToString();
+
+                    if (!_presenter.ValidateSerialNumber(serialNumber))
+                    {
+                        this.ShowWarning("Nomor seri " + serialNumber + " sudah digunakan.");
+                    }
                 }
             }
         }

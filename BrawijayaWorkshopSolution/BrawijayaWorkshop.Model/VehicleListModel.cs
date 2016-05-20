@@ -29,7 +29,7 @@ namespace BrawijayaWorkshop.Model
         public List<VehicleViewModel> SearchVehicle(string licenseNumber)
         {
             List<Vehicle> result = _vehicleRepository.GetMany(v => v.ActiveLicenseNumber.Contains(licenseNumber) &&
-                v.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.Brand).ToList();
+                v.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.VehicleGroupId).ToList();
             List<VehicleViewModel> mappedResult = new List<VehicleViewModel>();
             return Map(result, mappedResult);
         }
