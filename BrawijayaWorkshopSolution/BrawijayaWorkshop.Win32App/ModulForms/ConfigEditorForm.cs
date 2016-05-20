@@ -1,5 +1,7 @@
-﻿using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
@@ -26,6 +28,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             valOldPassword.SetIconAlignment(txtOldPassword, ErrorIconAlignment.MiddleRight);
             valNewPassword.SetIconAlignment(txtNewPassword, ErrorIconAlignment.MiddleRight);
             valReTypeNewPass.SetIconAlignment(txtReTypeNewPassword, ErrorIconAlignment.MiddleRight);
+
+            tpFingerprint.PageVisible = tpSparepart.PageVisible = tpSPK.PageVisible = LoginInformation.IsModulAllowed(DbConstant.MODUL_DBCONFIG);
 
             this.Load += ConfigEditorForm_Load;
         }
@@ -135,7 +139,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnCheckFingerprintConnection_Click(object sender, EventArgs e)
         {
-            if(!bgwFingerprint.IsBusy)
+            if (!bgwFingerprint.IsBusy)
             {
                 Cursor = Cursors.WaitCursor;
                 lblFingerprintStatus.Text = "Sedang memproses";
@@ -216,9 +220,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            if(valOldPassword.Validate() && valNewPassword.Validate() && valReTypeNewPass.Validate())
+            if (valOldPassword.Validate() && valNewPassword.Validate() && valReTypeNewPass.Validate())
             {
-                if(_presenter.ValidatePassword())
+                if (_presenter.ValidatePassword())
                 {
                     _presenter.SavePasswordChanges();
                 }
