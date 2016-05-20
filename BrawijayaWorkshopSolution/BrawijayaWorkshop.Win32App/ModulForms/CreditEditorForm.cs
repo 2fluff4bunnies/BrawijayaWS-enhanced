@@ -42,7 +42,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public new string CustomerName
+        public string CustomerName
         {
             get
             {

@@ -167,9 +167,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsEditData_Click(object sender, EventArgs e)
         {
-            if (_selectedTransaction != null)
+            if (_selectedTransaction != null && TransactionListData != null && TransactionListData.Count > 0)
             {
-                if(_selectedTransaction == TransactionListData.First())
+                if (_selectedTransaction.Id == TransactionListData.FirstOrDefault().Id)
                 {
                     this.ShowError("Data pembayaran purchasing tidak dapat diubah pada menu ini");
                 }
@@ -191,7 +191,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 try
                 {
-                    if (_selectedTransaction == TransactionListData.First())
+                    if (_selectedTransaction.Id == TransactionListData.FirstOrDefault().Id)
                     {
                         this.ShowError("Data pembayaran purchasing tidak dapat diubah pada menu ini");
                     }

@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.Model
             List<Transaction> result = null;
 
             Reference reference = _referenceRepository.GetMany(x => x.Code == DbConstant.REF_TRANSTBL_INVOICE).FirstOrDefault();
-            result = _transactionRepository.GetMany(c => c.PrimaryKeyValue == referencePK && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
+            result = _transactionRepository.GetMany(c => c.ReferenceTableId == reference.Id && c.PrimaryKeyValue == referencePK && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
 
             List<TransactionViewModel> mappedResult = new List<TransactionViewModel>();
             return Map(result, mappedResult);

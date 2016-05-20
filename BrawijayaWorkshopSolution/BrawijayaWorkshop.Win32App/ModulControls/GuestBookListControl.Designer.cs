@@ -71,7 +71,7 @@
             // colBrand
             // 
             this.colBrand.Caption = "Merek";
-            this.colBrand.FieldName = "Vehicle.Brand";
+            this.colBrand.FieldName = "Vehicle.Brand.Name";
             this.colBrand.Name = "colBrand";
             this.colBrand.Visible = true;
             this.colBrand.VisibleIndex = 2;
@@ -120,7 +120,7 @@
             // colType
             // 
             this.colType.Caption = "Tipe";
-            this.colType.FieldName = "Vehicle.Type";
+            this.colType.FieldName = "Vehicle.Type.Name";
             this.colType.Name = "colType";
             this.colType.Visible = true;
             this.colType.VisibleIndex = 3;
@@ -155,7 +155,7 @@
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
@@ -166,13 +166,13 @@
             this.cmsDeleteData,
             this.toolStripSeparator1});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 76);
+            this.cmsEditor.Size = new System.Drawing.Size(136, 54);
             // 
             // cmsDeleteData
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 

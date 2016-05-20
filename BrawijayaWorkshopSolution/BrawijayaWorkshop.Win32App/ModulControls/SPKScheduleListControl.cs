@@ -102,11 +102,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return dteCreatedDate.Text.AsDateTime();
+                return dteCreatedDate.EditValue.AsDateTime();
             }
             set
             {
-                dteCreatedDate.Text = value.ToShortDateString();
+                dteCreatedDate.EditValue = value;
             }
         }
 
@@ -189,7 +189,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsDeleteData_Click(object sender, EventArgs e)
         {
-            if (this.SelectedSPKSchedule== null) return;
+            if (this.SelectedSPKSchedule == null) return;
 
             if (this.ShowConfirmation("Apakah anda yakin ingin menghapus jadwal spk untuk kendaraan dengan nomor polisi : '" + SelectedSPKSchedule.SPK.Vehicle.ActiveLicenseNumber + "'?") == DialogResult.Yes)
             {
