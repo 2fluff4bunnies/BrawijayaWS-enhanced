@@ -86,7 +86,7 @@
             this.gcMechanicInfo.Location = new System.Drawing.Point(0, 0);
             this.gcMechanicInfo.Name = "gcMechanicInfo";
             this.gcMechanicInfo.Size = new System.Drawing.Size(385, 235);
-            this.gcMechanicInfo.TabIndex = 1;
+            this.gcMechanicInfo.TabIndex = 0;
             this.gcMechanicInfo.Text = "Informasi Mechanic";
             // 
             // txtBaseFee
@@ -98,7 +98,7 @@
             this.txtBaseFee.Properties.Mask.EditMask = "n0";
             this.txtBaseFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtBaseFee.Size = new System.Drawing.Size(162, 20);
-            this.txtBaseFee.TabIndex = 16;
+            this.txtBaseFee.TabIndex = 10;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Ongkos harus diisi";
             this.valBaseFee.SetValidationRule(this.txtBaseFee, conditionValidationRule1);
@@ -108,7 +108,7 @@
             this.lblBaseFee.Location = new System.Drawing.Point(12, 199);
             this.lblBaseFee.Name = "lblBaseFee";
             this.lblBaseFee.Size = new System.Drawing.Size(36, 13);
-            this.lblBaseFee.TabIndex = 15;
+            this.lblBaseFee.TabIndex = 9;
             this.lblBaseFee.Text = "Ongkos";
             // 
             // btnEnroll
@@ -116,7 +116,7 @@
             this.btnEnroll.Location = new System.Drawing.Point(11, 63);
             this.btnEnroll.Name = "btnEnroll";
             this.btnEnroll.Size = new System.Drawing.Size(362, 23);
-            this.btnEnroll.TabIndex = 14;
+            this.btnEnroll.TabIndex = 2;
             this.btnEnroll.Text = "Daftarkan Kode Pada Fingerprint";
             this.btnEnroll.Click += new System.EventHandler(this.btnEnroll_Click);
             // 
@@ -125,7 +125,7 @@
             this.lblMechanicCode.Location = new System.Drawing.Point(11, 35);
             this.lblMechanicCode.Name = "lblMechanicCode";
             this.lblMechanicCode.Size = new System.Drawing.Size(25, 13);
-            this.lblMechanicCode.TabIndex = 13;
+            this.lblMechanicCode.TabIndex = 0;
             this.lblMechanicCode.Text = "Code";
             // 
             // txtCode
@@ -136,7 +136,7 @@
             this.txtCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Regular;
             this.txtCode.Properties.Mask.SaveLiteral = false;
             this.txtCode.Size = new System.Drawing.Size(162, 20);
-            this.txtCode.TabIndex = 12;
+            this.txtCode.TabIndex = 1;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "Code harus diisi!";
             this.valCode.SetValidationRule(this.txtCode, conditionValidationRule2);
@@ -151,7 +151,7 @@
             this.txtPhoneNumber.Properties.Mask.EditMask = "[0-9]*";
             this.txtPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPhoneNumber.Size = new System.Drawing.Size(162, 20);
-            this.txtPhoneNumber.TabIndex = 11;
+            this.txtPhoneNumber.TabIndex = 8;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule4.ErrorText = "No. Telp. harus diisi!";
             this.valPhone.SetValidationRule(this.txtPhoneNumber, conditionValidationRule4);
@@ -161,7 +161,7 @@
             this.lblPhoneNumber.Location = new System.Drawing.Point(11, 170);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
             this.lblPhoneNumber.Size = new System.Drawing.Size(44, 13);
-            this.lblPhoneNumber.TabIndex = 10;
+            this.lblPhoneNumber.TabIndex = 7;
             this.lblPhoneNumber.Text = "No. Telp.";
             // 
             // txtAddress
@@ -169,7 +169,7 @@
             this.txtAddress.Location = new System.Drawing.Point(127, 135);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(247, 20);
-            this.txtAddress.TabIndex = 5;
+            this.txtAddress.TabIndex = 6;
             conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule5.ErrorText = "Alamat harus diisi!";
             this.valAddress.SetValidationRule(this.txtAddress, conditionValidationRule5);
@@ -179,7 +179,7 @@
             this.lblAddress.Location = new System.Drawing.Point(11, 138);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(33, 13);
-            this.lblAddress.TabIndex = 4;
+            this.lblAddress.TabIndex = 5;
             this.lblAddress.Text = "Alamat";
             // 
             // txtMechanicName
@@ -187,7 +187,7 @@
             this.txtMechanicName.Location = new System.Drawing.Point(127, 105);
             this.txtMechanicName.Name = "txtMechanicName";
             this.txtMechanicName.Size = new System.Drawing.Size(247, 20);
-            this.txtMechanicName.TabIndex = 3;
+            this.txtMechanicName.TabIndex = 4;
             conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule6.ErrorText = "Nama Mechanic harus diisi!";
             this.valMechanicName.SetValidationRule(this.txtMechanicName, conditionValidationRule6);
@@ -197,7 +197,7 @@
             this.lblMechanicName.Location = new System.Drawing.Point(11, 108);
             this.lblMechanicName.Name = "lblMechanicName";
             this.lblMechanicName.Size = new System.Drawing.Size(74, 13);
-            this.lblMechanicName.TabIndex = 2;
+            this.lblMechanicName.TabIndex = 3;
             this.lblMechanicName.Text = "Nama Mechanic";
             // 
             // valMechanicName
