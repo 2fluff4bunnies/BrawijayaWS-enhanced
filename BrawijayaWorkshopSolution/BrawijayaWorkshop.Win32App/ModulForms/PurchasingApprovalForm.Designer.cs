@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasingApprovalForm));
             this.gcPurchasingInfo = new DevExpress.XtraEditors.GroupControl();
@@ -49,9 +50,9 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnReject = new DevExpress.XtraEditors.SimpleButton();
             this.btnApprove = new DevExpress.XtraEditors.SimpleButton();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lihatSparepartDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.valPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.valPayment = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchasingInfo)).BeginInit();
             this.gcPurchasingInfo.SuspendLayout();
@@ -172,7 +173,7 @@
             // colPrice
             // 
             this.colPrice.Caption = "Harga per Item";
-            this.colPrice.DisplayFormat.FormatString = "#,#";
+            this.colPrice.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
             this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
@@ -183,6 +184,8 @@
             // 
             this.txtDP.Location = new System.Drawing.Point(155, 125);
             this.txtDP.Name = "txtDP";
+            this.txtDP.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtDP.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtDP.Size = new System.Drawing.Size(167, 20);
             this.txtDP.TabIndex = 7;
             this.txtDP.Visible = false;

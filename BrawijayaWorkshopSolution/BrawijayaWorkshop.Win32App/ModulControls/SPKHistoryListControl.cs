@@ -299,5 +299,42 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             btnSearch.PerformClick();
         }
+
+        private void gvSPK_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e)
+        {
+            ColumnView view = sender as ColumnView;
+            if (e.Column.FieldName == "StatusApprovalId" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "StatusApprovalId");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Menunggu Persetujuan"; break;
+                    case 1: e.DisplayText = "Disetujui"; break;
+                    case 2: e.DisplayText = "Direvisi"; break;
+                    case -1: e.DisplayText = "Ditolak"; break;
+                }
+            }
+
+            if (e.Column.FieldName == "StatusPrintId" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "StatusPrintId");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Menunggu Persetujuan"; break;
+                    case 1: e.DisplayText = "Siap Print"; break;
+                    case 2: e.DisplayText = "Sudah Diprint"; break;
+                }
+            }
+
+            if (e.Column.FieldName == "StatusCompletedId" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+            {
+                int status = (int)view.GetListSourceRowCellValue(e.ListSourceRowIndex, "StatusCompletedId");
+                switch (status)
+                {
+                    case 0: e.DisplayText = "Dalam Pengerjaan"; break;
+                    case 1: e.DisplayText = "Selesai"; break;
+                }
+            }
+        }
     }
 }

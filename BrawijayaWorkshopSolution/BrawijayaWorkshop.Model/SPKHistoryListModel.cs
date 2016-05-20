@@ -37,7 +37,9 @@ namespace BrawijayaWorkshop.Model
 
             if (dateFrom.HasValue && dateTo.HasValue)
             {
-                result = result.Where(spk => spk.CreateDate.Date >= dateFrom && spk.CreateDate.Date <= dateTo).ToList();
+                dateFrom = dateFrom.Value.Date;
+                dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
+                result = result.Where(spk => spk.CreateDate >= dateFrom && spk.CreateDate <= dateTo).ToList();
             }
 
             if (!string.IsNullOrEmpty(LicenseNumber))

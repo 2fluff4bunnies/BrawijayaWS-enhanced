@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using System;
 using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
@@ -14,7 +15,10 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitData()
         {
+            View.DateFilterFrom = DateTime.Now;
+            View.DateFilterTo = DateTime.Now;
             View.CategoryDropdownList = Model.GetSPKCategoryList();
+            View.CustomerDropdownList = Model.GetSPKCustomerList();
             View.ContractWorkStatusDropdownList = GetContractWorkStatusDropdownList();
         }
 

@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule9 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleEditorForm));
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule8 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.txtYearOfPurchase = new DevExpress.XtraEditors.TextEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
@@ -111,9 +111,9 @@
             this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(256, 20);
             this.lookUpCustomer.TabIndex = 1;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Customer harus dipilih";
-            this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule1);
+            conditionValidationRule9.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule9.ErrorText = "Customer harus dipilih";
+            this.FieldsValidator.SetValidationRule(this.lookUpCustomer, conditionValidationRule9);
             // 
             // txtYearOfPurchase
             // 
@@ -126,9 +126,9 @@
             this.txtYearOfPurchase.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtYearOfPurchase.Size = new System.Drawing.Size(256, 20);
             this.txtYearOfPurchase.TabIndex = 13;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Tahun Pembelian harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Tahun Pembelian harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtYearOfPurchase, conditionValidationRule1);
             // 
             // lblCustomer
             // 
@@ -215,10 +215,10 @@
             this.lookupGroup.Properties.ValueMember = "Id";
             this.lookupGroup.Size = new System.Drawing.Size(256, 20);
             this.lookupGroup.TabIndex = 3;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
-            conditionValidationRule3.ErrorText = "Pilih Kelompok";
-            conditionValidationRule3.Value1 = "-- Pilih Kelompok --";
-            this.valGroupName.SetValidationRule(this.lookupGroup, conditionValidationRule3);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.NotEquals;
+            conditionValidationRule2.ErrorText = "Pilih Kelompok";
+            conditionValidationRule2.Value1 = "-- Pilih Kelompok --";
+            this.valGroupName.SetValidationRule(this.lookupGroup, conditionValidationRule2);
             // 
             // lblVehicleGroup
             // 
@@ -270,9 +270,9 @@
             this.lookUpBrand.Properties.ValueMember = "Id";
             this.lookUpBrand.Size = new System.Drawing.Size(256, 20);
             this.lookUpBrand.TabIndex = 7;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Merek harus dipilih";
-            this.FieldsValidator.SetValidationRule(this.lookUpBrand, conditionValidationRule4);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Merek harus dipilih";
+            this.FieldsValidator.SetValidationRule(this.lookUpBrand, conditionValidationRule3);
             // 
             // lookUpType
             // 
@@ -293,9 +293,9 @@
             this.lookUpType.Properties.ValueMember = "Id";
             this.lookUpType.Size = new System.Drawing.Size(256, 20);
             this.lookUpType.TabIndex = 9;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "Tipe harus dipilih";
-            this.FieldsValidator.SetValidationRule(this.lookUpType, conditionValidationRule5);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Tipe harus dipilih";
+            this.FieldsValidator.SetValidationRule(this.lookUpType, conditionValidationRule4);
             // 
             // txtCode
             // 
@@ -307,9 +307,9 @@
             this.txtCode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCode.Size = new System.Drawing.Size(256, 20);
             this.txtCode.TabIndex = 11;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Kode harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtCode, conditionValidationRule6);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "Kode harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtCode, conditionValidationRule5);
             // 
             // lblCode
             // 
@@ -379,9 +379,11 @@
             this.lookupWheelDetailGv.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupWheelDetailGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupWheelDetailGv.DisplayMember = "SerialNumber";
             this.lookupWheelDetailGv.HideSelection = false;
             this.lookupWheelDetailGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupWheelDetailGv.Name = "lookupWheelDetailGv";
+            this.lookupWheelDetailGv.ValueMember = "Id";
             // 
             // dtpExpirationDate
             // 
@@ -402,9 +404,9 @@
             this.dtpExpirationDate.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.dtpExpirationDate.Size = new System.Drawing.Size(256, 20);
             this.dtpExpirationDate.TabIndex = 17;
-            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule7.ErrorText = "Tanggal kadaluarsa nopol harus diisi!";
-            this.ValidateExpireDate.SetValidationRule(this.dtpExpirationDate, conditionValidationRule7);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "Tanggal kadaluarsa nopol harus diisi!";
+            this.ValidateExpireDate.SetValidationRule(this.dtpExpirationDate, conditionValidationRule6);
             // 
             // lblExpirationDate
             // 
@@ -428,9 +430,9 @@
             this.txtLicenseNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtLicenseNumber.Size = new System.Drawing.Size(256, 20);
             this.txtLicenseNumber.TabIndex = 5;
-            conditionValidationRule8.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule8.ErrorText = "Nomor Polisi harus diisi";
-            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule8);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule7.ErrorText = "Nomor Polisi harus diisi";
+            this.FieldsValidator.SetValidationRule(this.txtLicenseNumber, conditionValidationRule7);
             // 
             // lblLicenseNumber
             // 

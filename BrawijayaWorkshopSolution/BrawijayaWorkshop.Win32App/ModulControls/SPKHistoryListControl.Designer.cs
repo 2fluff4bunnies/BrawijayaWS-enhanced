@@ -59,7 +59,6 @@
             this.lblCode = new DevExpress.XtraEditors.LabelControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
-            this.btnNewSPK = new DevExpress.XtraEditors.SimpleButton();
             this.cmsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
@@ -139,13 +138,13 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewDetailToolStripMenuItem});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 48);
+            this.cmsEditor.Size = new System.Drawing.Size(134, 26);
             // 
             // viewDetailToolStripMenuItem
             // 
             this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
             this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
             this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
             // 
@@ -190,6 +189,7 @@
             this.gvSPK.OptionsView.ShowGroupPanel = false;
             this.gvSPK.OptionsView.ShowViewCaption = true;
             this.gvSPK.ViewCaption = "Daftar SPK";
+            this.gvSPK.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvSPK_CustomColumnDisplayText);
             // 
             // gcSPK
             // 
@@ -330,11 +330,11 @@
             this.lookUpCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Status")});
-            this.lookUpCustomer.Properties.DisplayMember = "Description";
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Customer")});
+            this.lookUpCustomer.Properties.DisplayMember = "CompanyName";
             this.lookUpCustomer.Properties.HideSelection = false;
             this.lookUpCustomer.Properties.NullText = "-- Customer --";
-            this.lookUpCustomer.Properties.ValueMember = "Status";
+            this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(141, 20);
             this.lookUpCustomer.TabIndex = 7;
             // 
@@ -384,9 +384,9 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(806, 29);
+            this.btnSearch.Location = new System.Drawing.Point(791, 24);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(107, 86);
+            this.btnSearch.Size = new System.Drawing.Size(73, 29);
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -399,23 +399,11 @@
             this.lblCategory.TabIndex = 4;
             this.lblCategory.Text = "Kategori";
             // 
-            // btnNewSPK
-            // 
-            this.btnNewSPK.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSPK.Image")));
-            this.btnNewSPK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnNewSPK.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNewSPK.Location = new System.Drawing.Point(3, 137);
-            this.btnNewSPK.Name = "btnNewSPK";
-            this.btnNewSPK.Size = new System.Drawing.Size(103, 23);
-            this.btnNewSPK.TabIndex = 4;
-            this.btnNewSPK.Text = "Buat SPK Baru";
-            // 
             // SPKHistoryListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupFilter);
-            this.Controls.Add(this.btnNewSPK);
             this.Controls.Add(this.gcSPK);
             this.Name = "SPKHistoryListControl";
             this.Size = new System.Drawing.Size(1091, 444);
@@ -465,7 +453,6 @@
         private DevExpress.XtraEditors.LabelControl lblCode;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.LabelControl lblCategory;
-        private DevExpress.XtraEditors.SimpleButton btnNewSPK;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl lblFilterDate;
         private DevExpress.XtraEditors.DateEdit txtDateFilterTo;

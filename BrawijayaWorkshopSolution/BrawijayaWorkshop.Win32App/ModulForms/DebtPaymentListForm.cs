@@ -126,11 +126,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return txtTotalTransaction.Text.AsDecimal();
+                return txtTotalTransaction.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalTransaction.Text = value.ToString("#,#");
+                txtTotalTransaction.EditValue = value;
             }
         }
 
@@ -138,11 +138,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return ttTotalPaid.Text.AsDecimal();
+                return ttTotalPaid.EditValue.AsDecimal();
             }
             set
             {
-                ttTotalPaid.Text = value.ToString("#,#");
+                ttTotalPaid.EditValue = value;
             }
         }
 
@@ -150,11 +150,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             get
             {
-                return txtTotalNotPaid.Text.AsDecimal();
+                return txtTotalNotPaid.EditValue.AsDecimal();
             }
             set
             {
-                txtTotalNotPaid.Text = value.ToString("#,#");
+                txtTotalNotPaid.EditValue = value;
             }
         }
 

@@ -96,11 +96,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return !string.IsNullOrEmpty(txtItemPrice.Text) ? txtItemPrice.Text.AsDouble() : 0;
+                return txtItemPrice.EditValue.AsDouble();
             }
             set
             {
-                txtItemPrice.Text = value.ToString();
+                txtItemPrice.EditValue = value.ToString();
             }
         }
 
