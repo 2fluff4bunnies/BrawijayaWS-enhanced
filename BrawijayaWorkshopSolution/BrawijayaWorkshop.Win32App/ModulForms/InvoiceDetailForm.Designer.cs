@@ -397,7 +397,7 @@
             // colPurchasePrice
             // 
             this.colPurchasePrice.Caption = "Harga Beli";
-            this.colPurchasePrice.DisplayFormat.FormatString = "{0:#,#}";
+            this.colPurchasePrice.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colPurchasePrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPurchasePrice.FieldName = "ItemPrice";
             this.colPurchasePrice.Name = "colPurchasePrice";
@@ -408,7 +408,7 @@
             // colFeePctg
             // 
             this.colFeePctg.Caption = "Tambahan Biaya (%)";
-            this.colFeePctg.DisplayFormat.FormatString = "{0:#,#}";
+            this.colFeePctg.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colFeePctg.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFeePctg.FieldName = "FeePctg";
             this.colFeePctg.Name = "colFeePctg";
@@ -419,7 +419,7 @@
             // colFinalSubTotal
             // 
             this.colFinalSubTotal.Caption = "Total + Fee";
-            this.colFinalSubTotal.DisplayFormat.FormatString = "{0:#,#}";
+            this.colFinalSubTotal.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colFinalSubTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFinalSubTotal.FieldName = "SubTotalPrice";
             this.colFinalSubTotal.Name = "colFinalSubTotal";

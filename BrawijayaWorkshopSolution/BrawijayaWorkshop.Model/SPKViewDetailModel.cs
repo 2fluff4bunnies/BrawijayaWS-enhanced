@@ -344,7 +344,7 @@ namespace BrawijayaWorkshop.Model
             }
             invc.TotalServicePlusFee = invc.TotalService + invc.TotalFeeService;
             invc.TotalSparepartAndService = invc.TotalSparepartPlusFee + invc.TotalServicePlusFee;
-            invc.TotalValueAdded = 10 / 100 * invc.TotalSparepartAndService;
+            invc.TotalValueAdded = (invc.TotalSparepartAndService * (0.1).AsDecimal());
             invc.TotalPrice = invc.TotalValueAdded + invc.TotalSparepartAndService;
 
             _invoiceRepository.AttachNavigation<SPK>(invc.SPK);

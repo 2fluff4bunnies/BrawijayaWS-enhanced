@@ -31,16 +31,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void InvoiceEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
-            if(isContractWork)
-            {
-                txtValueAdded.Visible = true;
-                lblValueAdded.Visible = true;
-            }
-            else
-            {
-                txtValueAdded.Visible = false;
-                lblValueAdded.Visible = false;
-            }
         }
 
         public TransactionViewModel SelectedTransaction { get; set; }
@@ -295,7 +285,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
-                TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
+                TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
+                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }
 
@@ -313,7 +305,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
-                TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
+                TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
+                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }
 
@@ -334,7 +328,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
             TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
             TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
-            TotalTransaction = TotalSparepartPlusFee + TotalServicePlusFee;
+            TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
+            TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+            TotalTransaction = TotalSparepartAndService + TotalValueAdded;
         }
 
         private void cbPaymentType_EditValueChanged(object sender, EventArgs e)
