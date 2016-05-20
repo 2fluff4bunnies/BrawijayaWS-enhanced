@@ -29,6 +29,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             FieldsValidator.SetIconAlignment(lookUpType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(txtYearOfPurchase, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             FieldsValidator.SetIconAlignment(txtLicenseNumber, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            FieldsValidator.SetIconAlignment(txtCode, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             ValidateExpireDate.SetIconAlignment(dtpExpirationDate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += VehicleEditorForm_Load;
@@ -41,13 +42,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
             coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
-            //coll.Add(new LookUpColumnInfo("SparepartDetail.Sparepart.Name", 0, "Sparepart"));
+            //coll.Add(new LookUpColumnInfo("SparepartName", 0, "Sparepart"));
             lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
             lookupWheelDetailGv.AutoSearchColumnIndex = 1;
 
             lookUpCustomer.EditValueChanged += lookUpCustomer_EditValueChanged;
+
         }
+
+    
 
         public void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
         {
