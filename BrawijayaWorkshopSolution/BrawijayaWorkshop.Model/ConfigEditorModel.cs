@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Model
         {
             foreach (var setting in listSettings)
             {
-                Setting dbObject = new Setting();
+                Setting dbObject = _settingRepository.GetMany(set => set.Key == setting.Key).FirstOrDefault();
                 Map(setting, dbObject);
                 _settingRepository.Update(dbObject);
             }

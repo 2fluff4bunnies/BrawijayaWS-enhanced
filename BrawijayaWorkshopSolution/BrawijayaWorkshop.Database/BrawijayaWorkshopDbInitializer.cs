@@ -5,7 +5,7 @@ using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Database
 {
-    public class BrawijayaWorkshopDbInitializer : DropCreateMySqlDatabaseIfModelChanges<BrawijayaWorkshopDbContext>
+    public class BrawijayaWorkshopDbInitializer : CreateMySqlDatabaseIfNotExists<BrawijayaWorkshopDbContext>
     {
         protected override void Seed(BrawijayaWorkshopDbContext context)
         {

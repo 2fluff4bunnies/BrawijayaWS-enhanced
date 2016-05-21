@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.Kilometers = View.SelectedVehicle.Kilometers;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
-                View.WheelDetailList = Model.RetrieveAllWheelDetails(View.SelectedVehicle.Id);
+                View.WheelDetailList = Model.RetrieveReadyWheelDetails();
             }
             else
             {

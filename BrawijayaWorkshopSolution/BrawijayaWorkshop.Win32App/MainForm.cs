@@ -82,7 +82,8 @@ namespace BrawijayaWorkshop.Win32App
         {
             if (LoginInformation.RoleName != DbConstant.ROLE_SUPERADMIN &&
                 LoginInformation.RoleName != DbConstant.ROLE_ADMIN &&
-                LoginInformation.RoleName != DbConstant.ROLE_MANAGER)
+                LoginInformation.RoleName != DbConstant.ROLE_MANAGER &&
+                LoginInformation.RoleName != DbConstant.ROLE_FINANCE)
             {
                 iMaster.Visibility = BarItemVisibility.Never;
             }
