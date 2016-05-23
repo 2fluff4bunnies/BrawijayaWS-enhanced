@@ -69,7 +69,7 @@ namespace BrawijayaWorkshop.Win32App
                 }
                 else
                 {
-                    MessageBox.Show("An instance of the application is already running.");
+                    MessageBox.Show("Aplikasi MIS Brawijaya sudah berjalan", "Pemberitahuan");
                 }
             }
             finally
