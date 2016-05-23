@@ -5,6 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Reflection;
@@ -24,40 +25,60 @@ namespace BrawijayaWorkshop.Win32App
         [STAThread]
         static void Main()
         {
-            string applicationName = ConfigurationManager.AppSettings["LoggerAppName"];
-            LoggerExtensionUtils.InitLogger(applicationName);
-            LoggerExtensionUtils.FromEmail = ConfigurationManager.AppSettings["MailFrom"].Decrypt();
-            LoggerExtensionUtils.DeveloperEmail = ConfigurationManager.AppSettings["MailDeveloper"].Decrypt();
-
-            MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
-
-            // Registering all dependency injection objects
-            Bootstrapper.Wire(new DependencyInjectionModul());
-
-            // Configure AutoMapper
-            AutoMapperConfiguration.Configure();
-
+            string assName = System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location);
+            System.Threading.Mutex mutex = new System.Threading.Mutex(false, assName);
             try
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
+                if (mutex.WaitOne(0, false))
+                {
+                    // Run the application
+                    string applicationName = ConfigurationManager.AppSettings["LoggerAppName"];
+                    LoggerExtensionUtils.InitLogger(applicationName);
+                    LoggerExtensionUtils.FromEmail = ConfigurationManager.AppSettings["MailFrom"].Decrypt();
+                    LoggerExtensionUtils.DeveloperEmail = ConfigurationManager.AppSettings["MailDeveloper"].Decrypt();
 
-                DevExpress.Skins.SkinManager.EnableFormSkins();
-                DevExpress.UserSkins.BonusSkins.Register();
-                XtraMessageBox.AllowCustomLookAndFeel = true;
-                UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+                    MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - START");
 
-                SplashScreenManager.ShowForm(typeof(StartupScreen), true, true);
+                    // Registering all dependency injection objects
+                    Bootstrapper.Wire(new DependencyInjectionModul());
 
-                Application.Run(FormHelpers.CurrentMainForm);
-                MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
+                    // Configure AutoMapper
+                    AutoMapperConfiguration.Configure();
+
+                    try
+                    {
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
+
+                        DevExpress.Skins.SkinManager.EnableFormSkins();
+                        DevExpress.UserSkins.BonusSkins.Register();
+                        XtraMessageBox.AllowCustomLookAndFeel = true;
+                        UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+
+                        SplashScreenManager.ShowForm(typeof(StartupScreen), true, true);
+
+                        Application.Run(FormHelpers.CurrentMainForm);
+                        MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Error("Unable to initialize database!", ex);
+                        XtraMessageBoxHelper.ShowError(null, "Aplikasi error! Mohon hubungi developer.");
+                        MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("An instance of the application is already running.");
+                }
             }
-            catch (Exception ex)
+            finally
             {
-                MethodBase.GetCurrentMethod().Error("Unable to initialize database!", ex);
-                XtraMessageBoxHelper.ShowError(null, "Aplikasi error! Mohon hubungi developer.");
-                //XtraMessageBox.Show(, "Startup Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, DevExpress.Utils.DefaultBoolean.False);
-                MethodBase.GetCurrentMethod().Info("************** " + applicationName + " - END");
+                if (mutex != null)
+                {
+                    mutex.Close();
+                    mutex = null;
+                }
             }
         }
     }
