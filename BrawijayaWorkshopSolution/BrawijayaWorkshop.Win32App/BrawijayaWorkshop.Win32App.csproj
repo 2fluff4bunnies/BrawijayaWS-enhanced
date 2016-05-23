@@ -1182,6 +1182,7 @@
     <EmbeddedResource Include="StartupScreen.resx">
       <DependentUpon>StartupScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config.bak" />
     <None Include="App.config" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
