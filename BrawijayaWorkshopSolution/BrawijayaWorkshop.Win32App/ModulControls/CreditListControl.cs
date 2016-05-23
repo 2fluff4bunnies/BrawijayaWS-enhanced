@@ -61,7 +61,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     cmsNewPayment.Visible = true;
                     cmsListPayment.Visible = true;
                 }
-                else if (this.SelectedInvoice.Status == (int)DbConstant.PaymentStatus.Settled)
+                else if (this.SelectedInvoice.PaymentStatus == (int)DbConstant.PaymentStatus.Settled)
                 {
                     cmsNewPayment.Visible = false;
                     cmsListPayment.Visible = true;

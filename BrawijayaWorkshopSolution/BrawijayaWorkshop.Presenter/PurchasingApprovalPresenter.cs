@@ -20,6 +20,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.TotalPrice = View.SelectedPurchasing.TotalPrice;
                 View.DateStr = View.SelectedPurchasing.Date.ToString("dd-MM-yyyy");
                 View.SupplierName = View.SelectedPurchasing.Supplier.Name;
+                View.PaymentMethodId = View.SelectedPurchasing.PaymentMethodId;
                 View.ListPurchasingDetail = Model.RetrievePurchasingDetail(View.SelectedPurchasing.Id);
                 View.ListPaymentMethod = Model.RetrievePaymentMethod();                
             }
