@@ -326,12 +326,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
+            if (InvoiceListData == null || InvoiceListData.Count == 0) return;
+
             if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
             {
                 InvoicePrintItem report = new InvoicePrintItem();
-                List<InvoiceViewModel> _dataSource = new List<InvoiceViewModel>();
-                _dataSource = InvoiceListData.Where(i => i.Status == (int)DbConstant.InvoiceStatus.NotPrinted).ToList();
-                report.DataSource = _dataSource;
+                report.DataSource = InvoiceListData;
                 report.FillDataSource();
 
                 using (ReportPrintTool printTool = new ReportPrintTool(report))
