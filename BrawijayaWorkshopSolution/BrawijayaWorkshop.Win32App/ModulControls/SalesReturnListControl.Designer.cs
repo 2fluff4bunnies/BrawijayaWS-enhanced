@@ -95,7 +95,7 @@
             this.cbCustomerFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbCustomerFilter.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Supplier")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Name")});
             this.cbCustomerFilter.Properties.DisplayMember = "CompanyName";
             this.cbCustomerFilter.Properties.NullText = "Semua";
             this.cbCustomerFilter.Properties.ValueMember = "Id";

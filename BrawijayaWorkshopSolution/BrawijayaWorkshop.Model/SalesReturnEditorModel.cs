@@ -22,6 +22,8 @@ namespace BrawijayaWorkshop.Model
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
         private IJournalMasterRepository _journalMasterRepository;
+        private ISpecialSparepartRepository _specialSparepartRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnEditorModel(
@@ -35,6 +37,8 @@ namespace BrawijayaWorkshop.Model
             ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IJournalMasterRepository journalMasterRepository,
+            ISpecialSparepartRepository specialSparepartRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -48,6 +52,8 @@ namespace BrawijayaWorkshop.Model
             _transactionDetailRepository = transactionDetailRepository;
             _journalMasterRepository = journalMasterRepository;
             _referenceRepository = referenceRepository;
+            _specialSparepartRepository = specialSparepartRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -70,13 +76,33 @@ namespace BrawijayaWorkshop.Model
                     int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
                     foreach (var sparepartID in sparepartIDs)
                     {
-                        result.Add(new ReturnViewModel
+                        bool isSpecial = _specialSparepartRepository.GetMany(x => x.SparepartId == sparepartID).Count() > 0;
+                        if(isSpecial)
                         {
-                            SparepartId = sparepartID,
-                            SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
-                        });
+                            List<InvoiceDetail> listInvoiceDetailSparepart = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).ToList();
+                            foreach (var itemInvoiceSparepart in listInvoiceDetailSparepart)
+                            {
+                                result.Add(new ReturnViewModel
+                                {
+                                    SparepartId = sparepartID,
+                                    SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                                    ReturQty = listDetail.Where(x => x.InvoiceDetailId == itemInvoiceSparepart.Id).Count(),
+                                    ReturQtyLimit = 1,
+                                    SerialNumber = _specialSparepartDetailRepository.GetMany(x => x.SparepartDetailId == itemInvoiceSparepart.SPKDetailSparepartDetail.SparepartDetailId).FirstOrDefault().SerialNumber
+                                });
+                            }
+                        }
+                        else
+                        {
+                            result.Add(new ReturnViewModel
+                            {
+                                SparepartId = sparepartID,
+                                SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                                ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                                ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
+                            });
+                        }
+                        
                     }
                 }
             }
@@ -85,13 +111,32 @@ namespace BrawijayaWorkshop.Model
                 int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
                 foreach (var sparepartID in sparepartIDs)
                 {
-                    result.Add(new ReturnViewModel
+                    bool isSpecial = _specialSparepartRepository.GetMany(x => x.SparepartId == sparepartID).Count() > 0;
+                    if (isSpecial)
                     {
-                        SparepartId = sparepartID,
-                        SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                        ReturQty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                        ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
-                    });
+                        List<InvoiceDetail> listInvoiceDetailSparepart = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).ToList();
+                        foreach (var itemInvoiceSparepart in listInvoiceDetailSparepart)
+                        {
+                            result.Add(new ReturnViewModel
+                            {
+                                SparepartId = sparepartID,
+                                SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                                ReturQty = 1,
+                                ReturQtyLimit = 1,
+                                SerialNumber = _specialSparepartDetailRepository.GetMany(x=>x.SparepartDetailId == itemInvoiceSparepart.SPKDetailSparepartDetail.SparepartDetailId).FirstOrDefault().SerialNumber
+                            });
+                        }
+                    }
+                    else
+                    {
+                        result.Add(new ReturnViewModel
+                        {
+                            SparepartId = sparepartID,
+                            SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                            ReturQty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
+                        });
+                    }
                 }
             }
             return result;
@@ -106,7 +151,7 @@ namespace BrawijayaWorkshop.Model
                     InsertSalesReturnFunc(invoiceID, listReturn, userID);
                     trans.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
                     throw;
@@ -124,7 +169,7 @@ namespace BrawijayaWorkshop.Model
                     InsertSalesReturnFunc(invoiceID, listReturn, userID);
                     trans.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
                     throw;
@@ -164,7 +209,8 @@ namespace BrawijayaWorkshop.Model
                 List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId
                     && x.InvoiceId == invoiceID
                     && (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
-                    || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
+                    || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
+                    || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutInstalled)
                     ).OrderByDescending(x => x.CreateDate)
                     .Take(itemReturn.ReturQty).ToList();
 
