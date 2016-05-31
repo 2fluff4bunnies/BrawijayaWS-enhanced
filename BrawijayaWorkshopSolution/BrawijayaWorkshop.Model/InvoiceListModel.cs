@@ -14,15 +14,17 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private ICustomerRepository _customerRepository;
+        private ISparepartRepository _sparepartRepository;
         private IUnitOfWork _unitOfWork;
 
         public InvoiceListModel(IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,
-            ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+            ICustomerRepository customerRepository, ISparepartRepository sparepartRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
             _customerRepository = customerRepository;
+            _sparepartRepository = sparepartRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -42,6 +44,26 @@ namespace BrawijayaWorkshop.Model
                 _invoiceRepository.Update(invoice);
             }
             _unitOfWork.SaveChanges();
+        }
+
+        public List<InvoiceSparepartViewModel> GetInvoiceSparepartList(int invoiceID)
+        {
+            List<InvoiceSparepartViewModel> result = new List<InvoiceSparepartViewModel>();
+            List<InvoiceDetail> listInvoiceDetail = _invoiceDetailRepository.GetMany(x => x.InvoiceId == invoiceID).ToList();
+
+            int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+            foreach (var sparepartID in sparepartIDs)
+            {
+                result.Add(new InvoiceSparepartViewModel
+                {
+                    SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+                    Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                    SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
+                    SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
+                    UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
+                });
+            }
+            return result;
         }
 
         public List<InvoiceViewModel> SearchInvoice(DateTime? dateFrom, DateTime? dateTo,

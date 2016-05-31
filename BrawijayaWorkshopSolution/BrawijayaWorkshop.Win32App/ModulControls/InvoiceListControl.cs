@@ -330,16 +330,24 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
             {
-                InvoicePrintItem report = new InvoicePrintItem();
-                report.DataSource = InvoiceListData;
-                report.FillDataSource();
-
-                using (ReportPrintTool printTool = new ReportPrintTool(report))
+                List<InvoiceViewModel> dsReport = InvoiceListData.Where(i => i.Status == (int)DbConstant.InvoiceStatus.NotPrinted).ToList();
+                if(dsReport != null && dsReport.Count > 0)
                 {
-                    // Invoke the Print dialog.
-                    printTool.PrintDialog();
+                    foreach (var itemReport in dsReport)
+                    {
+                        itemReport.ListInvoiceSparepart = _presenter.GetSparepartInvoice(itemReport.Id);
+                    }
+                    InvoicePrintItem report = new InvoicePrintItem();
+                    report.DataSource = dsReport;
+                    report.FillDataSource();
+
+                    using (ReportPrintTool printTool = new ReportPrintTool(report))
+                    {
+                        // Invoke the Print dialog.
+                        printTool.PrintDialog();
+                    }
+                    _presenter.PrintAll();
                 }
-                _presenter.PrintAll();
             }
         }
 

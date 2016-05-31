@@ -124,5 +124,10 @@ namespace BrawijayaWorkshop.Presenter
 
             return result;
         }
+
+        public List<InvoiceSparepartViewModel> GetSparepartInvoice(int invoiceID)
+        {
+            return Model.GetInvoiceSparepartList(invoiceID);
+        }
     }
 }
