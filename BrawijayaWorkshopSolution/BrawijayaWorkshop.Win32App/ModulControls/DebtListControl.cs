@@ -208,6 +208,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvDebt.RowCount > 0)
             {
                 SelectedPurchasing = gvDebt.GetRow(0) as PurchasingViewModel;
+                if (this.SelectedPurchasing != null)
+                {
+                    if (this.SelectedPurchasing.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled)
+                    {
+                        cmsNewPayment.Visible = true;
+                        cmsListPayment.Visible = true;
+                    }
+                    else if (this.SelectedPurchasing.PaymentStatus == (int)DbConstant.PaymentStatus.Settled)
+                    {
+                        cmsNewPayment.Visible = false;
+                        cmsListPayment.Visible = true;
+                    }
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Debt selesai", true);

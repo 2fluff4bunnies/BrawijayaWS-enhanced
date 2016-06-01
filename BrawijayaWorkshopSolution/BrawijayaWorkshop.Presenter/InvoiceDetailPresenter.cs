@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.ListInvoiceDetail = Model.RetrieveInvoiceDetail(View.SelectedInvoice.Id);
                 View.Date = View.SelectedInvoice.CreateDate;
+                View.CustomerName = View.SelectedInvoice.SPK.Vehicle.Customer.CompanyName;
 
                 View.TotalService = View.SelectedInvoice.TotalService;
                 View.TotalServicePlusFee = View.SelectedInvoice.TotalServicePlusFee;

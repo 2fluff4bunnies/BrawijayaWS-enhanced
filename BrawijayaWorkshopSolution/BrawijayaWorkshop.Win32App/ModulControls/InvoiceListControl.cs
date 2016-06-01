@@ -347,6 +347,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         printTool.PrintDialog();
                     }
                     _presenter.PrintAll();
+
+                    btnSearch.PerformClick();
                 }
             }
         }

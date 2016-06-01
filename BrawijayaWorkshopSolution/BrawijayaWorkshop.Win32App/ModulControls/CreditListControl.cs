@@ -199,6 +199,20 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvCredit.RowCount > 0)
             {
                 SelectedInvoice = gvCredit.GetRow(0) as InvoiceViewModel;
+
+                if (this.SelectedInvoice != null)
+                {
+                    if (this.SelectedInvoice.PaymentStatus == (int)DbConstant.PaymentStatus.NotSettled)
+                    {
+                        cmsNewPayment.Visible = true;
+                        cmsListPayment.Visible = true;
+                    }
+                    else if (this.SelectedInvoice.PaymentStatus == (int)DbConstant.PaymentStatus.Settled)
+                    {
+                        cmsNewPayment.Visible = false;
+                        cmsListPayment.Visible = true;
+                    }
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Credit selesai", true);

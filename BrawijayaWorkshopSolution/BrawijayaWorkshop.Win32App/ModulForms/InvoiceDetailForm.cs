@@ -30,16 +30,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void InvoiceDetailForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
-            if (isContractWork)
-            {
-                txtValueAdded.Visible = true;
-                lblValueAdded.Visible = true;
-            }
-            else
-            {
-                txtValueAdded.Visible = false;
-                lblValueAdded.Visible = false;
-            }
         }
 
         public TransactionViewModel SelectedTransaction { get; set; }
