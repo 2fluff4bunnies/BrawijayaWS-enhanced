@@ -51,11 +51,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         }
 
-    
+
 
         public void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            if(this.CustomerId > 0)
+            if (this.CustomerId > 0)
             {
                 _presenter.PopulateVehicleGroup();
             }
@@ -357,7 +357,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (FieldsValidator.Validate() && valGroupName.Validate() && _presenter.IsCodeValidated())
+            List<int> duplicatedWheel = VehicleWheelList.GroupBy(x => x.WheelDetailId)
+                          .Where(group => group.Count() > 1)
+                          .Select(group => group.Key).ToList();
+
+
+            if (FieldsValidator.Validate() && valGroupName.Validate() && _presenter.IsCodeValidated() && duplicatedWheel.Count == 0)
             {
                 try
                 {
@@ -370,6 +375,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
                     this.ShowError("Proses simpan data Kendaraan gagal!");
                 }
+            }
+            else if (duplicatedWheel.Count > 0)
+            {
+                string duplicate = "";
+
+                //foreach (var item in duplicatedWheel)
+                //{
+                //    string sn = 
+                //        duplicate += item + "\n";
+                    
+                //}
+
+                this.ShowWarning("Terdapat ban yang sama " + "\n" + duplicate);
             }
         }
 

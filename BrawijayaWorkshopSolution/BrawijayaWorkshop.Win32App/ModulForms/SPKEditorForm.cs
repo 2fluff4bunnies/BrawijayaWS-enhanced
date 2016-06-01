@@ -92,7 +92,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
             lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
-            lookUpSparepartWheelGv.EditValueChanged += lookUpSparepartWheelGv_EditValueChanged;
             lookupWheelDetailGv.EditValueChanging += lookupWheelDetailGv_EditValueChanging;
         }
 
@@ -565,11 +564,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 gvSparepart.FocusedRowHandle = 0;
             }
-        }
-
-        void lookUpSparepartWheelGv_EditValueChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void cmsDeleteDataSparepart_Click(object sender, EventArgs e)
