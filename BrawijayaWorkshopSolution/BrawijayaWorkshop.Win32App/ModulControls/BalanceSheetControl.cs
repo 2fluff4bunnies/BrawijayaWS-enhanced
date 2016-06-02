@@ -6,6 +6,7 @@ using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -208,7 +209,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            PrintableComponentLink pcl = new PrintableComponentLink(new PrintingSystem());
+            pcl.Component = layoutControlPrint;
+            pcl.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            pcl.Landscape = true;
+            pcl.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+            pcl.ShowPreviewDialog();
         }
     }
 }

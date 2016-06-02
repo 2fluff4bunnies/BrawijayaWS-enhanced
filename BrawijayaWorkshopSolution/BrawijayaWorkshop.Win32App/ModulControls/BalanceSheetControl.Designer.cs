@@ -51,8 +51,11 @@
             this.lblFilterMonth = new DevExpress.XtraEditors.LabelControl();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.bgwRecalculate = new System.ComponentModel.BackgroundWorker();
-            this.mainSplitContainer = new DevExpress.XtraEditors.SplitContainerControl();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlPrint = new DevExpress.XtraLayout.LayoutControl();
+            this.layoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridActiva)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvActiva)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCheckBox)).BeginInit();
@@ -64,19 +67,21 @@
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupMonth.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
-            this.mainSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlPrint)).BeginInit();
+            this.layoutControlPrint.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // gridActiva
             // 
-            this.gridActiva.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridActiva.Location = new System.Drawing.Point(0, 0);
             this.gridActiva.MainView = this.gvActiva;
             this.gridActiva.Name = "gridActiva";
             this.gridActiva.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repoCheckBox});
-            this.gridActiva.Size = new System.Drawing.Size(428, 335);
+            this.gridActiva.Size = new System.Drawing.Size(432, 334);
             this.gridActiva.TabIndex = 5;
             this.gridActiva.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvActiva});
@@ -153,13 +158,12 @@
             // 
             // gridPassiva
             // 
-            this.gridPassiva.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridPassiva.Location = new System.Drawing.Point(0, 0);
+            this.gridPassiva.Location = new System.Drawing.Point(436, 0);
             this.gridPassiva.MainView = this.gvPassiva;
             this.gridPassiva.Name = "gridPassiva";
             this.gridPassiva.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridPassiva.Size = new System.Drawing.Size(424, 335);
+            this.gridPassiva.Size = new System.Drawing.Size(421, 334);
             this.gridPassiva.TabIndex = 6;
             this.gridPassiva.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPassiva,
@@ -326,23 +330,6 @@
             this.bgwRecalculate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRecalculate_DoWork);
             this.bgwRecalculate.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwRecalculate_RunWorkerCompleted);
             // 
-            // mainSplitContainer
-            // 
-            this.mainSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainSplitContainer.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.None;
-            this.mainSplitContainer.Location = new System.Drawing.Point(3, 110);
-            this.mainSplitContainer.Name = "mainSplitContainer";
-            this.mainSplitContainer.Panel1.Controls.Add(this.gridActiva);
-            this.mainSplitContainer.Panel1.Text = "Panel1";
-            this.mainSplitContainer.Panel2.Controls.Add(this.gridPassiva);
-            this.mainSplitContainer.Panel2.Text = "Panel2";
-            this.mainSplitContainer.Size = new System.Drawing.Size(857, 335);
-            this.mainSplitContainer.SplitterPosition = 427;
-            this.mainSplitContainer.TabIndex = 5;
-            this.mainSplitContainer.Text = "splitContainerControl1";
-            // 
             // btnPrint
             // 
             this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
@@ -354,12 +341,67 @@
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // layoutControlPrint
+            // 
+            this.layoutControlPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.layoutControlPrint.BackColor = System.Drawing.SystemColors.Control;
+            this.layoutControlPrint.Controls.Add(this.gridActiva);
+            this.layoutControlPrint.Controls.Add(this.gridPassiva);
+            this.layoutControlPrint.Location = new System.Drawing.Point(3, 111);
+            this.layoutControlPrint.Name = "layoutControlPrint";
+            this.layoutControlPrint.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(362, 100, 873, 507);
+            this.layoutControlPrint.OptionsView.IsReadOnly = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlPrint.Root = this.layoutControlGroup;
+            this.layoutControlPrint.Size = new System.Drawing.Size(857, 334);
+            this.layoutControlPrint.TabIndex = 8;
+            this.layoutControlPrint.Text = "layoutControl1";
+            // 
+            // layoutControlGroup
+            // 
+            this.layoutControlGroup.AllowCustomizeChildren = false;
+            this.layoutControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup.GroupBordersVisible = false;
+            this.layoutControlGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2});
+            this.layoutControlGroup.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup.Name = "Root";
+            this.layoutControlGroup.OptionsPrint.AllowPrintGroupCaption = false;
+            this.layoutControlGroup.OptionsTableLayoutItem.RowSpan = 2;
+            this.layoutControlGroup.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup.Size = new System.Drawing.Size(857, 334);
+            this.layoutControlGroup.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gridActiva;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlItem1.Size = new System.Drawing.Size(434, 334);
+            this.layoutControlItem1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 2, 0, 0);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.gridPassiva;
+            this.layoutControlItem2.Location = new System.Drawing.Point(434, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlItem2.Size = new System.Drawing.Size(423, 334);
+            this.layoutControlItem2.Spacing = new DevExpress.XtraLayout.Utils.Padding(2, 0, 0, 0);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
+            // 
             // BalanceSheetControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.layoutControlPrint);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.mainSplitContainer);
             this.Controls.Add(this.btnRecalculateBalanceJournal);
             this.Controls.Add(this.gcFilter);
             this.Name = "BalanceSheetControl";
@@ -376,8 +418,11 @@
             this.gcFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupMonth.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).EndInit();
-            this.mainSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlPrint)).EndInit();
+            this.layoutControlPrint.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -393,7 +438,6 @@
         private DevExpress.XtraEditors.LabelControl lblFilterMonth;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private System.ComponentModel.BackgroundWorker bgwRecalculate;
-        private DevExpress.XtraEditors.SplitContainerControl mainSplitContainer;
         private DevExpress.XtraGrid.GridControl gridActiva;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckBox;
         private DevExpress.XtraGrid.GridControl gridPassiva;
@@ -408,5 +452,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPassivaName;
         private DevExpress.XtraGrid.Columns.GridColumn colPassivaAmount;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
+        private DevExpress.XtraLayout.LayoutControl layoutControlPrint;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }
