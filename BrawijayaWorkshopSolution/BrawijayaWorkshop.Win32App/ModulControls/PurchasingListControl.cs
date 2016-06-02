@@ -58,6 +58,23 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void gvPurchasing_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedPurchasing = gvPurchasing.GetFocusedRow() as PurchasingViewModel;
+            if (this.SelectedPurchasing != null)
+            {
+                if (this.SelectedPurchasing.Status == (int)DbConstant.PurchasingStatus.NotVerified)
+                {
+                    cmsEditData.Visible = true;
+                    persetujuanPembelianToolStripMenuItem.Visible = true;
+                    lihatSelengkapnyaToolStripMenuItem.Visible = false;
+                    cmsPrint.Visible = false;
+                }
+                else
+                {
+                    cmsEditData.Visible = false;
+                    persetujuanPembelianToolStripMenuItem.Visible = false;
+                    lihatSelengkapnyaToolStripMenuItem.Visible = true;
+                    cmsPrint.Visible = true;
+                }
+            }
         }
 
         private void gvPurchasing_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -68,25 +85,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
-
-                this.SelectedPurchasing = gvPurchasing.GetRow(view.FocusedRowHandle) as PurchasingViewModel;
-                if (this.SelectedPurchasing != null)
-                {
-                    if (this.SelectedPurchasing.Status == (int)DbConstant.PurchasingStatus.NotVerified)
-                    {
-                        cmsEditData.Visible = true;
-                        persetujuanPembelianToolStripMenuItem.Visible = true;
-                        lihatSelengkapnyaToolStripMenuItem.Visible = false;
-                        cmsPrint.Visible = false;
-                    }
-                    else
-                    {
-                        cmsEditData.Visible = false;
-                        persetujuanPembelianToolStripMenuItem.Visible = false;
-                        lihatSelengkapnyaToolStripMenuItem.Visible = true;
-                        cmsPrint.Visible = true;
-                    }
-                }
             }
         }
 
@@ -237,6 +235,23 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvPurchasing.RowCount > 0)
             {
                 SelectedPurchasing = gvPurchasing.GetRow(0) as PurchasingViewModel;
+                if (this.SelectedPurchasing != null)
+                {
+                    if (this.SelectedPurchasing.Status == (int)DbConstant.PurchasingStatus.NotVerified)
+                    {
+                        cmsEditData.Visible = true;
+                        persetujuanPembelianToolStripMenuItem.Visible = true;
+                        lihatSelengkapnyaToolStripMenuItem.Visible = false;
+                        cmsPrint.Visible = false;
+                    }
+                    else
+                    {
+                        cmsEditData.Visible = false;
+                        persetujuanPembelianToolStripMenuItem.Visible = false;
+                        lihatSelengkapnyaToolStripMenuItem.Visible = true;
+                        cmsPrint.Visible = true;
+                    }
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);

@@ -91,29 +91,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
-
-                this.SelectedPurchasing = gvPurchasing.GetRow(view.FocusedRowHandle) as PurchasingViewModel;
-                if (this.SelectedPurchasing != null)
-                {
-                    bool isHasReturnActive = false;
-                    isHasReturnActive = SelectedPurchasing.IsHasReturn;
-                    if (!isHasReturnActive)
-                    {
-                        cmsAddReturn.Visible = true;
-                        cmsEditReturn.Visible = false;
-                        cmsDeleteReturn.Visible = false;
-                        cmsPrintReturn.Visible = false;
-                    }
-                    else
-                    {
-                        cmsAddReturn.Visible = false;
-                        cmsEditReturn.Visible = true;
-                        cmsDeleteReturn.Visible = true;
-                        cmsPrintReturn.Visible = true;
-                        _presenter.GetPurchaseReturn();
-                        _presenter.GetReturnList();
-                    }
-                }
             }
         }
 
@@ -245,6 +222,27 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvPurchasing.RowCount > 0)
             {
                 SelectedPurchasing = gvPurchasing.GetRow(0) as PurchasingViewModel;
+                if (this.SelectedPurchasing != null)
+                {
+                    bool isHasReturnActive = false;
+                    isHasReturnActive = SelectedPurchasing.IsHasReturn;
+                    if (!isHasReturnActive)
+                    {
+                        cmsAddReturn.Visible = true;
+                        cmsEditReturn.Visible = false;
+                        cmsDeleteReturn.Visible = false;
+                        cmsPrintReturn.Visible = false;
+                    }
+                    else
+                    {
+                        cmsAddReturn.Visible = false;
+                        cmsEditReturn.Visible = true;
+                        cmsDeleteReturn.Visible = true;
+                        cmsPrintReturn.Visible = true;
+                        _presenter.GetPurchaseReturn();
+                        _presenter.GetReturnList();
+                    }
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);

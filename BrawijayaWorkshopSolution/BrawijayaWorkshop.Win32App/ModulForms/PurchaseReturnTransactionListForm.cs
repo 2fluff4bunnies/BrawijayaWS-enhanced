@@ -215,6 +215,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvReturn.RowCount > 0)
             {
                 SelectedPurchaseReturn = gvReturn.GetRow(0) as PurchaseReturnViewModel;
+                if (this.SelectedPurchasing == null)
+                {
+                    this.SelectedPurchasing = this.SelectedPurchaseReturn.Purchasing;
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur pembelian selesai", true);

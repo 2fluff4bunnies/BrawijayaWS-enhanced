@@ -76,7 +76,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 {
                     cmsAddData.Visible = false;
                     cmsEditData.Visible = false;
-                    cmsPrint.Visible = false;
+                    cmsPrint.Visible = true;
                 }
             }
         }
@@ -89,29 +89,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
-
-                this.SelectedInvoice = gvInvoice.GetFocusedRow() as InvoiceViewModel;
-                if (this.SelectedInvoice != null)
-                {
-                    if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.FeeNotFixed)
-                    {
-                        cmsAddData.Visible = true;
-                        cmsEditData.Visible = false;
-                        cmsPrint.Visible = false;
-                    }
-                    else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
-                    {
-                        cmsAddData.Visible = false;
-                        cmsEditData.Visible = true;
-                        cmsPrint.Visible = true;
-                    }
-                    else
-                    {
-                        cmsAddData.Visible = false;
-                        cmsEditData.Visible = false;
-                        cmsPrint.Visible = false;
-                    }
-                }
             }
         }
 
@@ -308,6 +285,28 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvInvoice.RowCount > 0)
             {
                 SelectedInvoice = gvInvoice.GetRow(0) as InvoiceViewModel;
+
+                if (this.SelectedInvoice != null)
+                {
+                    if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.FeeNotFixed)
+                    {
+                        cmsAddData.Visible = true;
+                        cmsEditData.Visible = false;
+                        cmsPrint.Visible = false;
+                    }
+                    else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
+                    {
+                        cmsAddData.Visible = false;
+                        cmsEditData.Visible = true;
+                        cmsPrint.Visible = true;
+                    }
+                    else
+                    {
+                        cmsAddData.Visible = false;
+                        cmsEditData.Visible = false;
+                        cmsPrint.Visible = true;
+                    }
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Invoice selesai", true);

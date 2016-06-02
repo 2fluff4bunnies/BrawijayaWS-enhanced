@@ -213,6 +213,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (gvReturn.RowCount > 0)
             {
                 SelectedSalesReturn = gvReturn.GetRow(0) as SalesReturnViewModel;
+                if (this.SelectedInvoice == null)
+                {
+                    this.SelectedInvoice = this.SelectedSalesReturn.Invoice;
+                }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data retur penjualan selesai", true);
