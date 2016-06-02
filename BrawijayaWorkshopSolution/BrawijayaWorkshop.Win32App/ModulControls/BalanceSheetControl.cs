@@ -214,7 +214,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             pcl.PaperKind = System.Drawing.Printing.PaperKind.A4;
             pcl.Landscape = true;
             pcl.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
-            pcl.ShowPreviewDialog();
+            pcl.PrintDlg();
         }
     }
 }

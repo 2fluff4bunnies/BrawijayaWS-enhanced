@@ -356,7 +356,6 @@
             this.layoutControlPrint.Root = this.layoutControlGroup;
             this.layoutControlPrint.Size = new System.Drawing.Size(857, 334);
             this.layoutControlPrint.TabIndex = 8;
-            this.layoutControlPrint.Text = "layoutControl1";
             // 
             // layoutControlGroup
             // 
