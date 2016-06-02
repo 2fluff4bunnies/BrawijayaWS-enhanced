@@ -330,7 +330,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
             {
-                List<InvoiceViewModel> dsReport = InvoiceListData.Where(i => i.Status == (int)DbConstant.InvoiceStatus.NotPrinted).ToList();
+                List<InvoiceViewModel> dsReport = InvoiceListData;
                 if(dsReport != null && dsReport.Count > 0)
                 {
                     foreach (var itemReport in dsReport)

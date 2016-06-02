@@ -96,7 +96,7 @@ namespace BrawijayaWorkshop.Model
             List<Invoice> result = _invoiceRepository.GetMany(i =>
                 DbFunctions.TruncateTime(i.CreateDate) >= DbFunctions.TruncateTime(dateFrom) &&
                 DbFunctions.TruncateTime(i.CreateDate) <= DbFunctions.TruncateTime(dateTo) &&
-                i.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                i.Status != (int)DbConstant.DefaultDataStatus.Deleted &&
                 i.PaymentStatus != (int)DbConstant.PaymentStatus.Settled &&
                 i.SPK.CategoryReferenceId == categoryId && i.SPK.Vehicle.CustomerId == customerId).ToList();
             if(vehicleGroupId > 0)

@@ -60,7 +60,7 @@ namespace BrawijayaWorkshop.Model
                     Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
                     SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
                     SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
-                    UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
+                    UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name
                 });
             }
             return result;
