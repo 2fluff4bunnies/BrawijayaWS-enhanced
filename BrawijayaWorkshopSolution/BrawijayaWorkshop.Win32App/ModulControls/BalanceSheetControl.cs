@@ -205,5 +205,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             btnSearch.PerformClick();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

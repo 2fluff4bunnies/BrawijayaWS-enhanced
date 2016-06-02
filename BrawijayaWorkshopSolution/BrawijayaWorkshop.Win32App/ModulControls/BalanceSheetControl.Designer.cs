@@ -52,6 +52,7 @@
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.bgwRecalculate = new System.ComponentModel.BackgroundWorker();
             this.mainSplitContainer = new DevExpress.XtraEditors.SplitContainerControl();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridActiva)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvActiva)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCheckBox)).BeginInit();
@@ -342,10 +343,22 @@
             this.mainSplitContainer.TabIndex = 5;
             this.mainSplitContainer.Text = "splitContainerControl1";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrint.Location = new System.Drawing.Point(140, 75);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 29);
+            this.btnPrint.TabIndex = 7;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // BalanceSheetControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.mainSplitContainer);
             this.Controls.Add(this.btnRecalculateBalanceJournal);
             this.Controls.Add(this.gcFilter);
@@ -394,5 +407,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPassivaHeader;
         private DevExpress.XtraGrid.Columns.GridColumn colPassivaName;
         private DevExpress.XtraGrid.Columns.GridColumn colPassivaAmount;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
     }
 }

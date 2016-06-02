@@ -236,7 +236,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         public override void RefreshDataView()
         {
-            if (!bgwMain.IsBusy)
+            if (!bgwMain.IsBusy && !bgwExport.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing Invoice data...");
                 _selectedInvoice = null;
@@ -259,6 +259,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmEditData_Click(object sender, EventArgs e)
         {
+            if (bgwMain.IsBusy || bgwExport.IsBusy) return;
+
             if (_selectedInvoice != null)
             {
                 InvoiceEditorForm editor = Bootstrapper.Resolve<InvoiceEditorForm>();
@@ -271,6 +273,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void cmsPrint_Click(object sender, EventArgs e)
         {
+            if (bgwMain.IsBusy || bgwExport.IsBusy) return;
+
             if (_selectedInvoice != null)
             {
                 InvoiceDetailForm detail = Bootstrapper.Resolve<InvoiceDetailForm>();
@@ -326,6 +330,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
+            if (bgwMain.IsBusy || bgwExport.IsBusy) return;
+
             if (InvoiceListData == null || InvoiceListData.Count == 0) return;
 
             if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)

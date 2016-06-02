@@ -253,6 +253,8 @@ namespace BrawijayaWorkshop.Win32App
 
         private void ChangeChildrenState(Control.ControlCollection children, bool isEnable)
         {
+            ribbonControl.Enabled = isEnable;
+
             foreach (Control item in children)
             {
                 item.Enabled = isEnable;
