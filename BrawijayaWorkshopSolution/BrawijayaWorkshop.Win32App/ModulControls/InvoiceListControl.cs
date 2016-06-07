@@ -333,27 +333,34 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if (InvoiceListData == null || InvoiceListData.Count == 0) return;
 
-            if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
+            if (InvoiceListData.Where(x => x.Status == (int)DbConstant.InvoiceStatus.FeeNotFixed).Count() > 0)
             {
-                List<InvoiceViewModel> dsReport = InvoiceListData;
-                if(dsReport != null && dsReport.Count > 0)
+                this.ShowWarning("terdapat data yang belum dilengkapi dengan fee dalam grid, tidak bisa cetak semua");
+            }
+            else
+            {
+                if (this.ShowConfirmation("Apakah anda yakin ingin mencetak semua data yang tampil pada daftar?") == DialogResult.Yes)
                 {
-                    foreach (var itemReport in dsReport)
+                    List<InvoiceViewModel> dsReport = InvoiceListData;
+                    if (dsReport != null && dsReport.Count > 0)
                     {
-                        itemReport.ListInvoiceSparepart = _presenter.GetSparepartInvoice(itemReport.Id);
-                    }
-                    InvoicePrintItem report = new InvoicePrintItem();
-                    report.DataSource = dsReport;
-                    report.FillDataSource();
+                        foreach (var itemReport in dsReport)
+                        {
+                            itemReport.ListInvoiceSparepart = _presenter.GetSparepartInvoice(itemReport.Id);
+                        }
+                        InvoicePrintItem report = new InvoicePrintItem();
+                        report.DataSource = dsReport;
+                        report.FillDataSource();
 
-                    using (ReportPrintTool printTool = new ReportPrintTool(report))
-                    {
-                        // Invoke the Print dialog.
-                        printTool.PrintDialog();
-                    }
-                    _presenter.PrintAll();
+                        using (ReportPrintTool printTool = new ReportPrintTool(report))
+                        {
+                            // Invoke the Print dialog.
+                            printTool.PrintDialog();
+                        }
+                        _presenter.PrintAll();
 
-                    btnSearch.PerformClick();
+                        btnSearch.PerformClick();
+                    }
                 }
             }
         }

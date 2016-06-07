@@ -159,6 +159,8 @@
             // 
             // lblKilometres
             // 
+            this.lblKilometres.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "SPK.Vehicle.Kilometers")});
             this.lblKilometres.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblKilometres.LocationFloat = new DevExpress.Utils.PointFloat(656F, 46.04F);
             this.lblKilometres.Name = "lblKilometres";
@@ -167,7 +169,6 @@
             this.lblKilometres.StylePriority.UseFont = false;
             this.lblKilometres.StylePriority.UsePadding = false;
             this.lblKilometres.StylePriority.UseTextAlignment = false;
-            this.lblKilometres.Text = "000";
             this.lblKilometres.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // lblLicenseNumber
