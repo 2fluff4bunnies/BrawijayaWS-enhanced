@@ -54,7 +54,7 @@ namespace BrawijayaWorkshop.Model
 
             GuestBook entity = new GuestBook();
             Map(guestBook, entity);
-            _vehicleRepository.AttachNavigation<Vehicle>(entity.Vehicle);
+            _guestBookRepository.AttachNavigation<Vehicle>(entity.Vehicle);
             _guestBookRepository.Add(entity);
 
             _unitOfWork.SaveChanges();
@@ -67,8 +67,9 @@ namespace BrawijayaWorkshop.Model
             guestBook.ModifyDate = serverTime;
             guestBook.ModifyUserId = userId;
 
-            GuestBook entity = new GuestBook();
+            GuestBook entity = _guestBookRepository.GetById(guestBook.Id);
             Map(guestBook, entity);
+
             _guestBookRepository.AttachNavigation<Vehicle>(entity.Vehicle);
             _guestBookRepository.Update(entity);
 

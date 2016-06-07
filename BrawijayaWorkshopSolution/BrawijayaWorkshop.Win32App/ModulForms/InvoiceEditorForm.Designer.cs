@@ -409,7 +409,6 @@
             this.cbPaymentType.TabIndex = 19;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Pilih salah satu pembayaran";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
             this.valPaymentMethod.SetValidationRule(this.cbPaymentType, conditionValidationRule1);
             this.cbPaymentType.EditValueChanged += new System.EventHandler(this.cbPaymentType_EditValueChanged);
             // 

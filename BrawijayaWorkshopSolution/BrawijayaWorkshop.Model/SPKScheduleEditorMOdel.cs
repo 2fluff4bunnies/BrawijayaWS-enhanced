@@ -81,13 +81,19 @@ namespace BrawijayaWorkshop.Model
         public void UpdateSPKSchedule(SPKScheduleViewModel SPKSchedule, int userId)
         {
             DateTime serverTime = DateTime.Now;
-            SPKSchedule.ModifyDate = serverTime;
-            SPKSchedule.ModifyUserId = userId;
-            SPKSchedule entity = _SPKScheduleRepository.GetById(SPKSchedule.Id);
 
-            Map(SPKSchedule, entity);
-            _SPKScheduleRepository.AttachNavigation<SPK>(entity.SPK);
-            _SPKScheduleRepository.AttachNavigation<Mechanic>(entity.Mechanic);
+            SPKSchedule entity = _SPKScheduleRepository.GetById(SPKSchedule.Id);
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
+            entity.Date = SPKSchedule.Date;
+            entity.Description = SPKSchedule.Description;
+            entity.SPKId = SPKSchedule.SPKId;
+            entity.MechanicId = SPKSchedule.MechanicId;
+          
+            //Map(SPKSchedule, entity);
+            //_SPKScheduleRepository.AttachNavigation<Mechanic>(entity.Mechanic);
+            //_SPKScheduleRepository.AttachNavigation<SPK>(entity.SPK);
+           
             _SPKScheduleRepository.Update(entity);
             _unitOfWork.SaveChanges();
         }
