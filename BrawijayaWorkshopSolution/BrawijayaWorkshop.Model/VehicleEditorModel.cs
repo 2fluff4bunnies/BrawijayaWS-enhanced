@@ -61,22 +61,31 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails()
+        public List<SpecialSparepartDetailViewModel> RetrieveAllWheelDetails(int vehicleId, List<VehicleWheelViewModel> currentVehicleWheel)
         {
-            //var currentVehicleWHeel = getCurrentVehicleWheel(vehicleId);
-            //if (currentVehicleWHeel != null && currentVehicleWHeel.Count > 0)
-            //{
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
+            List<SpecialSparepartDetail> result = new List<SpecialSparepartDetail>();
 
-                List<SpecialSparepartDetail> result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
+            if (currentVehicleWheel != null && currentVehicleWheel.Count > 0)
+            {
+                IEnumerable<int> existingWheelDetailId = from item in currentVehicleWheel
+                                                         select item.WheelDetailId;
+
+                result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
                                                                                 || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
                                                                                 && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
-                                                                                //&& !currentVehicleWHeel.Any(vw => vw.WheelDetailId == wd.Id)
+                                                                                && !existingWheelDetailId.Any(vw => vw == wd.Id)
                                                                           ).ToList();
-                List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
-                return Map(result, mappedResult);
-            //}
-            //else
-            //    return new List<SpecialSparepartDetailViewModel>();
+            }
+            else {
+
+                result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
+                                                                             || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
+                                                                             && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                                                                       ).ToList();
+            }
+
+            return Map(result, mappedResult);
         }
 
         public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails()
@@ -285,6 +294,29 @@ namespace BrawijayaWorkshop.Model
                 result = _vehicleRepository.GetMany(v =>
                    v.Status == (int)DbConstant.DefaultDataStatus.Active &&
                    v.Code.ToLower() == code.ToLower()
+                   ).FirstOrDefault();
+            }
+
+            return result != null;
+        }
+
+        public bool IsLicenseNumberExist(string licenseNumber, VehicleViewModel selectedVehicle)
+        {
+            Vehicle result = new Vehicle();
+
+            if (selectedVehicle != null)
+            {
+                result = _vehicleRepository.GetMany(v =>
+                   v.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                   v.ActiveLicenseNumber.ToLower() == licenseNumber.ToLower() &&
+                   v.Id != selectedVehicle.Id
+                   ).FirstOrDefault();
+            }
+            else
+            {
+                result = _vehicleRepository.GetMany(v =>
+                   v.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                   v.ActiveLicenseNumber.ToLower() == licenseNumber.ToLower()
                    ).FirstOrDefault();
             }
 

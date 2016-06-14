@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.Kilometers = View.SelectedVehicle.Kilometers;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
-                View.WheelDetailList = Model.RetrieveAllWheelDetails();
+                View.WheelDetailList = Model.RetrieveAllWheelDetails(View.SelectedVehicle.Id, View.VehicleWheelList);
             }
             else
             {
@@ -87,6 +87,11 @@ namespace BrawijayaWorkshop.Presenter
         public bool IsCodeValidated()
         {
             return !Model.IsCodeExist(View.Code, View.SelectedVehicle);
+        }
+
+        public bool IsLicenseNumberValidated()
+        {
+            return !Model.IsLicenseNumberExist(View.ActiveLicenseNumber, View.SelectedVehicle);
         }
     }
 }

@@ -49,8 +49,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             lookUpCustomer.EditValueChanged += lookUpCustomer_EditValueChanged;
 
+            gvVehicleWheel.CustomRowCellEditForEditing += gvVehicleWheel_CustomRowCellEditForEditing; 
         }
 
+        void gvVehicleWheel_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName != "WheelDetail.SerialNumber") return;
+            e.RepositoryItem = lookupWheelDetailGv;
+        }
 
 
         public void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
@@ -66,7 +72,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.SelectedVehicle != null)
             {
                 DevExpress.XtraEditors.LookUpEdit lookup = sender as DevExpress.XtraEditors.LookUpEdit;
-                VehicleWheelViewModel foundConflict = _presenter.IsWheelUsedByOtherVehicle(lookup.EditValue.AsInteger());
+
+                SpecialSparepartDetailViewModel selectedWheelDetail = lookup.GetSelectedDataRow() as SpecialSparepartDetailViewModel;
+                this.SelectedVehicleWheel.WheelDetail = selectedWheelDetail;
+                this.SelectedVehicleWheel.WheelDetailId = selectedWheelDetail.Id;
+
+                VehicleWheelViewModel foundConflict = _presenter.IsWheelUsedByOtherVehicle(selectedWheelDetail.Id);
 
                 if (foundConflict != null)
                 {
@@ -316,7 +327,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 lblExpirationDate.Visible = false;
                 dtpExpirationDate.Visible = false;
-                txtLicenseNumber.Enabled = false;
             }
             else
             {
@@ -357,12 +367,32 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
+            bool validated = true;
+            string errMessage = "";
+
             List<int> duplicatedWheel = VehicleWheelList.GroupBy(x => x.WheelDetailId)
-                          .Where(group => group.Count() > 1)
-                          .Select(group => group.Key).ToList();
+                       .Where(group => group.Count() > 1)
+                       .Select(group => group.Key).ToList();
 
+            if (duplicatedWheel.Count > 0)
+            {
+                errMessage += "Terdapat ban yang sama! \n";
+                validated = false;
+            }
 
-            if (FieldsValidator.Validate() && valGroupName.Validate() && _presenter.IsCodeValidated() && duplicatedWheel.Count == 0)
+            if (!_presenter.IsCodeValidated())
+            {
+                errMessage += "Kode sudah terdaftar! \n";
+                validated = false;
+            }
+
+            if (!_presenter.IsLicenseNumberValidated())
+            {
+                errMessage += "Nopol sudah terdaftar! \n";
+                validated = false;
+            }
+
+            if (FieldsValidator.Validate() && valGroupName.Validate() && validated)
             {
                 try
                 {
@@ -376,18 +406,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.ShowError("Proses simpan data Kendaraan gagal!");
                 }
             }
-            else if (duplicatedWheel.Count > 0)
+            else
             {
-                string duplicate = "";
-
-                //foreach (var item in duplicatedWheel)
-                //{
-                //    string sn = 
-                //        duplicate += item + "\n";
-                    
-                //}
-
-                this.ShowWarning("Terdapat ban yang sama " + "\n" + duplicate);
+                this.ShowWarning(errMessage);
             }
         }
 
