@@ -196,12 +196,14 @@
             this.gcVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcVehicleInfo.Location = new System.Drawing.Point(0, 0);
             this.gcVehicleInfo.Name = "gcVehicleInfo";
-            this.gcVehicleInfo.Size = new System.Drawing.Size(404, 512);
+            this.gcVehicleInfo.Size = new System.Drawing.Size(394, 512);
             this.gcVehicleInfo.TabIndex = 0;
             this.gcVehicleInfo.Text = "Informasi Kendaraan";
             // 
             // lookupGroup
             // 
+            this.lookupGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lookupGroup.Location = new System.Drawing.Point(126, 66);
             this.lookupGroup.Name = "lookupGroup";
             this.lookupGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -344,7 +346,7 @@
             this.gridVehicleWheel.Name = "gridVehicleWheel";
             this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.lookupWheelDetailGv});
-            this.gridVehicleWheel.Size = new System.Drawing.Size(373, 136);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(360, 136);
             this.gridVehicleWheel.TabIndex = 19;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -360,7 +362,7 @@
             this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
             this.gvVehicleWheel.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gvVehicleWheel.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gvVehicleWheel.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
             this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
             this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
@@ -372,8 +374,6 @@
             this.colWheelDetail.ColumnEdit = this.lookupWheelDetailGv;
             this.colWheelDetail.FieldName = "WheelDetailIds";
             this.colWheelDetail.Name = "colWheelDetail";
-            this.colWheelDetail.Visible = true;
-            this.colWheelDetail.VisibleIndex = 0;
             // 
             // lookupWheelDetailGv
             // 
@@ -393,7 +393,7 @@
             this.colWheelDtl.FieldName = "WheelDetail.SerialNumber";
             this.colWheelDtl.Name = "colWheelDtl";
             this.colWheelDtl.Visible = true;
-            this.colWheelDtl.VisibleIndex = 1;
+            this.colWheelDtl.VisibleIndex = 0;
             // 
             // dtpExpirationDate
             // 
@@ -488,7 +488,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 561);
+            this.ClientSize = new System.Drawing.Size(394, 561);
             this.Controls.Add(this.gcVehicleInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VehicleEditorForm";

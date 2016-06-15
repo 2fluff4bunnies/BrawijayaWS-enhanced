@@ -19,6 +19,7 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ITypeRepository _typeRepository;
         private IBrandRepository _brandRepository;
         private IUnitOfWork _unitOfWork;
@@ -29,6 +30,7 @@ namespace BrawijayaWorkshop.Model
             ISparepartRepository sparepartRepository, ITypeRepository typeRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository, IBrandRepository brandRepository,
             ISparepartDetailRepository sparepartDetailRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -42,6 +44,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _typeRepository = typeRepository;
             _brandRepository = brandRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
 
             _unitOfWork = unitOfWork;
         }
@@ -94,6 +97,45 @@ namespace BrawijayaWorkshop.Model
                                                                                        && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL).ToList();
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
+        }
+
+        public SpecialSparepartDetailViewModel SearchBySerialNumber(string serialNumber)
+        {
+            SpecialSparepartDetail result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SerialNumber.ToLower() == serialNumber.ToLower()).FirstOrDefault();
+
+            SpecialSparepartDetailViewModel mappedResult = new SpecialSparepartDetailViewModel();
+
+            return Map(result, mappedResult); 
+        }
+
+
+        public List<VehicleWheelViewModel> ReGenerateVehicleWheelList(List<VehicleWheelViewModel> vehicleWheelList, int userId)
+        {
+            List<VehicleWheelViewModel> result = new List<VehicleWheelViewModel>();
+
+            foreach (var item in vehicleWheelList)
+            {
+                if (item.Id > 0)
+                {
+                    VehicleWheel vwEntity = _vehicleWheelRepository.GetById(item.Id);
+                    vwEntity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                    vwEntity.ModifyDate = DateTime.Now;
+                    vwEntity.ModifyUserId = userId;
+
+                    _vehicleWheelRepository.Update(vwEntity);
+                }
+
+                SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
+
+                result.Add(new VehicleWheelViewModel
+                {
+                    VehicleId = item.VehicleId,
+                    WheelDetailId = wheelDetail.Id,
+                    WheelDetail = wheelDetail
+                });
+            }
+
+            return result;
         }
 
         public void InsertVehicle(VehicleViewModel vehicle, DateTime expirationDate,
@@ -181,8 +223,6 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
 
-                    _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
-                    _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
                     _vehicleWheelRepository.Update(vwEntity);
                 }
             }
@@ -196,8 +236,6 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
 
-                    _vehicleWheelRepository.AttachNavigation<Vehicle>(vwEntity.Vehicle);
-                    _vehicleWheelRepository.AttachNavigation<SpecialSparepartDetail>(vwEntity.WheelDetail);
                     _vehicleWheelRepository.Update(vwEntity);
                 }
                 else

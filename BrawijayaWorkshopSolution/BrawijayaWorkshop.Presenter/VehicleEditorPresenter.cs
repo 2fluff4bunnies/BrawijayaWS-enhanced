@@ -33,13 +33,13 @@ namespace BrawijayaWorkshop.Presenter
                 View.YearOfPurchase = View.SelectedVehicle.YearOfPurchase;
                 View.Kilometers = View.SelectedVehicle.Kilometers;
                 View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedVehicle.Id);
-                View.WheelDetailList = Model.RetrieveAllWheelDetails(View.SelectedVehicle.Id, View.VehicleWheelList);
+                //View.WheelDetailList = Model.RetrieveAllWheelDetails(View.SelectedVehicle.Id, View.VehicleWheelList);
             }
             else
             {
-                View.WheelDetailList = Model.RetrieveReadyWheelDetails();
                 View.VehicleWheelList = new System.Collections.Generic.List<VehicleWheelViewModel>();
             }
+            View.WheelDetailList = Model.RetrieveReadyWheelDetails();
 
             if (View.WheelDetailList == null)
             {
@@ -66,11 +66,11 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedVehicle.Id > 0)
             {
-                Model.UpdateVehicle(View.SelectedVehicle, View.VehicleWheelList, View.VehicleWheelExchangedList, LoginInformation.UserId);
+                Model.UpdateVehicle(View.SelectedVehicle, Model.ReGenerateVehicleWheelList(View.VehicleWheelList, LoginInformation.UserId), View.VehicleWheelExchangedList, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, View.VehicleWheelList, LoginInformation.UserId);
+                Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, Model.ReGenerateVehicleWheelList(View.VehicleWheelList, LoginInformation.UserId), LoginInformation.UserId);
             }
         }
 

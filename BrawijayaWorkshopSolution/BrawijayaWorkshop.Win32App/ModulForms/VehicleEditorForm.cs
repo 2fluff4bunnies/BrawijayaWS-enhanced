@@ -11,12 +11,16 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
     public partial class VehicleEditorForm : BaseEditorForm, IVehicleEditorView
     {
         private VehicleEditorPresenter _presenter;
+
+        private RepositoryItemLookUpEdit _repoItemLookUpEdit;
 
         public VehicleEditorForm(VehicleEditorModel model)
         {
@@ -34,28 +38,69 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.Load += VehicleEditorForm_Load;
 
-            lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
+            //lookupWheelDetailGv.EditValueChanged += lookupWheelDetailGv_EditValueChanged;
             gvVehicleWheel.PopupMenuShowing += gvVehicleWheel_PopupMenuShowing;
             gvVehicleWheel.FocusedRowChanged += gvVehicleWheel_FocusedRowChanged;
 
-            //collumn setting for lookup specialSparepart in grid
-            LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
+            ////collumn setting for lookup specialSparepart in grid
+            //LookUpColumnInfoCollection coll = lookupWheelDetailGv.Columns;
 
+            //coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
+            ////coll.Add(new LookUpColumnInfo("SparepartName", 0, "Sparepart"));
+            //lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
+            //lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
+            //lookupWheelDetailGv.AutoSearchColumnIndex = 1;
+
+            //collumn setting for lookup specialSparepart in grid
+            _repoItemLookUpEdit = new RepositoryItemLookUpEdit();
+            _repoItemLookUpEdit.DisplayMember = "SerialNumber";
+            _repoItemLookUpEdit.ValueMember = "SerialNumber";
+            LookUpColumnInfoCollection coll = _repoItemLookUpEdit.Columns;
             coll.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
             //coll.Add(new LookUpColumnInfo("SparepartName", 0, "Sparepart"));
-            lookupWheelDetailGv.BestFitMode = BestFitMode.BestFitResizePopup;
-            lookupWheelDetailGv.SearchMode = SearchMode.AutoComplete;
-            lookupWheelDetailGv.AutoSearchColumnIndex = 1;
+            _repoItemLookUpEdit.BestFitMode = BestFitMode.BestFitResizePopup;
+            _repoItemLookUpEdit.SearchMode = SearchMode.AutoComplete;
+            _repoItemLookUpEdit.AutoSearchColumnIndex = 1;
+            _repoItemLookUpEdit.NullValuePromptShowForEmptyValue = false;
 
             lookUpCustomer.EditValueChanged += lookUpCustomer_EditValueChanged;
 
-            gvVehicleWheel.CustomRowCellEditForEditing += gvVehicleWheel_CustomRowCellEditForEditing; 
+            gvVehicleWheel.CustomRowCellEditForEditing += gvVehicleWheel_CustomRowCellEditForEditing;
         }
 
-        void gvVehicleWheel_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        private void gvVehicleWheel_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
         {
             if (e.Column.FieldName != "WheelDetail.SerialNumber") return;
-            e.RepositoryItem = lookupWheelDetailGv;
+            VehicleWheelViewModel currentDataRow = gvVehicleWheel.GetRow(e.RowHandle) as VehicleWheelViewModel;
+            List<SpecialSparepartDetailViewModel> listNotUsedWheel = new List<SpecialSparepartDetailViewModel>();
+
+            foreach (var item in VehicleWheelList)
+            {
+                if (item.Id > 0)
+                    listNotUsedWheel.Add(item.WheelDetail);
+            }
+
+            listNotUsedWheel.AddRange(WheelDetailList);
+
+            List<string> runtimeSerial = new List<string>();
+            if (VehicleWheelList != null && VehicleWheelList.Count > 0)
+            {
+                //runtimeSerial = VehicleWheelList.Select(w => w.WheelDetail.SerialNumber).ToList();
+                foreach (var item in VehicleWheelList)
+                {
+                    if (item.Id > 0)
+                        runtimeSerial.Add(item.WheelDetail.SerialNumber);
+                }
+            }
+
+            listNotUsedWheel = listNotUsedWheel.Where(w => !runtimeSerial.Contains(w.SerialNumber)).ToList();
+
+            if (currentDataRow != null) // insert current row into list only for edit
+            {
+                listNotUsedWheel.Insert(0, currentDataRow.WheelDetail);
+            }
+            _repoItemLookUpEdit.DataSource = listNotUsedWheel;
+            e.RepositoryItem = _repoItemLookUpEdit;
         }
 
 
@@ -327,6 +372,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 lblExpirationDate.Visible = false;
                 dtpExpirationDate.Visible = false;
+                txtLicenseNumber.Enabled = false;
             }
             else
             {
@@ -370,7 +416,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             bool validated = true;
             string errMessage = "";
 
-            List<int> duplicatedWheel = VehicleWheelList.GroupBy(x => x.WheelDetailId)
+            List<string> duplicatedWheel = VehicleWheelList.GroupBy(x => x.WheelDetail.SerialNumber)
                        .Where(group => group.Count() > 1)
                        .Select(group => group.Key).ToList();
 
@@ -423,7 +469,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
 
-            gvVehicleWheel.AddNewRow();
+            VehicleWheelList.Add(new VehicleWheelViewModel { 
+                WheelDetail = new SpecialSparepartDetailViewModel()
+            });
+            gridVehicleWheel.DataSource = VehicleWheelList;
+            gvVehicleWheel.BestFitColumns();
         }
 
         private void deleteWheelDetailToolStripMenuItem_Click(object sender, EventArgs e)
