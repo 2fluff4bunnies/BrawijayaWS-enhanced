@@ -66,11 +66,11 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedVehicle.Id > 0)
             {
-                Model.UpdateVehicle(View.SelectedVehicle, Model.ReGenerateVehicleWheelList(View.VehicleWheelList, LoginInformation.UserId), View.VehicleWheelExchangedList, LoginInformation.UserId);
+                Model.UpdateVehicle(View.SelectedVehicle, Model.ReGenerateVehicleWheelList(View.VehicleWheelList), View.VehicleWheelExchangedList, LoginInformation.UserId);
             }
             else
             {
-                Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, Model.ReGenerateVehicleWheelList(View.VehicleWheelList, LoginInformation.UserId), LoginInformation.UserId);
+                Model.InsertVehicle(View.SelectedVehicle, View.ExpirationDate, Model.ReGenerateVehicleWheelList(View.VehicleWheelList), LoginInformation.UserId);
             }
         }
 
@@ -92,6 +92,11 @@ namespace BrawijayaWorkshop.Presenter
         public bool IsLicenseNumberValidated()
         {
             return !Model.IsLicenseNumberExist(View.ActiveLicenseNumber, View.SelectedVehicle);
+        }
+
+        public void RemoveVehicleWheel(int vehicleWheelId)
+        {
+            Model.RevertVehicleWheel(vehicleWheelId, LoginInformation.UserId);
         }
     }
 }

@@ -80,7 +80,8 @@ namespace BrawijayaWorkshop.Model
                                                                                 && !existingWheelDetailId.Any(vw => vw == wd.Id)
                                                                           ).ToList();
             }
-            else {
+            else
+            {
 
                 result = _wheelDetailRepository.GetMany(wd => (wd.Status == (int)DbConstant.WheelDetailStatus.Ready
                                                                              || wd.Status == (int)DbConstant.WheelDetailStatus.Installed)
@@ -105,11 +106,11 @@ namespace BrawijayaWorkshop.Model
 
             SpecialSparepartDetailViewModel mappedResult = new SpecialSparepartDetailViewModel();
 
-            return Map(result, mappedResult); 
+            return Map(result, mappedResult);
         }
 
 
-        public List<VehicleWheelViewModel> ReGenerateVehicleWheelList(List<VehicleWheelViewModel> vehicleWheelList, int userId)
+        public List<VehicleWheelViewModel> ReGenerateVehicleWheelList(List<VehicleWheelViewModel> vehicleWheelList)
         {
             List<VehicleWheelViewModel> result = new List<VehicleWheelViewModel>();
 
@@ -117,22 +118,20 @@ namespace BrawijayaWorkshop.Model
             {
                 if (item.Id > 0)
                 {
-                    VehicleWheel vwEntity = _vehicleWheelRepository.GetById(item.Id);
-                    vwEntity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-                    vwEntity.ModifyDate = DateTime.Now;
-                    vwEntity.ModifyUserId = userId;
-
-                    _vehicleWheelRepository.Update(vwEntity);
+                    result.Add(item);
                 }
-
-                SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
-
-                result.Add(new VehicleWheelViewModel
+                else
                 {
-                    VehicleId = item.VehicleId,
-                    WheelDetailId = wheelDetail.Id,
-                    WheelDetail = wheelDetail
-                });
+                    SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
+                    if (wheelDetail != null)
+                    {
+                        result.Add(new VehicleWheelViewModel
+                        {
+                            VehicleId = item.VehicleId,
+                            WheelDetailId = wheelDetail.Id
+                        });
+                    }
+                }
             }
 
             return result;
@@ -148,11 +147,19 @@ namespace BrawijayaWorkshop.Model
             entity.CreateDate = entity.ModifyDate = serverTime;
             entity.CreateUserId = entity.ModifyUserId = userId;
             entity.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+            _vehicleRepository.AttachNavigation(entity.Brand);
+            _vehicleRepository.AttachNavigation(entity.Type);
+            _vehicleRepository.AttachNavigation(entity.VehicleGroup);
+            _vehicleRepository.AttachNavigation(entity.Customer);
+            _vehicleRepository.AttachNavigation(entity.CreateUser);
+            _vehicleRepository.AttachNavigation(entity.ModifyUser);
             var insertedVehicle = _vehicleRepository.Add(entity);
+            _unitOfWork.SaveChanges();
 
             VehicleDetail vehicleDetail = new VehicleDetail
             {
-                Vehicle = insertedVehicle,
+                VehicleId = insertedVehicle.Id,
                 LicenseNumber = insertedVehicle.ActiveLicenseNumber,
                 ExpirationDate = expirationDate,
                 CreateDate = serverTime,
@@ -162,7 +169,11 @@ namespace BrawijayaWorkshop.Model
                 Status = (int)DbConstant.LicenseNumberStatus.Active
             };
 
+            _vehicleDetailRepository.AttachNavigation(vehicleDetail.Vehicle);
+            _vehicleDetailRepository.AttachNavigation(vehicleDetail.CreateUser);
+            _vehicleDetailRepository.AttachNavigation(vehicleDetail.ModifyUser);
             _vehicleDetailRepository.Add(vehicleDetail);
+            _unitOfWork.SaveChanges();
 
             foreach (var vw in vehicleWheels)
             {
@@ -170,33 +181,55 @@ namespace BrawijayaWorkshop.Model
                 {
                     VehicleWheel vwEntity = new VehicleWheel();
                     Map(vw, vwEntity);
-                    vwEntity.Vehicle = insertedVehicle;
                     vwEntity.WheelDetailId = vw.WheelDetailId;
                     vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
                     vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
                     vwEntity.VehicleId = insertedVehicle.Id;
                     vwEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
 
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.CreateUser);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.ModifyUser);
                     _vehicleWheelRepository.Add(vwEntity);
+                    _unitOfWork.SaveChanges();
 
                     SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
                     wdEntity.ModifyDate = serverTime;
                     wdEntity.ModifyUserId = userId;
                     wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
 
+                    _wheelDetailRepository.AttachNavigation(wdEntity.SpecialSparepart);
+                    _wheelDetailRepository.AttachNavigation(wdEntity.SparepartDetail);
+                    _wheelDetailRepository.AttachNavigation(wdEntity.CreateUser);
+                    _wheelDetailRepository.AttachNavigation(wdEntity.ModifyUser);
                     _wheelDetailRepository.Update(wdEntity);
+                    _unitOfWork.SaveChanges();
 
                     SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
                     spdEntity.ModifyDate = serverTime;
                     spdEntity.ModifyUserId = userId;
                     spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutInstalled;
 
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.PurchasingDetail);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.CreateUser);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.ModifyUser);
                     _sparepartDetailRepository.Update(spdEntity);
+                    _unitOfWork.SaveChanges();
 
                     Sparepart spEntity = _sparepartRepository.GetById(wdEntity.SparepartDetail.SparepartId);
                     spEntity.ModifyDate = serverTime;
                     spEntity.ModifyUserId = userId;
                     spEntity.StockQty = spEntity.StockQty - 1;
+
+                    _sparepartRepository.AttachNavigation(spEntity.UnitReference);
+                    _sparepartRepository.AttachNavigation(spEntity.CategoryReference);
+                    _sparepartRepository.AttachNavigation(spEntity.CreateUser);
+                    _sparepartRepository.AttachNavigation(spEntity.ModifyUser);
+                    _sparepartRepository.Update(spEntity);
+                    _unitOfWork.SaveChanges();
                 }
             }
 
@@ -212,7 +245,15 @@ namespace BrawijayaWorkshop.Model
             vehicle.ModifyUserId = userId;
             Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
             Map(vehicle, entity);
+
+            _vehicleRepository.AttachNavigation(entity.Brand);
+            _vehicleRepository.AttachNavigation(entity.Type);
+            _vehicleRepository.AttachNavigation(entity.VehicleGroup);
+            _vehicleRepository.AttachNavigation(entity.Customer);
+            _vehicleRepository.AttachNavigation(entity.CreateUser);
+            _vehicleRepository.AttachNavigation(entity.ModifyUser);
             _vehicleRepository.Update(entity);
+            _unitOfWork.SaveChanges();
 
             if (vehicleWheelExchanged.Count > 0)
             {
@@ -223,7 +264,12 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
 
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.CreateUser);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.ModifyUser);
                     _vehicleWheelRepository.Update(vwEntity);
+                    _unitOfWork.SaveChanges();
                 }
             }
 
@@ -236,19 +282,65 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
 
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.CreateUser);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.ModifyUser);
                     _vehicleWheelRepository.Update(vwEntity);
+                    _unitOfWork.SaveChanges();
                 }
                 else
                 {
                     VehicleWheel vwEntity = new VehicleWheel();
                     Map(vw, vwEntity);
                     vwEntity.VehicleId = vehicle.Id;
-                    vwEntity.WheelDetailId = vw.WheelDetailId;
                     vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
                     vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
                     vwEntity.Status = (int)DbConstant.DefaultDataStatus.Active;
 
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.CreateUser);
+                    _vehicleWheelRepository.AttachNavigation(vwEntity.ModifyUser);
                     _vehicleWheelRepository.Add(vwEntity);
+                    _unitOfWork.SaveChanges();
+
+                    SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vw.WheelDetailId);
+                    wdEntity.ModifyDate = serverTime;
+                    wdEntity.ModifyUserId = userId;
+                    wdEntity.Status = (int)DbConstant.WheelDetailStatus.Installed;
+
+                    _wheelDetailRepository.AttachNavigation(wdEntity.SpecialSparepart);
+                    _wheelDetailRepository.AttachNavigation(wdEntity.SparepartDetail);
+                    _wheelDetailRepository.AttachNavigation(wdEntity.CreateUser);
+                    _wheelDetailRepository.AttachNavigation(wdEntity.ModifyUser);
+                    _wheelDetailRepository.Update(wdEntity);
+                    _unitOfWork.SaveChanges();
+
+                    SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
+                    spdEntity.ModifyDate = serverTime;
+                    spdEntity.ModifyUserId = userId;
+                    spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.OutInstalled;
+
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.PurchasingDetail);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.CreateUser);
+                    _sparepartDetailRepository.AttachNavigation(spdEntity.ModifyUser);
+                    _sparepartDetailRepository.Update(spdEntity);
+                    _unitOfWork.SaveChanges();
+
+                    Sparepart spEntity = _sparepartRepository.GetById(wdEntity.SparepartDetail.SparepartId);
+                    spEntity.ModifyDate = serverTime;
+                    spEntity.ModifyUserId = userId;
+                    spEntity.StockQty = spEntity.StockQty - 1;
+
+                    _sparepartRepository.AttachNavigation(spEntity.UnitReference);
+                    _sparepartRepository.AttachNavigation(spEntity.CategoryReference);
+                    _sparepartRepository.AttachNavigation(spEntity.CreateUser);
+                    _sparepartRepository.AttachNavigation(spEntity.ModifyUser);
+                    _sparepartRepository.Update(spEntity);
+                    _unitOfWork.SaveChanges();
                 }
             }
 
@@ -359,6 +451,61 @@ namespace BrawijayaWorkshop.Model
             }
 
             return result != null;
+        }
+
+
+        public void RevertVehicleWheel(int vehicleWheelId, int userId)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vehicleWheelId);
+            vwEntity.ModifyDate = serverTime;
+            vwEntity.ModifyUserId = userId;
+            vwEntity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+
+            _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
+            _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
+            _vehicleWheelRepository.AttachNavigation(vwEntity.CreateUser);
+            _vehicleWheelRepository.AttachNavigation(vwEntity.ModifyUser);
+            _vehicleWheelRepository.Update(vwEntity);
+            _unitOfWork.SaveChanges();
+
+            SpecialSparepartDetail wdEntity = _wheelDetailRepository.GetById(vwEntity.WheelDetailId);
+            wdEntity.ModifyDate = serverTime;
+            wdEntity.ModifyUserId = userId;
+            wdEntity.Status = (int)DbConstant.WheelDetailStatus.Ready;
+
+            _wheelDetailRepository.AttachNavigation(wdEntity.SpecialSparepart);
+            _wheelDetailRepository.AttachNavigation(wdEntity.SparepartDetail);
+            _wheelDetailRepository.AttachNavigation(wdEntity.CreateUser);
+            _wheelDetailRepository.AttachNavigation(wdEntity.ModifyUser);
+            _wheelDetailRepository.Update(wdEntity);
+            _unitOfWork.SaveChanges();
+
+            SparepartDetail spdEntity = _sparepartDetailRepository.GetById(wdEntity.SparepartDetailId);
+            spdEntity.ModifyDate = serverTime;
+            spdEntity.ModifyUserId = userId;
+            spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+
+            _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
+            _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
+            _sparepartDetailRepository.AttachNavigation(spdEntity.PurchasingDetail);
+            _sparepartDetailRepository.AttachNavigation(spdEntity.CreateUser);
+            _sparepartDetailRepository.AttachNavigation(spdEntity.ModifyUser);
+            _sparepartDetailRepository.Update(spdEntity);
+            _unitOfWork.SaveChanges();
+
+            Sparepart spEntity = _sparepartRepository.GetById(wdEntity.SparepartDetail.SparepartId);
+            spEntity.ModifyDate = serverTime;
+            spEntity.ModifyUserId = userId;
+            spEntity.StockQty = spEntity.StockQty + 1;
+
+            _sparepartRepository.AttachNavigation(spEntity.UnitReference);
+            _sparepartRepository.AttachNavigation(spEntity.CategoryReference);
+            _sparepartRepository.AttachNavigation(spEntity.CreateUser);
+            _sparepartRepository.AttachNavigation(spEntity.ModifyUser);
+            _sparepartRepository.Update(spEntity);
+            _unitOfWork.SaveChanges();
         }
     }
 }

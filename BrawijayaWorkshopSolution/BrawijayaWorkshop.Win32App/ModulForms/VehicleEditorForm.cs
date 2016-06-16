@@ -83,7 +83,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             listNotUsedWheel.AddRange(WheelDetailList);
 
             List<string> runtimeSerial = new List<string>();
-            if (VehicleWheelList != null && VehicleWheelList.Count > 0)
+            if (VehicleWheelList != null && VehicleWheelList.Count > 0 && SelectedVehicle != null)
             {
                 //runtimeSerial = VehicleWheelList.Select(w => w.WheelDetail.SerialNumber).ToList();
                 foreach (var item in VehicleWheelList)
@@ -462,14 +462,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             foreach (var item in this.VehicleWheelList)
             {
-                SpecialSparepartDetailViewModel toRemove = WheelDetailList.Where(wd => wd.Id == item.WheelDetailId).FirstOrDefault();
+                SpecialSparepartDetailViewModel toRemove = WheelDetailList.Where(wd => wd.SerialNumber == item.WheelDetail.SerialNumber).FirstOrDefault();
                 if (toRemove != null)
                 {
                     this.WheelDetailList.Remove(toRemove);
                 }
             }
 
-            VehicleWheelList.Add(new VehicleWheelViewModel { 
+            VehicleWheelList.Add(new VehicleWheelViewModel
+            {
                 WheelDetail = new SpecialSparepartDetailViewModel()
             });
             gridVehicleWheel.DataSource = VehicleWheelList;
@@ -478,11 +479,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void deleteWheelDetailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.SelectedVehicleWheel != null)
+            if (this.ShowConfirmation("Yakin menghapus ban kendaraan?") == System.Windows.Forms.DialogResult.Yes)
             {
-                this.WheelDetailList.Add(this.SelectedVehicleWheel.WheelDetail);
+                if (this.SelectedVehicleWheel != null)
+                {
+                    this.WheelDetailList.Add(this.SelectedVehicleWheel.WheelDetail);
+                }
+
+                _presenter.RemoveVehicleWheel(this.SelectedVehicleWheel.Id);
+                gvVehicleWheel.DeleteSelectedRows();
             }
-            gvVehicleWheel.DeleteSelectedRows();
         }
 
         private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
