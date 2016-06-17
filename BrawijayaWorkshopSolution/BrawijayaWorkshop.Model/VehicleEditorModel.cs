@@ -110,19 +110,25 @@ namespace BrawijayaWorkshop.Model
         }
 
 
-        public List<VehicleWheelViewModel> ReGenerateVehicleWheelList(List<VehicleWheelViewModel> vehicleWheelList)
+        public List<VehicleWheelViewModel> ReGenerateVehicleWheelList(List<VehicleWheelViewModel> vehicleWheelList, int userId)
         {
             List<VehicleWheelViewModel> result = new List<VehicleWheelViewModel>();
 
             foreach (var item in vehicleWheelList)
             {
-                if (item.Id > 0)
+                SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
+
+                if (item.Id > 0 && item.WheelDetailId == wheelDetail.Id)                
                 {
                     result.Add(item);
                 }
                 else
                 {
-                    SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
+                    if (item.WheelDetailId != wheelDetail.Id && item.WheelDetailId > 0)
+                    {
+                        RevertVehicleWheel(item.Id, userId);
+                    }
+
                     if (wheelDetail != null)
                     {
                         result.Add(new VehicleWheelViewModel
