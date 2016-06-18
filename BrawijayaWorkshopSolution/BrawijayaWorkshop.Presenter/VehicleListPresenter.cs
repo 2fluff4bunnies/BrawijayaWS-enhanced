@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -15,7 +16,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void DeleteVehicle()
         {
-            Model.DeleteVehicle(View.SelectedVehicle);
+            Model.DeleteVehicle(View.SelectedVehicle, LoginInformation.UserId);
         }
     }
 }

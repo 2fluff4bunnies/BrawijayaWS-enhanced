@@ -19,7 +19,6 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartDetailRepository _wheelDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
-        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ITypeRepository _typeRepository;
         private IBrandRepository _brandRepository;
         private IUnitOfWork _unitOfWork;
@@ -44,7 +43,6 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository = sparepartRepository;
             _typeRepository = typeRepository;
             _brandRepository = brandRepository;
-            _specialSparepartDetailRepository = specialSparepartDetailRepository;
 
             _unitOfWork = unitOfWork;
         }
@@ -102,7 +100,7 @@ namespace BrawijayaWorkshop.Model
 
         public SpecialSparepartDetailViewModel SearchBySerialNumber(string serialNumber)
         {
-            SpecialSparepartDetail result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SerialNumber.ToLower() == serialNumber.ToLower()).FirstOrDefault();
+            SpecialSparepartDetail result = _wheelDetailRepository.GetMany(ssd => ssd.SerialNumber.ToLower() == serialNumber.ToLower()).FirstOrDefault();
 
             SpecialSparepartDetailViewModel mappedResult = new SpecialSparepartDetailViewModel();
 
@@ -116,21 +114,22 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var item in vehicleWheelList)
             {
-                SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
+                if (!string.IsNullOrEmpty(item.WheelDetail.SerialNumber))
+                {
+                    SpecialSparepartDetailViewModel wheelDetail = SearchBySerialNumber(item.WheelDetail.SerialNumber);
 
-                if (item.Id > 0 && item.WheelDetailId == wheelDetail.Id)                
-                {
-                    result.Add(item);
-                }
-                else
-                {
-                    if (item.WheelDetailId != wheelDetail.Id && item.WheelDetailId > 0)
+                    if (item.Id > 0 && item.WheelDetailId == wheelDetail.Id)
                     {
-                        RevertVehicleWheel(item.Id, userId);
+                        result.Add(item);
                     }
-
-                    if (wheelDetail != null)
+                    else
                     {
+                        if (item.WheelDetailId != wheelDetail.Id && item.WheelDetailId > 0)
+                        {
+                            RevertVehicleWheel(item.Id, userId);
+                        }
+
+
                         result.Add(new VehicleWheelViewModel
                         {
                             VehicleId = item.VehicleId,
