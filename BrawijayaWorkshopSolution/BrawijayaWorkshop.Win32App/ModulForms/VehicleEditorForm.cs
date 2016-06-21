@@ -416,7 +416,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             bool validated = true;
             string errMessage = "";
 
-            List<string> duplicatedWheel = VehicleWheelList.GroupBy(x => x.WheelDetail.SerialNumber)
+            List<string> duplicatedWheel = VehicleWheelList.Where(wh => !string.IsNullOrEmpty(wh.WheelDetail.SerialNumber)).GroupBy(x => x.WheelDetail.SerialNumber)
                        .Where(group => group.Count() > 1)
                        .Select(group => group.Key).ToList();
 

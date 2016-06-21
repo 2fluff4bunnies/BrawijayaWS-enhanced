@@ -55,7 +55,7 @@ namespace BrawijayaWorkshop.Model
             List<Reference> list = new List<Reference>();
             if (parent != null)
             {
-                list = _referenceRepository.GetMany(c => c.ParentId == parent.Id).ToList();
+                list = _referenceRepository.GetMany(c => c.ParentId == parent.Id && c.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS).ToList();
             }
             List<ReferenceViewModel> mappedResult = new List<ReferenceViewModel>();
             return Map(list, mappedResult);
