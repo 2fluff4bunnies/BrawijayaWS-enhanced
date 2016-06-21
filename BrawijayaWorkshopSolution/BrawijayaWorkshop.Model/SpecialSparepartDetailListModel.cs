@@ -11,33 +11,24 @@ namespace BrawijayaWorkshop.Model
     public class SpecialSparepartDetailListModel : AppBaseModel
     {
         private ISpecialSparepartRepository _specialSparepartRepository;
-        private ISpecialSparepartDetailRepository _WheelDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
-          public SpecialSparepartDetailListModel(ISpecialSparepartRepository WheelRepository,
-            ISpecialSparepartDetailRepository WheelDetailRepository, IUnitOfWork unitOfWork)
-            : base()    
+        public SpecialSparepartDetailListModel(ISpecialSparepartRepository WheelRepository,
+          ISpecialSparepartDetailRepository WheelDetailRepository, IUnitOfWork unitOfWork)
+            : base()
         {
             _specialSparepartRepository = WheelRepository;
-            _WheelDetailRepository = WheelDetailRepository;
+            _specialSparepartDetailRepository = WheelDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<SpecialSparepartDetailViewModel> SearchWheel(int WheelId,
-            DbConstant.SparepartDetailDataStatus status, int purchaseDetailID)
+        public List<SpecialSparepartDetailViewModel> SearchDetail(int specialSparepartId,
+            DbConstant.WheelDetailStatus status)
         {
-            List<SpecialSparepartDetail> result = new List<SpecialSparepartDetail>();
-            if (purchaseDetailID > 0)
-            {
-                result = _WheelDetailRepository.GetMany(
-                whd => whd.SpecialSparepartId == WheelId && whd.SparepartDetail.Status == (int)status
-                    && whd.SparepartDetail.PurchasingDetailId == purchaseDetailID).ToList();
-            }
-            else
-            {
-                result = _WheelDetailRepository.GetMany(
-                spd => spd.SpecialSparepartId == WheelId && spd.Status == (int)status).ToList();
-            }
+            List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(whd => whd.Status == (int)status
+                && whd.SpecialSparepartId == specialSparepartId).ToList();
+
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
         }

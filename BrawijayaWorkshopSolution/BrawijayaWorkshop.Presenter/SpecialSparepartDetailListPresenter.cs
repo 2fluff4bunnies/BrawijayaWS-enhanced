@@ -16,21 +16,21 @@ namespace BrawijayaWorkshop.Presenter
             List<WheelDetailStatusItem> listStatus = new List<WheelDetailStatusItem>();
             listStatus.Add(new WheelDetailStatusItem
             {
-                Status = (int)DbConstant.SparepartDetailDataStatus.Active,
-                Description = "Aktif"
+                Status = (int)DbConstant.WheelDetailStatus.Ready,
+                Description = "Tersedia"
             });
             listStatus.Add(new WheelDetailStatusItem
             {
-                Status = (int)DbConstant.SparepartDetailDataStatus.NotVerified,
-                Description = "Pending"
+                Status = (int)DbConstant.WheelDetailStatus.Installed,
+                Description = "Terpasang"
             });
             View.ListStatus = listStatus;
         }
 
         public void LoadDetailList()
         {
-            View.WheelDetailListData = Model.SearchWheel(View.SelectedSpecialSparepart.Id,
-                (DbConstant.SparepartDetailDataStatus)View.SelectedStatus, View.PurchasingDetailID);
+            View.WheelDetailListData = Model.SearchDetail(View.SelectedSpecialSparepart.Id,
+                (DbConstant.WheelDetailStatus)View.SelectedStatus);
         }
     }
 }

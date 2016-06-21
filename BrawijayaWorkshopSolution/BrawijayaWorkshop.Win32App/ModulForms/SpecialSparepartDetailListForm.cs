@@ -28,6 +28,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void WheelDetailEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            lookupStatus.EditValue = (int)DbConstant.WheelDetailStatus.Ready;
         }
 
         private void lookupStatus_EditValueChanged(object sender, EventArgs e)

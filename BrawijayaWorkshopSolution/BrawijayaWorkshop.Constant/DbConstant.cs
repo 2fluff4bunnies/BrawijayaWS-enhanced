@@ -219,6 +219,7 @@ namespace BrawijayaWorkshop.Constant
 
         public enum WheelDetailStatus
         { 
+            Deleted = -1,
             Ready = 1,
             Installed = 2,
         }
