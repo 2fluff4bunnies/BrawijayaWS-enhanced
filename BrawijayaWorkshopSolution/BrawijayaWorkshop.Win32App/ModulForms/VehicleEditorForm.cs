@@ -486,7 +486,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     this.WheelDetailList.Add(this.SelectedVehicleWheel.WheelDetail);
                 }
 
-                _presenter.RemoveVehicleWheel(this.SelectedVehicleWheel.Id);
+                VehicleWheelViewModel selectedVWToDelete = this.gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+                _presenter.RemoveVehicleWheel(selectedVWToDelete.Id);
                 gvVehicleWheel.DeleteSelectedRows();
             }
         }
