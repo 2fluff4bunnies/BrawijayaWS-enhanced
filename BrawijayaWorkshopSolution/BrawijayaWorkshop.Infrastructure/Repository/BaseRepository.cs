@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Data.Objects;
+using System.Data.Entity.Infrastructure;
 
 namespace BrawijayaWorkshop.Infrastructure.Repository
 {
@@ -103,7 +105,14 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             try
             {
-                return _dbset.Find(id);
+                T result = _dbset.Find(id);
+                if (result != null)
+                {
+                    var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+                    context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
+                    return result;
+                }
+                return null;
             }
             catch (Exception ex)
             {
@@ -114,7 +123,10 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             try
             {
-                return _dbset.AsNoTracking().ToList();
+                IEnumerable<T> result = _dbset.ToList();
+                var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+                context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
+                return result.ToList();
             }
             catch (Exception ex)
             {
@@ -141,7 +153,10 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             try
             {
-                return _dbset.AsNoTracking().Where(where).ToList();
+                IEnumerable<T> result = _dbset.Where(where).ToList();
+                var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+                context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
+                return result.ToList();
             }
             catch (Exception ex)
             {
