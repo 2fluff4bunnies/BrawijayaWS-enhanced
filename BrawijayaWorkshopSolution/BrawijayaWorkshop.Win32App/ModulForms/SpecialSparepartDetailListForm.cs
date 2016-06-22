@@ -1,9 +1,12 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,14 +24,27 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             InitializeComponent();
 
             _presenter = new SpecialSparepartDetailListPresenter(this, model);
+            gvSpecialSparepartDetail.PopupMenuShowing += gvSpecialSparepartDetail_PopupMenuShowing;
 
             this.Load += WheelDetailEditorForm_Load;
+        }
+
+        void gvSpecialSparepartDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsEditor.Show(view.GridControl, e.Point);
+            }
         }
 
         void WheelDetailEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
             lookupStatus.EditValue = (int)DbConstant.WheelDetailStatus.Ready;
+            cmsDeleteData.Visible = LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN; ;
         }
 
         private void lookupStatus_EditValueChanged(object sender, EventArgs e)
@@ -117,6 +133,24 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data ban detail selesai", true);
+        }
+
+        private void cmsDeleteData_Click(object sender, EventArgs e)
+        {
+            if (this.ShowConfirmation("Yakin akan menghapus data?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                SpecialSparepartDetailViewModel selectedSspd = gvSpecialSparepartDetail.GetFocusedRow() as SpecialSparepartDetailViewModel;
+
+                if (_presenter.IsSpecialSparepartDetailInstalled(selectedSspd.Id))
+                {
+                    this.ShowWarning("Sparepart ini telah digunakan, untuk menjaga validitas data proses penghapusan dibatalkan");
+                }
+                else
+                {
+                    _presenter.RemoveSpecialSparepartDetail(selectedSspd.Id);
+                    this.RefreshDataView();
+                }
+            }
         }
     }
 }

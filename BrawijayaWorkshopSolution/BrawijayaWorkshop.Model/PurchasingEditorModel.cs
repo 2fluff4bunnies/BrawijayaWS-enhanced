@@ -223,7 +223,7 @@ namespace BrawijayaWorkshop.Model
 
         public bool IsSerialNumberExist(string sn)
         {
-            SpecialSparepartDetail ssd = _specialSparepartDetailRepository.GetMany(dtl => dtl.SerialNumber.ToLower() == sn.ToLower()).FirstOrDefault();
+            SpecialSparepartDetail ssd = _specialSparepartDetailRepository.GetMany(dtl => dtl.SerialNumber.ToLower() == sn.ToLower() && dtl.Status != (int)DbConstant.WheelDetailStatus.Deleted).FirstOrDefault();
 
             if (ssd != null)
             {

@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 using System.Collections.Generic;
 
@@ -31,6 +32,16 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.WheelDetailListData = Model.SearchDetail(View.SelectedSpecialSparepart.Id,
                 (DbConstant.WheelDetailStatus)View.SelectedStatus);
+        }
+
+        public bool IsSpecialSparepartDetailInstalled(int specialSparepartDetailId)
+        {
+            return Model.IsSpecialSparepartDetailInstalled(specialSparepartDetailId);
+        }
+
+        public void RemoveSpecialSparepartDetail(int specialSparepartDetailId)
+        {
+            Model.RemoveSpecialSparepart(specialSparepartDetailId, LoginInformation.UserId);
         }
     }
 }

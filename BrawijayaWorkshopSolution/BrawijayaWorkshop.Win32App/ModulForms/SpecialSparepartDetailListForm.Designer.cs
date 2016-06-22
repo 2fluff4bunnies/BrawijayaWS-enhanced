@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpecialSparepartDetailListForm));
             this.gridSpecialSparepartDetail = new DevExpress.XtraGrid.GridControl();
             this.gvSpecialSparepartDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -37,11 +38,14 @@
             this.lookupStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.lblFilterStatus = new DevExpress.XtraEditors.LabelControl();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecialSparepartDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSpecialSparepartDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupInfo)).BeginInit();
             this.groupInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupStatus.Properties)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridSpecialSparepartDetail
@@ -137,6 +141,21 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // cmsEditor
+            // 
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsDeleteData});
+            this.cmsEditor.Name = "cmsListEditor";
+            this.cmsEditor.Size = new System.Drawing.Size(153, 48);
+            // 
+            // cmsDeleteData
+            // 
+            this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsDeleteData.Name = "cmsDeleteData";
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Text = "Hapus Data";
+            this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
             // SpecialSparepartDetailListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,6 +172,7 @@
             this.groupInfo.ResumeLayout(false);
             this.groupInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupStatus.Properties)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -167,5 +187,7 @@
         private DevExpress.XtraEditors.LookUpEdit lookupStatus;
         private DevExpress.XtraEditors.LabelControl lblFilterStatus;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
     }
 }

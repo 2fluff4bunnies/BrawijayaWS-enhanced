@@ -1,4 +1,5 @@
-﻿using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Constant;
+using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
@@ -6,6 +7,7 @@ using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -33,6 +35,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtSerialNumber.Enabled = true;
                 txtQtyUpdate.Text = "1";
                 txtQtyUpdate.Enabled = false;
+                cbMode.Enabled = false;
+                cbMode.EditValue = ListTransactionTypeReference.Where(rf => rf.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS).FirstOrDefault().Id;
             }
             else
             {
