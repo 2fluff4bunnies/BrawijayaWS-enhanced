@@ -114,7 +114,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             try
             {
-                return _dbset.ToList();
+                return _dbset.AsNoTracking().ToList();
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             try
             {
-                return _dbset.Where(where).ToList();
+                return _dbset.AsNoTracking().Where(where).ToList();
             }
             catch (Exception ex)
             {
