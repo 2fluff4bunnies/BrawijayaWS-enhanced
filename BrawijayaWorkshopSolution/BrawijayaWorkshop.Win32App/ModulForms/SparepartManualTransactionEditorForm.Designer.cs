@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartManualTransactionEditorForm));
             this.lblSparepart = new DevExpress.XtraEditors.LabelControl();
             this.lblStok = new DevExpress.XtraEditors.LabelControl();
@@ -51,6 +52,7 @@
             this.valQty = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valMode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.valItemPrice = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtStok.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcUsedGoodsManualEditor)).BeginInit();
             this.gcUsedGoodsManualEditor.SuspendLayout();
@@ -63,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtQtyUpdate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valMode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valItemPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSparepart
@@ -149,6 +152,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalPrice.Location = new System.Drawing.Point(130, 306);
             this.txtTotalPrice.Name = "txtTotalPrice";
+            this.txtTotalPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtTotalPrice.Properties.Mask.EditMask = "d";
+            this.txtTotalPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTotalPrice.Properties.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(193, 20);
             this.txtTotalPrice.TabIndex = 24;
@@ -169,8 +176,13 @@
             this.txtItemPrice.Name = "txtItemPrice";
             this.txtItemPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
             this.txtItemPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtItemPrice.Properties.Mask.EditMask = "d";
+            this.txtItemPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Harga per item harus diisi";
+            this.valItemPrice.SetValidationRule(this.txtItemPrice, conditionValidationRule1);
             this.txtItemPrice.EditValueChanged += new System.EventHandler(this.txtItemPrice_EditValueChanged);
             // 
             // lblItemPrice
@@ -227,11 +239,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQtyUpdate.Location = new System.Drawing.Point(130, 99);
             this.txtQtyUpdate.Name = "txtQtyUpdate";
+            this.txtQtyUpdate.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtQtyUpdate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtQtyUpdate.Properties.Mask.EditMask = "d";
+            this.txtQtyUpdate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtQtyUpdate.Size = new System.Drawing.Size(193, 20);
             this.txtQtyUpdate.TabIndex = 14;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Jumlah Update Harus Diisi";
-            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Jumlah Update Harus Diisi";
+            this.valQty.SetValidationRule(this.txtQtyUpdate, conditionValidationRule2);
             this.txtQtyUpdate.EditValueChanged += new System.EventHandler(this.txtQtyUpdate_EditValueChanged);
             // 
             // lblQtyUpdaate
@@ -270,6 +286,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtQtyUpdate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valMode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valItemPrice)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -296,5 +313,6 @@
         private DevExpress.XtraEditors.TextEdit txtSerialNumber;
         private DevExpress.XtraEditors.LabelControl lblSerialNumber;
         private System.ComponentModel.BackgroundWorker bgwSave;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valItemPrice;
     }
 }

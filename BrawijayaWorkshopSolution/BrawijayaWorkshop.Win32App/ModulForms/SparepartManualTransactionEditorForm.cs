@@ -22,6 +22,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             // set validation alignment
             valMode.SetIconAlignment(cbMode, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valQty.SetIconAlignment(txtQtyUpdate, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            valItemPrice.SetIconAlignment(txtItemPrice, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 
             this.Load += SparepartsTransactionEditorForm_Load;
         }
@@ -91,11 +93,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             get
             {
-                return !string.IsNullOrEmpty(txtQtyUpdate.Text) ? txtQtyUpdate.Text.AsInteger() : 0;
+                return txtQtyUpdate.EditValue.AsInteger();
             }
             set
             {
-                txtQtyUpdate.Text = value.ToString();
+                txtQtyUpdate.EditValue = value;
             }
         }
 
@@ -168,12 +170,23 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         protected override void ExecuteSave()
         {
-            if (valMode.Validate() && valQty.Validate())
+            ReferenceViewModel selectedTransactionType = ListTransactionTypeReference.Where(x=>x.Id == this.TransactionTypeId).FirstOrDefault();
+            if (valMode.Validate() && valQty.Validate() && valItemPrice.Validate() 
+                && this.StockUpdate > 0 && selectedTransactionType != null
+                && (selectedTransactionType.Value == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS 
+                    || (selectedTransactionType.Value == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS && this.Stock >= this.StockUpdate)
+                    )
+                )
             {
                 bool ok = true;
                 if (this.IsSpecialSparepart)
                 {
-                    if (_presenter.IsSerialNumberExist())
+                    if (string.IsNullOrEmpty(this.SerialNumber))
+                    {
+                        ok = false;
+                        this.ShowWarning("Nomor seri harus diisi.");
+                    } 
+                    else if (_presenter.IsSerialNumberExist())
                     {
                         ok = false;
                         this.ShowWarning("Nomor seri "+this.SerialNumber+" sudah digunakan.");

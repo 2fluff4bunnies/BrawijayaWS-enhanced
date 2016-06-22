@@ -200,7 +200,10 @@ namespace BrawijayaWorkshop.Model
                             .Take(sparepartManualTransaction.Qty).ToList();
                             foreach (var spDetail in spDetails)
                             {
-                                _sparepartDetailRepository.Delete(spDetail);
+                                spDetail.ModifyUserId = userId;
+                                spDetail.ModifyDate = serverTime;
+                                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
+                                _sparepartDetailRepository.Update(spDetail);
                             }
                         }
 
