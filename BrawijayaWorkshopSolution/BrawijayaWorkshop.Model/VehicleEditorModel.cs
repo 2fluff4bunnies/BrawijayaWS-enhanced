@@ -100,7 +100,7 @@ namespace BrawijayaWorkshop.Model
 
         public SpecialSparepartDetailViewModel SearchBySerialNumber(string serialNumber)
         {
-            SpecialSparepartDetail result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SerialNumber.ToLower() == serialNumber.ToLower()).FirstOrDefault();
+            SpecialSparepartDetail result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SerialNumber.ToLower() == serialNumber.ToLower() && ssd.Status != (int) DbConstant.WheelDetailStatus.Deleted).FirstOrDefault();
 
             SpecialSparepartDetailViewModel mappedResult = new SpecialSparepartDetailViewModel();
 
