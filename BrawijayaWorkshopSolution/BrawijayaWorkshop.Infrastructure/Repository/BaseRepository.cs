@@ -98,6 +98,21 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 throw ex;
             }
         }
+
+        public virtual void AttachNavigation<N>(N navigation) where N : class, new()
+        {
+            if (navigation == null) return;
+
+            try
+            {
+                IDbSet<N> navigationSet = DataContext.Set<N>();
+                navigationSet.Attach(navigation);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Database Query
@@ -110,6 +125,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 {
                     var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
                     context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
+
                     return result;
                 }
                 return null;
@@ -126,22 +142,8 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 IEnumerable<T> result = _dbset.ToList();
                 var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
                 context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
+
                 return result.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public virtual void AttachNavigation<N>(N navigation) where N : class, new()
-        {
-            if (navigation == null) return;
-
-            try
-            {
-                IDbSet<N> navigationSet = DataContext.Set<N>();
-                navigationSet.Attach(navigation);
             }
             catch (Exception ex)
             {
@@ -156,6 +158,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 IEnumerable<T> result = _dbset.Where(where).ToList();
                 var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
                 context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
+
                 return result.ToList();
             }
             catch (Exception ex)
@@ -173,6 +176,19 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        private void RefreshProperty(System.Data.Entity.Core.Objects.ObjectContext context, T entity)
+        {
+            PropertyInfo[] properties = typeof(T).GetProperties()
+                        .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
+            foreach (var p in properties)
+            {
+                object pValue = p.GetValue(entity);
+                if (pValue == null) continue;
+
+                context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, pValue);
             }
         }
         #endregion

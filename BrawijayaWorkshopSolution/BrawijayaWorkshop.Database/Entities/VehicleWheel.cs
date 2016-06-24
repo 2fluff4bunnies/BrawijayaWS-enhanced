@@ -9,6 +9,9 @@ namespace BrawijayaWorkshop.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [MaxLength(200)]
+        public string Notes { get; set; }
+
         [Required]
         public int VehicleId { get; set; }
         public virtual Vehicle Vehicle { get; set; }
