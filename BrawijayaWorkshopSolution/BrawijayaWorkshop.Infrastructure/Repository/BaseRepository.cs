@@ -179,18 +179,24 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
         }
 
-        private void RefreshProperty(System.Data.Entity.Core.Objects.ObjectContext context, T entity)
+        public void RefreshObject<TObject>(TObject entity) where TObject : class, new()
         {
-            PropertyInfo[] properties = typeof(T).GetProperties()
-                        .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
-            foreach (var p in properties)
-            {
-                object pValue = p.GetValue(entity);
-                if (pValue == null) continue;
-
-                context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, pValue);
-            }
+            var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+            context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, entity);
         }
+
+        //private void RefreshProperty(System.Data.Entity.Core.Objects.ObjectContext context, T entity)
+        //{
+        //    PropertyInfo[] properties = typeof(T).GetProperties()
+        //                .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
+        //    foreach (var p in properties)
+        //    {
+        //        object pValue = p.GetValue(entity);
+        //        if (pValue == null) continue;
+
+        //        context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, pValue);
+        //    }
+        //}
         #endregion
     }
 }

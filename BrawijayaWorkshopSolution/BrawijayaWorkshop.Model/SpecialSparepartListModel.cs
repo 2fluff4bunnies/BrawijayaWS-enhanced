@@ -32,6 +32,10 @@ namespace BrawijayaWorkshop.Model
             List<SpecialSparepart> result = null;
 
             result = _specialSparepartRepository.GetMany(wh => wh.Status == (int)DbConstant.DefaultDataStatus.Active && wh.Sparepart.Name.Contains(name)).ToList();
+            foreach (var item in result)
+            {
+                _specialSparepartRepository.RefreshObject(item.Sparepart);
+            }
 
             List<SpecialSparepartViewModel> mappedResult = new List<SpecialSparepartViewModel>();
             return Map(result, mappedResult);

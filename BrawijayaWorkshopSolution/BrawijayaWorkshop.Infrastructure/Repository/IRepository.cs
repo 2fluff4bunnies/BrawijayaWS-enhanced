@@ -10,6 +10,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         T GetById<TID>(TID id);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
+        void RefreshObject<TObject>(TObject entity) where TObject : class, new();
 
         void AttachNavigation<N>(N navigation) where N : class, new();
 

@@ -70,6 +70,7 @@
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             this.ValidateExpireDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valGroupName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.colWheelNotes = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
@@ -355,7 +356,8 @@
             // 
             this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colWheelDetail,
-            this.colWheelDtl});
+            this.colWheelDtl,
+            this.colWheelNotes});
             this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
             this.gvVehicleWheel.Name = "gvVehicleWheel";
             this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -484,6 +486,14 @@
             this.ValidateExpireDate.ValidateHiddenControls = false;
             this.ValidateExpireDate.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // colWheelNotes
+            // 
+            this.colWheelNotes.Caption = "Keterangan";
+            this.colWheelNotes.FieldName = "Notes";
+            this.colWheelNotes.Name = "colWheelNotes";
+            this.colWheelNotes.Visible = true;
+            this.colWheelNotes.VisibleIndex = 1;
+            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -553,5 +563,6 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valGroupName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDtl;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelNotes;
     }
 }

@@ -186,6 +186,7 @@ namespace BrawijayaWorkshop.Model
                 {
                     VehicleWheel vwEntity = new VehicleWheel();
                     Map(vw, vwEntity);
+                    vwEntity.Notes = vw.Notes;
                     vwEntity.WheelDetailId = vw.WheelDetailId;
                     vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
                     vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
@@ -268,6 +269,7 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.WheelDetailId = vw.WheelDetailId;
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
+                    vwEntity.Notes = vw.Notes;
 
                     _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
                     _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
@@ -286,6 +288,7 @@ namespace BrawijayaWorkshop.Model
                     vwEntity.WheelDetailId = vw.WheelDetailId;
                     vwEntity.ModifyDate = serverTime;
                     vwEntity.ModifyUserId = userId;
+                    vwEntity.Notes = vw.Notes;
 
                     _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
                     _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
@@ -298,6 +301,7 @@ namespace BrawijayaWorkshop.Model
                 {
                     VehicleWheel vwEntity = new VehicleWheel();
                     Map(vw, vwEntity);
+                    vwEntity.Notes = vw.Notes;
                     vwEntity.VehicleId = vehicle.Id;
                     vwEntity.CreateDate = vwEntity.ModifyDate = serverTime;
                     vwEntity.CreateUserId = vwEntity.ModifyUserId = userId;
