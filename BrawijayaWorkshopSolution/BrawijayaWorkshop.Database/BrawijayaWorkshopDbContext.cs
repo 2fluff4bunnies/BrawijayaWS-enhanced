@@ -54,10 +54,16 @@ namespace BrawijayaWorkshop.Database
         public DbSet<SalesReturnDetail> SalesReturnDetails { get; set; }
         public DbSet<WheelExchangeHistory> WheelExchangeHistories { get; set; }
         public BrawijayaWorkshopDbContext()
-            : base(DatabaseConfigurationHelper.DefaultConnectionString) { }
+            : base(DatabaseConfigurationHelper.DefaultConnectionString)
+        {
+            System.Data.Entity.Database.SetInitializer<BrawijayaWorkshopDbContext>(null);
+        }
 
         public BrawijayaWorkshopDbContext(DbConnection existingConnection, bool contextOwnsConnection)
-            : base(existingConnection, contextOwnsConnection) { }
+            : base(existingConnection, contextOwnsConnection)
+        {
+            System.Data.Entity.Database.SetInitializer<BrawijayaWorkshopDbContext>(null);
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -94,6 +100,7 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new PurchaseReturnDetailConfiguration());
             modelBuilder.Configurations.Add(new SalesReturnConfiguration());
             modelBuilder.Configurations.Add(new SalesReturnDetailConfiguration());
+            modelBuilder.Configurations.Add(new VehicleWheelConfiguration());
             modelBuilder.Configurations.Add(new WheelExchangeHistoryConfiguration());
         }
     }
