@@ -59,6 +59,7 @@
             this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colWheelDtl = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWheelNotes = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dtpExpirationDate = new DevExpress.XtraEditors.DateEdit();
             this.lblExpirationDate = new DevExpress.XtraEditors.LabelControl();
             this.txtLicenseNumber = new DevExpress.XtraEditors.TextEdit();
@@ -70,7 +71,6 @@
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             this.ValidateExpireDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valGroupName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.colWheelNotes = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
@@ -397,6 +397,14 @@
             this.colWheelDtl.Visible = true;
             this.colWheelDtl.VisibleIndex = 0;
             // 
+            // colWheelNotes
+            // 
+            this.colWheelNotes.Caption = "Keterangan";
+            this.colWheelNotes.FieldName = "Notes";
+            this.colWheelNotes.Name = "colWheelNotes";
+            this.colWheelNotes.Visible = true;
+            this.colWheelNotes.VisibleIndex = 1;
+            // 
             // dtpExpirationDate
             // 
             this.dtpExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -485,14 +493,6 @@
             // 
             this.ValidateExpireDate.ValidateHiddenControls = false;
             this.ValidateExpireDate.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
-            // 
-            // colWheelNotes
-            // 
-            this.colWheelNotes.Caption = "Keterangan";
-            this.colWheelNotes.FieldName = "Notes";
-            this.colWheelNotes.Name = "colWheelNotes";
-            this.colWheelNotes.Visible = true;
-            this.colWheelNotes.VisibleIndex = 1;
             // 
             // VehicleEditorForm
             // 
