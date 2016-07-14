@@ -32,14 +32,163 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 new MySqlConnection(ConfigurationManager.ConnectionStrings["DestConn"].ConnectionString), true);
             contextDest.Database.CreateIfNotExists();
 
+            //get all data from temp db
             List<ApplicationModul> ApplicationModulList = contextTemp.ApplicationModuls.ToList();
+            List<Role> RoleList = contextTemp.Roles.ToList();
+            List<Setting> SettingList = contextTemp.Settings.ToList();
+            List<Reference> ReferenceList = contextTemp.References.ToList();
+            List<User> UserList = contextTemp.Users.ToList();
+            List<JournalMaster> JournalMasterList = contextTemp.JournalMasters.ToList();
+            List<Brand> BrandList = contextTemp.Brands.ToList();
+            List<BrawijayaWorkshop.Database.Entities.Type> TypeList = contextTemp.Types.ToList();
+            List<City> CityList = contextTemp.Cities.ToList();
 
+            List<RoleAccess> RoleAccessList = contextTemp.RoleAccesses.ToList();
+            List<UserRole> UserRoleList = contextTemp.UserRoles.ToList();
+
+            List<Customer> CustomerList = contextTemp.Customers.ToList();
+            List<VehicleGroup> VehicleGroupList = contextTemp.VehicleGroups.ToList();
+            List<Vehicle> VehicleList = contextTemp.Vehicles.ToList();
+            List<VehicleDetail> VehicleDetailList = contextTemp.VehicleDetails.ToList();
+
+            List<Mechanic> MechanicList = contextTemp.Mechanics.ToList();
+
+            List<Supplier> SupplierList = contextTemp.Suppliers.ToList();
+            List<Sparepart> SparepartList = contextTemp.Spareparts.ToList();
+            List<SpecialSparepart> SpecialSparepartList = contextTemp.Wheels.ToList();
+
+            List<SparepartManualTransaction> SparepartManualTransactionList = contextTemp.SparepartManualTransactions.ToList();
+            List<Purchasing> PurchasingTransactionList = contextTemp.Purchasings.ToList();
+            List<PurchasingDetail> PurchasingDetailList = contextTemp.PurchasingDetails.ToList();
+            List<PurchaseReturn> PurchaseReturnList = contextTemp.PurchaseReturns.ToList();
+            List<PurchaseReturnDetail> PurchaseReturnDetailList = contextTemp.PurchaseReturnDetails.ToList();
+            
+            List<SparepartDetail> SparepartDetailList = contextTemp.SparepartDetails.ToList();
+            List<SpecialSparepartDetail> SpecialSparepartDetailList = contextTemp.WheelDetails.ToList();
+            List<VehicleWheel> VehicleWheelList = contextTemp.VehicleWheels.ToList();
+
+            List<UsedGood> UsedGoodList = contextTemp.UsedGoods.ToList();
+            List<UsedGoodTransaction> UsedGoodTransactionList = contextTemp.UsedGoodsTransactions.ToList();
+
+            List<GuestBook> GuestBookList = contextTemp.GuestBooks.ToList();
+
+            List<SPK> SPKList = contextTemp.SPKs.ToList();
+            List<SPKDetailSparepart> SPKDetailSparepartList = contextTemp.SPKDetailSpareparts.ToList();
+            List<SPKDetailSparepartDetail> SPKDetailSparepartDetailList = contextTemp.SPKDetailSparepartDetails.ToList();
+            List<SPKSchedule> SPKScheduleList = contextTemp.SPKSchedules.ToList();
+            List<WheelExchangeHistory> WheelExchangeHistoryList = contextTemp.WheelExchangeHistories.ToList();
+
+            List<Invoice> InvoiceList = contextTemp.Invoices.ToList();
+            List<InvoiceDetail> InvoiceDetailList = contextTemp.InvoiceDetails.ToList();
+            List<SalesReturn> SalesReturnList = contextTemp.SalesReturns.ToList();
+            List<SalesReturnDetail> SalesReturnDetailList = contextTemp.SalesReturnDetails.ToList();
+
+            List<Transaction> TransactionList = contextTemp.Transactions.ToList();
+            List<TransactionDetail> TransactionDetailList = contextTemp.TransactionDetails.ToList();
+
+            List<BalanceJournal> BalanceJournalList = contextTemp.BalanceJournals.ToList();
+            List<BalanceJournalDetail> BalanceJournalDetailList = contextTemp.BalanceJournalDetails.ToList();
+
+            Dictionary<int, Role> dictRole = new Dictionary<int, Role>();
+            Dictionary<int, User> dictUser = new Dictionary<int, User>();
+            Dictionary<int, City> dictCity = new Dictionary<int, City>();
+
+            //applicationmodul
             foreach (var item in ApplicationModulList)
             {
                 item.Id = -1;
                 contextDest.ApplicationModuls.Add(item);
             }
 
+            //role
+            foreach (var item in RoleList)
+            {
+                int itemOldId = item.Id;
+                item.Id = -1;
+                Role newItem =  contextDest.Roles.Add(item);
+                dictRole.Add(itemOldId, newItem);
+            }
+
+            //setting
+            foreach (var item in SettingList)
+            {
+                contextDest.Settings.Add(item);
+            }
+
+            //reference
+            foreach (var item in ReferenceList)
+            {
+                item.Id = -1;
+                contextDest.References.Add(item);
+            }
+
+            //user
+            foreach (var item in UserList)
+            {
+                int itemOldId = item.Id;
+                item.Id = -1;
+                User newItem = contextDest.Users.Add(item);
+                dictUser.Add(itemOldId, newItem);
+            }
+
+            //journalMaster
+            foreach (var item in JournalMasterList)
+            {
+                item.Id = -1;
+                contextDest.JournalMasters.Add(item);
+            }
+
+            //brand
+            foreach (var item in BrandList)
+            {
+                item.Id = -1;
+                contextDest.Brands.Add(item);
+            }
+
+            //type
+            foreach (var item in TypeList)
+            {
+                item.Id = -1;
+                contextDest.Types.Add(item);
+            }
+
+            //city
+            foreach (var item in CityList)
+            {
+                int itemOldId = item.Id;
+                item.Id = -1;
+                City newItem = contextDest.Cities.Add(item);
+                dictCity.Add(itemOldId, newItem);
+            }
+
+            //role access
+            foreach (var item in RoleAccessList)
+            {
+                Role role = dictRole[item.RoleId];
+                item.Id = -1;
+                item.Role = role;
+                contextDest.RoleAccesses.Add(item);
+            }
+
+            //user role
+            foreach (var item in UserRoleList)
+            {
+                Role role = dictRole[item.RoleId];
+                User user = dictUser[item.UserId];
+                item.Id = -1;
+                item.Role = role;
+                item.User = user;
+                contextDest.UserRoles.Add(item);
+            }
+
+            //customer
+            foreach (var item in CustomerList)
+            {
+                City city = dictCity[item.CityId];
+                item.Id = -1;
+                item.City = city;
+                contextDest.Customers.Add(item);
+            }
             contextDest.SaveChanges();
 
             Console.Write("Done");

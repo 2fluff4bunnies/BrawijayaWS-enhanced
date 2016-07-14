@@ -53,6 +53,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<SalesReturn> SalesReturns { get; set; }
         public DbSet<SalesReturnDetail> SalesReturnDetails { get; set; }
         public DbSet<WheelExchangeHistory> WheelExchangeHistories { get; set; }
+        public DbSet<VehicleGroup> VehicleGroups { get; set; }
+        
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString)
         {
