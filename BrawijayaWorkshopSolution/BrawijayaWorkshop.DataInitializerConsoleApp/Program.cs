@@ -1,14 +1,54 @@
-﻿using BrawijayaWorkshop.Utils;
+﻿using BrawijayaWorkshop.Database;
+using BrawijayaWorkshop.Database.Entities;
+using BrawijayaWorkshop.Database.Repositories;
+using BrawijayaWorkshop.Utils;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Linq;
 
 namespace BrawijayaWorkshop.DataInitializerConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
+        {
+
+            //DataInitializer();
+            DataImporter();
+        }
+
+
+        public static void DataImporter()
+        {
+            BrawijayaWorkshopDbContext contextTemp = new BrawijayaWorkshopDbContext(
+                new MySqlConnection(ConfigurationManager.ConnectionStrings["TempConn"].ConnectionString), true);
+
+            BrawijayaWorkshopDbContext contextDest = new BrawijayaWorkshopDbContext(
+                new MySqlConnection(ConfigurationManager.ConnectionStrings["DestConn"].ConnectionString), true);
+            contextDest.Database.CreateIfNotExists();
+
+            List<ApplicationModul> ApplicationModulList = contextTemp.ApplicationModuls.ToList();
+
+            foreach (var item in ApplicationModulList)
+            {
+                item.Id = -1;
+                contextDest.ApplicationModuls.Add(item);
+            }
+
+            contextDest.SaveChanges();
+
+            Console.Write("Done");
+            Console.Read();
+        }
+
+
+
+        public static void DataInitializer()
         {
             string dirPath = "D:/Documents/Bengkel App/Data/";
             string accFile = "Account Jurnal.xlsx";
@@ -155,16 +195,16 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                         cmd.ExecuteNonQuery();
                         conn.Clone();
                     }
-//                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
-//                    {
-//                        MySqlCommand cmd = conn.CreateCommand();
-//                        cmd.CommandText = @"UPDATE `references` a
-//                                            SET a.ParentId = (SELECT z.Id FROM (SELECT x.*, y.Code `Kode` FROM `references` x, temp_catjournal y WHERE x.Code=y.Parent) z WHERE z.Kode=a.Code)";
-//                        cmd.CommandType = CommandType.Text;
-//                        conn.Open();
-//                        cmd.ExecuteNonQuery();
-//                        conn.Clone();
-//                    }
+                    //                    using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString))
+                    //                    {
+                    //                        MySqlCommand cmd = conn.CreateCommand();
+                    //                        cmd.CommandText = @"UPDATE `references` a
+                    //                                            SET a.ParentId = (SELECT z.Id FROM (SELECT x.*, y.Code `Kode` FROM `references` x, temp_catjournal y WHERE x.Code=y.Parent) z WHERE z.Kode=a.Code)";
+                    //                        cmd.CommandType = CommandType.Text;
+                    //                        conn.Open();
+                    //                        cmd.ExecuteNonQuery();
+                    //                        conn.Clone();
+                    //                    }
                 }
 
                 if (resultCit != null)
@@ -380,4 +420,5 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
         }
     }
+
 }
