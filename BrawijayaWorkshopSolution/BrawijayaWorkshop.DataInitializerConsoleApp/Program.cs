@@ -62,7 +62,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             List<PurchasingDetail> PurchasingDetailList = contextTemp.PurchasingDetails.ToList();
             List<PurchaseReturn> PurchaseReturnList = contextTemp.PurchaseReturns.ToList();
             List<PurchaseReturnDetail> PurchaseReturnDetailList = contextTemp.PurchaseReturnDetails.ToList();
-            
+
             List<SparepartDetail> SparepartDetailList = contextTemp.SparepartDetails.ToList();
             List<SpecialSparepartDetail> SpecialSparepartDetailList = contextTemp.WheelDetails.ToList();
             List<VehicleWheel> VehicleWheelList = contextTemp.VehicleWheels.ToList();
@@ -92,6 +92,8 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             Dictionary<int, int> dictRole = new Dictionary<int, int>();
             Dictionary<int, int> dictUser = new Dictionary<int, int>();
             Dictionary<int, int> dictCity = new Dictionary<int, int>();
+            Dictionary<int, int> dictReference = new Dictionary<int, int>();
+            Dictionary<int, int> dictJournalMaster = new Dictionary<int, int>();
 
             //applicationmodul
             foreach (var item in ApplicationModulList)
@@ -106,7 +108,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             {
                 int itemOldId = item.Id;
                 item.Id = -1;
-                Role newItem =  contextDest.Roles.Add(item);
+                Role newItem = contextDest.Roles.Add(item);
                 contextDest.SaveChanges();
 
                 dictRole.Add(itemOldId, newItem.Id);
@@ -121,8 +123,27 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             //reference
             foreach (var item in ReferenceList)
             {
-                item.Id = -1;
-                contextDest.References.Add(item);
+                int itemOldId = item.Id;
+                Reference newItem = new Reference
+                {
+                    Id = -1,
+                    Code = item.Code,
+                    Description = item.Description,
+                    Name = item.Name,
+                    ParentId = item.ParentId,
+                    Value = item.Value
+                };
+
+                if (item.ParentId > 0)
+                {
+                    int newParentId = dictReference[item.ParentId.Value];
+                    newItem.ParentId = newParentId;
+                }
+
+                Reference insertedReference = contextDest.References.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictReference.Add(itemOldId, insertedReference.Id);
             }
 
             //user
@@ -133,14 +154,32 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 User newItem = contextDest.Users.Add(item);
                 contextDest.SaveChanges();
 
-                dictRole.Add(itemOldId, newItem.Id);
+                dictUser.Add(itemOldId, newItem.Id);
             }
 
             //journalMaster
             foreach (var item in JournalMasterList)
             {
-                item.Id = -1;
-                contextDest.JournalMasters.Add(item);
+                int itemOldId = item.Id;
+                JournalMaster newItem = new JournalMaster
+                {
+                    Id = -1,
+                    Code = item.Code,
+                    Name = item.Name,
+                    ParentId = item.ParentId,
+                };
+
+                if (item.ParentId > 0)
+                {
+                    int newParentId = dictJournalMaster[item.ParentId.Value];
+                    newItem.ParentId = newParentId;
+                }
+
+                JournalMaster insertedJournalMaster = contextDest.JournalMasters.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictJournalMaster.Add(itemOldId, insertedJournalMaster.Id);
+
             }
 
             //brand
