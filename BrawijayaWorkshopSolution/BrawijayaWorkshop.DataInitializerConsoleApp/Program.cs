@@ -58,7 +58,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             List<SpecialSparepart> SpecialSparepartList = contextTemp.Wheels.ToList();
 
             List<SparepartManualTransaction> SparepartManualTransactionList = contextTemp.SparepartManualTransactions.ToList();
-            List<Purchasing> PurchasingTransactionList = contextTemp.Purchasings.ToList();
+            List<Purchasing> PurchasingList = contextTemp.Purchasings.ToList();
             List<PurchasingDetail> PurchasingDetailList = contextTemp.PurchasingDetails.ToList();
             List<PurchaseReturn> PurchaseReturnList = contextTemp.PurchaseReturns.ToList();
             List<PurchaseReturnDetail> PurchaseReturnDetailList = contextTemp.PurchaseReturnDetails.ToList();
@@ -89,19 +89,39 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             List<BalanceJournal> BalanceJournalList = contextTemp.BalanceJournals.ToList();
             List<BalanceJournalDetail> BalanceJournalDetailList = contextTemp.BalanceJournalDetails.ToList();
 
+            Dictionary<int, int> dictAppModul = new Dictionary<int, int>();
             Dictionary<int, int> dictRole = new Dictionary<int, int>();
             Dictionary<int, int> dictUser = new Dictionary<int, int>();
             Dictionary<int, int> dictCity = new Dictionary<int, int>();
             Dictionary<int, int> dictReference = new Dictionary<int, int>();
             Dictionary<int, int> dictJournalMaster = new Dictionary<int, int>();
-
+            Dictionary<int, int> dictBrand = new Dictionary<int, int>();
+            Dictionary<int, int> dictType = new Dictionary<int, int>();
+            Dictionary<int, int> dictCustomer = new Dictionary<int, int>();
+            Dictionary<int, int> dictVehicleGroup = new Dictionary<int, int>();
+            Dictionary<int, int> dictVehicle = new Dictionary<int, int>();
+            Dictionary<int, int> dictMechanic = new Dictionary<int, int>();
+            Dictionary<int, int> dictSupplier = new Dictionary<int, int>();
+            Dictionary<int, int> dictSparepart = new Dictionary<int, int>();
+            Dictionary<int, int> dictSpecialSparepart = new Dictionary<int, int>();
+            Dictionary<int, int> dictSpManualTrans = new Dictionary<int, int>();
+            Dictionary<int, int> dictPurchasing = new Dictionary<int, int>();
+            Dictionary<int, int> dictPurchasingDetail = new Dictionary<int, int>();
+            Dictionary<int, int> dictPurchaseReturn = new Dictionary<int, int>();
+            Dictionary<int, int> dictSparepartDetail = new Dictionary<int, int>();
+            Dictionary<int, int> dictSpecialSparepartDetail = new Dictionary<int, int>();
+            Dictionary<int, int> dictUsedGood = new Dictionary<int, int>();
+            
             //applicationmodul
             foreach (var item in ApplicationModulList)
             {
+                int itemOldId = item.Id;
                 item.Id = -1;
-                contextDest.ApplicationModuls.Add(item);
+                ApplicationModul newItem = contextDest.ApplicationModuls.Add(item);
+                contextDest.SaveChanges();
+
+                dictAppModul.Add(itemOldId, newItem.Id);
             }
-            contextDest.SaveChanges();
 
             //role
             foreach (var item in RoleList)
@@ -119,6 +139,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             {
                 contextDest.Settings.Add(item);
             }
+            contextDest.SaveChanges();
 
             //reference
             foreach (var item in ReferenceList)
@@ -185,15 +206,23 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             //brand
             foreach (var item in BrandList)
             {
+                int itemOldId = item.Id;
                 item.Id = -1;
-                contextDest.Brands.Add(item);
+                Brand newItem = contextDest.Brands.Add(item);
+                contextDest.SaveChanges();
+
+                dictBrand.Add(itemOldId, newItem.Id);
             }
 
             //type
             foreach (var item in TypeList)
             {
+                int itemOldId = item.Id;
                 item.Id = -1;
-                contextDest.Types.Add(item);
+                BrawijayaWorkshop.Database.Entities.Type newItem = contextDest.Types.Add(item);
+                contextDest.SaveChanges();
+
+                dictType.Add(itemOldId, newItem.Id);
             }
 
             //city
@@ -204,43 +233,534 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 City newItem = contextDest.Cities.Add(item);
                 contextDest.SaveChanges();
 
-                dictRole.Add(itemOldId, newItem.Id);
+                dictCity.Add(itemOldId, newItem.Id);
             }
 
             //role access
             foreach (var item in RoleAccessList)
             {
+                RoleAccess newItem = new RoleAccess();
                 int role = dictRole[item.RoleId];
-                item.Id = -1;
-                item.RoleId = role;
-                contextDest.RoleAccesses.Add(item);
+                int appModul = dictAppModul[item.ApplicationModulId];
+                
+                newItem.Id = -1;
+                newItem.RoleId = role;
+                newItem.ApplicationModulId = appModul;
+                newItem.AccessCode = item.AccessCode;
+                contextDest.RoleAccesses.Add(newItem);
             }
+            contextDest.SaveChanges();
 
             //user role
             foreach (var item in UserRoleList)
             {
+                UserRole newItem = new UserRole();
                 int role = dictRole[item.RoleId];
                 int user = dictUser[item.UserId];
-                item.Id = -1;
-                item.RoleId = role;
-                item.UserId = user;
-                contextDest.UserRoles.Add(item);
+
+                newItem.Id = -1;
+                newItem.RoleId = role;
+                newItem.UserId = user;
+                contextDest.UserRoles.Add(newItem);
             }
 
             //customer
             foreach (var item in CustomerList)
             {
+                int itemOldId = item.Id;
+                Customer newItem = new Customer();
                 int city = dictCity[item.CityId];
                 int userCreate = dictUser[item.CreateUserId];
                 int userModified = dictUser[item.ModifyUserId];
-                item.Id = -1;
-                item.CityId = city;
-                item.CreateUserId = userCreate;
-                item.ModifyUserId = userModified; item.Id = -1;
-                item.CityId = city;
-                contextDest.Customers.Add(item);
+
+                newItem.Id = -1;
+                newItem.CityId = city;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.Address = item.Address;
+                newItem.Code = item.Code;
+                newItem.CompanyName = item.CompanyName;
+                newItem.ContactPerson = item.ContactPerson;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.PhoneNumber = item.PhoneNumber;
+                newItem.Status = item.Status;
+                newItem = contextDest.Customers.Add(newItem); 
+                contextDest.SaveChanges();
+
+                dictCustomer.Add(itemOldId, newItem.Id);
+            }
+
+            //vehicle group
+            foreach (var item in VehicleGroupList)
+            {
+                int itemOldId = item.Id;
+                VehicleGroup newItem = new VehicleGroup();
+                int customer = dictCustomer[item.CustomerId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.CustomerId = customer;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Name = item.Name;
+                newItem.Status = item.Status;
+                newItem = contextDest.VehicleGroups.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictVehicleGroup.Add(itemOldId, newItem.Id);
+            }
+
+            //vehicle
+            foreach (var item in VehicleList)
+            {
+                int itemOldId = item.Id;
+                Vehicle newItem = new Vehicle();
+                int customer = dictCustomer[item.CustomerId];
+                int vehicleGroup = dictVehicleGroup[item.VehicleGroupId];
+                int brand = dictBrand[item.BrandId];
+                int type = dictType[item.TypeId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.CustomerId = customer;
+                newItem.VehicleGroupId = vehicleGroup;
+                newItem.BrandId = brand;
+                newItem.TypeId = type;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.ActiveLicenseNumber = item.ActiveLicenseNumber;
+                newItem.Code = item.Code;
+                newItem.CreateDate = item.CreateDate;
+                newItem.Kilometers = item.Kilometers;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem.YearOfPurchase = item.YearOfPurchase;
+                newItem = contextDest.Vehicles.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictVehicle.Add(itemOldId, newItem.Id);
+            }
+
+            //vehicle detail
+            foreach (var item in VehicleDetailList)
+            {
+                VehicleDetail newItem = new VehicleDetail();
+                int vehicle = dictVehicle[item.VehicleId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.VehicleId = vehicle;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ExpirationDate = item.ExpirationDate;
+                newItem.LicenseNumber = item.LicenseNumber;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                contextDest.VehicleDetails.Add(newItem);
             }
             contextDest.SaveChanges();
+
+            //mechanic
+            foreach (var item in MechanicList)
+            {
+                int itemOldId = item.Id;
+                Mechanic newItem = new Mechanic();
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.Address = item.Address;
+                newItem.BaseFee = item.BaseFee;
+                newItem.Code = item.Code;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Name = item.Name;
+                newItem.PhoneNumber = item.PhoneNumber;
+                newItem.Status = item.Status;
+                newItem = contextDest.Mechanics.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictMechanic.Add(itemOldId, newItem.Id);
+            }
+
+            //supplier
+            foreach (var item in SupplierList)
+            {
+                int itemOldId = item.Id;
+                Supplier newItem = new Supplier();
+                int city = dictCity[item.CityId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.CityId = city;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.Address = item.Address;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Name = item.Name;
+                newItem.PhoneNumber = item.PhoneNumber;
+                newItem.Status = item.Status;
+                newItem = contextDest.Suppliers.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSupplier.Add(itemOldId, newItem.Id);
+            }
+
+            //sparepart
+            foreach (var item in SparepartList)
+            {
+                int itemOldId = item.Id;
+                Sparepart newItem = new Sparepart();
+                int category = dictReference[item.CategoryReferenceId];
+                int unit = dictReference[item.UnitReferenceId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.CategoryReferenceId = category;
+                newItem.UnitReferenceId = unit;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.Code = item.Code;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Name = item.Name;
+                newItem.Status = item.Status;
+                newItem.StockQty = item.StockQty;
+                newItem = contextDest.Spareparts.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSparepart.Add(itemOldId, newItem.Id);
+            }
+
+            //special sparepart
+            foreach (var item in SpecialSparepartList)
+            {
+                int itemOldId = item.Id;
+                SpecialSparepart newItem = new SpecialSparepart();
+                int category = dictReference[item.ReferenceCategoryId];
+                int sparepart = dictSparepart[item.SparepartId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.ReferenceCategoryId = category;
+                newItem.SparepartId = sparepart;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.Wheels.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSpecialSparepart.Add(itemOldId, newItem.Id);
+            }
+
+            //sparepart manual trans
+            foreach (var item in SparepartManualTransactionList)
+            {
+                int itemOldId = item.Id;
+                SparepartManualTransaction newItem = new SparepartManualTransaction();
+                int sparepart = dictSparepart[item.SparepartId];
+                int type = dictReference[item.UpdateTypeId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.SparepartId = sparepart;
+                newItem.UpdateTypeId = type;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Price = item.Price;
+                newItem.Qty = item.Qty;
+                newItem.Remark = item.Remark;
+                newItem.TransactionDate = item.TransactionDate;
+                newItem = contextDest.SparepartManualTransactions.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSpManualTrans.Add(itemOldId, newItem.Id);
+            }
+
+            //purchasing
+            foreach (var item in PurchasingList)
+            {
+                int itemOldId = item.Id;
+                Purchasing newItem = new Purchasing();
+                int paymentMethod = dictReference[item.PaymentMethodId];
+                int supplier = dictSupplier[item.SupplierId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.PaymentMethodId = paymentMethod;
+                newItem.SupplierId = supplier;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.Code = item.Code;
+                newItem.CreateDate = item.CreateDate;
+                newItem.Date = item.Date;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.PaymentStatus = item.PaymentStatus;
+                newItem.Status = item.Status;
+                newItem.TotalHasPaid = item.TotalHasPaid;
+                newItem.TotalPrice = item.TotalPrice;
+                newItem = contextDest.Purchasings.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictPurchasing.Add(itemOldId, newItem.Id);
+            }
+
+            //purchasing detail
+            foreach (var item in PurchasingDetailList)
+            {
+                int itemOldId = item.Id;
+                PurchasingDetail newItem = new PurchasingDetail();
+                int purchasing = dictPurchasing[item.PurchasingId];
+                int sparepart = dictSparepart[item.SparepartId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.PurchasingId = purchasing;
+                newItem.SparepartId = sparepart;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Price = item.Price;
+                newItem.Qty = item.Qty;
+                newItem.SerialNumber = item.SerialNumber;
+                newItem.Status = item.Status;
+                newItem = contextDest.PurchasingDetails.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictPurchasingDetail.Add(itemOldId, newItem.Id);
+            }
+
+            //purchasing return
+            foreach (var item in PurchaseReturnList)
+            {
+                int itemOldId = item.Id;
+                PurchaseReturn newItem = new PurchaseReturn();
+                int purchasing = dictPurchasing[item.PurchasingId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.PurchasingId = purchasing;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.Code = item.Code;
+                newItem.CreateDate = item.CreateDate;
+                newItem.Date = item.Date;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.PurchaseReturns.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictPurchaseReturn.Add(itemOldId, newItem.Id);
+            }
+
+            //purchasing return detail
+            foreach (var item in PurchaseReturnDetailList)
+            {
+                int itemOldId = item.Id;
+                PurchaseReturnDetail newItem = new PurchaseReturnDetail();
+                int purchaseReturn = dictPurchaseReturn[item.PurchaseReturnId];
+                int pDetail = dictPurchasingDetail[item.PurchasingDetailId];
+                int spDetail = dictSparepartDetail[item.SparepartDetailId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.PurchaseReturnId = purchaseReturn;
+                newItem.PurchasingDetailId = pDetail;
+                newItem.SparepartDetailId = spDetail;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                contextDest.PurchaseReturnDetails.Add(newItem);
+            }
+            contextDest.SaveChanges();
+
+            //sparepart detail
+            foreach (var item in SparepartDetailList)
+            {
+                int itemOldId = item.Id;
+                SparepartDetail newItem = new SparepartDetail();
+                int sparepart = dictSparepart[item.SparepartId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.SparepartId = sparepart;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                if (item.PurchasingDetailId.HasValue && item.PurchasingDetailId != null && item.PurchasingDetailId > 0)
+                {
+                    int pDetail = dictPurchasingDetail[item.PurchasingDetailId.Value];
+                    newItem.PurchasingDetailId = pDetail;
+                }
+                if (item.SparepartManualTransactionId.HasValue && item.SparepartManualTransactionId != null && item.SparepartManualTransactionId > 0)
+                {
+                    int spManualTrans = dictSpManualTrans[item.SparepartManualTransactionId.Value];
+                    newItem.SparepartManualTransactionId = spManualTrans;
+                }
+
+                newItem.Code = item.Code;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.SparepartDetails.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSparepartDetail.Add(itemOldId, newItem.Id);
+            }
+
+            //special sparepart detail
+            foreach (var item in SpecialSparepartDetailList)
+            {
+                int itemOldId = item.Id;
+                SpecialSparepartDetail newItem = new SpecialSparepartDetail();
+                int spDetail = dictSparepartDetail[item.SparepartDetailId];
+                int ssp = dictSpecialSparepart[item.SpecialSparepartId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.SparepartDetailId = spDetail;
+                newItem.SpecialSparepartId = ssp;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.Kilometers = item.Kilometers;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.SerialNumber = item.SerialNumber;
+                newItem.Status = item.Status;
+                newItem = contextDest.WheelDetails.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSpecialSparepartDetail.Add(itemOldId, newItem.Id);
+            }
+
+            //vehicle wheel
+            foreach (var item in VehicleWheelList)
+            {
+                VehicleWheel newItem = new VehicleWheel();
+                int vehicle = dictVehicle[item.VehicleId];
+                int sspDetail = dictSpecialSparepartDetail[item.WheelDetailId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.VehicleId = vehicle;
+                newItem.WheelDetailId = sspDetail;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Notes = item.Notes;
+                newItem.Status = item.Status;
+                contextDest.VehicleWheels.Add(newItem);
+            }
+            contextDest.SaveChanges();
+
+            //used good
+            foreach (var item in UsedGoodList)
+            {
+                int itemOldId = item.Id;
+                UsedGood newItem = new UsedGood();
+                int sparepart = dictSparepart[item.SparepartId];
+
+                newItem.Id = -1;
+                newItem.SparepartId = sparepart;
+
+                newItem.Stock = item.Stock;
+                newItem.Status = item.Status;
+                newItem = contextDest.UsedGoods.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictUsedGood.Add(itemOldId, newItem.Id);
+            }
+
+            //used good trans
+            foreach (var item in UsedGoodTransactionList)
+            {
+                UsedGoodTransaction newItem = new UsedGoodTransaction();
+                int type = dictReference[item.TypeReferenceId];
+                int usedGood = dictUsedGood[item.UsedGoodId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.TypeReferenceId = type;
+                newItem.UsedGoodId = usedGood;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ItemPrice = item.ItemPrice;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Qty = item.Qty;
+                newItem.Remark = item.Remark;
+                newItem.TotalPrice = item.TotalPrice;
+                newItem.TransactionDate = item.TransactionDate;
+                contextDest.UsedGoodsTransactions.Add(newItem);
+            }
+            contextDest.SaveChanges();
+
+            //guest book
+            foreach (var item in GuestBookList)
+            {
+                GuestBook newItem = new GuestBook();
+                int vehicle = dictVehicle[item.VehicleId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
+
+                newItem.Id = -1;
+                newItem.VehicleId = vehicle;
+                newItem.CreateUserId = userCreate;
+                newItem.ModifyUserId = userModified;
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.Description = item.Description;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                contextDest.GuestBooks.Add(newItem);
+            }
+            contextDest.SaveChanges(); 
 
             Console.Write("Done");
             Console.Read();
