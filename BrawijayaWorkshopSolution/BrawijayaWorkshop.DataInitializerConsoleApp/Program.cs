@@ -89,9 +89,9 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             List<BalanceJournal> BalanceJournalList = contextTemp.BalanceJournals.ToList();
             List<BalanceJournalDetail> BalanceJournalDetailList = contextTemp.BalanceJournalDetails.ToList();
 
-            Dictionary<int, Role> dictRole = new Dictionary<int, Role>();
-            Dictionary<int, User> dictUser = new Dictionary<int, User>();
-            Dictionary<int, City> dictCity = new Dictionary<int, City>();
+            Dictionary<int, int> dictRole = new Dictionary<int, int>();
+            Dictionary<int, int> dictUser = new Dictionary<int, int>();
+            Dictionary<int, int> dictCity = new Dictionary<int, int>();
 
             //applicationmodul
             foreach (var item in ApplicationModulList)
@@ -99,6 +99,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 item.Id = -1;
                 contextDest.ApplicationModuls.Add(item);
             }
+            contextDest.SaveChanges();
 
             //role
             foreach (var item in RoleList)
@@ -106,7 +107,9 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 int itemOldId = item.Id;
                 item.Id = -1;
                 Role newItem =  contextDest.Roles.Add(item);
-                dictRole.Add(itemOldId, newItem);
+                contextDest.SaveChanges();
+
+                dictRole.Add(itemOldId, newItem.Id);
             }
 
             //setting
@@ -128,7 +131,9 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 int itemOldId = item.Id;
                 item.Id = -1;
                 User newItem = contextDest.Users.Add(item);
-                dictUser.Add(itemOldId, newItem);
+                contextDest.SaveChanges();
+
+                dictRole.Add(itemOldId, newItem.Id);
             }
 
             //journalMaster
@@ -158,40 +163,42 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 int itemOldId = item.Id;
                 item.Id = -1;
                 City newItem = contextDest.Cities.Add(item);
-                dictCity.Add(itemOldId, newItem);
+                contextDest.SaveChanges();
+
+                dictRole.Add(itemOldId, newItem.Id);
             }
 
             //role access
             foreach (var item in RoleAccessList)
             {
-                Role role = dictRole[item.RoleId];
+                int role = dictRole[item.RoleId];
                 item.Id = -1;
-                item.Role = role;
+                item.RoleId = role;
                 contextDest.RoleAccesses.Add(item);
             }
 
             //user role
             foreach (var item in UserRoleList)
             {
-                Role role = dictRole[item.RoleId];
-                User user = dictUser[item.UserId];
+                int role = dictRole[item.RoleId];
+                int user = dictUser[item.UserId];
                 item.Id = -1;
-                item.Role = role;
-                item.User = user;
+                item.RoleId = role;
+                item.UserId = user;
                 contextDest.UserRoles.Add(item);
             }
 
             //customer
             foreach (var item in CustomerList)
             {
-                City city = dictCity[item.CityId];
-                User userCreate = dictUser[item.CreateUserId];
-                User userModified = dictUser[item.ModifyUserId];
+                int city = dictCity[item.CityId];
+                int userCreate = dictUser[item.CreateUserId];
+                int userModified = dictUser[item.ModifyUserId];
                 item.Id = -1;
-                item.City = city;
-                item.CreateUser = userCreate;
-                item.ModifyUser = userModified; item.Id = -1;
-                item.City = city;
+                item.CityId = city;
+                item.CreateUserId = userCreate;
+                item.ModifyUserId = userModified; item.Id = -1;
+                item.CityId = city;
                 contextDest.Customers.Add(item);
             }
             contextDest.SaveChanges();
