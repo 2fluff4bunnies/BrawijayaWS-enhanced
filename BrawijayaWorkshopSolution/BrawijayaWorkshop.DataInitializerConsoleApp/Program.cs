@@ -185,7 +185,12 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             foreach (var item in CustomerList)
             {
                 City city = dictCity[item.CityId];
+                User userCreate = dictUser[item.CreateUserId];
+                User userModified = dictUser[item.ModifyUserId];
                 item.Id = -1;
+                item.City = city;
+                item.CreateUser = userCreate;
+                item.ModifyUser = userModified; item.Id = -1;
                 item.City = city;
                 contextDest.Customers.Add(item);
             }
