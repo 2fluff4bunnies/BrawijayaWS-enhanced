@@ -111,8 +111,18 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             Dictionary<int, int> dictSparepartDetail = new Dictionary<int, int>();
             Dictionary<int, int> dictSpecialSparepartDetail = new Dictionary<int, int>();
             Dictionary<int, int> dictUsedGood = new Dictionary<int, int>();
-            
+            Dictionary<int, int> dictSPK = new Dictionary<int, int>();
+            Dictionary<int, int> dictSPKDetailSparepart = new Dictionary<int, int>();
+            Dictionary<int, int> dictSPKDetailSparepartDetail = new Dictionary<int, int>();
+            Dictionary<int, int> dictInvoice = new Dictionary<int, int>();
+            Dictionary<int, int> dictInvoiceDetail = new Dictionary<int, int>();
+            Dictionary<int, int> dictSalesReturn = new Dictionary<int, int>();
+            Dictionary<int, int> dictTransaction = new Dictionary<int, int>();
+            Dictionary<int, int> dictBalanceJournal = new Dictionary<int, int>();
+
             //applicationmodul
+            Console.Write("Importing table ApplicationModul");
+
             foreach (var item in ApplicationModulList)
             {
                 int itemOldId = item.Id;
@@ -123,7 +133,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictAppModul.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table ApplicationModul done, " + ApplicationModulList.Count + " records imported");
+
             //role
+            Console.Write("Importing table Role");
+
             foreach (var item in RoleList)
             {
                 int itemOldId = item.Id;
@@ -134,14 +148,22 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictRole.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Role done, " + RoleList.Count + " records imported");
+
             //setting
+            Console.Write("Importing table setting");
+
             foreach (var item in SettingList)
             {
                 contextDest.Settings.Add(item);
             }
             contextDest.SaveChanges();
 
+            Console.Write("Importing table setting done, " + SettingList.Count + " records imported");
+
             //reference
+            Console.Write("Importing table Reference");
+
             foreach (var item in ReferenceList)
             {
                 int itemOldId = item.Id;
@@ -167,7 +189,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictReference.Add(itemOldId, insertedReference.Id);
             }
 
+            Console.Write("Importing table Reference done, " + ReferenceList.Count + " records imported");
+
             //user
+            Console.Write("Importing table User");
+
             foreach (var item in UserList)
             {
                 int itemOldId = item.Id;
@@ -178,7 +204,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictUser.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table User done, " + UserList.Count + " records imported");
+
             //journalMaster
+            Console.Write("Importing table JournalMaster");
+
             foreach (var item in JournalMasterList)
             {
                 int itemOldId = item.Id;
@@ -200,10 +230,13 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.SaveChanges();
 
                 dictJournalMaster.Add(itemOldId, insertedJournalMaster.Id);
-
             }
 
+            Console.Write("Importing table JournalMaster done, " + JournalMasterList.Count + " records imported");
+
             //brand
+            Console.Write("Importing table Brand");
+
             foreach (var item in BrandList)
             {
                 int itemOldId = item.Id;
@@ -214,7 +247,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictBrand.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Brand done, " + BrandList.Count + " records imported");
+
             //type
+            Console.Write("Importing table Type");
+
             foreach (var item in TypeList)
             {
                 int itemOldId = item.Id;
@@ -225,7 +262,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictType.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Type done, " + TypeList.Count + " records imported");
+
             //city
+            Console.Write("Importing table City");
+
             foreach (var item in CityList)
             {
                 int itemOldId = item.Id;
@@ -236,13 +277,17 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictCity.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table City done, " + CityList.Count + " records imported");
+
             //role access
+            Console.Write("Importing table RoleAccess");
+
             foreach (var item in RoleAccessList)
             {
                 RoleAccess newItem = new RoleAccess();
                 int role = dictRole[item.RoleId];
                 int appModul = dictAppModul[item.ApplicationModulId];
-                
+
                 newItem.Id = -1;
                 newItem.RoleId = role;
                 newItem.ApplicationModulId = appModul;
@@ -251,7 +296,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
+            Console.Write("Importing table RoleAccess done, " + RoleAccessList.Count + " records imported");
+
             //user role
+            Console.Write("Importing table UserRole");
+
             foreach (var item in UserRoleList)
             {
                 UserRole newItem = new UserRole();
@@ -264,7 +313,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.UserRoles.Add(newItem);
             }
 
+            Console.Write("Importing table UserRole done, " + UserRoleList.Count + " records imported");
+
             //customer
+            Console.Write("Importing table Customer");
+
             foreach (var item in CustomerList)
             {
                 int itemOldId = item.Id;
@@ -286,13 +339,17 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 newItem.ModifyDate = item.ModifyDate;
                 newItem.PhoneNumber = item.PhoneNumber;
                 newItem.Status = item.Status;
-                newItem = contextDest.Customers.Add(newItem); 
+                newItem = contextDest.Customers.Add(newItem);
                 contextDest.SaveChanges();
 
                 dictCustomer.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Customer done, " + CustomerList.Count + " records imported");
+
             //vehicle group
+            Console.Write("Importing table VehicleGroup");
+
             foreach (var item in VehicleGroupList)
             {
                 int itemOldId = item.Id;
@@ -316,7 +373,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictVehicleGroup.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table VehicleGroup done, " + VehicleGroupList.Count + " records imported");
+
             //vehicle
+            Console.Write("Importing table Vehicle");
+
             foreach (var item in VehicleList)
             {
                 int itemOldId = item.Id;
@@ -349,7 +410,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictVehicle.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Vehicle done, " + VehicleList.Count + " records imported");
+
             //vehicle detail
+            Console.Write("Importing table VehicleDetail");
+
             foreach (var item in VehicleDetailList)
             {
                 VehicleDetail newItem = new VehicleDetail();
@@ -371,7 +436,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
+            Console.Write("Importing table VehicleDetail done, " + VehicleDetailList.Count + " records imported");
+
             //mechanic
+            Console.Write("Importing table Mechanic");
+
             foreach (var item in MechanicList)
             {
                 int itemOldId = item.Id;
@@ -397,7 +466,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictMechanic.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Mechanic done, " + MechanicList.Count + " records imported");
+
             //supplier
+            Console.Write("Importing table Supplier");
+
             foreach (var item in SupplierList)
             {
                 int itemOldId = item.Id;
@@ -423,7 +496,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSupplier.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Supplier done, " + SupplierList.Count + " records imported");
+
             //sparepart
+            Console.Write("Importing table Sparepart");
+
             foreach (var item in SparepartList)
             {
                 int itemOldId = item.Id;
@@ -451,7 +528,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSparepart.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table Sparepart done, " + SparepartList.Count + " records imported");
+
             //special sparepart
+            Console.Write("Importing table SpecialSparepart");
+
             foreach (var item in SpecialSparepartList)
             {
                 int itemOldId = item.Id;
@@ -476,7 +557,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSpecialSparepart.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table SpecialSparepart done, " + SpecialSparepartList.Count + " records imported");
+
             //sparepart manual trans
+            Console.Write("Importing table SparepartManualTransaction");
+
             foreach (var item in SparepartManualTransactionList)
             {
                 int itemOldId = item.Id;
@@ -504,7 +589,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSpManualTrans.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table SparepartManualTransaction done, " + SparepartManualTransactionList.Count + " records imported");
+
             //purchasing
+            Console.Write("Importing table Purchasing");
+
             foreach (var item in PurchasingList)
             {
                 int itemOldId = item.Id;
@@ -534,7 +623,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictPurchasing.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table InvPurchasingoice done, " + PurchasingList.Count + " records imported");
+
             //purchasing detail
+            Console.Write("Importing table PurchasingDetail");
+
             foreach (var item in PurchasingDetailList)
             {
                 int itemOldId = item.Id;
@@ -562,7 +655,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictPurchasingDetail.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table PurchasingDetail done, " + PurchasingDetailList.Count + " records imported");
+
             //purchasing return
+            Console.Write("Importing table PurchaseReturn");
+
             foreach (var item in PurchaseReturnList)
             {
                 int itemOldId = item.Id;
@@ -587,7 +684,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictPurchaseReturn.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table PurchaseReturn done, " + PurchaseReturnList.Count + " records imported");
+
             //purchasing return detail
+            Console.Write("Importing table PurchaseReturnDetail");
+
             foreach (var item in PurchaseReturnDetailList)
             {
                 int itemOldId = item.Id;
@@ -612,7 +713,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
+            Console.Write("Importing table PurchaseReturnDetail done, " + PurchaseReturnDetailList.Count + " records imported");
+
             //sparepart detail
+            Console.Write("Importing table SparepartDetail");
+
             foreach (var item in SparepartDetailList)
             {
                 int itemOldId = item.Id;
@@ -647,7 +752,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSparepartDetail.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table SparepartDetail done, " + SparepartDetailList.Count + " records imported");
+
             //special sparepart detail
+            Console.Write("Importing table SpecialSparepartDetail");
+
             foreach (var item in SpecialSparepartDetailList)
             {
                 int itemOldId = item.Id;
@@ -674,7 +783,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSpecialSparepartDetail.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table SpecialSparepartDetail done, " + SpecialSparepartDetailList.Count + " records imported");
+
             //vehicle wheel
+            Console.Write("Importing table VehicleWheel");
+
             foreach (var item in VehicleWheelList)
             {
                 VehicleWheel newItem = new VehicleWheel();
@@ -697,7 +810,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
+            Console.Write("Importing table VehicleWheel done, " + VehicleWheelList.Count + " records imported");
+
             //used good
+            Console.Write("Importing table UsedGood");
+
             foreach (var item in UsedGoodList)
             {
                 int itemOldId = item.Id;
@@ -715,7 +832,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictUsedGood.Add(itemOldId, newItem.Id);
             }
 
+            Console.Write("Importing table UsedGood done, " + UsedGoodList.Count + " records imported");
+
             //used good trans
+            Console.Write("Importing table UsedGoodTransaction");
+
             foreach (var item in UsedGoodTransactionList)
             {
                 UsedGoodTransaction newItem = new UsedGoodTransaction();
@@ -741,7 +862,11 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
+            Console.Write("Importing table UsedGoodTransaction done, " + UsedGoodTransaction.Count + " records imported");
+
             //guest book
+            Console.Write("Importing table GuestBook");
+
             foreach (var item in GuestBookList)
             {
                 GuestBook newItem = new GuestBook();
@@ -760,9 +885,399 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 newItem.Status = item.Status;
                 contextDest.GuestBooks.Add(newItem);
             }
-            contextDest.SaveChanges(); 
+            contextDest.SaveChanges();
 
-            Console.Write("Done");
+            Console.Write("Importing table GuestBook done, " + GuestBookList.Count + " records imported");
+
+            //SPK
+            Console.Write("Importing table SPK");
+
+            foreach (var item in SPKList)
+            {
+                int itemOldId = item.Id;
+
+                SPK newItem = new SPK();
+
+                newItem.Id = -1;
+                newItem.VehicleId = dictVehicle[item.VehicleId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+                newItem.VehicleGroupId = dictVehicleGroup[item.VehicleGroupId];
+                newItem.CategoryReferenceId = dictReference[item.CategoryReferenceId];
+
+                if (item.SPKParentId > 0)
+                {
+                    newItem.SPKParentId = dictSPK[item.SPKParentId.Value];
+                }
+
+                newItem.Description = item.Description;
+                newItem.Code = item.Code;
+                newItem.isContractWork = item.isContractWork;
+                newItem.Contractor = item.Contractor;
+                newItem.ContractWorkFee = item.ContractWorkFee;
+                newItem.DueDate = item.DueDate;
+                newItem.Kilometers = item.Kilometers;
+                newItem.StatusApprovalId = item.StatusApprovalId;
+                newItem.StatusCompletedId = item.StatusCompletedId;
+                newItem.StatusPrintId = item.StatusPrintId;
+                newItem.StatusOverLimit = item.StatusOverLimit;
+                newItem.Subtotal = item.Subtotal;
+                newItem.TotalMechanicFee = item.TotalMechanicFee;
+                newItem.TotalSparepartPrice = item.TotalSparepartPrice;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                SPK insertedSPK = contextDest.SPKs.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSPK.Add(itemOldId, insertedSPK.Id);
+            }
+
+            Console.Write("Importing table SPK done, " + SPKList.Count + " records imported");
+
+            //spk detail sparepart
+            Console.Write("Importing table SPKDetailSparepart");
+
+            foreach (var item in SPKDetailSparepartList)
+            {
+                int itemOldId = item.Id;
+                SPKDetailSparepart newItem = new SPKDetailSparepart();
+
+                newItem.Id = -1;
+                newItem.SparepartId = dictSparepart[item.SparepartId];
+                newItem.SPKId = dictSPK[item.SPKId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.TotalPrice = item.TotalPrice;
+                newItem.TotalQuantity = item.TotalQuantity;
+                newItem.TotalPriceAfterCommission = item.TotalPriceAfterCommission;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.SPKDetailSpareparts.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSPKDetailSparepart.Add(itemOldId, newItem.Id);
+            }
+
+            Console.Write("Importing table SPKDetailSparepart done, " + SPKDetailSparepartList.Count + " records imported");
+
+            //spk detail sparepart detail
+            Console.Write("Importing table SPKDetailSparepartDetail");
+
+            foreach (var item in SPKDetailSparepartDetailList)
+            {
+                int itemOldId = item.Id;
+                SPKDetailSparepartDetail newItem = new SPKDetailSparepartDetail();
+
+                newItem.Id = -1;
+                newItem.SparepartDetailId = dictSparepartDetail[item.SparepartDetailId];
+                newItem.SPKDetailSparepartId = dictSPKDetailSparepart[item.SPKDetailSparepartId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.SPKDetailSparepartDetails.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSPKDetailSparepartDetail.Add(itemOldId, newItem.Id);
+            }
+
+            Console.Write("Importing table SPKDetailSparepartDetail done, " + SPKDetailSparepartDetailList.Count + " records imported");
+
+            //spk schedule
+            Console.Write("Importing table SPKSchedule");
+
+            foreach (var item in SPKScheduleList)
+            {
+                int itemOldId = item.Id;
+                SPKSchedule newItem = new SPKSchedule();
+
+                newItem.Id = -1;
+                newItem.SPKId = dictSPK[item.SPKId];
+                newItem.MechanicId = dictSPKDetailSparepart[item.MechanicId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.Description = item.Description;
+                newItem.Date = item.Date;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.SPKSchedules.Add(newItem);
+                contextDest.SaveChanges();
+            }
+
+            Console.Write("Importing table SPKSchedule done, " + SPKScheduleList.Count + " records imported");
+
+            //wheel exchange history
+            Console.Write("Importing table WheelExchangeHistory");
+
+            foreach (var item in WheelExchangeHistoryList)
+            {
+                int itemOldId = item.Id;
+                WheelExchangeHistory newItem = new WheelExchangeHistory();
+
+                newItem.Id = -1;
+                newItem.SPKId = dictSPK[item.SPKId];
+                newItem.OriginalWheelId = dictSpecialSparepartDetail[item.OriginalWheelId];
+                newItem.ReplaceWheelId = dictSpecialSparepartDetail[item.ReplaceWheelId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+                newItem = contextDest.WheelExchangeHistories.Add(newItem);
+                contextDest.SaveChanges();
+            }
+
+            Console.Write("Importing table WheelExchangeHistory done, " + WheelExchangeHistoryList.Count + " records imported");
+
+            //invoice
+            Console.Write("Importing table Invoice");
+
+            foreach (var item in InvoiceList)
+            {
+                int itemOldId = item.Id;
+                Invoice newItem = new Invoice();
+
+                newItem.Id = -1;
+                newItem.SPKId = dictSPK[item.SPKId];
+                newItem.PaymentMethodId = dictReference[item.PaymentMethodId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.Code = item.Code;
+                newItem.TotalPrice = item.TotalPrice;
+                newItem.TotalHasPaid = item.TotalHasPaid;
+                newItem.TotalService = item.TotalService;
+                newItem.TotalFeeService = item.TotalFeeService;
+                newItem.TotalServicePlusFee = item.TotalServicePlusFee;
+                newItem.TotalSparepart = item.TotalSparepart;
+                newItem.TotalFeeSparepart = item.TotalFeeSparepart;
+                newItem.TotalSparepartPlusFee = item.TotalSparepartPlusFee;
+                newItem.TotalValueAdded = item.TotalValueAdded;
+                newItem.TotalSparepartAndService = item.TotalSparepartAndService;
+                newItem.PaymentStatus = item.PaymentStatus;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                Invoice insertedInvoice = contextDest.Invoices.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictInvoice.Add(itemOldId, insertedInvoice.Id);
+            }
+
+            Console.Write("Importing table Invoice done, " + InvoiceList.Count + " records imported");
+
+            //invoice detail
+            Console.Write("Importing table InvoiceDetail");
+
+            foreach (var item in InvoiceDetailList)
+            {
+                int itemOldId = item.Id;
+                InvoiceDetail newItem = new InvoiceDetail();
+
+                newItem.Id = -1;
+                newItem.InvoiceId = dictInvoice[item.InvoiceId];
+                newItem.SPKDetailSparepartDetailId = dictReference[item.SPKDetailSparepartDetailId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.FeePctg = item.FeePctg;
+                newItem.SubTotalPrice = item.SubTotalPrice;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                newItem = contextDest.InvoiceDetails.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictInvoiceDetail.Add(itemOldId, newItem.Id);
+            }
+
+            Console.Write("Importing table InvoiceDetail done, " + InvoiceDetailList.Count + " records imported");
+
+            //sales return
+            Console.Write("Importing table SalesReturn");
+
+            foreach (var item in SalesReturnList)
+            {
+                int itemOldId = item.Id;
+                SalesReturn newItem = new SalesReturn();
+
+                newItem.Id = -1;
+                newItem.InvoiceId = dictInvoice[item.InvoiceId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.Code = item.Code;
+                newItem.Date = item.Date;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                newItem = contextDest.SalesReturns.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictSalesReturn.Add(itemOldId, newItem.Id);
+            }
+
+            Console.Write("Importing table SalesReturn done, " + SalesReturnList.Count + " records imported");
+
+            //sales return detail
+            Console.Write("Importing table SalesReturnDetail");
+
+            foreach (var item in SalesReturnDetailList)
+            {
+                int itemOldId = item.Id;
+                SalesReturnDetail newItem = new SalesReturnDetail();
+
+                newItem.Id = -1;
+                newItem.SalesReturnId = dictSalesReturn[item.SalesReturnId];
+                newItem.InvoiceDetailId = dictInvoiceDetail[item.InvoiceDetailId];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                newItem = contextDest.SalesReturnDetails.Add(newItem);
+                contextDest.SaveChanges();
+            }
+
+            Console.Write("Importing table SalesReturnDetail done, " + SalesReturnDetailList.Count + " records imported");
+
+            //transaction
+            Console.Write("Importing table Transaction");
+
+            foreach (var item in TransactionList)
+            {
+                int itemOldId = item.Id;
+                Transaction newItem = new Transaction();
+
+                newItem.Id = -1;
+                newItem.ReferenceTableId = dictReference[item.ReferenceTableId];
+                newItem.PaymentMethodId = dictReference[item.PaymentMethodId.Value];
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.PrimaryKeyValue = item.PrimaryKeyValue;
+                newItem.TotalTransaction = item.TotalTransaction;
+                newItem.TotalPayment = item.TotalPayment;
+                newItem.Description = item.Description;
+                newItem.IsReconciliation = item.IsReconciliation;
+                newItem.TransactionDate = item.TransactionDate;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                newItem = contextDest.Transactions.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictTransaction.Add(itemOldId, newItem.Id);
+            }
+
+            Console.Write("Importing table Transaction done, " + TransactionList.Count + " records imported");
+
+            //transaction detail
+            Console.Write("Importing table TransactionDetail");
+
+            foreach (var item in TransactionDetailList)
+            {
+                int itemOldId = item.Id;
+
+                TransactionDetail newItem = new TransactionDetail();
+
+                newItem.Id = -1;
+                newItem.JournalId = dictJournalMaster[item.JournalId];
+                newItem.ParentId = dictTransaction[item.ParentId];
+                //newItem.CreateUserId = dictUser[item.CreateUserId];
+                //newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                //newItem.CreateDate = item.CreateDate;
+                //newItem.ModifyDate = item.ModifyDate;
+                //newItem.Status = item.Status;
+
+                newItem = contextDest.TransactionDetails.Add(newItem);
+                contextDest.SaveChanges();
+            }
+
+            Console.Write("Importing table TransactionDetail done, " + TransactionDetailList.Count + " records imported");
+
+            //balance journal
+            Console.Write("Importing table BalanceJournal");
+
+            foreach (var item in BalanceJournalList)
+            {
+                int itemOldId = item.Id;
+                BalanceJournal newItem = new BalanceJournal();
+
+                newItem.Id = -1;
+                newItem.CreateUserId = dictUser[item.CreateUserId];
+                newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.Month = item.Month;
+                newItem.Year = item.Year;
+                newItem.IsFirst = item.IsFirst;
+                newItem.CreateDate = item.CreateDate;
+                newItem.ModifyDate = item.ModifyDate;
+                newItem.Status = item.Status;
+
+                newItem = contextDest.BalanceJournals.Add(newItem);
+                contextDest.SaveChanges();
+
+                dictBalanceJournal.Add(itemOldId, newItem.Id);
+            }
+
+            Console.Write("Importing table BalanceJournal done, " + BalanceJournalList.Count + " records imported");
+
+            //balance journal detail 
+            Console.Write("Importing table BalanceJournalDetail");
+
+            foreach (var item in BalanceJournalDetailList)
+            {
+                int itemOldId = item.Id;
+                BalanceJournalDetail newItem = new BalanceJournalDetail();
+
+                newItem.Id = -1;
+                newItem.JournalId = dictJournalMaster[item.JournalId];
+                newItem.ParentId = dictBalanceJournal[item.ParentId];
+                //newItem.CreateUserId = dictUser[item.CreateUserId];
+                //newItem.ModifyUserId = dictUser[item.ModifyUserId];
+
+                newItem.FirstDebit = item.FirstDebit;
+                newItem.FirstCredit = item.FirstCredit;
+                newItem.MutationDebit = item.MutationDebit;
+                newItem.MutationCredit = item.MutationCredit;
+                newItem.BalanceAfterMutationDebit = item.BalanceAfterMutationDebit;
+                newItem.BalanceAfterMutationCredit = item.BalanceAfterMutationCredit;
+                newItem.ReconciliationDebit = item.ReconciliationDebit;
+                newItem.ReconciliationCredit = item.ReconciliationCredit;
+                newItem.BalanceAfterReconciliationDebit = item.BalanceAfterReconciliationDebit;
+                newItem.BalanceAfterReconciliationCredit = item.BalanceAfterReconciliationCredit;
+                newItem.ProfitLossDebit = item.ProfitLossDebit;
+                newItem.ProfitLossCredit = item.ProfitLossCredit;
+                newItem.LastDebit = item.LastDebit;
+                newItem.LastCredit = item.LastCredit;
+                //newItem.CreateDate = item.CreateDate;
+                //newItem.ModifyDate = item.ModifyDate;
+                //newItem.Status = item.Status;
+
+                newItem = contextDest.BalanceJournalDetails.Add(newItem);
+                contextDest.SaveChanges();
+            }
+
+            Console.Write("Importing table BalanceJournalDetail done, " + BalanceJournalDetailList.Count + " records imported");
+
+            Console.Write("MOTHA FUCKIN DONE!");
             Console.Read();
         }
 
