@@ -18,6 +18,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
     public partial class SpecialSparepartDetailListForm : BaseDefaultForm, ISpecialSparepartDetailListView
     {
         private SpecialSparepartDetailListPresenter _presenter;
+        private SpecialSparepartDetailViewModel _selectedSSpd;
 
         public SpecialSparepartDetailListForm(SpecialSparepartDetailListModel model)
         {
@@ -25,8 +26,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             _presenter = new SpecialSparepartDetailListPresenter(this, model);
             gvSpecialSparepartDetail.PopupMenuShowing += gvSpecialSparepartDetail_PopupMenuShowing;
+            gvSpecialSparepartDetail.FocusedRowChanged += gvSpecialSparepartDetail_FocusedRowChanged;
 
             this.Load += WheelDetailEditorForm_Load;
+        }
+
+        void gvSpecialSparepartDetail_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            _selectedSSpd = gvSpecialSparepartDetail.GetFocusedRow() as SpecialSparepartDetailViewModel;
         }
 
         void gvSpecialSparepartDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -138,15 +145,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (this.ShowConfirmation("Yakin akan menghapus data?") == System.Windows.Forms.DialogResult.Yes)
             {
-                SpecialSparepartDetailViewModel selectedSspd = gvSpecialSparepartDetail.GetFocusedRow() as SpecialSparepartDetailViewModel;
 
-                if (_presenter.IsSpecialSparepartDetailInstalled(selectedSspd.Id))
+                if (_presenter.IsSpecialSparepartDetailInstalled(_selectedSSpd.Id))
                 {
                     this.ShowWarning("Sparepart ini telah digunakan, untuk menjaga validitas data proses penghapusan dibatalkan");
                 }
                 else
                 {
-                    _presenter.RemoveSpecialSparepartDetail(selectedSspd.Id);
+                    _presenter.RemoveSpecialSparepartDetail(_selectedSSpd.Id);
                     this.RefreshDataView();
                 }
             }
