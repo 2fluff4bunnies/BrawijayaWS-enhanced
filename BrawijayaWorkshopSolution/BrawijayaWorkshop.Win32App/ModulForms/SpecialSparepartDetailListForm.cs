@@ -44,7 +44,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             _presenter.InitFormData();
             lookupStatus.EditValue = (int)DbConstant.WheelDetailStatus.Ready;
-            cmsDeleteData.Visible = LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN; ;
         }
 
         private void lookupStatus_EditValueChanged(object sender, EventArgs e)

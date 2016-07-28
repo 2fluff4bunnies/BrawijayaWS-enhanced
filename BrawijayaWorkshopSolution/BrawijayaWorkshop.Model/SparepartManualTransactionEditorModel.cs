@@ -154,7 +154,7 @@ namespace BrawijayaWorkshop.Model
 
                                 if (!string.IsNullOrEmpty(sparepartManualTransaction.SerialNumber))
                                 {
-                                    SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartUpdated.Id).FirstOrDefault();
+                                    SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartUpdated.Id && w.Status == (int)DbConstant.DefaultDataStatus.Active ).FirstOrDefault();
 
                                     if (specialSparepart != null)
                                     {
@@ -174,6 +174,8 @@ namespace BrawijayaWorkshop.Model
                                         _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
                                         _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
                                         _specialSparepartDetailRepository.Add(wDetail);
+
+                                        _unitOfWork.SaveChanges();
                                     }
                                 }
 

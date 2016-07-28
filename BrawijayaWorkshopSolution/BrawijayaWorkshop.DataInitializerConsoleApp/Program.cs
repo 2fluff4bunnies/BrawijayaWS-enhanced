@@ -121,7 +121,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             Dictionary<int, int> dictBalanceJournal = new Dictionary<int, int>();
 
             //applicationmodul
-            Console.Write("Importing table ApplicationModul");
+            Console.Write("\nImporting table ApplicationModul");
 
             foreach (var item in ApplicationModulList)
             {
@@ -133,10 +133,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictAppModul.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table ApplicationModul done, " + ApplicationModulList.Count + " records imported");
+            Console.Write("\nImporting table ApplicationModul done, " + ApplicationModulList.Count + " records imported");
 
             //role
-            Console.Write("Importing table Role");
+            Console.Write("\nImporting table Role");
 
             foreach (var item in RoleList)
             {
@@ -148,10 +148,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictRole.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Role done, " + RoleList.Count + " records imported");
+            Console.Write("\nImporting table Role done, " + RoleList.Count + " records imported");
 
             //setting
-            Console.Write("Importing table setting");
+            Console.Write("\nImporting table setting");
 
             foreach (var item in SettingList)
             {
@@ -159,10 +159,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table setting done, " + SettingList.Count + " records imported");
+            Console.Write("\nImporting table setting done, " + SettingList.Count + " records imported");
 
             //reference
-            Console.Write("Importing table Reference");
+            Console.Write("\nImporting table Reference");
 
             foreach (var item in ReferenceList)
             {
@@ -189,10 +189,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictReference.Add(itemOldId, insertedReference.Id);
             }
 
-            Console.Write("Importing table Reference done, " + ReferenceList.Count + " records imported");
+            Console.Write("\nImporting table Reference done, " + ReferenceList.Count + " records imported");
 
             //user
-            Console.Write("Importing table User");
+            Console.Write("\nImporting table User");
 
             foreach (var item in UserList)
             {
@@ -204,10 +204,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictUser.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table User done, " + UserList.Count + " records imported");
+            Console.Write("\nImporting table User done, " + UserList.Count + " records imported");
 
             //journalMaster
-            Console.Write("Importing table JournalMaster");
+            Console.Write("\nImporting table JournalMaster");
 
             foreach (var item in JournalMasterList)
             {
@@ -232,10 +232,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictJournalMaster.Add(itemOldId, insertedJournalMaster.Id);
             }
 
-            Console.Write("Importing table JournalMaster done, " + JournalMasterList.Count + " records imported");
+            Console.Write("\nImporting table JournalMaster done, " + JournalMasterList.Count + " records imported");
 
             //brand
-            Console.Write("Importing table Brand");
+            Console.Write("\nImporting table Brand");
 
             foreach (var item in BrandList)
             {
@@ -247,10 +247,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictBrand.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Brand done, " + BrandList.Count + " records imported");
+            Console.Write("\nImporting table Brand done, " + BrandList.Count + " records imported");
 
             //type
-            Console.Write("Importing table Type");
+            Console.Write("\nImporting table Type");
 
             foreach (var item in TypeList)
             {
@@ -262,10 +262,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictType.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Type done, " + TypeList.Count + " records imported");
+            Console.Write("\nImporting table Type done, " + TypeList.Count + " records imported");
 
             //city
-            Console.Write("Importing table City");
+            Console.Write("\nImporting table City");
 
             foreach (var item in CityList)
             {
@@ -277,10 +277,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictCity.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table City done, " + CityList.Count + " records imported");
+            Console.Write("\nImporting table City done, " + CityList.Count + " records imported");
 
             //role access
-            Console.Write("Importing table RoleAccess");
+            Console.Write("\nImporting table RoleAccess");
 
             foreach (var item in RoleAccessList)
             {
@@ -296,10 +296,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table RoleAccess done, " + RoleAccessList.Count + " records imported");
+            Console.Write("\nImporting table RoleAccess done, " + RoleAccessList.Count + " records imported");
 
             //user role
-            Console.Write("Importing table UserRole");
+            Console.Write("\nImporting table UserRole");
 
             foreach (var item in UserRoleList)
             {
@@ -313,10 +313,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.UserRoles.Add(newItem);
             }
 
-            Console.Write("Importing table UserRole done, " + UserRoleList.Count + " records imported");
+            Console.Write("\nImporting table UserRole done, " + UserRoleList.Count + " records imported");
 
             //customer
-            Console.Write("Importing table Customer");
+            Console.Write("\nImporting table Customer");
 
             foreach (var item in CustomerList)
             {
@@ -345,10 +345,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictCustomer.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Customer done, " + CustomerList.Count + " records imported");
+            Console.Write("\nImporting table Customer done, " + CustomerList.Count + " records imported");
 
             //vehicle group
-            Console.Write("Importing table VehicleGroup");
+            Console.Write("\nImporting table VehicleGroup");
 
             foreach (var item in VehicleGroupList)
             {
@@ -373,10 +373,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictVehicleGroup.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table VehicleGroup done, " + VehicleGroupList.Count + " records imported");
+            Console.Write("\nImporting table VehicleGroup done, " + VehicleGroupList.Count + " records imported");
 
             //vehicle
-            Console.Write("Importing table Vehicle");
+            Console.Write("\nImporting table Vehicle");
 
             foreach (var item in VehicleList)
             {
@@ -410,10 +410,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictVehicle.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Vehicle done, " + VehicleList.Count + " records imported");
+            Console.Write("\nImporting table Vehicle done, " + VehicleList.Count + " records imported");
 
             //vehicle detail
-            Console.Write("Importing table VehicleDetail");
+            Console.Write("\nImporting table VehicleDetail");
 
             foreach (var item in VehicleDetailList)
             {
@@ -436,10 +436,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table VehicleDetail done, " + VehicleDetailList.Count + " records imported");
+            Console.Write("\nImporting table VehicleDetail done, " + VehicleDetailList.Count + " records imported");
 
             //mechanic
-            Console.Write("Importing table Mechanic");
+            Console.Write("\nImporting table Mechanic");
 
             foreach (var item in MechanicList)
             {
@@ -466,10 +466,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictMechanic.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Mechanic done, " + MechanicList.Count + " records imported");
+            Console.Write("\nImporting table Mechanic done, " + MechanicList.Count + " records imported");
 
             //supplier
-            Console.Write("Importing table Supplier");
+            Console.Write("\nImporting table Supplier");
 
             foreach (var item in SupplierList)
             {
@@ -496,10 +496,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSupplier.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Supplier done, " + SupplierList.Count + " records imported");
+            Console.Write("\nImporting table Supplier done, " + SupplierList.Count + " records imported");
 
             //sparepart
-            Console.Write("Importing table Sparepart");
+            Console.Write("\nImporting table Sparepart");
 
             foreach (var item in SparepartList)
             {
@@ -528,10 +528,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSparepart.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Sparepart done, " + SparepartList.Count + " records imported");
+            Console.Write("\nImporting table Sparepart done, " + SparepartList.Count + " records imported");
 
             //special sparepart
-            Console.Write("Importing table SpecialSparepart");
+            Console.Write("\nImporting table SpecialSparepart");
 
             foreach (var item in SpecialSparepartList)
             {
@@ -557,10 +557,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSpecialSparepart.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SpecialSparepart done, " + SpecialSparepartList.Count + " records imported");
+            Console.Write("\nImporting table SpecialSparepart done, " + SpecialSparepartList.Count + " records imported");
 
             //sparepart manual trans
-            Console.Write("Importing table SparepartManualTransaction");
+            Console.Write("\nImporting table SparepartManualTransaction");
 
             foreach (var item in SparepartManualTransactionList)
             {
@@ -589,10 +589,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSpManualTrans.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SparepartManualTransaction done, " + SparepartManualTransactionList.Count + " records imported");
+            Console.Write("\nImporting table SparepartManualTransaction done, " + SparepartManualTransactionList.Count + " records imported");
 
             //purchasing
-            Console.Write("Importing table Purchasing");
+            Console.Write("\nImporting table Purchasing");
 
             foreach (var item in PurchasingList)
             {
@@ -623,10 +623,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictPurchasing.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table InvPurchasingoice done, " + PurchasingList.Count + " records imported");
+            Console.Write("\nImporting table InvPurchasingoice done, " + PurchasingList.Count + " records imported");
 
             //purchasing detail
-            Console.Write("Importing table PurchasingDetail");
+            Console.Write("\nImporting table PurchasingDetail");
 
             foreach (var item in PurchasingDetailList)
             {
@@ -655,10 +655,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictPurchasingDetail.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table PurchasingDetail done, " + PurchasingDetailList.Count + " records imported");
+            Console.Write("\nImporting table PurchasingDetail done, " + PurchasingDetailList.Count + " records imported");
 
             //purchasing return
-            Console.Write("Importing table PurchaseReturn");
+            Console.Write("\nImporting table PurchaseReturn");
 
             foreach (var item in PurchaseReturnList)
             {
@@ -684,10 +684,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictPurchaseReturn.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table PurchaseReturn done, " + PurchaseReturnList.Count + " records imported");
+            Console.Write("\nImporting table PurchaseReturn done, " + PurchaseReturnList.Count + " records imported");
 
             //purchasing return detail
-            Console.Write("Importing table PurchaseReturnDetail");
+            Console.Write("\nImporting table PurchaseReturnDetail");
 
             foreach (var item in PurchaseReturnDetailList)
             {
@@ -713,10 +713,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table PurchaseReturnDetail done, " + PurchaseReturnDetailList.Count + " records imported");
+            Console.Write("\nImporting table PurchaseReturnDetail done, " + PurchaseReturnDetailList.Count + " records imported");
 
             //sparepart detail
-            Console.Write("Importing table SparepartDetail");
+            Console.Write("\nImporting table SparepartDetail");
 
             foreach (var item in SparepartDetailList)
             {
@@ -752,10 +752,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSparepartDetail.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SparepartDetail done, " + SparepartDetailList.Count + " records imported");
+            Console.Write("\nImporting table SparepartDetail done, " + SparepartDetailList.Count + " records imported");
 
             //special sparepart detail
-            Console.Write("Importing table SpecialSparepartDetail");
+            Console.Write("\nImporting table SpecialSparepartDetail");
 
             foreach (var item in SpecialSparepartDetailList)
             {
@@ -783,10 +783,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSpecialSparepartDetail.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SpecialSparepartDetail done, " + SpecialSparepartDetailList.Count + " records imported");
+            Console.Write("\nImporting table SpecialSparepartDetail done, " + SpecialSparepartDetailList.Count + " records imported");
 
             //vehicle wheel
-            Console.Write("Importing table VehicleWheel");
+            Console.Write("\nImporting table VehicleWheel");
 
             foreach (var item in VehicleWheelList)
             {
@@ -810,10 +810,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table VehicleWheel done, " + VehicleWheelList.Count + " records imported");
+            Console.Write("\nImporting table VehicleWheel done, " + VehicleWheelList.Count + " records imported");
 
             //used good
-            Console.Write("Importing table UsedGood");
+            Console.Write("\nImporting table UsedGood");
 
             foreach (var item in UsedGoodList)
             {
@@ -832,10 +832,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictUsedGood.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table UsedGood done, " + UsedGoodList.Count + " records imported");
+            Console.Write("\nImporting table UsedGood done, " + UsedGoodList.Count + " records imported");
 
             //used good trans
-            Console.Write("Importing table UsedGoodTransaction");
+            Console.Write("\nImporting table UsedGoodTransaction");
 
             foreach (var item in UsedGoodTransactionList)
             {
@@ -862,10 +862,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table UsedGoodTransaction done, " + UsedGoodTransaction.Count + " records imported");
+            Console.Write("\nImporting table UsedGoodTransaction done, " + UsedGoodTransactionList.Count + " records imported");
 
             //guest book
-            Console.Write("Importing table GuestBook");
+            Console.Write("\nImporting table GuestBook");
 
             foreach (var item in GuestBookList)
             {
@@ -887,10 +887,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             }
             contextDest.SaveChanges();
 
-            Console.Write("Importing table GuestBook done, " + GuestBookList.Count + " records imported");
+            Console.Write("\nImporting table GuestBook done, " + GuestBookList.Count + " records imported");
 
             //SPK
-            Console.Write("Importing table SPK");
+            Console.Write("\nImporting table SPK");
 
             foreach (var item in SPKList)
             {
@@ -934,10 +934,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSPK.Add(itemOldId, insertedSPK.Id);
             }
 
-            Console.Write("Importing table SPK done, " + SPKList.Count + " records imported");
+            Console.Write("\nImporting table SPK done, " + SPKList.Count + " records imported");
 
             //spk detail sparepart
-            Console.Write("Importing table SPKDetailSparepart");
+            Console.Write("\nImporting table SPKDetailSparepart");
 
             foreach (var item in SPKDetailSparepartList)
             {
@@ -962,10 +962,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSPKDetailSparepart.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SPKDetailSparepart done, " + SPKDetailSparepartList.Count + " records imported");
+            Console.Write("\nImporting table SPKDetailSparepart done, " + SPKDetailSparepartList.Count + " records imported");
 
             //spk detail sparepart detail
-            Console.Write("Importing table SPKDetailSparepartDetail");
+            Console.Write("\nImporting table SPKDetailSparepartDetail");
 
             foreach (var item in SPKDetailSparepartDetailList)
             {
@@ -987,10 +987,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSPKDetailSparepartDetail.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SPKDetailSparepartDetail done, " + SPKDetailSparepartDetailList.Count + " records imported");
+            Console.Write("\nImporting table SPKDetailSparepartDetail done, " + SPKDetailSparepartDetailList.Count + " records imported");
 
             //spk schedule
-            Console.Write("Importing table SPKSchedule");
+            Console.Write("\nImporting table SPKSchedule");
 
             foreach (var item in SPKScheduleList)
             {
@@ -1012,10 +1012,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.SaveChanges();
             }
 
-            Console.Write("Importing table SPKSchedule done, " + SPKScheduleList.Count + " records imported");
+            Console.Write("\nImporting table SPKSchedule done, " + SPKScheduleList.Count + " records imported");
 
             //wheel exchange history
-            Console.Write("Importing table WheelExchangeHistory");
+            Console.Write("\nImporting table WheelExchangeHistory");
 
             foreach (var item in WheelExchangeHistoryList)
             {
@@ -1036,10 +1036,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.SaveChanges();
             }
 
-            Console.Write("Importing table WheelExchangeHistory done, " + WheelExchangeHistoryList.Count + " records imported");
+            Console.Write("\nImporting table WheelExchangeHistory done, " + WheelExchangeHistoryList.Count + " records imported");
 
             //invoice
-            Console.Write("Importing table Invoice");
+            Console.Write("\nImporting table Invoice");
 
             foreach (var item in InvoiceList)
             {
@@ -1074,10 +1074,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictInvoice.Add(itemOldId, insertedInvoice.Id);
             }
 
-            Console.Write("Importing table Invoice done, " + InvoiceList.Count + " records imported");
+            Console.Write("\nImporting table Invoice done, " + InvoiceList.Count + " records imported");
 
             //invoice detail
-            Console.Write("Importing table InvoiceDetail");
+            Console.Write("\nImporting table InvoiceDetail");
 
             foreach (var item in InvoiceDetailList)
             {
@@ -1102,10 +1102,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictInvoiceDetail.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table InvoiceDetail done, " + InvoiceDetailList.Count + " records imported");
+            Console.Write("\nImporting table InvoiceDetail done, " + InvoiceDetailList.Count + " records imported");
 
             //sales return
-            Console.Write("Importing table SalesReturn");
+            Console.Write("\nImporting table SalesReturn");
 
             foreach (var item in SalesReturnList)
             {
@@ -1129,10 +1129,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictSalesReturn.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table SalesReturn done, " + SalesReturnList.Count + " records imported");
+            Console.Write("\nImporting table SalesReturn done, " + SalesReturnList.Count + " records imported");
 
             //sales return detail
-            Console.Write("Importing table SalesReturnDetail");
+            Console.Write("\nImporting table SalesReturnDetail");
 
             foreach (var item in SalesReturnDetailList)
             {
@@ -1153,10 +1153,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.SaveChanges();
             }
 
-            Console.Write("Importing table SalesReturnDetail done, " + SalesReturnDetailList.Count + " records imported");
+            Console.Write("\nImporting table SalesReturnDetail done, " + SalesReturnDetailList.Count + " records imported");
 
             //transaction
-            Console.Write("Importing table Transaction");
+            Console.Write("\nImporting table Transaction");
 
             foreach (var item in TransactionList)
             {
@@ -1185,10 +1185,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictTransaction.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table Transaction done, " + TransactionList.Count + " records imported");
+            Console.Write("\nImporting table Transaction done, " + TransactionList.Count + " records imported");
 
             //transaction detail
-            Console.Write("Importing table TransactionDetail");
+            Console.Write("\nImporting table TransactionDetail");
 
             foreach (var item in TransactionDetailList)
             {
@@ -1210,10 +1210,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.SaveChanges();
             }
 
-            Console.Write("Importing table TransactionDetail done, " + TransactionDetailList.Count + " records imported");
+            Console.Write("\nImporting table TransactionDetail done, " + TransactionDetailList.Count + " records imported");
 
             //balance journal
-            Console.Write("Importing table BalanceJournal");
+            Console.Write("\nImporting table BalanceJournal");
 
             foreach (var item in BalanceJournalList)
             {
@@ -1237,10 +1237,10 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 dictBalanceJournal.Add(itemOldId, newItem.Id);
             }
 
-            Console.Write("Importing table BalanceJournal done, " + BalanceJournalList.Count + " records imported");
+            Console.Write("\nImporting table BalanceJournal done, " + BalanceJournalList.Count + " records imported");
 
             //balance journal detail 
-            Console.Write("Importing table BalanceJournalDetail");
+            Console.Write("\nImporting table BalanceJournalDetail");
 
             foreach (var item in BalanceJournalDetailList)
             {
@@ -1275,7 +1275,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 contextDest.SaveChanges();
             }
 
-            Console.Write("Importing table BalanceJournalDetail done, " + BalanceJournalDetailList.Count + " records imported");
+            Console.Write("\nImporting table BalanceJournalDetail done, " + BalanceJournalDetailList.Count + " records imported");
 
             Console.Write("MOTHA FUCKIN DONE!");
             Console.Read();

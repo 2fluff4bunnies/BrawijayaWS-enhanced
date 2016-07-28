@@ -169,9 +169,9 @@
             this.btnNewSpecialSparepart.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnNewSpecialSparepart.Location = new System.Drawing.Point(3, 72);
             this.btnNewSpecialSparepart.Name = "btnNewSpecialSparepart";
-            this.btnNewSpecialSparepart.Size = new System.Drawing.Size(105, 23);
+            this.btnNewSpecialSparepart.Size = new System.Drawing.Size(198, 23);
             this.btnNewSpecialSparepart.TabIndex = 6;
-            this.btnNewSpecialSparepart.Text = "Buat Ban Baru";
+            this.btnNewSpecialSparepart.Text = "Tambahkan Spesial Sparepart";
             this.btnNewSpecialSparepart.Click += new System.EventHandler(this.btnNewSpecialSparepart_Click);
             // 
             // cmsEditor
