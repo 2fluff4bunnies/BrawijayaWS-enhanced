@@ -225,5 +225,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             btnSearch.PerformClick();
         }
+
+        private void txtFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+            }
+        }
     }
 }

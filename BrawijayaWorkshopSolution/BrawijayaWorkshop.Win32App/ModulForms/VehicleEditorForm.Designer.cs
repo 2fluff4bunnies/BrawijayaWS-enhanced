@@ -71,6 +71,7 @@
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             this.ValidateExpireDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valGroupName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.bgwDelete = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPurchase.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVehicleInfo)).BeginInit();
@@ -494,6 +495,11 @@
             this.ValidateExpireDate.ValidateHiddenControls = false;
             this.ValidateExpireDate.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // bgwDelete
+            // 
+            this.bgwDelete.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwDelete_DoWork);
+            this.bgwDelete.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwDelete_RunWorkerCompleted);
+            // 
             // VehicleEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -564,5 +570,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDtl;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelNotes;
+        private System.ComponentModel.BackgroundWorker bgwDelete;
     }
 }

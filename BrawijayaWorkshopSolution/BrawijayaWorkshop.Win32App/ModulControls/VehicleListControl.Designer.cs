@@ -94,6 +94,7 @@
             this.txtFilter.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtFilter.Size = new System.Drawing.Size(704, 20);
             this.txtFilter.TabIndex = 1;
+            this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
             // lblFilterCompanyName
             // 

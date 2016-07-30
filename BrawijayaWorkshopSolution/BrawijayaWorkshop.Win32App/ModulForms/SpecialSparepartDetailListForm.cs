@@ -143,19 +143,52 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void cmsDeleteData_Click(object sender, EventArgs e)
         {
-            if (this.ShowConfirmation("Yakin akan menghapus data?") == System.Windows.Forms.DialogResult.Yes)
+            if (!bgwDelete.IsBusy)
             {
+                if (this.ShowConfirmation("Yakin akan menghapus data?") == System.Windows.Forms.DialogResult.Yes)
+                {
 
-                if (_presenter.IsSpecialSparepartDetailInstalled(_selectedSSpd.Id))
-                {
-                    this.ShowWarning("Sparepart ini telah digunakan, untuk menjaga validitas data proses penghapusan dibatalkan");
-                }
-                else
-                {
-                    _presenter.RemoveSpecialSparepartDetail(_selectedSSpd.Id);
-                    this.RefreshDataView();
+                    if (_presenter.IsSpecialSparepartDetailInstalled(_selectedSSpd.Id))
+                    {
+                        this.ShowWarning("Sparepart ini telah digunakan, untuk menjaga validitas data proses penghapusan dibatalkan");
+                    }
+                    else
+                    {
+                        bgwDelete.RunWorkerAsync();
+                       
+                    }
                 }
             }
+            else
+            {
+                this.Enabled = false;
+            }
+        }
+
+        private void bgwDelete_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.RemoveSpecialSparepartDetail(_selectedSSpd.Id);
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to execute _presenter.RemoveSpecialSparepartDetail()", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwDelete_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Enabled = true;
+
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses hapus gagal!");
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Special sparepart detail berhasil dihapus", true);
+            this.RefreshDataView();
         }
     }
 }

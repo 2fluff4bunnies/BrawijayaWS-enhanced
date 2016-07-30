@@ -383,78 +383,57 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        //protected override void ExecuteSave()
-        //{
-        //    if (!bgwSave.IsBusy)
-        //    {
-        //        if (FieldsValidator.Validate() && VehicleWheelList.Count >= 4)
-        //        {
-        //            try
-        //            {
-        //                MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
-        //                bgwSave.RunWorkerAsync();
-        //                this.Close();
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
-        //                this.ShowError("Proses simpan data Kendaraan gagal!");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (VehicleWheelList.Count < 4)
-        //            {
-        //                this.ShowWarning("Ban yang terpasang pada kendaraan minimal 4!");
-        //            }
-        //        }
-        //    }         
-        //}
-
+    
         protected override void ExecuteSave()
         {
-            bool validated = true;
-            string errMessage = "";
-
-            List<string> duplicatedWheel = VehicleWheelList.Where(wh => !string.IsNullOrEmpty(wh.WheelDetail.SerialNumber)).GroupBy(x => x.WheelDetail.SerialNumber)
-                       .Where(group => group.Count() > 1)
-                       .Select(group => group.Key).ToList();
-
-            if (duplicatedWheel.Count > 0)
+            if (!bgwSave.IsBusy)
             {
-                errMessage += "Terdapat ban yang sama! \n";
-                validated = false;
-            }
+                bool validated = true;
+                string errMessage = "";
 
-            if (!_presenter.IsCodeValidated())
-            {
-                errMessage += "Kode sudah terdaftar! \n";
-                validated = false;
-            }
+                List<string> duplicatedWheel = VehicleWheelList.Where(wh => !string.IsNullOrEmpty(wh.WheelDetail.SerialNumber)).GroupBy(x => x.WheelDetail.SerialNumber)
+                           .Where(group => group.Count() > 1)
+                           .Select(group => group.Key).ToList();
 
-            if (!_presenter.IsLicenseNumberValidated())
-            {
-                errMessage += "Nopol sudah terdaftar! \n";
-                validated = false;
-            }
-
-            if (FieldsValidator.Validate() && valGroupName.Validate() && validated)
-            {
-                try
+                if (duplicatedWheel.Count > 0)
                 {
-                    MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
+                    errMessage += "Terdapat ban yang sama! \n";
+                    validated = false;
                 }
-                catch (Exception ex)
+
+                if (!_presenter.IsCodeValidated())
                 {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
-                    this.ShowError("Proses simpan data Kendaraan gagal!");
+                    errMessage += "Kode sudah terdaftar! \n";
+                    validated = false;
+                }
+
+                if (!_presenter.IsLicenseNumberValidated())
+                {
+                    errMessage += "Nopol sudah terdaftar! \n";
+                    validated = false;
+                }
+
+                if (FieldsValidator.Validate() && valGroupName.Validate() && validated)
+                {
+                    try
+                    {
+                        MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
+                        bgwSave.RunWorkerAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save Vehicle", ex);
+                        this.ShowError("Proses simpan data Kendaraan gagal!");
+                    }
+                }
+                else
+                {
+                    this.ShowWarning(errMessage);
                 }
             }
             else
             {
-                this.ShowWarning(errMessage);
+                this.Enabled = false;
             }
         }
 
@@ -494,29 +473,41 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void bgwSave_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //try
-            //{
-            //    _presenter.SaveChanges();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save vehicle", ex);
-            //    e.Result = ex;
-            //}
+            try
+            {
+                _presenter.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save vehicle", ex);
+                e.Result = ex;
+            }
         }
 
         private void bgwSave_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            //if (e.Result is Exception)
-            //{
-            //    this.ShowError("Proses simpan data kendaraan gagal!");
-            //    FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data kendaraan gagal", true);
-            //}
-            //else
-            //{
-            //    FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data kendaraan selesai", true);
-            //    this.Close();
-            //}
+            this.Enabled = true;
+
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses simpan data kendaraan gagal!");
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data kendaraan gagal", true);
+            }
+            else
+            {
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("simpan data kendaraan selesai", true);
+                this.Close();
+            }
+        }
+
+        private void bgwDelete_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+        }
+
+        private void bgwDelete_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
         }
     }
 }
