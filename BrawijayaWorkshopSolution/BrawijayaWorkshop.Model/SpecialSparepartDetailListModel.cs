@@ -74,7 +74,11 @@ namespace BrawijayaWorkshop.Model
             Sparepart spEntity = _sparepartRepository.GetById(spdEntity.SparepartId);
             spEntity.ModifyDate = serverTime;
             spEntity.ModifyUserId = userId;
-            spEntity.StockQty = spEntity.StockQty - 1;
+
+            if (spEntity.StockQty > 0)
+            {
+                spEntity.StockQty = spEntity.StockQty - 1;
+            }
 
             _sparepartRepository.AttachNavigation(spEntity.UnitReference);
             _sparepartRepository.AttachNavigation(spEntity.CategoryReference);

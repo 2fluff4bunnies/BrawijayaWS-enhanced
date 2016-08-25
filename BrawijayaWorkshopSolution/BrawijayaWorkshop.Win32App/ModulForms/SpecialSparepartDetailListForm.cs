@@ -118,6 +118,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwMain.IsBusy)
             {
+                this._selectedSSpd = null;
                 MethodBase.GetCurrentMethod().Info("Fecthing specialSparepart detail data...");
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data ban detail...", false);
                 bgwMain.RunWorkerAsync();
@@ -142,6 +143,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (e.Result is Exception)
             {
                 this.ShowError("Proses memuat data gagal!");
+            }
+
+            if (gvSpecialSparepartDetail.RowCount > 0)
+            {
+                this._selectedSSpd = gvSpecialSparepartDetail.GetRow(0) as SpecialSparepartDetailViewModel;
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data ban detail selesai", true);
@@ -194,19 +200,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void bgwDelete_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.Enabled = true;
-
-            if (gvSpecialSparepartDetail.RowCount > 0)
-            {
-                this._selectedSSpd = gvSpecialSparepartDetail.GetRow(0) as SpecialSparepartDetailViewModel;
-            }
-
             if (e.Result is Exception)
             {
                 this.ShowError("Proses hapus gagal!");
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Special sparepart detail berhasil dihapus", true);
+            this.Enabled = true;
             this.RefreshDataView();
         }
     }
