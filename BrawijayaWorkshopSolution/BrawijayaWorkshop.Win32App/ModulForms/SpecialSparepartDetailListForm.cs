@@ -45,6 +45,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
             }
+
+            if (_selectedSSpd != null)
+            {
+                this.cmsDeleteData.Enabled = !_presenter.IsSpecialSparepartDetailInstalled(_selectedSSpd.Id);
+            }
         }
 
         void WheelDetailEditorForm_Load(object sender, EventArgs e)
@@ -56,6 +61,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void lookupStatus_EditValueChanged(object sender, EventArgs e)
         {
             SelectedStatus = lookupStatus.EditValue.AsInteger();
+            cmsEditor.Close();
             RefreshDataView();
         }
 
@@ -148,20 +154,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 if (this.ShowConfirmation("Yakin akan menghapus data?") == System.Windows.Forms.DialogResult.Yes)
                 {
 
-                    if (_presenter.IsSpecialSparepartDetailInstalled(_selectedSSpd.Id))
+                    try
                     {
-                        this.ShowWarning("Sparepart ini telah digunakan, untuk menjaga validitas data proses penghapusan dibatalkan");
-                    }
-                    else
-                    {
+                        MethodBase.GetCurrentMethod().Info("Deleting special sparepat detail");
+                        this.Enabled = false;
                         bgwDelete.RunWorkerAsync();
-                       
                     }
+                    catch (Exception ex)
+                    {
+                        MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete special sparepart detail", ex);
+                        this.ShowError("Proses hapus data special sparepart detail gagal!");
+                    }
+
+                    //if ()
+                    //{
+                    //    this.ShowWarning("Sparepart ini telah digunakan, untuk menjaga validitas data proses penghapusan dibatalkan");
+                    //}
+                    //else
+                    //{
+                    //    this.Enabled = false;
+                    //    bgwDelete.RunWorkerAsync();
+                    //}
                 }
-            }
-            else
-            {
-                this.Enabled = false;
             }
         }
 
@@ -181,6 +195,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void bgwDelete_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.Enabled = true;
+
+            if (gvSpecialSparepartDetail.RowCount > 0)
+            {
+                this._selectedSSpd = gvSpecialSparepartDetail.GetRow(0) as SpecialSparepartDetailViewModel;
+            }
 
             if (e.Result is Exception)
             {

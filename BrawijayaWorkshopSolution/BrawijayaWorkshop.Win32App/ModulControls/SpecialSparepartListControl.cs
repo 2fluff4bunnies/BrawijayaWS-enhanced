@@ -119,11 +119,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 view.FocusedRowHandle = hitInfo.RowHandle;
                 cmsEditor.Show(view.GridControl, e.Point);
             }
-            if (this.SelectedSpecialSparepart.Sparepart.StockQty > 0)
-                this.cmsDeleteData.Enabled = false;
-            else
-                this.cmsDeleteData.Enabled = true;
-           
+
+            if (this.SelectedSpecialSparepart != null)
+                this.cmsDeleteData.Enabled = this.SelectedSpecialSparepart.Sparepart.StockQty < 1;
         }
 
         void gvSpecialSparepart_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)

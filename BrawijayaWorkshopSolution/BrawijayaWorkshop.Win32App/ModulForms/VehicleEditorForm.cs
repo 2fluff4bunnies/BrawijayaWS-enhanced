@@ -418,6 +418,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     try
                     {
                         MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
+                        this.Enabled = false;
                         bgwSave.RunWorkerAsync();
                     }
                     catch (Exception ex)
