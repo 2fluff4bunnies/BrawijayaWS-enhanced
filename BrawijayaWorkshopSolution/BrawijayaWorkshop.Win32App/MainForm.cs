@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Database;
+using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.Win32App.ModulControls;
@@ -225,6 +226,9 @@ namespace BrawijayaWorkshop.Win32App
             biStatusProgress.Visibility = BarItemVisibility.Never;
             if (!isComplete)
             {
+                IDatabaseFactory<BrawijayaWorkshopDbContext> database = Bootstrapper.Resolve<IDatabaseFactory<BrawijayaWorkshopDbContext>>();
+                database.Dispose();
+
                 isBusy = true;
                 biStatusProgress.Visibility = BarItemVisibility.Always;
             }
