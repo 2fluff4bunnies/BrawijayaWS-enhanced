@@ -12,6 +12,11 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             return _dbContext ?? (_dbContext = Activator.CreateInstance<T>());
         }
 
+        public void ReCreateContext()
+        {
+            _dbContext = Activator.CreateInstance<T>();
+        }
+
         protected override void DisposeCore()
         {
             if (_dbContext != null)

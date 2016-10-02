@@ -14,7 +14,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         where U : DbContext
     {
         private U _dataContext;
-        private readonly IDbSet<T> _dbset;
+        private IDbSet<T> _dbset;
 
         protected BaseRepository(IDatabaseFactory<U> databaseFactory)
         {
@@ -123,7 +123,7 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 T result = _dbset.Find(id);
                 if (result != null)
                 {
-                    var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+                    var context = ((IObjectContextAdapter)DataContext).ObjectContext;
                     context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
 
                     return result;
@@ -132,6 +132,17 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
             catch (Exception ex)
             {
+                try
+                {
+                    DatabaseFactory.ReCreateContext();
+                    _dbset = DataContext.Set<T>();
+                    return GetById(id);
+                }
+                catch (Exception innerEx)
+                {
+                    throw innerEx;
+                }
+
                 throw ex;
             }
         }
@@ -140,13 +151,24 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             try
             {
                 IEnumerable<T> result = _dbset.ToList();
-                var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+                var context = ((IObjectContextAdapter)DataContext).ObjectContext;
                 context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
 
                 return result.ToList();
             }
             catch (Exception ex)
             {
+                try
+                {
+                    DatabaseFactory.ReCreateContext();
+                    _dbset = DataContext.Set<T>();
+                    return GetAll();
+                }
+                catch (Exception innerEx)
+                {
+                    throw innerEx;
+                }
+
                 throw ex;
             }
         }
@@ -156,13 +178,24 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             try
             {
                 IEnumerable<T> result = _dbset.Where(where).ToList();
-                var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
+                var context = ((IObjectContextAdapter)DataContext).ObjectContext;
                 context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, result);
 
                 return result.ToList();
             }
             catch (Exception ex)
             {
+                try
+                {
+                    DatabaseFactory.ReCreateContext();
+                    _dbset = DataContext.Set<T>();
+                    return GetMany(where);
+                }
+                catch (Exception innerEx)
+                {
+                    throw innerEx;
+                }
+
                 throw ex;
             }
         }
@@ -171,10 +204,20 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             try
             {
-                return _dataContext.Database.SqlQuery<T>(query, parameters);
+                return DataContext.Database.SqlQuery<T>(query, parameters);
             }
             catch (Exception ex)
             {
+                try
+                {
+                    DatabaseFactory.ReCreateContext();
+                    return GetByQuery(query, parameters);
+                }
+                catch (Exception innerEx)
+                {
+                    throw innerEx;
+                }
+
                 throw ex;
             }
         }

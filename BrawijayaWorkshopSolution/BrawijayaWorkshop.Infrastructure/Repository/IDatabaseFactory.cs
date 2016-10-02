@@ -6,5 +6,6 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
     public interface IDatabaseFactory<T> : IDisposable where T : DbContext
     {
         T Get();
+        void ReCreateContext();
     }
 }
