@@ -215,6 +215,7 @@ namespace BrawijayaWorkshop.Constant
             FeeNotFixed = 0,
             NotPrinted = 1,
             Printed = 2,
+            HasReturn = 3,
         }
 
         public enum WheelDetailStatus

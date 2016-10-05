@@ -33,7 +33,7 @@ namespace BrawijayaWorkshop.Model
         public List<SPKViewModel> SearchSPK(string LicenseNumber, string code, int category, DateTime? dateFrom, DateTime? dateTo,
             int isContractWork, int customer)
         {
-            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.StatusCompletedId== (int) DbConstant.SPKCompletionStatus.Completed).ToList();
+            List<SPK> result = _SPKRepository.GetMany(spk => spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed && spk.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE).ToList();
 
             if (dateFrom.HasValue && dateTo.HasValue)
             {

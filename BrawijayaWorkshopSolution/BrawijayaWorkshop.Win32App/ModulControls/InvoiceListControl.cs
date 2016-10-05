@@ -72,6 +72,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     cmsEditData.Visible = true;
                     cmsPrint.Visible = true;
                 }
+                else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.HasReturn)
+                {
+                    cmsAddData.Visible = false;
+                    cmsEditData.Visible = false;
+                    cmsPrint.Visible = false;
+                }
                 else
                 {
                     cmsAddData.Visible = false;
@@ -300,6 +306,12 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         cmsEditData.Visible = true;
                         cmsPrint.Visible = true;
                     }
+                    else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.HasReturn)
+                    {
+                        cmsAddData.Visible = false;
+                        cmsEditData.Visible = false;
+                        cmsPrint.Visible = false;
+                    }
                     else
                     {
                         cmsAddData.Visible = false;
@@ -323,6 +335,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     case 0: e.DisplayText = "Belum Dibuat"; break;
                     case 1: e.DisplayText = "Belum Dicetak"; break;
                     case 2: e.DisplayText = "Telah Dicetak"; break;
+                    case 3: e.DisplayText = "Ada Retur"; break;
                 }
             }
         }

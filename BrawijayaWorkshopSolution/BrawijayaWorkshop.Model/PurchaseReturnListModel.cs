@@ -113,6 +113,14 @@ namespace BrawijayaWorkshop.Model
                     _unitOfWork.SaveChanges();
 
                     List<PurchaseReturnDetail> listDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
+                    List<ReturnViewModel> listReturn = listDetail
+                                    .GroupBy(l => l.SparepartDetail.Sparepart)
+                                    .Select(cl => new ReturnViewModel
+                                    {
+                                        SparepartId = cl.First().SparepartDetail.SparepartId,
+                                        ReturQty = cl.Count(),
+                                    }).ToList();
+
                     foreach (var itemDetail in listDetail)
                     {
                         itemDetail.Status = (int)DbConstant.DefaultDataStatus.Deleted;
@@ -136,15 +144,20 @@ namespace BrawijayaWorkshop.Model
                         _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
                         _sparepartDetailRepository.Update(spDetail);
 
-                        Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
-                        sparepart.StockQty += 1;
+                        
+                    }
+
+                    foreach (var itemReturn in listReturn)
+                    {
+                        Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
+                        sparepart.StockQty += itemReturn.ReturQty;
 
                         _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                         _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
                         _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
                         _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                         _sparepartRepository.Update(sparepart);
-                    }
+                    }        
 
                     _unitOfWork.SaveChanges();
 
