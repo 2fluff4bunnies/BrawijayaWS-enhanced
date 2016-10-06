@@ -16,6 +16,8 @@ namespace BrawijayaWorkshop.Model
         private IVehicleRepository _vehicleRepository;
         private ISPKRepository _spkRepository;
         private ISPKDetailSparepartRepository _spkDetailSparepartRepository;
+        private ISalesReturnRepository _salesReturnRepository;
+        private ISalesReturnDetailRepository _salesReturnDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public HistorySparepartListModel(IReferenceRepository referenceRepository,
@@ -23,6 +25,8 @@ namespace BrawijayaWorkshop.Model
             IVehicleRepository vehicleRepository,
             ISPKRepository spkRepository,
             ISPKDetailSparepartRepository spkDetailSparepartRepository, 
+            ISalesReturnRepository salesReturnRepository,
+            ISalesReturnDetailRepository salesReturnDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -31,6 +35,8 @@ namespace BrawijayaWorkshop.Model
             _vehicleRepository = vehicleRepository;
             _spkRepository = spkRepository;
             _spkDetailSparepartRepository = spkDetailSparepartRepository;
+            _salesReturnRepository = salesReturnRepository;
+            _salesReturnDetailRepository = salesReturnDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -51,29 +57,52 @@ namespace BrawijayaWorkshop.Model
         public List<SPKDetailSparepartViewModel> SearchHistorySparepart(DateTime? dateFrom, DateTime? dateTo, int vehicleFilter, int sparepartFilter)
         {
             List<SPKDetailSparepart> result = null;
+            List<SalesReturnDetail> listReturnSource = null;
 
             if (dateFrom.HasValue && dateTo.HasValue)
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
                 result = _spkDetailSparepartRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.CreateDate).ToList();
+                listReturnSource = _salesReturnDetailRepository.GetMany(c => c.InvoiceDetail.CreateDate >= dateFrom && c.InvoiceDetail.CreateDate <= dateTo).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
+                
             }
             else
             {
                 result = _spkDetailSparepartRepository.GetAll().OrderBy(c => c.CreateDate).ToList();
+                listReturnSource = _salesReturnDetailRepository.GetAll().OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
             }
 
             if(vehicleFilter != 0)
             {
                 result = result.Where(x => x.SPK.VehicleId == vehicleFilter).ToList();
+                listReturnSource = listReturnSource.Where(x => x.InvoiceDetail.Invoice.SPK.VehicleId == vehicleFilter).ToList();
             }
             if (sparepartFilter != 0)
             {
                 result = result.Where(x => x.SparepartId == sparepartFilter).ToList();
+                listReturnSource = listReturnSource.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartFilter).ToList();
             }
 
             List<SPKDetailSparepartViewModel> mappedResult = new List<SPKDetailSparepartViewModel>();
-            return Map(result, mappedResult);
+            List<SPKDetailSparepartViewModel> listSPK = new List<SPKDetailSparepartViewModel>();
+            listSPK = Map(result, mappedResult);
+
+            List<SPKDetailSparepartViewModel> listReturn = listReturnSource
+                            .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId)
+                            .Select(cl => new SPKDetailSparepartViewModel
+                            {
+                                SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId,
+                                SPK = Map(cl.First().InvoiceDetail.Invoice.SPK, new SPKViewModel()),
+                                Sparepart = Map(cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.Sparepart, new SparepartViewModel()),
+                                TotalQuantity = cl.Count(),
+                                TotalPrice = (decimal) cl.Sum(x => x.InvoiceDetail.SubTotalPrice),
+                                Category = "Retur"
+                            }).ToList();
+
+
+            List<SPKDetailSparepartViewModel> listMerge = listSPK.Union(listReturn).ToList();
+            return listMerge;
         }
     }
 }

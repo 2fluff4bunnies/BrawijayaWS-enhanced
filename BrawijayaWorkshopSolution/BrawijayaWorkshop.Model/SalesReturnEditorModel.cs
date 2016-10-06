@@ -369,7 +369,7 @@ namespace BrawijayaWorkshop.Model
             foreach (var itemReturn in listReturn)
             {
                 Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
-                sparepart.StockQty -= 1;
+                sparepart.StockQty -= itemReturn.ReturQty;
 
                 _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                 _sparepartRepository.AttachNavigation(sparepart.ModifyUser);

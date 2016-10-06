@@ -16,5 +16,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public SparepartViewModel Sparepart { get; set; }
 
         public string SerialNumber { get; set; }
+
+        public string Category { get; set; }
     }
 }

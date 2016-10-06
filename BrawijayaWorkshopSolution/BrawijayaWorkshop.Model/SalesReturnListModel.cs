@@ -59,11 +59,11 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && (c.Status == (int) DbConstant.InvoiceStatus.Printed || c.Status == (int) DbConstant.InvoiceStatus.HasReturn)).OrderBy(c => c.CreateDate).ToList();
+                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && (c.Status == (int) DbConstant.InvoiceStatus.Printed || c.Status == (int) DbConstant.InvoiceStatus.HasReturn) && c.SPK.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE).OrderBy(c => c.CreateDate).ToList();
             }
             else
             {
-                result = _invoiceRepository.GetAll().OrderBy(c => c.CreateDate).ToList();
+                result = _invoiceRepository.GetMany(c => (c.Status == (int) DbConstant.InvoiceStatus.Printed || c.Status == (int) DbConstant.InvoiceStatus.HasReturn) && c.SPK.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE).OrderBy(c => c.CreateDate).ToList();
             }
             if (customerID != 0)
             {
@@ -157,7 +157,7 @@ namespace BrawijayaWorkshop.Model
                     foreach (var itemReturn in listReturn)
                     {
                         Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
-                        sparepart.StockQty -= 1;
+                        sparepart.StockQty -= itemReturn.ReturQty;
 
                         _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                         _sparepartRepository.AttachNavigation(sparepart.ModifyUser);

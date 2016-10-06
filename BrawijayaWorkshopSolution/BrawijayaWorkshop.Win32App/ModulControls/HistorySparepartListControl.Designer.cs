@@ -50,6 +50,7 @@
             this.colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -223,7 +224,8 @@
             this.colSparepartName,
             this.colUnitName,
             this.colQty,
-            this.colSubTotal});
+            this.colSubTotal,
+            this.colCategory});
             this.gvHistorySparepart.GridControl = this.gridHistorySparepart;
             this.gvHistorySparepart.Name = "gvHistorySparepart";
             this.gvHistorySparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -328,6 +330,14 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // colCategory
+            // 
+            this.colCategory.Caption = "Kategori";
+            this.colCategory.FieldName = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.Visible = true;
+            this.colCategory.VisibleIndex = 7;
+            // 
             // HistorySparepartListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,5 +386,6 @@
         private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
         private DevExpress.XtraGrid.Columns.GridColumn colSubTotal;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategory;
     }
 }
