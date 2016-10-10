@@ -38,7 +38,7 @@ namespace BrawijayaWorkshop.Presenter
         {
             if (View.SelectedSalesReturn != null)
             {
-                Model.DeletePurchaseReturn(View.SelectedSalesReturn.Id, LoginInformation.UserId);
+                Model.DeleteSalesReturn(View.SelectedSalesReturn.Id, LoginInformation.UserId);
             }
 
         }

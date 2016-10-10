@@ -173,6 +173,28 @@ namespace BrawijayaWorkshop.Model
                     _transactionRepository.AttachNavigation(transaction.ReferenceTable);
                     _transactionRepository.Update(transaction);
 
+
+
+                    Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
+                    if (purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= (decimal)transaction.TotalTransaction)
+                    {
+                        purchasing.TotalHasPaid -= (decimal)transaction.TotalTransaction;
+                    }
+
+                    if (purchasing.TotalPrice == purchasing.TotalHasPaid)
+                    {
+                        purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+                    }
+                    else
+                    {
+                        purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+                    }
+
+                    _purchasingRepository.AttachNavigation(purchasing.CreateUser);
+                    _purchasingRepository.AttachNavigation(purchasing.ModifyUser);
+                    _purchasingRepository.AttachNavigation(purchasing.PaymentMethod);
+                    _purchasingRepository.AttachNavigation(purchasing.Supplier);
+
                     _unitOfWork.SaveChanges();
                     trans.Commit();
                 }

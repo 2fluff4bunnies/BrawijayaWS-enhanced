@@ -286,7 +286,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
-                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                TotalValueAdded = 0;
+                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE)
+                {
+                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                }
                 TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }
@@ -306,7 +310,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
-                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                TotalValueAdded = 0;
+                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE)
+                {
+                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                } 
                 TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }
@@ -329,7 +337,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
             TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
             TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
-            TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+            TotalValueAdded = 0;
+            if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE)
+            {
+                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+            } 
             TotalTransaction = TotalSparepartAndService + TotalValueAdded;
         }
 

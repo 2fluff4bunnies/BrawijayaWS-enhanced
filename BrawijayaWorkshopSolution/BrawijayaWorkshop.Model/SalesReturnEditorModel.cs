@@ -200,16 +200,6 @@ namespace BrawijayaWorkshop.Model
             _salesReturnRepository.AttachNavigation(salesReturn.Invoice);
             salesReturn = _salesReturnRepository.Add(salesReturn);
 
-            Invoice invoice = _invoiceRepository.GetById(salesReturn.InvoiceId);
-            invoice.Status = (int)DbConstant.InvoiceStatus.HasReturn;
-            invoice.ModifyDate = serverTime;
-            invoice.ModifyUserId = userID;
-
-            _invoiceRepository.AttachNavigation(invoice.CreateUser);
-            _invoiceRepository.AttachNavigation(invoice.ModifyUser);
-            _invoiceRepository.AttachNavigation(invoice.SPK);
-            _invoiceRepository.Update(invoice);
-
             _unitOfWork.SaveChanges();
 
             List<SalesReturnDetail> listReturnDetail = new List<SalesReturnDetail>();
@@ -273,6 +263,29 @@ namespace BrawijayaWorkshop.Model
                 _salesReturnDetailRepository.AttachNavigation(itemReturnDetail.InvoiceDetail);
                 _salesReturnDetailRepository.Add(itemReturnDetail);
             }
+
+            Invoice invoice = _invoiceRepository.GetById(salesReturn.InvoiceId);
+            invoice.Status = (int)DbConstant.InvoiceStatus.HasReturn;
+            invoice.ModifyDate = serverTime;
+            invoice.ModifyUserId = userID;
+            if (invoice.TotalPrice != invoice.TotalHasPaid && (invoice.TotalPrice - invoice.TotalHasPaid) >= totalTransaction)
+            {
+                invoice.TotalHasPaid += totalTransaction;
+            }
+
+            if (invoice.TotalPrice == invoice.TotalHasPaid)
+            {
+                invoice.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+            }
+            else
+            {
+                invoice.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            }
+
+            _invoiceRepository.AttachNavigation(invoice.CreateUser);
+            _invoiceRepository.AttachNavigation(invoice.ModifyUser);
+            _invoiceRepository.AttachNavigation(invoice.PaymentMethod);
+            _invoiceRepository.AttachNavigation(invoice.SPK);
 
             _unitOfWork.SaveChanges();
 
@@ -391,6 +404,26 @@ namespace BrawijayaWorkshop.Model
             _transactionRepository.AttachNavigation(transaction.PaymentMethod);
             _transactionRepository.AttachNavigation(transaction.ReferenceTable);
             _transactionRepository.Update(transaction);
+
+            Invoice invoice = _invoiceRepository.GetById(salesReturn.InvoiceId);
+            if (invoice.TotalPrice != invoice.TotalHasPaid && (invoice.TotalPrice - invoice.TotalHasPaid) >= (decimal)transaction.TotalTransaction)
+            {
+                invoice.TotalHasPaid -= (decimal)transaction.TotalTransaction;
+            }
+
+            if (invoice.TotalPrice == invoice.TotalHasPaid)
+            {
+                invoice.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+            }
+            else
+            {
+                invoice.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            }
+
+            _invoiceRepository.AttachNavigation(invoice.CreateUser);
+            _invoiceRepository.AttachNavigation(invoice.ModifyUser);
+            _invoiceRepository.AttachNavigation(invoice.PaymentMethod);
+            _invoiceRepository.AttachNavigation(invoice.SPK);
 
             _unitOfWork.SaveChanges();
         }

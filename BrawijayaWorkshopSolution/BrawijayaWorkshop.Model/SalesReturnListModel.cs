@@ -93,7 +93,7 @@ namespace BrawijayaWorkshop.Model
             return Map(salesReturn, viewModel);
         }
 
-        public void DeletePurchaseReturn(int salesReturnID, int userID)
+        public void DeleteSalesReturn(int salesReturnID, int userID)
         {
             using (var trans = _unitOfWork.BeginTransaction())
             {
@@ -110,16 +110,6 @@ namespace BrawijayaWorkshop.Model
                     _salesReturnRepository.AttachNavigation(salesReturn.ModifyUser);
                     _salesReturnRepository.AttachNavigation(salesReturn.Invoice);
                     _salesReturnRepository.Update(salesReturn);
-
-                    Invoice invoice = _invoiceRepository.GetById(salesReturn.InvoiceId);
-                    invoice.Status = (int)DbConstant.InvoiceStatus.Printed;
-                    invoice.ModifyDate = serverTime;
-                    invoice.ModifyUserId = userID;
-
-                    _invoiceRepository.AttachNavigation(invoice.CreateUser);
-                    _invoiceRepository.AttachNavigation(invoice.ModifyUser);
-                    _invoiceRepository.AttachNavigation(invoice.SPK);
-                    _invoiceRepository.Update(invoice);
                     _unitOfWork.SaveChanges();
 
                     List<SalesReturnDetail> listDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
@@ -179,6 +169,29 @@ namespace BrawijayaWorkshop.Model
                     _transactionRepository.AttachNavigation(transaction.PaymentMethod);
                     _transactionRepository.AttachNavigation(transaction.ReferenceTable);
                     _transactionRepository.Update(transaction);
+
+                    Invoice invoice = _invoiceRepository.GetById(salesReturn.InvoiceId);
+                    invoice.Status = (int)DbConstant.InvoiceStatus.Printed;
+                    invoice.ModifyDate = serverTime;
+                    invoice.ModifyUserId = userID; 
+                    if (invoice.TotalPrice != invoice.TotalHasPaid && (invoice.TotalPrice - invoice.TotalHasPaid) >= (decimal)transaction.TotalTransaction)
+                    {
+                        invoice.TotalHasPaid -= (decimal)transaction.TotalTransaction;
+                    }
+
+                    if (invoice.TotalPrice == invoice.TotalHasPaid)
+                    {
+                        invoice.PaymentStatus = (int) DbConstant.PaymentStatus.Settled;
+                    }
+                    else
+                    {
+                        invoice.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+                    }
+
+                    _invoiceRepository.AttachNavigation(invoice.CreateUser);
+                    _invoiceRepository.AttachNavigation(invoice.ModifyUser);
+                    _invoiceRepository.AttachNavigation(invoice.PaymentMethod);
+                    _invoiceRepository.AttachNavigation(invoice.SPK);
 
                     _unitOfWork.SaveChanges();
                     trans.Commit();

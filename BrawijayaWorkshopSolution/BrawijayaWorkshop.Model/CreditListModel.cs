@@ -32,11 +32,11 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && c.Status == (int)DbConstant.InvoiceStatus.Printed).OrderBy(c => c.CreateDate).ToList();
+                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && (c.Status == (int)DbConstant.InvoiceStatus.Printed || c.Status == (int)DbConstant.InvoiceStatus.HasReturn)).OrderBy(c => c.CreateDate).ToList();
             }
             else
             {
-                result = _invoiceRepository.GetMany(c => c.Status == (int)DbConstant.InvoiceStatus.Printed).OrderBy(c => c.CreateDate).ToList();
+                result = _invoiceRepository.GetMany(c => (c.Status == (int)DbConstant.InvoiceStatus.Printed || c.Status == (int)DbConstant.InvoiceStatus.HasReturn)).OrderBy(c => c.CreateDate).ToList();
             }
 
             List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();

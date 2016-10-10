@@ -172,6 +172,7 @@ namespace BrawijayaWorkshop.Model
             _purchaseReturnRepository.AttachNavigation(purchaseReturn.Purchasing);
             purchaseReturn = _purchaseReturnRepository.Add(purchaseReturn);
 
+            
             _unitOfWork.SaveChanges();
 
             List<PurchaseReturnDetail> listReturnDetail = new List<PurchaseReturnDetail>();
@@ -220,6 +221,26 @@ namespace BrawijayaWorkshop.Model
                 _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                 _sparepartRepository.Update(sparepart);
             }
+
+            Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
+            if(purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= totalTransaction)
+            {
+                purchasing.TotalHasPaid += totalTransaction;
+            }
+
+            if (purchasing.TotalPrice == purchasing.TotalHasPaid)
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+            }
+            else
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            }
+
+            _purchasingRepository.AttachNavigation(purchasing.CreateUser);
+            _purchasingRepository.AttachNavigation(purchasing.ModifyUser);
+            _purchasingRepository.AttachNavigation(purchasing.PaymentMethod);
+            _purchasingRepository.AttachNavigation(purchasing.Supplier);
 
             _unitOfWork.SaveChanges();
 
@@ -330,15 +351,15 @@ namespace BrawijayaWorkshop.Model
             foreach (var itemReturn in listReturn)
             {
                 Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
-                sparepart.StockQty += itemReturn.ReturQty;
+                sparepart.StockQty -= itemReturn.ReturQty;
 
                 _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                 _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
                 _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
                 _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                 _sparepartRepository.Update(sparepart);
-            } 
-
+            }
+            
             _unitOfWork.SaveChanges();
 
             Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASERETURN).FirstOrDefault();
@@ -352,6 +373,27 @@ namespace BrawijayaWorkshop.Model
             _transactionRepository.AttachNavigation(transaction.PaymentMethod);
             _transactionRepository.AttachNavigation(transaction.ReferenceTable);
             _transactionRepository.Update(transaction);
+
+            Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
+            if (purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= (decimal) transaction.TotalTransaction)
+            {
+                purchasing.TotalHasPaid -= (decimal) transaction.TotalTransaction;
+            }
+
+            if (purchasing.TotalPrice == purchasing.TotalHasPaid)
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.Settled;
+            }
+            else
+            {
+                purchasing.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+            }
+
+            _purchasingRepository.AttachNavigation(purchasing.CreateUser);
+            _purchasingRepository.AttachNavigation(purchasing.ModifyUser);
+            _purchasingRepository.AttachNavigation(purchasing.PaymentMethod);
+            _purchasingRepository.AttachNavigation(purchasing.Supplier);
+
 
             _unitOfWork.SaveChanges();
         }
