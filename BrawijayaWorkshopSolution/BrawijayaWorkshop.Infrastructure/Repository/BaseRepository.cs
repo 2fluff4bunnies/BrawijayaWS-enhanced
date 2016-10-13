@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Data.Objects;
 using System.Data.Entity.Infrastructure;
+using System.Text;
 
 namespace BrawijayaWorkshop.Infrastructure.Repository
 {
@@ -20,27 +21,27 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             DatabaseFactory = databaseFactory;
             _dbset = DataContext.Set<T>();
-            PropertyInfo[] properties = typeof(T).GetProperties()
-                .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
-            foreach (var item in properties)
-            {
-                _dbset.Include(item.Name);
-                IncludeRecursive(item.PropertyType, item.Name);
-            }
+            //PropertyInfo[] properties = typeof(T).GetProperties()
+            //    .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
+            //foreach (var item in properties)
+            //{
+            //    _dbset.Include(item.Name);
+            //    IncludeRecursive(item.PropertyType, item.Name);
+            //}
         }
 
-        private void IncludeRecursive(Type childrenType, string prevParentName)
-        {
-            PropertyInfo[] properties = childrenType.GetProperties()
-                .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
-            foreach (var item in properties)
-            {
-                if (prevParentName.Contains(item.Name)) continue;
-                string includePath = prevParentName + "." + item.Name;
-                _dbset.Include(includePath);
-                IncludeRecursive(item.PropertyType, includePath);
-            }
-        }
+        //private void IncludeRecursive(Type childrenType, string prevParentName)
+        //{
+        //    PropertyInfo[] properties = childrenType.GetProperties()
+        //        .Where(p => (p.CanRead ? p.GetMethod : p.SetMethod).IsVirtual).ToArray();
+        //    foreach (var item in properties)
+        //    {
+        //        if (prevParentName.Contains(item.Name)) continue;
+        //        string includePath = prevParentName + "." + item.Name;
+        //        _dbset.Include(includePath);
+        //        IncludeRecursive(item.PropertyType, includePath);
+        //    }
+        //}
 
         public IDatabaseFactory<U> DatabaseFactory { get; private set; }
 
@@ -132,18 +133,19 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
             catch (Exception ex)
             {
-                try
+                if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
+                   GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
+                   GenerateFullError(ex).Contains("Cannot access a disposed object"))
                 {
+                    _dataContext = null;
                     DatabaseFactory.ReCreateContext();
                     _dbset = DataContext.Set<T>();
                     return GetById(id);
                 }
-                catch (Exception innerEx)
+                else
                 {
-                    throw innerEx;
+                    throw ex;
                 }
-
-                throw ex;
             }
         }
         public virtual IEnumerable<T> GetAll()
@@ -158,18 +160,19 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
             catch (Exception ex)
             {
-                try
+                if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
+                    GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
+                    GenerateFullError(ex).Contains("Cannot access a disposed object"))
                 {
+                    _dataContext = null;
                     DatabaseFactory.ReCreateContext();
                     _dbset = DataContext.Set<T>();
                     return GetAll();
                 }
-                catch (Exception innerEx)
+                else
                 {
-                    throw innerEx;
+                    throw ex;
                 }
-
-                throw ex;
             }
         }
 
@@ -185,18 +188,19 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
             catch (Exception ex)
             {
-                try
+                if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
+                    GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
+                    GenerateFullError(ex).Contains("Cannot access a disposed object"))
                 {
+                    _dataContext = null;
                     DatabaseFactory.ReCreateContext();
                     _dbset = DataContext.Set<T>();
                     return GetMany(where);
                 }
-                catch (Exception innerEx)
+                else
                 {
-                    throw innerEx;
+                    throw ex;
                 }
-
-                throw ex;
             }
         }
 
@@ -208,17 +212,19 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
             catch (Exception ex)
             {
-                try
+                if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
+                    GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
+                    GenerateFullError(ex).Contains("Cannot access a disposed object"))
                 {
+                    _dataContext = null;
                     DatabaseFactory.ReCreateContext();
+                    _dbset = DataContext.Set<T>();
                     return GetByQuery(query, parameters);
                 }
-                catch (Exception innerEx)
+                else
                 {
-                    throw innerEx;
+                    throw ex;
                 }
-
-                throw ex;
             }
         }
 
@@ -226,6 +232,18 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         {
             var context = ((IObjectContextAdapter)_dataContext).ObjectContext;
             context.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, entity);
+        }
+
+        private string GenerateFullError(Exception exception)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(exception.Message);
+            if(exception.InnerException != null)
+            {
+                sb.AppendLine(GenerateFullError(exception.InnerException));
+            }
+
+            return sb.ToString();
         }
 
         //private void RefreshProperty(System.Data.Entity.Core.Objects.ObjectContext context, T entity)

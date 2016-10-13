@@ -86,16 +86,18 @@
             this.gcPurchasingInfo.Controls.Add(this.lblSupplier);
             this.gcPurchasingInfo.Controls.Add(this.lblDate);
             this.gcPurchasingInfo.Location = new System.Drawing.Point(0, 0);
+            this.gcPurchasingInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gcPurchasingInfo.Name = "gcPurchasingInfo";
-            this.gcPurchasingInfo.Size = new System.Drawing.Size(612, 339);
+            this.gcPurchasingInfo.Size = new System.Drawing.Size(714, 417);
             this.gcPurchasingInfo.TabIndex = 0;
             this.gcPurchasingInfo.Text = "Informasi Pembelian";
             // 
             // lblDP
             // 
-            this.lblDP.Location = new System.Drawing.Point(12, 128);
+            this.lblDP.Location = new System.Drawing.Point(14, 158);
+            this.lblDP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblDP.Name = "lblDP";
-            this.lblDP.Size = new System.Drawing.Size(49, 13);
+            this.lblDP.Size = new System.Drawing.Size(59, 16);
             this.lblDP.TabIndex = 6;
             this.lblDP.Text = "Jumlah DP";
             this.lblDP.Visible = false;
@@ -103,18 +105,22 @@
             // txtTotalPrice
             // 
             this.txtTotalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTotalPrice.Location = new System.Drawing.Point(155, 301);
+            this.txtTotalPrice.Location = new System.Drawing.Point(181, 370);
+            this.txtTotalPrice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTotalPrice.Name = "txtTotalPrice";
+            this.txtTotalPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalPrice.Properties.ReadOnly = true;
-            this.txtTotalPrice.Size = new System.Drawing.Size(167, 20);
+            this.txtTotalPrice.Size = new System.Drawing.Size(195, 22);
             this.txtTotalPrice.TabIndex = 10;
             // 
             // labelControl2
             // 
             this.labelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelControl2.Location = new System.Drawing.Point(12, 304);
+            this.labelControl2.Location = new System.Drawing.Point(14, 374);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(56, 13);
+            this.labelControl2.Size = new System.Drawing.Size(67, 16);
             this.labelControl2.TabIndex = 9;
             this.labelControl2.Text = "Total Harga";
             // 
@@ -123,10 +129,12 @@
             this.gridPurchasingDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridPurchasingDetail.Location = new System.Drawing.Point(3, 157);
+            this.gridPurchasingDetail.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridPurchasingDetail.Location = new System.Drawing.Point(3, 193);
             this.gridPurchasingDetail.MainView = this.gvPurchasingDetail;
+            this.gridPurchasingDetail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridPurchasingDetail.Name = "gridPurchasingDetail";
-            this.gridPurchasingDetail.Size = new System.Drawing.Size(607, 130);
+            this.gridPurchasingDetail.Size = new System.Drawing.Size(708, 160);
             this.gridPurchasingDetail.TabIndex = 8;
             this.gridPurchasingDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasingDetail});
@@ -182,17 +190,19 @@
             // 
             // txtDP
             // 
-            this.txtDP.Location = new System.Drawing.Point(155, 125);
+            this.txtDP.Location = new System.Drawing.Point(181, 154);
+            this.txtDP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDP.Name = "txtDP";
             this.txtDP.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
             this.txtDP.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtDP.Size = new System.Drawing.Size(167, 20);
+            this.txtDP.Size = new System.Drawing.Size(195, 22);
             this.txtDP.TabIndex = 7;
             this.txtDP.Visible = false;
             // 
             // cbPayment
             // 
-            this.cbPayment.Location = new System.Drawing.Point(155, 93);
+            this.cbPayment.Location = new System.Drawing.Point(181, 114);
+            this.cbPayment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbPayment.Name = "cbPayment";
             this.cbPayment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -201,7 +211,7 @@
             this.cbPayment.Properties.DisplayMember = "Name";
             this.cbPayment.Properties.NullText = "";
             this.cbPayment.Properties.ValueMember = "Id";
-            this.cbPayment.Size = new System.Drawing.Size(167, 20);
+            this.cbPayment.Size = new System.Drawing.Size(195, 22);
             this.cbPayment.TabIndex = 5;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "Pilih salah satu pembayaran";
@@ -210,41 +220,46 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(12, 96);
+            this.labelControl1.Location = new System.Drawing.Point(14, 118);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(99, 13);
+            this.labelControl1.Size = new System.Drawing.Size(117, 16);
             this.labelControl1.TabIndex = 4;
             this.labelControl1.Text = "Metode Pembayaran";
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(155, 61);
+            this.txtSupplier.Location = new System.Drawing.Point(181, 75);
+            this.txtSupplier.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Properties.ReadOnly = true;
-            this.txtSupplier.Size = new System.Drawing.Size(167, 20);
+            this.txtSupplier.Size = new System.Drawing.Size(195, 22);
             this.txtSupplier.TabIndex = 3;
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(155, 29);
+            this.txtDate.Location = new System.Drawing.Point(181, 36);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDate.Name = "txtDate";
             this.txtDate.Properties.ReadOnly = true;
-            this.txtDate.Size = new System.Drawing.Size(167, 20);
+            this.txtDate.Size = new System.Drawing.Size(195, 22);
             this.txtDate.TabIndex = 1;
             // 
             // lblSupplier
             // 
-            this.lblSupplier.Location = new System.Drawing.Point(12, 64);
+            this.lblSupplier.Location = new System.Drawing.Point(14, 79);
+            this.lblSupplier.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblSupplier.Name = "lblSupplier";
-            this.lblSupplier.Size = new System.Drawing.Size(38, 13);
+            this.lblSupplier.Size = new System.Drawing.Size(47, 16);
             this.lblSupplier.TabIndex = 2;
             this.lblSupplier.Text = "Supplier";
             // 
             // lblDate
             // 
-            this.lblDate.Location = new System.Drawing.Point(12, 32);
+            this.lblDate.Location = new System.Drawing.Point(14, 39);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(89, 13);
+            this.lblDate.Size = new System.Drawing.Size(109, 16);
             this.lblDate.TabIndex = 0;
             this.lblDate.Text = "Tanggal Pembelian";
             // 
@@ -256,17 +271,19 @@
             this.panelControl1.Controls.Add(this.btnReject);
             this.panelControl1.Controls.Add(this.btnApprove);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 337);
+            this.panelControl1.Location = new System.Drawing.Point(0, 415);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(612, 39);
+            this.panelControl1.Size = new System.Drawing.Size(714, 48);
             this.panelControl1.TabIndex = 0;
             // 
             // btnReject
             // 
             this.btnReject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReject.Location = new System.Drawing.Point(526, 8);
+            this.btnReject.Location = new System.Drawing.Point(614, 10);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(75, 23);
+            this.btnReject.Size = new System.Drawing.Size(87, 28);
             this.btnReject.TabIndex = 1;
             this.btnReject.Text = "Tolak";
             this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
@@ -274,25 +291,27 @@
             // btnApprove
             // 
             this.btnApprove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApprove.Location = new System.Drawing.Point(435, 8);
+            this.btnApprove.Location = new System.Drawing.Point(507, 10);
+            this.btnApprove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(75, 23);
+            this.btnApprove.Size = new System.Drawing.Size(87, 28);
             this.btnApprove.TabIndex = 0;
             this.btnApprove.Text = "Setuju";
             this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // cmsEditor
             // 
+            this.cmsEditor.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lihatSparepartDetailToolStripMenuItem});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(187, 26);
+            this.cmsEditor.Size = new System.Drawing.Size(228, 30);
             // 
             // lihatSparepartDetailToolStripMenuItem
             // 
             this.lihatSparepartDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
             this.lihatSparepartDetailToolStripMenuItem.Name = "lihatSparepartDetailToolStripMenuItem";
-            this.lihatSparepartDetailToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.lihatSparepartDetailToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
             this.lihatSparepartDetailToolStripMenuItem.Text = "Lihat Sparepart Detail";
             this.lihatSparepartDetailToolStripMenuItem.Click += new System.EventHandler(this.viewSparepartDetailToolStripMenuItem_Click);
             // 
@@ -307,12 +326,13 @@
             // 
             // PurchasingApprovalForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 376);
+            this.ClientSize = new System.Drawing.Size(714, 463);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.gcPurchasingInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "PurchasingApprovalForm";
             this.ShowInTaskbar = false;
             this.Text = "Form Persetujuan Pembelian";

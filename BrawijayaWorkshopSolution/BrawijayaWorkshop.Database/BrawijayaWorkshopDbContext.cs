@@ -58,13 +58,13 @@ namespace BrawijayaWorkshop.Database
         public BrawijayaWorkshopDbContext()
             : base(DatabaseConfigurationHelper.DefaultConnectionString)
         {
-            System.Data.Entity.Database.SetInitializer<BrawijayaWorkshopDbContext>(null);
+            //System.Data.Entity.Database.SetInitializer<BrawijayaWorkshopDbContext>(null);
         }
 
         public BrawijayaWorkshopDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
-            System.Data.Entity.Database.SetInitializer<BrawijayaWorkshopDbContext>(null);
+            //System.Data.Entity.Database.SetInitializer<BrawijayaWorkshopDbContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
