@@ -756,7 +756,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && (this.TotalSparepartPrice + +_presenter.GetAllPurchaseByVehicleToday()) >= this.ServiceThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && (this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) >= this.ServiceThreshold)
             {
                 result = true;
             }
@@ -995,20 +995,42 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
                 else
                 {
-                    SPKPrintItem report = new SPKPrintItem();
                     List<SPKViewModel> _dataSource = new List<SPKViewModel>();
                     _dataSource.Add(SelectedSPK);
-                    report.DataSource = _dataSource;
-                    report.FillDataSource();
-                    if (!this.IsSPKSales)
+
+                    if (isContractWork)
                     {
-                        _presenter.Print();
-                        using (ReportPrintTool printTool = new ReportPrintTool(report))
+                        SPKContractPrintItem report = new SPKContractPrintItem();
+                        report.DataSource = _dataSource;
+                        report.FillDataSource();
+                        if (!this.IsSPKSales)
                         {
-                            // Invoke the Print dialog.
-                            printTool.PrintDialog();
+                            _presenter.Print();
+                            using (ReportPrintTool printTool = new ReportPrintTool(report))
+                            {
+                                // Invoke the Print dialog.
+                                printTool.PrintDialog();
+                            }
                         }
                     }
+                    else
+                    {
+                        SPKPrintItem report = new SPKPrintItem();
+                        report.DataSource = _dataSource;
+                        report.FillDataSource();
+                        if (!this.IsSPKSales)
+                        {
+                            _presenter.Print();
+                            using (ReportPrintTool printTool = new ReportPrintTool(report))
+                            {
+                                // Invoke the Print dialog.
+                                printTool.PrintDialog();
+                            }
+                        }
+                    }
+                    
+                    
+                    
                 }
             }
             catch (Exception ex)
