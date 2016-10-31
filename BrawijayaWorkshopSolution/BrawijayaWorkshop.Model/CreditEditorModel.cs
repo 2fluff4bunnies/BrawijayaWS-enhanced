@@ -92,7 +92,7 @@ namespace BrawijayaWorkshop.Model
                     {
                         // Bank Kredit --> Karena berkurang
                         TransactionDetail detailBank = new TransactionDetail();
-                        detailBank.Credit = transaction.TotalPayment.AsDecimal();
+                        detailBank.Debit = transaction.TotalPayment.AsDecimal();
                         if (paymentMethod.Code == DbConstant.REF_DEBT_PAYMENTMETHOD_BANK_EKONOMI)
                         {
                             detailBank.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.02.01").FirstOrDefault().Id;
@@ -113,7 +113,7 @@ namespace BrawijayaWorkshop.Model
                 case DbConstant.REF_DEBT_PAYMENTMETHOD_KAS:
                     // Kas Kredit --> Karena berkurang
                     TransactionDetail detailKas = new TransactionDetail();
-                    detailKas.Credit = transaction.TotalPayment.AsDecimal();
+                    detailKas.Debit = transaction.TotalPayment.AsDecimal();
                     detailKas.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.01.01").FirstOrDefault().Id;
                     detailKas.Parent = transactionInserted;
                     _transactionDetailRepository.Add(detailKas);
@@ -121,8 +121,8 @@ namespace BrawijayaWorkshop.Model
             }
 
             TransactionDetail detailCredit = new TransactionDetail();
-            detailCredit.Debit = transaction.TotalPayment.AsDecimal();
-            detailCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "2.01.01.01").FirstOrDefault().Id;
+            detailCredit.Credit = transaction.TotalPayment.AsDecimal();
+            detailCredit.JournalId = _journalMasterRepository.GetMany(j => j.Code == "1.01.03.01").FirstOrDefault().Id;
             detailCredit.Parent = transactionInserted;
             _transactionDetailRepository.Add(detailCredit);
             _unitOfWork.SaveChanges();
