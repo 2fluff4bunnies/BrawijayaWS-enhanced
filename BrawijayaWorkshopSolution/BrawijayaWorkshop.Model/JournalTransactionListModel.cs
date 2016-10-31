@@ -45,7 +45,8 @@ namespace BrawijayaWorkshop.Model
         public List<TransactionDetailViewModel> RetrieveAllTransaction(int month, int year)
         {
             DateTime firstDay = new DateTime(year, month, 1);
-            DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            //DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            DateTime lastDay = firstDay.AddMonths(1).AddSeconds(-1);
 
             List<TransactionDetail> result = _transactionDetailRepository.GetMany(t =>
                 t.Parent.TransactionDate >= firstDay && t.Parent.TransactionDate <= lastDay &&
