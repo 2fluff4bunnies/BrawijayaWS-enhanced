@@ -133,10 +133,12 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
             }
             catch (Exception ex)
             {
+                //The underlying provider failed on Open
                 if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
                     GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
                     GenerateFullError(ex).Contains("Cannot access a disposed object") ||
-                    GenerateFullError(ex).Contains("Connection must be valid and open"))
+                    GenerateFullError(ex).Contains("Connection must be valid and open") ||
+                    GenerateFullError(ex).Contains("The underlying provider failed on Open"))
                 {
                     _dataContext = null;
                     DatabaseFactory.ReCreateContext();
@@ -164,7 +166,8 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
                     GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
                     GenerateFullError(ex).Contains("Cannot access a disposed object") ||
-                    GenerateFullError(ex).Contains("Connection must be valid and open"))
+                    GenerateFullError(ex).Contains("Connection must be valid and open") ||
+                    GenerateFullError(ex).Contains("The underlying provider failed on Open"))
                 {
                     _dataContext = null;
                     DatabaseFactory.ReCreateContext();
@@ -193,7 +196,8 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
                     GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
                     GenerateFullError(ex).Contains("Cannot access a disposed object") ||
-                    GenerateFullError(ex).Contains("Connection must be valid and open"))
+                    GenerateFullError(ex).Contains("Connection must be valid and open") ||
+                    GenerateFullError(ex).Contains("The underlying provider failed on Open"))
                 {
                     _dataContext = null;
                     DatabaseFactory.ReCreateContext();
@@ -218,7 +222,8 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
                 if (GenerateFullError(ex).Contains("There is already an open DataReader associated with this Connection which must be closed first") ||
                     GenerateFullError(ex).Contains("Unexpected connection state. When using a wrapping provider ensure that the StateChange event is implemented on the wrapped DbConnection") ||
                     GenerateFullError(ex).Contains("Cannot access a disposed object") ||
-                    GenerateFullError(ex).Contains("Connection must be valid and open"))
+                    GenerateFullError(ex).Contains("Connection must be valid and open") ||
+                    GenerateFullError(ex).Contains("The underlying provider failed on Open"))
                 {
                     _dataContext = null;
                     DatabaseFactory.ReCreateContext();
