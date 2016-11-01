@@ -116,7 +116,7 @@ namespace BrawijayaWorkshop.Model
                     }
 
                     DateTime firstDay = new DateTime(year, month, 1);
-                    DateTime lastDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+                    DateTime lastDay = firstDay.AddMonths(1).AddSeconds(-1);
                     DateTime prevMonth = firstDay.AddDays(-1);
 
                     List<JournalMaster> listAllJournal = _journalMasterRepository.GetAll().ToList();
