@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Database.Entities;
 using BrawijayaWorkshop.Database.Repositories;
 using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
+using BrawijayaWorkshop.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -33,8 +34,8 @@ namespace BrawijayaWorkshop.Model
             DbConstant.SPKPrintStatus printStatus, DbConstant.SPKCompletionStatus completedStatus, int isContractWork)
         {
             List<SPK> result = _SPKRepository.GetMany(spk =>
-                DbFunctions.TruncateTime(spk.CreateDate) >= DbFunctions.TruncateTime(from) &&
-                DbFunctions.TruncateTime(spk.CreateDate) <= DbFunctions.TruncateTime(to) &&
+                spk.CreateDate.SetToMinimumTime() >= from.SetToMinimumTime() &&
+                spk.CreateDate.SetToMinimumTime() <= to.SetToMaximumTime() &&
                 spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE).ToList();
 
             if ((int)completedStatus != 9)

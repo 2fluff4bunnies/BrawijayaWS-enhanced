@@ -115,6 +115,30 @@ namespace BrawijayaWorkshop.Utils
             }
         }
 
+        public static DateTime SetToMinimumTime(this DateTime sender)
+        {
+            try
+            {
+                return new DateTime(sender.Year, sender.Month, sender.Day, 0, 0, 0);
+            }
+            catch (Exception ex)
+            {
+                throw new ConvertExtentionUtilsException("An error occured while trying to set minimum time from: " + sender, ex);
+            }
+        }
+
+        public static DateTime SetToMaximumTime(this DateTime sender)
+        {
+            try
+            {
+                return new DateTime(sender.Year, sender.Month, sender.Day, 0, 0, 0).AddDays(1).AddSeconds(-1);
+            }
+            catch (Exception ex)
+            {
+                throw new ConvertExtentionUtilsException("An error occured while trying to set maximum time from: " + sender, ex);
+            }
+        }
+
         public static DateTime AsDateTime(this object sender, DateTimeFormatInfo dateTimeFormatInfo = null)
         {
             try
