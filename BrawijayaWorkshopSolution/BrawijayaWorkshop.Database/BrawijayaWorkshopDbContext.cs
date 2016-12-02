@@ -26,6 +26,7 @@ namespace BrawijayaWorkshop.Database
         public DbSet<Reference> References { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
         public DbSet<Sparepart> Spareparts { get; set; }
+        public DbSet<SparepartStockCard> SparepartStockCards { get; set; }
         public DbSet<SparepartDetail> SparepartDetails { get; set; }
         public DbSet<SparepartManualTransaction> SparepartManualTransactions { get; set; }
         public DbSet<SpecialSparepart> Wheels { get; set; }
@@ -83,6 +84,7 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
             modelBuilder.Configurations.Add(new ReferenceConfiguration());
             modelBuilder.Configurations.Add(new SparepartConfiguration());
+            modelBuilder.Configurations.Add(new SparepartStockCardConfiguration());
             modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
             modelBuilder.Configurations.Add(new SparepartManualTransactionConfiguration());
             modelBuilder.Configurations.Add(new JournalMasterConfiguration());

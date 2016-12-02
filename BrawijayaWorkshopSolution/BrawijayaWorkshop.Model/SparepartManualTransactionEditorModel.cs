@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Model
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
         private IJournalMasterRepository _journalMasterRepository;
+        private ISparepartStockCardRepository _sparepartStokCardRepository;
         private IUnitOfWork _unitOfWork;
 
         public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository,
@@ -32,6 +33,7 @@ namespace BrawijayaWorkshop.Model
             ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IJournalMasterRepository journalMasterRepository,
+            ISparepartStockCardRepository sparepartStockCardRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -44,6 +46,7 @@ namespace BrawijayaWorkshop.Model
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
             _journalMasterRepository = journalMasterRepository;
+            _sparepartStokCardRepository = sparepartStockCardRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -102,9 +105,17 @@ namespace BrawijayaWorkshop.Model
                         //transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
                         //transaction =_transactionRepository.Add(transaction);
 
+                        Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
+                        SparepartStockCard stockCard = new SparepartStockCard();
+                        stockCard.CreateUserId = userId;
+                        stockCard.CreateDate = serverTime;
+                        stockCard.PrimaryKeyValue = manualTransaction.Id;
+                        stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                        stockCard.SparepartId = manualTransaction.SparepartId;
 
                         if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
                         {
+                            stockCard.Description = "Penambahan stok awal";
                             //TransactionDetail transDebit = new TransactionDetail();
                             //transDebit.Debit = totalPrice;
                             //transDebit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "1.01.04.01").FirstOrDefault().Id;
@@ -118,6 +129,7 @@ namespace BrawijayaWorkshop.Model
                             //_transactionDetailRepository.Add(transCredit);
 
                             sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
+                            stockCard.QtyIn = sparepartManualTransaction.Qty;
 
                             SparepartDetail lastSPDetail = _sparepartDetailRepository.
                             GetMany(c => c.SparepartId == sparepartManualTransaction.SparepartId).OrderByDescending(c => c.Id)
@@ -183,6 +195,7 @@ namespace BrawijayaWorkshop.Model
                         }
                         else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
                         {
+                            stockCard.Description = "Pengurangan stok awal";
                             //TransactionDetail transCredit = new TransactionDetail();
                             //transCredit.Credit = totalPrice;
                             //transCredit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "1.01.04.01").FirstOrDefault().Id;
@@ -196,6 +209,7 @@ namespace BrawijayaWorkshop.Model
                             //_transactionDetailRepository.Add(transDebit);
 
                             sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
+                            stockCard.QtyOut = sparepartManualTransaction.Qty;
 
                             List<SparepartDetail> spDetails = _sparepartDetailRepository.
                             GetMany(c => c.SparepartId == sparepartManualTransaction.SparepartId).OrderByDescending(c => c.Id)
@@ -208,6 +222,19 @@ namespace BrawijayaWorkshop.Model
                                 _sparepartDetailRepository.Update(spDetail);
                             }
                         }
+
+                        SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(manualTransaction.SparepartId);
+                        double lastStock = 0;
+                        if (lastStockCard != null)
+                        {
+                            lastStock = lastStockCard.QtyLast;
+                        }
+                        stockCard.QtyFirst = lastStock;
+                        stockCard.QtyLast = lastStock + (stockCard.QtyIn - stockCard.QtyOut);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                        _sparepartStokCardRepository.Add(stockCard);
 
                         _sparepartRepository.AttachNavigation(sparepartUpdated.CreateUser);
                         _sparepartRepository.AttachNavigation(sparepartUpdated.ModifyUser);
@@ -243,23 +270,80 @@ namespace BrawijayaWorkshop.Model
             {
                 Reference updateTypeOld = _referenceRepository.GetById(manualTransactionOld.UpdateTypeId);
 
+                Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
+                SparepartStockCard stockCard = new SparepartStockCard();
+                stockCard.CreateUserId = userId;
+                stockCard.CreateDate = serverTime;
+                stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                stockCard.PrimaryKeyValue = manualTransactionOld.Id;
+                stockCard.SparepartId = sparepartManualTransaction.SparepartId;
+
+                SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepartManualTransaction.SparepartId);
+                double lastStock = 0;
+                if (lastStockCard != null)
+                {
+                    lastStock = lastStockCard.QtyLast;
+                }
+
+                stockCard.QtyFirst = lastStock;
+
                 if (updateTypeOld.Code == (DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS))
                 {
+                    stockCard.Description = "Revisi pembatalan penambahan stok awal";
+                    stockCard.QtyOut = manualTransactionOld.Qty;
                     sparepartUpdated.StockQty -= manualTransactionOld.Qty;
                 }
                 else if (updateTypeOld.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
                 {
+                    stockCard.Description = "Revisi pembatalan pengurangan stok awal";
+                    stockCard.QtyIn = manualTransactionOld.Qty;
                     sparepartUpdated.StockQty += manualTransactionOld.Qty;
                 }
 
+                stockCard.QtyLast = stockCard.QtyFirst + (stockCard.QtyIn - stockCard.QtyOut);
+
+                _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                _sparepartStokCardRepository.Add(stockCard);
+                _unitOfWork.SaveChanges();
+
+                SparepartStockCard revStockCard = new SparepartStockCard();
+                revStockCard.CreateUserId = userId;
+                revStockCard.CreateDate = serverTime;
+                revStockCard.ReferenceTableId = transactionReferenceTable.Id;
+                revStockCard.PrimaryKeyValue = manualTransactionOld.Id;
+                revStockCard.SparepartId = sparepartManualTransaction.SparepartId;
+
+                lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepartManualTransaction.SparepartId);
+                lastStock = 0;
+                if (lastStockCard != null)
+                {
+                    lastStock = lastStockCard.QtyLast;
+                }
+
+                revStockCard.QtyFirst = lastStock;
+
                 if (updateTypeNew.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
                 {
+                    revStockCard.Description = "Revisi penambahan stok awal";
+                    revStockCard.QtyIn = sparepartManualTransaction.Qty;
                     sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
                 }
                 else if (updateTypeNew.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
                 {
+                    revStockCard.Description = "Revisi pengurangan stok awal";
+                    revStockCard.QtyOut = sparepartManualTransaction.Qty;
                     sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
                 }
+
+                revStockCard.QtyLast = revStockCard.QtyFirst + (revStockCard.QtyIn - revStockCard.QtyOut);
+
+                _sparepartStokCardRepository.AttachNavigation(revStockCard.CreateUser);
+                _sparepartStokCardRepository.AttachNavigation(revStockCard.Sparepart);
+                _sparepartStokCardRepository.AttachNavigation(revStockCard.ReferenceTable);
+                _sparepartStokCardRepository.Add(revStockCard);
+
                 SparepartManualTransaction entity = new SparepartManualTransaction();
                 Map(sparepartManualTransaction, entity);
                 _sparepartManualTransactionRepository.Update(entity);

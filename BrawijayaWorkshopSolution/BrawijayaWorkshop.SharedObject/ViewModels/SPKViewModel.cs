@@ -40,5 +40,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int VehicleGroupId { get; set; }
 
         public VehicleGroupViewModel VehicleGroup { get; set; }
+
+        public double CostEstimation { get; set; }
     }
 }

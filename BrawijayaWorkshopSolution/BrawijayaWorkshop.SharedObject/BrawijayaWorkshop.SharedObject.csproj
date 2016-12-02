@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\SparepartDetailViewModel.cs" />
     <Compile Include="ViewModels\SparepartManualTransactionViewModel.cs" />
+    <Compile Include="ViewModels\SparepartStockCardViewModel.cs" />
     <Compile Include="ViewModels\SparepartViewModel.cs" />
     <Compile Include="ViewModels\SPKDetailSparepartDetailViewModel.cs" />
     <Compile Include="ViewModels\SPKDetailSparepartViewModel.cs" />

@@ -93,6 +93,7 @@
     <Compile Include="ISalesReturnTransactionListView.cs" />
     <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISparepartManualTransactionEditorView.cs" />
+    <Compile Include="ISparepartStockCardListView.cs" />
     <Compile Include="ISPKHistoryDetailView.cs" />
     <Compile Include="ISPKHistoryListView.cs" />
     <Compile Include="ISPKSaleListView.cs" />

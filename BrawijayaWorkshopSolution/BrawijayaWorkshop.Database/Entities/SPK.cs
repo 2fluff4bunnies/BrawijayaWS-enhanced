@@ -56,5 +56,7 @@ namespace BrawijayaWorkshop.Database.Entities
         public int VehicleGroupId { get; set; }
 
         public virtual VehicleGroup VehicleGroup { get; set; }
+
+        public double CostEstimation { get; set; }
     }
 }

@@ -379,6 +379,12 @@
     <Compile Include="ModulControls\SalesReturnListControl.Designer.cs">
       <DependentUpon>SalesReturnListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\SparepartStockCardListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\SparepartStockCardListControl.Designer.cs">
+      <DependentUpon>SparepartStockCardListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\SPKHistoryListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -951,6 +957,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SparepartListControl.resx">
       <DependentUpon>SparepartListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\SparepartStockCardListControl.resx">
+      <DependentUpon>SparepartStockCardListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\SPKHistoryListControl.resx">
       <DependentUpon>SPKHistoryListControl.cs</DependentUpon>
