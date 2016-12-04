@@ -39,7 +39,8 @@ namespace BrawijayaWorkshop.Presenter
                     isContractWork = View.ParentSPK.isContractWork,
                     ContractWorkFee = View.ParentSPK.ContractWorkFee,
                     Contractor = View.ParentSPK.Contractor,
-                    Kilometers = View.ParentSPK.Kilometers
+                    Kilometers = View.ParentSPK.Kilometers,
+                    CostEstimation = View.ParentSPK.CostEstimation
                 };
 
                 View.CategoryId = View.SelectedSPK.CategoryReference.Id;
@@ -51,6 +52,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.ContractWorkFee = View.SelectedSPK.ContractWorkFee;
                 View.Contractor = View.SelectedSPK.Contractor;
                 View.Kilometers = View.SelectedSPK.Kilometers;
+                View.CostEstimation = View.SelectedSPK.CostEstimation;
 
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.ParentSPK.Id);
@@ -69,7 +71,8 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.Description = View.Description;
             View.SelectedSPK.Kilometers = View.Kilometers;
             View.SelectedSPK.VehicleGroupId = View.SelectedVehicle.VehicleGroupId;
-
+            View.SelectedSPK.CostEstimation = View.CostEstimation;
+            View.SelectedSPK.Vehicle = View.SelectedVehicle;
             if (View.isContractWork)
             {
                 View.SelectedSPK.isContractWork = View.isContractWork;

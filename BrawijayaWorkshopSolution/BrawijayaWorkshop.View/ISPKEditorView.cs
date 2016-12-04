@@ -61,5 +61,6 @@ namespace BrawijayaWorkshop.View
         decimal ContractWorkFee { get; set; }
         string Contractor { get; set; }
         int Kilometers { get; set; }
+        double CostEstimation { get; set; }
     }
 }

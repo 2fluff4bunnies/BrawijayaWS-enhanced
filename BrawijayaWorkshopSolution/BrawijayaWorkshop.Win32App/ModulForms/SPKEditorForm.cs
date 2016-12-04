@@ -64,6 +64,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.TotalSparepartPrice = 0;
             this.ContractWorkFee = 0;
+            this.CostEstimation = 0;
 
             txtContractWorkFee.Enabled = false;
             txtContractor.Enabled = false;
@@ -447,6 +448,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtKilometer.EditValue = value.ToString();
             }
         }
+
+        public double CostEstimation
+        {
+            get
+            {
+                return txtCostEstimation.EditValue.AsDouble();
+            }
+            set
+            {
+                txtCostEstimation.EditValue = value.ToString();
+            }
+        }
         #endregion
 
         #region EmailProperties
@@ -756,13 +769,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE && (this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) >= this.ServiceThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE )
             {
-                result = true;
+                if (isContractWork && ContractWorkFee >= this.ServiceThreshold)
+                {
+                    result = true;
+                }
+                else if ((this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
+                {
+                    result = true;
+                }
             }
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR && (this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) >= this.RepairThreshold)
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR)
             {
+                if (isContractWork && ContractWorkFee >= this.RepairThreshold)
+                {
+                    result = true;
+                }
+                else if ((this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+                {
+                    result = true;
+                }
+
                 result = true;
             }
 

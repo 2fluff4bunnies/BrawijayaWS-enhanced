@@ -154,7 +154,7 @@ namespace BrawijayaWorkshop.Model
             {
                 case DbConstant.REF_SPK_CATEGORY_SERVICE: code = code + "S";
                     break;
-                case DbConstant.REF_SPK_CATEGORY_REPAIR: code = code + "R";
+                case DbConstant.REF_SPK_CATEGORY_REPAIR: code = code + "P";
                     break;
                 case DbConstant.REF_SPK_CATEGORY_SALE: code = code + "L";
                     break;
@@ -162,7 +162,7 @@ namespace BrawijayaWorkshop.Model
                     break;
             }
 
-            code = code + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+            code = code + "-" + spk.Vehicle.ActiveLicenseNumber + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
 
             //get total SPK created today
             List<SPK> todaySPK = _SPKRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
