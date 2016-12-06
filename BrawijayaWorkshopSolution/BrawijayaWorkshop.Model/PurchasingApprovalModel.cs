@@ -22,6 +22,7 @@ namespace BrawijayaWorkshop.Model
         private IJournalMasterRepository _journalMasterRepository;
         private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
+        private ISparepartStockCardRepository _sparepartStokCardRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchasingApprovalModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
@@ -34,6 +35,7 @@ namespace BrawijayaWorkshop.Model
             IJournalMasterRepository journalMasterRepository,
             ISpecialSparepartRepository wheelRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository,
+            ISparepartStockCardRepository sparepartStockCardRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -48,6 +50,7 @@ namespace BrawijayaWorkshop.Model
             _journalMasterRepository = journalMasterRepository;
             _specialSparepartRepository = wheelRepository;
             _specialSparepartDetailRepository = wheelDetailRepository;
+            _sparepartStokCardRepository = sparepartStockCardRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -84,6 +87,8 @@ namespace BrawijayaWorkshop.Model
                 {
                     DateTime serverTime = DateTime.Now;
 
+                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASING).FirstOrDefault();
+                    
                     List<PurchasingDetail> listPurchasingDetail = _purchasingDetailRepository
                         .GetMany(c => c.PurchasingId == purchasing.Id).ToList();
                     foreach (var purchasingDetail in listPurchasingDetail)
@@ -163,6 +168,27 @@ namespace BrawijayaWorkshop.Model
                         _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                         _sparepartRepository.Update(sparepart);
 
+                        SparepartStockCard stockCard = new SparepartStockCard();
+                        stockCard.CreateUserId = userID;
+                        stockCard.CreateDate = serverTime;
+                        stockCard.PrimaryKeyValue = purchasing.Id;
+                        stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                        stockCard.SparepartId = sparepart.Id;
+                        stockCard.Description = "Penambahan stok awal";
+                        stockCard.QtyIn = purchasingDetail.Qty;
+                        SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
+                        double lastStock = 0;
+                        if (lastStockCard != null)
+                        {
+                            lastStock = lastStockCard.QtyLast;
+                        }
+                        stockCard.QtyFirst = lastStock;
+                        stockCard.QtyLast = lastStock + stockCard.QtyIn;
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                        _sparepartStokCardRepository.Add(stockCard);
+
                         _unitOfWork.SaveChanges();
                     }
 
@@ -200,7 +226,6 @@ namespace BrawijayaWorkshop.Model
                     _purchasingRepository.Update(entity);
                     _unitOfWork.SaveChanges();
 
-                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASING).FirstOrDefault();
                     Transaction transaction = new Transaction();
                     transaction.TransactionDate = purchasing.Date;
                     transaction.TotalPayment = Convert.ToDouble(purchasing.TotalHasPaid);
