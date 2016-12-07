@@ -569,6 +569,7 @@ namespace BrawijayaWorkshop.Win32App
             navReporting.iRecapInvoiceByVehicleGroup.LinkClicked += iRecapInvoiceByVehicleGroup_LinkClicked;
             navReporting.iRecapInvoiceByCustomer.LinkClicked += iRecapInvoiceByCustomer_LinkClicked;
             navReporting.iHistorySparepart.LinkClicked += iHistorySparepart_LinkClicked;
+            navReporting.iStockOpname.LinkClicked += iStockOpname_LinkClicked;
         }
 
         #region Reporting Navigation
@@ -599,6 +600,12 @@ namespace BrawijayaWorkshop.Win32App
         {
             HistorySparepartListControl historySparepart = Bootstrapper.Resolve<HistorySparepartListControl>();
             ShowUserControl(historySparepart);
+        }
+
+        private void iStockOpname_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            SparepartStockCardListControl stockOpname = Bootstrapper.Resolve<SparepartStockCardListControl>();
+            ShowUserControl(stockOpname);
         }
         #endregion
 

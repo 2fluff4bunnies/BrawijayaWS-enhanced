@@ -38,6 +38,7 @@
             this.iRecapInvoiceByCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iHistorySparepart = new DevExpress.XtraNavBar.NavBarItem();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.iStockOpname = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.navbarReportingData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,8 @@
             this.iRecapInvoiceBySPK,
             this.iRecapInvoiceByVehicleGroup,
             this.iRecapInvoiceByCustomer,
-            this.iHistorySparepart});
+            this.iHistorySparepart,
+            this.iStockOpname});
             this.navbarReportingData.Location = new System.Drawing.Point(0, 0);
             this.navbarReportingData.Name = "navbarReportingData";
             this.navbarReportingData.OptionsNavPane.ExpandedWidth = 195;
@@ -72,7 +74,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceBySPK),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByVehicleGroup),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByCustomer),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iHistorySparepart)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iHistorySparepart),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iStockOpname)});
             this.navbarGroupReportingData.Name = "navbarGroupReportingData";
             // 
             // iSPKHistory
@@ -114,6 +117,12 @@
             this.imageCollection.Images.SetKeyName(2, "invoice2_16x16.png");
             this.imageCollection.Images.SetKeyName(3, "invoice3_16x16.png");
             // 
+            // iStockOpname
+            // 
+            this.iStockOpname.Caption = "Stock Opname";
+            this.iStockOpname.Name = "iStockOpname";
+            this.iStockOpname.SmallImageIndex = 0;
+            // 
             // ReportingDataNavigationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,5 +146,6 @@
         public DevExpress.XtraNavBar.NavBarItem iRecapInvoiceByVehicleGroup;
         public DevExpress.XtraNavBar.NavBarItem iRecapInvoiceByCustomer;
         public DevExpress.XtraNavBar.NavBarItem iHistorySparepart;
+        public DevExpress.XtraNavBar.NavBarItem iStockOpname;
     }
 }

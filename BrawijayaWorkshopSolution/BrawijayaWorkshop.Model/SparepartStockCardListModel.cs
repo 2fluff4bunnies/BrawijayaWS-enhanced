@@ -30,16 +30,17 @@ namespace BrawijayaWorkshop.Model
         public List<SparepartStockCardViewModel> RetrieveStockCards(DateTime fromDate, DateTime toDate, int sparepartId)
         {
             List<SparepartStockCard> result = new List<SparepartStockCard>();
-            if(sparepartId > 0)
+            DateTime lastDay = toDate.AddDays(1).AddSeconds(-1);
+            if (sparepartId > 0)
             {
                 result = _sparepartStockCardRepository.GetMany(stc =>
                     stc.SparepartId == sparepartId &&
-                    stc.CreateDate >= fromDate.GetRangeFormDate() && stc.CreateDate <= toDate.GetRangeToDate()).ToList();
+                    stc.CreateDate >= fromDate && stc.CreateDate <= lastDay).ToList();
             }
             else
             {
                 result = _sparepartStockCardRepository.GetMany(stc =>
-                    stc.CreateDate >= fromDate.GetRangeFormDate() && stc.CreateDate <= toDate.GetRangeToDate()).ToList();
+                    stc.CreateDate >= fromDate && stc.CreateDate <= lastDay).ToList();
             }
 
             List<SparepartStockCardViewModel> mappedResult = new List<SparepartStockCardViewModel>();
