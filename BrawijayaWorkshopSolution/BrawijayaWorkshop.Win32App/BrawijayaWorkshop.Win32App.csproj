@@ -841,6 +841,12 @@
     <Compile Include="PrintItems\SalesReturnPrintItem2.Designer.cs">
       <DependentUpon>SalesReturnPrintItem2.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\SparepartStockCardPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\SparepartStockCardPrintItem.Designer.cs">
+      <DependentUpon>SparepartStockCardPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\SPKContractPrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
