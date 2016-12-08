@@ -186,7 +186,7 @@ namespace BrawijayaWorkshop.Win32App
                 SplashScreenManager.Default.SendCommand(StartupScreen.SplashScreenCommand.CheckDatabaseConnection, null);
                 MethodBase.GetCurrentMethod().Info("Initialize database");
                 // Initialize Database
-                new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
+                // new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
                 MethodBase.GetCurrentMethod().Info("Database initialized successfully");
                 return true;
             }
