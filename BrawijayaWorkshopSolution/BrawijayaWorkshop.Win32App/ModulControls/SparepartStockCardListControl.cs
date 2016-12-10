@@ -5,9 +5,11 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,6 +44,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             deTo.EditValue = new DateTime(serverTime.Year, serverTime.Month, DateTime.DaysInMonth(serverTime.Year, serverTime.Month));
 
             this.Load += SparepartStockCardListControl_Load;
+            exportFileDialog.FileOk += ExportFileDialog_FileOk;
         }
 
         private void SparepartStockCardListControl_Load(object sender, EventArgs e)
@@ -208,6 +211,28 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void btnSearch_Click(object sender, EventArgs e)
         {
             RefreshDataView();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            SparepartStockCardPrintItem report = new SparepartStockCardPrintItem(DateFromFilter, DateToFilter);
+            report.DataSource = ListStockCard;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                printTool.PrintDialog();
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            exportFileDialog.ShowDialog(this);
+        }
+
+        private void ExportFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            gcStockCard.ExportToXlsx(exportFileDialog.FileName);
         }
     }
 }

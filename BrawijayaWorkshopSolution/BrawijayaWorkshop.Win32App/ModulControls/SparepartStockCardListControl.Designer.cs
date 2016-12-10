@@ -43,14 +43,15 @@
             this.colCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
-            this.bgwInit = new System.ComponentModel.BackgroundWorker();
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyFirst = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyIn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyOut = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyLast = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwInit = new System.ComponentModel.BackgroundWorker();
+            this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupSparepart.Properties)).BeginInit();
@@ -236,33 +237,6 @@
             this.colSparepartName.Visible = true;
             this.colSparepartName.VisibleIndex = 2;
             // 
-            // btnPrint
-            // 
-            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
-            this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(3, 91);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(116, 34);
-            this.btnPrint.TabIndex = 2;
-            this.btnPrint.Text = "Print";
-            // 
-            // btnExport
-            // 
-            this.btnExport.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export_16x16;
-            this.btnExport.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnExport.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExport.Location = new System.Drawing.Point(140, 91);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(116, 34);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Export";
-            // 
-            // bgwInit
-            // 
-            this.bgwInit.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwInit_DoWork);
-            this.bgwInit.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwInit_RunWorkerCompleted);
-            // 
             // colSparepartUnit
             // 
             this.colSparepartUnit.Caption = "Satuan";
@@ -310,6 +284,40 @@
             this.colQtyLast.Name = "colQtyLast";
             this.colQtyLast.Visible = true;
             this.colQtyLast.VisibleIndex = 7;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrint.Location = new System.Drawing.Point(3, 91);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(116, 34);
+            this.btnPrint.TabIndex = 2;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export_16x16;
+            this.btnExport.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnExport.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExport.Location = new System.Drawing.Point(140, 91);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(116, 34);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Export";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // bgwInit
+            // 
+            this.bgwInit.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwInit_DoWork);
+            this.bgwInit.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwInit_RunWorkerCompleted);
+            // 
+            // exportFileDialog
+            // 
+            this.exportFileDialog.DefaultExt = "xlsx";
+            this.exportFileDialog.Title = "Export Sparepart Stock Data";
             // 
             // SparepartStockCardListControl
             // 
@@ -359,5 +367,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colQtyIn;
         private DevExpress.XtraGrid.Columns.GridColumn colQtyOut;
         private DevExpress.XtraGrid.Columns.GridColumn colQtyLast;
+        private System.Windows.Forms.SaveFileDialog exportFileDialog;
     }
 }
