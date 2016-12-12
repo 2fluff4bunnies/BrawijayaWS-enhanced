@@ -174,7 +174,7 @@ namespace BrawijayaWorkshop.Model
                         stockCard.PrimaryKeyValue = purchasing.Id;
                         stockCard.ReferenceTableId = transactionReferenceTable.Id;
                         stockCard.SparepartId = sparepart.Id;
-                        stockCard.Description = "Penambahan stok awal";
+                        stockCard.Description = "Purchasing";
                         stockCard.QtyIn = purchasingDetail.Qty;
                         SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
                         double lastStock = 0;

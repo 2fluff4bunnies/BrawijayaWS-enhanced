@@ -252,6 +252,30 @@ namespace BrawijayaWorkshop.Model
                     sparepart.ModifyUserId = userId;
 
                     _sparepartRepository.Update(sparepart);
+
+                    SparepartStockCard stockCard = new SparepartStockCard();
+                    Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
+
+                    stockCard.CreateUserId = userId;
+                    stockCard.CreateDate = serverTime;
+                    stockCard.PrimaryKeyValue = spk.Id;
+                    stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                    stockCard.SparepartId = sparepart.Id;
+                    stockCard.Description = "SPK";
+                    stockCard.QtyOut = spkSparepart.TotalQuantity;
+
+                    SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
+                    double lastStock = 0;
+                    if (lastStockCard != null)
+                    {
+                        lastStock = lastStockCard.QtyLast;
+                    }
+                    stockCard.QtyFirst = lastStock;
+                    stockCard.QtyLast = lastStock - stockCard.QtyOut;
+                    _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                    _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                    _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                    _sparepartStokCardRepository.Add(stockCard);
                 }
 
                 if (isSPKSales)

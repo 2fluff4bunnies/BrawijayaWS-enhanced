@@ -21,6 +21,7 @@ namespace BrawijayaWorkshop.Model
         private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ICustomerRepository _customerRepository;
+        private ISparepartStockCardRepository _sparepartStokCardRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnListModel(ITransactionRepository transactionRepository,
@@ -28,7 +29,9 @@ namespace BrawijayaWorkshop.Model
             ISalesReturnDetailRepository salesReturnDetailRepository,
             ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository,
-            ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+            ICustomerRepository customerRepository,
+            ISparepartStockCardRepository sparepartStockCardRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _transactionRepository = transactionRepository;
@@ -40,6 +43,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _customerRepository = customerRepository;
+            _sparepartStokCardRepository = sparepartStockCardRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -101,6 +105,8 @@ namespace BrawijayaWorkshop.Model
                 {
                     DateTime serverTime = DateTime.Now;
 
+                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
+                    
                     SalesReturn salesReturn = _salesReturnRepository.GetById(salesReturnID);
                     salesReturn.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                     salesReturn.ModifyDate = serverTime;
@@ -154,11 +160,31 @@ namespace BrawijayaWorkshop.Model
                         _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
                         _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                         _sparepartRepository.Update(sparepart);
+
+                        SparepartStockCard stockCard = new SparepartStockCard();
+                        stockCard.CreateUserId = userID;
+                        stockCard.CreateDate = serverTime;
+                        stockCard.PrimaryKeyValue = salesReturn.Id;
+                        stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                        stockCard.SparepartId = sparepart.Id;
+                        stockCard.Description = "Pembatalan Retur Penjualan";
+                        stockCard.QtyOut = itemReturn.ReturQty;
+                        SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
+                        double lastStock = 0;
+                        if (lastStockCard != null)
+                        {
+                            lastStock = lastStockCard.QtyLast;
+                        }
+                        stockCard.QtyFirst = lastStock;
+                        stockCard.QtyLast = lastStock - stockCard.QtyOut;
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                        _sparepartStokCardRepository.Add(stockCard);
                     } 
 
                     _unitOfWork.SaveChanges();
 
-                    Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SALESRETURN).FirstOrDefault();
                     Transaction transaction = _transactionRepository.GetMany(x => x.PrimaryKeyValue == salesReturnID && x.ReferenceTableId == transactionReferenceTable.Id).FirstOrDefault();
                     transaction.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                     transaction.ModifyDate = serverTime;
