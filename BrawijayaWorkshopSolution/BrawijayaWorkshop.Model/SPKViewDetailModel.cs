@@ -412,7 +412,6 @@ namespace BrawijayaWorkshop.Model
                 _unitOfWork.SaveChanges();
 
                 //Update Stock Card
-
                 SparepartStockCard stockCard = new SparepartStockCard();
                 Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
 
@@ -421,7 +420,7 @@ namespace BrawijayaWorkshop.Model
                 stockCard.PrimaryKeyValue = spk.Id;
                 stockCard.ReferenceTableId = transactionReferenceTable.Id;
                 stockCard.SparepartId = spkSp.SparepartId;
-                stockCard.Description = "SPK";
+                stockCard.Description = "SPK Complete";
                 stockCard.QtyOut = SPKSpDetailList.Count;
                 SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(spkSp.SparepartId);
                 double lastStock = 0;

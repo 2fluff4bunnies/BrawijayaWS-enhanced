@@ -17,6 +17,8 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private ISparepartStockCardRepository _sparepartStokCardRepository;
+        private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public VehicleListModel(IVehicleRepository vehicleRepository, 
@@ -25,6 +27,8 @@ namespace BrawijayaWorkshop.Model
             ISparepartRepository sparepartRepository, 
             ISparepartDetailRepository sparepartDetailRepository,
             ISpecialSparepartDetailRepository specialSparepartDetailRepository,
+            ISparepartStockCardRepository sparepartStokCardRepository,
+            IReferenceRepository referenceRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -34,6 +38,8 @@ namespace BrawijayaWorkshop.Model
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
+            _sparepartStokCardRepository = sparepartStokCardRepository;
+            _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -112,6 +118,31 @@ namespace BrawijayaWorkshop.Model
                 _sparepartRepository.AttachNavigation(spEntity.CreateUser);
                 _sparepartRepository.AttachNavigation(spEntity.ModifyUser);
                 _sparepartRepository.Update(spEntity);
+                _unitOfWork.SaveChanges();
+
+                SparepartStockCard stockCard = new SparepartStockCard();
+                Reference transactionReferenceTable = _referenceRepository.GetMany(r => r.Code == DbConstant.MODUL_VEHICLE).FirstOrDefault();
+
+                stockCard.CreateUserId = userId;
+                stockCard.CreateDate = serverTime;
+                stockCard.PrimaryKeyValue = vehicle.Id;
+                stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                stockCard.SparepartId = spEntity.Id;
+                stockCard.Description = "Delete Vehicle";
+                stockCard.QtyIn = 1;
+
+                SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(spEntity.Id);
+                double lastStock = 0;
+                if (lastStockCard != null)
+                {
+                    lastStock = lastStockCard.QtyLast;
+                }
+                stockCard.QtyFirst = lastStock;
+                stockCard.QtyLast = lastStock + stockCard.QtyIn;
+                _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                _sparepartStokCardRepository.Add(stockCard);
                 _unitOfWork.SaveChanges();
             }
 

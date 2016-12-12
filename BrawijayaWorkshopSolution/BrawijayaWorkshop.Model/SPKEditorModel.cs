@@ -29,6 +29,7 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
         private ISPKScheduleRepository _SPKScheduleRepository;
+        private ISparepartStockCardRepository _sparepartStokCardRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -43,6 +44,7 @@ namespace BrawijayaWorkshop.Model
             IInvoiceDetailRepository invoiceDetailRepository,
             IWheelExchangeHistoryRepository WheelExchangeHistoryRepository,
             ISPKScheduleRepository spkScheduleRepository,
+            ISparepartStockCardRepository sparepartStokCardRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -62,6 +64,7 @@ namespace BrawijayaWorkshop.Model
             _invoiceDetailRepository = invoiceDetailRepository;
             _SPKScheduleRepository = spkScheduleRepository;
             _wheelExchangeHistoryRepository = WheelExchangeHistoryRepository;
+            _sparepartStokCardRepository = sparepartStokCardRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -573,12 +576,36 @@ namespace BrawijayaWorkshop.Model
             //_SPKRepository.AttachNavigation<Reference>(entity.CategoryReference);
             _SPKRepository.Update(entity);
 
-            foreach (var item in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
+            foreach (var spkSp in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
             {
-                Sparepart sparepart = _sparepartRepository.GetById(item.Sparepart.Id);
-                sparepart.StockQty = sparepart.StockQty + item.TotalQuantity;
+                Sparepart sparepart = _sparepartRepository.GetById(spkSp.Sparepart.Id);
+                sparepart.StockQty = sparepart.StockQty + spkSp.TotalQuantity;
                 sparepart.ModifyDate = serverTime;
                 sparepart.ModifyUserId = userId;
+
+                SparepartStockCard stockCard = new SparepartStockCard();
+                Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
+
+                stockCard.CreateUserId = userId;
+                stockCard.CreateDate = serverTime;
+                stockCard.PrimaryKeyValue = spk.Id;
+                stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                stockCard.SparepartId = spkSp.SparepartId;
+                stockCard.Description = "Pembatalan SPK";
+                stockCard.QtyIn = spkSp.TotalQuantity;
+
+                SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(spkSp.SparepartId);
+                double lastStock = 0;
+                if (lastStockCard != null)
+                {
+                    lastStock = lastStockCard.QtyLast;
+                }
+                stockCard.QtyFirst = lastStock;
+                stockCard.QtyLast = lastStock + stockCard.QtyIn;
+                _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                _sparepartStokCardRepository.Add(stockCard);
 
                 //_sparepartRepository.AttachNavigation<User>(sparepart.ModifyUser);
                 //_sparepartRepository.AttachNavigation<User>(sparepart.CreateUser);
