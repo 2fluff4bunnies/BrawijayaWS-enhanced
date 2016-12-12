@@ -37,6 +37,8 @@
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerMain = new DevExpress.XtraEditors.SplitContainerControl();
+            this.lblCostEstimation = new DevExpress.XtraEditors.LabelControl();
+            this.txtCostEstimation = new DevExpress.XtraEditors.TextEdit();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
             this.txtKilometer = new DevExpress.XtraEditors.TextEdit();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
@@ -91,14 +93,13 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
-            this.txtCostEstimation = new DevExpress.XtraEditors.TextEdit();
-            this.lblCostEstimation = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCostEstimation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKilometer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).BeginInit();
@@ -125,7 +126,6 @@
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCostEstimation.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -206,6 +206,29 @@
             this.splitContainerMain.TabIndex = 19;
             this.splitContainerMain.Text = "splitContainerControl1";
             // 
+            // lblCostEstimation
+            // 
+            this.lblCostEstimation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCostEstimation.Location = new System.Drawing.Point(9, 111);
+            this.lblCostEstimation.Name = "lblCostEstimation";
+            this.lblCostEstimation.Size = new System.Drawing.Size(84, 13);
+            this.lblCostEstimation.TabIndex = 20;
+            this.lblCostEstimation.Text = "Perkiraan Ongkos";
+            // 
+            // txtCostEstimation
+            // 
+            this.txtCostEstimation.Location = new System.Drawing.Point(105, 108);
+            this.txtCostEstimation.Name = "txtCostEstimation";
+            this.txtCostEstimation.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtCostEstimation.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtCostEstimation.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.txtCostEstimation.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtCostEstimation.Properties.Mask.EditMask = "d";
+            this.txtCostEstimation.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtCostEstimation.Size = new System.Drawing.Size(161, 20);
+            this.txtCostEstimation.TabIndex = 19;
+            // 
             // lblCategory
             // 
             this.lblCategory.Location = new System.Drawing.Point(9, 8);
@@ -216,7 +239,7 @@
             // 
             // txtKilometer
             // 
-            this.txtKilometer.Location = new System.Drawing.Point(90, 82);
+            this.txtKilometer.Location = new System.Drawing.Point(105, 82);
             this.txtKilometer.Name = "txtKilometer";
             this.txtKilometer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtKilometer.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -245,7 +268,7 @@
             // 
             // lookUpCategory
             // 
-            this.lookUpCategory.Location = new System.Drawing.Point(90, 4);
+            this.lookUpCategory.Location = new System.Drawing.Point(105, 4);
             this.lookUpCategory.Name = "lookUpCategory";
             this.lookUpCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -274,7 +297,7 @@
             // 
             // LookUpVehicle
             // 
-            this.LookUpVehicle.Location = new System.Drawing.Point(90, 30);
+            this.LookUpVehicle.Location = new System.Drawing.Point(105, 30);
             this.LookUpVehicle.Name = "LookUpVehicle";
             this.LookUpVehicle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.LookUpVehicle.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -306,7 +329,7 @@
             // dtpDueDate
             // 
             this.dtpDueDate.EditValue = null;
-            this.dtpDueDate.Location = new System.Drawing.Point(90, 56);
+            this.dtpDueDate.Location = new System.Drawing.Point(105, 56);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dtpDueDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -735,29 +758,6 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // txtCostEstimation
-            // 
-            this.txtCostEstimation.Location = new System.Drawing.Point(90, 108);
-            this.txtCostEstimation.Name = "txtCostEstimation";
-            this.txtCostEstimation.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtCostEstimation.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtCostEstimation.Properties.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
-            this.txtCostEstimation.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtCostEstimation.Properties.Mask.EditMask = "d";
-            this.txtCostEstimation.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtCostEstimation.Size = new System.Drawing.Size(161, 20);
-            this.txtCostEstimation.TabIndex = 19;
-            // 
-            // lblCostEstimation
-            // 
-            this.lblCostEstimation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCostEstimation.Location = new System.Drawing.Point(9, 111);
-            this.lblCostEstimation.Name = "lblCostEstimation";
-            this.lblCostEstimation.Size = new System.Drawing.Size(77, 13);
-            this.lblCostEstimation.TabIndex = 20;
-            this.lblCostEstimation.Text = "Perkiraan Harga";
-            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -775,6 +775,7 @@
             this.groupSPK.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
             this.splitContainerMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtCostEstimation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKilometer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LookUpVehicle.Properties)).EndInit();
@@ -801,7 +802,6 @@
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtCostEstimation.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

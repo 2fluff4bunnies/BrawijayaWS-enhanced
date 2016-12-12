@@ -50,6 +50,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lblCreateDateValue.Text = _prefix + this.SelectedSPK.CreateDate.ToShortDateString();
             lblDueDateValue.Text = _prefix + this.SelectedSPK.DueDate.ToShortDateString();
             lblContractWorkValue.Text = _prefix + (this.SelectedSPK.isContractWork ? "Borongan" : "Bukan Borongan");
+            lblCostEstimationValue.Text = _prefix + this.SelectedSPK.CostEstimation;
             if (this.SelectedSPK.isContractWork)
             {
                 lblContractWorkFeeValue.Text = _prefix + this.SelectedSPK.ContractWorkFee.ToString("n0");

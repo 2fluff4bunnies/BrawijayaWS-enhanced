@@ -44,6 +44,7 @@ namespace BrawijayaWorkshop.Model
         {
             List<SPK> result = _SPKRepository.GetMany(s => s.Status == (int)DbConstant.DefaultDataStatus.Active 
                                                             && s.StatusCompletedId == (int) DbConstant.SPKCompletionStatus.InProgress
+                                                            && s.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved
                                                             &&!s.isContractWork).ToList();
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
 

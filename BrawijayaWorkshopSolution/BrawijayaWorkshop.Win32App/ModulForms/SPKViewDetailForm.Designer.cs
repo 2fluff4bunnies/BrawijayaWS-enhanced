@@ -76,6 +76,8 @@
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.lblCostEstimationValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblCostEstimation = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
@@ -87,6 +89,8 @@
             // 
             // groupSPK
             // 
+            this.groupSPK.Controls.Add(this.lblCostEstimationValue);
+            this.groupSPK.Controls.Add(this.lblCostEstimation);
             this.groupSPK.Controls.Add(this.lblContractWorkValue);
             this.groupSPK.Controls.Add(this.lblContractWork);
             this.groupSPK.Controls.Add(this.lblContractWorkFeeValue);
@@ -132,7 +136,7 @@
             // 
             // lblContractWorkValue
             // 
-            this.lblContractWorkValue.Location = new System.Drawing.Point(135, 121);
+            this.lblContractWorkValue.Location = new System.Drawing.Point(391, 32);
             this.lblContractWorkValue.Name = "lblContractWorkValue";
             this.lblContractWorkValue.Size = new System.Drawing.Size(4, 13);
             this.lblContractWorkValue.TabIndex = 65;
@@ -140,7 +144,7 @@
             // 
             // lblContractWork
             // 
-            this.lblContractWork.Location = new System.Drawing.Point(15, 121);
+            this.lblContractWork.Location = new System.Drawing.Point(287, 31);
             this.lblContractWork.Name = "lblContractWork";
             this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 64;
@@ -148,7 +152,7 @@
             // 
             // lblContractWorkFeeValue
             // 
-            this.lblContractWorkFeeValue.Location = new System.Drawing.Point(135, 139);
+            this.lblContractWorkFeeValue.Location = new System.Drawing.Point(391, 49);
             this.lblContractWorkFeeValue.Name = "lblContractWorkFeeValue";
             this.lblContractWorkFeeValue.Size = new System.Drawing.Size(4, 13);
             this.lblContractWorkFeeValue.TabIndex = 63;
@@ -156,7 +160,7 @@
             // 
             // lblContractWorkFee
             // 
-            this.lblContractWorkFee.Location = new System.Drawing.Point(15, 139);
+            this.lblContractWorkFee.Location = new System.Drawing.Point(287, 49);
             this.lblContractWorkFee.Name = "lblContractWorkFee";
             this.lblContractWorkFee.Size = new System.Drawing.Size(71, 13);
             this.lblContractWorkFee.TabIndex = 62;
@@ -166,10 +170,10 @@
             // 
             this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 174);
+            this.gridVehicleWheel.Location = new System.Drawing.Point(12, 177);
             this.gridVehicleWheel.MainView = this.gvVehicleWheel;
             this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.Size = new System.Drawing.Size(533, 269);
+            this.gridVehicleWheel.Size = new System.Drawing.Size(533, 266);
             this.gridVehicleWheel.TabIndex = 61;
             this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvVehicleWheel});
@@ -465,7 +469,7 @@
             // 
             // lblCreateDateValue
             // 
-            this.lblCreateDateValue.Location = new System.Drawing.Point(391, 31);
+            this.lblCreateDateValue.Location = new System.Drawing.Point(135, 122);
             this.lblCreateDateValue.Name = "lblCreateDateValue";
             this.lblCreateDateValue.Size = new System.Drawing.Size(4, 13);
             this.lblCreateDateValue.TabIndex = 49;
@@ -473,7 +477,7 @@
             // 
             // lblDueDateValue
             // 
-            this.lblDueDateValue.Location = new System.Drawing.Point(391, 49);
+            this.lblDueDateValue.Location = new System.Drawing.Point(135, 141);
             this.lblDueDateValue.Name = "lblDueDateValue";
             this.lblDueDateValue.Size = new System.Drawing.Size(4, 13);
             this.lblDueDateValue.TabIndex = 48;
@@ -529,7 +533,7 @@
             // 
             // lblCreateDate
             // 
-            this.lblCreateDate.Location = new System.Drawing.Point(287, 31);
+            this.lblCreateDate.Location = new System.Drawing.Point(15, 122);
             this.lblCreateDate.Name = "lblCreateDate";
             this.lblCreateDate.Size = new System.Drawing.Size(95, 13);
             this.lblCreateDate.TabIndex = 35;
@@ -545,7 +549,7 @@
             // 
             // lblDueDate
             // 
-            this.lblDueDate.Location = new System.Drawing.Point(287, 49);
+            this.lblDueDate.Location = new System.Drawing.Point(15, 140);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(59, 13);
             this.lblDueDate.TabIndex = 12;
@@ -562,6 +566,22 @@
             // gridView1
             // 
             this.gridView1.Name = "gridView1";
+            // 
+            // lblCostEstimationValue
+            // 
+            this.lblCostEstimationValue.Location = new System.Drawing.Point(135, 158);
+            this.lblCostEstimationValue.Name = "lblCostEstimationValue";
+            this.lblCostEstimationValue.Size = new System.Drawing.Size(4, 13);
+            this.lblCostEstimationValue.TabIndex = 67;
+            this.lblCostEstimationValue.Text = ":";
+            // 
+            // lblCostEstimation
+            // 
+            this.lblCostEstimation.Location = new System.Drawing.Point(15, 158);
+            this.lblCostEstimation.Name = "lblCostEstimation";
+            this.lblCostEstimation.Size = new System.Drawing.Size(84, 13);
+            this.lblCostEstimation.TabIndex = 66;
+            this.lblCostEstimation.Text = "Perkiraan Ongkos";
             // 
             // SPKViewDetailForm
             // 
@@ -633,5 +653,7 @@
         private DevExpress.XtraEditors.LabelControl lblContractWorkValue;
         private DevExpress.XtraEditors.LabelControl lblContractWork;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
+        private DevExpress.XtraEditors.LabelControl lblCostEstimationValue;
+        private DevExpress.XtraEditors.LabelControl lblCostEstimation;
     }
 }

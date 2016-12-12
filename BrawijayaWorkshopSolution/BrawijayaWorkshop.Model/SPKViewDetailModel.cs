@@ -30,6 +30,7 @@ namespace BrawijayaWorkshop.Model
         private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
         private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
+        private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISettingRepository _settingRepository;
 
         public SPKViewDetailModel(IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -47,6 +48,7 @@ namespace BrawijayaWorkshop.Model
             IWheelExchangeHistoryRepository wheelExchangeHistoryRepository,
             ISpecialSparepartRepository specialSparepartRepository,
             ISpecialSparepartDetailRepository specialSparepartDetailRepository,
+            ISparepartStockCardRepository sparepartStockCardRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -68,6 +70,7 @@ namespace BrawijayaWorkshop.Model
             _wheelExchangeHistoryRepository = wheelExchangeHistoryRepository;
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _specialSparepartRepository = specialSparepartRepository;
+            _sparepartStokCardRepository = sparepartStockCardRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -331,7 +334,7 @@ namespace BrawijayaWorkshop.Model
 
                     foreach (Mechanic mechanic in involvedMechanic)
                     {
-                        int mechanicJobForToday = _SPKScheduleRepository.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id && sc.SPKId == spk.Id).Count();
+                        int mechanicJobForToday = _SPKScheduleRepository.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
 
                         decimal mechanicFeeForToday = mechanic.BaseFee / mechanicJobForToday;
 
@@ -407,6 +410,31 @@ namespace BrawijayaWorkshop.Model
                     _wheelExchangeHistoryRepository.Delete(item);
                 }
                 _unitOfWork.SaveChanges();
+
+                //Update Stock Card
+
+                SparepartStockCard stockCard = new SparepartStockCard();
+                Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
+
+                stockCard.CreateUserId = userId;
+                stockCard.CreateDate = serverTime;
+                stockCard.PrimaryKeyValue = spk.Id;
+                stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                stockCard.SparepartId = spkSp.SparepartId;
+                stockCard.Description = "SPK";
+                stockCard.QtyOut = SPKSpDetailList.Count;
+                SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(spkSp.SparepartId);
+                double lastStock = 0;
+                if (lastStockCard != null)
+                {
+                    lastStock = lastStockCard.QtyLast;
+                }
+                stockCard.QtyFirst = lastStock;
+                stockCard.QtyLast = lastStock - stockCard.QtyOut;
+                _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                _sparepartStokCardRepository.Add(stockCard);
             }
 
             foreach (SPKDetailSparepartDetail spkSpDtl in SPKSpDetailList)

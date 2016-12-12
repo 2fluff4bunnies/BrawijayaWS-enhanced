@@ -734,6 +734,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void gvVehicleWheel_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             this.SelectedVehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+
+            //GridView View = sender as GridView;
+            //var rowHandle = View.FocusedRowHandle;
+            //_presenter.LoadWheelDetail(View.GetRowCellValue(rowHandle, "SparepartId").AsInteger());
         }
 
         void gvVehicleWheel_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -920,7 +924,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (duplicateVwToChange != null && lookup.EditValue.AsInteger() > 0)
             {
-                this.ShowWarning("Terdapat duplikasi dalam pemilihan ban untuk diganti!");
+                this.ShowWarning("Terdapat duplikasi dalam pemilihan ban!");
             }
             else
             {
@@ -937,8 +941,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            VehicleWheelViewModel focusedvehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+
             GridView View = sender as GridView;
-            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId == 0 || this.SelectedVehicleWheel.Price > 0 || this.IsSPKSales))
+            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (focusedvehicleWheel.ReplaceWithWheelDetailId == 0 || focusedvehicleWheel.Price > 0 || this.IsSPKSales))
             {
                 e.Cancel = true;
             }
@@ -948,7 +954,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 e.Cancel = true;
             }
 
-            if (View.FocusedColumn.FieldName == "SparepartId" && (this.SelectedVehicleWheel.ReplaceWithWheelDetailId > 0 || this.SelectedVehicleWheel.Price > 0 || this.IsSPKSales))
+            if (View.FocusedColumn.FieldName == "SparepartId" && this.IsSPKSales)
             {
                 e.Cancel = true;
             }
