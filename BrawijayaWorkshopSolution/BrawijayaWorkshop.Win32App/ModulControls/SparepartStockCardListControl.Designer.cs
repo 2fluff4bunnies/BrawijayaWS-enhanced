@@ -48,11 +48,11 @@
             this.colQtyIn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyOut = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyLast = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.bgwInit = new System.ComponentModel.BackgroundWorker();
             this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.colDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupSparepart.Properties)).BeginInit();
@@ -83,7 +83,7 @@
             this.gcFilter.Location = new System.Drawing.Point(3, 2);
             this.gcFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(799, 67);
+            this.gcFilter.Size = new System.Drawing.Size(932, 82);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
             // 
@@ -93,9 +93,10 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(732, 30);
+            this.btnSearch.Location = new System.Drawing.Point(854, 37);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.Size = new System.Drawing.Size(64, 28);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -104,7 +105,7 @@
             // 
             this.lookupSparepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lookupSparepart.Location = new System.Drawing.Point(405, 32);
+            this.lookupSparepart.Location = new System.Drawing.Point(472, 39);
             this.lookupSparepart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lookupSparepart.Name = "lookupSparepart";
             this.lookupSparepart.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -118,22 +119,22 @@
             this.lookupSparepart.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupSparepart.Properties.NullText = "-- Pilih Sparepart --";
             this.lookupSparepart.Properties.ValueMember = "Id";
-            this.lookupSparepart.Size = new System.Drawing.Size(309, 20);
+            this.lookupSparepart.Size = new System.Drawing.Size(360, 22);
             this.lookupSparepart.TabIndex = 5;
             // 
             // lblSparepartFilter
             // 
-            this.lblSparepartFilter.Location = new System.Drawing.Point(339, 35);
+            this.lblSparepartFilter.Location = new System.Drawing.Point(395, 43);
             this.lblSparepartFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblSparepartFilter.Name = "lblSparepartFilter";
-            this.lblSparepartFilter.Size = new System.Drawing.Size(48, 13);
+            this.lblSparepartFilter.Size = new System.Drawing.Size(57, 16);
             this.lblSparepartFilter.TabIndex = 4;
             this.lblSparepartFilter.Text = "Sparepart";
             // 
             // deTo
             // 
             this.deTo.EditValue = null;
-            this.deTo.Location = new System.Drawing.Point(197, 32);
+            this.deTo.Location = new System.Drawing.Point(230, 39);
             this.deTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deTo.Name = "deTo";
             this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -144,22 +145,22 @@
             this.deTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.deTo.Properties.HideSelection = false;
             this.deTo.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.deTo.Size = new System.Drawing.Size(105, 20);
+            this.deTo.Size = new System.Drawing.Size(122, 22);
             this.deTo.TabIndex = 3;
             // 
             // lblDateTo
             // 
-            this.lblDateTo.Location = new System.Drawing.Point(167, 35);
+            this.lblDateTo.Location = new System.Drawing.Point(195, 43);
             this.lblDateTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblDateTo.Name = "lblDateTo";
-            this.lblDateTo.Size = new System.Drawing.Size(15, 13);
+            this.lblDateTo.Size = new System.Drawing.Size(18, 16);
             this.lblDateTo.TabIndex = 2;
             this.lblDateTo.Text = "s/d";
             // 
             // deFrom
             // 
             this.deFrom.EditValue = null;
-            this.deFrom.Location = new System.Drawing.Point(49, 32);
+            this.deFrom.Location = new System.Drawing.Point(57, 39);
             this.deFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deFrom.Name = "deFrom";
             this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -170,15 +171,15 @@
             this.deFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.deFrom.Properties.HideSelection = false;
             this.deFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.deFrom.Size = new System.Drawing.Size(105, 20);
+            this.deFrom.Size = new System.Drawing.Size(122, 22);
             this.deFrom.TabIndex = 1;
             // 
             // lblDateFrom
             // 
-            this.lblDateFrom.Location = new System.Drawing.Point(13, 35);
+            this.lblDateFrom.Location = new System.Drawing.Point(15, 43);
             this.lblDateFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblDateFrom.Name = "lblDateFrom";
-            this.lblDateFrom.Size = new System.Drawing.Size(19, 13);
+            this.lblDateFrom.Size = new System.Drawing.Size(23, 16);
             this.lblDateFrom.TabIndex = 0;
             this.lblDateFrom.Text = "Dari";
             // 
@@ -188,11 +189,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcStockCard.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gcStockCard.Location = new System.Drawing.Point(3, 106);
+            this.gcStockCard.Location = new System.Drawing.Point(3, 130);
             this.gcStockCard.MainView = this.gvStockCard;
             this.gcStockCard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gcStockCard.Name = "gcStockCard";
-            this.gcStockCard.Size = new System.Drawing.Size(799, 286);
+            this.gcStockCard.Size = new System.Drawing.Size(932, 352);
             this.gcStockCard.TabIndex = 1;
             this.gcStockCard.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvStockCard});
@@ -295,15 +296,23 @@
             this.colQtyLast.Visible = true;
             this.colQtyLast.VisibleIndex = 7;
             // 
+            // colDesc
+            // 
+            this.colDesc.Caption = "Deskripsi";
+            this.colDesc.FieldName = "Description";
+            this.colDesc.Name = "colDesc";
+            this.colDesc.Visible = true;
+            this.colDesc.VisibleIndex = 8;
+            // 
             // btnPrint
             // 
             this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrint.Location = new System.Drawing.Point(3, 74);
+            this.btnPrint.Location = new System.Drawing.Point(3, 91);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(99, 28);
+            this.btnPrint.Size = new System.Drawing.Size(115, 34);
             this.btnPrint.TabIndex = 2;
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
@@ -313,10 +322,10 @@
             this.btnExport.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export_16x16;
             this.btnExport.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnExport.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExport.Location = new System.Drawing.Point(120, 74);
+            this.btnExport.Location = new System.Drawing.Point(140, 91);
             this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(99, 28);
+            this.btnExport.Size = new System.Drawing.Size(115, 34);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Export";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
@@ -329,19 +338,12 @@
             // exportFileDialog
             // 
             this.exportFileDialog.DefaultExt = "xlsx";
+            this.exportFileDialog.Filter = "Excel File (*.xlsx)|*xlsx";
             this.exportFileDialog.Title = "Export Sparepart Stock Data";
-            // 
-            // colDesc
-            // 
-            this.colDesc.Caption = "Deskripsi";
-            this.colDesc.FieldName = "Description";
-            this.colDesc.Name = "colDesc";
-            this.colDesc.Visible = true;
-            this.colDesc.VisibleIndex = 8;
             // 
             // SparepartStockCardListControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnPrint);
@@ -349,7 +351,7 @@
             this.Controls.Add(this.gcFilter);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SparepartStockCardListControl";
-            this.Size = new System.Drawing.Size(804, 395);
+            this.Size = new System.Drawing.Size(938, 486);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();

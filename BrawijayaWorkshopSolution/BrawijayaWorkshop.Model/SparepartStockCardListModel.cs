@@ -23,6 +23,11 @@ namespace BrawijayaWorkshop.Model
         public List<SparepartViewModel> RetrieveAllSpareparts()
         {
             List<Sparepart> result = _sparepartRepository.GetAll().ToList();
+            result.Insert(0, new Sparepart {
+                Id = 0,
+                Code = "-",
+                Name = "-- Pilih Sparepart --"
+            });
             List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
             return Map(result, mappedResult);
         }
