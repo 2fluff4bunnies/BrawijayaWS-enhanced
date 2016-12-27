@@ -122,7 +122,7 @@ namespace BrawijayaWorkshop.Model
 
                         SparepartStockCard stockCard = new SparepartStockCard();
                         stockCard.CreateUserId = userID;
-                        stockCard.CreateDate = serverTime;
+                        stockCard.PurchaseDate = serverTime;
                         stockCard.PrimaryKeyValue = purchaseReturn.Id;
                         stockCard.ReferenceTableId = transactionReferenceTable.Id;
                         stockCard.SparepartId = sparepart.Id;

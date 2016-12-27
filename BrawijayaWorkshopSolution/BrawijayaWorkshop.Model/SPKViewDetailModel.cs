@@ -416,7 +416,7 @@ namespace BrawijayaWorkshop.Model
                 Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
 
                 stockCard.CreateUserId = userId;
-                stockCard.CreateDate = serverTime;
+                stockCard.PurchaseDate = serverTime;
                 stockCard.PrimaryKeyValue = spk.Id;
                 stockCard.ReferenceTableId = transactionReferenceTable.Id;
                 stockCard.SparepartId = spkSp.SparepartId;

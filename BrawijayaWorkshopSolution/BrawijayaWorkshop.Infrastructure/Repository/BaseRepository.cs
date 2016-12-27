@@ -17,6 +17,14 @@ namespace BrawijayaWorkshop.Infrastructure.Repository
         private U _dataContext;
         private IDbSet<T> _dbset;
 
+        protected IDbSet<T> DbSet
+        {
+            get
+            {
+                return _dbset;
+            }
+        }
+
         protected BaseRepository(IDatabaseFactory<U> databaseFactory)
         {
             DatabaseFactory = databaseFactory;

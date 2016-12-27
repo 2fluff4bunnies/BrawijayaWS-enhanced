@@ -40,12 +40,12 @@ namespace BrawijayaWorkshop.Model
             {
                 result = _sparepartStockCardRepository.GetMany(stc =>
                     stc.SparepartId == sparepartId &&
-                    stc.CreateDate >= fromDate && stc.CreateDate <= lastDay).ToList();
+                    stc.PurchaseDate >= fromDate && stc.PurchaseDate <= lastDay).ToList();
             }
             else
             {
                 result = _sparepartStockCardRepository.GetMany(stc =>
-                    stc.CreateDate >= fromDate && stc.CreateDate <= lastDay).ToList();
+                    stc.PurchaseDate >= fromDate && stc.PurchaseDate <= lastDay).ToList();
             }
 
             List<SparepartStockCardViewModel> mappedResult = new List<SparepartStockCardViewModel>();

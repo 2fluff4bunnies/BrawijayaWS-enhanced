@@ -108,7 +108,7 @@ namespace BrawijayaWorkshop.Model
                         Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
                         SparepartStockCard stockCard = new SparepartStockCard();
                         stockCard.CreateUserId = userId;
-                        stockCard.CreateDate = serverTime;
+                        stockCard.PurchaseDate = serverTime;
                         stockCard.PrimaryKeyValue = manualTransaction.Id;
                         stockCard.ReferenceTableId = transactionReferenceTable.Id;
                         stockCard.SparepartId = manualTransaction.SparepartId;
@@ -273,7 +273,7 @@ namespace BrawijayaWorkshop.Model
                 Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
                 SparepartStockCard stockCard = new SparepartStockCard();
                 stockCard.CreateUserId = userId;
-                stockCard.CreateDate = serverTime;
+                stockCard.PurchaseDate = serverTime;
                 stockCard.ReferenceTableId = transactionReferenceTable.Id;
                 stockCard.PrimaryKeyValue = manualTransactionOld.Id;
                 stockCard.SparepartId = sparepartManualTransaction.SparepartId;
@@ -310,7 +310,7 @@ namespace BrawijayaWorkshop.Model
 
                 SparepartStockCard revStockCard = new SparepartStockCard();
                 revStockCard.CreateUserId = userId;
-                revStockCard.CreateDate = serverTime;
+                revStockCard.PurchaseDate = serverTime;
                 revStockCard.ReferenceTableId = transactionReferenceTable.Id;
                 revStockCard.PrimaryKeyValue = manualTransactionOld.Id;
                 revStockCard.SparepartId = sparepartManualTransaction.SparepartId;

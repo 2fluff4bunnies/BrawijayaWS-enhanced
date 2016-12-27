@@ -104,6 +104,7 @@
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\GroupSparepartStockCard.cs" />
     <Compile Include="Entities\GuestBook.cs" />
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\InvoiceDetail.cs" />

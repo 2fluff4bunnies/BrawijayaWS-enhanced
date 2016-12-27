@@ -13,24 +13,85 @@ namespace BrawijayaWorkshop.Database.Repositories
 
         public SparepartStockCard RetrieveLastCard(int sparepartId)
         {
-            return GetMany(sp => sp.SparepartId == sparepartId).OrderByDescending(sp => sp.Id).FirstOrDefault();
         }
 
-        public List<SparepartStockCard> RetrieveLifoFifoTransaction(DateTime from, DateTime to, int sparepartId)
+        public List<GroupSparepartStockCard> RetrieveLifoFifoTransaction(DateTime dateFrom, DateTime dateTo, int sparepartId)
         {
-            throw new NotImplementedException();
+            var result = from sp in DbSet
+                                  sp.SparepartId == sparepartId
+                            group sp by new
+                            {
+                                sp.Sparepart,
+                                sp.SparepartId,
+                                sp.PricePerItem,
+                                sp.QtyFirst,
+                                sp.QtyFirstPrice,
+                                sp.QtyIn,
+                                sp.QtyInPrice,
+                                sp.QtyOut,
+                                sp.QtyOutPrice,
+                                sp.QtyLast,
+                                sp.QtyLastPrice
+                            } into gsp
+                            select new GroupSparepartStockCard
+                            {
+                                Sparepart = gsp.Key.Sparepart,
+                                SparepartId = gsp.Key.SparepartId,
+                                PricePerItem = gsp.Key.PricePerItem,
+                                TotalQtyFirst = gsp.Sum(g => g.QtyFirst),
+                                TotalQtyFirstPrice = gsp.Sum(g => g.QtyFirstPrice),
+                                TotalQtyIn = gsp.Sum(g => g.QtyIn),
+                                TotalQtyInPrice = gsp.Sum(g => g.QtyInPrice),
+                                TotalQtyOut = gsp.Sum(g => g.QtyOut),
+                                TotalQtyOutPrice = gsp.Sum(g => g.QtyOutPrice),
+                                TotalQtyLast = gsp.Sum(g => g.QtyLast),
+                                TotalQtyLastPrice = gsp.Sum(g => g.QtyLastPrice)
+                            };
+
+            return result.ToList();
         }
 
-        public List<SparepartStockCard> RetrieveCurrentStock(DateTime from, DateTime to, int sparepartId = 0)
+        public List<GroupSparepartStockCard> RetrieveCurrentStock(DateTime dateFrom, DateTime dateTo, int sparepartId = 0)
         {
-            throw new NotImplementedException();
+            var result = from sp in DbSet
+                                  (sparepartId > 0 ? sp.SparepartId == sparepartId : true)
+                            group sp by new
+                            {
+                                sp.Sparepart,
+                                sp.SparepartId,
+                                sp.PricePerItem,
+                                sp.QtyFirst,
+                                sp.QtyFirstPrice,
+                                sp.QtyIn,
+                                sp.QtyInPrice,
+                                sp.QtyOut,
+                                sp.QtyOutPrice,
+                                sp.QtyLast,
+                                sp.QtyLastPrice
+                            } into gsp
+                            select new GroupSparepartStockCard
+                            {
+                                Sparepart = gsp.Key.Sparepart,
+                                SparepartId = gsp.Key.SparepartId,
+                                PricePerItem = gsp.Key.PricePerItem,
+                                TotalQtyFirst = gsp.Sum(g => g.QtyFirst),
+                                TotalQtyFirstPrice = gsp.Sum(g => g.QtyFirstPrice),
+                                TotalQtyIn = gsp.Sum(g => g.QtyIn),
+                                TotalQtyInPrice = gsp.Sum(g => g.QtyInPrice),
+                                TotalQtyOut = gsp.Sum(g => g.QtyOut),
+                                TotalQtyOutPrice = gsp.Sum(g => g.QtyOutPrice),
+                                TotalQtyLast = gsp.Sum(g => g.QtyLast),
+                                TotalQtyLastPrice = gsp.Sum(g => g.QtyLastPrice)
+                            };
+
+            return result.ToList();
         }
     }
 
     public interface ISparepartStockCardRepository : IRepository<SparepartStockCard, BrawijayaWorkshopDbContext>
     {
         SparepartStockCard RetrieveLastCard(int sparepartId);
-        List<SparepartStockCard> RetrieveLifoFifoTransaction(DateTime from, DateTime to, int sparepartId);
-        List<SparepartStockCard> RetrieveCurrentStock(DateTime from, DateTime to, int sparepartId = 0);
+        List<GroupSparepartStockCard> RetrieveLifoFifoTransaction(DateTime dateFrom, DateTime dateTo, int sparepartId);
+        List<GroupSparepartStockCard> RetrieveCurrentStock(DateTime dateFrom, DateTime dateTo, int sparepartId = 0);
     }
 }

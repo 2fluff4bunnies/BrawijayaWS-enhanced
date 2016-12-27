@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\BrandViewModel.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\GroupSparepartStockCardViewModel.cs" />
     <Compile Include="ViewModels\GuestBookViewModel.cs" />
     <Compile Include="ViewModels\InternalInvoiceViewModel.cs" />
     <Compile Include="ViewModels\InvoiceDetailViewModel.cs" />

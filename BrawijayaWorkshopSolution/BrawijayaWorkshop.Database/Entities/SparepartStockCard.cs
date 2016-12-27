@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
         public int CreateUserId { get; set; }
         public virtual User CreateUser { get; set; }
 

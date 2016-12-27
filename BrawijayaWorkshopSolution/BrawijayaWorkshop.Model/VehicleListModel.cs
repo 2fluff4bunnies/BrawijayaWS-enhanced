@@ -124,7 +124,7 @@ namespace BrawijayaWorkshop.Model
                 Reference transactionReferenceTable = _referenceRepository.GetMany(r => r.Code == DbConstant.MODUL_VEHICLE).FirstOrDefault();
 
                 stockCard.CreateUserId = userId;
-                stockCard.CreateDate = serverTime;
+                stockCard.PurchaseDate = serverTime;
                 stockCard.PrimaryKeyValue = vehicle.Id;
                 stockCard.ReferenceTableId = transactionReferenceTable.Id;
                 stockCard.SparepartId = spEntity.Id;

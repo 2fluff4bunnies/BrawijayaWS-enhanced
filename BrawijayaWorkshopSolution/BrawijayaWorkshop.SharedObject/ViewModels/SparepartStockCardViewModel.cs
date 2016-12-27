@@ -6,7 +6,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
     {
         public int Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
         public int CreateUserId { get; set; }
         public UserViewModel CreateUser { get; set; }
 
