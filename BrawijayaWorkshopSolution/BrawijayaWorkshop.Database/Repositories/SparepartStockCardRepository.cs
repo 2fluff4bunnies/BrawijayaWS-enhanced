@@ -26,15 +26,7 @@ namespace BrawijayaWorkshop.Database.Repositories
                                 sp.PurchaseDate,
                                 sp.Sparepart,
                                 sp.SparepartId,
-                                sp.PricePerItem,
-                                sp.QtyFirst,
-                                sp.QtyFirstPrice,
-                                sp.QtyIn,
-                                sp.QtyInPrice,
-                                sp.QtyOut,
-                                sp.QtyOutPrice,
-                                sp.QtyLast,
-                                sp.QtyLastPrice
+                                sp.PricePerItem
                             } into gsp
                             select new GroupSparepartStockCard
                             {
@@ -64,15 +56,7 @@ namespace BrawijayaWorkshop.Database.Repositories
                             {
                                 sp.Sparepart,
                                 sp.SparepartId,
-                                sp.PricePerItem,
-                                sp.QtyFirst,
-                                sp.QtyFirstPrice,
-                                sp.QtyIn,
-                                sp.QtyInPrice,
-                                sp.QtyOut,
-                                sp.QtyOutPrice,
-                                sp.QtyLast,
-                                sp.QtyLastPrice
+                                sp.PricePerItem
                             } into gsp
                             select new GroupSparepartStockCard
                             {
