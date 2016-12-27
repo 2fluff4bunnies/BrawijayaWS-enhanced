@@ -1165,6 +1165,9 @@
     <EmbeddedResource Include="PrintItems\BalanceJournalPrintItem.resx">
       <DependentUpon>BalanceJournalPrintItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\FIFOSparepartStockCardPrintItem.resx">
+      <DependentUpon>FIFOSparepartStockCardPrintItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\InternalInvoicePrintItem.resx">
       <DependentUpon>InternalInvoicePrintItem.cs</DependentUpon>
     </EmbeddedResource>
