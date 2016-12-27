@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Database.Repositories
         public List<GroupSparepartStockCard> RetrieveLifoFifoTransaction(DateTime dateFrom, DateTime dateTo, int sparepartId)
         {
             var result = from sp in DbSet
-                            where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo.AddDays(1).AddSeconds(-1) &&
+                            where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo &&
                                   sp.SparepartId == sparepartId
                             group sp by new
                             {
@@ -50,7 +50,7 @@ namespace BrawijayaWorkshop.Database.Repositories
         public List<GroupSparepartStockCard> RetrieveCurrentStock(DateTime dateFrom, DateTime dateTo, int sparepartId = 0)
         {
             var result = from sp in DbSet
-                            where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo.AddDays(1).AddSeconds(-1) &&
+                            where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo &&
                                   (sparepartId > 0 ? sp.SparepartId == sparepartId : true)
                             group sp by new
                             {

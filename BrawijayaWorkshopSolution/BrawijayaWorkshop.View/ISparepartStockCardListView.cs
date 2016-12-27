@@ -13,6 +13,6 @@ namespace BrawijayaWorkshop.View
         List<SparepartViewModel> ListSparepart { get; set; }
         int SelectedSparepartId { get; set; }
 
-        List<SparepartStockCardViewModel> ListStockCard { get; set; }
+        List<GroupSparepartStockCardViewModel> ListStockCard { get; set; }
     }
 }

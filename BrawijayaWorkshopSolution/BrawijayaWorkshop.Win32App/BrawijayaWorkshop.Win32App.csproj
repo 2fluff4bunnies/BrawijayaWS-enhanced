@@ -781,6 +781,12 @@
     <Compile Include="PrintItems\BalanceJournalPrintItem.Designer.cs">
       <DependentUpon>BalanceJournalPrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\FIFOSparepartStockCardPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\FIFOSparepartStockCardPrintItem.Designer.cs">
+      <DependentUpon>FIFOSparepartStockCardPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\InternalInvoicePrintItem.cs">
       <SubType>Component</SubType>
     </Compile>

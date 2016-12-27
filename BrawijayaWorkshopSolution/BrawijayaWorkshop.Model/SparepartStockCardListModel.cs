@@ -32,23 +32,13 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SparepartStockCardViewModel> RetrieveStockCards(DateTime fromDate, DateTime toDate, int sparepartId)
+        public List<GroupSparepartStockCardViewModel> RetrieveStockCards(DateTime fromDate, DateTime toDate, int sparepartId)
         {
-            List<SparepartStockCard> result = new List<SparepartStockCard>();
+            List<GroupSparepartStockCard> result = new List<GroupSparepartStockCard>();
             DateTime lastDay = toDate.AddDays(1).AddSeconds(-1);
-            if (sparepartId > 0)
-            {
-                result = _sparepartStockCardRepository.GetMany(stc =>
-                    stc.SparepartId == sparepartId &&
-                    stc.PurchaseDate >= fromDate && stc.PurchaseDate <= lastDay).ToList();
-            }
-            else
-            {
-                result = _sparepartStockCardRepository.GetMany(stc =>
-                    stc.PurchaseDate >= fromDate && stc.PurchaseDate <= lastDay).ToList();
-            }
+            result = _sparepartStockCardRepository.RetrieveCurrentStock(fromDate, toDate, sparepartId);
 
-            List<SparepartStockCardViewModel> mappedResult = new List<SparepartStockCardViewModel>();
+            List <GroupSparepartStockCardViewModel> mappedResult = new List<GroupSparepartStockCardViewModel>();
             return Map(result, mappedResult);
         }
     }

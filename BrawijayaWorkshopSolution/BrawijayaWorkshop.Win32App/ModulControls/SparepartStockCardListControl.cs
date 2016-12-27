@@ -116,11 +116,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<SparepartStockCardViewModel> ListStockCard
+        public List<GroupSparepartStockCardViewModel> ListStockCard
         {
             get
             {
-                return gcStockCard.DataSource as List<SparepartStockCardViewModel>;
+                return gcStockCard.DataSource as List<GroupSparepartStockCardViewModel>;
             }
 
             set

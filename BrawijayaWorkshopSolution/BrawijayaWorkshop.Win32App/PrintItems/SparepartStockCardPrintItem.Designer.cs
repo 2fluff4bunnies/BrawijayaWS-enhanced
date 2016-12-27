@@ -134,28 +134,28 @@
             // xrTableCell13
             // 
             this.xrTableCell13.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "QtyFirst", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalQtyFirst", "{0:#,#;(#,#);0}")});
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.Weight = 0.84745703261338545D;
             // 
             // xrTableCell14
             // 
             this.xrTableCell14.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "QtyIn", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalQtyIn", "{0:#,#;(#,#);0}")});
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Weight = 0.77966082017924809D;
             // 
             // xrTableCell15
             // 
             this.xrTableCell15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "QtyOut", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalQtyOut", "{0:#,#;(#,#);0}")});
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.Weight = 0.79661018363610814D;
             // 
             // xrTableCell16
             // 
             this.xrTableCell16.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "QtyLast", "{0:#,#;(#,#);0}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalQtyLast", "{0:#,#;(#,#);0}")});
             this.xrTableCell16.Name = "xrTableCell16";
             this.xrTableCell16.Weight = 0.78813829504260891D;
             // 
@@ -302,7 +302,7 @@
             // 
             // dsReport
             // 
-            this.dsReport.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.SparepartStockCardViewModel);
+            this.dsReport.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.GroupSparepartStockCardViewModel);
             this.dsReport.Name = "dsReport";
             // 
             // SparepartStockCardPrintItem

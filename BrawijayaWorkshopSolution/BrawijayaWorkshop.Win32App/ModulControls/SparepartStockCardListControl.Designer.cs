@@ -40,7 +40,6 @@
             this.lblDateFrom = new DevExpress.XtraEditors.LabelControl();
             this.gcStockCard = new DevExpress.XtraGrid.GridControl();
             this.gvStockCard = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,7 +47,6 @@
             this.colQtyIn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyOut = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQtyLast = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.bgwInit = new System.ComponentModel.BackgroundWorker();
@@ -201,15 +199,13 @@
             // gvStockCard
             // 
             this.gvStockCard.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colCreateDate,
             this.colSparepartCode,
             this.colSparepartName,
             this.colSparepartUnit,
             this.colQtyFirst,
             this.colQtyIn,
             this.colQtyOut,
-            this.colQtyLast,
-            this.colDesc});
+            this.colQtyLast});
             this.gvStockCard.GridControl = this.gcStockCard;
             this.gvStockCard.Name = "gvStockCard";
             this.gvStockCard.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -222,23 +218,13 @@
             this.gvStockCard.OptionsView.EnableAppearanceEvenRow = true;
             this.gvStockCard.OptionsView.ShowGroupPanel = false;
             // 
-            // colCreateDate
-            // 
-            this.colCreateDate.Caption = "Tanggal";
-            this.colCreateDate.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.colCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.colCreateDate.FieldName = "CreateDate";
-            this.colCreateDate.Name = "colCreateDate";
-            this.colCreateDate.Visible = true;
-            this.colCreateDate.VisibleIndex = 0;
-            // 
             // colSparepartCode
             // 
             this.colSparepartCode.Caption = "Kode";
             this.colSparepartCode.FieldName = "Sparepart.Code";
             this.colSparepartCode.Name = "colSparepartCode";
             this.colSparepartCode.Visible = true;
-            this.colSparepartCode.VisibleIndex = 1;
+            this.colSparepartCode.VisibleIndex = 0;
             // 
             // colSparepartName
             // 
@@ -246,7 +232,7 @@
             this.colSparepartName.FieldName = "Sparepart.Name";
             this.colSparepartName.Name = "colSparepartName";
             this.colSparepartName.Visible = true;
-            this.colSparepartName.VisibleIndex = 2;
+            this.colSparepartName.VisibleIndex = 1;
             // 
             // colSparepartUnit
             // 
@@ -254,55 +240,47 @@
             this.colSparepartUnit.FieldName = "Sparepart.UnitReference.Value";
             this.colSparepartUnit.Name = "colSparepartUnit";
             this.colSparepartUnit.Visible = true;
-            this.colSparepartUnit.VisibleIndex = 3;
+            this.colSparepartUnit.VisibleIndex = 2;
             // 
             // colQtyFirst
             // 
             this.colQtyFirst.Caption = "Saldo Awal";
             this.colQtyFirst.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colQtyFirst.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colQtyFirst.FieldName = "QtyFirst";
+            this.colQtyFirst.FieldName = "TotalQtyFirst";
             this.colQtyFirst.Name = "colQtyFirst";
             this.colQtyFirst.Visible = true;
-            this.colQtyFirst.VisibleIndex = 4;
+            this.colQtyFirst.VisibleIndex = 3;
             // 
             // colQtyIn
             // 
             this.colQtyIn.Caption = "Masuk";
             this.colQtyIn.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colQtyIn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colQtyIn.FieldName = "QtyIn";
+            this.colQtyIn.FieldName = "TotalQtyIn";
             this.colQtyIn.Name = "colQtyIn";
             this.colQtyIn.Visible = true;
-            this.colQtyIn.VisibleIndex = 5;
+            this.colQtyIn.VisibleIndex = 4;
             // 
             // colQtyOut
             // 
             this.colQtyOut.Caption = "Keluar";
             this.colQtyOut.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colQtyOut.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colQtyOut.FieldName = "QtyOut";
+            this.colQtyOut.FieldName = "TotalQtyOut";
             this.colQtyOut.Name = "colQtyOut";
             this.colQtyOut.Visible = true;
-            this.colQtyOut.VisibleIndex = 6;
+            this.colQtyOut.VisibleIndex = 5;
             // 
             // colQtyLast
             // 
             this.colQtyLast.Caption = "Saldo Akhir";
             this.colQtyLast.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
             this.colQtyLast.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colQtyLast.FieldName = "QtyLast";
+            this.colQtyLast.FieldName = "TotalQtyLast";
             this.colQtyLast.Name = "colQtyLast";
             this.colQtyLast.Visible = true;
-            this.colQtyLast.VisibleIndex = 7;
-            // 
-            // colDesc
-            // 
-            this.colDesc.Caption = "Deskripsi";
-            this.colDesc.FieldName = "Description";
-            this.colDesc.Name = "colDesc";
-            this.colDesc.Visible = true;
-            this.colDesc.VisibleIndex = 8;
+            this.colQtyLast.VisibleIndex = 6;
             // 
             // btnPrint
             // 
@@ -382,7 +360,6 @@
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.ComponentModel.BackgroundWorker bgwInit;
-        private DevExpress.XtraGrid.Columns.GridColumn colCreateDate;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartName;
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartUnit;
@@ -391,6 +368,5 @@
         private DevExpress.XtraGrid.Columns.GridColumn colQtyOut;
         private DevExpress.XtraGrid.Columns.GridColumn colQtyLast;
         private System.Windows.Forms.SaveFileDialog exportFileDialog;
-        private DevExpress.XtraGrid.Columns.GridColumn colDesc;
     }
 }
