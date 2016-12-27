@@ -505,6 +505,12 @@
     <Compile Include="ModulForms\DebtPaymentListForm.Designer.cs">
       <DependentUpon>DebtPaymentListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\FIFOSparepartStockCardListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\FIFOSparepartStockCardListForm.Designer.cs">
+      <DependentUpon>FIFOSparepartStockCardListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\FirstBalanceEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1029,6 +1035,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\DebtPaymentListForm.resx">
       <DependentUpon>DebtPaymentListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\FIFOSparepartStockCardListForm.resx">
+      <DependentUpon>FIFOSparepartStockCardListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\FirstBalanceEditorForm.resx">
       <DependentUpon>FirstBalanceEditorForm.cs</DependentUpon>
