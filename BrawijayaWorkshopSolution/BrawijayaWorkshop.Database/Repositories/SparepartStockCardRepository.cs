@@ -13,14 +13,17 @@ namespace BrawijayaWorkshop.Database.Repositories
 
         public SparepartStockCard RetrieveLastCard(int sparepartId)
         {
+            return GetMany(sp => sp.SparepartId == sparepartId).OrderByDescending(sp => sp.PurchaseDate).FirstOrDefault();
         }
 
         public List<GroupSparepartStockCard> RetrieveLifoFifoTransaction(DateTime dateFrom, DateTime dateTo, int sparepartId)
         {
             var result = from sp in DbSet
+                            where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo.AddDays(1).AddSeconds(-1) &&
                                   sp.SparepartId == sparepartId
                             group sp by new
                             {
+                                sp.PurchaseDate,
                                 sp.Sparepart,
                                 sp.SparepartId,
                                 sp.PricePerItem,
@@ -35,6 +38,7 @@ namespace BrawijayaWorkshop.Database.Repositories
                             } into gsp
                             select new GroupSparepartStockCard
                             {
+                                LastPurchaseDate = gsp.Key.PurchaseDate,
                                 Sparepart = gsp.Key.Sparepart,
                                 SparepartId = gsp.Key.SparepartId,
                                 PricePerItem = gsp.Key.PricePerItem,
@@ -54,6 +58,7 @@ namespace BrawijayaWorkshop.Database.Repositories
         public List<GroupSparepartStockCard> RetrieveCurrentStock(DateTime dateFrom, DateTime dateTo, int sparepartId = 0)
         {
             var result = from sp in DbSet
+                            where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo.AddDays(1).AddSeconds(-1) &&
                                   (sparepartId > 0 ? sp.SparepartId == sparepartId : true)
                             group sp by new
                             {
@@ -71,6 +76,7 @@ namespace BrawijayaWorkshop.Database.Repositories
                             } into gsp
                             select new GroupSparepartStockCard
                             {
+                                LastPurchaseDate = gsp.Max(g => g.PurchaseDate),
                                 Sparepart = gsp.Key.Sparepart,
                                 SparepartId = gsp.Key.SparepartId,
                                 PricePerItem = gsp.Key.PricePerItem,
