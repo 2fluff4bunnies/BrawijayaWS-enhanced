@@ -54,6 +54,7 @@
     <Compile Include="IDebtEditorView.cs" />
     <Compile Include="IDebtListView.cs" />
     <Compile Include="IDebtPaymentListView.cs" />
+    <Compile Include="IFIFOSparepartStockCardListView.cs" />
     <Compile Include="IFirstBalanceEditorView.cs" />
     <Compile Include="IFirstBalanceListView.cs" />
     <Compile Include="IHistorySparepartListView.cs" />
