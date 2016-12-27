@@ -73,6 +73,7 @@
     <Compile Include="DebtEditorModel.cs" />
     <Compile Include="DebtListModel.cs" />
     <Compile Include="DebtPaymentListModel.cs" />
+    <Compile Include="FIFOSparepartStockCardListModel.cs" />
     <Compile Include="FirstBalanceEditorModel.cs" />
     <Compile Include="FirstBalanceListModel.cs" />
     <Compile Include="HistorySparepartListModel.cs" />
