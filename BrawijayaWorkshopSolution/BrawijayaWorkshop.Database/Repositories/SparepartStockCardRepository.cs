@@ -56,22 +56,21 @@ namespace BrawijayaWorkshop.Database.Repositories
                             {
                                 sp.Sparepart,
                                 sp.SparepartId,
-                                sp.PricePerItem
                             } into gsp
                             select new GroupSparepartStockCard
                             {
                                 LastPurchaseDate = gsp.Max(g => g.PurchaseDate),
                                 Sparepart = gsp.Key.Sparepart,
                                 SparepartId = gsp.Key.SparepartId,
-                                PricePerItem = gsp.Key.PricePerItem,
-                                TotalQtyFirst = gsp.Sum(g => g.QtyFirst),
-                                TotalQtyFirstPrice = gsp.Sum(g => g.QtyFirstPrice),
+                                PricePerItem = gsp.LastOrDefault().PricePerItem,
+                                TotalQtyFirst = gsp.FirstOrDefault().QtyFirst,
+                                TotalQtyFirstPrice = gsp.FirstOrDefault().QtyFirstPrice,
                                 TotalQtyIn = gsp.Sum(g => g.QtyIn),
                                 TotalQtyInPrice = gsp.Sum(g => g.QtyInPrice),
                                 TotalQtyOut = gsp.Sum(g => g.QtyOut),
                                 TotalQtyOutPrice = gsp.Sum(g => g.QtyOutPrice),
-                                TotalQtyLast = gsp.Sum(g => g.QtyLast),
-                                TotalQtyLastPrice = gsp.Sum(g => g.QtyLastPrice)
+                                TotalQtyLast = gsp.LastOrDefault().QtyLast,
+                                TotalQtyLastPrice = gsp.LastOrDefault().QtyLastPrice
                             };
 
             return result.ToList();
