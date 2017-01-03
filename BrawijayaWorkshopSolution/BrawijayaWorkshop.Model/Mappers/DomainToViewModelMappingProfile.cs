@@ -24,6 +24,7 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<Setting, SettingViewModel>();
             Mapper.CreateMap<Sparepart, SparepartViewModel>();
             Mapper.CreateMap<SparepartStockCard, SparepartStockCardViewModel>();
+            Mapper.CreateMap<SparepartStockCardDetail, SparepartStockCardDetailViewModel>();
             Mapper.CreateMap<GroupSparepartStockCard, GroupSparepartStockCardViewModel>();
             Mapper.CreateMap<SparepartDetail, SparepartDetailViewModel>();
             Mapper.CreateMap<SparepartManualTransaction, SparepartManualTransactionViewModel>();

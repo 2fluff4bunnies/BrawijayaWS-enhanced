@@ -79,6 +79,7 @@
     <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\SparepartManualTransactionConfiguration.cs" />
     <Compile Include="Configurations\SparepartStockCardConfiguration.cs" />
+    <Compile Include="Configurations\SparepartStockCardDetailConfiguration.cs" />
     <Compile Include="Configurations\SPKConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartConfiguration.cs" />
     <Compile Include="Configurations\SPKDetailSparepartDetailConfiguration.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Entities\SparepartDetail.cs" />
     <Compile Include="Entities\SparepartManualTransaction.cs" />
     <Compile Include="Entities\SparepartStockCard.cs" />
+    <Compile Include="Entities\SparepartStockCardDetail.cs" />
     <Compile Include="Entities\SPK.cs" />
     <Compile Include="Entities\SPKDetailSparepart.cs" />
     <Compile Include="Entities\SPKDetailSparepartDetail.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Repositories\SparepartDetailRepository.cs" />
     <Compile Include="Repositories\SparepartManualTransactionRepository.cs" />
     <Compile Include="Repositories\SparepartRepository.cs" />
+    <Compile Include="Repositories\SparepartStockCardDetailRepository.cs" />
     <Compile Include="Repositories\SparepartStockCardRepository.cs" />
     <Compile Include="Repositories\SPKDetailSparepartRepository.cs" />
     <Compile Include="Repositories\SPKDetailSparepartDetailRepository.cs" />
