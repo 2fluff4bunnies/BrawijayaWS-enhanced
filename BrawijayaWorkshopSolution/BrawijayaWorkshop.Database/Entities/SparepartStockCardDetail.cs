@@ -10,6 +10,13 @@ namespace BrawijayaWorkshop.Database.Entities
         public int ParentStockCardId { get; set; }
         public virtual SparepartStockCard ParentStockCard { get; set; }
 
+        public int? PurchasingId { get; set; }
+        public virtual Purchasing Purchasing { get; set; }
+
+        public int? SparepartManualTransactionId { get; set; }
+        public virtual SparepartManualTransaction SparepartManualTransaction { get; set; }
+
+
         public double PricePerItem { get; set; }
 
         public double QtyFirst { get; set; }

@@ -14,10 +14,17 @@ namespace BrawijayaWorkshop.Database.Repositories
         {
             throw new NotImplementedException();
         }
+
+        //public SparepartStockCardDetail RetrieveLastCardDetail(int sparepartId, int purchasingID)
+        //{
+        //    //return GetMany(sp => sp.ParentStockCard.SparepartId == sparepartId && sp.PurchasingId == purchasingID)
+        //}
     }
 
     public interface ISparepartStockCardDetailRepository : IRepository<SparepartStockCardDetail, BrawijayaWorkshopDbContext>
     {
         List<GroupSparepartStockCard> RetrieveFIFOCurrentSparepart(DateTime dateFrom, DateTime dateTo, int sparepartId);
+
+        //SparepartStockCard RetrieveLastCardDetail(int sparepartId, int purchasingID);
     }
 }
