@@ -60,6 +60,7 @@
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.dsReport = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsReport)).BeginInit();
@@ -305,6 +306,11 @@
             this.dsReport.DataSource = typeof(BrawijayaWorkshop.SharedObject.ViewModels.GroupSparepartStockCardViewModel);
             this.dsReport.Name = "dsReport";
             // 
+            // ReportFooter
+            // 
+            this.ReportFooter.HeightF = 100F;
+            this.ReportFooter.Name = "ReportFooter";
+            // 
             // SparepartStockCardPrintItem
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -312,7 +318,8 @@
             this.TopMargin,
             this.BottomMargin,
             this.ReportHeader,
-            this.PageHeader});
+            this.PageHeader,
+            this.ReportFooter});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.dsReport});
             this.DataSource = this.dsReport;
@@ -358,5 +365,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource dsReport;
+        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
     }
 }
