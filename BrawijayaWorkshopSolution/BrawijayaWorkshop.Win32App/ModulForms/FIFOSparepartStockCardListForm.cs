@@ -8,6 +8,8 @@ using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using System.Windows.Forms;
 using System.Reflection;
+using BrawijayaWorkshop.Win32App.PrintItems;
+using DevExpress.XtraReports.UI;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
@@ -50,24 +52,26 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public FIFOSparepartStockCardListForm(DateTime dateFrom, DateTime dateTo, SparepartViewModel selectedSparepart, FIFOSparepartStockCardListModel model)
+        public FIFOSparepartStockCardListForm(FIFOSparepartStockCardListModel model)
         {
             InitializeComponent();
 
             _presenter = new FIFOSparepartStockCardListPresenter(this, model);
 
-            DateFromFilter = dateFrom;
-            DateToFilter = dateTo;
-            SelectedSparepart = selectedSparepart;
-
-            this.Text = string.Format(_formatFormTitle, SelectedSparepart.Code + " - " + SelectedSparepart.Name);
-            gvFIFOSparepart.ViewCaption = string.Format("Daftar FIFO: {0}", SelectedSparepart.Code + " - " + SelectedSparepart.Name);
-
             this.Load += FIFOSparepartStockCardListForm_Load;
+            exportFileDialog.FileOk += ExportFileDialog_FileOk;
+        }
+
+        private void ExportFileDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            gcFIFOSparepart.ExportToXlsx(exportFileDialog.FileName);
         }
 
         private void FIFOSparepartStockCardListForm_Load(object sender, EventArgs e)
         {
+            this.Text = string.Format(_formatFormTitle, SelectedSparepart.Code + " - " + SelectedSparepart.Name);
+            gvFIFOSparepart.ViewCaption = string.Format("Daftar FIFO: {0}", SelectedSparepart.Code + " - " + SelectedSparepart.Name);
+
             RefreshDataView();
         }
 
@@ -106,12 +110,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            FIFOSparepartStockCardPrintItem report = new FIFOSparepartStockCardPrintItem(DateFromFilter, DateToFilter, SelectedSparepart.Name);
+            report.DataSource = ListStockCard;
+            report.FillDataSource();
 
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                printTool.PrintDialog();
+            }
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-
+            exportFileDialog.ShowDialog(this);
         }
     }
 }

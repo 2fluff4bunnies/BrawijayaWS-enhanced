@@ -28,24 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.gcFIFOSparepart = new DevExpress.XtraGrid.GridControl();
             this.gvFIFOSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnClose = new DevExpress.XtraEditors.SimpleButton();
-            this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsLoadFifoData = new System.Windows.Forms.ToolStripMenuItem();
             this.colFIFODate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFIFOPricePerItem = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFIFOQtyFirst = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFIFOQtyIn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFIFOQtyOut = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFIFOQtyLast = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gcFIFOSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFIFOSparepart)).BeginInit();
-            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExport
@@ -107,39 +104,10 @@
             this.gvFIFOSparepart.OptionsCustomization.AllowColumnMoving = false;
             this.gvFIFOSparepart.OptionsCustomization.AllowGroup = false;
             this.gvFIFOSparepart.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvFIFOSparepart.OptionsView.ShowFooter = true;
             this.gvFIFOSparepart.OptionsView.ShowGroupPanel = false;
             this.gvFIFOSparepart.OptionsView.ShowViewCaption = true;
             this.gvFIFOSparepart.ViewCaption = "Daftar FIFO";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(512, 538);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 29);
-            this.btnClose.TabIndex = 7;
-            this.btnClose.Text = "Tutup";
-            // 
-            // bgwMain
-            // 
-            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
-            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
-            // 
-            // cmsEditor
-            // 
-            this.cmsEditor.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsLoadFifoData});
-            this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(150, 30);
-            // 
-            // cmsLoadFifoData
-            // 
-            this.cmsLoadFifoData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsLoadFifoData.Name = "cmsLoadFifoData";
-            this.cmsLoadFifoData.Size = new System.Drawing.Size(149, 26);
-            this.cmsLoadFifoData.Text = "Lihat FIFO";
             // 
             // colFIFODate
             // 
@@ -168,6 +136,8 @@
             this.colFIFOQtyFirst.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFIFOQtyFirst.FieldName = "TotalQtyFirst";
             this.colFIFOQtyFirst.Name = "colFIFOQtyFirst";
+            this.colFIFOQtyFirst.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyFirst", "{0:#,#;(#,#);0}")});
             this.colFIFOQtyFirst.Visible = true;
             this.colFIFOQtyFirst.VisibleIndex = 2;
             // 
@@ -178,6 +148,8 @@
             this.colFIFOQtyIn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFIFOQtyIn.FieldName = "TotalQtyIn";
             this.colFIFOQtyIn.Name = "colFIFOQtyIn";
+            this.colFIFOQtyIn.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyIn", "{0:#,#;(#,#);0}")});
             this.colFIFOQtyIn.Visible = true;
             this.colFIFOQtyIn.VisibleIndex = 3;
             // 
@@ -188,6 +160,8 @@
             this.colFIFOQtyOut.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFIFOQtyOut.FieldName = "TotalQtyOut";
             this.colFIFOQtyOut.Name = "colFIFOQtyOut";
+            this.colFIFOQtyOut.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyOut", "{0:#,#;(#,#);0}")});
             this.colFIFOQtyOut.Visible = true;
             this.colFIFOQtyOut.VisibleIndex = 4;
             // 
@@ -198,8 +172,31 @@
             this.colFIFOQtyLast.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFIFOQtyLast.FieldName = "TotalQtyLast";
             this.colFIFOQtyLast.Name = "colFIFOQtyLast";
+            this.colFIFOQtyLast.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyLast", "{0:#,#;(#,#);0}")});
             this.colFIFOQtyLast.Visible = true;
             this.colFIFOQtyLast.VisibleIndex = 5;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Location = new System.Drawing.Point(512, 538);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 29);
+            this.btnClose.TabIndex = 7;
+            this.btnClose.Text = "Tutup";
+            // 
+            // bgwMain
+            // 
+            this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
+            this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // exportFileDialog
+            // 
+            this.exportFileDialog.DefaultExt = "xlsx";
+            this.exportFileDialog.Filter = "Excel File (*.xlsx)|*xlsx";
+            this.exportFileDialog.Title = "Export Fifo Sparepart Stock Data";
             // 
             // FIFOSparepartStockCardListForm
             // 
@@ -216,7 +213,6 @@
             this.Text = "FIFO Sparepart: {0}";
             ((System.ComponentModel.ISupportInitialize)(this.gcFIFOSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFIFOSparepart)).EndInit();
-            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -229,13 +225,12 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvFIFOSparepart;
         private DevExpress.XtraEditors.SimpleButton btnClose;
         private System.ComponentModel.BackgroundWorker bgwMain;
-        private System.Windows.Forms.ContextMenuStrip cmsEditor;
-        private System.Windows.Forms.ToolStripMenuItem cmsLoadFifoData;
         private DevExpress.XtraGrid.Columns.GridColumn colFIFODate;
         private DevExpress.XtraGrid.Columns.GridColumn colFIFOPricePerItem;
         private DevExpress.XtraGrid.Columns.GridColumn colFIFOQtyFirst;
         private DevExpress.XtraGrid.Columns.GridColumn colFIFOQtyIn;
         private DevExpress.XtraGrid.Columns.GridColumn colFIFOQtyOut;
         private DevExpress.XtraGrid.Columns.GridColumn colFIFOQtyLast;
+        private System.Windows.Forms.SaveFileDialog exportFileDialog;
     }
 }

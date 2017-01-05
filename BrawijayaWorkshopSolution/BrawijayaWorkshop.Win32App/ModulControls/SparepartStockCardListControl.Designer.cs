@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparepartStockCardListControl));
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
@@ -51,6 +52,8 @@
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.bgwInit = new System.ComponentModel.BackgroundWorker();
             this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsLoadFifoData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupSparepart.Properties)).BeginInit();
@@ -60,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcStockCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStockCard)).BeginInit();
+            this.cmsEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // bgwMain
@@ -216,6 +220,7 @@
             this.gvStockCard.OptionsCustomization.AllowGroup = false;
             this.gvStockCard.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvStockCard.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvStockCard.OptionsView.ShowFooter = true;
             this.gvStockCard.OptionsView.ShowGroupPanel = false;
             // 
             // colSparepartCode
@@ -249,6 +254,8 @@
             this.colQtyFirst.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colQtyFirst.FieldName = "TotalQtyFirst";
             this.colQtyFirst.Name = "colQtyFirst";
+            this.colQtyFirst.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyFirst", "{0:#,#;(#,#);0}")});
             this.colQtyFirst.Visible = true;
             this.colQtyFirst.VisibleIndex = 3;
             // 
@@ -259,6 +266,8 @@
             this.colQtyIn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colQtyIn.FieldName = "TotalQtyIn";
             this.colQtyIn.Name = "colQtyIn";
+            this.colQtyIn.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyIn", "{0:#,#;(#,#);0}")});
             this.colQtyIn.Visible = true;
             this.colQtyIn.VisibleIndex = 4;
             // 
@@ -269,6 +278,8 @@
             this.colQtyOut.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colQtyOut.FieldName = "TotalQtyOut";
             this.colQtyOut.Name = "colQtyOut";
+            this.colQtyOut.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyOut", "{0:#,#;(#,#);0}")});
             this.colQtyOut.Visible = true;
             this.colQtyOut.VisibleIndex = 5;
             // 
@@ -279,6 +290,8 @@
             this.colQtyLast.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colQtyLast.FieldName = "TotalQtyLast";
             this.colQtyLast.Name = "colQtyLast";
+            this.colQtyLast.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalQtyLast", "{0:#,#;(#,#);0}")});
             this.colQtyLast.Visible = true;
             this.colQtyLast.VisibleIndex = 6;
             // 
@@ -319,6 +332,22 @@
             this.exportFileDialog.Filter = "Excel File (*.xlsx)|*xlsx";
             this.exportFileDialog.Title = "Export Sparepart Stock Data";
             // 
+            // cmsEditor
+            // 
+            this.cmsEditor.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsLoadFifoData});
+            this.cmsEditor.Name = "cmsListEditor";
+            this.cmsEditor.Size = new System.Drawing.Size(182, 58);
+            // 
+            // cmsLoadFifoData
+            // 
+            this.cmsLoadFifoData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsLoadFifoData.Name = "cmsLoadFifoData";
+            this.cmsLoadFifoData.Size = new System.Drawing.Size(181, 26);
+            this.cmsLoadFifoData.Text = "Lihat FIFO";
+            this.cmsLoadFifoData.Click += new System.EventHandler(this.cmsLoadFifoData_Click);
+            // 
             // SparepartStockCardListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -340,6 +369,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcStockCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStockCard)).EndInit();
+            this.cmsEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -368,5 +398,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colQtyOut;
         private DevExpress.XtraGrid.Columns.GridColumn colQtyLast;
         private System.Windows.Forms.SaveFileDialog exportFileDialog;
+        private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private System.Windows.Forms.ToolStripMenuItem cmsLoadFifoData;
     }
 }

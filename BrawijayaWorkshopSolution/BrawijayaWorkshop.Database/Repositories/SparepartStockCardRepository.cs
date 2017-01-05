@@ -16,7 +16,7 @@ namespace BrawijayaWorkshop.Database.Repositories
             return GetMany(sp => sp.SparepartId == sparepartId).OrderByDescending(sp => sp.PurchaseDate).FirstOrDefault();
         }
 
-        public List<GroupSparepartStockCard> RetrieveFIFOCurrentSparepart(DateTime dateFrom, DateTime dateTo, int sparepartId)
+        /*public List<GroupSparepartStockCard> RetrieveFIFOCurrentSparepart(DateTime dateFrom, DateTime dateTo, int sparepartId)
         {
             var result = from sp in DbSet
                          where sp.PurchaseDate >= dateFrom && sp.PurchaseDate <= dateTo &&
@@ -45,7 +45,7 @@ namespace BrawijayaWorkshop.Database.Repositories
                          };
 
             return result.ToList();
-        }
+        }*/
 
         public List<GroupSparepartStockCard> RetrieveCurrentStock(DateTime dateFrom, DateTime dateTo, int sparepartId = 0)
         {
@@ -135,7 +135,7 @@ namespace BrawijayaWorkshop.Database.Repositories
     public interface ISparepartStockCardRepository : IRepository<SparepartStockCard, BrawijayaWorkshopDbContext>
     {
         SparepartStockCard RetrieveLastCard(int sparepartId);
-        List<GroupSparepartStockCard> RetrieveFIFOCurrentSparepart(DateTime dateFrom, DateTime dateTo, int sparepartId);
+        //List<GroupSparepartStockCard> RetrieveFIFOCurrentSparepart(DateTime dateFrom, DateTime dateTo, int sparepartId);
         List<GroupSparepartStockCard> RetrieveCurrentStock(DateTime dateFrom, DateTime dateTo, int sparepartId = 0);
     }
 }

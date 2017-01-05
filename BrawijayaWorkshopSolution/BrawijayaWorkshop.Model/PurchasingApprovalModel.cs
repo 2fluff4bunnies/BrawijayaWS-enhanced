@@ -195,7 +195,7 @@ namespace BrawijayaWorkshop.Model
                         _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
-                        _sparepartStokCardRepository.Add(stockCard);
+                        stockCard = _sparepartStokCardRepository.Add(stockCard);
 
                         SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
                         stockCardDtail.ParentStockCard = stockCard;

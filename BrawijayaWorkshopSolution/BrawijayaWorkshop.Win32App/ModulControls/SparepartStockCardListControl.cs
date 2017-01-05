@@ -30,6 +30,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public SparepartViewModel SelectedSparepart { get; set; }
+
         public SparepartStockCardListControl(SparepartStockCardListModel model)
         {
             InitializeComponent();
@@ -43,8 +45,27 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             deFrom.EditValue = new DateTime(serverTime.Year, serverTime.Month, 1);
             deTo.EditValue = new DateTime(serverTime.Year, serverTime.Month, DateTime.DaysInMonth(serverTime.Year, serverTime.Month));
 
+            gvStockCard.PopupMenuShowing += GvStockCard_PopupMenuShowing;
+            gvStockCard.FocusedRowChanged += GvStockCard_FocusedRowChanged;
+
             this.Load += SparepartStockCardListControl_Load;
             exportFileDialog.FileOk += ExportFileDialog_FileOk;
+        }
+
+        private void GvStockCard_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            SelectedSparepart = (gvStockCard.GetFocusedRow() as GroupSparepartStockCardViewModel).Sparepart;
+        }
+
+        private void GvStockCard_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Point);
+            if (hitInfo.InRow)
+            {
+                view.FocusedRowHandle = hitInfo.RowHandle;
+                cmsEditor.Show(view.GridControl, e.Point);
+            }
         }
 
         private void SparepartStockCardListControl_Load(object sender, EventArgs e)
@@ -233,6 +254,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void ExportFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             gcStockCard.ExportToXlsx(exportFileDialog.FileName);
+        }
+
+        private void cmsLoadFifoData_Click(object sender, EventArgs e)
+        {
+            FIFOSparepartStockCardListForm fifoForm = Bootstrapper.Resolve<FIFOSparepartStockCardListForm>();
+            fifoForm.DateFromFilter = DateFromFilter;
+            fifoForm.DateToFilter = DateToFilter;
+            fifoForm.SelectedSparepart = SelectedSparepart;
+            fifoForm.ShowDialog(this);
         }
     }
 }
