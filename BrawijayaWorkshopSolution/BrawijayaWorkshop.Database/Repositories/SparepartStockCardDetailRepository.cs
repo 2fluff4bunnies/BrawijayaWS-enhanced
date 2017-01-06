@@ -15,31 +15,88 @@ namespace BrawijayaWorkshop.Database.Repositories
         {
             var result = from sp in DbSet
                          where sp.ParentStockCard.PurchaseDate >= dateFrom && sp.ParentStockCard.PurchaseDate <= dateTo &&
-                               sp.ParentStockCard.SparepartId == sparepartId
+                               (sparepartId > 0 ? sp.ParentStockCard.SparepartId == sparepartId : true)
                          group sp by new
                          {
-                             sp.ParentStockCard.PurchaseDate,
                              sp.ParentStockCard.Sparepart,
                              sp.ParentStockCard.SparepartId,
-                             sp.PricePerItem
+                             sp.Purchasing,
+                             sp.PurchasingId,
+                             sp.SparepartManualTransaction,
+                             sp.SparepartManualTransactionId
                          } into gsp
                          select new GroupSparepartStockCard
                          {
-                             LastPurchaseDate = gsp.Key.PurchaseDate,
+                             LastPurchaseDate = gsp.FirstOrDefault().Purchasing != null ? gsp.FirstOrDefault().Purchasing.Date : gsp.FirstOrDefault().SparepartManualTransaction.CreateDate,
                              Sparepart = gsp.Key.Sparepart,
                              SparepartId = gsp.Key.SparepartId,
-                             PricePerItem = gsp.Key.PricePerItem,
-                             TotalQtyFirst = gsp.Sum(g => g.QtyFirst),
-                             TotalQtyFirstPrice = gsp.Sum(g => g.QtyFirstPrice),
+                             PricePerItem = gsp.LastOrDefault().PricePerItem,
+                             TotalQtyFirst = gsp.FirstOrDefault().QtyFirst,
+                             TotalQtyFirstPrice = gsp.FirstOrDefault().QtyFirstPrice,
                              TotalQtyIn = gsp.Sum(g => g.QtyIn),
                              TotalQtyInPrice = gsp.Sum(g => g.QtyInPrice),
                              TotalQtyOut = gsp.Sum(g => g.QtyOut),
                              TotalQtyOutPrice = gsp.Sum(g => g.QtyOutPrice),
-                             TotalQtyLast = gsp.Sum(g => g.QtyLast),
-                             TotalQtyLastPrice = gsp.Sum(g => g.QtyLastPrice)
+                             TotalQtyLast = gsp.LastOrDefault().QtyLast,
+                             TotalQtyLastPrice = gsp.LastOrDefault().QtyLastPrice
                          };
 
-            return result.ToList();
+
+            List<GroupSparepartStockCard> reportResult = result.ToList();
+            //check if there are sparepartID not in range of filter, just fill with totalqtyfirst from the day close to start date filter
+            if (sparepartId == 0)
+            {
+                var listSparepartID = DbSet.Select(x => x.ParentStockCard.SparepartId).Distinct();
+                if (reportResult == null || reportResult.Count() == 0)
+                {
+                    reportResult = new List<GroupSparepartStockCard>();
+                    foreach (var itemSparepartID in listSparepartID)
+                    {
+                        SparepartStockCardDetail firstInitData = DbSet.Where(x => x.ParentStockCard.SparepartId == itemSparepartID && x.ParentStockCard.PurchaseDate < dateFrom).LastOrDefault();
+                        if (firstInitData != null)
+                        {
+                            GroupSparepartStockCard newItem = new GroupSparepartStockCard();
+                            newItem.TotalQtyFirst = firstInitData.QtyLast;
+                            newItem.TotalQtyFirstPrice = firstInitData.QtyLastPrice;
+                            reportResult.Add(newItem);
+                        }
+                    }
+                }
+                else if (reportResult.Count != listSparepartID.Count())
+                {
+                    foreach (var itemSparepartID in listSparepartID)
+                    {
+                        if (reportResult.Where(x => x.SparepartId == itemSparepartID).Count() == 0)
+                        {
+                            SparepartStockCardDetail firstInitData = DbSet.Where(x => x.ParentStockCard.SparepartId == itemSparepartID && x.ParentStockCard.PurchaseDate < dateFrom).LastOrDefault();
+                            if (firstInitData != null)
+                            {
+                                GroupSparepartStockCard newItem = new GroupSparepartStockCard();
+                                newItem.TotalQtyFirst = firstInitData.QtyLast;
+                                newItem.TotalQtyFirstPrice = firstInitData.QtyLastPrice;
+                                reportResult.Add(newItem);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (reportResult == null || reportResult.Count() == 0)
+                {
+                    reportResult = new List<GroupSparepartStockCard>();
+                    SparepartStockCardDetail firstInitData = DbSet.Where(x => x.ParentStockCard.SparepartId == sparepartId && x.ParentStockCard.PurchaseDate < dateFrom).LastOrDefault();
+                    if (firstInitData != null)
+                    {
+                        GroupSparepartStockCard newItem = new GroupSparepartStockCard();
+                        newItem.TotalQtyFirst = firstInitData.QtyLast;
+                        newItem.TotalQtyFirstPrice = firstInitData.QtyLastPrice;
+                        reportResult.Add(newItem);
+                    }
+                }
+            }
+
+            return reportResult;
         }
 
         public SparepartStockCardDetail RetrieveLastCardDetailByPurchasingId(int sparepartId, int purchasingID)
