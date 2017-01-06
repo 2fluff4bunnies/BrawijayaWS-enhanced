@@ -143,7 +143,7 @@ namespace BrawijayaWorkshop.Model
                         stockCard.QtyFirst = lastStock;
                         stockCard.QtyFirstPrice = lastStockPrice;
                         stockCard.QtyLast = lastStock + stockCard.QtyIn;
-                        stockCard.QtyLastPrice = lastStockPrice + Convert.ToDouble(itemDetail.PurchasingDetail.Price);
+                        stockCard.QtyLastPrice = lastStockPrice + stockCard.QtyInPrice;
                         _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
@@ -157,15 +157,16 @@ namespace BrawijayaWorkshop.Model
                         SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, purchaseReturn.PurchasingId);
                         double lastStockDetail = 0;
                         double lastStockDetailPrice = 0;
-                        if (lastStockCard != null)
+                        if (lastStockCardDetail != null)
                         {
                             lastStockDetail = lastStockCardDetail.QtyLast;
                             lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
                         }
                         stockCardDtail.QtyFirst = lastStockDetail;
                         stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
-                        stockCard.QtyLast = lastStock + 1;
-                        stockCard.QtyLastPrice = lastStockPrice + Convert.ToDouble(1 * itemDetail.PurchasingDetail.Price);
+                        stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
+                        stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
+                        stockCardDtail.PurchasingId = purchaseReturn.PurchasingId;
 
                         _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                         _sparepartStokCardDetailRepository.Add(stockCardDtail);
