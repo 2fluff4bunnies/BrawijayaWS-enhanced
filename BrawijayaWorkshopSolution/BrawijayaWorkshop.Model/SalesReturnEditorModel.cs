@@ -355,7 +355,7 @@ namespace BrawijayaWorkshop.Model
                         stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
                         stockCardDtail.QtyIn = itemSpTrans.Qty;
                         stockCardDtail.QtyInPrice = Convert.ToDouble(itemSpTrans.Qty * itemSpTrans.Price);
-                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, itemSpTrans.Id);
+                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(sparepart.Id, itemSpTrans.Id);
                         double lastStockDetail = 0;
                         double lastStockDetailPrice = 0;
                         if (lastStockCardDetail != null)
@@ -609,7 +609,7 @@ namespace BrawijayaWorkshop.Model
                         stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
                         stockCardDtail.QtyOut = 1;
                         stockCardDtail.QtyOutPrice = Convert.ToDouble(1 * itemSpTrans.Price);
-                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, itemSpTrans.Id);
+                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(sparepart.Id, itemSpTrans.Id);
                         double lastStockDetail = 0;
                         double lastStockDetailPrice = 0;
                         if (lastStockCardDetail != null)
