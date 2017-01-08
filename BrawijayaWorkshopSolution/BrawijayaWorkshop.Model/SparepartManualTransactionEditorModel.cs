@@ -230,21 +230,22 @@ namespace BrawijayaWorkshop.Model
 
                         SparepartStockCard lastStockCard = _sparepartStockCardRepository.RetrieveLastCard(manualTransaction.SparepartId);
                         double lastStock = 0;
-                        double lastPrice = 0;
+                        double lastStockPrice = 0;
                         if (lastStockCard != null)
                         {
                             lastStock = lastStockCard.QtyLast;
-                            lastPrice = lastStockCard.PricePerItem;
+                            lastStockPrice = lastStockCard.QtyLastPrice;
                         }
                         stockCard.QtyFirst = lastStock;
-                        stockCard.QtyFirstPrice = lastStock * lastPrice;
+                        stockCard.QtyFirstPrice = lastStockPrice;
                         stockCard.QtyLast = lastStock + (stockCard.QtyIn - stockCard.QtyOut);
-                        stockCard.QtyLastPrice = stockCard.QtyLast * lastPrice;
+                        stockCard.QtyLastPrice = lastStockPrice + (stockCard.QtyInPrice - stockCard.QtyOutPrice);
 
                         _sparepartStockCardRepository.AttachNavigation(stockCard.CreateUser);
                         _sparepartStockCardRepository.AttachNavigation(stockCard.Sparepart);
                         _sparepartStockCardRepository.AttachNavigation(stockCard.ReferenceTable);
                         stockCard = _sparepartStockCardRepository.Add(stockCard);
+                        _unitOfWork.SaveChanges();
 
                         SparepartStockCardDetail stockCardDetail = new SparepartStockCardDetail();
                         stockCardDetail.ParentStockCard = stockCard;
@@ -274,7 +275,7 @@ namespace BrawijayaWorkshop.Model
                         trans.Commit();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
                     throw;

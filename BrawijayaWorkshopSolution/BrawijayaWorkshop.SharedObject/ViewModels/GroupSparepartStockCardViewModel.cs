@@ -8,6 +8,10 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public int SparepartId { get; set; }
         public virtual SparepartViewModel Sparepart { get; set; }
+        public int? PurchasingId { get; set; }
+        public virtual PurchasingViewModel Purchasing { get; set; }
+        public int? SparepartManualTransactionId { get; set; }
+        public virtual SparepartManualTransactionViewModel SparepartManualTransaction { get; set; }
 
         public double PricePerItem { get; set; }
 
