@@ -149,348 +149,360 @@ namespace BrawijayaWorkshop.Model
             int userId,
             bool isNeedApproval)
         {
-            DateTime serverTime = DateTime.Now;
-            Invoice insertedInvoice = new Invoice();
-            Reference spkReference = _referenceRepository.GetById(spk.CategoryReferenceId);
-            bool isSPKSales = spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE;
-
-            string code = "SPK-";
-
-            switch (spkReference.Code)
+            using (var trans = _unitOfWork.BeginTransaction())
             {
-                case DbConstant.REF_SPK_CATEGORY_SERVICE: code = code + "S";
-                    break;
-                case DbConstant.REF_SPK_CATEGORY_REPAIR: code = code + "P";
-                    break;
-                case DbConstant.REF_SPK_CATEGORY_SALE: code = code + "L";
-                    break;
-                case DbConstant.REF_SPK_CATEGORY_INVENTORY: code = code + "I";
-                    break;
-            }
-
-            code = code + "-" + spk.Vehicle.ActiveLicenseNumber + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
-
-            //get total SPK created today
-            List<SPK> todaySPK = _SPKRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
-
-            code = code + (todaySPK.Count + 1);
-
-            spk.Code = code;
-            spk.CreateDate = serverTime;
-            spk.ModifyDate = serverTime;
-            spk.ModifyUserId = userId;
-            spk.CreateUserId = userId;
-
-            spk.Status = (int)DbConstant.DefaultDataStatus.Active;
-            if (isNeedApproval)
-            {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
-                spk.StatusOverLimit = 1;
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
-            }
-            else
-            {
-                spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
-                spk.StatusOverLimit = 0;
-                spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
-            }
-
-            spk.StatusCompletedId = isSPKSales ? (int)DbConstant.SPKCompletionStatus.Completed : (int)DbConstant.SPKCompletionStatus.InProgress;
-            SPK entityChild = new SPK();
-            Map(spk, entityChild);
-
-            SPK insertedSPK = _SPKRepository.Add(entityChild);
-
-            if (isSPKSales)
-            {
-                //insert invoice
-
-                Invoice invc = new Invoice();
-                invc.Code = spk.Code.Replace("SPK", "INVC");
-                invc.TotalSparepart = spk.TotalSparepartPrice;
-                invc.TotalFeeSparepart = 0;
-                invc.TotalSparepartPlusFee = invc.TotalSparepart + invc.TotalFeeSparepart;
-                invc.TotalService = 0;
-                invc.TotalFeeService = 0;
-                invc.TotalServicePlusFee = invc.TotalService + invc.TotalFeeService;
-                invc.TotalSparepartAndService = invc.TotalSparepartPlusFee + invc.TotalServicePlusFee;
-                invc.TotalValueAdded = (invc.TotalSparepartAndService * (0.1).AsDecimal());
-                invc.TotalPrice = invc.TotalValueAdded + invc.TotalSparepartAndService;
-                invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
-                invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
-                invc.TotalHasPaid = 0;
-                invc.SPK = insertedSPK;
-                invc.PaymentMethod = invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
-
-                invc.CreateDate = serverTime;
-                invc.ModifyDate = serverTime;
-                invc.ModifyUserId = userId;
-                invc.CreateUserId = userId;
-
-                insertedInvoice = _invoiceRepository.Add(invc);
-            }
-
-
-            foreach (var spkSparepart in spkSparepartList)
-            {
-                SPKDetailSparepart entitySPKDetailSparepart = new SPKDetailSparepart();
-                Sparepart sparepart = _sparepartRepository.GetById(spkSparepart.Sparepart.Id);
-
-                entitySPKDetailSparepart.SparepartId = spkSparepart.SparepartId;
-                entitySPKDetailSparepart.TotalPrice = spkSparepart.TotalPrice;
-                entitySPKDetailSparepart.TotalQuantity = spkSparepart.TotalQuantity;
-                entitySPKDetailSparepart.Sparepart = sparepart;
-                entitySPKDetailSparepart.SPK = insertedSPK;
-
-                entitySPKDetailSparepart.CreateDate = serverTime;
-                entitySPKDetailSparepart.CreateUserId = userId;
-                entitySPKDetailSparepart.ModifyDate = serverTime;
-                entitySPKDetailSparepart.ModifyUserId = userId;
-                entitySPKDetailSparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
-
-                
-                if (!isNeedApproval)
+                try
                 {
-                    sparepart.StockQty = sparepart.StockQty - spkSparepart.TotalQuantity;
-                    sparepart.ModifyDate = serverTime;
-                    sparepart.ModifyUserId = userId;
+                    DateTime serverTime = DateTime.Now;
+                    Invoice insertedInvoice = new Invoice();
+                    Reference spkReference = _referenceRepository.GetById(spk.CategoryReferenceId);
+                    bool isSPKSales = spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE;
 
-                    _sparepartRepository.Update(sparepart);
-                }
+                    string code = "SPK-";
 
-                if (isSPKSales)
-                {
-                    UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSparepart.SparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-                    if (foundUsedGood != null)
+                    switch (spkReference.Code)
                     {
-                        foundUsedGood.Stock = foundUsedGood.Stock + spkSparepartList.Count;
-                        _usedGoodRepository.Update(foundUsedGood);
-                    }
-                }
-
-                SPKDetailSparepart insertedSPkDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
-
-                var detailList = spkSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == spkSparepart.SparepartId);
-
-                List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
-                List<SparepartManualTransaction> listSparepartManualTrans = new List<SparepartManualTransaction>();
-                foreach (var spkSparepartDetail in detailList)
-                {
-                    SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
-
-                    entityNewSparepartDetail.CreateDate = serverTime;
-                    entityNewSparepartDetail.CreateUserId = userId;
-                    entityNewSparepartDetail.ModifyDate = serverTime;
-                    entityNewSparepartDetail.ModifyUserId = userId;
-                    entityNewSparepartDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
-
-                    entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
-                    entityNewSparepartDetail.SparepartDetailId = spkSparepartDetail.SparepartDetailId;
-
-                    SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
-
-                    if (!isNeedApproval)
-                    {
-                        SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(spkSparepartDetail.SparepartDetail.Id);
-                        sparepartDetail.ModifyDate = serverTime;
-                        sparepartDetail.ModifyUserId = userId;
-
-                        if (spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE)
-                        {
-                            sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
-                        }
-                        else
-                        {
-                            sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
-                        }
-
-                        _sparepartDetailRepository.Update(sparepartDetail);
-
-                        if (sparepartDetail.PurchasingDetail != null)
-                        {
-                            listPurchasingDetail.Add(sparepartDetail.PurchasingDetail);
-                        }
-                        if (sparepartDetail.SparepartManualTransaction != null)
-                        {
-                            listSparepartManualTrans.Add(sparepartDetail.SparepartManualTransaction);
-                        }
+                        case DbConstant.REF_SPK_CATEGORY_SERVICE: code = code + "S";
+                            break;
+                        case DbConstant.REF_SPK_CATEGORY_REPAIR: code = code + "P";
+                            break;
+                        case DbConstant.REF_SPK_CATEGORY_SALE: code = code + "L";
+                            break;
+                        case DbConstant.REF_SPK_CATEGORY_INVENTORY: code = code + "I";
+                            break;
                     }
 
-                    //insert invoice detail
+                    code = code + "-" + spk.Vehicle.ActiveLicenseNumber + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+
+                    //get total SPK created today
+                    List<SPK> todaySPK = _SPKRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+
+                    code = code + (todaySPK.Count + 1);
+
+                    spk.Code = code;
+                    spk.CreateDate = serverTime;
+                    spk.ModifyDate = serverTime;
+                    spk.ModifyUserId = userId;
+                    spk.CreateUserId = userId;
+
+                    spk.Status = (int)DbConstant.DefaultDataStatus.Active;
+                    if (isNeedApproval)
+                    {
+                        spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
+                        spk.StatusOverLimit = 1;
+                        spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Pending;
+                    }
+                    else
+                    {
+                        spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Approved;
+                        spk.StatusOverLimit = 0;
+                        spk.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+                    }
+
+                    spk.StatusCompletedId = isSPKSales ? (int)DbConstant.SPKCompletionStatus.Completed : (int)DbConstant.SPKCompletionStatus.InProgress;
+                    SPK entityChild = new SPK();
+                    Map(spk, entityChild);
+
+                    SPK insertedSPK = _SPKRepository.Add(entityChild);
 
                     if (isSPKSales)
                     {
-                        InvoiceDetail invcDtl = new InvoiceDetail();
+                        //insert invoice
 
-                        invcDtl.Invoice = insertedInvoice;
-                        invcDtl.SPKDetailSparepartDetail = insertedSPKSpDtl;
+                        Invoice invc = new Invoice();
+                        invc.Code = spk.Code.Replace("SPK", "INVC");
+                        invc.TotalSparepart = spk.TotalSparepartPrice;
+                        invc.TotalFeeSparepart = 0;
+                        invc.TotalSparepartPlusFee = invc.TotalSparepart + invc.TotalFeeSparepart;
+                        invc.TotalService = 0;
+                        invc.TotalFeeService = 0;
+                        invc.TotalServicePlusFee = invc.TotalService + invc.TotalFeeService;
+                        invc.TotalSparepartAndService = invc.TotalSparepartPlusFee + invc.TotalServicePlusFee;
+                        invc.TotalValueAdded = (invc.TotalSparepartAndService * (0.1).AsDecimal());
+                        invc.TotalPrice = invc.TotalValueAdded + invc.TotalSparepartAndService;
+                        invc.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
+                        invc.Status = (int)DbConstant.InvoiceStatus.FeeNotFixed;
+                        invc.TotalHasPaid = 0;
+                        invc.SPK = insertedSPK;
+                        invc.PaymentMethod = invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
 
-                        if (insertedSPKSpDtl.SparepartDetail.PurchasingDetailId > 0)
-                        {
-                            invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
-                        }
-                        else
-                        {
-                            invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.SparepartManualTransaction.Price.AsDouble();
-                        }
+                        invc.CreateDate = serverTime;
+                        invc.ModifyDate = serverTime;
+                        invc.ModifyUserId = userId;
+                        invc.CreateUserId = userId;
 
-                        invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
-                        invcDtl.FeePctg = 0;
-
-                        invcDtl.CreateDate = serverTime;
-                        invcDtl.ModifyDate = serverTime;
-                        invcDtl.ModifyUserId = userId;
-                        invcDtl.CreateUserId = userId;
-
-                        _invoiceDetailRepository.Add(invcDtl);
+                        insertedInvoice = _invoiceRepository.Add(invc);
                     }
-                }
 
-                if (!isNeedApproval)
-                {
-                    SparepartStockCard stockCard = new SparepartStockCard();
-                    Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
 
-                    stockCard.CreateUserId = userId;
-                    stockCard.PurchaseDate = serverTime;
-                    stockCard.PrimaryKeyValue = spk.Id;
-                    stockCard.ReferenceTableId = transactionReferenceTable.Id;
-                    stockCard.SparepartId = sparepart.Id;
-                    stockCard.Description = "SPK";
-                    stockCard.QtyOut = spkSparepart.TotalQuantity;
-                    stockCard.QtyOutPrice = Convert.ToDouble(listPurchasingDetail.Sum(x => x.Price) + listSparepartManualTrans.Sum(x => x.Price));
-                
-                    SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
-                    double lastStock = 0;
-                    double lastStockPrice = 0;
-                    if (lastStockCard != null)
+                    foreach (var spkSparepart in spkSparepartList)
                     {
-                        lastStock = lastStockCard.QtyLast;
-                        lastStockPrice = lastStockCard.QtyLastPrice;
+                        SPKDetailSparepart entitySPKDetailSparepart = new SPKDetailSparepart();
+                        Sparepart sparepart = _sparepartRepository.GetById(spkSparepart.Sparepart.Id);
+
+                        entitySPKDetailSparepart.SparepartId = spkSparepart.SparepartId;
+                        entitySPKDetailSparepart.TotalPrice = spkSparepart.TotalPrice;
+                        entitySPKDetailSparepart.TotalQuantity = spkSparepart.TotalQuantity;
+                        entitySPKDetailSparepart.Sparepart = sparepart;
+                        entitySPKDetailSparepart.SPK = insertedSPK;
+
+                        entitySPKDetailSparepart.CreateDate = serverTime;
+                        entitySPKDetailSparepart.CreateUserId = userId;
+                        entitySPKDetailSparepart.ModifyDate = serverTime;
+                        entitySPKDetailSparepart.ModifyUserId = userId;
+                        entitySPKDetailSparepart.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+
+                        if (!isNeedApproval)
+                        {
+                            sparepart.StockQty = sparepart.StockQty - spkSparepart.TotalQuantity;
+                            sparepart.ModifyDate = serverTime;
+                            sparepart.ModifyUserId = userId;
+
+                            _sparepartRepository.Update(sparepart);
+                        }
+
+                        if (isSPKSales)
+                        {
+                            UsedGood foundUsedGood = _usedGoodRepository.GetMany(ug => ug.SparepartId == spkSparepart.SparepartId && ug.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                            if (foundUsedGood != null)
+                            {
+                                foundUsedGood.Stock = foundUsedGood.Stock + spkSparepartList.Count;
+                                _usedGoodRepository.Update(foundUsedGood);
+                            }
+                        }
+
+                        SPKDetailSparepart insertedSPkDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
+
+                        var detailList = spkSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == spkSparepart.SparepartId);
+
+                        List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
+                        List<SparepartManualTransaction> listSparepartManualTrans = new List<SparepartManualTransaction>();
+                        foreach (var spkSparepartDetail in detailList)
+                        {
+                            SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
+
+                            entityNewSparepartDetail.CreateDate = serverTime;
+                            entityNewSparepartDetail.CreateUserId = userId;
+                            entityNewSparepartDetail.ModifyDate = serverTime;
+                            entityNewSparepartDetail.ModifyUserId = userId;
+                            entityNewSparepartDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                            entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
+                            entityNewSparepartDetail.SparepartDetailId = spkSparepartDetail.SparepartDetailId;
+
+                            SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
+
+                            if (!isNeedApproval)
+                            {
+                                SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(spkSparepartDetail.SparepartDetail.Id);
+                                sparepartDetail.ModifyDate = serverTime;
+                                sparepartDetail.ModifyUserId = userId;
+
+                                if (spkReference.Code == DbConstant.REF_SPK_CATEGORY_SALE)
+                                {
+                                    sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+                                }
+                                else
+                                {
+                                    sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
+                                }
+
+                                _sparepartDetailRepository.Update(sparepartDetail);
+
+                                if (sparepartDetail.PurchasingDetail != null)
+                                {
+                                    listPurchasingDetail.Add(sparepartDetail.PurchasingDetail);
+                                }
+                                if (sparepartDetail.SparepartManualTransaction != null)
+                                {
+                                    listSparepartManualTrans.Add(sparepartDetail.SparepartManualTransaction);
+                                }
+                            }
+
+                            //insert invoice detail
+
+                            if (isSPKSales)
+                            {
+                                InvoiceDetail invcDtl = new InvoiceDetail();
+
+                                invcDtl.Invoice = insertedInvoice;
+                                invcDtl.SPKDetailSparepartDetail = insertedSPKSpDtl;
+
+                                if (insertedSPKSpDtl.SparepartDetail.PurchasingDetailId > 0)
+                                {
+                                    invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.PurchasingDetail.Price.AsDouble();
+                                }
+                                else
+                                {
+                                    invcDtl.SubTotalPrice = insertedSPKSpDtl.SparepartDetail.SparepartManualTransaction.Price.AsDouble();
+                                }
+
+                                invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
+                                invcDtl.FeePctg = 0;
+
+                                invcDtl.CreateDate = serverTime;
+                                invcDtl.ModifyDate = serverTime;
+                                invcDtl.ModifyUserId = userId;
+                                invcDtl.CreateUserId = userId;
+
+                                _invoiceDetailRepository.Add(invcDtl);
+                            }
+                        }
+
+                        if (!isNeedApproval)
+                        {
+                            SparepartStockCard stockCard = new SparepartStockCard();
+                            Reference transactionReferenceTable = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_SPK).FirstOrDefault();
+
+                            stockCard.CreateUserId = userId;
+                            stockCard.PurchaseDate = serverTime;
+                            stockCard.PrimaryKeyValue = spk.Id;
+                            stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                            stockCard.SparepartId = sparepart.Id;
+                            stockCard.Description = "SPK";
+                            stockCard.QtyOut = spkSparepart.TotalQuantity;
+                            stockCard.QtyOutPrice = Convert.ToDouble(listPurchasingDetail.Sum(x => x.Price) + listSparepartManualTrans.Sum(x => x.Price));
+
+                            SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
+                            double lastStock = 0;
+                            double lastStockPrice = 0;
+                            if (lastStockCard != null)
+                            {
+                                lastStock = lastStockCard.QtyLast;
+                                lastStockPrice = lastStockCard.QtyLastPrice;
+                            }
+                            stockCard.QtyFirst = lastStock;
+                            stockCard.QtyFirstPrice = lastStockPrice;
+                            stockCard.QtyLast = lastStock - stockCard.QtyOut;
+                            stockCard.QtyLastPrice = lastStockPrice - stockCard.QtyOutPrice;
+                            _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                            _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                            _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                            stockCard = _sparepartStokCardRepository.Add(stockCard);
+                            _unitOfWork.SaveChanges();
+                            if (listPurchasingDetail.Count > 0)
+                            {
+                                List<PurchasingDetailViewModel> listPurchasing = listPurchasingDetail
+                                                .GroupBy(l => l.PurchasingId)
+                                                .Select(cl => new PurchasingDetailViewModel
+                                                {
+                                                    PurchasingId = cl.Key,
+                                                    Qty = cl.Count(),
+                                                    Price = cl.First().Price
+                                                }).ToList();
+
+                                foreach (var itemPurchasing in listPurchasing)
+                                {
+                                    SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
+                                    stockCardDtail.ParentStockCard = stockCard;
+                                    stockCardDtail.PricePerItem = Convert.ToDouble(itemPurchasing.Price);
+                                    stockCardDtail.QtyOut = itemPurchasing.Qty;
+                                    stockCardDtail.QtyOutPrice = Convert.ToDouble(itemPurchasing.Qty * itemPurchasing.Price);
+                                    SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, itemPurchasing.PurchasingId);
+                                    double lastStockDetail = 0;
+                                    double lastStockDetailPrice = 0;
+                                    if (lastStockCardDetail != null)
+                                    {
+                                        lastStockDetail = lastStockCardDetail.QtyLast;
+                                        lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                                    }
+                                    stockCardDtail.QtyFirst = lastStockDetail;
+                                    stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                                    stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
+                                    stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
+                                    stockCardDtail.PurchasingId = itemPurchasing.PurchasingId;
+
+                                    _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
+                                    _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                                    _unitOfWork.SaveChanges();
+                                }
+                            }
+
+                            if (listSparepartManualTrans.Count > 0)
+                            {
+                                List<SparepartManualTransactionViewModel> listSpManual = listSparepartManualTrans
+                                                .GroupBy(l => l.Id)
+                                                .Select(cl => new SparepartManualTransactionViewModel
+                                                {
+                                                    Id = cl.Key,
+                                                    Qty = cl.Count(),
+                                                    Price = cl.First().Price
+                                                }).ToList();
+                                foreach (var itemSpTrans in listSpManual)
+                                {
+                                    SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
+                                    stockCardDtail.ParentStockCard = stockCard;
+                                    stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
+                                    stockCardDtail.QtyOut = itemSpTrans.Qty;
+                                    stockCardDtail.QtyOutPrice = Convert.ToDouble(itemSpTrans.Qty * itemSpTrans.Price);
+                                    SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(sparepart.Id, itemSpTrans.Id);
+                                    double lastStockDetail = 0;
+                                    double lastStockDetailPrice = 0;
+                                    if (lastStockCardDetail != null)
+                                    {
+                                        lastStockDetail = lastStockCardDetail.QtyLast;
+                                        lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                                    }
+                                    stockCardDtail.QtyFirst = lastStockDetail;
+                                    stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                                    stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
+                                    stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
+                                    stockCardDtail.SparepartManualTransactionId = itemSpTrans.Id;
+
+                                    _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
+                                    _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                                    _unitOfWork.SaveChanges();
+                                }
+                            }
+                        }
                     }
-                    stockCard.QtyFirst = lastStock;
-                    stockCard.QtyFirstPrice = lastStockPrice;
-                    stockCard.QtyLast = lastStock - stockCard.QtyOut;
-                    stockCard.QtyLastPrice = lastStockPrice - stockCard.QtyOutPrice;
-                    _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
-                    _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
-                    _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
-                    stockCard = _sparepartStokCardRepository.Add(stockCard);
+
+                    //Wheel Change Handler
+                    foreach (var item in vehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId > 0))
+                    {
+                        WheelExchangeHistory weh = new WheelExchangeHistory();
+                        weh.SPK = insertedSPK;
+                        weh.OriginalWheelId = item.WheelDetailId;
+                        weh.ReplaceWheelId = item.ReplaceWithWheelDetailId;
+
+                        weh.CreateDate = serverTime;
+                        weh.ModifyDate = serverTime;
+                        weh.ModifyUserId = userId;
+                        weh.CreateUserId = userId;
+
+                        _wheelExchangeHistoryRepository.Add(weh);
+
+                        SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
+                        wheel.Kilometers = spk.Kilometers;
+                        wheel.ModifyDate = serverTime;
+                        wheel.ModifyUserId = userId;
+
+                        _specialSparepartDetailRepository.Update(wheel);
+                    }
+
+                    // Update Vehicle Kilometers
+                    Vehicle vehicle = _vehicleRepository.GetById(spk.VehicleId);
+
+                    vehicle.Kilometers = spk.Kilometers;
+                    vehicle.ModifyDate = serverTime;
+                    vehicle.ModifyUserId = userId;
+
+                    _vehicleRepository.Update(vehicle);
+
                     _unitOfWork.SaveChanges();
-                    if (listPurchasingDetail.Count > 0)
-                    {
-                        List<PurchasingDetailViewModel> listPurchasing = listPurchasingDetail
-                                        .GroupBy(l => l.PurchasingId)
-                                        .Select(cl => new PurchasingDetailViewModel
-                                        {
-                                            PurchasingId = cl.Key,
-                                            Qty = cl.Count(),
-                                            Price = cl.First().Price
-                                        }).ToList();
 
-                        foreach (var itemPurchasing in listPurchasing)
-                        {
-                            SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
-                            stockCardDtail.ParentStockCard = stockCard;
-                            stockCardDtail.PricePerItem = Convert.ToDouble(itemPurchasing.Price);
-                            stockCardDtail.QtyOut = itemPurchasing.Qty;
-                            stockCardDtail.QtyOutPrice = Convert.ToDouble(itemPurchasing.Qty * itemPurchasing.Price);
-                            SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, itemPurchasing.PurchasingId);
-                            double lastStockDetail = 0;
-                            double lastStockDetailPrice = 0;
-                            if (lastStockCardDetail != null)
-                            {
-                                lastStockDetail = lastStockCardDetail.QtyLast;
-                                lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
-                            }
-                            stockCardDtail.QtyFirst = lastStockDetail;
-                            stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
-                            stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
-                            stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
-                            stockCardDtail.PurchasingId = itemPurchasing.PurchasingId;
+                    trans.Commit();
+                    SPKViewModel mappedResult = new SPKViewModel();
 
-                            _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
-                            _sparepartStokCardDetailRepository.Add(stockCardDtail);
-                            _unitOfWork.SaveChanges();
-                        }
-                    }
-
-                    if (listSparepartManualTrans.Count > 0)
-                    {
-                        List<SparepartManualTransactionViewModel> listSpManual = listSparepartManualTrans
-                                        .GroupBy(l => l.Id)
-                                        .Select(cl => new SparepartManualTransactionViewModel
-                                        {
-                                            Id = cl.Key,
-                                            Qty = cl.Count(),
-                                            Price = cl.First().Price
-                                        }).ToList();
-                        foreach (var itemSpTrans in listSpManual)
-                        {
-                            SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
-                            stockCardDtail.ParentStockCard = stockCard;
-                            stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
-                            stockCardDtail.QtyOut = itemSpTrans.Qty;
-                            stockCardDtail.QtyOutPrice = Convert.ToDouble(itemSpTrans.Qty * itemSpTrans.Price);
-                            SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(sparepart.Id, itemSpTrans.Id);
-                            double lastStockDetail = 0;
-                            double lastStockDetailPrice = 0;
-                            if (lastStockCardDetail != null)
-                            {
-                                lastStockDetail = lastStockCardDetail.QtyLast;
-                                lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
-                            }
-                            stockCardDtail.QtyFirst = lastStockDetail;
-                            stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
-                            stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
-                            stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
-                            stockCardDtail.SparepartManualTransactionId = itemSpTrans.Id;
-
-                            _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
-                            _sparepartStokCardDetailRepository.Add(stockCardDtail);
-                            _unitOfWork.SaveChanges();
-                        }
-                    }
+                    return Map(insertedSPK, mappedResult);
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    throw;
                 }
             }
-
-            //Wheel Change Handler
-            foreach (var item in vehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId > 0))
-            {
-                WheelExchangeHistory weh = new WheelExchangeHistory();
-                weh.SPK = insertedSPK;
-                weh.OriginalWheelId = item.WheelDetailId;
-                weh.ReplaceWheelId = item.ReplaceWithWheelDetailId;
-
-                weh.CreateDate = serverTime;
-                weh.ModifyDate = serverTime;
-                weh.ModifyUserId = userId;
-                weh.CreateUserId = userId;
-
-                _wheelExchangeHistoryRepository.Add(weh);
-
-                SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
-                wheel.Kilometers = spk.Kilometers;
-                wheel.ModifyDate = serverTime;
-                wheel.ModifyUserId = userId;
-
-                _specialSparepartDetailRepository.Update(wheel);
-            }
-
-            // Update Vehicle Kilometers
-            Vehicle vehicle = _vehicleRepository.GetById(spk.VehicleId);
-
-            vehicle.Kilometers = spk.Kilometers;
-            vehicle.ModifyDate = serverTime;
-            vehicle.ModifyUserId = userId;
-
-            _vehicleRepository.Update(vehicle);
-
-            _unitOfWork.SaveChanges();
-
-            SPKViewModel mappedResult = new SPKViewModel();
-
-            return Map(insertedSPK, mappedResult);
         }
 
 
@@ -682,190 +694,203 @@ namespace BrawijayaWorkshop.Model
 
         public void AbortParentSPK(SPKViewModel spk, int userId)
         {
-            #region Abort Endorsed SPK
-            DateTime serverTime = DateTime.Now;
-
-            SPK entity = _SPKRepository.GetById(spk.Id);
-            entity.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
-            entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
-            entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
-            entity.ModifyDate = serverTime;
-            entity.ModifyUserId = userId;
-
-            //_SPKRepository.AttachNavigation<Vehicle>(entity.Vehicle);
-            //_SPKRepository.AttachNavigation<User>(entity.ModifyUser);
-            //_SPKRepository.AttachNavigation<User>(entity.CreateUser);
-            //_SPKRepository.AttachNavigation<Reference>(entity.CategoryReference);
-            _SPKRepository.Update(entity);
-
-            foreach (var spkSp in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
+            using (var trans = _unitOfWork.BeginTransaction())
             {
-                Sparepart sparepart = _sparepartRepository.GetById(spkSp.Sparepart.Id);
-                sparepart.StockQty = sparepart.StockQty + spkSp.TotalQuantity;
-                sparepart.ModifyDate = serverTime;
-                sparepart.ModifyUserId = userId;
-
-                //_sparepartRepository.AttachNavigation<User>(sparepart.ModifyUser);
-                //_sparepartRepository.AttachNavigation<User>(sparepart.CreateUser);
-                //_sparepartRepository.AttachNavigation<Reference>(sparepart.CategoryReference);
-                //_sparepartRepository.AttachNavigation<Reference>(sparepart.UnitReference);
-                _sparepartRepository.Update(sparepart);
-            }
-
-            List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
-            List<SparepartManualTransaction> listSparepartManualTrans = new List<SparepartManualTransaction>();
-            foreach (var item in _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == entity.Id))
-            {
-                SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
-                sparepartDetail.ModifyDate = serverTime;
-                sparepartDetail.ModifyUserId = userId;
-                sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-
-                //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.ModifyUser);
-                //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.CreateUser);
-                //_sparepartDetailRepository.AttachNavigation<Sparepart>(sparepartDetail.Sparepart);
-                //_sparepartDetailRepository.AttachNavigation<PurchasingDetail>(sparepartDetail.PurchasingDetail);
-                //_sparepartDetailRepository.AttachNavigation<SparepartManualTransaction>(sparepartDetail.SparepartManualTransaction);
-                _sparepartDetailRepository.Update(sparepartDetail);
-
-                if (sparepartDetail.PurchasingDetail != null)
+                try
                 {
-                    listPurchasingDetail.Add(sparepartDetail.PurchasingDetail);
-                }
-                if (sparepartDetail.SparepartManualTransaction != null)
-                {
-                    listSparepartManualTrans.Add(sparepartDetail.SparepartManualTransaction);
-                }
-            }
+                    #region Abort Endorsed SPK
+                    DateTime serverTime = DateTime.Now;
 
-            foreach (var spkSp in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
-            {
-                SparepartStockCard stockCard = new SparepartStockCard();
-                Reference transactionReferenceTable = _referenceRepository.GetById(spk.CategoryReferenceId);
+                    SPK entity = _SPKRepository.GetById(spk.Id);
+                    entity.StatusCompletedId = (int)DbConstant.SPKCompletionStatus.Completed;
+                    entity.StatusApprovalId = (int)DbConstant.ApprovalStatus.Endorsed;
+                    entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
+                    entity.ModifyDate = serverTime;
+                    entity.ModifyUserId = userId;
 
-                stockCard.CreateUserId = userId;
-                stockCard.PurchaseDate = serverTime;
-                stockCard.PrimaryKeyValue = spk.Id;
-                stockCard.ReferenceTableId = transactionReferenceTable.Id;
-                stockCard.SparepartId = spkSp.SparepartId;
-                stockCard.Description = "Pembatalan SPK";
-                stockCard.QtyIn = spkSp.TotalQuantity;
-                stockCard.QtyInPrice = Convert.ToDouble(listPurchasingDetail.Sum(x => x.Price) + listSparepartManualTrans.Sum(x => x.Price));
+                    //_SPKRepository.AttachNavigation<Vehicle>(entity.Vehicle);
+                    //_SPKRepository.AttachNavigation<User>(entity.ModifyUser);
+                    //_SPKRepository.AttachNavigation<User>(entity.CreateUser);
+                    //_SPKRepository.AttachNavigation<Reference>(entity.CategoryReference);
+                    _SPKRepository.Update(entity);
 
-                SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(spkSp.SparepartId);
-                double lastStock = 0;
-                double lastStockPrice = 0;
-                if (lastStockCard != null)
-                {
-                    lastStock = lastStockCard.QtyLast;
-                    lastStockPrice = lastStockCard.QtyLastPrice;
-                }
-                stockCard.QtyFirst = lastStock;
-                stockCard.QtyFirstPrice = lastStockPrice;
-                stockCard.QtyLast = lastStock + stockCard.QtyIn;
-                stockCard.QtyLastPrice = lastStockPrice + stockCard.QtyInPrice;
-
-                _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
-                _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
-                _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
-                stockCard = _sparepartStokCardRepository.Add(stockCard);
-
-                _unitOfWork.SaveChanges();
-
-                if (listPurchasingDetail.Count > 0)
-                {
-                    List<PurchasingDetailViewModel> listPurchasing = listPurchasingDetail
-                                    .GroupBy(l => l.PurchasingId)
-                                    .Select(cl => new PurchasingDetailViewModel
-                                    {
-                                        PurchasingId = cl.Key,
-                                        Qty = cl.Count(),
-                                        Price = cl.First().Price
-                                    }).ToList();
-
-                    foreach (var itemPurchasing in listPurchasing)
+                    foreach (var spkSp in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
                     {
-                        SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
-                        stockCardDtail.ParentStockCard = stockCard;
-                        stockCardDtail.PricePerItem = Convert.ToDouble(itemPurchasing.Price);
-                        stockCardDtail.QtyIn = itemPurchasing.Qty;
-                        stockCardDtail.QtyInPrice = Convert.ToDouble(itemPurchasing.Qty * itemPurchasing.Price);
-                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(itemPurchasing.Sparepart.Id, itemPurchasing.PurchasingId);
-                        double lastStockDetail = 0;
-                        double lastStockDetailPrice = 0;
-                        if (lastStockCardDetail != null)
-                        {
-                            lastStockDetail = lastStockCardDetail.QtyLast;
-                            lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
-                        }
-                        stockCardDtail.QtyFirst = lastStockDetail;
-                        stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
-                        stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
-                        stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
-                        stockCardDtail.PurchasingId = itemPurchasing.PurchasingId;
+                        Sparepart sparepart = _sparepartRepository.GetById(spkSp.Sparepart.Id);
+                        sparepart.StockQty = sparepart.StockQty + spkSp.TotalQuantity;
+                        sparepart.ModifyDate = serverTime;
+                        sparepart.ModifyUserId = userId;
 
-                        _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
-                        _sparepartStokCardDetailRepository.Add(stockCardDtail);
-                        _unitOfWork.SaveChanges();
+                        //_sparepartRepository.AttachNavigation<User>(sparepart.ModifyUser);
+                        //_sparepartRepository.AttachNavigation<User>(sparepart.CreateUser);
+                        //_sparepartRepository.AttachNavigation<Reference>(sparepart.CategoryReference);
+                        //_sparepartRepository.AttachNavigation<Reference>(sparepart.UnitReference);
+                        _sparepartRepository.Update(sparepart);
                     }
-                }
 
-                if (listSparepartManualTrans.Count > 0)
-                {
-                    List<SparepartManualTransactionViewModel> listSpManual = listSparepartManualTrans
-                                    .GroupBy(l => l.Id)
-                                    .Select(cl => new SparepartManualTransactionViewModel
-                                    {
-                                        Id = cl.Key,
-                                        Qty = cl.Count(),
-                                        Price = cl.First().Price
-                                    }).ToList();
-                    foreach (var itemSpTrans in listSpManual)
+                    List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
+                    List<SparepartManualTransaction> listSparepartManualTrans = new List<SparepartManualTransaction>();
+                    foreach (var item in _SPKDetailSparepartDetailRepository.GetMany(sdsd => sdsd.SPKDetailSparepart.SPK.Id == entity.Id))
                     {
-                        SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
-                        stockCardDtail.ParentStockCard = stockCard;
-                        stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
-                        stockCardDtail.QtyIn = itemSpTrans.Qty;
-                        stockCardDtail.QtyInPrice = Convert.ToDouble(itemSpTrans.Qty * itemSpTrans.Price);
-                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(itemSpTrans.Sparepart.Id, itemSpTrans.Id);
-                        double lastStockDetail = 0;
-                        double lastStockDetailPrice = 0;
-                        if (lastStockCardDetail != null)
+                        SparepartDetail sparepartDetail = _sparepartDetailRepository.GetById(item.SparepartDetail.Id);
+                        sparepartDetail.ModifyDate = serverTime;
+                        sparepartDetail.ModifyUserId = userId;
+                        sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+
+                        //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.ModifyUser);
+                        //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.CreateUser);
+                        //_sparepartDetailRepository.AttachNavigation<Sparepart>(sparepartDetail.Sparepart);
+                        //_sparepartDetailRepository.AttachNavigation<PurchasingDetail>(sparepartDetail.PurchasingDetail);
+                        //_sparepartDetailRepository.AttachNavigation<SparepartManualTransaction>(sparepartDetail.SparepartManualTransaction);
+                        _sparepartDetailRepository.Update(sparepartDetail);
+
+                        if (sparepartDetail.PurchasingDetail != null)
                         {
-                            lastStockDetail = lastStockCardDetail.QtyLast;
-                            lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                            listPurchasingDetail.Add(sparepartDetail.PurchasingDetail);
                         }
-                        stockCardDtail.QtyFirst = lastStockDetail;
-                        stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
-                        stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
-                        stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
-                        stockCardDtail.PurchasingId = itemSpTrans.Id;
-
-                        _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
-                        _sparepartStokCardDetailRepository.Add(stockCardDtail);
-                        _unitOfWork.SaveChanges();
+                        if (sparepartDetail.SparepartManualTransaction != null)
+                        {
+                            listSparepartManualTrans.Add(sparepartDetail.SparepartManualTransaction);
+                        }
                     }
+
+                    foreach (var spkSp in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
+                    {
+                        SparepartStockCard stockCard = new SparepartStockCard();
+                        Reference transactionReferenceTable = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_SPK).FirstOrDefault();
+
+                        stockCard.CreateUserId = userId;
+                        stockCard.PurchaseDate = serverTime;
+                        stockCard.PrimaryKeyValue = spk.Id;
+                        stockCard.ReferenceTableId = transactionReferenceTable.Id;
+                        stockCard.SparepartId = spkSp.SparepartId;
+                        stockCard.Description = "Pembatalan SPK";
+                        stockCard.QtyIn = spkSp.TotalQuantity;
+                        stockCard.QtyInPrice = Convert.ToDouble(listPurchasingDetail.Sum(x => x.Price) + listSparepartManualTrans.Sum(x => x.Price));
+
+                        SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(spkSp.SparepartId);
+                        double lastStock = 0;
+                        double lastStockPrice = 0;
+                        if (lastStockCard != null)
+                        {
+                            lastStock = lastStockCard.QtyLast;
+                            lastStockPrice = lastStockCard.QtyLastPrice;
+                        }
+                        stockCard.QtyFirst = lastStock;
+                        stockCard.QtyFirstPrice = lastStockPrice;
+                        stockCard.QtyLast = lastStock + stockCard.QtyIn;
+                        stockCard.QtyLastPrice = lastStockPrice + stockCard.QtyInPrice;
+
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
+                        _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+                        stockCard = _sparepartStokCardRepository.Add(stockCard);
+
+                        _unitOfWork.SaveChanges();
+
+                        if (listPurchasingDetail.Count > 0)
+                        {
+                            List<PurchasingDetailViewModel> listPurchasing = listPurchasingDetail
+                                            .GroupBy(l => l.PurchasingId)
+                                            .Select(cl => new PurchasingDetailViewModel
+                                            {
+                                                PurchasingId = cl.Key,
+                                                Qty = cl.Count(),
+                                                Price = cl.First().Price
+                                            }).ToList();
+
+                            foreach (var itemPurchasing in listPurchasing)
+                            {
+                                SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
+                                stockCardDtail.ParentStockCard = stockCard;
+                                stockCardDtail.PricePerItem = Convert.ToDouble(itemPurchasing.Price);
+                                stockCardDtail.QtyIn = itemPurchasing.Qty;
+                                stockCardDtail.QtyInPrice = Convert.ToDouble(itemPurchasing.Qty * itemPurchasing.Price);
+                                SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(itemPurchasing.Sparepart.Id, itemPurchasing.PurchasingId);
+                                double lastStockDetail = 0;
+                                double lastStockDetailPrice = 0;
+                                if (lastStockCardDetail != null)
+                                {
+                                    lastStockDetail = lastStockCardDetail.QtyLast;
+                                    lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                                }
+                                stockCardDtail.QtyFirst = lastStockDetail;
+                                stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                                stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
+                                stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
+                                stockCardDtail.PurchasingId = itemPurchasing.PurchasingId;
+
+                                _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
+                                _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                                _unitOfWork.SaveChanges();
+                            }
+                        }
+
+                        if (listSparepartManualTrans.Count > 0)
+                        {
+                            List<SparepartManualTransactionViewModel> listSpManual = listSparepartManualTrans
+                                            .GroupBy(l => l.Id)
+                                            .Select(cl => new SparepartManualTransactionViewModel
+                                            {
+                                                Id = cl.Key,
+                                                Qty = cl.Count(),
+                                                Price = cl.First().Price
+                                            }).ToList();
+                            foreach (var itemSpTrans in listSpManual)
+                            {
+                                SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
+                                stockCardDtail.ParentStockCard = stockCard;
+                                stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
+                                stockCardDtail.QtyIn = itemSpTrans.Qty;
+                                stockCardDtail.QtyInPrice = Convert.ToDouble(itemSpTrans.Qty * itemSpTrans.Price);
+                                SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(itemSpTrans.Sparepart.Id, itemSpTrans.Id);
+                                double lastStockDetail = 0;
+                                double lastStockDetailPrice = 0;
+                                if (lastStockCardDetail != null)
+                                {
+                                    lastStockDetail = lastStockCardDetail.QtyLast;
+                                    lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                                }
+                                stockCardDtail.QtyFirst = lastStockDetail;
+                                stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                                stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
+                                stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
+                                stockCardDtail.PurchasingId = itemSpTrans.Id;
+
+                                _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
+                                _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                                _unitOfWork.SaveChanges();
+                            }
+                        }
+
+
+                    }
+
+                    List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
+
+                    foreach (var item in wehList)
+                    {
+                        _wheelExchangeHistoryRepository.Delete(item);
+                    }
+
+                    List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
+
+                    foreach (SPKSchedule schedule in scheduleList)
+                    {
+                        _SPKScheduleRepository.Delete(schedule);
+                    }
+
+                    _unitOfWork.SaveChanges();
+                    #endregion
+                    trans.Commit();
                 }
-
-
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    throw;
+                }
             }
-
-            List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
-
-            foreach (var item in wehList)
-            {
-                _wheelExchangeHistoryRepository.Delete(item);
-            }
-
-            List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
-
-            foreach (SPKSchedule schedule in scheduleList)
-            {
-                _SPKScheduleRepository.Delete(schedule);
-            }
-
-            _unitOfWork.SaveChanges();
-            #endregion
+            
         }
 
         public decimal AllPurchaseByVehicle(int vehicleId, int spkParentId)

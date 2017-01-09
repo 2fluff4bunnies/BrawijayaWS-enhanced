@@ -101,12 +101,12 @@ namespace BrawijayaWorkshop.Database.Repositories
 
         public SparepartStockCardDetail RetrieveLastCardDetailByPurchasingId(int sparepartId, int purchasingID)
         {
-            return GetMany(sp => sp.ParentStockCard.SparepartId == sparepartId && sp.PurchasingId == purchasingID).OrderByDescending(sp => sp.ParentStockCard.PurchaseDate).FirstOrDefault();
+            return GetMany(sp => sp.ParentStockCard.SparepartId == sparepartId && sp.PurchasingId == purchasingID).OrderByDescending(sp => sp.ParentStockCard.PurchaseDate).ThenByDescending(sp=>sp.Id).FirstOrDefault();
         }
 
         public SparepartStockCardDetail RetrieveLastCardDetailByTransactionManualId(int sparepartId, int transactionManualId)
         {
-            return GetMany(sp => sp.ParentStockCard.SparepartId == sparepartId && sp.SparepartManualTransactionId == transactionManualId).OrderByDescending(sp => sp.ParentStockCard.PurchaseDate).FirstOrDefault();
+            return GetMany(sp => sp.ParentStockCard.SparepartId == sparepartId && sp.SparepartManualTransactionId == transactionManualId).OrderByDescending(sp => sp.ParentStockCard.PurchaseDate).ThenByDescending(sp=>sp.Id).FirstOrDefault();
         }
     }
 

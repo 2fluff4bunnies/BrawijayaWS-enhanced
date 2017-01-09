@@ -204,10 +204,18 @@ namespace BrawijayaWorkshop.Model
                         stockCardDtail.PricePerItem = Convert.ToDouble(purchasingDetail.Price);
                         stockCardDtail.QtyIn = purchasingDetail.Qty;
                         stockCardDtail.QtyInPrice = Convert.ToDouble(purchasingDetail.Price * purchasingDetail.Qty);
-                        stockCardDtail.QtyFirst = 0;
-                        stockCardDtail.QtyFirstPrice = 0;
-                        stockCardDtail.QtyLast = stockCardDtail.QtyIn;
-                        stockCardDtail.QtyLastPrice = stockCardDtail.QtyInPrice;
+                        SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, purchasing.Id);
+                        double lastStockDetail = 0;
+                        double lastStockDetailPrice = 0;
+                        if (lastStockCardDetail != null)
+                        {
+                            lastStockDetail = lastStockCardDetail.QtyLast;
+                            lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                        }
+                        stockCardDtail.QtyFirst = lastStockDetail;
+                        stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                        stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
+                        stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
                         stockCardDtail.PurchasingId = purchasing.Id;
                         _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                         _sparepartStokCardDetailRepository.Add(stockCardDtail);

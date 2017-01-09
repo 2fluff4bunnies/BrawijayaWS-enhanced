@@ -255,6 +255,7 @@ namespace BrawijayaWorkshop.Model
                 _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                 _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
                 stockCard =_sparepartStokCardRepository.Add(stockCard);
+                _unitOfWork.SaveChanges();
 
                 SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
                 stockCardDtail.ParentStockCard = stockCard;
@@ -277,6 +278,7 @@ namespace BrawijayaWorkshop.Model
                         
                 _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                 _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                _unitOfWork.SaveChanges();
 
             }
 
@@ -445,6 +447,7 @@ namespace BrawijayaWorkshop.Model
                 _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                 _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
                 stockCard = _sparepartStokCardRepository.Add(stockCard);
+                _unitOfWork.SaveChanges();
 
                 SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
                 stockCardDtail.ParentStockCard = stockCard;
@@ -466,6 +469,7 @@ namespace BrawijayaWorkshop.Model
                 stockCardDtail.PurchasingId = purchaseReturn.PurchasingId;
                 _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                 _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                _unitOfWork.SaveChanges();
             }
             
             _unitOfWork.SaveChanges();

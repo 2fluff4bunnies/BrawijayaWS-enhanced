@@ -13,7 +13,7 @@ namespace BrawijayaWorkshop.Database.Repositories
 
         public SparepartStockCard RetrieveLastCard(int sparepartId)
         {
-            return GetMany(sp => sp.SparepartId == sparepartId).OrderByDescending(sp => sp.PurchaseDate).FirstOrDefault();
+            return GetMany(sp => sp.SparepartId == sparepartId).OrderByDescending(sp => sp.PurchaseDate).ThenByDescending(sp => sp.Id).FirstOrDefault();
         }
 
         /*public List<GroupSparepartStockCard> RetrieveFIFOCurrentSparepart(DateTime dateFrom, DateTime dateTo, int sparepartId)
