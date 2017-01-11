@@ -112,24 +112,6 @@ namespace BrawijayaWorkshop.Model
                             newItem.TotalQtyLastPrice = firstInitData.QtyLastPrice;
                             reportResult.Add(newItem);
                         }
-                        else
-                        {
-                            GroupSparepartStockCard newItem = new GroupSparepartStockCard();
-                            newItem.TotalQtyFirst = 0;
-                            newItem.TotalQtyFirstPrice = 0;
-                            newItem.Sparepart = itemSparepart;
-                            newItem.SparepartId = itemSparepart.Id;
-                            newItem.Purchasing = itemPurchasing;
-                            newItem.PurchasingId = itemPurchasing.Id;
-                            newItem.PricePerItem = 0;
-                            newItem.TotalQtyIn = 0;
-                            newItem.TotalQtyInPrice = 0;
-                            newItem.TotalQtyOut = 0;
-                            newItem.TotalQtyOutPrice = 0;
-                            newItem.TotalQtyLast = 0;
-                            newItem.TotalQtyLastPrice = 0;
-                            reportResult.Add(newItem);
-                        }
                     }
                 }
                 foreach (var itemSpManual in listSparepartManual)
@@ -154,24 +136,6 @@ namespace BrawijayaWorkshop.Model
                             newItem.TotalQtyOutPrice = 0;
                             newItem.TotalQtyLast = firstInitData.QtyLast;
                             newItem.TotalQtyLastPrice = firstInitData.QtyLastPrice;
-                            reportResult.Add(newItem);
-                        }
-                        else
-                        {
-                            GroupSparepartStockCard newItem = new GroupSparepartStockCard();
-                            newItem.TotalQtyFirst = 0;
-                            newItem.TotalQtyFirstPrice = 0;
-                            newItem.Sparepart = itemSparepart;
-                            newItem.SparepartId = itemSparepart.Id;
-                            newItem.SparepartManualTransaction = itemSpManual;
-                            newItem.SparepartManualTransactionId = itemSpManual.Id;
-                            newItem.PricePerItem = 0;
-                            newItem.TotalQtyIn = 0;
-                            newItem.TotalQtyInPrice = 0;
-                            newItem.TotalQtyOut = 0;
-                            newItem.TotalQtyOutPrice = 0;
-                            newItem.TotalQtyLast = 0;
-                            newItem.TotalQtyLastPrice = 0;
                             reportResult.Add(newItem);
                         }
                     }
