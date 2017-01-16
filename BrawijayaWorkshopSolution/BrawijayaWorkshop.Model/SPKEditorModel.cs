@@ -573,9 +573,35 @@ namespace BrawijayaWorkshop.Model
 
         public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty)
         {
-            List<SparepartDetail> sparepartDetails = _sparepartDetailRepository.GetMany(
-                spd => spd.SparepartId == sparepartId && spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active).OrderBy(spd => spd.Id).Take(qty).ToList();
+            List<SparepartDetail> sparepartDetails = new List<SparepartDetail>();
+            List<SparepartDetail> sparepartDetailsFromPurchasing = new List<SparepartDetail>();
 
+            if (qty > 0 && sparepartId > 0)
+            {
+                sparepartDetails = _sparepartDetailRepository
+                    .GetMany(
+                        spd => spd.SparepartId == sparepartId &&
+                        spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active &&
+                        spd.SparepartManualTransactionId != null
+                    )
+                    .OrderBy(spd => spd.SparepartManualTransaction.CreateDate).Take(qty).ToList();
+
+                if (sparepartDetails.Count < qty)
+                {
+                    int remainingQty = qty - sparepartDetails.Count;
+
+                    sparepartDetailsFromPurchasing = _sparepartDetailRepository
+                        .GetMany(
+                            spd => spd.SparepartId == sparepartId &&
+                            spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active &&
+                            spd.PurchasingDetailId != null
+                        )
+                        .OrderBy(spd => spd.PurchasingDetail.CreateDate).Take(remainingQty).ToList();
+
+                    sparepartDetails.AddRange(sparepartDetailsFromPurchasing);
+                }
+            }
+            
             List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
 
             foreach (var item in sparepartDetails)
@@ -586,6 +612,7 @@ namespace BrawijayaWorkshop.Model
                      SparepartDetail = item,
                  });
             }
+
 
             List<SPKDetailSparepartDetailViewModel> mappedResult = new List<SPKDetailSparepartDetailViewModel>();
 
@@ -890,7 +917,7 @@ namespace BrawijayaWorkshop.Model
                     throw;
                 }
             }
-            
+
         }
 
         public decimal AllPurchaseByVehicle(int vehicleId, int spkParentId)
@@ -915,7 +942,7 @@ namespace BrawijayaWorkshop.Model
         {
             List<SpecialSparepartViewModel> wheelList = LoadWheel();
             List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
-            
+
 
             List<Sparepart> getSpInWheel = (from sp in result
                                             join wh in wheelList on sp.Id equals wh.SparepartId
