@@ -772,6 +772,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             bool result = false;
 
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
+            decimal vehicleBills = _presenter.GetAllPurchaseByVehicleToday();
 
             if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE )
             {
@@ -779,7 +780,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     result = true;
                 }
-                else if ((this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
+                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
                 {
                     result = true;
                 }
@@ -791,12 +792,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     result = true;
                 }
-                else if ((this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
                 {
                     result = true;
                 }
-
-                result = true;
             }
 
             return result;

@@ -31,6 +31,11 @@ namespace BrawijayaWorkshop.Model
         private ISPKScheduleRepository _SPKScheduleRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
+        private IVehicleGroupRepository _vehicleGroupRepository;
+        private IPurchasingDetailRepository _purchasingDetailRepository;
+        private ISparepartManualTransactionRepository _sparepartManualTransaction;
+        private ICustomerRepository _customerRepository;
+        private IBrandRepository _brandRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -47,6 +52,11 @@ namespace BrawijayaWorkshop.Model
             ISPKScheduleRepository spkScheduleRepository,
             ISparepartStockCardRepository sparepartStokCardRepository,
             ISparepartStockCardDetailRepository sparepartStokCardDetailRepository,
+            IVehicleGroupRepository vehicleGroupRepository,
+            IPurchasingDetailRepository purchasingDetailRepository,
+            ISparepartManualTransactionRepository sparepartManualTransaction,
+            ICustomerRepository customerRepository,
+            IBrandRepository brandRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -68,6 +78,11 @@ namespace BrawijayaWorkshop.Model
             _wheelExchangeHistoryRepository = WheelExchangeHistoryRepository;
             _sparepartStokCardRepository = sparepartStokCardRepository;
             _sparepartStokCardDetailRepository = sparepartStokCardDetailRepository;
+            _vehicleGroupRepository = vehicleGroupRepository;
+            _purchasingDetailRepository = purchasingDetailRepository;
+            _sparepartManualTransaction = sparepartManualTransaction;
+            _customerRepository = customerRepository;
+            _brandRepository = brandRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -184,8 +199,8 @@ namespace BrawijayaWorkshop.Model
                     spk.ModifyDate = serverTime;
                     spk.ModifyUserId = userId;
                     spk.CreateUserId = userId;
-
                     spk.Status = (int)DbConstant.DefaultDataStatus.Active;
+
                     if (isNeedApproval)
                     {
                         spk.StatusApprovalId = (int)DbConstant.ApprovalStatus.Pending;
@@ -200,10 +215,21 @@ namespace BrawijayaWorkshop.Model
                     }
 
                     spk.StatusCompletedId = isSPKSales ? (int)DbConstant.SPKCompletionStatus.Completed : (int)DbConstant.SPKCompletionStatus.InProgress;
-                    SPK entityChild = new SPK();
-                    Map(spk, entityChild);
 
-                    SPK insertedSPK = _SPKRepository.Add(entityChild);
+                    SPK entitySPK = new SPK();
+                    Vehicle spkVehicle = _vehicleRepository.GetById(spk.VehicleId);
+
+                    Map(spk, entitySPK);
+                    entitySPK.Vehicle = spkVehicle;
+
+                    _vehicleRepository.AttachNavigation<Vehicle>(entitySPK.Vehicle);
+                    _vehicleRepository.AttachNavigation<VehicleGroup>(entitySPK.Vehicle.VehicleGroup);
+                    _referenceRepository.AttachNavigation<Reference>(entitySPK.CategoryReference);
+                    _SPKRepository.AttachNavigation<SPK>(entitySPK.SPKParent);
+
+                    SPK insertedSPK = _SPKRepository.Add(entitySPK);
+
+                    _unitOfWork.SaveChanges();
 
                     if (isSPKSales)
                     {
@@ -231,7 +257,9 @@ namespace BrawijayaWorkshop.Model
                         invc.ModifyUserId = userId;
                         invc.CreateUserId = userId;
 
+                        _SPKRepository.AttachNavigation<SPK>(invc.SPK);
                         insertedInvoice = _invoiceRepository.Add(invc);
+                        _unitOfWork.SaveChanges();
                     }
 
 
@@ -246,6 +274,8 @@ namespace BrawijayaWorkshop.Model
                         entitySPKDetailSparepart.Sparepart = sparepart;
                         entitySPKDetailSparepart.SPK = insertedSPK;
 
+                        //Map(spkSparepart, entitySPKDetailSparepart);
+
                         entitySPKDetailSparepart.CreateDate = serverTime;
                         entitySPKDetailSparepart.CreateUserId = userId;
                         entitySPKDetailSparepart.ModifyDate = serverTime;
@@ -259,7 +289,9 @@ namespace BrawijayaWorkshop.Model
                             sparepart.ModifyDate = serverTime;
                             sparepart.ModifyUserId = userId;
 
+                            _sparepartRepository.AttachNavigation<Sparepart>(entitySPKDetailSparepart.Sparepart);
                             _sparepartRepository.Update(sparepart);
+                            _unitOfWork.SaveChanges();
                         }
 
                         if (isSPKSales)
@@ -272,7 +304,13 @@ namespace BrawijayaWorkshop.Model
                             }
                         }
 
+
+                        _SPKRepository.AttachNavigation<SPK>(entitySPKDetailSparepart.SPK);
+                        _sparepartRepository.AttachNavigation<Sparepart>(entitySPKDetailSparepart.Sparepart);
+
                         SPKDetailSparepart insertedSPkDetailSparepart = _SPKDetailSparepartRepository.Add(entitySPKDetailSparepart);
+
+                        _unitOfWork.SaveChanges();
 
                         var detailList = spkSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == spkSparepart.SparepartId);
 
@@ -291,7 +329,9 @@ namespace BrawijayaWorkshop.Model
                             entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
                             entityNewSparepartDetail.SparepartDetailId = spkSparepartDetail.SparepartDetailId;
 
+                            _SPKDetailSparepartRepository.AttachNavigation<SPKDetailSparepart>(entityNewSparepartDetail.SPKDetailSparepart);
                             SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
+                            _unitOfWork.SaveChanges();
 
                             if (!isNeedApproval)
                             {
@@ -308,7 +348,12 @@ namespace BrawijayaWorkshop.Model
                                     sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutService;
                                 }
 
+                                _sparepartRepository.AttachNavigation<Sparepart>(sparepartDetail.Sparepart);
+                                _purchasingDetailRepository.AttachNavigation<PurchasingDetail>(sparepartDetail.PurchasingDetail);
+                                _sparepartManualTransaction.AttachNavigation<SparepartManualTransaction>(sparepartDetail.SparepartManualTransaction);
+
                                 _sparepartDetailRepository.Update(sparepartDetail);
+                                _unitOfWork.SaveChanges();
 
                                 if (sparepartDetail.PurchasingDetail != null)
                                 {
@@ -346,7 +391,11 @@ namespace BrawijayaWorkshop.Model
                                 invcDtl.ModifyUserId = userId;
                                 invcDtl.CreateUserId = userId;
 
+                                _invoiceRepository.AttachNavigation<Invoice>(invcDtl.Invoice);
+                                _SPKDetailSparepartDetailRepository.AttachNavigation<SPKDetailSparepartDetail>(invcDtl.SPKDetailSparepartDetail);
+
                                 _invoiceDetailRepository.Add(invcDtl);
+                                _unitOfWork.SaveChanges();
                             }
                         }
 
@@ -376,11 +425,14 @@ namespace BrawijayaWorkshop.Model
                             stockCard.QtyFirstPrice = lastStockPrice;
                             stockCard.QtyLast = lastStock - stockCard.QtyOut;
                             stockCard.QtyLastPrice = lastStockPrice - stockCard.QtyOutPrice;
+
                             _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
                             _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                             _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
+
                             stockCard = _sparepartStokCardRepository.Add(stockCard);
                             _unitOfWork.SaveChanges();
+
                             if (listPurchasingDetail.Count > 0)
                             {
                                 List<PurchasingDetailViewModel> listPurchasing = listPurchasingDetail
@@ -461,24 +513,37 @@ namespace BrawijayaWorkshop.Model
                     //Wheel Change Handler
                     foreach (var item in vehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId > 0))
                     {
+                        SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
+                        SpecialSparepartDetail wheelReplace = _specialSparepartDetailRepository.GetById(item.ReplaceWithWheelDetailId);
                         WheelExchangeHistory weh = new WheelExchangeHistory();
+
                         weh.SPK = insertedSPK;
                         weh.OriginalWheelId = item.WheelDetailId;
                         weh.ReplaceWheelId = item.ReplaceWithWheelDetailId;
+                        weh.OrignialWheel = wheel;
+                        weh.ReplaceWheel = wheelReplace;
 
                         weh.CreateDate = serverTime;
                         weh.ModifyDate = serverTime;
                         weh.ModifyUserId = userId;
                         weh.CreateUserId = userId;
 
-                        _wheelExchangeHistoryRepository.Add(weh);
+                        _SPKRepository.AttachNavigation<SPK>(entitySPK);
+                        _specialSparepartDetailRepository.AttachNavigation<SpecialSparepartDetail>(weh.OrignialWheel);
+                        _specialSparepartDetailRepository.AttachNavigation<SpecialSparepartDetail>(weh.ReplaceWheel);
 
-                        SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
+                        _wheelExchangeHistoryRepository.Add(weh);
+                        _unitOfWork.SaveChanges();
+
                         wheel.Kilometers = spk.Kilometers;
                         wheel.ModifyDate = serverTime;
                         wheel.ModifyUserId = userId;
 
+                        _specialSparepartRepository.AttachNavigation<SpecialSparepart>(wheel.SpecialSparepart);
+                        _sparepartDetailRepository.AttachNavigation<SparepartDetail>(wheel.SparepartDetail);
+
                         _specialSparepartDetailRepository.Update(wheel);
+                        _unitOfWork.SaveChanges();
                     }
 
                     // Update Vehicle Kilometers
@@ -488,6 +553,9 @@ namespace BrawijayaWorkshop.Model
                     vehicle.ModifyDate = serverTime;
                     vehicle.ModifyUserId = userId;
 
+                    _vehicleGroupRepository.AttachNavigation(vehicle.VehicleGroup);
+                    _customerRepository.AttachNavigation(vehicle.Customer);
+                    _brandRepository.AttachNavigation(vehicle.Brand);
                     _vehicleRepository.Update(vehicle);
 
                     _unitOfWork.SaveChanges();
