@@ -775,23 +775,52 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
             decimal vehicleBills = _presenter.GetAllPurchaseByVehicleToday();
 
-            if (this.isContractWork && (this.ContractWorkFee + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ContractThreshold)
-            {
-                result = true;
-            }
-            else
-            {
-                if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE &&
-                    (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
-                {
-                    result = true;
-                }
+            #region contract as high priority
+            //if (this.isContractWork && (this.ContractWorkFee + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ContractThreshold)
+            //{
+            //    result = true;
+            //}
+            //else
+            //{
+            //    if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE &&
+            //        (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
+            //    {
+            //        result = true;
+            //    }
 
-                if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR &&
-                    (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+            //    if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR &&
+            //        (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+            //    {
+            //        result = true;
+            //    }
+            //}
+            #endregion
+
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE)
+            {
+                if (isContractWork && ContractWorkFee >= this.ContractThreshold)
                 {
                     result = true;
                 }
+                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
+                {
+                    result = true;
+                }
+            }
+
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR)
+            {
+                //if (isContractWork && ContractWorkFee >= this.ContractThreshold)
+                //{
+                //    result = true;
+                //}
+                //else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+                //{
+                //    result = true;
+                //}
+
+                //always true
+                result = true;
             }
 
             return result;

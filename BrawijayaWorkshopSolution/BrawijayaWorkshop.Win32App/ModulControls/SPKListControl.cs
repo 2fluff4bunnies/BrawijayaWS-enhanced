@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
@@ -277,6 +278,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 cmsPrintApproval.Visible = false;
                 cmsAbort.Visible = false;
                 cmsEndorseData.Visible = false;
+                cmsRollback.Visible = false;
+                //cmsRollback.Visible = LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN;
             }
             else
             {
@@ -297,6 +300,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
                 toolStripSeparator1.Visible = cmsEndorseData.Visible && cmsPrintData.Visible && cmsRequestPrint.Visible &&
                     cmsSetAsCompleted.Visible;
+
+                cmsRollback.Visible = false;
             }
         }
 
@@ -475,6 +480,16 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
             editor.SelectedSPK = this.SelectedSPK;
             editor.IsPrintApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsRollback_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsRollBack = true;
             editor.ShowDialog(this);
 
             btnSearch.PerformClick();

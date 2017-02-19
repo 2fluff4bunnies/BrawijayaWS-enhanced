@@ -71,5 +71,9 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.VehicleWheelList = Model.getCurrentVehicleWheel(View.SelectedSPK.VehicleId, View.SelectedSPK.Id);
         }
+
+        public void RollBack()
+        {
+        }
     }
 }

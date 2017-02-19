@@ -652,5 +652,26 @@ namespace BrawijayaWorkshop.Model
 
             return mappedResult;
         }
+
+
+        public void rollBackSparepart(int sparepartId)
+        { 
+        
+        }
+
+        public void rollBackSparepartDetail(List<SparepartDetailViewModel> sparepartDetailList)
+        { 
+        
+
+        }
+
+        public void rollBackInvoice(int invoiceId)
+        { 
+        
+        }
+
+        public void rollBackVehicle(int vehicleId)
+        { }
+
     }
 }
