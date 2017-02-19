@@ -720,6 +720,12 @@ namespace BrawijayaWorkshop.Model
             return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_S).FirstOrDefault().Value;
         }
 
+        public string GetContractThreshold()
+        {
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_B).FirstOrDefault().Value;
+        }
+
+
         public int getPendingSparpartQty(int sparepartId)
         {
             int result = 0;

@@ -54,15 +54,17 @@
             this.txtMinStockQty = new DevExpress.XtraEditors.TextEdit();
             this.lblStockMinQty = new DevExpress.XtraEditors.LabelControl();
             this.tpSPK = new DevExpress.XtraTab.XtraTabPage();
+            this.txtSPKRepairLimit = new DevExpress.XtraEditors.TextEdit();
+            this.lblSPKRepairLimit = new DevExpress.XtraEditors.LabelControl();
+            this.txtSPKServiceLimit = new DevExpress.XtraEditors.TextEdit();
+            this.lblSPKServiceLimit = new DevExpress.XtraEditors.LabelControl();
             this.bgwFingerprint = new System.ComponentModel.BackgroundWorker();
             this.bgwSaveData = new System.ComponentModel.BackgroundWorker();
             this.valOldPassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valNewPassword = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valReTypeNewPass = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.lblSPKServiceLimit = new DevExpress.XtraEditors.LabelControl();
-            this.txtSPKServiceLimit = new DevExpress.XtraEditors.TextEdit();
-            this.lblSPKRepairLimit = new DevExpress.XtraEditors.LabelControl();
-            this.txtSPKRepairLimit = new DevExpress.XtraEditors.TextEdit();
+            this.txtSPKContractLimit = new DevExpress.XtraEditors.TextEdit();
+            this.lblSPKContractLimit = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configTabControl)).BeginInit();
             this.configTabControl.SuspendLayout();
@@ -77,11 +79,12 @@
             this.tpSparepart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMinStockQty.Properties)).BeginInit();
             this.tpSPK.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKRepairLimit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKServiceLimit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valOldPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valNewPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valReTypeNewPass)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSPKServiceLimit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSPKRepairLimit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKContractLimit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNewPassword
@@ -284,6 +287,8 @@
             // 
             // tpSPK
             // 
+            this.tpSPK.Controls.Add(this.txtSPKContractLimit);
+            this.tpSPK.Controls.Add(this.lblSPKContractLimit);
             this.tpSPK.Controls.Add(this.txtSPKRepairLimit);
             this.tpSPK.Controls.Add(this.lblSPKRepairLimit);
             this.tpSPK.Controls.Add(this.txtSPKServiceLimit);
@@ -291,6 +296,40 @@
             this.tpSPK.Name = "tpSPK";
             this.tpSPK.Size = new System.Drawing.Size(402, 165);
             this.tpSPK.Text = "SPK";
+            // 
+            // txtSPKRepairLimit
+            // 
+            this.txtSPKRepairLimit.Location = new System.Drawing.Point(103, 52);
+            this.txtSPKRepairLimit.Name = "txtSPKRepairLimit";
+            this.txtSPKRepairLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKRepairLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKRepairLimit.Size = new System.Drawing.Size(199, 20);
+            this.txtSPKRepairLimit.TabIndex = 3;
+            // 
+            // lblSPKRepairLimit
+            // 
+            this.lblSPKRepairLimit.Location = new System.Drawing.Point(11, 55);
+            this.lblSPKRepairLimit.Name = "lblSPKRepairLimit";
+            this.lblSPKRepairLimit.Size = new System.Drawing.Size(71, 13);
+            this.lblSPKRepairLimit.TabIndex = 2;
+            this.lblSPKRepairLimit.Text = "Limit Perbaikan";
+            // 
+            // txtSPKServiceLimit
+            // 
+            this.txtSPKServiceLimit.Location = new System.Drawing.Point(103, 14);
+            this.txtSPKServiceLimit.Name = "txtSPKServiceLimit";
+            this.txtSPKServiceLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKServiceLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKServiceLimit.Size = new System.Drawing.Size(199, 20);
+            this.txtSPKServiceLimit.TabIndex = 1;
+            // 
+            // lblSPKServiceLimit
+            // 
+            this.lblSPKServiceLimit.Location = new System.Drawing.Point(11, 17);
+            this.lblSPKServiceLimit.Name = "lblSPKServiceLimit";
+            this.lblSPKServiceLimit.Size = new System.Drawing.Size(59, 13);
+            this.lblSPKServiceLimit.TabIndex = 0;
+            this.lblSPKServiceLimit.Text = "Limit Service";
             // 
             // bgwFingerprint
             // 
@@ -314,39 +353,22 @@
             // 
             this.valReTypeNewPass.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
-            // lblSPKServiceLimit
+            // txtSPKContractLimit
             // 
-            this.lblSPKServiceLimit.Location = new System.Drawing.Point(11, 17);
-            this.lblSPKServiceLimit.Name = "lblSPKServiceLimit";
-            this.lblSPKServiceLimit.Size = new System.Drawing.Size(59, 13);
-            this.lblSPKServiceLimit.TabIndex = 0;
-            this.lblSPKServiceLimit.Text = "Limit Service";
+            this.txtSPKContractLimit.Location = new System.Drawing.Point(103, 89);
+            this.txtSPKContractLimit.Name = "txtSPKContractLimit";
+            this.txtSPKContractLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKContractLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtSPKContractLimit.Size = new System.Drawing.Size(199, 20);
+            this.txtSPKContractLimit.TabIndex = 5;
             // 
-            // txtSPKServiceLimit
+            // lblSPKContractLimit
             // 
-            this.txtSPKServiceLimit.Location = new System.Drawing.Point(103, 14);
-            this.txtSPKServiceLimit.Name = "txtSPKServiceLimit";
-            this.txtSPKServiceLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtSPKServiceLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtSPKServiceLimit.Size = new System.Drawing.Size(199, 20);
-            this.txtSPKServiceLimit.TabIndex = 1;
-            // 
-            // lblSPKRepairLimit
-            // 
-            this.lblSPKRepairLimit.Location = new System.Drawing.Point(11, 55);
-            this.lblSPKRepairLimit.Name = "lblSPKRepairLimit";
-            this.lblSPKRepairLimit.Size = new System.Drawing.Size(71, 13);
-            this.lblSPKRepairLimit.TabIndex = 2;
-            this.lblSPKRepairLimit.Text = "Limit Perbaikan";
-            // 
-            // txtSPKRepairLimit
-            // 
-            this.txtSPKRepairLimit.Location = new System.Drawing.Point(103, 52);
-            this.txtSPKRepairLimit.Name = "txtSPKRepairLimit";
-            this.txtSPKRepairLimit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtSPKRepairLimit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtSPKRepairLimit.Size = new System.Drawing.Size(199, 20);
-            this.txtSPKRepairLimit.TabIndex = 3;
+            this.lblSPKContractLimit.Location = new System.Drawing.Point(11, 92);
+            this.lblSPKContractLimit.Name = "lblSPKContractLimit";
+            this.lblSPKContractLimit.Size = new System.Drawing.Size(70, 13);
+            this.lblSPKContractLimit.TabIndex = 4;
+            this.lblSPKContractLimit.Text = "Limit Borongan";
             // 
             // ConfigEditorForm
             // 
@@ -376,11 +398,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMinStockQty.Properties)).EndInit();
             this.tpSPK.ResumeLayout(false);
             this.tpSPK.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKRepairLimit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKServiceLimit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valOldPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valNewPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valReTypeNewPass)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSPKServiceLimit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSPKRepairLimit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSPKContractLimit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -417,5 +440,7 @@
         private DevExpress.XtraEditors.LabelControl lblSPKRepairLimit;
         private DevExpress.XtraEditors.TextEdit txtSPKServiceLimit;
         private DevExpress.XtraEditors.LabelControl lblSPKServiceLimit;
+        private DevExpress.XtraEditors.TextEdit txtSPKContractLimit;
+        private DevExpress.XtraEditors.LabelControl lblSPKContractLimit;
     }
 }

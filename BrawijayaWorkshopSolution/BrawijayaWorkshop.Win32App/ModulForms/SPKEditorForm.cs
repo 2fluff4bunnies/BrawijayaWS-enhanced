@@ -106,6 +106,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public MechanicViewModel SelectedMechanic { get; set; }
         public decimal RepairThreshold { get; set; }
         public decimal ServiceThreshold { get; set; }
+        public decimal ContractThreshold { get; set; }
         public bool IsNeedApproval { get; set; }
         public bool IsUsedSparepartRequired { get; set; }
         public List<SpecialSparepartDetailViewModel> RemovedWHeelDetailList { get; set; }
@@ -774,25 +775,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
             decimal vehicleBills = _presenter.GetAllPurchaseByVehicleToday();
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE )
+            if (this.isContractWork && (this.ContractWorkFee + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ContractThreshold)
             {
-                if (isContractWork && ContractWorkFee >= this.ServiceThreshold)
-                {
-                    result = true;
-                }
-                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
-                {
-                    result = true;
-                }
+                result = true;
             }
-
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR)
+            else
             {
-                if (isContractWork && ContractWorkFee >= this.RepairThreshold)
+                if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE &&
+                    (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
                 {
                     result = true;
                 }
-                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+
+                if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR &&
+                    (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
                 {
                     result = true;
                 }
@@ -935,7 +931,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void lookupWheelDetailGv_EditValueChanging(object sender, ChangingEventArgs e)
         {
-           
+
         }
 
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
@@ -958,7 +954,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 e.Cancel = true;
             }
 
-            if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber" )
+            if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber")
             {
                 e.Cancel = true;
             }
@@ -1062,9 +1058,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             }
                         }
                     }
-                    
-                    
-                    
+
+
+
                 }
             }
             catch (Exception ex)

@@ -130,12 +130,12 @@ namespace BrawijayaWorkshop.Model
 
                             _sparepartRepository.Update(sparepart);
 
-                            if (sparepart.StockQty <= GetStockThreshold())
-                            {
-                                SparepartViewModel viewModel = new SparepartViewModel();
-                                Map(sparepart, viewModel);
-                                warningList.Add(viewModel);
-                            }
+                            //if (sparepart.StockQty <= GetStockThreshold())
+                            //{
+                            //    SparepartViewModel viewModel = new SparepartViewModel();
+                            //    Map(sparepart, viewModel);
+                            //    warningList.Add(viewModel);
+                            //}
                         }
 
                         _unitOfWork.SaveChanges();
