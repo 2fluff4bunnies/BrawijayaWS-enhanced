@@ -32,11 +32,11 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status == (int)DbConstant.PurchasingStatus.Active).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status == (int)DbConstant.PurchasingStatus.Active || c.Status == (int)DbConstant.PurchasingStatus.HasReturn).OrderBy(c => c.Date).ToList();
             }
             else
             {
-                result = _purchasingRepository.GetMany(c => c.Status == (int)DbConstant.PurchasingStatus.Active).OrderBy(c => c.Date).ToList();
+                result = _purchasingRepository.GetMany(c => c.Status == (int)DbConstant.PurchasingStatus.Active || c.Status == (int)DbConstant.PurchasingStatus.HasReturn).OrderBy(c => c.Date).ToList();
             }
 
             List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();

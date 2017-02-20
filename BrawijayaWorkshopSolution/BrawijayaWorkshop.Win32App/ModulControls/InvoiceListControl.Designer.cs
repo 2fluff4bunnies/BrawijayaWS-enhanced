@@ -47,6 +47,7 @@
             this.colTransDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomer = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colVehicle = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -57,7 +58,7 @@
             this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
-            this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
@@ -301,6 +302,16 @@
             this.colVehicle.Visible = true;
             this.colVehicle.VisibleIndex = 2;
             // 
+            // colTotalPrice
+            // 
+            this.colTotalPrice.Caption = "Total Tagihan";
+            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colTotalPrice.FieldName = "TotalPrice";
+            this.colTotalPrice.Name = "colTotalPrice";
+            this.colTotalPrice.Visible = true;
+            this.colTotalPrice.VisibleIndex = 3;
+            // 
             // colStatus
             // 
             this.colStatus.Caption = "Status";
@@ -319,9 +330,10 @@
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsAddData,
             this.cmsEditData,
-            this.cmsPrint});
+            this.cmsPrint,
+            this.cmsAddReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(146, 70);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 114);
             // 
             // cmsAddData
             // 
@@ -383,15 +395,13 @@
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
-            // colTotalPrice
+            // cmsAddReturn
             // 
-            this.colTotalPrice.Caption = "Total Tagihan";
-            this.colTotalPrice.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
-            this.colTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colTotalPrice.FieldName = "TotalPrice";
-            this.colTotalPrice.Name = "colTotalPrice";
-            this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 3;
+            this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.cmsAddReturn.Name = "cmsAddReturn";
+            this.cmsAddReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsAddReturn.Text = "Buat Retur";
+            this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
             // InvoiceListControl
             // 
@@ -451,6 +461,7 @@
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
+        private System.Windows.Forms.ToolStripMenuItem cmsAddReturn;
 
     }
 }

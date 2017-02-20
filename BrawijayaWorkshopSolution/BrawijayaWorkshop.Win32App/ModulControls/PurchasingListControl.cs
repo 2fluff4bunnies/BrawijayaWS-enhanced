@@ -44,6 +44,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsEditData.Enabled = AllowEdit;
             persetujuanPembelianToolStripMenuItem.Enabled = AllowEdit;
             cmsPrint.Enabled = AllowEdit;
+            cmsAddReturn.Enabled = AllowEdit;
             txtDateFilterFrom.EditValue = txtDateFilterTo.EditValue = DateTime.Today;
 
             this.Load += PurchasingListControl_Load;
@@ -66,6 +67,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     persetujuanPembelianToolStripMenuItem.Visible = true;
                     lihatSelengkapnyaToolStripMenuItem.Visible = false;
                     cmsPrint.Visible = false;
+                    cmsAddReturn.Visible = false;
+                }
+                else if (this.SelectedPurchasing.Status == (int)DbConstant.PurchasingStatus.HasReturn)
+                {
+                    cmsEditData.Visible = false;
+                    persetujuanPembelianToolStripMenuItem.Visible = false;
+                    lihatSelengkapnyaToolStripMenuItem.Visible = true;
+                    cmsPrint.Visible = true;
+                    cmsAddReturn.Visible = false;
                 }
                 else
                 {
@@ -73,6 +83,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     persetujuanPembelianToolStripMenuItem.Visible = false;
                     lihatSelengkapnyaToolStripMenuItem.Visible = true;
                     cmsPrint.Visible = true;
+                    cmsAddReturn.Visible = true;
                 }
             }
         }
@@ -243,6 +254,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         persetujuanPembelianToolStripMenuItem.Visible = true;
                         lihatSelengkapnyaToolStripMenuItem.Visible = false;
                         cmsPrint.Visible = false;
+                        cmsAddReturn.Visible = false;
+                    }
+                    else if (this.SelectedPurchasing.Status == (int)DbConstant.PurchasingStatus.HasReturn)
+                    {
+                        cmsEditData.Visible = false;
+                        persetujuanPembelianToolStripMenuItem.Visible = false;
+                        lihatSelengkapnyaToolStripMenuItem.Visible = true;
+                        cmsPrint.Visible = true;
+                        cmsAddReturn.Visible = false;
                     }
                     else
                     {
@@ -250,6 +270,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         persetujuanPembelianToolStripMenuItem.Visible = false;
                         lihatSelengkapnyaToolStripMenuItem.Visible = true;
                         cmsPrint.Visible = true;
+                        cmsAddReturn.Visible = true;
                     }
                 }
             }
@@ -267,6 +288,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 {
                     case 0: e.DisplayText = "Menunggu Persetujuan"; break;
                     case 1: e.DisplayText = "Disetujui"; break;
+                    case 2: e.DisplayText = "Ada Retur"; break;
                 }
             }
         }
@@ -307,6 +329,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 // Invoke the Print dialog.
                 printTool.PrintDialog();
+            }
+        }
+
+        private void cmsAddReturn_Click(object sender, EventArgs e)
+        {
+            if (_selectedPurchasing != null)
+            {
+                PurchaseReturnEditorForm editor = Bootstrapper.Resolve<PurchaseReturnEditorForm>();
+                editor.SelectedPurchasing = _selectedPurchasing;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
             }
         }
 

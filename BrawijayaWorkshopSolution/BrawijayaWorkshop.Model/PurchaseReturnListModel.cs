@@ -49,34 +49,50 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchasingViewModel> SearchPurchasingList(DateTime? dateFrom, DateTime? dateTo, int supplierID)
+        public List<PurchaseReturnViewModel> SearchPurchaseReturnList(DateTime? dateFrom, DateTime? dateTo, int supplierID)
         {
-            List<Purchasing> result = null;
+            List<PurchaseReturn> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _purchasingRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status == (int)DbConstant.PurchasingStatus.Active).OrderBy(c => c.Date).ToList();
+                result = _purchaseReturnRepository.GetMany(c => c.Date >= dateFrom && c.Date <= dateTo && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.Date).ToList();
             }
             else
             {
-                result = _purchasingRepository.GetMany(c => c.Status == (int)DbConstant.PurchasingStatus.Active).OrderBy(c => c.Date).ToList();
+                result = _purchaseReturnRepository.GetMany(c => c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.Date).ToList();
             }
 
             if (supplierID != 0)
             {
-                result = result.Where(p => p.SupplierId == supplierID).ToList();
-            } 
+                result = result.Where(p => p.Purchasing.SupplierId == supplierID).ToList();
+            }
 
-            List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();
+            List<PurchaseReturnViewModel> mappedResult = new List<PurchaseReturnViewModel>();
             Map(result, mappedResult);
 
             foreach (var itemMapped in mappedResult)
             {
-                itemMapped.IsHasReturn = IsHasReturnActive(itemMapped.Id);
+                itemMapped.TotalPriceReturn = CalculateTotalReturn(itemMapped.Id);
             }
 
             return mappedResult;
+        }
+
+        public decimal CalculateTotalReturn(int purchaseReturnID)
+        {
+            decimal result = 0;
+            List<PurchaseReturnDetail> listReturnDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
+
+            if(listReturnDetail != null && listReturnDetail.Count > 0)
+            {
+                foreach (var itemReturn in listReturnDetail)
+                {
+                    result += itemReturn.SparepartDetail.PurchasingDetail != null ? itemReturn.SparepartDetail.PurchasingDetail.Price : itemReturn.SparepartDetail.SparepartManualTransaction.Price;
+                }
+            }
+
+            return result;
         }
 
         public List<SupplierViewModel> GetSupplierFilterList()
@@ -86,11 +102,6 @@ namespace BrawijayaWorkshop.Model
 
             List<SupplierViewModel> mappedResult = new List<SupplierViewModel>();
             return Map(result, mappedResult);
-        }
-
-        public bool IsHasReturnActive(int purchasingID)
-        {
-            return _purchaseReturnRepository.GetMany(x => x.PurchasingId == purchasingID && x.Status == (int)DbConstant.DefaultDataStatus.Active).Count() > 0;
         }
 
         public PurchaseReturnViewModel GetPurchaseReturn(int purchasingID)
@@ -235,6 +246,7 @@ namespace BrawijayaWorkshop.Model
 
 
                     Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
+                    purchasing.Status = (int)DbConstant.PurchasingStatus.Active;
                     if (purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= (decimal)transaction.TotalTransaction)
                     {
                         purchasing.TotalHasPaid -= (decimal)transaction.TotalTransaction;

@@ -15,5 +15,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public List<PurchaseReturnDetailViewModel> PurchasingReturnDetailList { get; set; }
 
         public List<ReturnViewModel> ReturnList { get; set; }
+
+        public decimal TotalPriceReturn { get; set; }
     }
 }

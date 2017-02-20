@@ -51,6 +51,7 @@
             this.persetujuanPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lihatSelengkapnyaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).BeginInit();
@@ -270,9 +271,10 @@
             this.cmsEditData,
             this.persetujuanPembelianToolStripMenuItem,
             this.lihatSelengkapnyaToolStripMenuItem,
-            this.cmsPrint});
+            this.cmsPrint,
+            this.cmsAddReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(196, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(196, 136);
             // 
             // cmsEditData
             // 
@@ -305,6 +307,14 @@
             this.cmsPrint.Size = new System.Drawing.Size(195, 22);
             this.cmsPrint.Text = "Cetak";
             this.cmsPrint.Click += new System.EventHandler(this.cmsPrint_Click);
+            // 
+            // cmsAddReturn
+            // 
+            this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.cmsAddReturn.Name = "cmsAddReturn";
+            this.cmsAddReturn.Size = new System.Drawing.Size(195, 22);
+            this.cmsAddReturn.Text = "Buat Retur";
+            this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
             // PurchasingListControl
             // 
@@ -353,6 +363,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmsPrint;
         private DevExpress.XtraEditors.LabelControl lblStatus;
         private DevExpress.XtraEditors.LookUpEdit cbStatus;
+        private System.Windows.Forms.ToolStripMenuItem cmsAddReturn;
 
     }
 }

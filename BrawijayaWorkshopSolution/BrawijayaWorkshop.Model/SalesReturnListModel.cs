@@ -59,38 +59,49 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<InvoiceViewModel> SearchInvoiceList(DateTime? dateFrom, DateTime? dateTo, int customerID)
+        public bool IsHasReturnActive(int invoiceID)
         {
-            List<Invoice> result = null;
+            return _salesReturnRepository.GetMany(x => x.InvoiceId == invoiceID && x.Status == (int)DbConstant.DefaultDataStatus.Active).Count() > 0;
+        }
+
+        public List<SalesReturnViewModel> SearchSalesReturnList(DateTime? dateFrom, DateTime? dateTo, int customerID)
+        {
+            List<SalesReturn> result = null;
             if (dateFrom.HasValue && dateTo.HasValue)
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _invoiceRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && (c.Status == (int) DbConstant.InvoiceStatus.Printed || c.Status == (int) DbConstant.InvoiceStatus.HasReturn) && c.SPK.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE).OrderBy(c => c.CreateDate).ToList();
+                result = _salesReturnRepository.GetMany(c => c.Date >= dateFrom && c.CreateDate <= dateTo && c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderByDescending(c => c.Date).ToList();
             }
             else
             {
-                result = _invoiceRepository.GetMany(c => (c.Status == (int) DbConstant.InvoiceStatus.Printed || c.Status == (int) DbConstant.InvoiceStatus.HasReturn) && c.SPK.CategoryReference.Code == DbConstant.REF_SPK_CATEGORY_SALE).OrderBy(c => c.CreateDate).ToList();
+                result = _salesReturnRepository.GetMany(c => c.Status == (int)DbConstant.DefaultDataStatus.Active).OrderByDescending(c => c.Date).ToList();
             }
-            if (customerID != 0)
-            {
-                result = result.Where(p => p.SPK.Vehicle.CustomerId == customerID).ToList();
-            } 
 
-            List<InvoiceViewModel> mappedResult = new List<InvoiceViewModel>();
+            List<SalesReturnViewModel> mappedResult = new List<SalesReturnViewModel>();
             Map(result, mappedResult);
-
             foreach (var itemMapped in mappedResult)
             {
-                itemMapped.IsHasReturn = IsHasReturnActive(itemMapped.Id);
+                itemMapped.TotalPriceReturn = CalculateTotalReturn(itemMapped.Id);
             }
 
             return mappedResult;
         }
 
-        public bool IsHasReturnActive(int invoiceID)
+        public decimal CalculateTotalReturn(int salesReturnID)
         {
-            return _salesReturnRepository.GetMany(x => x.InvoiceId == invoiceID && x.Status == (int)DbConstant.DefaultDataStatus.Active).Count() > 0;
+            decimal result = 0;
+            List<SalesReturnDetail> listReturnDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
+
+            if (listReturnDetail != null && listReturnDetail.Count > 0)
+            {
+                foreach (var itemReturn in listReturnDetail)
+                {
+                    result += itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail != null ? itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail.Price : itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartManualTransaction.Price;
+                }
+            }
+
+            return result;
         }
 
         public SalesReturnViewModel GetSalesReturn(int invoiceID)

@@ -44,6 +44,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsAddData.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsPrint.Enabled = AllowEdit;
+            cmsAddReturn.Enabled = AllowEdit;
 
             this.Load += InvoiceListControl_Load;
         }
@@ -65,24 +66,28 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     cmsAddData.Visible = true;
                     cmsEditData.Visible = false;
                     cmsPrint.Visible = false;
+                    cmsAddReturn.Visible = false;
                 }
                 else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
                 {
                     cmsAddData.Visible = false;
                     cmsEditData.Visible = true;
                     cmsPrint.Visible = true;
+                    cmsAddReturn.Visible = false;
                 }
                 else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.HasReturn)
                 {
                     cmsAddData.Visible = false;
                     cmsEditData.Visible = false;
                     cmsPrint.Visible = false;
+                    cmsAddReturn.Visible = false;
                 }
                 else
                 {
                     cmsAddData.Visible = false;
                     cmsEditData.Visible = false;
                     cmsPrint.Visible = true;
+                    cmsAddReturn.Visible = true;
                 }
             }
         }
@@ -299,24 +304,28 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         cmsAddData.Visible = true;
                         cmsEditData.Visible = false;
                         cmsPrint.Visible = false;
+                        cmsAddReturn.Visible = false;
                     }
                     else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.NotPrinted)
                     {
                         cmsAddData.Visible = false;
                         cmsEditData.Visible = true;
                         cmsPrint.Visible = true;
+                        cmsAddReturn.Visible = false;
                     }
                     else if (this.SelectedInvoice.Status == (int)DbConstant.InvoiceStatus.HasReturn)
                     {
                         cmsAddData.Visible = false;
                         cmsEditData.Visible = false;
                         cmsPrint.Visible = false;
+                        cmsAddReturn.Visible = false;
                     }
                     else
                     {
                         cmsAddData.Visible = false;
                         cmsEditData.Visible = false;
                         cmsPrint.Visible = true;
+                        cmsAddReturn.Visible = true;
                     }
                 }
             }
@@ -434,6 +443,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Export invoice selesai", true);
+        }
+
+        private void cmsAddReturn_Click(object sender, EventArgs e)
+        {
+            if (_selectedInvoice != null)
+            {
+                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
+                editor.SelectedInvoice = _selectedInvoice;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+            }
         }
     }
 }

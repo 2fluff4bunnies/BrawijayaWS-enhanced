@@ -21,7 +21,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
     public partial class SalesReturnListControl : BaseAppUserControl, ISalesReturnListView
     {
         private SalesReturnListPresenter _presenter;
-        private InvoiceViewModel _selectedInvoice;
+        private SalesReturnViewModel _selectedSalesReturn;
 
         protected override string ModulName
         {
@@ -40,9 +40,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvInvoice.FocusedRowChanged += gvInvoice_FocusedRowChanged;
 
             // init editor control accessibility
-            btnListReturn.Enabled = AllowEdit;
-            cmsAddReturn.Enabled = AllowInsert;
-            cmsEditReturn.Enabled = AllowEdit;
+            cmsViewDetail.Enabled = AllowEdit;
             cmsDeleteReturn.Enabled = AllowEdit;
             cmsPrintReturn.Enabled = AllowEdit;
 
@@ -59,27 +57,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void gvInvoice_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            this.SelectedInvoice = gvInvoice.GetFocusedRow() as InvoiceViewModel;
-            if (this.SelectedInvoice != null)
+            this.SelectedSalesReturn = gvInvoice.GetFocusedRow() as SalesReturnViewModel;
+            if (this.SelectedSalesReturn != null)
             {
-                bool isHasReturnActive = false;
-                isHasReturnActive = SelectedInvoice.IsHasReturn;
-                if (!isHasReturnActive)
-                {
-                    cmsAddReturn.Visible = true;
-                    cmsEditReturn.Visible = false;
-                    cmsDeleteReturn.Visible = false;
-                    cmsPrintReturn.Visible = false;
-                }
-                else
-                {
-                    cmsAddReturn.Visible = false;
-                    cmsEditReturn.Visible = true;
-                    cmsDeleteReturn.Visible = true;
-                    cmsPrintReturn.Visible = true;
-                    _presenter.GetSalesReturn();
-                    _presenter.GetReturnList();
-                }
+                _presenter.GetReturnList();
             }
         }
 
@@ -142,11 +123,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public List<InvoiceViewModel> InvoiceListData
+        public List<SalesReturnViewModel> SalesReturnListData
         {
             get
             {
-                return gridInvoice.DataSource as List<InvoiceViewModel>;
+                return gridInvoice.DataSource as List<SalesReturnViewModel>;
             }
             set
             {
@@ -162,19 +143,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        public InvoiceViewModel SelectedInvoice
+        public SalesReturnViewModel SelectedSalesReturn
         {
             get
             {
-                return _selectedInvoice;
+                return _selectedSalesReturn;
             }
             set
             {
-                _selectedInvoice = value;
+                _selectedSalesReturn = value;
             }
         }
 
-        public SalesReturnViewModel SelectedSalesReturn { get; set; }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             RefreshDataView();
@@ -185,7 +165,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (!bgwMain.IsBusy)
             {
                 MethodBase.GetCurrentMethod().Info("Fecthing SalesReturn data...");
-                _selectedInvoice = null;
+                _selectedSalesReturn = null;
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data penjualan...", false);
                 bgwMain.RunWorkerAsync();
             }
@@ -221,77 +201,14 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             if (gvInvoice.RowCount > 0)
             {
-                SelectedInvoice = gvInvoice.GetRow(0) as InvoiceViewModel;
-                if (this.SelectedInvoice != null)
+                SelectedSalesReturn = gvInvoice.GetRow(0) as SalesReturnViewModel;
+                if (this.SelectedSalesReturn != null)
                 {
-                    bool isHasReturnActive = false;
-                    isHasReturnActive = SelectedInvoice.IsHasReturn;
-                    if (!isHasReturnActive)
-                    {
-                        cmsAddReturn.Visible = true;
-                        cmsEditReturn.Visible = false;
-                        cmsDeleteReturn.Visible = false;
-                        cmsPrintReturn.Visible = false;
-                    }
-                    else
-                    {
-                        cmsAddReturn.Visible = false;
-                        cmsEditReturn.Visible = true;
-                        cmsDeleteReturn.Visible = true;
-                        cmsPrintReturn.Visible = true;
-                        _presenter.GetSalesReturn();
-                        _presenter.GetReturnList();
-                    }
+                    _presenter.GetReturnList();
                 }
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data pembelian selesai", true);
-        }
-
-        private void btnListReturn_Click(object sender, EventArgs e)
-        {
-            SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
-            editor.ShowDialog(this);
-
-            btnSearch.PerformClick();
-        }
-
-        private void cmsAddReturn_Click(object sender, EventArgs e)
-        {
-            if (_selectedInvoice != null)
-            {
-                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
-                editor.SelectedInvoice = _selectedInvoice;
-                editor.ShowDialog(this);
-
-                btnSearch.PerformClick();
-            }
-        }
-
-        private void cmsListReturn_Click(object sender, EventArgs e)
-        {
-            if (_selectedInvoice != null)
-            {
-                SalesReturnTransactionListForm editor = Bootstrapper.Resolve<SalesReturnTransactionListForm>();
-                editor.SelectedInvoice = _selectedInvoice;
-                editor.ShowDialog(this);
-
-                btnSearch.PerformClick();
-            }
-        }
-
-        private void cmsEditReturn_Click(object sender, EventArgs e)
-        {
-            if (SelectedSalesReturn != null)
-            {
-                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
-                editor.SelectedInvoice = SelectedInvoice;
-                editor.SelectedSalesReturn = SelectedSalesReturn;
-                editor.ShowDialog(this);
-
-                btnSearch.PerformClick();
-
-            }
         }
 
         private void cmsDeleteReturn_Click(object sender, EventArgs e)
@@ -327,6 +244,20 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 // Invoke the Print dialog.
                 printTool.PrintDialog();
+            }
+        }
+
+        private void cmsViewDetail_Click(object sender, EventArgs e)
+        {
+            if (SelectedSalesReturn != null)
+            {
+                SalesReturnEditorForm editor = Bootstrapper.Resolve<SalesReturnEditorForm>();
+                editor.SelectedInvoice = SelectedSalesReturn.Invoice;
+                editor.SelectedSalesReturn = SelectedSalesReturn;
+                editor.ShowDialog(this);
+
+                btnSearch.PerformClick();
+
             }
         }
 

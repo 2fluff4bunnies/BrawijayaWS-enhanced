@@ -21,17 +21,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadSalesReturn()
         {
-            View.InvoiceListData = Model.SearchInvoiceList(View.DateFilterFrom, View.DateFilterTo, View.CustomerFilter);
-        }
-
-        public bool IsHasReturnActive()
-        {
-            return Model.IsHasReturnActive(View.SelectedInvoice.Id);
-        }
-
-        public void GetSalesReturn()
-        {
-            View.SelectedSalesReturn = Model.GetSalesReturn(View.SelectedInvoice.Id);
+            View.SalesReturnListData = Model.SearchSalesReturnList(View.DateFilterFrom, View.DateFilterTo, View.CustomerFilter);
         }
 
         public void DeleteData()
@@ -44,7 +34,7 @@ namespace BrawijayaWorkshop.Presenter
         }
         public void GetReturnList()
         {
-            View.SelectedSalesReturn.ReturnList = Model.GetReturnListDetail(View.SelectedSalesReturn.Id, View.SelectedInvoice.Id);
+            View.SelectedSalesReturn.ReturnList = Model.GetReturnListDetail(View.SelectedSalesReturn.Id, View.SelectedSalesReturn.Invoice.Id);
             View.SelectedSalesReturn.SalesReturnDetails = Model.RetrieveSalesReturnDetailView(View.SelectedSalesReturn.Id);
         }
     }

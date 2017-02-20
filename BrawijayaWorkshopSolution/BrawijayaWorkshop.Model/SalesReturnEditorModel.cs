@@ -658,6 +658,8 @@ namespace BrawijayaWorkshop.Model
                 invoice.PaymentStatus = (int)DbConstant.PaymentStatus.NotSettled;
             }
 
+            invoice.Status = (int)DbConstant.InvoiceStatus.Printed;
+
             _invoiceRepository.AttachNavigation(invoice.CreateUser);
             _invoiceRepository.AttachNavigation(invoice.ModifyUser);
             _invoiceRepository.AttachNavigation(invoice.PaymentMethod);

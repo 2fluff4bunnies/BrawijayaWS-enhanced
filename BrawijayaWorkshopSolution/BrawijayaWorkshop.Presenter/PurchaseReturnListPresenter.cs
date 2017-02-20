@@ -21,17 +21,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadPurchaseReturn()
         {
-            View.PurchasingListData = Model.SearchPurchasingList(View.DateFilterFrom, View.DateFilterTo, View.SupplierFilter);
-        }
-
-        public bool IsHasReturnActive()
-        {
-            return Model.IsHasReturnActive(View.SelectedPurchasing.Id);
-        }
-
-        public void GetPurchaseReturn()
-        {
-            View.SelectedPurchaseReturn = Model.GetPurchaseReturn(View.SelectedPurchasing.Id);
+            View.PurchaseReturnListData = Model.SearchPurchaseReturnList(View.DateFilterFrom, View.DateFilterTo, View.SupplierFilter);
         }
 
         public void DeleteData()
@@ -44,7 +34,7 @@ namespace BrawijayaWorkshop.Presenter
         }
         public void GetReturnList()
         {
-            View.SelectedPurchaseReturn.ReturnList = Model.GetReturnListDetail(View.SelectedPurchaseReturn.Id, View.SelectedPurchasing.Id);
+            View.SelectedPurchaseReturn.ReturnList = Model.GetReturnListDetail(View.SelectedPurchaseReturn.Id, View.SelectedPurchaseReturn.PurchasingId);
         }
     }
 }

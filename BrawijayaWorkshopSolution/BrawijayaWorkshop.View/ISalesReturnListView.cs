@@ -10,9 +10,7 @@ namespace BrawijayaWorkshop.View
         DateTime? DateFilterFrom { get; set; }
         DateTime? DateFilterTo { get; set; }
         int CustomerFilter { get; set; }
-        List<InvoiceViewModel> InvoiceListData { get; set; }
-
-        InvoiceViewModel SelectedInvoice { get; set; }
+        List<SalesReturnViewModel> SalesReturnListData { get; set; }
 
         SalesReturnViewModel SelectedSalesReturn { get; set; }
         List<CustomerViewModel> CustomerFilterList { get; set; }

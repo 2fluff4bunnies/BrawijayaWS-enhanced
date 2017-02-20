@@ -283,7 +283,8 @@ namespace BrawijayaWorkshop.Model
             }
 
             Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
-            if(purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= totalTransaction)
+            purchasing.Status = (int)DbConstant.PurchasingStatus.HasReturn;
+            if (purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= totalTransaction)
             {
                 purchasing.TotalHasPaid += totalTransaction;
             }
@@ -486,7 +487,8 @@ namespace BrawijayaWorkshop.Model
             _transactionRepository.Update(transaction);
 
             Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
-            if (purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= (decimal) transaction.TotalTransaction)
+            purchasing.Status = (int)DbConstant.PurchasingStatus.Active;
+            if (purchasing.TotalPrice != purchasing.TotalHasPaid && (purchasing.TotalPrice - purchasing.TotalHasPaid) >= (decimal)transaction.TotalTransaction)
             {
                 purchasing.TotalHasPaid -= (decimal) transaction.TotalTransaction;
             }

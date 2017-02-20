@@ -204,6 +204,7 @@ namespace BrawijayaWorkshop.Constant
         {
             NotVerified = 0,
             Active = 1,
+            HasReturn = 2,
             Deleted = -1
         }
 
