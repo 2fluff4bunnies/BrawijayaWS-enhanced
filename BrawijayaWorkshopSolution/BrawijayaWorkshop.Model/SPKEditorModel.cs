@@ -809,11 +809,12 @@ namespace BrawijayaWorkshop.Model
                     entity.ModifyDate = serverTime;
                     entity.ModifyUserId = userId;
 
-                    //_SPKRepository.AttachNavigation<Vehicle>(entity.Vehicle);
-                    //_SPKRepository.AttachNavigation<User>(entity.ModifyUser);
-                    //_SPKRepository.AttachNavigation<User>(entity.CreateUser);
-                    //_SPKRepository.AttachNavigation<Reference>(entity.CategoryReference);
+                    _SPKRepository.AttachNavigation<Vehicle>(entity.Vehicle);
+                    _SPKRepository.AttachNavigation<User>(entity.ModifyUser);
+                    _SPKRepository.AttachNavigation<User>(entity.CreateUser);
+                    _SPKRepository.AttachNavigation<Reference>(entity.CategoryReference);
                     _SPKRepository.Update(entity);
+                    _unitOfWork.SaveChanges();
 
                     foreach (var spkSp in _SPKDetailSparepartRepository.GetMany(sds => sds.SPKId == entity.Id))
                     {
@@ -822,11 +823,12 @@ namespace BrawijayaWorkshop.Model
                         sparepart.ModifyDate = serverTime;
                         sparepart.ModifyUserId = userId;
 
-                        //_sparepartRepository.AttachNavigation<User>(sparepart.ModifyUser);
-                        //_sparepartRepository.AttachNavigation<User>(sparepart.CreateUser);
-                        //_sparepartRepository.AttachNavigation<Reference>(sparepart.CategoryReference);
-                        //_sparepartRepository.AttachNavigation<Reference>(sparepart.UnitReference);
+                        _sparepartRepository.AttachNavigation<User>(sparepart.ModifyUser);
+                        _sparepartRepository.AttachNavigation<User>(sparepart.CreateUser);
+                        _sparepartRepository.AttachNavigation<Reference>(sparepart.CategoryReference);
+                        _sparepartRepository.AttachNavigation<Reference>(sparepart.UnitReference);
                         _sparepartRepository.Update(sparepart);
+                        _unitOfWork.SaveChanges();
                     }
 
                     List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
@@ -838,12 +840,13 @@ namespace BrawijayaWorkshop.Model
                         sparepartDetail.ModifyUserId = userId;
                         sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
 
-                        //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.ModifyUser);
-                        //_sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.CreateUser);
-                        //_sparepartDetailRepository.AttachNavigation<Sparepart>(sparepartDetail.Sparepart);
-                        //_sparepartDetailRepository.AttachNavigation<PurchasingDetail>(sparepartDetail.PurchasingDetail);
-                        //_sparepartDetailRepository.AttachNavigation<SparepartManualTransaction>(sparepartDetail.SparepartManualTransaction);
+                        _sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.ModifyUser);
+                        _sparepartDetailRepository.AttachNavigation<User>(sparepartDetail.CreateUser);
+                        _sparepartDetailRepository.AttachNavigation<Sparepart>(sparepartDetail.Sparepart);
+                        _sparepartDetailRepository.AttachNavigation<PurchasingDetail>(sparepartDetail.PurchasingDetail);
+                        _sparepartDetailRepository.AttachNavigation<SparepartManualTransaction>(sparepartDetail.SparepartManualTransaction);
                         _sparepartDetailRepository.Update(sparepartDetail);
+                        _unitOfWork.SaveChanges();
 
                         if (sparepartDetail.PurchasingDetail != null)
                         {
@@ -897,7 +900,8 @@ namespace BrawijayaWorkshop.Model
                                             {
                                                 PurchasingId = cl.Key,
                                                 Qty = cl.Count(),
-                                                Price = cl.First().Price
+                                                Price = cl.First().Price,
+                                                SparepartId = cl.First().SparepartId
                                             }).ToList();
 
                             foreach (var itemPurchasing in listPurchasing)
@@ -907,7 +911,7 @@ namespace BrawijayaWorkshop.Model
                                 stockCardDtail.PricePerItem = Convert.ToDouble(itemPurchasing.Price);
                                 stockCardDtail.QtyIn = itemPurchasing.Qty;
                                 stockCardDtail.QtyInPrice = Convert.ToDouble(itemPurchasing.Qty * itemPurchasing.Price);
-                                SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(itemPurchasing.Sparepart.Id, itemPurchasing.PurchasingId);
+                                SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(itemPurchasing.SparepartId, itemPurchasing.PurchasingId);
                                 double lastStockDetail = 0;
                                 double lastStockDetailPrice = 0;
                                 if (lastStockCardDetail != null)
