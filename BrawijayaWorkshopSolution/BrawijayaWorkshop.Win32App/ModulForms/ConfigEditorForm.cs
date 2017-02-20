@@ -137,6 +137,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public string SPKContractLimit
+        {
+            get
+            {
+                return txtSPKContractLimit.Text;
+            }
+            set
+            {
+                txtSPKContractLimit.Text = value;
+            }
+        }
+
         private void btnCheckFingerprintConnection_Click(object sender, EventArgs e)
         {
             if (!bgwFingerprint.IsBusy)

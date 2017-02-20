@@ -24,6 +24,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SparepartWheelLookupList = Model.LoadSparepartWheel();
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
+            View.ContractThreshold = Model.GetContractThreshold().AsDecimal();
 
             if (View.ParentSPK != null)
             {

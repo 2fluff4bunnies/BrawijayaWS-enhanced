@@ -106,6 +106,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public MechanicViewModel SelectedMechanic { get; set; }
         public decimal RepairThreshold { get; set; }
         public decimal ServiceThreshold { get; set; }
+        public decimal ContractThreshold { get; set; }
         public bool IsNeedApproval { get; set; }
         public bool IsUsedSparepartRequired { get; set; }
         public List<SpecialSparepartDetailViewModel> RemovedWHeelDetailList { get; set; }
@@ -772,14 +773,36 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             bool result = false;
 
             ReferenceViewModel selectedReference = lookUpCategory.Properties.GetDataSourceRowByKeyValue(lookUpCategory.EditValue) as ReferenceViewModel;
+            decimal vehicleBills = _presenter.GetAllPurchaseByVehicleToday();
 
-            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE )
+            #region contract as high priority
+            //if (this.isContractWork && (this.ContractWorkFee + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ContractThreshold)
+            //{
+            //    result = true;
+            //}
+            //else
+            //{
+            //    if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE &&
+            //        (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
+            //    {
+            //        result = true;
+            //    }
+
+            //    if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR &&
+            //        (this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+            //    {
+            //        result = true;
+            //    }
+            //}
+            #endregion
+
+            if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_SERVICE)
             {
-                if (isContractWork && ContractWorkFee >= this.ServiceThreshold)
+                if (isContractWork && ContractWorkFee >= this.ContractThreshold)
                 {
                     result = true;
                 }
-                else if ((this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
+                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.ServiceThreshold)
                 {
                     result = true;
                 }
@@ -787,15 +810,16 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR)
             {
-                if (isContractWork && ContractWorkFee >= this.RepairThreshold)
-                {
-                    result = true;
-                }
-                else if ((this.TotalSparepartPrice + _presenter.GetAllPurchaseByVehicleToday()) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
-                {
-                    result = true;
-                }
+                //if (isContractWork && ContractWorkFee >= this.ContractThreshold)
+                //{
+                //    result = true;
+                //}
+                //else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+                //{
+                //    result = true;
+                //}
 
+                //always true
                 result = true;
             }
 
@@ -936,7 +960,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void lookupWheelDetailGv_EditValueChanging(object sender, ChangingEventArgs e)
         {
-           
+
         }
 
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
@@ -959,7 +983,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 e.Cancel = true;
             }
 
-            if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber" )
+            if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber")
             {
                 e.Cancel = true;
             }
@@ -1063,9 +1087,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             }
                         }
                     }
-                    
-                    
-                    
+
+
+
                 }
             }
             catch (Exception ex)

@@ -48,6 +48,7 @@ namespace BrawijayaWorkshop.View
 
         decimal RepairThreshold { get; set; }
         decimal ServiceThreshold { get; set; }
+        decimal ContractThreshold { get; set; }
 
         bool IsNeedApproval { get; set; }
         decimal TotalSparepartPrice { get; set; }

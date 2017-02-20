@@ -130,12 +130,12 @@ namespace BrawijayaWorkshop.Model
 
                             _sparepartRepository.Update(sparepart);
 
-                            if (sparepart.StockQty <= GetStockThreshold())
-                            {
-                                SparepartViewModel viewModel = new SparepartViewModel();
-                                Map(sparepart, viewModel);
-                                warningList.Add(viewModel);
-                            }
+                            //if (sparepart.StockQty <= GetStockThreshold())
+                            //{
+                            //    SparepartViewModel viewModel = new SparepartViewModel();
+                            //    Map(sparepart, viewModel);
+                            //    warningList.Add(viewModel);
+                            //}
                         }
 
                         _unitOfWork.SaveChanges();
@@ -652,5 +652,26 @@ namespace BrawijayaWorkshop.Model
 
             return mappedResult;
         }
+
+
+        public void rollBackSparepart(int sparepartId)
+        { 
+        
+        }
+
+        public void rollBackSparepartDetail(List<SparepartDetailViewModel> sparepartDetailList)
+        { 
+        
+
+        }
+
+        public void rollBackInvoice(int invoiceId)
+        { 
+        
+        }
+
+        public void rollBackVehicle(int vehicleId)
+        { }
+
     }
 }

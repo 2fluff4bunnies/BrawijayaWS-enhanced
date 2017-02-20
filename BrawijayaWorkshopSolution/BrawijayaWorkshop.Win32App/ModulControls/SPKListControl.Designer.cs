@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKListControl));
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
+            this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
+            this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.lookUpContractWorkStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
             this.lblCompletedStatus = new DevExpress.XtraEditors.LabelControl();
@@ -68,12 +72,13 @@
             this.cmsSetAsCompleted = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
-            this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
+            this.cmsRollback = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCompletedStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).BeginInit();
@@ -84,10 +89,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFilter
@@ -118,6 +119,60 @@
             this.groupFilter.Size = new System.Drawing.Size(1085, 128);
             this.groupFilter.TabIndex = 0;
             this.groupFilter.Text = "Filter";
+            // 
+            // txtDateFilterTo
+            // 
+            this.txtDateFilterTo.EditValue = null;
+            this.txtDateFilterTo.Location = new System.Drawing.Point(245, 30);
+            this.txtDateFilterTo.Name = "txtDateFilterTo";
+            this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterTo.Properties.HideSelection = false;
+            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txtDateFilterTo.Size = new System.Drawing.Size(119, 20);
+            this.txtDateFilterTo.TabIndex = 3;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(235, 33);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(4, 13);
+            this.labelControl1.TabIndex = 2;
+            this.labelControl1.Text = "-";
+            // 
+            // txtDateFilterFrom
+            // 
+            this.txtDateFilterFrom.EditValue = null;
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(110, 30);
+            this.txtDateFilterFrom.Name = "txtDateFilterFrom";
+            this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtDateFilterFrom.Properties.HideSelection = false;
+            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
+            this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txtDateFilterFrom.Size = new System.Drawing.Size(119, 20);
+            this.txtDateFilterFrom.TabIndex = 1;
+            // 
+            // lblFilterDate
+            // 
+            this.lblFilterDate.Location = new System.Drawing.Point(12, 33);
+            this.lblFilterDate.Name = "lblFilterDate";
+            this.lblFilterDate.Size = new System.Drawing.Size(63, 13);
+            this.lblFilterDate.TabIndex = 0;
+            this.lblFilterDate.Text = "Tanggal SPK:";
             // 
             // lookUpContractWorkStatus
             // 
@@ -409,6 +464,7 @@
             this.viewDetailToolStripMenuItem,
             this.cmsEndorseData,
             this.cmsSPKApproval,
+            this.cmsRollback,
             this.toolStripSeparator1,
             this.cmsPrintData,
             this.cmsRequestPrint,
@@ -416,7 +472,7 @@
             this.cmsSetAsCompleted,
             this.cmsAbort});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(172, 186);
+            this.cmsEditor.Size = new System.Drawing.Size(172, 230);
             // 
             // viewDetailToolStripMenuItem
             // 
@@ -492,59 +548,13 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // txtDateFilterTo
+            // cmsRollback
             // 
-            this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(245, 30);
-            this.txtDateFilterTo.Name = "txtDateFilterTo";
-            this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateFilterTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateFilterTo.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.txtDateFilterTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txtDateFilterTo.Properties.EditFormat.FormatString = "dd-MM-yyyy";
-            this.txtDateFilterTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txtDateFilterTo.Properties.HideSelection = false;
-            this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterTo.Size = new System.Drawing.Size(119, 20);
-            this.txtDateFilterTo.TabIndex = 3;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(235, 33);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(4, 13);
-            this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "-";
-            // 
-            // txtDateFilterFrom
-            // 
-            this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(110, 30);
-            this.txtDateFilterFrom.Name = "txtDateFilterFrom";
-            this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateFilterFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateFilterFrom.Properties.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.txtDateFilterFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txtDateFilterFrom.Properties.EditFormat.FormatString = "dd-MM-yyyy";
-            this.txtDateFilterFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txtDateFilterFrom.Properties.HideSelection = false;
-            this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterFrom.Size = new System.Drawing.Size(119, 20);
-            this.txtDateFilterFrom.TabIndex = 1;
-            // 
-            // lblFilterDate
-            // 
-            this.lblFilterDate.Location = new System.Drawing.Point(12, 33);
-            this.lblFilterDate.Name = "lblFilterDate";
-            this.lblFilterDate.Size = new System.Drawing.Size(63, 13);
-            this.lblFilterDate.TabIndex = 0;
-            this.lblFilterDate.Text = "Tanggal SPK:";
+            this.cmsRollback.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources._1459465829_refresh;
+            this.cmsRollback.Name = "cmsRollback";
+            this.cmsRollback.Size = new System.Drawing.Size(171, 22);
+            this.cmsRollback.Text = "Rollback";
+            this.cmsRollback.Click += new System.EventHandler(this.cmsRollback_Click);
             // 
             // SPKListControl
             // 
@@ -558,6 +568,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpContractWorkStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCompletedStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpPrintStatus.Properties)).EndInit();
@@ -568,10 +582,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcSPK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPK)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -620,5 +630,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
         private DevExpress.XtraEditors.LabelControl lblFilterDate;
+        private System.Windows.Forms.ToolStripMenuItem cmsRollback;
     }
 }

@@ -128,10 +128,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     btnApprove.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending;
                 }
-                if (this.IsApproval)
+                else if (this.IsApproval)
                 {
                     btnApprove.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
                     btnReject.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+                }
+                else if (this.IsRollBack)
+                {
+                    btnRollback.Visible = false;
+                    //btnRollback.Visible = SelectedSPK.StatusApprovalId == (int)DbConstant.SPKCompletionStatus.Completed;
                 }
             }
 
@@ -165,6 +170,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public bool IsRequestPrintApproval { get; set; }
 
         public bool IsPrintApproval { get; set; }
+
+        public bool IsRollBack { get; set; }
 
         public bool IsAbort { get; set; }
 
@@ -304,6 +311,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.ShowConfirmation("SPK yang sudah dianggap selesai tidak bisa direvisi kembali \nkarena akan digunakan untuk pembuatan invoice/tagihan, anda yakin ingin melanjutkan ?") == DialogResult.Yes)
             {
                 _presenter.SetAsCompleted();
+                this.Close();
+            }
+        }
+
+        private void btnRollback_Click(object sender, EventArgs e)
+        {
+            if (this.ShowConfirmation("Ulangi semua proses penyelesaian SPK?") == DialogResult.Yes)
+            {
+                _presenter.RollBack();
                 this.Close();
             }
         }

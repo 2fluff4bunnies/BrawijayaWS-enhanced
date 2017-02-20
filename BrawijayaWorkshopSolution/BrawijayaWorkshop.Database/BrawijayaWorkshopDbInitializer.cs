@@ -1659,6 +1659,13 @@ namespace BrawijayaWorkshop.Database
                 Key = DbConstant.SETTING_SPK_THRESHOLD_P,
                 Value = "5000000"
             });
+
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_SPK_THRESHOLD_B,
+                Value = "15000000"
+            });
+
             context.SaveChanges();
             context.Database.ExecuteSqlCommand(@"SET GLOBAL log_bin_trust_function_creators = 1");
             context.Database.ExecuteSqlCommand(@"CREATE FUNCTION `TruncateTime`(dateValue DATETIME) RETURNS DATE

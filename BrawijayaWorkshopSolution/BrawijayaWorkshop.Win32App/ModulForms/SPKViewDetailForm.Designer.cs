@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKViewDetailForm));
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
+            this.lblCostEstimationValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblCostEstimation = new DevExpress.XtraEditors.LabelControl();
             this.lblContractWorkValue = new DevExpress.XtraEditors.LabelControl();
             this.lblContractWork = new DevExpress.XtraEditors.LabelControl();
             this.lblContractWorkFeeValue = new DevExpress.XtraEditors.LabelControl();
@@ -76,8 +78,7 @@
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
             this.lblVehicle = new DevExpress.XtraEditors.LabelControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.lblCostEstimationValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblCostEstimation = new DevExpress.XtraEditors.LabelControl();
+            this.btnRollback = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
             this.groupSPK.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
@@ -89,6 +90,7 @@
             // 
             // groupSPK
             // 
+            this.groupSPK.Controls.Add(this.btnRollback);
             this.groupSPK.Controls.Add(this.lblCostEstimationValue);
             this.groupSPK.Controls.Add(this.lblCostEstimation);
             this.groupSPK.Controls.Add(this.lblContractWorkValue);
@@ -133,6 +135,22 @@
             this.groupSPK.Size = new System.Drawing.Size(1075, 484);
             this.groupSPK.TabIndex = 1;
             this.groupSPK.Text = "Informasi SPK";
+            // 
+            // lblCostEstimationValue
+            // 
+            this.lblCostEstimationValue.Location = new System.Drawing.Point(135, 158);
+            this.lblCostEstimationValue.Name = "lblCostEstimationValue";
+            this.lblCostEstimationValue.Size = new System.Drawing.Size(4, 13);
+            this.lblCostEstimationValue.TabIndex = 67;
+            this.lblCostEstimationValue.Text = ":";
+            // 
+            // lblCostEstimation
+            // 
+            this.lblCostEstimation.Location = new System.Drawing.Point(15, 158);
+            this.lblCostEstimation.Name = "lblCostEstimation";
+            this.lblCostEstimation.Size = new System.Drawing.Size(84, 13);
+            this.lblCostEstimation.TabIndex = 66;
+            this.lblCostEstimation.Text = "Perkiraan Ongkos";
             // 
             // lblContractWorkValue
             // 
@@ -567,21 +585,17 @@
             // 
             this.gridView1.Name = "gridView1";
             // 
-            // lblCostEstimationValue
+            // btnRollback
             // 
-            this.lblCostEstimationValue.Location = new System.Drawing.Point(135, 158);
-            this.lblCostEstimationValue.Name = "lblCostEstimationValue";
-            this.lblCostEstimationValue.Size = new System.Drawing.Size(4, 13);
-            this.lblCostEstimationValue.TabIndex = 67;
-            this.lblCostEstimationValue.Text = ":";
-            // 
-            // lblCostEstimation
-            // 
-            this.lblCostEstimation.Location = new System.Drawing.Point(15, 158);
-            this.lblCostEstimation.Name = "lblCostEstimation";
-            this.lblCostEstimation.Size = new System.Drawing.Size(84, 13);
-            this.lblCostEstimation.TabIndex = 66;
-            this.lblCostEstimation.Text = "Perkiraan Ongkos";
+            this.btnRollback.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRollback.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnRollback.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnRollback.Location = new System.Drawing.Point(15, 452);
+            this.btnRollback.Name = "btnRollback";
+            this.btnRollback.Size = new System.Drawing.Size(94, 23);
+            this.btnRollback.TabIndex = 68;
+            this.btnRollback.Text = "Rollback";
+            this.btnRollback.Click += new System.EventHandler(this.btnRollback_Click);
             // 
             // SPKViewDetailForm
             // 
@@ -655,5 +669,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
         private DevExpress.XtraEditors.LabelControl lblCostEstimationValue;
         private DevExpress.XtraEditors.LabelControl lblCostEstimation;
+        private DevExpress.XtraEditors.SimpleButton btnRollback;
     }
 }
