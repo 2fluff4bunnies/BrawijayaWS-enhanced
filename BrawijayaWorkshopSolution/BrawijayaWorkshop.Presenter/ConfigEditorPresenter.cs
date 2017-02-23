@@ -35,6 +35,16 @@ namespace BrawijayaWorkshop.Presenter
             return View.ListSettings.Where(s => s.Key == key).FirstOrDefault();
         }
 
+        public void SetSetting(string key, string newValue)
+        {
+            try
+            {
+                int index = View.ListSettings.IndexOf(View.ListSettings.Where(s => s.Key == key).FirstOrDefault());
+                View.ListSettings[index].Value = newValue;
+            }
+            catch { }
+        }
+
         public bool ValidatePassword()
         {
             return Model.ValidateOldPassword(LoginInformation.UserId, View.OldPassword.Encrypt());
