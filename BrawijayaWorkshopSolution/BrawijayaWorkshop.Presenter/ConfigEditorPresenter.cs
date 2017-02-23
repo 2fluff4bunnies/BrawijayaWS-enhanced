@@ -22,7 +22,8 @@ namespace BrawijayaWorkshop.Presenter
             View.MinStockQuantity = GetSetting(DbConstant.SETTING_MINTSTOCK).Value;
             View.SPKServiceLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_S).Value;
             View.SPKRepairLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_P).Value;
-            View.SPKContractLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_B).Value;
+            View.SPKInventoryLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_I).Value;
+            View.SPKDirectSparepartLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_OL).Value;
         }
 
         public void SaveAllConfig()

@@ -722,7 +722,7 @@ namespace BrawijayaWorkshop.Model
 
         public string GetContractThreshold()
         {
-            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_B).FirstOrDefault().Value;
+            return _settingRepository.GetMany(s => s.Key == DbConstant.SETTING_SPK_THRESHOLD_I).FirstOrDefault().Value;
         }
 
 

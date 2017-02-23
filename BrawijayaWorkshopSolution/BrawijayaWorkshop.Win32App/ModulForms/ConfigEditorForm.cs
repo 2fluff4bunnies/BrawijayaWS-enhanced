@@ -150,16 +150,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public string SPKContractLimit
+        public string SPKInventoryLimit
         {
             get
             {
-                return txtSPKContractLimit.Text;
+                return txtSPKInventoryLimit.Text;
             }
             set
             {
-                txtSPKContractLimit.Text = value;
-                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_B, value);
+                txtSPKInventoryLimit.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_I, value);
+            }
+        }
+
+        public string SPKDirectSparepartLimit
+        {
+            get
+            {
+                return txtSPKDirectSparepartLimit.Text;
+            }
+            set
+            {
+                txtSPKDirectSparepartLimit.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_OL, value);
             }
         }
 

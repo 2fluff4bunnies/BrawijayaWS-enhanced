@@ -132,7 +132,8 @@ namespace BrawijayaWorkshop.Constant
         public const string SETTING_FINGERPRINT_PORT = "S_FINGERPRINT_PORT";
         public const string SETTING_SPK_THRESHOLD_P = "S_SPK_THRESHOLD_P";
         public const string SETTING_SPK_THRESHOLD_S = "S_SPK_THRESHOLD_S";
-        public const string SETTING_SPK_THRESHOLD_B = "S_SPK_THRESHOLD_B";
+        public const string SETTING_SPK_THRESHOLD_I = "S_SPK_THRESHOLD_I";
+        public const string SETTING_SPK_THRESHOLD_OL = "S_SPK_THRESHOLD_OL";
 
         public const string REF_SPK_CATEGORY_SERVICE = "REF_SPKCATEGORY_SERVICE";
         public const string REF_SPK_CATEGORY_REPAIR = "REF_SPKCATEGORY_REPAIR";
