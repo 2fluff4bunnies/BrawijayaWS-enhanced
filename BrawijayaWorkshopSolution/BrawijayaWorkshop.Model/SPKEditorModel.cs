@@ -99,7 +99,27 @@ namespace BrawijayaWorkshop.Model
             //List<Vehicle> result = _vehicleRepository.GetMany(v => v.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
             List<Vehicle> result = _vehicleRepository.GetVehicleForLookUp();
             List<VehicleViewModel> mappedResult = new List<VehicleViewModel>();
-            return Map(result, mappedResult);
+            //return Map(result, mappedResult);
+
+            foreach (var vehicle in result)
+            {
+                mappedResult.Add(new VehicleViewModel
+                {
+                    Id = vehicle.Id,
+                    TypeId = vehicle.TypeId,
+                    BrandId = vehicle.BrandId,
+                    ActiveLicenseNumber = vehicle.ActiveLicenseNumber,
+                    YearOfPurchase = vehicle.YearOfPurchase,
+                    CustomerId = vehicle.CustomerId,
+                    VehicleGroupId = vehicle.VehicleGroupId,
+                    Kilometers = vehicle.Kilometers,
+                    Code = vehicle.Code,
+                    CompanyName = vehicle.Customer.CompanyName,
+                    VehicleGroupName = vehicle.VehicleGroup.Name,
+                });
+            }
+
+            return mappedResult;
         }
 
 

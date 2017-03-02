@@ -16,5 +16,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public VehicleGroupViewModel VehicleGroup { get; set; }
         public int Kilometers { get; set; }
         public string Code { get; set; }
+        public string CompanyName { get; set; }
+        public string VehicleGroupName { get; set; }
     }
 }

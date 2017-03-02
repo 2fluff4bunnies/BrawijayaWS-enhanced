@@ -74,7 +74,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lookUpSerialNumber.Enabled = false;
             txtTotalSparepartPrice.ReadOnly = true;
 
-            //collumn setting for lookup specialSparepart in grid
+            //column setting for lookup specialSparepart in grid
             LookUpColumnInfoCollection wheelDetailColl = lookupWheelDetailGv.Columns;
 
             wheelDetailColl.Add(new LookUpColumnInfo("SerialNumber", 0, "Nomor Seri"));
@@ -88,7 +88,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lookUpSparepartWheelGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookUpSparepartWheelGv.SearchMode = SearchMode.AutoComplete;
             lookUpSparepartWheelGv.AutoSearchColumnIndex = 1;
-
+                        
             //Vehicle wheel handler
             ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
