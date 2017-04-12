@@ -37,6 +37,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void ConfigEditorForm_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            /*
+            View.FingerprintIpAddress = GetSetting(DbConstant.SETTING_FINGERPRINT_IPADDRESS).Value;
+            View.FingerprintPort = GetSetting(DbConstant.SETTING_FINGERPRINT_PORT).Value;
+            View.MinStockQuantity = GetSetting(DbConstant.SETTING_MINTSTOCK).Value;
+            View.SPKServiceLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_S).Value;
+            View.SPKRepairLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_P).Value;
+            View.SPKContractLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_B).Value;
+            */
         }
 
         public List<SettingViewModel> ListSettings { get; set; }
@@ -50,6 +58,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtMinStockQty.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_MINTSTOCK, value);
             }
         }
 
@@ -62,6 +71,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtIpAddress.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_FINGERPRINT_IPADDRESS, value);
             }
         }
 
@@ -74,6 +84,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtPort.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_FINGERPRINT_PORT, value);
             }
         }
 
@@ -122,6 +133,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtSPKServiceLimit.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_S, value);
             }
         }
 
@@ -134,18 +146,33 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             set
             {
                 txtSPKRepairLimit.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_P, value);
             }
         }
 
-        public string SPKContractLimit
+        public string SPKInventoryLimit
         {
             get
             {
-                return txtSPKContractLimit.Text;
+                return txtSPKInventoryLimit.Text;
             }
             set
             {
-                txtSPKContractLimit.Text = value;
+                txtSPKInventoryLimit.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_I, value);
+            }
+        }
+
+        public string SPKDirectSparepartLimit
+        {
+            get
+            {
+                return txtSPKDirectSparepartLimit.Text;
+            }
+            set
+            {
+                txtSPKDirectSparepartLimit.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_SPK_THRESHOLD_OL, value);
             }
         }
 

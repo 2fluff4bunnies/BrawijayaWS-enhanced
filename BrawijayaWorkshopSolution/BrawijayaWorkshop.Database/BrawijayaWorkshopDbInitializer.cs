@@ -1662,8 +1662,14 @@ namespace BrawijayaWorkshop.Database
 
             context.Settings.Add(new Setting
             {
-                Key = DbConstant.SETTING_SPK_THRESHOLD_B,
+                Key = DbConstant.SETTING_SPK_THRESHOLD_I,
                 Value = "15000000"
+            });
+
+            context.Settings.Add(new Setting
+            {
+                Key = DbConstant.SETTING_SPK_THRESHOLD_OL,
+                Value = "5000000"
             });
 
             context.SaveChanges();

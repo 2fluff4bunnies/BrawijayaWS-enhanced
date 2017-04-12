@@ -5,6 +5,7 @@ using BrawijayaWorkshop.Infrastructure.Repository;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace BrawijayaWorkshop.Model
@@ -45,7 +46,9 @@ namespace BrawijayaWorkshop.Model
             List<SPK> result = _SPKRepository.GetMany(s => s.Status == (int)DbConstant.DefaultDataStatus.Active 
                                                             && s.StatusCompletedId == (int) DbConstant.SPKCompletionStatus.InProgress
                                                             && s.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved
-                                                            &&!s.isContractWork).ToList();
+                                                            &&!s.isContractWork
+                                                            //&& DbFunctions.TruncateTime(s.DueDate) <= DbFunctions.TruncateTime(DateTime.Now)
+                                                            ).ToList();
             List<SPKViewModel> mappedResult = new List<SPKViewModel>();
 
             return Map(result, mappedResult);

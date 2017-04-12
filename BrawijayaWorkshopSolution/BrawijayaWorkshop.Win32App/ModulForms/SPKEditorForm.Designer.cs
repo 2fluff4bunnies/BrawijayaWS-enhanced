@@ -305,8 +305,10 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.LookUpVehicle.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ActiveLicenseNumber", "Nopol"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("VehicleGroupName", "Kelompok"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Kilometers", "Kilometer")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Kilometers", "Kilometer"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Customer")});
             this.LookUpVehicle.Properties.DisplayMember = "ActiveLicenseNumber";
             this.LookUpVehicle.Properties.HideSelection = false;
             this.LookUpVehicle.Properties.NullText = "-- Pilih Kendaraan --";
