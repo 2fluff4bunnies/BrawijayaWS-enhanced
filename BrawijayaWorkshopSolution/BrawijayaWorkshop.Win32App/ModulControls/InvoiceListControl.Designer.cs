@@ -31,6 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpServiceCategory = new DevExpress.XtraEditors.LookUpEdit();
+            this.txtLicenseNumberFilter = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpVehicleGroup = new DevExpress.XtraEditors.LookUpEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.cbPaymentStatus = new DevExpress.XtraEditors.ComboBoxEdit();
             this.lblPaymentStatus = new DevExpress.XtraEditors.LabelControl();
             this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
@@ -54,13 +60,16 @@
             this.cmsAddData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPrintAll = new DevExpress.XtraEditors.SimpleButton();
             this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
-            this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpServiceCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumberFilter.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicleGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).BeginInit();
@@ -77,6 +86,12 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.lookUpServiceCategory);
+            this.gcFilter.Controls.Add(this.txtLicenseNumberFilter);
+            this.gcFilter.Controls.Add(this.labelControl4);
+            this.gcFilter.Controls.Add(this.labelControl3);
+            this.gcFilter.Controls.Add(this.lookUpVehicleGroup);
+            this.gcFilter.Controls.Add(this.labelControl2);
             this.gcFilter.Controls.Add(this.cbPaymentStatus);
             this.gcFilter.Controls.Add(this.lblPaymentStatus);
             this.gcFilter.Controls.Add(this.lookUpCustomer);
@@ -90,13 +105,79 @@
             this.gcFilter.Controls.Add(this.lblFilterDate);
             this.gcFilter.Location = new System.Drawing.Point(0, 0);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(808, 95);
+            this.gcFilter.Size = new System.Drawing.Size(808, 169);
             this.gcFilter.TabIndex = 2;
             this.gcFilter.Text = "Filter";
             // 
+            // lookUpServiceCategory
+            // 
+            this.lookUpServiceCategory.Location = new System.Drawing.Point(106, 95);
+            this.lookUpServiceCategory.Name = "lookUpServiceCategory";
+            this.lookUpServiceCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpServiceCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpServiceCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Address", "Alamat")});
+            this.lookUpServiceCategory.Properties.DisplayMember = "CompanyName";
+            this.lookUpServiceCategory.Properties.HideSelection = false;
+            this.lookUpServiceCategory.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpServiceCategory.Properties.NullText = "Semua";
+            this.lookUpServiceCategory.Properties.ValueMember = "Id";
+            this.lookUpServiceCategory.Size = new System.Drawing.Size(181, 20);
+            this.lookUpServiceCategory.TabIndex = 22;
+            // 
+            // txtLicenseNumberFilter
+            // 
+            this.txtLicenseNumberFilter.Location = new System.Drawing.Point(454, 129);
+            this.txtLicenseNumberFilter.Name = "txtLicenseNumberFilter";
+            this.txtLicenseNumberFilter.Size = new System.Drawing.Size(181, 20);
+            this.txtLicenseNumberFilter.TabIndex = 21;
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(386, 132);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(27, 13);
+            this.labelControl4.TabIndex = 20;
+            this.labelControl4.Text = "NoPol";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(14, 98);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(68, 13);
+            this.labelControl3.TabIndex = 18;
+            this.labelControl3.Text = "Jenis Layanan";
+            // 
+            // lookUpVehicleGroup
+            // 
+            this.lookUpVehicleGroup.Location = new System.Drawing.Point(454, 61);
+            this.lookUpVehicleGroup.Name = "lookUpVehicleGroup";
+            this.lookUpVehicleGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpVehicleGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpVehicleGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.lookUpVehicleGroup.Properties.DisplayMember = "Name";
+            this.lookUpVehicleGroup.Properties.HideSelection = false;
+            this.lookUpVehicleGroup.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpVehicleGroup.Properties.NullText = "Semua";
+            this.lookUpVehicleGroup.Properties.ValueMember = "Id";
+            this.lookUpVehicleGroup.Size = new System.Drawing.Size(223, 20);
+            this.lookUpVehicleGroup.TabIndex = 17;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(386, 64);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(45, 13);
+            this.labelControl2.TabIndex = 16;
+            this.labelControl2.Text = "Kelompok";
+            // 
             // cbPaymentStatus
             // 
-            this.cbPaymentStatus.Location = new System.Drawing.Point(454, 61);
+            this.cbPaymentStatus.Location = new System.Drawing.Point(454, 95);
             this.cbPaymentStatus.Name = "cbPaymentStatus";
             this.cbPaymentStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -113,7 +194,7 @@
             // 
             // lblPaymentStatus
             // 
-            this.lblPaymentStatus.Location = new System.Drawing.Point(386, 64);
+            this.lblPaymentStatus.Location = new System.Drawing.Point(386, 98);
             this.lblPaymentStatus.Name = "lblPaymentStatus";
             this.lblPaymentStatus.Size = new System.Drawing.Size(62, 13);
             this.lblPaymentStatus.TabIndex = 14;
@@ -239,10 +320,10 @@
             this.gridInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridInvoice.Location = new System.Drawing.Point(0, 130);
+            this.gridInvoice.Location = new System.Drawing.Point(0, 218);
             this.gridInvoice.MainView = this.gvInvoice;
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(808, 247);
+            this.gridInvoice.Size = new System.Drawing.Size(808, 263);
             this.gridInvoice.TabIndex = 6;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -333,7 +414,7 @@
             this.cmsPrint,
             this.cmsAddReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 114);
+            this.cmsEditor.Size = new System.Drawing.Size(146, 92);
             // 
             // cmsAddData
             // 
@@ -359,12 +440,20 @@
             this.cmsPrint.Text = "Cetak Invoice";
             this.cmsPrint.Click += new System.EventHandler(this.cmsPrint_Click);
             // 
+            // cmsAddReturn
+            // 
+            this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
+            this.cmsAddReturn.Name = "cmsAddReturn";
+            this.cmsAddReturn.Size = new System.Drawing.Size(145, 22);
+            this.cmsAddReturn.Text = "Buat Retur";
+            this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
+            // 
             // btnPrintAll
             // 
             this.btnPrintAll.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.btnPrintAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnPrintAll.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrintAll.Location = new System.Drawing.Point(0, 101);
+            this.btnPrintAll.Location = new System.Drawing.Point(14, 189);
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(97, 23);
             this.btnPrintAll.TabIndex = 7;
@@ -376,7 +465,7 @@
             this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
             this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExportToCSV.Location = new System.Drawing.Point(119, 101);
+            this.btnExportToCSV.Location = new System.Drawing.Point(119, 189);
             this.btnExportToCSV.Name = "btnExportToCSV";
             this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
             this.btnExportToCSV.TabIndex = 8;
@@ -395,14 +484,6 @@
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
-            // cmsAddReturn
-            // 
-            this.cmsAddReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_item_16x16;
-            this.cmsAddReturn.Name = "cmsAddReturn";
-            this.cmsAddReturn.Size = new System.Drawing.Size(152, 22);
-            this.cmsAddReturn.Text = "Buat Retur";
-            this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
-            // 
             // InvoiceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,11 +493,14 @@
             this.Controls.Add(this.gridInvoice);
             this.Controls.Add(this.gcFilter);
             this.Name = "InvoiceListControl";
-            this.Size = new System.Drawing.Size(808, 377);
+            this.Size = new System.Drawing.Size(808, 481);
             this.Load += new System.EventHandler(this.InvoiceListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpServiceCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumberFilter.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicleGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).EndInit();
@@ -462,6 +546,12 @@
         private System.ComponentModel.BackgroundWorker bgwExport;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
         private System.Windows.Forms.ToolStripMenuItem cmsAddReturn;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LookUpEdit lookUpVehicleGroup;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.TextEdit txtLicenseNumberFilter;
+        private DevExpress.XtraEditors.LookUpEdit lookUpServiceCategory;
 
     }
 }

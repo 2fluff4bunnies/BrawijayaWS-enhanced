@@ -18,9 +18,9 @@ namespace BrawijayaWorkshop.Presenter
         public void InitData()
         {
             View.InvoiceStatusList = GetInvoiceStatusDropdownList();
+            View.InvoiceStatusFilter = 9;
             View.DateFromFilter = DateTime.Now;
             View.DateToFilter = DateTime.Now;
-            View.InvoiceStatusFilter = 9;
             List<CustomerViewModel> listCustomer = Model.GetAllCustomer();
             listCustomer.Insert(0, new CustomerViewModel
             {
@@ -29,6 +29,35 @@ namespace BrawijayaWorkshop.Presenter
                 Address = "Semua"
             });
             View.CustomerListOption = listCustomer;
+            List<ReferenceViewModel> listServiceCategory = Model.GetServiceCategoryList();
+            listServiceCategory.Insert(0, new ReferenceViewModel
+            {
+                Id = 0,
+                Name = "Semua"
+            });
+            View.ServiceCategoryList = listServiceCategory;
+            List<VehicleGroupViewModel> listVehicleGroup = new List<VehicleGroupViewModel>();
+            listVehicleGroup.Insert(0, new VehicleGroupViewModel
+            {
+                Id = 0,
+                Name = "Semua"
+            });
+            View.VehicleGroupListOption = listVehicleGroup;
+        }
+
+        public void LoadVehicleGroups()
+        {
+            List<VehicleGroupViewModel> listVehicleGroup = new List<VehicleGroupViewModel>();
+            if(View.SelectedCustomerId > 0)
+            {
+                listVehicleGroup = Model.GetVehicleGroupByCustomer(View.SelectedCustomerId);
+            }
+            listVehicleGroup.Insert(0, new VehicleGroupViewModel
+            {
+                Id = 0,
+                Name = "Semua"
+            });
+            View.VehicleGroupListOption = listVehicleGroup;
         }
 
         public void LoadInvoiceList()
@@ -43,7 +72,8 @@ namespace BrawijayaWorkshop.Presenter
                 paymentStatus = 1;
             }
 
-            View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter, View.SelectedCustomerId, paymentStatus);
+            View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter, View.SelectedCustomerId, 
+                View.ServiceCategoryFilter, View.SelectedVehicleGroupId, View.LicenseNumberFilter, paymentStatus);
         }
 
         public void ExportToCSV()

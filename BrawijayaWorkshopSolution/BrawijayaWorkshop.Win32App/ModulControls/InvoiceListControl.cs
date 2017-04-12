@@ -215,6 +215,61 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public List<ReferenceViewModel> ServiceCategoryList
+        {
+            get
+            {
+                return lookUpServiceCategory.Properties.DataSource as List<ReferenceViewModel>;
+            }
+            set
+            {
+                lookUpServiceCategory.Properties.DataSource = value;
+            }
+        }
+
+        public int ServiceCategoryFilter
+        {
+            get
+            {
+                return lookUpServiceCategory.EditValue.AsInteger();
+            }
+        }
+
+        public List<VehicleGroupViewModel> VehicleGroupListOption
+        {
+            get
+            {
+                return lookUpVehicleGroup.Properties.DataSource as List<VehicleGroupViewModel>;
+            }
+            set
+            {
+                lookUpVehicleGroup.Properties.DataSource = value;
+            }
+        }
+
+        public int SelectedVehicleGroupId
+        {
+            get
+            {
+                return lookUpVehicleGroup.EditValue.AsInteger();
+            }
+        }
+
+        public string LicenseNumberFilter
+        {
+            get
+            {
+                if (txtLicenseNumberFilter.EditValue != null)
+                {
+                    return txtLicenseNumberFilter.EditValue.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public string ExportFileName { get; set; }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -410,6 +465,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
         {
             EnableExport();
+            _presenter.LoadVehicleGroups();
         }
 
         private void cbPaymentStatus_EditValueChanged(object sender, EventArgs e)

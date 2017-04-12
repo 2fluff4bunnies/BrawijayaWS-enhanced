@@ -15,16 +15,26 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private ICustomerRepository _customerRepository;
         private ISparepartRepository _sparepartRepository;
+        private IReferenceRepository _referenceRepository;
+        private IVehicleGroupRepository _vehicleGroupRepository;
+        private IVehicleDetailRepository _vehicleDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public InvoiceListModel(IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,
-            ICustomerRepository customerRepository, ISparepartRepository sparepartRepository, IUnitOfWork unitOfWork)
+            ICustomerRepository customerRepository, ISparepartRepository sparepartRepository,
+            IReferenceRepository referenceRepository,
+            IVehicleGroupRepository vehicleGroupRepository,
+            IVehicleDetailRepository vehicleDetailRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
             _customerRepository = customerRepository;
             _sparepartRepository = sparepartRepository;
+            _referenceRepository = referenceRepository;
+            _vehicleGroupRepository = vehicleGroupRepository;
+            _vehicleDetailRepository = vehicleDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -67,7 +77,9 @@ namespace BrawijayaWorkshop.Model
         }
 
         public List<InvoiceViewModel> SearchInvoice(DateTime? dateFrom, DateTime? dateTo,
-            DbConstant.InvoiceStatus invoiceStatus, int customerId, int paymentStatus)
+            DbConstant.InvoiceStatus invoiceStatus, int customerId, 
+            int serviceCategoryId, int vehicleGroupId, string licenseNumber,
+            int paymentStatus)
         {
             List<Invoice> result = null;
 
@@ -92,6 +104,26 @@ namespace BrawijayaWorkshop.Model
                 result = result.Where(inv => inv.SPK.Vehicle.CustomerId == customerId).ToList();
             }
 
+            if (vehicleGroupId > 0)
+            {
+                result = result.Where(inv => inv.SPK.Vehicle.VehicleGroupId == vehicleGroupId).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(licenseNumber))
+            {
+                VehicleDetail vehicleDetail = _vehicleDetailRepository.GetMany(v => string.Compare(v.LicenseNumber, licenseNumber, true) == 1
+                                                                                    && v.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+                if (vehicleDetail != null)
+                {
+                    result = result.Where(inv => inv.SPK.VehicleId == vehicleDetail.VehicleId).ToList();
+                }
+            }
+
+            if (serviceCategoryId > 0)
+            {
+                result = result.Where(inv => inv.SPK.CategoryReferenceId == serviceCategoryId).ToList();
+            }
+
             if(paymentStatus > -1)
             {
                 result = result.Where(inv => inv.PaymentStatus == paymentStatus).ToList();
@@ -107,6 +139,22 @@ namespace BrawijayaWorkshop.Model
                 invd.Status == (int)DbConstant.DefaultDataStatus.Active &&
                 invd.InvoiceId == invoiceId).ToList();
             List<InvoiceDetailViewModel> mappedResult = new List<InvoiceDetailViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<ReferenceViewModel> GetServiceCategoryList()
+        {
+            Reference spkCategory = _referenceRepository.GetMany(r => string.Compare(r.Code, DbConstant.REF_SPKCATEGORY, true) == 0).FirstOrDefault();
+            List<Reference> result = _referenceRepository.GetMany(r => r.ParentId == spkCategory.Id).ToList();
+            List<ReferenceViewModel> mappedResult = new List<ReferenceViewModel>();
+            return Map(result, mappedResult);
+        }
+
+        public List<VehicleGroupViewModel> GetVehicleGroupByCustomer(int customerId)
+        {
+            List<VehicleGroup> result = _vehicleGroupRepository.GetMany(vg => vg.Status == (int)DbConstant.DefaultDataStatus.Active &&
+                vg.CustomerId == customerId).ToList();
+            List<VehicleGroupViewModel> mappedResult = new List<VehicleGroupViewModel>();
             return Map(result, mappedResult);
         }
     }

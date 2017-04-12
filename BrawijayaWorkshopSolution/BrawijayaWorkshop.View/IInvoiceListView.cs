@@ -26,6 +26,18 @@ namespace BrawijayaWorkshop.View
         List<InvoiceStatusItem> InvoiceStatusList { get; set; }
 
         List<CustomerViewModel> CustomerListOption { get; set; }
+
+        List<ReferenceViewModel> ServiceCategoryList { get; set; }
+
+        int ServiceCategoryFilter { get;}
+        List<VehicleGroupViewModel> VehicleGroupListOption { get; set; }
+        int SelectedVehicleGroupId { get; }
+        string LicenseNumberFilter { get; }
+
+
+
+
+
     }
 
     public class InvoiceStatusItem
