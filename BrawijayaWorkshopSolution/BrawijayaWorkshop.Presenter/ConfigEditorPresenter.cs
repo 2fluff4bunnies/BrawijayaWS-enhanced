@@ -24,6 +24,9 @@ namespace BrawijayaWorkshop.Presenter
             View.SPKRepairLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_P).Value;
             View.SPKInventoryLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_I).Value;
             View.SPKDirectSparepartLimit = GetSetting(DbConstant.SETTING_SPK_THRESHOLD_OL).Value;
+
+            View.InvoiceFeeSparepart = GetSetting(DbConstant.SETTING_INVOICE_FEE_SPAREPART).Value;
+            View.InvoiceFeeService = GetSetting(DbConstant.SETTING_INVOICE_FEE_SERVICE).Value;
         }
 
         public void SaveAllConfig()

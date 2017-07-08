@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<PurchasingViewModel> SearchTransaction(DateTime? dateFrom, DateTime? dateTo)
+        public List<PurchasingViewModel> SearchTransaction(DateTime? dateFrom, DateTime? dateTo, int paymentStatus)
         {
             List<Purchasing> result = null;
 
@@ -37,6 +37,11 @@ namespace BrawijayaWorkshop.Model
             else
             {
                 result = _purchasingRepository.GetMany(c => c.Status == (int)DbConstant.PurchasingStatus.Active || c.Status == (int)DbConstant.PurchasingStatus.HasReturn).OrderBy(c => c.Date).ToList();
+            }
+
+            if (paymentStatus > -1)
+            {
+                result = result.Where(p => p.PaymentStatus == paymentStatus).ToList();
             }
 
             List<PurchasingViewModel> mappedResult = new List<PurchasingViewModel>();

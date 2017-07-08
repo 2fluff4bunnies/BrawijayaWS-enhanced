@@ -63,7 +63,7 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _spkDetailSparepartRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo).OrderBy(c => c.CreateDate).ToList();
+                result = _spkDetailSparepartRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && c.SPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed).OrderBy(c => c.CreateDate).ToList();
                 listReturnSource = _salesReturnDetailRepository.GetMany(c => c.InvoiceDetail.CreateDate >= dateFrom && c.InvoiceDetail.CreateDate <= dateTo).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
                 
             }

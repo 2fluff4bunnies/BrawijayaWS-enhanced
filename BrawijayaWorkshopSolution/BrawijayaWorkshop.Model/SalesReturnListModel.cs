@@ -97,7 +97,10 @@ namespace BrawijayaWorkshop.Model
             {
                 foreach (var itemReturn in listReturnDetail)
                 {
-                    result += itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail != null ? itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail.Price : itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartManualTransaction.Price;
+                    //result += itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail != null ? itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail.Price : itemReturn.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartManualTransaction.Price;
+
+                    //new get price plus fee
+                    result += Convert.ToDecimal(itemReturn.InvoiceDetail.SubTotalPrice);
                 }
             }
 

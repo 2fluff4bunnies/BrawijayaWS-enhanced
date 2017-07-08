@@ -47,6 +47,8 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbPaymentStatus = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.lblPaymentStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -56,12 +58,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridDebt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDebt)).BeginInit();
             this.cmsEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.lblPaymentStatus);
+            this.gcFilter.Controls.Add(this.cbPaymentStatus);
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.labelControl1);
             this.gcFilter.Controls.Add(this.txtDateFilterTo);
@@ -69,7 +74,7 @@
             this.gcFilter.Controls.Add(this.lblFilterDate);
             this.gcFilter.Location = new System.Drawing.Point(0, 0);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(636, 64);
+            this.gcFilter.Size = new System.Drawing.Size(636, 101);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
@@ -144,10 +149,10 @@
             this.gridDebt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridDebt.Location = new System.Drawing.Point(0, 70);
+            this.gridDebt.Location = new System.Drawing.Point(-3, 107);
             this.gridDebt.MainView = this.gvDebt;
             this.gridDebt.Name = "gridDebt";
-            this.gridDebt.Size = new System.Drawing.Size(636, 242);
+            this.gridDebt.Size = new System.Drawing.Size(636, 243);
             this.gridDebt.TabIndex = 5;
             this.gridDebt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDebt});
@@ -256,6 +261,30 @@
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
             // 
+            // cbPaymentStatus
+            // 
+            this.cbPaymentStatus.Location = new System.Drawing.Point(127, 71);
+            this.cbPaymentStatus.Name = "cbPaymentStatus";
+            this.cbPaymentStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbPaymentStatus.Properties.HideSelection = false;
+            this.cbPaymentStatus.Properties.Items.AddRange(new object[] {
+            "Semua",
+            "Belum Lunas",
+            "Lunas"});
+            this.cbPaymentStatus.Properties.NullText = "Semua";
+            this.cbPaymentStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbPaymentStatus.Size = new System.Drawing.Size(138, 20);
+            this.cbPaymentStatus.TabIndex = 16;
+            // 
+            // lblPaymentStatus
+            // 
+            this.lblPaymentStatus.Location = new System.Drawing.Point(14, 74);
+            this.lblPaymentStatus.Name = "lblPaymentStatus";
+            this.lblPaymentStatus.Size = new System.Drawing.Size(62, 13);
+            this.lblPaymentStatus.TabIndex = 17;
+            this.lblPaymentStatus.Text = "Status Bayar";
+            // 
             // DebtListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,7 +292,7 @@
             this.Controls.Add(this.gridDebt);
             this.Controls.Add(this.gcFilter);
             this.Name = "DebtListControl";
-            this.Size = new System.Drawing.Size(636, 315);
+            this.Size = new System.Drawing.Size(636, 377);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -274,6 +303,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridDebt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDebt)).EndInit();
             this.cmsEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -297,5 +327,7 @@
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.ToolStripMenuItem cmsListPayment;
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentStatus;
+        private DevExpress.XtraEditors.ComboBoxEdit cbPaymentStatus;
+        private DevExpress.XtraEditors.LabelControl lblPaymentStatus;
     }
 }

@@ -14,5 +14,12 @@ namespace BrawijayaWorkshop.View
         List<InvoiceViewModel> InvoiceListData { get; set; }
 
         InvoiceViewModel SelectedInvoice { get; set; }
+
+        List<VehicleGroupViewModel> VehicleGroupListOption { get; set; }
+        int SelectedVehicleGroupId { get; }
+        string LicenseNumberFilter { get; }
+        List<CustomerViewModel> CustomerListOption { get; set; }
+        int SelectedCustomerId { get; }
+        string CreditStatusPayment { get; }
     }
 }

@@ -188,7 +188,8 @@
             this.cbSparepartGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbSparepartGv.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Sparepart"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "Kode")});
             this.cbSparepartGv.DisplayMember = "Name";
             this.cbSparepartGv.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.cbSparepartGv.Name = "cbSparepartGv";

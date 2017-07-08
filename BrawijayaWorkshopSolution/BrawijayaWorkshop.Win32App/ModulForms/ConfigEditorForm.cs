@@ -176,6 +176,32 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+        public string InvoiceFeeSparepart
+        {
+            get
+            {
+                return txtInvoiceFeeSparepart.Text;
+            }
+            set
+            {
+                txtInvoiceFeeSparepart.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_INVOICE_FEE_SPAREPART, value);
+            }
+        }
+
+        public string InvoiceFeeService
+        {
+            get
+            {
+                return txtInvoiceFeeService.Text;
+            }
+            set
+            {
+                txtInvoiceFeeService.Text = value;
+                _presenter.SetSetting(DbConstant.SETTING_INVOICE_FEE_SERVICE, value);
+            }
+        }
+
         private void btnCheckFingerprintConnection_Click(object sender, EventArgs e)
         {
             if (!bgwFingerprint.IsBusy)

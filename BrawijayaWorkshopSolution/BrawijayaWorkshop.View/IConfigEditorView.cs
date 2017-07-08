@@ -21,5 +21,8 @@ namespace BrawijayaWorkshop.View
         string SPKRepairLimit { get; set; }
         string SPKInventoryLimit { get; set; }
         string SPKDirectSparepartLimit { get; set; }
+
+        string InvoiceFeeSparepart { get; set; }
+        string InvoiceFeeService { get; set; }
     }
 }

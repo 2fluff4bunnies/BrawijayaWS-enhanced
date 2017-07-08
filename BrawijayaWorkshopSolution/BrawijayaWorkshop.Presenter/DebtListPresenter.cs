@@ -11,7 +11,17 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadPurchasingList()
         {
-            View.PurchasingListData = Model.SearchTransaction(View.DateFromFilter, View.DateToFilter);
+            int paymentStatus = -1;
+            if (string.Compare(View.DebtStatusPayment, "Belum Lunas", true) == 0)
+            {
+                paymentStatus = 0;
+            }
+            if (string.Compare(View.DebtStatusPayment, "Lunas", true) == 0)
+            {
+                paymentStatus = 1;
+            }
+            View.PurchasingListData = Model.SearchTransaction(View.DateFromFilter, View.DateToFilter, paymentStatus);
+            
         }
     }
 }

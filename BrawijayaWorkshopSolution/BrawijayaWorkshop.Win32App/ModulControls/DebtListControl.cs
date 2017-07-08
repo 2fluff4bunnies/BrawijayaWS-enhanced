@@ -136,6 +136,19 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public string DebtStatusPayment
+        {
+            get
+            {
+                string result = "Semua";
+                if (cbPaymentStatus.EditValue != null)
+                {
+                    result = cbPaymentStatus.EditValue.ToString();
+                }
+                return result;
+            }
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             RefreshDataView();

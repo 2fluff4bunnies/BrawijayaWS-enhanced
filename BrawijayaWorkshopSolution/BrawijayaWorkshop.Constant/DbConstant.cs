@@ -140,6 +140,9 @@ namespace BrawijayaWorkshop.Constant
         public const string REF_SPK_CATEGORY_SALE = "REF_SPKCATEGORY_SALE";
         public const string REF_SPK_CATEGORY_INVENTORY= "REF_SPKCATEGORY_INVENTORY";
 
+        public const string SETTING_INVOICE_FEE_SPAREPART = "S_INV_FEE_SPAREPART";
+        public const string SETTING_INVOICE_FEE_SERVICE = "S_INV_FEE_SERVICE";
+
         public enum AccessTypeEnum
         {
             Read = 1,

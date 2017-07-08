@@ -46,8 +46,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void CreditListControl_Load(object sender, EventArgs e)
         {
-            DateFromFilter = DateTime.Now;
-            DateToFilter = DateTime.Now;
+            _presenter.InitData();
             btnSearch.PerformClick();
         }
 
@@ -133,6 +132,74 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             set
             {
                 _selectedInvoice = value;
+            }
+        }
+
+        public string CreditStatusPayment
+        {
+            get
+            {
+                string result = "Semua";
+                if (cbPaymentStatus.EditValue != null)
+                {
+                    result = cbPaymentStatus.EditValue.ToString();
+                }
+                return result;
+            }
+        }
+
+        public List<CustomerViewModel> CustomerListOption
+        {
+            get
+            {
+                return lookUpCustomer.Properties.DataSource as List<CustomerViewModel>;
+            }
+            set
+            {
+                lookUpCustomer.Properties.DataSource = value;
+            }
+        }
+
+        public List<VehicleGroupViewModel> VehicleGroupListOption
+        {
+            get
+            {
+                return lookUpVehicleGroup.Properties.DataSource as List<VehicleGroupViewModel>;
+            }
+            set
+            {
+                lookUpVehicleGroup.Properties.DataSource = value;
+            }
+        }
+
+        public int SelectedVehicleGroupId
+        {
+            get
+            {
+                return lookUpVehicleGroup.EditValue.AsInteger();
+            }
+        }
+
+        public int SelectedCustomerId
+        {
+            get
+            {
+                return lookUpCustomer.EditValue.AsInteger();
+            }
+        }
+
+        public string LicenseNumberFilter
+        {
+            get
+            {
+                if (txtLicenseNumberFilter.EditValue != null)
+                {
+                    return txtLicenseNumberFilter.EditValue.ToString();
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -230,6 +297,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                     case 1: e.DisplayText = "Lunas"; break;
                 }
             }
+        }
+
+        private void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            _presenter.LoadVehicleGroups();
         }
     }
 }
