@@ -237,12 +237,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void lookUpChangedSerialNumber_EditValueChanged(object sender, EventArgs e)
         {
-            SpecialSparepartDetailViewModel wheelDetail = lookUpChangedSerialNumber.GetSelectedDataRow() as SpecialSparepartDetailViewModel;
+            LookUpEdit lookup = sender as LookUpEdit;
+            SpecialSparepartDetailViewModel wheelDetail = lookup.GetSelectedDataRow() as SpecialSparepartDetailViewModel;
+
             if (wheelDetail != null)
             {
                 if (wheelDetail.SparepartDetail.PurchasingDetailId > 0)
                 {
-                    this.Price = wheelDetail.SparepartDetail.SparepartManualTransaction.Price;
+                    this.Price = wheelDetail.SparepartDetail.PurchasingDetail.Price;
                 }
                 else if (wheelDetail.SparepartDetail.SparepartManualTransactionId > 0)
                 {
@@ -261,7 +263,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (this.WheelDetailList != null)
             {
-
                 var result = WheelDetailList.Where(wd => !_wheelDetailChanged.Any(wdc => wdc.Id == wd.Id && wdc.Id != this.SelectedVehicleWheel.ReplaceWithWheelDetailId)).ToList();
                 this.WheelDetailList = result;
             }
@@ -269,6 +270,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 this.WheelDetailList = new List<SpecialSparepartDetailViewModel>();
             }
+
             this.lookUpChangedSerialNumber.Refresh();
         }
 

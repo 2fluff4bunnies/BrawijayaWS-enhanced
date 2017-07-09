@@ -140,6 +140,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             SelectedMechanicList.AddRange(MechanicList);
             MechanicList.Clear();
+            RebindListboxes();
         }
 
         private void btnMoveLeft_Click(object sender, EventArgs e)
@@ -164,6 +165,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             MechanicList.AddRange(SelectedMechanicList);
             SelectedMechanicList.Clear();
+            RebindListboxes();
         }
 
         private void bgwFingerPrint_DoWork(object sender, DoWorkEventArgs e)
@@ -274,7 +276,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-
         protected override void ExecuteSave()
         {
             foreach (MechanicViewModel selected in SelectedMechanicList)
@@ -289,7 +290,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.Close();
         }
-
 
         private void RebindListboxes()
         {
