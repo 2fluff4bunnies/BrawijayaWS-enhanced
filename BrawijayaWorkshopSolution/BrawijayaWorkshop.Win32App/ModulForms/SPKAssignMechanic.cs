@@ -37,9 +37,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             _assignedSchedule = new List<SPKScheduleViewModel>();
 
-            lbxMechanics.DisplayMember = "Name";
-            lbxSelectedMechanics.DisplayMember = "Name";
-
             this.Load += SPKAssignMechanic_Load;
 
 
@@ -50,7 +47,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             _presenter.InitFormData();
 
-
+            RebindListboxes();
         }
 
         #region Properties
@@ -91,29 +88,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         public int MechanicId { get; set; }
 
-        public List<MechanicViewModel> MechanicList
-        {
-            get
-            {
-                return lbxMechanics.DataSource as List<MechanicViewModel>;
-            }
-            set
-            {
-                lbxMechanics.DataSource = value;
-            }
-        }
+        public List<MechanicViewModel> MechanicList { get; set; }
 
-        public List<MechanicViewModel> SelectedMechanicList
-        {
-            get
-            {
-                return lbxSelectedMechanics.DataSource as List<MechanicViewModel>;
-            }
-            set
-            {
-                lbxSelectedMechanics.DataSource = value;
-            }
-        }
+        public List<MechanicViewModel> SelectedMechanicList { get; set; }
 
         public SPKViewModel SelectedSPK
         {
@@ -143,30 +120,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnMoveRight_Click(object sender, EventArgs e)
         {
-            //MechanicViewModel selected = lbxMechanics.SelectedItem as MechanicViewModel;
-            //lbxSelectedMechanics.Items.Add(lbxMechanics.SelectedItem);
-            //SelectedMechanicList.Add(selected);
-            //MechanicList.Remove(selected);
-
-            //multiselect why is this very slow?
-
-            //foreach (var item in lbxMechanics.SelectedItems)
-            //{
-            //    MechanicViewModel selected = item as MechanicViewModel;
-            //    SelectedMechanicList.Add(selected);
-            //    MechanicList.Remove(selected);
-            //}
-
-            foreach (var item in lbxMechanics.SelectedItems)
+            if (lbxMechanics.SelectedItems != null)
             {
-                SelectedMechanicList.Add(item as MechanicViewModel);
-                
-            }
+                foreach (var item in lbxMechanics.SelectedItems)
+                {
+                    SelectedMechanicList.Add((MechanicViewModel)item);
+                }
 
+                foreach (var item in SelectedMechanicList)
+                {
+                    MechanicList.Remove((MechanicViewModel)item);
+                }
 
-            foreach (var item in SelectedMechanicList)
-            {
-                MechanicList.Remove(item as MechanicViewModel);
+                RebindListboxes();
             }
         }
 
@@ -178,19 +144,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnMoveLeft_Click(object sender, EventArgs e)
         {
-            //MechanicViewModel selected = lbxSelectedMechanics.SelectedItem as MechanicViewModel;
-
-            //MechanicList.Add(selected);
-            //SelectedMechanicList.Remove(selected);
-
-            foreach (var item in lbxSelectedMechanics.SelectedItems)
+            if (lbxSelectedMechanics != null)
             {
-                MechanicList.Add(item as MechanicViewModel);
-            }
+                foreach (var item in lbxSelectedMechanics.SelectedItems)
+                {
+                    MechanicList.Add(item as MechanicViewModel);
+                }
 
-            foreach (var item in SelectedMechanicList)
-            {
-                SelectedMechanicList.Remove(item as MechanicViewModel);
+                foreach (var item in MechanicList)
+                {
+                    SelectedMechanicList.Remove(item as MechanicViewModel);
+                }
+
+                RebindListboxes();
             }
         }
 
@@ -322,6 +288,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
 
             this.Close();
+        }
+
+
+        private void RebindListboxes()
+        {
+            lbxMechanics.DataSource = null;
+            lbxMechanics.DataSource = MechanicList;
+            lbxSelectedMechanics.DataSource = null;
+            lbxSelectedMechanics.DataSource = SelectedMechanicList;
+            lbxMechanics.ValueMember = "Id";
+            lbxMechanics.DisplayMember = "Name";
+            lbxSelectedMechanics.ValueMember = "Id";
+            lbxSelectedMechanics.DisplayMember = "Name";
         }
 
     }

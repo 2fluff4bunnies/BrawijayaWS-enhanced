@@ -562,11 +562,18 @@ namespace BrawijayaWorkshop.Model
                         wheel.Kilometers = spk.Kilometers;
                         wheel.ModifyDate = serverTime;
                         wheel.ModifyUserId = userId;
+                        wheel.Status = (int)DbConstant.WheelDetailStatus.Deleted;
+
+                        wheelReplace.Kilometers = spk.Kilometers;
+                        wheelReplace.ModifyDate = serverTime;
+                        wheelReplace.ModifyUserId = userId;
+                        wheelReplace.Status = (int)DbConstant.WheelDetailStatus.Installed;
 
                         _specialSparepartRepository.AttachNavigation<SpecialSparepart>(wheel.SpecialSparepart);
                         _sparepartDetailRepository.AttachNavigation<SparepartDetail>(wheel.SparepartDetail);
 
                         _specialSparepartDetailRepository.Update(wheel);
+                        _specialSparepartDetailRepository.Update(wheelReplace);
                         _unitOfWork.SaveChanges();
                     }
 

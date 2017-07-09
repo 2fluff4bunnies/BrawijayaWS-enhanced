@@ -364,6 +364,22 @@ namespace BrawijayaWorkshop.Model
                 sparepartDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
 
                 _sparepartDetailRepository.Update(sparepartDetail);
+
+                SpecialSparepartDetail sspd = _specialSparepartDetailRepository.GetAll().Where(spd => spd.SpecialSparepartId == item.SparepartDetail.Id).FirstOrDefault();
+                if (sspd != null)
+                {
+                    sparepartDetail.ModifyDate = serverTime;
+                    sparepartDetail.ModifyUserId = userId;
+
+                    if (sspd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL)
+                    {
+                        sparepartDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
+                    }
+                    else
+                    {
+                        sparepartDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+                    }
+                }
             }
 
             List<SPKSchedule> scheduleList = _SPKScheduleRepository.GetMany(sched => sched.SPKId == spk.Id).ToList();
@@ -518,7 +534,7 @@ namespace BrawijayaWorkshop.Model
                         }
 
                         //Replace Vehicle Wheel
-                        foreach (var item in getCurrentVehicleWheel(spk.Id, spk.VehicleId).Where(w => w.ReplaceWithWheelDetailId > 0))
+                        foreach (var item in getCurrentVehicleWheel(spk.VehicleId, spk.Id).Where(w => w.ReplaceWithWheelDetailId > 0))
                         {
                             VehicleWheel vw = _vehicleWheelRepository.GetById(item.Id);
 
@@ -607,7 +623,7 @@ namespace BrawijayaWorkshop.Model
                     throw;
                 }
             }
-            
+
         }
 
 
@@ -655,19 +671,19 @@ namespace BrawijayaWorkshop.Model
 
 
         public void rollBackSparepart(int sparepartId)
-        { 
-        
+        {
+
         }
 
         public void rollBackSparepartDetail(List<SparepartDetailViewModel> sparepartDetailList)
-        { 
-        
+        {
+
 
         }
 
         public void rollBackInvoice(int invoiceId)
-        { 
-        
+        {
+
         }
 
         public void rollBackVehicle(int vehicleId)

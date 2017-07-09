@@ -37,16 +37,14 @@
             this.btnMoveLeft = new DevExpress.XtraEditors.SimpleButton();
             this.btnMoveAllRight = new DevExpress.XtraEditors.SimpleButton();
             this.btnMoveRight = new DevExpress.XtraEditors.SimpleButton();
-            this.lbxSelectedMechanics = new DevExpress.XtraEditors.ListBoxControl();
-            this.lbxMechanics = new DevExpress.XtraEditors.ListBoxControl();
             this.bgwFingerPrint = new System.ComponentModel.BackgroundWorker();
+            this.lbxSelectedMechanics = new System.Windows.Forms.ListBox();
+            this.lbxMechanics = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl)).BeginInit();
             this.groupControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbxSelectedMechanics)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbxMechanics)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl
@@ -54,6 +52,8 @@
             this.groupControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl.Controls.Add(this.lbxSelectedMechanics);
+            this.groupControl.Controls.Add(this.lbxMechanics);
             this.groupControl.Controls.Add(this.lblDate);
             this.groupControl.Controls.Add(this.dtpDate);
             this.groupControl.Controls.Add(this.txtDescription);
@@ -62,8 +62,6 @@
             this.groupControl.Controls.Add(this.btnMoveLeft);
             this.groupControl.Controls.Add(this.btnMoveAllRight);
             this.groupControl.Controls.Add(this.btnMoveRight);
-            this.groupControl.Controls.Add(this.lbxSelectedMechanics);
-            this.groupControl.Controls.Add(this.lbxMechanics);
             this.groupControl.Location = new System.Drawing.Point(0, 0);
             this.groupControl.Name = "groupControl";
             this.groupControl.Size = new System.Drawing.Size(441, 391);
@@ -158,26 +156,27 @@
             this.btnMoveRight.Text = ">";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
             // 
-            // lbxSelectedMechanics
-            // 
-            this.lbxSelectedMechanics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbxSelectedMechanics.Location = new System.Drawing.Point(249, 52);
-            this.lbxSelectedMechanics.Name = "lbxSelectedMechanics";
-            this.lbxSelectedMechanics.Size = new System.Drawing.Size(180, 213);
-            this.lbxSelectedMechanics.TabIndex = 34;
-            // 
-            // lbxMechanics
-            // 
-            this.lbxMechanics.Location = new System.Drawing.Point(12, 52);
-            this.lbxMechanics.Name = "lbxMechanics";
-            this.lbxMechanics.Size = new System.Drawing.Size(180, 213);
-            this.lbxMechanics.SortOrder = System.Windows.Forms.SortOrder.Ascending;
-            this.lbxMechanics.TabIndex = 33;
-            // 
             // bgwFingerPrint
             // 
             this.bgwFingerPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFingerPrint_DoWork);
             this.bgwFingerPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFingerPrint_RunWorkerCompleted);
+            // 
+            // lbxSelectedMechanics
+            // 
+            this.lbxSelectedMechanics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbxSelectedMechanics.FormattingEnabled = true;
+            this.lbxSelectedMechanics.Location = new System.Drawing.Point(249, 49);
+            this.lbxSelectedMechanics.Name = "lbxSelectedMechanics";
+            this.lbxSelectedMechanics.Size = new System.Drawing.Size(180, 212);
+            this.lbxSelectedMechanics.TabIndex = 52;
+            // 
+            // lbxMechanics
+            // 
+            this.lbxMechanics.FormattingEnabled = true;
+            this.lbxMechanics.Location = new System.Drawing.Point(12, 49);
+            this.lbxMechanics.Name = "lbxMechanics";
+            this.lbxMechanics.Size = new System.Drawing.Size(180, 212);
+            this.lbxMechanics.TabIndex = 51;
             // 
             // SPKAssignMechanic
             // 
@@ -194,8 +193,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbxSelectedMechanics)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbxMechanics)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -203,8 +200,6 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl groupControl;
-        private DevExpress.XtraEditors.ListBoxControl lbxSelectedMechanics;
-        private DevExpress.XtraEditors.ListBoxControl lbxMechanics;
         private DevExpress.XtraEditors.SimpleButton btnMoveAllLeft;
         private DevExpress.XtraEditors.SimpleButton btnMoveLeft;
         private DevExpress.XtraEditors.SimpleButton btnMoveAllRight;
@@ -214,5 +209,7 @@
         private DevExpress.XtraEditors.LabelControl lblDate;
         private DevExpress.XtraEditors.DateEdit dtpDate;
         private System.ComponentModel.BackgroundWorker bgwFingerPrint;
+        private System.Windows.Forms.ListBox lbxSelectedMechanics;
+        private System.Windows.Forms.ListBox lbxMechanics;
     }
 }

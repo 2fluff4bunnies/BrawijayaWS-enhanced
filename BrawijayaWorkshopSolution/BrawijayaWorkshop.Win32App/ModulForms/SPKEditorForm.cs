@@ -1162,8 +1162,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             Name = vw.ReplaceWithWheelDetailName
                         },
                         SparepartId = vw.SparepartId,
-                        TotalQuantity = 1,
-                        TotalPrice = vw.Price
                     });
                 }
 
@@ -1177,6 +1175,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             Id = vw.ReplaceWithWheelDetailId
                         }
                     });
+
+                    SPKDetailSparepartViewModel spkSp = SPKSparepartList.Where(sp => sp.SparepartId == vw.SparepartId).FirstOrDefault();
+
+                    if (spkSp != null)
+                    {
+                        spkSp.TotalQuantity++;
+                        spkSp.TotalPrice = spkSp.TotalPrice + vw.Price;
+                    }
+
                 }
             }
 

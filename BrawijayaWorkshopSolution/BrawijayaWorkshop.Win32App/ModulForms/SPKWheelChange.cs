@@ -199,20 +199,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void btnConfirmChange_Click(object sender, EventArgs e)
         {
-            VehicleWheelViewModel vwChanged = VehicleWheelList.Where(vw => vw.Id == this.SelectedVehicleWheel.Id).FirstOrDefault();
-
-            if (vwChanged != null)
+            if (this.SelectedVehicleWheel != null)
             {
+                if (this.SelectedVehicleWheel.ReplaceWithWheelDetailId > 0)
+                {
+                    SpecialSparepartDetailViewModel vw = _wheelDetailChanged.Where(wdc => wdc.Id == this.SelectedVehicleWheel.ReplaceWithWheelDetailId).FirstOrDefault();
+
+                    if (vw != null)
+                    {
+                        _wheelDetailChanged.Remove(vw);
+                    }
+
+                }
+
                 SparepartViewModel sparepartWheel = lookUpChangedWheel.GetSelectedDataRow() as SparepartViewModel;
                 SpecialSparepartDetailViewModel wheelDetail = lookUpChangedSerialNumber.GetSelectedDataRow() as SpecialSparepartDetailViewModel;
                 if (sparepartWheel != null && wheelDetail != null)
                 {
-                    vwChanged.ReplaceWithWheelDetailName = sparepartWheel.Name;
-                    vwChanged.SparepartId = sparepartWheel.Id;
-                    vwChanged.ReplaceWithWheelDetailId = wheelDetail.Id;
-                    vwChanged.ReplaceWithWheelDetailSerialNumber = wheelDetail.SerialNumber;
-                    vwChanged.IsUsedWheelRetrieved = ckeUsedGoodRetrieved.Checked;
-                    vwChanged.Price = this.Price;
+                    this.SelectedVehicleWheel.ReplaceWithWheelDetailName = sparepartWheel.Name;
+                    this.SelectedVehicleWheel.SparepartId = sparepartWheel.Id;
+                    this.SelectedVehicleWheel.ReplaceWithWheelDetailId = wheelDetail.Id;
+                    this.SelectedVehicleWheel.ReplaceWithWheelDetailSerialNumber = wheelDetail.SerialNumber;
+                    this.SelectedVehicleWheel.IsUsedWheelRetrieved = ckeUsedGoodRetrieved.Checked;
+                    this.SelectedVehicleWheel.Price = this.Price;
 
                     _wheelDetailChanged.Add(wheelDetail);
                 }

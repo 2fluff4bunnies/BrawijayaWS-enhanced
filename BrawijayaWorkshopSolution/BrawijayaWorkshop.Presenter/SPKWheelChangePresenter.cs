@@ -31,12 +31,6 @@ namespace BrawijayaWorkshop.Presenter
             }
         }
 
-        public void SaveChanges()
-        {
-
-        }
-
-
         public void SetSelectedWheelDetailToChange(int wheelDetailId)
         {
             View.SelectedWheelDetailToChange = Model.GetWheelDetailById(wheelDetailId);
