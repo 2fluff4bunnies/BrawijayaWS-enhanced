@@ -20,6 +20,7 @@ namespace BrawijayaWorkshop.View
         List<MechanicViewModel> MechanicList { get; set; }
         SPKViewModel SelectedSPK { get; set; }
         string Description { get; set; }
+        List<MechanicViewModel> SelectedMechanicList { get; set; }
 
     }
 

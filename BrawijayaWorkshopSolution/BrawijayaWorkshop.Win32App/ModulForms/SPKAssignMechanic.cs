@@ -1,27 +1,19 @@
-﻿using BrawijayaWorkshop.Constant;
-using BrawijayaWorkshop.Database.Entities;
-using BrawijayaWorkshop.Model;
+﻿using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
-using BrawijayaWorkshop.Win32App.Properties;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Linq;
-using BrawijayaWorkshop.Win32App.PrintItems;
-using DevExpress.XtraReports.UI;
-using BrawijayaWorkshop.SharedObject.ViewModels;
-using DevExpress.XtraEditors;
+
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class SPKScheduleEditorForm : BaseEditorForm, ISPKScheduleEditorView
+    public partial class SPKAssignMechanic : BaseEditorForm, ISPKScheduleEditorView
     {
         private DateTime _today;
         private List<string> _availableMechanic;
@@ -29,10 +21,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private bool _isFingerprintConnected = false;
         public string FingerprintIP { get; set; }
         public string FingerpringPort { get; set; }
+        private BindingList<MechanicViewModel> _bindMechanics;
+        private BindingList<MechanicViewModel> _bindelectedMechanics;
+        private SPKScheduleEditorPresenter _presenter;
+        private SPKViewModel _selectedSPK;
+        private List<SPKScheduleViewModel> _assignedSchedule;
 
-        SPKScheduleEditorPresenter _presenter;
-
-        public SPKScheduleEditorForm(SPKScheduleEditorModel model)
+        public SPKAssignMechanic(SPKScheduleEditorModel model)
         {
             InitializeComponent();
 
@@ -40,42 +35,172 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _availableMechanic = new List<string>();
             _today = DateTime.Today;
 
-            FieldValidator.SetIconAlignment(lookUpMechanic, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            FieldValidator.SetIconAlignment(lookUpSPK, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            _assignedSchedule = new List<SPKScheduleViewModel>();
 
-            lookUpSPK.EditValueChanged += lookUpSPK_EditValueChanged;
+            lbxMechanics.DisplayMember = "Name";
+            lbxSelectedMechanics.DisplayMember = "Name";
 
-            this.Load += SPKScheduleEditorForm_Load;
+            this.Load += SPKAssignMechanic_Load;
+
+
+            //bgwFingerPrint.RunWorkerAsync();
         }
 
-        void lookUpSPK_EditValueChanged(object sender, EventArgs e)
-        {
-            LookUpEdit lookup = sender as LookUpEdit;
-            SPKVehicleModel selectedSPK = lookUpSPK.GetSelectedDataRow() as SPKVehicleModel;
-
-            _presenter.SetSelectedSPK(selectedSPK.Id);
-
-            if (this.SelectedSPK != null)
-            {
-                lblSPKCategoryValue.Text = this.SelectedSPK.CategoryReference.Name;
-                lblSPKDescriptionValue.Text = this.SelectedSPK.Description;
-                lblSPKVehicleCustomerValue.Text = this.SelectedSPK.Vehicle.Customer.CompanyName;
-            }
-            else
-            {
-                lblSPKCategoryValue.Text = "--";
-                lblSPKDescriptionValue.Text = "--";
-                lblSPKVehicleCustomerValue.Text = "--";
-            }
-        }
-
-        void SPKScheduleEditorForm_Load(object sender, EventArgs e)
+        void SPKAssignMechanic_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+
+
         }
 
-        #region FingerPrint
-        private void bgwFingerPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        #region Properties
+        public SPKScheduleViewModel SelectedSPKSchedule { get; set; }
+        public List<SPKScheduleViewModel> AssignedSchedule
+        {
+            get
+            {
+                return this._assignedSchedule;
+            }
+            set
+            {
+                this._assignedSchedule = value;
+            }
+        }
+        public string SPKVehicleCustomer { get; set; }
+        public string SPKCategory { get; set; }
+
+        public string SPKDescription { get; set; }
+
+        public DateTime Date
+        {
+            get
+            {
+                return dtpDate.EditValue.AsDateTime();
+            }
+            set
+            {
+                dtpDate.EditValue = value;
+            }
+        }
+
+        public int SPKId { get; set; }
+
+        public List<SPKViewModel> SPKList { get; set; }
+
+        public List<SPKVehicleModel> SPKVehicleList { get; set; }
+
+        public int MechanicId { get; set; }
+
+        public List<MechanicViewModel> MechanicList
+        {
+            get
+            {
+                return lbxMechanics.DataSource as List<MechanicViewModel>;
+            }
+            set
+            {
+                lbxMechanics.DataSource = value;
+            }
+        }
+
+        public List<MechanicViewModel> SelectedMechanicList
+        {
+            get
+            {
+                return lbxSelectedMechanics.DataSource as List<MechanicViewModel>;
+            }
+            set
+            {
+                lbxSelectedMechanics.DataSource = value;
+            }
+        }
+
+        public SPKViewModel SelectedSPK
+        {
+            get
+            {
+                return _selectedSPK;
+            }
+            set
+            {
+                _selectedSPK = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return txtDescription.EditValue.ToString();
+            }
+            set
+            {
+                txtDescription.EditValue = value;
+            }
+        }
+
+        #endregion
+
+        private void btnMoveRight_Click(object sender, EventArgs e)
+        {
+            //MechanicViewModel selected = lbxMechanics.SelectedItem as MechanicViewModel;
+            //lbxSelectedMechanics.Items.Add(lbxMechanics.SelectedItem);
+            //SelectedMechanicList.Add(selected);
+            //MechanicList.Remove(selected);
+
+            //multiselect why is this very slow?
+
+            //foreach (var item in lbxMechanics.SelectedItems)
+            //{
+            //    MechanicViewModel selected = item as MechanicViewModel;
+            //    SelectedMechanicList.Add(selected);
+            //    MechanicList.Remove(selected);
+            //}
+
+            foreach (var item in lbxMechanics.SelectedItems)
+            {
+                SelectedMechanicList.Add(item as MechanicViewModel);
+                
+            }
+
+
+            foreach (var item in SelectedMechanicList)
+            {
+                MechanicList.Remove(item as MechanicViewModel);
+            }
+        }
+
+        private void btnMoveAllRight_Click(object sender, EventArgs e)
+        {
+            SelectedMechanicList.AddRange(MechanicList);
+            MechanicList.Clear();
+        }
+
+        private void btnMoveLeft_Click(object sender, EventArgs e)
+        {
+            //MechanicViewModel selected = lbxSelectedMechanics.SelectedItem as MechanicViewModel;
+
+            //MechanicList.Add(selected);
+            //SelectedMechanicList.Remove(selected);
+
+            foreach (var item in lbxSelectedMechanics.SelectedItems)
+            {
+                MechanicList.Add(item as MechanicViewModel);
+            }
+
+            foreach (var item in SelectedMechanicList)
+            {
+                SelectedMechanicList.Remove(item as MechanicViewModel);
+            }
+        }
+
+        private void btnMoveAllLeft_Click(object sender, EventArgs e)
+        {
+            MechanicList.AddRange(SelectedMechanicList);
+            SelectedMechanicList.Clear();
+        }
+
+        private void bgwFingerPrint_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -160,7 +285,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        private void bgwFingerPrint_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void bgwFingerPrint_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Cursor = Cursors.Default;
             if (e.Result is Exception)
@@ -182,151 +307,21 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
             }
         }
-        #endregion
 
-        #region Properties
-        public SPKScheduleViewModel SelectedSPKSchedule { get; set; }
-        public SPKViewModel SelectedSPK { get; set; }
-
-        public string SPKVehicleCustomer
-        {
-            get
-            {
-                return lblSPKVehicleCustomerValue.Text;
-            }
-            set
-            {
-                lblSPKVehicleCustomerValue.Text = value;
-            }
-        }
-
-        public string SPKCategory
-        {
-            get
-            {
-                return lblSPKCategoryValue.Text;
-            }
-            set
-            {
-                lblSPKCategoryValue.Text = value;
-            }
-        }
-
-        public string SPKDescription
-        {
-            get
-            {
-                return lblSPKDescriptionValue.Text;
-            }
-            set
-            {
-                lblSPKDescriptionValue.Text = value;
-            }
-        }
-
-        public int SPKId
-        {
-            get
-            {
-                return lookUpSPK.EditValue.AsInteger();
-            }
-            set
-            {
-                lookUpSPK.EditValue = value;
-            }
-        }
-
-        public List<SPKViewModel> SPKList { get; set; }
-
-        public List<SPKVehicleModel> SPKVehicleList
-        {
-            get
-            {
-                return lookUpSPK.Properties.DataSource as List<SPKVehicleModel>;
-            }
-            set
-            {
-                lookUpSPK.Properties.DataSource = value;
-            }
-        }
-
-        public int MechanicId
-        {
-            get
-            {
-                return lookUpMechanic.EditValue.AsInteger();
-            }
-            set
-            {
-                lookUpMechanic.EditValue = value;
-            }
-        }
-
-        public List<MechanicViewModel> MechanicList
-        {
-            get
-            {
-                return lookUpMechanic.Properties.DataSource as List<MechanicViewModel>;
-            }
-            set
-            {
-                lookUpMechanic.Properties.DataSource = value;
-            }
-        }
-
-        public List<MechanicViewModel> SelectedMechanicList
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return memoDescription.Text;
-            }
-            set
-            {
-                memoDescription.Text = value;
-            }
-        }
-
-        public DateTime Date
-        {
-            get
-            {
-                return dtpDate.EditValue.AsDateTime();
-            }
-            set
-            {
-                dtpDate.EditValue = value;
-            }
-        }
-        #endregion
 
         protected override void ExecuteSave()
         {
-            if (FieldValidator.Validate())
+            foreach (MechanicViewModel selected in SelectedMechanicList)
             {
-                try
+                _assignedSchedule.Add(new SPKScheduleViewModel
                 {
-                    MethodBase.GetCurrentMethod().Info("Save SPK Schedule's changes");
-                    _presenter.SaveChanges();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to save guestbook", ex);
-                    this.ShowError("Proses simpan penjadwalan harian SPK gagal!");
-                }
+                    MechanicId = selected.Id,
+                    Description = this.Description,
+                    Date = this.Date,
+                });
             }
+
+            this.Close();
         }
 
     }

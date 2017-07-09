@@ -625,6 +625,12 @@
     <Compile Include="ModulForms\SparepartManualTransactionEditorForm.Designer.cs">
       <DependentUpon>SparepartManualTransactionEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\SPKAssignMechanic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKAssignMechanic.Designer.cs">
+      <DependentUpon>SPKAssignMechanic.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulForms\SPKDetailMechanicListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -660,6 +666,12 @@
     </Compile>
     <Compile Include="ModulForms\SPKViewDetailForm.Designer.cs">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulForms\SPKWheelChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\SPKWheelChange.Designer.cs">
+      <DependentUpon>SPKWheelChange.cs</DependentUpon>
     </Compile>
     <Compile Include="ModulForms\TypeEditorForm.cs">
       <SubType>Form</SubType>
@@ -1096,6 +1108,9 @@
     <EmbeddedResource Include="ModulForms\SparepartManualTransactionEditorForm.resx">
       <DependentUpon>SparepartManualTransactionEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKAssignMechanic.resx">
+      <DependentUpon>SPKAssignMechanic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKDetailMechanicListForm.resx">
       <DependentUpon>SPKDetailMechanicListForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1110,6 +1125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\SPKViewDetailForm.resx">
       <DependentUpon>SPKViewDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\SPKWheelChange.resx">
+      <DependentUpon>SPKWheelChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\TypeEditorForm.resx">
       <DependentUpon>TypeEditorForm.cs</DependentUpon>
@@ -1329,6 +1347,7 @@
     <None Include="Images\Truck-Left-Green-icon-16x16.png" />
     <None Include="Images\payment 16x16.png" />
     <None Include="Images\1459465829_refresh.png" />
+    <None Include="Resources\Apply_16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
     <None Include="Resources\calculator_16x16.png" />

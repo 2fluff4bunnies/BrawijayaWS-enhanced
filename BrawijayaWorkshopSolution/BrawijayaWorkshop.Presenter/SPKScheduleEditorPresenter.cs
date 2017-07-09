@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace BrawijayaWorkshop.Presenter
             View.MechanicList = Model.LoadMechanic();
             View.SPKList = Model.LoadSPK();
             View.SPKVehicleList = new List<SPKVehicleModel>();
+            View.SelectedMechanicList = new List<MechanicViewModel>();
+            View.Description = string.Empty;
 
             foreach (var item in View.SPKList)
             {

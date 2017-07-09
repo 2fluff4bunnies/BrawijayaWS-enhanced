@@ -25,6 +25,7 @@ namespace BrawijayaWorkshop.Presenter
             View.RepairThreshold = Model.GetRepairThreshold().AsDecimal();
             View.ServiceThreshold = Model.GetServiceThreshold().AsDecimal();
             View.ContractThreshold = Model.GetContractThreshold().AsDecimal();
+            View.AssignedSchedule = new List<SPKScheduleViewModel>();
 
             if (View.ParentSPK != null)
             {
@@ -54,6 +55,7 @@ namespace BrawijayaWorkshop.Presenter
                 View.Contractor = View.SelectedSPK.Contractor;
                 View.Kilometers = View.SelectedSPK.Kilometers;
                 View.CostEstimation = View.SelectedSPK.CostEstimation;
+                View.AssignedSchedule = new List<SPKScheduleViewModel>();
 
                 View.SPKSparepartList = Model.GetEndorsedSPKSparepartList(View.ParentSPK.Id);
                 View.SPKSparepartDetailList = Model.GetEndorsedSPKSparepartDetailList(View.ParentSPK.Id);
@@ -81,7 +83,8 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedSPK.Contractor = View.Contractor;
             }
 
-            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, View.VehicleWheelList, LoginInformation.UserId, View.IsNeedApproval);
+            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, 
+                View.VehicleWheelList, View.AssignedSchedule, LoginInformation.UserId, View.IsNeedApproval);
             if (View.ParentSPK != null)
             {
                 Model.AbortParentSPK(View.ParentSPK, LoginInformation.UserId);

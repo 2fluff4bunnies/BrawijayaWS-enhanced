@@ -26,6 +26,9 @@ namespace BrawijayaWorkshop.View
         List<SPKDetailSparepartDetailViewModel> SPKSparepartDetailList { get; set; }
         List<SparepartViewModel> SparepartLookupList { get; set; }
         List<SparepartViewModel> SparepartWheelLookupList { get; set; }
+
+        List<SPKScheduleViewModel> AssignedSchedule { get; set; }
+
         SparepartViewModel SparepartToInsert { get; }
         SparepartViewModel SelectedSparepart { get; set; }
         SPKDetailSparepartViewModel LastUsageRecord { get; set; }

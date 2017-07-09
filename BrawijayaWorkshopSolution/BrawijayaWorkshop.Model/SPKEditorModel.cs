@@ -36,6 +36,7 @@ namespace BrawijayaWorkshop.Model
         private ISparepartManualTransactionRepository _sparepartManualTransaction;
         private ICustomerRepository _customerRepository;
         private IBrandRepository _brandRepository;
+        private IMechanicRepository _mechanicRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKEditorModel(ISettingRepository settingRepository, IReferenceRepository referenceRepository, IVehicleRepository vehicleRepository,
@@ -57,6 +58,7 @@ namespace BrawijayaWorkshop.Model
             ISparepartManualTransactionRepository sparepartManualTransaction,
             ICustomerRepository customerRepository,
             IBrandRepository brandRepository,
+            IMechanicRepository mechanicRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -83,6 +85,7 @@ namespace BrawijayaWorkshop.Model
             _sparepartManualTransaction = sparepartManualTransaction;
             _customerRepository = customerRepository;
             _brandRepository = brandRepository;
+            _mechanicRepository = mechanicRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -181,6 +184,7 @@ namespace BrawijayaWorkshop.Model
             List<SPKDetailSparepartViewModel> spkSparepartList,
             List<SPKDetailSparepartDetailViewModel> spkSparepartDetailList,
             List<VehicleWheelViewModel> vehicleWheelList,
+            List<SPKScheduleViewModel> assignedScheduleList,
             int userId,
             bool isNeedApproval)
         {
@@ -580,6 +584,32 @@ namespace BrawijayaWorkshop.Model
 
                     _unitOfWork.SaveChanges();
 
+                    //Update SPK Schedule
+
+                    if (assignedScheduleList.Count > 0)
+                    {
+                        foreach ( SPKScheduleViewModel sched in assignedScheduleList)
+                        {
+                            SPKSchedule entitySched = new SPKSchedule();
+                            Mechanic mechanic = _mechanicRepository.GetById(sched.MechanicId);
+                         
+                            Map(sched, entitySched);
+                            entitySched.SPK = insertedSPK;
+                            entitySched.Mechanic = mechanic;
+                            entitySched.CreateDate = serverTime;
+                            entitySched.CreateUserId = userId;
+                            entitySched.ModifyDate = serverTime;
+                            entitySched.ModifyUserId = userId;
+                            entitySched.Status = (int)DbConstant.DefaultDataStatus.Active;
+
+                            _SPKRepository.AttachNavigation<SPK>(entitySched.SPK);
+                            _mechanicRepository.AttachNavigation<Mechanic>(entitySched.Mechanic);
+                            _SPKScheduleRepository.Add(entitySched);
+                            _unitOfWork.SaveChanges();
+                        } 
+
+                    }
+
                     trans.Commit();
                     SPKViewModel mappedResult = new SPKViewModel();
 
@@ -689,7 +719,7 @@ namespace BrawijayaWorkshop.Model
                     sparepartDetails.AddRange(sparepartDetailsFromPurchasing);
                 }
             }
-            
+
             List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
 
             foreach (var item in sparepartDetails)
@@ -1051,7 +1081,5 @@ namespace BrawijayaWorkshop.Model
 
             return Map(getSpInWheel, mappedResult);
         }
-
-        //test commit diff account
     }
 }

@@ -461,6 +461,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtCostEstimation.EditValue = value.ToString();
             }
         }
+
+        public List<SPKScheduleViewModel> AssignedSchedule { get; set; }
         #endregion
 
         #region EmailProperties
@@ -1125,6 +1127,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 this.IsSPKSales = true;
             }
 
+        }
+
+        private void btnAssignMechanic_Click(object sender, EventArgs e)
+        {
+            SPKAssignMechanic editor = Bootstrapper.Resolve<SPKAssignMechanic>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.ShowDialog(this);
+            this.AssignedSchedule = editor.AssignedSchedule;
         }
     }
 }

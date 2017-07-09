@@ -93,6 +93,7 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.btnAssignMechanic = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -150,6 +151,7 @@
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSPK.Controls.Add(this.btnAssignMechanic);
             this.groupSPK.Controls.Add(this.splitContainerMain);
             this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
             this.groupSPK.Controls.Add(this.lblTotalSparepart);
@@ -760,6 +762,18 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // btnAssignMechanic
+            // 
+            this.btnAssignMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
+            this.btnAssignMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAssignMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAssignMechanic.Location = new System.Drawing.Point(14, 395);
+            this.btnAssignMechanic.Name = "btnAssignMechanic";
+            this.btnAssignMechanic.Size = new System.Drawing.Size(123, 23);
+            this.btnAssignMechanic.TabIndex = 26;
+            this.btnAssignMechanic.Text = "Tugaskan Mekanik";
+            this.btnAssignMechanic.Click += new System.EventHandler(this.btnAssignMechanic_Click);
+            // 
             // SPKEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -870,5 +884,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpSparepartWheelGv;
         private DevExpress.XtraEditors.LabelControl lblCostEstimation;
         private DevExpress.XtraEditors.TextEdit txtCostEstimation;
+        private DevExpress.XtraEditors.SimpleButton btnAssignMechanic;
     }
 }
