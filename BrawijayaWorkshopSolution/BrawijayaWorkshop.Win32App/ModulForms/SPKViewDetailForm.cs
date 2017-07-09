@@ -29,8 +29,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             this.IsAbort = false;
             this.IsSetAsComplete = false;
-
+           
             this.Load += SPKViewDetailForm_Load;
+
+            this.btnRollback.Visible = false;
         }
 
         private void SPKViewDetailForm_Load(object sender, EventArgs e)

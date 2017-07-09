@@ -36,6 +36,8 @@
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.groupSPK = new DevExpress.XtraEditors.GroupControl();
+            this.btnChangeWheel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAssignMechanic = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.lblCostEstimation = new DevExpress.XtraEditors.LabelControl();
             this.txtCostEstimation = new DevExpress.XtraEditors.TextEdit();
@@ -49,15 +51,6 @@
             this.txtContractor = new DevExpress.XtraEditors.TextEdit();
             this.dtpDueDate = new DevExpress.XtraEditors.DateEdit();
             this.lblDueDate = new DevExpress.XtraEditors.LabelControl();
-            this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
-            this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lookUpSparepartWheelGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.colWheelDetailReplace = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.lblContractPrice = new DevExpress.XtraEditors.LabelControl();
             this.memoDescription = new DevExpress.XtraEditors.MemoEdit();
@@ -93,7 +86,15 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
-            this.btnAssignMechanic = new DevExpress.XtraEditors.SimpleButton();
+            this.gridVehicleWheel = new DevExpress.XtraGrid.GridControl();
+            this.gvVehicleWheel = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWheelDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colWheelDetailChanged = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIsUsedGoodReceived = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lookUpSparepartWheelGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -107,9 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContractWorkFee.Properties)).BeginInit();
@@ -127,6 +125,9 @@
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -151,6 +152,7 @@
             this.groupSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSPK.Controls.Add(this.btnChangeWheel);
             this.groupSPK.Controls.Add(this.btnAssignMechanic);
             this.groupSPK.Controls.Add(this.splitContainerMain);
             this.groupSPK.Controls.Add(this.txtTotalSparepartPrice);
@@ -161,6 +163,31 @@
             this.groupSPK.TabIndex = 0;
             this.groupSPK.Text = "Informasi SPK";
             // 
+            // btnChangeWheel
+            // 
+            this.btnChangeWheel.Enabled = false;
+            this.btnChangeWheel.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.Tire_16x16;
+            this.btnChangeWheel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
+            this.btnChangeWheel.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnChangeWheel.Location = new System.Drawing.Point(148, 395);
+            this.btnChangeWheel.Name = "btnChangeWheel";
+            this.btnChangeWheel.Size = new System.Drawing.Size(123, 23);
+            this.btnChangeWheel.TabIndex = 27;
+            this.btnChangeWheel.Text = "Ganti Ban";
+            this.btnChangeWheel.Click += new System.EventHandler(this.btnChangeWheel_Click);
+            // 
+            // btnAssignMechanic
+            // 
+            this.btnAssignMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
+            this.btnAssignMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnAssignMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAssignMechanic.Location = new System.Drawing.Point(14, 395);
+            this.btnAssignMechanic.Name = "btnAssignMechanic";
+            this.btnAssignMechanic.Size = new System.Drawing.Size(123, 23);
+            this.btnAssignMechanic.TabIndex = 26;
+            this.btnAssignMechanic.Text = "Tugaskan Mekanik";
+            this.btnAssignMechanic.Click += new System.EventHandler(this.btnAssignMechanic_Click);
+            // 
             // splitContainerMain
             // 
             this.splitContainerMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -169,6 +196,7 @@
             this.splitContainerMain.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerMain.Location = new System.Drawing.Point(5, 23);
             this.splitContainerMain.Name = "splitContainerMain";
+            this.splitContainerMain.Panel1.Controls.Add(this.gridVehicleWheel);
             this.splitContainerMain.Panel1.Controls.Add(this.lblCostEstimation);
             this.splitContainerMain.Panel1.Controls.Add(this.txtCostEstimation);
             this.splitContainerMain.Panel1.Controls.Add(this.lblCategory);
@@ -181,7 +209,6 @@
             this.splitContainerMain.Panel1.Controls.Add(this.txtContractor);
             this.splitContainerMain.Panel1.Controls.Add(this.dtpDueDate);
             this.splitContainerMain.Panel1.Controls.Add(this.lblDueDate);
-            this.splitContainerMain.Panel1.Controls.Add(this.gridVehicleWheel);
             this.splitContainerMain.Panel1.Controls.Add(this.labelControl2);
             this.splitContainerMain.Panel1.Controls.Add(this.lblContractPrice);
             this.splitContainerMain.Panel1.Controls.Add(this.memoDescription);
@@ -357,105 +384,6 @@
             this.lblDueDate.Size = new System.Drawing.Size(62, 13);
             this.lblDueDate.TabIndex = 4;
             this.lblDueDate.Text = "Jatuh Tempo";
-            // 
-            // gridVehicleWheel
-            // 
-            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridVehicleWheel.Location = new System.Drawing.Point(9, 138);
-            this.gridVehicleWheel.MainView = this.gvVehicleWheel;
-            this.gridVehicleWheel.Name = "gridVehicleWheel";
-            this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.lookUpSparepartWheelGv});
-            this.gridVehicleWheel.Size = new System.Drawing.Size(581, 226);
-            this.gridVehicleWheel.TabIndex = 11;
-            this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvVehicleWheel});
-            // 
-            // gvVehicleWheel
-            // 
-            this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colName,
-            this.colWheelDetail,
-            this.colSparepart,
-            this.colWheelDetailReplace,
-            this.colIsUsedGoodReceived,
-            this.colPrice});
-            this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
-            this.gvVehicleWheel.Name = "gvVehicleWheel";
-            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
-            this.gvVehicleWheel.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gvVehicleWheel.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
-            this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
-            this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
-            this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
-            this.gvVehicleWheel.ViewCaption = "Daftar Ban Kendaraan";
-            // 
-            // colName
-            // 
-            this.colName.Caption = "Nama";
-            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 0;
-            // 
-            // colWheelDetail
-            // 
-            this.colWheelDetail.Caption = "Nomor Seri (Terpasang)";
-            this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
-            this.colWheelDetail.Name = "colWheelDetail";
-            this.colWheelDetail.Visible = true;
-            this.colWheelDetail.VisibleIndex = 1;
-            // 
-            // colSparepart
-            // 
-            this.colSparepart.Caption = "Jenis Ban";
-            this.colSparepart.ColumnEdit = this.lookUpSparepartWheelGv;
-            this.colSparepart.FieldName = "SparepartId";
-            this.colSparepart.Name = "colSparepart";
-            this.colSparepart.Visible = true;
-            this.colSparepart.VisibleIndex = 2;
-            // 
-            // lookUpSparepartWheelGv
-            // 
-            this.lookUpSparepartWheelGv.AutoHeight = false;
-            this.lookUpSparepartWheelGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpSparepartWheelGv.DisplayMember = "Name";
-            this.lookUpSparepartWheelGv.Name = "lookUpSparepartWheelGv";
-            this.lookUpSparepartWheelGv.NullText = "-- Pilih Jenis Ban --";
-            this.lookUpSparepartWheelGv.ValueMember = "Id";
-            // 
-            // colWheelDetailReplace
-            // 
-            this.colWheelDetailReplace.Caption = "Nomor Seri (Ganti)";
-            this.colWheelDetailReplace.ColumnEdit = this.lookupWheelDetailGv;
-            this.colWheelDetailReplace.FieldName = "ReplaceWithWheelDetailId";
-            this.colWheelDetailReplace.Name = "colWheelDetailReplace";
-            this.colWheelDetailReplace.Visible = true;
-            this.colWheelDetailReplace.VisibleIndex = 3;
-            // 
-            // colIsUsedGoodReceived
-            // 
-            this.colIsUsedGoodReceived.Caption = "Ban Bekas Diterima";
-            this.colIsUsedGoodReceived.ColumnEdit = this.ckeIsUsedWheelRetrieved;
-            this.colIsUsedGoodReceived.FieldName = "IsUsedWheelRetrieved";
-            this.colIsUsedGoodReceived.Name = "colIsUsedGoodReceived";
-            this.colIsUsedGoodReceived.Visible = true;
-            this.colIsUsedGoodReceived.VisibleIndex = 4;
-            // 
-            // colPrice
-            // 
-            this.colPrice.Caption = "Harga";
-            this.colPrice.DisplayFormat.FormatString = "#,#";
-            this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colPrice.FieldName = "Price";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 5;
             // 
             // labelControl2
             // 
@@ -762,17 +690,100 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // btnAssignMechanic
+            // gridVehicleWheel
             // 
-            this.btnAssignMechanic.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.add_mechanic_16x16;
-            this.btnAssignMechanic.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnAssignMechanic.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAssignMechanic.Location = new System.Drawing.Point(14, 395);
-            this.btnAssignMechanic.Name = "btnAssignMechanic";
-            this.btnAssignMechanic.Size = new System.Drawing.Size(123, 23);
-            this.btnAssignMechanic.TabIndex = 26;
-            this.btnAssignMechanic.Text = "Tugaskan Mekanik";
-            this.btnAssignMechanic.Click += new System.EventHandler(this.btnAssignMechanic_Click);
+            this.gridVehicleWheel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridVehicleWheel.Location = new System.Drawing.Point(9, 138);
+            this.gridVehicleWheel.MainView = this.gvVehicleWheel;
+            this.gridVehicleWheel.Name = "gridVehicleWheel";
+            this.gridVehicleWheel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.lookUpSparepartWheelGv});
+            this.gridVehicleWheel.Size = new System.Drawing.Size(556, 226);
+            this.gridVehicleWheel.TabIndex = 32;
+            this.gridVehicleWheel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvVehicleWheel});
+            // 
+            // gvVehicleWheel
+            // 
+            this.gvVehicleWheel.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colName,
+            this.colWheelDetail,
+            this.colSparepart,
+            this.colWheelDetailChanged,
+            this.colIsUsedGoodReceived,
+            this.colPrice});
+            this.gvVehicleWheel.GridControl = this.gridVehicleWheel;
+            this.gvVehicleWheel.Name = "gvVehicleWheel";
+            this.gvVehicleWheel.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvVehicleWheel.OptionsBehavior.AutoPopulateColumns = false;
+            this.gvVehicleWheel.OptionsBehavior.Editable = false;
+            this.gvVehicleWheel.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvVehicleWheel.OptionsView.ShowGroupPanel = false;
+            this.gvVehicleWheel.OptionsView.ShowViewCaption = true;
+            this.gvVehicleWheel.ViewCaption = "Daftar Ban Kendaraan";
+            // 
+            // colName
+            // 
+            this.colName.Caption = "Jenis Ban (Terpasang)";
+            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
+            // 
+            // colWheelDetail
+            // 
+            this.colWheelDetail.Caption = "Nomor Seri (Terpasang)";
+            this.colWheelDetail.FieldName = "WheelDetail.SerialNumber";
+            this.colWheelDetail.Name = "colWheelDetail";
+            this.colWheelDetail.Visible = true;
+            this.colWheelDetail.VisibleIndex = 1;
+            // 
+            // colSparepart
+            // 
+            this.colSparepart.Caption = "Jenis Ban (Pengganti)";
+            this.colSparepart.FieldName = "ReplaceWithWheelDetailName";
+            this.colSparepart.Name = "colSparepart";
+            this.colSparepart.Visible = true;
+            this.colSparepart.VisibleIndex = 2;
+            // 
+            // colWheelDetailChanged
+            // 
+            this.colWheelDetailChanged.Caption = "Nomor Seri (Pengganti)";
+            this.colWheelDetailChanged.FieldName = "ReplaceWithWheelDetailSerialNumber";
+            this.colWheelDetailChanged.Name = "colWheelDetailChanged";
+            this.colWheelDetailChanged.Visible = true;
+            this.colWheelDetailChanged.VisibleIndex = 3;
+            // 
+            // colIsUsedGoodReceived
+            // 
+            this.colIsUsedGoodReceived.Caption = "Ban Bekas Diterima";
+            this.colIsUsedGoodReceived.FieldName = "IsUsedWheelRetrieved";
+            this.colIsUsedGoodReceived.Name = "colIsUsedGoodReceived";
+            this.colIsUsedGoodReceived.Visible = true;
+            this.colIsUsedGoodReceived.VisibleIndex = 4;
+            // 
+            // colPrice
+            // 
+            this.colPrice.Caption = "Harga";
+            this.colPrice.DisplayFormat.FormatString = "#,#";
+            this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colPrice.FieldName = "Price";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.Visible = true;
+            this.colPrice.VisibleIndex = 5;
+            // 
+            // lookUpSparepartWheelGv
+            // 
+            this.lookUpSparepartWheelGv.AutoHeight = false;
+            this.lookUpSparepartWheelGv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpSparepartWheelGv.DisplayMember = "Name";
+            this.lookUpSparepartWheelGv.Name = "lookUpSparepartWheelGv";
+            this.lookUpSparepartWheelGv.NullText = "-- Pilih Jenis Ban --";
+            this.lookUpSparepartWheelGv.ValueMember = "Id";
             // 
             // SPKEditorForm
             // 
@@ -798,9 +809,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpDueDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsContractWork.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContractWorkFee.Properties)).EndInit();
@@ -818,6 +826,9 @@
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvVehicleWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpSparepartWheelGv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -841,19 +852,12 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl lblContractPrice;
         private DevExpress.XtraEditors.TextEdit txtContractWorkFee;
-        private DevExpress.XtraGrid.GridControl gridVehicleWheel;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
-        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailReplace;
         private DevExpress.XtraEditors.CheckEdit ckeIsContractWork;
-        private DevExpress.XtraGrid.Columns.GridColumn colIsUsedGoodReceived;
         private System.Windows.Forms.BindingSource bsVehicleWheel;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupWheelDetailGv;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit ckeIsUsedWheelRetrieved;
-        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
         private System.Windows.Forms.ContextMenuStrip cmsVehicleWheel;
         private System.Windows.Forms.ToolStripMenuItem cmsVehicleWheelItemReset;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
         private DevExpress.XtraEditors.TextEdit txtTotalSparepartPrice;
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraEditors.LabelControl lblContractor;
@@ -879,11 +883,19 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSparepartCode;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalQty;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn colSparepart;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpSparepartWheelGv;
         private DevExpress.XtraEditors.LabelControl lblCostEstimation;
         private DevExpress.XtraEditors.TextEdit txtCostEstimation;
         private DevExpress.XtraEditors.SimpleButton btnAssignMechanic;
+        private DevExpress.XtraEditors.SimpleButton btnChangeWheel;
+        private DevExpress.XtraGrid.GridControl gridVehicleWheel;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvVehicleWheel;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetail;
+        private DevExpress.XtraGrid.Columns.GridColumn colSparepart;
+        private DevExpress.XtraGrid.Columns.GridColumn colWheelDetailChanged;
+        private DevExpress.XtraGrid.Columns.GridColumn colIsUsedGoodReceived;
+        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpSparepartWheelGv;
     }
 }

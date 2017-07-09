@@ -100,6 +100,7 @@
     <Compile Include="SparepartDetailListPresenter.cs" />
     <Compile Include="SparepartManualTransactionEditorPresenter.cs" />
     <Compile Include="SparepartStockCardListPresenter.cs" />
+    <Compile Include="SPKWheelChangePresenter.cs" />
     <Compile Include="SPKHistoryDetailPresenter.cs" />
     <Compile Include="SPKHistoryListPresenter.cs" />
     <Compile Include="SPKSaleListPresenter.cs" />

@@ -13,6 +13,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public bool IsUsedWheelRetrieved { get; set; }
         public decimal Price { get; set; }
         public int ReplaceWithWheelDetailId { get; set; }
+        public string ReplaceWithWheelDetailName { get; set; }
         public string ReplaceWithWheelDetailSerialNumber{ get; set; }
     }
 }

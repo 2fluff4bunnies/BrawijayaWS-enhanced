@@ -88,7 +88,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lookUpSparepartWheelGv.BestFitMode = BestFitMode.BestFitResizePopup;
             lookUpSparepartWheelGv.SearchMode = SearchMode.AutoComplete;
             lookUpSparepartWheelGv.AutoSearchColumnIndex = 1;
-                        
+
             //Vehicle wheel handler
             ckeIsUsedWheelRetrieved.CheckedChanged += ckeIsUsedWheelRetrieved_CheckedChanged;
             gvVehicleWheel.ShowingEditor += gvVehicleWheel_ShowingEditor;
@@ -881,11 +881,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 splitContainerMain.Panel2.Enabled = true;
                 gridVehicleWheel.Enabled = true;
+                btnChangeWheel.Enabled = true;
             }
             else
             {
                 splitContainerMain.Panel2.Enabled = false;
                 gridVehicleWheel.Enabled = false;
+                btnChangeWheel.Enabled = false;
             }
         }
 
@@ -909,55 +911,55 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void cmsVehicleWheelItemReset_Click(object sender, EventArgs e)
         {
-            this.SelectedVehicleWheel.ReplaceWithWheelDetailId = 0;
-            this.SelectedVehicleWheel.SparepartId = 0;
-            SpecialSparepartDetailViewModel wheelToAdd = this.RemovedWHeelDetailList.Where(wd => wd.Id == this.SelectedWheelDetailToChange.Id).FirstOrDefault();
-            this.WheelDetailList.Add(wheelToAdd);
-            RemovedWHeelDetailList.Remove(wheelToAdd);
-            ResetSelecteVehicleWheel();
-            RefreshSparepartGrid();
-            CalculateTotalSparepart();
+            //this.SelectedVehicleWheel.ReplaceWithWheelDetailId = 0;
+            //this.SelectedVehicleWheel.SparepartId = 0;
+            //SpecialSparepartDetailViewModel wheelToAdd = this.RemovedWHeelDetailList.Where(wd => wd.Id == this.SelectedWheelDetailToChange.Id).FirstOrDefault();
+            //this.WheelDetailList.Add(wheelToAdd);
+            //RemovedWHeelDetailList.Remove(wheelToAdd);
+            //ResetSelecteVehicleWheel();
+            //RefreshSparepartGrid();
+            //CalculateTotalSparepart();
         }
 
 
         private void ResetSelecteVehicleWheel()
         {
-            this.SelectedVehicleWheel.IsUsedWheelRetrieved = false;
-            this.SelectedVehicleWheel.Price = 0;
-            gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
-            gvVehicleWheel.SetFocusedRowCellValue("IsUsedWheelRetrieved", this.SelectedVehicleWheel.IsUsedWheelRetrieved);
-            gvVehicleWheel.SetFocusedRowCellValue("Sparepart", null);
+            //this.SelectedVehicleWheel.IsUsedWheelRetrieved = false;
+            //this.SelectedVehicleWheel.Price = 0;
+            //gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
+            //gvVehicleWheel.SetFocusedRowCellValue("IsUsedWheelRetrieved", this.SelectedVehicleWheel.IsUsedWheelRetrieved);
+            //gvVehicleWheel.SetFocusedRowCellValue("Sparepart", null);
 
-            SPKDetailSparepartDetailViewModel detailToRemove = this.SPKSparepartDetailList.Where(d => d.SparepartDetail.SparepartId == this.SelectedWheelDetailToChange.SparepartDetail.SparepartId).FirstOrDefault();
-            if (detailToRemove != null)
-            {
-                this.SPKSparepartDetailList.Remove(detailToRemove);
-                SPKDetailSparepartViewModel sparepartToRemove = this.SPKSparepartList.Where(sp => sp.SparepartId == detailToRemove.SparepartDetail.SparepartId).FirstOrDefault();
+            //SPKDetailSparepartDetailViewModel detailToRemove = this.SPKSparepartDetailList.Where(d => d.SparepartDetail.SparepartId == this.SelectedWheelDetailToChange.SparepartDetail.SparepartId).FirstOrDefault();
+            //if (detailToRemove != null)
+            //{
+            //    this.SPKSparepartDetailList.Remove(detailToRemove);
+            //    SPKDetailSparepartViewModel sparepartToRemove = this.SPKSparepartList.Where(sp => sp.SparepartId == detailToRemove.SparepartDetail.SparepartId).FirstOrDefault();
 
-                if (sparepartToRemove != null)
-                {
-                    this.SPKSparepartList.Remove(sparepartToRemove);
-                }
-            }
+            //    if (sparepartToRemove != null)
+            //    {
+            //        this.SPKSparepartList.Remove(sparepartToRemove);
+            //    }
+            //}
         }
 
 
         void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
         {
-            LookUpEdit lookup = sender as LookUpEdit;
+            //LookUpEdit lookup = sender as LookUpEdit;
 
-            VehicleWheelViewModel duplicateVwToChange = this.VehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId == lookup.EditValue.AsInteger()).FirstOrDefault();
+            //VehicleWheelViewModel duplicateVwToChange = this.VehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId == lookup.EditValue.AsInteger()).FirstOrDefault();
 
-            if (duplicateVwToChange != null && lookup.EditValue.AsInteger() > 0)
-            {
-                this.ShowWarning("Terdapat duplikasi dalam pemilihan ban!");
-            }
-            else
-            {
-                _presenter.SetSelectedWheelDetailToChange(lookup.EditValue.AsInteger());
-            }
+            //if (duplicateVwToChange != null && lookup.EditValue.AsInteger() > 0)
+            //{
+            //    this.ShowWarning("Terdapat duplikasi dalam pemilihan ban!");
+            //}
+            //else
+            //{
+            //    _presenter.SetSelectedWheelDetailToChange(lookup.EditValue.AsInteger());
+            //}
 
-            ResetSelecteVehicleWheel();
+            //ResetSelecteVehicleWheel();
         }
 
         void lookupWheelDetailGv_EditValueChanging(object sender, ChangingEventArgs e)
@@ -967,78 +969,78 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         void gvVehicleWheel_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            VehicleWheelViewModel focusedvehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+            //VehicleWheelViewModel focusedvehicleWheel = gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
 
-            GridView View = sender as GridView;
-            if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (focusedvehicleWheel.ReplaceWithWheelDetailId == 0 || focusedvehicleWheel.Price > 0 || this.IsSPKSales))
-            {
-                e.Cancel = true;
-            }
+            //GridView View = sender as GridView;
+            //if (View.FocusedColumn.FieldName == "IsUsedWheelRetrieved" && (focusedvehicleWheel.ReplaceWithWheelDetailId == 0 || focusedvehicleWheel.Price > 0 || this.IsSPKSales))
+            //{
+            //    e.Cancel = true;
+            //}
 
-            if (View.FocusedColumn.FieldName == "Price")
-            {
-                e.Cancel = true;
-            }
+            //if (View.FocusedColumn.FieldName == "Price")
+            //{
+            //    e.Cancel = true;
+            //}
 
-            if (View.FocusedColumn.FieldName == "SparepartId" && this.IsSPKSales)
-            {
-                e.Cancel = true;
-            }
+            //if (View.FocusedColumn.FieldName == "SparepartId" && this.IsSPKSales)
+            //{
+            //    e.Cancel = true;
+            //}
 
-            if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber")
-            {
-                e.Cancel = true;
-            }
+            //if (View.FocusedColumn.FieldName == "WheelDetail.SerialNumber")
+            //{
+            //    e.Cancel = true;
+            //}
 
-            if (View.FocusedColumn.FieldName == "ReplaceWithWheelDetailId")
-            {
-                var rowHandle = View.FocusedRowHandle;
-                _presenter.LoadWheelDetail(View.GetRowCellValue(rowHandle, "SparepartId").AsInteger());
-            }
+            //if (View.FocusedColumn.FieldName == "ReplaceWithWheelDetailId")
+            //{
+            //    var rowHandle = View.FocusedRowHandle;
+            //    _presenter.LoadWheelDetail(View.GetRowCellValue(rowHandle, "SparepartId").AsInteger());
+            //}
         }
 
         void ckeIsUsedWheelRetrieved_CheckedChanged(object sender, EventArgs e)
         {
-            CheckEdit check = sender as CheckEdit;
+            //CheckEdit check = sender as CheckEdit;
 
-            if (this.SelectedVehicleWheel.ReplaceWithWheelDetailId > 0)
-            {
-                if (check.Checked)
-                {
-                    if (this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetailId > 0)
-                    {
-                        this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price;
-                    }
-                    else if (this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransactionId > 0)
-                    {
-                        this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransaction.Price;
-                    }
+            //if (this.SelectedVehicleWheel.ReplaceWithWheelDetailId > 0)
+            //{
+            //    if (check.Checked)
+            //    {
+            //        if (this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetailId > 0)
+            //        {
+            //            this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.PurchasingDetail.Price;
+            //        }
+            //        else if (this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransactionId > 0)
+            //        {
+            //            this.SelectedVehicleWheel.Price = this.SelectedWheelDetailToChange.SparepartDetail.SparepartManualTransaction.Price;
+            //        }
 
-                    gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
+            //        gvVehicleWheel.SetFocusedRowCellValue("Price", this.SelectedVehicleWheel.Price);
 
-                    this.SPKSparepartList.Add(new SPKDetailSparepartViewModel
-                    {
-                        Sparepart = this.SelectedWheelDetailToChange.SparepartDetail.Sparepart,
-                        SparepartId = this.SelectedWheelDetailToChange.SparepartDetail.SparepartId,
-                        TotalQuantity = 1,
-                        TotalPrice = this.SelectedVehicleWheel.Price
-                    });
+            //        this.SPKSparepartList.Add(new SPKDetailSparepartViewModel
+            //        {
+            //            Sparepart = this.SelectedWheelDetailToChange.SparepartDetail.Sparepart,
+            //            SparepartId = this.SelectedWheelDetailToChange.SparepartDetail.SparepartId,
+            //            TotalQuantity = 1,
+            //            TotalPrice = this.SelectedVehicleWheel.Price
+            //        });
 
-                    this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
-                    {
-                        SparepartDetailId = this.SelectedWheelDetailToChange.SparepartDetail.Id,
-                        SparepartDetail = this.SelectedWheelDetailToChange.SparepartDetail
-                    });
+            //        this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
+            //        {
+            //            SparepartDetailId = this.SelectedWheelDetailToChange.SparepartDetail.Id,
+            //            SparepartDetail = this.SelectedWheelDetailToChange.SparepartDetail
+            //        });
 
-                    RefreshSparepartGrid();
-                    CalculateTotalSparepart();
+            //        RefreshSparepartGrid();
+            //        CalculateTotalSparepart();
 
-                    SpecialSparepartDetailViewModel wheelToRemove = this.WheelDetailList.Where(wd => wd.Id == this.SelectedWheelDetailToChange.Id).FirstOrDefault();
-                    RemovedWHeelDetailList.Add(wheelToRemove);
-                    this.WheelDetailList.Remove(wheelToRemove);
-                }
-            }
-            check.Enabled = false;
+            //        SpecialSparepartDetailViewModel wheelToRemove = this.WheelDetailList.Where(wd => wd.Id == this.SelectedWheelDetailToChange.Id).FirstOrDefault();
+            //        RemovedWHeelDetailList.Add(wheelToRemove);
+            //        this.WheelDetailList.Remove(wheelToRemove);
+            //    }
+            //}
+            //check.Enabled = false;
 
         }
 
@@ -1089,9 +1091,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                             }
                         }
                     }
-
-
-
                 }
             }
             catch (Exception ex)
@@ -1135,6 +1134,54 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             editor.SelectedSPK = this.SelectedSPK;
             editor.ShowDialog(this);
             this.AssignedSchedule = editor.AssignedSchedule;
+        }
+
+        private void btnChangeWheel_Click(object sender, EventArgs e)
+        {
+            SPKWheelChange editor = Bootstrapper.Resolve<SPKWheelChange>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.VehicleId = this.VehicleId;
+
+            if (this.VehicleWheelList != null)
+            {
+                editor.VehicleWheelList = this.VehicleWheelList;
+            }
+
+            editor.ShowDialog(this);
+            this.VehicleWheelList = editor.VehicleWheelList;
+
+            foreach (VehicleWheelViewModel vw in VehicleWheelList.Where(w => w.ReplaceWithWheelDetailId > 0))
+            {
+                if (!SPKSparepartList.Any(sp => sp.SparepartId == vw.SparepartId))
+                {
+                    this.SPKSparepartList.Add(new SPKDetailSparepartViewModel
+                    {
+                        Sparepart = new SparepartViewModel
+                        {
+                            Id = vw.SparepartId,
+                            Name = vw.ReplaceWithWheelDetailName
+                        },
+                        SparepartId = vw.SparepartId,
+                        TotalQuantity = 1,
+                        TotalPrice = vw.Price
+                    });
+                }
+
+                if (!SPKSparepartDetailList.Any(spd => spd.SparepartDetailId == vw.ReplaceWithWheelDetailId))
+                {
+                    this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
+                    {
+                        SparepartDetailId = vw.ReplaceWithWheelDetailId,
+                        SparepartDetail = new SparepartDetailViewModel
+                        {
+                            Id = vw.ReplaceWithWheelDetailId
+                        }
+                    });
+                }
+            }
+
+            RefreshSparepartGrid();
+            CalculateTotalSparepart();
         }
     }
 }
