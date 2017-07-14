@@ -274,17 +274,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<MechanicViewModel> SelectedMechanicList
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public List<MechanicViewModel> SelectedMechanicList { get; set; }
 
         public string Description
         {

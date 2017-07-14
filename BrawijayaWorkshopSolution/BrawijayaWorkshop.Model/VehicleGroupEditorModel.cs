@@ -79,7 +79,7 @@ namespace BrawijayaWorkshop.Model
                   
                     // update last group status to deleted
                     _vehicleGroupRepository.AttachNavigation<Customer>(entity.Customer);
-                    entity.Id = vehicleGroup.Id;
+                    entity = _vehicleGroupRepository.GetById(vehicleGroup.Id);
                     entity.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                     _vehicleGroupRepository.Update(entity);
                     _unitOfWork.SaveChanges();

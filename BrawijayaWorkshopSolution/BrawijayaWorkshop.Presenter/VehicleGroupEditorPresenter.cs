@@ -35,6 +35,7 @@ namespace BrawijayaWorkshop.Presenter
 
             if (View.SelectedGroup.Id > 0)
             {
+                View.SelectedGroup.Customer = null;
                 Model.UpdateGroup(View.SelectedGroup, LoginInformation.UserId);
             }
             else

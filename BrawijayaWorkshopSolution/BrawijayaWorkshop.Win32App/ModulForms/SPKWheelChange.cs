@@ -40,10 +40,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.SelectedWheelName = vw.WheelDetail.SparepartDetail.Sparepart.Name;
             this.SelectedWHeelSerialNumber = vw.WheelDetail.SerialNumber;
             this.SelectedWHeelSparepartCode = vw.WheelDetail.SparepartDetail.Sparepart.Code;
-            
+
+            this.txtChangedCode.EditValue = string.Empty;
             this.lookUpChangedWheel.EditValue = vw.SparepartId;
             this.lookUpChangedSerialNumber.EditValue = vw.ReplaceWithWheelDetailId;
-            this.txtChangedCode.EditValue = vw.WheelDetail.SparepartDetail.Sparepart.Code;
             this.ckeUsedGoodRetrieved.Checked = vw.IsUsedWheelRetrieved;
             this.Price = vw.Price;
 

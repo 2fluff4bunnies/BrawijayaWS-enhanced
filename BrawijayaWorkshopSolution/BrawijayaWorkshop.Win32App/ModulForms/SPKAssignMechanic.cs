@@ -295,12 +295,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             lbxMechanics.DataSource = null;
             lbxMechanics.DataSource = MechanicList;
-            lbxSelectedMechanics.DataSource = null;
-            lbxSelectedMechanics.DataSource = SelectedMechanicList;
             lbxMechanics.ValueMember = "Id";
             lbxMechanics.DisplayMember = "Name";
+            lbxMechanics.SelectionMode = SelectionMode.MultiSimple;
+
+            lbxSelectedMechanics.DataSource = null;
             lbxSelectedMechanics.ValueMember = "Id";
             lbxSelectedMechanics.DisplayMember = "Name";
+            lbxSelectedMechanics.DataSource = SelectedMechanicList;
+            lbxSelectedMechanics.SelectionMode = SelectionMode.MultiSimple;
         }
 
     }
