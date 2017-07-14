@@ -31,6 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.txtLicenseNumberFilter = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpVehicleGroup = new DevExpress.XtraEditors.LookUpEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.cbPaymentStatus = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.lblPaymentStatus = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
@@ -48,16 +57,14 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtLicenseNumberFilter = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpVehicleGroup = new DevExpress.XtraEditors.LookUpEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.cbPaymentStatus = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.lblPaymentStatus = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumberFilter.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicleGroup.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -65,16 +72,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridCredit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCredit)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumberFilter.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicleGroup.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.txtLicenseNumberFilter);
             this.gcFilter.Controls.Add(this.labelControl4);
             this.gcFilter.Controls.Add(this.lookUpVehicleGroup);
@@ -93,6 +97,109 @@
             this.gcFilter.Size = new System.Drawing.Size(757, 129);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
+            // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(632, 97);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 30;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // txtLicenseNumberFilter
+            // 
+            this.txtLicenseNumberFilter.Location = new System.Drawing.Point(484, 63);
+            this.txtLicenseNumberFilter.Name = "txtLicenseNumberFilter";
+            this.txtLicenseNumberFilter.Size = new System.Drawing.Size(160, 20);
+            this.txtLicenseNumberFilter.TabIndex = 29;
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(413, 63);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(27, 13);
+            this.labelControl4.TabIndex = 28;
+            this.labelControl4.Text = "NoPol";
+            // 
+            // lookUpVehicleGroup
+            // 
+            this.lookUpVehicleGroup.Location = new System.Drawing.Point(106, 94);
+            this.lookUpVehicleGroup.Name = "lookUpVehicleGroup";
+            this.lookUpVehicleGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpVehicleGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpVehicleGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
+            this.lookUpVehicleGroup.Properties.DisplayMember = "Name";
+            this.lookUpVehicleGroup.Properties.HideSelection = false;
+            this.lookUpVehicleGroup.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpVehicleGroup.Properties.NullText = "Semua";
+            this.lookUpVehicleGroup.Properties.ValueMember = "Id";
+            this.lookUpVehicleGroup.Size = new System.Drawing.Size(223, 20);
+            this.lookUpVehicleGroup.TabIndex = 27;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(15, 97);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(45, 13);
+            this.labelControl2.TabIndex = 26;
+            this.labelControl2.Text = "Kelompok";
+            // 
+            // cbPaymentStatus
+            // 
+            this.cbPaymentStatus.Location = new System.Drawing.Point(484, 31);
+            this.cbPaymentStatus.Name = "cbPaymentStatus";
+            this.cbPaymentStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbPaymentStatus.Properties.HideSelection = false;
+            this.cbPaymentStatus.Properties.Items.AddRange(new object[] {
+            "Semua",
+            "Belum Lunas",
+            "Lunas"});
+            this.cbPaymentStatus.Properties.NullText = "Semua";
+            this.cbPaymentStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbPaymentStatus.Size = new System.Drawing.Size(135, 20);
+            this.cbPaymentStatus.TabIndex = 25;
+            // 
+            // lblPaymentStatus
+            // 
+            this.lblPaymentStatus.Location = new System.Drawing.Point(413, 34);
+            this.lblPaymentStatus.Name = "lblPaymentStatus";
+            this.lblPaymentStatus.Size = new System.Drawing.Size(62, 13);
+            this.lblPaymentStatus.TabIndex = 24;
+            this.lblPaymentStatus.Text = "Status Bayar";
+            // 
+            // lookUpCustomer
+            // 
+            this.lookUpCustomer.Location = new System.Drawing.Point(106, 60);
+            this.lookUpCustomer.Name = "lookUpCustomer";
+            this.lookUpCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            this.lookUpCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Address", "Alamat")});
+            this.lookUpCustomer.Properties.DisplayMember = "CompanyName";
+            this.lookUpCustomer.Properties.HideSelection = false;
+            this.lookUpCustomer.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
+            this.lookUpCustomer.Properties.NullText = "Semua";
+            this.lookUpCustomer.Properties.ValueMember = "Id";
+            this.lookUpCustomer.Size = new System.Drawing.Size(223, 20);
+            this.lookUpCustomer.TabIndex = 23;
+            this.lookUpCustomer.EditValueChanged += new System.EventHandler(this.lookUpCustomer_EditValueChanged);
+            // 
+            // lblCustomer
+            // 
+            this.lblCustomer.Location = new System.Drawing.Point(14, 63);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(46, 13);
+            this.lblCustomer.TabIndex = 22;
+            this.lblCustomer.Text = "Customer";
             // 
             // btnSearch
             // 
@@ -288,96 +395,17 @@
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
             // 
-            // txtLicenseNumberFilter
+            // exportDialog
             // 
-            this.txtLicenseNumberFilter.Location = new System.Drawing.Point(484, 63);
-            this.txtLicenseNumberFilter.Name = "txtLicenseNumberFilter";
-            this.txtLicenseNumberFilter.Size = new System.Drawing.Size(160, 20);
-            this.txtLicenseNumberFilter.TabIndex = 29;
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
             // 
-            // labelControl4
+            // bgwExport
             // 
-            this.labelControl4.Location = new System.Drawing.Point(413, 63);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(27, 13);
-            this.labelControl4.TabIndex = 28;
-            this.labelControl4.Text = "NoPol";
-            // 
-            // lookUpVehicleGroup
-            // 
-            this.lookUpVehicleGroup.Location = new System.Drawing.Point(106, 94);
-            this.lookUpVehicleGroup.Name = "lookUpVehicleGroup";
-            this.lookUpVehicleGroup.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpVehicleGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpVehicleGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Nama")});
-            this.lookUpVehicleGroup.Properties.DisplayMember = "Name";
-            this.lookUpVehicleGroup.Properties.HideSelection = false;
-            this.lookUpVehicleGroup.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lookUpVehicleGroup.Properties.NullText = "Semua";
-            this.lookUpVehicleGroup.Properties.ValueMember = "Id";
-            this.lookUpVehicleGroup.Size = new System.Drawing.Size(223, 20);
-            this.lookUpVehicleGroup.TabIndex = 27;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(15, 97);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(45, 13);
-            this.labelControl2.TabIndex = 26;
-            this.labelControl2.Text = "Kelompok";
-            // 
-            // cbPaymentStatus
-            // 
-            this.cbPaymentStatus.Location = new System.Drawing.Point(484, 31);
-            this.cbPaymentStatus.Name = "cbPaymentStatus";
-            this.cbPaymentStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbPaymentStatus.Properties.HideSelection = false;
-            this.cbPaymentStatus.Properties.Items.AddRange(new object[] {
-            "Semua",
-            "Belum Lunas",
-            "Lunas"});
-            this.cbPaymentStatus.Properties.NullText = "Semua";
-            this.cbPaymentStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbPaymentStatus.Size = new System.Drawing.Size(135, 20);
-            this.cbPaymentStatus.TabIndex = 25;
-            // 
-            // lblPaymentStatus
-            // 
-            this.lblPaymentStatus.Location = new System.Drawing.Point(413, 34);
-            this.lblPaymentStatus.Name = "lblPaymentStatus";
-            this.lblPaymentStatus.Size = new System.Drawing.Size(62, 13);
-            this.lblPaymentStatus.TabIndex = 24;
-            this.lblPaymentStatus.Text = "Status Bayar";
-            // 
-            // lookUpCustomer
-            // 
-            this.lookUpCustomer.Location = new System.Drawing.Point(106, 60);
-            this.lookUpCustomer.Name = "lookUpCustomer";
-            this.lookUpCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            this.lookUpCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Nama"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Address", "Alamat")});
-            this.lookUpCustomer.Properties.DisplayMember = "CompanyName";
-            this.lookUpCustomer.Properties.HideSelection = false;
-            this.lookUpCustomer.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lookUpCustomer.Properties.NullText = "Semua";
-            this.lookUpCustomer.Properties.ValueMember = "Id";
-            this.lookUpCustomer.Size = new System.Drawing.Size(223, 20);
-            this.lookUpCustomer.TabIndex = 23;
-            this.lookUpCustomer.EditValueChanged += new System.EventHandler(this.lookUpCustomer_EditValueChanged);
-            // 
-            // lblCustomer
-            // 
-            this.lblCustomer.Location = new System.Drawing.Point(14, 63);
-            this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(46, 13);
-            this.lblCustomer.TabIndex = 22;
-            this.lblCustomer.Text = "Customer";
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
             // CreditListControl
             // 
@@ -391,6 +419,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumberFilter.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicleGroup.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -398,10 +430,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridCredit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCredit)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtLicenseNumberFilter.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpVehicleGroup.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpCustomer.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -434,5 +462,8 @@
         private DevExpress.XtraEditors.LabelControl lblPaymentStatus;
         private DevExpress.XtraEditors.LookUpEdit lookUpCustomer;
         private DevExpress.XtraEditors.LabelControl lblCustomer;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
     }
 }

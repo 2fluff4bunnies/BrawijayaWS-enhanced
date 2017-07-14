@@ -2,8 +2,10 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using LINQtoCSV;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -12,6 +14,32 @@ namespace BrawijayaWorkshop.Presenter
         public CreditListPresenter(ICreditListView view, CreditListModel model)
             : base(view, model) { }
 
+        public void ExportToCSV()
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                QuoteAllFields = true,
+                SeparatorChar = ';', // tab delimited
+                FirstLineHasColumnNames = true,
+                FileCultureName = "en-US"
+            };
+
+            // prepare invoices
+            var exportInvoices =
+                from inv in View.InvoiceListData
+                select new
+                {
+                    Tanggal = inv.CreateDate.ToString("yyyyMMdd"),
+                    Customer = inv.SPK.Vehicle.Customer.CompanyName,
+                    NomorPolisi = inv.SPK.Vehicle.ActiveLicenseNumber,
+                    TotalTransaksi = inv.TotalPrice,
+                    TotalDibayar = inv.TotalHasPaid,
+                    StatusBayar = inv.PaymentMethodId == 0 ? "Belum Lunas" : "Lunas"
+                };
+
+            cc.Write(exportInvoices, View.ExportFileName, outputFileDescription);
+        }
         public void InitData()
         {
             View.DateFromFilter = DateTime.Now;

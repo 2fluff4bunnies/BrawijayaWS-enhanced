@@ -378,7 +378,7 @@ namespace BrawijayaWorkshop.Model
                                 ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
                                 SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                                 UnitName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
-                                SubTotalFee = (listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice)).AsDecimal()
+                                SubTotalFee = (listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.InvoiceDetail.SubTotalPrice)).AsDecimal()
                             });
                         }
                     }

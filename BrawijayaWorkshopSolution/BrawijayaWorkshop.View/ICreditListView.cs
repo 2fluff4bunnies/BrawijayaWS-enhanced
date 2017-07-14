@@ -21,5 +21,6 @@ namespace BrawijayaWorkshop.View
         List<CustomerViewModel> CustomerListOption { get; set; }
         int SelectedCustomerId { get; }
         string CreditStatusPayment { get; }
+        string ExportFileName { get; set; }
     }
 }
