@@ -218,7 +218,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     this.SelectedVehicleWheel.ReplaceWithWheelDetailName = sparepartWheel.Name;
                     this.SelectedVehicleWheel.SparepartId = sparepartWheel.Id;
-                    this.SelectedVehicleWheel.ReplaceWithWheelDetailId = wheelDetail.Id;
+                    this.SelectedVehicleWheel.ReplaceWithWheelDetailId = wheelDetail.SparepartDetailId;
                     this.SelectedVehicleWheel.ReplaceWithWheelDetailSerialNumber = wheelDetail.SerialNumber;
                     this.SelectedVehicleWheel.IsUsedWheelRetrieved = ckeUsedGoodRetrieved.Checked;
                     this.SelectedVehicleWheel.Price = this.Price;

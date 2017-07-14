@@ -1172,7 +1172,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         SparepartDetailId = vw.ReplaceWithWheelDetailId,
                         SparepartDetail = new SparepartDetailViewModel
                         {
-                            Id = vw.ReplaceWithWheelDetailId
+                            Id = vw.ReplaceWithWheelDetailId,
+                            SparepartId = vw.SparepartId
                         }
                     });
 
