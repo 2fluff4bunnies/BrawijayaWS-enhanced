@@ -42,6 +42,9 @@
             this.btnEditData = new DevExpress.XtraEditors.SimpleButton();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.btnDeleteData = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gcFirstBalance)).BeginInit();
             this.gcFirstBalance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridFirstBalance)).BeginInit();
@@ -198,10 +201,35 @@
             this.btnDeleteData.Text = "Hapus Saldo Awal";
             this.btnDeleteData.Click += new System.EventHandler(this.btnDeleteData_Click);
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(492, 3);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
             // FirstBalanceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExportToCSV);
             this.Controls.Add(this.btnDeleteData);
             this.Controls.Add(this.btnEditData);
             this.Controls.Add(this.gridFirstBalance);
@@ -233,5 +261,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
         private DevExpress.XtraGrid.Columns.GridColumn colLastDebit;
         private DevExpress.XtraGrid.Columns.GridColumn colLastCredit;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.ComponentModel.BackgroundWorker bgwExport;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
     }
 }

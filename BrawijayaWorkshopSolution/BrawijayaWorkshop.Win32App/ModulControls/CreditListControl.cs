@@ -293,7 +293,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
             catch (Exception ex)
             {
-                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to export Invoice", ex);
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to export Credit", ex);
                 e.Result = ex;
             }
         }
@@ -302,10 +302,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (e.Result is Exception)
             {
-                this.ShowError("Proses export invoice gagal!");
+                this.ShowError("Proses export Credit gagal!");
             }
 
-            FormHelpers.CurrentMainForm.UpdateStatusInformation("Export invoice selesai", true);
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Export Credit selesai", true);
         }
 
         public string ExportFileName { get; set; }
@@ -316,7 +316,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             {
                 ExportFileName = string.Empty;
                 btnSearch.PerformClick();
-                exportDialog.FileName = "Credit_" + SelectedCustomerId + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".csv";
+                exportDialog.FileName = "Credit_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".csv";
                 exportDialog.ShowDialog(this);
             }
         }

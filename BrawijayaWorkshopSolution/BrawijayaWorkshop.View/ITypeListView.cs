@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
         List<TypeViewModel> TypeListData { get; set; }
 
         TypeViewModel SelectedType { get; set; }
+
+        string ExportFileName { get; }
     }
 }

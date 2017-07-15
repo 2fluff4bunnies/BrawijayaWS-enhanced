@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.View
         List<int> ListYear { get; set; }
 
         List<TransactionDetailViewModel> JournalTransactionList { get; set; }
+
+        string ExportFileName { get; }
     }
 }

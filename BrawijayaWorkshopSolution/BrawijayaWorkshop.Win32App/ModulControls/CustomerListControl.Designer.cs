@@ -47,6 +47,9 @@
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterCompanyName.Properties)).BeginInit();
@@ -59,12 +62,13 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.txtFilterCompanyName);
             this.gcFilter.Controls.Add(this.lblFilterCompanyName);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(575, 62);
+            this.gcFilter.Size = new System.Drawing.Size(678, 62);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
             // 
@@ -74,7 +78,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(508, 28);
+            this.btnSearch.Location = new System.Drawing.Point(484, 27);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 2;
@@ -87,7 +91,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterCompanyName.Location = new System.Drawing.Point(128, 30);
             this.txtFilterCompanyName.Name = "txtFilterCompanyName";
-            this.txtFilterCompanyName.Size = new System.Drawing.Size(374, 20);
+            this.txtFilterCompanyName.Size = new System.Drawing.Size(340, 20);
             this.txtFilterCompanyName.TabIndex = 1;
             this.txtFilterCompanyName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterCompanyName_KeyDown);
             // 
@@ -107,7 +111,7 @@
             this.gridCustomer.Location = new System.Drawing.Point(3, 100);
             this.gridCustomer.MainView = this.gvCustomer;
             this.gridCustomer.Name = "gridCustomer";
-            this.gridCustomer.Size = new System.Drawing.Size(575, 224);
+            this.gridCustomer.Size = new System.Drawing.Size(678, 224);
             this.gridCustomer.TabIndex = 1;
             this.gridCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCustomer});
@@ -226,6 +230,30 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(559, 27);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
             // CustomerListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,7 +262,7 @@
             this.Controls.Add(this.gridCustomer);
             this.Controls.Add(this.gcFilter);
             this.Name = "CustomerListControl";
-            this.Size = new System.Drawing.Size(581, 327);
+            this.Size = new System.Drawing.Size(684, 327);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -265,5 +293,8 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

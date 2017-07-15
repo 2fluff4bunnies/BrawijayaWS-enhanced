@@ -15,5 +15,7 @@ namespace BrawijayaWorkshop.View
         List<SparepartViewModel> SparepartListData { get; set; }
 
         SparepartViewModel SelectedSparepart { get; set; }
+
+        string ExportFileName { get; }
     }
 }

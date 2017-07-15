@@ -50,6 +50,9 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbxFilterIsActive.Properties)).BeginInit();
@@ -65,6 +68,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.cbxFilterIsActive);
             this.gcFilter.Controls.Add(this.txtUserName);
@@ -83,7 +87,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(746, 31);
+            this.btnSearch.Location = new System.Drawing.Point(626, 31);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 5;
@@ -93,7 +97,7 @@
             // cbxFilterIsActive
             // 
             this.cbxFilterIsActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxFilterIsActive.Location = new System.Drawing.Point(670, 34);
+            this.cbxFilterIsActive.Location = new System.Drawing.Point(536, 34);
             this.cbxFilterIsActive.Name = "cbxFilterIsActive";
             this.cbxFilterIsActive.Properties.Caption = "Active";
             this.cbxFilterIsActive.Size = new System.Drawing.Size(60, 19);
@@ -103,14 +107,14 @@
             // 
             this.txtUserName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUserName.Location = new System.Drawing.Point(290, 34);
+            this.txtUserName.Location = new System.Drawing.Point(258, 34);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(374, 20);
+            this.txtUserName.Size = new System.Drawing.Size(259, 20);
             this.txtUserName.TabIndex = 3;
             // 
             // lblFilterName
             // 
-            this.lblFilterName.Location = new System.Drawing.Point(219, 37);
+            this.lblFilterName.Location = new System.Drawing.Point(200, 37);
             this.lblFilterName.Name = "lblFilterName";
             this.lblFilterName.Size = new System.Drawing.Size(52, 13);
             this.lblFilterName.TabIndex = 2;
@@ -251,7 +255,7 @@
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
@@ -259,9 +263,33 @@
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
+            // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(705, 30);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
             // ManageUserListControl
             // 
@@ -308,5 +336,8 @@
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

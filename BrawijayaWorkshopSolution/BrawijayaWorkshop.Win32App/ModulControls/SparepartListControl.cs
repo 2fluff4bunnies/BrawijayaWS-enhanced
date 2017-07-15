@@ -249,5 +249,50 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                 btnSearch.PerformClick();
             }
         }
+
+        private void bgwExport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.ExportToCSV();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to export Sparepart", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses export Sparepart gagal!");
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Export Sparepart selesai", true);
+        }
+
+        public string ExportFileName { get; set; }
+
+        private void btnExportToCSV_Click(object sender, EventArgs e)
+        {
+            if (!bgwExport.IsBusy && !bgwMain.IsBusy)
+            {
+                ExportFileName = string.Empty;
+                btnSearch.PerformClick();
+                exportDialog.FileName = "Sparepart_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".csv";
+                exportDialog.ShowDialog(this);
+            }
+        }
+
+        private void exportDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            ExportFileName = exportDialog.FileName;
+
+            MethodBase.GetCurrentMethod().Info("Exporting Sparepart data...");
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Sparepart...", false);
+            bgwExport.RunWorkerAsync();
+        }
     }
 }

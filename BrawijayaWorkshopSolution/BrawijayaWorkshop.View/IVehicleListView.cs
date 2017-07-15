@@ -12,5 +12,6 @@ namespace BrawijayaWorkshop.View
 
         List<VehicleViewModel> VehicleListData { get; set; }
 
+        string ExportFileName { get; }
     }
 }

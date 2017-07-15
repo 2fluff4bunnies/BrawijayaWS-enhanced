@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
         List<SupplierViewModel> SupplierListData { get; set; }
 
         SupplierViewModel SelectedSupplier { get; set; }
+
+        string ExportFileName { get; }
     }
 }

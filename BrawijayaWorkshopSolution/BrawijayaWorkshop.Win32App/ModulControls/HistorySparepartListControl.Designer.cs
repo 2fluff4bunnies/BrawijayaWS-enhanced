@@ -48,9 +48,12 @@
             this.colUnitName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -68,6 +71,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.labelControl1);
             this.gcFilter.Controls.Add(this.txtDateFilterTo);
             this.gcFilter.Controls.Add(this.txtDateFilterFrom);
@@ -79,7 +83,7 @@
             this.gcFilter.Controls.Add(this.lblFilterVehicleNo);
             this.gcFilter.Location = new System.Drawing.Point(3, 2);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(877, 66);
+            this.gcFilter.Size = new System.Drawing.Size(877, 95);
             this.gcFilter.TabIndex = 2;
             this.gcFilter.Text = "Filter";
             // 
@@ -319,6 +323,14 @@
             this.colSubTotal.Visible = true;
             this.colSubTotal.VisibleIndex = 6;
             // 
+            // colCategory
+            // 
+            this.colCategory.Caption = "Kategori";
+            this.colCategory.FieldName = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.Visible = true;
+            this.colCategory.VisibleIndex = 7;
+            // 
             // repoCheckBox
             // 
             this.repoCheckBox.AutoHeight = false;
@@ -330,13 +342,29 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // colCategory
+            // btnExportToCSV
             // 
-            this.colCategory.Caption = "Kategori";
-            this.colCategory.FieldName = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.Visible = true;
-            this.colCategory.VisibleIndex = 7;
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(12, 67);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
             // HistorySparepartListControl
             // 
@@ -387,5 +415,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSubTotal;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraGrid.Columns.GridColumn colCategory;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

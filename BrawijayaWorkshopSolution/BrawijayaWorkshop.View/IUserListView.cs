@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
 
         string FilterName { get; set; }
         bool FilterIsActive { get; set; }
+
+        string ExportFileName { get; }
     }
 }

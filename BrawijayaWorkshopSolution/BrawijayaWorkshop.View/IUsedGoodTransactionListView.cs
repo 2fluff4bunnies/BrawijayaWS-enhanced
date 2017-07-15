@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
         List<UsedGoodTransactionViewModel> UsedGoodTransactionListData { get; set; }
 
         UsedGoodTransactionViewModel SelectedUsedGoodTransaction { get; set; }
+
+        string ExportFileName { get; }
     }
 }

@@ -37,12 +37,15 @@
             this.lblFilterMonth = new DevExpress.XtraEditors.LabelControl();
             this.gridTransaction = new DevExpress.XtraGrid.GridControl();
             this.gvTransaction = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colTransactionDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalDebit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalCredit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.colTransactionDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupYear.Properties)).BeginInit();
@@ -55,6 +58,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.lookupYear);
             this.gcFilter.Controls.Add(this.lblFilterYear);
@@ -163,6 +167,16 @@
             this.gvTransaction.OptionsView.ShowViewCaption = true;
             this.gvTransaction.ViewCaption = "Daftar Transaksi Jurnal";
             // 
+            // colTransactionDate
+            // 
+            this.colTransactionDate.Caption = "Tanggal";
+            this.colTransactionDate.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.colTransactionDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.colTransactionDate.FieldName = "Parent.TransactionDate";
+            this.colTransactionDate.Name = "colTransactionDate";
+            this.colTransactionDate.Visible = true;
+            this.colTransactionDate.VisibleIndex = 0;
+            // 
             // colJournalCode
             // 
             this.colJournalCode.Caption = "Kode Akun";
@@ -212,15 +226,29 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // colTransactionDate
+            // btnExportToCSV
             // 
-            this.colTransactionDate.Caption = "Tanggal";
-            this.colTransactionDate.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.colTransactionDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.colTransactionDate.FieldName = "Parent.TransactionDate";
-            this.colTransactionDate.Name = "colTransactionDate";
-            this.colTransactionDate.Visible = true;
-            this.colTransactionDate.VisibleIndex = 0;
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(403, 29);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
             // JournalTransactionListControl
             // 
@@ -257,5 +285,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colJournalCredit;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionDate;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

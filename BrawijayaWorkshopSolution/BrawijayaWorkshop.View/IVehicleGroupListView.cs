@@ -12,5 +12,7 @@ namespace BrawijayaWorkshop.View
 
         List<VehicleGroupViewModel> ListVehicleGroupData { get; set; }
         VehicleGroupViewModel SelectedGroup { get; set; }
+
+        string ExportFileName { get; }
     }
 }

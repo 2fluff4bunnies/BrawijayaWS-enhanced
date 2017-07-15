@@ -16,5 +16,7 @@ namespace BrawijayaWorkshop.View
         PurchasingViewModel SelectedPurchasing { get; set; }
 
         string DebtStatusPayment { get; }
+
+        string ExportFileName { get; }
     }
 }

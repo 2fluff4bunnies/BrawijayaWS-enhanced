@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
 
         List<RoleViewModel> RoleDropdownListData { get; set; }
         int SelectedRoleId { get; set; }
+
+        string ExportFileName { get; }
     }
 }

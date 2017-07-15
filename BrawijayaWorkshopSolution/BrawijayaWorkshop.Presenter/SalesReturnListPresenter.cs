@@ -2,7 +2,9 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using LINQtoCSV;
 using System;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -10,6 +12,31 @@ namespace BrawijayaWorkshop.Presenter
     {
         public SalesReturnListPresenter(ISalesReturnListView view, SalesReturnListModel model)
             : base(view, model) { }
+
+        public void ExportToCSV()
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                QuoteAllFields = true,
+                SeparatorChar = ';', // tab delimited
+                FirstLineHasColumnNames = true,
+                FileCultureName = "en-US"
+            };
+
+            // prepare invoices
+            var exportSalesReturns =
+                from sal in View.SalesReturnListData
+                select new
+                {
+                    Tanggal = sal.CreateDate.ToString("yyyyMMdd"),
+                    Customer = sal.Invoice.SPK.Vehicle.Customer.CompanyName,
+                    TotalTransaksi = sal.Invoice.TotalPrice,
+                    TotalRetur = sal.TotalPriceReturn
+                };
+
+            cc.Write(exportSalesReturns, View.ExportFileName, outputFileDescription);
+        }
 
         public void InitData()
         {

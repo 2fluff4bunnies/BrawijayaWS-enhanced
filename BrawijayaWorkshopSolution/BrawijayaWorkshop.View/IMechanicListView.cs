@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
         List<MechanicViewModel> MechanicListData { get; set; }
 
         MechanicViewModel SelectedMechanic { get; set; }
+
+        string ExportFileName { get; }
     }
 }

@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
         List<JournalMasterViewModel> JournalMasterListData { get; set; }
 
         JournalMasterViewModel SelectedJournalMaster { get; set; }
+
+        string ExportFileName { get; }
     }
 }

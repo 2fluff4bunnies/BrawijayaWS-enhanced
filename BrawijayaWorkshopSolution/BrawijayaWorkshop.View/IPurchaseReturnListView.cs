@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
 
         PurchaseReturnViewModel SelectedPurchaseReturn { get; set; }
         List<SupplierViewModel> SupplierFilterList { get; set; }
+
+        string ExportFileName { get; }
     }
 }

@@ -2,7 +2,9 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using LINQtoCSV;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -10,6 +12,30 @@ namespace BrawijayaWorkshop.Presenter
     {
         public JournalMasterListPresenter(IJournalMasterListView view, JournalMasterListModel model)
             : base(view, model) { }
+
+        public void ExportToCSV()
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                QuoteAllFields = true,
+                SeparatorChar = ';', // tab delimited
+                FirstLineHasColumnNames = true,
+                FileCultureName = "en-US"
+            };
+
+            // prepare invoices
+            var exportJournals =
+                from jou in View.JournalMasterListData
+                select new
+                {
+                    Kode = jou.Code,
+                    Nama = jou.Name,
+                    Induk = jou.Parent.Code,
+                };
+
+            cc.Write(exportJournals, View.ExportFileName, outputFileDescription);
+        }
 
         public void InitData()
         {

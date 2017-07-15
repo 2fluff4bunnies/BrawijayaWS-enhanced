@@ -52,6 +52,9 @@
             this.lihatSelengkapnyaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAddReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbStatus.Properties)).BeginInit();
@@ -68,6 +71,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.lblStatus);
             this.gcFilter.Controls.Add(this.cbStatus);
             this.gcFilter.Controls.Add(this.labelControl1);
@@ -77,7 +81,7 @@
             this.gcFilter.Controls.Add(this.lblFilterDate);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(718, 64);
+            this.gcFilter.Size = new System.Drawing.Size(832, 64);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
             // 
@@ -189,7 +193,7 @@
             this.gridPurchasing.Location = new System.Drawing.Point(3, 102);
             this.gridPurchasing.MainView = this.gvPurchasing;
             this.gridPurchasing.Name = "gridPurchasing";
-            this.gridPurchasing.Size = new System.Drawing.Size(718, 210);
+            this.gridPurchasing.Size = new System.Drawing.Size(832, 210);
             this.gridPurchasing.TabIndex = 4;
             this.gridPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasing});
@@ -274,7 +278,7 @@
             this.cmsPrint,
             this.cmsAddReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(196, 136);
+            this.cmsEditor.Size = new System.Drawing.Size(196, 114);
             // 
             // cmsEditData
             // 
@@ -316,6 +320,30 @@
             this.cmsAddReturn.Text = "Buat Retur";
             this.cmsAddReturn.Click += new System.EventHandler(this.cmsAddReturn_Click);
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(706, 28);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
             // PurchasingListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,7 +352,7 @@
             this.Controls.Add(this.btnNewPurchasing);
             this.Controls.Add(this.gcFilter);
             this.Name = "PurchasingListControl";
-            this.Size = new System.Drawing.Size(724, 315);
+            this.Size = new System.Drawing.Size(838, 315);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
@@ -364,6 +392,9 @@
         private DevExpress.XtraEditors.LabelControl lblStatus;
         private DevExpress.XtraEditors.LookUpEdit cbStatus;
         private System.Windows.Forms.ToolStripMenuItem cmsAddReturn;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
 
     }
 }

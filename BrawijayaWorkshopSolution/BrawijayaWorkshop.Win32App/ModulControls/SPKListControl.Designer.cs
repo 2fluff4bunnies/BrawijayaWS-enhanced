@@ -65,6 +65,7 @@
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEndorseData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsSPKApproval = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsRollback = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsRequestPrint = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +73,9 @@
             this.cmsSetAsCompleted = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.cmsRollback = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -95,6 +98,7 @@
             // 
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFilter.Controls.Add(this.btnExportToCSV);
             this.groupFilter.Controls.Add(this.txtDateFilterTo);
             this.groupFilter.Controls.Add(this.labelControl1);
             this.groupFilter.Controls.Add(this.txtDateFilterFrom);
@@ -116,7 +120,7 @@
             this.groupFilter.Controls.Add(this.lblCategory);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(1085, 128);
+            this.groupFilter.Size = new System.Drawing.Size(1142, 128);
             this.groupFilter.TabIndex = 0;
             this.groupFilter.Text = "Filter";
             // 
@@ -357,7 +361,7 @@
             this.gcSPK.Location = new System.Drawing.Point(3, 166);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(1085, 275);
+            this.gcSPK.Size = new System.Drawing.Size(1142, 275);
             this.gcSPK.TabIndex = 2;
             this.gcSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPK});
@@ -472,7 +476,7 @@
             this.cmsSetAsCompleted,
             this.cmsAbort});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(172, 230);
+            this.cmsEditor.Size = new System.Drawing.Size(172, 208);
             // 
             // viewDetailToolStripMenuItem
             // 
@@ -497,6 +501,14 @@
             this.cmsSPKApproval.Size = new System.Drawing.Size(171, 22);
             this.cmsSPKApproval.Text = "Persetujuan SPK";
             this.cmsSPKApproval.Click += new System.EventHandler(this.cmsSPKApproval_Click);
+            // 
+            // cmsRollback
+            // 
+            this.cmsRollback.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources._1459465829_refresh;
+            this.cmsRollback.Name = "cmsRollback";
+            this.cmsRollback.Size = new System.Drawing.Size(171, 22);
+            this.cmsRollback.Text = "Rollback";
+            this.cmsRollback.Click += new System.EventHandler(this.cmsRollback_Click);
             // 
             // toolStripSeparator1
             // 
@@ -548,13 +560,29 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // cmsRollback
+            // btnExportToCSV
             // 
-            this.cmsRollback.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources._1459465829_refresh;
-            this.cmsRollback.Name = "cmsRollback";
-            this.cmsRollback.Size = new System.Drawing.Size(171, 22);
-            this.cmsRollback.Text = "Rollback";
-            this.cmsRollback.Click += new System.EventHandler(this.cmsRollback_Click);
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(1031, 23);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 90);
+            this.btnExportToCSV.TabIndex = 33;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
             // SPKListControl
             // 
@@ -564,7 +592,7 @@
             this.Controls.Add(this.btnNewSPK);
             this.Controls.Add(this.groupFilter);
             this.Name = "SPKListControl";
-            this.Size = new System.Drawing.Size(1091, 444);
+            this.Size = new System.Drawing.Size(1148, 444);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
@@ -631,5 +659,8 @@
         private DevExpress.XtraEditors.DateEdit txtDateFilterFrom;
         private DevExpress.XtraEditors.LabelControl lblFilterDate;
         private System.Windows.Forms.ToolStripMenuItem cmsRollback;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

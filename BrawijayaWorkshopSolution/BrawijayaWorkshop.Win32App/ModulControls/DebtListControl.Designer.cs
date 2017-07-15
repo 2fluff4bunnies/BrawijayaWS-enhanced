@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebtListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.lblPaymentStatus = new DevExpress.XtraEditors.LabelControl();
+            this.cbPaymentStatus = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
@@ -47,10 +49,12 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNewPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsListPayment = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbPaymentStatus = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.lblPaymentStatus = new DevExpress.XtraEditors.LabelControl();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -58,13 +62,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridDebt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDebt)).BeginInit();
             this.cmsEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFilter
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.lblPaymentStatus);
             this.gcFilter.Controls.Add(this.cbPaymentStatus);
             this.gcFilter.Controls.Add(this.btnSearch);
@@ -77,6 +81,30 @@
             this.gcFilter.Size = new System.Drawing.Size(636, 101);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
+            // 
+            // lblPaymentStatus
+            // 
+            this.lblPaymentStatus.Location = new System.Drawing.Point(14, 74);
+            this.lblPaymentStatus.Name = "lblPaymentStatus";
+            this.lblPaymentStatus.Size = new System.Drawing.Size(62, 13);
+            this.lblPaymentStatus.TabIndex = 17;
+            this.lblPaymentStatus.Text = "Status Bayar";
+            // 
+            // cbPaymentStatus
+            // 
+            this.cbPaymentStatus.Location = new System.Drawing.Point(127, 71);
+            this.cbPaymentStatus.Name = "cbPaymentStatus";
+            this.cbPaymentStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbPaymentStatus.Properties.HideSelection = false;
+            this.cbPaymentStatus.Properties.Items.AddRange(new object[] {
+            "Semua",
+            "Belum Lunas",
+            "Lunas"});
+            this.cbPaymentStatus.Properties.NullText = "Semua";
+            this.cbPaymentStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbPaymentStatus.Size = new System.Drawing.Size(138, 20);
+            this.cbPaymentStatus.TabIndex = 16;
             // 
             // btnSearch
             // 
@@ -261,29 +289,29 @@
             this.cmsListPayment.Text = "Lihat Daftar Pembayaran";
             this.cmsListPayment.Click += new System.EventHandler(this.cmsListPayment_Click);
             // 
-            // cbPaymentStatus
+            // exportDialog
             // 
-            this.cbPaymentStatus.Location = new System.Drawing.Point(127, 71);
-            this.cbPaymentStatus.Name = "cbPaymentStatus";
-            this.cbPaymentStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbPaymentStatus.Properties.HideSelection = false;
-            this.cbPaymentStatus.Properties.Items.AddRange(new object[] {
-            "Semua",
-            "Belum Lunas",
-            "Lunas"});
-            this.cbPaymentStatus.Properties.NullText = "Semua";
-            this.cbPaymentStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbPaymentStatus.Size = new System.Drawing.Size(138, 20);
-            this.cbPaymentStatus.TabIndex = 16;
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
             // 
-            // lblPaymentStatus
+            // bgwExport
             // 
-            this.lblPaymentStatus.Location = new System.Drawing.Point(14, 74);
-            this.lblPaymentStatus.Name = "lblPaymentStatus";
-            this.lblPaymentStatus.Size = new System.Drawing.Size(62, 13);
-            this.lblPaymentStatus.TabIndex = 17;
-            this.lblPaymentStatus.Text = "Status Bayar";
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(425, 64);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 31;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
             // 
             // DebtListControl
             // 
@@ -296,6 +324,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
             this.gcFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -303,7 +332,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridDebt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDebt)).EndInit();
             this.cmsEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbPaymentStatus.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -329,5 +357,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentStatus;
         private DevExpress.XtraEditors.ComboBoxEdit cbPaymentStatus;
         private DevExpress.XtraEditors.LabelControl lblPaymentStatus;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
     }
 }

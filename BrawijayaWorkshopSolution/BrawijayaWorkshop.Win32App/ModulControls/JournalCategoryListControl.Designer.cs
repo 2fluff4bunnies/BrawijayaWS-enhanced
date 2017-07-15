@@ -36,15 +36,18 @@
             this.lblParentFilter = new DevExpress.XtraEditors.LabelControl();
             this.gridCatJournal = new DevExpress.XtraGrid.GridControl();
             this.gvCatJournal = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colJournalName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colParent = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.btnNewChildren = new DevExpress.XtraEditors.SimpleButton();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
@@ -58,6 +61,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Controls.Add(this.lookUpCategory);
             this.gcFilter.Controls.Add(this.lblParentFilter);
@@ -73,7 +77,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(643, 28);
+            this.btnSearch.Location = new System.Drawing.Point(527, 27);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 5;
@@ -95,7 +99,7 @@
             this.lookUpCategory.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookUpCategory.Properties.NullText = "-- Pilih Jurnal Kategori --";
             this.lookUpCategory.Properties.ValueMember = "Id";
-            this.lookUpCategory.Size = new System.Drawing.Size(534, 20);
+            this.lookUpCategory.Size = new System.Drawing.Size(418, 20);
             this.lookUpCategory.TabIndex = 1;
             // 
             // lblParentFilter
@@ -143,6 +147,14 @@
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colParent, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvCatJournal.ViewCaption = "Daftar Akun Jurnal";
             // 
+            // colParent
+            // 
+            this.colParent.Caption = "Kategori";
+            this.colParent.FieldName = "Parent.Description";
+            this.colParent.Name = "colParent";
+            this.colParent.Visible = true;
+            this.colParent.VisibleIndex = 0;
+            // 
             // colJournalCode
             // 
             this.colJournalCode.Caption = "Kode";
@@ -158,14 +170,6 @@
             this.colJournalName.Name = "colJournalName";
             this.colJournalName.Visible = true;
             this.colJournalName.VisibleIndex = 2;
-            // 
-            // colParent
-            // 
-            this.colParent.Caption = "Kategori";
-            this.colParent.FieldName = "Parent.Description";
-            this.colParent.Name = "colParent";
-            this.colParent.Visible = true;
-            this.colParent.VisibleIndex = 0;
             // 
             // repoCheckBox
             // 
@@ -214,6 +218,30 @@
             this.cmsEditor.Name = "cmsListEditor";
             this.cmsEditor.Size = new System.Drawing.Size(136, 48);
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(598, 27);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
             // JournalCategoryListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,5 +280,8 @@
         private System.Windows.Forms.ToolStripMenuItem cmsEditData;
         private System.Windows.Forms.ToolStripMenuItem cmsDeleteData;
         private System.Windows.Forms.ContextMenuStrip cmsEditor;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.ComponentModel.BackgroundWorker bgwExport;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
     }
 }

@@ -21,5 +21,7 @@ namespace BrawijayaWorkshop.View
         List<SPKStatusItem> ContractWorkStatusDropdownList { get; set; }
         List<CustomerViewModel> CustomerDropdownList { get; set; }
 
+        string ExportFileName { get; }
+
     }
 }

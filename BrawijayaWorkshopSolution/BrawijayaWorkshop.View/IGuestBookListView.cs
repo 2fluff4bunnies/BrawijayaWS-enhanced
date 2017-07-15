@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
         List<GuestBookViewModel> GuestBookListData { get; set; }
 
         DateTime CreatedDateFilter { get; set; }
+
+        string ExportFileName { get; }
     }
 }

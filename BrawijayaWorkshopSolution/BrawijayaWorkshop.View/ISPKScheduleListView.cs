@@ -18,6 +18,8 @@ namespace BrawijayaWorkshop.View
         DateTime CreatedDateFilter { get; set; }
 
         List<SPKScheduleViewModel> SPKScheduleListData { get; set; }
+
+        string ExportFileName { get; }
     }
 
     public class FilterSPKVechile

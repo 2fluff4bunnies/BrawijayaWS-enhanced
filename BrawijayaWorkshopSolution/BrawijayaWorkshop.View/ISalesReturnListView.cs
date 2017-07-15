@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
 
         SalesReturnViewModel SelectedSalesReturn { get; set; }
         List<CustomerViewModel> CustomerFilterList { get; set; }
+
+        string ExportFileName { get; }
     }
 }

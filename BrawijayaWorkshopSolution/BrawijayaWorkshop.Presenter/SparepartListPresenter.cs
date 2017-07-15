@@ -3,7 +3,9 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using LINQtoCSV;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -11,6 +13,32 @@ namespace BrawijayaWorkshop.Presenter
     {
         public SparepartListPresenter(ISparepartListView view, SparepartListModel model)
             : base(view, model) { }
+
+        public void ExportToCSV()
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                QuoteAllFields = true,
+                SeparatorChar = ';', // tab delimited
+                FirstLineHasColumnNames = true,
+                FileCultureName = "en-US"
+            };
+
+            // prepare invoices
+            var exportSpareparts =
+                from sp in View.SparepartListData
+                select new
+                {
+                    Kategori = sp.CategoryReference.Name,
+                    Kode = sp.Code,
+                    Nama = sp.Name,
+                    Unit = sp.UnitReference.Value,
+                    Stok = sp.StockQty
+                };
+
+            cc.Write(exportSpareparts, View.ExportFileName, outputFileDescription);
+        }
 
         public void InitData()
         {

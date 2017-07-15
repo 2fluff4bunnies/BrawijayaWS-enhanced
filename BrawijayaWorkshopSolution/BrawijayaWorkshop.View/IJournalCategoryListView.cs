@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.View
         List<ReferenceViewModel> ChildrenListData { get; set; }
 
         ReferenceViewModel SelectedChildren { get; set; }
+
+        string ExportFileName { get; }
     }
 }

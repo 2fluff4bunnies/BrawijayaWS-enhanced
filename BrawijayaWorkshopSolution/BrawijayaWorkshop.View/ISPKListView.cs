@@ -37,6 +37,8 @@ namespace BrawijayaWorkshop.View
         List<SPKStatusItem> CompletedStatusDropdownList { get; set; }
 
         List<SPKStatusItem> ContractWorkStatusDropdownList { get; set; }
+
+        string ExportFileName { get; }
     }
 
     public class SPKStatusItem

@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
         List<BrandViewModel> BrandListData { get; set; }
 
         BrandViewModel SelectedBrand { get; set; }
+
+        string ExportFileName { get; }
     }
 }

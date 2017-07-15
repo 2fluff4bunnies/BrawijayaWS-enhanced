@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
         UserRoleViewModel SelectedUserRole { get; set; }
 
         bool IsActive { get; set; }
+
+        string ExportFileName { get; }
     }
 }

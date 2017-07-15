@@ -11,5 +11,7 @@ namespace BrawijayaWorkshop.View
         DateTime To { get; set; }
         List<TransactionViewModel> TransactionListData { get; set; }
         TransactionViewModel SelectedTransaction { get; set; }
+
+        string ExportFileName { get; }
     }
 }

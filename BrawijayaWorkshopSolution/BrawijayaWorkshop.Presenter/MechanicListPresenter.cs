@@ -2,6 +2,8 @@
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
+using LINQtoCSV;
+using System.Linq;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -9,6 +11,31 @@ namespace BrawijayaWorkshop.Presenter
     {
         public MechanicListPresenter(IMechanicListView view, MechanicListModel model)
             : base(view, model) { }
+
+        public void ExportToCSV()
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                QuoteAllFields = true,
+                SeparatorChar = ';', // tab delimited
+                FirstLineHasColumnNames = true,
+                FileCultureName = "en-US"
+            };
+
+            // prepare invoices
+            var exportMechanics =
+                from m in View.MechanicListData
+                select new
+                {
+                    Kode = m.Code,
+                    Nama = m.Name,
+                    Alamat = m.Address,
+                    Telepon = m.PhoneNumber
+                };
+
+            cc.Write(exportMechanics, View.ExportFileName, outputFileDescription);
+        }
 
         public void LoadMechanic()
         {

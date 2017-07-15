@@ -239,6 +239,51 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data Debt selesai", true);
         }
 
+        private void bgwExport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.ExportToCSV();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to export Debt", ex);
+                e.Result = ex;
+            }
+        }
+
+        private void bgwExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses export Debt gagal!");
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Export Debt selesai", true);
+        }
+
+        public string ExportFileName { get; set; }
+
+        private void btnExportToCSV_Click(object sender, EventArgs e)
+        {
+            if (!bgwExport.IsBusy && !bgwMain.IsBusy)
+            {
+                ExportFileName = string.Empty;
+                btnSearch.PerformClick();
+                exportDialog.FileName = "Debt_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".csv";
+                exportDialog.ShowDialog(this);
+            }
+        }
+
+        private void exportDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            ExportFileName = exportDialog.FileName;
+
+            MethodBase.GetCurrentMethod().Info("Exporting Debt data...");
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Debt...", false);
+            bgwExport.RunWorkerAsync();
+        }
+
         private void gvDebt_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             ColumnView view = sender as ColumnView;

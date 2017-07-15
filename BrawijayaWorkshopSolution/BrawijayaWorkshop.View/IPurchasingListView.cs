@@ -14,6 +14,8 @@ namespace BrawijayaWorkshop.View
 
         PurchasingViewModel SelectedPurchasing { get; set; }
         List<PurchasingStatusItem> PurchasingStatusList { get; set; }
+
+        string ExportFileName { get; }
     }
 
     public class PurchasingStatusItem

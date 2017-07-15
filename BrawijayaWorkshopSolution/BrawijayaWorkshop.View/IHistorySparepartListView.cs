@@ -14,5 +14,7 @@ namespace BrawijayaWorkshop.View
         List<VehicleViewModel> VehicleFilterList { get; set; }
         int SparepartFilter { get; set; }
         List<SPKDetailSparepartViewModel> SparepartListData { get; set; }
+
+        string ExportFileName { get; }
     }
 }

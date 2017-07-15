@@ -49,6 +49,9 @@
             this.cmsViewDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteReturn = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPrintReturn = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSupplierFilter.Properties)).BeginInit();
@@ -65,6 +68,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.lblSupplier);
             this.gcFilter.Controls.Add(this.cbSupplierFilter);
             this.gcFilter.Controls.Add(this.labelControl1);
@@ -74,7 +78,7 @@
             this.gcFilter.Controls.Add(this.lblFilterDate);
             this.gcFilter.Location = new System.Drawing.Point(3, 3);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(742, 67);
+            this.gcFilter.Size = new System.Drawing.Size(869, 67);
             this.gcFilter.TabIndex = 1;
             this.gcFilter.Text = "Filter";
             // 
@@ -174,7 +178,7 @@
             this.gridPurchasing.Location = new System.Drawing.Point(3, 105);
             this.gridPurchasing.MainView = this.gvPurchasing;
             this.gridPurchasing.Name = "gridPurchasing";
-            this.gridPurchasing.Size = new System.Drawing.Size(742, 207);
+            this.gridPurchasing.Size = new System.Drawing.Size(869, 207);
             this.gridPurchasing.TabIndex = 6;
             this.gridPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPurchasing});
@@ -258,13 +262,13 @@
             this.cmsDeleteReturn,
             this.cmsPrintReturn});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(153, 92);
+            this.cmsEditor.Size = new System.Drawing.Size(139, 70);
             // 
             // cmsViewDetail
             // 
             this.cmsViewDetail.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.history_16x16;
             this.cmsViewDetail.Name = "cmsViewDetail";
-            this.cmsViewDetail.Size = new System.Drawing.Size(152, 22);
+            this.cmsViewDetail.Size = new System.Drawing.Size(138, 22);
             this.cmsViewDetail.Text = "Lihat Detail";
             this.cmsViewDetail.Click += new System.EventHandler(this.cmsViewDetail_Click);
             // 
@@ -272,7 +276,7 @@
             // 
             this.cmsDeleteReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteReturn.Name = "cmsDeleteReturn";
-            this.cmsDeleteReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsDeleteReturn.Size = new System.Drawing.Size(138, 22);
             this.cmsDeleteReturn.Text = "Delete Retur";
             this.cmsDeleteReturn.Click += new System.EventHandler(this.cmsDeleteReturn_Click);
             // 
@@ -280,9 +284,33 @@
             // 
             this.cmsPrintReturn.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
             this.cmsPrintReturn.Name = "cmsPrintReturn";
-            this.cmsPrintReturn.Size = new System.Drawing.Size(152, 22);
+            this.cmsPrintReturn.Size = new System.Drawing.Size(138, 22);
             this.cmsPrintReturn.Text = "Cetak Retur";
             this.cmsPrintReturn.Click += new System.EventHandler(this.cmsPrintReturn_Click);
+            // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(735, 28);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
             // PurchaseReturnListControl
             // 
@@ -291,7 +319,7 @@
             this.Controls.Add(this.gridPurchasing);
             this.Controls.Add(this.gcFilter);
             this.Name = "PurchaseReturnListControl";
-            this.Size = new System.Drawing.Size(748, 315);
+            this.Size = new System.Drawing.Size(875, 315);
             this.Load += new System.EventHandler(this.PurchaseReturnListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
@@ -329,5 +357,8 @@
         private DevExpress.XtraEditors.LabelControl lblSupplier;
         private DevExpress.XtraEditors.LookUpEdit cbSupplierFilter;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPriceReturn;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

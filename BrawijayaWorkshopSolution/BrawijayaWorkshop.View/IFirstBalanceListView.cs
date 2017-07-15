@@ -8,5 +8,7 @@ namespace BrawijayaWorkshop.View
     {
         BalanceJournalViewModel SelectedFirstBalanceJournal { get; set; }
         List<BalanceJournalDetailViewModel> FirstBalanceJournalDetailList { get; set; }
+
+        string ExportFileName { get; }
     }
 }

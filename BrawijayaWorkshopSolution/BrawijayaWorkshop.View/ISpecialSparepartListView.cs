@@ -12,5 +12,7 @@ namespace BrawijayaWorkshop.View
 
         SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
 
+        string ExportFileName { get; }
+
     }
 }

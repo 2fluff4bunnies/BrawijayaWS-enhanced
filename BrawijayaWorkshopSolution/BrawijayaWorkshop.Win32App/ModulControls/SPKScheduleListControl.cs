@@ -237,6 +237,49 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data jadwal spk untuk kendaraan selesai", true);
         }
 
+        private void bgwExport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _presenter.ExportToCSV();
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to export SPKSchedule", ex);
+                e.Result = ex;
+            }
+        }
 
+        private void bgwExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                this.ShowError("Proses export SPKSchedule gagal!");
+            }
+
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Export SPKSchedule selesai", true);
+        }
+
+        public string ExportFileName { get; set; }
+
+        private void btnExportToCSV_Click(object sender, EventArgs e)
+        {
+            if (!bgwExport.IsBusy && !bgwMain.IsBusy)
+            {
+                ExportFileName = string.Empty;
+                btnSearch.PerformClick();
+                exportDialog.FileName = "SPKSchedule_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".csv";
+                exportDialog.ShowDialog(this);
+            }
+        }
+
+        private void exportDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            ExportFileName = exportDialog.FileName;
+
+            MethodBase.GetCurrentMethod().Info("Exporting SPKSchedule data...");
+            FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data SPKSchedule...", false);
+            bgwExport.RunWorkerAsync();
+        }
     }
 }

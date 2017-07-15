@@ -47,6 +47,9 @@
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
+            this.exportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bgwExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtJournalName.Properties)).BeginInit();
@@ -61,6 +64,7 @@
             // 
             this.groupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFilter.Controls.Add(this.btnExportToCSV);
             this.groupFilter.Controls.Add(this.btnSearch);
             this.groupFilter.Controls.Add(this.txtJournalName);
             this.groupFilter.Controls.Add(this.lblJournalName);
@@ -68,7 +72,7 @@
             this.groupFilter.Controls.Add(this.lblParent);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(774, 60);
+            this.groupFilter.Size = new System.Drawing.Size(892, 60);
             this.groupFilter.TabIndex = 0;
             this.groupFilter.Text = "Filter";
             // 
@@ -78,7 +82,7 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(714, 26);
+            this.btnSearch.Location = new System.Drawing.Point(713, 26);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 23);
             this.btnSearch.TabIndex = 4;
@@ -89,15 +93,15 @@
             // 
             this.txtJournalName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtJournalName.Location = new System.Drawing.Point(444, 29);
+            this.txtJournalName.Location = new System.Drawing.Point(387, 29);
             this.txtJournalName.Name = "txtJournalName";
-            this.txtJournalName.Size = new System.Drawing.Size(264, 20);
+            this.txtJournalName.Size = new System.Drawing.Size(310, 20);
             this.txtJournalName.TabIndex = 3;
             this.txtJournalName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtJournalName_KeyDown);
             // 
             // lblJournalName
             // 
-            this.lblJournalName.Location = new System.Drawing.Point(369, 32);
+            this.lblJournalName.Location = new System.Drawing.Point(327, 32);
             this.lblJournalName.Name = "lblJournalName";
             this.lblJournalName.Size = new System.Drawing.Size(54, 13);
             this.lblJournalName.TabIndex = 2;
@@ -118,7 +122,7 @@
             this.lookupJournalParent.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupJournalParent.Properties.NullText = "-- Pilih Induk Akun --";
             this.lookupJournalParent.Properties.ValueMember = "Id";
-            this.lookupJournalParent.Size = new System.Drawing.Size(259, 20);
+            this.lookupJournalParent.Size = new System.Drawing.Size(225, 20);
             this.lookupJournalParent.TabIndex = 1;
             // 
             // lblParent
@@ -151,7 +155,7 @@
             this.gridJournalMaster.Name = "gridJournalMaster";
             this.gridJournalMaster.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repoCheckBox});
-            this.gridJournalMaster.Size = new System.Drawing.Size(774, 303);
+            this.gridJournalMaster.Size = new System.Drawing.Size(892, 303);
             this.gridJournalMaster.TabIndex = 4;
             this.gridJournalMaster.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvJournalMaster});
@@ -237,6 +241,30 @@
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(774, 26);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
+            // exportDialog
+            // 
+            this.exportDialog.DefaultExt = "csv";
+            this.exportDialog.Filter = "CSV (*.csv) | *.csv";
+            this.exportDialog.Title = "Export Invoice";
+            this.exportDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportDialog_FileOk);
+            // 
+            // bgwExport
+            // 
+            this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
+            this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
             // JournalMasterListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,7 +273,7 @@
             this.Controls.Add(this.btnNewJournal);
             this.Controls.Add(this.groupFilter);
             this.Name = "JournalMasterListControl";
-            this.Size = new System.Drawing.Size(780, 404);
+            this.Size = new System.Drawing.Size(898, 404);
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).EndInit();
             this.groupFilter.ResumeLayout(false);
             this.groupFilter.PerformLayout();
@@ -278,5 +306,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colJournalName;
         private DevExpress.XtraGrid.Columns.GridColumn colParent;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoCheckBox;
+        private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
+        private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.ComponentModel.BackgroundWorker bgwExport;
     }
 }

@@ -15,5 +15,7 @@ namespace BrawijayaWorkshop.View
         SPKViewModel SelectedSPK { get; set; }
 
         InvoiceViewModel SelectedInvoice { get; set; }
+
+        string ExportFileName { get; }
     }
 }
