@@ -76,6 +76,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.VehicleGroupId = View.SelectedVehicle.VehicleGroupId;
             View.SelectedSPK.CostEstimation = View.CostEstimation;
             View.SelectedSPK.Vehicle = View.SelectedVehicle;
+
             if (View.isContractWork)
             {
                 View.SelectedSPK.isContractWork = View.isContractWork;
@@ -129,6 +130,11 @@ namespace BrawijayaWorkshop.Presenter
             return Model.GetSparepartSpecial(View.SparepartId);
         }
 
+        public SpecialSparepartDetailViewModel GetSpecialSparepartDetail(int id)
+        {
+            return Model.GetSpecialSparepartDetail(id);
+        }
+
         public bool IsUsedSparepartRequired()
         {
             return Model.IsUsedSparepartRequired(View.SparepartId);
@@ -146,9 +152,9 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadVehicleWheel()
         {
-            if (View.SelectedSPK != null)
+            if (View.ParentSPK != null)
             {
-                View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId, View.SelectedSPK.Id);
+                View.VehicleWheelList = Model.getCurrentVehicleWheel(View.VehicleId, View.ParentSPK.Id);
             }
             else
             {

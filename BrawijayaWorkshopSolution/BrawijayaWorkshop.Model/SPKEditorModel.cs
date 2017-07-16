@@ -352,6 +352,7 @@ namespace BrawijayaWorkshop.Model
 
                             entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
                             entityNewSparepartDetail.SparepartDetailId = spkSparepartDetail.SparepartDetailId;
+                            //entityNewSparepartDetail.SPKDetailSparepartId = insertedSPkDetailSparepart.Id;
 
                             _SPKDetailSparepartRepository.AttachNavigation<SPKDetailSparepart>(entityNewSparepartDetail.SPKDetailSparepart);
                             SPKDetailSparepartDetail insertedSPKSpDtl = _SPKDetailSparepartDetailRepository.Add(entityNewSparepartDetail);
@@ -645,16 +646,22 @@ namespace BrawijayaWorkshop.Model
                 foreach (var item in mappedResult)
                 {
                     WheelExchangeHistory wheel = _wheelExchangeHistoryRepository.GetMany(w => w.SPKId == SPKId && w.OriginalWheelId == item.WheelDetailId).FirstOrDefault();
-                    item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
-                    if (wheel.ReplaceWheel.SparepartDetail.PurchasingDetailId > 0)
+                    if (wheel != null)
                     {
-                        item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                        item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
+                        item.ReplaceWithWheelDetailName = wheel.ReplaceWheel.SparepartDetail.Sparepart.Name;
+                        item.ReplaceWithWheelDetailSerialNumber = wheel.ReplaceWheel.SerialNumber;
+
+                        if (wheel.ReplaceWheel.SparepartDetail.PurchasingDetailId > 0)
+                        {
+                            item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                        }
+                        else if (wheel.ReplaceWheel.SparepartDetail.SparepartManualTransactionId > 0)
+                        {
+                            item.Price = wheel.ReplaceWheel.SparepartDetail.SparepartManualTransaction.Price;
+                        }
+                        item.IsUsedWheelRetrieved = true;
                     }
-                    else if (wheel.ReplaceWheel.SparepartDetail.SparepartManualTransactionId > 0)
-                    {
-                        item.Price = wheel.ReplaceWheel.SparepartDetail.SparepartManualTransaction.Price;
-                    }
-                    item.IsUsedWheelRetrieved = true;
                 }
             }
 
@@ -805,6 +812,14 @@ namespace BrawijayaWorkshop.Model
             SpecialSparepart result = _specialSparepartRepository.GetMany(ss => ss.SparepartId == sparepartId && ss.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
 
             SpecialSparepartViewModel mappedResult = new SpecialSparepartViewModel();
+
+            return Map(result, mappedResult);
+        }
+
+        public SpecialSparepartDetailViewModel GetSpecialSparepartDetail(int id)
+        {
+            SpecialSparepartDetail result = _specialSparepartDetailRepository.GetById(id);
+            SpecialSparepartDetailViewModel mappedResult = new SpecialSparepartDetailViewModel();
 
             return Map(result, mappedResult);
         }

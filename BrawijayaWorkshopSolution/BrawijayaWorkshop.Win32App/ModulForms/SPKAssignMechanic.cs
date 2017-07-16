@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
@@ -34,9 +35,6 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _presenter = new SPKScheduleEditorPresenter(this, model);
             _availableMechanic = new List<string>();
             _today = DateTime.Today;
-
-            _assignedSchedule = new List<SPKScheduleViewModel>();
-
             this.Load += SPKAssignMechanic_Load;
 
 
@@ -46,6 +44,30 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void SPKAssignMechanic_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+
+            if (this.AssignedSchedule != null && this.AssignedSchedule.Count > 0)
+            {
+                foreach (var item in this.AssignedSchedule)
+                {
+                    MechanicViewModel mechanic = MechanicList.Where(m => m.Id == item.MechanicId).FirstOrDefault();
+
+                    if (mechanic != null)
+                    {
+                        SelectedMechanicList.Add((MechanicViewModel)mechanic);
+                    }
+                }
+
+                foreach (var item in SelectedMechanicList)
+                {
+                    MechanicList.Remove((MechanicViewModel)item);
+                }
+
+                RebindListboxes();
+            }
+            else
+            {
+                this.AssignedSchedule = new List<SPKScheduleViewModel>();
+            }
 
             RebindListboxes();
         }

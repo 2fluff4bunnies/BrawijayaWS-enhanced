@@ -110,6 +110,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         public bool IsNeedApproval { get; set; }
         public bool IsUsedSparepartRequired { get; set; }
         public List<SpecialSparepartDetailViewModel> RemovedWHeelDetailList { get; set; }
+        public string MechanicDesc { get; set; }
 
         public decimal TotalSparepartPrice
         {
@@ -870,6 +871,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void LookUpVehicle_EditValueChanged(object sender, EventArgs e)
         {
             _presenter.LoadVehicleWheel();
+            VehicleViewModel vehicle = LookUpVehicle.GetSelectedDataRow() as VehicleViewModel;
+            Kilometers = vehicle.Kilometers;
 
             if (this.VehicleWheelList.Count <= 0)
             {
@@ -1131,9 +1134,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void btnAssignMechanic_Click(object sender, EventArgs e)
         {
             SPKAssignMechanic editor = Bootstrapper.Resolve<SPKAssignMechanic>();
+
+            if (this.AssignedSchedule != null)
+            {
+                editor.AssignedSchedule = this.AssignedSchedule;
+                editor.Description = this.MechanicDesc;
+            }
+
             editor.SelectedSPK = this.SelectedSPK;
             editor.ShowDialog(this);
             this.AssignedSchedule = editor.AssignedSchedule;
+            this.MechanicDesc = editor.Description;
         }
 
         private void btnChangeWheel_Click(object sender, EventArgs e)
@@ -1167,12 +1178,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                 if (!SPKSparepartDetailList.Any(spd => spd.SparepartDetailId == vw.ReplaceWithWheelDetailId))
                 {
+                    SpecialSparepartDetailViewModel changedVwDetail = _presenter.GetSpecialSparepartDetail(vw.ReplaceWithWheelDetailId);
                     this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
                     {
-                        SparepartDetailId = vw.ReplaceWithWheelDetailId,
+                        SparepartDetailId = changedVwDetail.SparepartDetailId,
                         SparepartDetail = new SparepartDetailViewModel
                         {
-                            Id = vw.ReplaceWithWheelDetailId,
+                            Id = changedVwDetail.SparepartDetailId,
                             SparepartId = vw.SparepartId
                         }
                     });
