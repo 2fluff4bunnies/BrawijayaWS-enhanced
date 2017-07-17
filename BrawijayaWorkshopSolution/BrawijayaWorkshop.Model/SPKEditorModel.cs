@@ -1011,7 +1011,8 @@ namespace BrawijayaWorkshop.Model
                                             {
                                                 Id = cl.Key,
                                                 Qty = cl.Count(),
-                                                Price = cl.First().Price
+                                                Price = cl.First().Price,
+                                                SparepartId = cl.First().SparepartId
                                             }).ToList();
                             foreach (var itemSpTrans in listSpManual)
                             {
@@ -1020,7 +1021,7 @@ namespace BrawijayaWorkshop.Model
                                 stockCardDtail.PricePerItem = Convert.ToDouble(itemSpTrans.Price);
                                 stockCardDtail.QtyIn = itemSpTrans.Qty;
                                 stockCardDtail.QtyInPrice = Convert.ToDouble(itemSpTrans.Qty * itemSpTrans.Price);
-                                SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(itemSpTrans.Sparepart.Id, itemSpTrans.Id);
+                                SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(itemSpTrans.SparepartId, itemSpTrans.Id);
                                 double lastStockDetail = 0;
                                 double lastStockDetailPrice = 0;
                                 if (lastStockCardDetail != null)
@@ -1032,15 +1033,13 @@ namespace BrawijayaWorkshop.Model
                                 stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
                                 stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
                                 stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
-                                stockCardDtail.PurchasingId = itemSpTrans.Id;
+                                stockCardDtail.SparepartManualTransactionId = itemSpTrans.Id;
 
                                 _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                                 _sparepartStokCardDetailRepository.Add(stockCardDtail);
                                 _unitOfWork.SaveChanges();
                             }
                         }
-
-
                     }
 
                     List<WheelExchangeHistory> wehList = _wheelExchangeHistoryRepository.GetMany(weh => weh.SPKId == spk.Id).ToList();
