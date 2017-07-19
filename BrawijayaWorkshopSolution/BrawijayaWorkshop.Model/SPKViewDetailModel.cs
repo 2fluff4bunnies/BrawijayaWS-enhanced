@@ -671,13 +671,13 @@ namespace BrawijayaWorkshop.Model
 
                             _vehicleWheelRepository.Update(vw);
 
-                            UsedGood usedWHeel = _usedGoodRepository.GetMany(ug => ug.SparepartId == item.WheelDetail.SparepartDetail.SparepartId).FirstOrDefault();
-                            if (usedWHeel != null)
-                            {
-                                usedWHeel.Stock++;
+                            //UsedGood usedWHeel = _usedGoodRepository.GetMany(ug => ug.SparepartId == item.WheelDetail.SparepartDetail.SparepartId).FirstOrDefault();
+                            //if (usedWHeel != null)
+                            //{
+                            //    usedWHeel.Stock++;
 
-                                _usedGoodRepository.Update(usedWHeel);
-                            }
+                            //    _usedGoodRepository.Update(usedWHeel);
+                            //}
                         }
                         _unitOfWork.SaveChanges();
 

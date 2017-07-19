@@ -813,17 +813,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (selectedReference.Code == DbConstant.REF_SPK_CATEGORY_REPAIR)
             {
-                //if (isContractWork && ContractWorkFee >= this.ContractThreshold)
-                //{
-                //    result = true;
-                //}
-                //else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
-                //{
-                //    result = true;
-                //}
+                if (isContractWork && ContractWorkFee >= this.ContractThreshold)
+                {
+                    result = true;
+                }
+                else if ((this.TotalSparepartPrice + vehicleBills) + this.CostEstimation.AsDecimal() >= this.RepairThreshold)
+                {
+                    result = true;
+                }
 
-                //always true
-                result = true;
+                //always true?
+                //result = true;
             }
 
             return result;
