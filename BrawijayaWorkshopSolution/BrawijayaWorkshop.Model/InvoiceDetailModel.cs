@@ -12,6 +12,8 @@ namespace BrawijayaWorkshop.Model
 {
     public class InvoiceDetailModel : AppBaseModel
     {
+        private ISPKRepository _spkRepository;
+        private ISPKScheduleRepository _spkScheduleRepository;
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private IReferenceRepository _referenceRepository;
@@ -21,7 +23,10 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private IUnitOfWork _unitOfWork;
 
-        public InvoiceDetailModel(IInvoiceRepository invoiceRepository,
+        public InvoiceDetailModel(
+            ISPKRepository spkRepository,
+            ISPKScheduleRepository spkScheduleRepository,
+            IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
             IReferenceRepository referenceRepository,
             ITransactionRepository transactionRepository,
@@ -31,6 +36,8 @@ namespace BrawijayaWorkshop.Model
             IUnitOfWork unitOfWork)
             : base()
         {
+            _spkRepository = spkRepository;
+            _spkScheduleRepository = spkScheduleRepository;
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
             _transactionRepository = transactionRepository;
@@ -93,6 +100,48 @@ namespace BrawijayaWorkshop.Model
                     SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                     UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
                 });
+            }
+
+            Invoice invoice = _invoiceRepository.GetById(invoiceID);
+            if (invoice.SPK.isContractWork)
+            {
+                result.Add(new InvoiceSparepartViewModel
+                {
+                    SparepartName = "Borongan",
+                    Qty = 1,
+                    SubTotalPrice = (invoice.SPK.ContractWorkFee * (0.2).AsDecimal()).AsDouble(),
+                    SparepartCode = "Biaya Tukang",
+                    UnitCategoryName = "",
+                });
+            }
+            else
+            {
+                decimal ServiceFee = 0;
+
+                TimeSpan SPKTimeSpan = invoice.CreateDate - invoice.SPK.CreateDate;
+                int SPKWorkingDays = Math.Ceiling(SPKTimeSpan.TotalDays).AsInteger();
+
+                for (int i = 0; i < SPKWorkingDays; i++)
+                {
+                    List<Mechanic> involvedMechanic = (from sched in _spkScheduleRepository.GetMany(sc => sc.CreateDate.Day == invoice.SPK.CreateDate.Day + i && sc.SPKId == invoice.SPK.Id).ToList()
+                                                       select sched.Mechanic).ToList();
+
+                    foreach (Mechanic mechanic in involvedMechanic)
+                    {
+                        int mechanicJobForToday = _spkScheduleRepository.GetMany(sc => sc.CreateDate.Day == invoice.SPK.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
+
+                        decimal mechanicFeeForToday = mechanic.BaseFee / mechanicJobForToday;
+
+                        result.Add(new InvoiceSparepartViewModel
+                        {
+                            SparepartName = mechanic.Name,
+                            Qty = 1,
+                            SubTotalPrice = mechanicFeeForToday.AsDouble(),
+                            SparepartCode = "Biaya Tukang",
+                            UnitCategoryName = "",
+                        });
+                    }
+                }
             }
             return result;
         }
