@@ -63,14 +63,14 @@ namespace BrawijayaWorkshop.Model
             {
                 dateFrom = dateFrom.Value.Date;
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
-                result = _spkDetailSparepartRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && c.SPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed).OrderBy(c => c.CreateDate).ToList();
-                listReturnSource = _salesReturnDetailRepository.GetMany(c => c.InvoiceDetail.CreateDate >= dateFrom && c.InvoiceDetail.CreateDate <= dateTo).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
+                result = _spkDetailSparepartRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && c.SPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed && c.SPK.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
+                listReturnSource = _salesReturnDetailRepository.GetMany(c => c.InvoiceDetail.CreateDate >= dateFrom && c.InvoiceDetail.CreateDate <= dateTo && c.SalesReturn.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
                 
             }
             else
             {
-                result = _spkDetailSparepartRepository.GetAll().OrderBy(c => c.CreateDate).ToList();
-                listReturnSource = _salesReturnDetailRepository.GetAll().OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
+                result = _spkDetailSparepartRepository.GetMany(c => c.SPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed && c.SPK.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
+                listReturnSource = _salesReturnDetailRepository.GetMany(c => c.SalesReturn.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
             }
 
             if(vehicleFilter != 0)
