@@ -361,6 +361,12 @@
     <Compile Include="ModulControls\RecapInvoiceByVehicleGroupListControl.Designer.cs">
       <DependentUpon>RecapInvoiceByVehicleGroupListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulControls\RecapPurchasing BySupplierListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulControls\RecapPurchasing BySupplierListControl.Designer.cs">
+      <DependentUpon>RecapPurchasing BySupplierListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModulControls\RoleAccessListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -975,6 +981,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RecapInvoiceByVehicleGroupListControl.resx">
       <DependentUpon>RecapInvoiceByVehicleGroupListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulControls\RecapPurchasing BySupplierlistControl.resx">
+      <DependentUpon>RecapPurchasing BySupplierListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModulControls\RoleAccessListControl.resx">
       <DependentUpon>RoleAccessListControl.cs</DependentUpon>

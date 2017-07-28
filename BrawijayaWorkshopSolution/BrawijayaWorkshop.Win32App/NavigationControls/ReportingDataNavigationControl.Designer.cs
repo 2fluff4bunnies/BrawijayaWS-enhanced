@@ -37,8 +37,9 @@
             this.iRecapInvoiceByVehicleGroup = new DevExpress.XtraNavBar.NavBarItem();
             this.iRecapInvoiceByCustomer = new DevExpress.XtraNavBar.NavBarItem();
             this.iHistorySparepart = new DevExpress.XtraNavBar.NavBarItem();
-            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.iStockOpname = new DevExpress.XtraNavBar.NavBarItem();
+            this.iRecapPurchasingBySupplier = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarReportingData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +57,8 @@
             this.iRecapInvoiceByVehicleGroup,
             this.iRecapInvoiceByCustomer,
             this.iHistorySparepart,
-            this.iStockOpname});
+            this.iStockOpname,
+            this.iRecapPurchasingBySupplier});
             this.navbarReportingData.Location = new System.Drawing.Point(0, 0);
             this.navbarReportingData.Name = "navbarReportingData";
             this.navbarReportingData.OptionsNavPane.ExpandedWidth = 195;
@@ -75,7 +77,8 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByVehicleGroup),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapInvoiceByCustomer),
             new DevExpress.XtraNavBar.NavBarItemLink(this.iHistorySparepart),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iStockOpname)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iStockOpname),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iRecapPurchasingBySupplier)});
             this.navbarGroupReportingData.Name = "navbarGroupReportingData";
             // 
             // iSPKHistory
@@ -109,6 +112,18 @@
             this.iHistorySparepart.Name = "iHistorySparepart";
             this.iHistorySparepart.SmallImageIndex = 0;
             // 
+            // iStockOpname
+            // 
+            this.iStockOpname.Caption = "Stock Opname";
+            this.iStockOpname.Name = "iStockOpname";
+            this.iStockOpname.SmallImageIndex = 0;
+            // 
+            // iRecapPurchasingBySupplier
+            // 
+            this.iRecapPurchasingBySupplier.Caption = "Rekap Pembelian";
+            this.iRecapPurchasingBySupplier.Name = "iRecapPurchasingBySupplier";
+            this.iRecapPurchasingBySupplier.SmallImageIndex = 2;
+            // 
             // imageCollection
             // 
             this.imageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection.ImageStream")));
@@ -116,12 +131,6 @@
             this.imageCollection.Images.SetKeyName(1, "invoice1_16x16.png");
             this.imageCollection.Images.SetKeyName(2, "invoice2_16x16.png");
             this.imageCollection.Images.SetKeyName(3, "invoice3_16x16.png");
-            // 
-            // iStockOpname
-            // 
-            this.iStockOpname.Caption = "Stock Opname";
-            this.iStockOpname.Name = "iStockOpname";
-            this.iStockOpname.SmallImageIndex = 0;
             // 
             // ReportingDataNavigationControl
             // 
@@ -147,5 +156,6 @@
         public DevExpress.XtraNavBar.NavBarItem iRecapInvoiceByCustomer;
         public DevExpress.XtraNavBar.NavBarItem iHistorySparepart;
         public DevExpress.XtraNavBar.NavBarItem iStockOpname;
+        public DevExpress.XtraNavBar.NavBarItem iRecapPurchasingBySupplier;
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="ViewModels\RecapInvoiceBySPKItemViewModel.cs" />
     <Compile Include="ViewModels\RecapInvoiceByVehicleItemGroupViewModel.cs" />
     <Compile Include="ViewModels\RecapInvoiceItemViewModel.cs" />
+    <Compile Include="ViewModels\RecapPurchasingItemViewModel.cs" />
     <Compile Include="ViewModels\ReferenceViewModel.cs" />
     <Compile Include="ViewModels\ReturnViewModel.cs" />
     <Compile Include="ViewModels\RoleAccessViewModel.cs" />

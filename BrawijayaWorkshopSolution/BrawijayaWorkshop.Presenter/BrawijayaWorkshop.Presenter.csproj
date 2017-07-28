@@ -90,6 +90,7 @@
     <Compile Include="RecapInvoiceByCustomerPresenter.cs" />
     <Compile Include="RecapInvoiceBySPKPresenter.cs" />
     <Compile Include="RecapInvoiceByVehicleGroupPresenter.cs" />
+    <Compile Include="RecapPurchasingeBySupplierPresenter.cs" />
     <Compile Include="RoleAccessEditorPresenter.cs" />
     <Compile Include="RoleAccessListPresenter.cs" />
     <Compile Include="RoleEditorPresenter.cs" />

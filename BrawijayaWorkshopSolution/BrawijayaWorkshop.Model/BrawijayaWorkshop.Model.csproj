@@ -110,6 +110,7 @@
     <Compile Include="RecapInvoiceByCustomerModel.cs" />
     <Compile Include="RecapInvoiceBySPKModel.cs" />
     <Compile Include="RecapInvoiceByVehicleGroupModel.cs" />
+    <Compile Include="RecapPurchasingModel.cs" />
     <Compile Include="RoleAccessEditorModel.cs" />
     <Compile Include="RoleAccessListModel.cs" />
     <Compile Include="RoleEditorModel.cs" />

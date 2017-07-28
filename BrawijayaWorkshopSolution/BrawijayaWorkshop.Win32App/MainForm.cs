@@ -186,7 +186,7 @@ namespace BrawijayaWorkshop.Win32App
                 SplashScreenManager.Default.SendCommand(StartupScreen.SplashScreenCommand.CheckDatabaseConnection, null);
                 MethodBase.GetCurrentMethod().Info("Initialize database");
                 // Initialize Database
-                // new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
+                //new BrawijayaWorkshopDbInitializer().InitializeDatabase(new BrawijayaWorkshopDbContext());
                 MethodBase.GetCurrentMethod().Info("Database initialized successfully");
                 return true;
             }
@@ -560,6 +560,7 @@ namespace BrawijayaWorkshop.Win32App
             navReporting.iRecapInvoiceByVehicleGroup.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
             navReporting.iRecapInvoiceByCustomer.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_INVOICE);
             navReporting.iHistorySparepart.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_HISTORY_SPAREPART);
+            navReporting.iRecapPurchasingBySupplier.Visible = LoginInformation.IsModulAllowed(DbConstant.MODUL_RECAP_PURCHASING);
 
             ShowNavigationControl(navReporting);
             // init event navigation
@@ -570,6 +571,7 @@ namespace BrawijayaWorkshop.Win32App
             navReporting.iRecapInvoiceByCustomer.LinkClicked += iRecapInvoiceByCustomer_LinkClicked;
             navReporting.iHistorySparepart.LinkClicked += iHistorySparepart_LinkClicked;
             navReporting.iStockOpname.LinkClicked += iStockOpname_LinkClicked;
+            navReporting.iRecapPurchasingBySupplier.LinkClicked += iRecapPurchasingBySupplier_LinkClicked;
         }
 
         #region Reporting Navigation
@@ -606,6 +608,12 @@ namespace BrawijayaWorkshop.Win32App
         {
             SparepartStockCardListControl stockOpname = Bootstrapper.Resolve<SparepartStockCardListControl>();
             ShowUserControl(stockOpname);
+        }
+
+        private void iRecapPurchasingBySupplier_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            RecapPurchasingBySupplierListControl recapPurchasing = Bootstrapper.Resolve<RecapPurchasingBySupplierListControl>();
+            ShowUserControl(recapPurchasing);
         }
         #endregion
 

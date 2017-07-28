@@ -248,6 +248,11 @@ namespace BrawijayaWorkshop.Database
                 ModulName = DbConstant.MODUL_HISTORY_SPAREPART,
                 ModulDescription = "History Sparepart"
             });
+            ApplicationModul recapPurchasingMod = context.ApplicationModuls.Add(new ApplicationModul
+            {
+                ModulName = DbConstant.MODUL_RECAP_PURCHASING,
+                ModulDescription = "Rekap Pembelian"
+            });
             context.SaveChanges();
 
             // superadmin
@@ -582,8 +587,20 @@ namespace BrawijayaWorkshop.Database
                 RoleId = adminRole.Id,
                 AccessCode = (int)DbConstant.AccessTypeEnum.All
             });
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = recapPurchasingMod.Id,
+                RoleId = adminRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
 
             // manager
+            context.RoleAccesses.Add(new RoleAccess
+            {
+                ApplicationModulId = recapPurchasingMod.Id,
+                RoleId = managerRole.Id,
+                AccessCode = (int)DbConstant.AccessTypeEnum.All
+            });
             context.RoleAccesses.Add(new RoleAccess
             {
                 ApplicationModulId = recapInvoiceMod.Id,
