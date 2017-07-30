@@ -40,11 +40,12 @@
             this.btnPrintAll = new DevExpress.XtraEditors.SimpleButton();
             this.gridRecapPurchasing = new DevExpress.XtraGrid.GridControl();
             this.gvRecapPurchasing = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDatePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSupplierNamePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPricePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupSupplier.Properties)).BeginInit();
@@ -60,6 +61,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.simpleButton1);
             this.gcFilter.Controls.Add(this.lookupSupplier);
             this.gcFilter.Controls.Add(this.lblCustomer);
             this.gcFilter.Controls.Add(this.dePeriodeTo);
@@ -69,7 +71,7 @@
             this.gcFilter.Controls.Add(this.btnSearch);
             this.gcFilter.Location = new System.Drawing.Point(2, 4);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(729, 79);
+            this.gcFilter.Size = new System.Drawing.Size(729, 92);
             this.gcFilter.TabIndex = 9;
             this.gcFilter.Text = "Filter";
             // 
@@ -210,6 +212,14 @@
             this.gvRecapPurchasing.OptionsView.ShowGroupPanel = false;
             this.gvRecapPurchasing.ViewCaption = "Daftar Pembelian";
             // 
+            // colCode
+            // 
+            this.colCode.Caption = "Kode";
+            this.colCode.FieldName = "Code";
+            this.colCode.Name = "colCode";
+            this.colCode.Visible = true;
+            this.colCode.VisibleIndex = 0;
+            // 
             // colDatePurchasing
             // 
             this.colDatePurchasing.Caption = "Tanggal";
@@ -235,21 +245,27 @@
             this.colTotalPricePurchasing.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalPricePurchasing.FieldName = "TotalPrice";
             this.colTotalPricePurchasing.Name = "colTotalPricePurchasing";
+            this.colTotalPricePurchasing.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalPrice", "{0:#,#}")});
             this.colTotalPricePurchasing.Visible = true;
             this.colTotalPricePurchasing.VisibleIndex = 3;
-            // 
-            // colCode
-            // 
-            this.colCode.Caption = "Kode";
-            this.colCode.FieldName = "Code";
-            this.colCode.Name = "colCode";
-            this.colCode.Visible = true;
-            this.colCode.VisibleIndex = 0;
             // 
             // bgwMain
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButton1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton1.Location = new System.Drawing.Point(5, 64);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(107, 23);
+            this.simpleButton1.TabIndex = 12;
+            this.simpleButton1.Text = "Print Semua";
+            this.simpleButton1.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
             // RecapPurchasingBySupplierListControl
             // 
@@ -293,5 +309,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSupplierNamePurchasing;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPricePurchasing;
         private System.ComponentModel.BackgroundWorker bgwMain;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

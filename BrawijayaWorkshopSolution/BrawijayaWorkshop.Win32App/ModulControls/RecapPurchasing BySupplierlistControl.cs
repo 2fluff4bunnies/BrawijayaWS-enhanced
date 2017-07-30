@@ -121,11 +121,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
-        private void btnPrintAll_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void bgwMain_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -147,6 +142,35 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
 
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Memuat data purchasing selesai", true);
+        }
+
+        private void btnPrintAll_Click(object sender, EventArgs e)
+        {
+            if (ListPurchasing == null || ListPurchasing.Count == 0)
+            {
+                this.ShowInformation("Data Purchasing tidak ada");
+                return;
+            }
+
+            try
+            {
+                List<RecapPurchasingItemViewModel> reportDataSource = ListPurchasing;
+
+                string supplier = (lookupSupplier.GetSelectedDataRow() as SupplierViewModel).Name;
+                RecapPurchasingBySupplierPrintItem report = new RecapPurchasingBySupplierPrintItem(supplier, DateFrom, DateTo);
+                report.DataSource = reportDataSource;
+                report.FillDataSource();
+
+                using (ReportPrintTool printTool = new ReportPrintTool(report))
+                {
+                    printTool.PrintDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MethodBase.GetCurrentMethod().Fatal("An error occured while trying to print recap purchasing", ex);
+                this.ShowError("Print recap purchasing Gagal! Hubungi Developer.");
+            }
         }
     }
 }

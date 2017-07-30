@@ -829,6 +829,12 @@
     <Compile Include="PrintItems\PurchasingReturnPrintItem.Designer.cs">
       <DependentUpon>PurchasingReturnPrintItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintItems\RecapPurchasingBySupplierPrintItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintItems\RecapPurchasingBySupplierPrintItem.Designer.cs">
+      <DependentUpon>RecapPurchasingBySupplierPrintItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintItems\RecapInvoiceByCustomerPrintItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1212,6 +1218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\PurchasingReturnPrintItem.resx">
       <DependentUpon>PurchasingReturnPrintItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintItems\RecapPurchasingBySupplierPrintItem.resx">
+      <DependentUpon>RecapPurchasingBySupplierPrintItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintItems\RecapInvoiceByCustomerPrintItem.resx">
       <DependentUpon>RecapInvoiceByCustomerPrintItem.cs</DependentUpon>
