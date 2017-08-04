@@ -649,7 +649,7 @@ namespace BrawijayaWorkshop.Model
                     stockCard.QtyFirst = lastStock;
                     stockCard.QtyFirstPrice = lastStockPrice;
                     stockCard.QtyLast = lastStock + stockCard.QtyIn;
-                    stockCard.QtyLast = lastStockPrice + stockCard.QtyInPrice;
+                    stockCard.QtyLastPrice = lastStockPrice + stockCard.QtyInPrice;
                     _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
                     _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                     _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
