@@ -15,12 +15,18 @@ namespace BrawijayaWorkshop.Model
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
         private ISparepartDetailRepository _sparepartDetailRepository;
+        private IReferenceRepository _referenceRepository;
+        private ISparepartStockCardRepository _sparepartStockCardRepository;
+        private ISparepartStockCardDetailRepository _sparepartStockCardDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public SpecialSparepartDetailListModel(ISpecialSparepartRepository WheelRepository,
             ISpecialSparepartDetailRepository WheelDetailRepository,
             ISparepartRepository sparepartRepository,
             ISparepartDetailRepository sparepartDetailRepository,
+            IReferenceRepository referenceRepository,
+            ISparepartStockCardRepository sparepartStockCardRepository,
+            ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -28,6 +34,9 @@ namespace BrawijayaWorkshop.Model
             _specialSparepartDetailRepository = WheelDetailRepository;
             _sparepartDetailRepository = sparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
+            _referenceRepository = referenceRepository;
+            _sparepartStockCardRepository = sparepartStockCardRepository;
+            _sparepartStockCardDetailRepository = sparepartStockCardDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -85,6 +94,91 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository.AttachNavigation(spEntity.CreateUser);
             _sparepartRepository.AttachNavigation(spEntity.ModifyUser);
             _sparepartRepository.Update(spEntity);
+            _unitOfWork.SaveChanges();
+
+            SparepartStockCard stockCard = new SparepartStockCard();
+            Reference transactionReferenceTable = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_TRANSTBL_MANUAL).FirstOrDefault();
+
+            stockCard.CreateUserId = userId;
+            stockCard.PurchaseDate = serverTime;
+            stockCard.PrimaryKeyValue = sspdEntity.Id;
+            stockCard.ReferenceTableId = transactionReferenceTable.Id;
+            stockCard.SparepartId = spEntity.Id;
+            stockCard.Description = "Remove Special Sparepart Detail";
+            stockCard.QtyOut = 1;
+            stockCard.QtyOutPrice = Convert.ToDouble(spdEntity.PurchasingDetail != null ? spdEntity.PurchasingDetail.Price : spdEntity.SparepartManualTransaction != null ? spdEntity.SparepartManualTransaction.Price : 0);
+
+            SparepartStockCard lastStockCard = _sparepartStockCardRepository.RetrieveLastCard(spEntity.Id);
+            double lastStock = 0;
+            double lastStockPrice = 0;
+            if (lastStockCard != null)
+            {
+                lastStock = lastStockCard.QtyLast;
+                lastStockPrice = lastStockCard.QtyLastPrice;
+            }
+
+            stockCard.QtyFirst = lastStock;
+            stockCard.QtyFirstPrice = lastStockPrice;
+            stockCard.QtyLast = lastStock - stockCard.QtyOut;
+            stockCard.QtyLastPrice = lastStockPrice - stockCard.QtyOutPrice;
+            _sparepartStockCardRepository.AttachNavigation(stockCard.CreateUser);
+            _sparepartStockCardRepository.AttachNavigation(stockCard.Sparepart);
+            _sparepartStockCardRepository.AttachNavigation(stockCard.ReferenceTable);
+            stockCard = _sparepartStockCardRepository.Add(stockCard);
+            _unitOfWork.SaveChanges();
+
+            if (spdEntity.PurchasingDetail != null)
+            {
+                SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
+                stockCardDtail.ParentStockCard = stockCard;
+                stockCardDtail.PricePerItem = Convert.ToDouble(spdEntity.PurchasingDetail.Price);
+                stockCardDtail.QtyOut = 1;
+                stockCardDtail.QtyOutPrice = Convert.ToDouble(spdEntity.PurchasingDetail.Price);
+                SparepartStockCardDetail lastStockCardDetail = _sparepartStockCardDetailRepository.RetrieveLastCardDetailByPurchasingId(spdEntity.Sparepart.Id, spdEntity.PurchasingDetail.PurchasingId);
+                double lastStockDetail = 0;
+                double lastStockDetailPrice = 0;
+                if (lastStockCardDetail != null)
+                {
+                    lastStockDetail = lastStockCardDetail.QtyLast;
+                    lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                }
+                stockCardDtail.QtyFirst = lastStockDetail;
+                stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
+                stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
+                stockCardDtail.PurchasingId = spdEntity.PurchasingDetail.PurchasingId;
+
+                _sparepartStockCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
+                _sparepartStockCardDetailRepository.Add(stockCardDtail);
+                _unitOfWork.SaveChanges();
+            }
+
+            if (spdEntity.SparepartManualTransaction != null)
+            {
+                SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
+                stockCardDtail.ParentStockCard = stockCard;
+                stockCardDtail.PricePerItem = Convert.ToDouble(spdEntity.SparepartManualTransaction.Price);
+                stockCardDtail.QtyOut = 1;
+                stockCardDtail.QtyOutPrice = Convert.ToDouble(1 * spdEntity.SparepartManualTransaction.Price);
+                SparepartStockCardDetail lastStockCardDetail = _sparepartStockCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(spdEntity.Sparepart.Id, spdEntity.SparepartManualTransactionId.Value);
+                double lastStockDetail = 0;
+                double lastStockDetailPrice = 0;
+                if (lastStockCardDetail != null)
+                {
+                    lastStockDetail = lastStockCardDetail.QtyLast;
+                    lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
+                }
+                stockCardDtail.QtyFirst = lastStockDetail;
+                stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
+                stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
+                stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
+                stockCardDtail.SparepartManualTransactionId = spdEntity.SparepartManualTransactionId;
+
+                _sparepartStockCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
+                _sparepartStockCardDetailRepository.Add(stockCardDtail);
+                _unitOfWork.SaveChanges();
+            }
+
             _unitOfWork.SaveChanges();
         }
 
