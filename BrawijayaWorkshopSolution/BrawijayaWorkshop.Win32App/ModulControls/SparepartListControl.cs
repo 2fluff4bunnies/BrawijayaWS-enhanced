@@ -294,5 +294,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Sparepart...", false);
             bgwExport.RunWorkerAsync();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (!gridSparepart.IsPrintingAvailable)
+            {
+                MessageBox.Show("Data Tidak Tersedia", "Warning");
+                return;
+            }
+
+            // Print.
+            gridSparepart.Print();
+        }
     }
 }
