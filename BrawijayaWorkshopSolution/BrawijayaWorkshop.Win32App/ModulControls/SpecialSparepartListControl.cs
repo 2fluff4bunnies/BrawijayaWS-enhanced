@@ -269,5 +269,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             bgwExport.RunWorkerAsync();
         }
 
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (!gcSpecialSparepart.IsPrintingAvailable)
+            {
+                MessageBox.Show("Data Tidak Tersedia", "Warning");
+                return;
+            }
+
+            // Print.
+            gcSpecialSparepart.Print();
+        }
+
     }
 }

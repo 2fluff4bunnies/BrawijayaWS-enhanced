@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilterCompanyName = new DevExpress.XtraEditors.TextEdit();
             this.lblFilterCompanyName = new DevExpress.XtraEditors.LabelControl();
@@ -47,9 +48,9 @@
             this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDeleteData = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterCompanyName.Properties)).BeginInit();
@@ -71,6 +72,19 @@
             this.gcFilter.Size = new System.Drawing.Size(678, 62);
             this.gcFilter.TabIndex = 0;
             this.gcFilter.Text = "Filter";
+            // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(567, 27);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
             // 
             // btnSearch
             // 
@@ -230,18 +244,6 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // btnExportToCSV
-            // 
-            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
-            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExportToCSV.Location = new System.Drawing.Point(559, 27);
-            this.btnExportToCSV.Name = "btnExportToCSV";
-            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
-            this.btnExportToCSV.TabIndex = 32;
-            this.btnExportToCSV.Text = "Export Data";
-            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
-            // 
             // exportDialog
             // 
             this.exportDialog.DefaultExt = "csv";
@@ -254,10 +256,24 @@
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x161;
+            this.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnPrint.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrint.Location = new System.Drawing.Point(570, 71);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(106, 23);
+            this.btnPrint.TabIndex = 34;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // CustomerListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnNewCustomer);
             this.Controls.Add(this.gridCustomer);
             this.Controls.Add(this.gcFilter);
@@ -296,5 +312,6 @@
         private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
     }
 }

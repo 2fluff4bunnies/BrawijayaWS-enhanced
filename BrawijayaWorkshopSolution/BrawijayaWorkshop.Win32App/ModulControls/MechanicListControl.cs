@@ -297,5 +297,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Mechanics...", false);
             bgwExport.RunWorkerAsync();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (!gridMechanic.IsPrintingAvailable)
+            {
+                MessageBox.Show("Data Tidak Tersedia", "Warning");
+                return;
+            }
+
+            // Print.
+            gridMechanic.Print();
+        }
     }
 }

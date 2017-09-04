@@ -247,5 +247,17 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data Brand...", false);
             bgwExport.RunWorkerAsync();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (!gridBrand.IsPrintingAvailable)
+            {
+                MessageBox.Show("Data Tidak Tersedia", "Warning");
+                return;
+            }
+
+            // Print.
+            gridBrand.Print();
+        }
     }
 }

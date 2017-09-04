@@ -391,6 +391,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 bool validated = true;
                 string errMessage = "";
 
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memeriksa nomor seri yang kembar dalam daftar", false);
+
                 List<string> duplicatedWheel = VehicleWheelList.Where(wh => !string.IsNullOrEmpty(wh.WheelDetail.SerialNumber)).GroupBy(x => x.WheelDetail.SerialNumber)
                            .Where(group => group.Count() > 1)
                            .Select(group => group.Key).ToList();
@@ -401,11 +403,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     validated = false;
                 }
 
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memeriksa nomor seri yang kembar pada database", false);
+
                 if (!_presenter.IsCodeValidated())
                 {
                     errMessage += "Kode sudah terdaftar! \n";
                     validated = false;
                 }
+
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memeriksa nomor polisi yang kembar pada database", false);
 
                 if (!_presenter.IsLicenseNumberValidated())
                 {
@@ -415,6 +421,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                 if (FieldsValidator.Validate() && valGroupName.Validate() && validated)
                 {
+                    FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses Penyimpanan dimulai", false);
+
                     try
                     {
                         MethodBase.GetCurrentMethod().Info("Save Vehicle's changes");
