@@ -39,7 +39,7 @@ namespace BrawijayaWorkshop.Model
             DateTime lastDay = toDate.AddDays(1).AddSeconds(-1);
             //result = _sparepartStockCardDetailRepository.RetrieveFIFOCurrentSparepart(fromDate, toDate, sparepartId);
 
-            List<SparepartStockCardDetail> list = _sparepartStockCardDetailRepository.GetMany(sp => sp.ParentStockCard.PurchaseDate >= fromDate && sp.ParentStockCard.PurchaseDate <= toDate &&
+            List<SparepartStockCardDetail> list = _sparepartStockCardDetailRepository.GetMany(sp => sp.ParentStockCard.PurchaseDate >= fromDate && sp.ParentStockCard.PurchaseDate <= lastDay &&
                                (sparepartId > 0 ? sp.ParentStockCard.SparepartId == sparepartId : true)).ToList();
             if (list != null)
             {
