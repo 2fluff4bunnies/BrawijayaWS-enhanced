@@ -403,7 +403,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     validated = false;
                 }
 
-                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memeriksa nomor seri yang kembar pada database", false);
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Memeriksa kode kendaraan yang kembar pada database", false);
 
                 if (!_presenter.IsCodeValidated())
                 {

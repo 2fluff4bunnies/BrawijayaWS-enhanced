@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
-    public class SpecialSparepartDetailListPresenter: BasePresenter<ISpecialSparepartDetailListView, SpecialSparepartDetailListModel>
+    public class SpecialSparepartDetailListPresenter : BasePresenter<ISpecialSparepartDetailListView, SpecialSparepartDetailListModel>
     {
         public SpecialSparepartDetailListPresenter(ISpecialSparepartDetailListView view, SpecialSparepartDetailListModel model)
             : base(view, model) { }
@@ -26,11 +26,13 @@ namespace BrawijayaWorkshop.Presenter
                 Description = "Terpasang"
             });
             View.ListStatus = listStatus;
+            View.SerialNumber = "";
+            View.SerialNumberUpdate = "";
         }
 
         public void LoadDetailList()
         {
-            View.WheelDetailListData = Model.SearchDetail(View.SelectedSpecialSparepart.Id,
+            View.SpecialSparepartData = Model.SearchDetail(View.SelectedSpecialSparepart.Id, View.SerialNumber,
                 (DbConstant.WheelDetailStatus)View.SelectedStatus);
         }
 
@@ -42,6 +44,16 @@ namespace BrawijayaWorkshop.Presenter
         public void RemoveSpecialSparepartDetail(int specialSparepartDetailId)
         {
             Model.RemoveSpecialSparepart(specialSparepartDetailId, LoginInformation.UserId);
+        }
+
+        public void UpdateSerialNUmber(int specialSparepartDetailId)
+        {
+            Model.UpdateSerialNumber(specialSparepartDetailId, View.SerialNumberUpdate);
+        }
+
+        public bool IsSerialNumberExist(string sn)
+        {
+            return Model.IsSerialNumberExist(sn);
         }
     }
 }

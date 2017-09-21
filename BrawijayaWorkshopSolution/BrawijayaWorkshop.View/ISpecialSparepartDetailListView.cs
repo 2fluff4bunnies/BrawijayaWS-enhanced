@@ -12,9 +12,13 @@ namespace BrawijayaWorkshop.View
 
         List<WheelDetailStatusItem> ListStatus { get; set; }
 
-        List<SpecialSparepartDetailViewModel> WheelDetailListData { get; set; }
+        List<SpecialSparepartDetailViewModel> SpecialSparepartData { get; set; }
 
         int PurchasingDetailID { get; set; }
+
+        string SerialNumber { get; set; }
+
+        string SerialNumberUpdate { get; set; }
     }
 
     public class WheelDetailStatusItem

@@ -34,6 +34,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         void gvSpecialSparepartDetail_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             _selectedSSpd = gvSpecialSparepartDetail.GetFocusedRow() as SpecialSparepartDetailViewModel;
+            SerialNumberUpdate = _selectedSSpd.SerialNumber;
         }
 
         void gvSpecialSparepartDetail_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -56,13 +57,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             _presenter.InitFormData();
             lookupStatus.EditValue = (int)DbConstant.WheelDetailStatus.Ready;
+
         }
 
         private void lookupStatus_EditValueChanged(object sender, EventArgs e)
         {
-            SelectedStatus = lookupStatus.EditValue.AsInteger();
-            cmsEditor.Close();
-            RefreshDataView();
+
         }
 
         #region Properties
@@ -93,7 +93,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SpecialSparepartDetailViewModel> WheelDetailListData
+        public List<SpecialSparepartDetailViewModel> SpecialSparepartData
         {
             get
             {
@@ -111,7 +111,31 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     gvSpecialSparepartDetail.BestFitColumns();
                 }
             }
-        } 
+        }
+
+        public string SerialNumber
+        {
+            get
+            {
+                return txtSerialNumber.EditValue.ToString();
+            }
+            set
+            {
+                txtSerialNumber.EditValue = value;
+            }
+        }
+
+        public string SerialNumberUpdate
+        {
+            get
+            {
+                return txtSerialNumberUpdate.EditValue.ToString();
+            }
+            set
+            {
+                txtSerialNumberUpdate.EditValue = value;
+            }
+        }
         #endregion
 
         public override void RefreshDataView()
@@ -208,5 +232,28 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             this.Enabled = true;
             this.RefreshDataView();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SelectedStatus = lookupStatus.EditValue.AsInteger();
+            cmsEditor.Close();
+            RefreshDataView();
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (!_presenter.IsSerialNumberExist(this.SerialNumberUpdate))
+            {
+                _presenter.UpdateSerialNUmber(_selectedSSpd.Id);
+                btnSearch.PerformClick();
+                this.ShowInformation("Nomor seri berhasil diupdate");
+            }
+            else
+            {
+                this.ShowWarning("Nomor seri " + this.SerialNumberUpdate + " sudah digunakan.");
+            }
+        }
+
     }
 }

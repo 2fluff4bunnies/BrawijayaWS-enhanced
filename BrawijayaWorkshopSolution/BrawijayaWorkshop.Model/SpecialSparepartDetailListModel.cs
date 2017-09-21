@@ -40,11 +40,22 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SpecialSparepartDetailViewModel> SearchDetail(int specialSparepartId,
-            DbConstant.WheelDetailStatus status)
+        public List<SpecialSparepartDetailViewModel> SearchDetail(int specialSparepartId, string serialNumber, DbConstant.WheelDetailStatus status)
         {
-            List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(whd => whd.Status == (int)status
-                && whd.SpecialSparepartId == specialSparepartId).ToList();
+            List<SpecialSparepartDetail> result;
+
+            if (!string.IsNullOrWhiteSpace(serialNumber))
+            {
+                result = _specialSparepartDetailRepository.GetMany(whd =>
+                    whd.Status == (int)status &&
+                    whd.SpecialSparepartId == specialSparepartId &&
+                    string.Compare(whd.SerialNumber, serialNumber) == 0).ToList();
+            }
+            else
+            {
+                result = _specialSparepartDetailRepository.GetMany(whd => whd.Status == (int)status
+                    && whd.SpecialSparepartId == specialSparepartId).ToList();
+            }
 
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
@@ -192,6 +203,42 @@ namespace BrawijayaWorkshop.Model
                 result = true;
 
             return result;
+        }
+
+
+        public void UpdateSerialNumber(int specialSparepartDetailId, string newSerialNumber)
+        {
+            if (specialSparepartDetailId > 0)
+            {
+                SpecialSparepartDetail sspd = _specialSparepartDetailRepository.GetById(specialSparepartDetailId);
+                sspd.SerialNumber = newSerialNumber;
+                _specialSparepartDetailRepository.Update(sspd);
+                _unitOfWork.SaveChanges();
+            }
+        }
+
+        public bool IsSerialNumberExist(string sn)
+        {
+            SpecialSparepartDetail ssd = _specialSparepartDetailRepository.GetMany(
+                dtl => dtl.SerialNumber.ToLower() == sn.ToLower() && 
+                dtl.Status != (int)DbConstant.WheelDetailStatus.Deleted
+                ).FirstOrDefault();
+
+            if (ssd != null)
+            {
+                if (ssd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
