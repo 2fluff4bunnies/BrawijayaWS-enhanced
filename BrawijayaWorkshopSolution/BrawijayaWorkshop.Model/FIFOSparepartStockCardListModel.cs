@@ -142,7 +142,8 @@ namespace BrawijayaWorkshop.Model
                 }
             }
             List<GroupSparepartStockCardViewModel> mappedResult = new List<GroupSparepartStockCardViewModel>();
-            return Map(reportResult, mappedResult);
+            mappedResult = Map(reportResult, mappedResult);
+            return mappedResult.OrderBy(x => x.Sparepart.Code).ToList();
         }
     }
 }
