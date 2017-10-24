@@ -97,6 +97,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #region Field Editor
+        public DateTime Date
+        {
+            get
+            {
+                return deTransDate.EditValue.AsDateTime();
+            }
+            set
+            {
+                deTransDate.EditValue = value;
+            }
+        }
 
         public SPKViewModel SelectedSPK { get; set; }
         public SPKViewModel ParentSPK { get; set; }

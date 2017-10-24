@@ -219,7 +219,6 @@ namespace BrawijayaWorkshop.Model
                     code = code + (todaySPK.Count + 1);
 
                     spk.Code = code;
-                    spk.CreateDate = serverTime;
                     spk.ModifyDate = serverTime;
                     spk.ModifyUserId = userId;
                     spk.CreateUserId = userId;
@@ -276,7 +275,7 @@ namespace BrawijayaWorkshop.Model
                         invc.SPK = insertedSPK;
                         invc.PaymentMethod = invc.PaymentMethod = _referenceRepository.GetMany(r => r.Code == DbConstant.REF_INVOICE_PAYMENTMETHOD_PIUTANG).FirstOrDefault();
 
-                        invc.CreateDate = serverTime;
+                        invc.CreateDate = spk.CreateDate;
                         invc.ModifyDate = serverTime;
                         invc.ModifyUserId = userId;
                         invc.CreateUserId = userId;

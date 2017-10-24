@@ -144,8 +144,6 @@
             this.deTransDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.deTransDate.Properties.HideSelection = false;
             this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
-            this.deTransDate.Properties.ReadOnly = true;
-            this.deTransDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.deTransDate.Size = new System.Drawing.Size(171, 20);
             this.deTransDate.TabIndex = 38;
             // 
