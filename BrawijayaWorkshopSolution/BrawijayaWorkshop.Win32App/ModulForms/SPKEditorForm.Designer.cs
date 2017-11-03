@@ -32,6 +32,7 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKEditorForm));
             this.lookupWheelDetailGv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ckeIsUsedWheelRetrieved = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -97,6 +98,7 @@
             this.cmsVehicleWheel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVehicleWheelItemReset = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.valDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.lookupWheelDetailGv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckeIsUsedWheelRetrieved)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupSPK)).BeginInit();
@@ -132,6 +134,7 @@
             this.cmsSparepartEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).BeginInit();
             this.cmsVehicleWheel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.valDate)).BeginInit();
             this.SuspendLayout();
             // 
             // lookupWheelDetailGv
@@ -258,6 +261,9 @@
             this.deTransDate.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.deTransDate.Size = new System.Drawing.Size(142, 20);
             this.deTransDate.TabIndex = 40;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Tanggal transaksi harus diisi";
+            this.valDate.SetValidationRule(this.deTransDate, conditionValidationRule1);
             // 
             // lblTransactionDate
             // 
@@ -438,9 +444,9 @@
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(161, 20);
             this.lookUpCategory.TabIndex = 0;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "Kategori harus dipilih!";
-            this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Kategori harus dipilih!";
+            this.valCategory.SetValidationRule(this.lookUpCategory, conditionValidationRule2);
             this.lookUpCategory.EditValueChanged += new System.EventHandler(this.lookUpCategory_EditValueChanged);
             // 
             // lblContractor
@@ -471,9 +477,9 @@
             this.LookUpVehicle.Properties.ValueMember = "Id";
             this.LookUpVehicle.Size = new System.Drawing.Size(161, 20);
             this.LookUpVehicle.TabIndex = 1;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "Kendaraan harus dipilih!";
-            this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule2);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Kendaraan harus dipilih!";
+            this.valVehicle.SetValidationRule(this.LookUpVehicle, conditionValidationRule3);
             this.LookUpVehicle.EditValueChanged += new System.EventHandler(this.LookUpVehicle_EditValueChanged);
             // 
             // txtContractor
@@ -500,9 +506,9 @@
             this.dtpDueDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dtpDueDate.Size = new System.Drawing.Size(161, 20);
             this.dtpDueDate.TabIndex = 2;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "Batas waktu pengerjaan harus diisi!";
-            this.valDueDate.SetValidationRule(this.dtpDueDate, conditionValidationRule3);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Batas waktu pengerjaan harus diisi!";
+            this.valDueDate.SetValidationRule(this.dtpDueDate, conditionValidationRule4);
             // 
             // lblDueDate
             // 
@@ -863,6 +869,7 @@
             this.cmsSparepartEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsVehicleWheel)).EndInit();
             this.cmsVehicleWheel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.valDate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -933,5 +940,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpSparepartWheelGv;
         private DevExpress.XtraEditors.DateEdit deTransDate;
         private DevExpress.XtraEditors.LabelControl lblTransactionDate;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valDate;
     }
 }

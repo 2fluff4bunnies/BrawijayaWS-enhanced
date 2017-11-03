@@ -490,7 +490,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwSave.IsBusy)
             {
-                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate())
+                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && valDate.Validate())
                 {
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();

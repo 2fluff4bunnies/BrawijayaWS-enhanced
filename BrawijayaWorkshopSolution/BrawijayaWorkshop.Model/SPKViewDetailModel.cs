@@ -608,12 +608,12 @@ namespace BrawijayaWorkshop.Model
 
                         for (int i = 0; i < SPKWorkingDays; i++)
                         {
-                            List<Mechanic> involvedMechanic = (from sched in _SPKScheduleRepository.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.SPKId == spk.Id).ToList()
+                            List<Mechanic> involvedMechanic = (from sched in _SPKScheduleRepository.GetMany(sc => sc.Date.Day == spk.CreateDate.Day + i && sc.SPKId == spk.Id).ToList()
                                                                select sched.Mechanic).ToList();
 
                             foreach (Mechanic mechanic in involvedMechanic)
                             {
-                                int mechanicJobForToday = _SPKScheduleRepository.GetMany(sc => sc.CreateDate.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
+                                int mechanicJobForToday = _SPKScheduleRepository.GetMany(sc => sc.Date.Day == spk.CreateDate.Day + i && sc.MechanicId == mechanic.Id).Count();
 
                                 decimal mechanicFeeForToday = mechanic.BaseFee / mechanicJobForToday;
 

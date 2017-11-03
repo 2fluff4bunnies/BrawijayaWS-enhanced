@@ -211,10 +211,10 @@ namespace BrawijayaWorkshop.Model
                             break;
                     }
 
-                    code = code + "-" + spk.Vehicle.ActiveLicenseNumber + "-" + serverTime.Month.ToString() + serverTime.Day.ToString() + "-";
+                    code = code + "-" + spk.Vehicle.ActiveLicenseNumber + "-" + spk.CreateDate.Month.ToString() + spk.CreateDate.Day.ToString() + "-";
 
                     //get total SPK created today
-                    List<SPK> todaySPK = _SPKRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == serverTime.Year).ToList();
+                    List<SPK> todaySPK = _SPKRepository.GetMany(s => s.Code.ToString().Contains(code) && s.CreateDate.Year == spk.CreateDate.Year).ToList();
 
                     code = code + (todaySPK.Count + 1);
 
