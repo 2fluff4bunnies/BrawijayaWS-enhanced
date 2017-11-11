@@ -49,7 +49,7 @@ namespace BrawijayaWorkshop.Presenter
             {
                 View.SelectedInvoice = new InvoiceViewModel();
             }
-
+            View.SelectedInvoice.CreateDate = View.Date;
             View.SelectedInvoice.PaymentMethodId = View.PaymentMethodId;
             View.SelectedInvoice.TotalHasPaid = View.TotalPayment;
 

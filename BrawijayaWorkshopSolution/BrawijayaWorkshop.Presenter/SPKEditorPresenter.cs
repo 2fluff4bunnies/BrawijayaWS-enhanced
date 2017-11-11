@@ -76,6 +76,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPK.VehicleGroupId = View.SelectedVehicle.VehicleGroupId;
             View.SelectedSPK.CostEstimation = View.CostEstimation;
             View.SelectedSPK.Vehicle = View.SelectedVehicle;
+            View.SelectedSPK.CreateDate = View.Date;
 
             if (View.isContractWork)
             {

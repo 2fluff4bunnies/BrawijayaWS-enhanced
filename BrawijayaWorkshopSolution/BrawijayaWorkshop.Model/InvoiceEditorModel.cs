@@ -75,6 +75,7 @@ namespace BrawijayaWorkshop.Model
 		            DateTime serverTime = DateTime.Now;
 
                     Invoice entity = _invoiceRepository.GetById<int>(invoice.Id);
+                    entity.CreateDate = invoice.CreateDate;
                     entity.PaymentMethodId = invoice.PaymentMethodId;
                     entity.TotalHasPaid = invoice.TotalHasPaid;
                     entity.TotalPrice = invoice.TotalPrice;

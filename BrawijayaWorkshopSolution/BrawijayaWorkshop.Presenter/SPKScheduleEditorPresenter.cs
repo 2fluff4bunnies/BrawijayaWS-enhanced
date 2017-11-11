@@ -60,6 +60,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSPKSchedule.SPKId = View.SPKId;
             View.SelectedSPKSchedule.Description = View.Description;
             View.SelectedSPKSchedule.Date = View.Date;
+            View.SelectedSPKSchedule.CreateDate = View.Date;
 
             if (View.SelectedSPKSchedule.Id > 0)
             {

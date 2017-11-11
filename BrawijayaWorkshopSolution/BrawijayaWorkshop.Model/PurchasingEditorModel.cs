@@ -109,9 +109,12 @@ namespace BrawijayaWorkshop.Model
                     _purchasingRepository.Update(entity);
                     _unitOfWork.SaveChanges();
 
+                    int supplierID = purchasing.SupplierId;
+                    DateTime purchaseDate = purchasing.Date;
+
                     purchasing = new PurchasingViewModel();
-                    purchasing.SupplierId = entity.SupplierId;
-                    purchasing.Date = entity.Date;
+                    purchasing.SupplierId = supplierID;
+                    purchasing.Date = purchaseDate;
                     InsertPurchasingMethod(purchasing, purchasingDetails, userID);
                     
                     trans.Commit();

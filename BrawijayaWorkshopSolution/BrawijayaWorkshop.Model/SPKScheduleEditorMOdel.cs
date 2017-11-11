@@ -68,7 +68,6 @@ namespace BrawijayaWorkshop.Model
         public void InsertSPKSchedule(SPKScheduleViewModel SPKSchedule, int userId)
         {
             DateTime serverTime = DateTime.Now;
-            SPKSchedule.CreateDate = serverTime;
             SPKSchedule.CreateUserId = userId;
             SPKSchedule.ModifyDate = serverTime;
             SPKSchedule.ModifyUserId = userId;

@@ -57,7 +57,7 @@ namespace BrawijayaWorkshop.Model
                 sched.SPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
                 sched.SPK.Status == (int)DbConstant.DefaultDataStatus.Active
                 ).ToList();
-            result = result.Where(sched => sched.CreateDate.Date == createDate.Date).ToList();
+            result = result.Where(sched => sched.Date.Date == createDate.Date).ToList();
 
             if (mechanicId > 0)
             {

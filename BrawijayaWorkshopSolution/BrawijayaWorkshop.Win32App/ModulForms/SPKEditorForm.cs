@@ -97,6 +97,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #region Field Editor
+        public DateTime Date
+        {
+            get
+            {
+                return deTransDate.EditValue.AsDateTime();
+            }
+            set
+            {
+                deTransDate.EditValue = value;
+            }
+        }
 
         public SPKViewModel SelectedSPK { get; set; }
         public SPKViewModel ParentSPK { get; set; }
@@ -479,7 +490,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (!bgwSave.IsBusy)
             {
-                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate())
+                if (valCategory.Validate() && valVehicle.Validate() && valDueDate.Validate() && valDate.Validate())
                 {
                     MethodBase.GetCurrentMethod().Info("Save SPK's changes");
                     this.IsNeedApproval = ApprovalCheck();

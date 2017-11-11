@@ -7,6 +7,8 @@ namespace BrawijayaWorkshop.View
 {
     public interface ISPKEditorView : IView
     {
+        DateTime Date { get; set; }
+        
         string ApprovalEmailBody { get; set; }
         string ApprovalEmailFrom { get; set; }
         string ApprovalEmailTo { get; set; }
