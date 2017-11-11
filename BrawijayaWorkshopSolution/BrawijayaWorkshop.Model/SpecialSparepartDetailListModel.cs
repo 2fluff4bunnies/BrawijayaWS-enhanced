@@ -49,7 +49,7 @@ namespace BrawijayaWorkshop.Model
                 result = _specialSparepartDetailRepository.GetMany(whd =>
                     whd.Status == (int)status &&
                     whd.SpecialSparepartId == specialSparepartId &&
-                    string.Compare(whd.SerialNumber, serialNumber) == 0).ToList();
+                    whd.SerialNumber.ToLower().Contains(serialNumber.ToLower())).ToList();
             }
             else
             {
