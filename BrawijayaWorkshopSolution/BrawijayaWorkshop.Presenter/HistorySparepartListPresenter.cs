@@ -19,7 +19,7 @@ namespace BrawijayaWorkshop.Presenter
             CsvFileDescription outputFileDescription = new CsvFileDescription
             {
                 QuoteAllFields = true,
-                SeparatorChar = ';', // tab delimited
+                SeparatorChar = ',', // tab delimited
                 FirstLineHasColumnNames = true,
                 FileCultureName = "en-US"
             };
@@ -52,7 +52,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadHistorySparepartList()
         {
-            View.SparepartListData = Model.SearchHistorySparepart(View.DateFromFilter, View.DateToFilter, View.VehicleFilter, View.SparepartFilter);
+            View.SparepartListData = Model.SearchHistorySparepart(View.DateFromFilter, View.DateToFilter, View.VehicleFilter, View.SparepartFilter, View.ShowAllVehicle);
         }
     }
 }

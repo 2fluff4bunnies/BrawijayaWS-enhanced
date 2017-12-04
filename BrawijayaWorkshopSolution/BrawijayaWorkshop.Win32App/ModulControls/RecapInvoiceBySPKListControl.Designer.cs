@@ -107,7 +107,7 @@
             this.lookupVehicleGroup.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupVehicleGroup.Properties.NullText = "-- Pilih Kelompok --";
             this.lookupVehicleGroup.Properties.ValueMember = "Id";
-            this.lookupVehicleGroup.Size = new System.Drawing.Size(130, 20);
+            this.lookupVehicleGroup.Size = new System.Drawing.Size(162, 20);
             this.lookupVehicleGroup.TabIndex = 14;
             // 
             // lblVehicleGroup

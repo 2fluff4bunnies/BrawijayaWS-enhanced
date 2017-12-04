@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistorySparepartListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
@@ -51,9 +52,9 @@
             this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCheckBox = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.cbxAllVehicle = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -71,6 +72,7 @@
             // 
             this.gcFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcFilter.Controls.Add(this.cbxAllVehicle);
             this.gcFilter.Controls.Add(this.btnExportToCSV);
             this.gcFilter.Controls.Add(this.labelControl1);
             this.gcFilter.Controls.Add(this.txtDateFilterTo);
@@ -83,13 +85,25 @@
             this.gcFilter.Controls.Add(this.lblFilterVehicleNo);
             this.gcFilter.Location = new System.Drawing.Point(3, 2);
             this.gcFilter.Name = "gcFilter";
-            this.gcFilter.Size = new System.Drawing.Size(877, 95);
+            this.gcFilter.Size = new System.Drawing.Size(877, 105);
             this.gcFilter.TabIndex = 2;
             this.gcFilter.Text = "Filter";
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(432, 63);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(111, 31);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(661, 35);
+            this.labelControl1.Location = new System.Drawing.Point(246, 29);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(4, 13);
             this.labelControl1.TabIndex = 8;
@@ -98,7 +112,7 @@
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(671, 32);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(256, 26);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -111,13 +125,13 @@
             this.txtDateFilterTo.Properties.HideSelection = false;
             this.txtDateFilterTo.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterTo.Size = new System.Drawing.Size(138, 20);
+            this.txtDateFilterTo.Size = new System.Drawing.Size(157, 20);
             this.txtDateFilterTo.TabIndex = 7;
             // 
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(517, 32);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(83, 26);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -130,12 +144,12 @@
             this.txtDateFilterFrom.Properties.HideSelection = false;
             this.txtDateFilterFrom.Properties.Mask.EditMask = "dd-MM-yyyy";
             this.txtDateFilterFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtDateFilterFrom.Size = new System.Drawing.Size(138, 20);
+            this.txtDateFilterFrom.Size = new System.Drawing.Size(157, 20);
             this.txtDateFilterFrom.TabIndex = 6;
             // 
             // lblDate
             // 
-            this.lblDate.Location = new System.Drawing.Point(460, 35);
+            this.lblDate.Location = new System.Drawing.Point(14, 29);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(48, 13);
             this.lblDate.TabIndex = 5;
@@ -146,16 +160,16 @@
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(816, 29);
+            this.btnSearch.Location = new System.Drawing.Point(432, 23);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 23);
+            this.btnSearch.Size = new System.Drawing.Size(111, 31);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lookupSparepart
             // 
-            this.lookupSparepart.Location = new System.Drawing.Point(276, 32);
+            this.lookupSparepart.Location = new System.Drawing.Point(83, 78);
             this.lookupSparepart.Name = "lookupSparepart";
             this.lookupSparepart.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupSparepart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -168,12 +182,12 @@
             this.lookupSparepart.Properties.NullText = "-- Pilih Sparepart --";
             this.lookupSparepart.Properties.ShowHeader = false;
             this.lookupSparepart.Properties.ValueMember = "Id";
-            this.lookupSparepart.Size = new System.Drawing.Size(169, 20);
+            this.lookupSparepart.Size = new System.Drawing.Size(157, 20);
             this.lookupSparepart.TabIndex = 3;
             // 
             // lblFilterSparepart
             // 
-            this.lblFilterSparepart.Location = new System.Drawing.Point(215, 35);
+            this.lblFilterSparepart.Location = new System.Drawing.Point(14, 81);
             this.lblFilterSparepart.Name = "lblFilterSparepart";
             this.lblFilterSparepart.Size = new System.Drawing.Size(55, 13);
             this.lblFilterSparepart.TabIndex = 2;
@@ -181,7 +195,7 @@
             // 
             // lookupVehicleNo
             // 
-            this.lookupVehicleNo.Location = new System.Drawing.Point(52, 32);
+            this.lookupVehicleNo.Location = new System.Drawing.Point(83, 52);
             this.lookupVehicleNo.Name = "lookupVehicleNo";
             this.lookupVehicleNo.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookupVehicleNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -193,12 +207,12 @@
             this.lookupVehicleNo.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
             this.lookupVehicleNo.Properties.NullText = "-- Pilih Nopol --";
             this.lookupVehicleNo.Properties.ValueMember = "Id";
-            this.lookupVehicleNo.Size = new System.Drawing.Size(153, 20);
+            this.lookupVehicleNo.Size = new System.Drawing.Size(157, 20);
             this.lookupVehicleNo.TabIndex = 1;
             // 
             // lblFilterVehicleNo
             // 
-            this.lblFilterVehicleNo.Location = new System.Drawing.Point(12, 35);
+            this.lblFilterVehicleNo.Location = new System.Drawing.Point(14, 55);
             this.lblFilterVehicleNo.Name = "lblFilterVehicleNo";
             this.lblFilterVehicleNo.Size = new System.Drawing.Size(34, 13);
             this.lblFilterVehicleNo.TabIndex = 0;
@@ -342,18 +356,6 @@
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
             // 
-            // btnExportToCSV
-            // 
-            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
-            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExportToCSV.Location = new System.Drawing.Point(12, 67);
-            this.btnExportToCSV.Name = "btnExportToCSV";
-            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
-            this.btnExportToCSV.TabIndex = 32;
-            this.btnExportToCSV.Text = "Export Data";
-            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
-            // 
             // exportDialog
             // 
             this.exportDialog.DefaultExt = "csv";
@@ -365,6 +367,17 @@
             // 
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
+            // 
+            // cbxAllVehicle
+            // 
+            this.cbxAllVehicle.AutoSize = true;
+            this.cbxAllVehicle.Location = new System.Drawing.Point(256, 55);
+            this.cbxAllVehicle.Name = "cbxAllVehicle";
+            this.cbxAllVehicle.Size = new System.Drawing.Size(88, 17);
+            this.cbxAllVehicle.TabIndex = 33;
+            this.cbxAllVehicle.Text = "Semua Nopol";
+            this.cbxAllVehicle.UseVisualStyleBackColor = true;
+            this.cbxAllVehicle.CheckedChanged += new System.EventHandler(this.cbxAllVehicle_CheckedChanged);
             // 
             // HistorySparepartListControl
             // 
@@ -418,5 +431,6 @@
         private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
+        private System.Windows.Forms.CheckBox cbxAllVehicle;
     }
 }

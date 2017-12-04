@@ -44,6 +44,7 @@
             this.gvSPK = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcSPK = new DevExpress.XtraGrid.GridControl();
             this.groupFilter = new DevExpress.XtraEditors.GroupControl();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.txtDateFilterTo = new DevExpress.XtraEditors.DateEdit();
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -59,7 +60,6 @@
             this.lblCode = new DevExpress.XtraEditors.LabelControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.lblCategory = new DevExpress.XtraEditors.LabelControl();
-            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
             this.cmsEditor.SuspendLayout();
@@ -199,10 +199,10 @@
             this.gcSPK.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcSPK.Location = new System.Drawing.Point(3, 166);
+            this.gcSPK.Location = new System.Drawing.Point(3, 138);
             this.gcSPK.MainView = this.gvSPK;
             this.gcSPK.Name = "gcSPK";
-            this.gcSPK.Size = new System.Drawing.Size(1085, 275);
+            this.gcSPK.Size = new System.Drawing.Size(1085, 303);
             this.gcSPK.TabIndex = 5;
             this.gcSPK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSPK});
@@ -229,14 +229,26 @@
             this.groupFilter.Controls.Add(this.lblCategory);
             this.groupFilter.Location = new System.Drawing.Point(3, 3);
             this.groupFilter.Name = "groupFilter";
-            this.groupFilter.Size = new System.Drawing.Size(1085, 128);
+            this.groupFilter.Size = new System.Drawing.Size(1085, 129);
             this.groupFilter.TabIndex = 3;
             this.groupFilter.Text = "Filter";
+            // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(716, 73);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(101, 44);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
             // 
             // txtDateFilterTo
             // 
             this.txtDateFilterTo.EditValue = null;
-            this.txtDateFilterTo.Location = new System.Drawing.Point(290, 95);
+            this.txtDateFilterTo.Location = new System.Drawing.Point(286, 25);
             this.txtDateFilterTo.Name = "txtDateFilterTo";
             this.txtDateFilterTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -255,7 +267,7 @@
             // txtDateFilterFrom
             // 
             this.txtDateFilterFrom.EditValue = null;
-            this.txtDateFilterFrom.Location = new System.Drawing.Point(113, 95);
+            this.txtDateFilterFrom.Location = new System.Drawing.Point(109, 25);
             this.txtDateFilterFrom.Name = "txtDateFilterFrom";
             this.txtDateFilterFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -273,7 +285,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(265, 98);
+            this.labelControl2.Location = new System.Drawing.Point(261, 28);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(15, 13);
             this.labelControl2.TabIndex = 19;
@@ -281,7 +293,7 @@
             // 
             // lblFilterDate
             // 
-            this.lblFilterDate.Location = new System.Drawing.Point(12, 98);
+            this.lblFilterDate.Location = new System.Drawing.Point(8, 28);
             this.lblFilterDate.Name = "lblFilterDate";
             this.lblFilterDate.Size = new System.Drawing.Size(70, 13);
             this.lblFilterDate.TabIndex = 15;
@@ -289,7 +301,7 @@
             // 
             // lookUpContractWorkStatus
             // 
-            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(356, 62);
+            this.lookUpContractWorkStatus.Location = new System.Drawing.Point(524, 91);
             this.lookUpContractWorkStatus.Name = "lookUpContractWorkStatus";
             this.lookUpContractWorkStatus.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpContractWorkStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -305,7 +317,7 @@
             // 
             // lblContractWork
             // 
-            this.lblContractWork.Location = new System.Drawing.Point(290, 65);
+            this.lblContractWork.Location = new System.Drawing.Point(458, 94);
             this.lblContractWork.Name = "lblContractWork";
             this.lblContractWork.Size = new System.Drawing.Size(46, 13);
             this.lblContractWork.TabIndex = 12;
@@ -313,14 +325,14 @@
             // 
             // txtLicenseNumber
             // 
-            this.txtLicenseNumber.Location = new System.Drawing.Point(113, 64);
+            this.txtLicenseNumber.Location = new System.Drawing.Point(109, 87);
             this.txtLicenseNumber.Name = "txtLicenseNumber";
             this.txtLicenseNumber.Size = new System.Drawing.Size(141, 20);
             this.txtLicenseNumber.TabIndex = 3;
             // 
             // lblLicenseNumber
             // 
-            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 65);
+            this.lblLicenseNumber.Location = new System.Drawing.Point(8, 94);
             this.lblLicenseNumber.Name = "lblLicenseNumber";
             this.lblLicenseNumber.Size = new System.Drawing.Size(76, 13);
             this.lblLicenseNumber.TabIndex = 2;
@@ -328,23 +340,23 @@
             // 
             // lookUpCustomer
             // 
-            this.lookUpCustomer.Location = new System.Drawing.Point(606, 30);
+            this.lookUpCustomer.Location = new System.Drawing.Point(524, 25);
             this.lookUpCustomer.Name = "lookUpCustomer";
             this.lookUpCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lookUpCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Customer")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CompanyName", "Customer")});
             this.lookUpCustomer.Properties.DisplayMember = "CompanyName";
             this.lookUpCustomer.Properties.HideSelection = false;
-            this.lookUpCustomer.Properties.NullText = "-- Customer --";
+            this.lookUpCustomer.Properties.NullText = "-- Pilih Customer --";
             this.lookUpCustomer.Properties.ValueMember = "Id";
             this.lookUpCustomer.Size = new System.Drawing.Size(141, 20);
             this.lookUpCustomer.TabIndex = 7;
             // 
             // lblApprovalStatus
             // 
-            this.lblApprovalStatus.Location = new System.Drawing.Point(535, 33);
+            this.lblApprovalStatus.Location = new System.Drawing.Point(458, 28);
             this.lblApprovalStatus.Name = "lblApprovalStatus";
             this.lblApprovalStatus.Size = new System.Drawing.Size(46, 13);
             this.lblApprovalStatus.TabIndex = 6;
@@ -352,7 +364,7 @@
             // 
             // lookUpCategory
             // 
-            this.lookUpCategory.Location = new System.Drawing.Point(356, 30);
+            this.lookUpCategory.Location = new System.Drawing.Point(524, 59);
             this.lookUpCategory.Name = "lookUpCategory";
             this.lookUpCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpCategory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -362,21 +374,21 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Kategori")});
             this.lookUpCategory.Properties.DisplayMember = "Name";
             this.lookUpCategory.Properties.HideSelection = false;
-            this.lookUpCategory.Properties.NullText = "-- Kategori --";
+            this.lookUpCategory.Properties.NullText = "-- Pilih Kategori --";
             this.lookUpCategory.Properties.ValueMember = "Id";
             this.lookUpCategory.Size = new System.Drawing.Size(141, 20);
             this.lookUpCategory.TabIndex = 5;
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(113, 30);
+            this.txtCode.Location = new System.Drawing.Point(109, 57);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(141, 20);
             this.txtCode.TabIndex = 1;
             // 
             // lblCode
             // 
-            this.lblCode.Location = new System.Drawing.Point(12, 33);
+            this.lblCode.Location = new System.Drawing.Point(8, 62);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(45, 13);
             this.lblCode.TabIndex = 0;
@@ -384,36 +396,23 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSearch.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSearch.Location = new System.Drawing.Point(791, 24);
+            this.btnSearch.Location = new System.Drawing.Point(715, 23);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(73, 29);
+            this.btnSearch.Size = new System.Drawing.Size(102, 44);
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "cari";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(290, 33);
+            this.lblCategory.Location = new System.Drawing.Point(458, 62);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(40, 13);
             this.lblCategory.TabIndex = 4;
             this.lblCategory.Text = "Kategori";
-            // 
-            // btnExportToCSV
-            // 
-            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
-            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExportToCSV.Location = new System.Drawing.Point(791, 67);
-            this.btnExportToCSV.Name = "btnExportToCSV";
-            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
-            this.btnExportToCSV.TabIndex = 32;
-            this.btnExportToCSV.Text = "Export Data";
-            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
             // 
             // exportDialog
             // 

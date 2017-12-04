@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
+using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 
 namespace BrawijayaWorkshop.Presenter
@@ -14,6 +15,12 @@ namespace BrawijayaWorkshop.Presenter
         {
             View.DateFrom = View.DateTo = System.DateTime.Today;
             View.ListCategory = Model.RetrieveCategories();
+            View.ListCategory.Add(new ReferenceViewModel
+            {
+                Id = -1,
+                Description = "All Category",
+                Name = "All Category"
+            });
             View.ListCustomer = Model.RetrieveCustomers();
         }
 

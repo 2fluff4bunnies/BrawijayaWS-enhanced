@@ -93,17 +93,31 @@ namespace BrawijayaWorkshop.Model
         public List<RecapInvoiceItemViewModel> RetrieveRecap(DateTime dateFrom, DateTime dateTo, int categoryId,
             int customerId, int vehicleGroupId = 0, int vehicleId = 0)
         {
-            List<Invoice> result = _invoiceRepository.GetMany(i =>
+            List<Invoice> result = null;
+
+            if (categoryId == -1)
+            {
+                result =_invoiceRepository.GetMany(i =>
+                DbFunctions.TruncateTime(i.CreateDate) >= DbFunctions.TruncateTime(dateFrom) &&
+                DbFunctions.TruncateTime(i.CreateDate) <= DbFunctions.TruncateTime(dateTo) &&
+                i.Status != (int)DbConstant.DefaultDataStatus.Deleted &&
+                i.PaymentStatus != (int)DbConstant.PaymentStatus.Settled).ToList();
+            }
+            else
+            {
+                result = _invoiceRepository.GetMany(i =>
                 DbFunctions.TruncateTime(i.CreateDate) >= DbFunctions.TruncateTime(dateFrom) &&
                 DbFunctions.TruncateTime(i.CreateDate) <= DbFunctions.TruncateTime(dateTo) &&
                 i.Status != (int)DbConstant.DefaultDataStatus.Deleted &&
                 i.PaymentStatus != (int)DbConstant.PaymentStatus.Settled &&
                 i.SPK.CategoryReferenceId == categoryId && i.SPK.Vehicle.CustomerId == customerId).ToList();
-            if(vehicleGroupId > 0)
+            }
+
+            if (vehicleGroupId > 0)
             {
                 result = result.Where(i => i.SPK.VehicleGroupId == vehicleGroupId).ToList();
             }
-            if(vehicleId > 0)
+            if (vehicleId > 0)
             {
                 result = result.Where(i => i.SPK.VehicleId == vehicleId).ToList();
             }

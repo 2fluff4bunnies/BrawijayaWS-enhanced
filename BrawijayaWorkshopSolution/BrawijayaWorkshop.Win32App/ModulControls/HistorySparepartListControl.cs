@@ -39,6 +39,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void HistorySparepartListControl_Load(object sender, EventArgs e)
         {
             _presenter.InitData();
+            lookupVehicleNo.Enabled = true;
+            ShowAllVehicle = false;
+
             btnSearch.PerformClick();
         }
 
@@ -134,6 +137,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             }
         }
 
+        public bool ShowAllVehicle
+        {
+            get
+            {
+                return this.cbxAllVehicle.Checked;
+            }
+            set
+            {
+                this.cbxAllVehicle.Checked = value;
+            }
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             RefreshDataView();
@@ -215,6 +230,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             MethodBase.GetCurrentMethod().Info("Exporting HistorySparepart data...");
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data HistorySparepart...", false);
             bgwExport.RunWorkerAsync();
+        }
+
+        private void cbxAllVehicle_CheckedChanged(object sender, EventArgs e)
+        {
+            lookupVehicleNo.Enabled = !cbxAllVehicle.Checked;
         }
     }
 }

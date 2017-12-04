@@ -24,7 +24,7 @@ namespace BrawijayaWorkshop.Model
             ISparepartRepository sparepartRepository,
             IVehicleRepository vehicleRepository,
             ISPKRepository spkRepository,
-            ISPKDetailSparepartRepository spkDetailSparepartRepository, 
+            ISPKDetailSparepartRepository spkDetailSparepartRepository,
             ISalesReturnRepository salesReturnRepository,
             ISalesReturnDetailRepository salesReturnDetailRepository,
             IUnitOfWork unitOfWork)
@@ -54,7 +54,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SPKDetailSparepartViewModel> SearchHistorySparepart(DateTime? dateFrom, DateTime? dateTo, int vehicleFilter, int sparepartFilter)
+        public List<SPKDetailSparepartViewModel> SearchHistorySparepart(DateTime? dateFrom, DateTime? dateTo, int vehicleFilter, int sparepartFilter, bool showALlVehicle)
         {
             List<SPKDetailSparepart> result = null;
             List<SalesReturnDetail> listReturnSource = null;
@@ -65,7 +65,7 @@ namespace BrawijayaWorkshop.Model
                 dateTo = dateTo.Value.Date.AddDays(1).AddSeconds(-1);
                 result = _spkDetailSparepartRepository.GetMany(c => c.CreateDate >= dateFrom && c.CreateDate <= dateTo && c.SPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed && c.SPK.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.CreateDate).ToList();
                 listReturnSource = _salesReturnDetailRepository.GetMany(c => c.InvoiceDetail.CreateDate >= dateFrom && c.InvoiceDetail.CreateDate <= dateTo && c.SalesReturn.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
-                
+
             }
             else
             {
@@ -73,7 +73,7 @@ namespace BrawijayaWorkshop.Model
                 listReturnSource = _salesReturnDetailRepository.GetMany(c => c.SalesReturn.Status == (int)DbConstant.DefaultDataStatus.Active).OrderBy(c => c.InvoiceDetail.CreateDate).ToList();
             }
 
-            if(vehicleFilter != 0)
+            if (vehicleFilter != 0 && !showALlVehicle)
             {
                 result = result.Where(x => x.SPK.VehicleId == vehicleFilter).ToList();
                 listReturnSource = listReturnSource.Where(x => x.InvoiceDetail.Invoice.SPK.VehicleId == vehicleFilter).ToList();
@@ -96,7 +96,7 @@ namespace BrawijayaWorkshop.Model
                                 SPK = Map(cl.First().InvoiceDetail.Invoice.SPK, new SPKViewModel()),
                                 Sparepart = Map(cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.Sparepart, new SparepartViewModel()),
                                 TotalQuantity = cl.Count(),
-                                TotalPrice = (decimal) cl.Sum(x => x.InvoiceDetail.SubTotalPrice),
+                                TotalPrice = (decimal)cl.Sum(x => x.InvoiceDetail.SubTotalPrice),
                                 Category = "Retur"
                             }).ToList();
 

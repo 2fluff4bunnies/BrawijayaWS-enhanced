@@ -36,6 +36,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void RecapInvoiceBySPKListControl_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
+            this.SelectedCategory = -1;
         }
 
         public DateTime DateFrom
@@ -180,7 +181,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (SelectedCategory > 0 && SelectedCustomer > 0 && SelectedVehicleGroup > 0)
+            if (SelectedCustomer > 0 && SelectedVehicleGroup > 0)
             {
                 RefreshDataView();
             }
