@@ -42,6 +42,7 @@ namespace BrawijayaWorkshop.Model
         {
             Reference spkCategory = _referenceRepository.GetMany(r => string.Compare(r.Code, DbConstant.REF_SPKCATEGORY, true) == 0).FirstOrDefault();
             List<Reference> result = _referenceRepository.GetMany(r => r.ParentId == spkCategory.Id).ToList();
+
             List<ReferenceViewModel> mappedResult = new List<ReferenceViewModel>();
             return Map(result, mappedResult);
         }

@@ -769,6 +769,12 @@
     <Compile Include="ModulForms\VehicleGroupEditorForm.Designer.cs">
       <DependentUpon>VehicleGroupEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModulForms\VehicleWheelSwapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModulForms\VehicleWheelSwapForm.Designer.cs">
+      <DependentUpon>VehicleWheelSwapForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NavigationControls\AccountingNavigationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1188,6 +1194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModulForms\VehicleGroupEditorForm.resx">
       <DependentUpon>VehicleGroupEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModulForms\VehicleWheelSwapForm.resx">
+      <DependentUpon>VehicleWheelSwapForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NavigationControls\AccountingNavigationControl.resx">
       <DependentUpon>AccountingNavigationControl.cs</DependentUpon>

@@ -18,8 +18,8 @@ namespace BrawijayaWorkshop.Presenter
             View.ListCategory.Add(new ReferenceViewModel
             {
                 Id = -1,
-                Description = "All Category",
-                Name = "All Category"
+                Description = "Semua Kategori",
+                Name = "Semua Kategori"
             });
             View.ListCustomer = Model.RetrieveCustomers();
         }

@@ -130,6 +130,7 @@
     <Compile Include="ISpecialSparepartEditorView.cs" />
     <Compile Include="ISpecialSparepartListView.cs" />
     <Compile Include="IManageUserEditorView.cs" />
+    <Compile Include="IVehicleWheelSwapView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -36,7 +36,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         private void RecapInvoiceBySPKListControl_Load(object sender, EventArgs e)
         {
             _presenter.InitFormData();
-            this.SelectedCategory = -1;
         }
 
         public DateTime DateFrom

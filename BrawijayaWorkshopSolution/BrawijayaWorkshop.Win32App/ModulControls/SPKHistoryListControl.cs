@@ -40,7 +40,6 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             gvSPK.FocusedRowChanged += gvSPK_FocusedRowChanged;
             gvSPK.PopupMenuShowing += gvSPK_PopupMenuShowing;
 
-            this.CategoryFilter = -1;
             this.ContractWorkStatusFilter = -1;
         }
 

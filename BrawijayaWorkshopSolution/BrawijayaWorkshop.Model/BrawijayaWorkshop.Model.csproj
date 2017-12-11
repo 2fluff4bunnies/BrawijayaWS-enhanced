@@ -153,6 +153,7 @@
     <Compile Include="SpecialSparepartDetailListModel.cs" />
     <Compile Include="SpecialSparepartEditorModel.cs" />
     <Compile Include="SpecialSparepartListModel.cs" />
+    <Compile Include="VehicleWheelSwapModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">

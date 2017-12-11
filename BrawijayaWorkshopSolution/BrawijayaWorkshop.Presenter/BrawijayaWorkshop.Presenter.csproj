@@ -135,6 +135,7 @@
     <Compile Include="SpecialSparepartDetailListPresenter.cs" />
     <Compile Include="SpecialSparepartEditorPresenter.cs" />
     <Compile Include="SpecialSparepartListPresenter.cs" />
+    <Compile Include="VehicleWheelSwapPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj">
