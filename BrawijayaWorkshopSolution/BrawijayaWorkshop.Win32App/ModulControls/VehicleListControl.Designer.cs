@@ -54,6 +54,7 @@
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.btnVehicleWheelSwap = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter.Properties)).BeginInit();
@@ -298,10 +299,23 @@
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnVehicleWheelSwap
+            // 
+            this.btnVehicleWheelSwap.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.if_ic_swap_horiz_16x16;
+            this.btnVehicleWheelSwap.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnVehicleWheelSwap.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnVehicleWheelSwap.Location = new System.Drawing.Point(153, 72);
+            this.btnVehicleWheelSwap.Name = "btnVehicleWheelSwap";
+            this.btnVehicleWheelSwap.Size = new System.Drawing.Size(144, 23);
+            this.btnVehicleWheelSwap.TabIndex = 35;
+            this.btnVehicleWheelSwap.Text = "Tukar Ban Kendaraan";
+            this.btnVehicleWheelSwap.Click += new System.EventHandler(this.btnVehicleWheelSwap_Click);
+            // 
             // VehicleListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnVehicleWheelSwap);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.gcVehicle);
             this.Controls.Add(this.gcFilter);
@@ -345,5 +359,6 @@
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
+        private DevExpress.XtraEditors.SimpleButton btnVehicleWheelSwap;
     }
 }

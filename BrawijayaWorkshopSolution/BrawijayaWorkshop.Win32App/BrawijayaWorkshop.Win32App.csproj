@@ -1375,6 +1375,7 @@
     <None Include="Images\payment 16x16.png" />
     <None Include="Images\1459465829_refresh.png" />
     <None Include="Resources\Apply_16x16.png" />
+    <None Include="Images\if_ic_swap_horiz_16x16.png" />
     <Content Include="Resources\apply_32x32.png" />
     <Content Include="Resources\app_login.png" />
     <None Include="Resources\calculator_16x16.png" />

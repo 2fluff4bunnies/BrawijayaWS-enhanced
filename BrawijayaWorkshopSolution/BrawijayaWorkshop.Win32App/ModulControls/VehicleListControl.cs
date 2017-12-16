@@ -290,5 +290,13 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             // Print.
             gcVehicle.Print();
         }
+
+        private void btnVehicleWheelSwap_Click(object sender, EventArgs e)
+        {
+            VehicleWheelSwapForm editor = Bootstrapper.Resolve<VehicleWheelSwapForm>();
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
     }
 }

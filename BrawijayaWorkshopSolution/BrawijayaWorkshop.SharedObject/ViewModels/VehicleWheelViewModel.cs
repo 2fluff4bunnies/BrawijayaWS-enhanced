@@ -14,6 +14,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public decimal Price { get; set; }
         public int ReplaceWithWheelDetailId { get; set; }
         public string ReplaceWithWheelDetailName { get; set; }
-        public string ReplaceWithWheelDetailSerialNumber{ get; set; }
+        public string ReplaceWithWheelDetailSerialNumber { get; set; }
+        public string DisplayName { get; set; }
     }
 }

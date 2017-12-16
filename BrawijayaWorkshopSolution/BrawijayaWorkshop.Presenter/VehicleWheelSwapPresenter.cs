@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
 using System;
@@ -26,6 +27,12 @@ namespace BrawijayaWorkshop.Presenter
         public List<VehicleWheelViewModel> LoadVehicleWhel(int vehicleId)
         {
             return Model.GetVehicleWheels(vehicleId);
+        }
+
+        public void Save()
+        {
+            Model.UpdateVehicleWheel(View.SelectedVehicle1, View.VehicleWheel1, LoginInformation.UserId);
+            Model.UpdateVehicleWheel(View.SelectedVehicle2, View.VehicleWheel2, LoginInformation.UserId);
         }
     }
 }

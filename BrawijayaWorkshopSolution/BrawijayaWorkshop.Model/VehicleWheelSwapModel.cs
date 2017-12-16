@@ -64,27 +64,26 @@ namespace BrawijayaWorkshop.Model
 
             List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
 
-           return Map(result, mappedResult);
+            foreach (VehicleWheel vw in result)
+            {
+                mappedResult.Add(new VehicleWheelViewModel
+                {
+                    DisplayName = "(" + vw.WheelDetail.SerialNumber + ") " + vw.WheelDetail.SparepartDetail.Sparepart.Name,
+                    Id = vw.Id,
+                    WheelDetail = Map(vw.WheelDetail, new SpecialSparepartDetailViewModel()),
+                    WheelDetailId = vw.WheelDetailId,
+                    Vehicle = Map(vw.Vehicle, new VehicleViewModel()),
+                    VehicleId = vw.VehicleId,
+                });
+            }
+
+            return mappedResult;
         }
 
 
-        public void UpdateVehicleWheel(VehicleViewModel vehicle, List<VehicleWheelViewModel> vehicleWheels, int userId)
+        public void UpdateVehicleWheel(int vehicleId, List<VehicleWheelViewModel> vehicleWheels, int userId)
         {
             DateTime serverTime = DateTime.Now;
-
-            vehicle.ModifyDate = serverTime;
-            vehicle.ModifyUserId = userId;
-            Vehicle entity = _vehicleRepository.GetById(vehicle.Id);
-            Map(vehicle, entity);
-
-            _vehicleRepository.AttachNavigation(entity.Brand);
-            _vehicleRepository.AttachNavigation(entity.Type);
-            _vehicleRepository.AttachNavigation(entity.VehicleGroup);
-            _vehicleRepository.AttachNavigation(entity.Customer);
-            _vehicleRepository.AttachNavigation(entity.CreateUser);
-            _vehicleRepository.AttachNavigation(entity.ModifyUser);
-            _vehicleRepository.Update(entity);
-            _unitOfWork.SaveChanges();
 
             foreach (var vw in vehicleWheels)
             {
@@ -92,7 +91,7 @@ namespace BrawijayaWorkshop.Model
                 vwEntity.WheelDetailId = vw.WheelDetailId;
                 vwEntity.ModifyDate = serverTime;
                 vwEntity.ModifyUserId = userId;
-                vwEntity.Notes = vw.Notes;
+                vwEntity.VehicleId = vehicleId;
 
                 _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
                 _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
@@ -101,8 +100,6 @@ namespace BrawijayaWorkshop.Model
                 _vehicleWheelRepository.Update(vwEntity);
                 _unitOfWork.SaveChanges();
             }
-
-            _unitOfWork.SaveChanges();
         }
     }
 }
