@@ -10,6 +10,7 @@ using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
+using DevExpress.XtraEditors;
 
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
@@ -257,6 +258,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                             if (!string.IsNullOrEmpty(currentMechanic))
                             {
+                                _availableMechanic = new List<string>();
                                 _availableMechanic.Add(currentMechanic);
                             }
                         }
@@ -278,17 +280,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void bgwFingerPrint_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Cursor = Cursors.Default;
+            
             if (e.Result is Exception)
             {
                 this.ShowError("Koneksi ke fingerprint gagal!");
                 _isFingerprintConnected = false;
+                this.ckeGetFingerPrint.Checked = false;
             }
             else
             {
                 if (!e.Result.AsBoolean())
                 {
-                    this.ShowError("Koneksi ke fingerprint gagal! Data akan diambil dari database");
+                    this.ShowError("Koneksi ke fingerprint gagal! Data mekanik sekarang diambil dari master mekanik");
                     _isFingerprintConnected = false;
+                    this.ckeGetFingerPrint.Checked = false;
                 }
                 else
                 {
@@ -296,6 +301,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     _presenter.UpdateMechanicList(_availableMechanic);
                 }
             }
+            this.Enabled = true;
         }
 
         protected override void ExecuteSave()
@@ -326,6 +332,19 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             lbxSelectedMechanics.DisplayMember = "Name";
             lbxSelectedMechanics.DataSource = SelectedMechanicList;
             lbxSelectedMechanics.SelectionMode = SelectionMode.MultiSimple;
+        }
+
+        private void ckeGetFingerPrint_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckEdit cke = (CheckEdit)sender;
+
+            if (cke.Checked)
+            {
+                this.Enabled = false;
+                Cursor = Cursors.WaitCursor;
+                FormHelpers.CurrentMainForm.UpdateStatusInformation("Cek koneksi ke fingerprint", false);
+                bgwFingerPrint.RunWorkerAsync();
+            }
         }
 
     }

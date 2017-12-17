@@ -17,7 +17,7 @@ namespace BrawijayaWorkshop.Presenter
             CsvContext cc = new CsvContext();
             CsvFileDescription outputFileDescription = new CsvFileDescription
             {
-                QuoteAllFields = true,
+                QuoteAllFields = false,
                 SeparatorChar = ',', // tab delimited
                 FirstLineHasColumnNames = true,
                 FileCultureName = "en-US"
