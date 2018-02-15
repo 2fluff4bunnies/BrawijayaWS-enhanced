@@ -6,7 +6,7 @@ namespace BrawijayaWorkshop.View
 {
     public interface ISpecialSparepartDetailListView : IView
     {
-        SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
+        SparepartViewModel SelectedSparepart { get; set; }
 
         int SelectedStatus { get; set; }
 

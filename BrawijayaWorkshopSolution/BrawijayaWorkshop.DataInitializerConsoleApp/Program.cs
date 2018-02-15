@@ -55,7 +55,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
 
             List<Supplier> SupplierList = contextTemp.Suppliers.ToList();
             List<Sparepart> SparepartList = contextTemp.Spareparts.ToList();
-            List<SpecialSparepart> SpecialSparepartList = contextTemp.Wheels.ToList();
+            List<Sparepart> SpecialSparepartList = contextTemp.Wheels.ToList();
 
             List<SparepartManualTransaction> SparepartManualTransactionList = contextTemp.SparepartManualTransactions.ToList();
             List<Purchasing> PurchasingList = contextTemp.Purchasings.ToList();
@@ -63,7 +63,6 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
             List<PurchaseReturn> PurchaseReturnList = contextTemp.PurchaseReturns.ToList();
             List<PurchaseReturnDetail> PurchaseReturnDetailList = contextTemp.PurchaseReturnDetails.ToList();
 
-            List<SparepartDetail> SparepartDetailList = contextTemp.SparepartDetails.ToList();
             List<SpecialSparepartDetail> SpecialSparepartDetailList = contextTemp.WheelDetails.ToList();
             List<VehicleWheel> VehicleWheelList = contextTemp.VehicleWheels.ToList();
 
@@ -530,35 +529,6 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
 
             Console.Write("\nImporting table Sparepart done, " + SparepartList.Count + " records imported");
 
-            //special sparepart
-            Console.Write("\nImporting table SpecialSparepart");
-
-            foreach (var item in SpecialSparepartList)
-            {
-                int itemOldId = item.Id;
-                SpecialSparepart newItem = new SpecialSparepart();
-                int category = dictReference[item.ReferenceCategoryId];
-                int sparepart = dictSparepart[item.SparepartId];
-                int userCreate = dictUser[item.CreateUserId];
-                int userModified = dictUser[item.ModifyUserId];
-
-                newItem.Id = -1;
-                newItem.ReferenceCategoryId = category;
-                newItem.SparepartId = sparepart;
-                newItem.CreateUserId = userCreate;
-                newItem.ModifyUserId = userModified;
-
-                newItem.CreateDate = item.CreateDate;
-                newItem.ModifyDate = item.ModifyDate;
-                newItem.Status = item.Status;
-                newItem = contextDest.Wheels.Add(newItem);
-                contextDest.SaveChanges();
-
-                dictSpecialSparepart.Add(itemOldId, newItem.Id);
-            }
-
-            Console.Write("\nImporting table SpecialSparepart done, " + SpecialSparepartList.Count + " records imported");
-
             //sparepart manual trans
             Console.Write("\nImporting table SparepartManualTransaction");
 
@@ -694,15 +664,21 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 int itemOldId = item.Id;
                 PurchaseReturnDetail newItem = new PurchaseReturnDetail();
                 int purchaseReturn = dictPurchaseReturn[item.PurchaseReturnId];
-                int pDetail = dictPurchasingDetail[item.PurchasingDetailId];
-                int spDetail = dictSparepartDetail[item.SparepartDetailId];
+                if (item.PurchasingDetailId.HasValue && item.PurchasingDetailId != null && item.PurchasingDetailId > 0)
+                {
+                    int pDetail = dictPurchasingDetail[item.PurchasingDetailId.Value];
+                    newItem.PurchasingDetailId = pDetail;
+                }
+                if (item.SparepartManualTransactionId.HasValue && item.SparepartManualTransactionId != null && item.SparepartManualTransactionId > 0)
+                {
+                    int spManualTrans = dictSpManualTrans[item.SparepartManualTransactionId.Value];
+                    newItem.SparepartManualTransactionId = spManualTrans;
+                } 
                 int userCreate = dictUser[item.CreateUserId];
                 int userModified = dictUser[item.ModifyUserId];
 
                 newItem.Id = -1;
                 newItem.PurchaseReturnId = purchaseReturn;
-                newItem.PurchasingDetailId = pDetail;
-                newItem.SparepartDetailId = spDetail;
                 newItem.CreateUserId = userCreate;
                 newItem.ModifyUserId = userModified;
 
@@ -715,19 +691,19 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
 
             Console.Write("\nImporting table PurchaseReturnDetail done, " + PurchaseReturnDetailList.Count + " records imported");
 
-            //sparepart detail
-            Console.Write("\nImporting table SparepartDetail");
+            //special sparepart detail
+            Console.Write("\nImporting table SpecialSparepartDetail");
 
-            foreach (var item in SparepartDetailList)
+            foreach (var item in SpecialSparepartDetailList)
             {
                 int itemOldId = item.Id;
-                SparepartDetail newItem = new SparepartDetail();
-                int sparepart = dictSparepart[item.SparepartId];
+                SpecialSparepartDetail newItem = new SpecialSparepartDetail();
+                int ssp = dictSparepart[item.SparepartId];
                 int userCreate = dictUser[item.CreateUserId];
                 int userModified = dictUser[item.ModifyUserId];
 
                 newItem.Id = -1;
-                newItem.SparepartId = sparepart;
+                newItem.SparepartId = ssp;
                 newItem.CreateUserId = userCreate;
                 newItem.ModifyUserId = userModified;
 
@@ -741,36 +717,6 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                     int spManualTrans = dictSpManualTrans[item.SparepartManualTransactionId.Value];
                     newItem.SparepartManualTransactionId = spManualTrans;
                 }
-
-                newItem.Code = item.Code;
-                newItem.CreateDate = item.CreateDate;
-                newItem.ModifyDate = item.ModifyDate;
-                newItem.Status = item.Status;
-                newItem = contextDest.SparepartDetails.Add(newItem);
-                contextDest.SaveChanges();
-
-                dictSparepartDetail.Add(itemOldId, newItem.Id);
-            }
-
-            Console.Write("\nImporting table SparepartDetail done, " + SparepartDetailList.Count + " records imported");
-
-            //special sparepart detail
-            Console.Write("\nImporting table SpecialSparepartDetail");
-
-            foreach (var item in SpecialSparepartDetailList)
-            {
-                int itemOldId = item.Id;
-                SpecialSparepartDetail newItem = new SpecialSparepartDetail();
-                int spDetail = dictSparepartDetail[item.SparepartDetailId];
-                int ssp = dictSpecialSparepart[item.SpecialSparepartId];
-                int userCreate = dictUser[item.CreateUserId];
-                int userModified = dictUser[item.ModifyUserId];
-
-                newItem.Id = -1;
-                newItem.SparepartDetailId = spDetail;
-                newItem.SpecialSparepartId = ssp;
-                newItem.CreateUserId = userCreate;
-                newItem.ModifyUserId = userModified;
 
                 newItem.CreateDate = item.CreateDate;
                 newItem.Kilometers = item.Kilometers;
@@ -973,7 +919,16 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
                 SPKDetailSparepartDetail newItem = new SPKDetailSparepartDetail();
 
                 newItem.Id = -1;
-                newItem.SparepartDetailId = dictSparepartDetail[item.SparepartDetailId];
+                if (item.PurchasingDetailId.HasValue && item.PurchasingDetailId != null && item.PurchasingDetailId > 0)
+                {
+                    int pDetail = dictPurchasingDetail[item.PurchasingDetailId.Value];
+                    newItem.PurchasingDetailId = pDetail;
+                }
+                if (item.SparepartManualTransactionId.HasValue && item.SparepartManualTransactionId != null && item.SparepartManualTransactionId > 0)
+                {
+                    int spManualTrans = dictSpManualTrans[item.SparepartManualTransactionId.Value];
+                    newItem.SparepartManualTransactionId = spManualTrans;
+                } 
                 newItem.SPKDetailSparepartId = dictSPKDetailSparepart[item.SPKDetailSparepartId];
                 newItem.CreateUserId = dictUser[item.CreateUserId];
                 newItem.ModifyUserId = dictUser[item.ModifyUserId];

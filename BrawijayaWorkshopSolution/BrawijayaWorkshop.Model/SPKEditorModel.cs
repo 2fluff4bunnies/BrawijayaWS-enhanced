@@ -299,7 +299,7 @@ namespace BrawijayaWorkshop.Model
 
                         //Map(spkSparepart, entitySPKDetailSparepart);
 
-                        entitySPKDetailSparepart.CreateDate = serverTime;
+                        entitySPKDetailSparepart.CreateDate = spk.CreateDate;
                         entitySPKDetailSparepart.CreateUserId = userId;
                         entitySPKDetailSparepart.ModifyDate = serverTime;
                         entitySPKDetailSparepart.ModifyUserId = userId;
@@ -343,7 +343,7 @@ namespace BrawijayaWorkshop.Model
                         {
                             SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
 
-                            entityNewSparepartDetail.CreateDate = serverTime;
+                            entityNewSparepartDetail.CreateDate = spk.CreateDate;
                             entityNewSparepartDetail.CreateUserId = userId;
                             entityNewSparepartDetail.ModifyDate = serverTime;
                             entityNewSparepartDetail.ModifyUserId = userId;
@@ -410,7 +410,7 @@ namespace BrawijayaWorkshop.Model
                                 invcDtl.Status = (int)DbConstant.DefaultDataStatus.Active;
                                 invcDtl.FeePctg = 0;
 
-                                invcDtl.CreateDate = serverTime;
+                                invcDtl.CreateDate = spk.CreateDate;
                                 invcDtl.ModifyDate = serverTime;
                                 invcDtl.ModifyUserId = userId;
                                 invcDtl.CreateUserId = userId;

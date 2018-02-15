@@ -10,12 +10,15 @@ namespace BrawijayaWorkshop.Database.Entities
         public int Id { get; set; }
 
         [Required]
-        public int SparepartDetailId { get; set; }
-        public virtual SparepartDetail SparepartDetail { get; set; }
+        public int SparepartId { get; set; }
+        public virtual Sparepart Sparepart { get; set; }
 
-        [Required]
-        public int SpecialSparepartId { get; set; }
-        public virtual SpecialSparepart SpecialSparepart { get; set; }
+
+        public int? PurchasingDetailId { get; set; }
+        public virtual PurchasingDetail PurchasingDetail { get; set; }
+
+        public int? SparepartManualTransactionId { get; set; }
+        public virtual SparepartManualTransaction SparepartManualTransaction { get; set; }
 
         [Required]
         [MaxLength(100)]

@@ -11,28 +11,23 @@ namespace BrawijayaWorkshop.Model
 {
     public class SpecialSparepartDetailListModel : AppBaseModel
     {
-        private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ISparepartStockCardRepository _sparepartStockCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStockCardDetailRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SpecialSparepartDetailListModel(ISpecialSparepartRepository WheelRepository,
+        public SpecialSparepartDetailListModel(
             ISpecialSparepartDetailRepository WheelDetailRepository,
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
-            _specialSparepartRepository = WheelRepository;
             _specialSparepartDetailRepository = WheelDetailRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
             _referenceRepository = referenceRepository;
             _sparepartStockCardRepository = sparepartStockCardRepository;
@@ -40,7 +35,7 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-        public List<SpecialSparepartDetailViewModel> SearchDetail(int specialSparepartId, string serialNumber, DbConstant.WheelDetailStatus status)
+        public List<SpecialSparepartDetailViewModel> SearchDetail(int sparepartId, string serialNumber, DbConstant.WheelDetailStatus status)
         {
             List<SpecialSparepartDetail> result;
 
@@ -48,13 +43,13 @@ namespace BrawijayaWorkshop.Model
             {
                 result = _specialSparepartDetailRepository.GetMany(whd =>
                     whd.Status == (int)status &&
-                    whd.SpecialSparepartId == specialSparepartId &&
+                    whd.SparepartId == sparepartId &&
                     whd.SerialNumber.ToLower().Contains(serialNumber.ToLower())).ToList();
             }
             else
             {
                 result = _specialSparepartDetailRepository.GetMany(whd => whd.Status == (int)status
-                    && whd.SpecialSparepartId == specialSparepartId).ToList();
+                    && whd.SparepartId == sparepartId).ToList();
             }
 
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
@@ -71,27 +66,15 @@ namespace BrawijayaWorkshop.Model
             sspdEntity.ModifyUserId = userId;
             sspdEntity.Status = (int)DbConstant.WheelDetailStatus.Deleted;
 
-            _specialSparepartDetailRepository.AttachNavigation(sspdEntity.SpecialSparepart);
-            _specialSparepartDetailRepository.AttachNavigation(sspdEntity.SparepartDetail);
+            _specialSparepartDetailRepository.AttachNavigation(sspdEntity.Sparepart);
             _specialSparepartDetailRepository.AttachNavigation(sspdEntity.CreateUser);
             _specialSparepartDetailRepository.AttachNavigation(sspdEntity.ModifyUser);
             _specialSparepartDetailRepository.Update(sspdEntity);
             _unitOfWork.SaveChanges();
 
-            SparepartDetail spdEntity = _sparepartDetailRepository.GetById(sspdEntity.SparepartDetailId);
-            spdEntity.ModifyDate = serverTime;
-            spdEntity.ModifyUserId = userId;
-            spdEntity.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
-
-            _sparepartDetailRepository.AttachNavigation(spdEntity.Sparepart);
-            _sparepartDetailRepository.AttachNavigation(spdEntity.SparepartManualTransaction);
-            _sparepartDetailRepository.AttachNavigation(spdEntity.PurchasingDetail);
-            _sparepartDetailRepository.AttachNavigation(spdEntity.CreateUser);
-            _sparepartDetailRepository.AttachNavigation(spdEntity.ModifyUser);
-            _sparepartDetailRepository.Update(spdEntity);
             _unitOfWork.SaveChanges();
 
-            Sparepart spEntity = _sparepartRepository.GetById(spdEntity.SparepartId);
+            Sparepart spEntity = _sparepartRepository.GetById(sspdEntity.SparepartId);
             spEntity.ModifyDate = serverTime;
             spEntity.ModifyUserId = userId;
 

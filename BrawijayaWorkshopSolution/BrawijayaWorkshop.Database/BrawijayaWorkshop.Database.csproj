@@ -76,7 +76,6 @@
     <Compile Include="Configurations\SalesReturnConfiguration.cs" />
     <Compile Include="Configurations\SalesReturnDetailConfiguration.cs" />
     <Compile Include="Configurations\SparepartConfiguration.cs" />
-    <Compile Include="Configurations\SparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\SparepartManualTransactionConfiguration.cs" />
     <Compile Include="Configurations\SparepartStockCardConfiguration.cs" />
     <Compile Include="Configurations\SparepartStockCardDetailConfiguration.cs" />
@@ -94,7 +93,6 @@
     <Compile Include="Configurations\VehicleDetailConfiguration.cs" />
     <Compile Include="Configurations\VehicleGroupConfiguration.cs" />
     <Compile Include="Configurations\VehicleWheelConfiguration.cs" />
-    <Compile Include="Configurations\SpecialSparepartConfiguration.cs" />
     <Compile Include="Configurations\SpecialSparepartDetailConfiguration.cs" />
     <Compile Include="Configurations\WheelExchangeHistoryConfiguration.cs" />
     <Compile Include="DatabaseConfigurationHelper.cs" />
@@ -124,7 +122,6 @@
     <Compile Include="Entities\SalesReturnDetail.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Sparepart.cs" />
-    <Compile Include="Entities\SparepartDetail.cs" />
     <Compile Include="Entities\SparepartManualTransaction.cs" />
     <Compile Include="Entities\SparepartStockCard.cs" />
     <Compile Include="Entities\SparepartStockCardDetail.cs" />
@@ -144,7 +141,6 @@
     <Compile Include="Entities\VehicleDetail.cs" />
     <Compile Include="Entities\VehicleGroup.cs" />
     <Compile Include="Entities\VehicleWheel.cs" />
-    <Compile Include="Entities\SpecialSparepart.cs" />
     <Compile Include="Entities\SpecialSparepartDetail.cs" />
     <Compile Include="Entities\WheelExchangeHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,7 +168,6 @@
     <Compile Include="Repositories\SalesReturnDetailRepository.cs" />
     <Compile Include="Repositories\SalesReturnRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
-    <Compile Include="Repositories\SparepartDetailRepository.cs" />
     <Compile Include="Repositories\SparepartManualTransactionRepository.cs" />
     <Compile Include="Repositories\SparepartRepository.cs" />
     <Compile Include="Repositories\SparepartStockCardDetailRepository.cs" />
@@ -194,7 +189,6 @@
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="Repositories\VehicleWheelRepository.cs" />
     <Compile Include="Repositories\SpecialSparepartDetailRepository.cs" />
-    <Compile Include="Repositories\SpecialSparepartRepository.cs" />
     <Compile Include="Repositories\WheelExchangeHistoryRepository.cs" />
   </ItemGroup>
   <ItemGroup />

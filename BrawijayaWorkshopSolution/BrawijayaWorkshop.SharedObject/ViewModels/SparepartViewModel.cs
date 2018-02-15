@@ -13,5 +13,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public int CategoryReferenceId { get; set; }
         public ReferenceViewModel CategoryReference { get; set; }
+
+        public bool IsSpecialSparepart { get; set; }
     }
 }

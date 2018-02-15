@@ -28,9 +28,8 @@ namespace BrawijayaWorkshop.Database
         public DbSet<Sparepart> Spareparts { get; set; }
         public DbSet<SparepartStockCard> SparepartStockCards { get; set; }
         public DbSet<SparepartStockCardDetail> SparepartStockCardDetails { get; set; }
-        public DbSet<SparepartDetail> SparepartDetails { get; set; }
         public DbSet<SparepartManualTransaction> SparepartManualTransactions { get; set; }
-        public DbSet<SpecialSparepart> Wheels { get; set; }
+        public DbSet<Sparepart> Wheels { get; set; }
         public DbSet<SpecialSparepartDetail> WheelDetails { get; set; }
         public DbSet<Purchasing> Purchasings { get; set; }
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
@@ -79,7 +78,6 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new GuestBookConfiguration());
             modelBuilder.Configurations.Add(new VehicleConfiguration());
             modelBuilder.Configurations.Add(new VehicleDetailConfiguration());
-            modelBuilder.Configurations.Add(new SpecialSparepartConfiguration());
             modelBuilder.Configurations.Add(new SpecialSparepartDetailConfiguration());
             modelBuilder.Configurations.Add(new PurchasingConfiguration());
             modelBuilder.Configurations.Add(new PurchasingDetailConfiguration());
@@ -87,7 +85,6 @@ namespace BrawijayaWorkshop.Database
             modelBuilder.Configurations.Add(new SparepartConfiguration());
             modelBuilder.Configurations.Add(new SparepartStockCardConfiguration());
             modelBuilder.Configurations.Add(new SparepartStockCardDetailConfiguration());
-            modelBuilder.Configurations.Add(new SparepartDetailConfiguration());
             modelBuilder.Configurations.Add(new SparepartManualTransactionConfiguration());
             modelBuilder.Configurations.Add(new JournalMasterConfiguration());
             modelBuilder.Configurations.Add(new SPKConfiguration());

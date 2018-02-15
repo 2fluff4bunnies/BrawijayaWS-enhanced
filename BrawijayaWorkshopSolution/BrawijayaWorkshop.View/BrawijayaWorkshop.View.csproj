@@ -93,7 +93,6 @@
     <Compile Include="ISalesReturnEditorView.cs" />
     <Compile Include="ISalesReturnListView.cs" />
     <Compile Include="ISalesReturnTransactionListView.cs" />
-    <Compile Include="ISparepartDetailListView.cs" />
     <Compile Include="ISparepartManualTransactionEditorView.cs" />
     <Compile Include="ISparepartStockCardListView.cs" />
     <Compile Include="ISPKWheelChangeView.cs" />
@@ -127,8 +126,6 @@
     <Compile Include="ISparepartEditorView.cs" />
     <Compile Include="ISparepartListView.cs" />
     <Compile Include="ISpecialSparepartDetailListView.cs" />
-    <Compile Include="ISpecialSparepartEditorView.cs" />
-    <Compile Include="ISpecialSparepartListView.cs" />
     <Compile Include="IManageUserEditorView.cs" />
     <Compile Include="IVehicleWheelSwapView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -151,8 +151,6 @@
     <Compile Include="SparepartEditorModel.cs" />
     <Compile Include="SparepartListModel.cs" />
     <Compile Include="SpecialSparepartDetailListModel.cs" />
-    <Compile Include="SpecialSparepartEditorModel.cs" />
-    <Compile Include="SpecialSparepartListModel.cs" />
     <Compile Include="VehicleWheelSwapModel.cs" />
   </ItemGroup>
   <ItemGroup>

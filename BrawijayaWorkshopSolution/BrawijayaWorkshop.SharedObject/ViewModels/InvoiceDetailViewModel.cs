@@ -18,7 +18,7 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         {
             get
             {
-                return SPKDetailSparepartDetail.SparepartDetail.PurchasingDetailId.HasValue ? SPKDetailSparepartDetail.SparepartDetail.PurchasingDetail.Price : SPKDetailSparepartDetail.SparepartDetail.SparepartManualTransaction.Price;
+                return SPKDetailSparepartDetail.PurchasingDetailId.HasValue ? SPKDetailSparepartDetail.PurchasingDetail.Price : SPKDetailSparepartDetail.SparepartManualTransaction.Price;
             }
         }
     }

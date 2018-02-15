@@ -24,5 +24,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         public int CategoryReferenceId { get; set; }
         public virtual Reference CategoryReference { get; set; }
+
+        [Required]
+        public bool IsSpecialSparepart { get; set; }
     }
 }

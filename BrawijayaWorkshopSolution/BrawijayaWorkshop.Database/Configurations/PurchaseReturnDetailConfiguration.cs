@@ -9,7 +9,7 @@ namespace BrawijayaWorkshop.Database.Configurations
         {
             HasRequired(p => p.PurchaseReturn).WithMany().HasForeignKey(p => p.PurchaseReturnId).WillCascadeOnDelete(true);
             HasRequired(p => p.PurchasingDetail).WithMany().HasForeignKey(p => p.PurchasingDetailId).WillCascadeOnDelete(true);
-            HasRequired(p => p.SparepartDetail).WithMany().HasForeignKey(p => p.SparepartDetailId).WillCascadeOnDelete(true);
+            HasRequired(p => p.SparepartManualTransaction).WithMany().HasForeignKey(p => p.SparepartManualTransactionId).WillCascadeOnDelete(true);
             HasRequired(p => p.CreateUser).WithMany().HasForeignKey(p => p.CreateUserId).WillCascadeOnDelete(true);
             HasRequired(p => p.ModifyUser).WithMany().HasForeignKey(p => p.ModifyUserId).WillCascadeOnDelete(true);
         }
