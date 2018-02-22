@@ -32,7 +32,6 @@ namespace BrawijayaWorkshop.Model
             _unitOfWork = unitOfWork;
         }
 
-
         public List<MechanicViewModel> LoadMechanic()
         {
             List<Mechanic> result = _mechanicRepository.GetMany(m => m.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();

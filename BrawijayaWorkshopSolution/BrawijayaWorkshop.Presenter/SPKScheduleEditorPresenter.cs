@@ -15,6 +15,8 @@ namespace BrawijayaWorkshop.Presenter
 
         public void InitFormData()
         {
+            View.FingerprintIP = Model.GetFingerprintIpAddress();
+            View.FingerpringPort = Model.GetFingerprintPort();
             View.MechanicList = Model.LoadMechanic();
             View.SPKList = Model.LoadSPK();
             View.SPKVehicleList = new List<SPKVehicleModel>();

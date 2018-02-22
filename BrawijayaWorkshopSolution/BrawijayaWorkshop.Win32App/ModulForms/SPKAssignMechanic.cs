@@ -46,31 +46,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             _presenter.InitFormData();
 
-            if (this.AssignedSchedule != null && this.AssignedSchedule.Count > 0)
-            {
-                foreach (var item in this.AssignedSchedule)
-                {
-                    MechanicViewModel mechanic = MechanicList.Where(m => m.Id == item.MechanicId).FirstOrDefault();
-
-                    if (mechanic != null)
-                    {
-                        SelectedMechanicList.Add((MechanicViewModel)mechanic);
-                    }
-                }
-
-                foreach (var item in SelectedMechanicList)
-                {
-                    MechanicList.Remove((MechanicViewModel)item);
-                }
-
-                RebindListboxes();
-            }
-            else
-            {
-                this.AssignedSchedule = new List<SPKScheduleViewModel>();
-            }
-
-            RebindListboxes();
+            ReloadMechanics();
         }
 
         #region Properties
@@ -240,6 +216,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     if (dtAttLog.Rows.Count > 0)
                     {
+                        List<string> attendedMechanics = new List<string>();
                         foreach (var item in MechanicList)
                         {
                             string currentMechanic = string.Empty;
@@ -258,9 +235,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                             if (!string.IsNullOrEmpty(currentMechanic))
                             {
-                                _availableMechanic = new List<string>();
-                                _availableMechanic.Add(currentMechanic);
+                                attendedMechanics.Add(currentMechanic);
                             }
+                        }
+
+                        if (attendedMechanics.Count > 0)
+                        {
+                            _availableMechanic = attendedMechanics;
                         }
                     }
                     e.Result = true;
@@ -280,7 +261,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void bgwFingerPrint_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Cursor = Cursors.Default;
-            
+
             if (e.Result is Exception)
             {
                 this.ShowError("Koneksi ke fingerprint gagal!");
@@ -299,6 +280,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 {
                     _isFingerprintConnected = true;
                     _presenter.UpdateMechanicList(_availableMechanic);
+                    ReloadMechanics();
                 }
             }
             this.Enabled = true;
@@ -347,5 +329,34 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
+
+        private void ReloadMechanics()
+        {
+            if (this.AssignedSchedule != null && this.AssignedSchedule.Count > 0)
+            {
+                foreach (var item in this.AssignedSchedule)
+                {
+                    MechanicViewModel mechanic = MechanicList.Where(m => m.Id == item.MechanicId).FirstOrDefault();
+
+                    if (mechanic != null)
+                    {
+                        SelectedMechanicList.Add((MechanicViewModel)mechanic);
+                    }
+                }
+
+                foreach (var item in SelectedMechanicList)
+                {
+                    MechanicList.Remove((MechanicViewModel)item);
+                }
+
+                RebindListboxes();
+            }
+            else
+            {
+                this.AssignedSchedule = new List<SPKScheduleViewModel>();
+            }
+
+            RebindListboxes();
+        }
     }
 }

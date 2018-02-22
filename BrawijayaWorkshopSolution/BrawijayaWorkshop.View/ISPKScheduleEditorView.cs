@@ -22,6 +22,8 @@ namespace BrawijayaWorkshop.View
         string Description { get; set; }
         List<MechanicViewModel> SelectedMechanicList { get; set; }
 
+        string FingerprintIP { get; set; }
+        string FingerpringPort { get; set; }
     }
 
     public class SPKVehicleModel
