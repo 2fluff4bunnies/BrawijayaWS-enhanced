@@ -14,16 +14,20 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailSparepartRepository _SPKDetailSparepartRepository;
         private ISPKDetailSparepartDetailRepository _SPKDetailSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
+        //private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKDetailSparepartListModel(ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
+
+            //ISparepartDetailRepository sparepartDetailRepository, 
             IUnitOfWork unitOfWork)
         {
             _SPKRepository = SPKRepository;
             _SPKDetailSparepartRepository = SPKDetailSparePartRepository;
             _SPKDetailSparepartDetailRepository = SPKDetailSparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
+            //_sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
