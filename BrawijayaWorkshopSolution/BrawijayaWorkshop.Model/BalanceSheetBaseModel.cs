@@ -22,7 +22,6 @@ namespace BrawijayaWorkshop.Model
         protected IPurchasingRepository _purchasingRepository;
 
         protected ISparepartRepository _sparepartRepository;
-        protected ISparepartDetailRepository _sparepartDetailRepository;
 
         protected ITransactionRepository _transactionRepository;
         protected ITransactionDetailRepository _transactionDetailRepository;
@@ -34,7 +33,7 @@ namespace BrawijayaWorkshop.Model
         public BalanceSheetBaseModel(IBalanceJournalRepository balanceJournalRepository, IBalanceJournalDetailRepository balanceJournalDetailRepository,
             IJournalMasterRepository journalMasterRepository, IReferenceRepository referenceRepository,
             IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, ITransactionRepository transactionRepository,
+            ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IInvoiceRepository invoiceRepository,
             IUnitOfWork unitOfWork)
@@ -46,7 +45,6 @@ namespace BrawijayaWorkshop.Model
             _referenceRepository = referenceRepository;
             _purchasingRepository = purchasingRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
             _invoiceRepository = invoiceRepository;

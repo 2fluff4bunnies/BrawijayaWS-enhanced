@@ -13,13 +13,12 @@ namespace BrawijayaWorkshop.Model
         public ProfitLossModel(IBalanceJournalRepository balanceJournalRepository,
             IBalanceJournalDetailRepository balanceJournalDetailRepository,
             IJournalMasterRepository journalMasterRepository, IReferenceRepository referenceRepository,
-            IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, ITransactionRepository transactionRepository,
+            IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository, ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IInvoiceRepository invoiceRepository,
             IUnitOfWork unitOfWork)
             : base(balanceJournalRepository, balanceJournalDetailRepository, journalMasterRepository,
-                   referenceRepository, purchasingRepository, sparepartRepository, sparepartDetailRepository,
+                   referenceRepository, purchasingRepository, sparepartRepository,
                    transactionRepository, transactionDetailRepository, invoiceRepository, unitOfWork) { }
 
         public List<BalanceSheetDetailViewModel> RetrieveProfitLoss(int headerId)

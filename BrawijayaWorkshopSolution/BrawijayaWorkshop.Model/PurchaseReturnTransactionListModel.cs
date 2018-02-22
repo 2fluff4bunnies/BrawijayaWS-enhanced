@@ -17,7 +17,6 @@ namespace BrawijayaWorkshop.Model
         private IPurchaseReturnRepository _purchaseReturnRepository;
         private IPurchaseReturnDetailRepository _purchaseReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
@@ -26,7 +25,7 @@ namespace BrawijayaWorkshop.Model
         public PurchaseReturnTransactionListModel(ITransactionRepository transactionRepository,
             IPurchasingRepository purchasingRepository, IPurchasingDetailRepository purchasingDetailRepository, IPurchaseReturnRepository purchaseReturnRepository,
             IPurchaseReturnDetailRepository purchaseReturnDetailRepository,
-            ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
+            ISparepartRepository sparepartRepository,
             IReferenceRepository referenceRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
@@ -39,7 +38,6 @@ namespace BrawijayaWorkshop.Model
             _purchaseReturnRepository = purchaseReturnRepository;
             _purchaseReturnDetailRepository = purchaseReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
@@ -101,27 +99,30 @@ namespace BrawijayaWorkshop.Model
                         _purchaseReturnRepository.AttachNavigation(itemDetail.ModifyUser);
                         _purchaseReturnRepository.AttachNavigation(itemDetail.PurchaseReturn);
                         _purchaseReturnRepository.AttachNavigation(itemDetail.PurchasingDetail);
-                        _purchaseReturnRepository.AttachNavigation(itemDetail.SparepartDetail);
+                        _purchaseReturnRepository.AttachNavigation(itemDetail.SparepartManualTransaction);
                         _purchaseReturnDetailRepository.Update(itemDetail);
 
-                        SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.SparepartDetailId);
-                        spDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+                        //tempdelete
+                        //SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.SparepartDetailId);
+                        //spDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
 
-                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                        _sparepartDetailRepository.Update(spDetail);
+                        //_sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                        //_sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                        //_sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                        //_sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                        //_sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                        //_sparepartDetailRepository.Update(spDetail);
 
-                        Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
-                        sparepart.StockQty += 1;
 
-                        _sparepartRepository.AttachNavigation(sparepart.CreateUser);
-                        _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
-                        _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
-                        _sparepartRepository.AttachNavigation(sparepart.UnitReference);
-                        _sparepartRepository.Update(sparepart);
+                        //temp delete
+                        //Sparepart sparepart = _sparepartRepository.GetById(itemDetail.SparepartId);
+                        //sparepart.StockQty += 1;
+
+                        //_sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                        //_sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                        //_sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                        //_sparepartRepository.AttachNavigation(sparepart.UnitReference);
+                        //_sparepartRepository.Update(sparepart);
 
                         SparepartStockCard stockCard = new SparepartStockCard();
                         stockCard.CreateUserId = userID;
@@ -221,7 +222,8 @@ namespace BrawijayaWorkshop.Model
                         {
                             SparepartId = itemDetail.SparepartId,
                             SparepartName = itemDetail.Sparepart.Name,
-                            ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
+                            //temp delete
+                            //ReturQty = Convert.ToDecimal(listDetail.Where(x => x.Qty).Sum()),
                             ReturQtyLimit = itemDetail.Qty,
                             PricePerItem = itemDetail.Price,
                             SparepartCode = itemDetail.Sparepart.Code,

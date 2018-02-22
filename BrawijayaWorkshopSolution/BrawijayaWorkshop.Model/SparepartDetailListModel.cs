@@ -11,15 +11,12 @@ namespace BrawijayaWorkshop.Model
     public class SparepartDetailListModel : AppBaseModel
     {
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SparepartDetailListModel(ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+        public SparepartDetailListModel(ISparepartRepository sparepartRepository, IUnitOfWork unitOfWork)
             : base()
         {
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 

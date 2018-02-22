@@ -14,18 +14,16 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailSparepartRepository _SPKDetailSparepartRepository;
         private ISPKDetailSparepartDetailRepository _SPKDetailSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public SPKDetailSparepartListModel(ISPKRepository SPKRepository, ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork)
         {
             _SPKRepository = SPKRepository;
             _SPKDetailSparepartRepository = SPKDetailSparePartRepository;
             _SPKDetailSparepartDetailRepository = SPKDetailSparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -46,12 +44,13 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        public List<SparepartDetail> SearchSparepart(int sparepartId, DbConstant.SparepartDetailDataStatus status)
-        {
-            List<SparepartDetail> result = _sparepartDetailRepository.GetMany(
-                spd => spd.SparepartId == sparepartId && spd.Status == (int)status).ToList();
+        //temp delete
+        //public List<SparepartDetail> SearchSparepart(int sparepartId, DbConstant.SparepartDetailDataStatus status)
+        //{
+        //    List<SparepartDetail> result = _sparepartDetailRepository.GetMany(
+        //        spd => spd.SparepartId == sparepartId && spd.Status == (int)status).ToList();
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

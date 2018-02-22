@@ -12,18 +12,18 @@ namespace BrawijayaWorkshop.Model
     public class SparepartListModel : AppBaseModel
     {
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private IUnitOfWork _unitOfWork;
 
         public SparepartListModel(ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IReferenceRepository referenceRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _unitOfWork = unitOfWork;
         }
@@ -57,18 +57,18 @@ namespace BrawijayaWorkshop.Model
         public void DeleteSparepart(SparepartViewModel sparepart, int userId)
         {
             DateTime serverTime = DateTime.Now;
-            List<SparepartDetail> details = _sparepartDetailRepository.GetMany(spd => spd.SparepartId == sparepart.Id).ToList();
+            List<SpecialSparepartDetail> details = _specialSparepartDetailRepository.GetMany(spd => spd.SparepartId == sparepart.Id).ToList();
             foreach (var iDetails in details)
             {
                 iDetails.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                 iDetails.ModifyDate = serverTime;
                 iDetails.ModifyUserId = userId;
-                _sparepartDetailRepository.AttachNavigation(iDetails.CreateUser);
-                _sparepartDetailRepository.AttachNavigation(iDetails.ModifyUser);
-                _sparepartDetailRepository.AttachNavigation(iDetails.PurchasingDetail);
-                _sparepartDetailRepository.AttachNavigation(iDetails.Sparepart);
-                _sparepartDetailRepository.AttachNavigation(iDetails.SparepartManualTransaction);
-                _sparepartDetailRepository.Update(iDetails);
+                _specialSparepartDetailRepository.AttachNavigation(iDetails.CreateUser);
+                _specialSparepartDetailRepository.AttachNavigation(iDetails.ModifyUser);
+                _specialSparepartDetailRepository.AttachNavigation(iDetails.PurchasingDetail);
+                _specialSparepartDetailRepository.AttachNavigation(iDetails.Sparepart);
+                _specialSparepartDetailRepository.AttachNavigation(iDetails.SparepartManualTransaction);
+                _specialSparepartDetailRepository.Update(iDetails);
             }
 
             sparepart.Status = (int)DbConstant.DefaultDataStatus.Deleted;

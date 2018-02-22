@@ -15,12 +15,10 @@ namespace BrawijayaWorkshop.Model
         private IPurchasingDetailRepository _purchasingDetailRepository;
         private ISupplierRepository _supplierRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
         private IJournalMasterRepository _journalMasterRepository;
-        private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
@@ -29,12 +27,10 @@ namespace BrawijayaWorkshop.Model
         public PurchasingApprovalModel(IPurchasingRepository purchasingRepository, ISupplierRepository supplierRepository,
             IPurchasingDetailRepository purchasingDetailRepository,
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository,
             ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IJournalMasterRepository journalMasterRepository,
-            ISpecialSparepartRepository wheelRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
@@ -45,12 +41,10 @@ namespace BrawijayaWorkshop.Model
             _purchasingRepository = purchasingRepository;
             _supplierRepository = supplierRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
             _journalMasterRepository = journalMasterRepository;
-            _specialSparepartRepository = wheelRepository;
             _specialSparepartDetailRepository = wheelDetailRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
@@ -98,43 +92,9 @@ namespace BrawijayaWorkshop.Model
                     {
                         Sparepart sparepartDB = _sparepartRepository.GetById(purchasingDetail.SparepartId);
 
-                        SparepartDetail lastSPDetail = _sparepartDetailRepository.
-                            GetMany(c => c.SparepartId == purchasingDetail.SparepartId).OrderByDescending(c => c.Id)
-                            .FirstOrDefault();
-                        string lastSPID = string.Empty;
-                        if (lastSPDetail != null) lastSPID = lastSPDetail.Code;
-
-                        SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartDB.Id && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-
                         for (int i = 1; i <= purchasingDetail.Qty; i++)
                         {
-                            SparepartDetail spDetail = new SparepartDetail();
-                            if (string.IsNullOrEmpty(lastSPID))
-                            {
-                                lastSPID = sparepartDB.Code + "0000000001";
-                            }
-                            else
-                            {
-                                lastSPID = sparepartDB.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
-                                    .ToString("D10");
-                            }
-                            spDetail.PurchasingDetailId = purchasingDetail.Id;
-                            spDetail.SparepartId = sparepartDB.Id;
-                            spDetail.Code = lastSPID;
-                            spDetail.CreateDate = serverTime;
-                            spDetail.CreateUserId = userID;
-                            spDetail.ModifyUserId = userID;
-                            spDetail.ModifyDate = serverTime;
-                            spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-
-                            _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                            _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                            SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
-
-                            if (!string.IsNullOrEmpty(purchasingDetail.SerialNumber) && specialSparepart != null)
+                            if (!string.IsNullOrEmpty(purchasingDetail.SerialNumber))
                             {
                                 SpecialSparepartDetail wd = new SpecialSparepartDetail();
                                 wd.SerialNumber = purchasingDetail.SerialNumber;
@@ -142,15 +102,13 @@ namespace BrawijayaWorkshop.Model
                                 wd.CreateDate = serverTime;
                                 wd.ModifyUserId = userID;
                                 wd.ModifyDate = serverTime;
-                                wd.SpecialSparepartId = specialSparepart.Id;
-                                wd.SparepartDetail = insertedSpDetail;
+                                wd.SparepartId = sparepartDB.Id;
                                 wd.Status = (int)DbConstant.WheelDetailStatus.Ready;
 
-                                _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                                _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                                _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                                _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                                _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                                _specialSparepartDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                                _specialSparepartDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                                _specialSparepartDetailRepository.AttachNavigation(purchasingDetail);
+                                _specialSparepartDetailRepository.AttachNavigation(purchasingDetail.Sparepart);;
                                 _specialSparepartDetailRepository.Add(wd);
                             }
                         }

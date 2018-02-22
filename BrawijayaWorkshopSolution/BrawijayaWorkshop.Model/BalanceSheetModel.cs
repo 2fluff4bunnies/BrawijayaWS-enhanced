@@ -15,12 +15,12 @@ namespace BrawijayaWorkshop.Model
             IBalanceJournalDetailRepository balanceJournalDetailRepository,
             IJournalMasterRepository journalMasterRepository, IReferenceRepository referenceRepository,
             IPurchasingRepository purchasingRepository, ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository, ITransactionRepository transactionRepository,
+            ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IInvoiceRepository invoiceRepository,
             IUnitOfWork unitOfWork)
             : base(balanceJournalRepository, balanceJournalDetailRepository, journalMasterRepository,
-                   referenceRepository, purchasingRepository, sparepartRepository, sparepartDetailRepository,
+                   referenceRepository, purchasingRepository, sparepartRepository,
                    transactionRepository, transactionDetailRepository, invoiceRepository, unitOfWork) { }
 
         public List<BalanceSheetDetailViewModel> RetrieveBalance(int headerId, bool isActiva)

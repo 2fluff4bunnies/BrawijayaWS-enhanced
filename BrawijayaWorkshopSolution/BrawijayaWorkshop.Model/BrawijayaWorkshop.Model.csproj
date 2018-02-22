@@ -118,7 +118,6 @@
     <Compile Include="SalesReturnEditorModel.cs" />
     <Compile Include="SalesReturnListModel.cs" />
     <Compile Include="SalesReturnTransactionListModel.cs" />
-    <Compile Include="SparepartDetailListModel.cs" />
     <Compile Include="SparepartManualTransactionEditorModel.cs" />
     <Compile Include="SparepartStockCardListModel.cs" />
     <Compile Include="SPKHistoryDetailModel.cs" />

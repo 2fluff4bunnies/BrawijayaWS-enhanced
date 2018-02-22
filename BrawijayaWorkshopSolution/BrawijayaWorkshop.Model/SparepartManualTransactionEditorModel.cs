@@ -14,8 +14,6 @@ namespace BrawijayaWorkshop.Model
     {
         private ISparepartManualTransactionRepository _sparepartManualTransactionRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
-        private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ITransactionRepository _transactionRepository;
@@ -27,8 +25,6 @@ namespace BrawijayaWorkshop.Model
 
         public SparepartManualTransactionEditorModel(ISparepartManualTransactionRepository sparepartManualTransactionRepository,
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository,
-            ISpecialSparepartRepository wheelRepository,
             ISpecialSparepartDetailRepository wheelDetailRepository,
             IReferenceRepository referenceRepository,
             ITransactionRepository transactionRepository,
@@ -41,8 +37,6 @@ namespace BrawijayaWorkshop.Model
         {
             _sparepartManualTransactionRepository = sparepartManualTransactionRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
-            _specialSparepartRepository = wheelRepository;
             _specialSparepartDetailRepository = wheelDetailRepository;
             _referenceRepository = referenceRepository;
             _transactionRepository = transactionRepository;
@@ -93,21 +87,6 @@ namespace BrawijayaWorkshop.Model
                         SparepartManualTransaction manualTransaction = _sparepartManualTransactionRepository.Add(entity);
                         _unitOfWork.SaveChanges();
 
-                        //Reference referenceTransaction = _referenceRepository.GetMany(x=>x.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
-                        //Transaction transaction = new Transaction();
-                        //transaction.CreateDate = serverTime;
-                        //transaction.CreateUserId = userId;
-                        //transaction.ModifyDate = serverTime;
-                        //transaction.ModifyUserId = userId;
-                        //transaction.Description = "Transaksi sparepart manual";
-                        //transaction.ReferenceTableId = referenceTransaction.Id;
-                        //transaction.PrimaryKeyValue = 0;
-                        //transaction.TotalPayment = totalPrice.AsDouble();
-                        //transaction.TotalTransaction = totalPrice.AsDouble();
-                        //transaction.TransactionDate = serverTime;
-                        //transaction.Status = (int)DbConstant.DefaultDataStatus.Active;
-                        //transaction =_transactionRepository.Add(transaction);
-
                         Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_SPAREPARTMANUAL).FirstOrDefault();
                         SparepartStockCard stockCard = new SparepartStockCard();
                         stockCard.CreateUserId = userId;
@@ -119,80 +98,31 @@ namespace BrawijayaWorkshop.Model
                         if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_PLUS)
                         {
                             stockCard.Description = "Penambahan stok awal";
-                            //TransactionDetail transDebit = new TransactionDetail();
-                            //transDebit.Debit = totalPrice;
-                            //transDebit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "1.01.04.01").FirstOrDefault().Id;
-                            //transDebit.Parent = transaction;
-                            //_transactionDetailRepository.Add(transDebit);
-
-                            //TransactionDetail transCredit = new TransactionDetail();
-                            //transCredit.Credit = totalPrice;
-                            //transCredit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "9.9").FirstOrDefault().Id;
-                            //transCredit.Parent = transaction;
-                            //_transactionDetailRepository.Add(transCredit);
 
                             sparepartUpdated.StockQty += sparepartManualTransaction.Qty;
                             stockCard.QtyIn = sparepartManualTransaction.Qty;
                             stockCard.QtyInPrice = (sparepartManualTransaction.Qty * sparepartManualTransaction.Price).AsDouble();
 
-                            SparepartDetail lastSPDetail = _sparepartDetailRepository.
-                            GetMany(c => c.SparepartId == sparepartManualTransaction.SparepartId).OrderByDescending(c => c.Id)
-                            .FirstOrDefault();
-                            string lastSPID = string.Empty;
-                            if (lastSPDetail != null) lastSPID = lastSPDetail.Code;
                             for (int i = 1; i <= sparepartManualTransaction.Qty; i++)
                             {
-                                SparepartDetail spDetail = new SparepartDetail();
-                                if (string.IsNullOrEmpty(lastSPID))
-                                {
-                                    lastSPID = sparepartUpdated.Code + "0000000001";
-                                }
-                                else
-                                {
-                                    lastSPID = sparepartUpdated.Code + (Convert.ToInt32(lastSPID.Substring(lastSPID.Length - 10)) + 1)
-                                        .ToString("D10");
-                                }
-                                spDetail.SparepartManualTransaction = manualTransaction;
-                                spDetail.SparepartId = sparepartUpdated.Id;
-                                spDetail.Code = lastSPID;
-                                spDetail.CreateDate = serverTime;
-                                spDetail.CreateUserId = userId;
-                                spDetail.ModifyUserId = userId;
-                                spDetail.ModifyDate = serverTime;
-                                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
-
-                                _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                                SparepartDetail insertedSpDetail = _sparepartDetailRepository.Add(spDetail);
-
                                 if (!string.IsNullOrEmpty(sparepartManualTransaction.SerialNumber))
                                 {
-                                    SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartUpdated.Id && w.Status == (int)DbConstant.DefaultDataStatus.Active ).FirstOrDefault();
+                                    SpecialSparepartDetail wDetail = new SpecialSparepartDetail();
+                                    wDetail.Sparepart = manualTransaction.Sparepart;
+                                    wDetail.SerialNumber = sparepartManualTransaction.SerialNumber;
+                                    wDetail.CreateDate = serverTime;
+                                    wDetail.CreateUserId = userId;
+                                    wDetail.ModifyUserId = userId;
+                                    wDetail.ModifyDate = serverTime;
+                                    wDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
 
-                                    if (specialSparepart != null)
-                                    {
-                                        SpecialSparepartDetail wDetail = new SpecialSparepartDetail();
-                                        wDetail.SparepartDetail = insertedSpDetail;
-                                        wDetail.SpecialSparepartId = specialSparepart.Id;
-                                        wDetail.SerialNumber = sparepartManualTransaction.SerialNumber;
-                                        wDetail.CreateDate = serverTime;
-                                        wDetail.CreateUserId = userId;
-                                        wDetail.ModifyUserId = userId;
-                                        wDetail.ModifyDate = serverTime;
-                                        wDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
+                                    _specialSparepartDetailRepository.AttachNavigation(manualTransaction.CreateUser);
+                                    _specialSparepartDetailRepository.AttachNavigation(manualTransaction.ModifyUser);
+                                    _specialSparepartDetailRepository.AttachNavigation(manualTransaction.Sparepart);
+                                    _specialSparepartDetailRepository.AttachNavigation(manualTransaction);
+                                    _specialSparepartDetailRepository.Add(wDetail);
 
-                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                                        _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                                        _specialSparepartDetailRepository.Add(wDetail);
-
-                                        _unitOfWork.SaveChanges();
-                                    }
+                                    _unitOfWork.SaveChanges();
                                 }
 
                             }
@@ -200,32 +130,10 @@ namespace BrawijayaWorkshop.Model
                         else if (updateType.Code == DbConstant.REF_SPAREPART_TRANSACTION_MANUAL_TYPE_MINUS)
                         {
                             stockCard.Description = "Pengurangan stok awal";
-                            //TransactionDetail transCredit = new TransactionDetail();
-                            //transCredit.Credit = totalPrice;
-                            //transCredit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "1.01.04.01").FirstOrDefault().Id;
-                            //transCredit.Parent = transaction;
-                            //_transactionDetailRepository.Add(transCredit);
-
-                            //TransactionDetail transDebit = new TransactionDetail();
-                            //transDebit.Debit = totalPrice;
-                            //transDebit.JournalId = _journalMasterRepository.GetMany(x => x.Code == "9.9").FirstOrDefault().Id;
-                            //transDebit.Parent = transaction;
-                            //_transactionDetailRepository.Add(transDebit);
-
                             sparepartUpdated.StockQty -= sparepartManualTransaction.Qty;
                             stockCard.QtyOut = sparepartManualTransaction.Qty;
                             stockCard.QtyOutPrice = (sparepartManualTransaction.Qty * sparepartManualTransaction.Price).AsDouble();
 
-                            List<SparepartDetail> spDetails = _sparepartDetailRepository.
-                            GetMany(c => c.SparepartId == sparepartManualTransaction.SparepartId).OrderByDescending(c => c.Id)
-                            .Take(sparepartManualTransaction.Qty).ToList();
-                            foreach (var spDetail in spDetails)
-                            {
-                                spDetail.ModifyUserId = userId;
-                                spDetail.ModifyDate = serverTime;
-                                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Deleted;
-                                _sparepartDetailRepository.Update(spDetail);
-                            }
                         }
 
                         SparepartStockCard lastStockCard = _sparepartStockCardRepository.RetrieveLastCard(manualTransaction.SparepartId);
@@ -276,10 +184,6 @@ namespace BrawijayaWorkshop.Model
                         _sparepartRepository.AttachNavigation(sparepartUpdated.UnitReference);
                         _sparepartRepository.Update(sparepartUpdated);
                         _unitOfWork.SaveChanges();
-
-                        //transaction.PrimaryKeyValue = manualTransaction.Id;
-                        //_transactionRepository.Update(transaction);
-                        //_unitOfWork.SaveChanges();
                         trans.Commit();
                     }
                 }
@@ -443,7 +347,7 @@ namespace BrawijayaWorkshop.Model
 
         public bool IsThisWheel(int sparepartId)
         {
-            SpecialSparepart specialSparepart = _specialSparepartRepository.GetMany(w => w.SparepartId == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+            Sparepart specialSparepart = _sparepartRepository.GetMany(w => w.Id == sparepartId && w.Status == (int)DbConstant.DefaultDataStatus.Active && w.IsSpecialSparepart).FirstOrDefault();
 
             return specialSparepart != null;
         }
@@ -454,7 +358,7 @@ namespace BrawijayaWorkshop.Model
 
             if (ssd != null)
             {
-                if (ssd.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
+                if (ssd.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
                 {
                     return false;
                 }

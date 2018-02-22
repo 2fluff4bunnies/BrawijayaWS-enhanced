@@ -17,12 +17,10 @@ namespace BrawijayaWorkshop.Model
         private IInvoiceRepository _invoiceRepository;
         private IInvoiceDetailRepository _invoiceDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ITransactionRepository _transactionRepository;
         private ITransactionDetailRepository _transactionDetailRepository;
         private IJournalMasterRepository _journalMasterRepository;
-        private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
@@ -34,12 +32,10 @@ namespace BrawijayaWorkshop.Model
             IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository,
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository,
             IReferenceRepository referenceRepository,
             ITransactionRepository transactionRepository,
             ITransactionDetailRepository transactionDetailRepository,
             IJournalMasterRepository journalMasterRepository,
-            ISpecialSparepartRepository specialSparepartRepository,
             ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
@@ -51,12 +47,10 @@ namespace BrawijayaWorkshop.Model
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _transactionRepository = transactionRepository;
             _transactionDetailRepository = transactionDetailRepository;
             _journalMasterRepository = journalMasterRepository;
             _referenceRepository = referenceRepository;
-            _specialSparepartRepository = specialSparepartRepository;
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
@@ -79,13 +73,13 @@ namespace BrawijayaWorkshop.Model
                 List<SalesReturnDetail> listDetail = this.RetrieveSalesReturnDetail(salesReturnID);
                 if (listDetail != null && listDetail.Count > 0)
                 {
-                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
                     foreach (var sparepartID in sparepartIDs)
                     {
-                        bool isSpecial = _specialSparepartRepository.GetMany(x => x.SparepartId == sparepartID).Count() > 0;
+                        bool isSpecial = _sparepartRepository.GetMany(x => x.Id == sparepartID && x.IsSpecialSparepart).Count() > 0;
                         if(isSpecial)
                         {
-                            List<InvoiceDetail> listInvoiceDetailSparepart = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).ToList();
+                            List<InvoiceDetail> listInvoiceDetailSparepart = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).ToList();
                             foreach (var itemInvoiceSparepart in listInvoiceDetailSparepart)
                             {
                                 result.Add(new ReturnViewModel
@@ -94,7 +88,8 @@ namespace BrawijayaWorkshop.Model
                                     SparepartName = _sparepartRepository.GetById(sparepartID).Name,
                                     ReturQty = listDetail.Where(x => x.InvoiceDetailId == itemInvoiceSparepart.Id).Count(),
                                     ReturQtyLimit = 1,
-                                    SerialNumber = _specialSparepartDetailRepository.GetMany(x => x.SparepartDetailId == itemInvoiceSparepart.SPKDetailSparepartDetail.SparepartDetailId).FirstOrDefault().SerialNumber
+                                    SerialNumber = itemInvoiceSparepart.SPKDetailSparepartDetail.PurchasingDetail != null ? _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == itemInvoiceSparepart.SPKDetailSparepartDetail.PurchasingDetailId).FirstOrDefault().SerialNumber
+                                    : _specialSparepartDetailRepository.GetMany(x => x.SparepartManualTransactionId == itemInvoiceSparepart.SPKDetailSparepartDetail.SparepartManualTransactionId).FirstOrDefault().SerialNumber
                                 });
                             }
                         }
@@ -104,8 +99,8 @@ namespace BrawijayaWorkshop.Model
                             {
                                 SparepartId = sparepartID,
                                 SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                                ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                                ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
+                                ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
+                                ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count()
                             });
                         }
                         
@@ -114,13 +109,13 @@ namespace BrawijayaWorkshop.Model
             }
             else
             {
-                int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
                 foreach (var sparepartID in sparepartIDs)
                 {
-                    bool isSpecial = _specialSparepartRepository.GetMany(x => x.SparepartId == sparepartID).Count() > 0;
+                    bool isSpecial = _sparepartRepository.GetMany(x => x.Id == sparepartID && x.IsSpecialSparepart).Count() > 0;
                     if (isSpecial)
                     {
-                        List<InvoiceDetail> listInvoiceDetailSparepart = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).ToList();
+                        List<InvoiceDetail> listInvoiceDetailSparepart = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).ToList();
                         foreach (var itemInvoiceSparepart in listInvoiceDetailSparepart)
                         {
                             result.Add(new ReturnViewModel
@@ -129,7 +124,8 @@ namespace BrawijayaWorkshop.Model
                                 SparepartName = _sparepartRepository.GetById(sparepartID).Name,
                                 ReturQty = 1,
                                 ReturQtyLimit = 1,
-                                SerialNumber = _specialSparepartDetailRepository.GetMany(x=>x.SparepartDetailId == itemInvoiceSparepart.SPKDetailSparepartDetail.SparepartDetailId).FirstOrDefault().SerialNumber
+                                SerialNumber = itemInvoiceSparepart.SPKDetailSparepartDetail.PurchasingDetail != null ? _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == itemInvoiceSparepart.SPKDetailSparepartDetail.PurchasingDetailId).FirstOrDefault().SerialNumber
+                                    : _specialSparepartDetailRepository.GetMany(x => x.SparepartManualTransactionId == itemInvoiceSparepart.SPKDetailSparepartDetail.SparepartManualTransactionId).FirstOrDefault().SerialNumber
                             });
                         }
                     }
@@ -139,8 +135,8 @@ namespace BrawijayaWorkshop.Model
                         {
                             SparepartId = sparepartID,
                             SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                            ReturQty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count()
+                            ReturQty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
+                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count()
                         });
                     }
                 }
@@ -216,11 +212,11 @@ namespace BrawijayaWorkshop.Model
             decimal totalTransaction = 0;
             foreach (var itemReturn in listReturn)
             {
-                List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId
+                List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == itemReturn.SparepartId
                     && x.InvoiceId == invoiceID
-                    && (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
-                    || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
-                    || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutInstalled)
+                    //&& (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
+                    //|| x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService
+                    //|| x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutInstalled)
                     ).OrderByDescending(x => x.CreateDate)
                     .Take(itemReturn.ReturQty).ToList();
 
@@ -240,26 +236,27 @@ namespace BrawijayaWorkshop.Model
                     });
                     totalTransaction += invoiceDetail.SubTotalPrice.AsDecimal();
 
-                    SparepartDetail spDetail = _sparepartDetailRepository.GetById(invoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                    spDetail.ModifyDate = serverTime;
-                    spDetail.ModifyUserId = userID;
-                    spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+                    //temp delete
+                    //SparepartDetail spDetail = _sparepartDetailRepository.GetById(invoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                    //spDetail.ModifyDate = serverTime;
+                    //spDetail.ModifyUserId = userID;
+                    //spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
 
-                    if(spDetail.PurchasingDetail != null)
-                    {
-                        listPurchasingDetail.Add(spDetail.PurchasingDetail);
-                    }
-                    if (spDetail.SparepartManualTransaction != null)
-                    {
-                        listSparepartManualTrans.Add(spDetail.SparepartManualTransaction);
-                    }
+                    //if(spDetail.PurchasingDetail != null)
+                    //{
+                    //    listPurchasingDetail.Add(spDetail.PurchasingDetail);
+                    //}
+                    //if (spDetail.SparepartManualTransaction != null)
+                    //{
+                    //    listSparepartManualTrans.Add(spDetail.SparepartManualTransaction);
+                    //}
 
-                    _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                    _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                    _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                    _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                    _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                    _sparepartDetailRepository.Update(spDetail);
+                    //_sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                    //_sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                    //_sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                    //_sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                    //_sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                    //_sparepartDetailRepository.Update(spDetail);
                 }
                 Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
                 sparepart.ModifyDate = serverTime;
@@ -475,10 +472,10 @@ namespace BrawijayaWorkshop.Model
             List<SalesReturnDetail> listDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
 
             List<ReturnViewModel> listReturn = listDetail
-                                    .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId)
+                                    .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId)
                                     .Select(cl => new ReturnViewModel
                                     {
-                                        SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId,
+                                        SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId,
                                         ReturQty = cl.Count(),
                                     }).ToList();
             List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
@@ -495,24 +492,25 @@ namespace BrawijayaWorkshop.Model
                 _salesReturnDetailRepository.AttachNavigation(itemDetail.InvoiceDetail);
                 _salesReturnDetailRepository.Update(itemDetail);
 
-                SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+                //temp delete
+                //SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                //spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
 
-                _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                _sparepartDetailRepository.Update(spDetail);
+                //_sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                //_sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                //_sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                //_sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                //_sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                //_sparepartDetailRepository.Update(spDetail);
 
-                if (spDetail.PurchasingDetail != null)
-                {
-                    listPurchasingDetail.Add(spDetail.PurchasingDetail);
-                }
-                if (spDetail.SparepartManualTransaction != null)
-                {
-                    listSparepartManualTrans.Add(spDetail.SparepartManualTransaction);
-                }
+                //if (spDetail.PurchasingDetail != null)
+                //{
+                //    listPurchasingDetail.Add(spDetail.PurchasingDetail);
+                //}
+                //if (spDetail.SparepartManualTransaction != null)
+                //{
+                //    listSparepartManualTrans.Add(spDetail.SparepartManualTransaction);
+                //}
             }
 
             foreach (var itemReturn in listReturn)
@@ -683,16 +681,16 @@ namespace BrawijayaWorkshop.Model
                     foreach (var itemReturn in listReturn)
                     {
                         int oldReturQty = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID
-                            && x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId).Count();
+                            && x.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == itemReturn.SparepartId).Count();
                         if (itemReturn.ReturQty > oldReturQty)
                         {
                             int diffQty = itemReturn.ReturQty - oldReturQty;
                             List<SalesReturnDetail> newReturnDetail = new List<SalesReturnDetail>();
 
-                            List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId
+                            List<InvoiceDetail> invoiceDetails = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == itemReturn.SparepartId
                             && x.InvoiceId == invoiceID
-                            && (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
-                            || x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
+                            //&& (x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutPurchase
+                            //|| x.SPKDetailSparepartDetail.SparepartDetail.Status == (int)DbConstant.SparepartDetailDataStatus.OutService)
                             ).OrderByDescending(x => x.CreateDate)
                             .Take(diffQty).ToList();
                             foreach (var invoiceDetail in invoiceDetails)
@@ -709,17 +707,18 @@ namespace BrawijayaWorkshop.Model
                                 });
                                 totalTransaction += invoiceDetail.SubTotalPrice.AsDecimal();
 
-                                SparepartDetail spDetail = _sparepartDetailRepository.GetById(invoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                                spDetail.ModifyDate = serverTime;
-                                spDetail.ModifyUserId = userID;
-                                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
+                                //temp delete
+                                //SparepartDetail spDetail = _sparepartDetailRepository.GetById(invoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                                //spDetail.ModifyDate = serverTime;
+                                //spDetail.ModifyUserId = userID;
+                                //spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.Active;
 
-                                _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                                _sparepartDetailRepository.Update(spDetail);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                                //_sparepartDetailRepository.Update(spDetail);
                             }
 
                             Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
@@ -745,7 +744,7 @@ namespace BrawijayaWorkshop.Model
                         else if (itemReturn.ReturQty < oldReturQty)
                         {
                             int diffQty = oldReturQty - itemReturn.ReturQty;
-                            InvoiceDetail InvoiceDetail = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == itemReturn.SparepartId && x.InvoiceId == invoiceID).FirstOrDefault();
+                            InvoiceDetail InvoiceDetail = _invoiceDetailRepository.GetMany(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == itemReturn.SparepartId && x.InvoiceId == invoiceID).FirstOrDefault();
 
                             List<SalesReturnDetail> listDeletedDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID
                             && x.InvoiceDetailId == InvoiceDetail.Id).OrderByDescending(x => x.CreateDate).Take(diffQty).ToList();
@@ -754,17 +753,18 @@ namespace BrawijayaWorkshop.Model
                                 totalTransaction -= itemDeleted.InvoiceDetail.SubTotalPrice.AsDecimal();
                                 _salesReturnDetailRepository.Delete(itemDeleted);
 
-                                SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDeleted.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                                spDetail.ModifyDate = serverTime;
-                                spDetail.ModifyUserId = userID;
-                                spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
+                                //temp delete
+                                //SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDeleted.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
+                                //spDetail.ModifyDate = serverTime;
+                                //spDetail.ModifyUserId = userID;
+                                //spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
 
-                                _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                                _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                                _sparepartDetailRepository.Update(spDetail);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                                //_sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                                //_sparepartDetailRepository.Update(spDetail);
                             }
 
                             Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
