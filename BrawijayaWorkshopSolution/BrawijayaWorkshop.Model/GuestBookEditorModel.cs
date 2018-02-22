@@ -16,12 +16,14 @@ namespace BrawijayaWorkshop.Model
         private IVehicleDetailRepository _vehicleDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private ISpecialSparepartDetailRepository _wheelDetailRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
+        //private ISparepartDetailRepository _sparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public GuestBookEditorModel(IGuestBookRepository guestBookRepository, IVehicleRepository vehicleRepository,
            IVehicleDetailRepository vehicleDetailRepository, IVehicleWheelRepository vehicleWheelRepository,
-            ISpecialSparepartDetailRepository wheelDetailRepository, ISparepartDetailRepository sparepartDetailRepository, IUnitOfWork unitOfWork)
+            ISpecialSparepartDetailRepository wheelDetailRepository, 
+            //ISparepartDetailRepository sparepartDetailRepository,
+            IUnitOfWork unitOfWork)
             : base()
         {
             _guestBookRepository = guestBookRepository;
@@ -29,7 +31,7 @@ namespace BrawijayaWorkshop.Model
             _vehicleDetailRepository = vehicleDetailRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
             _wheelDetailRepository = wheelDetailRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
+            //_sparepartDetailRepository = sparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 

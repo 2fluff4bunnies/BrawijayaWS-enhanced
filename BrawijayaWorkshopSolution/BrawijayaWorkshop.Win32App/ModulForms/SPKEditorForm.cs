@@ -526,7 +526,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     decimal totalPrice = 0;
 
-                    foreach (var item in SPKSparepartDetailList.Where(ssd => ssd.SparepartDetail.Sparepart.Id == SparepartToInsert.Id))
+                    foreach (var item in SPKSparepartDetailList.Where(ssd => ssd.Id == SparepartToInsert.Id))
                     {
                         if (item.SparepartDetail.PurchasingDetailId > 0)
                         {

@@ -18,12 +18,10 @@ namespace BrawijayaWorkshop.Model
         private ISPKDetailSparepartRepository _SPKDetailSparepartRepository;
         private ISPKDetailSparepartDetailRepository _SPKDetailSparepartDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IVehicleWheelRepository _vehicleWheelRepository;
         private ISPKScheduleRepository _SPKScheduleRepository;
         private IMechanicRepository _mechanicRepository;
         private IWheelExchangeHistoryRepository _wheelExchangeHistoryRepository;
-        private ISpecialSparepartRepository _specialSparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private ISettingRepository _settingRepository;
         private IUnitOfWork _unitOfWork;
@@ -35,13 +33,11 @@ namespace BrawijayaWorkshop.Model
             ISPKDetailSparepartRepository SPKDetailSparePartRepository,
             ISPKDetailSparepartDetailRepository SPKDetailSparepartDetailRepository, 
             ISparepartRepository sparepartRepository,
-            ISparepartDetailRepository sparepartDetailRepository,
             ISettingRepository settingRepository,
             IVehicleWheelRepository vehicleWheelRepository,
             ISPKScheduleRepository SPKScheduleReposistory,
             IMechanicRepository mechanicRepository,
             IWheelExchangeHistoryRepository wheelExchangeHistoryRepository,
-            ISpecialSparepartRepository specialSparepartRepository,
             ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IUnitOfWork unitOfWork) :base()
         {
@@ -51,14 +47,12 @@ namespace BrawijayaWorkshop.Model
             _SPKDetailSparepartRepository = SPKDetailSparePartRepository;
             _SPKDetailSparepartDetailRepository = SPKDetailSparepartDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _settingRepository = settingRepository;
             _vehicleWheelRepository = vehicleWheelRepository;
             _SPKScheduleRepository = SPKScheduleReposistory;
             _mechanicRepository = mechanicRepository;
             _wheelExchangeHistoryRepository = wheelExchangeHistoryRepository;
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
-            _specialSparepartRepository = specialSparepartRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -80,21 +74,21 @@ namespace BrawijayaWorkshop.Model
 
             foreach (var item in mappedResult)
             {
-                WheelExchangeHistory wheel = _wheelExchangeHistoryRepository.GetMany(w => w.SPKId == SPKId && w.OriginalWheelId == item.WheelDetailId).FirstOrDefault();
-                if (wheel != null)
-                {
-                    item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
-                    item.ReplaceWithWheelDetailSerialNumber = wheel.ReplaceWheel.SerialNumber;
+                //WheelExchangeHistory wheel = _wheelExchangeHistoryRepository.GetMany(w => w.SPKId == SPKId && w.OriginalWheelId == item.WheelDetailId).FirstOrDefault();
+                //if (wheel != null)
+                //{
+                //    item.ReplaceWithWheelDetailId = wheel.ReplaceWheelId;
+                //    item.ReplaceWithWheelDetailSerialNumber = wheel.ReplaceWheel.SerialNumber;
 
-                    if (wheel.ReplaceWheel.SparepartDetail.PurchasingDetailId > 0)
-                    {
-                        item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
-                    }
-                    else if (wheel.ReplaceWheel.SparepartDetail.SparepartManualTransactionId > 0)
-                    {
-                        item.Price = wheel.ReplaceWheel.SparepartDetail.SparepartManualTransaction.Price;
-                    }
-                }
+                //    if (wheel.ReplaceWheel.SparepartDetail.PurchasingDetailId > 0)
+                //    {
+                //        item.Price = wheel.ReplaceWheel.SparepartDetail.PurchasingDetail.Price;
+                //    }
+                //    else if (wheel.ReplaceWheel.SparepartDetail.SparepartManualTransactionId > 0)
+                //    {
+                //        item.Price = wheel.ReplaceWheel.SparepartDetail.SparepartManualTransaction.Price;
+                //    }
+                //}
             }
 
             return mappedResult;
