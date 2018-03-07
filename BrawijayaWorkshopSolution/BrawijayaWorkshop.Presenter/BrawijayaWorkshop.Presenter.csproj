@@ -98,7 +98,6 @@
     <Compile Include="SalesReturnEditorPresenter.cs" />
     <Compile Include="SalesReturnListPresenter.cs" />
     <Compile Include="SalesReturnTransactionListPresenter.cs" />
-    <Compile Include="SparepartDetailListPresenter.cs" />
     <Compile Include="SparepartManualTransactionEditorPresenter.cs" />
     <Compile Include="SparepartStockCardListPresenter.cs" />
     <Compile Include="SPKWheelChangePresenter.cs" />
@@ -133,8 +132,6 @@
     <Compile Include="SparepartEditorPresenter.cs" />
     <Compile Include="SparepartListPresenter.cs" />
     <Compile Include="SpecialSparepartDetailListPresenter.cs" />
-    <Compile Include="SpecialSparepartEditorPresenter.cs" />
-    <Compile Include="SpecialSparepartListPresenter.cs" />
     <Compile Include="VehicleWheelSwapPresenter.cs" />
   </ItemGroup>
   <ItemGroup>

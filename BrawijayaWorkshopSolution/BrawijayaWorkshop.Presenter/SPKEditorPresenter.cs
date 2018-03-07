@@ -92,7 +92,6 @@ namespace BrawijayaWorkshop.Presenter
                 Model.AbortParentSPK(View.ParentSPK, LoginInformation.UserId);
             }
         }
-
         public void populateSparepartDetail()
         {
             View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty));
@@ -126,10 +125,11 @@ namespace BrawijayaWorkshop.Presenter
             Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
-        public SpecialSparepartViewModel GetSpecialSparepart()
-        {
-            return Model.GetSparepartSpecial(View.SparepartId);
-        }
+        //temp delete
+        //public SpecialSparepartViewModel GetSpecialSparepart()
+        //{
+        //    return Model.GetSparepartSpecial(View.SparepartId);
+        //}
 
         public SpecialSparepartDetailViewModel GetSpecialSparepartDetail(int id)
         {

@@ -89,14 +89,14 @@ namespace BrawijayaWorkshop.Model
             List<InvoiceSparepartViewModel> result = new List<InvoiceSparepartViewModel>();
             List<InvoiceDetail> listInvoiceDetail = _invoiceDetailRepository.GetMany(x => x.InvoiceId == invoiceID).ToList();
 
-            int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+            int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
             foreach (var sparepartID in sparepartIDs)
             {
                 result.Add(new InvoiceSparepartViewModel
                 {
                     SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                    Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                    SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x=>x.SubTotalPrice),
+                    Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
+                    SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
                     SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                     UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
                 });

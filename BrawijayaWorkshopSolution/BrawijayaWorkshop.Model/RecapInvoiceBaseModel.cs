@@ -75,12 +75,12 @@ namespace BrawijayaWorkshop.Model
             List<InvoiceSparepartViewModel> result = new List<InvoiceSparepartViewModel>();
             List<InvoiceDetail> listInvoiceDetail = _invoiceDetailRepository.GetMany(x => x.InvoiceId == invoiceID).ToList();
 
-            int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+            int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
             
             foreach (var sparepartID in sparepartIDs)
             {
                 Sparepart sparepart = _sparepartRepository.GetById(sparepartID);
-                List<InvoiceDetail> listInvoiceDetailFilter = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).ToList();
+                List<InvoiceDetail> listInvoiceDetailFilter = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).ToList();
                 result.Add(new InvoiceSparepartViewModel
                 {
                     SparepartName = sparepart.Name,

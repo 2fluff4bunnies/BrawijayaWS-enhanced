@@ -18,7 +18,6 @@ namespace BrawijayaWorkshop.Model
         private ISalesReturnRepository _salesReturnRepository;
         private ISalesReturnDetailRepository _salesReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ICustomerRepository _customerRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
@@ -28,7 +27,7 @@ namespace BrawijayaWorkshop.Model
         public SalesReturnListModel(ITransactionRepository transactionRepository,
             IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ISalesReturnRepository salesReturnRepository,
             ISalesReturnDetailRepository salesReturnDetailRepository,
-            ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
+            ISparepartRepository sparepartRepository,
             IReferenceRepository referenceRepository,
             ICustomerRepository customerRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
@@ -42,7 +41,6 @@ namespace BrawijayaWorkshop.Model
             _salesReturnRepository = salesReturnRepository;
             _salesReturnDetailRepository = salesReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _customerRepository = customerRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
@@ -138,10 +136,10 @@ namespace BrawijayaWorkshop.Model
                     List<SalesReturnDetail> listDetail = _salesReturnDetailRepository.GetMany(x => x.SalesReturnId == salesReturnID).ToList();
 
                     List<ReturnViewModel> listReturn = listDetail
-                                    .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId)
+                                    .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId)
                                     .Select(cl => new ReturnViewModel
                                     {
-                                        SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId,
+                                        SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId,
                                         ReturQty = cl.Count(),
                                     }).ToList();
 
@@ -159,23 +157,13 @@ namespace BrawijayaWorkshop.Model
                         _salesReturnDetailRepository.AttachNavigation(itemDetail.InvoiceDetail);
                         _salesReturnDetailRepository.Update(itemDetail);
 
-                        SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
-
-                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                        _sparepartDetailRepository.Update(spDetail);
-
-                        if (spDetail.PurchasingDetail != null)
+                        if (itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail != null)
                         {
-                            listPurchasingDetail.Add(spDetail.PurchasingDetail);
+                            listPurchasingDetail.Add(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail);
                         }
-                        if (spDetail.SparepartManualTransaction != null)
+                        if (itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction != null)
                         {
-                            listSparepartManualTrans.Add(spDetail.SparepartManualTransaction);
+                            listSparepartManualTrans.Add(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction);
                         }
                     }
 
@@ -365,20 +353,20 @@ namespace BrawijayaWorkshop.Model
                 List<SalesReturnDetail> listDetail = this.RetrieveSalesReturnDetail(salesReturnID);
                 if (listDetail != null && listDetail.Count > 0)
                 {
-                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
                     foreach (var sparepartID in sparepartIDs)
                     {
-                        if (listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count() > 0)
+                        if (listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count() > 0)
                         {
                             result.Add(new ReturnViewModel
                             {
                                 SparepartId = sparepartID,
                                 SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                                ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                                ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                                ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
+                                ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
                                 SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                                 UnitName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
-                                SubTotalFee = (listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.InvoiceDetail.SubTotalPrice)).AsDecimal()
+                                SubTotalFee = (listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Sum(x => x.InvoiceDetail.SubTotalPrice)).AsDecimal()
                             });
                         }
                     }

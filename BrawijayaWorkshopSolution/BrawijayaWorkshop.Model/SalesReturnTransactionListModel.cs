@@ -18,7 +18,6 @@ namespace BrawijayaWorkshop.Model
         private ISalesReturnRepository _salesReturnRepository;
         private ISalesReturnDetailRepository _salesReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
@@ -27,7 +26,7 @@ namespace BrawijayaWorkshop.Model
         public SalesReturnTransactionListModel(ITransactionRepository transactionRepository,
             IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ISalesReturnRepository salesReturnRepository,
             ISalesReturnDetailRepository salesReturnDetailRepository,
-            ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
+            ISparepartRepository sparepartRepository,
             IReferenceRepository referenceRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
@@ -40,7 +39,6 @@ namespace BrawijayaWorkshop.Model
             _salesReturnRepository = salesReturnRepository;
             _salesReturnDetailRepository = salesReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
@@ -103,17 +101,7 @@ namespace BrawijayaWorkshop.Model
                         _salesReturnDetailRepository.AttachNavigation(itemDetail.InvoiceDetail);
                         _salesReturnDetailRepository.Update(itemDetail);
 
-                        SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetailId);
-                        spDetail.Status = (int)DbConstant.SparepartDetailDataStatus.OutPurchase;
-
-                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                        _sparepartDetailRepository.Update(spDetail);
-
-                        Sparepart sparepart = _sparepartRepository.GetById(spDetail.SparepartId);
+                        Sparepart sparepart = _sparepartRepository.GetById(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId);
                         sparepart.StockQty -= 1;
 
                         _sparepartRepository.AttachNavigation(sparepart.CreateUser);
@@ -130,7 +118,7 @@ namespace BrawijayaWorkshop.Model
                         stockCard.SparepartId = sparepart.Id;
                         stockCard.Description = "Pembatalan Retur Penjualan";
                         stockCard.QtyOut = 1;
-                        stockCard.QtyOutPrice = Convert.ToDouble(spDetail.PurchasingDetail != null ? spDetail.PurchasingDetail.Price : spDetail.SparepartManualTransaction != null ? spDetail.SparepartManualTransaction.Price : 0);
+                        stockCard.QtyOutPrice = Convert.ToDouble(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail != null ? itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price : itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction != null ? itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction.Price : 0);
                         SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
                         double lastStock = 0;
                         double lastStockPrice = 0;
@@ -142,7 +130,7 @@ namespace BrawijayaWorkshop.Model
                         stockCard.QtyFirst = lastStock;
                         stockCard.QtyFirstPrice = lastStockPrice;
                         stockCard.QtyLast = lastStock - 1;
-                        stockCard.QtyLastPrice = lastStockPrice - Convert.ToDouble(spDetail.PurchasingDetail != null ? spDetail.PurchasingDetail.Price : spDetail.SparepartManualTransaction != null ? spDetail.SparepartManualTransaction.Price : 0);
+                        stockCard.QtyLastPrice = lastStockPrice - Convert.ToDouble(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail != null ? itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price : itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction != null ? itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction.Price : 0);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                         _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
@@ -150,14 +138,14 @@ namespace BrawijayaWorkshop.Model
 
                         _unitOfWork.SaveChanges();
 
-                        if(spDetail.PurchasingDetail != null)
+                        if(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail != null)
                         {
                             SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
                             stockCardDtail.ParentStockCard = stockCard;
-                            stockCardDtail.PricePerItem = Convert.ToDouble(spDetail.PurchasingDetail.Price);
+                            stockCardDtail.PricePerItem = Convert.ToDouble(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price);
                             stockCardDtail.QtyOut = 1;
-                            stockCardDtail.QtyOutPrice = Convert.ToDouble(spDetail.PurchasingDetail.Price);
-                            SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, spDetail.PurchasingDetail.PurchasingId);
+                            stockCardDtail.QtyOutPrice = Convert.ToDouble(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price);
+                            SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.PurchasingId);
                             double lastStockDetail = 0;
                             double lastStockDetailPrice = 0;
                             if (lastStockCardDetail != null)
@@ -169,21 +157,21 @@ namespace BrawijayaWorkshop.Model
                             stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
                             stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
                             stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
-                            stockCardDtail.PurchasingId = spDetail.PurchasingDetail.PurchasingId;
+                            stockCardDtail.PurchasingId = itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.PurchasingId;
 
                             _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                             _sparepartStokCardDetailRepository.Add(stockCardDtail);
                             _unitOfWork.SaveChanges();
                         }
 
-                        if (spDetail.SparepartManualTransaction != null)
+                        if (itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction != null)
                         {
                             SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
                             stockCardDtail.ParentStockCard = stockCard;
-                            stockCardDtail.PricePerItem = Convert.ToDouble(spDetail.PurchasingDetail.Price);
+                            stockCardDtail.PricePerItem = Convert.ToDouble(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price);
                             stockCardDtail.QtyOut = 1;
-                            stockCardDtail.QtyOutPrice = Convert.ToDouble(spDetail.PurchasingDetail.Price);
-                            SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(sparepart.Id, spDetail.SparepartManualTransaction.Id);
+                            stockCardDtail.QtyOutPrice = Convert.ToDouble(itemDetail.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price);
+                            SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByTransactionManualId(sparepart.Id, itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction.Id);
                             double lastStockDetail = 0;
                             double lastStockDetailPrice = 0;
                             if (lastStockCardDetail != null)
@@ -195,7 +183,7 @@ namespace BrawijayaWorkshop.Model
                             stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
                             stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
                             stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
-                            stockCardDtail.SparepartManualTransactionId = spDetail.SparepartManualTransaction.Id;
+                            stockCardDtail.SparepartManualTransactionId = itemDetail.InvoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction.Id;
 
                             _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                             _sparepartStokCardDetailRepository.Add(stockCardDtail);
@@ -244,18 +232,18 @@ namespace BrawijayaWorkshop.Model
                 List<SalesReturnDetail> listDetail = this.RetrieveSalesReturnDetail(salesReturnID);
                 if (listDetail != null && listDetail.Count > 0)
                 {
-                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId).Distinct().ToArray();
+                    int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.PurchasingDetail.SparepartId).Distinct().ToArray();
                     foreach (var sparepartID in sparepartIDs)
                     {
                         result.Add(new ReturnViewModel
                         {
                             SparepartId = sparepartID,
                             SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
-                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Count(),
+                            ReturQty = listDetail.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.SparepartId == sparepartID).Count(),
+                            ReturQtyLimit = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.PurchasingDetail.SparepartId == sparepartID).Count(),
                             SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
                             UnitName = _sparepartRepository.GetById(sparepartID).UnitReference.Name,
-                            SubTotalFee = (listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice)).AsDecimal()
+                            SubTotalFee = (listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.PurchasingDetail.SparepartId == sparepartID).Sum(x => x.SubTotalPrice)).AsDecimal()
                         });
                     }
                 }

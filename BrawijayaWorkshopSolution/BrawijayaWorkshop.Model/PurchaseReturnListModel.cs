@@ -17,7 +17,6 @@ namespace BrawijayaWorkshop.Model
         private IPurchaseReturnRepository _purchaseReturnRepository;
         private IPurchaseReturnDetailRepository _purchaseReturnDetailRepository;
         private ISparepartRepository _sparepartRepository;
-        private ISparepartDetailRepository _sparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
         private ISupplierRepository _supplierRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
@@ -27,7 +26,7 @@ namespace BrawijayaWorkshop.Model
         public PurchaseReturnListModel(ITransactionRepository transactionRepository,
             IPurchasingRepository purchasingRepository, IPurchasingDetailRepository purchasingDetailRepository, IPurchaseReturnRepository purchaseReturnRepository,
             IPurchaseReturnDetailRepository purchaseReturnDetailRepository,
-            ISparepartRepository sparepartRepository, ISparepartDetailRepository sparepartDetailRepository,
+            ISparepartRepository sparepartRepository,
             IReferenceRepository referenceRepository, 
             ISupplierRepository supplierRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
@@ -41,7 +40,6 @@ namespace BrawijayaWorkshop.Model
             _purchaseReturnRepository = purchaseReturnRepository;
             _purchaseReturnDetailRepository = purchaseReturnDetailRepository;
             _sparepartRepository = sparepartRepository;
-            _sparepartDetailRepository = sparepartDetailRepository;
             _referenceRepository = referenceRepository;
             _supplierRepository = supplierRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
@@ -88,7 +86,7 @@ namespace BrawijayaWorkshop.Model
             {
                 foreach (var itemReturn in listReturnDetail)
                 {
-                    result += itemReturn.SparepartDetail.PurchasingDetail != null ? itemReturn.SparepartDetail.PurchasingDetail.Price : itemReturn.SparepartDetail.SparepartManualTransaction.Price;
+                    result += itemReturn.PurchasingDetail != null ? itemReturn.PurchasingDetail.Price : itemReturn.SparepartManualTransaction.Price;
                 }
             }
 
@@ -134,10 +132,10 @@ namespace BrawijayaWorkshop.Model
 
                     List<PurchaseReturnDetail> listDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
                     List<ReturnViewModel> listReturn = listDetail
-                                    .GroupBy(l => l.SparepartDetail.Sparepart)
+                                    .GroupBy(l => l.PurchasingDetail.Sparepart)
                                     .Select(cl => new ReturnViewModel
                                     {
-                                        SparepartId = cl.First().SparepartDetail.SparepartId,
+                                        SparepartId = cl.First().PurchasingDetail.SparepartId,
                                         ReturQty = cl.Count(),
                                         PricePerItem = cl.First().PurchasingDetail.Price
                                     }).ToList();
@@ -152,20 +150,8 @@ namespace BrawijayaWorkshop.Model
                         _purchaseReturnRepository.AttachNavigation(itemDetail.ModifyUser);
                         _purchaseReturnRepository.AttachNavigation(itemDetail.PurchaseReturn);
                         _purchaseReturnRepository.AttachNavigation(itemDetail.PurchasingDetail);
-                        _purchaseReturnRepository.AttachNavigation(itemDetail.SparepartDetail);
                         _purchaseReturnDetailRepository.Update(itemDetail);
 
-                        SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.SparepartDetailId);
-                        spDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
-
-                        _sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                        _sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                        _sparepartDetailRepository.Update(spDetail);
-
-                        
                     }
 
                     foreach (var itemReturn in listReturn)
@@ -296,13 +282,13 @@ namespace BrawijayaWorkshop.Model
                 {
                     foreach (var itemDetail in listPurchasingDetail)
                     {
-                        if (listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count() > 0)
+                        if (listDetail.Where(x => x.PurchasingDetail.SparepartId == itemDetail.SparepartId).Count() > 0)
                         {
                             result.Add(new ReturnViewModel
                             {
                                 SparepartId = itemDetail.SparepartId,
                                 SparepartName = itemDetail.Sparepart.Name,
-                                ReturQty = listDetail.Where(x => x.SparepartDetail.SparepartId == itemDetail.SparepartId).Count(),
+                                ReturQty = listDetail.Where(x => x.PurchasingDetailId == itemDetail.Id).FirstOrDefault().Qty,
                                 ReturQtyLimit = itemDetail.Qty,
                                 PricePerItem = itemDetail.Price,
                                 SparepartCode = itemDetail.Sparepart.Code,

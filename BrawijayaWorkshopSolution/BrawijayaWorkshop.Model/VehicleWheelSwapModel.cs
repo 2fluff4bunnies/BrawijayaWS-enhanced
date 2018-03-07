@@ -68,7 +68,7 @@ namespace BrawijayaWorkshop.Model
             {
                 mappedResult.Add(new VehicleWheelViewModel
                 {
-                    DisplayName = "(" + vw.WheelDetail.SerialNumber + ") " + vw.WheelDetail.SparepartDetail.Sparepart.Name,
+                    DisplayName = "(" + vw.WheelDetail.SerialNumber + ") " + vw.WheelDetail.Sparepart.Name,
                     Id = vw.Id,
                     WheelDetail = Map(vw.WheelDetail, new SpecialSparepartDetailViewModel()),
                     WheelDetailId = vw.WheelDetailId,

@@ -26,7 +26,6 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<SparepartStockCardViewModel, SparepartStockCard>();
             Mapper.CreateMap<SparepartStockCardDetailViewModel, SparepartStockCardDetail>();
             Mapper.CreateMap<GroupSparepartStockCardViewModel, GroupSparepartStockCard>();
-            Mapper.CreateMap<SparepartDetailViewModel, SparepartDetail>();
             Mapper.CreateMap<SparepartManualTransactionViewModel, SparepartManualTransaction>();
             Mapper.CreateMap<SPKViewModel, SPK>();
             Mapper.CreateMap<SPKDetailSparepartViewModel, SPKDetailSparepart>();
@@ -43,7 +42,6 @@ namespace BrawijayaWorkshop.Model.Mappers
             Mapper.CreateMap<VehicleViewModel, Vehicle>();
             Mapper.CreateMap<VehicleDetailViewModel, VehicleDetail>();
             Mapper.CreateMap<VehicleWheelViewModel, VehicleWheel>();
-            Mapper.CreateMap<SpecialSparepartViewModel, SpecialSparepart>();
             Mapper.CreateMap<SpecialSparepartDetailViewModel, SpecialSparepartDetail>();
             Mapper.CreateMap<BalanceJournalViewModel, BalanceJournal>();
             Mapper.CreateMap<BalanceJournalDetailViewModel, BalanceJournalDetail>();

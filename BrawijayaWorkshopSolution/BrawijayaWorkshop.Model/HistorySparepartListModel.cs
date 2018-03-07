@@ -81,7 +81,7 @@ namespace BrawijayaWorkshop.Model
             if (sparepartFilter != 0)
             {
                 result = result.Where(x => x.SparepartId == sparepartFilter).ToList();
-                listReturnSource = listReturnSource.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId == sparepartFilter).ToList();
+                listReturnSource = listReturnSource.Where(x => x.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartFilter).ToList();
             }
 
             List<SPKDetailSparepartViewModel> mappedResult = new List<SPKDetailSparepartViewModel>();
@@ -89,12 +89,12 @@ namespace BrawijayaWorkshop.Model
             listSPK = Map(result, mappedResult);
 
             List<SPKDetailSparepartViewModel> listReturn = listReturnSource
-                            .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId)
+                            .GroupBy(l => l.InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId)
                             .Select(cl => new SPKDetailSparepartViewModel
                             {
-                                SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.SparepartId,
+                                SparepartId = cl.First().InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId,
                                 SPK = Map(cl.First().InvoiceDetail.Invoice.SPK, new SPKViewModel()),
-                                Sparepart = Map(cl.First().InvoiceDetail.SPKDetailSparepartDetail.SparepartDetail.Sparepart, new SparepartViewModel()),
+                                Sparepart = Map(cl.First().InvoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart, new SparepartViewModel()),
                                 TotalQuantity = cl.Count(),
                                 TotalPrice = (decimal)cl.Sum(x => x.InvoiceDetail.SubTotalPrice),
                                 Category = "Retur"

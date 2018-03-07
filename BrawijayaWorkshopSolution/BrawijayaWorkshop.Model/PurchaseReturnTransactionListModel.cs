@@ -102,27 +102,14 @@ namespace BrawijayaWorkshop.Model
                         _purchaseReturnRepository.AttachNavigation(itemDetail.SparepartManualTransaction);
                         _purchaseReturnDetailRepository.Update(itemDetail);
 
-                        //tempdelete
-                        //SparepartDetail spDetail = _sparepartDetailRepository.GetById(itemDetail.SparepartDetailId);
-                        //spDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+                        Sparepart sparepart = _sparepartRepository.GetById(itemDetail.PurchasingDetail.SparepartId);
+                        sparepart.StockQty += 1;
 
-                        //_sparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                        //_sparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                        //_sparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                        //_sparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                        //_sparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                        //_sparepartDetailRepository.Update(spDetail);
-
-
-                        //temp delete
-                        //Sparepart sparepart = _sparepartRepository.GetById(itemDetail.SparepartId);
-                        //sparepart.StockQty += 1;
-
-                        //_sparepartRepository.AttachNavigation(sparepart.CreateUser);
-                        //_sparepartRepository.AttachNavigation(sparepart.ModifyUser);
-                        //_sparepartRepository.AttachNavigation(sparepart.CategoryReference);
-                        //_sparepartRepository.AttachNavigation(sparepart.UnitReference);
-                        //_sparepartRepository.Update(sparepart);
+                        _sparepartRepository.AttachNavigation(sparepart.CreateUser);
+                        _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
+                        _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
+                        _sparepartRepository.AttachNavigation(sparepart.UnitReference);
+                        _sparepartRepository.Update(sparepart);
 
                         SparepartStockCard stockCard = new SparepartStockCard();
                         stockCard.CreateUserId = userID;
