@@ -184,20 +184,20 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (SelectedPurchasingDetail != null)
             {
-                SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
-                SparepartViewModel sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
-                editor.SelectedSparepart = sparepart;
-                if (SelectedPurchasingDetail.Status == (int)DbConstant.PurchasingStatus.NotVerified)
-                {
-                    editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.NotVerified;
-                }
-                else
-                {
-                    editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.Active;
-                }
+                //SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
+                //SparepartViewModel sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
+                //editor.SelectedSparepart = sparepart;
+                //if (SelectedPurchasingDetail.Status == (int)DbConstant.PurchasingStatus.NotVerified)
+                //{
+                //    editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.NotVerified;
+                //}
+                //else
+                //{
+                //    editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.Active;
+                //}
 
-                editor.PurchasingDetailID = SelectedPurchasingDetail.Id;
-                editor.ShowDialog(this);
+                //editor.PurchasingDetailID = SelectedPurchasingDetail.Id;
+                //editor.ShowDialog(this);
             }
         }
 

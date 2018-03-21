@@ -125,11 +125,10 @@ namespace BrawijayaWorkshop.Presenter
             Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
-        //temp delete
-        //public SpecialSparepartViewModel GetSpecialSparepart()
-        //{
-        //    return Model.GetSparepartSpecial(View.SparepartId);
-        //}
+        public SparepartViewModel GetSpecialSparepart()
+        {
+            return Model.GetSparepartSpecial(View.SparepartId);
+        }
 
         public SpecialSparepartDetailViewModel GetSpecialSparepartDetail(int id)
         {

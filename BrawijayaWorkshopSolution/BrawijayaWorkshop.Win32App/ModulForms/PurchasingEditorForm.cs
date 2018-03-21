@@ -348,12 +348,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (SelectedPurchasingDetail != null)
             {
-                SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
-                SparepartViewModel sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
-                editor.SelectedSparepart = sparepart;
-                editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.NotVerified;
-                editor.PurchasingDetailID = SelectedPurchasingDetail.Id;
-                editor.ShowDialog(this);
+                //SparepartDetailListForm editor = Bootstrapper.Resolve<SparepartDetailListForm>();
+                //SparepartViewModel sparepart = ListSparepart.Where(c => c.Id == SelectedPurchasingDetail.SparepartId).FirstOrDefault();
+                //editor.SelectedSparepart = sparepart;
+                //editor.SelectedStatus = (int)DbConstant.SparepartDetailDataStatus.NotVerified;
+                //editor.PurchasingDetailID = SelectedPurchasingDetail.Id;
+                //editor.ShowDialog(this);
             }
         }
     }

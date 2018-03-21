@@ -13,6 +13,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public int Qty { get; set; }
 
         [Required]
+        public int QtyRemaining { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
 
         public string SerialNumber { get; set; }

@@ -37,9 +37,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             VehicleWheelViewModel vw = gvVehicleWheel.GetRow(e.FocusedRowHandle) as VehicleWheelViewModel;
             this.SelectedVehicleWheel = vw;
-            this.SelectedWheelName = vw.WheelDetail.SparepartDetail.Sparepart.Name;
+            this.SelectedWheelName = vw.WheelDetail.Sparepart.Name;
             this.SelectedWHeelSerialNumber = vw.WheelDetail.SerialNumber;
-            this.SelectedWHeelSparepartCode = vw.WheelDetail.SparepartDetail.Sparepart.Code;
+            this.SelectedWHeelSparepartCode = vw.WheelDetail.Sparepart.Code;
 
             this.txtChangedCode.EditValue = string.Empty;
             this.lookUpChangedWheel.EditValue = vw.SparepartId;
@@ -242,15 +242,15 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             if (wheelDetail != null)
             {
-                if (wheelDetail.SparepartDetail.PurchasingDetailId > 0)
+                if (wheelDetail.PurchasingDetailId > 0)
                 {
-                    this.Price = wheelDetail.SparepartDetail.PurchasingDetail.Price;
+                    this.Price = wheelDetail.PurchasingDetail.Price;
                 }
-                else if (wheelDetail.SparepartDetail.SparepartManualTransactionId > 0)
+                else if (wheelDetail.SparepartManualTransactionId > 0)
                 {
-                    this.Price = wheelDetail.SparepartDetail.SparepartManualTransaction.Price;
+                    this.Price = wheelDetail.SparepartManualTransaction.Price;
                 }
-                this.txtChangedCode.EditValue = wheelDetail.SparepartDetail.Sparepart.Code;
+                this.txtChangedCode.EditValue = wheelDetail.Sparepart.Code;
             }
         }
 

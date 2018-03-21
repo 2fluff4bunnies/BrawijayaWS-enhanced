@@ -32,7 +32,7 @@ namespace BrawijayaWorkshop.Presenter
 
         public void LoadDetailList()
         {
-            View.SpecialSparepartData = Model.SearchDetail(View.SelectedSpecialSparepart.Id, View.SerialNumber,
+            View.SpecialSparepartData = Model.SearchDetail(View.SelectedSparepart.Id, View.SerialNumber,
                 (DbConstant.WheelDetailStatus)View.SelectedStatus);
         }
 

@@ -528,13 +528,13 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     foreach (var item in SPKSparepartDetailList.Where(ssd => ssd.Id == SparepartToInsert.Id))
                     {
-                        if (item.SparepartDetail.PurchasingDetailId > 0)
+                        if (item.PurchasingDetailId > 0)
                         {
-                            totalPrice = totalPrice + item.SparepartDetail.PurchasingDetail.Price;
+                            totalPrice = totalPrice + (item.PurchasingDetail.Price * item.Qty);
                         }
-                        else if (item.SparepartDetail.SparepartManualTransactionId > 0)
+                        else if (item.SparepartManualTransactionId > 0)
                         {
-                            totalPrice = totalPrice + item.SparepartDetail.SparepartManualTransaction.Price;
+                            totalPrice = totalPrice + (item.SparepartManualTransaction.Price * item.Qty);
                         }
                     }
 
@@ -603,7 +603,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             List<SPKDetailSparepartDetailViewModel> listCurrentDetail = new List<SPKDetailSparepartDetailViewModel>();
 
-            foreach (var item in this.SPKSparepartDetailList.Where(spd => spd.SparepartDetail.SparepartId == SparepartToRemove.SparepartId))
+            foreach (var item in this.SPKSparepartDetailList.Where(spd => spd.SPKDetailSparepartId == SparepartToRemove.SparepartId))
             {
                 listCurrentDetail.Add(item);
             }
@@ -845,7 +845,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.SparepartId > 0)
             {
                 //check if special sparepart
-                SpecialSparepartViewModel ss = _presenter.GetSpecialSparepart();
+                SparepartViewModel ss = _presenter.GetSpecialSparepart();
                 if (ss != null)
                 {
                     lookUpSerialNumber.Enabled = true;
@@ -1187,28 +1187,29 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     });
                 }
 
-                if (!SPKSparepartDetailList.Any(spd => spd.SparepartDetailId == vw.ReplaceWithWheelDetailId))
-                {
-                    SpecialSparepartDetailViewModel changedVwDetail = _presenter.GetSpecialSparepartDetail(vw.ReplaceWithWheelDetailId);
-                    this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
-                    {
-                        SparepartDetailId = changedVwDetail.SparepartDetailId,
-                        SparepartDetail = new SparepartDetailViewModel
-                        {
-                            Id = changedVwDetail.SparepartDetailId,
-                            SparepartId = vw.SparepartId
-                        }
-                    });
+                //temp remove by Tegar
+                //if (!SPKSparepartDetailList.Any(spd => spd.SparepartDetailId == vw.ReplaceWithWheelDetailId))
+                //{
+                //    SpecialSparepartDetailViewModel changedVwDetail = _presenter.GetSpecialSparepartDetail(vw.ReplaceWithWheelDetailId);
+                //    this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
+                //    {
+                //        SparepartDetailId = changedVwDetail.SparepartDetailId,
+                //        SparepartDetail = new SparepartDetailViewModel
+                //        {
+                //            Id = changedVwDetail.SparepartDetailId,
+                //            SparepartId = vw.SparepartId
+                //        }
+                //    });
 
-                    SPKDetailSparepartViewModel spkSp = SPKSparepartList.Where(sp => sp.SparepartId == vw.SparepartId).FirstOrDefault();
+                //    SPKDetailSparepartViewModel spkSp = SPKSparepartList.Where(sp => sp.SparepartId == vw.SparepartId).FirstOrDefault();
 
-                    if (spkSp != null)
-                    {
-                        spkSp.TotalQuantity++;
-                        spkSp.TotalPrice = spkSp.TotalPrice + vw.Price;
-                    }
+                //    if (spkSp != null)
+                //    {
+                //        spkSp.TotalQuantity++;
+                //        spkSp.TotalPrice = spkSp.TotalPrice + vw.Price;
+                //    }
 
-                }
+                //}
             }
 
             RefreshSparepartGrid();

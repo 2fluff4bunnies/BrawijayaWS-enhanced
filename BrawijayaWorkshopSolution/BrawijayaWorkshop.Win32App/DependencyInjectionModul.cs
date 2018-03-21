@@ -26,14 +26,12 @@ namespace BrawijayaWorkshop.Win32App
             Bind<ISparepartRepository>().To<SparepartRepository>();
             Bind<ISparepartStockCardRepository>().To<SparepartStockCardRepository>();
             Bind<ISparepartStockCardDetailRepository>().To<SparepartStockCardDetailRepository>();
-            Bind<ISparepartDetailRepository>().To<SparepartDetailRepository>();
             Bind<ISparepartManualTransactionRepository>().To<SparepartManualTransactionRepository>();
             Bind<ISupplierRepository>().To<SupplierRepository>();
             Bind<IVehicleGroupRepository>().To<VehicleGroupRepository>();
             Bind<IVehicleRepository>().To<VehicleRepository>();
             Bind<IVehicleDetailRepository>().To<VehicleDetailRepository>();
             Bind<IVehicleWheelRepository>().To<VehicleWheelRepository>();
-            Bind<ISpecialSparepartRepository>().To<SpecialSparepartRepository>();
             Bind<ISpecialSparepartDetailRepository>().To<SpecialSparepartDetailRepository>();
             Bind<IJournalMasterRepository>().To<JournalMasterRepository>();
             Bind<IMechanicRepository>().To<MechanicRepository>();

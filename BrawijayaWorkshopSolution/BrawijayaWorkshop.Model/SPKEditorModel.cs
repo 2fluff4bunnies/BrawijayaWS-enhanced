@@ -669,14 +669,14 @@ namespace BrawijayaWorkshop.Model
             return mappedResult;
         }
 
-        //public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails(int sparepartId)
-        //{
-        //    List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready
-        //                                                                               && wd.SpecialSparepart.ReferenceCategory.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
-        //                                                                               && wd.SparepartDetail.SparepartId == sparepartId).ToList();
-        //    List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
-        //    return Map(result, mappedResult);
-        //}
+        public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails(int sparepartId)
+        {
+            List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready
+                                                                                       && wd.Sparepart.CategoryReference.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                                                                                       && wd.SparepartId == sparepartId).ToList();
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
+            return Map(result, mappedResult);
+        }
 
         //public List<SpecialSparepartViewModel> LoadWheel()
         //{
@@ -688,69 +688,107 @@ namespace BrawijayaWorkshop.Model
         //    return Map(result, mappedResult);
         //}
 
-        //public List<SparepartViewModel> LoadSparepart()
-        //{
-        //    //List<SpecialSparepartViewModel> wheelList = LoadWheel();
-        //    //List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+        public List<SparepartViewModel> LoadSparepart()
+        {
+            List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active && sp.IsSpecialSparepart
+                && sp.CategoryReference.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL).ToList();
 
-        //    //var getSpInWheel = (from sp in result
-        //    //                    join wh in wheelList on sp.Id equals wh.SparepartId
-        //    //                    select sp).ToList(); // return sparepart object which in list
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
 
-        //    //var finalResult = result.Except(getSpInWheel);
+            return Map(result, mappedResult);
+        }
 
-        //    //List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+        public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty)
+        {
+            List<SparepartManualTransaction> spManuals = new List<SparepartManualTransaction>();
+            List<PurchasingDetail> purchasingDetails = new List<PurchasingDetail>();
+            List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
+            if (qty > 0 && sparepartId > 0)
+            {
+                int qtyRemains = qty;
+                
+                List<SparepartManualTransaction> spManual = _sparepartManualTransaction
+                    .GetMany(
+                        spd => spd.SparepartId == sparepartId &&
+                        spd.QtyRemaining > 0
+                    )
+                    .OrderBy(spd => spd.CreateDate).ToList();
 
-        //    //return Map(finalResult, mappedResult);
-        //}
+                foreach (var itemManual in spManual)
+                {
+                    if(itemManual.QtyRemaining > qtyRemains)
+                    {
+                        result.Add(new SPKDetailSparepartDetail
+                        {
+                            SparepartManualTransaction = itemManual,
+                            SparepartManualTransactionId = itemManual.Id,
+                            Qty = qtyRemains
+                        }); 
+                        
+                        itemManual.QtyRemaining = itemManual.QtyRemaining - qtyRemains;
+                        spManuals.Add(itemManual);
+                        qtyRemains = 0;
+                    }
+                    else
+                    {
+                        result.Add(new SPKDetailSparepartDetail
+                        {
+                            SparepartManualTransaction = itemManual,
+                            SparepartManualTransactionId = itemManual.Id,
+                            Qty = itemManual.QtyRemaining
+                        }); 
 
-        //public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty)
-        //{
-        //    List<SparepartDetail> sparepartDetails = new List<SparepartDetail>();
-        //    List<SparepartDetail> sparepartDetailsFromPurchasing = new List<SparepartDetail>();
+                        itemManual.QtyRemaining = 0;
+                        spManuals.Add(itemManual);
+                        qtyRemains -= itemManual.QtyRemaining;
+                    }
 
-        //    if (qty > 0 && sparepartId > 0)
-        //    {
-        //        sparepartDetails = _sparepartDetailRepository
-        //            .GetMany(
-        //                spd => spd.SparepartId == sparepartId &&
-        //                spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active &&
-        //                spd.SparepartManualTransactionId != null
-        //            )
-        //            .OrderBy(spd => spd.SparepartManualTransaction.CreateDate).Take(qty).ToList();
+                    if (qtyRemains == 0) break;
+                }
 
-        //        if (sparepartDetails.Count < qty)
-        //        {
-        //            int remainingQty = qty - sparepartDetails.Count;
+                List<PurchasingDetail> purchasingDetail = _purchasingDetailRepository
+                    .GetMany(
+                        spd => spd.SparepartId == sparepartId &&
+                        spd.QtyRemaining > 0
+                    )
+                    .OrderBy(spd => spd.CreateDate).ToList();
 
-        //            sparepartDetailsFromPurchasing = _sparepartDetailRepository
-        //                .GetMany(
-        //                    spd => spd.SparepartId == sparepartId &&
-        //                    spd.Status == (int)DbConstant.SparepartDetailDataStatus.Active &&
-        //                    spd.PurchasingDetailId != null
-        //                )
-        //                .OrderBy(spd => spd.PurchasingDetail.CreateDate).Take(remainingQty).ToList();
+                foreach (var itemPD in purchasingDetail)
+                {
+                    if (itemPD.QtyRemaining > qtyRemains)
+                    {
+                        result.Add(new SPKDetailSparepartDetail
+                        {
+                            PurchasingDetail = itemPD,
+                            PurchasingDetailId = itemPD.Id,
+                            Qty = qtyRemains
+                        }); 
 
-        //            sparepartDetails.AddRange(sparepartDetailsFromPurchasing);
-        //        }
-        //    }
+                        itemPD.QtyRemaining = itemPD.QtyRemaining - qtyRemains;
+                        purchasingDetails.Add(itemPD);
+                        qtyRemains = 0;
+                    }
+                    else
+                    {
+                        result.Add(new SPKDetailSparepartDetail
+                        {
+                            PurchasingDetail = itemPD,
+                            PurchasingDetailId = itemPD.Id,
+                            Qty = itemPD.QtyRemaining
+                        });
+                        itemPD.QtyRemaining = 0;
+                        purchasingDetails.Add(itemPD);
+                        qtyRemains -= itemPD.QtyRemaining;
+                    }
 
-        //    List<SPKDetailSparepartDetail> result = new List<SPKDetailSparepartDetail>();
+                    if (qtyRemains == 0) break;
+                }
+            }
 
-        //    foreach (var item in sparepartDetails)
-        //    {
-        //        result.Add(new SPKDetailSparepartDetail
-        //         {
-        //             SparepartDetailId = item.Id,
-        //             SparepartDetail = item,
-        //         });
-        //    }
+            List<SPKDetailSparepartDetailViewModel> mappedResult = new List<SPKDetailSparepartDetailViewModel>();
 
-
-        //    List<SPKDetailSparepartDetailViewModel> mappedResult = new List<SPKDetailSparepartDetailViewModel>();
-
-        //    return Map(result, mappedResult);
-        //}
+            return Map(result, mappedResult);
+        }
 
 
         public SpecialSparepartDetailViewModel GetWheelDetailById(int wheelDetailId)
@@ -808,14 +846,14 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        //public SpecialSparepartViewModel GetSparepartSpecial(int sparepartId)
-        //{
-        //    SpecialSparepart result = _specialSparepartRepository.GetMany(ss => ss.SparepartId == sparepartId && ss.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
+        public SparepartViewModel GetSparepartSpecial(int sparepartId)
+        {
+            Sparepart result = _sparepartRepository.GetMany(ss => ss.Id == sparepartId && ss.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
 
-        //    SpecialSparepartViewModel mappedResult = new SpecialSparepartViewModel();
+            SparepartViewModel mappedResult = new SparepartViewModel();
 
-        //    return Map(result, mappedResult);
-        //}
+            return Map(result, mappedResult);
+        }
 
         public SpecialSparepartDetailViewModel GetSpecialSparepartDetail(int id)
         {
@@ -842,14 +880,14 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        //public List<SpecialSparepartDetailViewModel> loadSSDetail(int specialSparepartId)
-        //{
-        //    List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SpecialSparepartId == specialSparepartId).ToList();
+        public List<SpecialSparepartDetailViewModel> loadSSDetail(int sparepartId)
+        {
+            List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(ssd => ssd.SparepartId == sparepartId).ToList();
 
-        //    List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
+            List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
 
-        //    return Map(result, mappedResult);
-        //}
+            return Map(result, mappedResult);
+        }
 
 
         public VehicleWheelViewModel GetVehicleWHeelById(int VehicleWheelid)
@@ -1088,20 +1126,19 @@ namespace BrawijayaWorkshop.Model
             return result;
         }
 
-        //public List<SparepartViewModel> LoadSparepartWheel()
-        //{
-        //    List<SpecialSparepartViewModel> wheelList = LoadWheel();
-        //    List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
+        public List<SparepartViewModel> LoadSparepartWheel()
+        {
+            List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
 
-        //    List<Sparepart> getSpInWheel = (from sp in result
-        //                                    join wh in wheelList on sp.Id equals wh.SparepartId
-        //                                    where sp.StockQty > 0
-        //                                    select sp).ToList(); // return sparepart object which in list
+            List<Sparepart> getSpInWheel = (from sp in result
+                                            where sp.IsSpecialSparepart && sp.StockQty > 0
+                                            && sp.CategoryReference.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                                            select sp).ToList(); // return sparepart object which in list
 
-        //    List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
+            List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
 
-        //    return Map(getSpInWheel, mappedResult);
-        //}
+            return Map(getSpInWheel, mappedResult);
+        }
     }
 }

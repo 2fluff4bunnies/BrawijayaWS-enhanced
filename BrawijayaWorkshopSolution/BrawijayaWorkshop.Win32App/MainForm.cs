@@ -424,8 +424,8 @@ namespace BrawijayaWorkshop.Win32App
 
         private void iSpecialSparepart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            SpecialSparepartListControl specialSparepartListControl = Bootstrapper.Resolve<SpecialSparepartListControl>();
-            ShowUserControl(specialSparepartListControl);
+            //SpecialSparepartListControl specialSparepartListControl = Bootstrapper.Resolve<SpecialSparepartListControl>();
+            //ShowUserControl(specialSparepartListControl);
         }
 
         private void iUsedGood_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

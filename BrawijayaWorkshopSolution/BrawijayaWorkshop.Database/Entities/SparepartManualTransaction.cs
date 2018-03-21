@@ -14,7 +14,8 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         public int Qty { get; set; }
-
+        [Required]
+        public int QtyRemaining { get; set; }
         public string Remark { get; set; }
 
         public int SparepartId { get; set; }

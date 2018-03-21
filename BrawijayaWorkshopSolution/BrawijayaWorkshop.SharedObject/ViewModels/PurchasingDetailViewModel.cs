@@ -22,6 +22,8 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int SparepartId { get; set; }
         public SparepartViewModel Sparepart { get; set; }
 
+        public int QtyRemaining { get; set; }
+
         public int ValidationStatus { get; set; }
     }
 }

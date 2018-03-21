@@ -233,9 +233,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
         {
             if (_selectedSparepart != null)
             {
-                SparepartDetailListForm detail = Bootstrapper.Resolve<SparepartDetailListForm>();
-                detail.SelectedSparepart = _selectedSparepart;
-                detail.ShowDialog(this);
+                //SparepartDetailListForm detail = Bootstrapper.Resolve<SparepartDetailListForm>();
+                //detail.SelectedSparepart = _selectedSparepart;
+                //detail.ShowDialog(this);
             }
         }
 

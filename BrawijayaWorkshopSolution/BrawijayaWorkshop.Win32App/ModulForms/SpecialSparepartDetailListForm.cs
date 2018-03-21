@@ -66,7 +66,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
         #region Properties
-        public SpecialSparepartViewModel SelectedSpecialSparepart { get; set; }
+        public SparepartViewModel SelectedSparepart { get; set; }
         public int PurchasingDetailID { get; set; }
 
         public int SelectedStatus
