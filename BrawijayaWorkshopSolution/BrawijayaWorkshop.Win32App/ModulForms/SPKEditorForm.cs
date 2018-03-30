@@ -1188,28 +1188,50 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 }
 
                 //temp remove by Tegar
-                //if (!SPKSparepartDetailList.Any(spd => spd.SparepartDetailId == vw.ReplaceWithWheelDetailId))
-                //{
-                //    SpecialSparepartDetailViewModel changedVwDetail = _presenter.GetSpecialSparepartDetail(vw.ReplaceWithWheelDetailId);
-                //    this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
-                //    {
-                //        SparepartDetailId = changedVwDetail.SparepartDetailId,
-                //        SparepartDetail = new SparepartDetailViewModel
-                //        {
-                //            Id = changedVwDetail.SparepartDetailId,
-                //            SparepartId = vw.SparepartId
-                //        }
-                //    });
 
-                //    SPKDetailSparepartViewModel spkSp = SPKSparepartList.Where(sp => sp.SparepartId == vw.SparepartId).FirstOrDefault();
+                SpecialSparepartDetailViewModel changedVwDetail = _presenter.GetSpecialSparepartDetail(vw.ReplaceWithWheelDetailId);
+                if (changedVwDetail.PurchasingDetail != null)
+                {
+                    if (!SPKSparepartDetailList.Any(spd => spd.PurchasingDetail != null && spd.PurchasingDetailId == changedVwDetail.PurchasingDetailId))
+                    {
+                        this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
+                        {
+                            PurchasingDetailId = changedVwDetail.PurchasingDetailId,
+                            Qty = 1
+                        });
+                    }
+                    else
+                    {
+                        SPKDetailSparepartDetailViewModel detail = SPKSparepartDetailList.Where(spd => spd.PurchasingDetail != null && spd.PurchasingDetailId == changedVwDetail.PurchasingDetailId).FirstOrDefault();
+                        detail.Qty += 1;
+                    }
+                }
 
-                //    if (spkSp != null)
-                //    {
-                //        spkSp.TotalQuantity++;
-                //        spkSp.TotalPrice = spkSp.TotalPrice + vw.Price;
-                //    }
+                if (changedVwDetail.SparepartManualTransaction != null)
+                {
+                    if (!SPKSparepartDetailList.Any(spd => spd.SparepartManualTransaction != null && spd.SparepartManualTransactionId == changedVwDetail.SparepartManualTransactionId))
+                    {
+                        this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
+                        {
+                            SparepartManualTransactionId = changedVwDetail.SparepartManualTransactionId,
+                            Qty = 1
+                        });
+                    }
+                    else
+                    {
+                        SPKDetailSparepartDetailViewModel detail = SPKSparepartDetailList.Where(spd => spd.SparepartManualTransaction != null && spd.SparepartManualTransactionId == changedVwDetail.SparepartManualTransactionId).FirstOrDefault();
+                        detail.Qty += 1;
+                    }
+                }
 
-                //}
+                SPKDetailSparepartViewModel spkSp = SPKSparepartList.Where(sp => sp.SparepartId == vw.SparepartId).FirstOrDefault();
+
+                if (spkSp != null)
+                {
+                    spkSp.TotalQuantity++;
+                    spkSp.TotalPrice = spkSp.TotalPrice + vw.Price;
+                }
+
             }
 
             RefreshSparepartGrid();

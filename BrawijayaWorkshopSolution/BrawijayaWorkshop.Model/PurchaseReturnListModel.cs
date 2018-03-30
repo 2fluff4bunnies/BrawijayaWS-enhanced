@@ -152,6 +152,11 @@ namespace BrawijayaWorkshop.Model
                         _purchaseReturnRepository.AttachNavigation(itemDetail.PurchasingDetail);
                         _purchaseReturnDetailRepository.Update(itemDetail);
 
+                        PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetById(itemDetail.PurchasingDetailId);
+                        purchasingDetail.QtyRemaining += itemDetail.Qty;
+                        _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                        _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                        _purchasingDetailRepository.Update(purchasingDetail);
                     }
 
                     foreach (var itemReturn in listReturn)

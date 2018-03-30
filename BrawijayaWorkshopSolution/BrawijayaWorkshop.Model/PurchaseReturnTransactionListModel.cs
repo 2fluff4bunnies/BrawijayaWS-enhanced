@@ -105,6 +105,13 @@ namespace BrawijayaWorkshop.Model
                         Sparepart sparepart = _sparepartRepository.GetById(itemDetail.PurchasingDetail.SparepartId);
                         sparepart.StockQty += 1;
 
+
+                        PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetById(itemDetail.PurchasingDetailId);
+                        purchasingDetail.QtyRemaining += itemDetail.Qty;
+                        _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                        _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                        _purchasingDetailRepository.Update(purchasingDetail);
+
                         _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                         _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
                         _sparepartRepository.AttachNavigation(sparepart.CategoryReference);

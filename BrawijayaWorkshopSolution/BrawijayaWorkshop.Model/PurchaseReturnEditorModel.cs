@@ -198,7 +198,6 @@ namespace BrawijayaWorkshop.Model
                     });
 
                 totalTransaction += purchasingDetail.Price;
-
                 Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
                 sparepart.ModifyDate = serverTime;
                 sparepart.ModifyUserId = userID;
@@ -209,6 +208,11 @@ namespace BrawijayaWorkshop.Model
                 _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
                 _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                 _sparepartRepository.Update(sparepart);
+
+                purchasingDetail.QtyRemaining -= itemReturn.ReturQty;
+                _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                _purchasingDetailRepository.Update(purchasingDetail);
 
                 SparepartStockCard stockCard = new SparepartStockCard();
                 stockCard.CreateUserId = userID;
@@ -358,6 +362,17 @@ namespace BrawijayaWorkshop.Model
 
             List<PurchaseReturnDetail> listDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
 
+            foreach (var item in listDetail)
+	        {
+                PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetById(item.PurchasingDetailId);
+                 purchasingDetail.QtyRemaining -= item.Qty;
+                 _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                 _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                 _purchasingDetailRepository.Update(purchasingDetail);
+
+	        }
+                
+
             List<ReturnViewModel> listReturn = listDetail
                                     .GroupBy(l => l.PurchasingDetail.Sparepart)
                                     .Select(cl => new ReturnViewModel
@@ -385,7 +400,7 @@ namespace BrawijayaWorkshop.Model
             {
                 Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
                 sparepart.StockQty -= itemReturn.ReturQty;
-
+                
                 _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                 _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
                 _sparepartRepository.AttachNavigation(sparepart.CategoryReference);

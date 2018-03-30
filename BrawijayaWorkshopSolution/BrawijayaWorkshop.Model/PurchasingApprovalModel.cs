@@ -114,6 +114,7 @@ namespace BrawijayaWorkshop.Model
                         }
 
                         purchasingDetail.Status = (int)DbConstant.PurchasingStatus.Active;
+                        purchasingDetail.QtyRemaining = purchasingDetail.Qty;
                         _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
                         _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
                         _purchasingDetailRepository.AttachNavigation(purchasingDetail.Purchasing);
