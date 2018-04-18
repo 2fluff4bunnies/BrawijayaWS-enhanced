@@ -11,6 +11,10 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public int? SparepartManualTransactionId { get; set; }
         public virtual SparepartManualTransactionViewModel SparepartManualTransaction { get; set; }
 
+        public int? SpecialSparepartDetailId { get; set; }
+        public virtual SpecialSparepartDetailViewModel SpecialSparepartDetail { get; set; }
+
+
         public int Qty { get; set; }
 
         public int SPKDetailSparepartId { get; set; }

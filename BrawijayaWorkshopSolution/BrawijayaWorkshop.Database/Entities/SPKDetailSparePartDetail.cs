@@ -13,6 +13,9 @@ namespace BrawijayaWorkshop.Database.Entities
         public int? SparepartManualTransactionId { get; set; }
         public virtual SparepartManualTransaction SparepartManualTransaction { get; set; }
 
+        public int? SpecialSparepartDetailId { get; set; }
+        public virtual SpecialSparepartDetail SpecialSparepartDetail { get; set; }
+
         public int Qty { get; set; }
 
         public int SPKDetailSparepartId { get; set; }
