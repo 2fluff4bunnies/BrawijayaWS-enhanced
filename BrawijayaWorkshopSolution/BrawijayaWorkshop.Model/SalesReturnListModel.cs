@@ -22,6 +22,8 @@ namespace BrawijayaWorkshop.Model
         private ICustomerRepository _customerRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
+        private IPurchasingDetailRepository _purchasingDetailRepository;
+        private ISparepartManualTransactionRepository _sparepartManualTransactionRepository;
         private IUnitOfWork _unitOfWork;
 
         public SalesReturnListModel(ITransactionRepository transactionRepository,
@@ -32,6 +34,8 @@ namespace BrawijayaWorkshop.Model
             ICustomerRepository customerRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
+            IPurchasingDetailRepository purchasingDetailRepository,
+            ISparepartManualTransactionRepository sparepartManualTransactionRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -45,6 +49,8 @@ namespace BrawijayaWorkshop.Model
             _customerRepository = customerRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
+            _purchasingDetailRepository = purchasingDetailRepository;
+            _sparepartManualTransactionRepository = sparepartManualTransactionRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -241,6 +247,18 @@ namespace BrawijayaWorkshop.Model
                                 _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                                 _sparepartStokCardDetailRepository.Add(stockCardDtail);
                                 _unitOfWork.SaveChanges();
+
+                                PurchasingDetail pDetail = _purchasingDetailRepository.GetById(itemPurchasing.Id);
+                                pDetail.ModifyDate = serverTime;
+                                pDetail.ModifyUserId = userID;
+                                pDetail.QtyRemaining = pDetail.QtyRemaining - itemPurchasing.Qty;
+
+                                _purchasingDetailRepository.AttachNavigation(pDetail.Purchasing);
+                                _purchasingDetailRepository.AttachNavigation(pDetail.Sparepart);
+                                _purchasingDetailRepository.AttachNavigation(pDetail.CreateUser);
+                                _purchasingDetailRepository.AttachNavigation(pDetail.ModifyUser);
+                                _purchasingDetailRepository.Update(pDetail);
+                                _unitOfWork.SaveChanges();
                             }
                         }
 
@@ -277,6 +295,18 @@ namespace BrawijayaWorkshop.Model
 
                                 _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                                 _sparepartStokCardDetailRepository.Add(stockCardDtail);
+                                _unitOfWork.SaveChanges();
+
+                                SparepartManualTransaction spManual = _sparepartManualTransactionRepository.GetById(itemSpTrans.Id);
+                                spManual.ModifyDate = serverTime;
+                                spManual.ModifyUserId = userID;
+                                spManual.QtyRemaining = spManual.QtyRemaining - 1;
+
+                                _sparepartManualTransactionRepository.AttachNavigation(spManual.UpdateType);
+                                _sparepartManualTransactionRepository.AttachNavigation(spManual.Sparepart);
+                                _sparepartManualTransactionRepository.AttachNavigation(spManual.CreateUser);
+                                _sparepartManualTransactionRepository.AttachNavigation(spManual.ModifyUser);
+                                _sparepartManualTransactionRepository.Update(spManual);
                                 _unitOfWork.SaveChanges();
                             }
                         }

@@ -73,6 +73,7 @@ namespace BrawijayaWorkshop.Model
                     sparepartManualTransaction.ModifyDate = serverTime;
                     sparepartManualTransaction.ModifyUserId = userId;
                     sparepartManualTransaction.TransactionDate = serverTime;
+                    sparepartManualTransaction.QtyRemaining = sparepartManualTransaction.Qty;
                     Reference updateType = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
                     Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);
                     if (updateType != null && sparepartUpdated != null)
@@ -201,6 +202,7 @@ namespace BrawijayaWorkshop.Model
             DateTime serverTime = DateTime.Now;
             sparepartManualTransaction.ModifyDate = serverTime;
             sparepartManualTransaction.ModifyUserId = userId;
+            sparepartManualTransaction.QtyRemaining = sparepartManualTransaction.Qty;
             Reference updateTypeNew = _referenceRepository.GetById(sparepartManualTransaction.UpdateTypeId);
             SparepartManualTransaction manualTransactionOld = _sparepartManualTransactionRepository.GetById(sparepartManualTransaction.Id);
             Sparepart sparepartUpdated = _sparepartRepository.GetById(sparepartManualTransaction.SparepartId);

@@ -15,6 +15,7 @@ namespace BrawijayaWorkshop.Database.Configurations
             HasRequired(sp => sp.PurchasingDetail).WithMany().HasForeignKey(sp => sp.PurchasingDetailId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.SparepartManualTransaction).WithMany().HasForeignKey(sp => sp.SparepartManualTransactionId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.SPKDetailSparepart).WithMany().HasForeignKey(sp => sp.SPKDetailSparepartId).WillCascadeOnDelete(true);
+            HasRequired(sp => sp.SpecialSparepartDetail).WithMany().HasForeignKey(sp => sp.SpecialSparepartDetailId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.CreateUser).WithMany().HasForeignKey(sp => sp.CreateUserId).WillCascadeOnDelete(true);
             HasRequired(sp => sp.ModifyUser).WithMany().HasForeignKey(sp => sp.ModifyUserId).WillCascadeOnDelete(true);
         }
