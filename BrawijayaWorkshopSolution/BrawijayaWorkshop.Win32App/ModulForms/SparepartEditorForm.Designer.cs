@@ -47,6 +47,8 @@
             this.valUnit = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valCode = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.chkIsSpecialSparepart = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSparepartInfo)).BeginInit();
             this.gcSparepartInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
@@ -57,10 +59,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.valUnit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIsSpecialSparepart.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSparepartInfo
             // 
+            this.gcSparepartInfo.Controls.Add(this.chkIsSpecialSparepart);
+            this.gcSparepartInfo.Controls.Add(this.labelControl1);
             this.gcSparepartInfo.Controls.Add(this.txtName);
             this.gcSparepartInfo.Controls.Add(this.lblName);
             this.gcSparepartInfo.Controls.Add(this.txtCode);
@@ -72,7 +77,7 @@
             this.gcSparepartInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcSparepartInfo.Location = new System.Drawing.Point(0, 0);
             this.gcSparepartInfo.Name = "gcSparepartInfo";
-            this.gcSparepartInfo.Size = new System.Drawing.Size(406, 160);
+            this.gcSparepartInfo.Size = new System.Drawing.Size(406, 196);
             this.gcSparepartInfo.TabIndex = 1;
             this.gcSparepartInfo.Text = "Informasi Sparepart";
             // 
@@ -184,11 +189,27 @@
             // 
             this.valName.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(13, 160);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(38, 13);
+            this.labelControl1.TabIndex = 8;
+            this.labelControl1.Text = "Spesial?";
+            // 
+            // chkIsSpecialSparepart
+            // 
+            this.chkIsSpecialSparepart.Location = new System.Drawing.Point(113, 154);
+            this.chkIsSpecialSparepart.Name = "chkIsSpecialSparepart";
+            this.chkIsSpecialSparepart.Properties.Caption = "";
+            this.chkIsSpecialSparepart.Size = new System.Drawing.Size(75, 19);
+            this.chkIsSpecialSparepart.TabIndex = 9;
+            // 
             // SparepartEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 209);
+            this.ClientSize = new System.Drawing.Size(406, 245);
             this.Controls.Add(this.gcSparepartInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparepartEditorForm";
@@ -206,6 +227,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.valUnit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIsSpecialSparepart.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,5 +247,7 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valUnit;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valCode;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider valName;
+        private DevExpress.XtraEditors.CheckEdit chkIsSpecialSparepart;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }

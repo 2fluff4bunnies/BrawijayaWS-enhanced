@@ -114,8 +114,8 @@
             // 
             // colCodeDetail
             // 
-            this.colCodeDetail.Caption = "Kode";
-            this.colCodeDetail.FieldName = "Code";
+            this.colCodeDetail.Caption = "SerialNumber";
+            this.colCodeDetail.FieldName = "SerialNumber";
             this.colCodeDetail.Name = "colCodeDetail";
             this.colCodeDetail.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "Code", "Jumlah Data: {0}")});

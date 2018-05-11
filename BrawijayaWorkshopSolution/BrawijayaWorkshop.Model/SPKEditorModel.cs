@@ -640,7 +640,7 @@ namespace BrawijayaWorkshop.Model
 
             List<VehicleWheelViewModel> mappedResult = new List<VehicleWheelViewModel>();
 
-            //Map(result, mappedResult);
+            Map(result, mappedResult);
 
             //if (SPKId > 0)
             //{

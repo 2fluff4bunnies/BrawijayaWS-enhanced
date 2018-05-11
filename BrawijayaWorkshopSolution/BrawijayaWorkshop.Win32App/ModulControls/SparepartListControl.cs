@@ -231,11 +231,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_selectedSparepart != null)
+            if (_selectedSparepart != null && _selectedSparepart.IsSpecialSparepart)
             {
-                //SparepartDetailListForm detail = Bootstrapper.Resolve<SparepartDetailListForm>();
-                //detail.SelectedSparepart = _selectedSparepart;
-                //detail.ShowDialog(this);
+                SparepartDetailListForm detail = Bootstrapper.Resolve<SparepartDetailListForm>();
+                detail.SelectedSparepart = _selectedSparepart;
+                detail.ShowDialog(this);
             }
         }
 

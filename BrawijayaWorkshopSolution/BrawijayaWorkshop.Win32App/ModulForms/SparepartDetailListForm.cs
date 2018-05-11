@@ -12,14 +12,14 @@ using System.Windows.Forms;
 
 namespace BrawijayaWorkshop.Win32App.ModulForms
 {
-    public partial class SparepartDetailListForm : BaseDefaultForm, ISparepartDetailListView
+    public partial class SparepartDetailListForm : BaseDefaultForm, ISpecialSparepartDetailListView
     {
-        private SparepartDetailListPresenter _presenter;
+        private SpecialSparepartDetailListPresenter _presenter;
 
-        public SparepartDetailListForm(SparepartDetailListModel model)
+        public SparepartDetailListForm(SpecialSparepartDetailListModel model)
         {
             InitializeComponent();
-            _presenter = new SparepartDetailListPresenter(this, model);
+            _presenter = new SpecialSparepartDetailListPresenter(this, model);
 
             this.Load += SparepartDetailListForm_Load;
         }
@@ -47,11 +47,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SparepartDetailStatusItem> ListStatus
+        public List<WheelDetailStatusItem> ListStatus
         {
             get
             {
-                return lookupStatus.Properties.DataSource as List<SparepartDetailStatusItem>;
+                return lookupStatus.Properties.DataSource as List<WheelDetailStatusItem>;
             }
             set
             {
@@ -59,11 +59,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-        public List<SparepartDetailViewModel> SparepartDetailListData
+        public List<SpecialSparepartDetailViewModel> SparepartDetailListData
         {
             get
             {
-                return gridSparepartDetail.DataSource as List<SparepartDetailViewModel>;
+                return gridSparepartDetail.DataSource as List<SpecialSparepartDetailViewModel>;
             }
             set
             {
@@ -117,5 +117,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 bgwMain.RunWorkerAsync();
             }
         }
+
+
+        public List<SpecialSparepartDetailViewModel> SpecialSparepartData { get; set; }
+
+        public string SerialNumber { get; set; }
+
+        public string SerialNumberUpdate { get; set; }
     }
 }

@@ -103,6 +103,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtName.Text = value;
             }
         }
+
+        public bool IsSpecialSparepart
+        {
+            get
+            {
+                return chkIsSpecialSparepart.Checked;
+            }
+            set
+            {
+                chkIsSpecialSparepart.Checked = value;
+            }
+        }
         #endregion
 
         protected override void ExecuteSave()

@@ -36,6 +36,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSparepart.UnitReferenceId = View.UnitId;
             View.SelectedSparepart.Code = View.Code;
             View.SelectedSparepart.Name = View.SparepartName;
+            View.SelectedSparepart.IsSpecialSparepart = View.IsSpecialSparepart;
 
             if (View.SelectedSparepart.Id > 0)
             {

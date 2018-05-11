@@ -45,6 +45,7 @@
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartStock = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.IsSpecialSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -181,7 +182,8 @@
             this.colSparepartCode,
             this.colSparepartName,
             this.colSparepartUnit,
-            this.colSparepartStock});
+            this.colSparepartStock,
+            this.IsSpecialSparepart});
             this.gvSparepart.GridControl = this.gridSparepart;
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -235,6 +237,14 @@
             this.colSparepartStock.Name = "colSparepartStock";
             this.colSparepartStock.Visible = true;
             this.colSparepartStock.VisibleIndex = 4;
+            // 
+            // IsSpecialSparepart
+            // 
+            this.IsSpecialSparepart.Caption = "Spesial?";
+            this.IsSpecialSparepart.FieldName = "IsSpecialSparepart";
+            this.IsSpecialSparepart.Name = "IsSpecialSparepart";
+            this.IsSpecialSparepart.Visible = true;
+            this.IsSpecialSparepart.VisibleIndex = 5;
             // 
             // cmsEditor
             // 
@@ -363,5 +373,6 @@
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
+        private DevExpress.XtraGrid.Columns.GridColumn IsSpecialSparepart;
     }
 }

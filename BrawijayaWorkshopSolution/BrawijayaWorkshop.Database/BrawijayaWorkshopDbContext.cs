@@ -29,7 +29,6 @@ namespace BrawijayaWorkshop.Database
         public DbSet<SparepartStockCard> SparepartStockCards { get; set; }
         public DbSet<SparepartStockCardDetail> SparepartStockCardDetails { get; set; }
         public DbSet<SparepartManualTransaction> SparepartManualTransactions { get; set; }
-        public DbSet<Sparepart> Wheels { get; set; }
         public DbSet<SpecialSparepartDetail> WheelDetails { get; set; }
         public DbSet<Purchasing> Purchasings { get; set; }
         public DbSet<PurchasingDetail> PurchasingDetails { get; set; }
