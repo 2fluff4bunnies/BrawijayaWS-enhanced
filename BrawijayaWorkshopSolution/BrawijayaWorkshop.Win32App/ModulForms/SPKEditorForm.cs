@@ -526,7 +526,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     decimal totalPrice = 0;
 
-                    foreach (var item in SPKSparepartDetailList.Where(ssd => ssd.Id == SparepartToInsert.Id))
+                    foreach (var item in SPKSparepartDetailList)
                     {
                         if (item.PurchasingDetailId > 0)
                         {
@@ -845,13 +845,17 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (this.SparepartId > 0)
             {
                 //check if special sparepart
-                SparepartViewModel ss = _presenter.GetSpecialSparepart();
-                if (ss != null)
+
+                LookUpEdit lookup = (LookUpEdit)sender;
+                SparepartViewModel sparepart = (SparepartViewModel)lookup.GetSelectedDataRow();
+               
+                if (sparepart.IsSpecialSparepart)
                 {
                     lookUpSerialNumber.Enabled = true;
-                    _presenter.LoadSSDetails(ss.Id);
                     txtQty.Text = "1";
                     txtQty.Enabled = false;
+
+                    _presenter.LoadSSDetails(sparepart.Id);
                 }
                 else
                 {

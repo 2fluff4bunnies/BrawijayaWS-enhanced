@@ -55,7 +55,7 @@ namespace BrawijayaWorkshop.DataInitializerConsoleApp
 
             List<Supplier> SupplierList = contextTemp.Suppliers.ToList();
             List<Sparepart> SparepartList = contextTemp.Spareparts.ToList();
-            List<Sparepart> SpecialSparepartList = contextTemp.Wheels.ToList();
+            //List<Sparepart> SpecialSparepartList = contextTemp.Wheels.ToList();
 
             List<SparepartManualTransaction> SparepartManualTransactionList = contextTemp.SparepartManualTransactions.ToList();
             List<Purchasing> PurchasingList = contextTemp.Purchasings.ToList();

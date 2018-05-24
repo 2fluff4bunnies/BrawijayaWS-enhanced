@@ -72,7 +72,7 @@ namespace BrawijayaWorkshop.Model
                     InsertPurchasingMethod(purchasing, purchasingDetails, userID);
                     trans.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
                     throw;
