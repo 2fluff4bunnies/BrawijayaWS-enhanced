@@ -682,7 +682,7 @@ namespace BrawijayaWorkshop.Model
         public List<SpecialSparepartDetailViewModel> RetrieveReadyWheelDetails(int sparepartId)
         {
             List<SpecialSparepartDetail> result = _specialSparepartDetailRepository.GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready
-                                                                                       && wd.Sparepart.CategoryReference.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
+                                                                                     //&& wd.Sparepart.CategoryReference.Code == Constant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
                                                                                        && wd.SparepartId == sparepartId).ToList();
             List<SpecialSparepartDetailViewModel> mappedResult = new List<SpecialSparepartDetailViewModel>();
             return Map(result, mappedResult);
@@ -1137,13 +1137,15 @@ namespace BrawijayaWorkshop.Model
 
         public List<SparepartViewModel> LoadSparepartWheel()
         {
-            List<Sparepart> result = _sparepartRepository.GetMany(sp => sp.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
+            List<int> spId = _specialSparepartDetailRepository
+                .GetMany(wd => wd.Status == (int)DbConstant.WheelDetailStatus.Ready)
+                .GroupBy(group => new { spId = group.SparepartId })
+                .Select(grouped =>  grouped.Key.spId)
+                .ToList();
+         
 
-            List<Sparepart> getSpInWheel = (from sp in result
-                                            where sp.IsSpecialSparepart && sp.StockQty > 0
-                                            && sp.CategoryReference.Code == DbConstant.REF_SPECIAL_SPAREPART_TYPE_WHEEL
-                                            select sp).ToList(); // return sparepart object which in list
+            List<Sparepart> getSpInWheel = _sparepartRepository.GetMany(sp => spId.Contains(sp.Id)).ToList();
 
             List<SparepartViewModel> mappedResult = new List<SparepartViewModel>();
 
