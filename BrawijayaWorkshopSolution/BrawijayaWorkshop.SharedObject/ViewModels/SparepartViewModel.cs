@@ -15,5 +15,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
         public ReferenceViewModel CategoryReference { get; set; }
 
         public bool IsSpecialSparepart { get; set; }
+        public bool IsWheel { get; set; }
     }
 }

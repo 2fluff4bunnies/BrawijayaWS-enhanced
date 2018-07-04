@@ -27,5 +27,7 @@ namespace BrawijayaWorkshop.Database.Entities
 
         [Required]
         public bool IsSpecialSparepart { get; set; }
+        [Required]
+        public bool IsWheel { get; set; }
     }
 }

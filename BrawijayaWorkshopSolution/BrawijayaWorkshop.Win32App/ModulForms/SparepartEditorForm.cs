@@ -115,6 +115,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 chkIsSpecialSparepart.Checked = value;
             }
         }
+
+        public bool IsWheel
+        {
+            get
+            {
+                return chkIsWheel.Checked;
+            }
+            set
+            {
+                chkIsWheel.Checked = value;
+            }
+        }
         #endregion
 
         protected override void ExecuteSave()

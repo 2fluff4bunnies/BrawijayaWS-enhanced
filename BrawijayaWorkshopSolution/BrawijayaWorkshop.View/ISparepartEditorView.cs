@@ -17,5 +17,6 @@ namespace BrawijayaWorkshop.View
         string Code { get; set; }
         string SparepartName { get; set; }
         bool IsSpecialSparepart { get; set; }
+        bool IsWheel { get; set; }
     }
 }

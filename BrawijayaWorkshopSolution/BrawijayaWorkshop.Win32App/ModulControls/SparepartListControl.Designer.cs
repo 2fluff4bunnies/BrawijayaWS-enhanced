@@ -56,6 +56,7 @@
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.IsWheel = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
@@ -183,7 +184,8 @@
             this.colSparepartName,
             this.colSparepartUnit,
             this.colSparepartStock,
-            this.IsSpecialSparepart});
+            this.IsSpecialSparepart,
+            this.IsWheel});
             this.gvSparepart.GridControl = this.gridSparepart;
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -324,6 +326,14 @@
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // IsWheel
+            // 
+            this.IsWheel.Caption = "Ban?";
+            this.IsWheel.FieldName = "IsWheel";
+            this.IsWheel.Name = "IsWheel";
+            this.IsWheel.Visible = true;
+            this.IsWheel.VisibleIndex = 6;
+            // 
             // SparepartListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,5 +384,6 @@
         private System.ComponentModel.BackgroundWorker bgwExport;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraGrid.Columns.GridColumn IsSpecialSparepart;
+        private DevExpress.XtraGrid.Columns.GridColumn IsWheel;
     }
 }

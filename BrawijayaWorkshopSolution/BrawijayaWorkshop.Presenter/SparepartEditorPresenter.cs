@@ -37,6 +37,7 @@ namespace BrawijayaWorkshop.Presenter
             View.SelectedSparepart.Code = View.Code;
             View.SelectedSparepart.Name = View.SparepartName;
             View.SelectedSparepart.IsSpecialSparepart = View.IsSpecialSparepart;
+            View.SelectedSparepart.IsWheel = View.IsWheel;
 
             if (View.SelectedSparepart.Id > 0)
             {
