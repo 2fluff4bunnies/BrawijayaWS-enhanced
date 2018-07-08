@@ -97,6 +97,7 @@ namespace BrawijayaWorkshop.Model
                             if (!string.IsNullOrEmpty(purchasingDetail.SerialNumber))
                             {
                                 SpecialSparepartDetail wd = new SpecialSparepartDetail();
+                                wd.PurchasingDetail = purchasingDetail;
                                 wd.SerialNumber = purchasingDetail.SerialNumber;
                                 wd.CreateUserId = userID;
                                 wd.CreateDate = serverTime;

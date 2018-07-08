@@ -110,6 +110,7 @@ namespace BrawijayaWorkshop.Model
                                 {
                                     SpecialSparepartDetail wDetail = new SpecialSparepartDetail();
                                     wDetail.Sparepart = manualTransaction.Sparepart;
+                                    wDetail.SparepartManualTransaction = manualTransaction;
                                     wDetail.SerialNumber = sparepartManualTransaction.SerialNumber;
                                     wDetail.CreateDate = serverTime;
                                     wDetail.CreateUserId = userId;
