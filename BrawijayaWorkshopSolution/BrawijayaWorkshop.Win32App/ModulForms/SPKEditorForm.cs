@@ -1201,6 +1201,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
                         {
                             PurchasingDetailId = changedVwDetail.PurchasingDetailId,
+                            PurchasingDetail = changedVwDetail.PurchasingDetail,
                             Qty = 1
                         });
                     }
@@ -1218,6 +1219,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         this.SPKSparepartDetailList.Add(new SPKDetailSparepartDetailViewModel
                         {
                             SparepartManualTransactionId = changedVwDetail.SparepartManualTransactionId,
+                            SparepartManualTransaction = changedVwDetail.SparepartManualTransaction,
                             Qty = 1
                         });
                     }
