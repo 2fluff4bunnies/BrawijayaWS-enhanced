@@ -265,7 +265,7 @@
             // colSparepartDetail
             // 
             this.colSparepartDetail.Caption = "Kode Item";
-            this.colSparepartDetail.FieldName = "  SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Code";
+            this.colSparepartDetail.FieldName = "SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Code";
             this.colSparepartDetail.Name = "colSparepartDetail";
             this.colSparepartDetail.OptionsColumn.ReadOnly = true;
             this.colSparepartDetail.Visible = true;
@@ -274,7 +274,7 @@
             // colSparepartName
             // 
             this.colSparepartName.Caption = "Sparepart";
-            this.colSparepartName.FieldName = "SPKDetailSparepartDetail.SparepartDetail.Sparepart.Name";
+            this.colSparepartName.FieldName = "SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name";
             this.colSparepartName.Name = "colSparepartName";
             this.colSparepartName.OptionsColumn.ReadOnly = true;
             this.colSparepartName.Visible = true;
