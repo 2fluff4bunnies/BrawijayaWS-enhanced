@@ -343,6 +343,21 @@ namespace BrawijayaWorkshop.Model
                         {
                             SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
 
+                            if (spkSparepartDetail.PurchasingDetailId > 0)
+                            {
+                                entityNewSparepartDetail.PurchasingDetailId = spkSparepartDetail.PurchasingDetailId;
+                            }
+
+                            if (spkSparepartDetail.SparepartManualTransactionId > 0)
+                            {
+                                entityNewSparepartDetail.SparepartManualTransactionId = spkSparepartDetail.SparepartManualTransactionId;
+                            }
+
+                            if (spkSparepartDetail.SpecialSparepartDetailId > 0)
+                            {
+                                entityNewSparepartDetail.SpecialSparepartDetailId = spkSparepartDetail.SpecialSparepartDetailId;
+                            }
+
                             entityNewSparepartDetail.CreateDate = spk.CreateDate;
                             entityNewSparepartDetail.CreateUserId = userId;
                             entityNewSparepartDetail.ModifyDate = serverTime;
