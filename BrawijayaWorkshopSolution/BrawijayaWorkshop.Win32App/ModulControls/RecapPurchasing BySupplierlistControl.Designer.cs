@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecapPurchasingBySupplierListControl));
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.lookupSupplier = new DevExpress.XtraEditors.LookUpEdit();
             this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
             this.dePeriodeTo = new DevExpress.XtraEditors.DateEdit();
@@ -45,7 +46,6 @@
             this.colSupplierNamePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPricePurchasing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookupSupplier.Properties)).BeginInit();
@@ -74,6 +74,18 @@
             this.gcFilter.Size = new System.Drawing.Size(729, 92);
             this.gcFilter.TabIndex = 9;
             this.gcFilter.Text = "Filter";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButton1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton1.Location = new System.Drawing.Point(5, 64);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(107, 23);
+            this.simpleButton1.TabIndex = 12;
+            this.simpleButton1.Text = "Print Semua";
+            this.simpleButton1.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
             // lookupSupplier
             // 
@@ -181,7 +193,7 @@
             this.gridRecapPurchasing.Location = new System.Drawing.Point(2, 116);
             this.gridRecapPurchasing.MainView = this.gvRecapPurchasing;
             this.gridRecapPurchasing.Name = "gridRecapPurchasing";
-            this.gridRecapPurchasing.Size = new System.Drawing.Size(728, 289);
+            this.gridRecapPurchasing.Size = new System.Drawing.Size(728, 252);
             this.gridRecapPurchasing.TabIndex = 11;
             this.gridRecapPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRecapPurchasing});
@@ -254,18 +266,6 @@
             // 
             this.bgwMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwMain_DoWork);
             this.bgwMain.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwMain_RunWorkerCompleted);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
-            this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(5, 64);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(107, 23);
-            this.simpleButton1.TabIndex = 12;
-            this.simpleButton1.Text = "Print Semua";
-            this.simpleButton1.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
             // RecapPurchasingBySupplierListControl
             // 
