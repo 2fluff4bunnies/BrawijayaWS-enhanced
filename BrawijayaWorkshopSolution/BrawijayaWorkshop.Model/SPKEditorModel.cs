@@ -339,7 +339,8 @@ namespace BrawijayaWorkshop.Model
                         List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
                         List<SparepartManualTransaction> listSparepartManualTrans = new List<SparepartManualTransaction>();
 
-                        foreach (var spkSparepartDetail in spkSparepartDetailList)
+                        List<SPKDetailSparepartDetailViewModel> spkSparepartDetailListBySparepart = spkSparepartDetailList.Where(x => x.SPKDetailSparepartId == spkSparepart.SparepartId).ToList();
+                        foreach (var spkSparepartDetail in spkSparepartDetailListBySparepart)
                         {
                             SPKDetailSparepartDetail entityNewSparepartDetail = new SPKDetailSparepartDetail();
 
@@ -363,6 +364,7 @@ namespace BrawijayaWorkshop.Model
                             entityNewSparepartDetail.ModifyDate = serverTime;
                             entityNewSparepartDetail.ModifyUserId = userId;
                             entityNewSparepartDetail.Status = (int)DbConstant.DefaultDataStatus.Active;
+                            entityNewSparepartDetail.Qty = spkSparepartDetail.Qty;
 
                             entityNewSparepartDetail.SPKDetailSparepart = insertedSPkDetailSparepart;
 
@@ -376,7 +378,7 @@ namespace BrawijayaWorkshop.Model
                                 {
                                     PurchasingDetail pdt = _purchasingDetailRepository.GetById(spkSparepartDetail.PurchasingDetailId);
 
-                                    pdt.QtyRemaining = spkSparepartDetail.PurchasingDetail.QtyRemaining;
+                                    pdt.QtyRemaining -= spkSparepartDetail.Qty;
                                     pdt.ModifyDate = serverTime;
                                     pdt.ModifyUserId = userId;
 
@@ -388,7 +390,7 @@ namespace BrawijayaWorkshop.Model
                                 {
                                     SparepartManualTransaction spm = _sparepartManualTransactionRepository.GetById(spkSparepartDetail.SparepartManualTransactionId);
 
-                                    spm.QtyRemaining = spkSparepartDetail.SparepartManualTransaction.QtyRemaining;
+                                    spm.QtyRemaining -= spkSparepartDetail.Qty;
                                     spm.ModifyDate = serverTime;
                                     spm.ModifyUserId = userId;
 
@@ -738,8 +740,6 @@ namespace BrawijayaWorkshop.Model
                     }
                     else
                     {
-                        itemManual.QtyRemaining = 0;
-
                         result.Add(new SPKDetailSparepartDetail
                         {
                             SparepartManualTransaction = itemManual,
@@ -749,6 +749,7 @@ namespace BrawijayaWorkshop.Model
                         });
 
                         qtyRemains -= itemManual.QtyRemaining;
+                        itemManual.QtyRemaining = 0;
                     }
 
                     if (qtyRemains == 0) break;
@@ -781,8 +782,6 @@ namespace BrawijayaWorkshop.Model
                         }
                         else
                         {
-                            itemPD.QtyRemaining = 0;
-
                             result.Add(new SPKDetailSparepartDetail
                             {
                                 PurchasingDetail = itemPD,
@@ -792,6 +791,8 @@ namespace BrawijayaWorkshop.Model
                             });
 
                             qtyRemains -= itemPD.QtyRemaining;
+                            itemPD.QtyRemaining = 0;
+
                         }
 
                         if (qtyRemains == 0) break;
