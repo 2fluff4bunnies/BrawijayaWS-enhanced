@@ -378,7 +378,7 @@ namespace BrawijayaWorkshop.Model
                                 {
                                     PurchasingDetail pdt = _purchasingDetailRepository.GetById(spkSparepartDetail.PurchasingDetailId);
 
-                                    pdt.QtyRemaining -= spkSparepartDetail.Qty;
+                                    pdt.QtyRemaining = spkSparepartDetail.PurchasingDetail.QtyRemaining;
                                     pdt.ModifyDate = serverTime;
                                     pdt.ModifyUserId = userId;
 
@@ -390,7 +390,7 @@ namespace BrawijayaWorkshop.Model
                                 {
                                     SparepartManualTransaction spm = _sparepartManualTransactionRepository.GetById(spkSparepartDetail.SparepartManualTransactionId);
 
-                                    spm.QtyRemaining -= spkSparepartDetail.Qty;
+                                    spm.QtyRemaining = spkSparepartDetail.SparepartManualTransaction.QtyRemaining;
                                     spm.ModifyDate = serverTime;
                                     spm.ModifyUserId = userId;
 
