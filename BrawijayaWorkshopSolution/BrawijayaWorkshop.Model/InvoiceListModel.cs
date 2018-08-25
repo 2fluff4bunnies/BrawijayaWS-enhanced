@@ -61,23 +61,47 @@ namespace BrawijayaWorkshop.Model
             List<InvoiceSparepartViewModel> result = new List<InvoiceSparepartViewModel>();
             List<InvoiceDetail> listInvoiceDetail = _invoiceDetailRepository.GetMany(x => x.InvoiceId == invoiceID).ToList();
 
-            int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
-            foreach (var sparepartID in sparepartIDs)
+            foreach (InvoiceDetail invoiceDetail in listInvoiceDetail)
             {
+                double itemPrice = 0;
+
+                if (invoiceDetail.SPKDetailSparepartDetail.SparepartManualTransactionId > 0)
+                {
+                    itemPrice = decimal.ToDouble(invoiceDetail.SPKDetailSparepartDetail.SparepartManualTransaction.Price);
+                }
+                else if (invoiceDetail.SPKDetailSparepartDetail.PurchasingDetailId > 0)
+                {
+                    itemPrice = decimal.ToDouble(invoiceDetail.SPKDetailSparepartDetail.PurchasingDetail.Price);
+                }
+
                 result.Add(new InvoiceSparepartViewModel
                 {
-                    SparepartName = _sparepartRepository.GetById(sparepartID).Name,
-                    Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
-                    SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
-                    SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
-                    UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name
+                    SparepartName = invoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Name,
+                    Qty = invoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.TotalQuantity,
+                    SubTotalPrice = decimal.ToDouble(invoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.TotalPrice),
+                    SparepartCode = invoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.Code,
+                    UnitCategoryName = invoiceDetail.SPKDetailSparepartDetail.SPKDetailSparepart.Sparepart.UnitReference.Name,
+                    ItemPrice = itemPrice
                 });
             }
+
+            //int[] sparepartIDs = listInvoiceDetail.Select(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId).Distinct().ToArray();
+            //foreach (var sparepartID in sparepartIDs)
+            //{
+            //    result.Add(new InvoiceSparepartViewModel
+            //    {
+            //        SparepartName = _sparepartRepository.GetById(sparepartID).Name,
+            //        Qty = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Count(),
+            //        SubTotalPrice = listInvoiceDetail.Where(x => x.SPKDetailSparepartDetail.SPKDetailSparepart.SparepartId == sparepartID).Sum(x => x.SubTotalPrice),
+            //        SparepartCode = _sparepartRepository.GetById(sparepartID).Code,
+            //        UnitCategoryName = _sparepartRepository.GetById(sparepartID).UnitReference.Name
+            //    });
+            //}
             return result;
         }
 
         public List<InvoiceViewModel> SearchInvoice(DateTime? dateFrom, DateTime? dateTo,
-            DbConstant.InvoiceStatus invoiceStatus, int customerId, 
+            DbConstant.InvoiceStatus invoiceStatus, int customerId,
             int serviceCategoryId, int vehicleGroupId, string licenseNumber,
             int paymentStatus)
         {
@@ -99,7 +123,7 @@ namespace BrawijayaWorkshop.Model
                 result = result.Where(spk => spk.Status == (int)invoiceStatus).ToList();
             }
 
-            if(customerId > 0)
+            if (customerId > 0)
             {
                 result = result.Where(inv => inv.SPK.Vehicle.CustomerId == customerId).ToList();
             }
@@ -124,7 +148,7 @@ namespace BrawijayaWorkshop.Model
                 result = result.Where(inv => inv.SPK.CategoryReferenceId == serviceCategoryId).ToList();
             }
 
-            if(paymentStatus > -1)
+            if (paymentStatus > -1)
             {
                 result = result.Where(inv => inv.PaymentStatus == paymentStatus).ToList();
             }
