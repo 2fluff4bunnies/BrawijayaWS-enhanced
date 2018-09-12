@@ -193,7 +193,7 @@
             this.gridRecapPurchasing.Location = new System.Drawing.Point(2, 116);
             this.gridRecapPurchasing.MainView = this.gvRecapPurchasing;
             this.gridRecapPurchasing.Name = "gridRecapPurchasing";
-            this.gridRecapPurchasing.Size = new System.Drawing.Size(728, 252);
+            this.gridRecapPurchasing.Size = new System.Drawing.Size(728, 287);
             this.gridRecapPurchasing.TabIndex = 11;
             this.gridRecapPurchasing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRecapPurchasing});
@@ -221,6 +221,7 @@
             this.gvRecapPurchasing.OptionsDetail.ShowDetailTabs = false;
             this.gvRecapPurchasing.OptionsDetail.SmartDetailExpand = false;
             this.gvRecapPurchasing.OptionsView.EnableAppearanceEvenRow = true;
+            this.gvRecapPurchasing.OptionsView.ShowFooter = true;
             this.gvRecapPurchasing.OptionsView.ShowGroupPanel = false;
             this.gvRecapPurchasing.ViewCaption = "Daftar Pembelian";
             // 
@@ -275,7 +276,7 @@
             this.Controls.Add(this.gcFilter);
             this.Controls.Add(this.btnPrintAll);
             this.Name = "RecapPurchasingBySupplierListControl";
-            this.Size = new System.Drawing.Size(734, 383);
+            this.Size = new System.Drawing.Size(734, 406);
             this.Load += new System.EventHandler(this.RecapInvoiceByCustomerListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).EndInit();
             this.gcFilter.ResumeLayout(false);
