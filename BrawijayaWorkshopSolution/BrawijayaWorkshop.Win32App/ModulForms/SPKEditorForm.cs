@@ -848,7 +848,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                 LookUpEdit lookup = (LookUpEdit)sender;
                 SparepartViewModel sparepart = (SparepartViewModel)lookup.GetSelectedDataRow();
-               
+
                 if (sparepart.IsSpecialSparepart)
                 {
                     lookUpSerialNumber.Enabled = true;
@@ -1178,6 +1178,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
             foreach (VehicleWheelViewModel vw in VehicleWheelList.Where(w => w.ReplaceWithWheelDetailId > 0))
             {
+
                 if (!SPKSparepartList.Any(sp => sp.SparepartId == vw.SparepartId))
                 {
                     this.SPKSparepartList.Add(new SPKDetailSparepartViewModel
@@ -1202,6 +1203,9 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         {
                             PurchasingDetailId = changedVwDetail.PurchasingDetailId,
                             PurchasingDetail = changedVwDetail.PurchasingDetail,
+                            SpecialSparepartDetailId = changedVwDetail.Id,
+                            SpecialSparepartDetail = changedVwDetail,
+                            SPKDetailSparepartId = changedVwDetail.SparepartId,
                             Qty = 1
                         });
                     }
@@ -1220,8 +1224,12 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                         {
                             SparepartManualTransactionId = changedVwDetail.SparepartManualTransactionId,
                             SparepartManualTransaction = changedVwDetail.SparepartManualTransaction,
+                            SpecialSparepartDetailId = changedVwDetail.Id,
+                            SpecialSparepartDetail = changedVwDetail,
+                            SPKDetailSparepartId = changedVwDetail.SparepartId,
                             Qty = 1
                         });
+
                     }
                     else
                     {
