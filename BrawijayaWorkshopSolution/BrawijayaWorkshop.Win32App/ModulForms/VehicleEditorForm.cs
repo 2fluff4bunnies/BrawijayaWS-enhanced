@@ -62,57 +62,14 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             _repoItemLookUpEdit.SearchMode = SearchMode.AutoComplete;
             _repoItemLookUpEdit.AutoSearchColumnIndex = 1;
             _repoItemLookUpEdit.NullValuePromptShowForEmptyValue = false;
+            _repoItemLookUpEdit.EditValueChanged += _repoItemLookUpEdit_EditValueChanged;
 
             lookUpCustomer.EditValueChanged += lookUpCustomer_EditValueChanged;
 
             gvVehicleWheel.CustomRowCellEditForEditing += gvVehicleWheel_CustomRowCellEditForEditing;
         }
 
-        private void gvVehicleWheel_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
-        {
-            if (e.Column.FieldName != "WheelDetail.SerialNumber") return;
-            VehicleWheelViewModel currentDataRow = gvVehicleWheel.GetRow(e.RowHandle) as VehicleWheelViewModel;
-            List<SpecialSparepartDetailViewModel> listNotUsedWheel = new List<SpecialSparepartDetailViewModel>();
-
-            foreach (var item in VehicleWheelList)
-            {
-                if (item.Id > 0)
-                    listNotUsedWheel.Add(item.WheelDetail);
-            }
-
-            listNotUsedWheel.AddRange(WheelDetailList);
-
-            List<string> runtimeSerial = new List<string>();
-            if (VehicleWheelList != null && VehicleWheelList.Count > 0 && SelectedVehicle != null)
-            {
-                //runtimeSerial = VehicleWheelList.Select(w => w.WheelDetail.SerialNumber).ToList();
-                foreach (var item in VehicleWheelList)
-                {
-                    if (item.Id > 0)
-                        runtimeSerial.Add(item.WheelDetail.SerialNumber);
-                }
-            }
-
-            listNotUsedWheel = listNotUsedWheel.Where(w => !runtimeSerial.Contains(w.SerialNumber)).ToList();
-
-            if (currentDataRow != null) // insert current row into list only for edit
-            {
-                listNotUsedWheel.Insert(0, currentDataRow.WheelDetail);
-            }
-            _repoItemLookUpEdit.DataSource = listNotUsedWheel;
-            e.RepositoryItem = _repoItemLookUpEdit;
-        }
-
-
-        public void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
-        {
-            if (this.CustomerId > 0)
-            {
-                _presenter.PopulateVehicleGroup();
-            }
-        }
-
-        private void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
+        void _repoItemLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (this.SelectedVehicle != null)
             {
@@ -131,14 +88,84 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                        "\n\n Apakah anda yakin ingin menukar?") == System.Windows.Forms.DialogResult.Yes)
                     {
                         foundConflict.WheelDetailId = _presenter.GetCurrentInstalledWheel(this.SelectedVehicleWheel.Id);
-                        this.VehicleWheelExchangedList.Add(foundConflict);
+                        VehicleWheelViewModel insertedWheel = _presenter.InsertVechileWheel(foundConflict);
+                        VehicleWheelViewModel selectedWheel = this.gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+                        selectedWheel.Id = insertedWheel.Id;
+                        selectedWheel.WheelDetailId = insertedWheel.WheelDetailId;
+                        selectedWheel.VehicleId = insertedWheel.VehicleId;
+
                     }
                     else
                     {
                         sender = null;
                     }
                 }
+                else
+                {
+                    VehicleWheelViewModel newWheel = new VehicleWheelViewModel
+                    {
+                        WheelDetailId = selectedWheelDetail.Id,
+                        VehicleId = this.SelectedVehicle.Id,
+                    };
+
+                    VehicleWheelViewModel insertedWheel = _presenter.InsertVechileWheel(newWheel);
+                    VehicleWheelViewModel selectedWheel = this.gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+                    selectedWheel.Id = insertedWheel.Id;
+                    selectedWheel.WheelDetailId = insertedWheel.WheelDetailId;
+                    selectedWheel.VehicleId = insertedWheel.VehicleId;
+                }
             }
+        }
+
+        private void gvVehicleWheel_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName != "WheelDetail.SerialNumber") return;
+            VehicleWheelViewModel currentDataRow = gvVehicleWheel.GetRow(e.RowHandle) as VehicleWheelViewModel;
+            List<SpecialSparepartDetailViewModel> listNotUsedWheel = new List<SpecialSparepartDetailViewModel>();
+
+            listNotUsedWheel = _presenter.GetAvailableWheel();
+
+            //foreach (var item in VehicleWheelList)
+            //{
+            //    if (item.Id > 0)
+            //        listNotUsedWheel.Add(item.WheelDetail);
+            //}
+
+            //listNotUsedWheel.AddRange(WheelDetailList);
+
+            //List<string> runtimeSerial = new List<string>();
+            //if (VehicleWheelList != null && VehicleWheelList.Count > 0 && SelectedVehicle != null)
+            //{
+            //    //runtimeSerial = VehicleWheelList.Select(w => w.WheelDetail.SerialNumber).ToList();
+            //    foreach (var item in VehicleWheelList)
+            //    {
+            //        if (item.Id > 0)
+            //            runtimeSerial.Add(item.WheelDetail.SerialNumber);
+            //    }
+            //}
+
+            //listNotUsedWheel = listNotUsedWheel.Where(w => !runtimeSerial.Contains(w.SerialNumber)).ToList();
+
+            //if (currentDataRow != null) // insert current row into list only for edit
+            //{
+            //    listNotUsedWheel.Insert(0, currentDataRow.WheelDetail);
+            //}
+            _repoItemLookUpEdit.DataSource = listNotUsedWheel;
+            e.RepositoryItem = _repoItemLookUpEdit;
+        }
+
+
+        public void lookUpCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.CustomerId > 0)
+            {
+                _presenter.PopulateVehicleGroup();
+            }
+        }
+
+        private void lookupWheelDetailGv_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
 
         #region Field Editor
@@ -383,7 +410,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             }
         }
 
-    
+
         protected override void ExecuteSave()
         {
             if (!bgwSave.IsBusy)
@@ -467,7 +494,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
         private void deleteWheelDetailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.ShowConfirmation("Yakin menghapus ban kendaraan?") == System.Windows.Forms.DialogResult.Yes)
+            if (this.ShowConfirmation("Yakin melepas ban kendaraan?") == System.Windows.Forms.DialogResult.Yes)
             {
                 if (this.SelectedVehicleWheel != null)
                 {
@@ -517,6 +544,21 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         private void bgwDelete_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
 
+        }
+
+        private void deleteFromStockWheeldetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ShowConfirmation("Yakin menghapus data ban?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (this.SelectedVehicleWheel != null)
+                {
+                    this.WheelDetailList.Add(this.SelectedVehicleWheel.WheelDetail);
+                }
+
+                VehicleWheelViewModel selectedVWToDelete = this.gvVehicleWheel.GetFocusedRow() as VehicleWheelViewModel;
+                _presenter.SetWheelAsDeleted(selectedVWToDelete.Id);
+                gvVehicleWheel.DeleteSelectedRows();
+            }
         }
     }
 }

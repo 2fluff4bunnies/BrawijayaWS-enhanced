@@ -3,6 +3,7 @@ using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.View;
+using System.Collections.Generic;
 
 namespace BrawijayaWorkshop.Presenter
 {
@@ -97,6 +98,21 @@ namespace BrawijayaWorkshop.Presenter
         public void RemoveVehicleWheel(int vehicleWheelId)
         {
             Model.RevertVehicleWheel(vehicleWheelId, LoginInformation.UserId);
+        }
+
+        public void SetWheelAsDeleted(int vehicleWheelId)
+        {
+            Model.SetWheelAsDeleted(vehicleWheelId, LoginInformation.UserId);
+        }
+
+        public List<SpecialSparepartDetailViewModel> GetAvailableWheel()
+        {
+            return Model.RetrieveReadyWheelDetails();
+        }
+
+        public VehicleWheelViewModel InsertVechileWheel(VehicleWheelViewModel vw)
+        {
+            return Model.InsertVehicleWheel(vw, LoginInformation.UserId);
         }
     }
 }

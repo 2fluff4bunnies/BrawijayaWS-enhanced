@@ -68,6 +68,7 @@
             this.bsVehicleWheel = new System.Windows.Forms.BindingSource(this.components);
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteWheelDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteFromStockWheeldetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
             this.ValidateExpireDate = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.valGroupName = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
@@ -473,17 +474,26 @@
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteWheelDetailToolStripMenuItem});
+            this.deleteWheelDetailToolStripMenuItem,
+            this.deleteFromStockWheeldetailToolStripMenuItem});
             this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(132, 26);
+            this.cmsEditor.Size = new System.Drawing.Size(211, 70);
             // 
             // deleteWheelDetailToolStripMenuItem
             // 
-            this.deleteWheelDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.deleteWheelDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.if_ic_swap_horiz_16x16;
             this.deleteWheelDetailToolStripMenuItem.Name = "deleteWheelDetailToolStripMenuItem";
-            this.deleteWheelDetailToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.deleteWheelDetailToolStripMenuItem.Text = "Hapus Ban";
+            this.deleteWheelDetailToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.deleteWheelDetailToolStripMenuItem.Text = "Lepas Ban Dari Kendaraan";
             this.deleteWheelDetailToolStripMenuItem.Click += new System.EventHandler(this.deleteWheelDetailToolStripMenuItem_Click);
+            // 
+            // deleteFromStockWheeldetailToolStripMenuItem
+            // 
+            this.deleteFromStockWheeldetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.deleteFromStockWheeldetailToolStripMenuItem.Name = "deleteFromStockWheeldetailToolStripMenuItem";
+            this.deleteFromStockWheeldetailToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.deleteFromStockWheeldetailToolStripMenuItem.Text = "Hapus Ban Dari Stock";
+            this.deleteFromStockWheeldetailToolStripMenuItem.Click += new System.EventHandler(this.deleteFromStockWheeldetailToolStripMenuItem_Click);
             // 
             // bgwSave
             // 
@@ -571,5 +581,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colWheelDtl;
         private DevExpress.XtraGrid.Columns.GridColumn colWheelNotes;
         private System.ComponentModel.BackgroundWorker bgwDelete;
+        private System.Windows.Forms.ToolStripMenuItem deleteFromStockWheeldetailToolStripMenuItem;
     }
 }
