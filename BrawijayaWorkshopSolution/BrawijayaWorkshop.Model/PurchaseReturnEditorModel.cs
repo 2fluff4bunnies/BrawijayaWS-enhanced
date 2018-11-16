@@ -23,6 +23,8 @@ namespace BrawijayaWorkshop.Model
         private IJournalMasterRepository _journalMasterRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
+
         private IUnitOfWork _unitOfWork;
 
         public PurchaseReturnEditorModel(
@@ -37,6 +39,7 @@ namespace BrawijayaWorkshop.Model
             IJournalMasterRepository journalMasterRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -51,6 +54,7 @@ namespace BrawijayaWorkshop.Model
             _referenceRepository = referenceRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -214,6 +218,18 @@ namespace BrawijayaWorkshop.Model
                 _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
                 _purchasingDetailRepository.Update(purchasingDetail);
 
+                SpecialSparepartDetail spDetail = _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id).FirstOrDefault();
+                if (spDetail != null)
+                {
+                    spDetail.Status = (int)DbConstant.WheelDetailStatus.Deleted;
+                    _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                    _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                    _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                    _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                    _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                    _specialSparepartDetailRepository.Update(spDetail);
+                }
+
                 SparepartStockCard stockCard = new SparepartStockCard();
                 stockCard.CreateUserId = userID;
                 stockCard.PurchaseDate = serverTime;
@@ -369,6 +385,19 @@ namespace BrawijayaWorkshop.Model
                  _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
                  _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
                  _purchasingDetailRepository.Update(purchasingDetail);
+
+                 SpecialSparepartDetail spDetail = _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id).FirstOrDefault();
+                 if (spDetail != null)
+                 {
+                     spDetail.Status = (int) DbConstant.WheelDetailStatus.Ready;
+                     _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                     _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                     _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                     _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                     _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                     _specialSparepartDetailRepository.Update(spDetail);
+
+                 }
 
 	        }
                 
