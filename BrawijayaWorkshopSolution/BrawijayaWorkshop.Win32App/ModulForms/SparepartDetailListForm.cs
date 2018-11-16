@@ -119,7 +119,25 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         }
 
 
-        public List<SpecialSparepartDetailViewModel> SpecialSparepartData { get; set; }
+        public List<SpecialSparepartDetailViewModel> SpecialSparepartData
+        {
+            get
+            {
+                return gridSparepartDetail.DataSource as List<SpecialSparepartDetailViewModel>;
+            }
+            set
+            {
+                if (InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate { gridSparepartDetail.DataSource = value; gvSparepartDetail.BestFitColumns(); }));
+                }
+                else
+                {
+                    gridSparepartDetail.DataSource = value;
+                    gvSparepartDetail.BestFitColumns();
+                }
+            }
+        }
 
         public string SerialNumber { get; set; }
 
