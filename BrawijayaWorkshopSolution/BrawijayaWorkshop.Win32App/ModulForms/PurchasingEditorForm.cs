@@ -228,7 +228,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 if (ListPurchasingDetail != null && ListPurchasingDetail.Count > 0)
                 {
                     int rowGvPurchasingDetailNotValid = 0;
-                    rowGvPurchasingDetailNotValid = ListPurchasingDetail.Where(i => i.SparepartId == 0 || i.Qty == 0 || i.Price == 0).Count();
+                    rowGvPurchasingDetailNotValid = ListPurchasingDetail.Where(i => i.SparepartId == 0 || i.Qty == 0).Count();
                     if (valSupplier.Validate() && valDate.Validate() && rowGvPurchasingDetailNotValid == 0)
                     {
                         for (int i = 0; i < ListPurchasingDetail.Count; i++)
