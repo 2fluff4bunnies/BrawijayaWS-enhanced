@@ -226,27 +226,7 @@ namespace BrawijayaWorkshop.Model
             _vehicleRepository.AttachNavigation(entity.CreateUser);
             _vehicleRepository.AttachNavigation(entity.ModifyUser);
             _vehicleRepository.Update(entity);
-            _unitOfWork.SaveChanges();
-
-            if (vehicleWheelExchanged.Count > 0)
-            {
-                foreach (var vw in vehicleWheelExchanged)
-                {
-                    VehicleWheel vwEntity = _vehicleWheelRepository.GetById(vw.Id);
-                    vwEntity.WheelDetailId = vw.WheelDetailId;
-                    vwEntity.ModifyDate = serverTime;
-                    vwEntity.ModifyUserId = userId;
-                    vwEntity.Notes = vw.Notes;
-
-                    _vehicleWheelRepository.AttachNavigation(vwEntity.Vehicle);
-                    _vehicleWheelRepository.AttachNavigation(vwEntity.WheelDetail);
-                    _vehicleWheelRepository.AttachNavigation(vwEntity.CreateUser);
-                    _vehicleWheelRepository.AttachNavigation(vwEntity.ModifyUser);
-                    _vehicleWheelRepository.Update(vwEntity);
-                    _unitOfWork.SaveChanges();
-                }
-            }
-
+          
             _unitOfWork.SaveChanges();
         }
 
