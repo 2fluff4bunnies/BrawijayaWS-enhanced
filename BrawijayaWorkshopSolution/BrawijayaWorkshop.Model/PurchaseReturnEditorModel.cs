@@ -84,7 +84,8 @@ namespace BrawijayaWorkshop.Model
                                 SparepartName = itemDetail.Sparepart.Name,
                                 ReturQty = listDetail.Where(x => x.PurchasingDetailId == itemDetail.Id).FirstOrDefault().Qty,
                                 ReturQtyLimit = itemDetail.Qty,
-                                SerialNumber = itemDetail.SerialNumber
+                                SerialNumber = itemDetail.SerialNumber,
+                                PurchasingDetailId = itemDetail.Id
                             });
                         }
                         else
@@ -95,7 +96,8 @@ namespace BrawijayaWorkshop.Model
                                 SparepartName = itemDetail.Sparepart.Name,
                                 ReturQty = listDetail.Where(x => x.PurchasingDetailId == itemDetail.Id).FirstOrDefault().Qty,
                                 ReturQtyLimit = itemDetail.Qty,
-                                SerialNumber = itemDetail.SerialNumber
+                                SerialNumber = itemDetail.SerialNumber,
+                                PurchasingDetailId = itemDetail.Id
                             });
                         }
 
@@ -112,7 +114,8 @@ namespace BrawijayaWorkshop.Model
                         SparepartName = itemDetail.Sparepart.Name,
                         ReturQty =  0,
                         ReturQtyLimit = itemDetail.Qty,
-                        SerialNumber = itemDetail.SerialNumber
+                        SerialNumber = itemDetail.SerialNumber,
+                        PurchasingDetailId = itemDetail.Id
                     });
                 }
             }
@@ -188,47 +191,69 @@ namespace BrawijayaWorkshop.Model
             decimal totalTransaction = 0;
             foreach (var itemReturn in listReturn)
             {
-                PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetMany(x => x.SparepartId == itemReturn.SparepartId && x.PurchasingId == purchasingID).FirstOrDefault();
-                 listReturnDetail.Add(new PurchaseReturnDetail
+                PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetMany(x => x.Id == itemReturn.PurchasingDetailId).FirstOrDefault();
+                listReturnDetail.Add(new PurchaseReturnDetail
+                {
+                    CreateDate = serverTime,
+                    CreateUserId = userID,
+                    ModifyDate = serverTime,
+                    ModifyUserId = userID,
+                    PurchaseReturnId = purchaseReturn.Id,
+                    PurchasingDetailId = purchasingDetail.Id,
+                    Qty = itemReturn.ReturQty,
+                    Status = (int)DbConstant.DefaultDataStatus.Active
+                });
+                itemReturn.PricePerItem = purchasingDetail.Price;
+                if (itemReturn.ReturQty > 0)
+                {
+                    totalTransaction += itemReturn.ReturQty * purchasingDetail.Price;
+                    
+                    purchasingDetail.QtyRemaining -= itemReturn.ReturQty;
+                    
+                    SpecialSparepartDetail spDetail = _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id).FirstOrDefault();
+                    if (spDetail != null)
                     {
-                        CreateDate = serverTime,
-                        CreateUserId = userID,
-                        ModifyDate = serverTime,
-                        ModifyUserId = userID,
-                        PurchaseReturnId = purchaseReturn.Id,
-                        PurchasingDetailId = purchasingDetail.Id,
-                        Qty = itemReturn.ReturQty,
-                        Status = (int)DbConstant.DefaultDataStatus.Active
-                    });
+                        spDetail.Status = (int)DbConstant.WheelDetailStatus.Deleted;
+                        _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                        _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                        _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                        _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                        _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                        _specialSparepartDetailRepository.Update(spDetail);
+                    }
+                }
 
-                totalTransaction += purchasingDetail.Price;
-                Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
+                _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                _purchasingDetailRepository.AttachNavigation(purchasingDetail.Purchasing);
+                _purchasingDetailRepository.AttachNavigation(purchasingDetail.Sparepart);
+                _purchasingDetailRepository.Update(purchasingDetail);
+                _unitOfWork.SaveChanges();
+
+            }
+
+            List<ReturnViewModel> listReturnGroup = listReturn
+                                    .GroupBy(l => l.SparepartId)
+                                    .Select(cl => new ReturnViewModel
+                                    {
+                                        SparepartId = cl.First().SparepartId,
+                                        ReturQty = cl.Sum(c => c.ReturQty),
+                                        SubTotalFee = cl.Sum(c => c.PricePerItem * c.ReturQty),
+                                        PricePerItem = cl.First().PricePerItem,
+                                    }).ToList();
+
+            foreach (var itemReturnGroup in listReturnGroup)
+            {
+                Sparepart sparepart = _sparepartRepository.GetById(itemReturnGroup.SparepartId);
                 sparepart.ModifyDate = serverTime;
                 sparepart.ModifyUserId = userID;
-                sparepart.StockQty -= itemReturn.ReturQty;
+                sparepart.StockQty -= itemReturnGroup.ReturQty;
 
                 _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                 _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
                 _sparepartRepository.AttachNavigation(sparepart.CategoryReference);
                 _sparepartRepository.AttachNavigation(sparepart.UnitReference);
                 _sparepartRepository.Update(sparepart);
-
-                purchasingDetail.QtyRemaining -= itemReturn.ReturQty;
-                _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
-                _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
-                _purchasingDetailRepository.Update(purchasingDetail);
-
-                SpecialSparepartDetail spDetail = _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id).FirstOrDefault();
-                if (spDetail != null)
-                {
-                    spDetail.Status = (int)DbConstant.WheelDetailStatus.Deleted;
-                    _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
-                    _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
-                    _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
-                    _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
-                    _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
-                    _specialSparepartDetailRepository.Update(spDetail);
-                }
 
                 SparepartStockCard stockCard = new SparepartStockCard();
                 stockCard.CreateUserId = userID;
@@ -237,8 +262,8 @@ namespace BrawijayaWorkshop.Model
                 stockCard.ReferenceTableId = transactionReferenceTable.Id;
                 stockCard.SparepartId = sparepart.Id;
                 stockCard.Description = "Retur Pembelian";
-                stockCard.QtyOut = itemReturn.ReturQty;
-                stockCard.QtyOutPrice = Convert.ToDouble(itemReturn.ReturQty * purchasingDetail.Price);
+                stockCard.QtyOut = itemReturnGroup.ReturQty;
+                stockCard.QtyOutPrice = Convert.ToDouble(itemReturnGroup.SubTotalFee);
                 SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
                 double lastStock = 0;
                 double lastStockPrice = 0;
@@ -254,14 +279,14 @@ namespace BrawijayaWorkshop.Model
                 _sparepartStokCardRepository.AttachNavigation(stockCard.CreateUser);
                 _sparepartStokCardRepository.AttachNavigation(stockCard.Sparepart);
                 _sparepartStokCardRepository.AttachNavigation(stockCard.ReferenceTable);
-                stockCard =_sparepartStokCardRepository.Add(stockCard);
+                stockCard = _sparepartStokCardRepository.Add(stockCard);
                 _unitOfWork.SaveChanges();
 
                 SparepartStockCardDetail stockCardDtail = new SparepartStockCardDetail();
                 stockCardDtail.ParentStockCard = stockCard;
-                stockCardDtail.PricePerItem = Convert.ToDouble(purchasingDetail.Price);
-                stockCardDtail.QtyOut = itemReturn.ReturQty;
-                stockCardDtail.QtyOutPrice = Convert.ToDouble(purchasingDetail.Price * itemReturn.ReturQty);
+                stockCardDtail.PricePerItem = Convert.ToDouble(itemReturnGroup.PricePerItem);
+                stockCardDtail.QtyOut = itemReturnGroup.ReturQty;
+                stockCardDtail.QtyOutPrice = Convert.ToDouble(itemReturnGroup.SubTotalFee);
                 SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, purchasingID);
                 double lastStockDetail = 0;
                 double lastStockDetailPrice = 0;
@@ -275,11 +300,10 @@ namespace BrawijayaWorkshop.Model
                 stockCardDtail.QtyLast = lastStockDetail - stockCardDtail.QtyOut;
                 stockCardDtail.QtyLastPrice = lastStockDetailPrice - stockCardDtail.QtyOutPrice;
                 stockCardDtail.PurchasingId = purchasingID;
-                        
+
                 _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                 _sparepartStokCardDetailRepository.Add(stockCardDtail);
                 _unitOfWork.SaveChanges();
-
             }
 
             Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
@@ -381,7 +405,7 @@ namespace BrawijayaWorkshop.Model
             foreach (var item in listDetail)
 	        {
                 PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetById(item.PurchasingDetailId);
-                 purchasingDetail.QtyRemaining -= item.Qty;
+                 purchasingDetail.QtyRemaining += item.Qty;
                  _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
                  _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
                  _purchasingDetailRepository.Update(purchasingDetail);
@@ -407,8 +431,9 @@ namespace BrawijayaWorkshop.Model
                                     .Select(cl => new ReturnViewModel
                                     {
                                         SparepartId = cl.First().PurchasingDetail.SparepartId,
-                                        ReturQty = cl.Count(),
-                                        PricePerItem = cl.First().PurchasingDetail.Price
+                                        ReturQty = cl.Sum(c=>c.Qty),
+                                        SubTotalFee = cl.Sum(c=>c.PurchasingDetail.Price * c.Qty),
+                                        PricePerItem = cl.First().PurchasingDetail.Price,                                       
                                     }).ToList();
 
             foreach (var itemDetail in listDetail)
@@ -428,7 +453,7 @@ namespace BrawijayaWorkshop.Model
             foreach (var itemReturn in listReturn)
             {
                 Sparepart sparepart = _sparepartRepository.GetById(itemReturn.SparepartId);
-                sparepart.StockQty -= itemReturn.ReturQty;
+                sparepart.StockQty += itemReturn.ReturQty;
                 
                 _sparepartRepository.AttachNavigation(sparepart.CreateUser);
                 _sparepartRepository.AttachNavigation(sparepart.ModifyUser);
@@ -444,7 +469,7 @@ namespace BrawijayaWorkshop.Model
                 stockCard.SparepartId = sparepart.Id;
                 stockCard.Description = "Pembatalan Retur Pembelian";
                 stockCard.QtyIn = itemReturn.ReturQty;
-                stockCard.QtyInPrice = Convert.ToDouble(itemReturn.ReturQty * itemReturn.PricePerItem);
+                stockCard.QtyInPrice = itemReturn.SubTotalFee.AsDouble();
                 SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
                 double lastStock = 0;
                 double lastStockPrice = 0;
@@ -467,7 +492,7 @@ namespace BrawijayaWorkshop.Model
                 stockCardDtail.ParentStockCard = stockCard;
                 stockCardDtail.PricePerItem = Convert.ToDouble(itemReturn.PricePerItem);
                 stockCardDtail.QtyIn = itemReturn.ReturQty;
-                stockCardDtail.QtyInPrice = Convert.ToDouble(itemReturn.PricePerItem * itemReturn.ReturQty);
+                stockCardDtail.QtyInPrice = itemReturn.SubTotalFee.AsDouble();
                 SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, purchaseReturn.PurchasingId);
                 double lastStockDetail = 0;
                 double lastStockDetailPrice = 0;

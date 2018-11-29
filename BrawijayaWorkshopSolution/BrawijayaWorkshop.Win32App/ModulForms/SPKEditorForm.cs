@@ -530,11 +530,11 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     {
                         if (item.PurchasingDetailId > 0)
                         {
-                            totalPrice = item.PurchasingDetail.Price * item.Qty;
+                            totalPrice += item.PurchasingDetail.Price * item.Qty;
                         }
                         else if (item.SparepartManualTransactionId > 0)
                         {
-                            totalPrice = item.SparepartManualTransaction.Price * item.Qty;
+                            totalPrice += item.SparepartManualTransaction.Price * item.Qty;
                         }
                     }
 

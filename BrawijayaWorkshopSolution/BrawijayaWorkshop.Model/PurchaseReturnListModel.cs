@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -21,6 +22,7 @@ namespace BrawijayaWorkshop.Model
         private ISupplierRepository _supplierRepository;
         private ISparepartStockCardRepository _sparepartStokCardRepository;
         private ISparepartStockCardDetailRepository _sparepartStokCardDetailRepository;
+        private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public PurchaseReturnListModel(ITransactionRepository transactionRepository,
@@ -31,6 +33,7 @@ namespace BrawijayaWorkshop.Model
             ISupplierRepository supplierRepository,
             ISparepartStockCardRepository sparepartStockCardRepository,
             ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
+            ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
@@ -44,6 +47,7 @@ namespace BrawijayaWorkshop.Model
             _supplierRepository = supplierRepository;
             _sparepartStokCardRepository = sparepartStockCardRepository;
             _sparepartStokCardDetailRepository = sparepartStockCardDetailRepository;
+            _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -86,7 +90,7 @@ namespace BrawijayaWorkshop.Model
             {
                 foreach (var itemReturn in listReturnDetail)
                 {
-                    result += itemReturn.PurchasingDetail != null ? itemReturn.PurchasingDetail.Price : itemReturn.SparepartManualTransaction.Price;
+                    result += itemReturn.PurchasingDetail != null ? itemReturn.Qty * itemReturn.PurchasingDetail.Price : itemReturn.Qty * itemReturn.SparepartManualTransaction.Price;
                 }
             }
 
@@ -115,10 +119,11 @@ namespace BrawijayaWorkshop.Model
             {
                 try
                 {
+                    //delete old purchase return
                     DateTime serverTime = DateTime.Now;
 
                     Reference transactionReferenceTable = _referenceRepository.GetMany(c => c.Code == DbConstant.REF_TRANSTBL_PURCHASERETURN).FirstOrDefault();
-            
+
                     PurchaseReturn purchaseReturn = _purchaseReturnRepository.GetById(purchaseReturnID);
                     purchaseReturn.Status = (int)DbConstant.DefaultDataStatus.Deleted;
                     purchaseReturn.ModifyDate = serverTime;
@@ -131,14 +136,47 @@ namespace BrawijayaWorkshop.Model
                     _unitOfWork.SaveChanges();
 
                     List<PurchaseReturnDetail> listDetail = _purchaseReturnDetailRepository.GetMany(x => x.PurchaseReturnId == purchaseReturnID).ToList();
+
+                    foreach (var item in listDetail)
+                    {
+                        if (item.Qty > 0)
+                        {
+                            PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetById(item.PurchasingDetailId);
+                            purchasingDetail.QtyRemaining += item.Qty;
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetail.Purchasing);
+                            _purchasingDetailRepository.AttachNavigation(purchasingDetail.Sparepart);
+                            _purchasingDetailRepository.Update(purchasingDetail);
+
+                            SpecialSparepartDetail spDetail = _specialSparepartDetailRepository.GetMany(x => x.PurchasingDetailId == purchasingDetail.Id).FirstOrDefault();
+                            if (spDetail != null)
+                            {
+                                spDetail.Status = (int)DbConstant.WheelDetailStatus.Ready;
+                                _specialSparepartDetailRepository.AttachNavigation(spDetail.CreateUser);
+                                _specialSparepartDetailRepository.AttachNavigation(spDetail.ModifyUser);
+                                _specialSparepartDetailRepository.AttachNavigation(spDetail.PurchasingDetail);
+                                _specialSparepartDetailRepository.AttachNavigation(spDetail.Sparepart);
+                                _specialSparepartDetailRepository.AttachNavigation(spDetail.SparepartManualTransaction);
+                                _specialSparepartDetailRepository.Update(spDetail);
+
+                            }
+
+                            _unitOfWork.SaveChanges();
+                        }
+
+                    }
+
+
                     List<ReturnViewModel> listReturn = listDetail
-                                    .GroupBy(l => l.PurchasingDetail.Sparepart)
-                                    .Select(cl => new ReturnViewModel
-                                    {
-                                        SparepartId = cl.First().PurchasingDetail.SparepartId,
-                                        ReturQty = cl.Count(),
-                                        PricePerItem = cl.First().PurchasingDetail.Price
-                                    }).ToList();
+                                            .GroupBy(l => l.PurchasingDetail.Sparepart)
+                                            .Select(cl => new ReturnViewModel
+                                            {
+                                                SparepartId = cl.First().PurchasingDetail.SparepartId,
+                                                ReturQty = cl.Sum(c => c.Qty),
+                                                SubTotalFee = cl.Sum(c => c.PurchasingDetail.Price * c.Qty),
+                                                PricePerItem = cl.First().PurchasingDetail.Price,
+                                            }).ToList();
 
                     foreach (var itemDetail in listDetail)
                     {
@@ -147,16 +185,11 @@ namespace BrawijayaWorkshop.Model
                         itemDetail.ModifyUserId = userID;
 
                         _purchaseReturnDetailRepository.AttachNavigation(itemDetail.CreateUser);
-                        _purchaseReturnRepository.AttachNavigation(itemDetail.ModifyUser);
-                        _purchaseReturnRepository.AttachNavigation(itemDetail.PurchaseReturn);
-                        _purchaseReturnRepository.AttachNavigation(itemDetail.PurchasingDetail);
+                        _purchaseReturnDetailRepository.AttachNavigation(itemDetail.ModifyUser);
+                        _purchaseReturnDetailRepository.AttachNavigation(itemDetail.PurchaseReturn);
+                        _purchaseReturnDetailRepository.AttachNavigation(itemDetail.PurchasingDetail);
                         _purchaseReturnDetailRepository.Update(itemDetail);
 
-                        PurchasingDetail purchasingDetail = _purchasingDetailRepository.GetById(itemDetail.PurchasingDetailId);
-                        purchasingDetail.QtyRemaining += itemDetail.Qty;
-                        _purchasingDetailRepository.AttachNavigation(purchasingDetail.CreateUser);
-                        _purchasingDetailRepository.AttachNavigation(purchasingDetail.ModifyUser);
-                        _purchasingDetailRepository.Update(purchasingDetail);
                     }
 
                     foreach (var itemReturn in listReturn)
@@ -178,7 +211,7 @@ namespace BrawijayaWorkshop.Model
                         stockCard.SparepartId = sparepart.Id;
                         stockCard.Description = "Pembatalan Retur Pembelian";
                         stockCard.QtyIn = itemReturn.ReturQty;
-                        stockCard.QtyInPrice = Convert.ToDouble(itemReturn.ReturQty * itemReturn.PricePerItem);
+                        stockCard.QtyInPrice = itemReturn.SubTotalFee.AsDouble();
                         SparepartStockCard lastStockCard = _sparepartStokCardRepository.RetrieveLastCard(sparepart.Id);
                         double lastStock = 0;
                         double lastStockPrice = 0;
@@ -201,11 +234,11 @@ namespace BrawijayaWorkshop.Model
                         stockCardDtail.ParentStockCard = stockCard;
                         stockCardDtail.PricePerItem = Convert.ToDouble(itemReturn.PricePerItem);
                         stockCardDtail.QtyIn = itemReturn.ReturQty;
-                        stockCardDtail.QtyInPrice = Convert.ToDouble(itemReturn.PricePerItem * itemReturn.ReturQty);
+                        stockCardDtail.QtyInPrice = itemReturn.SubTotalFee.AsDouble();
                         SparepartStockCardDetail lastStockCardDetail = _sparepartStokCardDetailRepository.RetrieveLastCardDetailByPurchasingId(sparepart.Id, purchaseReturn.PurchasingId);
                         double lastStockDetail = 0;
                         double lastStockDetailPrice = 0;
-                        if (lastStockCardDetail != null)
+                        if (lastStockCardDetail.QtyIn != null)
                         {
                             lastStockDetail = lastStockCardDetail.QtyLast;
                             lastStockDetailPrice = lastStockCardDetail.QtyLastPrice;
@@ -215,11 +248,10 @@ namespace BrawijayaWorkshop.Model
                         stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
                         stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
                         stockCardDtail.PurchasingId = purchaseReturn.PurchasingId;
-
                         _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                         _sparepartStokCardDetailRepository.Add(stockCardDtail);
                         _unitOfWork.SaveChanges();
-                    }        
+                    }
 
                     _unitOfWork.SaveChanges();
 
@@ -233,8 +265,6 @@ namespace BrawijayaWorkshop.Model
                     _transactionRepository.AttachNavigation(transaction.PaymentMethod);
                     _transactionRepository.AttachNavigation(transaction.ReferenceTable);
                     _transactionRepository.Update(transaction);
-
-
 
                     Purchasing purchasing = _purchasingRepository.GetById(purchaseReturn.PurchasingId);
                     purchasing.Status = (int)DbConstant.PurchasingStatus.Active;
@@ -257,10 +287,11 @@ namespace BrawijayaWorkshop.Model
                     _purchasingRepository.AttachNavigation(purchasing.PaymentMethod);
                     _purchasingRepository.AttachNavigation(purchasing.Supplier);
 
+
                     _unitOfWork.SaveChanges();
                     trans.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
                     throw;

@@ -25,5 +25,6 @@ namespace BrawijayaWorkshop.SharedObject.ViewModels
 
         public decimal SubTotalFee { get; set; }
         public int ReturQtyLimit { get; set; }
+        public int PurchasingDetailId { get; set; }
     }
 }
