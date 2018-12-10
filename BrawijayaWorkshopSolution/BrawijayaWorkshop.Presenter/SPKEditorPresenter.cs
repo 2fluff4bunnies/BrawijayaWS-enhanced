@@ -94,7 +94,7 @@ namespace BrawijayaWorkshop.Presenter
         }
         public void populateSparepartDetail()
         {
-            View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty));
+            View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty, View.SSDetailId));
         }
 
         public void SetSelectedWheelDetailToChange(int wheelDetailId)

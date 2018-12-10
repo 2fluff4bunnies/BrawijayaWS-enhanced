@@ -55,11 +55,10 @@ namespace BrawijayaWorkshop.Model
 
             if (!string.IsNullOrEmpty(LicenseNumber))
             {
-                VehicleDetail vehicleDetail = _vehicleDetailRepository.GetMany(v => string.Compare(v.LicenseNumber, LicenseNumber, true) == 1
-                                                                                    && v.Status == (int)DbConstant.DefaultDataStatus.Active).FirstOrDefault();
-                if (vehicleDetail != null)
+                IEnumerable<int> vehicleDetails = _vehicleDetailRepository.GetMany(v => v.LicenseNumber.Contains(LicenseNumber)).Select(v => v.Id).DefaultIfEmpty(0);
+                if (vehicleDetails != null)
                 {
-                    result = result.Where(spk => spk.VehicleId == vehicleDetail.VehicleId).ToList();
+                    result = result.Where(spk => vehicleDetails.Contains(spk.VehicleId)).ToList();
                 }
             }
 

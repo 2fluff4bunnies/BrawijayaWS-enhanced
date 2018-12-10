@@ -487,7 +487,7 @@ namespace BrawijayaWorkshop.Model
                                                 .Select(cl => new PurchasingDetailViewModel
                                                 {
                                                     PurchasingId = cl.Key,
-                                                    Qty = cl.Sum(x=>x.Qty),
+                                                    Qty = cl.Sum(x => x.Qty),
                                                     Price = cl.First().Price
                                                 }).ToList();
 
@@ -716,7 +716,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty)
+        public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty, int ssDetailId)
         {
             List<SparepartManualTransaction> spManuals = new List<SparepartManualTransaction>();
             List<PurchasingDetail> purchasingDetails = new List<PurchasingDetail>();
@@ -738,25 +738,39 @@ namespace BrawijayaWorkshop.Model
                     {
                         itemManual.QtyRemaining = itemManual.QtyRemaining - qtyRemains;
 
-                        result.Add(new SPKDetailSparepartDetail
+                        SPKDetailSparepartDetail spkspd = new SPKDetailSparepartDetail
                         {
                             SparepartManualTransaction = itemManual,
                             SparepartManualTransactionId = itemManual.Id,
                             SPKDetailSparepartId = itemManual.SparepartId,
-                            Qty = qtyRemains,
-                        });
+                            Qty = qtyRemains
+                        };
+
+                        if (ssDetailId > 0)
+                        {
+                            spkspd.SpecialSparepartDetailId = ssDetailId;
+                        }
+
+                        result.Add(spkspd);
 
                         qtyRemains = 0;
                     }
                     else
                     {
-                        result.Add(new SPKDetailSparepartDetail
+                        SPKDetailSparepartDetail spkspd = new SPKDetailSparepartDetail
                         {
                             SparepartManualTransaction = itemManual,
                             SparepartManualTransactionId = itemManual.Id,
                             SPKDetailSparepartId = itemManual.SparepartId,
                             Qty = itemManual.QtyRemaining
-                        });
+                        };
+
+                        if (ssDetailId > 0)
+                        {
+                            spkspd.SpecialSparepartDetailId = ssDetailId;
+                        }
+
+                        result.Add(spkspd);
 
                         qtyRemains -= itemManual.QtyRemaining;
                         itemManual.QtyRemaining = 0;
@@ -780,25 +794,40 @@ namespace BrawijayaWorkshop.Model
                         {
                             itemPD.QtyRemaining = itemPD.QtyRemaining - qtyRemains;
 
-                            result.Add(new SPKDetailSparepartDetail
+                            SPKDetailSparepartDetail spkspd = new SPKDetailSparepartDetail
                             {
                                 PurchasingDetail = itemPD,
                                 PurchasingDetailId = itemPD.Id,
                                 SPKDetailSparepartId = itemPD.SparepartId,
                                 Qty = qtyRemains
-                            });
+                            };
+
+                            if (ssDetailId > 0)
+                            {
+                                spkspd.SpecialSparepartDetailId = ssDetailId;
+                            }
+
+                            result.Add(spkspd);
 
                             qtyRemains = 0;
                         }
                         else
                         {
-                            result.Add(new SPKDetailSparepartDetail
+
+                            SPKDetailSparepartDetail spkspd = new SPKDetailSparepartDetail
                             {
                                 PurchasingDetail = itemPD,
                                 PurchasingDetailId = itemPD.Id,
                                 SPKDetailSparepartId = itemPD.SparepartId,
                                 Qty = itemPD.QtyRemaining
-                            });
+                            };
+
+                            if (ssDetailId > 0)
+                            {
+                                spkspd.SpecialSparepartDetailId = ssDetailId;
+                            }
+
+                            result.Add(spkspd);
 
                             qtyRemains -= itemPD.QtyRemaining;
                             itemPD.QtyRemaining = 0;
