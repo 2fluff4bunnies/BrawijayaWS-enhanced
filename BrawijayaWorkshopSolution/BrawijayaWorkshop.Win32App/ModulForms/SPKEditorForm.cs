@@ -526,7 +526,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                     decimal totalPrice = 0;
 
-                    foreach (var item in SPKSparepartDetailList)
+                    List<SPKDetailSparepartDetailViewModel> SelectedSPKSparepartDetailList = SPKSparepartDetailList.Where(x => x.SPKDetailSparepartId == SparepartId).ToList();
+                    foreach (var item in SelectedSPKSparepartDetailList)
                     {
                         if (item.PurchasingDetailId > 0)
                         {
