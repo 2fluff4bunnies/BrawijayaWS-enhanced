@@ -1,5 +1,6 @@
 ﻿using BrawijayaWorkshop.Infrastructure.MVP;
 using BrawijayaWorkshop.Model;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.View;
 using LINQtoCSV;
 using System.Linq;
@@ -34,6 +35,11 @@ namespace BrawijayaWorkshop.Presenter
                 };
 
             cc.Write(exportSpKs, View.ExportFileName, outputFileDescription);
+        }
+
+        public void PrintSPK()
+        {
+            Model.PrintSPK(View.SelectedSPK, LoginInformation.UserId);
         }
 
         public void LoadSPK()

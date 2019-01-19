@@ -43,5 +43,18 @@ namespace BrawijayaWorkshop.Model
 
             return Map(result, mappedResult);
         }
+
+        public void PrintSPK(SPKViewModel spk, int userId)
+        {
+            DateTime serverTime = DateTime.Now;
+            SPK entity = _spkRepository.GetById(spk.Id);
+            entity.StatusPrintId = (int)DbConstant.SPKPrintStatus.Printed;
+            entity.ModifyDate = serverTime;
+            entity.ModifyUserId = userId;
+
+            _spkRepository.Update(entity);
+
+            _unitOfWork.SaveChanges();
+        }
     }
 }

@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SPKSaleListControl));
-            this.cmsEditData = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bgwMain = new System.ComponentModel.BackgroundWorker();
             this.btnNewSale = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -40,16 +38,26 @@
             this.txtDateFilterFrom = new DevExpress.XtraEditors.DateEdit();
             this.lblFilterDate = new DevExpress.XtraEditors.LabelControl();
             this.gcFilter = new DevExpress.XtraEditors.GroupControl();
+            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.gcSPKSales = new DevExpress.XtraGrid.GridControl();
             this.gvSPKSales = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLicenseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
-            this.cmsEditor.SuspendLayout();
+            this.cmsEditData = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEndorseData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsSPKApproval = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsRollback = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsPrintData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsRequestPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPrintApproval = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsSetAsCompleted = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAbort = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -58,22 +66,8 @@
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).BeginInit();
+            this.cmsEditData.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // cmsEditData
-            // 
-            this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
-            this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(129, 22);
-            this.cmsEditData.Text = "Ubah Data";
-            this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
-            // 
-            // cmsEditor
-            // 
-            this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsEditData});
-            this.cmsEditor.Name = "cmsEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(130, 26);
             // 
             // bgwMain
             // 
@@ -174,6 +168,18 @@
             this.gcFilter.TabIndex = 5;
             this.gcFilter.Text = "Filter";
             // 
+            // btnExportToCSV
+            // 
+            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
+            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnExportToCSV.Location = new System.Drawing.Point(507, 29);
+            this.btnExportToCSV.Name = "btnExportToCSV";
+            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
+            this.btnExportToCSV.TabIndex = 32;
+            this.btnExportToCSV.Text = "Export Data";
+            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
+            // 
             // gcSPKSales
             // 
             this.gcSPKSales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -246,18 +252,6 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 3;
             // 
-            // btnExportToCSV
-            // 
-            this.btnExportToCSV.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.export3_16x16;
-            this.btnExportToCSV.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnExportToCSV.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnExportToCSV.Location = new System.Drawing.Point(507, 29);
-            this.btnExportToCSV.Name = "btnExportToCSV";
-            this.btnExportToCSV.Size = new System.Drawing.Size(106, 23);
-            this.btnExportToCSV.TabIndex = 32;
-            this.btnExportToCSV.Text = "Export Data";
-            this.btnExportToCSV.Click += new System.EventHandler(this.btnExportToCSV_Click);
-            // 
             // exportDialog
             // 
             this.exportDialog.DefaultExt = "csv";
@@ -270,6 +264,99 @@
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
+            // cmsEditData
+            // 
+            this.cmsEditData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewDetailToolStripMenuItem,
+            this.cmsEndorseData,
+            this.cmsSPKApproval,
+            this.cmsRollback,
+            this.toolStripSeparator1,
+            this.cmsPrintData,
+            this.cmsRequestPrint,
+            this.cmsPrintApproval,
+            this.cmsSetAsCompleted,
+            this.cmsAbort});
+            this.cmsEditData.Name = "cmsListEditor";
+            this.cmsEditData.Size = new System.Drawing.Size(172, 230);
+            // 
+            // viewDetailToolStripMenuItem
+            // 
+            this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
+            this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
+            this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
+            // 
+            // cmsEndorseData
+            // 
+            this.cmsEndorseData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
+            this.cmsEndorseData.Name = "cmsEndorseData";
+            this.cmsEndorseData.Size = new System.Drawing.Size(171, 22);
+            this.cmsEndorseData.Text = "Revisi";
+            this.cmsEndorseData.Click += new System.EventHandler(this.cmsEndorseData_Click);
+            // 
+            // cmsSPKApproval
+            // 
+            this.cmsSPKApproval.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.approve_16x16;
+            this.cmsSPKApproval.Name = "cmsSPKApproval";
+            this.cmsSPKApproval.Size = new System.Drawing.Size(171, 22);
+            this.cmsSPKApproval.Text = "Persetujuan SPK";
+            this.cmsSPKApproval.Click += new System.EventHandler(this.cmsSPKApproval_Click);
+            // 
+            // cmsRollback
+            // 
+            this.cmsRollback.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources._1459465829_refresh;
+            this.cmsRollback.Name = "cmsRollback";
+            this.cmsRollback.Size = new System.Drawing.Size(171, 22);
+            this.cmsRollback.Text = "Rollback";
+            this.cmsRollback.Click += new System.EventHandler(this.cmsRollback_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
+            // 
+            // cmsPrintData
+            // 
+            this.cmsPrintData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsPrintData.Name = "cmsPrintData";
+            this.cmsPrintData.Size = new System.Drawing.Size(171, 22);
+            this.cmsPrintData.Text = "Print";
+            this.cmsPrintData.Click += new System.EventHandler(this.cmsPrintData_Click);
+            // 
+            // cmsRequestPrint
+            // 
+            this.cmsRequestPrint.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.print_16x16;
+            this.cmsRequestPrint.Name = "cmsRequestPrint";
+            this.cmsRequestPrint.Size = new System.Drawing.Size(171, 22);
+            this.cmsRequestPrint.Text = "Permohonan Print";
+            this.cmsRequestPrint.Click += new System.EventHandler(this.cmsRequestPrint_Click);
+            // 
+            // cmsPrintApproval
+            // 
+            this.cmsPrintApproval.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.approve_16x16;
+            this.cmsPrintApproval.Name = "cmsPrintApproval";
+            this.cmsPrintApproval.Size = new System.Drawing.Size(171, 22);
+            this.cmsPrintApproval.Text = "Persetujuan Print";
+            this.cmsPrintApproval.Click += new System.EventHandler(this.cmsPrintApproval_Click);
+            // 
+            // cmsSetAsCompleted
+            // 
+            this.cmsSetAsCompleted.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.completed_16x16;
+            this.cmsSetAsCompleted.Name = "cmsSetAsCompleted";
+            this.cmsSetAsCompleted.Size = new System.Drawing.Size(171, 22);
+            this.cmsSetAsCompleted.Text = "Set SPK Selesai";
+            this.cmsSetAsCompleted.Click += new System.EventHandler(this.cmsSetAsCompleted_Click);
+            // 
+            // cmsAbort
+            // 
+            this.cmsAbort.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
+            this.cmsAbort.Name = "cmsAbort";
+            this.cmsAbort.Size = new System.Drawing.Size(171, 22);
+            this.cmsAbort.Text = "Batalkan";
+            this.cmsAbort.Click += new System.EventHandler(this.cmsAbort_Click);
+            // 
             // SPKSaleListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,7 +366,6 @@
             this.Controls.Add(this.gcFilter);
             this.Name = "SPKSaleListControl";
             this.Size = new System.Drawing.Size(638, 315);
-            this.cmsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateFilterFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -289,14 +375,13 @@
             this.gcFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcSPKSales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSPKSales)).EndInit();
+            this.cmsEditData.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem cmsEditData;
-        private System.Windows.Forms.ContextMenuStrip cmsEditor;
         private System.ComponentModel.BackgroundWorker bgwMain;
         private DevExpress.XtraEditors.SimpleButton btnNewSale;
         private DevExpress.XtraEditors.LabelControl labelControl1;
@@ -314,6 +399,17 @@
         private DevExpress.XtraEditors.SimpleButton btnExportToCSV;
         private System.Windows.Forms.SaveFileDialog exportDialog;
         private System.ComponentModel.BackgroundWorker bgwExport;
+        private System.Windows.Forms.ContextMenuStrip cmsEditData;
+        private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmsEndorseData;
+        private System.Windows.Forms.ToolStripMenuItem cmsSPKApproval;
+        private System.Windows.Forms.ToolStripMenuItem cmsRollback;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem cmsPrintData;
+        private System.Windows.Forms.ToolStripMenuItem cmsRequestPrint;
+        private System.Windows.Forms.ToolStripMenuItem cmsPrintApproval;
+        private System.Windows.Forms.ToolStripMenuItem cmsSetAsCompleted;
+        private System.Windows.Forms.ToolStripMenuItem cmsAbort;
 
     }
 }

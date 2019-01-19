@@ -5,8 +5,10 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
 using BrawijayaWorkshop.Win32App.ModulForms;
+using BrawijayaWorkshop.Win32App.PrintItems;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -173,7 +175,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             if (hitInfo.InRow)
             {
                 view.FocusedRowHandle = hitInfo.RowHandle;
-                cmsEditor.Show(view.GridControl, e.Point);
+                cmsEditData.Show(view.GridControl, e.Point);
+                this.SelectedSPK = gvSPKSales.GetRow(view.FocusedRowHandle) as SPKViewModel;
+                ApplyCMSSetting();
             }
         }
 
@@ -231,6 +235,148 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             MethodBase.GetCurrentMethod().Info("Exporting SPKSale data...");
             FormHelpers.CurrentMainForm.UpdateStatusInformation("Proses export data SPKSale...", false);
             bgwExport.RunWorkerAsync();
+        }
+
+
+        private void viewDetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsApproval = false;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsEndorseData_Click(object sender, EventArgs e)
+        {
+            SPKEditorForm editor = Bootstrapper.Resolve<SPKEditorForm>();
+            editor.ParentSPK = this.SelectedSPK;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsPrintData_Click(object sender, EventArgs e)
+        {
+            SPKPrintItem report = new SPKPrintItem();
+            List<SPKViewModel> _dataSource = new List<SPKViewModel>();
+            _dataSource.Add(SelectedSPK);
+            report.DataSource = _dataSource;
+            report.FillDataSource();
+
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // Invoke the Print dialog.
+                bool? result = printTool.PrintDialog();
+                if (result.HasValue && result.Value)
+                {
+                    _presenter.PrintSPK();
+                }
+            }
+
+            btnSearch.PerformClick();
+        }
+
+
+        private void cmsSetAsCompleted_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsSetAsComplete = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsRequestPrint_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsRequestPrintApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsSPKApproval_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsPrintApproval_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsPrintApproval = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        private void cmsRollback_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsRollBack = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+
+        private void cmsAbort_Click(object sender, EventArgs e)
+        {
+            SPKViewDetailForm editor = Bootstrapper.Resolve<SPKViewDetailForm>();
+            editor.SelectedSPK = this.SelectedSPK;
+            editor.IsAbort = true;
+            editor.ShowDialog(this);
+
+            btnSearch.PerformClick();
+        }
+
+        void ApplyCMSSetting()
+        {
+            if (this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.Completed)
+            {
+                cmsEndorseData.Visible = false;
+                cmsPrintData.Visible = false;
+                cmsRequestPrint.Visible = false;
+                cmsSetAsCompleted.Visible = false;
+                cmsSPKApproval.Visible = false;
+                cmsPrintApproval.Visible = false;
+                cmsAbort.Visible = false;
+                cmsEndorseData.Visible = false;
+                cmsRollback.Visible = false;
+                //cmsRollback.Visible = LoginInformation.RoleName == DbConstant.ROLE_MANAGER || LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN;
+            }
+            else
+            {
+                cmsSPKApproval.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Pending;
+
+                cmsPrintApproval.Visible = (this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Pending &&
+                    this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved);
+
+                cmsEndorseData.Visible = (this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved ||
+                    this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Rejected) &&
+                    this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
+                cmsPrintData.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Ready;
+
+                cmsRequestPrint.Visible = this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed;
+                cmsSetAsCompleted.Visible = this.SelectedSPK.StatusApprovalId == (int)DbConstant.ApprovalStatus.Approved &&
+                    this.SelectedSPK.StatusPrintId == (int)DbConstant.SPKPrintStatus.Printed &&
+                    this.SelectedSPK.StatusCompletedId == (int)DbConstant.SPKCompletionStatus.InProgress;
+
+                toolStripSeparator1.Visible = cmsEndorseData.Visible && cmsPrintData.Visible && cmsRequestPrint.Visible &&
+                    cmsSetAsCompleted.Visible;
+
+                cmsRollback.Visible = false;
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace BrawijayaWorkshop.Model
             List<SPK> result = _SPKRepository.GetMany(spk =>
                 DbFunctions.TruncateTime(spk.CreateDate) >= DbFunctions.TruncateTime(from) &&
                 DbFunctions.TruncateTime(spk.CreateDate) <= DbFunctions.TruncateTime(to) &&
-                spk.Status == (int)DbConstant.DefaultDataStatus.Active && spk.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE).ToList();
+                spk.Status == (int)DbConstant.DefaultDataStatus.Active).ToList();
 
             if ((int)completedStatus != 9)
             {
