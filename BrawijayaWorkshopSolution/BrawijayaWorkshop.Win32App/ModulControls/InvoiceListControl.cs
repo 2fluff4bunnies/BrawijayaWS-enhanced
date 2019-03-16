@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
@@ -45,6 +46,15 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             cmsEditData.Enabled = AllowEdit;
             cmsPrint.Enabled = AllowEdit;
             cmsAddReturn.Enabled = AllowEdit;
+
+            if (LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN)
+            {
+                btnRepairAll.Visible = true;
+            }
+            else
+            {
+                btnRepairAll.Visible = false;
+            }
 
             this.Load += InvoiceListControl_Load;
         }
@@ -511,6 +521,11 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
                 btnSearch.PerformClick();
             }
+        }
+
+        private void btnRepairAll_Click(object sender, EventArgs e)
+        {
+            _presenter.RepairAll();
         }
     }
 }

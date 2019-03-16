@@ -48,7 +48,7 @@ namespace BrawijayaWorkshop.Presenter
         public void LoadVehicleGroups()
         {
             List<VehicleGroupViewModel> listVehicleGroup = new List<VehicleGroupViewModel>();
-            if(View.SelectedCustomerId > 0)
+            if (View.SelectedCustomerId > 0)
             {
                 listVehicleGroup = Model.GetVehicleGroupByCustomer(View.SelectedCustomerId);
             }
@@ -63,7 +63,7 @@ namespace BrawijayaWorkshop.Presenter
         public void LoadInvoiceList()
         {
             int paymentStatus = -1;
-            if(string.Compare(View.InvoiceStatusPayment, "Belum Lunas", true) == 0)
+            if (string.Compare(View.InvoiceStatusPayment, "Belum Lunas", true) == 0)
             {
                 paymentStatus = 0;
             }
@@ -72,7 +72,7 @@ namespace BrawijayaWorkshop.Presenter
                 paymentStatus = 1;
             }
 
-            View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter, View.SelectedCustomerId, 
+            View.InvoiceListData = Model.SearchInvoice(View.DateFromFilter, View.DateToFilter, (DbConstant.InvoiceStatus)View.InvoiceStatusFilter, View.SelectedCustomerId,
                 View.ServiceCategoryFilter, View.SelectedVehicleGroupId, View.LicenseNumberFilter, paymentStatus);
         }
 
@@ -97,7 +97,10 @@ namespace BrawijayaWorkshop.Presenter
             var exportInvoices =
                 from inv in listDetails
                 group inv by
-                new { InvoiceCode = inv.Invoice.Code, inv.Invoice.CreateDate, 
+                new
+                {
+                    InvoiceCode = inv.Invoice.Code,
+                    inv.Invoice.CreateDate,
                     inv.Invoice.SPK.Vehicle.Customer.CompanyName,
                     VehicleCode = inv.Invoice.SPK.Vehicle.Code,
                     inv.Invoice.SPK.Vehicle.ActiveLicenseNumber,
@@ -158,6 +161,11 @@ namespace BrawijayaWorkshop.Presenter
         public List<InvoiceSparepartViewModel> GetSparepartInvoice(int invoiceID)
         {
             return Model.GetInvoiceSparepartList(invoiceID);
+        }
+
+        public void RepairAll()
+        {
+            Model.RepairInvoice();
         }
     }
 }

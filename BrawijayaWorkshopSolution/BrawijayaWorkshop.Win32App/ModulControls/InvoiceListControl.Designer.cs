@@ -65,6 +65,7 @@
             this.btnExportToCSV = new DevExpress.XtraEditors.SimpleButton();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
+            this.btnRepairAll = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcFilter)).BeginInit();
             this.gcFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpServiceCategory.Properties)).BeginInit();
@@ -484,10 +485,22 @@
             this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
             this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
             // 
+            // btnRepairAll
+            // 
+            this.btnRepairAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnRepairAll.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnRepairAll.Location = new System.Drawing.Point(231, 189);
+            this.btnRepairAll.Name = "btnRepairAll";
+            this.btnRepairAll.Size = new System.Drawing.Size(106, 23);
+            this.btnRepairAll.TabIndex = 9;
+            this.btnRepairAll.Text = "Repair All";
+            this.btnRepairAll.Click += new System.EventHandler(this.btnRepairAll_Click);
+            // 
             // InvoiceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRepairAll);
             this.Controls.Add(this.btnExportToCSV);
             this.Controls.Add(this.btnPrintAll);
             this.Controls.Add(this.gridInvoice);
@@ -552,6 +565,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.TextEdit txtLicenseNumberFilter;
         private DevExpress.XtraEditors.LookUpEdit lookUpServiceCategory;
+        private DevExpress.XtraEditors.SimpleButton btnRepairAll;
 
     }
 }
