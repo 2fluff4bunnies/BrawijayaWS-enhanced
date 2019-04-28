@@ -152,7 +152,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalPrice.Location = new System.Drawing.Point(130, 306);
             this.txtTotalPrice.Name = "txtTotalPrice";
-            this.txtTotalPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtTotalPrice.Properties.DisplayFormat.FormatString = "{0:0,0.00}";
             this.txtTotalPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTotalPrice.Properties.Mask.EditMask = "d";
             this.txtTotalPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -174,9 +174,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtItemPrice.Location = new System.Drawing.Point(130, 273);
             this.txtItemPrice.Name = "txtItemPrice";
-            this.txtItemPrice.Properties.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.txtItemPrice.Properties.DisplayFormat.FormatString = "{0:0,0.00}";
             this.txtItemPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtItemPrice.Properties.Mask.EditMask = "d";
+            this.txtItemPrice.Properties.Mask.EditMask = "n2";
             this.txtItemPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtItemPrice.Size = new System.Drawing.Size(193, 20);
             this.txtItemPrice.TabIndex = 22;

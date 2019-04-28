@@ -209,7 +209,7 @@
             // colPrice
             // 
             this.colPrice.Caption = "Harga per Item";
-            this.colPrice.DisplayFormat.FormatString = " {0:#,#;(#,#);0}";
+            this.colPrice.DisplayFormat.FormatString = "{0:0,0.00}";
             this.colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
@@ -219,7 +219,7 @@
             // colSubTotal
             // 
             this.colSubTotal.Caption = "Sub Total";
-            this.colSubTotal.DisplayFormat.FormatString = "{0:#,#;(#,#);0}";
+            this.colSubTotal.DisplayFormat.FormatString = "{0:0,0.00}";
             this.colSubTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colSubTotal.FieldName = "SubTotal";
             this.colSubTotal.Name = "colSubTotal";
