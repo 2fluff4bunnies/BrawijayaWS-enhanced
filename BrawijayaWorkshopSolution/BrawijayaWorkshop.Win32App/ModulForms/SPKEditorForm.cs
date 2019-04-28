@@ -527,28 +527,36 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                     decimal totalPrice = 0;
 
                     List<SPKDetailSparepartDetailViewModel> SelectedSPKSparepartDetailList = SPKSparepartDetailList.Where(x => x.SPKDetailSparepartId == SparepartId).ToList();
-                    foreach (var item in SelectedSPKSparepartDetailList)
+
+                    if (SelectedSPKSparepartDetailList != null && SelectedSPKSparepartDetailList.Count > 0)
                     {
-                        if (item.PurchasingDetailId > 0)
+                        foreach (var item in SelectedSPKSparepartDetailList)
                         {
-                            totalPrice += item.PurchasingDetail.Price * item.Qty;
+                            if (item.PurchasingDetailId > 0)
+                            {
+                                totalPrice += item.PurchasingDetail.Price * item.Qty;
+                            }
+                            else if (item.SparepartManualTransactionId > 0)
+                            {
+                                totalPrice += item.SparepartManualTransaction.Price * item.Qty;
+                            }
                         }
-                        else if (item.SparepartManualTransactionId > 0)
+
+                        SPKSparepartList.Add(new SPKDetailSparepartViewModel
                         {
-                            totalPrice += item.SparepartManualTransaction.Price * item.Qty;
-                        }
+                            Sparepart = SparepartToInsert,
+                            SparepartId = SparepartId,
+                            TotalQuantity = SparepartQty,
+                            TotalPrice = totalPrice
+                        });
+
+                        RefreshSparepartGrid();
+                        CalculateTotalSparepart();
                     }
-
-                    SPKSparepartList.Add(new SPKDetailSparepartViewModel
+                    else
                     {
-                        Sparepart = SparepartToInsert,
-                        SparepartId = SparepartId,
-                        TotalQuantity = SparepartQty,
-                        TotalPrice = totalPrice
-                    });
-
-                    RefreshSparepartGrid();
-                    CalculateTotalSparepart();
+                        this.ShowError(string.Format("Sparepart tidak tersedia di data pengaturan stok maupun pembelian"));
+                    }
                 }
                 else
                 {

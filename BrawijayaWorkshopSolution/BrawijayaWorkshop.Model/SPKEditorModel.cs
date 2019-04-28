@@ -727,8 +727,8 @@ namespace BrawijayaWorkshop.Model
 
                 List<SparepartManualTransaction> spManual = _sparepartManualTransactionRepository
                     .GetMany(
-                        spd => spd.SparepartId == sparepartId &&
-                        spd.QtyRemaining > 0
+                        spm => spm.SparepartId == sparepartId &&
+                        spm.QtyRemaining > 0
                     )
                     .OrderBy(spd => spd.CreateDate).ToList();
 
@@ -783,8 +783,8 @@ namespace BrawijayaWorkshop.Model
                 {
                     List<PurchasingDetail> purchasingDetail = _purchasingDetailRepository
                         .GetMany(
-                            spd => spd.SparepartId == sparepartId &&
-                            spd.QtyRemaining > 0
+                            pdt => pdt.SparepartId == sparepartId &&
+                            pdt.QtyRemaining > 0
                         )
                         .OrderBy(spd => spd.CreateDate).ToList();
 
