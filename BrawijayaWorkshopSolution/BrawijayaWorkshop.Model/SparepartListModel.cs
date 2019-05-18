@@ -6,6 +6,7 @@ using BrawijayaWorkshop.SharedObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BrawijayaWorkshop.Utils;
 
 namespace BrawijayaWorkshop.Model
 {
@@ -14,17 +15,26 @@ namespace BrawijayaWorkshop.Model
         private ISparepartRepository _sparepartRepository;
         private ISpecialSparepartDetailRepository _specialSparepartDetailRepository;
         private IReferenceRepository _referenceRepository;
+        private ISparepartStockCardRepository _sparepartStockCardRepository;
+        private ISparepartStockCardDetailRepository _sparepartStockCardDetailRepository;
+        private ISparepartManualTransactionRepository _sparepartManualTransactionRepository;
         private IUnitOfWork _unitOfWork;
 
         public SparepartListModel(ISparepartRepository sparepartRepository,
             ISpecialSparepartDetailRepository specialSparepartDetailRepository,
             IReferenceRepository referenceRepository,
+            ISparepartStockCardRepository sparepartStockCardRepository,
+            ISparepartStockCardDetailRepository sparepartStockCardDetailRepository,
+            ISparepartManualTransactionRepository sparepartManualTransactionRepository,
             IUnitOfWork unitOfWork)
             : base()
         {
             _sparepartRepository = sparepartRepository;
             _specialSparepartDetailRepository = specialSparepartDetailRepository;
             _referenceRepository = referenceRepository;
+            _sparepartStockCardRepository = sparepartStockCardRepository;
+            _sparepartStockCardDetailRepository = sparepartStockCardDetailRepository;
+            _sparepartManualTransactionRepository = sparepartManualTransactionRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -81,6 +91,43 @@ namespace BrawijayaWorkshop.Model
             _sparepartRepository.AttachNavigation(entity.CategoryReference);
             _sparepartRepository.AttachNavigation(entity.UnitReference);
             _sparepartRepository.Update(entity);
+
+            _unitOfWork.SaveChanges();
+        }
+
+
+        public void FixSPM(int sparepartId)
+        {
+            DateTime serverTime = DateTime.Now;
+
+            Sparepart sparepart = _sparepartRepository.GetById(sparepartId);
+
+            if (sparepart != null)
+            {
+                // update sparepart to last stock
+                SparepartStockCard lastStock = _sparepartStockCardRepository.GetMany(sc => sc.SparepartId == sparepartId).LastOrDefault();
+
+                if (lastStock != null)
+                {
+                    sparepart.StockQty = lastStock.QtyLast.AsInteger();
+                    _sparepartRepository.Update(sparepart);
+                }
+
+                //update spm by stockcarddetail
+                List<SparepartManualTransaction> spmList = _sparepartManualTransactionRepository.GetMany(spm => spm.SparepartId == sparepartId).ToList();
+
+                foreach (SparepartManualTransaction spm in spmList)
+                {
+                    SparepartStockCardDetail lastStockDetail = _sparepartStockCardDetailRepository.GetMany(scd => scd.SparepartManualTransactionId == spm.Id).LastOrDefault();
+
+                    if (lastStockDetail != null)
+                    {
+                        spm.QtyRemaining = lastStockDetail.QtyLast.AsInteger();
+                        _sparepartManualTransactionRepository.Update(spm);
+                    }
+                }
+
+            }
 
             _unitOfWork.SaveChanges();
         }

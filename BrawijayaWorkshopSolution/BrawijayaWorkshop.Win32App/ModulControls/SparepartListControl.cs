@@ -1,6 +1,7 @@
 ﻿using BrawijayaWorkshop.Constant;
 using BrawijayaWorkshop.Model;
 using BrawijayaWorkshop.Presenter;
+using BrawijayaWorkshop.Runtime;
 using BrawijayaWorkshop.SharedObject.ViewModels;
 using BrawijayaWorkshop.Utils;
 using BrawijayaWorkshop.View;
@@ -41,7 +42,9 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
             btnNewSparepart.Enabled = AllowInsert;
             cmsEditData.Enabled = AllowEdit;
             cmsDeleteData.Enabled = AllowDelete;
-
+            cmsFixSPM.Visible = LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN;
+            cmsFixSPM.Enabled = LoginInformation.RoleName == DbConstant.ROLE_SUPERADMIN;
+            
             this.Load += SparepartListControl_Load;
         }
 
@@ -305,6 +308,28 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
             // Print.
             gridSparepart.Print();
+        }
+
+        private void cmsFixSPM_Click(object sender, EventArgs e)
+        {
+            if (SelectedSparepart == null) return;
+
+            if (this.ShowConfirmation("Apakah anda yakin ingin fix spm untuk sparepart: '" + SelectedSparepart.Name + "'?") == DialogResult.Yes)
+            {
+                try
+                {
+                    MethodBase.GetCurrentMethod().Info("Fixing SPM for sparepart sparepart: " + SelectedSparepart.Name);
+
+                    _presenter.fixSPM();
+
+                    btnSearch.PerformClick(); // refresh data
+                }
+                catch (Exception ex)
+                {
+                    MethodBase.GetCurrentMethod().Fatal("An error occured while trying to delete sparepart: '" + SelectedSparepart.Name + "'", ex);
+                    this.ShowError("Proses fix spm sparepart: '" + SelectedSparepart.Name + "' gagal!");
+                }
+            }
         }
     }
 }

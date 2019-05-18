@@ -62,5 +62,10 @@ namespace BrawijayaWorkshop.Presenter
         {
             Model.DeleteSparepart(View.SelectedSparepart, LoginInformation.UserId);
         }
+
+        public void fixSPM()
+        {
+            Model.FixSPM(View.SelectedSparepart.Id);
+        }
     }
 }

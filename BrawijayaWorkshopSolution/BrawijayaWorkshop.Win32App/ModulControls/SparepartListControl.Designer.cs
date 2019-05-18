@@ -46,6 +46,7 @@
             this.colSparepartUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSparepartStock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsSpecialSparepart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.IsWheel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmsEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,7 +57,7 @@
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.bgwExport = new System.ComponentModel.BackgroundWorker();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.IsWheel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cmsFixSPM = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupFilter)).BeginInit();
             this.groupFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpCategory.Properties)).BeginInit();
@@ -248,6 +249,14 @@
             this.IsSpecialSparepart.Visible = true;
             this.IsSpecialSparepart.VisibleIndex = 5;
             // 
+            // IsWheel
+            // 
+            this.IsWheel.Caption = "Ban?";
+            this.IsWheel.FieldName = "IsWheel";
+            this.IsWheel.Name = "IsWheel";
+            this.IsWheel.Visible = true;
+            this.IsWheel.VisibleIndex = 6;
+            // 
             // cmsEditor
             // 
             this.cmsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -255,28 +264,29 @@
             this.toolStripSeparator1,
             this.cmsEditData,
             this.cmsManageStock,
-            this.cmsDeleteData});
+            this.cmsDeleteData,
+            this.cmsFixSPM});
             this.cmsEditor.Name = "cmsListEditor";
-            this.cmsEditor.Size = new System.Drawing.Size(136, 98);
+            this.cmsEditor.Size = new System.Drawing.Size(153, 142);
             // 
             // viewDetailToolStripMenuItem
             // 
             this.viewDetailToolStripMenuItem.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.zoom_icon;
             this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewDetailToolStripMenuItem.Text = "Lihat Detail";
             this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.viewDetailToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // cmsEditData
             // 
             this.cmsEditData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsEditData.Name = "cmsEditData";
-            this.cmsEditData.Size = new System.Drawing.Size(135, 22);
+            this.cmsEditData.Size = new System.Drawing.Size(152, 22);
             this.cmsEditData.Text = "Ubah Data";
             this.cmsEditData.Click += new System.EventHandler(this.cmsEditData_Click);
             // 
@@ -284,7 +294,7 @@
             // 
             this.cmsManageStock.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.edit_icon;
             this.cmsManageStock.Name = "cmsManageStock";
-            this.cmsManageStock.Size = new System.Drawing.Size(135, 22);
+            this.cmsManageStock.Size = new System.Drawing.Size(152, 22);
             this.cmsManageStock.Text = "Atur Stok";
             this.cmsManageStock.Click += new System.EventHandler(this.cmsManageStock_Click);
             // 
@@ -292,7 +302,7 @@
             // 
             this.cmsDeleteData.Image = global::BrawijayaWorkshop.Win32App.Properties.Resources.delete_icon;
             this.cmsDeleteData.Name = "cmsDeleteData";
-            this.cmsDeleteData.Size = new System.Drawing.Size(135, 22);
+            this.cmsDeleteData.Size = new System.Drawing.Size(152, 22);
             this.cmsDeleteData.Text = "Hapus Data";
             this.cmsDeleteData.Click += new System.EventHandler(this.cmsDeleteData_Click);
             // 
@@ -326,13 +336,12 @@
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // IsWheel
+            // cmsFixSPM
             // 
-            this.IsWheel.Caption = "Ban?";
-            this.IsWheel.FieldName = "IsWheel";
-            this.IsWheel.Name = "IsWheel";
-            this.IsWheel.Visible = true;
-            this.IsWheel.VisibleIndex = 6;
+            this.cmsFixSPM.Name = "cmsFixSPM";
+            this.cmsFixSPM.Size = new System.Drawing.Size(152, 22);
+            this.cmsFixSPM.Text = "FIX SPM";
+            this.cmsFixSPM.Click += new System.EventHandler(this.cmsFixSPM_Click);
             // 
             // SparepartListControl
             // 
@@ -385,5 +394,6 @@
         private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraGrid.Columns.GridColumn IsSpecialSparepart;
         private DevExpress.XtraGrid.Columns.GridColumn IsWheel;
+        private System.Windows.Forms.ToolStripMenuItem cmsFixSPM;
     }
 }
