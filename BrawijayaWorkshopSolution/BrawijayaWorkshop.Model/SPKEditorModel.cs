@@ -716,7 +716,7 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
-        public List<SPKDetailSparepartDetailViewModel> getRandomDetails(int sparepartId, int qty, int ssDetailId)
+        public List<SPKDetailSparepartDetailViewModel> GetRandomDetails(int sparepartId, int qty, int ssDetailId)
         {
             List<SparepartManualTransaction> spManuals = new List<SparepartManualTransaction>();
             List<PurchasingDetail> purchasingDetails = new List<PurchasingDetail>();
@@ -844,6 +844,25 @@ namespace BrawijayaWorkshop.Model
             return Map(result, mappedResult);
         }
 
+        public void RestoreRandomDetails(List<SPKDetailSparepartDetailViewModel> details)
+        {
+            if (details != null)
+            {
+                foreach (SPKDetailSparepartDetailViewModel item in details)
+                {
+                    if (item.SparepartManualTransactionId > 0)
+                    {
+                        SparepartManualTransaction spManual = _sparepartManualTransactionRepository.GetById(item.SparepartManualTransactionId);
+                        spManual.QtyRemaining = spManual.QtyRemaining;
+                    }
+                    else if (item.PurchasingDetailId > 0)
+                    {
+                        PurchasingDetail pdt = _purchasingDetailRepository.GetById(item.PurchasingDetailId);
+                        pdt.QtyRemaining = pdt.QtyRemaining;
+                    }
+                }
+            }
+        }
 
         public SpecialSparepartDetailViewModel GetWheelDetailById(int wheelDetailId)
         {

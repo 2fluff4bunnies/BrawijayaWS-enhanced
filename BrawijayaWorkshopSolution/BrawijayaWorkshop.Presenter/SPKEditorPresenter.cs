@@ -85,16 +85,21 @@ namespace BrawijayaWorkshop.Presenter
                 View.SelectedSPK.Contractor = View.Contractor;
             }
 
-            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList, 
+            View.SelectedSPK = Model.InsertSPK(View.SelectedSPK, View.SPKSparepartList, View.SPKSparepartDetailList,
                 View.VehicleWheelList, View.AssignedSchedule, LoginInformation.UserId, View.IsNeedApproval);
             if (View.ParentSPK != null)
             {
                 Model.AbortParentSPK(View.ParentSPK, LoginInformation.UserId);
             }
         }
-        public void populateSparepartDetail()
+        public void PopulateSparepartDetail()
         {
-            View.SPKSparepartDetailList.AddRange(Model.getRandomDetails(View.SparepartToInsert.Id, View.SparepartQty, View.SSDetailId));
+            View.SPKSparepartDetailList.AddRange(Model.GetRandomDetails(View.SparepartToInsert.Id, View.SparepartQty, View.SSDetailId));
+        }
+
+        public void RestoreSparepartDetail(List<SPKDetailSparepartDetailViewModel> details)
+        {
+            Model.RestoreRandomDetails(details);
         }
 
         public void SetSelectedWheelDetailToChange(int wheelDetailId)

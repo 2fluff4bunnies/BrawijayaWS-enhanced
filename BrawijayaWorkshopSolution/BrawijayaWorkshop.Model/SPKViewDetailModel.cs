@@ -387,16 +387,27 @@ namespace BrawijayaWorkshop.Model
             List<PurchasingDetail> listPurchasingDetail = new List<PurchasingDetail>();
             List<SparepartManualTransaction> listSparepartManualTrans = new List<SparepartManualTransaction>();
 
+            // returning stock
             foreach (var spkSparepartDetail in spkSparepartDetailList)
             {
                 if (spkSparepartDetail.PurchasingDetailId > 0)
                 {
                     PurchasingDetail pdt = _purchasingDetailRepository.GetById(spkSparepartDetail.PurchasingDetailId);
+                    pdt.QtyRemaining = pdt.QtyRemaining + spkSparepartDetail.Qty;
+                    pdt.ModifyDate = serverTime;
+                    pdt.ModifyUserId = userId;
+                    _purchasingDetailRepository.Update(pdt);
+
                     listPurchasingDetail.Add(pdt);
                 }
                 else if (spkSparepartDetail.SparepartManualTransactionId > 0)
                 {
                     SparepartManualTransaction spm = _sparepartManualTransactionRepository.GetById(spkSparepartDetail.SparepartManualTransactionId);
+                    spm.QtyRemaining = spm.QtyRemaining + spkSparepartDetail.Qty;
+                    spm.ModifyDate = serverTime;
+                    spm.ModifyUserId = userId;
+                    _sparepartManualTransactionRepository.Update(spm);
+                  
                     listSparepartManualTrans.Add(spm);
                 }
 
@@ -404,6 +415,10 @@ namespace BrawijayaWorkshop.Model
                 {
                     SpecialSparepartDetail sspd = _specialSparepartDetailRepository.GetById(spkSparepartDetail.SpecialSparepartDetailId);
                     sspd.Status = (int)DbConstant.WheelDetailStatus.Ready;
+                    sspd.ModifyDate = serverTime;
+                    sspd.ModifyUserId = userId;
+
+                    _specialSparepartDetailRepository.Update(sspd);
                 }
             }
 
@@ -478,6 +493,7 @@ namespace BrawijayaWorkshop.Model
 
                         _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                         _sparepartStokCardDetailRepository.Add(stockCardDtail);
+
                         _unitOfWork.SaveChanges();
                     }
                 }
@@ -512,7 +528,7 @@ namespace BrawijayaWorkshop.Model
                         stockCardDtail.QtyFirstPrice = lastStockDetailPrice;
                         stockCardDtail.QtyLast = lastStockDetail + stockCardDtail.QtyIn;
                         stockCardDtail.QtyLastPrice = lastStockDetailPrice + stockCardDtail.QtyInPrice;
-                        stockCardDtail.SparepartManualTransactionId = itemSpTrans.Id;
+                        stockCardDtail.SparepartManualTransactionId = itemSpTrans.Id;                      
 
                         _sparepartStokCardDetailRepository.AttachNavigation(stockCardDtail.ParentStockCard);
                         _sparepartStokCardDetailRepository.Add(stockCardDtail);

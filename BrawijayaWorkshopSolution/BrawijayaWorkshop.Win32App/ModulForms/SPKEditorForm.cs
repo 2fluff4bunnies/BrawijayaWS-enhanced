@@ -522,7 +522,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
 
                 if (this.SparepartQty + pendingRequestSparepart <= SparepartToInsert.StockQty)
                 {
-                    _presenter.populateSparepartDetail();
+                    _presenter.PopulateSparepartDetail();
 
                     decimal totalPrice = 0;
 
@@ -616,6 +616,8 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 listCurrentDetail.Add(item);
             }
+
+            _presenter.RestoreSparepartDetail(listCurrentDetail);
 
             foreach (var item in listCurrentDetail)
             {
