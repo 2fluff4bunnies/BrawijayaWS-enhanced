@@ -70,6 +70,7 @@
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
             this.valPaymentMethod = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.chkUseAddedValue = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcInvoiceInfo)).BeginInit();
             this.gcInvoiceInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -92,10 +93,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkUseAddedValue.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcInvoiceInfo
             // 
+            this.gcInvoiceInfo.Controls.Add(this.chkUseAddedValue);
             this.gcInvoiceInfo.Controls.Add(this.deTransDate);
             this.gcInvoiceInfo.Controls.Add(this.txtFeeSparepart);
             this.gcInvoiceInfo.Controls.Add(this.lblFeeSparepart);
@@ -482,6 +485,16 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // chkUseAddedValue
+            // 
+            this.chkUseAddedValue.EditValue = true;
+            this.chkUseAddedValue.Location = new System.Drawing.Point(396, 433);
+            this.chkUseAddedValue.Name = "chkUseAddedValue";
+            this.chkUseAddedValue.Properties.Caption = "Gunakan PPN?";
+            this.chkUseAddedValue.Size = new System.Drawing.Size(112, 19);
+            this.chkUseAddedValue.TabIndex = 39;
+            this.chkUseAddedValue.EditValueChanged += new System.EventHandler(this.chkUseAddedValue_EditValueChanged);
+            // 
             // InvoiceEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -515,6 +528,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSparepart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valPaymentMethod)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkUseAddedValue.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -560,5 +574,6 @@
         private DevExpress.XtraEditors.TextEdit txtFeeService;
         private DevExpress.XtraEditors.LabelControl lblServiceFee;
         private DevExpress.XtraEditors.DateEdit deTransDate;
+        private DevExpress.XtraEditors.CheckEdit chkUseAddedValue;
     }
 }

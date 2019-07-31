@@ -245,6 +245,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 txtValueAdded.EditValue = value;
             }
         }
+
+        public bool IsUseAddedValue
+        {
+            get
+            {
+                return chkUseAddedValue.EditValue.AsBoolean();
+            }
+            set
+            {
+                chkUseAddedValue.EditValue = value;
+            }
+        }
         public decimal TotalSparepartAndService { get; set; }
 
         public bool IsApplyToAll
@@ -277,17 +289,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
         {
             if (chkApplyToAll.Checked)
             {
+                TotalSparepart = 0;
                 foreach (var itemInvoice in ListInvoiceDetail)
                 {
                     itemInvoice.FeePctg = MasterFee.AsDouble();
-                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
+                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty * itemInvoice.FeePctg / 100);
+                    TotalSparepart += itemInvoice.ItemPrice * itemInvoice.SPKDetailSparepartDetail.Qty;
                 }
-                TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
                 TotalValueAdded = 0;
-                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE)
+                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
                 {
                     TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
                 }
@@ -300,18 +313,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             if (chkApplyToAll.Checked)
             {
                 List<InvoiceDetailViewModel> list = ListInvoiceDetail;
+                TotalSparepart = 0;
                 foreach (var itemInvoice in list)
                 {
                     itemInvoice.FeePctg = MasterFee.AsDouble();
-                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
+                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty * itemInvoice.FeePctg / 100);
+                    TotalSparepart += itemInvoice.ItemPrice * itemInvoice.SPKDetailSparepartDetail.Qty;
                 }
-                ListInvoiceDetail = list;
-                TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
                 TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
                 TotalValueAdded = 0;
-                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE)
+                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
                 {
                     TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
                 } 
@@ -328,17 +341,18 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 chkApplyToAll.Checked = false;
             }
             List<InvoiceDetailViewModel> list = ListInvoiceDetail;
+            TotalSparepart = 0;
             foreach (var itemInvoice in list)
             {
-                itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.FeePctg / 100);
+                itemInvoice.FeePctg = MasterFee.AsDouble();
+                itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty * itemInvoice.FeePctg / 100);
+                TotalSparepart += itemInvoice.ItemPrice * itemInvoice.SPKDetailSparepartDetail.Qty;
             }
-            ListInvoiceDetail = list;
-            TotalSparepart = ListInvoiceDetail.Sum(x => x.ItemPrice);
             TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
             TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
             TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
             TotalValueAdded = 0;
-            if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE)
+            if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
             {
                 TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
             } 
@@ -401,6 +415,52 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
             {
                 FormHelpers.CurrentMainForm.UpdateStatusInformation("proses penyimpanan data invoice selesai", true);
                 this.Close();
+            }
+        }
+
+        private void chkUseAddedValue_EditValueChanged(object sender, EventArgs e)
+        {
+            if (chkApplyToAll.Checked)
+            {
+                List<InvoiceDetailViewModel> list = ListInvoiceDetail;
+                TotalSparepart = 0;
+                foreach (var itemInvoice in list)
+                {
+                    itemInvoice.FeePctg = MasterFee.AsDouble();
+                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty + (itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty * itemInvoice.FeePctg / 100);
+                    TotalSparepart += itemInvoice.ItemPrice * itemInvoice.SPKDetailSparepartDetail.Qty;
+                }
+                ListInvoiceDetail = list;
+                TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
+                TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
+                TotalValueAdded = 0;
+                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
+                {
+                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                }
+                TotalTransaction = TotalSparepartAndService + TotalValueAdded;
+            }
+            else
+            {
+                List<InvoiceDetailViewModel> list = ListInvoiceDetail;
+                TotalSparepart = 0;
+                foreach (var itemInvoice in list)
+                {
+                    itemInvoice.FeePctg = MasterFee.AsDouble();
+                    itemInvoice.SubTotalPrice = itemInvoice.ItemPrice.AsDouble() * itemInvoice.SPKDetailSparepartDetail.Qty;
+                    TotalSparepart += itemInvoice.ItemPrice * itemInvoice.SPKDetailSparepartDetail.Qty;
+                }
+                ListInvoiceDetail = list;
+                TotalSparepartPlusFee = ListInvoiceDetail.Sum(x => x.SubTotalPrice).AsDecimal();
+                TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
+                TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
+                TotalValueAdded = 0;
+                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
+                {
+                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                }
+                TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }
     }
