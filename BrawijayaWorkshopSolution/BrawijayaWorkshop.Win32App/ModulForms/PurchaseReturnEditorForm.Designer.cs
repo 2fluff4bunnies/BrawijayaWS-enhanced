@@ -43,6 +43,7 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.colReturQtyLimit = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcPurchaseReturnInfo)).BeginInit();
             this.gcPurchaseReturnInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -128,7 +129,8 @@
             this.gvSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSparepartName,
             this.colReturQty,
-            this.colSerialNo});
+            this.colSerialNo,
+            this.colReturQtyLimit});
             this.gvSparepart.GridControl = this.gridSparepart;
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -177,6 +179,15 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
+            // colReturQtyLimit
+            // 
+            this.colReturQtyLimit.Caption = "Limit";
+            this.colReturQtyLimit.FieldName = "ReturQtyLimit";
+            this.colReturQtyLimit.Name = "colReturQtyLimit";
+            this.colReturQtyLimit.OptionsColumn.AllowEdit = false;
+            this.colReturQtyLimit.Visible = true;
+            this.colReturQtyLimit.VisibleIndex = 3;
+            // 
             // PurchaseReturnEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,5 +230,6 @@
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNo;
         private DevExpress.XtraEditors.DateEdit deTransDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colReturQtyLimit;
     }
 }

@@ -39,10 +39,11 @@
             this.gvSparepart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSparepartName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colReturQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsSparepart = new System.Windows.Forms.BindingSource(this.components);
             this.bgwSave = new System.ComponentModel.BackgroundWorker();
-            this.colSerialNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colReturQtyLimit = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcSalesReturnInfo)).BeginInit();
             this.gcSalesReturnInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deTransDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -128,7 +129,8 @@
             this.gvSparepart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSparepartName,
             this.colReturQty,
-            this.colSerialNumber});
+            this.colSerialNumber,
+            this.colReturQtyLimit});
             this.gvSparepart.GridControl = this.gridSparepart;
             this.gvSparepart.Name = "gvSparepart";
             this.gvSparepart.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
@@ -158,6 +160,15 @@
             this.colReturQty.Visible = true;
             this.colReturQty.VisibleIndex = 1;
             // 
+            // colSerialNumber
+            // 
+            this.colSerialNumber.Caption = "Serial Number";
+            this.colSerialNumber.FieldName = "SerialNumber";
+            this.colSerialNumber.Name = "colSerialNumber";
+            this.colSerialNumber.OptionsColumn.ReadOnly = true;
+            this.colSerialNumber.Visible = true;
+            this.colSerialNumber.VisibleIndex = 2;
+            // 
             // gridView1
             // 
             this.gridView1.GridControl = this.gridSparepart;
@@ -168,14 +179,14 @@
             this.bgwSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSave_DoWork);
             this.bgwSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwSave_RunWorkerCompleted);
             // 
-            // colSerialNumber
+            // colReturQtyLimit
             // 
-            this.colSerialNumber.Caption = "Serial Number";
-            this.colSerialNumber.FieldName = "SerialNumber";
-            this.colSerialNumber.Name = "colSerialNumber";
-            this.colSerialNumber.OptionsColumn.ReadOnly = true;
-            this.colSerialNumber.Visible = true;
-            this.colSerialNumber.VisibleIndex = 2;
+            this.colReturQtyLimit.Caption = "Limit";
+            this.colReturQtyLimit.FieldName = "ReturQtyLimit";
+            this.colReturQtyLimit.Name = "colReturQtyLimit";
+            this.colReturQtyLimit.OptionsColumn.AllowEdit = false;
+            this.colReturQtyLimit.Visible = true;
+            this.colReturQtyLimit.VisibleIndex = 3;
             // 
             // SalesReturnEditorForm
             // 
@@ -218,6 +229,6 @@
         private System.ComponentModel.BackgroundWorker bgwSave;
         private DevExpress.XtraEditors.DateEdit deTransDate;
         private DevExpress.XtraGrid.Columns.GridColumn colSerialNumber;
-
+        private DevExpress.XtraGrid.Columns.GridColumn colReturQtyLimit;
     }
 }
