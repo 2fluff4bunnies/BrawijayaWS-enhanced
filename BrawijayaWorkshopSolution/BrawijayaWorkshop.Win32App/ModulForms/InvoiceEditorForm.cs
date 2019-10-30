@@ -435,10 +435,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
                 TotalValueAdded = 0;
-                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
-                {
-                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
-                }
+                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
                 TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
             else
@@ -456,10 +453,7 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
                 TotalValueAdded = 0;
-                if (SelectedInvoice.SPK.CategoryReference.Code != DbConstant.REF_SPK_CATEGORY_SALE && IsUseAddedValue)
-                {
-                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
-                }
+                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
                 TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }
