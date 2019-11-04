@@ -557,45 +557,64 @@ namespace BrawijayaWorkshop.Model
                         }
                     }
 
-                    //Wheel Change Handler
-                    foreach (var item in vehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId > 0))
+
+                    if (isSPKSales)
                     {
-                        SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
-                        SpecialSparepartDetail wheelReplace = _specialSparepartDetailRepository.GetById(item.ReplaceWithWheelDetailId);
-                        WheelExchangeHistory weh = new WheelExchangeHistory();
+                        foreach (var item in vehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId > 0))
+                        {
+                            VehicleWheel vw = _vehicleWheelRepository.GetById(item.Id);
 
-                        weh.SPK = insertedSPK;
-                        weh.OriginalWheelId = item.WheelDetailId;
-                        weh.ReplaceWheelId = item.ReplaceWithWheelDetailId;
-                        weh.OrignialWheel = wheel;
-                        weh.ReplaceWheel = wheelReplace;
+                            vw.WheelDetailId = item.ReplaceWithWheelDetailId;
+                            vw.ModifyDate = serverTime;
+                            vw.ModifyUserId = userId;
 
-                        weh.CreateDate = serverTime;
-                        weh.ModifyDate = serverTime;
-                        weh.ModifyUserId = userId;
-                        weh.CreateUserId = userId;
-
-                        _SPKRepository.AttachNavigation<SPK>(entitySPK);
-                        _specialSparepartDetailRepository.AttachNavigation<SpecialSparepartDetail>(weh.OrignialWheel);
-                        _specialSparepartDetailRepository.AttachNavigation<SpecialSparepartDetail>(weh.ReplaceWheel);
-
-                        _wheelExchangeHistoryRepository.Add(weh);
-                        _unitOfWork.SaveChanges();
-
-                        wheel.Kilometers = spk.Kilometers;
-                        wheel.ModifyDate = serverTime;
-                        wheel.ModifyUserId = userId;
-                        wheel.Status = (int)DbConstant.WheelDetailStatus.Deleted;
-
-                        wheelReplace.Kilometers = spk.Kilometers;
-                        wheelReplace.ModifyDate = serverTime;
-                        wheelReplace.ModifyUserId = userId;
-                        wheelReplace.Status = (int)DbConstant.WheelDetailStatus.Installed;
-
-                        _specialSparepartDetailRepository.Update(wheel);
-                        _specialSparepartDetailRepository.Update(wheelReplace);
-                        _unitOfWork.SaveChanges();
+                            _vehicleWheelRepository.Update(vw);
+                            _unitOfWork.SaveChanges();
+                        }
                     }
+                    else
+                    {
+                        //Wheel Change Handler
+                        foreach (var item in vehicleWheelList.Where(vw => vw.ReplaceWithWheelDetailId > 0))
+                        {
+                            SpecialSparepartDetail wheel = _specialSparepartDetailRepository.GetById(item.WheelDetailId);
+                            SpecialSparepartDetail wheelReplace = _specialSparepartDetailRepository.GetById(item.ReplaceWithWheelDetailId);
+                            WheelExchangeHistory weh = new WheelExchangeHistory();
+
+                            weh.SPK = insertedSPK;
+                            weh.OriginalWheelId = item.WheelDetailId;
+                            weh.ReplaceWheelId = item.ReplaceWithWheelDetailId;
+                            weh.OrignialWheel = wheel;
+                            weh.ReplaceWheel = wheelReplace;
+
+                            weh.CreateDate = serverTime;
+                            weh.ModifyDate = serverTime;
+                            weh.ModifyUserId = userId;
+                            weh.CreateUserId = userId;
+
+                            _SPKRepository.AttachNavigation<SPK>(entitySPK);
+                            _specialSparepartDetailRepository.AttachNavigation<SpecialSparepartDetail>(weh.OrignialWheel);
+                            _specialSparepartDetailRepository.AttachNavigation<SpecialSparepartDetail>(weh.ReplaceWheel);
+
+                            _wheelExchangeHistoryRepository.Add(weh);
+                            _unitOfWork.SaveChanges();
+
+                            wheel.Kilometers = spk.Kilometers;
+                            wheel.ModifyDate = serverTime;
+                            wheel.ModifyUserId = userId;
+                            wheel.Status = (int)DbConstant.WheelDetailStatus.Deleted;
+
+                            wheelReplace.Kilometers = spk.Kilometers;
+                            wheelReplace.ModifyDate = serverTime;
+                            wheelReplace.ModifyUserId = userId;
+                            wheelReplace.Status = (int)DbConstant.WheelDetailStatus.Installed;
+
+                            _specialSparepartDetailRepository.Update(wheel);
+                            _specialSparepartDetailRepository.Update(wheelReplace);
+                            _unitOfWork.SaveChanges();
+                        }
+                    }
+
 
                     // Update Vehicle Kilometers
                     Vehicle vehicle = _vehicleRepository.GetById(spk.VehicleId);

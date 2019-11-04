@@ -435,7 +435,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
                 TotalValueAdded = 0;
-                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                if (chkUseAddedValue.Checked)
+                {
+                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                }
                 TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
             else
@@ -453,7 +456,10 @@ namespace BrawijayaWorkshop.Win32App.ModulForms
                 TotalFeeSparepart = TotalSparepartPlusFee - TotalSparepart;
                 TotalSparepartAndService = TotalSparepartPlusFee + TotalServicePlusFee;
                 TotalValueAdded = 0;
-                TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                if (chkUseAddedValue.Checked)
+                {
+                    TotalValueAdded = (TotalSparepartAndService * (0.1).AsDecimal());
+                }
                 TotalTransaction = TotalSparepartAndService + TotalValueAdded;
             }
         }

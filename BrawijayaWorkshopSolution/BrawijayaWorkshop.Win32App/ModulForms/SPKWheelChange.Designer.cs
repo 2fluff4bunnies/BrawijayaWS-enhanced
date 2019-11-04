@@ -290,7 +290,7 @@
             // colName
             // 
             this.colName.Caption = "Jenis Ban (Terpasang)";
-            this.colName.FieldName = "WheelDetail.SparepartDetail.Sparepart.Name";
+            this.colName.FieldName = "WheelDetail.Sparepart.Name";
             this.colName.Name = "colName";
             this.colName.Visible = true;
             this.colName.VisibleIndex = 0;
