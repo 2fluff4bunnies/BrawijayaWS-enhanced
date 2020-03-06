@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brawijaya.QueryHelper", "Brawijaya.QueryHelper\Brawijaya.QueryHelper.csproj", "{B2FACFBE-EE2D-4572-A757-9A2AEF506B9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.Constant", "E:\Project\Speed Up Brawijaya Project\BrawijayaWS-enhanced\BrawijayaWorkshopSolution\BrawijayaWorkshop.Constant\BrawijayaWorkshop.Constant.csproj", "{26119B53-0E9A-4C13-8C2E-BC032FCB1686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrawijayaWorkshop.Utils", "E:\Project\Speed Up Brawijaya Project\BrawijayaWS-enhanced\BrawijayaWorkshopSolution\BrawijayaWorkshop.Utils\BrawijayaWorkshop.Utils.csproj", "{49F696DC-CD3F-491E-A729-1B78CB550DDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2FACFBE-EE2D-4572-A757-9A2AEF506B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FACFBE-EE2D-4572-A757-9A2AEF506B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FACFBE-EE2D-4572-A757-9A2AEF506B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FACFBE-EE2D-4572-A757-9A2AEF506B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26119B53-0E9A-4C13-8C2E-BC032FCB1686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26119B53-0E9A-4C13-8C2E-BC032FCB1686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26119B53-0E9A-4C13-8C2E-BC032FCB1686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26119B53-0E9A-4C13-8C2E-BC032FCB1686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49F696DC-CD3F-491E-A729-1B78CB550DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49F696DC-CD3F-491E-A729-1B78CB550DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49F696DC-CD3F-491E-A729-1B78CB550DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49F696DC-CD3F-491E-A729-1B78CB550DDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
