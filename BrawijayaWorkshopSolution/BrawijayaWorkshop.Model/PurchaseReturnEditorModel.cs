@@ -85,7 +85,8 @@ namespace BrawijayaWorkshop.Model
                                 ReturQty = listDetail.Where(x => x.PurchasingDetailId == itemDetail.Id).FirstOrDefault().Qty,
                                 ReturQtyLimit = itemDetail.Qty,
                                 SerialNumber = itemDetail.SerialNumber,
-                                PurchasingDetailId = itemDetail.Id
+                                PurchasingDetailId = itemDetail.Id,
+                                PricePerItem = itemDetail.Price
                             });
                         }
                         else
@@ -97,7 +98,8 @@ namespace BrawijayaWorkshop.Model
                                 ReturQty = listDetail.Where(x => x.PurchasingDetailId == itemDetail.Id).FirstOrDefault().Qty,
                                 ReturQtyLimit = itemDetail.Qty,
                                 SerialNumber = itemDetail.SerialNumber,
-                                PurchasingDetailId = itemDetail.Id
+                                PurchasingDetailId = itemDetail.Id,
+                                PricePerItem = itemDetail.Price
                             });
                         }
 
@@ -115,7 +117,8 @@ namespace BrawijayaWorkshop.Model
                         ReturQty =  0,
                         ReturQtyLimit = itemDetail.Qty,
                         SerialNumber = itemDetail.SerialNumber,
-                        PurchasingDetailId = itemDetail.Id
+                        PurchasingDetailId = itemDetail.Id,
+                        PricePerItem = itemDetail.Price
                     });
                 }
             }
