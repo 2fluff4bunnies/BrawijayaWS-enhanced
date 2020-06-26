@@ -154,7 +154,7 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (SelectedCategory > 0 && SelectedCustomer > 0)
+            if (SelectedCustomer > 0)
             {
                 RefreshDataView();
             }

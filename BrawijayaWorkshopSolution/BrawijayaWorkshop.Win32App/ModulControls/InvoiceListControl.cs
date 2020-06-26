@@ -485,7 +485,8 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
 
         private void EnableExport()
         {
-            btnExportToCSV.Enabled = SelectedCustomerId > 0 && InvoiceStatusPayment == "Belum Lunas";
+            //btnExportToCSV.Enabled = SelectedCustomerId > 0 && InvoiceStatusPayment == "Belum Lunas";
+            btnExportToCSV.Enabled = true;
         }
 
         private void bgwExport_DoWork(object sender, DoWorkEventArgs e)
