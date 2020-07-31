@@ -205,14 +205,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                                 decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
                                 itemWorker.CommisionNominal = commission;
                                 itemWorker.Nominal += (item.SubTotalWithoutFee - commission);
-                                itemWorker.Total += item.SubTotalWithFee;
-                                itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                //temp removed requested by mbak : pengen ngilangin fee di cetakan 20/07/31
+                                //itemWorker.Total += item.SubTotalWithFee;
+                                //itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                itemWorker.Total += item.SubTotalWithoutFee;
                             }
                             else
                             {
                                 itemWorker.Nominal += item.SubTotalWithoutFee;
-                                itemWorker.Total += item.SubTotalWithFee;
-                                itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                //temp removed requested by mbak : pengen ngilangin fee di cetakan 20/07/31
+                                //itemWorker.Total += item.SubTotalWithFee;
+                                //itemWorker.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                itemWorker.Total += item.SubTotalWithoutFee;
                             }
                             reportDataSource[currentIndex] = itemWorker;
                         }
@@ -229,14 +233,18 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                                 decimal commission = item.SubTotalWithoutFee - ((100M / 120M) * item.SubTotalWithoutFee);
                                 itemWorker.CommisionNominal = commission;
                                 itemWorker.Nominal = item.SubTotalWithoutFee - commission;
-                                itemWorker.Total = item.SubTotalWithFee;
-                                itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                //temp removed requested by mbak : pengen ngilangin fee di cetakan 20/07/31
+                                //itemWorker.Total = item.SubTotalWithFee;
+                                //itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                itemWorker.Total += item.SubTotalWithoutFee;
                             }
                             else
                             {
                                 itemWorker.Nominal = item.SubTotalWithoutFee;
-                                itemWorker.Total = item.SubTotalWithFee;
-                                itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                //temp removed requested by mbak : pengen ngilangin fee di cetakan 20/07/31
+                                //itemWorker.Total = item.SubTotalWithFee;
+                                //itemWorker.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                                itemWorker.Total += item.SubTotalWithoutFee;
                             }
                             reportDataSource.Add(itemWorker);
                         }
@@ -251,8 +259,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                         {
                             int currentIndex = reportDataSource.IndexOf(itemSparepart);
                             itemSparepart.Nominal += item.SubTotalWithoutFee;
-                            itemSparepart.Total += item.SubTotalWithFee;
-                            itemSparepart.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            //temp removed requested by mbak : pengen ngilangin fee di cetakan 20/07/31
+                            //itemSparepart.Total += item.SubTotalWithFee;
+                            //itemSparepart.Fee += (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            itemSparepart.Total += item.SubTotalWithoutFee;
                             reportDataSource[currentIndex] = itemSparepart;
                         }
                         else
@@ -263,8 +273,10 @@ namespace BrawijayaWorkshop.Win32App.ModulControls
                             itemSparepart.LicenseNumber = item.Invoice.SPK.Vehicle.ActiveLicenseNumber;
                             itemSparepart.Description = "ONDERDIL";
                             itemSparepart.Nominal = item.SubTotalWithoutFee;
-                            itemSparepart.Total = item.SubTotalWithFee;
-                            itemSparepart.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            //temp removed requested by mbak : pengen ngilangin fee di cetakan 20/07/31
+                            //itemSparepart.Total = item.SubTotalWithFee;
+                            //itemSparepart.Fee = (item.SubTotalWithFee - item.SubTotalWithoutFee);
+                            itemSparepart.Total += item.SubTotalWithoutFee;
                             reportDataSource.Add(itemSparepart);
                         }
                     }
